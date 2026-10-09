@@ -1,11 +1,9 @@
-"""Build an offline-importable Tochigi convenience-store CSV from Geofabrik OSM data.
-
-Source: https://download.geofabrik.de/asia/japan/kanto.html
-OSM data © OpenStreetMap contributors, ODbL 1.0.
+"""Build Tochigi convenience-store CSV from OpenStreetMap.
+Data: © OpenStreetMap contributors, ODbL 1.0.
+Boundaries: geoBoundaries.
 """
 import csv
 import os
-import sys
 import tempfile
 from pathlib import Path
 
@@ -13,104 +11,222 @@ import osmium
 import requests
 from shapely.geometry import Point, shape
 from shapely.ops import unary_union
+from shapely.prepared import prep
 
 PBF_URL = "https://download.geofabrik.de/asia/japan/kanto-latest.osm.pbf"
-GEOBOUNDARIES_API = "https://www.geoboundaries.org/api/current/gbOpen/JPN/ADM1/"
+BOUNDARY_API = "https://www.geoboundaries.org/api/current/gbOpen/JPN/"
 OUTPUT = Path("tochigi-convenience-stores.csv")
 
 
-def get_tochigi_boundary():
-    print("Downloading prefecture boundaries from geoBoundaries", flush=True)
-    r = requests.get(GEOBOUNDARIES_API, timeout=60)
+def get_features(level):
+    print(f"Downloading {level} boundaries", flush=True)
+    r = requests.get(BOUNDARY_API + level + "/", timeout=60)
     r.raise_for_status()
     meta = r.json()
     url = meta.get("simplifiedGeometryGeoJSON") or meta.get("gjDownloadURL")
     if not url:
-        raise RuntimeError("geoBoundaries returned no GeoJSON download URL")
-    r = requests.get(url, timeout=120)
+        raise RuntimeError(f"No geometry URL for {level}")
+    r = requests.get(url, timeout=180)
     r.raise_for_status()
-    features = r.json().get("features", [])
-    matches = []
-    for f in features:
-        p = f.get("properties") or {}
-        name = " ".join(str(p.get(k, "")) for k in ("shapeName", "name", "NAME_1", "name_en", "name_ja"))
-        if "Tochigi" in name or "栃木" in name:
-            matches.append(shape(f["geometry"]))
+    return r.json()["features"]
+
+
+def feature_name(feature):
+    props = feature.get("properties") or {}
+    return str(
+        props.get("shapeName")
+        or props.get("name")
+        or props.get("NAME_2")
+        or ""
+    ).strip()
+
+
+def get_boundaries():
+    prefectures = get_features("ADM1")
+    matches = [
+        shape(f["geometry"])
+        for f in prefectures
+        if "Tochigi" in feature_name(f) or "栃木" in feature_name(f)
+    ]
     if len(matches) != 1:
-        raise RuntimeError(f"Could not uniquely identify Tochigi: {len(matches)} matches")
-    return unary_union(matches)
+        raise RuntimeError("Could not identify Tochigi prefecture")
+    prefecture = unary_union(matches)
+
+    municipalities = []
+    for f in get_features("ADM2"):
+        geometry = shape(f["geometry"])
+        if geometry.is_empty:
+            continue
+
+        # Keep boundaries located inside Tochigi.
+        if not prefecture.covers(geometry.representative_point()):
+            continue
+
+        name = feature_name(f)
+        if name:
+            municipalities.append((name, prep(geometry)))
+
+    print(f"Municipality boundaries: {len(municipalities)}", flush=True)
+    return prep(prefecture), municipalities
 
 
-def download_pbf(destination):
-    print("Downloading Kanto OSM extract (this may take several minutes)", flush=True)
-    with requests.get(PBF_URL, stream=True, timeout=(30, 180)) as r:
-        r.raise_for_status()
-        with open(destination, "wb") as out:
-            for chunk in r.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    out.write(chunk)
-    print(f"Downloaded {os.path.getsize(destination):,} bytes", flush=True)
+def normalize_name(name):
+    name = str(name or "").strip()
+    compact = (
+        name.lower()
+        .replace(" ", "")
+        .replace("-", "")
+        .replace("‐", "")
+        .replace("‑", "")
+        .replace("－", "")
+        .replace("・", "")
+        .replace("ー", "")
+    )
+
+    if "7eleven" in compact or "セブンイレブン" in compact:
+        if compact in ("7eleven", "セブンイレブン"):
+            return "セブン‐イレブン"
+        return "セブン‐イレブン " + name
+
+    if "familymart" in compact or "ファミリーマート" in compact:
+        if compact in ("familymart", "ファミリーマート"):
+            return "ファミリーマート"
+        return "ファミリーマート " + name
+
+    if "lawson" in compact or "ローソン" in compact:
+        if compact in ("lawson", "ローソン"):
+            return "ローソン"
+        return "ローソン " + name
+
+    return name
+
+
+def chain_name(tags):
+    values = " ".join(
+        str(tags.get(k) or "")
+        for k in ("name", "name:ja", "brand", "brand:ja")
+    ).lower()
+
+    if "7-eleven" in values or "7‐eleven" in values or "セブン" in values:
+        return "セブン‐イレブン"
+    if "familymart" in values or "ファミリーマート" in values:
+        return "ファミリーマート"
+    if "lawson" in values or "ローソン" in values:
+        return "ローソン"
+    return ""
 
 
 class Stores(osmium.SimpleHandler):
-    def __init__(self, boundary):
+    def __init__(self, prefecture, municipalities):
         super().__init__()
-        self.boundary = boundary
+        self.prefecture = prefecture
+        self.municipalities = municipalities
         self.rows = []
         self.seen = set()
 
     def add(self, tags, lon, lat):
-        if tags.get("shop") != "convenience":
+        shop = tags.get("shop")
+        chain = chain_name(tags)
+
+        # Include regular convenience stores and known chains
+        # whose shop classification is missing.
+        if shop != "convenience" and not (chain and not shop):
             return
-        name = tags.get("name:ja") or tags.get("name") or tags.get("brand:ja") or tags.get("brand")
+
+        name = (
+            tags.get("name:ja")
+            or tags.get("name")
+            or tags.get("brand:ja")
+            or tags.get("brand")
+            or chain
+        )
         if not name:
             return
-        if not self.boundary.covers(Point(lon, lat)):
+
+        point = Point(lon, lat)
+        if not self.prefecture.covers(point):
             return
-        name = str(name).strip()
-        if not name:
-            return
-        city = tags.get("addr:city") or tags.get("addr:municipality") or ""
+
+        name = normalize_name(name)
+        city = ""
+
+        for municipality_name, boundary in self.municipalities:
+            if boundary.covers(point):
+                city = municipality_name
+                break
+
+        if not city:
+            city = (
+                tags.get("addr:city")
+                or tags.get("addr:municipality")
+                or ""
+            )
+
         lat, lon = round(lat, 7), round(lon, 7)
         key = (name, round(lat, 5), round(lon, 5))
         if key in self.seen:
             return
+
         self.seen.add(key)
         self.rows.append((name, city, lat, lon))
 
-    def node(self, n):
-        if n.location.valid():
-            self.add(n.tags, n.location.lon, n.location.lat)
+    def node(self, node):
+        if node.location.valid():
+            self.add(node.tags, node.location.lon, node.location.lat)
 
-    def way(self, w):
-        if w.tags.get("shop") != "convenience":
+    def way(self, way):
+        if way.tags.get("shop") != "convenience" and not (
+            chain_name(way.tags) and not way.tags.get("shop")
+        ):
             return
-        coords = [(n.lon, n.lat) for n in w.nodes if n.location.valid()]
+
+        coords = [
+            (node.lon, node.lat)
+            for node in way.nodes
+            if node.location.valid()
+        ]
         if not coords:
             return
-        # Representative point of mapped building footprint (centroid approximation).
+
         lon = sum(x for x, _ in coords) / len(coords)
         lat = sum(y for _, y in coords) / len(coords)
-        self.add(w.tags, lon, lat)
+        self.add(way.tags, lon, lat)
 
 
 def main():
-    boundary = get_tochigi_boundary()
+    prefecture, municipalities = get_boundaries()
+
     with tempfile.TemporaryDirectory() as folder:
         pbf = os.path.join(folder, "kanto.osm.pbf")
-        download_pbf(pbf)
-        handler = Stores(boundary)
-        print("Reading convenience-store nodes and ways", flush=True)
+
+        print("Downloading Kanto OSM data", flush=True)
+        with requests.get(
+            PBF_URL, stream=True, timeout=(30, 180)
+        ) as response:
+            response.raise_for_status()
+            with open(pbf, "wb") as output:
+                for chunk in response.iter_content(1024 * 1024):
+                    if chunk:
+                        output.write(chunk)
+
+        handler = Stores(prefecture, municipalities)
+        print("Reading store locations", flush=True)
         handler.apply_file(pbf, locations=True, idx="flex_mem")
-    rows = sorted(handler.rows, key=lambda x: (x[0], x[1], x[2], x[3]))
+
+    rows = sorted(handler.rows)
     if not rows:
-        raise RuntimeError("No convenience stores found; refusing to create empty CSV")
-    with OUTPUT.open("w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
+        raise RuntimeError("No stores found")
+
+    with OUTPUT.open(
+        "w", newline="", encoding="utf-8-sig"
+    ) as output:
+        writer = csv.writer(output)
         writer.writerow(["name", "city", "lat", "lng"])
         writer.writerows(rows)
-    print(f"Exported {len(rows)} convenience stores to {OUTPUT}", flush=True)
-    print("Source: OpenStreetMap contributors, ODbL 1.0; Geofabrik Kanto extract", flush=True)
+
+    missing_city = sum(not row[1] for row in rows)
+    print(f"Exported {len(rows)} stores", flush=True)
+    print(f"Stores without municipality: {missing_city}", flush=True)
 
 
 if __name__ == "__main__":
