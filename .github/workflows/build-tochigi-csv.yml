@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: pip install requests shapely pyosmium
+        run: pip install requests shapely osmium
       - name: Generate CSV
         run: python scripts/tochigi_csv.py
       - name: Upload CSV
