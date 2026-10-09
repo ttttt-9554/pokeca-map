@@ -24,6 +24,17 @@ function addStores(items){
 // 既存の発見履歴からも店舗候補を作る（実際に記録した店舗のみ）。
 const historyStores=reports.map(r=>({name:r.shop,city:'',lat:Number(r.lat),lng:Number(r.lng)}));
 addStores(historyStores);
+      fetch('./tochigi-convenience-stores.csv')
+  .then(response => {
+    if (!response.ok) throw new Error('CSVの取得に失敗しました');
+    return response.text();
+  })
+  .then(csv => {
+    const importedStores = parseCSV(csv);
+    addStores(importedStores);
+    console.log('栃木県の店舗データを読み込みました');
+  })
+  .catch(error => console.error('店舗データ読み込みエラー:', error));
 function searchStores(){
  const area=norm($('searchArea').value),term=brandNorm($('storeQuery').value),out=$('storeResults');
  out.replaceChildren();
