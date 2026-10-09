@@ -1,0 +1,26 @@
+name: Build Tochigi convenience CSV
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install requests shapely pyosmium
+      - name: Generate CSV
+        run: python scripts/tochigi_csv.py
+      - name: Upload CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: tochigi-convenience-stores
+          path: tochigi-convenience-stores.csv
