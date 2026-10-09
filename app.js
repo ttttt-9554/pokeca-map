@@ -40,16 +40,28 @@ async function searchStores(){
   const radius=5000;
   // 地域の近くの店舗に限定して、公共Overpass APIへの負荷を抑える。
   const query=`[out:json][timeout:20];(nwr(around:${radius},${lat},${lon})[shop~"^(convenience|supermarket|department_store|mall|books|toys|gift)$"];nwr(around:${radius},${lat},${lon})[name][shop="cards"];);out center tags;`;
-  const response=await fetch('https://overpass.kumi.systems/api/interpreter',{method:'POST',body:new URLSearchParams({data:query}),signal:controller.signal});
-  if(!response.ok)throw Error('店舗検索サーバーが混雑しています');
-  const data=await response.json(),aliases=queryAliases(term).map(normalizeName);
+  // 公開OverpassインスタンスにGETで接続。POSTがSafariやサーバーに拒否される問題を回避。
+  const endpoints=['https://overpass.private.coffee/api/interpreter','https://overpass.nchc.org.tw/api/interpreter','https://overpass.kumi.systems/api/interpreter'];
+  let data=null, lastError='';
+  for(const endpoint of endpoints){
+   try{
+    out.textContent='店舗検索中…（接続先を確認しています）';
+    const response=await fetch(endpoint+'?data='+encodeURIComponent(query),{method:'GET',signal:controller.signal});
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const result=await response.json();
+    if(!Array.isArray(result.elements))throw Error('応答形式が不正');
+    data=result;break;
+   }catch(err){if(err.name==='AbortError')throw err;lastError=err.message||String(err);}
+  }
+  if(!data)throw Error('公開店舗検索サービスに接続できません（'+lastError+'）');
+  const aliases=queryAliases(term).map(normalizeName);
   const found=(data.elements||[]).map(e=>{
    const tags=e.tags||{},la=e.lat??e.center?.lat,lo=e.lon??e.center?.lon;
    return {...tags,lat:la,lon:lo};
   }).filter(p=>p.name&&Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&aliases.some(a=>normalizeName(p.name+' '+(p.brand||'')+' '+(p.operator||'')).includes(a)));
   const unique=[...new Map(found.map(p=>[`${p.name}:${p.lat.toFixed(5)}:${p.lon.toFixed(5)}`,p])).values()].slice(0,40);
   showStores(unique);
- }catch(e){if(e.name!=='AbortError')out.textContent='検索に失敗しました。公開検索サービスが混雑している可能性があります。少し待って再試行してください。';}
+ }catch(e){if(e.name!=='AbortError')out.textContent='検索に失敗しました：'+(e.message||'通信エラー')+'。地図の長押しで手動登録もできます。';}
  finally{if(searchController===controller)$('storeSearch').disabled=false;}
 }
 $('storeSearch').addEventListener('click',searchStores);
