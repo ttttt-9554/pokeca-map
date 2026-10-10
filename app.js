@@ -6,7 +6,9 @@ let stores=[];
 function isStore(p){return p&&typeof p.name==='string'&&p.name.trim()&&Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng))&&Number(p.lat)>35&&Number(p.lat)<38&&Number(p.lng)>138&&Number(p.lng)<141;}
 function norm(s){return String(s||'').normalize('NFKC').toLowerCase().replace(/[\s\u3000・ー－-]/g,'');}
 function brandNorm(s){const n=norm(s);if(/^(セブン|seven|7eleven)/.test(n))return 'seven';if(/^(ファミマ|ファミリーマート|familymart)/.test(n))return 'familymart';if(/^(ローソン|lawson)/.test(n))return 'lawson';if(/^(ミニストップ|ministop)/.test(n))return 'ministop';return n;}
-function storeKey(p){return norm(p.name)+'|'+Number(p.lat).toFixed(5)+'|'+Number(p.lng).toFixed(5);}
+function storeKey(p){
+  return Number(p.lat).toFixed(4)+'|'+Number(p.lng).toFixed(4);
+}
 function updateCount(){ $('storeCount').textContent=`保存済み店舗 ${stores.length}件（この端末のみ）`; }
 function persistStores(){
  try{localStorage.setItem(STORE_KEY,JSON.stringify(stores));updateCount();return true;}
@@ -53,8 +55,11 @@ function searchStores(){
  const matches=stores.filter(p=>{
   const name=norm(p.name),brand=brandNorm(p.name),city=norm(p.city);
   return (brand.includes(term)||name.includes(term))&&(!area||city.includes(area)||name.includes(area));
- }).slice(0,100);
- const count=document.createElement('p');count.className='hint';count.textContent=`${matches.length}件の候補（保存済み${stores.length}件から検索）`;out.append(count);
+ });
+ const count = document.createElement('p');
+count.className = 'hint';
+count.textContent = `${matches.length}件の店舗が見つかりました（保存済み${stores.length}件から検索）`;
+out.append(count);
  if(!matches.length){const msg=document.createElement('p');msg.textContent='該当店舗は未登録です。下の店舗名・座標を入力して「店舗一覧に保存」、またはCSVを取り込んでください。';out.append(msg);return;}
  matches.forEach(p=>{
   const b=document.createElement('button');b.type='button';b.className='store-result';
