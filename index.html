@@ -30,6 +30,7 @@
         </label>
         <button id="locate">現在地へ</button>
       </div>
+
       <div id="map"></div>
       <p class="hint">地図を長押しすると、その位置を登録できます。店舗の場所を確認してから保存してください。</p>
       <div id="mapList"></div>
@@ -48,7 +49,7 @@
 
           <label for="storeQuery">② 店舗名・チェーン名</label>
           <div class="searchrow">
-            <input id="storeQuery" type="search" placeholder="例：セブンイレブン">
+            <input id="storeQuery" type="search" placeholder="例：セブンイレブン、ファミマ">
             <button type="button" id="storeSearch">店舗検索</button>
           </div>
 
@@ -67,14 +68,16 @@
             <button type="button" id="storeRemember">下の店舗名と座標を店舗一覧に保存</button>
 
             <p class="hint">
-              CSV列：name,city,lat,lng。店舗データはこのiPhoneのブラウザ内に保存されます。
-              OSM等から入手した正確なデータだけを取り込んでください。
+              CSV列：name,city,lat,lng。店舗データはこの端末のブラウザ内に保存されます。
+              正確な店舗データだけを取り込んでください。
             </p>
           </div>
         </div>
 
-        <!-- 店舗名は検索結果から自動入力。入力欄は表示しない -->
+        <!-- 検索結果から店舗名・緯度・経度を自動設定 -->
         <input id="shop" type="hidden">
+        <input id="lat" type="hidden">
+        <input id="lng" type="hidden">
 
         <label>
           商品名
@@ -101,18 +104,7 @@
           <textarea id="memo" maxlength="1000" rows="3" placeholder="購入制限など"></textarea>
         </label>
 
-        <div class="coords">
-          <label>
-            緯度
-            <input id="lat" type="number" step="any" min="-90" max="90" required>
-          </label>
-          <label>
-            経度
-            <input id="lng" type="number" step="any" min="-180" max="180" required>
-          </label>
-        </div>
-
-        <p class="hint">検索結果を選ぶと座標が自動入力されます。地図の長押しや手入力も可能です。</p>
+        <p class="hint">検索結果から店舗を選択すると、店舗名と位置情報が自動設定されます。</p>
 
         <button type="submit" class="primary">保存する</button>
         <button type="button" id="cancelEdit" hidden>編集をキャンセル</button>
