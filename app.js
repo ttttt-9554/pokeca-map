@@ -1,3 +1,4 @@
+
 (()=>{'use strict';const KEY='pokeca-reports-v1';const $=id=>document.getElementById(id);let reports=[];try{const data=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(data))reports=data.filter(valid)}catch(e){alert('保存データを読み込めませんでした。')}let editId=null;let map,markers;const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function valid(r){return r&&typeof r.id==='string'&&typeof r.shop==='string'&&typeof r.product==='string'&&typeof r.foundAt==='string'&&Number.isFinite(Number(r.lat))&&Math.abs(Number(r.lat))<=90&&Number.isFinite(Number(r.lng))&&Math.abs(Number(r.lng))<=180}function save(){localStorage.setItem(KEY,JSON.stringify(reports))}function nowLocal(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}function switchTab(tab){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id===tab+'View'));document.querySelectorAll('nav button').forEach(e=>e.classList.toggle('active',e.dataset.tab===tab));if(tab==='map')setTimeout(()=>map.invalidateSize(),60);render()}document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));function inPeriod(r){const p=$('period').value;if(p==='all')return true;const t=new Date(r.foundAt).getTime(),now=Date.now();if(!Number.isFinite(t))return false;if(p==='week')return t>=now-7*86400000&&t<=now;return new Date(r.foundAt).toDateString()===new Date().toDateString()}function card(r){return `<article class="entry"><h3>${escape(r.shop)}</h3><p><strong>${escape(r.product)}</strong> · ${escape(r.status)}</p><p>${escape(r.foundAt.replace('T',' '))}</p>${r.memo?`<p>${escape(r.memo)}</p>`:''}<div class="actions"><button data-action="view" data-id="${escape(r.id)}">地図で見る</button><button data-action="edit" data-id="${escape(r.id)}">編集</button><button data-action="delete" data-id="${escape(r.id)}">削除</button></div></article>`}function render(){const sorted=[...reports].sort((a,b)=>b.foundAt.localeCompare(a.foundAt));$('historyList').innerHTML=sorted.length?sorted.map(card).join(''):'<p class="hint">まだ発見記録がありません。</p>';$('mapList').innerHTML=sorted.filter(inPeriod).map(card).join('')||'<p class="hint">この期間の発見記録はありません。</p>';markers.clearLayers();sorted.filter(inPeriod).forEach(r=>{const marker=L.marker([Number(r.lat),Number(r.lng)]).addTo(markers);marker.bindPopup(`<strong>${escape(r.shop)}</strong><p>${escape(r.product)}</p><small>${escape(r.foundAt.replace('T',' '))} · ${escape(r.status)}</small>`);});}function formFor(r){editId=r?.id||null;$('formTitle').textContent=editId?'発見情報を編集':'発見情報を登録';$('shop').value=r?.shop||'';$('product').value=r?.product||'';$('foundAt').value=r?.foundAt||nowLocal();$('status').value=r?.status||'販売を確認';$('memo').value=r?.memo||'';$('lat').value=r?.lat??'';$('lng').value=r?.lng??'';$('cancelEdit').hidden=!editId;switchTab('add')}
 
 // v0.5: 店舗検索はブラウザ内データのみ。公開APIには問い合わせません。
@@ -84,8 +85,42 @@ out.append(count);
   });out.append(b);
  });
 }
-$('storeSearch').addEventListener('click',searchStores);
-$('storeQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchStores();}});
+
+// チェーン名の入力補助：空欄でもタップすると4チェーンを表示
+const chainNames=['セブンイレブン','ファミリーマート','ローソン','ミニストップ'];
+const storeQueryInput=$('storeQuery');
+const chainDropdown=document.createElement('div');
+chainDropdown.id='chainDropdown';
+chainDropdown.hidden=true;
+chainDropdown.style.cssText='position:absolute;top:100%;left:0;right:0;z-index:1000;background:#fff;border:1px solid #cbd5e1;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.15);max-height:240px;overflow-y:auto;';
+const searchRow=storeQueryInput.closest('.searchrow');
+searchRow.style.position='relative';
+searchRow.appendChild(chainDropdown);
+storeQueryInput.setAttribute('autocomplete','off');
+storeQueryInput.setAttribute('aria-controls','chainDropdown');
+storeQueryInput.setAttribute('aria-expanded','false');
+function closeChainDropdown(){chainDropdown.hidden=true;storeQueryInput.setAttribute('aria-expanded','false');}
+function showChainDropdown(){
+ const raw=storeQueryInput.value.trim(),q=norm(raw);
+ chainDropdown.replaceChildren();
+ const options=chainNames.filter(name=>!q||norm(name).includes(q)||(name==='ファミリーマート'&&norm('ファミマ').includes(q))||(name==='セブンイレブン'&&'seveneleven'.includes(q)));
+ for(const name of options){
+  const option=document.createElement('button');
+  option.type='button';option.textContent=name;
+  option.style.cssText='display:block;width:100%;padding:12px 14px;text-align:left;background:white;color:#111827;border:0;border-bottom:1px solid #e5e7eb;cursor:pointer;font-size:16px;';
+  option.addEventListener('click',()=>{storeQueryInput.value=name;closeChainDropdown();searchStores();});
+  chainDropdown.appendChild(option);
+ }
+ chainDropdown.hidden=options.length===0;
+ storeQueryInput.setAttribute('aria-expanded',String(options.length>0));
+}
+storeQueryInput.addEventListener('focus',showChainDropdown);
+storeQueryInput.addEventListener('click',showChainDropdown);
+storeQueryInput.addEventListener('input',showChainDropdown);
+storeQueryInput.addEventListener('keydown',e=>{if(e.key==='Escape')closeChainDropdown();});
+document.addEventListener('pointerdown',e=>{if(!searchRow.contains(e.target))closeChainDropdown();});
+$('storeSearch').addEventListener('click',()=>{closeChainDropdown();searchStores();});
+$('storeQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();closeChainDropdown();searchStores();}});
 $('searchArea').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchStores();}});
 $('storeRemember').addEventListener('click',()=>{
  const name=$('shop').value.trim(),lat=$('lat').value,lng=$('lng').value;
