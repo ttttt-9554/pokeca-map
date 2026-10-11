@@ -1,10 +1,13 @@
 
 /* ==========================================
    ポケカ発見マップ
-   style.css v15
+   style.css v17
    ========================================== */
 
-/* 基本設定 */
+/* ==========================================
+   基本設定
+   ========================================== */
+
 :root {
   font-family:
     -apple-system,
@@ -176,7 +179,7 @@ button:focus-visible {
    ========================================== */
 
 form {
-  background: white;
+  background: #fff;
   padding: 16px;
   border-radius: 16px;
   display: grid;
@@ -229,7 +232,8 @@ form label,
   flex: 1;
 }
 
-.searchrow button {
+/* 店舗検索ボタンのみ青色 */
+.searchrow > button {
   background: #2563eb;
   color: #fff;
   flex-shrink: 0;
@@ -347,7 +351,6 @@ form label,
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* hidden属性を確実に反映 */
 .product-dropdown[hidden] {
   display: none !important;
 }
@@ -386,6 +389,55 @@ form label,
   margin-top: 4px;
   color: #64748b;
   font-size: 12px;
+}
+
+/* ==========================================
+   店舗チェーンのプルダウン配色修正
+   ========================================== */
+
+#chainDropdown {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 280px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+#chainDropdown .product-result {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 14px 16px;
+  background: #ffffff;
+  color: #182333;
+  border: 0;
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 0;
+  text-align: left;
+  font-weight: 600;
+}
+
+#chainDropdown .product-result:hover,
+#chainDropdown .product-result:focus-visible {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+#chainDropdown .product-result:last-child {
+  border-bottom: 0;
+}
+
+/* 商品名候補も同じ配色に統一 */
+#packDropdown .product-result {
+  background: #ffffff;
+  color: #182333;
+}
+
+#packDropdown .product-result:hover,
+#packDropdown .product-result:focus-visible {
+  background: #eff6ff;
+  color: #1d4ed8;
 }
 
 /* ==========================================
@@ -530,7 +582,7 @@ nav button.active {
     gap: 6px;
   }
 
-  .searchrow button {
+  .searchrow > button {
     padding: 10px;
     font-size: 13px;
   }
