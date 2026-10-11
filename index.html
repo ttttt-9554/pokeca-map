@@ -7,7 +7,10 @@
   <meta name="theme-color" content="#2563eb">
   <title>ポケカ発見マップ</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
   <link rel="stylesheet" href="style.css?v=05">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
@@ -32,6 +35,7 @@
             <option value="week">過去7日間</option>
           </select>
         </label>
+
         <button id="locate">現在地へ</button>
       </div>
 
@@ -51,6 +55,7 @@
 
       <form id="reportForm">
 
+        <!-- 店舗検索 -->
         <div class="searchbox">
           <strong>栃木県の店舗をオフライン検索</strong>
 
@@ -61,6 +66,7 @@
           <label for="searchArea">
             ① 地域・市区町村（省略可）
           </label>
+
           <input
             id="searchArea"
             placeholder="例：宇都宮市、平松本町"
@@ -75,13 +81,18 @@
               id="storeQuery"
               type="search"
               placeholder="タップして選択、または入力"
+              autocomplete="off"
             >
+
             <button type="button" id="storeSearch">
               店舗検索
             </button>
           </div>
 
-          <div id="storeResults" aria-live="polite"></div>
+          <div
+            id="storeResults"
+            aria-live="polite"
+          ></div>
         </div>
 
         <!-- 検索結果から自動設定される非表示データ -->
@@ -89,16 +100,28 @@
         <input id="lat" type="hidden">
         <input id="lng" type="hidden">
 
-        <label>
+        <!-- 商品名検索 -->
+        <label for="product">
           商品名
-          <input
-            id="product"
-            required
-            maxlength="120"
-            placeholder="例：拡張パック"
-          >
         </label>
 
+        <input
+          id="product"
+          type="search"
+          required
+          maxlength="120"
+          placeholder="タップして選択、または商品名・省略名で検索"
+          autocomplete="off"
+          aria-label="商品名"
+        >
+
+        <p class="hint">
+          商品名をタップすると候補が表示されます。
+          文字を入力すると、一致する商品だけに自動で絞り込まれます。
+          省略名でも検索できます。
+        </p>
+
+        <!-- 発見日時 -->
         <label>
           発見日時
           <input
@@ -108,6 +131,7 @@
           >
         </label>
 
+        <!-- 販売状況 -->
         <label>
           販売状況
           <select id="status">
@@ -118,6 +142,7 @@
           </select>
         </label>
 
+        <!-- メモ -->
         <label>
           メモ
           <textarea
@@ -133,11 +158,18 @@
           店舗名と位置情報が自動設定されます。
         </p>
 
-        <button type="submit" class="primary">
+        <button
+          type="submit"
+          class="primary"
+        >
           保存する
         </button>
 
-        <button type="button" id="cancelEdit" hidden>
+        <button
+          type="button"
+          id="cancelEdit"
+          hidden
+        >
           編集をキャンセル
         </button>
 
@@ -156,6 +188,7 @@
 
       <div class="notice">
         <strong>次の開発段階で実装</strong>
+
         <p>
           招待リンク、メンバー管理、
           リアルタイム同期を追加予定です。
@@ -178,7 +211,7 @@
       </label>
     </section>
 
-    <!-- 新規追加：開発タブ -->
+    <!-- 開発・データ管理 -->
     <section id="devView" class="view">
       <h2>開発・データ管理</h2>
 
@@ -198,11 +231,17 @@
           >
         </label>
 
-        <button type="button" id="storeExport">
+        <button
+          type="button"
+          id="storeExport"
+        >
           店舗CSVを書き出す
         </button>
 
-        <button type="button" id="storeRemember">
+        <button
+          type="button"
+          id="storeRemember"
+        >
           選択中の店舗を店舗一覧に保存
         </button>
 
@@ -213,6 +252,22 @@
         <p class="hint">
           店舗データはこの端末のブラウザ内に保存されます。
           正確な店舗データだけを取り込んでください。
+        </p>
+      </div>
+
+      <!-- 商品データについて -->
+      <div class="store-tools">
+        <strong>商品データ</strong>
+
+        <p class="hint">
+          商品名の候補は pokemon_packs.csv から
+          自動的に読み込まれます。
+        </p>
+
+        <p class="hint">
+          商品名・発売日・希望小売価格を参照し、
+          発売日の新しい順に表示します。
+          商品名の部分一致検索と省略名検索に対応しています。
         </p>
       </div>
     </section>
@@ -242,12 +297,15 @@
     </button>
   </nav>
 
+  <!-- Leaflet -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
 
-  <script src="app.js?v=05"></script>
+  <!-- アプリ本体 -->
+  <script src="app.js?v=08"></script>
+
 </body>
 </html>
