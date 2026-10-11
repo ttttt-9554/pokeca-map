@@ -5,11 +5,19 @@ const STORE_KEY='pokeca-tochigi-stores-v05';
 let stores=[];
 function isStore(p){return p&&typeof p.name==='string'&&p.name.trim()&&Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lng))&&Number(p.lat)>35&&Number(p.lat)<38&&Number(p.lng)>138&&Number(p.lng)<141;}
 function norm(s){return String(s||'').normalize('NFKC').toLowerCase().replace(/[\s\u3000・ー－-]/g,'');}
-function brandNorm(s){const n=norm(s);if(/^(セブン|seven|7eleven)/.test(n))return 'seven';if(/^(ファミマ|ファミリーマート|familymart)/.test(n))return 'familymart';if(/^(ローソン|lawson)/.test(n))return 'lawson';if(/^(ミニストップ|ministop)/.test(n))return 'ministop';return n;}
 function storeKey(p){
   return norm(p.name)+'|'+Number(p.lat).toFixed(6)+'|'+Number(p.lng).toFixed(6);
 }
+function brandNorm(s) {
+  const n = norm(s);
 
+  if (/^(セブン|seven|7eleven)/.test(n)) return 'seven';
+  if (/^(ファミマ|ファミリマト|familymart)/.test(n)) return 'familymart';
+  if (/^(ロソン|lawson)/.test(n)) return 'lawson';
+  if (/^(ミニストップ|ministop)/.test(n)) return 'ministop';
+
+  return n;
+}
 function updateCount(){ $('storeCount').textContent=`保存済み店舗 ${stores.length}件（この端末のみ）`; }
 function persistStores(){
  try{localStorage.setItem(STORE_KEY,JSON.stringify(stores));updateCount();return true;}
@@ -55,7 +63,11 @@ function searchStores(){
  if(!term){out.textContent='店舗名・チェーン名を入力してください。';return;}
  const matches=stores.filter(p=>{
   const name=norm(p.name),brand=brandNorm(p.name),city=norm(p.city);
-  return (brand.includes(term)||name.includes(term))&&(!area||city.includes(area)||name.includes(area));
+  return (
+  brand.includes(term) ||
+  name.includes(term) ||
+  (term === 'familymart' && name.includes('ファミリマト'))
+) && (!area || city.includes(area) || name.includes(area));
  });
  const count = document.createElement('p');
 count.className = 'hint';
