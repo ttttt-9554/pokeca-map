@@ -7,15 +7,21 @@
   <meta name="theme-color" content="#2563eb">
   <title>ポケカ発見マップ</title>
 
+  <!-- 地図ライブラリ -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   >
+
+  <!-- アプリのデザイン -->
   <link rel="stylesheet" href="style.css?v=05">
+
+  <!-- PWA設定 -->
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
 <body>
+
   <header>
     <div class="eyebrow">PRIVATE DISCOVERY LOG</div>
     <h1>ポケカ発見マップ</h1>
@@ -24,8 +30,11 @@
 
   <main>
 
-    <!-- マップ -->
+    <!-- =====================================
+         マップ
+    ====================================== -->
     <section id="mapView" class="view active">
+
       <div class="toolbar">
         <label>
           表示期間
@@ -36,7 +45,9 @@
           </select>
         </label>
 
-        <button id="locate">現在地へ</button>
+        <button id="locate">
+          現在地へ
+        </button>
       </div>
 
       <div id="map"></div>
@@ -47,16 +58,21 @@
       </p>
 
       <div id="mapList"></div>
+
     </section>
 
-    <!-- 発見情報の登録 -->
+    <!-- =====================================
+         発見情報の登録
+    ====================================== -->
     <section id="addView" class="view">
+
       <h2 id="formTitle">発見情報を登録</h2>
 
       <form id="reportForm">
 
         <!-- 店舗検索 -->
         <div class="searchbox">
+
           <strong>栃木県の店舗をオフライン検索</strong>
 
           <p class="hint">
@@ -69,6 +85,7 @@
 
           <input
             id="searchArea"
+            type="text"
             placeholder="例：宇都宮市、平松本町"
           >
 
@@ -77,6 +94,7 @@
           </label>
 
           <div class="searchrow">
+
             <input
               id="storeQuery"
               type="search"
@@ -84,23 +102,31 @@
               autocomplete="off"
             >
 
-            <button type="button" id="storeSearch">
+            <button
+              type="button"
+              id="storeSearch"
+            >
               店舗検索
             </button>
+
           </div>
 
           <div
             id="storeResults"
             aria-live="polite"
           ></div>
+
         </div>
 
-        <!-- 検索結果から自動設定される非表示データ -->
+        <!-- 選択した店舗の情報 -->
         <input id="shop" type="hidden">
         <input id="lat" type="hidden">
         <input id="lng" type="hidden">
 
-        <!-- 商品名検索 -->
+        <!-- =====================================
+             商品名プルダウン検索
+        ====================================== -->
+
         <label for="product">
           商品名
         </label>
@@ -110,20 +136,21 @@
           type="search"
           required
           maxlength="120"
-          placeholder="タップして選択、または商品名・省略名で検索"
+          placeholder="商品名・ひらがな・省略名で検索"
           autocomplete="off"
           aria-label="商品名"
         >
 
         <p class="hint">
-          商品名をタップすると候補が表示されます。
-          文字を入力すると、一致する商品だけに自動で絞り込まれます。
-          省略名でも検索できます。
+          商品名をタップすると、発売日の新しい順に候補が表示されます。
+          文字を入力・削除すると候補が自動的に絞り込まれます。
+          ひらがな・カタカナ・省略名の検索に対応しています。
         </p>
 
         <!-- 発見日時 -->
         <label>
           発見日時
+
           <input
             id="foundAt"
             type="datetime-local"
@@ -134,6 +161,7 @@
         <!-- 販売状況 -->
         <label>
           販売状況
+
           <select id="status">
             <option>販売を確認</option>
             <option>在庫少なめ</option>
@@ -145,6 +173,7 @@
         <!-- メモ -->
         <label>
           メモ
+
           <textarea
             id="memo"
             maxlength="1000"
@@ -174,19 +203,29 @@
         </button>
 
       </form>
+
     </section>
 
-    <!-- 発見履歴 -->
+    <!-- =====================================
+         発見履歴
+    ====================================== -->
     <section id="historyView" class="view">
+
       <h2>発見履歴</h2>
+
       <div id="historyList"></div>
+
     </section>
 
-    <!-- グループ共有 -->
+    <!-- =====================================
+         グループ共有
+    ====================================== -->
     <section id="groupView" class="view">
+
       <h2>グループ共有</h2>
 
       <div class="notice">
+
         <strong>次の開発段階で実装</strong>
 
         <p>
@@ -195,6 +234,7 @@
           現在のデータはこのブラウザ内だけに保存され、
           友達には共有されません。
         </p>
+
       </div>
 
       <button id="export">
@@ -203,19 +243,26 @@
 
       <label class="import">
         JSONから記録を読み込む
+
         <input
           type="file"
           id="import"
           accept="application/json,.json"
         >
       </label>
+
     </section>
 
-    <!-- 開発・データ管理 -->
+    <!-- =====================================
+         開発・データ管理
+    ====================================== -->
     <section id="devView" class="view">
+
       <h2>開発・データ管理</h2>
 
+      <!-- 店舗データ -->
       <div class="store-tools">
+
         <strong>店舗データの管理</strong>
 
         <p class="hint" id="storeCount">
@@ -224,6 +271,7 @@
 
         <label class="import">
           店舗CSVを取り込む
+
           <input
             id="storeImport"
             type="file"
@@ -253,10 +301,12 @@
           店舗データはこの端末のブラウザ内に保存されます。
           正確な店舗データだけを取り込んでください。
         </p>
+
       </div>
 
-      <!-- 商品データについて -->
+      <!-- 商品データ -->
       <div class="store-tools">
+
         <strong>商品データ</strong>
 
         <p class="hint">
@@ -267,15 +317,25 @@
         <p class="hint">
           商品名・発売日・希望小売価格を参照し、
           発売日の新しい順に表示します。
-          商品名の部分一致検索と省略名検索に対応しています。
         </p>
+
+        <p class="hint">
+          商品名の部分一致検索、
+          ひらがな・カタカナ検索、
+          省略名検索に対応しています。
+        </p>
+
       </div>
+
     </section>
 
   </main>
 
-  <!-- 下部ナビゲーション -->
+  <!-- =====================================
+       下部ナビゲーション
+  ====================================== -->
   <nav>
+
     <button data-tab="map">
       🗺️<span>マップ</span>
     </button>
@@ -295,17 +355,18 @@
     <button data-tab="dev">
       🛠️<span>開発</span>
     </button>
+
   </nav>
 
-  <!-- Leaflet -->
+  <!-- 地図ライブラリ -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
 
-  <!-- アプリ本体 -->
-  <script src="app.js?v=08"></script>
+  <!-- アプリ本体：ひらがな検索対応版 -->
+  <script src="app.js?v=09"></script>
 
 </body>
 </html>
