@@ -12,7 +12,7 @@ function brandNorm(s) {
   const n = norm(s);
 
   if (/^(セブン|seven|7eleven)/.test(n)) return 'seven';
-  if (/^(ファミマ|ファミリマト|familymart)/.test(n)) return 'familymart';
+  if (/^(ファミマ|ファミリマト|ファミリーマート|familymart)/.test(n)) return 'familymart';
   if (/^(ロソン|lawson)/.test(n)) return 'lawson';
   if (/^(ミニストップ|ministop)/.test(n)) return 'ministop';
 
