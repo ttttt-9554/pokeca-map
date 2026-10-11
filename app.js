@@ -91,10 +91,13 @@ function render(){
  $('historyList').innerHTML=sorted.length?
   sorted.map(card).join(''):
   '<p class="hint">まだ発見記録がありません。</p>';
- $('mapList').innerHTML=sorted.filter(inPeriod).map(card).join('')||
+
+ $('mapList').innerHTML=
+  sorted.filter(inPeriod).map(card).join('')||
   '<p class="hint">この期間の発見記録はありません。</p>';
 
  markers.clearLayers();
+
  sorted.filter(inPeriod).forEach(r=>{
   const marker=L.marker([Number(r.lat),Number(r.lng)])
    .addTo(markers);
@@ -178,6 +181,7 @@ try{
 function addStores(items){
  const existing=new Set(stores.map(storeKey));
  let count=0;
+
  items.filter(isStore).forEach(p=>{
   const x={
    name:String(p.name).trim(),
@@ -185,12 +189,14 @@ function addStores(items){
    lat:Number(p.lat),
    lng:Number(p.lng)
   };
+
   if(!existing.has(storeKey(x))){
    stores.push(x);
    existing.add(storeKey(x));
    count++;
   }
  });
+
  persistStores();
  return count;
 }
@@ -233,6 +239,7 @@ function searchStores(){
   const name=norm(p.name);
   const brand=brandNorm(p.name);
   const city=norm(p.city);
+
   return (
    brand.includes(term)||
    name.includes(term)||
@@ -268,6 +275,7 @@ function searchStores(){
   ].filter(Boolean).join(' · ');
 
   b.append(title,sub);
+
   b.addEventListener('click',()=>{
    $('shop').value=p.name;
    $('lat').value=p.lat.toFixed(6);
@@ -275,6 +283,7 @@ function searchStores(){
    out.textContent='選択済み：'+p.name;
    map.setView([p.lat,p.lng],17);
   });
+
   out.append(b);
  });
 }
@@ -339,6 +348,7 @@ function showChainDropdown(){
    closeChainDropdown();
    searchStores();
   });
+
   chainDropdown.appendChild(option);
  });
 
@@ -349,6 +359,7 @@ function showChainDropdown(){
 storeQueryInput.addEventListener('focus',showChainDropdown);
 storeQueryInput.addEventListener('click',showChainDropdown);
 storeQueryInput.addEventListener('input',showChainDropdown);
+
 storeQueryInput.addEventListener('keydown',e=>{
  if(e.key==='Escape')closeChainDropdown();
 });
@@ -381,16 +392,19 @@ $('storeRemember').addEventListener('click',()=>{
  const name=$('shop').value.trim();
  const lat=$('lat').value;
  const lng=$('lng').value;
+
  const p={
   name,
   city:$('searchArea').value.trim(),
   lat:Number(lat),
   lng:Number(lng)
  };
+
  if(!name||lat===''||lng===''||!isStore(p)){
   alert('栃木県内の正確な店舗名・緯度・経度を入力してください。');
   return;
  }
+
  const n=addStores([p]);
  alert(n?'店舗一覧に保存しました。':'すでに登録されている店舗です。');
 });
@@ -406,10 +420,12 @@ $('storeExport').addEventListener('click',()=>{
   'name,city,lat,lng',
   ...stores.map(p=>[p.name,p.city,p.lat,p.lng].map(csvEscape).join(','))
  ];
+
  const blob=new Blob(
   ['\uFEFF'+lines.join('\r\n')],
   {type:'text/csv;charset=utf-8'}
  );
+
  const a=document.createElement('a');
  a.href=URL.createObjectURL(blob);
  a.download='pokeca-tochigi-stores.csv';
@@ -427,6 +443,7 @@ function parseCSV(src){
 
  for(let i=0;i<src.length;i++){
   const ch=src[i];
+
   if(ch==='"'){
    if(quoted&&src[i+1]==='"'){
     field+='"';
@@ -453,6 +470,7 @@ function parseCSV(src){
  if(!rows.length)return [];
 
  const headers=rows.shift().map(x=>x.trim().toLowerCase());
+
  for(const h of ['name','city','lat','lng']){
   if(!headers.includes(h)){
    throw Error('CSVの見出しは name,city,lat,lng が必要です。');
@@ -467,12 +485,17 @@ function parseCSV(src){
 $('storeImport').addEventListener('change',async e=>{
  const f=e.target.files?.[0];
  if(!f)return;
+
  try{
   if(f.size>2000000)throw Error('CSVは2MB以下にしてください。');
+
   const rows=parseCSV(await f.text());
   if(rows.length>10000)throw Error('一度に取り込めるのは1万件までです。');
+
   const validRows=rows.filter(isStore);
-  if(!validRows.length)throw Error('栃木県内の有効な店舗データがありません。');
+  if(!validRows.length){
+   throw Error('栃木県内の有効な店舗データがありません。');
+  }
 
   if(confirm(`${validRows.length}件の店舗データを取り込みますか？`)){
    const n=addStores(validRows);
@@ -481,11 +504,13 @@ $('storeImport').addEventListener('change',async e=>{
  }catch(err){
   alert('CSV取込エラー：'+err.message);
  }
+
  e.target.value='';
 });
 
 // ========================================
 // 商品名プルダウン検索
+// ひらがな・カタカナ両対応
 // ========================================
 
 const packInput=$('product');
@@ -533,10 +558,14 @@ const packAliases={
  'ブラックボルト':['ブラボル']
 };
 
+// ★変更点：カタカナをひらがなに統一
 function packNorm(s){
  return String(s||'')
   .normalize('NFKC')
   .toLowerCase()
+  .replace(/[\u30A1-\u30F6]/g,c=>
+   String.fromCharCode(c.charCodeAt(0)-0x60)
+  )
   .replace(/[\s\u3000・ー－‐-‒–—―_()（）「」『』]/g,'');
 }
 
@@ -553,12 +582,15 @@ function showPackDropdown(){
   const message=document.createElement('p');
   message.className='hint';
   message.style.padding='12px';
-  message.textContent='商品データを読み込み中、またはCSVを取得できません。';
+  message.textContent=
+   '商品データを読み込み中、またはCSVを取得できません。';
   packDropdown.append(message);
   packDropdown.hidden=false;
   return;
  }
 
+ // 商品名の部分一致 + 省略名の部分一致
+ // 両方ともひらがな・カタカナを統一して比較
  const matches=packs.filter(p=>
   !q||
   packNorm(p.name).includes(q)||
@@ -572,7 +604,8 @@ function showPackDropdown(){
   const message=document.createElement('p');
   message.className='hint';
   message.style.padding='12px';
-  message.textContent='該当する商品がありません。手入力も可能です。';
+  message.textContent=
+   '該当する商品がありません。手入力も可能です。';
   packDropdown.append(message);
  }
 
@@ -590,6 +623,7 @@ function showPackDropdown(){
   const detail=document.createElement('small');
   detail.style.cssText=
    'display:block;color:#64748b;margin-top:3px;';
+
   detail.textContent=[
    p.date,
    p.price?p.price+'円':'',
@@ -613,7 +647,7 @@ function showPackDropdown(){
 packInput.addEventListener('focus',showPackDropdown);
 packInput.addEventListener('click',showPackDropdown);
 
-// 1文字入力・削除するたびに候補を更新
+// 1文字入力・削除するたびに検索
 packInput.addEventListener('input',showPackDropdown);
 
 packInput.addEventListener('keydown',e=>{
@@ -661,6 +695,7 @@ function parsePackCSV(src){
  if(!rows.length)return [];
 
  const headers=rows.shift().map(h=>h.trim());
+
  if(!headers.includes('パック名')||
     !headers.includes('発売日')){
   throw Error('商品CSVの列名を確認してください。');
@@ -674,6 +709,7 @@ function parsePackCSV(src){
 function packDateValue(s){
  const m=String(s).match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
  if(!m)return 0;
+
  return Number(m[1])*10000+
   Number(m[2])*100+
   Number(m[3]);
@@ -693,7 +729,9 @@ fetch('./pokemon_packs.csv')
     tax:String(r['価格表記']||'').trim()
    }))
    .filter(p=>p.name&&packDateValue(p.date)>0)
-   .sort((a,b)=>packDateValue(b.date)-packDateValue(a.date));
+   .sort((a,b)=>
+    packDateValue(b.date)-packDateValue(a.date)
+   );
 
   console.log('商品CSV読み込み:',packs.length,'件');
 
@@ -703,6 +741,7 @@ fetch('./pokemon_packs.csv')
  })
  .catch(error=>{
   console.error('商品CSV読み込みエラー:',error);
+
   if(document.activeElement===packInput){
    showPackDropdown();
   }
@@ -717,6 +756,7 @@ updateCount();
 function handleCard(e){
  const b=e.target.closest('button[data-action]');
  if(!b)return;
+
  const r=reports.find(x=>x.id===b.dataset.id);
  if(!r)return;
 
@@ -733,6 +773,7 @@ function handleCard(e){
   $('period').value='all';
   render();
   map.setView([r.lat,r.lng],16);
+
   markers.eachLayer(m=>{
    if(m.getLatLng().lat===Number(r.lat)&&
       m.getLatLng().lng===Number(r.lng)){
@@ -814,6 +855,7 @@ let pressTimer;
 const start=e=>{
  clearTimeout(pressTimer);
  const point=e.latlng;
+
  pressTimer=setTimeout(()=>{
   formFor(null);
   $('lat').value=point.lat.toFixed(6);
@@ -822,6 +864,7 @@ const start=e=>{
 };
 
 map.on('mousedown touchstart',start);
+
 map.on('mouseup touchend dragstart move',()=>{
  clearTimeout(pressTimer);
 });
@@ -854,6 +897,7 @@ $('export').addEventListener('click',()=>{
   [JSON.stringify(reports,null,2)],
   {type:'application/json'}
  );
+
  const a=document.createElement('a');
  a.href=URL.createObjectURL(blob);
  a.download='pokeca-reports.json';
@@ -868,7 +912,9 @@ $('import').addEventListener('change',async e=>{
  try{
   const data=JSON.parse(await file.text());
 
-  if(!Array.isArray(data)||!data.every(valid)||data.length>10000){
+  if(!Array.isArray(data)||
+     !data.every(valid)||
+     data.length>10000){
    throw Error('invalid');
   }
 
