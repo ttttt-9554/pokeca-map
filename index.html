@@ -3,43 +3,67 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport"
         content="width=device-width, initial-scale=1, viewport-fit=cover">
+
   <meta name="theme-color" content="#2563eb">
 
   <title>ポケカ発見マップ</title>
 
-  <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <!-- 地図ライブラリ -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  >
 
+  <!-- アプリのデザイン -->
   <link rel="stylesheet" href="style.css?v=05">
+
+  <!-- PWA設定 -->
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
 <body>
 
+  <!-- ====================================== -->
+  <!-- ヘッダー -->
+  <!-- ====================================== -->
+
   <header>
     <div class="eyebrow">PRIVATE DISCOVERY LOG</div>
+
     <h1>ポケカ発見マップ</h1>
+
     <p>友達と共有するための発見記録・試作版</p>
   </header>
 
+
   <main>
 
+    <!-- ====================================== -->
     <!-- マップ画面 -->
+    <!-- ====================================== -->
+
     <section id="mapView" class="view active">
 
       <div class="toolbar">
-        <label>
+
+        <label for="period">
           表示期間
-          <select id="period">
-            <option value="all">すべて</option>
-            <option value="today">今日</option>
-            <option value="week">過去7日間</option>
-          </select>
         </label>
 
-        <button id="locate">現在地へ</button>
+        <select id="period">
+          <option value="all">すべて</option>
+          <option value="today">今日</option>
+          <option value="week">過去7日間</option>
+        </select>
+
+        <button id="locate" type="button">
+          現在地へ
+        </button>
+
       </div>
 
       <div id="map"></div>
@@ -50,10 +74,14 @@
       </p>
 
       <div id="mapList"></div>
+
     </section>
 
 
+    <!-- ====================================== -->
     <!-- 発見情報登録画面 -->
+    <!-- ====================================== -->
+
     <section id="addView" class="view">
 
       <h2 id="formTitle">発見情報を登録</h2>
@@ -63,10 +91,10 @@
         <!-- 店舗検索 -->
         <div class="searchbox">
 
-          <strong>栃木県の店舗をオフライン検索</strong>
+          <strong>栃木県の店舗を検索</strong>
 
           <p class="hint">
-            保存済み店舗から検索します。
+            登録済みの店舗一覧から検索できます。
           </p>
 
           <label for="searchArea">
@@ -75,6 +103,7 @@
 
           <input
             id="searchArea"
+            type="search"
             placeholder="例：宇都宮市、平松本町"
           >
 
@@ -91,18 +120,24 @@
               autocomplete="off"
             >
 
-            <button type="button" id="storeSearch">
+            <button
+              id="storeSearch"
+              type="button"
+            >
               店舗検索
             </button>
 
           </div>
 
-          <div id="storeResults" aria-live="polite"></div>
+          <div
+            id="storeResults"
+            aria-live="polite"
+          ></div>
 
         </div>
 
 
-        <!-- 選択された店舗情報 -->
+        <!-- 選択した店舗情報 -->
         <input id="shop" type="hidden">
         <input id="lat" type="hidden">
         <input id="lng" type="hidden">
@@ -114,6 +149,7 @@
         </label>
 
         <select id="productCategory">
+
           <option value="pack">
             拡張パック
           </option>
@@ -121,10 +157,11 @@
           <option value="deck">
             構築デッキ・スターターセット
           </option>
+
         </select>
 
 
-        <!-- 商品検索 -->
+        <!-- 商品名検索 -->
         <label for="product">
           商品名
         </label>
@@ -139,55 +176,60 @@
         >
 
         <p class="hint">
-          選択したカテゴリの商品を発売日の新しい順に表示します。
-          ひらがな・カタカナ・よみがな・省略名で検索できます。
+          選択したカテゴリの商品を検索できます。
+          正式名称・よみがな・省略名に対応しています。
         </p>
 
 
         <!-- 発見日時 -->
-        <label>
+        <label for="foundAt">
           発見日時
-
-          <input
-            id="foundAt"
-            type="datetime-local"
-            required
-          >
         </label>
+
+        <input
+          id="foundAt"
+          type="datetime-local"
+          required
+        >
 
 
         <!-- 販売状況 -->
-        <label>
+        <label for="status">
           販売状況
-
-          <select id="status">
-            <option>販売を確認</option>
-            <option>在庫少なめ</option>
-            <option>売り切れ</option>
-            <option>不明</option>
-          </select>
         </label>
+
+        <select id="status">
+          <option>販売を確認</option>
+          <option>在庫少なめ</option>
+          <option>売り切れ</option>
+          <option>不明</option>
+        </select>
 
 
         <!-- メモ -->
-        <label>
+        <label for="memo">
           メモ
-
-          <textarea
-            id="memo"
-            maxlength="1000"
-            rows="3"
-            placeholder="購入制限など"
-          ></textarea>
         </label>
+
+        <textarea
+          id="memo"
+          maxlength="1000"
+          rows="3"
+          placeholder="購入制限など"
+        ></textarea>
 
 
         <p class="hint">
-          検索結果から店舗を選択すると、
-          店舗名と位置情報が自動設定されます。
+          店舗検索結果から店舗を選択すると、
+          店舗名と位置情報が自動入力されます。
         </p>
 
-        <button type="submit" class="primary">
+
+        <!-- 保存 -->
+        <button
+          type="submit"
+          class="primary"
+        >
           保存する
         </button>
 
@@ -200,10 +242,14 @@
         </button>
 
       </form>
+
     </section>
 
 
+    <!-- ====================================== -->
     <!-- 発見履歴 -->
+    <!-- ====================================== -->
+
     <section id="historyView" class="view">
 
       <h2>発見履歴</h2>
@@ -213,25 +259,35 @@
     </section>
 
 
+    <!-- ====================================== -->
     <!-- グループ共有 -->
+    <!-- ====================================== -->
+
     <section id="groupView" class="view">
 
       <h2>グループ共有</h2>
 
       <div class="notice">
 
-        <strong>次の開発段階で実装</strong>
+        <strong>今後実装予定</strong>
 
         <p>
-          招待リンク、メンバー管理、
-          リアルタイム同期を追加予定です。
-          現在のデータはこのブラウザ内だけに保存され、
-          友達には共有されません。
+          招待リンク・メンバー管理・
+          リアルタイム同期などの機能を
+          今後追加する予定です。
+        </p>
+
+        <p>
+          現在の発見記録はこのブラウザ内に保存され、
+          他のユーザーとは自動共有されません。
         </p>
 
       </div>
 
-      <button id="export">
+      <button
+        id="export"
+        type="button"
+      >
         記録をJSONで書き出す
       </button>
 
@@ -239,8 +295,8 @@
         JSONから記録を読み込む
 
         <input
-          type="file"
           id="import"
+          type="file"
           accept="application/json,.json"
         >
       </label>
@@ -248,16 +304,23 @@
     </section>
 
 
+    <!-- ====================================== -->
     <!-- 開発・データ管理 -->
+    <!-- ====================================== -->
+
     <section id="devView" class="view">
 
       <h2>開発・データ管理</h2>
 
+      <!-- 店舗データ -->
       <div class="store-tools">
 
-        <strong>店舗データの管理</strong>
+        <strong>店舗データ管理</strong>
 
-        <p class="hint" id="storeCount">
+        <p
+          class="hint"
+          id="storeCount"
+        >
           保存済み店舗 0件
         </p>
 
@@ -271,16 +334,23 @@
           >
         </label>
 
-        <button type="button" id="storeExport">
+        <button
+          id="storeExport"
+          type="button"
+        >
           店舗CSVを書き出す
         </button>
 
-        <button type="button" id="storeRemember">
+        <button
+          id="storeRemember"
+          type="button"
+        >
           選択中の店舗を店舗一覧に保存
         </button>
 
         <p class="hint">
-          CSV列：name,city,lat,lng
+          店舗CSVの列：
+          name,city,lat,lng
         </p>
 
         <p class="hint">
@@ -290,21 +360,24 @@
       </div>
 
 
+      <!-- 商品データ -->
       <div class="store-tools">
 
         <strong>商品データ</strong>
 
         <p class="hint">
-          拡張パック：pokemon_packs.csv
+          拡張パック：
+          pokemon_packs.csv
         </p>
 
         <p class="hint">
-          構築デッキ：pokemon_decks.csv
+          構築デッキ：
+          pokemon_decks.csv
         </p>
 
         <p class="hint">
-          どちらも商品名・発売日・希望小売価格・
-          よみがなを読み込みます。
+          商品名・発売日・希望小売価格・
+          価格表記・よみがなを読み込みます。
         </p>
 
       </div>
@@ -314,30 +387,49 @@
   </main>
 
 
+  <!-- ====================================== -->
   <!-- 下部ナビゲーション -->
+  <!-- ====================================== -->
+
   <nav>
 
-    <button data-tab="map">
+    <button
+      type="button"
+      data-tab="map"
+      class="active"
+    >
       🗺️
       <span>マップ</span>
     </button>
 
-    <button data-tab="add">
+    <button
+      type="button"
+      data-tab="add"
+    >
       ➕
       <span>登録</span>
     </button>
 
-    <button data-tab="history">
+    <button
+      type="button"
+      data-tab="history"
+    >
       📅
       <span>履歴</span>
     </button>
 
-    <button data-tab="group">
+    <button
+      type="button"
+      data-tab="group"
+    >
       👥
       <span>共有</span>
     </button>
 
-    <button data-tab="dev">
+    <button
+      type="button"
+      data-tab="dev"
+    >
       🛠️
       <span>開発</span>
     </button>
@@ -345,15 +437,19 @@
   </nav>
 
 
-  <!-- Leaflet -->
+  <!-- ====================================== -->
+  <!-- JavaScript読み込み -->
+  <!-- ====================================== -->
+
+  <!-- Leaflet：地図表示 -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
 
-  <!-- アプリ本体 -->
-  <script src="app.js?v=12"></script>
+  <!-- アプリ本体：修正版 v14 -->
+  <script src="app.js?v=14"></script>
 
 </body>
 </html>
