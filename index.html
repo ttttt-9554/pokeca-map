@@ -3,67 +3,36 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport"
         content="width=device-width, initial-scale=1, viewport-fit=cover">
-
   <meta name="theme-color" content="#2563eb">
-
   <title>ポケカ発見マップ</title>
 
-  <!-- 地図ライブラリ -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin=""
-  >
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-  <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=05">
-
-  <!-- PWA設定 -->
+  <link rel="stylesheet" href="style.css?v=15">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
 <body>
-
-  <!-- ====================================== -->
-  <!-- ヘッダー -->
-  <!-- ====================================== -->
-
   <header>
     <div class="eyebrow">PRIVATE DISCOVERY LOG</div>
-
     <h1>ポケカ発見マップ</h1>
-
     <p>友達と共有するための発見記録・試作版</p>
   </header>
 
-
   <main>
-
-    <!-- ====================================== -->
-    <!-- マップ画面 -->
-    <!-- ====================================== -->
-
+    <!-- マップ -->
     <section id="mapView" class="view active">
-
       <div class="toolbar">
-
-        <label for="period">
-          表示期間
-        </label>
-
+        <label for="period">表示期間</label>
         <select id="period">
           <option value="all">すべて</option>
           <option value="today">今日</option>
           <option value="week">過去7日間</option>
         </select>
-
-        <button id="locate" type="button">
-          現在地へ
-        </button>
-
+        <button type="button" id="locate">現在地へ</button>
       </div>
 
       <div id="map"></div>
@@ -72,132 +41,89 @@
         地図を長押しすると、その位置を登録できます。
         店舗の場所を確認してから保存してください。
       </p>
-
       <div id="mapList"></div>
-
     </section>
 
-
-    <!-- ====================================== -->
-    <!-- 発見情報登録画面 -->
-    <!-- ====================================== -->
-
+    <!-- 登録 -->
     <section id="addView" class="view">
-
       <h2 id="formTitle">発見情報を登録</h2>
 
       <form id="reportForm">
-
-        <!-- 店舗検索 -->
         <div class="searchbox">
-
           <strong>栃木県の店舗を検索</strong>
-
-          <p class="hint">
-            登録済みの店舗一覧から検索できます。
-          </p>
+          <p class="hint">登録済みの店舗一覧から検索できます。</p>
 
           <label for="searchArea">
             ① 地域・市区町村（省略可）
           </label>
-
-          <input
-            id="searchArea"
-            type="search"
-            placeholder="例：宇都宮市、平松本町"
-          >
+          <input id="searchArea"
+                 type="search"
+                 placeholder="例：宇都宮市、平松本町">
 
           <label for="storeQuery">
             ② 店舗名・チェーン名
           </label>
 
           <div class="searchrow">
-
-            <input
-              id="storeQuery"
-              type="search"
-              placeholder="タップして選択、または入力"
-              autocomplete="off"
-            >
-
-            <button
-              id="storeSearch"
-              type="button"
-            >
+            <input id="storeQuery"
+                   type="search"
+                   placeholder="タップして選択、または入力"
+                   autocomplete="off">
+            <button id="storeSearch" type="button">
               店舗検索
             </button>
-
           </div>
 
-          <div
-            id="storeResults"
-            aria-live="polite"
-          ></div>
-
+          <div id="storeResults" aria-live="polite"></div>
         </div>
 
-
-        <!-- 選択した店舗情報 -->
         <input id="shop" type="hidden">
         <input id="lat" type="hidden">
         <input id="lng" type="hidden">
 
+        <!-- 商品カテゴリ：チェックボックス式 -->
+        <fieldset class="product-category-group">
+          <legend>商品カテゴリ</legend>
 
-        <!-- 商品カテゴリ -->
-        <label for="productCategory">
-          商品カテゴリ
-        </label>
+          <label class="category-option">
+            <input id="categoryPack"
+                   type="checkbox"
+                   value="pack"
+                   checked>
+            <span>拡張パック</span>
+          </label>
 
-        <select id="productCategory">
+          <label class="category-option">
+            <input id="categoryDeck"
+                   type="checkbox"
+                   value="deck">
+            <span>構築デッキ・スターターセット</span>
+          </label>
 
-          <option value="pack">
-            拡張パック
-          </option>
+          <p class="hint" id="categoryHint">
+            拡張パックの商品を検索します。
+          </p>
+        </fieldset>
 
-          <option value="deck">
-            構築デッキ・スターターセット
-          </option>
-
-        </select>
-
-
-        <!-- 商品名検索 -->
-        <label for="product">
-          商品名
-        </label>
-
-        <input
-          id="product"
-          type="search"
-          required
-          maxlength="120"
-          placeholder="商品名・ひらがな・省略名で検索"
-          autocomplete="off"
-        >
+        <label for="product">商品名</label>
+        <input id="product"
+               type="search"
+               required
+               maxlength="120"
+               placeholder="商品名・ひらがな・省略名で検索"
+               autocomplete="off">
 
         <p class="hint">
-          選択したカテゴリの商品を検索できます。
-          正式名称・よみがな・省略名に対応しています。
+          チェックしたカテゴリの商品を検索します。
+          両方にチェックするとまとめて検索できます。
         </p>
 
+        <label for="foundAt">発見日時</label>
+        <input id="foundAt"
+               type="datetime-local"
+               required>
 
-        <!-- 発見日時 -->
-        <label for="foundAt">
-          発見日時
-        </label>
-
-        <input
-          id="foundAt"
-          type="datetime-local"
-          required
-        >
-
-
-        <!-- 販売状況 -->
-        <label for="status">
-          販売状況
-        </label>
-
+        <label for="status">販売状況</label>
         <select id="status">
           <option>販売を確認</option>
           <option>在庫少なめ</option>
@@ -205,251 +131,126 @@
           <option>不明</option>
         </select>
 
-
-        <!-- メモ -->
-        <label for="memo">
-          メモ
-        </label>
-
-        <textarea
-          id="memo"
-          maxlength="1000"
-          rows="3"
-          placeholder="購入制限など"
-        ></textarea>
-
+        <label for="memo">メモ</label>
+        <textarea id="memo"
+                  maxlength="1000"
+                  rows="3"
+                  placeholder="購入制限など"></textarea>
 
         <p class="hint">
           店舗検索結果から店舗を選択すると、
           店舗名と位置情報が自動入力されます。
         </p>
 
-
-        <!-- 保存 -->
-        <button
-          type="submit"
-          class="primary"
-        >
+        <button type="submit" class="primary">
           保存する
         </button>
 
-        <button
-          type="button"
-          id="cancelEdit"
-          hidden
-        >
+        <button type="button" id="cancelEdit" hidden>
           編集をキャンセル
         </button>
-
       </form>
-
     </section>
 
-
-    <!-- ====================================== -->
-    <!-- 発見履歴 -->
-    <!-- ====================================== -->
-
+    <!-- 履歴 -->
     <section id="historyView" class="view">
-
       <h2>発見履歴</h2>
-
       <div id="historyList"></div>
-
     </section>
 
-
-    <!-- ====================================== -->
-    <!-- グループ共有 -->
-    <!-- ====================================== -->
-
+    <!-- 共有 -->
     <section id="groupView" class="view">
-
       <h2>グループ共有</h2>
 
       <div class="notice">
-
         <strong>今後実装予定</strong>
-
         <p>
-          招待リンク・メンバー管理・
-          リアルタイム同期などの機能を
+          招待リンク・メンバー管理・リアルタイム同期などを
           今後追加する予定です。
         </p>
-
         <p>
           現在の発見記録はこのブラウザ内に保存され、
           他のユーザーとは自動共有されません。
         </p>
-
       </div>
 
-      <button
-        id="export"
-        type="button"
-      >
+      <button id="export" type="button">
         記録をJSONで書き出す
       </button>
 
       <label class="import">
         JSONから記録を読み込む
-
-        <input
-          id="import"
-          type="file"
-          accept="application/json,.json"
-        >
+        <input id="import"
+               type="file"
+               accept="application/json,.json">
       </label>
-
     </section>
 
-
-    <!-- ====================================== -->
     <!-- 開発・データ管理 -->
-    <!-- ====================================== -->
-
     <section id="devView" class="view">
-
       <h2>開発・データ管理</h2>
 
-      <!-- 店舗データ -->
       <div class="store-tools">
-
         <strong>店舗データ管理</strong>
-
-        <p
-          class="hint"
-          id="storeCount"
-        >
+        <p class="hint" id="storeCount">
           保存済み店舗 0件
         </p>
 
         <label class="import">
           店舗CSVを取り込む
-
-          <input
-            id="storeImport"
-            type="file"
-            accept=".csv,text/csv"
-          >
+          <input id="storeImport"
+                 type="file"
+                 accept=".csv,text/csv">
         </label>
 
-        <button
-          id="storeExport"
-          type="button"
-        >
+        <button id="storeExport" type="button">
           店舗CSVを書き出す
         </button>
 
-        <button
-          id="storeRemember"
-          type="button"
-        >
+        <button id="storeRemember" type="button">
           選択中の店舗を店舗一覧に保存
         </button>
 
-        <p class="hint">
-          店舗CSVの列：
-          name,city,lat,lng
-        </p>
-
-        <p class="hint">
-          店舗データはこの端末のブラウザ内に保存されます。
-        </p>
-
+        <p class="hint">店舗CSVの列：name,city,lat,lng</p>
       </div>
 
-
-      <!-- 商品データ -->
       <div class="store-tools">
-
         <strong>商品データ</strong>
-
+        <p class="hint">拡張パック：pokemon_packs.csv</p>
+        <p class="hint">構築デッキ：pokemon_decks.csv</p>
         <p class="hint">
-          拡張パック：
-          pokemon_packs.csv
+          商品名・発売日・希望小売価格・価格表記・
+          よみがなを読み込みます。
         </p>
-
-        <p class="hint">
-          構築デッキ：
-          pokemon_decks.csv
-        </p>
-
-        <p class="hint">
-          商品名・発売日・希望小売価格・
-          価格表記・よみがなを読み込みます。
-        </p>
-
       </div>
-
     </section>
-
   </main>
 
-
-  <!-- ====================================== -->
   <!-- 下部ナビゲーション -->
-  <!-- ====================================== -->
-
   <nav>
-
-    <button
-      type="button"
-      data-tab="map"
-      class="active"
-    >
-      🗺️
-      <span>マップ</span>
+    <button type="button" data-tab="map" class="active">
+      🗺️ <span>マップ</span>
     </button>
-
-    <button
-      type="button"
-      data-tab="add"
-    >
-      ➕
-      <span>登録</span>
+    <button type="button" data-tab="add">
+      ➕ <span>登録</span>
     </button>
-
-    <button
-      type="button"
-      data-tab="history"
-    >
-      📅
-      <span>履歴</span>
+    <button type="button" data-tab="history">
+      📅 <span>履歴</span>
     </button>
-
-    <button
-      type="button"
-      data-tab="group"
-    >
-      👥
-      <span>共有</span>
+    <button type="button" data-tab="group">
+      👥 <span>共有</span>
     </button>
-
-    <button
-      type="button"
-      data-tab="dev"
-    >
-      🛠️
-      <span>開発</span>
+    <button type="button" data-tab="dev">
+      🛠️ <span>開発</span>
     </button>
-
   </nav>
 
-
-  <!-- ====================================== -->
-  <!-- JavaScript読み込み -->
-  <!-- ====================================== -->
-
-  <!-- Leaflet：地図表示 -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
+    crossorigin="">
+  </script>
 
-  <!-- アプリ本体：修正版 v14 -->
-  <script src="app.js?v=14"></script>
-
+  <script src="app.js?v=15"></script>
 </body>
 </html>
