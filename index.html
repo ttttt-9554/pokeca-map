@@ -1,22 +1,18 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#2563eb">
+
   <title>ポケカ発見マップ</title>
 
-  <!-- 地図ライブラリ -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  >
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-  <!-- アプリのデザイン -->
   <link rel="stylesheet" href="style.css?v=05">
-
-  <!-- PWA設定 -->
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
@@ -30,9 +26,7 @@
 
   <main>
 
-    <!-- =====================================
-         マップ
-    ====================================== -->
+    <!-- マップ画面 -->
     <section id="mapView" class="view active">
 
       <div class="toolbar">
@@ -45,9 +39,7 @@
           </select>
         </label>
 
-        <button id="locate">
-          現在地へ
-        </button>
+        <button id="locate">現在地へ</button>
       </div>
 
       <div id="map"></div>
@@ -58,12 +50,10 @@
       </p>
 
       <div id="mapList"></div>
-
     </section>
 
-    <!-- =====================================
-         発見情報の登録
-    ====================================== -->
+
+    <!-- 発見情報登録画面 -->
     <section id="addView" class="view">
 
       <h2 id="formTitle">発見情報を登録</h2>
@@ -85,7 +75,6 @@
 
           <input
             id="searchArea"
-            type="text"
             placeholder="例：宇都宮市、平松本町"
           >
 
@@ -102,31 +91,40 @@
               autocomplete="off"
             >
 
-            <button
-              type="button"
-              id="storeSearch"
-            >
+            <button type="button" id="storeSearch">
               店舗検索
             </button>
 
           </div>
 
-          <div
-            id="storeResults"
-            aria-live="polite"
-          ></div>
+          <div id="storeResults" aria-live="polite"></div>
 
         </div>
 
-        <!-- 選択した店舗の情報 -->
+
+        <!-- 選択された店舗情報 -->
         <input id="shop" type="hidden">
         <input id="lat" type="hidden">
         <input id="lng" type="hidden">
 
-        <!-- =====================================
-             商品名プルダウン検索
-        ====================================== -->
 
+        <!-- 商品カテゴリ -->
+        <label for="productCategory">
+          商品カテゴリ
+        </label>
+
+        <select id="productCategory">
+          <option value="pack">
+            拡張パック
+          </option>
+
+          <option value="deck">
+            構築デッキ・スターターセット
+          </option>
+        </select>
+
+
+        <!-- 商品検索 -->
         <label for="product">
           商品名
         </label>
@@ -138,14 +136,13 @@
           maxlength="120"
           placeholder="商品名・ひらがな・省略名で検索"
           autocomplete="off"
-          aria-label="商品名"
         >
 
         <p class="hint">
-          商品名をタップすると、発売日の新しい順に候補が表示されます。
-          文字を入力・削除すると候補が自動的に絞り込まれます。
-          ひらがな・カタカナ・省略名の検索に対応しています。
+          選択したカテゴリの商品を発売日の新しい順に表示します。
+          ひらがな・カタカナ・よみがな・省略名で検索できます。
         </p>
+
 
         <!-- 発見日時 -->
         <label>
@@ -157,6 +154,7 @@
             required
           >
         </label>
+
 
         <!-- 販売状況 -->
         <label>
@@ -170,6 +168,7 @@
           </select>
         </label>
 
+
         <!-- メモ -->
         <label>
           メモ
@@ -182,15 +181,13 @@
           ></textarea>
         </label>
 
+
         <p class="hint">
           検索結果から店舗を選択すると、
           店舗名と位置情報が自動設定されます。
         </p>
 
-        <button
-          type="submit"
-          class="primary"
-        >
+        <button type="submit" class="primary">
           保存する
         </button>
 
@@ -203,12 +200,10 @@
         </button>
 
       </form>
-
     </section>
 
-    <!-- =====================================
-         発見履歴
-    ====================================== -->
+
+    <!-- 発見履歴 -->
     <section id="historyView" class="view">
 
       <h2>発見履歴</h2>
@@ -217,9 +212,8 @@
 
     </section>
 
-    <!-- =====================================
-         グループ共有
-    ====================================== -->
+
+    <!-- グループ共有 -->
     <section id="groupView" class="view">
 
       <h2>グループ共有</h2>
@@ -253,14 +247,12 @@
 
     </section>
 
-    <!-- =====================================
-         開発・データ管理
-    ====================================== -->
+
+    <!-- 開発・データ管理 -->
     <section id="devView" class="view">
 
       <h2>開発・データ管理</h2>
 
-      <!-- 店舗データ -->
       <div class="store-tools">
 
         <strong>店舗データの管理</strong>
@@ -279,17 +271,11 @@
           >
         </label>
 
-        <button
-          type="button"
-          id="storeExport"
-        >
+        <button type="button" id="storeExport">
           店舗CSVを書き出す
         </button>
 
-        <button
-          type="button"
-          id="storeRemember"
-        >
+        <button type="button" id="storeRemember">
           選択中の店舗を店舗一覧に保存
         </button>
 
@@ -299,30 +285,26 @@
 
         <p class="hint">
           店舗データはこの端末のブラウザ内に保存されます。
-          正確な店舗データだけを取り込んでください。
         </p>
 
       </div>
 
-      <!-- 商品データ -->
+
       <div class="store-tools">
 
         <strong>商品データ</strong>
 
         <p class="hint">
-          商品名の候補は pokemon_packs.csv から
-          自動的に読み込まれます。
+          拡張パック：pokemon_packs.csv
         </p>
 
         <p class="hint">
-          商品名・発売日・希望小売価格を参照し、
-          発売日の新しい順に表示します。
+          構築デッキ：pokemon_decks.csv
         </p>
 
         <p class="hint">
-          商品名の部分一致検索、
-          ひらがな・カタカナ検索、
-          省略名検索に対応しています。
+          どちらも商品名・発売日・希望小売価格・
+          よみがなを読み込みます。
         </p>
 
       </div>
@@ -331,42 +313,47 @@
 
   </main>
 
-  <!-- =====================================
-       下部ナビゲーション
-  ====================================== -->
+
+  <!-- 下部ナビゲーション -->
   <nav>
 
     <button data-tab="map">
-      🗺️<span>マップ</span>
+      🗺️
+      <span>マップ</span>
     </button>
 
     <button data-tab="add">
-      ➕<span>登録</span>
+      ➕
+      <span>登録</span>
     </button>
 
     <button data-tab="history">
-      📅<span>履歴</span>
+      📅
+      <span>履歴</span>
     </button>
 
     <button data-tab="group">
-      👥<span>共有</span>
+      👥
+      <span>共有</span>
     </button>
 
     <button data-tab="dev">
-      🛠️<span>開発</span>
+      🛠️
+      <span>開発</span>
     </button>
 
   </nav>
 
-  <!-- 地図ライブラリ -->
+
+  <!-- Leaflet -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
 
-  <!-- アプリ本体：ひらがな検索対応版 -->
-  <script src="app.js?v=09"></script>
+  <!-- アプリ本体 -->
+  <script src="app.js?v=12"></script>
 
 </body>
 </html>
