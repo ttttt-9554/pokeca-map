@@ -1,7 +1,541 @@
-:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;color:#182333;background:#f5f7fb}*{box-sizing:border-box}body{margin:0;padding-bottom:calc(83px + env(safe-area-inset-bottom))}header{padding:calc(18px + env(safe-area-inset-top)) 18px 16px;background:#fff;border-bottom:1px solid #e4e9f0}.eyebrow{font-size:10px;letter-spacing:.16em;color:#2563eb;font-weight:800}h1{font-size:23px;margin:4px 0}header p{font-size:12px;color:#64748b;margin:0}main{max-width:700px;margin:auto}.view{display:none;padding:14px}.view.active{display:block}h2{font-size:19px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.toolbar label{display:flex;align-items:center;gap:8px;font-size:13px}#map{height:min(53vh,490px);min-height:280px;border-radius:16px;border:1px solid #dbe3ed;z-index:0}.hint{color:#64748b;font-size:12px;line-height:1.6}button,select,input,textarea{font:inherit}button{border:1px solid #d8e1ee;border-radius:10px;background:#fff;padding:10px 12px;color:#1e40af;font-weight:650;cursor:pointer}button.primary{background:#2563eb;color:#fff;border:0;width:100%;padding:14px}form{background:white;padding:16px;border-radius:16px;display:grid;gap:14px}form label,.import{display:grid;gap:6px;font-size:13px;font-weight:650}input,textarea,select{width:100%;border:1px solid #d7dfeb;border-radius:10px;padding:12px;background:#fff;color:#172033;font-size:16px}.coords{display:grid;grid-template-columns:1fr 1fr;gap:10px}.entry{background:#fff;border:1px solid #e3e9f2;border-radius:13px;padding:14px;margin:10px 0}.entry h3{margin:0 0 7px;font-size:15px}.entry p{margin:5px 0;font-size:13px;color:#475569;overflow-wrap:anywhere}.entry small{color:#64748b}.entry .actions{display:flex;gap:8px;margin-top:12px}.entry .actions button{font-size:12px;padding:8px}.notice{background:#eff6ff;border-radius:14px;padding:17px;line-height:1.65;font-size:14px}.import{margin-top:18px}nav{position:fixed;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #e2e8f0;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:1000}nav button{display:grid;justify-items:center;gap:3px;border:0;background:transparent;font-size:21px;color:#64748b;padding:5px}nav span{font-size:11px}nav button.active{color:#2563eb;background:#eff6ff}.leaflet-container{font:inherit}
 
-.searchbox{padding:12px;background:#eff6ff;border-radius:12px}.searchrow{display:flex;gap:8px;margin-top:8px}.searchrow input{min-width:0;flex:1}.searchrow button{background:#2563eb;color:white}.store-result{display:flex;flex-direction:column;gap:3px;width:100%;text-align:left;margin-top:6px;color:#182333}.store-result small{color:#64748b;font-size:11px}#storeResults{font-size:13px}
+/* ==========================================
+   ポケカ発見マップ
+   style.css v15
+   ========================================== */
 
-.searchbox{display:grid;gap:8px}.searchbox>strong{font-size:16px}.searchbox label{font-size:13px}.store-result{background:white;border:1px solid #dbe3ed}
+/* 基本設定 */
+:root {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Kaku Gothic ProN",
+    sans-serif;
+  color: #182333;
+  background: #f5f7fb;
+}
 
-.store-tools{margin-top:14px;padding:12px;background:#fff;border-radius:10px;border:1px solid #dbe5f4}.store-tools>button{width:100%;margin-top:8px}.store-tools .import{display:block;margin-top:8px}.store-result{width:100%;text-align:left;display:flex;flex-direction:column;gap:4px;margin:6px 0}.store-result small{font-size:12px;color:#64748b}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-bottom: calc(83px + env(safe-area-inset-bottom));
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+/* ==========================================
+   ヘッダー
+   ========================================== */
+
+header {
+  padding:
+    calc(18px + env(safe-area-inset-top))
+    18px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e4e9f0;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: #2563eb;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 23px;
+  margin: 4px 0;
+}
+
+header p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ==========================================
+   メイン・画面切り替え
+   ========================================== */
+
+main {
+  max-width: 700px;
+  margin: auto;
+}
+
+.view {
+  display: none;
+  padding: 14px;
+}
+
+.view.active {
+  display: block;
+}
+
+h2 {
+  font-size: 19px;
+}
+
+.hint {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   ボタン・入力フォーム共通
+   ========================================== */
+
+button {
+  border: 1px solid #d8e1ee;
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px 12px;
+  color: #1e40af;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  width: 100%;
+  padding: 14px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid #d7dfeb;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  color: #172033;
+  font-size: 16px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   地図
+   ========================================== */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.toolbar select {
+  width: auto;
+  min-width: 110px;
+}
+
+#map {
+  height: min(53vh, 490px);
+  min-height: 280px;
+  border-radius: 16px;
+  border: 1px solid #dbe3ed;
+  z-index: 0;
+}
+
+.leaflet-container {
+  font: inherit;
+}
+
+/* ==========================================
+   登録フォーム
+   ========================================== */
+
+form {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  display: grid;
+  gap: 14px;
+}
+
+form label,
+.import {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.coords {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ==========================================
+   店舗検索
+   ========================================== */
+
+.searchbox {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  background: #eff6ff;
+  border-radius: 12px;
+}
+
+.searchbox > strong {
+  font-size: 16px;
+}
+
+.searchbox label {
+  font-size: 13px;
+}
+
+.searchrow {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  min-width: 0;
+}
+
+.searchrow input {
+  min-width: 0;
+  flex: 1;
+}
+
+.searchrow button {
+  background: #2563eb;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+#storeResults {
+  font-size: 13px;
+}
+
+.store-result {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin: 6px 0;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #dbe3ed;
+  color: #182333;
+}
+
+.store-result small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ==========================================
+   商品カテゴリ：チェックボックス式
+   ========================================== */
+
+.product-category-group {
+  border: 0;
+  padding: 0;
+  margin: 4px 0 8px;
+  min-width: 0;
+}
+
+.product-category-group legend {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+.category-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  margin: 8px 0;
+  border: 1px solid #d5dfef;
+  border-radius: 12px;
+  background: #f8fbff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* チェック済みのカテゴリを強調 */
+.category-option:has(input:checked) {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+/* 共通inputのwidth:100%を上書き */
+.category-option input[type="checkbox"] {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  width: 21px;
+  height: 21px;
+  min-width: 21px;
+  flex: 0 0 21px;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.category-option span {
+  flex: 1;
+  line-height: 1.5;
+}
+
+#categoryHint {
+  margin: 10px 0 0;
+}
+
+/* ==========================================
+   商品名検索・候補一覧
+   ========================================== */
+
+.product-input-wrap {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.product-input-wrap > input {
+  width: 100%;
+}
+
+.product-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* hidden属性を確実に反映 */
+.product-dropdown[hidden] {
+  display: none !important;
+}
+
+.product-result {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #e5e7eb;
+  border-radius: 0;
+  background: #fff;
+  color: #111827;
+  text-align: left;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.product-result:last-child {
+  border-bottom: 0;
+}
+
+.product-result:hover,
+.product-result:focus {
+  background: #eff6ff;
+}
+
+.product-result strong {
+  display: block;
+  font-weight: 600;
+}
+
+.product-result small {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ==========================================
+   発見履歴
+   ========================================== */
+
+.entry {
+  background: #fff;
+  border: 1px solid #e3e9f2;
+  border-radius: 13px;
+  padding: 14px;
+  margin: 10px 0;
+}
+
+.entry h3 {
+  margin: 0 0 7px;
+  font-size: 15px;
+}
+
+.entry p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #475569;
+  overflow-wrap: anywhere;
+}
+
+.entry small {
+  color: #64748b;
+}
+
+.entry .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.entry .actions button {
+  font-size: 12px;
+  padding: 8px;
+}
+
+/* ==========================================
+   共有画面
+   ========================================== */
+
+.notice {
+  background: #eff6ff;
+  border-radius: 14px;
+  padding: 17px;
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+.import {
+  margin-top: 18px;
+}
+
+/* ==========================================
+   開発・データ管理
+   ========================================== */
+
+.store-tools {
+  margin-top: 14px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #dbe5f4;
+}
+
+.store-tools > button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.store-tools .import {
+  display: block;
+  margin-top: 8px;
+}
+
+/* ==========================================
+   下部ナビゲーション：5項目
+   ========================================== */
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  padding:
+    8px 6px
+    calc(8px + env(safe-area-inset-bottom));
+  z-index: 1000;
+}
+
+nav button {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 3px;
+  min-width: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 21px;
+  color: #64748b;
+  padding: 5px 2px;
+}
+
+nav span {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+nav button.active {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+/* ==========================================
+   スマートフォン表示
+   ========================================== */
+
+@media (max-width: 600px) {
+  .view {
+    padding: 12px;
+  }
+
+  form {
+    padding: 14px;
+  }
+
+  .category-option {
+    padding: 12px;
+  }
+
+  .searchrow {
+    gap: 6px;
+  }
+
+  .searchrow button {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  nav span {
+    font-size: 10px;
+  }
+}
