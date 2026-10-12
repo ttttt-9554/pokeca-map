@@ -21,7 +21,20 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=17">
+  <link rel="stylesheet" href="style.css?v=18">
+
+  <style>
+    .store-category-group { border: 0; padding: 0; margin: 16px 0 20px; min-width: 0; }
+    .store-category-group legend { font-weight: 700; margin-bottom: 12px; }
+    .store-category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .store-category-grid label { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #cbdcf4; border-radius: 10px; padding: 11px 9px; margin: 0; font-size: 14px; cursor: pointer; }
+    .store-category-grid input { width: 18px; height: 18px; flex: 0 0 auto; accent-color: #2563eb; }
+    .store-category-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+    .store-category-actions button { padding: 7px 11px; font-size: 12px; border-radius: 8px; }
+    #storeResults .store-result { width: 100%; text-align: left; }
+    #storeResults .store-result small { display: block; margin-top: 5px; color: #64748b; }
+    @media (max-width: 370px) { .store-category-grid { grid-template-columns: 1fr; } }
+  </style>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest">
@@ -109,8 +122,26 @@
             登録済みの店舗一覧から検索できます。
           </p>
 
+          <fieldset class="store-category-group">
+            <legend>① 店舗カテゴリ（複数選択可）</legend>
+            <div class="store-category-grid">
+              <label><input type="checkbox" name="storeCategory" value="コンビニ" checked> コンビニ</label>
+              <label><input type="checkbox" name="storeCategory" value="TSUTAYA" checked> TSUTAYA</label>
+              <label><input type="checkbox" name="storeCategory" value="GEO" checked> GEO</label>
+              <label><input type="checkbox" name="storeCategory" value="ヨドバシカメラ" checked> ヨドバシカメラ</label>
+              <label><input type="checkbox" name="storeCategory" value="コジマ" checked> コジマ</label>
+              <label><input type="checkbox" name="storeCategory" value="ヤマダデンキ" checked> ヤマダデンキ</label>
+              <label><input type="checkbox" name="storeCategory" value="カードショップ" checked> カードショップ</label>
+            </div>
+            <div class="store-category-actions">
+              <button type="button" id="storeSelectAll">すべて選択</button>
+              <button type="button" id="storeClearAll">すべて解除</button>
+            </div>
+            <p class="hint" id="storeDataStatus" aria-live="polite">店舗データを読み込み中です。</p>
+          </fieldset>
+
           <label for="searchArea">
-            ① 地域・市区町村（省略可）
+            ② 地域・市区町村（省略可）
           </label>
 
           <input
@@ -121,7 +152,7 @@
           >
 
           <label for="storeQuery">
-            ② 店舗名・チェーン名
+            ③ 店舗名・チェーン名
           </label>
 
           <div class="searchrow">
@@ -440,7 +471,7 @@
 
         <p class="hint">
           店舗CSVの列：
-          name,city,lat,lng
+          name,city,address,category,lat,lng
         </p>
 
         <p class="hint">
@@ -546,7 +577,7 @@
 
 
   <!-- アプリ本体 -->
-  <script src="app.js?v=16"></script>
+  <script src="app.js?v=17"></script>
 
 </body>
 </html>

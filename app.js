@@ -3,7 +3,7 @@
   'use strict';
 
   const KEY = 'pokeca-reports-v1';
-  const STORE_KEY = 'pokeca-tochigi-stores-v05';
+  const STORE_KEY = 'pokeca-tochigi-stores-v05'; // 既存データを保持
   const $ = id => document.getElementById(id);
 
   let reports = [];
@@ -820,16 +820,29 @@
   // 店舗データ
   // ========================================
 
+  const STORE_CATEGORIES = [
+    'コンビニ', 'TSUTAYA', 'GEO', 'ヨドバシカメラ',
+    'コジマ', 'ヤマダデンキ', 'カードショップ'
+  ];
+
+  function inferStoreCategory(p) {
+    if (STORE_CATEGORIES.includes(p.category)) return p.category;
+    const name = String(p.name || '').normalize('NFKC').toLowerCase();
+    if (/tsutaya|ツタヤ/.test(name)) return 'TSUTAYA';
+    if (/ゲオ|\bgeo\b/.test(name)) return 'GEO';
+    if (/ヨドバシ/.test(name)) return 'ヨドバシカメラ';
+    if (/コジマ/.test(name)) return 'コジマ';
+    if (/ヤマダ|テックランド|yamada/i.test(name)) return 'ヤマダデンキ';
+    if (/カードラボ|トレカ|バトロコ|駿河屋|ganryu|wondergoo|bookoff|ホビーオフ|イエローサブマリン|きんこん館|ポケットトレジャー|tiny frontier|コーギーアール|quest/i.test(name)) return 'カードショップ';
+    return 'コンビニ';
+  }
+
   function isStore(p) {
-    return p &&
-      typeof p.name === 'string' &&
-      p.name.trim() &&
-      Number.isFinite(Number(p.lat)) &&
-      Number.isFinite(Number(p.lng)) &&
-      Number(p.lat) > 35 &&
-      Number(p.lat) < 38 &&
-      Number(p.lng) > 138 &&
-      Number(p.lng) < 141;
+    if (!p || typeof p.name !== 'string' || !p.name.trim()) return false;
+    if (p.lat === '' || p.lng === '' || p.lat == null || p.lng == null) return false;
+    return Number.isFinite(Number(p.lat)) && Number.isFinite(Number(p.lng)) &&
+      Number(p.lat) > 35 && Number(p.lat) < 38 &&
+      Number(p.lng) > 138 && Number(p.lng) < 141;
   }
 
   function norm(value) {
@@ -864,153 +877,145 @@
   }
 
   function updateStoreCount() {
-    get('storeCount').textContent =
-      `保存済み店舗 ${stores.length}件（この端末のみ）`;
+    const count = stores.length;
+    get('storeCount').textContent = `登録店舗 ${count}件（端末保存＋CSV）`;
+    const status = $('storeDataStatus');
+    if (status) status.textContent = `${count}店舗を検索できます。`;
   }
 
   function addStores(items) {
-    const existing = new Set(stores.map(storeKey));
+    const existing = new Map(stores.map((p, i) => [storeKey(p), i]));
     let added = 0;
-
     items.filter(isStore).forEach(p => {
       const item = {
+        id: String(p.id || '').trim(),
         name: String(p.name).trim(),
         city: String(p.city || '').trim(),
-        lat: Number(p.lat),
-        lng: Number(p.lng)
+        address: String(p.address || '').trim(),
+        category: inferStoreCategory(p),
+        lat: Number(p.lat), lng: Number(p.lng)
       };
-
       const key = storeKey(item);
-
-      if (!existing.has(key)) {
+      if (existing.has(key)) {
+        const index = existing.get(key);
+        const old = stores[index];
+        // CSV側の分類・住所で既存の古いデータを補完する。
+        stores[index] = { ...old, ...item,
+          id: item.id || old.id || '',
+          address: item.address || old.address || '',
+          city: item.city || old.city || '' };
+      } else {
+        existing.set(key, stores.length);
         stores.push(item);
-        existing.add(key);
         added++;
       }
     });
-
     try {
       localStorage.setItem(STORE_KEY, JSON.stringify(stores));
     } catch (error) {
       console.error('店舗データ保存エラー:', error);
     }
-
     updateStoreCount();
     return added;
   }
 
   function loadSavedStores() {
     try {
-      const saved = JSON.parse(
-        localStorage.getItem(STORE_KEY) || '[]'
-      );
-
+      const saved = JSON.parse(localStorage.getItem(STORE_KEY) || '[]');
       if (Array.isArray(saved)) {
         stores = saved.filter(isStore).map(p => ({
-          name: p.name,
-          city: String(p.city || ''),
-          lat: Number(p.lat),
-          lng: Number(p.lng)
+          id: String(p.id || ''), name: String(p.name).trim(),
+          city: String(p.city || ''), address: String(p.address || ''),
+          category: inferStoreCategory(p),
+          lat: Number(p.lat), lng: Number(p.lng)
         }));
       }
     } catch (error) {
       console.error('店舗データ読み込みエラー:', error);
     }
-
     updateStoreCount();
   }
 
   async function loadStoreCSV() {
-    try {
-      const response = await fetch(
-        './tochigi-convenience-stores.csv'
-      );
-
-      if (!response.ok) {
-        throw new Error('店舗CSVが見つかりません');
+    const sources = [
+      ['./tochigi-convenience-stores.csv', 'コンビニ'],
+      ['./tochigi_pokeca_stores_89_app_ready.csv', null]
+    ];
+    await Promise.all(sources.map(async ([file, fallbackCategory]) => {
+      try {
+        const response = await fetch(file, { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
+        const items = parseCSV(await response.text()).map(p => ({
+          ...p, category: p.category || fallbackCategory || ''
+        })).filter(isStore);
+        const added = addStores(items);
+        console.log(file, '読込:', items.length, '追加:', added);
+      } catch (error) {
+        console.error('店舗CSV読み込みエラー:', error);
+        const status = $('storeDataStatus');
+        if (status) status.textContent =
+          '一部の店舗CSVを読み込めませんでした。開発者ツールで確認してください。';
       }
+    }));
+  }
 
-      const items = parseCSV(
-        await response.text()
-      ).filter(isStore);
-
-      addStores(items);
-      console.log('店舗CSV:', items.length, '件');
-    } catch (error) {
-      console.error('店舗CSV読み込みエラー:', error);
-    }
+  function selectedStoreCategories() {
+    return [...document.querySelectorAll('input[name="storeCategory"]:checked')]
+      .map(input => input.value);
   }
 
   function searchStores() {
     const area = norm(get('searchArea').value);
     const query = brandNorm(get('storeQuery').value);
     const output = get('storeResults');
-
+    const selected = selectedStoreCategories();
     output.replaceChildren();
 
-    if (!query) {
-      output.textContent =
-        '店舗名・チェーン名を入力してください。';
+    if (!selected.length) {
+      output.textContent = '店舗カテゴリを1つ以上選択してください。';
       return;
     }
-
+    if (!query && !area) {
+      output.textContent = '地域または店舗名を入力してください。';
+      return;
+    }
     const matches = stores.filter(p => {
+      if (!selected.includes(inferStoreCategory(p))) return false;
       const name = norm(p.name);
       const brand = brandNorm(p.name);
       const city = norm(p.city);
-
-      return (
-        brand.includes(query) ||
-        name.includes(query)
-      ) && (
-        !area ||
-        city.includes(area) ||
-        name.includes(area)
-      );
+      const address = norm(p.address);
+      return (!query || brand.includes(query) || name.includes(query) || norm(inferStoreCategory(p)).includes(query)) &&
+        (!area || city.includes(area) || address.includes(area) || name.includes(area));
     });
-
     const count = document.createElement('p');
     count.className = 'hint';
-    count.textContent =
-      `${matches.length}件の店舗が見つかりました。`;
+    count.textContent = `${matches.length}件の店舗が見つかりました。` +
+      (matches.length > 150 ? ' 最初の150件を表示します。' : '');
     output.append(count);
-
     if (!matches.length) {
       const message = document.createElement('p');
       message.textContent = '該当店舗がありません。';
       output.append(message);
       return;
     }
-
-    matches.forEach(p => {
+    matches.slice(0, 150).forEach(p => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'store-result';
-
       const name = document.createElement('strong');
       name.textContent = p.name;
-
       const detail = document.createElement('small');
-      detail.textContent = [
-        p.city,
-        `緯度 ${p.lat.toFixed(5)}`,
-        `経度 ${p.lng.toFixed(5)}`
-      ].filter(Boolean).join(' · ');
-
+      detail.textContent = [inferStoreCategory(p), p.city, p.address]
+        .filter(Boolean).join(' · ');
       button.append(name, detail);
-
       button.addEventListener('click', () => {
         get('shop').value = p.name;
         get('lat').value = p.lat.toFixed(6);
         get('lng').value = p.lng.toFixed(6);
-
-        output.textContent = `選択済み：${p.name}`;
-
-        if (map) {
-          map.setView([p.lat, p.lng], 17);
-        }
+        output.textContent = `選択済み：${p.name}（${inferStoreCategory(p)}）`;
+        if (map) map.setView([p.lat, p.lng], 17);
       });
-
       output.append(button);
     });
   }
@@ -1023,7 +1028,9 @@
     'セブンイレブン',
     'ファミリーマート',
     'ローソン',
-    'ミニストップ'
+    'ミニストップ',
+    'TSUTAYA', 'GEO', 'ヨドバシカメラ', 'コジマ',
+    'ヤマダデンキ', 'カードショップ'
   ];
 
   let chainDropdown = null;
@@ -1114,9 +1121,9 @@
 
   function exportStores() {
     const lines = [
-      'name,city,lat,lng',
+      'name,city,address,category,lat,lng',
       ...stores.map(p =>
-        [p.name, p.city, p.lat, p.lng]
+        [p.name, p.city, p.address || '', inferStoreCategory(p), p.lat, p.lng]
           .map(csvEscape).join(',')
       )
     ];
@@ -1164,6 +1171,7 @@
     const item = {
       name: get('shop').value.trim(),
       city: get('searchArea').value.trim(),
+      category: 'コンビニ',
       lat: Number(latText),
       lng: Number(lngText)
     };
@@ -1299,6 +1307,12 @@
       formFor(null);
     });
 
+    get('storeSelectAll').addEventListener('click', () => {
+      document.querySelectorAll('input[name="storeCategory"]').forEach(input => { input.checked = true; });
+    });
+    get('storeClearAll').addEventListener('click', () => {
+      document.querySelectorAll('input[name="storeCategory"]').forEach(input => { input.checked = false; });
+    });
     get('storeSearch').addEventListener('click', () => {
       closeChainDropdown();
       searchStores();
@@ -1337,7 +1351,7 @@
 
   function init() {
     try {
-      console.log('ポケカ発見マップ v15 起動開始');
+      console.log('ポケカ発見マップ 7カテゴリ版 起動開始');
 
       loadReports();
       loadSavedStores();
@@ -1356,7 +1370,7 @@
       loadStoreCSV();
       loadProducts();
 
-      console.log('ポケカ発見マップ v15 起動完了');
+      console.log('ポケカ発見マップ 7カテゴリ版 起動完了');
     } catch (error) {
       console.error('アプリ起動エラー:', error);
       alert(
