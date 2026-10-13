@@ -36,6 +36,24 @@
     @media (max-width: 370px) { .store-category-grid { grid-template-columns: 1fr; } }
   </style>
 
+  <style>
+    /* マップ専用。既存style.cssは変更不要 */
+    .map-product-filter{margin:14px 0;padding:16px;border:1px solid #d5e0f2;border-radius:14px;background:#fff;display:flex;flex-direction:column;gap:10px}
+    .map-category-option{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid #d5e0f2;border-radius:13px;background:#f8fafc;cursor:pointer;font-weight:600}
+    .map-category-option:has(input:checked){border-color:#2563eb;background:#eff6ff}
+    .map-category-option input{width:23px;height:23px;accent-color:#2563eb;flex-shrink:0}
+    .map-product-input-wrap{position:relative}
+    #mapProductSearch{width:100%;box-sizing:border-box;min-height:48px;border:1px solid #d5e0f2;border-radius:12px;padding:12px;font-size:16px;background:#fff;color:#172033}
+    .map-product-dropdown{position:absolute;top:100%;left:0;right:0;z-index:1100;max-height:260px;overflow-y:auto;background:#fff;border:1px solid #cbd5e1;border-radius:12px;box-shadow:0 8px 20px #0002}
+    .map-product-dropdown[hidden]{display:none}
+    .map-product-choice{display:block;width:100%;padding:12px;text-align:left;background:#fff;color:#172033;border:0;border-bottom:1px solid #edf2f7;border-radius:0;font-size:14px}
+    .map-product-choice small{display:block;color:#64748b;margin-top:4px}
+    .map-selected-products{display:flex;flex-wrap:wrap;gap:7px}
+    .map-product-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid #93c5fd;border-radius:30px;background:#eff6ff;color:#1e40af;padding:7px 10px;font-size:13px}
+    .map-product-chip button{border:0;background:transparent;color:inherit;padding:0 3px;font-size:18px;line-height:1}
+    .map-clear-products{align-self:flex-start;padding:8px 12px;border:1px solid #cbd5e1;border-radius:9px;background:#f8fafc;color:#334155}
+  </style>
+
   <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest">
 </head>
@@ -86,6 +104,23 @@
         </button>
 
       </div>
+
+      <!-- マップ表示用の商品フィルター（登録画面と同じ操作形式） -->
+      <section class="map-product-filter" aria-label="マップの商品絞り込み">
+        <strong>商品カテゴリ</strong>
+        <label class="map-category-option"><input id="mapCategoryPack" type="checkbox" checked><span>拡張パック</span></label>
+        <label class="map-category-option"><input id="mapCategoryDeck" type="checkbox" checked><span>構築デッキ・スターターセット</span></label>
+        <p class="hint" id="mapCategoryHint">両方のカテゴリを表示します。</p>
+        <label for="mapProductSearch"><strong>商品名</strong></label>
+        <div class="map-product-input-wrap">
+          <input id="mapProductSearch" type="search" placeholder="商品名・ひらがな・省略名で検索" autocomplete="off" aria-expanded="false" aria-controls="mapProductDropdown">
+          <div id="mapProductDropdown" class="map-product-dropdown" hidden></div>
+        </div>
+        <p class="hint">候補をタップすると商品を追加できます。複数選択可能です。</p>
+        <div id="mapSelectedProducts" class="map-selected-products" aria-live="polite"></div>
+        <button id="mapClearProducts" type="button" class="map-clear-products">商品選択を解除</button>
+        <p class="hint" id="mapFilterCount" aria-live="polite"></p>
+      </section>
 
       <div id="map"></div>
 
@@ -577,7 +612,7 @@
 
 
   <!-- アプリ本体 -->
-  <script src="app.js?v=17"></script>
+  <script src="app.js?v=18"></script>
 
 </body>
 </html>

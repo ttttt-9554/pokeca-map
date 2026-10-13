@@ -10,6 +10,7 @@
   let stores = [];
   let packs = [];
   let decks = [];
+  let mapSelectedProducts = []; // {name, category}
   let editId = null;
   let map = null;
   let markers = null;
@@ -215,7 +216,8 @@
       ? sorted.map(card).join('')
       : '<p class="hint">まだ発見記録がありません。</p>';
 
-    const visible = sorted.filter(inPeriod);
+    const visible = sorted.filter(r => inPeriod(r) && mapReportMatches(r));
+    get('mapFilterCount').textContent = `該当する発見情報：${visible.length}件`; 
 
     get('mapList').innerHTML = visible.length
       ? visible.map(card).join('')
@@ -265,6 +267,11 @@
 
     if (button.dataset.action === 'view') {
       get('period').value = 'all';
+      // 履歴の「地図で見る」は商品フィルターを解除して確実に表示
+      mapSelectedProducts = [];
+      get('mapCategoryPack').checked = true;
+      get('mapCategoryDeck').checked = true;
+      updateMapFilterUI();
       switchTab('map');
 
       if (map) {
@@ -624,6 +631,9 @@
           if (document.activeElement === get('product')) {
             showProductDropdown();
           }
+          if (document.activeElement === get('mapProductSearch')) {
+            showMapProductDropdown();
+          }
         } catch (error) {
           console.error('商品CSV読み込みエラー:', error);
         }
@@ -671,6 +681,138 @@
         /[\s\u3000・ー－‐-‒–—―_()（）「」『』]/g,
         ''
       );
+  }
+
+  // ========================================
+  // マップ用 商品カテゴリ・商品名フィルター
+  // ========================================
+  function mapCategories() {
+    const result = [];
+    if (get('mapCategoryPack').checked) result.push('pack');
+    if (get('mapCategoryDeck').checked) result.push('deck');
+    return result;
+  }
+
+  function mapReportMatches(report) {
+    const categories = mapCategories();
+    const category = report.category === 'deck' ? 'deck' : 'pack';
+    if (!categories.includes(category)) return false;
+    const chosen = mapSelectedProducts.filter(p => categories.includes(p.category));
+    if (!chosen.length) return true;
+    return chosen.some(p => p.category === category &&
+      productNorm(p.name) === productNorm(report.product));
+  }
+
+  function mapProductMatches(product, query) {
+    if (!query) return true;
+    if (productNorm(product.name).includes(query) || productNorm(product.reading).includes(query)) return true;
+    return Object.entries(productAliases).some(([name, aliases]) =>
+      productNorm(product.name).includes(productNorm(name)) &&
+      aliases.some(alias => productNorm(alias).includes(query)));
+  }
+
+  function closeMapProductDropdown() {
+    get('mapProductDropdown').hidden = true;
+    get('mapProductSearch').setAttribute('aria-expanded', 'false');
+  }
+
+  function showMapProductDropdown() {
+    const dropdown = get('mapProductDropdown');
+    const query = productNorm(get('mapProductSearch').value);
+    dropdown.replaceChildren();
+    const categories = mapCategories();
+    const products = [
+      ...(categories.includes('pack') ? packs.map(p => ({...p, category:'pack'})) : []),
+      ...(categories.includes('deck') ? decks.map(p => ({...p, category:'deck'})) : [])
+    ].sort((a,b) => productDateValue(b.date) - productDateValue(a.date));
+    if (!categories.length) {
+      dropdown.textContent = '商品カテゴリを1つ以上選択してください。';
+    } else if (!products.length) {
+      dropdown.textContent = '商品データを読み込み中です。';
+    } else {
+      const matches = products.filter(p => mapProductMatches(p, query));
+      if (!matches.length) dropdown.textContent = '該当する商品がありません。';
+      matches.slice(0, 120).forEach(p => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'map-product-choice';
+        const strong = document.createElement('strong');
+        strong.textContent = p.name;
+        const small = document.createElement('small');
+        small.textContent = `${p.category === 'pack' ? '拡張パック' : '構築デッキ'}${p.date ? ' · '+p.date : ''}`;
+        button.append(strong, small);
+        button.addEventListener('click', () => {
+          if (!mapSelectedProducts.some(x => x.category === p.category && x.name === p.name)) {
+            mapSelectedProducts.push({name:p.name, category:p.category});
+          }
+          get('mapProductSearch').value = '';
+          closeMapProductDropdown();
+          updateMapFilterUI();
+          render();
+        });
+        dropdown.append(button);
+      });
+    }
+    dropdown.hidden = false;
+    get('mapProductSearch').setAttribute('aria-expanded', 'true');
+  }
+
+  function updateMapFilterUI() {
+    const categories = mapCategories();
+    get('mapCategoryHint').textContent = categories.length === 2
+      ? '拡張パックと構築デッキの両方を検索します。'
+      : categories.length === 1
+        ? (categories[0] === 'pack' ? '拡張パックの商品を検索します。' : '構築デッキの商品を検索します。')
+        : '商品カテゴリを1つ以上選択してください。';
+    const box = get('mapSelectedProducts');
+    box.replaceChildren();
+    mapSelectedProducts.forEach((p, index) => {
+      const chip = document.createElement('span');
+      chip.className = 'map-product-chip';
+      chip.append(document.createTextNode(p.name));
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = '×';
+      remove.setAttribute('aria-label', `${p.name}を解除`);
+      remove.addEventListener('click', () => {
+        mapSelectedProducts.splice(index, 1);
+        updateMapFilterUI();
+        render();
+      });
+      chip.append(remove);
+      box.append(chip);
+    });
+    get('mapClearProducts').hidden = mapSelectedProducts.length === 0;
+  }
+
+  function initMapProductFilter() {
+    ['mapCategoryPack','mapCategoryDeck'].forEach(id => {
+      get(id).addEventListener('change', () => {
+        // 選択されていないカテゴリの商品は選択リストからも外す
+        mapSelectedProducts = mapSelectedProducts.filter(p => mapCategories().includes(p.category));
+        closeMapProductDropdown();
+        updateMapFilterUI();
+        render();
+      });
+    });
+    const input = get('mapProductSearch');
+    input.addEventListener('focus', showMapProductDropdown);
+    input.addEventListener('input', showMapProductDropdown);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMapProductDropdown();
+      if (e.key === 'Enter') e.preventDefault();
+    });
+    get('mapClearProducts').addEventListener('click', () => {
+      mapSelectedProducts = [];
+      input.value = '';
+      closeMapProductDropdown();
+      updateMapFilterUI();
+      render();
+    });
+    document.addEventListener('pointerdown', e => {
+      if (!e.target.closest('.map-product-input-wrap')) closeMapProductDropdown();
+    });
+    updateMapFilterUI();
   }
 
   let productDropdown = null;
@@ -1357,6 +1499,7 @@
       loadSavedStores();
 
       initProductDropdown();
+      initMapProductFilter();
       initChainDropdown();
       bindEvents();
 
