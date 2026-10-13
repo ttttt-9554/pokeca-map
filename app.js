@@ -240,6 +240,42 @@
     });
   }
 
+  // 絞り込み後、該当する発見ポイントがすべて見える範囲へ移動する。
+  // 通常の再描画では呼ばず、商品・カテゴリ・期間の変更時だけ実行する。
+  function fitMapToFilteredReports() {
+    if (!map || !markers || typeof L === 'undefined') return;
+
+    const points = reports
+      .filter(r => inPeriod(r) && mapReportMatches(r))
+      .map(r => [Number(r.lat), Number(r.lng)])
+      .filter(([lat, lng]) =>
+        Number.isFinite(lat) && Number.isFinite(lng) &&
+        Math.abs(lat) <= 90 && Math.abs(lng) <= 180
+      );
+
+    if (!points.length) return; // 0件なら現在の表示範囲を維持
+
+    // スマホで地図が表示された後のサイズを使用する。
+    requestAnimationFrame(() => {
+      if (!document.getElementById('mapView')?.classList.contains('active')) return;
+      map.invalidateSize();
+      if (points.length === 1) {
+        map.setView(points[0], 16, { animate: true });
+      } else {
+        map.fitBounds(L.latLngBounds(points), {
+          padding: [36, 36],
+          maxZoom: 16,
+          animate: true
+        });
+      }
+    });
+  }
+
+  function renderAndFitMap() {
+    render();
+    fitMapToFilteredReports();
+  }
+
   function handleCard(event) {
     const button = event.target.closest(
       'button[data-action]'
@@ -748,7 +784,7 @@
           get('mapProductSearch').value = '';
           closeMapProductDropdown();
           updateMapFilterUI();
-          render();
+          renderAndFitMap();
         });
         dropdown.append(button);
       });
@@ -777,7 +813,7 @@
       remove.addEventListener('click', () => {
         mapSelectedProducts.splice(index, 1);
         updateMapFilterUI();
-        render();
+        renderAndFitMap();
       });
       chip.append(remove);
       box.append(chip);
@@ -792,7 +828,7 @@
         mapSelectedProducts = mapSelectedProducts.filter(p => mapCategories().includes(p.category));
         closeMapProductDropdown();
         updateMapFilterUI();
-        render();
+        renderAndFitMap();
       });
     });
     const input = get('mapProductSearch');
@@ -807,7 +843,7 @@
       input.value = '';
       closeMapProductDropdown();
       updateMapFilterUI();
-      render();
+      renderAndFitMap();
     });
     document.addEventListener('pointerdown', e => {
       if (!e.target.closest('.map-product-input-wrap')) closeMapProductDropdown();
@@ -1438,7 +1474,7 @@
       });
     });
 
-    get('period').addEventListener('change', render);
+    get('period').addEventListener('change', renderAndFitMap);
 
     get('historyList').addEventListener('click', handleCard);
     get('mapList').addEventListener('click', handleCard);
@@ -1493,7 +1529,7 @@
 
   function init() {
     try {
-      console.log('ポケカ発見マップ 7カテゴリ版 起動開始');
+      console.log('ポケカ発見マップ 地図自動調整版 起動開始');
 
       loadReports();
       loadSavedStores();
