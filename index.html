@@ -21,7 +21,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=20">
 
   <style>
     .store-category-group { border: 0; padding: 0; margin: 16px 0 20px; min-width: 0; }
@@ -54,6 +54,16 @@
     .map-clear-products{align-self:flex-start;padding:8px 12px;border:1px solid #cbd5e1;border-radius:9px;background:#f8fafc;color:#334155}
   </style>
 
+  <style>
+    .share-panel{padding:16px;border:1px solid #d5e0f2;border-radius:14px;background:#fff;margin:12px 0}
+    .share-panel button{margin:6px 6px 6px 0}
+    .share-user{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .share-user img{width:38px;height:38px;border-radius:50%}
+    .share-tag{font-size:12px;color:#2563eb;font-weight:700}
+    .share-error{color:#b91c1c;white-space:pre-wrap}
+    .share-option{display:flex;align-items:center;gap:10px;margin:14px 0;padding:12px;border:1px solid #cbdcf4;border-radius:10px}
+    .share-option input{width:22px;height:22px;flex-shrink:0}
+  </style>
   <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest">
 </head>
@@ -144,6 +154,7 @@
         発見情報を登録
       </h2>
 
+      <div id="shareAuthStatus" class="share-panel" aria-live="polite">共有機能の接続を確認しています。</div>
       <form id="reportForm">
 
         <!-- 店舗検索 -->
@@ -357,6 +368,8 @@
         </p>
 
 
+        <label class="share-option"><input type="checkbox" id="publishReport"><span>Discordでログインしたアカウントから、発見情報をみんなに共有する</span></label>
+        <p class="hint" id="publishHint">チェックしない場合は、この端末だけに保存します。</p>
         <!-- 保存ボタン -->
         <button
           type="submit"
@@ -405,26 +418,18 @@
         グループ共有
       </h2>
 
-      <div class="notice">
-
-        <strong>
-          今後実装予定
-        </strong>
-
-        <p>
-          招待リンク・メンバー管理・
-          リアルタイム同期などの機能を
-          今後追加する予定です。
-        </p>
-
-        <p>
-          現在の発見記録は
-          このブラウザ内に保存され、
-          他のユーザーとは自動共有されません。
-        </p>
-
+      <div class="share-panel">
+        <h3>Discordログイン・発見情報共有</h3>
+        <div id="discordAccount" aria-live="polite">接続を確認しています。</div>
+        <button type="button" id="discordLogin" class="primary">Discordでログイン</button>
+        <button type="button" id="discordLogout" hidden>ログアウト</button>
+        <button type="button" id="sharedRefresh">共有情報を更新</button>
+        <p id="sharedStatus" class="hint" aria-live="polite"></p>
+        <p class="hint">公開した情報は、アプリを利用するほかのユーザーにも表示されます。端末内の過去の記録は自動公開されません。</p>
       </div>
-
+      <h3>自分の共有投稿</h3>
+      <div id="mySharedList"></div>
+      <h3>端末内データのバックアップ</h3>
 
       <button
         id="export"
@@ -611,8 +616,10 @@
   ></script>
 
 
+  <!-- Supabase JavaScript SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=19"></script>
+  <script src="app.js?v=20"></script>
 
 </body>
 </html>

@@ -6,6 +6,14 @@
   const STORE_KEY = 'pokeca-tochigi-stores-v05'; // 既存データを保持
   const $ = id => document.getElementById(id);
 
+  const SUPABASE_URL = 'https://aypcmtlaaygmiexboypk.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_C0YESv-nDjR7PvAoMPscQg_uznt6foN';
+  const SHARED_TABLE = 'shared_reports';
+  let supabaseClient = null;
+  let authUser = null;
+  let sharedReports = [];
+  let sharedChannel = null;
+  let sharedEditId = null;
   let reports = [];
   let stores = [];
   let packs = [];
@@ -74,6 +82,128 @@
 
   function saveReports() {
     localStorage.setItem(KEY, JSON.stringify(reports));
+  }
+
+  function allReports() { return [...reports, ...sharedReports]; }
+
+  function fromShared(row) {
+    return { id: String(row.id), ownerId: row.user_id, shared: true,
+      shop: row.shop, product: row.product, category: row.category,
+      foundAt: row.found_at ? new Date(new Date(row.found_at).getTime() - new Date(row.found_at).getTimezoneOffset()*60000).toISOString().slice(0,16) : '',
+      status: row.status, memo: row.memo || '', lat: Number(row.lat), lng: Number(row.lng) };
+  }
+
+  function displayAuth() {
+    const account = $('discordAccount');
+    const status = $('shareAuthStatus');
+    if (!supabaseClient) {
+      const msg = '共有機能の読み込みに失敗しました。通信環境を確認してください。';
+      account.textContent = msg; status.textContent = msg;
+    } else if (authUser) {
+      const profile = authUser.user_metadata || {};
+      const name = profile.full_name || profile.name || profile.user_name || authUser.email || 'Discordユーザー';
+      account.replaceChildren();
+      const line = document.createElement('div'); line.className = 'share-user';
+      if (profile.avatar_url && /^https:\/\//.test(profile.avatar_url)) {
+        const avatar = document.createElement('img'); avatar.src = profile.avatar_url; avatar.alt = '';
+        avatar.referrerPolicy = 'no-referrer'; line.append(avatar);
+      }
+      const text = document.createElement('strong'); text.textContent = name + '（ログイン中）';
+      line.append(text); account.append(line);
+      status.textContent = 'Discordログイン中：登録時に「みんなに共有する」を選べます。';
+    } else {
+      account.textContent = '未ログイン：Discordでログインすると共有投稿できます。';
+      status.textContent = '未ログイン：端末内への保存は引き続き利用できます。';
+    }
+    $('discordLogin').hidden = !supabaseClient || !!authUser;
+    $('discordLogout').hidden = !authUser;
+    $('publishReport').disabled = !authUser;
+    if (!authUser) $('publishReport').checked = false;
+    $('publishHint').textContent = authUser
+      ? 'チェックを入れると共有データベースに投稿します。外すと端末内にだけ保存します。'
+      : '共有するには「共有」タブからDiscordでログインしてください。';
+    renderMyShared();
+  }
+
+  async function loadSharedReports() {
+    if (!supabaseClient) return;
+    const {data,error} = await supabaseClient.from(SHARED_TABLE)
+      .select('id,user_id,shop,product,category,found_at,status,memo,lat,lng')
+      .order('found_at', {ascending:false}).limit(1000);
+    if (error) { $('sharedStatus').textContent = '共有情報の取得に失敗: ' + error.message; return; }
+    sharedReports = (data || []).map(fromShared).filter(validReport);
+    $('sharedStatus').textContent = `共有情報：${sharedReports.length}件（最大1000件を取得）`;
+    renderAndFitMap();
+    renderMyShared();
+  }
+
+  function renderMyShared() {
+    const target = $('mySharedList'); if (!target) return;
+    const own = authUser ? sharedReports.filter(r => r.ownerId === authUser.id) : [];
+    target.innerHTML = own.length ? own.map(card).join('') :
+      '<p class="hint">共有した投稿はありません。</p>';
+  }
+
+  async function initShared() {
+    if (!window.supabase?.createClient) { displayAuth(); return; }
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: {detectSessionInUrl:true, persistSession:true, autoRefreshToken:true}
+    });
+    supabaseClient.auth.onAuthStateChange((_event,session) => {
+      authUser = session?.user || null;
+      displayAuth();
+    });
+    const {data,error} = await supabaseClient.auth.getSession();
+    if (error) $('sharedStatus').textContent = 'ログイン状態の確認に失敗: ' + error.message;
+    authUser = data?.session?.user || null;
+    displayAuth();
+    await loadSharedReports();
+    sharedChannel = supabaseClient.channel('pokeca-shared-report-updates')
+      .on('postgres_changes',{event:'*',schema:'public',table:SHARED_TABLE},() => loadSharedReports())
+      .subscribe();
+  }
+
+  async function discordLogin() {
+    if (!supabaseClient) return alert('共有機能を読み込めませんでした。');
+    const {error} = await supabaseClient.auth.signInWithOAuth({provider:'discord',options:{
+      redirectTo: window.location.origin + window.location.pathname,
+      scopes:'identify email'
+    }});
+    if (error) alert('Discordログインに失敗しました: ' + error.message);
+  }
+
+  async function discordLogout() {
+    if (!supabaseClient) return;
+    const {error} = await supabaseClient.auth.signOut();
+    if (error) return alert('ログアウトに失敗しました: ' + error.message);
+    authUser = null; displayAuth(); render();
+  }
+
+  function toSharedPayload(report) {
+    return {shop:report.shop, product:report.product, category:report.category,
+      found_at:new Date(report.foundAt).toISOString(),status:report.status,
+      memo:report.memo,lat:report.lat,lng:report.lng};
+  }
+
+  async function saveSharedReport(report) {
+    if (!supabaseClient || !authUser) throw new Error('Discordログインが必要です。');
+    const payload = {...toSharedPayload(report),user_id:authUser.id};
+    const query = sharedEditId
+      ? supabaseClient.from(SHARED_TABLE).update(payload).eq('id',sharedEditId).eq('user_id',authUser.id)
+      : supabaseClient.from(SHARED_TABLE).insert(payload);
+    const {data,error} = await query.select('id');
+    if (error) throw error;
+    if (!data?.length) throw new Error('更新できませんでした。投稿者本人か確認してください。');
+    await loadSharedReports();
+  }
+
+  async function deleteSharedReport(report) {
+    if (!authUser || report.ownerId !== authUser.id) return alert('自分の共有投稿のみ削除できます。');
+    if (!confirm('この共有投稿を削除しますか？ ほかの利用者の地図からも消えます。')) return;
+    const {data,error} = await supabaseClient.from(SHARED_TABLE)
+      .delete().eq('id',report.id).eq('user_id',authUser.id).select('id');
+    if (error || !data?.length) return alert('削除できませんでした: ' + (error?.message || '権限を確認してください。'));
+    await loadSharedReports();
   }
 
   // ========================================
@@ -185,9 +315,10 @@
       ? '構築デッキ'
       : '拡張パック';
 
+    const mine = !r.shared || (authUser && r.ownerId === authUser.id);
     return `
       <article class="entry">
-        <h3>${escape(r.shop)}</h3>
+        <h3>${escape(r.shop)} ${r.shared ? '<span class="share-tag">共有</span>' : '<span class="share-tag">端末内</span>'}</h3>
         <p>
           <strong>${escape(r.product)}</strong>
           · ${escape(r.status || '')}
@@ -216,7 +347,7 @@
       ? sorted.map(card).join('')
       : '<p class="hint">まだ発見記録がありません。</p>';
 
-    const visible = sorted.filter(r => inPeriod(r) && mapReportMatches(r));
+    const visible = allReports().sort((a,b) => b.foundAt.localeCompare(a.foundAt)).filter(r => inPeriod(r) && mapReportMatches(r));
     get('mapFilterCount').textContent = `該当する発見情報：${visible.length}件`; 
 
     get('mapList').innerHTML = visible.length
@@ -245,7 +376,7 @@
   function fitMapToFilteredReports() {
     if (!map || !markers || typeof L === 'undefined') return;
 
-    const points = reports
+    const points = allReports()
       .filter(r => inPeriod(r) && mapReportMatches(r))
       .map(r => [Number(r.lat), Number(r.lng)])
       .filter(([lat, lng]) =>
@@ -276,19 +407,19 @@
     fitMapToFilteredReports();
   }
 
-  function handleCard(event) {
+  async function handleCard(event) {
     const button = event.target.closest(
       'button[data-action]'
     );
     if (!button) return;
 
-    const r = reports.find(
-      item => item.id === button.dataset.id
-    );
+    const r = allReports().find(item => item.id === button.dataset.id);
     if (!r) return;
 
+    if (r.shared && (!authUser || r.ownerId !== authUser.id) && button.dataset.action !== 'view') return;
+    if (r.shared && button.dataset.action === 'delete') { await deleteSharedReport(r); return; }
     if (button.dataset.action === 'delete') {
-      if (!confirm('この発見記録を削除しますか？')) return;
+      if (!confirm('この端末内の発見記録を削除しますか？')) return;
 
       reports = reports.filter(item => item.id !== r.id);
       saveReports();
@@ -395,10 +526,13 @@
   // ========================================
 
   function formFor(r) {
-    editId = r?.id || null;
+    editId = r && !r.shared ? r.id : null;
+    sharedEditId = r?.shared ? r.id : null;
     selectedProduct = null;
+    $('publishReport').checked = !!r?.shared;
+    $('publishReport').disabled = !!r?.shared || !authUser;
 
-    get('formTitle').textContent = editId
+    get('formTitle').textContent = (editId || sharedEditId)
       ? '発見情報を編集'
       : '発見情報を登録';
 
@@ -415,14 +549,14 @@
     get('memo').value = r?.memo || '';
     get('lat').value = r?.lat ?? '';
     get('lng').value = r?.lng ?? '';
-    get('cancelEdit').hidden = !editId;
+    get('cancelEdit').hidden = !(editId || sharedEditId);
 
     updateCategoryHint();
     closeProductDropdown();
     switchTab('add');
   }
 
-  function saveForm(event) {
+  async function saveForm(event) {
     event.preventDefault();
 
     const shop = get('shop').value.trim();
@@ -509,6 +643,14 @@
       lng
     };
 
+    if ($('publishReport').checked || sharedEditId) {
+      try {
+        await saveSharedReport(report);
+      } catch(error) {
+        alert('共有投稿を保存できませんでした。\n' + error.message);
+        return;
+      }
+    } else {
     const previous = reports;
 
     if (editId) {
@@ -527,10 +669,13 @@
       return;
     }
 
+    }
     editId = null;
+    sharedEditId = null;
     selectedProduct = null;
 
     get('reportForm').reset();
+    $('publishReport').disabled = !authUser;
     get('shop').value = '';
     get('lat').value = '';
     get('lng').value = '';
@@ -1519,6 +1664,10 @@
     get('import').addEventListener(
       'change', importReports
     );
+    get('discordLogin').addEventListener('click',discordLogin);
+    get('discordLogout').addEventListener('click',discordLogout);
+    get('sharedRefresh').addEventListener('click',loadSharedReports);
+    get('mySharedList').addEventListener('click',handleCard);
 
     get('locate').addEventListener('click', locate);
   }
@@ -1548,6 +1697,10 @@
 
       loadStoreCSV();
       loadProducts();
+      initShared().catch(error => {
+        console.error('共有機能初期化エラー',error);
+        $('sharedStatus').textContent = '共有機能の初期化に失敗: ' + error.message;
+      });
 
       console.log('ポケカ発見マップ 7カテゴリ版 起動完了');
     } catch (error) {
