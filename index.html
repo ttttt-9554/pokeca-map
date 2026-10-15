@@ -87,6 +87,9 @@
   </style>
   <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest">
+<style>
+.cloud-admin-form{display:grid;gap:10px;margin-top:12px}.cloud-admin-form input,.cloud-admin-form select{width:100%;box-sizing:border-box;min-height:43px;padding:9px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px}.cloud-admin-form label{font-weight:600;font-size:14px}.cloud-admin-actions{display:flex;gap:8px;flex-wrap:wrap}.cloud-admin-list{max-height:320px;overflow:auto;margin-top:10px}.cloud-admin-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #ddd}.cloud-admin-item span{min-width:0;overflow-wrap:anywhere}.cloud-admin-item button{flex-shrink:0}.cloud-admin-status{font-size:13px;color:#475569}
+</style>
 </head>
 
 <body>
@@ -571,6 +574,37 @@
 
       </div>
 
+
+      <div class="store-tools" id="cloudAdminPanel">
+        <h3>☁️ 全ユーザー共通データ管理</h3>
+        <p class="hint">ここで追加した商品・店舗はSupabaseに保存され、すべての利用者に表示されます。最初に付属のSQLをSupabaseで実行してください。</p>
+        <p id="cloudAdminStatus" class="cloud-admin-status" role="status">接続待ち</p>
+        <h4>商品を追加・編集</h4>
+        <form id="cloudProductForm" class="cloud-admin-form">
+          <input id="cloudProductId" type="hidden">
+          <label for="cloudProductCategory">カテゴリ</label>
+          <select id="cloudProductCategory"><option value="pack">拡張パック</option><option value="deck">構築デッキ・スターターセット</option></select>
+          <label for="cloudProductName">商品名（必須）</label><input id="cloudProductName" required maxlength="120">
+          <label for="cloudProductReading">よみがな</label><input id="cloudProductReading" maxlength="120">
+          <label for="cloudProductDate">発売日</label><input id="cloudProductDate" type="date">
+          <label for="cloudProductPrice">希望小売価格（円）</label><input id="cloudProductPrice" type="number" min="0" max="1000000" step="1">
+          <div class="cloud-admin-actions"><button type="submit">商品を保存</button><button type="button" id="cloudProductCancel">編集を解除</button></div>
+        </form>
+        <div id="cloudProductList" class="cloud-admin-list"></div>
+        <h4>店舗を追加・編集</h4>
+        <form id="cloudStoreForm" class="cloud-admin-form">
+          <input id="cloudStoreId" type="hidden">
+          <label for="cloudStoreName">店舗名（必須）</label><input id="cloudStoreName" required maxlength="160">
+          <label for="cloudStoreCategory">店舗カテゴリ</label><select id="cloudStoreCategory"><option>コンビニ</option><option>TSUTAYA</option><option>GEO</option><option>ヨドバシカメラ</option><option>コジマ</option><option>ヤマダデンキ</option><option>カードショップ</option></select>
+          <label for="cloudStoreCity">市区町村</label><input id="cloudStoreCity" maxlength="120">
+          <label for="cloudStoreAddress">住所</label><input id="cloudStoreAddress" maxlength="240">
+          <label for="cloudStoreLat">緯度（必須）</label><input id="cloudStoreLat" type="number" step="any" min="35" max="38" required placeholder="例：36.5551">
+          <label for="cloudStoreLng">経度（必須）</label><input id="cloudStoreLng" type="number" step="any" min="138" max="141" required placeholder="例：139.8828">
+          <div class="cloud-admin-actions"><button type="button" id="cloudUseSelectedStore">選択中の店舗の位置を使う</button><button type="submit">店舗を保存</button><button type="button" id="cloudStoreCancel">編集を解除</button></div>
+        </form>
+        <div id="cloudStoreList" class="cloud-admin-list"></div>
+      </div>
+
     </section>
 
   </main>
@@ -646,7 +680,7 @@
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=23"></script>
+  <script src="app.js?v=24"></script>
 
 </body>
 </html>

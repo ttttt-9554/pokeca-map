@@ -36,6 +36,10 @@
   let stores = [];
   let packs = [];
   let decks = [];
+  let csvPacks = [];
+  let csvDecks = [];
+  let cloudProducts = [];
+  let cloudStores = [];
   let mapSelectedProducts = []; // {name, category}
   let editId = null;
   let map = null;
@@ -144,6 +148,7 @@
       : '共有するには「共有」タブからDiscordでログインしてください。';
     renderMyShared();
     updateDeveloperTab();
+    if (isDeveloper()) renderCloudAdminLists();
   }
 
   async function loadSharedReports() {
@@ -179,6 +184,12 @@
     authUser = data?.session?.user || null;
     displayAuth();
     await loadSharedReports();
+    await loadCloudData();
+    supabaseClient.channel('pokeca-cloud-catalog-updates')
+      .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
+      .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
+      .subscribe();
+    window.addEventListener('focus',()=>loadCloudData());
     sharedChannel = supabaseClient.channel('pokeca-shared-report-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:SHARED_TABLE},() => loadSharedReports())
       .subscribe();
@@ -878,11 +889,12 @@
           );
 
           if (category === 'pack') {
-            packs = products;
+            csvPacks = products;
           } else {
-            decks = products;
+            csvDecks = products;
           }
 
+          mergeCloudProducts();
           console.log(
             category, '商品数:', products.length
           );
@@ -1313,7 +1325,7 @@
   }
 
   function updateStoreCount() {
-    const count = stores.length;
+    const count = stores.length + cloudStores.filter(s=>!stores.some(p=>storeKey(p)===storeKey(s))).length;
     get('storeCount').textContent = `登録店舗 ${count}件（端末保存＋CSV）`;
     const status = $('storeDataStatus');
     if (status) status.textContent = `${count}店舗を検索できます。`;
@@ -1415,7 +1427,7 @@
       output.textContent = '地域または店舗名を入力してください。';
       return;
     }
-    const matches = stores.filter(p => {
+    const matches = [...stores.filter(p=>!cloudStores.some(c=>storeKey(c)===storeKey(p))),...cloudStores].filter(p => {
       if (!selected.includes(inferStoreCategory(p))) return false;
       const name = norm(p.name);
       const brand = brandNorm(p.name);
@@ -1788,6 +1800,106 @@
     get('locate').addEventListener('click', locate);
   }
 
+
+  // クラウドデータは端末のlocalStorageに混ぜない（削除後に復活させないため）。
+  function mergeCloudProducts() {
+    const merge = (base, category) => {
+      const items = base.map(p=>({...p}));
+      for (const row of cloudProducts.filter(p=>p.category===category)) {
+        const p = {name:row.name,reading:row.reading||'',date:row.release_date||'',price:row.price==null?'':String(row.price),tax:''};
+        const i=items.findIndex(x=>x.name===p.name);
+        if(i>=0) items[i]={...items[i],...p}; else items.push(p);
+      }
+      return items.sort((a,b)=>productDateValue(b.date)-productDateValue(a.date));
+    };
+    packs=merge(csvPacks,'pack'); decks=merge(csvDecks,'deck');
+  }
+
+  async function loadCloudData() {
+    if (!supabaseClient) return;
+    const [p,s] = await Promise.all([
+      supabaseClient.from('catalog_products').select('id,category,name,reading,release_date,price').order('created_at',{ascending:false}).limit(2000),
+      supabaseClient.from('catalog_stores').select('id,name,category,city,address,lat,lng').order('created_at',{ascending:false}).limit(2000)
+    ]);
+    if (p.error || s.error) {
+      const target=$('cloudAdminStatus');
+      if(target && isDeveloper()) target.textContent='クラウド取得エラー：'+(p.error||s.error).message+'（SQL設定を確認）';
+      return;
+    }
+    cloudProducts=p.data||[];
+    cloudStores=(s.data||[]).filter(isStore).map(x=>({...x,lat:Number(x.lat),lng:Number(x.lng)}));
+    mergeCloudProducts(); updateStoreCount(); renderCloudAdminLists();
+    if (document.activeElement===$('product')) showProductDropdown();
+    if (document.activeElement===$('mapProductSearch')) showMapProductDropdown();
+    if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・共有店舗 ${cloudStores.length}件`;
+  }
+
+  function renderCloudAdminLists() {
+    if(!isDeveloper()) return;
+    for(const [kind,rows] of [['Product',cloudProducts],['Store',cloudStores]]) {
+      const target=$('cloud'+kind+'List'); if(!target)continue;
+      target.replaceChildren();
+      for(const item of rows) {
+        const div=document.createElement('div');div.className='cloud-admin-item';
+        const label=document.createElement('span');label.textContent=kind==='Product'?`${item.category==='pack'?'パック':'デッキ'}：${item.name}`:`${item.name}（${item.city||'地域未設定'}）`;
+        const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.addEventListener('click',()=>{
+          if(kind==='Product') {
+            for(const [field,value] of Object.entries({Id:item.id,Category:item.category,Name:item.name,Reading:item.reading||'',Date:item.release_date||'',Price:item.price??''})) $('cloudProduct'+field).value=value;
+          } else {
+            for(const [field,value] of Object.entries({Id:item.id,Name:item.name,Category:item.category,City:item.city||'',Address:item.address||'',Lat:item.lat,Lng:item.lng})) $('cloudStore'+field).value=value;
+          }
+          $('cloud'+kind+'Form').scrollIntoView({behavior:'smooth',block:'start'});
+        });
+        const del=document.createElement('button');del.type='button';del.textContent='削除';del.addEventListener('click',()=>deleteCloudItem(kind,item));
+        div.append(label,edit,del);target.append(div);
+      }
+    }
+  }
+
+  async function deleteCloudItem(kind,item) {
+    if(!isDeveloper()||!supabaseClient)return;
+    if(!confirm(`「${item.name}」を共有データから削除しますか？`))return;
+    const table=kind==='Product'?'catalog_products':'catalog_stores';
+    const {error}=await supabaseClient.from(table).delete().eq('id',item.id);
+    if(error) return alert('削除失敗：'+error.message);
+    await loadCloudData();
+  }
+
+  async function saveCloudItem(kind,event) {
+    event.preventDefault();
+    if(!isDeveloper()||!supabaseClient) return alert('開発者としてDiscordログインしてください。');
+    const product=kind==='Product';
+    const id=$('cloud'+kind+'Id').value;
+    const value=field=>$('cloud'+kind+field).value.trim();
+    let payload;
+    if(product) {
+      payload={category:value('Category'),name:value('Name'),reading:value('Reading'),release_date:value('Date')||null,price:value('Price')===''?null:Number(value('Price'))};
+    } else {
+      payload={name:value('Name'),category:value('Category'),city:value('City'),address:value('Address'),lat:Number(value('Lat')),lng:Number(value('Lng'))};
+      if(!isStore(payload))return alert('緯度・経度を確認してください（現在は栃木周辺の範囲に対応）。');
+    }
+    const table=product?'catalog_products':'catalog_stores';
+    const query=id?supabaseClient.from(table).update(payload).eq('id',id):supabaseClient.from(table).insert(payload);
+    const {error}=await query;
+    if(error)return alert('保存失敗：'+error.message);
+    $('cloud'+kind+'Form').reset();$('cloud'+kind+'Id').value='';
+    await loadCloudData();
+    alert('全ユーザー共通データに保存しました。');
+  }
+
+  function initCloudAdmin() {
+    for(const kind of ['Product','Store']) {
+      $('cloud'+kind+'Form').addEventListener('submit',e=>saveCloudItem(kind,e));
+      $('cloud'+kind+'Cancel').addEventListener('click',()=>{$('cloud'+kind+'Form').reset();$('cloud'+kind+'Id').value='';});
+    }
+    $('cloudUseSelectedStore').addEventListener('click',()=>{
+      const lat=Number($('lat')?.value),lng=Number($('lng')?.value);
+      if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng) return alert('登録画面で店舗を選択してからお試しください。');
+      $('cloudStoreLat').value=lat;$('cloudStoreLng').value=lng;
+      if($('shop')?.value) $('cloudStoreName').value=$('shop').value;
+    });
+  }
+
   // ========================================
   // 起動
   // ========================================
@@ -1803,6 +1915,7 @@
       initMapProductFilter();
       initMapFilterDrawer();
       initChainDropdown();
+      initCloudAdmin();
       bindEvents();
 
       get('foundAt').value = nowLocal();
