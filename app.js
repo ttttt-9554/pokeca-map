@@ -1900,6 +1900,37 @@
     });
   }
 
+
+  // アプリ設定（全ユーザー共通の端末内テーマ設定）
+  function initAppTheme() {
+    const key = 'pokeca-app-theme-v1';
+    const root = document.documentElement;
+    const select = document.getElementById('appThemeChoice');
+    const panel = document.getElementById('appSettingsPanel');
+    const backdrop = document.getElementById('appSettingsBackdrop');
+    const open = document.getElementById('appSettingsOpen');
+    const close = document.getElementById('appSettingsClose');
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    let choice = 'system';
+    try { choice = localStorage.getItem(key) || 'system'; } catch (_) {}
+    if (!['system','light','dark'].includes(choice)) choice = 'system';
+    select.value = choice;
+    const apply = () => {
+      const dark = choice === 'dark' || (choice === 'system' && media.matches);
+      root.dataset.theme = dark ? 'dark' : 'light';
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0d1524' : '#2563eb');
+    };
+    select.addEventListener('change', () => { choice = select.value; try { localStorage.setItem(key, choice); } catch (_) {} apply(); });
+    if (media.addEventListener) media.addEventListener('change', apply);
+    else if (media.addListener) media.addListener(apply);
+    function toggle(show) { panel.hidden = !show; backdrop.hidden = !show; if (show) select.focus(); else open.focus(); }
+    open.addEventListener('click', () => toggle(true));
+    close.addEventListener('click', () => toggle(false));
+    backdrop.addEventListener('click', () => toggle(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) toggle(false); });
+    apply();
+  }
+
   // ========================================
   // 起動
   // ========================================
@@ -1908,6 +1939,7 @@
     try {
       console.log('ポケカ発見マップ 地図自動調整版 起動開始');
 
+      initAppTheme();
       loadReports();
       loadSavedStores();
 

@@ -1,5 +1,4 @@
-1. SupabaseのSQL Editorでsupabase_catalog_setup.sqlを実行
-2. GitHubリポジトリのindex.htmlとapp.jsをZIP内のファイルで上書き
-3. サイトを開きDiscordで開発者アカウントとしてログイン
-4. 開発タブから商品・店舗を追加
-注意: CSVの既存データはそのまま利用。クラウドの店舗位置は栃木周辺に制限。
+ポケカ発見マップ ダークモード・PWA版
+GitHubに index.html、app.js、manifest.webmanifest、iconsフォルダをアップロードしてください。既存style.css・CSV・Supabase設定は変更不要です。
+iPhone: Safariの共有メニュー → ホーム画面に追加。
+既存機能は元のクラウド管理版から維持しています。

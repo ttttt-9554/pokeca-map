@@ -11,6 +11,10 @@
   >
 
   <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ポケカ発見">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 
   <title>ポケカ発見マップ</title>
 
@@ -90,9 +94,38 @@
 <style>
 .cloud-admin-form{display:grid;gap:10px;margin-top:12px}.cloud-admin-form input,.cloud-admin-form select{width:100%;box-sizing:border-box;min-height:43px;padding:9px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px}.cloud-admin-form label{font-weight:600;font-size:14px}.cloud-admin-actions{display:flex;gap:8px;flex-wrap:wrap}.cloud-admin-list{max-height:320px;overflow:auto;margin-top:10px}.cloud-admin-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #ddd}.cloud-admin-item span{min-width:0;overflow-wrap:anywhere}.cloud-admin-item button{flex-shrink:0}.cloud-admin-status{font-size:13px;color:#475569}
 </style>
+
+<style id="theme-app-styles">
+:root{color-scheme:light;--app-bg:#f4f7fc;--app-surface:#fff;--app-surface2:#f0f5fc;--app-text:#172033;--app-muted:#53627b;--app-border:#cfdbec;--app-accent:#2563eb}
+html[data-theme="dark"]{color-scheme:dark;--app-bg:#0d1524;--app-surface:#172337;--app-surface2:#203149;--app-text:#eaf1fc;--app-muted:#b5c4d9;--app-border:#344963;--app-accent:#75a8ff}
+html,body{background:var(--app-bg)!important;color:var(--app-text)!important}
+header,main,.view,nav{color:var(--app-text)}
+html[data-theme="dark"] header,html[data-theme="dark"] nav,html[data-theme="dark"] .card,html[data-theme="dark"] .panel,html[data-theme="dark"] .share-panel,html[data-theme="dark"] .map-product-filter,html[data-theme="dark"] .map-filter-drawer-head,html[data-theme="dark"] .map-filter-drawer-foot,html[data-theme="dark"] .map-product-dropdown,html[data-theme="dark"] .map-product-choice,html[data-theme="dark"] .map-filter-drawer,html[data-theme="dark"] .store-category-grid label,html[data-theme="dark"] .map-category-option,html[data-theme="dark"] .share-option,html[data-theme="dark"] .map-product-chip,html[data-theme="dark"] .map-clear-products{background:var(--app-surface)!important;color:var(--app-text)!important;border-color:var(--app-border)!important}
+html[data-theme="dark"] section,html[data-theme="dark"] article,html[data-theme="dark"] fieldset{border-color:var(--app-border)}
+html[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:var(--app-surface2)!important;color:var(--app-text)!important;border-color:var(--app-border)!important}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#b4c2d3!important}
+html[data-theme="dark"] p,html[data-theme="dark"] .hint,html[data-theme="dark"] small,html[data-theme="dark"] .cloud-admin-status{color:var(--app-muted)}
+html[data-theme="dark"] button:not(.primary):not(.map-filter-open):not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out),html[data-theme="dark"] nav button{color:var(--app-text);border-color:var(--app-border)}
+html[data-theme="dark"] .map-category-option:has(input:checked){background:#243d63!important;border-color:#75a8ff!important}
+html[data-theme="dark"] .leaflet-popup-content-wrapper,html[data-theme="dark"] .leaflet-popup-tip{background:#1a293e;color:#edf4ff}
+html[data-theme="dark"] .leaflet-control-zoom a{background:#1a293e;color:#edf4ff;border-color:#344963}
+.app-settings-button{position:absolute;right:14px;top:max(12px,env(safe-area-inset-top));z-index:2;padding:8px 12px;border:1px solid var(--app-border);border-radius:12px;background:var(--app-surface);color:var(--app-text);font-size:14px;cursor:pointer}
+header{position:relative;padding-right:75px}
+.app-settings-backdrop{position:fixed;inset:0;background:#07111eb3;z-index:7000}
+.app-settings-panel{position:fixed;z-index:7001;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,420px);box-sizing:border-box;padding:22px;border-radius:18px;background:var(--app-surface);color:var(--app-text);border:1px solid var(--app-border);box-shadow:0 20px 60px #0005}
+.app-settings-panel h2{margin:0 0 16px}.app-settings-panel label{display:block;margin:12px 0 7px;font-weight:700}.app-settings-panel select{width:100%;min-height:48px;background:var(--app-surface2);color:var(--app-text);border:1px solid var(--app-border);border-radius:10px;padding:10px;font-size:16px}.app-settings-panel button{margin-top:16px;min-height:44px;width:100%}
+@media(display-mode:standalone){body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)} }
+</style>
 </head>
 
 <body>
+<button id="appSettingsOpen" class="app-settings-button" type="button" aria-haspopup="dialog">⚙ 設定</button>
+<div id="appSettingsBackdrop" class="app-settings-backdrop" hidden></div>
+<section id="appSettingsPanel" class="app-settings-panel" role="dialog" aria-modal="true" aria-label="アプリ設定" hidden>
+<h2>⚙ アプリ設定</h2><label for="appThemeChoice">画面のテーマ</label>
+<select id="appThemeChoice"><option value="system">端末の設定に合わせる</option><option value="light">ライトモード</option><option value="dark">ダークモード</option></select>
+<p class="hint">選択したテーマは次回起動時も維持されます。</p>
+<button id="appSettingsClose" type="button">閉じる</button></section>
 
   <!-- ======================================
        ヘッダー
@@ -680,7 +713,7 @@
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=24"></script>
+  <script src="app.js?v=25"></script>
 
 </body>
 </html>
