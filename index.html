@@ -197,6 +197,54 @@ html[data-theme="dark"] #addView .store-category-grid label:has(input:checked) {
   border-color:#75a8ff!important;
 }
 </style>
+
+<style id="dark-inner-forms-fix-v2">
+/* 内側フォームの白背景と淡色文字を明示的に上書き */
+html[data-theme="dark"] #addView .product-category-group,
+html[data-theme="dark"] #addView .category-option,
+html[data-theme="dark"] #devView .cloud-admin-form,
+html[data-theme="dark"] #devView #cloudProductForm,
+html[data-theme="dark"] #devView #cloudStoreForm,
+html[data-theme="dark"] #devView .cloud-admin-list,
+html[data-theme="dark"] #devView .cloud-admin-item {
+  background:#172337!important;
+  color:#eef4ff!important;
+  border-color:#526681!important;
+}
+html[data-theme="dark"] #addView .category-option {
+  display:flex;
+  align-items:center;
+  background:#203149!important;
+  border:1px solid #7187a4!important;
+}
+html[data-theme="dark"] #addView .category-option:has(input:checked) {
+  background:#263f66!important;
+  border-color:#75a8ff!important;
+}
+html[data-theme="dark"] #addView .category-option span,
+html[data-theme="dark"] #addView .category-option label,
+html[data-theme="dark"] #addView .product-category-group legend,
+html[data-theme="dark"] #devView .cloud-admin-form label,
+html[data-theme="dark"] #devView .cloud-admin-form h3,
+html[data-theme="dark"] #devView .cloud-admin-form h4,
+html[data-theme="dark"] #devView .cloud-admin-item span {
+  color:#eef4ff!important;
+  -webkit-text-fill-color:#eef4ff!important;
+  opacity:1!important;
+}
+html[data-theme="dark"] #devView .cloud-admin-form input:not([type="hidden"]),
+html[data-theme="dark"] #devView .cloud-admin-form select,
+html[data-theme="dark"] #devView .cloud-admin-form textarea {
+  background:#203149!important;
+  color:#f3f7ff!important;
+  -webkit-text-fill-color:#f3f7ff!important;
+  border:1px solid #7187a4!important;
+}
+html[data-theme="dark"] #devView .cloud-admin-form input::placeholder {
+  color:#bdcde2!important;
+  -webkit-text-fill-color:#bdcde2!important;
+}
+</style>
 </head>
 
 <body>
