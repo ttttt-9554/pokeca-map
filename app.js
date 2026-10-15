@@ -43,6 +43,8 @@
 
   // 候補から選んだ商品の情報
   let selectedProduct = null;
+  let selectedRegistrationProducts = [];
+  let savingForm = false;
 
   const escape = value => String(value ?? '').replace(
     /[&<>"']/g,
@@ -579,6 +581,8 @@
     // 以前選んだ商品がカテゴリ変更後も
     // 誤って保存されないよう選択を解除
     selectedProduct = null;
+    selectedRegistrationProducts = selectedRegistrationProducts.filter(p => selectedCategories().includes(p.category));
+    updateRegistrationProducts();
     get('product').value = '';
     updateCategoryHint();
     closeProductDropdown();
@@ -592,6 +596,8 @@
     editId = r && !r.shared ? r.id : null;
     sharedEditId = r?.shared ? r.id : null;
     selectedProduct = null;
+    selectedRegistrationProducts = [];
+    updateRegistrationProducts();
     $('publishReport').checked = !!r?.shared;
     $('publishReport').disabled = !!r?.shared || !authUser;
 
@@ -621,6 +627,7 @@
 
   async function saveForm(event) {
     event.preventDefault();
+    if (savingForm) return;
 
     const shop = get('shop').value.trim();
     const product = get('product').value.trim();
@@ -636,8 +643,8 @@
       return;
     }
 
-    if (!product) {
-      alert('商品名を入力してください。');
+    if (!product && !selectedRegistrationProducts.length) {
+      alert('商品名を1つ以上選択または入力してください。');
       return;
     }
 
@@ -669,73 +676,81 @@
       return;
     }
 
-    let category = null;
-
-    // 候補から選択した商品ならカテゴリを自動判定
-    if (
-      selectedProduct &&
-      selectedProduct.name === product &&
-      selected.includes(selectedProduct.category)
-    ) {
-      category = selectedProduct.category;
-    } else if (selected.length === 1) {
-      category = selected[0];
-    } else {
-      // 両方チェック・手入力の場合は曖昧さを防ぐ
-      alert(
-        '手入力した商品を保存する場合は、' +
-        'カテゴリを1つだけチェックしてください。'
-      );
-      return;
-    }
-
-    const report = {
-      id: editId || (
-        typeof crypto !== 'undefined' &&
-        typeof crypto.randomUUID === 'function'
-          ? crypto.randomUUID()
-          : `${Date.now()}-${Math.random()}`
-      ),
-      shop,
-      product,
-      category,
-      foundAt,
-      status: get('status').value,
-      memo: get('memo').value.trim(),
-      lat,
-      lng
-    };
-
-    if ($('publishReport').checked || sharedEditId) {
-      try {
-        await saveSharedReport(report);
-      } catch(error) {
-        alert('共有投稿を保存できませんでした。\n' + error.message);
+    const editing = !!(editId || sharedEditId);
+    const selectedItems = editing ? [] : [...selectedRegistrationProducts];
+    // 候補から追加していない手入力の商品も1件として登録できる
+    if (product && !selectedItems.some(p => p.name === product)) {
+      let category = null;
+      if (selectedProduct && selectedProduct.name === product && selected.includes(selectedProduct.category)) {
+        category = selectedProduct.category;
+      } else if (selected.length === 1) {
+        category = selected[0];
+      } else {
+        alert('手入力の商品を登録する場合はカテゴリを1つだけ選択してください。');
         return;
       }
-    } else {
-    const previous = reports;
-
-    if (editId) {
-      reports = reports.map(
-        item => item.id === editId ? report : item
-      );
-    } else {
-      reports = [...reports, report];
+      selectedItems.push({name: product, category});
     }
-
-    try {
-      saveReports();
-    } catch (error) {
-      reports = previous;
-      alert('保存に失敗しました。');
+    if (editing) {
+      selectedItems.length = 0;
+      const category = selectedProduct && selectedProduct.name === product && selected.includes(selectedProduct.category)
+        ? selectedProduct.category : selected.length === 1 ? selected[0] : null;
+      if (!product || !category) {
+        alert('編集時は商品を1種類選び、カテゴリを確定してください。');
+        return;
+      }
+      selectedItems.push({name: product, category});
+    }
+    if (!selectedItems.length) {
+      alert('登録する商品を選択してください。');
+      return;
+    }
+    if (selectedItems.length > 20) {
+      alert('一度に登録できる商品は20種類までです。');
       return;
     }
 
+    const makeReport = item => ({
+      id: editId || (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+        ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`),
+      shop, product: item.name, category: item.category, foundAt,
+      status: get('status').value, memo: get('memo').value.trim(), lat, lng
+    });
+    const batch = selectedItems.map(makeReport);
+    const shared = $('publishReport').checked || !!sharedEditId;
+    const submitButton = get('reportForm').querySelector('button[type="submit"]');
+    savingForm = true;
+    if (submitButton) submitButton.disabled = true;
+    try {
+      if (shared) {
+        if (!supabaseClient || !authUser) throw new Error('Discordログインが必要です。');
+        if (sharedEditId) {
+          await saveSharedReport(batch[0]);
+        } else {
+          // 1商品につき1行のINSERT。DB Webhookから商品別にDiscord通知される
+          const payloads = batch.map(r => ({...toSharedPayload(r), user_id: authUser.id}));
+          const {data, error} = await supabaseClient.from(SHARED_TABLE).insert(payloads).select('id');
+          if (error) throw error;
+          if (!data || data.length !== payloads.length) throw new Error('登録件数を確認できませんでした。共有一覧を確認してください。');
+          await loadSharedReports();
+        }
+      } else {
+        const previous = reports;
+        reports = editId ? reports.map(r => r.id === editId ? batch[0] : r) : [...reports, ...batch];
+        try { saveReports(); } catch (error) { reports = previous; throw error; }
+      }
+    } catch (error) {
+      alert('登録に失敗しました。\n' + error.message + '\n共有投稿の場合、再送信前に共有一覧を確認してください。');
+      return;
+    } finally {
+      savingForm = false;
+      if (submitButton) submitButton.disabled = false;
     }
     editId = null;
     sharedEditId = null;
     selectedProduct = null;
+    selectedRegistrationProducts = [];
+    updateRegistrationProducts();
 
     get('reportForm').reset();
     $('publishReport').disabled = !authUser;
@@ -1059,6 +1074,33 @@
     updateMapFilterUI();
   }
 
+  function updateRegistrationProducts() {
+    const box = $('registrationSelectedProducts');
+    if (!box) return;
+    box.replaceChildren();
+    selectedRegistrationProducts.forEach((item, index) => {
+      const chip = document.createElement('span');
+      chip.className = 'map-product-chip';
+      chip.append(document.createTextNode(item.name));
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = '×';
+      remove.setAttribute('aria-label', item.name + 'を解除');
+      remove.addEventListener('click', () => {
+        selectedRegistrationProducts.splice(index, 1);
+        updateRegistrationProducts();
+      });
+      chip.append(remove);
+      box.append(chip);
+    });
+    const hint = $('registrationSelectionHint');
+    if (hint) hint.textContent = selectedRegistrationProducts.length
+      ? `${selectedRegistrationProducts.length}種類を選択中。保存すると商品ごとに別々の発見情報になります。`
+      : '候補をタップすると複数の商品を追加できます。';
+    const input = $('product');
+    if (input) input.required = selectedRegistrationProducts.length === 0;
+  }
+
   let productDropdown = null;
 
   function closeProductDropdown() {
@@ -1118,7 +1160,7 @@
       productDropdown.append(message);
     }
 
-    matches.forEach(p => {
+    matches.slice(0, 150).forEach(p => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'product-result';
@@ -1145,11 +1187,18 @@
       button.append(name, detail);
 
       button.addEventListener('click', () => {
-        input.value = p.name;
-        selectedProduct = {
-          name: p.name,
-          category: p.category
-        };
+        if (editId || sharedEditId) {
+          input.value = p.name;
+          selectedProduct = {name:p.name, category:p.category};
+        } else {
+          if (!selectedRegistrationProducts.some(x => x.name === p.name && x.category === p.category)) {
+            if (selectedRegistrationProducts.length >= 20) return alert('一度に20種類まで選択できます。');
+            selectedRegistrationProducts.push({name:p.name, category:p.category});
+          }
+          input.value = '';
+          selectedProduct = null;
+          updateRegistrationProducts();
+        }
         closeProductDropdown();
       });
 
@@ -1186,6 +1235,7 @@
     });
 
     input.addEventListener('keydown', event => {
+      if (event.key === 'Enter') event.preventDefault();
       if (event.key === 'Escape') {
         closeProductDropdown();
       }
