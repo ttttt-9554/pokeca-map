@@ -116,6 +116,33 @@ header{position:relative;padding-right:75px}
 .app-settings-panel h2{margin:0 0 16px}.app-settings-panel label{display:block;margin:12px 0 7px;font-weight:700}.app-settings-panel select{width:100%;min-height:48px;background:var(--app-surface2);color:var(--app-text);border:1px solid var(--app-border);border-radius:10px;padding:10px;font-size:16px}.app-settings-panel button{margin-top:16px;min-height:44px;width:100%}
 @media(display-mode:standalone){body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)} }
 </style>
+<style id="dark-contrast-fix">
+
+/* ダークモード可読性修正 v2: 既存機能・データ処理は変更しない */
+html[data-theme="dark"]{--app-muted:#d1dced;--app-border:#526681}
+html[data-theme="dark"] body,html[data-theme="dark"] main,html[data-theme="dark"] .view,
+html[data-theme="dark"] label,html[data-theme="dark"] strong,html[data-theme="dark"] legend,
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,
+html[data-theme="dark"] .toolbar,html[data-theme="dark"] #mapList,
+html[data-theme="dark"] #historyList,html[data-theme="dark"] #mySharedList{color:var(--app-text)!important}
+html[data-theme="dark"] .hint,html[data-theme="dark"] p,html[data-theme="dark"] small,
+html[data-theme="dark"] .cloud-admin-status{color:var(--app-muted)!important}
+html[data-theme="dark"] nav button{background:transparent!important;color:#e2ebfa!important;opacity:1!important}
+html[data-theme="dark"] nav button span{color:inherit!important;opacity:1!important}
+html[data-theme="dark"] nav button.active{background:#315fbd!important;color:#fff!important;border:1px solid #89b2ff!important}
+html[data-theme="dark"] nav button.active span{color:#fff!important;font-weight:700!important}
+html[data-theme="dark"] button:not(.primary):not(.map-filter-open):not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out):not(.active):not(:disabled),
+html[data-theme="dark"] .map-filter-drawer button:not(.primary):not(.map-filter-open):not(:disabled){background:#263a55!important;color:#f4f8ff!important;border-color:#7288a6!important}
+html[data-theme="dark"] button:disabled{background:#344154!important;color:#c3cfdf!important;border-color:#64748b!important;opacity:1!important;cursor:not-allowed}
+html[data-theme="dark"] #locate:disabled{background:#344154!important;color:#d5e1f0!important}
+html[data-theme="dark"] a:not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out){color:#9dc4ff}
+html[data-theme="dark"] .map-product-choice{background:#203149!important;color:#f1f6ff!important}
+html[data-theme="dark"] .map-product-choice small{color:#c6d5ea!important}
+html[data-theme="dark"] .map-product-chip{background:#25446e!important;color:#eff6ff!important}
+html[data-theme="dark"] .map-product-chip button{background:transparent!important;color:#fff!important}
+html[data-theme="dark"] .share-error{color:#ffb2b2!important}
+html[data-theme="dark"] .app-settings-panel,html[data-theme="dark"] .app-settings-panel label{color:var(--app-text)!important}
+</style>
 </head>
 
 <body>
