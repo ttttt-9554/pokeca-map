@@ -11,6 +11,24 @@
   const SHARED_TABLE = 'shared_reports';
   let supabaseClient = null;
   let authUser = null;
+
+  // Supabase > Authentication > Users に表示される自分の User UID を設定
+  // 指定したUIDでログインしたときだけ開発タブを表示します。
+  const DEVELOPER_USER_ID = '0ba965da-445b-4055-8d8d-ead585fa0d09';
+
+  function isDeveloper() {
+    return !!authUser && authUser.id === DEVELOPER_USER_ID;
+  }
+
+  function updateDeveloperTab() {
+    const button = document.querySelector('nav button[data-tab="dev"]');
+    const view = $('devView');
+    const allowed = isDeveloper();
+    if (button) button.hidden = !allowed;
+    if (view) view.hidden = !allowed;
+    if (!allowed && view?.classList.contains('active')) switchTab('map');
+  }
+
   let sharedReports = [];
   let sharedChannel = null;
   let sharedEditId = null;
@@ -123,6 +141,7 @@
       ? 'チェックを入れると共有データベースに投稿します。外すと端末内にだけ保存します。'
       : '共有するには「共有」タブからDiscordでログインしてください。';
     renderMyShared();
+    updateDeveloperTab();
   }
 
   async function loadSharedReports() {
@@ -273,6 +292,7 @@
   }
 
   function switchTab(tab) {
+    if (tab === 'dev' && !isDeveloper()) tab = 'map';
     document.querySelectorAll('.view').forEach(view => {
       view.classList.toggle(
         'active', view.id === `${tab}View`
@@ -1443,6 +1463,7 @@
   }
 
   function exportStores() {
+    if (!isDeveloper()) return;
     const lines = [
       'name,city,address,category,lat,lng',
       ...stores.map(p =>
@@ -1460,6 +1481,7 @@
   }
 
   async function importStores(event) {
+    if (!isDeveloper()) return;
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -1488,6 +1510,7 @@
   }
 
   function rememberStore() {
+    if (!isDeveloper()) return;
     const latText = get('lat').value;
     const lngText = get('lng').value;
 

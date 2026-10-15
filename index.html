@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="style.css?v=20">
 
   <style>
+    [hidden] { display: none !important; }
     .store-category-group { border: 0; padding: 0; margin: 16px 0 20px; min-width: 0; }
     .store-category-group legend { font-weight: 700; margin-bottom: 12px; }
     .store-category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -458,7 +459,7 @@
          開発・データ管理
          ====================================== -->
 
-    <section id="devView" class="view">
+    <section id="devView" class="view" hidden>
 
       <h2>
         開発・データ管理
@@ -596,6 +597,7 @@
     <button
       type="button"
       data-tab="dev"
+      hidden
     >
       🛠️
       <span>開発</span>
@@ -619,7 +621,7 @@
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20"></script>
+  <script src="app.js?v=21"></script>
 
 </body>
 </html>
