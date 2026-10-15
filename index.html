@@ -278,6 +278,35 @@ html[data-theme="dark"] #wishlistSearch{background:#203149!important;color:#f4f8
 html[data-theme="dark"] .wishlist-guide,html[data-theme="dark"] .wishlist-choice-main small{color:#b9cbe2!important}
 html[data-theme="dark"] .wishlist-choice-add{background:#2563eb!important;color:#fff!important}
 </style>
+
+<style id="map-search-panel-frame">
+.map-search-panel{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:14px;
+  margin:0 0 6px;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:14px;
+  background:var(--app-surface2,#f8fafc);
+  color:var(--app-text,#172033);
+}
+.map-search-panel .map-search-heading{
+  margin:0;
+  padding:0;
+  border-top:0;
+  font-size:17px;
+  line-height:1.5;
+}
+.map-search-panel .hint{margin:0;line-height:1.6}
+.map-search-panel .map-clear-products{align-self:stretch;min-height:44px}
+html[data-theme="dark"] .map-search-panel{
+  background:#203149!important;
+  color:#f4f8ff!important;
+  border-color:#617895!important;
+}
+html[data-theme="dark"] .map-search-panel .hint{color:#c5d4e9!important}
+</style>
 </head>
 
 <body>
@@ -349,7 +378,8 @@ html[data-theme="dark"] .wishlist-choice-add{background:#2563eb!important;color:
               <button id="wishlistApply" type="button" class="primary">③ ⭐ 登録した商品を地図で探す</button>
               <button id="wishlistResetFilter" type="button">地図の商品絞り込みを解除</button>
             </section>
-            <h3 class="map-search-heading">🔎 地図の検索条件を細かく指定</h3>
+            <section class="map-search-panel" aria-label="地図の検索条件">
+              <h3 class="map-search-heading">🔎 地図の検索条件を細かく指定</h3>
             <p class="hint">ここから商品を選ぶと、地図だけを絞り込めます。上の「探している商品」には登録されません。</p>
             <strong>商品カテゴリ</strong>
             <label class="map-category-option"><input id="mapCategoryPack" type="checkbox" checked><span>拡張パック</span></label>
@@ -364,6 +394,7 @@ html[data-theme="dark"] .wishlist-choice-add{background:#2563eb!important;color:
             <div id="mapSelectedProducts" class="map-selected-products" aria-live="polite"></div>
             <button id="mapClearProducts" type="button" class="map-clear-products">商品選択を解除</button>
             <p class="hint" id="mapFilterCount" aria-live="polite"></p>
+            </section>
           </section>
         </div>
         <div class="map-filter-drawer-foot">
@@ -894,7 +925,7 @@ html[data-theme="dark"] .wishlist-choice-add{background:#2563eb!important;color:
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261016-wishlist-ux-fix-1"></script>
+  <script src="app.js?v=20261016-search-frame-1"></script>
 
 <script>
 /* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */
