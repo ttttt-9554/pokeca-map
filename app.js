@@ -292,6 +292,7 @@
   }
 
   function switchTab(tab) {
+    if ($('mapFilterDrawer') && !$('mapFilterDrawer').hidden && tab !== 'map') setMapFilterOpen(false);
     if (tab === 'dev' && !isDeveloper()) tab = 'map';
     document.querySelectorAll('.view').forEach(view => {
       view.classList.toggle(
@@ -307,6 +308,48 @@
 
     if (tab === 'map') refreshMap();
     render();
+  }
+
+
+  // マップ検索サイドバー
+  function setMapFilterOpen(open) {
+    const drawer = $('mapFilterDrawer');
+    const overlay = $('mapFilterOverlay');
+    if (!drawer || !overlay) return;
+    drawer.hidden = !open;
+    overlay.hidden = !open;
+    drawer.setAttribute('aria-hidden', String(!open));
+    $('openMapFilters').setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('map-filter-locked', open);
+    if (open) {
+      $('closeMapFilters').focus();
+    } else {
+      closeMapProductDropdown();
+      $('openMapFilters').focus();
+      refreshMap();
+    }
+  }
+
+  function initMapFilterDrawer() {
+    $('openMapFilters').addEventListener('click', () => setMapFilterOpen(true));
+    $('closeMapFilters').addEventListener('click', () => setMapFilterOpen(false));
+    $('applyMapFilters').addEventListener('click', () => setMapFilterOpen(false));
+    $('mapFilterOverlay').addEventListener('click', () => setMapFilterOpen(false));
+    document.addEventListener('keydown', event => {
+      if ($('mapFilterDrawer').hidden) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setMapFilterOpen(false);
+      }
+      if (event.key === 'Tab') {
+        const focusable = [...$('mapFilterDrawer').querySelectorAll('button:not([disabled]):not([hidden]),input:not([disabled]),select:not([disabled])')]
+          .filter(element => element.getClientRects().length > 0);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {event.preventDefault();last.focus();}
+        else if (!event.shiftKey && document.activeElement === last) {event.preventDefault();first.focus();}
+      }
+    });
   }
 
   // ========================================
@@ -1708,6 +1751,7 @@
 
       initProductDropdown();
       initMapProductFilter();
+      initMapFilterDrawer();
       initChainDropdown();
       bindEvents();
 

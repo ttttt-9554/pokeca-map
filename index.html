@@ -65,6 +65,26 @@
     .share-option{display:flex;align-items:center;gap:10px;margin:14px 0;padding:12px;border:1px solid #cbdcf4;border-radius:10px}
     .share-option input{width:22px;height:22px;flex-shrink:0}
   </style>
+
+  <style>
+    /* スマホ・PC共通の検索サイドバー */
+    .map-top-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:12px 0 16px}
+    .map-top-actions button{min-height:46px}
+    .map-filter-open{background:#2563eb!important;color:#fff!important;border:1px solid #2563eb!important;border-radius:12px;font-weight:700;padding:10px 14px}
+    .map-filter-overlay{position:fixed;inset:0;background:rgba(15,23,42,.48);z-index:4000}
+    .map-filter-drawer{position:fixed;left:0;top:0;bottom:0;width:min(390px,90vw);box-sizing:border-box;background:#f8fafc;z-index:4001;display:flex;flex-direction:column;box-shadow:8px 0 35px #0003;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+    .map-filter-drawer-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 16px;background:#fff;border-bottom:1px solid #d5e0f2}
+    .map-filter-drawer-head h2{font-size:18px;margin:0}
+    .map-filter-drawer-head button{font-size:14px;white-space:nowrap}
+    .map-filter-drawer-body{overflow-y:auto;overscroll-behavior:contain;padding:16px;flex:1;min-height:0}
+    .map-filter-period{display:block;width:100%;box-sizing:border-box;margin:10px 0 14px;min-height:46px;font-size:16px}
+    .map-filter-drawer .map-product-filter{margin:0;padding:12px;gap:10px}
+    .map-filter-drawer .map-category-option{padding:10px}
+    .map-filter-drawer-foot{padding:12px 16px;background:#fff;border-top:1px solid #d5e0f2}
+    .map-filter-drawer-foot button{width:100%;min-height:46px}
+    body.map-filter-locked{overflow:hidden}
+    @media(min-width:768px){.map-filter-drawer{width:390px}}
+  </style>
   <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest">
 </head>
@@ -95,43 +115,44 @@
 
     <section id="mapView" class="view active">
 
-      <div class="toolbar">
-
-        <label for="period">
-          表示期間
-        </label>
-
-        <select id="period">
-          <option value="all">すべて</option>
-          <option value="today">今日</option>
-          <option value="week">過去7日間</option>
-        </select>
-
-        <button
-          id="locate"
-          type="button"
-        >
-          現在地へ
-        </button>
-
+      <div class="map-top-actions">
+        <button id="openMapFilters" class="map-filter-open" type="button" aria-controls="mapFilterDrawer" aria-expanded="false">☰ 検索・絞り込み</button>
+        <button id="locate" type="button">現在地へ</button>
       </div>
 
-      <!-- マップ表示用の商品フィルター（登録画面と同じ操作形式） -->
-      <section class="map-product-filter" aria-label="マップの商品絞り込み">
-        <strong>商品カテゴリ</strong>
-        <label class="map-category-option"><input id="mapCategoryPack" type="checkbox" checked><span>拡張パック</span></label>
-        <label class="map-category-option"><input id="mapCategoryDeck" type="checkbox" checked><span>構築デッキ・スターターセット</span></label>
-        <p class="hint" id="mapCategoryHint">両方のカテゴリを表示します。</p>
-        <label for="mapProductSearch"><strong>商品名</strong></label>
-        <div class="map-product-input-wrap">
-          <input id="mapProductSearch" type="search" placeholder="商品名・ひらがな・省略名で検索" autocomplete="off" aria-expanded="false" aria-controls="mapProductDropdown">
-          <div id="mapProductDropdown" class="map-product-dropdown" hidden></div>
+      <div id="mapFilterOverlay" class="map-filter-overlay" hidden></div>
+      <aside id="mapFilterDrawer" class="map-filter-drawer" role="dialog" aria-modal="true" aria-label="検索・絞り込み" aria-hidden="true" hidden>
+        <div class="map-filter-drawer-head">
+          <h2>検索・絞り込み</h2>
+          <button id="closeMapFilters" type="button" aria-label="検索パネルを閉じる">✕ 閉じる</button>
         </div>
-        <p class="hint">候補をタップすると商品を追加できます。複数選択可能です。</p>
-        <div id="mapSelectedProducts" class="map-selected-products" aria-live="polite"></div>
-        <button id="mapClearProducts" type="button" class="map-clear-products">商品選択を解除</button>
-        <p class="hint" id="mapFilterCount" aria-live="polite"></p>
-      </section>
+        <div class="map-filter-drawer-body">
+          <label for="period"><strong>表示期間</strong></label>
+          <select id="period" class="map-filter-period">
+            <option value="all">すべて</option>
+            <option value="today">今日</option>
+            <option value="week">過去7日間</option>
+          </select>
+          <section class="map-product-filter" aria-label="マップの商品絞り込み">
+            <strong>商品カテゴリ</strong>
+            <label class="map-category-option"><input id="mapCategoryPack" type="checkbox" checked><span>拡張パック</span></label>
+            <label class="map-category-option"><input id="mapCategoryDeck" type="checkbox" checked><span>構築デッキ・スターターセット</span></label>
+            <p class="hint" id="mapCategoryHint">両方のカテゴリを表示します。</p>
+            <label for="mapProductSearch"><strong>商品名</strong></label>
+            <div class="map-product-input-wrap">
+              <input id="mapProductSearch" type="search" placeholder="商品名・ひらがな・省略名で検索" autocomplete="off" aria-expanded="false" aria-controls="mapProductDropdown">
+              <div id="mapProductDropdown" class="map-product-dropdown" hidden></div>
+            </div>
+            <p class="hint">候補をタップすると商品を追加できます。複数選択可能です。</p>
+            <div id="mapSelectedProducts" class="map-selected-products" aria-live="polite"></div>
+            <button id="mapClearProducts" type="button" class="map-clear-products">商品選択を解除</button>
+            <p class="hint" id="mapFilterCount" aria-live="polite"></p>
+          </section>
+        </div>
+        <div class="map-filter-drawer-foot">
+          <button id="applyMapFilters" type="button" class="primary">地図を見る</button>
+        </div>
+      </aside>
 
       <div id="map"></div>
 
@@ -621,7 +642,7 @@
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=21"></script>
+  <script src="app.js?v=22"></script>
 
 </body>
 </html>
