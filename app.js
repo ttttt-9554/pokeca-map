@@ -1172,43 +1172,67 @@
       list.append(chip);
     });
     get('wishlistEmpty').hidden = wishlist.length > 0;
+    get('wishlistSelectedHeading').textContent = `② 登録済みの探している商品（${wishlist.length}件）`;
     get('wishlistApply').disabled = wishlist.length === 0;
   }
   function showWishlistChoices() {
     const input = get('wishlistSearch');
     const dropdown = get('wishlistChoices');
+    const info = get('wishlistSearchInfo');
     const query = productNorm(input.value);
     dropdown.replaceChildren();
-    if (!query) { dropdown.hidden = true; input.setAttribute('aria-expanded','false'); return; }
-    const products = [
+    if (!query) {
+      dropdown.hidden = true;
+      info.textContent = '商品名を入力すると、ここに候補が表示されます。';
+      input.setAttribute('aria-expanded','false');
+      return;
+    }
+    const allProducts = [
       ...packs.map(p => ({...p, category:'pack'})),
       ...decks.map(p => ({...p, category:'deck'}))
-    ].filter(p => mapProductMatches(p,query) && !wishlist.some(x => x.category === p.category && productNorm(x.name) === productNorm(p.name))).slice(0,40);
-    if (!products.length) {
-      const message = document.createElement('p');
-      message.className = 'hint';
-      message.textContent = '候補がありません。商品が追加済みか確認してください。';
-      dropdown.append(message);
+    ];
+    if (!allProducts.length) {
+      info.textContent = '商品一覧を読み込み中です。少し待ってから検索してください。';
+      dropdown.hidden = true;
+      input.setAttribute('aria-expanded','false');
+      return;
     }
-    products.forEach(p => {
+    const matches = allProducts
+      .filter(p => mapProductMatches(p, query))
+      .filter(p => !wishlist.some(x => x.category === p.category && productNorm(x.name) === productNorm(p.name)))
+      .sort((a,b) => productDateValue(b.date) - productDateValue(a.date));
+    info.textContent = matches.length ? `検索結果：${matches.length}件（候補をタップして追加）` : '該当する未登録の商品はありません。別の名前でも検索できます。';
+    matches.slice(0, 40).forEach(p => {
       const button = document.createElement('button');
       button.type = 'button';
-      button.textContent = p.name + (p.category === 'deck' ? '（構築デッキ）' : '');
+      const main = document.createElement('span');
+      main.className = 'wishlist-choice-main';
+      const name = document.createElement('strong');
+      name.textContent = p.name;
+      const details = document.createElement('small');
+      details.textContent = (p.category === 'deck' ? '構築デッキ・スターターセット' : '拡張パック') + (p.date ? ' · ' + p.date : '');
+      main.append(name, details);
+      const add = document.createElement('span');
+      add.className = 'wishlist-choice-add';
+      add.textContent = '＋ 追加';
+      button.append(main, add);
       button.addEventListener('click', () => {
         wishlist.push({name:p.name, category:p.category});
         input.value = '';
         dropdown.hidden = true;
         input.setAttribute('aria-expanded','false');
+        info.textContent = `「${p.name}」を登録しました。続けて別の商品も検索できます。`;
         saveWishlist();
       });
       dropdown.append(button);
     });
-    dropdown.hidden = false;
-    input.setAttribute('aria-expanded','true');
+    dropdown.hidden = matches.length === 0;
+    input.setAttribute('aria-expanded',String(matches.length > 0));
   }
   function initWishlist() {
     loadWishlist();
     renderWishlist();
+    get('wishlistSearchInfo').textContent = '商品名を入力すると、ここに候補が表示されます。';
     const input = get('wishlistSearch');
     input.addEventListener('input', showWishlistChoices);
     input.addEventListener('focus', showWishlistChoices);

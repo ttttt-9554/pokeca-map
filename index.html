@@ -259,6 +259,25 @@ html[data-theme="dark"] .wishlist-panel{background:#203149!important;color:#f4f8
 html[data-theme="dark"] .wishlist-choices,html[data-theme="dark"] .wishlist-choices button{background:#203149!important;color:#f4f8ff!important}
 html[data-theme="dark"] #wishlistSearch{background:#203149!important;color:#f4f8ff!important;border-color:#7288a6!important}
 </style>
+
+<style id="wishlist-ux-fix">
+.wishlist-guide{margin:0;font-size:13px;line-height:1.55;color:var(--app-muted,#64748b)}
+.wishlist-selected-heading{display:block;margin-top:5px;font-size:15px}
+.wishlist-choices{display:flex;flex-direction:column;gap:0;box-shadow:0 6px 16px #0002}
+.wishlist-choices button{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer}
+.wishlist-choice-main{display:flex;flex-direction:column;gap:4px;min-width:0}
+.wishlist-choice-main strong{overflow-wrap:anywhere;font-size:15px}
+.wishlist-choice-main small{font-size:12px;color:var(--app-muted,#64748b)}
+.wishlist-choice-add{flex-shrink:0;border-radius:20px;background:#2563eb;color:#fff;font-size:12px;padding:6px 10px;font-weight:700}
+.wishlist-panel #wishlistSelected{min-height:0}
+.wishlist-panel #wishlistSelected .map-product-chip{max-width:100%;overflow-wrap:anywhere}
+.wishlist-panel #wishlistSelected .map-product-chip button{min-width:28px;min-height:28px}
+.wishlist-panel #wishlistEmpty{margin:0}
+.wishlist-panel #wishlistApply:disabled{opacity:.5;cursor:not-allowed}
+.map-search-heading{font-size:17px;margin:18px 0 0;border-top:1px solid var(--app-border,#cbd5e1);padding-top:20px}
+html[data-theme="dark"] .wishlist-guide,html[data-theme="dark"] .wishlist-choice-main small{color:#b9cbe2!important}
+html[data-theme="dark"] .wishlist-choice-add{background:#2563eb!important;color:#fff!important}
+</style>
 </head>
 
 <body>
@@ -317,25 +336,31 @@ html[data-theme="dark"] #wishlistSearch{background:#203149!important;color:#f4f8
           <section class="map-product-filter" aria-label="マップの商品絞り込み">
             <section class="wishlist-panel" aria-label="探している商品">
               <h3>⭐ 探しているパック・商品</h3>
-              <p class="hint">探している商品を登録すると、次回からワンタップで地図を絞り込めます。Discordログイン中は同じアカウントの端末と同期します。未ログイン時はこの端末に保存されます。</p>
-              <label for="wishlistSearch">探している商品を追加</label>
-              <input id="wishlistSearch" type="search" placeholder="商品名・よみがなで検索" autocomplete="off" aria-controls="wishlistChoices" aria-expanded="false">
+              <p class="hint">欲しい商品をここに登録しておくと、次回からまとめて地図で探せます。複数登録できます。</p>
+              <label for="wishlistSearch">① 欲しいパックを検索して追加</label>
+              <input id="wishlistSearch" type="search" placeholder="例：メガブレイブ、30th、インフェルノ" autocomplete="off" aria-controls="wishlistChoices" aria-expanded="false">
+              <p class="wishlist-guide">商品名の一部を入力 → 下の候補をタップして登録</p>
               <div id="wishlistChoices" class="wishlist-choices" hidden></div>
-              <div id="wishlistSelected" class="map-selected-products" aria-live="polite"></div>\n              <p id="wishlistSyncStatus" class="hint" aria-live="polite"></p>
+              <p id="wishlistSearchInfo" class="wishlist-guide" aria-live="polite"></p>
+              <strong id="wishlistSelectedHeading" class="wishlist-selected-heading">② 登録済みの探している商品（0件）</strong>
+              <div id="wishlistSelected" class="map-selected-products" aria-live="polite"></div>
+              <p id="wishlistSyncStatus" class="hint" aria-live="polite"></p>
               <p id="wishlistEmpty" class="hint">まだ登録されていません。</p>
-              <button id="wishlistApply" type="button" class="primary">⭐ 探している商品を地図に表示</button>
-              <button id="wishlistResetFilter" type="button">絞り込みを解除</button>
+              <button id="wishlistApply" type="button" class="primary">③ ⭐ 登録した商品を地図で探す</button>
+              <button id="wishlistResetFilter" type="button">地図の商品絞り込みを解除</button>
             </section>
+            <h3 class="map-search-heading">🔎 地図の検索条件を細かく指定</h3>
+            <p class="hint">ここから商品を選ぶと、地図だけを絞り込めます。上の「探している商品」には登録されません。</p>
             <strong>商品カテゴリ</strong>
             <label class="map-category-option"><input id="mapCategoryPack" type="checkbox" checked><span>拡張パック</span></label>
             <label class="map-category-option"><input id="mapCategoryDeck" type="checkbox" checked><span>構築デッキ・スターターセット</span></label>
             <p class="hint" id="mapCategoryHint">両方のカテゴリを表示します。</p>
-            <label for="mapProductSearch"><strong>商品名</strong></label>
+            <label for="mapProductSearch"><strong>地図で検索する商品名</strong></label>
             <div class="map-product-input-wrap">
               <input id="mapProductSearch" type="search" placeholder="商品名・ひらがな・省略名で検索" autocomplete="off" aria-expanded="false" aria-controls="mapProductDropdown">
               <div id="mapProductDropdown" class="map-product-dropdown" hidden></div>
             </div>
-            <p class="hint">候補をタップすると商品を追加できます。複数選択可能です。</p>
+            <p class="hint">商品名の一部を入力して候補をタップ。複数の商品で絞り込めます。</p>
             <div id="mapSelectedProducts" class="map-selected-products" aria-live="polite"></div>
             <button id="mapClearProducts" type="button" class="map-clear-products">商品選択を解除</button>
             <p class="hint" id="mapFilterCount" aria-live="polite"></p>
@@ -869,7 +894,7 @@ html[data-theme="dark"] #wishlistSearch{background:#203149!important;color:#f4f8
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261016-wishlist-1"></script>
+  <script src="app.js?v=20261016-wishlist-ux-fix-1"></script>
 
 <script>
 /* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */
