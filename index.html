@@ -202,6 +202,8 @@ html[data-theme="dark"] #addView .store-category-grid label:has(input:checked) {
 <h2>⚙ アプリ設定</h2><label for="appThemeChoice">画面のテーマ</label>
 <select id="appThemeChoice"><option value="system">端末の設定に合わせる</option><option value="light">ライトモード</option><option value="dark">ダークモード</option></select>
 <p class="hint">選択したテーマは次回起動時も維持されます。</p>
+<button id="appUpdateNow" type="button" style="display:block;width:100%;margin:14px 0 8px;padding:13px;border-radius:10px;background:#2563eb;color:white;font-weight:700;border:1px solid #75a8ff">↻ 最新版に更新</button>
+<p class="hint" id="appUpdateStatus" role="status">表示が古い場合はこちらから更新してください。端末内の登録データは削除しません。</p>
 <button id="appSettingsClose" type="button">閉じる</button></section>
 
   <!-- ======================================
@@ -790,7 +792,30 @@ html[data-theme="dark"] #addView .store-category-grid label:has(input:checked) {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261015-2"></script>
+  <script src="app.js?v=20261015-4"></script>
 
+<script>
+/* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */
+(function(){
+  var btn=document.getElementById('appUpdateNow');
+  if(!btn)return;
+  btn.addEventListener('click',async function(){
+    btn.disabled=true;
+    var status=document.getElementById('appUpdateStatus');
+    status.textContent='最新版を確認しています…';
+    try{
+      var next=new URL('./index.html',location.href);
+      next.searchParams.set('app_refresh',String(Date.now()));
+      var response=await fetch(next.href,{cache:'no-store'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      status.textContent='更新版を読み込んでいます…';
+      location.replace(next.href);
+    }catch(error){
+      status.textContent='更新できませんでした。通信状況を確認してもう一度お試しください。';
+      btn.disabled=false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
