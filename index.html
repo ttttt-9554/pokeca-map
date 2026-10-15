@@ -144,6 +144,55 @@ html[data-theme="dark"] .map-product-chip button{background:transparent!importan
 html[data-theme="dark"] .share-error{color:#ffb2b2!important}
 html[data-theme="dark"] .app-settings-panel,html[data-theme="dark"] .app-settings-panel label{color:var(--app-text)!important}
 </style>
+
+<style id="dark-panel-contrast-fix">
+/* 登録・開発画面の明色固定パネルをダークテーマに合わせる */
+html[data-theme="dark"] #addView .searchbox,
+html[data-theme="dark"] #addView #reportForm,
+html[data-theme="dark"] #devView .store-tools,
+html[data-theme="dark"] #devView #cloudAdminPanel,
+html[data-theme="dark"] #addView fieldset,
+html[data-theme="dark"] #devView fieldset {
+  background:#172337!important;
+  color:#eef4ff!important;
+  border-color:#526681!important;
+}
+html[data-theme="dark"] #addView .searchbox *,
+html[data-theme="dark"] #devView .store-tools * {
+  border-color: #526681;
+}
+html[data-theme="dark"] #addView .searchbox :is(h2,h3,h4,strong,legend,label),
+html[data-theme="dark"] #devView .store-tools :is(h2,h3,h4,strong,legend,label),
+html[data-theme="dark"] #addView #reportForm :is(h2,h3,h4,strong,legend,label) {
+  color:#eef4ff!important;
+}
+html[data-theme="dark"] #addView :is(.hint,small,p),
+html[data-theme="dark"] #devView :is(.hint,small,p) {
+  color:#c9d7eb!important;
+}
+html[data-theme="dark"] #addView :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea),
+html[data-theme="dark"] #devView :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea) {
+  background:#203149!important;
+  color:#f3f7ff!important;
+  border-color:#7085a2!important;
+  -webkit-text-fill-color:#f3f7ff;
+}
+html[data-theme="dark"] #addView input::placeholder,
+html[data-theme="dark"] #devView input::placeholder {
+  color:#b7c8e0!important;
+  -webkit-text-fill-color:#b7c8e0;
+  opacity:1;
+}
+html[data-theme="dark"] #addView .store-category-grid label {
+  background:#203149!important;
+  color:#eef4ff!important;
+  border-color:#7085a2!important;
+}
+html[data-theme="dark"] #addView .store-category-grid label:has(input:checked) {
+  background:#243d63!important;
+  border-color:#75a8ff!important;
+}
+</style>
 </head>
 
 <body>
