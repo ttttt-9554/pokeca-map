@@ -149,6 +149,7 @@
     renderMyShared();
     updateDeveloperTab();
     if (isDeveloper()) renderCloudAdminLists();
+    refreshWishlistForAccount();
   }
 
   async function loadSharedReports() {
@@ -189,7 +190,11 @@
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>loadCloudData());
+    window.addEventListener('focus',()=>{ loadCloudData(); refreshWishlistForAccount(); });
+    supabaseClient.channel('pokeca-wishlist-updates')
+      .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
+        payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
+      .subscribe();
     sharedChannel = supabaseClient.channel('pokeca-shared-report-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:SHARED_TABLE},() => loadSharedReports())
       .subscribe();
@@ -1054,6 +1059,185 @@
       box.append(chip);
     });
     get('mapClearProducts').hidden = mapSelectedProducts.length === 0;
+  }
+
+
+  // 探している商品: 未ログイン時は端末保存、ログイン時はユーザー専用クラウド保存。
+  const WISHLIST_KEY = 'pokeca-wishlist-v1';
+  const WISHLIST_TABLE = 'user_wishlists';
+  let wishlist = [];
+  let wishlistReady = false;
+  let wishlistSyncSequence = 0;
+  let wishlistSaveQueue = Promise.resolve();
+
+  function normalizeWishlist(items) {
+    if (!Array.isArray(items)) return [];
+    const seen = new Set();
+    return items.filter(p => {
+      if (!p || typeof p.name !== 'string' || !['pack','deck'].includes(p.category)) return false;
+      const name = p.name.trim();
+      const key = p.category + ':' + productNorm(name);
+      if (!name || name.length > 200 || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0,100).map(p => ({name:p.name.trim(), category:p.category}));
+  }
+  function readLocalWishlist() {
+    try { return normalizeWishlist(JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]')); }
+    catch (_) { return []; }
+  }
+  function writeLocalWishlist() {
+    try { localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist)); }
+    catch (_) { console.warn('探している商品の端末保存に失敗しました'); }
+  }
+  function wishlistStatus(message) {
+    const node = get('wishlistSyncStatus');
+    if (node) node.textContent = message;
+  }
+  function loadWishlist() {
+    wishlist = readLocalWishlist();
+    wishlistReady = true;
+  }
+  async function refreshWishlistForAccount() {
+    const sequence = ++wishlistSyncSequence;
+    if (!wishlistReady) return;
+    if (!supabaseClient || !authUser) {
+      wishlist = readLocalWishlist();
+      renderWishlist();
+      wishlistStatus('端末内に保存中。Discordログインで他の端末と同期できます。');
+      return;
+    }
+    const userId = authUser.id;
+    wishlistStatus('クラウドから同期中…');
+    try {
+      await wishlistSaveQueue;
+      const {data,error} = await supabaseClient.from(WISHLIST_TABLE)
+        .select('items').eq('user_id',userId).maybeSingle();
+      if (error) throw error;
+      if (sequence !== wishlistSyncSequence || authUser?.id !== userId) return;
+      const remote = normalizeWishlist(data?.items || []);
+      const migrationKey = WISHLIST_KEY + '-migrated-' + userId;
+      const shouldMigrate = localStorage.getItem(migrationKey) !== '1';
+      // 初回のみ既存の端末設定をクラウドに統合。以降はクラウドを正として削除も反映する。
+      const merged = shouldMigrate ? normalizeWishlist([...remote,...readLocalWishlist()]) : remote;
+      if (shouldMigrate) {
+        const {error:saveError} = await supabaseClient.from(WISHLIST_TABLE)
+          .upsert({user_id:userId,items:merged},{onConflict:'user_id'});
+        if (saveError) throw saveError;
+        if (sequence !== wishlistSyncSequence || authUser?.id !== userId) return;
+        localStorage.setItem(migrationKey,'1');
+      }
+      wishlist = merged;
+      writeLocalWishlist();
+      renderWishlist();
+      wishlistStatus('☁ 同じDiscordアカウントの端末と同期しています。');
+    } catch (error) {
+      if (sequence !== wishlistSyncSequence) return;
+      wishlistStatus('同期できませんでした。通信とSupabase設定を確認してください：' + error.message);
+    }
+  }
+  function saveWishlist() {
+    wishlist = normalizeWishlist(wishlist);
+    writeLocalWishlist();
+    renderWishlist();
+    if (!supabaseClient || !authUser) {
+      wishlistStatus('端末内に保存しました。Discordログインで同期できます。');
+      return;
+    }
+    const userId = authUser.id;
+    const snapshot = wishlist.map(p => ({...p}));
+    wishlistStatus('クラウドに保存中…');
+    wishlistSaveQueue = wishlistSaveQueue.catch(()=>{}).then(async () => {
+      const {error} = await supabaseClient.from(WISHLIST_TABLE)
+        .upsert({user_id:userId,items:snapshot},{onConflict:'user_id'});
+      if (error) throw error;
+      if (authUser?.id === userId) wishlistStatus('☁ クラウドに保存しました。');
+    }).catch(error => {
+      if (authUser?.id === userId) wishlistStatus('クラウド保存に失敗しました：' + error.message);
+    });
+  }
+  function renderWishlist() {
+    const list = get('wishlistSelected');
+    list.replaceChildren();
+    wishlist.forEach((p, index) => {
+      const chip = document.createElement('span');
+      chip.className = 'map-product-chip';
+      chip.append(document.createTextNode(p.name));
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = '×';
+      remove.setAttribute('aria-label', p.name + 'を探している商品から削除');
+      remove.addEventListener('click', () => { wishlist.splice(index, 1); saveWishlist(); });
+      chip.append(remove);
+      list.append(chip);
+    });
+    get('wishlistEmpty').hidden = wishlist.length > 0;
+    get('wishlistApply').disabled = wishlist.length === 0;
+  }
+  function showWishlistChoices() {
+    const input = get('wishlistSearch');
+    const dropdown = get('wishlistChoices');
+    const query = productNorm(input.value);
+    dropdown.replaceChildren();
+    if (!query) { dropdown.hidden = true; input.setAttribute('aria-expanded','false'); return; }
+    const products = [
+      ...packs.map(p => ({...p, category:'pack'})),
+      ...decks.map(p => ({...p, category:'deck'}))
+    ].filter(p => mapProductMatches(p,query) && !wishlist.some(x => x.category === p.category && productNorm(x.name) === productNorm(p.name))).slice(0,40);
+    if (!products.length) {
+      const message = document.createElement('p');
+      message.className = 'hint';
+      message.textContent = '候補がありません。商品が追加済みか確認してください。';
+      dropdown.append(message);
+    }
+    products.forEach(p => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = p.name + (p.category === 'deck' ? '（構築デッキ）' : '');
+      button.addEventListener('click', () => {
+        wishlist.push({name:p.name, category:p.category});
+        input.value = '';
+        dropdown.hidden = true;
+        input.setAttribute('aria-expanded','false');
+        saveWishlist();
+      });
+      dropdown.append(button);
+    });
+    dropdown.hidden = false;
+    input.setAttribute('aria-expanded','true');
+  }
+  function initWishlist() {
+    loadWishlist();
+    renderWishlist();
+    const input = get('wishlistSearch');
+    input.addEventListener('input', showWishlistChoices);
+    input.addEventListener('focus', showWishlistChoices);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { get('wishlistChoices').hidden = true; input.setAttribute('aria-expanded','false'); }
+    });
+    document.addEventListener('pointerdown', e => {
+      if (!e.target.closest('.wishlist-panel')) {
+        get('wishlistChoices').hidden = true;
+        input.setAttribute('aria-expanded','false');
+      }
+    });
+    get('wishlistApply').addEventListener('click', () => {
+      if (!wishlist.length) return;
+      get('mapCategoryPack').checked = wishlist.some(p => p.category === 'pack');
+      get('mapCategoryDeck').checked = wishlist.some(p => p.category === 'deck');
+      mapSelectedProducts = wishlist.map(p => ({...p}));
+      closeMapProductDropdown();
+      updateMapFilterUI();
+      renderAndFitMap();
+      setMapFilterOpen(false);
+    });
+    get('wishlistResetFilter').addEventListener('click', () => {
+      mapSelectedProducts = [];
+      get('mapCategoryPack').checked = true;
+      get('mapCategoryDeck').checked = true;
+      updateMapFilterUI();
+      renderAndFitMap();
+    });
   }
 
   function initMapProductFilter() {
@@ -1945,6 +2129,7 @@
 
       initProductDropdown();
       initMapProductFilter();
+      initWishlist();
       initMapFilterDrawer();
       initChainDropdown();
       initCloudAdmin();

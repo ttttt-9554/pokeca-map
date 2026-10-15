@@ -245,6 +245,20 @@ html[data-theme="dark"] #devView .cloud-admin-form input::placeholder {
   -webkit-text-fill-color:#bdcde2!important;
 }
 </style>
+
+<style id="wishlist-style">
+.wishlist-panel{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--app-border,#cbd5e1);border-radius:14px;background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);margin-bottom:16px}
+.wishlist-panel h3{margin:0;font-size:17px}
+.wishlist-panel label{font-weight:700}
+#wishlistSearch{width:100%;box-sizing:border-box;min-height:46px;padding:11px;border:1px solid var(--app-border,#cbd5e1);border-radius:10px;background:var(--app-surface,#fff);color:var(--app-text,#172033);font-size:16px}
+.wishlist-choices{max-height:240px;overflow-y:auto;border:1px solid var(--app-border,#cbd5e1);border-radius:10px;background:var(--app-surface,#fff)}
+.wishlist-choices[hidden]{display:none!important}
+.wishlist-choices button{display:block;width:100%;text-align:left;padding:11px;border:0;border-bottom:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+.wishlist-panel .map-product-chip{background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+html[data-theme="dark"] .wishlist-panel{background:#203149!important;color:#f4f8ff!important}
+html[data-theme="dark"] .wishlist-choices,html[data-theme="dark"] .wishlist-choices button{background:#203149!important;color:#f4f8ff!important}
+html[data-theme="dark"] #wishlistSearch{background:#203149!important;color:#f4f8ff!important;border-color:#7288a6!important}
+</style>
 </head>
 
 <body>
@@ -301,6 +315,17 @@ html[data-theme="dark"] #devView .cloud-admin-form input::placeholder {
             <option value="week">過去7日間</option>
           </select>
           <section class="map-product-filter" aria-label="マップの商品絞り込み">
+            <section class="wishlist-panel" aria-label="探している商品">
+              <h3>⭐ 探しているパック・商品</h3>
+              <p class="hint">探している商品を登録すると、次回からワンタップで地図を絞り込めます。Discordログイン中は同じアカウントの端末と同期します。未ログイン時はこの端末に保存されます。</p>
+              <label for="wishlistSearch">探している商品を追加</label>
+              <input id="wishlistSearch" type="search" placeholder="商品名・よみがなで検索" autocomplete="off" aria-controls="wishlistChoices" aria-expanded="false">
+              <div id="wishlistChoices" class="wishlist-choices" hidden></div>
+              <div id="wishlistSelected" class="map-selected-products" aria-live="polite"></div>\n              <p id="wishlistSyncStatus" class="hint" aria-live="polite"></p>
+              <p id="wishlistEmpty" class="hint">まだ登録されていません。</p>
+              <button id="wishlistApply" type="button" class="primary">⭐ 探している商品を地図に表示</button>
+              <button id="wishlistResetFilter" type="button">絞り込みを解除</button>
+            </section>
             <strong>商品カテゴリ</strong>
             <label class="map-category-option"><input id="mapCategoryPack" type="checkbox" checked><span>拡張パック</span></label>
             <label class="map-category-option"><input id="mapCategoryDeck" type="checkbox" checked><span>構築デッキ・スターターセット</span></label>
@@ -844,7 +869,7 @@ html[data-theme="dark"] #devView .cloud-admin-form input::placeholder {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261015-4"></script>
+  <script src="app.js?v=20261016-wishlist-1"></script>
 
 <script>
 /* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */
