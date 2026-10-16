@@ -4895,7 +4895,9 @@
     "product_name": 18,
     "application_period": 2,
     "sales_period": 0,
-    "lottery_result_period": 1
+    "lottery_result_period": 1,
+    "application_end_at": 1,
+    "application_start_at": 1
   },
   "collector_state": {
     "last_seen_message_ids": {
