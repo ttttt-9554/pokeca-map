@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#18243a">
   <meta name="description" content="LivePocket URLを検索。未確認項目を区別し、情報が充実したイベントから表示します。">
-  <title>LivePocket イベント一覧 v6.1 | pokeca-map</title>
+  <title>LivePocket イベント一覧 v7 | pokeca-map</title>
   <style>
     :root {
       color-scheme: light;
@@ -110,7 +110,7 @@
     <div class="wrap">
       <div class="hero-top"><span class="eyebrow">POKECA MAP / LIVEPOCKET</span><button type="button" id="refresh" class="refresh">↻ 更新</button></div>
       <h1>LivePocket イベント一覧</h1>
-      <p>確認済みの店名・商品名を優先表示。未登録の情報は未登録と明記します。</p>
+      <p>確認済みの店名・商品名を優先表示。元投稿で確認できる店舗見出しも反映。名前がないURLは推測しません。</p>
       <div class="stats" aria-live="polite">
         <div class="stat"><strong id="totalCount">—</strong><span>収集済みURL</span></div>
         <div class="stat"><strong id="namedCount">—</strong><span>店舗名確認済み</span></div>
@@ -174,7 +174,7 @@
     }
     function categoryOf(item) {
       // 投稿全体の抜粋には無関係なURLの商品も含まれるため使用しない。
-      const evidence = norm([item.event_title, item.product_name, item.store_name_original].filter(Boolean).join(' '));
+      const evidence = norm([item.event_title, item.product_name].filter(Boolean).join(' '));
       if (/one\s*piece|ワンピース/.test(evidence)) return 'onepiece';
       if (/遊戯王|yu[\s-]?gi[\s-]?oh|yugioh/.test(evidence)) return 'yugioh';
       if (/ポケカ|ポケモンカード|pokemon|pokémon|メガシンフォニア|メガブレイブ|エーフィ|ブラッキー/.test(evidence)) return 'pokemon';
@@ -200,7 +200,7 @@
       return store;
     }
     function candidateTitle(item) {
-      const v = clean(item.store_name_original);
+      const v = clean(item.source_preview);
       // 文字化け・極端な文字列は店名候補として再表示しない。
       if (!v || v.length > 85 || !/[ぁ-んァ-ヶ一-龯]/.test(v) || /[„гАР]/.test(v)) return '';
       return v;
@@ -270,7 +270,7 @@
       }
       if (clean(item.lottery_result_period)) fact(el,'抽選結果',item.lottery_result_period);
       const foot = text('div','','event-footer');
-      const hasVerified = item.field_sources && Object.values(item.field_sources).some(x=>String(x).startsWith('user_safari_'));
+      const hasVerified = item.detail_provenance === 'screen_verified';
       foot.append(text('span',hasVerified?'一部の詳細は画面確認済み':'Discord投稿から収集','source'));
       const url = safeEventUrl(item.url);
       if (url) {
@@ -312,7 +312,7 @@
         if (status && periodState(item) !== status) return false;
         if (onlyInfo && !hasUsefulName(item)) return false;
         if (query) {
-          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.store_name_original,item.url].join(' '));
+          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.url].join(' '));
           if (!search.includes(query)) return false;
         }
         return true;
@@ -350,7 +350,7 @@
       $('refresh').textContent='読み込み中…';
       $('message').className='hidden';
       try {
-        const response = await fetch('./livepocket_urls.json?version='+Date.now(),{cache:'no-store'});
+        const response = await fetch('./livepocket_public.json?version='+Date.now(),{cache:'no-store'});
         if (!response.ok) throw new Error('HTTP '+response.status);
         const data=await response.json();
         if (!data || !Array.isArray(data.items)) throw new Error('JSONに items 配列がありません');
@@ -367,7 +367,7 @@
         $('results').replaceChildren();
         $('resultCount').textContent='読み込み失敗';
         $('message').className='error';
-        $('message').textContent='データの読み込みに失敗しました（'+String(err.message||err)+'）。livepocket.html と livepocket_urls.json をリポジトリの同じ階層に配置し、GitHub PagesのURLから開いてください。';
+        $('message').textContent='データの読み込みに失敗しました（'+String(err.message||err)+'）。livepocket.html と livepocket_public.json をリポジトリの同じ階層に配置し、GitHub PagesのURLから開いてください。';
       } finally {
         $('refresh').disabled=false;
         $('refresh').textContent='↻ 更新';
