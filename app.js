@@ -117,6 +117,167 @@
       status: row.status, memo: row.memo || '', lat: Number(row.lat), lng: Number(row.lng) };
   }
 
+
+  // 友達限定のアプリ利用状況。Supabase RPC側で友達関係と公開許可を検証する。
+  let friendPresenceTimer = null;
+  let friendPresenceUserId = null;
+  let friendPresencePublic = false;
+  let friendPresenceBusy = false;
+  function friendStatus(message) {
+    const node = $('friendPresenceStatus');
+    if (node) node.textContent = message;
+  }
+  function friendDisplayName() {
+    const meta = authUser?.user_metadata || {};
+    return String(meta.global_name || meta.globalName || meta.custom_claims?.global_name
+      || meta.full_name || meta.name || meta.user_name || 'Discordユーザー').slice(0,80);
+  }
+  async function friendRpc(name, args = {}) {
+    if (!supabaseClient || !authUser) throw new Error('Discordログインが必要です。');
+    const {data,error} = await supabaseClient.rpc(name,args);
+    if (error) throw error;
+    return data;
+  }
+  async function friendPresenceHeartbeat() {
+    if (!authUser || !friendPresencePublic || document.visibilityState === 'hidden') return;
+    try { await friendRpc('friend_presence_heartbeat',{p_name:friendDisplayName()}); }
+    catch (e) { friendStatus('オンライン更新に失敗しました: ' + e.message); }
+  }
+  function renderFriendList(rows) {
+    const root = $('friendPresenceList');
+    root.replaceChildren();
+    if (!rows?.length) {
+      const empty = document.createElement('p');
+      empty.className = 'hint';
+      empty.textContent = 'まだ友達がいません。招待コードを共有して追加してください。';
+      root.append(empty);
+      return;
+    }
+    rows.forEach(friend => {
+      const item = document.createElement('div');
+      item.className = 'friend-member';
+      const name = document.createElement('strong');
+      name.className = 'friend-member-name';
+      name.textContent = friend.display_name || '友達';
+      const state = document.createElement('span');
+      state.className = 'friend-member-state';
+      if (!friend.is_visible) {
+        state.classList.add('private');
+        state.textContent = '非公開';
+      } else if (friend.is_online) {
+        state.classList.add('online');
+        state.textContent = '● オンライン';
+      } else {
+        state.classList.add('offline');
+        state.textContent = '○ オフライン';
+      }
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = '解除';
+      remove.setAttribute('aria-label',(friend.display_name || '友達')+'との友達登録を解除');
+      remove.addEventListener('click',async () => {
+        if (!confirm('この友達との接続を解除しますか？')) return;
+        try {
+          await friendRpc('friend_remove',{p_friend_id:friend.friend_id});
+          await friendRefresh();
+        } catch(e) { friendStatus('解除できませんでした: '+e.message); }
+      });
+      item.append(name,state,remove);
+      root.append(item);
+    });
+  }
+  async function friendRefresh() {
+    if (!authUser || friendPresenceBusy) return;
+    friendPresenceBusy = true;
+    try {
+      const data = await friendRpc('friend_list_status');
+      renderFriendList(data || []);
+      friendStatus('友達の状態を更新しました。オンライン判定は約3分以内の利用です。');
+    } catch(e) { friendStatus('友達の情報を取得できません: '+e.message); }
+    finally { friendPresenceBusy = false; }
+  }
+  async function friendPresenceAuthChanged() {
+    const loggedIn = !!authUser && !!supabaseClient;
+    $('friendPresenceSignedOut').hidden = loggedIn;
+    $('friendPresenceSignedIn').hidden = !loggedIn;
+    if (friendPresenceTimer) { clearInterval(friendPresenceTimer); friendPresenceTimer = null; }
+    if (!loggedIn) {
+      friendPresenceUserId = null;
+      friendPresencePublic = false;
+      $('friendPresenceList').replaceChildren();
+      $('friendPresenceOptin').checked = false;
+      return;
+    }
+    const uid = authUser.id;
+    friendPresenceUserId = uid;
+    try {
+      const settings = await friendRpc('friend_my_presence_settings');
+      if (authUser?.id !== uid) return;
+      friendPresencePublic = !!settings?.enabled;
+      $('friendPresenceOptin').checked = friendPresencePublic;
+      if (friendPresencePublic) await friendPresenceHeartbeat();
+      await friendRefresh();
+    } catch(e) { friendStatus('設定を読み込めません: '+e.message); }
+    if (authUser?.id === uid) {
+      friendPresenceTimer = setInterval(() => {
+        if (authUser?.id !== uid) return;
+        friendPresenceHeartbeat();
+        if (document.visibilityState !== 'hidden') friendRefresh();
+      },60000);
+    }
+  }
+  function initFriendPresence() {
+    $('friendPresenceOptin').addEventListener('change',async e => {
+      const enabled = e.target.checked;
+      try {
+        await friendRpc('friend_set_presence',{p_enabled:enabled,p_name:friendDisplayName()});
+        friendPresencePublic = enabled;
+        friendStatus(enabled ? '公開を許可しました。友達にアプリ利用状況が表示されます。' : '非公開にしました。友達には状態が表示されません。');
+        if (enabled) await friendPresenceHeartbeat();
+      } catch(error) {
+        e.target.checked = !enabled;
+        friendStatus('設定の変更に失敗しました: '+error.message);
+      }
+    });
+    $('friendCreateInvite').addEventListener('click',async () => {
+      try {
+        const code = await friendRpc('friend_create_invite');
+        const output = $('friendInviteOutput');
+        output.replaceChildren();
+        const label = document.createElement('span');
+        label.textContent = '招待コード（7日間有効・1回限り）：';
+        const value = document.createElement('code');
+        value.className = 'friend-invite-code';
+        value.textContent = String(code);
+        const copy = document.createElement('button');
+        copy.type = 'button';
+        copy.textContent = 'コードをコピー';
+        copy.addEventListener('click',async () => {
+          try { await navigator.clipboard.writeText(String(code)); friendStatus('招待コードをコピーしました。'); }
+          catch(_) { friendStatus('コードを長押ししてコピーしてください。'); }
+        });
+        output.append(label,value,copy);
+      } catch(e) { friendStatus('招待コードを発行できません: '+e.message); }
+    });
+    $('friendAcceptInvite').addEventListener('click',async () => {
+      const code = $('friendInviteInput').value.trim();
+      if (!code) return friendStatus('招待コードを入力してください。');
+      try {
+        await friendRpc('friend_accept_invite',{p_code:code});
+        $('friendInviteInput').value = '';
+        friendStatus('友達を追加しました。');
+        await friendRefresh();
+      } catch(e) { friendStatus('友達を追加できません: '+e.message); }
+    });
+    $('friendRefresh').addEventListener('click',friendRefresh);
+    document.addEventListener('visibilitychange',() => {
+      if (document.visibilityState === 'visible' && authUser) {
+        friendPresenceHeartbeat();
+        friendRefresh();
+      }
+    });
+  }
+
   function displayAuth() {
     const account = $('discordAccount');
     const status = $('shareAuthStatus');
@@ -152,6 +313,7 @@
     updateDeveloperTab();
     if (isDeveloper()) renderCloudAdminLists();
     refreshWishlistForAccount();
+    queueMicrotask(() => friendPresenceAuthChanged());
   }
 
   async function loadSharedReports() {
@@ -2159,6 +2321,7 @@
       initMapFilterDrawer();
       initChainDropdown();
       initCloudAdmin();
+      initFriendPresence();
       bindEvents();
 
       get('foundAt').value = nowLocal();

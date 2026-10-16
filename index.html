@@ -307,6 +307,29 @@ html[data-theme="dark"] .map-search-panel{
 }
 html[data-theme="dark"] .map-search-panel .hint{color:#c5d4e9!important}
 </style>
+
+<style id="friend-presence-style">
+.friend-presence-panel{display:flex;flex-direction:column;gap:12px;margin:16px 0;padding:16px;border:1px solid var(--app-border,#cbd5e1);border-radius:14px;background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+.friend-presence-panel h3,.friend-presence-panel p{margin:0}
+.friend-presence-panel label{font-weight:600}
+.friend-optin{display:flex;align-items:center;gap:10px;line-height:1.5}
+.friend-optin input{width:22px;height:22px;accent-color:#2563eb;flex-shrink:0}
+.friend-invite-actions{display:flex;gap:8px;flex-wrap:wrap}
+.friend-invite-actions input{flex:1;min-width:140px;box-sizing:border-box;padding:10px;font-size:16px;border-radius:9px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+.friend-invite-actions button{flex-shrink:0}
+.friend-member{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--app-border,#cbd5e1)}
+.friend-member-name{flex:1;min-width:0;overflow-wrap:anywhere}
+.friend-member-state{font-size:13px;font-weight:700}
+.friend-member-state.online{color:#16a34a}
+.friend-member-state.offline{color:var(--app-muted,#64748b)}
+.friend-member-state.private{color:var(--app-muted,#64748b)}
+.friend-member button{font-size:12px;padding:7px}
+.friend-invite-code{display:block;overflow-wrap:anywhere;font-weight:700}
+html[data-theme="dark"] .friend-presence-panel{background:#203149!important;color:#f4f8ff!important;border-color:#617895!important}
+html[data-theme="dark"] .friend-invite-actions input{background:#152337!important;color:#fff!important;border-color:#617895!important}
+html[data-theme="dark"] .friend-member-state.online{color:#86efac!important}
+html[data-theme="dark"] .friend-member-state.offline,html[data-theme="dark"] .friend-member-state.private{color:#c5d4e9!important}
+</style>
 </head>
 
 <body>
@@ -701,6 +724,27 @@ html[data-theme="dark"] .map-search-panel .hint{color:#c5d4e9!important}
         <p id="sharedStatus" class="hint" aria-live="polite"></p>
         <p class="hint">公開した情報は、アプリを利用するほかのユーザーにも表示されます。端末内の過去の記録は自動公開されません。</p>
       </div>
+      <section class="friend-presence-panel" aria-label="招待した友達のログイン状況">
+        <h3>👥 招待した友達のログイン状況</h3>
+        <p class="hint">友達として接続したユーザーだけを表示します。Discord自体のオンライン状態ではなく、このアプリを利用中かどうかの目安です。</p>
+        <div id="friendPresenceSignedOut" class="hint">Discordでログインすると利用できます。</div>
+        <div id="friendPresenceSignedIn" hidden>
+          <label class="friend-optin"><input type="checkbox" id="friendPresenceOptin"> <span>自分のログイン状況を友達に公開する</span></label>
+          <p class="hint">初期設定は非公開です。許可した場合だけ友達にオンライン状況が表示されます。</p>
+          <div class="friend-invite-actions">
+            <button type="button" id="friendCreateInvite">招待コードを発行</button>
+            <button type="button" id="friendRefresh">友達の状態を更新</button>
+          </div>
+          <div id="friendInviteOutput" class="hint" aria-live="polite"></div>
+          <label for="friendInviteInput">友達から受け取った招待コード</label>
+          <div class="friend-invite-actions">
+            <input id="friendInviteInput" type="text" placeholder="招待コードを貼り付け" autocomplete="off">
+            <button type="button" id="friendAcceptInvite">友達に追加</button>
+          </div>
+          <p id="friendPresenceStatus" class="hint" aria-live="polite"></p>
+          <div id="friendPresenceList" aria-live="polite"></div>
+        </div>
+      </section>
       <h3>自分の共有投稿</h3>
       <div id="mySharedList"></div>
       <h3>端末内データのバックアップ</h3>
