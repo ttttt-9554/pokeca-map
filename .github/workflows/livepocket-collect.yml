@@ -67,6 +67,9 @@ jobs:
       - name: Prefecture matching and review previews (v9)
         run: python scripts/livepocket_v9.py
 
+      - name: Verified updates and review classification (v10)
+        run: python scripts/livepocket_v10.py
+
       - name: Save JSON and review list to repository
         shell: bash
         run: |
