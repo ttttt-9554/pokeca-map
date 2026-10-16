@@ -1,5 +1,5 @@
 {
-  "schema_version": 12,
+  "schema_version": 13,
   "collected_at": "2026-10-16T22:44:52.567906+00:00",
   "unique_livepocket_urls": 331,
   "items": [
@@ -1609,13 +1609,17 @@
       "url": "https://livepocket.jp/e/1maxl",
       "store_name": "新宿マルイアネックス3階 FEWMANY",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-17T20:00:00+09:00",
+      "application_start_at": "2026-10-17T11:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/vt2ev",
       "store_name": "新宿マルイアネックス3階 FEWMANY",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-17T20:00:00+09:00",
+      "application_start_at": "2026-10-17T11:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/zof6r",
@@ -1627,43 +1631,57 @@
       "url": "https://livepocket.jp/e/opyur-hugr",
       "store_name": "古本市場新小岩店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/717w_",
       "store_name": "ふるいちトップブックス港北ミナモ店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/3hemk",
       "store_name": "ふるいちトップブックス港北ミナモ店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/3010thfu",
       "store_name": "古本市場市川鬼高店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/st1030ft",
       "store_name": "古本市場市川鬼高店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/fg69z",
       "store_name": "晴れる屋 千葉店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-10-16T17:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/pjg_2",
       "store_name": "古本市場草加店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "application_end_at": "2026-10-18T21:59:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/jbkc-",
