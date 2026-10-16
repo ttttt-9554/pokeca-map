@@ -1,4 +1,6 @@
+
 name: LivePocket Discord URL Collector
+
 "on":
   workflow_dispatch:
     inputs:
@@ -10,28 +12,42 @@ name: LivePocket Discord URL Collector
         options:
           - "true"
           - "false"
+
   schedule:
     - cron: "7,17,27,37,47,57 * * * *"
+
 permissions:
   contents: read
+
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Collect Discord LivePocket URLs
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_ID: "1551580466266644552"
           BACKFILL: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill || 'false' }}
         run: python scripts/collect_livepocket.py
+
+      - name: Enrich LivePocket information
+        run: python scripts/enrich_livepocket.py
+
       - name: Save private Actions artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: livepocket-urls-${{ github.run_id }}
-          path: output/livepocket_urls.json
+          path: output/
           retention-days: 7
+          if-no-files-found: warn
