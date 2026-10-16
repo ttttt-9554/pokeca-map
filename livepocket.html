@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#18243a">
-  <meta name="description" content="LivePocketイベントのURLを店舗・地域・カード種別・申込期間で検索できる一覧">
-  <title>LivePocket イベント一覧 | pokeca-map</title>
+  <meta name="description" content="LivePocket URLを検索。未確認項目を区別し、情報が充実したイベントから表示します。">
+  <title>LivePocket イベント一覧 v6.1 | pokeca-map</title>
   <style>
     :root {
       color-scheme: light;
@@ -83,6 +83,12 @@
     .error {color:#a53449;background:#fff7f8;border-color:#f1b9c6;text-align:left}
     .smallnote {font-size:11px;color:var(--muted);margin:18px 4px 0}
     .meta {font-size:11px;color:#aabbcf;margin-top:12px}
+    .display-options {display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:13px;font-size:12px;color:#44546c}
+    .display-options label {display:flex;gap:7px;align-items:center;font-weight:700;cursor:pointer}
+    .display-options input {accent-color:var(--pink);width:17px;height:17px;margin:0}
+    .display-options .hint {font-size:11px;color:var(--muted)}
+    .event-hint {color:#8a6475;font-size:12px;margin:5px 0 0}
+
     .hidden {display:none!important}
     @media(min-width:650px) {
       .hero {padding:30px 28px}
@@ -104,10 +110,10 @@
     <div class="wrap">
       <div class="hero-top"><span class="eyebrow">POKECA MAP / LIVEPOCKET</span><button type="button" id="refresh" class="refresh">↻ 更新</button></div>
       <h1>LivePocket イベント一覧</h1>
-      <p>Discordから収集したイベントURLを検索。店名・地域・ジャンル・応募期間で探せます。</p>
+      <p>確認済みの店名・商品名を優先表示。未登録の情報は未登録と明記します。</p>
       <div class="stats" aria-live="polite">
         <div class="stat"><strong id="totalCount">—</strong><span>収集済みURL</span></div>
-        <div class="stat"><strong id="namedCount">—</strong><span>店舗名あり</span></div>
+        <div class="stat"><strong id="namedCount">—</strong><span>店舗名確認済み</span></div>
         <div class="stat"><strong id="activeCount">—</strong><span>期間内と判定</span></div>
       </div>
       <div id="dataDate" class="meta">データを読み込み中…</div>
@@ -136,15 +142,16 @@
         <button class="tab" type="button" data-category="yugioh" aria-pressed="false">遊戯王</button>
         <button class="tab" type="button" data-category="other" aria-pressed="false">その他・不明</button>
       </div>
+      <div class="display-options"><label for="onlyInfo"><input type="checkbox" id="onlyInfo">店舗名または商品名があるものだけ</label><span class="hint">未確認のURLも全件保存しています</span></div>
     </section>
     <div class="results-header">
       <div><h2>検索結果</h2><span id="resultCount" aria-live="polite">読み込み中…</span></div>
-      <select id="sort" class="sort" aria-label="並び順"><option value="new">投稿が新しい順</option><option value="deadline">申込締切が早い順</option><option value="name">店舗名順</option></select>
+      <select id="sort" class="sort" aria-label="並び順"><option value="info">情報が多い順</option><option value="new">投稿が新しい順</option><option value="deadline">申込締切が早い順</option><option value="name">店舗名順</option></select>
     </div>
     <div id="message" class="hidden" role="status"></div>
     <div id="results" class="cards" aria-live="off"></div>
     <button type="button" id="loadMore" class="more hidden">さらに30件表示</button>
-    <p class="smallnote">※「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。イベント内容は必ずリンク先で確認してください。</p>
+    <p class="smallnote">※ 店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。イベント内容は必ずリンク先で確認してください。</p>
   </main>
   <script>
   (() => {
@@ -183,13 +190,32 @@
       return 'active';
     }
     const statuses = { active:'期間内', upcoming:'受付前', ended:'期間終了', unknown:'期間不明' };
-    function properShop(item) {
+    function knownShop(item) {
       const store = clean(item.store_name);
       const product = clean(item.product_name);
+      // v5の一部は商品名をstore_nameにも保持している。店舗名として数えない。
       if (!store || (product && norm(store.replace(/^\*\s*/,'')).startsWith(norm(product)))) {
-        return clean(item.venue_name) || '店舗未確認';
+        return clean(item.venue_name);
       }
       return store;
+    }
+    function candidateTitle(item) {
+      const v = clean(item.store_name_original);
+      // 文字化け・極端な文字列は店名候補として再表示しない。
+      if (!v || v.length > 85 || !/[ぁ-んァ-ヶ一-龯]/.test(v) || /[„гАР]/.test(v)) return '';
+      return v;
+    }
+    function properShop(item) { return knownShop(item) || '店舗未確認'; }
+    function hasUsefulName(item) {
+      return Boolean(knownShop(item) || clean(item.product_name) || clean(item.event_title));
+    }
+    function detailScore(item) {
+      return (knownShop(item) ? 8 : 0)
+        + (clean(item.product_name) ? 7 : 0)
+        + (clean(item.event_title) ? 4 : 0)
+        + (clean(item.prefecture) ? 2 : 0)
+        + (clean(item.application_period) || clean(item.application_end_at) ? 3 : 0)
+        + (candidateTitle(item) ? 1 : 0);
     }
     function safeEventUrl(raw) {
       try {
@@ -223,9 +249,19 @@
       top.append(tags);
       el.append(top);
       el.append(text('div',clean(item.prefecture)||'都道府県未確認','label-region'));
-      el.append(text('h3',properShop(item),'name'));
-      if (clean(item.event_title)) el.append(text('p',item.event_title,'product'));
-      if (clean(item.product_name)) fact(el,'商品名',item.product_name);
+      const shop = knownShop(item);
+      const product = clean(item.product_name);
+      const possible = candidateTitle(item);
+      const heading = shop || product || clean(item.event_title) || possible || '店舗・商品名未登録';
+      el.append(text('h3',heading,'name'));
+      if (!shop) {
+        const note = product ? '商品名を表示中・店舗名は未登録'
+          : clean(item.event_title) ? 'イベント名を表示中・店舗名は未登録'
+          : possible ? 'Discord投稿の名称候補（未確認）' : '詳細情報が未登録';
+        el.append(text('p',note,'event-hint'));
+      }
+      if (clean(item.event_title) && heading !== clean(item.event_title)) el.append(text('p',item.event_title,'product'));
+      if (product && heading !== product) fact(el,'商品名',product);
       if (clean(item.event_date)) fact(el,'開催日',item.event_date);
       if (end !== null && parseTime(item.application_start_at) !== null) {
         fact(el,'申込期間',formatTime(item.application_start_at)+' 〜 '+formatTime(item.application_end_at));
@@ -269,10 +305,12 @@
       const cat = $('category').value;
       const status = $('status').value;
       const sort = $('sort').value;
+      const onlyInfo = $('onlyInfo').checked;
       state.filtered = state.items.filter(item => {
         if (pref && item.prefecture !== pref) return false;
         if (cat && categoryOf(item) !== cat) return false;
         if (status && periodState(item) !== status) return false;
+        if (onlyInfo && !hasUsefulName(item)) return false;
         if (query) {
           const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.store_name_original,item.url].join(' '));
           if (!search.includes(query)) return false;
@@ -283,6 +321,8 @@
         state.filtered.sort((a,b) => (parseTime(a.application_end_at)??Infinity)-(parseTime(b.application_end_at)??Infinity) || (Date.parse(b.discord_posted_at||'')||0)-(Date.parse(a.discord_posted_at||'')||0));
       } else if (sort === 'name') {
         state.filtered.sort((a,b) => collator.compare(properShop(a),properShop(b)));
+      } else if (sort === 'info') {
+        state.filtered.sort((a,b) => detailScore(b)-detailScore(a) || (Date.parse(b.discord_posted_at||'')||0)-(Date.parse(a.discord_posted_at||'')||0));
       } else {
         state.filtered.sort((a,b) => (Date.parse(b.discord_posted_at||'')||0)-(Date.parse(a.discord_posted_at||'')||0));
       }
@@ -317,7 +357,7 @@
         state.items=data.items.filter(x=>x && typeof x==='object' && safeEventUrl(x.url));
         state.loaded=true;
         $('totalCount').textContent=state.items.length.toLocaleString('ja-JP');
-        $('namedCount').textContent=state.items.filter(x=>clean(x.store_name)).length.toLocaleString('ja-JP');
+        $('namedCount').textContent=state.items.filter(x=>knownShop(x)).length.toLocaleString('ja-JP');
         $('activeCount').textContent=state.items.filter(x=>periodState(x)==='active').length.toLocaleString('ja-JP');
         $('dataDate').textContent=data.collected_at?'URL収集日時（JSON記録）：'+formatTime(data.collected_at):'JSONから表示しています';
         populatePrefectures(state.items);
@@ -333,7 +373,7 @@
         $('refresh').textContent='↻ 更新';
       }
     }
-    ['query','prefecture','category','status','sort'].forEach(id => $(id).addEventListener(id==='query'?'input':'change',applyFilters));
+    ['query','prefecture','category','status','sort','onlyInfo'].forEach(id => $(id).addEventListener(id==='query'?'input':'change',applyFilters));
     tabs.forEach(tab => tab.addEventListener('click',()=>{$('category').value=tab.dataset.category;applyFilters();}));
     $('loadMore').addEventListener('click',()=>{state.limit+=30;render();});
     $('refresh').addEventListener('click',load);
