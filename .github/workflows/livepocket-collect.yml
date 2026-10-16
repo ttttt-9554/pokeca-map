@@ -15,6 +15,7 @@ name: LivePocket Discord URL Collector
 
   schedule:
     - cron: '7,17,27,37,47,57 * * * *'
+    - cron: '23 1,13 * * *'
 
 permissions:
   contents: write
@@ -52,13 +53,12 @@ jobs:
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
-      - name: Enrich Discord embeds (v8)
+      - name: Enrich Discord embeds without Brave (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           BRAVE_SEARCH_API_KEY: ''
           LIVEPOCKET_V8_DISCORD_MAX: '10'
-          LIVEPOCKET_V8_BRAVE_PER_RUN: '3'
-          LIVEPOCKET_V8_BRAVE_DAILY_MAX: '15'
+          LIVEPOCKET_V8_BRAVE_PER_RUN: '0'
         run: python scripts/livepocket_v8.py
 
       - name: Recover store names and create public JSON (v7)
@@ -73,12 +73,16 @@ jobs:
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      - name: Search verified event deadlines (v12)
+      - name: Install free browser (v13)
+        if: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *' }}
+        run: |
+          python -m pip install 'playwright>=1.55,<2'
+          python -m playwright install --with-deps chromium
+
+      - name: Check rendered LivePocket application deadlines (v13)
         env:
-          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
-          LIVEPOCKET_V12_BRAVE_PER_RUN: '3'
-          LIVEPOCKET_V12_BRAVE_DAILY_MAX: '15'
-        run: python scripts/livepocket_v12.py
+          LIVEPOCKET_V13_PER_RUN: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && '10' || '0' }}
+        run: python scripts/livepocket_v13.py
 
       - name: Save JSON and review lists
         shell: bash
@@ -91,7 +95,7 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket event data and deadline review'
+            git commit -m 'Update LivePocket event data and free deadline checks'
             git push
           fi
 
