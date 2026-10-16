@@ -1,5 +1,5 @@
 {
-  "schema_version": 9,
+  "schema_version": 10,
   "collected_at": "2026-10-16T21:50:54.526834+00:00",
   "unique_livepocket_urls": 331,
   "items": [
@@ -71,7 +71,8 @@
       "ticket_price_yen": 0,
       "ticket_application_limit": "お1人様1回のみ購入・申込可能",
       "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
-      "detail_provenance": "screen_verified"
+      "detail_provenance": "screen_verified",
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/m0-8b",
@@ -121,7 +122,8 @@
     {
       "url": "https://livepocket.jp/e/uay8k",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
-      "source_preview": "※再入荷分 ポケカ商品【スター..."
+      "source_preview": "※再入荷分 ポケカ商品【スター...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ld_6t",
@@ -132,12 +134,14 @@
     {
       "url": "https://livepocket.jp/e/vddw3",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
-      "source_preview": "※再入荷分 ポケカ商品【メガブ..."
+      "source_preview": "※再入荷分 ポケカ商品【メガブ...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/miwqx",
       "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
-      "source_preview": "10月再販：ワンピースカードゲ..."
+      "source_preview": "10月再販：ワンピースカードゲ...",
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/iups6",
@@ -252,7 +256,8 @@
     {
       "url": "https://livepocket.jp/e/qf-o3",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
-      "source_preview": "ONE PIECEカードゲーム..."
+      "source_preview": "ONE PIECEカードゲーム...",
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/zdj8h",
@@ -398,7 +403,8 @@
     {
       "url": "https://livepocket.jp/e/cq6ix",
       "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
-      "source_preview": "10/16(金)発売 ポケカ商..."
+      "source_preview": "10/16(金)発売 ポケカ商...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/rbbol",
@@ -498,7 +504,8 @@
     {
       "url": "https://livepocket.jp/e/e259k",
       "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
-      "source_preview": "ポケモンカードゲーム MEGA..."
+      "source_preview": "ポケモンカードゲーム MEGA...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/yko8h",
@@ -550,7 +557,8 @@
     {
       "url": "https://livepocket.jp/e/c_9fv",
       "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
-      "source_preview": "10月中旬再販：ポケモンカード..."
+      "source_preview": "10月中旬再販：ポケモンカード...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/guj70",
@@ -804,7 +812,8 @@
       "url": "https://livepocket.jp/e/ampml",
       "store_name": "キデイランド浦和美園",
       "product_name": "エーフィ＆ブラッキー",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00"
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -836,7 +845,8 @@
       "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
       "product_name": "遊戯王 ART WORK COLLECTION系",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00"
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "review_category": "yugioh"
     },
     {
       "url": "https://livepocket.jp/e/qz-dx",
@@ -847,7 +857,8 @@
       "url": "https://livepocket.jp/e/tupcdz",
       "store_name": "竜星のPAO",
       "product_name": "エーフィ＆ブラッキー",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00"
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/7_zc2",
@@ -926,13 +937,15 @@
       "url": "https://livepocket.jp/e/flwm5",
       "store_name": "キデイランド ららぽーと富士見店",
       "product_name": "エーフィ・ブラッキー",
-      "discord_posted_at": "2026-09-28T14:27:19.175000+00:00"
+      "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/prp_c",
       "store_name": "キデイランド ららぽーと富士見店",
       "product_name": "メガシンフォニア",
-      "discord_posted_at": "2026-09-28T14:27:19.175000+00:00"
+      "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/8wkbq",
@@ -954,7 +967,8 @@
       "store_name": "キデイランド吉祥寺店",
       "prefecture": "東京都",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
-      "discord_posted_at": "2026-09-28T14:27:19.175000+00:00"
+      "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/adjql",
@@ -965,7 +979,8 @@
     {
       "url": "https://livepocket.jp/e/j1mv8",
       "discord_posted_at": "2026-09-28T10:58:06.722000+00:00",
-      "source_preview": "※再入荷分 ポケカ商品【30t..."
+      "source_preview": "※再入荷分 ポケカ商品【30t...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/y2s_f",
@@ -976,7 +991,8 @@
     {
       "url": "https://livepocket.jp/e/wrgdu",
       "discord_posted_at": "2026-09-28T10:58:06.722000+00:00",
-      "source_preview": "※再入荷 ポケカ商品【30th..."
+      "source_preview": "※再入荷 ポケカ商品【30th...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ba_89",
@@ -987,7 +1003,8 @@
     {
       "url": "https://livepocket.jp/e/g5mbn",
       "discord_posted_at": "2026-09-28T10:58:06.722000+00:00",
-      "source_preview": "※再入荷分 ポケカ商品【ストー..."
+      "source_preview": "※再入荷分 ポケカ商品【ストー...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/rzrdz",
@@ -1040,7 +1057,8 @@
     {
       "url": "https://livepocket.jp/e/68ats",
       "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
-      "source_preview": "10月再販：ポケモンカードゲー..."
+      "source_preview": "10月再販：ポケモンカードゲー...",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/uo6gp",
@@ -1127,7 +1145,8 @@
     {
       "url": "https://livepocket.jp/e/e7ec9",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
-      "discord_posted_at": "2026-09-25T11:25:36.501000+00:00"
+      "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/0a2vu",
