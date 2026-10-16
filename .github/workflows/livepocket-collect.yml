@@ -6,9 +6,9 @@ name: LivePocket Discord URL Collector
     inputs:
       backfill:
         description: 'Discord過去投稿も再確認する'
-        type: choice
         required: true
         default: 'false'
+        type: choice
         options:
           - 'true'
           - 'false'
@@ -46,13 +46,22 @@ jobs:
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/livepocket_collect.py
 
-      - name: Enrich product details from Discord
+      - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
-      - name: Apply verified event details
+      - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
-      - name: Recover stores and generate public event JSON (v7)
+      - name: Enrich exact-URL Discord embeds and optional search (v8)
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+          LIVEPOCKET_V8_DISCORD_MAX: '10'
+          LIVEPOCKET_V8_BRAVE_PER_RUN: '3'
+          LIVEPOCKET_V8_BRAVE_DAILY_MAX: '15'
+        run: python scripts/livepocket_v8.py
+
+      - name: Recover store names and create public JSON (v7)
         run: python scripts/livepocket_v7.py
 
       - name: Save JSON to repository
@@ -61,7 +70,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add livepocket_urls.json livepocket_public.json
-
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
