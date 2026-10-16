@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#18243a">
   <meta name="description" content="LivePocket URLを検索。未確認項目を区別し、情報が充実したイベントから表示します。">
-  <title>LivePocket イベント一覧 v7 | pokeca-map</title>
+  <title>LivePocket イベント一覧 | pokeca-map</title>
   <style>
     :root {
       color-scheme: light;
@@ -58,6 +58,16 @@
     .sort {max-width:150px;font-size:12px}
     .cards {display:grid;grid-template-columns:1fr;gap:11px}
     .event {border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:15px;box-shadow:0 3px 14px #14284408;min-width:0}
+    /* 応募終了が日付で確定したイベントのみグレーアウト。リンクは残す。 */
+    .event.is-ended {background:#edf0f4;border-color:#cfd6e0;color:#697585;box-shadow:none}
+    .event.is-ended .name,.event.is-ended .fact strong {color:#657180}
+    .event.is-ended .label-region,.event.is-ended .product,.event.is-ended .event-hint,
+    .event.is-ended .fact .fact-title,.event.is-ended .source {color:#798593}
+    .event.is-ended .pill:not(.ended) {filter:grayscale(1);opacity:.7}
+    .event.is-ended .pill.ended {background:#dfe4eb;color:#526171}
+    .event.is-ended .event-footer {border-color:#d7dde6}
+    .event.is-ended .action {background:#8a95a4;color:#fff}
+    .event.is-ended .action:hover {background:#717e8f}
     .event-top {display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
     .tags {display:flex;gap:6px;flex-wrap:wrap}
     .pill {display:inline-flex;align-items:center;border-radius:6px;padding:2px 7px;background:#f1f4f8;color:#53627a;font-size:11px;font-weight:750;line-height:1.65;max-width:100%}
@@ -151,7 +161,7 @@
     <div id="message" class="hidden" role="status"></div>
     <div id="results" class="cards" aria-live="off"></div>
     <button type="button" id="loadMore" class="more hidden">さらに30件表示</button>
-    <p class="smallnote">※ 店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。イベント内容は必ずリンク先で確認してください。</p>
+    <p class="smallnote">※ 店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。応募期間終了が日時から確定したカードはグレー表示します。期間不明のカードはグレー表示しません。イベント内容は必ずリンク先で確認してください。</p>
   </main>
   <script>
   (() => {
@@ -244,6 +254,7 @@
       const tags = text('div','','tags');
       const cat = categoryOf(item);
       const status = periodState(item);
+      if (status === 'ended') el.classList.add('is-ended');
       const hintOnly = !item.product_name && !item.event_title && item.review_category && cat !== 'other';
       tags.append(tag(catLabels[cat]+(hintOnly?'（参考）':''),cat));
       tags.append(tag(statuses[status],status));
@@ -377,6 +388,18 @@
         $('refresh').textContent='↻ 更新';
       }
     }
+    // ページを開きっぱなしにしていても、受付開始・終了のタイミングで表示を更新する。
+    let lastPeriodCheck = Date.now();
+    function refreshPeriodsIfChanged() {
+      const now = Date.now();
+      const changed = state.loaded && state.items.some(item => periodState(item,lastPeriodCheck) !== periodState(item,now));
+      lastPeriodCheck = now;
+      if (!changed) return;
+      $('activeCount').textContent=state.items.filter(x=>periodState(x,now)==='active').length.toLocaleString('ja-JP');
+      applyFilters();
+    }
+    window.setInterval(refreshPeriodsIfChanged,60000);
+    document.addEventListener('visibilitychange',()=>{if (!document.hidden) refreshPeriodsIfChanged();});
     ['query','prefecture','category','status','sort','onlyInfo'].forEach(id => $(id).addEventListener(id==='query'?'input':'change',applyFilters));
     tabs.forEach(tab => tab.addEventListener('click',()=>{$('category').value=tab.dataset.category;applyFilters();}));
     $('loadMore').addEventListener('click',()=>{state.limit+=30;render();});
