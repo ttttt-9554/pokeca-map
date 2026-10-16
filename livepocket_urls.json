@@ -1963,10 +1963,13 @@
       "store_name": "プレミアムデッキセット",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "プレミアムデッキセット",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/vduyy",
@@ -2005,10 +2008,13 @@
       "store_name": "ストームエメラルダ",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ストームエメラルダ",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -2047,10 +2053,13 @@
       "store_name": "エーフィ＆ブラッキー",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "エーフィ＆ブラッキー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -2061,10 +2070,13 @@
       "store_name": "30th CELEBRATION",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -2075,10 +2087,13 @@
       "store_name": "30th CELEBRATION",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -2103,10 +2118,13 @@
       "store_name": "30th CELEBRATION 再販",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -2117,10 +2135,13 @@
       "store_name": "遊戯王 ART WORK COLLECTION系",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "遊戯王 ART WORK COLLECTION系",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/qz-dx",
@@ -2145,10 +2166,13 @@
       "store_name": "エーフィ＆ブラッキー",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "エーフィ＆ブラッキー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/7_zc2",
@@ -2257,10 +2281,13 @@
       "store_name": "世界最強の戦士／Heroines Edition",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "世界最強の戦士／Heroines Edition",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1555858034461511756"
+      }
     },
     {
       "url": "https://livepocket.jp/e/z5i6s",
@@ -2327,10 +2354,13 @@
       "store_name": "* ストームエメラルダ",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ストームエメラルダ",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -2341,10 +2371,13 @@
       "store_name": "* エーフィ・ブラッキー",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "エーフィ・ブラッキー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/prp_c",
@@ -2355,10 +2388,13 @@
       "store_name": "* メガシンフォニア",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "メガシンフォニア",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/8wkbq",
@@ -2369,10 +2405,14 @@
       "store_name": "* ストームエメラルダ",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
-      "application_period": null,
+      "product_name": "ストームエメラルダ",
+      "application_period": "9/28 10:00〜9/30 23:59",
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473",
+        "application_period": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -2383,10 +2423,13 @@
       "store_name": "* 30th CELEBRATION",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2397,10 +2440,13 @@
       "store_name": "* プレミアムデッキセット エーフィ・ブラッキー",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/adjql",
@@ -2411,10 +2457,13 @@
       "store_name": "* 30th CELEBRATION",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1554137435812667473"
+      }
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2905,10 +2954,13 @@
       "store_name": "プレミアムデッキセット エーフィ・ブラッキー",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1553004543086952509"
+      }
     },
     {
       "url": "https://livepocket.jp/e/0a2vu",
@@ -2919,10 +2971,13 @@
       "store_name": "30th CELEBRATION 3次抽選",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "discord_post:1553004543086952509"
+      }
     },
     {
       "url": "https://livepocket.jp/e/asb1y",
@@ -4517,8 +4572,8 @@
     "prefecture": 126,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 0,
-    "application_period": 1,
+    "product_name": 18,
+    "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1
   },
