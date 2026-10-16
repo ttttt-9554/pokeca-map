@@ -52,10 +52,10 @@ jobs:
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
-      - name: Enrich Discord embeds and optional search (v8)
+      - name: Enrich Discord embeds (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+          BRAVE_SEARCH_API_KEY: ''
           LIVEPOCKET_V8_DISCORD_MAX: '10'
           LIVEPOCKET_V8_BRAVE_PER_RUN: '3'
           LIVEPOCKET_V8_BRAVE_DAILY_MAX: '15'
@@ -73,12 +73,20 @@ jobs:
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      - name: Save JSON and review lists to repository
+      - name: Search verified event deadlines (v12)
+        env:
+          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+          LIVEPOCKET_V12_BRAVE_PER_RUN: '3'
+          LIVEPOCKET_V12_BRAVE_DAILY_MAX: '15'
+        run: python scripts/livepocket_v12.py
+
+      - name: Save JSON and review lists
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv
+
+          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv
 
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
@@ -87,7 +95,7 @@ jobs:
             git push
           fi
 
-      - name: Backup full JSON for authorized maintainers
+      - name: Backup full JSON
         if: always()
         uses: actions/upload-artifact@v4
         with:
