@@ -1960,7 +1960,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "プレミアムデッキセット",
+      "store_name": "TSUTAYA加須店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "プレミアムデッキセット",
@@ -1968,8 +1968,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "プレミアムデッキセット"
     },
     {
       "url": "https://livepocket.jp/e/vduyy",
@@ -2005,7 +2007,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "ストームエメラルダ",
+      "store_name": "竜星のPAO",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "ストームエメラルダ",
@@ -2013,8 +2015,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "ストームエメラルダ"
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -2050,7 +2054,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "エーフィ＆ブラッキー",
+      "store_name": "キデイランド浦和美園",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "エーフィ＆ブラッキー",
@@ -2058,8 +2062,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "エーフィ＆ブラッキー"
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -2067,7 +2073,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "30th CELEBRATION",
+      "store_name": "TSUTAYA加須店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
@@ -2075,8 +2081,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "30th CELEBRATION"
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -2084,7 +2092,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "30th CELEBRATION",
+      "store_name": "キデイランド浦和美園",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
@@ -2092,8 +2100,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "30th CELEBRATION"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -2115,7 +2125,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "30th CELEBRATION 再販",
+      "store_name": "ホビーステーション",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
@@ -2123,8 +2133,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "30th CELEBRATION 再販"
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -2132,7 +2144,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "遊戯王 ART WORK COLLECTION系",
+      "store_name": "TSUTAYA加須店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "遊戯王 ART WORK COLLECTION系",
@@ -2140,8 +2152,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "遊戯王 ART WORK COLLECTION系"
     },
     {
       "url": "https://livepocket.jp/e/qz-dx",
@@ -2163,7 +2177,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "エーフィ＆ブラッキー",
+      "store_name": "竜星のPAO",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "エーフィ＆ブラッキー",
@@ -2171,8 +2185,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "エーフィ＆ブラッキー"
     },
     {
       "url": "https://livepocket.jp/e/7_zc2",
@@ -2278,7 +2294,7 @@
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
-      "store_name": "世界最強の戦士／Heroines Edition",
+      "store_name": "JUMP SHOP名古屋",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "世界最強の戦士／Heroines Edition",
@@ -2286,8 +2302,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1555858034461511756"
-      }
+        "product_name": "discord_post:1555858034461511756",
+        "store_name": "discord_heading:1555858034461511756"
+      },
+      "store_name_original": "世界最強の戦士／Heroines Edition"
     },
     {
       "url": "https://livepocket.jp/e/z5i6s",
@@ -2351,7 +2369,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* ストームエメラルダ",
+      "store_name": "キデイランド ららぽーと富士見店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "ストームエメラルダ",
@@ -2359,8 +2377,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1554137435812667473"
-      }
+        "product_name": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* ストームエメラルダ"
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -2368,7 +2388,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* エーフィ・ブラッキー",
+      "store_name": "キデイランド ららぽーと富士見店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "エーフィ・ブラッキー",
@@ -2376,8 +2396,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1554137435812667473"
-      }
+        "product_name": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* エーフィ・ブラッキー"
     },
     {
       "url": "https://livepocket.jp/e/prp_c",
@@ -2385,7 +2407,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* メガシンフォニア",
+      "store_name": "キデイランド ららぽーと富士見店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "メガシンフォニア",
@@ -2393,8 +2415,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1554137435812667473"
-      }
+        "product_name": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* メガシンフォニア"
     },
     {
       "url": "https://livepocket.jp/e/8wkbq",
@@ -2402,7 +2426,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* ストームエメラルダ",
+      "store_name": "キデイランド吉祥寺店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "ストームエメラルダ",
@@ -2411,8 +2435,10 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
-        "application_period": "discord_post:1554137435812667473"
-      }
+        "application_period": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* ストームエメラルダ"
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -2420,7 +2446,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* 30th CELEBRATION",
+      "store_name": "キデイランド吉祥寺店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
@@ -2428,8 +2454,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1554137435812667473"
-      }
+        "product_name": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* 30th CELEBRATION"
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2437,7 +2465,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* プレミアムデッキセット エーフィ・ブラッキー",
+      "store_name": "キデイランド吉祥寺店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
@@ -2445,8 +2473,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1554137435812667473"
-      }
+        "product_name": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* プレミアムデッキセット エーフィ・ブラッキー"
     },
     {
       "url": "https://livepocket.jp/e/adjql",
@@ -2454,7 +2484,7 @@
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
-      "store_name": "* 30th CELEBRATION",
+      "store_name": "キデイランド ららぽーと富士見店",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
@@ -2462,8 +2492,10 @@
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
-        "product_name": "discord_post:1554137435812667473"
-      }
+        "product_name": "discord_post:1554137435812667473",
+        "store_name": "discord_heading:1554137435812667473"
+      },
+      "store_name_original": "* 30th CELEBRATION"
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2951,7 +2983,7 @@
       "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "30th CELEBRATION 3次抽選\nhttps://livepocket.jp/e/0a2vu\nプレミアムデッキセット エーフィ・ブラッキー\nhttps://livepocket.jp/e/e7ec9",
-      "store_name": "プレミアムデッキセット エーフィ・ブラッキー",
+      "store_name": null,
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
@@ -2960,7 +2992,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1553004543086952509"
-      }
+      },
+      "store_name_original": "プレミアムデッキセット エーフィ・ブラッキー"
     },
     {
       "url": "https://livepocket.jp/e/0a2vu",
@@ -2968,7 +3001,7 @@
       "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "30th CELEBRATION 3次抽選\nhttps://livepocket.jp/e/0a2vu\nプレミアムデッキセット エーフィ・ブラッキー\nhttps://livepocket.jp/e/e7ec9",
-      "store_name": "30th CELEBRATION 3次抽選",
+      "store_name": null,
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
@@ -2977,7 +3010,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1553004543086952509"
-      }
+      },
+      "store_name_original": "30th CELEBRATION 3次抽選"
     },
     {
       "url": "https://livepocket.jp/e/asb1y",
@@ -4568,7 +4602,7 @@
     "no_structured_details": 150
   },
   "field_counts": {
-    "store_name": 161,
+    "store_name": 159,
     "prefecture": 126,
     "event_title": 1,
     "event_date": 1,
