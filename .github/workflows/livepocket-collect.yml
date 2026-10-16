@@ -1,55 +1,68 @@
 
 name: LivePocket Discord URL Collector
 
-"on":
+'on':
   workflow_dispatch:
     inputs:
       backfill:
-        description: "Fetch historical Discord messages"
-        required: true
-        default: "true"
+        description: '過去のメッセージも再確認して店舗名などを補完'
         type: choice
+        required: true
+        default: 'true'
         options:
-          - "true"
-          - "false"
+          - 'true'
+          - 'false'
 
   schedule:
-    - cron: "7,17,27,37,47,57 * * * *"
+    # UTC. Every 10 minutes.
+    - cron: '7,17,27,37,47,57 * * * *'
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: livepocket-collect
+  cancel-in-progress: false
 
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-      - name: Set up Python
+      - name: Python setup
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Collect Discord LivePocket URLs
+      - name: Collect (preserve existing data)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_CHANNEL_ID: "1551580466266644552"
-          BACKFILL: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill || 'false' }}
-        run: python scripts/collect_livepocket.py
+          DISCORD_CHANNEL_IDS: ${{ secrets.DISCORD_CHANNEL_IDS || secrets.DISCORD_CHANNEL_ID }}
+          BACKFILL: ${{ inputs.backfill || 'false' }}
+        run: python scripts/livepocket_collect.py
 
-      - name: Enrich LivePocket information
-        env:
-          LIVEPOCKET_MAX_ITEMS: "311"
-        run: python scripts/enrich_livepocket.py
+      - name: Save JSON back to repository
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add livepocket_urls.json
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'Update LivePocket collected URLs'
+            git push
+          fi
 
-      - name: Upload collected results
-        if: always()
+      - name: Backup downloadable JSON
         uses: actions/upload-artifact@v4
         with:
-          name: livepocket-urls-${{ github.run_id }}
-          path: output/livepocket_urls.json
-          if-no-files-found: warn
+          name: livepocket-urls-${{ github.run_number }}
+          path: livepocket_urls.json
           retention-days: 7
