@@ -52,7 +52,7 @@ jobs:
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
-      - name: Enrich exact-URL Discord embeds and optional search (v8)
+      - name: Enrich Discord embeds and optional search (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
@@ -64,16 +64,20 @@ jobs:
       - name: Recover store names and create public JSON (v7)
         run: python scripts/livepocket_v7.py
 
-      - name: Save JSON to repository
+      - name: Prefecture matching and review previews (v9)
+        run: python scripts/livepocket_v9.py
+
+      - name: Save JSON and review list to repository
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add livepocket_urls.json livepocket_public.json
+          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv
+
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket event data and public view'
+            git commit -m 'Update LivePocket event data and review queue'
             git push
           fi
 
