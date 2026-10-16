@@ -330,6 +330,16 @@ html[data-theme="dark"] .friend-invite-actions input{background:#152337!importan
 html[data-theme="dark"] .friend-member-state.online{color:#86efac!important}
 html[data-theme="dark"] .friend-member-state.offline,html[data-theme="dark"] .friend-member-state.private{color:#c5d4e9!important}
 </style>
+
+<style id="ios-form-scroll-fix">
+/* iPhone Safari/PWA: 登録フォームの末尾が固定タブバーの下に隠れないようにする */
+html { min-height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+body:not(.map-filter-locked) { min-height: 100%; height: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
+#addView { height: auto; max-height: none; overflow: visible; }
+#reportForm { height: auto; max-height: none; overflow: visible; }
+#reportForm > :last-child { margin-bottom: 18px; }
+</style>
 </head>
 
 <body>
