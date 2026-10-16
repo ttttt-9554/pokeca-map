@@ -144,13 +144,16 @@ def main():
     counts = {}
     for idx, item in enumerate(items):
         if idx >= MAX_ITEMS:
-            item['extraction_status'] = 'not_checked_limit'
+            item['extraction_status'] = 'discord_post_only' if item.get('store_name') or item.get('prefecture') else 'not_checked_limit'
             continue
         try:
-            item.update(analyze(fetch(item['url'])))
+            page_details = analyze(fetch(item['url']))
+            for field, value in page_details.items():
+                if value is not None and (not item.get(field) or field == 'page_title'):
+                    item[field] = value
             item['extraction_status'] = 'parsed' if any(item.get(k) for k in ('store_name', 'prefecture', 'product_name', 'application_period', 'sales_period')) else 'no_structured_details'
         except Exception as e:
-            item['extraction_status'] = str(e)[:80]
+            item['extraction_status'] = ('discord_post_only' if item.get('store_name') or item.get('prefecture') else str(e)[:80])
         counts[item['extraction_status']] = counts.get(item['extraction_status'], 0) + 1
         if idx < len(items) - 1: time.sleep(1.5)
     data['enriched_at'] = datetime.now(timezone.utc).isoformat()

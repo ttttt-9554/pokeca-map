@@ -10,6 +10,29 @@ MAX_PAGES = int(os.environ.get('MAX_PAGES', '200' if BACKFILL else '15'))
 URL_RE = re.compile(r'https?://(?:www\.)?livepocket\.jp/e/[a-zA-Z0-9_-]+', re.I)
 API = 'https://discord.com/api/v10'
 
+PREFECTURES = set("北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県".split())
+
+def extract_post_details(content, url):
+    """Extract location tied to this exact URL, not another shop in the same post."""
+    lines = [line.strip() for line in content.splitlines()]
+    matches = [i for i, line in enumerate(lines) if url in URL_RE.findall(line)]
+    if not matches:
+        return {'store_name': None, 'prefecture': None, 'details_source': None}
+    idx = matches[0]
+    # A location block starts at the nearest preceding 📍 marker.
+    start = next((j for j in range(idx - 1, -1, -1) if lines[j].startswith('📍')), -1)
+    if start < 0 or idx - start > 12:
+        return {'store_name': None, 'prefecture': None, 'details_source': None}
+    region = lines[start].lstrip('📍').strip().split(' ')[0]
+    pref = region if region in PREFECTURES else None
+    candidates = [line for line in lines[start + 1:idx]
+                  if line and not URL_RE.search(line) and not line.startswith(('📍', '🔗', 'http'))]
+    name = candidates[-1] if candidates else None
+    if name and (name.startswith(('※', '【', '⚠', '抽選', '応募')) or len(name) > 100):
+        name = None
+    return {'store_name': name, 'prefecture': pref,
+            'details_source': 'discord_post' if name or pref else None}
+
 def request_messages(before=None):
     params = {'limit': '100'}
     if before: params['before'] = before
@@ -55,14 +78,16 @@ def main():
             for url in found:
                 url = url.rstrip('.,)）】]')
                 if url not in results:
+                    post_details = extract_post_details('\n'.join(contents), url)
                     results[url] = {
                         'url': url,
                         'discord_message_id': msg['id'],
                         'discord_posted_at': msg.get('timestamp'),
                         'discord_channel_id': CHANNEL,
                         'post_excerpt': (msg.get('content') or '')[:500],
-                        'store_name': None,
-                        'prefecture': None,
+                        'store_name': post_details['store_name'],
+                        'prefecture': post_details['prefecture'],
+                        'details_source': post_details['details_source'],
                         'product_name': None,
                         'application_period': None,
                         'sales_period': None,
