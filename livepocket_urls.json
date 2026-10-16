@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-16T11:21:51.901938+00:00",
-  "mode": "backfill",
+  "collected_at": "2026-10-16T21:50:54.526834+00:00",
+  "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 64,
-  "unique_livepocket_urls": 311,
+  "messages_scanned": 65,
+  "unique_livepocket_urls": 331,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -1961,7 +1961,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
       "store_name": "TSUTAYA加須店",
-      "prefecture": null,
+      "prefecture": "埼玉県",
       "details_source": "discord_post",
       "product_name": "プレミアムデッキセット",
       "application_period": null,
@@ -1969,7 +1969,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "store_name_original": "プレミアムデッキセット"
     },
@@ -2074,7 +2075,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
       "store_name": "TSUTAYA加須店",
-      "prefecture": null,
+      "prefecture": "埼玉県",
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
       "application_period": null,
@@ -2082,7 +2083,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "store_name_original": "30th CELEBRATION"
     },
@@ -2145,7 +2147,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "📢 LivePocket抽選まとめ\n【10/3・10/2分】\n\n■10/3\n【ポケカ】\n竜星のPAO\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/tupcdz\n・ストームエメラルダ\nhttps://livepocket.jp/e/mtgl4\n\nキデイランド浦和美園\n・30th CELEBRATION\nhttps://livepocket.jp/e/19wmh\n・エーフィ＆ブラッキー\nhttps://livepocket.jp/e/ampml\n\nTSUTAYA加須店\n・30th CELEBRATION\nhttps://livepocket.jp/e/v-dww\n・プレミアムデッキセット\nhttps://livepocket.jp/e/ms0m8\n・遊戯王 ART WORK COLLECTION系\nhttps://livepocket.jp/e/ie8vo\n\nホビーステーション\n・30th CELEBRATION 再販\nhttps://livepocket.jp/e/7r2ey\n\n【ワンピース】\nJUMP SHOP名古屋\n・世界最強の戦士／Heroines Edition\nhttps://livepocket.jp/e/sgq88\n\n■10/2\n・府中\nhttps://livepocket.jp/e/vduyy\n\n・錦糸\nhttps://livepocket.jp/e/qz-dx\n\n・ヤマシロ\nhttps://livepocket.jp/e/cbovd\n\n・錦糸町マルイ\nhttps://livepocket.jp/e/ping7\n\n・吹上\nhttps://livepocket.jp/e/pli05\n\n・北習志野\nhttps://livepocket.jp/e/j_tif\n\n・鮎川\nhttps://livepocket.jp/e/p158q\nhttps://livepocket.jp/e/hwrag\n\n・鎌ケ谷\nhttps://livepocket.jp/e/qhoza\nhttps://livepocket.jp/e/h2dg6\n\n・平塚\nhttps://livepocket.jp/e/94gmw\n\n・山陽\nhttps://livepocket.jp/e/kyqq3\nhttps://livepocket.jp/e/7_zc2\n\n※重複応募・応募条件・本人確認・受取店舗は各ページで要確認",
       "store_name": "TSUTAYA加須店",
-      "prefecture": null,
+      "prefecture": "埼玉県",
       "details_source": "discord_post",
       "product_name": "遊戯王 ART WORK COLLECTION系",
       "application_period": null,
@@ -2153,7 +2155,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "store_name_original": "遊戯王 ART WORK COLLECTION系"
     },
@@ -2427,7 +2430,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
       "store_name": "キデイランド吉祥寺店",
-      "prefecture": null,
+      "prefecture": "東京都",
       "details_source": "discord_post",
       "product_name": "ストームエメラルダ",
       "application_period": "9/28 10:00〜9/30 23:59",
@@ -2436,7 +2439,8 @@
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
         "application_period": "discord_post:1554137435812667473",
-        "store_name": "discord_heading:1554137435812667473"
+        "store_name": "discord_heading:1554137435812667473",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "store_name_original": "* ストームエメラルダ"
     },
@@ -2447,7 +2451,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
       "store_name": "キデイランド吉祥寺店",
-      "prefecture": null,
+      "prefecture": "東京都",
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION",
       "application_period": null,
@@ -2455,7 +2459,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
-        "store_name": "discord_heading:1554137435812667473"
+        "store_name": "discord_heading:1554137435812667473",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "store_name_original": "* 30th CELEBRATION"
     },
@@ -2466,7 +2471,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "* キデイランド吉祥寺店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/c6b-4\n    * プレミアムデッキセット エーフィ・ブラッキー\n        https://livepocket.jp/e/tle-s\n    * ストームエメラルダ\n        https://livepocket.jp/e/8wkbq\n        受付：9/28 10:00〜9/30 23:59。\n\n* キデイランド ららぽーと富士見店\n    * 30th CELEBRATION\n        https://livepocket.jp/e/adjql\n    * エーフィ・ブラッキー\n        https://livepocket.jp/e/flwm5\n    * ストームエメラルダ\n        https://livepocket.jp/e/8knv_\n    * メガシンフォニア\n        https://livepocket.jp/e/prp_c\n        9/28まで。",
       "store_name": "キデイランド吉祥寺店",
-      "prefecture": null,
+      "prefecture": "東京都",
       "details_source": "discord_post",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
       "application_period": null,
@@ -2474,7 +2479,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
-        "store_name": "discord_heading:1554137435812667473"
+        "store_name": "discord_heading:1554137435812667473",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "store_name_original": "* プレミアムデッキセット エーフィ・ブラッキー"
     },
@@ -4594,16 +4600,296 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details"
+    },
+    {
+      "url": "https://livepocket.jp/e/1maxl",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "新宿マルイアネックス3階 FEWMANY",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/vt2ev",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "新宿マルイアネックス3階 FEWMANY",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/zof6r",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "古本市場新小岩店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/opyur-hugr",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "古本市場新小岩店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/717w_",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ふるいちトップブックス港北ミナモ店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/3hemk",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ふるいちトップブックス港北ミナモ店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/3010thfu",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "古本市場市川鬼高店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/st1030ft",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "古本市場市川鬼高店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/fg69z",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "晴れる屋 千葉店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/pjg_2",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "古本市場草加店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/jbkc-",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/ih5ta",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ＴＳＵＴＡＹＡ真岡店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/k6x2c",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ふるいちトップブックス伊勢崎茂呂店",
+      "prefecture": "群馬県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/x2n7b",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ふるいち前橋みなみモール店",
+      "prefecture": "群馬県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/7ck7b",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "ヤマト屋書店TSUTAYA中里店",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/39gwbz6j-d",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "イトーヨーカドー",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/q8-1nh5bh5",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "イトーヨーカドー",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/i44fhaaluv",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "イトーヨーカドー",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/h2dkqnh0f0",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "イトーヨーカドー",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
+    },
+    {
+      "url": "https://livepocket.jp/e/yv07y",
+      "discord_message_id": "1560771354746159196",
+      "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/1maxl\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\nhttps://livepocket.jp/e/vt2ev\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/zof6r\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/opyur-hugr\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/717w_\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\nhttps://livepocket.jp/e/3hemk\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/3010thfu\n\n📍千葉県\n古本市場市川鬼高店\nhttps://livepocket.jp/e/st1030ft\n\n📍千葉県\n晴れる屋 千葉店\nhttps://livepocket.jp/e/fg69z\n\n📍埼玉県\n古本市場草加店\nhttps://livepocket.jp/e/pjg_2\n\n📍埼玉県\nふるいち ららぽーと富士見店\nhttps://livepocket.jp/e/jbkc-\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\nhttps://livepocket.jp/e/ih5ta\n\n📍群馬県\nふるいちトップブックス伊勢崎茂呂店\nhttps://livepocket.jp/e/k6x2c\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/x2n7b\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\nhttps://livepocket.jp/e/7ck7b\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/39gwbz6j-d\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/q8-1nh5bh5\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/i44fhaaluv\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/h2dkqnh0f0\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/yv07y",
+      "store_name": "イトーヨーカドー",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 161,
+    "parsed": 181,
     "no_structured_details": 150
   },
   "field_counts": {
-    "store_name": 159,
-    "prefecture": 126,
+    "store_name": 179,
+    "prefecture": 147,
     "event_title": 1,
     "event_date": 1,
     "product_name": 18,
@@ -4613,13 +4899,13 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1560477278344052836"
+      "1551580466266644552": "1560771354746159196"
     },
     "last_run": {
-      "checked_at": "2026-10-16T11:21:51.901938+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-16T21:50:54.526834+00:00",
+      "new_urls": 20,
       "original_urls": 311,
-      "suspect_legacy_store_names": 10
+      "suspect_legacy_store_names": 0
     },
     "livepocket_page_enrichment": {
       "blocked_until": "2026-10-17T12:19:57.811101+00:00",
@@ -4656,7 +4942,15 @@
         "1551941541793112115": "2026-10-16T18:59:15.026718+00:00",
         "1551929772651847690": "2026-10-16T18:59:15.026718+00:00",
         "1551918790319669268": "2026-10-16T18:59:15.026718+00:00",
-        "1551911167058780220": "2026-10-16T18:59:15.026718+00:00"
+        "1551911167058780220": "2026-10-16T18:59:15.026718+00:00",
+        "1560771354746159196": "2026-10-16T21:50:54.789799+00:00",
+        "1551903773000204402": "2026-10-16T21:50:54.789799+00:00",
+        "1551896222015426711": "2026-10-16T21:50:54.789799+00:00",
+        "1551896185810325564": "2026-10-16T21:50:54.789799+00:00",
+        "1551896149667872769": "2026-10-16T21:50:54.789799+00:00",
+        "1551591545562472569": "2026-10-16T21:50:54.789799+00:00",
+        "1551590059910897674": "2026-10-16T21:50:54.789799+00:00",
+        "1551588625764851782": "2026-10-16T21:50:54.789799+00:00"
       },
       "checked_search_urls": {}
     }
