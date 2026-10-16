@@ -125,7 +125,9 @@
       account.textContent = msg; status.textContent = msg;
     } else if (authUser) {
       const profile = authUser.user_metadata || {};
-      const name = profile.full_name || profile.name || profile.user_name || authUser.email || 'Discordユーザー';
+      // Discordの表示名（global_name）を優先。未取得なら従来のユーザー名にフォールバック。
+      const name = profile.global_name || profile.globalName || profile.custom_claims?.global_name
+        || profile.full_name || profile.name || profile.user_name || authUser.email || 'Discordユーザー';
       account.replaceChildren();
       const line = document.createElement('div'); line.className = 'share-user';
       if (profile.avatar_url && /^https:\/\//.test(profile.avatar_url)) {
