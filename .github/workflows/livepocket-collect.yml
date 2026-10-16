@@ -5,7 +5,7 @@ name: LivePocket Discord URL Collector
   workflow_dispatch:
     inputs:
       backfill:
-        description: "Fetch historical messages"
+        description: "Fetch historical Discord messages"
         required: true
         default: "true"
         type: choice
@@ -41,13 +41,15 @@ jobs:
         run: python scripts/collect_livepocket.py
 
       - name: Enrich LivePocket information
+        env:
+          LIVEPOCKET_MAX_ITEMS: "311"
         run: python scripts/enrich_livepocket.py
 
-      - name: Save private Actions artifact
+      - name: Upload collected results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: livepocket-urls-${{ github.run_id }}
-          path: output/
-          retention-days: 7
+          path: output/livepocket_urls.json
           if-no-files-found: warn
+          retention-days: 7
