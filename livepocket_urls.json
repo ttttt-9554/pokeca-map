@@ -1,8 +1,8 @@
 {
-  "collected_at": "2026-10-16T21:50:54.526834+00:00",
+  "collected_at": "2026-10-16T22:44:52.567906+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 65,
+  "messages_scanned": 66,
   "unique_livepocket_urls": 331,
   "items": [
     {
@@ -4901,12 +4901,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1560771354746159196"
+      "1551580466266644552": "1560783894612025505"
     },
     "last_run": {
-      "checked_at": "2026-10-16T21:50:54.526834+00:00",
-      "new_urls": 20,
-      "original_urls": 311,
+      "checked_at": "2026-10-16T22:44:52.567906+00:00",
+      "new_urls": 0,
+      "original_urls": 331,
       "suspect_legacy_store_names": 0
     },
     "livepocket_page_enrichment": {
@@ -4955,6 +4955,13 @@
         "1551588625764851782": "2026-10-16T21:50:54.789799+00:00"
       },
       "checked_search_urls": {}
+    },
+    "v12": {
+      "search_checks": {},
+      "brave_daily": {
+        "date": "2026-10-16",
+        "used": 0
+      }
     }
   }
 }
