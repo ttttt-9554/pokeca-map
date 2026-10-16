@@ -5,16 +5,15 @@ name: LivePocket Discord URL Collector
   workflow_dispatch:
     inputs:
       backfill:
-        description: '過去のメッセージも再確認して店舗名などを補完'
+        description: 'Discord過去投稿を再確認する'
         type: choice
         required: true
-        default: 'true'
+        default: 'false'
         options:
           - 'true'
           - 'false'
 
   schedule:
-    # UTC. Every 10 minutes.
     - cron: '7,17,27,37,47,57 * * * *'
 
 permissions:
@@ -40,12 +39,19 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Collect (preserve existing data)
+      - name: Collect Discord and preserve existing JSON
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_IDS: ${{ secrets.DISCORD_CHANNEL_IDS || secrets.DISCORD_CHANNEL_ID }}
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/livepocket_collect.py
+
+      - name: Enrich missing fields from public LivePocket event pages
+        env:
+          LIVEPOCKET_PAGE_FETCH: 'true'
+          LIVEPOCKET_MAX_PER_RUN: '8'
+          LIVEPOCKET_REQUEST_GAP: '2.5'
+        run: python scripts/livepocket_enrich.py
 
       - name: Save JSON back to repository
         shell: bash
@@ -53,14 +59,16 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add livepocket_urls.json
+
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket collected URLs'
+            git commit -m 'Update LivePocket collected URLs and page metadata'
             git push
           fi
 
       - name: Backup downloadable JSON
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: livepocket-urls-${{ github.run_number }}
