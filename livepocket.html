@@ -178,6 +178,8 @@
       if (/one\s*piece|ワンピース/.test(evidence)) return 'onepiece';
       if (/遊戯王|yu[\s-]?gi[\s-]?oh|yugioh/.test(evidence)) return 'yugioh';
       if (/ポケカ|ポケモンカード|pokemon|pokémon|メガシンフォニア|メガブレイブ|エーフィ|ブラッキー/.test(evidence)) return 'pokemon';
+      // v10: URLごとの省略見出しによる参考ジャンル（正式商品名ではない）。
+      if (!item.event_title && !item.product_name && ['pokemon','onepiece','yugioh'].includes(item.review_category)) return item.review_category;
       return 'other';
     }
     const catLabels = {pokemon:'ポケカ',onepiece:'ONE PIECE',yugioh:'遊戯王',other:'その他・不明'};
@@ -242,7 +244,8 @@
       const tags = text('div','','tags');
       const cat = categoryOf(item);
       const status = periodState(item);
-      tags.append(tag(catLabels[cat],cat));
+      const hintOnly = !item.product_name && !item.event_title && item.review_category && cat !== 'other';
+      tags.append(tag(catLabels[cat]+(hintOnly?'（参考）':''),cat));
       tags.append(tag(statuses[status],status));
       const end = parseTime(item.application_end_at);
       if (status === 'active' && end !== null && end-Date.now() <= 48*3600000) tags.append(tag('締切間近','urgency'));
@@ -271,7 +274,8 @@
       if (clean(item.lottery_result_period)) fact(el,'抽選結果',item.lottery_result_period);
       const foot = text('div','','event-footer');
       const hasVerified = item.detail_provenance === 'screen_verified';
-      foot.append(text('span',hasVerified?'一部の詳細は画面確認済み':'Discord投稿から収集','source'));
+      const manuallyVerified = item.detail_provenance === 'user_verified_csv';
+      foot.append(text('span',hasVerified?'一部の詳細は画面確認済み':manuallyVerified?'一部の詳細は手動確認済み':'Discord投稿から収集','source'));
       const url = safeEventUrl(item.url);
       if (url) {
         const a = text('a','イベントページ ↗','action');
@@ -312,7 +316,7 @@
         if (status && periodState(item) !== status) return false;
         if (onlyInfo && !hasUsefulName(item)) return false;
         if (query) {
-          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.url].join(' '));
+          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.source_preview,item.url].join(' '));
           if (!search.includes(query)) return false;
         }
         return true;
