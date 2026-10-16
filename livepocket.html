@@ -161,7 +161,7 @@
     <div id="message" class="hidden" role="status"></div>
     <div id="results" class="cards" aria-live="off"></div>
     <button type="button" id="loadMore" class="more hidden">さらに30件表示</button>
-    <p class="smallnote">※ 店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。応募期間終了が日時から確定したカードはグレー表示します。期間不明のカードはグレー表示しません。イベント内容は必ずリンク先で確認してください。</p>
+    <p class="smallnote">※ 店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。確認済みの申込締切日時を過ぎたカードは、開始日時が不明でもグレー表示します。締切時刻はその分の終わりまで有効として扱います。期間不明のカードはグレー表示しません。イベント内容は必ずリンク先で確認してください。</p>
   </main>
   <script>
   (() => {
@@ -196,9 +196,11 @@
     function periodState(item, now = Date.now()) {
       const start = parseTime(item.application_start_at);
       const end = parseTime(item.application_end_at);
-      if (start === null || end === null || end < start) return 'unknown';
+      if (end === null || (start !== null && end < start)) return 'unknown';
+      // 締切時刻が 23:59 の場合は 23:59 台の最後まで受付中として扱う。
+      if (Math.floor(now / 60000) > Math.floor(end / 60000)) return 'ended';
+      if (start === null) return 'unknown';
       if (now < start) return 'upcoming';
-      if (now > end) return 'ended';
       return 'active';
     }
     const statuses = { active:'期間内', upcoming:'受付前', ended:'期間終了', unknown:'期間不明' };
@@ -279,6 +281,8 @@
       if (clean(item.event_date)) fact(el,'開催日',item.event_date);
       if (end !== null && parseTime(item.application_start_at) !== null) {
         fact(el,'申込期間',formatTime(item.application_start_at)+' 〜 '+formatTime(item.application_end_at));
+      } else if (end !== null) {
+        fact(el,'申込締切',formatTime(item.application_end_at));
       } else if (clean(item.application_period)) {
         fact(el,'申込期間',item.application_period+'（年・状態は未確定の場合あり）');
       }
