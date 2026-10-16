@@ -70,17 +70,20 @@ jobs:
       - name: Verified updates and review classification (v10)
         run: python scripts/livepocket_v10.py
 
-      - name: Save JSON and review list to repository
+      - name: Confirm yearful application deadlines (v11)
+        run: python scripts/livepocket_v11.py
+
+      - name: Save JSON and review lists to repository
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv
+          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv
 
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket event data and review queue'
+            git commit -m 'Update LivePocket event data and deadline review'
             git push
           fi
 
