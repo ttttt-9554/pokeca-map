@@ -169,7 +169,19 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "livepocket_page_check": {
+        "status": "empty_visible_content",
+        "checked_at": "2026-10-16T12:19:57.811101+00:00",
+        "next_retry_at": "2026-10-18T12:19:57.811101+00:00",
+        "diagnostics": {
+          "html_bytes": 2415,
+          "visible_chars": 0,
+          "page_title": null,
+          "has_event_section": false,
+          "response_fingerprint": "3488901653abbc80"
+        }
+      }
     },
     {
       "url": "https://livepocket.jp/e/m0-8b",
@@ -183,7 +195,19 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "livepocket_page_check": {
+        "status": "empty_visible_content",
+        "checked_at": "2026-10-16T12:19:57.811101+00:00",
+        "next_retry_at": "2026-10-18T12:19:57.811101+00:00",
+        "diagnostics": {
+          "html_bytes": 2415,
+          "visible_chars": 0,
+          "page_title": null,
+          "has_event_section": false,
+          "response_fingerprint": "56a0e0cc0d9807ea"
+        }
+      }
     },
     {
       "url": "https://livepocket.jp/e/o35r4",
@@ -197,7 +221,19 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "livepocket_page_check": {
+        "status": "empty_visible_content",
+        "checked_at": "2026-10-16T12:19:57.811101+00:00",
+        "next_retry_at": "2026-10-18T12:19:57.811101+00:00",
+        "diagnostics": {
+          "html_bytes": 2415,
+          "visible_chars": 0,
+          "page_title": null,
+          "has_event_section": false,
+          "response_fingerprint": "8353e4f9b52ec5f7"
+        }
+      }
     },
     {
       "url": "https://livepocket.jp/e/1q_nh",
@@ -4463,6 +4499,9 @@
       "original_urls": 311,
       "suspect_legacy_store_names": 10
     },
-    "livepocket_page_enrichment": {}
+    "livepocket_page_enrichment": {
+      "blocked_until": "2026-10-17T12:19:57.811101+00:00",
+      "empty_page_streak": 3
+    }
   }
 }
