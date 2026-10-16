@@ -167,7 +167,7 @@
       "prefecture": "宮城県",
       "details_source": "discord_post",
       "product_name": null,
-      "application_period": null,
+      "application_period": "2026-10-13 17:00〜2026-10-17 23:59（日本時間）",
       "sales_period": null,
       "extraction_status": "parsed",
       "livepocket_page_check": {
@@ -181,7 +181,38 @@
           "has_event_section": false,
           "response_fingerprint": "3488901653abbc80"
         }
-      }
+      },
+      "event_title": "ONE PIECE カードゲームコーナー【事前入店申込・抽選】10月31日(土) JUMP SHOP仙台店",
+      "field_sources": {
+        "event_title": "user_safari_screenshots_2026-10-16",
+        "event_date": "user_safari_screenshots_2026-10-16",
+        "venue_name": "user_safari_screenshots_2026-10-16",
+        "venue_address": "user_safari_screenshots_2026-10-16",
+        "opening_hours": "user_safari_screenshots_2026-10-16",
+        "registration_type": "user_safari_screenshots_2026-10-16",
+        "application_period": "user_safari_screenshots_2026-10-16",
+        "application_start_at": "user_safari_screenshots_2026-10-16",
+        "application_end_at": "user_safari_screenshots_2026-10-16",
+        "lottery_result_period": "user_safari_screenshots_2026-10-16",
+        "lottery_result_start_date": "user_safari_screenshots_2026-10-16",
+        "lottery_result_end_date": "user_safari_screenshots_2026-10-16",
+        "ticket_name": "user_safari_screenshots_2026-10-16",
+        "ticket_price_yen": "user_safari_screenshots_2026-10-16",
+        "ticket_application_limit": "user_safari_screenshots_2026-10-16"
+      },
+      "event_date": "2026-10-31",
+      "venue_name": "JUMP SHOP仙台店",
+      "venue_address": "宮城県仙台市青葉区中央1-2-3 仙台PARCO1 8F",
+      "opening_hours": "10:00〜20:00",
+      "registration_type": "抽選",
+      "application_start_at": "2026-10-13T17:00:00+09:00",
+      "application_end_at": "2026-10-17T23:59:00+09:00",
+      "lottery_result_period": "2026-10-18〜2026-10-28",
+      "lottery_result_start_date": "2026-10-18",
+      "lottery_result_end_date": "2026-10-28",
+      "ticket_name": "10:15入店",
+      "ticket_price_yen": 0,
+      "ticket_application_limit": "お1人様1回のみ購入・申込可能"
     },
     {
       "url": "https://livepocket.jp/e/m0-8b",
@@ -4484,10 +4515,12 @@
   "field_counts": {
     "store_name": 161,
     "prefecture": 126,
+    "event_title": 1,
+    "event_date": 1,
     "product_name": 0,
-    "application_period": 0,
+    "application_period": 1,
     "sales_period": 0,
-    "event_title": 0
+    "lottery_result_period": 1
   },
   "collector_state": {
     "last_seen_message_ids": {
