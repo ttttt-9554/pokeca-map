@@ -7,6 +7,7 @@ All existing JSON entries/fields are preserved and missing values alone are fill
 from __future__ import annotations
 
 import copy
+import hashlib
 import email.utils
 import html
 import json
@@ -24,7 +25,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 DATA_PATH = Path(os.getenv("LIVEPOCKET_DATA_FILE", "livepocket_urls.json"))
-USER_AGENT = "LivePocket-Event-Metadata-Collector/3.0 (+non-commercial; respects access restrictions)"
+USER_AGENT = "LivePocket-Event-Metadata-Collector/3.1 (+non-commercial; respects access restrictions)"
 EVENT_RE = re.compile(r"https://(?:www\.)?livepocket\.jp/e/[a-zA-Z0-9_-]{4,64}\Z")
 MAX_PAGE_BYTES = 2_000_000
 MAX_PER_RUN = max(1, min(int(os.getenv("LIVEPOCKET_MAX_PER_RUN", "8")), 20))
@@ -169,7 +170,9 @@ def parse_html_page(html_body: str) -> dict[str, str]:
     title = normalize_line(parser.og_title or "".join(parser.title))
     title = re.sub(r"\s*(?:のチケット情報\s*[|｜-]|[|｜]\s*LivePocket).*$", "", title).strip()
     out: dict[str, str] = {}
-    if title and len(title) <= 220 and not re.search(r"(Cloudflare|Just a moment|Access Denied|認証が必要)", title, re.I):
+    if (title and len(title) <= 220 and not re.search(
+        r"(Cloudflare|Just a moment|Access Denied|認証が必要|^LivePocket(?:\s*[（(].*)?$)", title, re.I
+    )):
         out["event_title"] = title
     for field, priorities in LABEL_GROUPS.items():
         for labels in priorities:
@@ -178,6 +181,31 @@ def parse_html_page(html_body: str) -> dict[str, str]:
                 out[field] = value
                 break
     return out
+
+
+def diagnose_empty_result(page: str) -> tuple[str, dict]:
+    """Explain unsuccessful HTML parsing without retaining response HTML."""
+    parser = VisibleHTML()
+    parser.feed(page)
+    visible = " ".join(parser.lines())
+    title = normalize_line(parser.og_title or "".join(parser.title))
+    diagnostic = {
+        "html_bytes": len(page.encode("utf-8", errors="replace")),
+        "visible_chars": len(visible),
+        "page_title": title[:140] if title else None,
+        "has_event_section": any(word in visible for word in (
+            "受付・チケット情報", "販売受付期間", "イベント詳細", "受付期間"
+        )),
+        "response_fingerprint": hashlib.sha256(page.encode("utf-8")).hexdigest()[:16],
+    }
+    if re.search(r"(認証が必要|アクセス制限|verify you are human|security check|Just a moment)",
+                 title + " " + visible[:350], re.I):
+        return "verification_required", diagnostic
+    if len(visible) < 60:
+        return "empty_visible_content", diagnostic
+    if not diagnostic["has_event_section"] and len(visible) < 260:
+        return "missing_event_content", diagnostic
+    return "no_fields", diagnostic
 
 
 class PageFetchError(Exception):
@@ -258,6 +286,8 @@ def enrich_data(data: dict, fetch=fetch_page, sleep=time.sleep, now=None) -> tup
     st = output.setdefault("collector_state", {}).setdefault("livepocket_page_enrichment", {})
     blocked = parse_iso(st.get("blocked_until"))
     stats = {"attempted": 0, "enriched": 0, "blocked": 0, "errors": 0, "total": len(items)}
+    # Stop repeated ineffective requests across scheduled runs, while keeping Discord collection active.
+    empty_streak = int(st.get("empty_page_streak", 0))
     if blocked and current < blocked:
         stats["paused_until"] = iso(blocked)
         return output, stats
@@ -280,13 +310,33 @@ def enrich_data(data: dict, fetch=fetch_page, sleep=time.sleep, now=None) -> tup
         if stats["attempted"]:
             sleep(REQUEST_GAP)
         stats["attempted"] += 1
+        diagnostics = None
         try:
             body = fetch(item["url"])
             if not isinstance(body, str):
                 raise PageFetchError("non_html_response", 24)
             extracted = parse_html_page(body)
-            status = "success" if extracted else "no_fields"
-            delay = 24 * (7 if extracted else 2)
+            diagnostics = None
+            if extracted:
+                status, delay = "success", 24 * 7
+                empty_streak = 0
+            else:
+                status, diagnostics = diagnose_empty_result(body)
+                delay = 48
+                empty_streak += 1
+                print(f"No metadata: {item['url']} status={status} "
+                      f"title={diagnostics['page_title']!r} "
+                      f"visible_chars={diagnostics['visible_chars']} "
+                      f"fingerprint={diagnostics['response_fingerprint']}")
+                if status == "verification_required":
+                    stats["blocked"] += 1
+                    st["blocked_until"] = iso(current + timedelta(hours=24))
+                elif empty_streak >= 3:
+                    # A site-wide page/layout problem is more likely than three unrelated empty pages.
+                    st["blocked_until"] = iso(current + timedelta(hours=24))
+                    stats["paused_until"] = st["blocked_until"]
+                    print("Paused webpage enrichment for 24 hours after 3 empty results. "
+                          "Discord collection is unaffected.")
             new_fields = []
             for name, val in extracted.items():
                 if val and not item.get(name):
@@ -313,10 +363,15 @@ def enrich_data(data: dict, fetch=fetch_page, sleep=time.sleep, now=None) -> tup
             "checked_at": iso(current),
             "next_retry_at": iso(current + timedelta(hours=delay)),
         }
-        if stats["blocked"]:
+        if diagnostics is not None:
+            item["livepocket_page_check"]["diagnostics"] = diagnostics
+        diagnostics = None
+        active_pause = parse_iso(st.get("blocked_until"))
+        if stats["blocked"] or (active_pause is not None and active_pause > current):
             break
 
     if stats["attempted"]:
+        st["empty_page_streak"] = empty_streak
         output["field_counts"] = {
             field: sum(bool(i.get(field)) for i in items if isinstance(i, dict))
             for field in ("store_name", "prefecture", "product_name", "application_period", "sales_period", "event_title")
