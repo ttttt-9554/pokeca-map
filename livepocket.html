@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#18243a">
+  <meta name="description" content="LivePocketイベントのURLを店舗・地域・カード種別・申込期間で検索できる一覧">
+  <title>LivePocket イベント一覧 | pokeca-map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #18243a;
+      --navy2: #243552;
+      --pink: #ed427c;
+      --pink-soft: #fff0f5;
+      --bg: #f5f7fb;
+      --surface: #fff;
+      --line: #e5e9f0;
+      --muted: #66758b;
+      --text: #1b283a;
+      --radius: 17px;
+    }
+    *,*::before,*::after {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+    a {color:inherit}
+    button,input,select {font:inherit}
+    button {cursor:pointer}
+    .hero {background:linear-gradient(140deg,var(--navy),#314566);color:#fff;padding:24px 18px 27px;padding-top:max(24px, env(safe-area-inset-top));}
+    .wrap {max-width:1050px;margin:0 auto}
+    .hero-top {display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .eyebrow {font-size:11px;letter-spacing:.12em;font-weight:750;color:#fdb7d1}
+    .hero h1 {margin:6px 0 7px;font-size:clamp(24px,5.4vw,33px);line-height:1.28;font-weight:850;letter-spacing:-.04em}
+    .hero p {margin:0;color:#d8e2ef;font-size:13px;max-width:630px}
+    .refresh {padding:8px 12px;border:1px solid #91a5bf;color:#fff;background:#ffffff16;border-radius:10px;white-space:nowrap;font-size:13px;min-height:40px}
+    .refresh:focus-visible,.tab:focus-visible,.action:focus-visible,.more:focus-visible,a:focus-visible {outline:3px solid #ffb8d1;outline-offset:3px}
+    .stats {margin-top:21px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+    .stat {background:#ffffff1a;border:1px solid #ffffff20;border-radius:13px;padding:10px 11px 9px;min-height:68px}
+    .stat strong {display:block;font-size:clamp(22px,5.6vw,28px);line-height:1.15;font-variant-numeric:tabular-nums}
+    .stat span {display:block;color:#d8e2ef;font-size:11px;margin-top:5px}
+    main {padding:16px 15px 32px;padding-bottom:max(35px, env(safe-area-inset-bottom));}
+    .panel {background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px;box-shadow:0 4px 18px #15294808}
+    .search-label {font-weight:750;font-size:14px;display:block;margin:0 0 8px}
+    .search-row {position:relative}
+    .search-row svg {position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#63748b}
+    #query {width:100%;min-height:48px;border-radius:11px;padding:11px 12px 11px 42px;background:#f9fafc;border:1px solid #cad3df;outline:none;color:var(--text)}
+    #query:focus,select:focus {border-color:var(--pink);box-shadow:0 0 0 3px #ed427c1e}
+    .filters {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+    .filters label {font-size:11px;color:var(--muted);font-weight:700;display:flex;flex-direction:column;gap:5px;min-width:0}
+    select {appearance:none;width:100%;border:1px solid #d5dce7;background:#fff url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2366758b" stroke-width="2"%3E%3Cpath d="m6 9 6 6 6-6"/%3E%3C/svg%3E') right 9px center/14px no-repeat;min-height:42px;border-radius:10px;padding:8px 22px 8px 9px;color:var(--text);outline:none;font-size:13px}
+    .chips {display:flex;gap:7px;overflow-x:auto;margin-top:12px;padding-bottom:2px;scrollbar-width:none}
+    .chips::-webkit-scrollbar {display:none}
+    .tab {flex:0 0 auto;border:1px solid #dbe1ea;background:#fff;color:#485870;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:750;white-space:nowrap}
+    .tab[aria-pressed="true"] {background:var(--pink-soft);border-color:var(--pink);color:#b81b54}
+    .results-header {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 2px 12px}
+    .results-header h2 {margin:0;font-size:17px;letter-spacing:-.02em}
+    .results-header span {font-size:12px;color:var(--muted)}
+    .sort {max-width:150px;font-size:12px}
+    .cards {display:grid;grid-template-columns:1fr;gap:11px}
+    .event {border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:15px;box-shadow:0 3px 14px #14284408;min-width:0}
+    .event-top {display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+    .tags {display:flex;gap:6px;flex-wrap:wrap}
+    .pill {display:inline-flex;align-items:center;border-radius:6px;padding:2px 7px;background:#f1f4f8;color:#53627a;font-size:11px;font-weight:750;line-height:1.65;max-width:100%}
+    .pill.pokemon {background:#e8f1ff;color:#245eaa}
+    .pill.onepiece {background:#fff0dd;color:#965b18}
+    .pill.yugioh {background:#f3eafe;color:#7435a5}
+    .pill.urgency {background:#fff0f1;color:#b3274a}
+    .pill.active {background:#e8f9f0;color:#147c4e}
+    .pill.upcoming {background:#edf3ff;color:#2f5caa}
+    .pill.ended {background:#f0f2f6;color:#778396}
+    .label-region {margin-top:10px;font-size:12px;color:var(--muted);font-weight:650}
+    .name {font-weight:800;font-size:17px;letter-spacing:-.02em;line-height:1.45;margin:4px 0 0;overflow-wrap:anywhere}
+    .product {margin:7px 0 0;font-size:13px;color:#4d5d74;overflow-wrap:anywhere}
+    .fact {display:flex;align-items:baseline;gap:8px;font-size:12px;margin-top:8px;min-width:0}
+    .fact .fact-title {min-width:71px;flex:0 0 71px;color:var(--muted)}
+    .fact strong {font-size:13px;font-weight:650;overflow-wrap:anywhere}
+    .event-footer {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding-top:13px;border-top:1px solid #edf0f4}
+    .source {font-size:10px;color:#8a96a9;overflow-wrap:anywhere}
+    .action {text-decoration:none;display:inline-flex;align-items:center;justify-content:center;background:var(--pink);border-radius:9px;color:white;min-height:39px;padding:8px 12px;font-weight:750;font-size:12px;white-space:nowrap}
+    .action:hover {background:#d82d69}
+    .more {display:block;width:100%;border:1px solid #d3dce8;border-radius:12px;color:var(--navy2);font-size:14px;font-weight:750;background:#fff;margin:15px 0 0;padding:13px}
+    .empty,.error {background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 16px;color:var(--muted);text-align:center;line-height:1.8}
+    .error {color:#a53449;background:#fff7f8;border-color:#f1b9c6;text-align:left}
+    .smallnote {font-size:11px;color:var(--muted);margin:18px 4px 0}
+    .meta {font-size:11px;color:#aabbcf;margin-top:12px}
+    .hidden {display:none!important}
+    @media(min-width:650px) {
+      .hero {padding:30px 28px}
+      main {padding:24px 26px 50px}
+      .panel {padding:22px}
+      .cards {grid-template-columns:repeat(2,minmax(0,1fr))}
+      .stats {max-width:620px;gap:14px}
+    }
+    @media(min-width:980px) {.cards {grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:370px) {
+      .filters {grid-template-columns:1fr 1fr}
+      .filters label:last-child {grid-column:1/-1}
+      .hero h1 {font-size:23px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top"><span class="eyebrow">POKECA MAP / LIVEPOCKET</span><button type="button" id="refresh" class="refresh">↻ 更新</button></div>
+      <h1>LivePocket イベント一覧</h1>
+      <p>Discordから収集したイベントURLを検索。店名・地域・ジャンル・応募期間で探せます。</p>
+      <div class="stats" aria-live="polite">
+        <div class="stat"><strong id="totalCount">—</strong><span>収集済みURL</span></div>
+        <div class="stat"><strong id="namedCount">—</strong><span>店舗名あり</span></div>
+        <div class="stat"><strong id="activeCount">—</strong><span>期間内と判定</span></div>
+      </div>
+      <div id="dataDate" class="meta">データを読み込み中…</div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="panel" aria-label="イベント検索と絞り込み">
+      <label class="search-label" for="query">イベントを探す</label>
+      <div class="search-row">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="query" type="search" autocomplete="off" placeholder="店舗名・商品名・地域・URLで検索">
+      </div>
+      <div class="filters">
+        <label for="prefecture">都道府県<select id="prefecture"><option value="">全国・すべて</option></select></label>
+        <label for="category">ジャンル<select id="category">
+          <option value="">すべて</option><option value="pokemon">ポケカ</option><option value="onepiece">ONE PIECE</option><option value="yugioh">遊戯王</option><option value="other">その他・不明</option>
+        </select></label>
+        <label for="status">申込期間<select id="status">
+          <option value="">すべて</option><option value="active">期間内</option><option value="upcoming">受付前</option><option value="ended">期間終了</option><option value="unknown">判定できない</option>
+        </select></label>
+      </div>
+      <div class="chips" role="group" aria-label="ジャンルのクイック選択">
+        <button class="tab" type="button" data-category="" aria-pressed="true">すべて</button>
+        <button class="tab" type="button" data-category="pokemon" aria-pressed="false">ポケカ</button>
+        <button class="tab" type="button" data-category="onepiece" aria-pressed="false">ONE PIECE</button>
+        <button class="tab" type="button" data-category="yugioh" aria-pressed="false">遊戯王</button>
+        <button class="tab" type="button" data-category="other" aria-pressed="false">その他・不明</button>
+      </div>
+    </section>
+    <div class="results-header">
+      <div><h2>検索結果</h2><span id="resultCount" aria-live="polite">読み込み中…</span></div>
+      <select id="sort" class="sort" aria-label="並び順"><option value="new">投稿が新しい順</option><option value="deadline">申込締切が早い順</option><option value="name">店舗名順</option></select>
+    </div>
+    <div id="message" class="hidden" role="status"></div>
+    <div id="results" class="cards" aria-live="off"></div>
+    <button type="button" id="loadMore" class="more hidden">さらに30件表示</button>
+    <p class="smallnote">※「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。イベント内容は必ずリンク先で確認してください。</p>
+  </main>
+  <script>
+  (() => {
+    'use strict';
+    const $ = (id) => document.getElementById(id);
+    const state = { items: [], filtered: [], limit: 30, loaded: false };
+    const tabs = [...document.querySelectorAll('.tab')];
+    const collator = new Intl.Collator('ja');
+    const clean = (v) => typeof v === 'string' ? v.trim() : '';
+    const norm = (v) => clean(v).normalize('NFKC').toLocaleLowerCase('ja-JP');
+    function parseTime(value) {
+      if (!value || typeof value !== 'string' || !/\d{4}-\d{2}-\d{2}T/.test(value)) return null;
+      const ms = Date.parse(value);
+      return Number.isFinite(ms) ? ms : null;
+    }
+    function formatTime(value) {
+      const ms = parseTime(value);
+      if (ms === null) return clean(value) || '未登録';
+      return new Intl.DateTimeFormat('ja-JP', {timeZone:'Asia/Tokyo',year:'numeric',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(ms));
+    }
+    function categoryOf(item) {
+      // 投稿全体の抜粋には無関係なURLの商品も含まれるため使用しない。
+      const evidence = norm([item.event_title, item.product_name, item.store_name_original].filter(Boolean).join(' '));
+      if (/one\s*piece|ワンピース/.test(evidence)) return 'onepiece';
+      if (/遊戯王|yu[\s-]?gi[\s-]?oh|yugioh/.test(evidence)) return 'yugioh';
+      if (/ポケカ|ポケモンカード|pokemon|pokémon|メガシンフォニア|メガブレイブ|エーフィ|ブラッキー/.test(evidence)) return 'pokemon';
+      return 'other';
+    }
+    const catLabels = {pokemon:'ポケカ',onepiece:'ONE PIECE',yugioh:'遊戯王',other:'その他・不明'};
+    function periodState(item, now = Date.now()) {
+      const start = parseTime(item.application_start_at);
+      const end = parseTime(item.application_end_at);
+      if (start === null || end === null || end < start) return 'unknown';
+      if (now < start) return 'upcoming';
+      if (now > end) return 'ended';
+      return 'active';
+    }
+    const statuses = { active:'期間内', upcoming:'受付前', ended:'期間終了', unknown:'期間不明' };
+    function properShop(item) {
+      const store = clean(item.store_name);
+      const product = clean(item.product_name);
+      if (!store || (product && norm(store.replace(/^\*\s*/,'')).startsWith(norm(product)))) {
+        return clean(item.venue_name) || '店舗未確認';
+      }
+      return store;
+    }
+    function safeEventUrl(raw) {
+      try {
+        const u = new URL(raw);
+        return u.protocol === 'https:' && (u.hostname === 'livepocket.jp' || u.hostname.endsWith('.livepocket.jp')) ? u.href : null;
+      } catch { return null; }
+    }
+    function text(tag, value, className) {
+      const e = document.createElement(tag);
+      e.textContent = value;
+      if (className) e.className = className;
+      return e;
+    }
+    function tag(value, cls) {return text('span',value,'pill '+(cls||''));}
+    function fact(parent, label, value) {
+      if (!value) return;
+      const row = text('div','','fact');
+      row.append(text('span',label,'fact-title'),text('strong',value));
+      parent.append(row);
+    }
+    function eventCard(item) {
+      const el = text('article','','event');
+      const top = text('div','','event-top');
+      const tags = text('div','','tags');
+      const cat = categoryOf(item);
+      const status = periodState(item);
+      tags.append(tag(catLabels[cat],cat));
+      tags.append(tag(statuses[status],status));
+      const end = parseTime(item.application_end_at);
+      if (status === 'active' && end !== null && end-Date.now() <= 48*3600000) tags.append(tag('締切間近','urgency'));
+      top.append(tags);
+      el.append(top);
+      el.append(text('div',clean(item.prefecture)||'都道府県未確認','label-region'));
+      el.append(text('h3',properShop(item),'name'));
+      if (clean(item.event_title)) el.append(text('p',item.event_title,'product'));
+      if (clean(item.product_name)) fact(el,'商品名',item.product_name);
+      if (clean(item.event_date)) fact(el,'開催日',item.event_date);
+      if (end !== null && parseTime(item.application_start_at) !== null) {
+        fact(el,'申込期間',formatTime(item.application_start_at)+' 〜 '+formatTime(item.application_end_at));
+      } else if (clean(item.application_period)) {
+        fact(el,'申込期間',item.application_period+'（年・状態は未確定の場合あり）');
+      }
+      if (clean(item.lottery_result_period)) fact(el,'抽選結果',item.lottery_result_period);
+      const foot = text('div','','event-footer');
+      const hasVerified = item.field_sources && Object.values(item.field_sources).some(x=>String(x).startsWith('user_safari_'));
+      foot.append(text('span',hasVerified?'一部の詳細は画面確認済み':'Discord投稿から収集','source'));
+      const url = safeEventUrl(item.url);
+      if (url) {
+        const a = text('a','イベントページ ↗','action');
+        a.href=url;
+        a.target='_blank';
+        a.rel='noopener noreferrer';
+        a.setAttribute('aria-label', properShop(item)+'のLivePocketページを開く');
+        foot.append(a);
+      }
+      el.append(foot);
+      return el;
+    }
+    function populatePrefectures(items) {
+      const previous = $('prefecture').value;
+      $('prefecture').querySelectorAll('option:not(:first-child)').forEach(e=>e.remove());
+      [...new Set(items.map(x=>clean(x.prefecture)).filter(Boolean))].sort(collator.compare).forEach(value => {
+        const opt = document.createElement('option');
+        opt.value=value; opt.textContent=value;
+        $('prefecture').append(opt);
+      });
+      $('prefecture').value=previous;
+    }
+    function updateTabs() {
+      tabs.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.category === $('category').value)));
+    }
+    function applyFilters() {
+      if (!state.loaded) return;
+      state.limit=30;
+      const query = norm($('query').value);
+      const pref = $('prefecture').value;
+      const cat = $('category').value;
+      const status = $('status').value;
+      const sort = $('sort').value;
+      state.filtered = state.items.filter(item => {
+        if (pref && item.prefecture !== pref) return false;
+        if (cat && categoryOf(item) !== cat) return false;
+        if (status && periodState(item) !== status) return false;
+        if (query) {
+          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.store_name_original,item.url].join(' '));
+          if (!search.includes(query)) return false;
+        }
+        return true;
+      });
+      if (sort === 'deadline') {
+        state.filtered.sort((a,b) => (parseTime(a.application_end_at)??Infinity)-(parseTime(b.application_end_at)??Infinity) || (Date.parse(b.discord_posted_at||'')||0)-(Date.parse(a.discord_posted_at||'')||0));
+      } else if (sort === 'name') {
+        state.filtered.sort((a,b) => collator.compare(properShop(a),properShop(b)));
+      } else {
+        state.filtered.sort((a,b) => (Date.parse(b.discord_posted_at||'')||0)-(Date.parse(a.discord_posted_at||'')||0));
+      }
+      updateTabs();
+      render();
+    }
+    function render() {
+      const root = $('results');
+      root.replaceChildren();
+      $('resultCount').textContent=state.items.length+'件中 '+state.filtered.length+'件（'+Math.min(state.limit,state.filtered.length)+'件表示）';
+      if (state.filtered.length === 0) {
+        $('message').textContent='条件に合うイベントがありません。条件を変えてお試しください。';
+        $('message').className='empty';
+      } else {
+        $('message').className='hidden';
+        const frag = document.createDocumentFragment();
+        state.filtered.slice(0,state.limit).forEach(item=>frag.append(eventCard(item)));
+        root.append(frag);
+      }
+      $('loadMore').classList.toggle('hidden',state.limit >= state.filtered.length);
+      $('loadMore').textContent='さらに'+Math.min(30,state.filtered.length-state.limit)+'件表示';
+    }
+    async function load() {
+      $('refresh').disabled=true;
+      $('refresh').textContent='読み込み中…';
+      $('message').className='hidden';
+      try {
+        const response = await fetch('./livepocket_urls.json?version='+Date.now(),{cache:'no-store'});
+        if (!response.ok) throw new Error('HTTP '+response.status);
+        const data=await response.json();
+        if (!data || !Array.isArray(data.items)) throw new Error('JSONに items 配列がありません');
+        state.items=data.items.filter(x=>x && typeof x==='object' && safeEventUrl(x.url));
+        state.loaded=true;
+        $('totalCount').textContent=state.items.length.toLocaleString('ja-JP');
+        $('namedCount').textContent=state.items.filter(x=>clean(x.store_name)).length.toLocaleString('ja-JP');
+        $('activeCount').textContent=state.items.filter(x=>periodState(x)==='active').length.toLocaleString('ja-JP');
+        $('dataDate').textContent=data.collected_at?'URL収集日時（JSON記録）：'+formatTime(data.collected_at):'JSONから表示しています';
+        populatePrefectures(state.items);
+        applyFilters();
+      } catch(err) {
+        state.loaded=false;
+        $('results').replaceChildren();
+        $('resultCount').textContent='読み込み失敗';
+        $('message').className='error';
+        $('message').textContent='データの読み込みに失敗しました（'+String(err.message||err)+'）。livepocket.html と livepocket_urls.json をリポジトリの同じ階層に配置し、GitHub PagesのURLから開いてください。';
+      } finally {
+        $('refresh').disabled=false;
+        $('refresh').textContent='↻ 更新';
+      }
+    }
+    ['query','prefecture','category','status','sort'].forEach(id => $(id).addEventListener(id==='query'?'input':'change',applyFilters));
+    tabs.forEach(tab => tab.addEventListener('click',()=>{$('category').value=tab.dataset.category;applyFilters();}));
+    $('loadMore').addEventListener('click',()=>{state.limit+=30;render();});
+    $('refresh').addEventListener('click',load);
+    load();
+  })();
+  </script>
+</body>
+</html>
