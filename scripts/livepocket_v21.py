@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21: map-catalog-assisted Pokémon classification & store-aware review.
+"""LivePocket v21.1: map-catalog-assisted Pokémon classification & store-aware review.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -123,10 +123,14 @@ def load_catalog(pack_path=PACK_PATH, deck_path=DECK_PATH):
 
 
 def candidate_product(item, catalog):
-    """Match a real catalog name as a substring of an event's own name/title.
+    """Match map product names, prioritizing observed whole product names.
 
-    A short, generic or truncated string cannot match. If several unrelated
-    names are found, classification remains unknown rather than guessing.
+    1. A catalog key contained in a longer ticket product/title is the
+       strongest evidence (exact/full match takes priority).
+    2. Only if no full key is present, accept a sufficiently distinctive
+       part of exactly ONE catalog product. This handles abbreviated names
+       such as "エーフィ・ブラッキー" without mistaking
+       "30th CELEBRATION" for the deck containing that pack title.
     """
     if not isinstance(item, dict):
         return None
@@ -137,24 +141,31 @@ def candidate_product(item, catalog):
         key = name_key(text)
         if not usable_key(key):
             continue
-        candidates = [(len(canonical), canonical, meta) for canonical, meta in catalog.items()
-                      if canonical in key or (key in canonical and len(key) >= 7)]
-        if not candidates:
-            continue
-        maxlen = max(x[0] for x in candidates)
-        # A shorter known model may be a substring of the longer product.
-        best = [(key2, meta) for size, key2, meta in candidates if size == maxlen]
-        if len(best) == 1:
-            matched_key, meta = best[0]
-            # Reject partial evidence which might refer to any of several
-            # different products sharing a short prefix (e.g. "エーフィ").
-            if matched_key not in key:
-                competing = [c for c in catalog if key in c]
-                if len(competing) != 1:
-                    continue
-            return {**meta, 'evidence': field}
-    return None
 
+        # Direct matches are strongest. Prefer the exact key when possible.
+        if key in catalog:
+            return {**catalog[key], 'evidence': field}
+        direct = [(len(canonical), canonical, meta)
+                  for canonical, meta in catalog.items()
+                  if canonical in key]
+        if direct:
+            longest = max(size for size, _, _ in direct)
+            best = [(canon, meta) for size, canon, meta in direct
+                    if size == longest]
+            if len(best) == 1:
+                return {**best[0][1], 'evidence': field}
+            # Two equally strong names: the event's single product is unclear.
+            continue
+
+        # Reverse / abbreviated match is only safe when ONE map entry
+        # contains this long-enough piece. Do not prefer a longer deck
+        # over an exact pack match or guess between similar products.
+        if len(key) >= 7:
+            reverse = [(canonical, meta) for canonical, meta in catalog.items()
+                       if key in canonical]
+            if len(reverse) == 1:
+                return {**reverse[0][1], 'evidence': field}
+    return None
 
 def stores_known(item):
     stores = item.get('stores') if isinstance(item, dict) else None
