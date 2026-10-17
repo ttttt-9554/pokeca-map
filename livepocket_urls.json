@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-17T09:46:48.613943+00:00",
+  "collected_at": "2026-10-17T12:29:47.718721+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 68,
@@ -1876,7 +1876,13 @@
       "store_name_original": "10/16(金)発売 ポケカ商...",
       "quality_flags": [
         "suspect_store_name"
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T23:59:00+09:00",
+      "application_start_at": "2026-10-05T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/rbbol",
@@ -2028,7 +2034,13 @@
           "name": "TSUTAYA Trading Card 戸塚店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T21:00:00+09:00",
+      "application_start_at": "2026-10-05T10:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/p7l99",
@@ -2100,7 +2112,13 @@
           "name": "プリキュア プリティストア東京店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-13T20:00:00+09:00",
+      "application_start_at": "2026-10-04T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/egck0",
@@ -2120,7 +2138,13 @@
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-07T22:00:00+09:00",
+      "application_start_at": "2026-10-05T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/da7vx",
@@ -2131,16 +2155,40 @@
       "store_name": "晴れる屋2 西日本店舗",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATION カードセット (9種セット)",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
       "stores": [
         {
-          "name": "晴れる屋2 西日本店舗",
+          "name": "晴れる屋2なんば店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2三宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2京都店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2大須店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2福岡店",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-05T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/abnrt",
@@ -2194,7 +2242,13 @@
           "name": "文教堂書店湘南とうきゅう店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T20:30:00+09:00",
+      "application_start_at": "2026-10-05T11:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ksy1d",
@@ -2212,7 +2266,13 @@
       "store_name_original": "晴れる屋2 通販「30th C...",
       "quality_flags": [
         "suspect_store_name"
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-07T18:00:00+09:00",
+      "application_start_at": "2026-10-05T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/p5xy5",
@@ -2258,7 +2318,13 @@
           "name": "トレカエース新取手店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-05T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/e259k",
@@ -6088,7 +6154,7 @@
       "store_name": "新宿マルイアネックス3階 FEWMANY",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ストームエメラルダ",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -6096,14 +6162,18 @@
       "application_start_at": "2026-10-17T11:00:00+09:00",
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
-        "application_start_at": "v13_livepocket_rendered_public_page"
+        "application_start_at": "v13_livepocket_rendered_public_page",
+        "product_name": "discord_url_pair:1560943049637502976"
       },
       "stores": [
         {
           "name": "新宿マルイアネックス3階 FEWMANY",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "discord_product_source_message_id": "1560943049637502976",
+      "discord_product_source_channel_id": "1551580466266644552",
+      "discord_product_source_posted_at": "2026-10-17T09:10:23.953000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/vt2ev",
@@ -6114,7 +6184,7 @@
       "store_name": "新宿マルイアネックス3階 FEWMANY",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "イーブイex",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -6122,14 +6192,18 @@
       "application_start_at": "2026-10-17T11:00:00+09:00",
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
-        "application_start_at": "v13_livepocket_rendered_public_page"
+        "application_start_at": "v13_livepocket_rendered_public_page",
+        "product_name": "discord_url_pair:1560943049637502976"
       },
       "stores": [
         {
           "name": "新宿マルイアネックス3階 FEWMANY",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "discord_product_source_message_id": "1560943049637502976",
+      "discord_product_source_channel_id": "1551580466266644552",
+      "discord_product_source_posted_at": "2026-10-17T09:10:23.953000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/zof6r",
@@ -6801,12 +6875,12 @@
     "prefecture": 147,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 27,
+    "product_name": 30,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 87,
-    "application_start_at": 87,
+    "application_end_at": 95,
+    "application_start_at": 95,
     "stores_events": 186
   },
   "collector_state": {
@@ -6814,10 +6888,12 @@
       "1551580466266644552": "1560943049637502976"
     },
     "last_run": {
-      "checked_at": "2026-10-17T09:46:48.613943+00:00",
-      "new_urls": 6,
-      "original_urls": 332,
-      "suspect_legacy_store_names": 0
+      "checked_at": "2026-10-17T12:29:47.718721+00:00",
+      "new_urls": 0,
+      "original_urls": 338,
+      "suspect_legacy_store_names": 0,
+      "discord_url_pairs_added": 2,
+      "discord_url_pairs_conflicts": 0
     },
     "livepocket_page_enrichment": {
       "blocked_until": "2026-10-17T12:19:57.811101+00:00",
@@ -7264,6 +7340,38 @@
         "https://livepocket.jp/e/p5xy5": {
           "checked_at": "2026-10-17T11:05:49.633731+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/n8hf3": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ms12p": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ksy1d": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/k1kbb": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/illuy": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/egck0": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/da7vx": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/cq6ix": {
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -7327,6 +7435,20 @@
           "attempts": 1,
           "checked_at": "2026-10-17T11:05:49.633731+00:00",
           "status": "ok"
+        },
+        "https://livepocket.jp/e/409ws": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/qr8o-": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T12:30:12.428547+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
         }
       }
     }
