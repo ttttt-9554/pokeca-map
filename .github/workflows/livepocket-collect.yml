@@ -9,9 +9,7 @@ name: LivePocket Discord URL Collector
         required: true
         default: 'false'
         type: choice
-        options:
-          - 'true'
-          - 'false'
+        options: ['true', 'false']
 
   schedule:
     - cron: '7,17,27,37,47,57 * * * *'
@@ -30,7 +28,7 @@ jobs:
     timeout-minutes: 20
 
     env:
-      LIVEPOCKET_V14_SNAPSHOT: ${{ runner.temp }}/livepocket-before.json
+      LIVEPOCKET_V14_SNAPSHOT: '.livepocket_v14_before.json'
       LIVEPOCKET_V14_NEW_PER_RUN: '15'
       LIVEPOCKET_V14_BACKGROUND_PER_RUN: '8'
       LIVEPOCKET_V14_RUN_BACKGROUND: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && 'true' || 'false' }}
@@ -46,7 +44,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Snapshot existing URLs (v14)
+      - name: Snapshot existing URLs before Discord collection (v14)
         run: python scripts/livepocket_v14.py snapshot
 
       - name: Collect Discord URLs
@@ -82,7 +80,7 @@ jobs:
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      - name: Queue newly discovered URLs (v14)
+      - name: Queue new URLs for immediate content checks (v14)
         id: priorities
         run: python scripts/livepocket_v14.py prepare
 
@@ -110,7 +108,7 @@ jobs:
             git push
           fi
 
-      - name: Backup full JSON
+      - name: Backup full JSON for authorized maintainers
         if: always()
         uses: actions/upload-artifact@v4
         with:
