@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v19: one event URL, zero or more explicitly verified stores.
+"""LivePocket v19.1: one event URL, zero or more explicitly verified stores.
 
 Runs v18's existing browser priorities *once* and examines the SAME browser
 responses for a clearly labelled participating-store list. No paid API, no
@@ -85,14 +85,28 @@ def store_part(piece, *, strict_retail=False):
 
 
 def split_store_line(line, *, strict_retail=False):
-    """Only split a labelled shop list; never split a generic paragraph."""
+    """Split a labelled shop list, including Japanese full-width slashes (／).
+
+    Do NOT split ASCII slashes: those can be part of a legitimate business name.
+    A failed fragment invalidates the whole line instead of keeping partial data.
+    """
     s = line.strip()
     # A colon on a bullet may mark a locality; preserve it for store_part().
-    parts = re.split(r'\s*[、,，;；]\s*', s)
-    if len(parts) > MAX_STORES:
+    parts = re.split(r'\s*[、,，;；／]\s*', s)
+    if len(parts) > MAX_STORES or any(not p.strip() for p in parts):
         return []
     result = [store_part(p, strict_retail=strict_retail) for p in parts]
     return result if all(result) else []
+
+
+def normalize_store_heading(s):
+    """Accept headings like 【対象9店舗】 without weakening unlabeled parsing."""
+    s = s.strip()
+    if s.startswith('【') and s.endswith('】'):
+        s = s[1:-1].strip()
+    s = re.sub(r'^[①-⑳]\s*', '', s)
+    s = re.sub(r'^(対象|販売|実施|開催|受取|参加|取扱)\s*[0-9０-９]+\s*店舗', r'\1店舗', s)
+    return s
 
 
 def page_stores(text):
@@ -106,7 +120,7 @@ def page_stores(text):
     lines = [line.strip() for line in text.splitlines()]
     candidate_groups = []
     for idx, line in enumerate(lines):
-        header = STORE_HEADING.fullmatch(line)
+        header = STORE_HEADING.fullmatch(normalize_store_heading(line))
         if not header:
             continue
         group = []
@@ -115,12 +129,15 @@ def page_stores(text):
             group = split_store_line(inline, strict_retail=False)
         else:
             for raw in lines[idx+1:idx+1+MAX_STORES+2]:
-                if not raw or OTHER_HEADING.fullmatch(raw) or STORE_HEADING.fullmatch(raw):
+                if not raw or OTHER_HEADING.fullmatch(raw) or STORE_HEADING.fullmatch(normalize_store_heading(raw)):
                     break
                 prefixed = bool(LIST_PREFIX.match(raw))
                 # A single unbulleted value after label is valid. Multiple
                 # unbulleted prose lines are too risky: need retail names.
-                entries = split_store_line(raw, strict_retail=not prefixed)
+                # An explicitly labelled multi-store slash/comma list is
+                # sufficiently structured even when shop names omit the 店 suffix.
+                delimited = any(mark in raw for mark in ('／', '、', '，', ';', '；'))
+                entries = split_store_line(raw, strict_retail=not (prefixed or delimited))
                 if not entries:
                     break
                 group.extend(entries)
@@ -194,6 +211,18 @@ def merge_stores(existing, page, manual, legacy_name='', legacy_pref=''):
             if name and pref in (v10.PREFS | {''}):
                 entries[(name, pref)] = {'name': name, 'prefecture': pref}
     legacy_name = safe_name(legacy_name)
+    # Older versions used one chain-level placeholder (e.g. イトーヨーカドー)
+    # where the actual event has multiple shop locations.  When an explicitly
+    # labelled multi-store list replaces that singleton, do not count the
+    # placeholder as an additional participating shop.
+    explicit = [s for s in (page or []) + (manual or []) if isinstance(s, dict)]
+    if len({(s.get('name'), s.get('prefecture') or '') for s in explicit}) >= 2:
+        if len(existing or []) == 1 and isinstance(existing[0], dict):
+            old = existing[0]
+            old_name, old_pref = old.get('name'), old.get('prefecture') or ''
+            if (old_name == legacy_name and not old_pref
+                    and not any(s.get('name') == old_name for s in explicit)):
+                entries.pop((old_name, ''), None)
     if not entries and legacy_name:
         pref = legacy_pref if legacy_pref in v10.PREFS else ''
         entries[(legacy_name,pref)] = {'name': legacy_name, 'prefecture': pref}
