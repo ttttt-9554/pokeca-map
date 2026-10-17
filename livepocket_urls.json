@@ -5041,31 +5041,31 @@
     "v13": {
       "browser_checks": {
         "https://livepocket.jp/e/1maxl": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/vt2ev": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/zof6r": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "browser_redirected"
         },
         "https://livepocket.jp/e/opyur-hugr": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/717w_": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/3hemk": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/3010thfu": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/st1030ft": {
@@ -5081,7 +5081,7 @@
           "status": "browser_deadline_found"
         },
         "https://livepocket.jp/e/w6vl0": {
-          "checked_at": "2026-10-17T01:25:25.516519+00:00",
+          "checked_at": "2026-10-17T01:57:24.223167+00:00",
           "status": "checked_no_new_details"
         }
       }
@@ -5095,6 +5095,9 @@
         }
       },
       "pending_new_urls": []
+    },
+    "v16": {
+      "retry_log": {}
     }
   }
 }
