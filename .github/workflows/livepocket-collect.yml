@@ -9,10 +9,15 @@ name: LivePocket Discord URL Collector
         required: true
         default: 'false'
         type: choice
-        options: ['true', 'false']
+        options:
+          - 'true'
+          - 'false'
 
   schedule:
+    # 新しいDiscord投稿を約10分おきに検知
     - cron: '7,17,27,37,47,57 * * * *'
+
+    # 過去の未確認URLを1日2回追加チェック（UTC）
     - cron: '23 1,13 * * *'
 
 permissions:
@@ -34,19 +39,23 @@ jobs:
       LIVEPOCKET_V14_RUN_BACKGROUND: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && 'true' || 'false' }}
 
     steps:
+      # 1. GitHubのファイルを取得
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: true
 
+      # 2. Pythonを準備
       - name: Python setup
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
+      # 3. 既存URLのスナップショットを保存
       - name: Snapshot existing URLs before Discord collection (v14)
         run: python scripts/livepocket_v14.py snapshot
 
+      # 4. Discordから新しいURLを収集
       - name: Collect Discord URLs
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -54,12 +63,15 @@ jobs:
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/livepocket_collect.py
 
+      # 5. Discord投稿から商品情報を取得
       - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
+      # 6. 確認済みイベント情報を反映
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
+      # 7. Discordの埋め込み情報を取得（Brave不使用）
       - name: Enrich Discord embeds without Brave (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -68,31 +80,39 @@ jobs:
           LIVEPOCKET_V8_BRAVE_PER_RUN: '0'
         run: python scripts/livepocket_v8.py
 
+      # 8. 店舗名を整理して公開JSONを作成
       - name: Recover store names and create public JSON (v7)
         run: python scripts/livepocket_v7.py
 
+      # 9. 都道府県を補完
       - name: Prefecture matching and review previews (v9)
         run: python scripts/livepocket_v9.py
 
+      # 10. 商品分類と確認待ちリストを更新
       - name: Verified updates and review classification (v10)
         run: python scripts/livepocket_v10.py
 
+      # 11. 応募締切日時を確認
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
+      # 12. 新着URLを最優先キューに登録
       - name: Queue new URLs for immediate content checks (v14)
         id: priorities
         run: python scripts/livepocket_v14.py prepare
 
+      # 13. 必要な場合だけ無料ブラウザを準備
       - name: Install free browser only when needed
         if: ${{ steps.priorities.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
 
-      - name: Check NEW event pages FIRST (v14)
-        run: python scripts/livepocket_v14.py process
+      # 14. 新着URLの内容を最優先で確認（v15）
+      - name: Check NEW event names, products, stores and deadlines (v15)
+        run: python scripts/livepocket_v15.py process
 
+      # 15. 取得結果をGitHubへ保存
       - name: Save public data and check reports
         shell: bash
         run: |
@@ -108,6 +128,7 @@ jobs:
             git push
           fi
 
+      # 16. 全URLデータをバックアップ
       - name: Backup full JSON for authorized maintainers
         if: always()
         uses: actions/upload-artifact@v4
