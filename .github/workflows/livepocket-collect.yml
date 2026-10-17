@@ -9,12 +9,13 @@ name: LivePocket Discord URL Collector
         required: true
         default: 'false'
         type: choice
-        options:
-          - 'true'
-          - 'false'
+        options: ['true', 'false']
 
   schedule:
+    # Discordの新着URLを約10分おきに確認
     - cron: '7,17,27,37,47,57 * * * *'
+
+    # 未確認の過去URLを1日2回確認（UTC）
     - cron: '23 1,13 * * *'
 
 permissions:
@@ -47,9 +48,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Snapshot existing URLs (v14)
+      # 収集前のURLを保存して新着を判定
+      - name: Snapshot existing URLs before Discord collection (v14)
         run: python scripts/livepocket_v14.py snapshot
 
+      # DiscordからLivePocket URLを収集
       - name: Collect Discord URLs
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -57,12 +60,15 @@ jobs:
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/livepocket_collect.py
 
+      # Discord投稿から商品情報を抽出
       - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
+      # 確認済みイベント情報を反映
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
+      # Discordの埋め込み情報を補完
       - name: Enrich Discord embeds without Brave (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -71,37 +77,49 @@ jobs:
           LIVEPOCKET_V8_BRAVE_PER_RUN: '0'
         run: python scripts/livepocket_v8.py
 
-      - name: Recover store names and public JSON (v7)
+      # 店舗情報と公開JSONを生成
+      - name: Recover store names and create public JSON (v7)
         run: python scripts/livepocket_v7.py
 
+      # 都道府県を判定
       - name: Prefecture matching and review previews (v9)
         run: python scripts/livepocket_v9.py
 
+      # 確認済み情報と商品区分を反映
       - name: Verified updates and review classification (v10)
         run: python scripts/livepocket_v10.py
 
-      - name: Confirm application deadlines (v11)
+      # 応募締切を確認
+      - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      - name: Queue newly discovered URLs (v14)
+      # 新着URLを最優先で確認対象にする
+      - name: Queue new URLs for immediate content checks (v14)
         id: priorities
         run: python scripts/livepocket_v14.py prepare
 
-      - name: Plan new, retry and historical checks (v20)
-        id: v20plan
-        run: python scripts/livepocket_v20.py plan
+      # v21: 新着・再確認・過去URLを計画
+      - name: Plan new, due retries and ticket products and verified store locations (v21)
+        id: v21plan
+        run: python scripts/livepocket_v21.py plan
 
+      # 必要な場合だけ無料ブラウザを導入
       - name: Install free browser only when needed
-        if: ${{ steps.v20plan.outputs.browser_needed == 'true' }}
+        if: ${{ steps.v21plan.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
 
-      - name: Check ticket products and store prefectures (v20)
+      # v21:
+      # LivePocketのチケット・商品名・店舗情報を確認
+      # 発見マップのポケカ商品マスタと部分一致照合
+      # 複数店舗の未取得判定を改善
+      - name: Check ticket products and multiple-store prefectures (v21)
         env:
-          LIVEPOCKET_V20_BROWSER_READY: ${{ steps.v20plan.outputs.browser_needed }}
-        run: python scripts/livepocket_v20.py process
+          LIVEPOCKET_V21_BROWSER_READY: ${{ steps.v21plan.outputs.browser_needed }}
+        run: python scripts/livepocket_v21.py process
 
+      # 最新のJSONと確認レポートをGitHubに保存
       - name: Save public data and check reports
         shell: bash
         run: |
@@ -113,11 +131,12 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket v20 products and verified prefectures'
+            git commit -m 'Update LivePocket v21 map catalog classification'
             git push
           fi
 
-      - name: Backup full JSON
+      # バックアップ
+      - name: Backup full JSON for authorized maintainers
         if: always()
         uses: actions/upload-artifact@v4
         with:
