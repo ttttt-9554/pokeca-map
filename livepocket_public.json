@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-17T13:09:25.606549+00:00",
-  "unique_livepocket_urls": 343,
+  "collected_at": "2026-10-17T21:12:19.502362+00:00",
+  "unique_livepocket_urls": 348,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -1411,6 +1411,8 @@
       "store_name": "トレカ丸倉賀野店",
       "prefecture": "群馬県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-07T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00",
       "stores": [
         {
           "name": "トレカ丸倉賀野店",
@@ -1461,6 +1463,8 @@
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1484,6 +1488,8 @@
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-10-03T13:00:00+09:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -1532,6 +1538,8 @@
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-10-03T13:00:00+09:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -1664,6 +1672,8 @@
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1752,6 +1762,8 @@
       "store_name": "トレカ丸足利助戸店",
       "prefecture": "栃木県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-07T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00",
       "stores": [
         {
           "name": "トレカ丸足利助戸店",
@@ -1776,6 +1788,8 @@
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-10-03T13:00:00+09:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -3433,7 +3447,77 @@
           "prefecture": "宮城県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/lli1u",
+      "store_name": "HMVトレカショップ柏の葉",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "application_end_at": "2026-10-18T20:59:00+09:00",
+      "application_start_at": "2026-10-17T13:00:00+09:00",
+      "stores": [
+        {
+          "name": "HMVトレカショップ柏の葉",
+          "prefecture": "千葉県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/sy415",
+      "store_name": "TSUTAYA所沢山口店トレカ売場",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-17T07:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA所沢山口店トレカ売場",
+          "prefecture": "埼玉県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/jlwei",
+      "store_name": "古本市場蓮田店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-17T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "古本市場蓮田店",
+          "prefecture": "埼玉県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/d08fb",
+      "store_name": "トレカ丸葉鹿店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "application_end_at": "2026-10-21T22:00:00+09:00",
+      "application_start_at": "2026-10-17T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "トレカ丸葉鹿店",
+          "prefecture": "栃木県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/p997-",
+      "store_name": "TSUTAYA仙台荒井店",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA仙台荒井店",
+          "prefecture": "宮城県"
+        }
+      ]
     }
   ],
-  "updated_at": "2026-10-17T18:52:33.419063+00:00"
+  "updated_at": "2026-10-17T21:12:44.537734+00:00"
 }
