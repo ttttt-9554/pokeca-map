@@ -479,7 +479,13 @@
           "name": "TSUTAYA入間仏子店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T21:45:00+09:00",
+      "application_start_at": "2026-10-12T07:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/i6s-n",
@@ -490,7 +496,7 @@
       "store_name": "晴れる屋",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "『リアリティ・フラクチャー』 Secret Lair Bundle (●英語版)",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -499,7 +505,14 @@
           "name": "晴れる屋",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-12T17:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/bqj23",
@@ -519,7 +532,13 @@
           "name": "蔦屋書店茂原店 トレカコーナー",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-13T21:00:00+09:00",
+      "application_start_at": "2026-10-11T17:13:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/uay8k",
@@ -533,7 +552,44 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-12T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "豊橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "とよかわ店",
+          "prefecture": ""
+        },
+        {
+          "name": "荒尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "領家店",
+          "prefecture": ""
+        },
+        {
+          "name": "中島新町店",
+          "prefecture": ""
+        },
+        {
+          "name": "佐鳴台店",
+          "prefecture": ""
+        },
+        {
+          "name": "蒲郡三谷店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ld_6t",
@@ -553,7 +609,13 @@
           "name": "TAUTAYA秩父店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-14T20:00:00+09:00",
+      "application_start_at": "2026-10-12T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/vddw3",
@@ -567,7 +629,44 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-12T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "豊橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "とよかわ店",
+          "prefecture": ""
+        },
+        {
+          "name": "荒尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "領家店",
+          "prefecture": ""
+        },
+        {
+          "name": "中島新町店",
+          "prefecture": ""
+        },
+        {
+          "name": "佐鳴台店",
+          "prefecture": ""
+        },
+        {
+          "name": "蒲郡三谷店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/miwqx",
@@ -578,14 +677,21 @@
       "store_name": null,
       "prefecture": null,
       "details_source": null,
-      "product_name": null,
+      "product_name": "ワンピースカードゲーム「世界最強の戦士」",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
       "store_name_original": "10月再販：ワンピースカードゲ...",
       "quality_flags": [
         "suspect_store_name"
-      ]
+      ],
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-14T20:05:00+09:00",
+      "application_start_at": "2026-10-11T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/iups6",
@@ -625,7 +731,13 @@
           "name": "コロコロBASE",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-09T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ae88o",
@@ -6025,14 +6137,47 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_user_verified_store_csv"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "stores": [
         {
-          "name": "イトーヨーカドー",
-          "prefecture": ""
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーららぽーと横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーグランツリー武蔵小杉店",
+          "prefecture": "神奈川県"
         }
       ]
     },
@@ -6172,13 +6317,13 @@
     "prefecture": 147,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 21,
+    "product_name": 23,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 31,
-    "application_start_at": 31,
-    "stores_events": 180
+    "application_end_at": 39,
+    "application_start_at": 39,
+    "stores_events": 182
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -6386,6 +6531,38 @@
         "https://livepocket.jp/e/409ws": {
           "checked_at": "2026-10-17T04:33:41.450764+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/vddw3": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/uay8k": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/qelp_": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ld_6t": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/i6s-n": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/bqj23": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/risz5": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/miwqx": {
+          "checked_at": "2026-10-17T04:40:50.371545+00:00",
+          "status": "checked_product_deadline"
         }
       }
     },

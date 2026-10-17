@@ -80,9 +80,9 @@
       "url": "https://livepocket.jp/e/qr8o-",
       "store_name": "JUMP SHOP横浜店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
-      "application_end_at": "2026-10-17T23:59:00+09:00",
       "application_start_at": "2026-10-13T17:00:00+09:00",
+      "application_end_at": "2026-10-17T23:59:00+09:00",
+      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
       "stores": [
         {
           "name": "JUMP SHOP横浜店",
@@ -94,9 +94,9 @@
       "url": "https://livepocket.jp/e/rfsy5",
       "store_name": "JUMP SHOP東京駅店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
-      "application_end_at": "2026-10-17T23:59:00+09:00",
       "application_start_at": "2026-10-13T17:00:00+09:00",
+      "application_end_at": "2026-10-17T23:59:00+09:00",
+      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
       "stores": [
         {
           "name": "JUMP SHOP東京駅店",
@@ -108,9 +108,9 @@
       "url": "https://livepocket.jp/e/vmmju",
       "store_name": "JUMP SHOP東京スカイツリータウン・ソラマチ店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
-      "application_end_at": "2026-10-17T23:59:00+09:00",
       "application_start_at": "2026-10-13T17:00:00+09:00",
+      "application_end_at": "2026-10-17T23:59:00+09:00",
+      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
       "stores": [
         {
           "name": "JUMP SHOP東京スカイツリータウン・ソラマチ店",
@@ -163,9 +163,9 @@
       "url": "https://livepocket.jp/e/o35r4",
       "store_name": "ブックエース坂東店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
-      "application_end_at": "2026-10-18T21:00:00+09:00",
       "application_start_at": "2026-10-13T10:00:00+09:00",
+      "application_end_at": "2026-10-18T21:00:00+09:00",
+      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
       "stores": [
         {
           "name": "ブックエース坂東店",
@@ -175,9 +175,9 @@
     },
     {
       "url": "https://livepocket.jp/e/1q_nh",
-      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
+      "application_start_at": "2026-10-13T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-13T09:00:00+09:00"
+      "discord_posted_at": "2026-10-13T22:28:18.672000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/yiucw",
@@ -197,9 +197,9 @@
       "url": "https://livepocket.jp/e/409ws",
       "store_name": "JUMP SHOP東京ドームシティ店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-13T09:00:32.200000+00:00",
-      "application_end_at": "2026-10-17T23:59:00+09:00",
       "application_start_at": "2026-10-13T17:00:00+09:00",
+      "application_end_at": "2026-10-17T23:59:00+09:00",
+      "discord_posted_at": "2026-10-13T09:00:32.200000+00:00",
       "stores": [
         {
           "name": "JUMP SHOP東京ドームシティ店",
@@ -212,6 +212,8 @@
       "store_name": "TSUTAYA入間仏子店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
+      "application_end_at": "2026-10-18T21:45:00+09:00",
+      "application_start_at": "2026-10-12T07:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA入間仏子店",
@@ -223,6 +225,9 @@
       "url": "https://livepocket.jp/e/i6s-n",
       "store_name": "晴れる屋",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
+      "product_name": "『リアリティ・フラクチャー』 Secret Lair Bundle (●英語版)",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-12T17:00:00+09:00",
       "stores": [
         {
           "name": "晴れる屋",
@@ -235,6 +240,8 @@
       "store_name": "蔦屋書店茂原店 トレカコーナー",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
+      "application_end_at": "2026-10-13T21:00:00+09:00",
+      "application_start_at": "2026-10-11T17:13:00+09:00",
       "stores": [
         {
           "name": "蔦屋書店茂原店 トレカコーナー",
@@ -246,13 +253,47 @@
       "url": "https://livepocket.jp/e/uay8k",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "source_preview": "※再入荷分 ポケカ商品【スター...",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-12T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "豊橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "とよかわ店",
+          "prefecture": ""
+        },
+        {
+          "name": "荒尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "領家店",
+          "prefecture": ""
+        },
+        {
+          "name": "中島新町店",
+          "prefecture": ""
+        },
+        {
+          "name": "佐鳴台店",
+          "prefecture": ""
+        },
+        {
+          "name": "蒲郡三谷店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ld_6t",
       "store_name": "TAUTAYA秩父店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
+      "application_end_at": "2026-10-14T20:00:00+09:00",
+      "application_start_at": "2026-10-12T09:00:00+09:00",
       "stores": [
         {
           "name": "TAUTAYA秩父店",
@@ -264,13 +305,48 @@
       "url": "https://livepocket.jp/e/vddw3",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "source_preview": "※再入荷分 ポケカ商品【メガブ...",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-12T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "豊橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "とよかわ店",
+          "prefecture": ""
+        },
+        {
+          "name": "荒尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "領家店",
+          "prefecture": ""
+        },
+        {
+          "name": "中島新町店",
+          "prefecture": ""
+        },
+        {
+          "name": "佐鳴台店",
+          "prefecture": ""
+        },
+        {
+          "name": "蒲郡三谷店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/miwqx",
       "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
       "source_preview": "10月再販：ワンピースカードゲ...",
-      "review_category": "onepiece"
+      "review_category": "onepiece",
+      "product_name": "ワンピースカードゲーム「世界最強の戦士」",
+      "application_end_at": "2026-10-14T20:05:00+09:00",
+      "application_start_at": "2026-10-11T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/iups6",
@@ -289,6 +365,8 @@
       "store_name": "コロコロBASE",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-09T10:00:00+09:00",
       "stores": [
         {
           "name": "コロコロBASE",
@@ -2802,8 +2880,40 @@
       "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
       "stores": [
         {
-          "name": "イトーヨーカドー",
-          "prefecture": ""
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーららぽーと横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーグランツリー武蔵小杉店",
+          "prefecture": "神奈川県"
         }
       ]
     },
