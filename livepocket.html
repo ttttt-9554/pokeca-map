@@ -196,6 +196,9 @@
       if (/one\s*piece|ワンピース/.test(evidence)) return 'onepiece';
       if (/遊戯王|yu[\s-]?gi[\s-]?oh|yugioh/.test(evidence)) return 'yugioh';
       if (/ポケカ|ポケモンカード|pokemon|pokémon|メガシンフォニア|メガブレイブ|エーフィ|ブラッキー/.test(evidence)) return 'pokemon';
+      // v21: 発見マップの既存CSVで商品名を照合したイベントはポケカ扱い。
+      // サーバー側で他TCGを除外済み。別ジャンルの明示名は上の判定が優先。
+      if (clean(item.pokemon_map_match)) return 'pokemon';
       // v10: URLごとの省略見出しによる参考ジャンル（正式商品名ではない）。
       if (!item.event_title && !item.product_name && ['pokemon','onepiece','yugioh'].includes(item.review_category)) return item.review_category;
       return 'other';
