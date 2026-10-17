@@ -1044,17 +1044,17 @@
     },
     {
       "url": "https://livepocket.jp/e/57_nt",
-      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "application_start_at": "2026-10-05T10:34:00+09:00",
       "application_end_at": "2026-10-13T12:00:00+09:00",
-      "application_start_at": "2026-10-05T10:34:00+09:00"
+      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/b1c0d",
       "store_name": "プリキュア プリティストア横浜店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
-      "application_end_at": "2026-10-13T20:00:00+09:00",
       "application_start_at": "2026-10-04T18:00:00+09:00",
+      "application_end_at": "2026-10-13T20:00:00+09:00",
+      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
       "stores": [
         {
           "name": "プリキュア プリティストア横浜店",
@@ -1066,9 +1066,9 @@
       "url": "https://livepocket.jp/e/adl25",
       "store_name": "プリキュア プリティストア横浜店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
-      "application_end_at": "2026-10-14T12:00:00+09:00",
       "application_start_at": "2026-10-04T18:00:00+09:00",
+      "application_end_at": "2026-10-14T12:00:00+09:00",
+      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
       "stores": [
         {
           "name": "プリキュア プリティストア横浜店",
@@ -1196,17 +1196,17 @@
     },
     {
       "url": "https://livepocket.jp/e/abnrt",
-      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "application_start_at": "2026-10-05T10:34:00+09:00",
       "application_end_at": "2026-10-13T12:00:00+09:00",
-      "application_start_at": "2026-10-05T10:34:00+09:00"
+      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/7_fib",
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
-      "application_end_at": "2026-10-07T22:00:00+09:00",
       "application_start_at": "2026-10-05T10:00:00+09:00",
+      "application_end_at": "2026-10-07T22:00:00+09:00",
+      "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -1273,9 +1273,9 @@
       "url": "https://livepocket.jp/e/yko8h",
       "store_name": "TSUTAYA秩父店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
-      "application_end_at": "2026-10-06T21:00:00+09:00",
       "application_start_at": "2026-10-03T15:00:00+09:00",
+      "application_end_at": "2026-10-06T21:00:00+09:00",
+      "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
       "stores": [
         {
           "name": "TSUTAYA秩父店",
@@ -1297,11 +1297,10 @@
     },
     {
       "url": "https://livepocket.jp/e/hzk15",
-      "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
-      "source_preview": "落選者専用：10月再販ポケモン...",
       "product_name": "ポケモンカードゲーム拡張パック「30th CELEBRATION 」",
-      "application_end_at": "2026-10-07T20:05:00+09:00",
       "application_start_at": "2026-10-04T09:00:00+09:00",
+      "application_end_at": "2026-10-07T20:05:00+09:00",
+      "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
@@ -1311,9 +1310,9 @@
       "url": "https://livepocket.jp/e/o0ss9",
       "store_name": "トレカ丸葉鹿店",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
-      "application_end_at": "2026-10-07T23:59:00+09:00",
       "application_start_at": "2026-10-03T09:00:00+09:00",
+      "application_end_at": "2026-10-07T23:59:00+09:00",
+      "discord_posted_at": "2026-10-04T22:19:09.607000+00:00",
       "stores": [
         {
           "name": "トレカ丸葉鹿店",
@@ -3347,9 +3346,9 @@
       "url": "https://livepocket.jp/e/0_ugz",
       "store_name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
-      "application_end_at": "2026-10-18T22:10:00+09:00",
       "application_start_at": "2026-10-16T22:45:00+09:00",
+      "application_end_at": "2026-10-18T22:10:00+09:00",
+      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
       "stores": [
         {
           "name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
@@ -3361,9 +3360,9 @@
       "url": "https://livepocket.jp/e/6ys9i",
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
-      "application_end_at": "2026-10-18T22:00:00+09:00",
       "application_start_at": "2026-10-17T10:00:00+09:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -3375,9 +3374,9 @@
       "url": "https://livepocket.jp/e/26civ",
       "store_name": "TSUTAYA自治医大店トレカ売場",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
-      "application_end_at": "2026-10-19T23:59:00+09:00",
       "application_start_at": "2026-10-17T07:00:00+09:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
       "stores": [
         {
           "name": "TSUTAYA自治医大店トレカ売場",
@@ -3389,9 +3388,9 @@
       "url": "https://livepocket.jp/e/70ppw",
       "store_name": "TSUTAYA栃木城内店トレカ売場",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
-      "application_end_at": "2026-10-19T23:59:00+09:00",
       "application_start_at": "2026-10-17T07:00:00+09:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
       "stores": [
         {
           "name": "TSUTAYA栃木城内店トレカ売場",
@@ -3403,9 +3402,9 @@
       "url": "https://livepocket.jp/e/ldloz",
       "store_name": "TSUTAYA利府",
       "prefecture": "宮城県",
-      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
-      "application_end_at": "2026-10-18T21:00:00+09:00",
       "application_start_at": "2026-10-17T09:00:00+09:00",
+      "application_end_at": "2026-10-18T21:00:00+09:00",
+      "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
       "stores": [
         {
           "name": "TSUTAYA利府",
@@ -3414,5 +3413,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-17T13:10:03.821729+00:00"
+  "updated_at": "2026-10-17T13:43:52.924914+00:00"
 }

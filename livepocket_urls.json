@@ -7720,6 +7720,20 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
+        },
+        "https://livepocket.jp/e/yiucw": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T13:43:52.924914+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/ruq6l": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T13:43:52.924914+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
         }
       }
     }
