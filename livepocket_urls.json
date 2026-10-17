@@ -22,7 +22,19 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-15T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA加須店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vm68e",
@@ -41,7 +53,14 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "field_sources": {},
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/p2b1t",
@@ -52,7 +71,7 @@
       "store_name": "晴れる屋２秋葉原タワー店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ポケモンカード【MEGA】「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -60,7 +79,20 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-14T14:00:00+09:00",
+      "stores": [
+        {
+          "name": "晴れる屋２秋葉原タワー店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/v7i-m",
@@ -71,7 +103,7 @@
       "store_name": "晴れる屋２秋葉原タワー店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "【MEGA】拡張パック「30th CELEBRATION」BOX",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -79,7 +111,20 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-14T14:00:00+09:00",
+      "stores": [
+        {
+          "name": "晴れる屋２秋葉原タワー店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/moozm",
@@ -90,7 +135,7 @@
       "store_name": "晴れる屋２秋葉原タワー店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ポケモンカード【MEGA】拡張パック「ストームエメラルダ」",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -98,7 +143,20 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-14T14:00:00+09:00",
+      "stores": [
+        {
+          "name": "晴れる屋２秋葉原タワー店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/qr8o-",
@@ -117,7 +175,13 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "stores": [
+        {
+          "name": "JUMP SHOP横浜店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/rfsy5",
@@ -136,7 +200,13 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "stores": [
+        {
+          "name": "JUMP SHOP東京駅店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vmmju",
@@ -155,7 +225,13 @@
         "status": "no_fields",
         "checked_at": "2026-10-16T12:08:18.248948+00:00",
         "next_retry_at": "2026-10-18T12:08:18.248948+00:00"
-      }
+      },
+      "stores": [
+        {
+          "name": "JUMP SHOP東京スカイツリータウン・ソラマチ店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/2-pqn",
@@ -212,7 +288,13 @@
       "lottery_result_end_date": "2026-10-28",
       "ticket_name": "10:15入店",
       "ticket_price_yen": 0,
-      "ticket_application_limit": "お1人様1回のみ購入・申込可能"
+      "ticket_application_limit": "お1人様1回のみ購入・申込可能",
+      "stores": [
+        {
+          "name": "JUMP SHOP仙台店",
+          "prefecture": "宮城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/m0-8b",
@@ -238,7 +320,13 @@
           "has_event_section": false,
           "response_fingerprint": "56a0e0cc0d9807ea"
         }
-      }
+      },
+      "stores": [
+        {
+          "name": "TSUTAYA六高台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/o35r4",
@@ -264,7 +352,13 @@
           "has_event_section": false,
           "response_fingerprint": "8353e4f9b52ec5f7"
         }
-      }
+      },
+      "stores": [
+        {
+          "name": "ブックエース坂東店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/1q_nh",
@@ -296,7 +390,19 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-17T23:59:00+09:00",
+      "application_start_at": "2026-10-13T17:00:00+09:00",
+      "stores": [
+        {
+          "name": "JUMP SHOP池袋店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/409ws",
@@ -310,7 +416,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "JUMP SHOP東京ドームシティ店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/qelp_",
@@ -324,7 +436,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA入間仏子店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/i6s-n",
@@ -338,7 +456,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "晴れる屋",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/bqj23",
@@ -352,7 +476,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "蔦屋書店茂原店 トレカコーナー",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/uay8k",
@@ -380,7 +510,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TAUTAYA秩父店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vddw3",
@@ -426,7 +562,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース春日部店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/risz5",
@@ -440,7 +582,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "コロコロBASE",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ae88o",
@@ -454,7 +602,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/lx6zx",
@@ -468,7 +622,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場柏豊四季店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vo0as",
@@ -482,7 +642,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場柏豊四季店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/dsvro",
@@ -496,7 +662,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/q78jb",
@@ -510,7 +682,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂あきる野店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/xnr8d",
@@ -524,7 +702,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "銀座三越 新館3階ジェラート ピケ",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/1ydm_",
@@ -556,7 +740,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "フルコンプ",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/4a-uj",
@@ -570,7 +760,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA17号北浦和店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/jdpux",
@@ -584,7 +780,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ruq6l",
@@ -598,7 +800,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card平塚店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/zhv4i",
@@ -612,7 +820,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場与野本町店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/q8of5",
@@ -626,7 +840,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tx5dc",
@@ -640,7 +860,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックスひたちなか店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/y4w0_",
@@ -654,7 +880,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "伊勢丹浦和店 2階 ジェラートピケ",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/6d7t6",
@@ -668,7 +900,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂書店浦安西友店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/zy0lo",
@@ -682,7 +920,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card府中駅前",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/qf-o3",
@@ -714,7 +958,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA籠原店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/3ftqq",
@@ -728,7 +978,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/zfehv_08gw",
@@ -742,7 +998,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/fzpe-",
@@ -756,7 +1018,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA六高台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/5mcaz",
@@ -770,7 +1038,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "HMVトレカショップ",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/p6y6i",
@@ -784,7 +1058,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "フルコンプ",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/8ft5n",
@@ -798,7 +1078,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA加須店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/drlnx",
@@ -812,7 +1098,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース常陸太田店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/1jz6j",
@@ -826,7 +1118,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYA中里店",
+          "prefecture": "宮城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/5xb-s",
@@ -840,7 +1138,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA町田木曽店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/07hw9",
@@ -854,7 +1158,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場与野本町店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/rxcg5",
@@ -868,7 +1178,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/o0z6y",
@@ -882,7 +1198,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/n_pb_",
@@ -896,7 +1218,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "麦わらストア お台場店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/qkcel",
@@ -910,7 +1238,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "麦わらストア 渋谷本店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/1d90p",
@@ -924,7 +1258,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "麦わらストア 東京駅店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/i5dvh",
@@ -938,7 +1278,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA秩父店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/yaxsh",
@@ -952,7 +1298,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "MUGIWARA STORE HARAJUKU",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/1gia2",
@@ -966,7 +1318,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "麦わらストア 池袋店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/6mr30",
@@ -980,7 +1338,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA籠原店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/mjum5",
@@ -994,7 +1358,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/cyqww",
@@ -1008,7 +1378,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "新宿高島屋 9階おもちゃ売場 総合レジカウンター",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/0pazm",
@@ -1022,7 +1398,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/irssg",
@@ -1036,7 +1418,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/cq6ix",
@@ -1068,7 +1456,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "晴れる屋2 東日本店舗",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/57_nt",
@@ -1096,7 +1490,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "プリキュア プリティストア横浜店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/adl25",
@@ -1110,7 +1510,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "プリキュア プリティストア横浜店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ynwy7",
@@ -1124,7 +1530,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "プリキュア プリティストア越谷店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/illuy",
@@ -1138,7 +1550,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 戸塚店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/p7l99",
@@ -1152,7 +1570,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card平塚店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/v8vpq",
@@ -1166,7 +1590,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA北習志野駅前店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/k1kbb",
@@ -1180,7 +1610,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "プリキュア プリティストア東京店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/egck0",
@@ -1194,7 +1630,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/da7vx",
@@ -1208,7 +1650,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "晴れる屋2 西日本店舗",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/abnrt",
@@ -1236,7 +1684,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/n8hf3",
@@ -1250,7 +1704,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ksy1d",
@@ -1282,7 +1742,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "プリキュア プリティストア越谷店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ms12p",
@@ -1296,7 +1762,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース新取手店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/e259k",
@@ -1328,7 +1800,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA秩父店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/c1zxf",
@@ -1342,7 +1820,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "CARD WINGS秋葉原駅前店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/hzk15",
@@ -1374,7 +1858,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸葉鹿店",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ge83m",
@@ -1388,7 +1878,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂行徳店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/homby",
@@ -1402,7 +1898,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "CARD WINGS秋葉原駅前店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/g0dwi",
@@ -1416,7 +1918,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/13lkd",
@@ -1430,7 +1938,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂書店南大沢店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/c_9fv",
@@ -1462,7 +1976,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ucdrl",
@@ -1476,7 +1996,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸倉賀野店",
+          "prefecture": "群馬県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/6fb3y",
@@ -1490,7 +2016,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キントレ竹の塚店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/fysn-",
@@ -1504,7 +2036,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/zpned",
@@ -1518,7 +2056,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸渋川中央店",
+          "prefecture": "群馬県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/wz2ug",
@@ -1532,7 +2076,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/j_8s0",
@@ -1546,7 +2096,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "フルコンプ",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/z7_94",
@@ -1560,7 +2116,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/e3bcl",
@@ -1574,7 +2136,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "CARDWINGS八王子駅前店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/pp-t2",
@@ -1588,7 +2156,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tle89",
@@ -1602,7 +2176,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tm7em",
@@ -1616,7 +2196,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/2cc0p",
@@ -1630,7 +2216,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/j7uqd",
@@ -1644,7 +2236,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース坂東店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/5n05s",
@@ -1658,7 +2256,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/9o6qo",
@@ -1672,7 +2276,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸新井店",
+          "prefecture": "群馬県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/kr0g5",
@@ -1686,7 +2296,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "CARDWINGS八王子駅前店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/gvgo8",
@@ -1700,7 +2316,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸幸手店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/kjby1",
@@ -1714,7 +2336,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/lyypz",
@@ -1728,7 +2356,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tvuq4",
@@ -1742,7 +2376,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA嵐山店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/7o-si",
@@ -1756,7 +2396,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "CARDWINGS八王子駅前店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ybnjd",
@@ -1770,7 +2416,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/9_bzs",
@@ -1798,7 +2450,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/c9abe",
@@ -1812,7 +2470,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/io5nq",
@@ -1826,7 +2490,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/l3bu7",
@@ -1840,7 +2510,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/pl03d",
@@ -1854,7 +2530,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/c5feg",
@@ -1868,7 +2550,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vgtyg",
@@ -1882,7 +2570,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸足利助戸店",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/nv1k2",
@@ -1896,7 +2590,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/xmmhx",
@@ -1910,7 +2610,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/hjya8",
@@ -1924,7 +2630,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/bm1g5",
@@ -1938,7 +2650,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA嵐山店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/2h41m",
@@ -1952,7 +2670,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ms0m8",
@@ -1972,7 +2696,13 @@
         "store_name": "discord_heading:1555858034461511756",
         "prefecture": "v9_exact_store_cross_reference"
       },
-      "store_name_original": "プレミアムデッキセット"
+      "store_name_original": "プレミアムデッキセット",
+      "stores": [
+        {
+          "name": "TSUTAYA加須店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vduyy",
@@ -1986,7 +2716,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "府中",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/qhoza",
@@ -2000,7 +2736,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "鎌ケ谷",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/mtgl4",
@@ -2019,7 +2761,13 @@
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756"
       },
-      "store_name_original": "ストームエメラルダ"
+      "store_name_original": "ストームエメラルダ",
+      "stores": [
+        {
+          "name": "竜星のPAO",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -2033,7 +2781,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "錦糸町マルイ",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/94gmw",
@@ -2047,7 +2801,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "平塚",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ampml",
@@ -2066,7 +2826,13 @@
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756"
       },
-      "store_name_original": "エーフィ＆ブラッキー"
+      "store_name_original": "エーフィ＆ブラッキー",
+      "stores": [
+        {
+          "name": "キデイランド浦和美園",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -2086,7 +2852,13 @@
         "store_name": "discord_heading:1555858034461511756",
         "prefecture": "v9_exact_store_cross_reference"
       },
-      "store_name_original": "30th CELEBRATION"
+      "store_name_original": "30th CELEBRATION",
+      "stores": [
+        {
+          "name": "TSUTAYA加須店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -2105,7 +2877,13 @@
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756"
       },
-      "store_name_original": "30th CELEBRATION"
+      "store_name_original": "30th CELEBRATION",
+      "stores": [
+        {
+          "name": "キデイランド浦和美園",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -2119,7 +2897,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "鮎川",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/7r2ey",
@@ -2138,7 +2922,13 @@
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756"
       },
-      "store_name_original": "30th CELEBRATION 再販"
+      "store_name_original": "30th CELEBRATION 再販",
+      "stores": [
+        {
+          "name": "ホビーステーション",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -2158,7 +2948,13 @@
         "store_name": "discord_heading:1555858034461511756",
         "prefecture": "v9_exact_store_cross_reference"
       },
-      "store_name_original": "遊戯王 ART WORK COLLECTION系"
+      "store_name_original": "遊戯王 ART WORK COLLECTION系",
+      "stores": [
+        {
+          "name": "TSUTAYA加須店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/qz-dx",
@@ -2172,7 +2968,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "錦糸",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tupcdz",
@@ -2191,7 +2993,13 @@
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756"
       },
-      "store_name_original": "エーフィ＆ブラッキー"
+      "store_name_original": "エーフィ＆ブラッキー",
+      "stores": [
+        {
+          "name": "竜星のPAO",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/7_zc2",
@@ -2205,7 +3013,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "山陽",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/pli05",
@@ -2219,7 +3033,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "吹上",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/cbovd",
@@ -2233,7 +3053,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ヤマシロ",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/h2dg6",
@@ -2247,7 +3073,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "鎌ケ谷",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/j_tif",
@@ -2261,7 +3093,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "北習志野",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/hwrag",
@@ -2275,7 +3113,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "鮎川",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/kyqq3",
@@ -2289,7 +3133,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "山陽",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/sgq88",
@@ -2308,7 +3158,13 @@
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756"
       },
-      "store_name_original": "世界最強の戦士／Heroines Edition"
+      "store_name_original": "世界最強の戦士／Heroines Edition",
+      "stores": [
+        {
+          "name": "JUMP SHOP名古屋",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/z5i6s",
@@ -2322,7 +3178,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/sko2i",
@@ -2336,7 +3198,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 戸塚店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/amageo",
@@ -2350,7 +3218,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール上尾店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/nvuh2",
@@ -2364,7 +3238,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース TSUTAYAデイズタウンつくば",
+          "prefecture": "茨城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/8knv_",
@@ -2383,7 +3263,13 @@
         "product_name": "discord_post:1554137435812667473",
         "store_name": "discord_heading:1554137435812667473"
       },
-      "store_name_original": "* ストームエメラルダ"
+      "store_name_original": "* ストームエメラルダ",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -2402,7 +3288,13 @@
         "product_name": "discord_post:1554137435812667473",
         "store_name": "discord_heading:1554137435812667473"
       },
-      "store_name_original": "* エーフィ・ブラッキー"
+      "store_name_original": "* エーフィ・ブラッキー",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/prp_c",
@@ -2421,7 +3313,13 @@
         "product_name": "discord_post:1554137435812667473",
         "store_name": "discord_heading:1554137435812667473"
       },
-      "store_name_original": "* メガシンフォニア"
+      "store_name_original": "* メガシンフォニア",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/8wkbq",
@@ -2442,7 +3340,13 @@
         "store_name": "discord_heading:1554137435812667473",
         "prefecture": "v9_exact_store_cross_reference"
       },
-      "store_name_original": "* ストームエメラルダ"
+      "store_name_original": "* ストームエメラルダ",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -2462,7 +3366,13 @@
         "store_name": "discord_heading:1554137435812667473",
         "prefecture": "v9_exact_store_cross_reference"
       },
-      "store_name_original": "* 30th CELEBRATION"
+      "store_name_original": "* 30th CELEBRATION",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2482,7 +3392,13 @@
         "store_name": "discord_heading:1554137435812667473",
         "prefecture": "v9_exact_store_cross_reference"
       },
-      "store_name_original": "* プレミアムデッキセット エーフィ・ブラッキー"
+      "store_name_original": "* プレミアムデッキセット エーフィ・ブラッキー",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/adjql",
@@ -2501,7 +3417,13 @@
         "product_name": "discord_post:1554137435812667473",
         "store_name": "discord_heading:1554137435812667473"
       },
-      "store_name_original": "* 30th CELEBRATION"
+      "store_name_original": "* 30th CELEBRATION",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2529,7 +3451,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール上尾店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/wrgdu",
@@ -2557,7 +3485,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂書店浦安西友店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/g5mbn",
@@ -2585,7 +3519,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/4f1c3",
@@ -2599,7 +3539,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール羽生店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/5ng9r",
@@ -2613,7 +3559,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/k4jty",
@@ -2627,7 +3579,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド二子玉川店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/fmw8w",
@@ -2641,7 +3599,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド二子玉川店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/pc516",
@@ -2655,7 +3619,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/68ayl",
@@ -2669,7 +3639,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース植田店",
+          "prefecture": "福島県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/dqq-m",
@@ -2683,7 +3659,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド二子玉川店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/68ats",
@@ -2715,7 +3697,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース植田店",
+          "prefecture": "福島県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/pp-3l",
@@ -4619,7 +5607,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "新宿マルイアネックス3階 FEWMANY",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vt2ev",
@@ -4639,7 +5633,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "新宿マルイアネックス3階 FEWMANY",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/zof6r",
@@ -4653,7 +5653,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場新小岩店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/opyur-hugr",
@@ -4673,7 +5679,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "古本市場新小岩店",
+          "prefecture": "東京都"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/717w_",
@@ -4693,7 +5705,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "ふるいちトップブックス港北ミナモ店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/3hemk",
@@ -4713,7 +5731,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "ふるいちトップブックス港北ミナモ店",
+          "prefecture": "神奈川県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/3010thfu",
@@ -4733,7 +5757,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "古本市場市川鬼高店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/st1030ft",
@@ -4753,7 +5783,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "古本市場市川鬼高店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/fg69z",
@@ -4773,7 +5809,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "晴れる屋 千葉店",
+          "prefecture": "千葉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/pjg_2",
@@ -4793,7 +5835,13 @@
       "field_sources": {
         "application_end_at": "v13_livepocket_rendered_public_page",
         "application_start_at": "v13_livepocket_rendered_public_page"
-      }
+      },
+      "stores": [
+        {
+          "name": "古本市場草加店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/jbkc-",
@@ -4813,7 +5861,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T21:00:00+09:00",
-      "application_start_at": "2026-10-16T10:00:00+09:00"
+      "application_start_at": "2026-10-16T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいち ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ih5ta",
@@ -4833,7 +5887,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T22:00:00+09:00",
-      "application_start_at": "2026-10-16T08:00:00+09:00"
+      "application_start_at": "2026-10-16T08:00:00+09:00",
+      "stores": [
+        {
+          "name": "ＴＳＵＴＡＹＡ真岡店",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/k6x2c",
@@ -4853,7 +5913,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T21:00:00+09:00",
-      "application_start_at": "2026-10-16T09:00:00+09:00"
+      "application_start_at": "2026-10-16T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス伊勢崎茂呂店",
+          "prefecture": "群馬県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/x2n7b",
@@ -4873,7 +5939,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T22:00:00+09:00",
-      "application_start_at": "2026-10-16T09:00:00+09:00"
+      "application_start_at": "2026-10-16T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいち前橋みなみモール店",
+          "prefecture": "群馬県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/7ck7b",
@@ -4887,7 +5959,19 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T21:00:00+09:00",
+      "application_start_at": "2026-10-16T12:00:00+09:00",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYA中里店",
+          "prefecture": "宮城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/39gwbz6j-d",
@@ -4901,7 +5985,19 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-07T14:21:00+09:00",
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/q8-1nh5bh5",
@@ -4921,7 +6017,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
-      "application_start_at": "2026-10-07T14:21:00+09:00"
+      "application_start_at": "2026-10-07T14:21:00+09:00",
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/i44fhaaluv",
@@ -4941,7 +6043,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
-      "application_start_at": "2026-10-07T14:21:00+09:00"
+      "application_start_at": "2026-10-07T14:21:00+09:00",
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/h2dkqnh0f0",
@@ -4961,7 +6069,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
-      "application_start_at": "2026-10-07T14:21:00+09:00"
+      "application_start_at": "2026-10-07T14:21:00+09:00",
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/yv07y",
@@ -4976,7 +6090,13 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {},
+      "stores": [
+        {
+          "name": "イトーヨーカドー",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/w6vl0",
@@ -4996,7 +6116,13 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-19T23:59:00+09:00",
-      "application_start_at": "2026-10-17T07:00:00+09:00"
+      "application_start_at": "2026-10-17T07:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYAテクノ店",
+          "prefecture": ""
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
@@ -5009,12 +6135,13 @@
     "prefecture": 147,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 18,
+    "product_name": 21,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 18,
-    "application_start_at": 18
+    "application_end_at": 25,
+    "application_start_at": 25,
+    "stores_events": 180
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -5157,6 +6284,38 @@
         },
         "https://livepocket.jp/e/h2dkqnh0f0": {
           "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/7ck7b": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/39gwbz6j-d": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/vm68e": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/mm2c4": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/v7i-m": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/p2b1t": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/moozm": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/yiucw": {
+          "checked_at": "2026-10-17T04:12:07.743203+00:00",
           "status": "checked_deadline"
         }
       }
