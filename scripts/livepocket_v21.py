@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.3: safer title recovery + v21.1 catalog classifier.
+"""LivePocket v21.4: bounded title retries with diagnostic reasons + catalog classifier.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -122,7 +122,7 @@ def load_catalog(pack_path=PACK_PATH, deck_path=DECK_PATH):
     return result
 
 
-def candidate_product(item, catalog):
+def candidate_product(item, catalog, *, allow_short_suffix=False):
     """Match map product names, prioritizing observed whole product names.
 
     1. A catalog key contained in a longer ticket product/title is the
@@ -165,6 +165,15 @@ def candidate_product(item, catalog):
                        if key in canonical]
             if len(reverse) == 1:
                 return {**reverse[0][1], 'evidence': field}
+        # URL-adjacent Discord evidence can support a distinctive *suffix*
+        # of exactly one registered product. Keep the observed product text;
+        # this is a classification hint, not a name substitution.
+        if (allow_short_suffix and field == 'product_name'
+                and len(key) >= 6 and sum(c.isalpha() for c in key) >= 3):
+            suffix = [(canonical, meta) for canonical, meta in catalog.items()
+                      if canonical.endswith(key)]
+            if len(suffix) == 1:
+                return {**suffix[0][1], 'evidence': 'discord_url_pair_unique_suffix'}
     return None
 
 def stores_known(item):
@@ -208,7 +217,9 @@ def classify(raw, public, catalog):
             matched = None
             stats['map_conflicts_skipped'] += 1
         else:
-            matched = candidate_product(item, catalog)
+            src = ri.get(url, {}).get('field_sources') or {}
+            paired = str(src.get('product_name') or '').startswith('discord_url_pair:')
+            matched = candidate_product(item, catalog, allow_short_suffix=paired)
             if matched and item.get('review_category') in ('onepiece', 'yugioh'):
                 # Source-preview classifications can be stale/mixed; be safe.
                 stats['map_conflicts_skipped'] += 1
@@ -287,18 +298,100 @@ from datetime import timedelta
 
 TITLE_RECHECK_HOURS = 6
 TITLE_END_GRACE_HOURS = 12
-TITLE_RECHECK_MAX = 1
+# v21.3 stopped all URLs forever after the first extra check. Instead, use
+# a capped backoff tied to that event's last attempt. Legacy v21.3 state
+# (attempts, checked_at, status) is reused without migration or data resets.
+TITLE_RECHECK_MAX = 4
 TITLE_RECHECK_DEFAULT_PER_RUN = 2
+TITLE_RECHECK_DELAYS_HOURS = (6, 12, 24)  # after attempt 1, 2 and 3
 REPORT_COLUMNS = REPORT_COLUMNS + (
     'title_recheck_attempts', 'title_recheck_at', 'title_recheck_status',
+    'title_recheck_reason', 'title_recheck_next_at', 'title_recheck_http_status',
 )
 
 
-def title_recheck_candidates(raw, public, *, now=None, limit=TITLE_RECHECK_DEFAULT_PER_RUN):
-    """Recheck recently checked, active/recently-ended URLs; new arrivals first.
+def recheck_attempts(entry):
+    try:
+        return max(0, min(999, int(entry.get('attempts', 0))))
+    except (TypeError, ValueError, AttributeError):
+        return 0
 
-    Never recheck stale expired pages, missing-date pages, the first-check queue,
-    redirect failures or blocked cooldown. One extra attempt at most.
+
+def retry_wait(attempt_count):
+    """Duration AFTER the last retry; attempts >= max have no next attempt."""
+    if attempt_count >= TITLE_RECHECK_MAX:
+        return None
+    return timedelta(hours=TITLE_RECHECK_DELAYS_HOURS[
+        min(max(attempt_count, 1) - 1, len(TITLE_RECHECK_DELAYS_HOURS) - 1)
+    ])
+
+
+def retry_ready(record, *, now, checked=None):
+    """Honor past v21.3 timestamps; don't refetch the same URL every run."""
+    attempts = recheck_attempts(record)
+    if attempts >= TITLE_RECHECK_MAX:
+        return False
+    if attempts == 0:
+        return True
+    last = v19.v18.v17.check_time(record.get('checked_at'))
+    if not last:
+        # v21.3 persisted a timestamp; an incomplete old state must not cause
+        # immediate rapid loops. Use the v13 browser check as conservative base.
+        last = checked
+    return bool(last and now >= last + retry_wait(attempts))
+
+
+def retry_next_at(record, *, end, now, checked=None):
+    """Next retry time if in the original event-window and budget."""
+    count = recheck_attempts(record)
+    if not count or count >= TITLE_RECHECK_MAX:
+        return ''
+    last = v19.v18.v17.check_time(record.get('checked_at')) or checked
+    if not last:
+        return ''
+    due = last + retry_wait(count)
+    # A recheck cannot happen once the application has been closed for 12h.
+    if end and due >= end + timedelta(hours=TITLE_END_GRACE_HOURS):
+        return ''
+    if end and due > now + timedelta(days=7):
+        return ''
+    return due.astimezone(timezone.utc).isoformat()
+
+
+def describe_result(page, url, title, product):
+    """Short diagnostic codes, never log untrusted page text or private data."""
+    status = str(page.get('status') or 'browser_error')
+    http = page.get('http_status')
+    if status == 'ok':
+        if v12.exact_event_url(page.get('final_url')) != url:
+            return 'browser_redirected', 'not_original_event_url', ''
+        if title:
+            return ('title_and_product_found' if product else 'title_found',
+                    'official_title_verified', '')
+        if product:
+            return 'product_only', 'official_product_but_no_title', ''
+        return 'ok_no_title', 'no_verifiable_title_on_page', ''
+    reasons = {
+        'browser_timeout': 'request_timeout',
+        'browser_no_response': 'no_http_response',
+        'browser_blocked': 'access_limited',
+        'browser_blocked_or_empty': 'limited_or_empty_page',
+        'browser_redirected': 'not_original_event_url',
+        'browser_http_error': 'http_error',
+        'browser_error': 'browser_or_network_error',
+    }
+    try:
+        http = str(int(http)) if http is not None else ''
+    except (TypeError, ValueError):
+        http = ''
+    return status, reasons.get(status, 'unrecognized_fetch_status'), http
+
+
+def title_recheck_candidates(raw, public, *, now=None, limit=TITLE_RECHECK_DEFAULT_PER_RUN):
+    """Small bounded retries of incomplete, currently relevant event titles.
+
+    New arrivals remain v20's priority. The original browser check must have
+    been >= 6h ago; after any title recheck apply the bounded backoff.
     """
     if limit <= 0:
         return []
@@ -322,13 +415,12 @@ def title_recheck_candidates(raw, public, *, now=None, limit=TITLE_RECHECK_DEFAU
         if start and now < start:
             continue
         check = checks.get(url, {})
-        # v17 is reachable through v19.v18; its parser accepts microseconds.
         when = v19.v18.v17.check_time(check.get('checked_at'))
         if not when or now - when < timedelta(hours=TITLE_RECHECK_HOURS):
             continue
         if check.get('status') == 'browser_redirected':
             continue
-        if int(attempts.get(url, {}).get('attempts', 0)) >= TITLE_RECHECK_MAX:
+        if not retry_ready(attempts.get(url, {}), now=now, checked=when):
             continue
         options.append((end, -(when.timestamp()), url))
     options.sort()
@@ -391,12 +483,12 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     state = raw.setdefault('collector_state', {})
     log = state.setdefault('v21_3', {}).setdefault('title_rechecks', {})
     stats.update(title_recheck_planned=len(queued), title_recheck_attempted=0,
-                 title_recheck_titles_added=0, title_recheck_products_added=0,
-                 title_recheck_blocked=0)
+                 title_recheck_retried=0, title_recheck_titles_added=0,
+                 title_recheck_products_added=0, title_recheck_blocked=0,
+                 title_recheck_ok_no_title=0, title_recheck_fetch_errors=0)
     for url in queued:
         if url in seen or v14._cooldown_active(state.setdefault('v14', {}), now):
             continue
-        # An upstream pass may already have obtained the title.
         if pi[url].get('event_title'):
             continue
         try:
@@ -405,25 +497,32 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             result = {'status': 'browser_error'}
         if not isinstance(result, dict):
             result = {'status': 'browser_error'}
-        status = str(result.get('status') or 'browser_error')
-        if status == 'ok' and v12.exact_event_url(result.get('final_url')) != url:
-            status = 'browser_redirected'
+        title, title_source = verified_title(result, url)
+        product, product_source = verified_product(result, url)
+        status, reason, http_status = describe_result(result, url, title, product)
         previous = log.get(url, {})
-        log[url] = {'attempts': int(previous.get('attempts', 0)) + 1,
-                    'checked_at': now.isoformat(), 'status': status}
+        previous_attempts = recheck_attempts(previous)
+        log[url] = {'attempts': previous_attempts + 1,
+                    'checked_at': now.isoformat(), 'status': status,
+                    'reason': reason, 'http_status': http_status}
         stats['title_recheck_attempted'] += 1
-        if status == 'ok':
-            title, source = verified_title(result, url)
-            if title and not (ri[url].get('event_title') or pi[url].get('event_title')):
+        if previous_attempts:
+            stats['title_recheck_retried'] += 1
+        if status == 'ok_no_title':
+            stats['title_recheck_ok_no_title'] += 1
+        if status not in ('ok_no_title', 'title_found', 'title_and_product_found', 'product_only'):
+            stats['title_recheck_fetch_errors'] += 1
+        if status in ('title_found', 'title_and_product_found') and title:
+            if not (ri[url].get('event_title') or pi[url].get('event_title')):
                 for item in (ri[url], pi[url]):
                     item['event_title'] = title
-                ri[url].setdefault('field_sources', {})['event_title'] = source
+                ri[url].setdefault('field_sources', {})['event_title'] = title_source
                 stats['title_recheck_titles_added'] += 1
-            product, source = verified_product(result, url)
-            if product and not (ri[url].get('product_name') or pi[url].get('product_name')):
+        if status in ('title_and_product_found', 'title_found', 'product_only') and product:
+            if not (ri[url].get('product_name') or pi[url].get('product_name')):
                 for item in (ri[url], pi[url]):
                     item['product_name'] = product
-                ri[url].setdefault('field_sources', {})['product_name'] = source
+                ri[url].setdefault('field_sources', {})['product_name'] = product_source
                 stats['title_recheck_products_added'] += 1
         if status in ('browser_blocked', 'browser_blocked_or_empty'):
             state['v14']['blocked_until'] = (now + timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
@@ -467,9 +566,17 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['map_catalog_type'] = pub.get('pokemon_map_type') or ''
         row['map_catalog_evidence'] = pub.get('pokemon_map_evidence') or ''
         retry = log.get(row['url'], {})
-        row['title_recheck_attempts'] = retry.get('attempts', 0)
+        row['title_recheck_attempts'] = recheck_attempts(retry)
         row['title_recheck_at'] = retry.get('checked_at', '')
         row['title_recheck_status'] = retry.get('status', '')
+        row['title_recheck_reason'] = retry.get('reason', '')
+        row['title_recheck_http_status'] = retry.get('http_status', '')
+        browser_check = state.get('v13', {}).get('browser_checks', {}).get(row['url'], {})
+        checked = v19.v18.v17.check_time(browser_check.get('checked_at'))
+        row['title_recheck_next_at'] = ('' if pub.get('event_title') else
+            retry_next_at(retry, end=v11.parse_datetime(pub.get('application_end_at')),
+                          now=now, checked=checked))
+
     if any(snapshot.get(i['url']) != json.dumps(i, ensure_ascii=False, sort_keys=True)
            for i in public['items']):
         public['updated_at'] = now.isoformat()
@@ -504,9 +611,9 @@ def browser_fetcher():
             if response is None:
                 return {'status': 'browser_no_response'}
             if response.status in (401, 403, 429):
-                return {'status': 'browser_blocked'}
+                return {'status': 'browser_blocked', 'http_status': response.status}
             if response.status >= 400:
-                return {'status': 'browser_http_error'}
+                return {'status': 'browser_http_error', 'http_status': response.status}
             if v12.exact_event_url(page.url) != url:
                 return {'status': 'browser_redirected'}
             body = ''
@@ -626,7 +733,7 @@ def main():
     titles_due = title_recheck_candidates(raw, public, limit=title_limit)
     browser_needed = bool(work['browser_needed'] or titles_due)
     if sys.argv[1] == 'plan':
-        print('v21.3 browser plan:', work, 'title_due:', len(titles_due),
+        print('v21.4 browser plan:', work, 'title_due:', len(titles_due),
               'map catalog products:', len(catalog))
         if os.getenv('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:

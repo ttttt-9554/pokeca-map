@@ -8,6 +8,7 @@ or bypass verification screens. Designed for GitHub Actions.
 from __future__ import annotations
 
 import copy
+import csv
 import json
 import os
 import re
@@ -16,6 +17,8 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import unicodedata
+from functools import lru_cache
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -45,6 +48,137 @@ PRODUCT_LIKE_RE = re.compile(
     r"発売\s*ポケカ|応募受付|抽選販売|通販「.*\.\.\.)",
     re.I,
 )
+# v21.5: URL-specific product labels from later Discord posts.
+# Only explicit labels also supported by the local discovery-map product CSVs
+# are trusted. Generic abbreviations such as "30th" or "ストーム" are excluded.
+CATALOG_FILES = (
+    Path(os.environ.get('POKEMON_PACKS_FILE', 'pokemon_packs.csv')),
+    Path(os.environ.get('POKEMON_DECKS_FILE', 'pokemon_decks.csv')),
+)
+CATALOG_NAME_COLUMNS = ('パック名', '商品名', 'デッキ名', 'name', 'product_name')
+PRODUCT_PREFIX = re.compile(r'^(?:商品名|対象商品|商品|ポケカ)\s*[：:]\s*')
+LABEL_CLEAN = re.compile(r'[\s\u3000・･&＆/／\\|:：;；、。，．!！?？()（）\[\]【】「」『」"\'\-_+＋~〜～=]')
+
+
+def product_norm(value: str) -> str:
+    return LABEL_CLEAN.sub('', unicodedata.normalize('NFKC', value).casefold())
+
+
+def load_product_catalog(paths=CATALOG_FILES) -> dict[str, set[str]]:
+    """Map normalized product names to their literal display names; no API."""
+    names: dict[str, set[str]] = {}
+    for path in paths:
+        if not Path(path).is_file():
+            continue
+        try:
+            body = Path(path).read_text(encoding='utf-8-sig')
+        except UnicodeDecodeError:
+            body = Path(path).read_text(encoding='cp932')
+        reader = csv.DictReader(body.splitlines())
+        column = next((h for h in (reader.fieldnames or [])
+                       if h.strip() in CATALOG_NAME_COLUMNS), None)
+        if not column:
+            continue
+        for record in reader:
+            label = (record.get(column) or '').strip()
+            key = product_norm(label)
+            if label and 5 <= len(key) <= 170 and '...' not in key and '…' not in key:
+                names.setdefault(key, set()).add(label)
+    return names
+
+
+@lru_cache(maxsize=1)
+def _cached_product_catalog() -> dict[str, set[str]]:
+    return load_product_catalog()
+
+
+def adjacent_catalog_label(text: str, catalog: dict[str, set[str]]) -> str | None:
+    """Product name as literally written in Discord, never an invented expansion.
+
+    A unique suffix of a catalog title is allowed (e.g. イーブイex), provided
+    it is distinctive enough. Short aliases 30th/ストーム are NOT product names.
+    """
+    s = PRODUCT_PREFIX.sub('', text.strip()).strip().lstrip('・●•*').strip()
+    if not (5 <= len(s) <= 130) or '...' in s or '…' in s or EVENT_RE.search(s):
+        return None
+    if s.startswith(('※','【','📍','🔗','■','⚠','🎫','#')):
+        return None
+    key = product_norm(s)
+    if len(key) < 5 or not any(c.isalpha() for c in key):
+        return None
+    if key in catalog:
+        return s
+    # Only unique, distinctive suffix; do not expand to that catalog title.
+    if len(key) >= 6 and len({name for title, labels in catalog.items()
+                             if title.endswith(key) for name in labels}) == 1:
+        return s
+    return None
+
+
+def discord_url_product_pairs(content: str, catalog: dict[str, set[str]]) -> dict[str, str]:
+    """Associate ONE bare URL with the immediately preceding product line.
+
+    Each link must be on its own line. Empty lines, unrelated labels or multiple
+    URLs between the product and URL break adjacency. Conflicts are ignored.
+    """
+    lines = content.splitlines()
+    candidates: dict[str, str] = {}
+    ambiguous = set()
+    for i, raw in enumerate(lines):
+        line = raw.strip().strip('<>')
+        urls = event_urls(line)
+        if len(urls) != 1 or not EVENT_RE.fullmatch(line) or i == 0:
+            continue
+        label = adjacent_catalog_label(lines[i-1], catalog)
+        if not label:
+            continue
+        url = urls[0]
+        if url in candidates and product_norm(candidates[url]) != product_norm(label):
+            ambiguous.add(url)
+        else:
+            candidates[url] = label
+    return {u: label for u, label in candidates.items() if u not in ambiguous}
+
+
+def enrich_paired_post(items: dict[str, dict[str, Any]], message: dict[str, Any],
+                       channel: str, catalog: dict[str, set[str]]) -> tuple[int, int]:
+    """Enrich even previously known URLs from a recent *new* Discord message.
+
+    Never rewrite post_excerpt, first-discovery timestamps or verified names.
+    A URL must appear adjacent to this product label in the SAME message.
+    """
+    content = message.get('content')
+    if not isinstance(content, str) or not content or not catalog:
+        return 0, 0
+    added = conflicts = 0
+    message_id = str(message.get('id') or '')
+    for url, label in discord_url_product_pairs(content, catalog).items():
+        item = items.get(url)
+        if not item:
+            continue
+        old = item.get('product_name')
+        if old:
+            if product_norm(old) != product_norm(label):
+                conflicts += 1
+            continue
+        # The legacy collector treats a line immediately preceding a URL as
+        # a potential *store*. On a NEW labeled URL this could incorrectly
+        # store the product label as the shop name. Do not erase a shop from
+        # the original older post, only that unverified same-message guess.
+        if (item.get('discord_message_id') == message_id
+                and product_norm(item.get('store_name') or '') == product_norm(label)):
+            item['store_name'] = None
+        item['product_name'] = label
+        item.setdefault('field_sources', {})['product_name'] = 'discord_url_pair:' + message_id
+        item['discord_product_source_message_id'] = message_id
+        item['discord_product_source_channel_id'] = channel
+        item['discord_product_source_posted_at'] = message.get('timestamp') or ''
+        item['extraction_status'] = 'parsed'
+        item['details_source'] = item.get('details_source') or 'discord_url_pair'
+        added += 1
+    return added, conflicts
+
+
 FIELD_PATTERNS = {
     "product_name": re.compile(r"^(?:商品名|対象商品)\s*[：:]\s*(.+)$"),
     "application_period": re.compile(r"^(?:応募期間|抽選受付期間|申込期間)\s*[：:]\s*(.+)$"),
@@ -102,8 +236,9 @@ def message_texts(message: dict[str, Any]) -> list[str]:
     return parts
 
 
-def parse_text(text: str) -> dict[str, dict[str, str | None]]:
+def parse_text(text: str, catalog: dict[str, set[str]] | None = None) -> dict[str, dict[str, str | None]]:
     """Associate each URL with only its adjacent location heading and store line."""
+    catalog = load_product_catalog() if catalog is None else catalog
     result: dict[str, dict[str, str | None]] = {}
     prefecture: str | None = None
     store: str | None = None
@@ -125,6 +260,15 @@ def parse_text(text: str) -> dict[str, dict[str, str | None]]:
                 if credible_store(store):
                     current["store_name"] = clean_label(store)
             continue
+        # An adjacent catalog-backed product label must NOT replace a store
+        # heading. Preserve it for the next URL under the same store.
+        if adjacent_catalog_label(line, _cached_product_catalog()):
+            continue
+        # Do not mistake a Discord product label (or a short, explicit
+        # shorthand) for the shop. Keep the shop heading across product lines.
+        if (adjacent_catalog_label(line, catalog) or product_norm(line) in {'30th', 'ストーム', 'メガブ'}
+                or re.search(r'Heroines\s*Edition|世界最強の戦士|ART\s*WORK\s*COLLECTION', line, re.I)):
+            continue
         # Only a preceding line can be a store. Never use a post title as a store.
         if line.startswith(("🔗", "📣", "🎫", "⚠", "※", "【", "#")):
             store = None
@@ -133,13 +277,14 @@ def parse_text(text: str) -> dict[str, dict[str, str | None]]:
     return result
 
 
-def parse_message(message: dict[str, Any]) -> tuple[dict[str, dict[str, str | None]], str]:
+def parse_message(message: dict[str, Any], catalog: dict[str, set[str]] | None = None) -> tuple[dict[str, dict[str, str | None]], str]:
+    catalog = load_product_catalog() if catalog is None else catalog
     texts = message_texts(message)
     combined = "\n\n".join(texts)  # Preserve all Discord body and embed text (not 500 characters).
     combined_urls = event_urls(combined)
     result = {u: {"store_name": None, "prefecture": None} for u in combined_urls}
     for text in texts:
-        for url, details in parse_text(text).items():
+        for url, details in parse_text(text, catalog=catalog).items():
             if url not in result:
                 continue
             for key, value in details.items():
@@ -175,8 +320,9 @@ def default_item(url: str, message: dict[str, Any], channel_id: str, combined: s
     }
 
 
-def merge_message(items: dict[str, dict[str, Any]], message: dict[str, Any], channel_id: str) -> int:
-    details_by_url, full_text = parse_message(message)
+def merge_message(items: dict[str, dict[str, Any]], message: dict[str, Any], channel_id: str,
+                  catalog: dict[str, set[str]] | None = None) -> int:
+    details_by_url, full_text = parse_message(message, catalog=catalog)
     new_count = 0
     for url, details in details_by_url.items():
         if url not in items:
@@ -269,8 +415,10 @@ def ensure_data_shape(data: Any) -> dict[str, Any]:
 
 
 def run_collector(data: dict[str, Any], channels: list[str], token: str, backfill: bool = False,
-                  fetch=request_messages, sleep=time.sleep) -> dict[str, Any]:
+                  fetch=request_messages, sleep=time.sleep,
+                  catalog: dict[str, set[str]] | None = None) -> dict[str, Any]:
     output = copy.deepcopy(ensure_data_shape(data))
+    catalog = load_product_catalog() if catalog is None else catalog
     items = {entry["url"]: entry for entry in output["items"] if isinstance(entry, dict) and entry.get("url")}
     # Preserve entries; never overwrite with a filtered-only snapshot.
     original_count = len(items)
@@ -291,6 +439,8 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
     pages_scanned = 0
     messages_scanned = 0
     all_new = 0
+    product_pairs_added = 0
+    product_pairs_conflicts = 0
     for channel in channels:
         boundary = int(checkpoint.get(channel) or 0)
         newest_id: int | None = None
@@ -308,9 +458,18 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
             if newest_id is None:
                 newest_id = max(ids)
             for message in messages:
-                if not backfill and int(message["id"]) <= boundary:
-                    continue
-                all_new += merge_message(items, message, channel)
+                # v21.5: Always re-evaluate the newest 100 messages so that a
+                # later annotated Discord post is usable even when the URL was
+                # first registered in an earlier post/checkpoint.
+                is_new = backfill or int(message["id"]) > boundary
+                if is_new:
+                    all_new += merge_message(items, message, channel, catalog=catalog)
+                # For old messages, only read the FIRST returned page. For
+                # backfill, every page is explicitly requested by the owner.
+                if is_new or page == 0:
+                    added, conflicts = enrich_paired_post(items, message, channel, catalog)
+                    product_pairs_added += added
+                    product_pairs_conflicts += conflicts
             if not backfill and boundary and min(ids) <= boundary:
                 completed = True
                 break
@@ -341,6 +500,8 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
         "new_urls": all_new,
         "original_urls": original_count,
         "suspect_legacy_store_names": flagged,
+        "discord_url_pairs_added": product_pairs_added,
+        "discord_url_pairs_conflicts": product_pairs_conflicts,
     }
     return output
 
@@ -378,6 +539,8 @@ def main() -> int:
     print(f"Discord messages checked: {result['messages_scanned']}")
     print(f"Unique event URLs: {result['unique_livepocket_urls']}")
     print(f"New URLs added: {result['collector_state']['last_run']['new_urls']}")
+    print(f"Discord URL-paired product names added: {result['collector_state']['last_run']['discord_url_pairs_added']}")
+    print(f"Discord URL-paired conflicts preserved: {result['collector_state']['last_run']['discord_url_pairs_conflicts']}")
     print(f"Filled fields: {result['field_counts']}")
     return 0
 
