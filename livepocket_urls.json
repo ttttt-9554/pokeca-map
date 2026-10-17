@@ -2365,14 +2365,21 @@
       "store_name": null,
       "prefecture": null,
       "details_source": null,
-      "product_name": null,
+      "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATION カードセット (9種セット)",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
       "store_name_original": "ポケモンカードゲーム MEGA...",
       "quality_flags": [
         "suspect_store_name"
-      ]
+      ],
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-07T20:05:00+09:00",
+      "application_start_at": "2026-10-04T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/yko8h",
@@ -2418,7 +2425,13 @@
           "name": "CARD WINGS秋葉原駅前店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-05T18:59:00+09:00",
+      "application_start_at": "2026-10-04T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/hzk15",
@@ -2489,7 +2502,13 @@
           "name": "文教堂行徳店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "application_start_at": "2026-10-03T15:13:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/homby",
@@ -2509,7 +2528,13 @@
           "name": "CARD WINGS秋葉原駅前店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-05T18:59:00+09:00",
+      "application_start_at": "2026-10-04T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/g0dwi",
@@ -2529,7 +2554,13 @@
           "name": "ブックエース上荒川店",
           "prefecture": "福島県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-06T22:00:00+09:00",
+      "application_start_at": "2026-10-04T08:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/13lkd",
@@ -2549,7 +2580,13 @@
           "name": "文教堂書店南大沢店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-10T21:00:00+09:00",
+      "application_start_at": "2026-10-04T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/c_9fv",
@@ -2560,14 +2597,21 @@
       "store_name": null,
       "prefecture": null,
       "details_source": null,
-      "product_name": null,
+      "product_name": "ポケモンカードゲームMEGA 拡張パック「ストームエメラルダ」",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
       "store_name_original": "10月中旬再販：ポケモンカード...",
       "quality_flags": [
         "suspect_store_name"
-      ]
+      ],
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-07T20:05:00+09:00",
+      "application_start_at": "2026-10-04T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/guj70",
@@ -2667,7 +2711,13 @@
           "name": "トレカ丸渋川中央店",
           "prefecture": "群馬県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-07T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/wz2ug",
@@ -7054,12 +7104,12 @@
     "prefecture": 152,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 31,
+    "product_name": 33,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 108,
-    "application_start_at": 108,
+    "application_end_at": 116,
+    "application_start_at": 116,
     "stores_events": 191
   },
   "collector_state": {
@@ -7402,20 +7452,20 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/u62m7": {
-          "checked_at": "2026-10-17T09:47:16.780864+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/t4s-9": {
           "checked_at": "2026-10-17T09:47:16.780864+00:00",
           "status": "browser_redirected"
         },
         "https://livepocket.jp/e/s9-lf": {
-          "checked_at": "2026-10-17T09:47:16.780864+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/kvys2": {
-          "checked_at": "2026-10-17T09:47:16.780864+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/79p_y": {
           "checked_at": "2026-10-17T09:47:16.780864+00:00",
@@ -7604,6 +7654,38 @@
         "https://livepocket.jp/e/hzk15": {
           "checked_at": "2026-10-17T13:10:03.821729+00:00",
           "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/homby": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ge83m": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/g0dwi": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/e259k": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/c_9fv": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/c1zxf": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/13lkd": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/zpned": {
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -7626,13 +7708,13 @@
         },
         "https://livepocket.jp/e/kvys2": {
           "detected_at": "2026-10-17T09:46:49.693536+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T09:47:16.780864+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-17T16:30:31.792537+00:00"
         },
         "https://livepocket.jp/e/s9-lf": {
           "detected_at": "2026-10-17T09:46:49.693536+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T09:47:16.780864+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-17T16:30:31.792537+00:00"
         },
         "https://livepocket.jp/e/t4s-9": {
           "detected_at": "2026-10-17T09:46:49.693536+00:00",
@@ -7641,8 +7723,8 @@
         },
         "https://livepocket.jp/e/u62m7": {
           "detected_at": "2026-10-17T09:46:49.693536+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T09:47:16.780864+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-17T16:30:31.792537+00:00"
         },
         "https://livepocket.jp/e/0_ugz": {
           "detected_at": "2026-10-17T13:09:26.462486+00:00",
@@ -7677,6 +7759,21 @@
         "https://livepocket.jp/e/w6vl0": {
           "attempts": 2,
           "last_attempt_at": "2026-10-17T13:10:03.821729+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/u62m7": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-17T16:30:31.792537+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/s9-lf": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-17T16:30:31.792537+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/kvys2": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-17T16:30:31.792537+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -7731,6 +7828,13 @@
         "https://livepocket.jp/e/ruq6l": {
           "attempts": 1,
           "checked_at": "2026-10-17T13:43:52.924914+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/1hvyn": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T16:30:31.792537+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
