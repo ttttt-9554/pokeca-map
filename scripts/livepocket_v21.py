@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.1: map-catalog-assisted Pokémon classification & store-aware review.
+"""LivePocket v21.3: safer title recovery + v21.1 catalog classifier.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -230,7 +230,7 @@ def classify(raw, public, catalog):
     return stats
 
 
-def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
+def process_v21_1(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None):
     before = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
               for item in public.get('items', [])}
@@ -279,6 +279,333 @@ def write_content(path, rows):
     return v11.atomic_write(path, output.getvalue(), 'utf-8-sig')
 
 
+# v21.3: Short, audited follow-up for already-checked, currently applicable
+# events whose official event TITLE is still missing.  The page is visited
+# using the ordinary v20 browser only; no CAPTCHA bypass, search API, login,
+# or unrelated event URL is ever used.
+from datetime import timedelta
+
+TITLE_RECHECK_HOURS = 6
+TITLE_END_GRACE_HOURS = 12
+TITLE_RECHECK_MAX = 1
+TITLE_RECHECK_DEFAULT_PER_RUN = 2
+REPORT_COLUMNS = REPORT_COLUMNS + (
+    'title_recheck_attempts', 'title_recheck_at', 'title_recheck_status',
+)
+
+
+def title_recheck_candidates(raw, public, *, now=None, limit=TITLE_RECHECK_DEFAULT_PER_RUN):
+    """Recheck recently checked, active/recently-ended URLs; new arrivals first.
+
+    Never recheck stale expired pages, missing-date pages, the first-check queue,
+    redirect failures or blocked cooldown. One extra attempt at most.
+    """
+    if limit <= 0:
+        return []
+    now = v14._utc(now)
+    state = raw.get('collector_state', {})
+    v14state = state.get('v14', {})
+    if v14._cooldown_active(v14state, now):
+        return []
+    pending = set(v14state.get('pending_new_urls', []))
+    raw_index, pub_index = v11.indices(raw, public)
+    checks = state.get('v13', {}).get('browser_checks', {})
+    attempts = state.get('v21_3', {}).get('title_rechecks', {})
+    options = []
+    for url, pub in pub_index.items():
+        if url in pending or pub.get('event_title') or raw_index[url].get('event_title'):
+            continue
+        end = v11.parse_datetime(pub.get('application_end_at'))
+        start = v11.parse_datetime(pub.get('application_start_at'))
+        if not end or not (now - timedelta(hours=TITLE_END_GRACE_HOURS) < end <= now + timedelta(days=7)):
+            continue
+        if start and now < start:
+            continue
+        check = checks.get(url, {})
+        # v17 is reachable through v19.v18; its parser accepts microseconds.
+        when = v19.v18.v17.check_time(check.get('checked_at'))
+        if not when or now - when < timedelta(hours=TITLE_RECHECK_HOURS):
+            continue
+        if check.get('status') == 'browser_redirected':
+            continue
+        if int(attempts.get(url, {}).get('attempts', 0)) >= TITLE_RECHECK_MAX:
+            continue
+        options.append((end, -(when.timestamp()), url))
+    options.sort()
+    return [entry[2] for entry in options[:limit]]
+
+
+def verified_title(page, url):
+    """Only use titles from the exact LivePocket event on an accessible page."""
+    if not isinstance(page, dict) or page.get('status') != 'ok':
+        return None, ''
+    if v12.exact_event_url(page.get('final_url')) != url:
+        return None, ''
+    value = v14.pick_title(page)
+    if value:
+        return value, 'v21_3_official_page_title'
+    labelled = v20.v15.event_title(page)
+    if labelled:
+        value = v14.clean_title(labelled)
+        if value:
+            return value, 'v21_3_official_explicit_event_label'
+    return None, ''
+
+
+def verified_product(page, url):
+    if not isinstance(page, dict) or page.get('status') != 'ok' or v12.exact_event_url(page.get('final_url')) != url:
+        return None, ''
+    # Product names from exact product labels / uniform multi-store tickets
+    # ONLY; never infer product name from an event title, group name or catalog.
+    text = page.get('text') or ''
+    product = v14.extract_product(text) or v20.v15.single_label(text, 'product_name')
+    if product:
+        return product, 'v21_3_official_explicit_product_label'
+    product = v20.uniform_ticket_product(text)
+    if product:
+        return product, 'v21_3_uniform_multi_store_tickets'
+    return None, ''
+
+
+def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
+            background_limit=0, retry_limit=3, verified=None, v19_verified=None,
+            title_limit=TITLE_RECHECK_DEFAULT_PER_RUN):
+    """v21.1 checks first, then bounded title-specific rechecks on older URLs."""
+    now = v14._utc(now)
+    snapshot = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
+                for item in public['items']}
+    # Selection before the upstream pass prevents fresh discoveries from being
+    # rechecked twice in the same job. An overlap with upstream is skipped.
+    queued = title_recheck_candidates(raw, public, now=now, limit=title_limit)
+    seen = set()
+
+    def record(url):
+        seen.add(url)
+        return fetch(url)
+
+    raw, public, review, deadlines, sources, content, stats = process_v21_1(
+        raw, public, record, catalog=catalog, now=now,
+        new_limit=new_limit, background_limit=background_limit,
+        retry_limit=retry_limit, verified=verified, v19_verified=v19_verified)
+    ri, pi = v11.indices(raw, public)
+    state = raw.setdefault('collector_state', {})
+    log = state.setdefault('v21_3', {}).setdefault('title_rechecks', {})
+    stats.update(title_recheck_planned=len(queued), title_recheck_attempted=0,
+                 title_recheck_titles_added=0, title_recheck_products_added=0,
+                 title_recheck_blocked=0)
+    for url in queued:
+        if url in seen or v14._cooldown_active(state.setdefault('v14', {}), now):
+            continue
+        # An upstream pass may already have obtained the title.
+        if pi[url].get('event_title'):
+            continue
+        try:
+            result = fetch(url)
+        except Exception:
+            result = {'status': 'browser_error'}
+        if not isinstance(result, dict):
+            result = {'status': 'browser_error'}
+        status = str(result.get('status') or 'browser_error')
+        if status == 'ok' and v12.exact_event_url(result.get('final_url')) != url:
+            status = 'browser_redirected'
+        previous = log.get(url, {})
+        log[url] = {'attempts': int(previous.get('attempts', 0)) + 1,
+                    'checked_at': now.isoformat(), 'status': status}
+        stats['title_recheck_attempted'] += 1
+        if status == 'ok':
+            title, source = verified_title(result, url)
+            if title and not (ri[url].get('event_title') or pi[url].get('event_title')):
+                for item in (ri[url], pi[url]):
+                    item['event_title'] = title
+                ri[url].setdefault('field_sources', {})['event_title'] = source
+                stats['title_recheck_titles_added'] += 1
+            product, source = verified_product(result, url)
+            if product and not (ri[url].get('product_name') or pi[url].get('product_name')):
+                for item in (ri[url], pi[url]):
+                    item['product_name'] = product
+                ri[url].setdefault('field_sources', {})['product_name'] = source
+                stats['title_recheck_products_added'] += 1
+        if status in ('browser_blocked', 'browser_blocked_or_empty'):
+            state['v14']['blocked_until'] = (now + timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
+            stats['title_recheck_blocked'] += 1
+            break
+
+    # A recovered event name is an event title, NOT automatically the product.
+    # Re-evaluate category hints only after a successful page-specific result.
+    if stats['title_recheck_titles_added'] or stats['title_recheck_products_added']:
+        for item in public['items']:
+            inferred = v10.category_of(item)
+            if inferred != 'unknown' and item.get('review_category') not in ('onepiece', 'yugioh'):
+                item['review_category'] = inferred
+        # Reconcile the legacy queue and THEN apply map-specific category hints,
+        # because v10.transform rebuilds review_category from basic rules.
+        raw, public, new_review, _ = v10.transform(raw, public)
+        updated = classify(raw, public, catalog)
+        stats['map_matches'] = updated['map_matches']
+        stats['map_new_pokemon_hints'] += updated['map_new_pokemon_hints']
+        for row in new_review:
+            item = pi[row['url']]
+            if stores_known(item):
+                row['needs_store'] = ''
+                row['review_reason'] = ';'.join(
+                    r for r in (row.get('review_reason') or '').split(';')
+                    if r != 'store_unknown')
+            if item.get('pokemon_map_match'):
+                row['review_category'] = 'pokemon'
+        review = [r for r in new_review if r.get('needs_store') or r.get('needs_product')]
+        stats['review_remaining'] = len(review)
+
+    for row in content:
+        item, pub = ri[row['url']], pi[row['url']]
+        row['event_title'] = v12._safe_csv(pub.get('event_title') or '')
+        row['product_name'] = v12._safe_csv(pub.get('product_name') or '')
+        row['title_source'] = item.get('field_sources', {}).get('event_title', '')
+        row['product_source'] = item.get('field_sources', {}).get('product_name', '')
+        row['product_origin'] = item.get('field_sources', {}).get('product_name', '')
+        row['missing_details'] = ','.join(missing_details_v21(pub))
+        row['map_catalog_match'] = v12._safe_csv(pub.get('pokemon_map_match') or '')
+        row['map_catalog_type'] = pub.get('pokemon_map_type') or ''
+        row['map_catalog_evidence'] = pub.get('pokemon_map_evidence') or ''
+        retry = log.get(row['url'], {})
+        row['title_recheck_attempts'] = retry.get('attempts', 0)
+        row['title_recheck_at'] = retry.get('checked_at', '')
+        row['title_recheck_status'] = retry.get('status', '')
+    if any(snapshot.get(i['url']) != json.dumps(i, ensure_ascii=False, sort_keys=True)
+           for i in public['items']):
+        public['updated_at'] = now.isoformat()
+    public['schema_version'] = 21
+    return raw, public, review, deadlines, sources, content, stats
+
+
+def browser_fetcher():
+    """Preserve v20 same-URL browser behavior; also read structured event titles.
+
+    No new endpoint, API, login, access-block evasion, or second request.
+    """
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as BrowserTimeout
+    except ImportError as exc:
+        raise RuntimeError('Playwrightがインストールされていません') from exc
+    manager = sync_playwright().start()
+    try:
+        browser = manager.chromium.launch(headless=True)
+        context = browser.new_context(locale='ja-JP', timezone_id='Asia/Tokyo')
+    except Exception:
+        manager.stop()
+        raise
+
+    def fetch(url):
+        page = context.new_page()
+        try:
+            try:
+                response = page.goto(url, wait_until='domcontentloaded', timeout=18000)
+            except BrowserTimeout:
+                return {'status': 'browser_timeout'}
+            if response is None:
+                return {'status': 'browser_no_response'}
+            if response.status in (401, 403, 429):
+                return {'status': 'browser_blocked'}
+            if response.status >= 400:
+                return {'status': 'browser_http_error'}
+            if v12.exact_event_url(page.url) != url:
+                return {'status': 'browser_redirected'}
+            body = ''
+            for _ in range(3):
+                try:
+                    body = page.locator('body').inner_text(timeout=4000)
+                except BrowserTimeout:
+                    body = ''
+                if len(body.strip()) > 80:
+                    break
+                page.wait_for_timeout(1500)
+            if v14.v13.BLOCK_WORDS.search(body) or len(body.strip()) < 40:
+                return {'status': 'browser_blocked_or_empty'}
+            titles = []
+            for selector in ('meta[property="og:title"]', 'meta[name="twitter:title"]'):
+                try:
+                    value = page.locator(selector).first.get_attribute('content', timeout=800)
+                    if value:
+                        titles.append(value)
+                except Exception:
+                    pass
+            try:
+                titles.extend(page.locator('h1').all_inner_texts(timeout=1200)[:3])
+            except Exception:
+                pass
+            try:
+                titles.append(page.title())
+            except Exception:
+                pass
+            # Event-specific JSON-LD only (ignore unrelated product lists,
+            # breadcrumbs, other event URLs and global Website metadata).
+            try:
+                blocks = page.locator('script[type="application/ld+json"]').all_text_contents(timeout=1300)
+                titles.extend(structured_event_titles(blocks, url))
+            except Exception:
+                pass
+            if '受付・チケット情報' in body and not v19.ticket_option_stores(body):
+                try:
+                    tab = page.get_by_text('受付・チケット情報', exact=True).first
+                    tab.click(timeout=1500)
+                    page.wait_for_timeout(350)
+                    if v12.exact_event_url(page.url) != url:
+                        return {'status': 'browser_redirected'}
+                    additional = page.locator('body').inner_text(timeout=4000)
+                    if v19.ticket_option_stores(additional) and additional != body:
+                        body += '\n' + additional
+                except Exception:
+                    pass
+            return {'status': 'ok', 'final_url': page.url,
+                    'text': body[:30000], 'titles': titles[:12]}
+        except BrowserTimeout:
+            return {'status': 'browser_timeout'}
+        except Exception:
+            return {'status': 'browser_error'}
+        finally:
+            page.close()
+
+    def close():
+        try:
+            context.close()
+            browser.close()
+        finally:
+            manager.stop()
+    return fetch, close
+
+
+def structured_event_titles(blocks, url):
+    """Only a unique Event name from JSON-LD on the EXACT event URL."""
+    names = set()
+    for source in blocks[:20]:
+        if not isinstance(source, str) or len(source) > 200000:
+            continue
+        try:
+            document = json.loads(source)
+        except (ValueError, TypeError):
+            continue
+        stack = [(document, 0)]
+        while stack:
+            node, depth = stack.pop()
+            if depth > 6:
+                continue
+            if isinstance(node, list):
+                stack.extend((child, depth+1) for child in node[:40])
+            elif isinstance(node, dict):
+                kind = node.get('@type') or ''
+                kinds = kind if isinstance(kind, list) else [kind]
+                if any(isinstance(t,str) and t.casefold() == 'event' for t in kinds):
+                    target = node.get('url')
+                    if target and v12.exact_event_url(target) != url:
+                        continue
+                    value = v14.clean_title(node.get('name'))
+                    if value:
+                        names.add(value)
+                for key in ('@graph','mainEntity','itemListElement'):
+                    if key in node:
+                        stack.append((node[key], depth+1))
+    return list(names) if len(names) == 1 else []
+
+
 def main():
     import sys
     if len(sys.argv) != 2 or sys.argv[1] not in ('plan', 'process'):
@@ -295,20 +622,24 @@ def main():
     with use_store_aware_missing():
         work = v19.v18.plan(raw, public, new_limit=new_limit,
                            background_limit=background_limit, retry_limit=retry_limit)
+    title_limit = v14.safe_limit('LIVEPOCKET_V21_3_TITLE_PER_RUN', 2, 3)
+    titles_due = title_recheck_candidates(raw, public, limit=title_limit)
+    browser_needed = bool(work['browser_needed'] or titles_due)
     if sys.argv[1] == 'plan':
-        print('v21 browser plan:', work, 'map catalog products:', len(catalog))
+        print('v21.3 browser plan:', work, 'title_due:', len(titles_due),
+              'map catalog products:', len(catalog))
         if os.getenv('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
-                fh.write('browser_needed=' + ('true' if work['browser_needed'] else 'false') + '\n')
+                fh.write('browser_needed=' + ('true' if browser_needed else 'false') + '\n')
         return
     ready = os.getenv('LIVEPOCKET_V21_BROWSER_READY', '')
     if ready == 'false':
-        new_limit = background_limit = retry_limit = 0
+        new_limit = background_limit = retry_limit = title_limit = 0
         needed = False
     else:
-        needed = ready == 'true' or work['browser_needed']
+        needed = ready == 'true' or browser_needed
     if needed:
-        fetch, close = v20.browser_fetcher()
+        fetch, close = browser_fetcher()
     else:
         def fetch(_url):
             raise AssertionError('Unexpected browser fetch')
@@ -317,7 +648,8 @@ def main():
         data = process(raw, public, fetch, catalog=catalog,
                        new_limit=new_limit, background_limit=background_limit,
                        retry_limit=retry_limit, verified=verified,
-                       v19_verified=v19_verified)
+                       v19_verified=v19_verified,
+                       title_limit=title_limit)
     finally:
         close()
     raw, public, review, deadlines, sources, content, stats = data
