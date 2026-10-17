@@ -1,5 +1,5 @@
 {
-  "schema_version": 20,
+  "schema_version": 21,
   "collected_at": "2026-10-17T00:30:00.714215+00:00",
   "unique_livepocket_urls": 332,
   "items": [
@@ -43,7 +43,10 @@
           "name": "晴れる屋２秋葉原タワー店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/v7i-m",
@@ -58,7 +61,11 @@
           "name": "晴れる屋２秋葉原タワー店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/moozm",
@@ -74,7 +81,10 @@
           "name": "晴れる屋２秋葉原タワー店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/qr8o-",
@@ -390,9 +400,9 @@
       "url": "https://livepocket.jp/e/lx6zx",
       "store_name": "古本市場柏豊四季店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T22:00:00+09:00",
       "application_start_at": "2026-10-10T10:00:00+09:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "古本市場柏豊四季店",
@@ -418,9 +428,9 @@
       "url": "https://livepocket.jp/e/dsvro",
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-11T22:00:00+09:00",
       "application_start_at": "2026-10-10T10:00:00+09:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -432,9 +442,9 @@
       "url": "https://livepocket.jp/e/q78jb",
       "store_name": "文教堂あきる野店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T20:30:00+09:00",
       "application_start_at": "2026-10-09T13:46:00+09:00",
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "文教堂あきる野店",
@@ -458,14 +468,16 @@
     },
     {
       "url": "https://livepocket.jp/e/1ydm_",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00"
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/birt9",
       "store_name": "フルコンプ",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T23:59:00+09:00",
       "application_start_at": "2026-10-10T09:00:00+09:00",
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "フルコンプ八王子本店",
@@ -498,6 +510,8 @@
       "store_name": "TSUTAYA17号北浦和店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA17号北浦和店",
@@ -509,9 +523,9 @@
       "url": "https://livepocket.jp/e/jdpux",
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-11T22:00:00+09:00",
       "application_start_at": "2026-10-10T10:00:00+09:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -523,9 +537,9 @@
       "url": "https://livepocket.jp/e/ruq6l",
       "store_name": "TSUTAYA Trading Card平塚店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-18T20:00:00+09:00",
       "application_start_at": "2026-10-07T18:00:00+09:00",
+      "application_end_at": "2026-10-18T20:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card平塚店",
@@ -591,9 +605,9 @@
       "url": "https://livepocket.jp/e/6d7t6",
       "store_name": "文教堂書店浦安西友店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T20:30:00+09:00",
       "application_start_at": "2026-10-10T10:00:00+09:00",
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "文教堂書店浦安西友店",
@@ -619,13 +633,17 @@
       "url": "https://livepocket.jp/e/qf-o3",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
       "source_preview": "ONE PIECEカードゲーム...",
-      "review_category": "onepiece"
+      "review_category": "onepiece",
+      "application_end_at": "2026-10-16T09:00:00+09:00",
+      "application_start_at": "2026-10-09T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/zdj8h",
       "store_name": "TSUTAYA籠原店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-11T21:30:00+09:00",
+      "application_start_at": "2026-10-09T09:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA籠原店",
@@ -649,6 +667,8 @@
       "url": "https://livepocket.jp/e/zfehv_08gw",
       "store_name": "イトーヨーカドー",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-11T23:59:00+09:00",
+      "application_start_at": "2026-09-29T19:35:00+09:00",
       "stores": [
         {
           "name": "イトーヨーカドー",
@@ -683,9 +703,39 @@
       "url": "https://livepocket.jp/e/p6y6i",
       "store_name": "フルコンプ",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "application_start_at": "2026-10-09T17:15:00+09:00",
       "stores": [
         {
-          "name": "フルコンプ",
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ仙台駅前店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ福岡天神店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ札幌駅前店",
           "prefecture": ""
         }
       ]
@@ -767,6 +817,8 @@
       "store_name": "カードショップ オリオンベース",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-11T21:00:00+09:00",
+      "application_start_at": "2026-10-09T14:51:00+09:00",
       "stores": [
         {
           "name": "カードショップ オリオンベース",
@@ -1661,7 +1713,11 @@
           "name": "竜星のPAO",
           "prefecture": ""
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -1697,7 +1753,10 @@
           "name": "キデイランド浦和美園",
           "prefecture": ""
         }
-      ]
+      ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -1710,7 +1769,11 @@
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -1722,7 +1785,11 @@
           "name": "キデイランド浦和美園",
           "prefecture": ""
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -1746,7 +1813,11 @@
           "name": "ホビーステーション",
           "prefecture": ""
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -1784,7 +1855,10 @@
           "name": "竜星のPAO",
           "prefecture": ""
         }
-      ]
+      ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/7_zc2",
@@ -1935,7 +2009,11 @@
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": ""
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -1948,7 +2026,10 @@
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": ""
         }
-      ]
+      ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/prp_c",
@@ -1961,7 +2042,10 @@
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": ""
         }
-      ]
+      ],
+      "pokemon_map_match": "メガシンフォニア",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/8wkbq",
@@ -1975,7 +2059,11 @@
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -1988,7 +2076,11 @@
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2002,7 +2094,10 @@
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/adjql",
@@ -2014,7 +2109,11 @@
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": ""
         }
-      ]
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2252,12 +2351,19 @@
       "url": "https://livepocket.jp/e/e7ec9",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
       "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/0a2vu",
       "product_name": "30th CELEBRATION",
-      "discord_posted_at": "2026-09-25T11:25:36.501000+00:00"
+      "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/asb1y",
@@ -2964,7 +3070,10 @@
           "name": "イトーヨーカドーグランツリー武蔵小杉店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/q8-1nh5bh5",
@@ -3029,5 +3138,6 @@
         }
       ]
     }
-  ]
+  ],
+  "updated_at": "2026-10-17T06:53:33.485164+00:00"
 }
