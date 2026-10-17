@@ -4807,7 +4807,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T21:00:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ih5ta",
@@ -4821,7 +4827,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T08:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/k6x2c",
@@ -4835,7 +4847,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T21:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/x2n7b",
@@ -4849,7 +4867,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7ck7b",
@@ -4891,7 +4915,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-07T14:21:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/i44fhaaluv",
@@ -4905,7 +4935,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-07T14:21:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/h2dkqnh0f0",
@@ -4919,7 +4955,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-07T14:21:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/yv07y",
@@ -4933,7 +4975,8 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {}
     },
     {
       "url": "https://livepocket.jp/e/w6vl0",
@@ -4970,8 +5013,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 11,
-    "application_start_at": 11
+    "application_end_at": 18,
+    "application_start_at": 18
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -5083,6 +5126,38 @@
         "https://livepocket.jp/e/w6vl0": {
           "checked_at": "2026-10-17T02:30:20.783465+00:00",
           "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/yv07y": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/x2n7b": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/q8-1nh5bh5": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/k6x2c": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/jbkc-": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ih5ta": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/i44fhaaluv": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/h2dkqnh0f0": {
+          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "status": "checked_deadline"
         }
       }
     },
