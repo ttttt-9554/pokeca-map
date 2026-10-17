@@ -109,6 +109,43 @@ def normalize_store_heading(s):
     return s
 
 
+# Ticket cards on the official "受付・チケット情報" tab sometimes use one
+# bracketed name per participating shop, without a separate "対象店舗" heading.
+# Count a shop only when the bracketed name looks like a retail location AND
+# the card has a ticket-status/price marker shortly thereafter.  Two or more
+# distinct ticket options are required; a single bracketed mention is not an
+# independently verified multi-store list.
+TICKET_SHOP_TITLE = re.compile(r'^\s*【\s*([^】\r\n]{2,90}店)\s*】(?:[^\r\n]*)$')
+TICKET_CARD_MARKER = re.compile(r'(?:販売中|販売終了|受付中|受付終了|販売予定|分配不可|￥|¥|予定枚数終了|受付締切)')
+
+
+def ticket_option_stores(text):
+    """Extract distinct shop names from clearly identifiable ticket cards."""
+    if not isinstance(text, str) or '受付・チケット情報' not in text:
+        return []
+    lines = [line.strip() for line in text.splitlines()]
+    matches = []
+    for idx, line in enumerate(lines):
+        m = TICKET_SHOP_TITLE.match(line)
+        if not m:
+            continue
+        name = safe_name(m.group(1), strict_retail=True)
+        if not name:
+            continue
+        following = []
+        for nextline in lines[idx+1:idx+11]:
+            if TICKET_SHOP_TITLE.match(nextline):
+                break
+            following.append(nextline)
+        if not TICKET_CARD_MARKER.search('\n'.join(following)):
+            continue
+        matches.append({'name': name, 'prefecture': ''})
+        if len(matches) > MAX_STORES:
+            return []
+    distinct = list({m['name']: m for m in matches}.values())
+    return distinct if len(distinct) >= 2 else []
+
+
 def page_stores(text):
     """Only interpret a contiguous, clearly labelled list of participating stores.
 
@@ -150,7 +187,7 @@ def page_stores(text):
         if group:
             candidate_groups.append(group)
     if not candidate_groups:
-        return []
+        return ticket_option_stores(text)
     # If several separately labelled lists conflict, do not combine them.
     signatures = {tuple((e['name'], e['prefecture']) for e in g) for g in candidate_groups}
     if len(signatures) > 1:
