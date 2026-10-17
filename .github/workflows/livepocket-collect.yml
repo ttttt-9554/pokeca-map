@@ -83,21 +83,24 @@ jobs:
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      - name: Queue new URLs (v14)
+      - name: Queue new URLs for immediate content checks (v14)
+        id: priorities
         run: python scripts/livepocket_v14.py prepare
 
-      - name: Plan new and retry event checks (v16)
-        id: v16plan
-        run: python scripts/livepocket_v16.py plan
+      - name: Plan new and due retry event checks (v17)
+        id: v17plan
+        run: python scripts/livepocket_v17.py plan
 
       - name: Install free browser only when needed
-        if: ${{ steps.v16plan.outputs.browser_needed == 'true' }}
+        if: ${{ steps.v17plan.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
 
-      - name: Check new URLs and retry missing details (v16)
-        run: python scripts/livepocket_v16.py process
+      - name: Check new URLs FIRST and due retries (v17)
+        env:
+          LIVEPOCKET_V17_BROWSER_READY: ${{ steps.v17plan.outputs.browser_needed }}
+        run: python scripts/livepocket_v17.py process
 
       - name: Save public data and check reports
         shell: bash
@@ -110,7 +113,7 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket events with new-first content checks and retries'
+            git commit -m 'Update LivePocket v17 event checks and due retries'
             git push
           fi
 
