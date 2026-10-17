@@ -29,6 +29,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
+    env:
+      LIVEPOCKET_V14_SNAPSHOT: ${{ runner.temp }}/livepocket-before.json
+      LIVEPOCKET_V14_NEW_PER_RUN: '15'
+      LIVEPOCKET_V14_BACKGROUND_PER_RUN: '8'
+      LIVEPOCKET_V14_RUN_BACKGROUND: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && 'true' || 'false' }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,6 +45,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Snapshot existing URLs (v14)
+        run: python scripts/livepocket_v14.py snapshot
 
       - name: Collect Discord URLs
         env:
@@ -73,29 +82,31 @@ jobs:
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      - name: Install free browser (v13)
-        if: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *' }}
+      - name: Queue newly discovered URLs (v14)
+        id: priorities
+        run: python scripts/livepocket_v14.py prepare
+
+      - name: Install free browser only when needed
+        if: ${{ steps.priorities.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
 
-      - name: Check rendered LivePocket application deadlines (v13)
-        env:
-          LIVEPOCKET_V13_PER_RUN: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && '10' || '0' }}
-        run: python scripts/livepocket_v13.py
+      - name: Check NEW event pages FIRST (v14)
+        run: python scripts/livepocket_v14.py process
 
-      - name: Save JSON and review lists
+      - name: Save public data and check reports
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv
+          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv livepocket_content_checks.csv
 
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket event data and free deadline checks'
+            git commit -m 'Update LivePocket events and new-URL content checks'
             git push
           fi
 
