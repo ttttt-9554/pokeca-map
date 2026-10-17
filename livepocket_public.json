@@ -844,9 +844,9 @@
       "url": "https://livepocket.jp/e/n_pb_",
       "store_name": "麦わらストア お台場店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
-      "application_end_at": "2026-10-10T23:59:00+09:00",
       "application_start_at": "2026-10-08T00:00:00+09:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
       "stores": [
         {
           "name": "麦わらストア お台場店",
@@ -858,9 +858,9 @@
       "url": "https://livepocket.jp/e/qkcel",
       "store_name": "麦わらストア 渋谷本店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
-      "application_end_at": "2026-10-10T23:59:00+09:00",
       "application_start_at": "2026-10-08T00:00:00+09:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
       "stores": [
         {
           "name": "麦わらストア 渋谷本店",
@@ -872,9 +872,9 @@
       "url": "https://livepocket.jp/e/1d90p",
       "store_name": "麦わらストア 東京駅店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
-      "application_end_at": "2026-10-10T23:59:00+09:00",
       "application_start_at": "2026-10-08T00:00:00+09:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
       "stores": [
         {
           "name": "麦わらストア 東京駅店",
@@ -886,9 +886,9 @@
       "url": "https://livepocket.jp/e/i5dvh",
       "store_name": "TSUTAYA秩父店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
-      "application_end_at": "2026-10-09T20:00:00+09:00",
       "application_start_at": "2026-10-07T09:00:00+09:00",
+      "application_end_at": "2026-10-09T20:00:00+09:00",
+      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
       "stores": [
         {
           "name": "TSUTAYA秩父店",
@@ -900,9 +900,9 @@
       "url": "https://livepocket.jp/e/yaxsh",
       "store_name": "MUGIWARA STORE HARAJUKU",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
-      "application_end_at": "2026-10-10T23:59:00+09:00",
       "application_start_at": "2026-10-08T00:00:00+09:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
       "stores": [
         {
           "name": "MUGIWARA STORE HARAJUKU",
@@ -914,9 +914,9 @@
       "url": "https://livepocket.jp/e/1gia2",
       "store_name": "麦わらストア 池袋店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
-      "application_end_at": "2026-10-10T23:59:00+09:00",
       "application_start_at": "2026-10-08T00:00:00+09:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "discord_posted_at": "2026-10-07T21:43:17.478000+00:00",
       "stores": [
         {
           "name": "麦わらストア 池袋店",
@@ -929,6 +929,8 @@
       "store_name": "TSUTAYA籠原店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-07T03:11:08.315000+00:00",
+      "application_end_at": "2026-10-08T21:30:00+09:00",
+      "application_start_at": "2026-10-06T09:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA籠原店",
@@ -940,9 +942,9 @@
       "url": "https://livepocket.jp/e/mjum5",
       "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-07T03:11:08.315000+00:00",
-      "application_end_at": "2026-10-11T20:00:00+09:00",
       "application_start_at": "2026-10-05T08:00:00+09:00",
+      "application_end_at": "2026-10-11T20:00:00+09:00",
+      "discord_posted_at": "2026-10-07T03:11:08.315000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
@@ -955,6 +957,8 @@
       "store_name": "新宿高島屋 9階おもちゃ売場 総合レジカウンター",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-07T03:11:08.315000+00:00",
+      "application_end_at": "2026-10-12T19:30:00+09:00",
+      "application_start_at": "2026-10-09T12:00:00+09:00",
       "stores": [
         {
           "name": "新宿高島屋 9階おもちゃ売場 総合レジカウンター",
@@ -967,6 +971,8 @@
       "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
       "prefecture": "栃木県",
       "discord_posted_at": "2026-10-07T03:11:08.315000+00:00",
+      "application_end_at": "2026-10-11T20:00:00+09:00",
+      "application_start_at": "2026-10-05T08:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
@@ -996,12 +1002,43 @@
       "url": "https://livepocket.jp/e/rbbol",
       "store_name": "晴れる屋2 東日本店舗",
       "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATION カードセット (9種セット)",
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-05T12:00:00+09:00",
+      "review_category": "pokemon",
       "stores": [
         {
-          "name": "晴れる屋2 東日本店舗",
+          "name": "晴れる屋2秋葉原タワー店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2高田馬場店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2水戸店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2大宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2仙台店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2郡山店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2池袋店",
           "prefecture": ""
         }
-      ]
+      ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/57_nt",
@@ -1036,6 +1073,8 @@
       "store_name": "プリキュア プリティストア越谷店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "application_end_at": "2026-10-13T20:30:00+09:00",
+      "application_start_at": "2026-10-04T18:00:00+09:00",
       "stores": [
         {
           "name": "プリキュア プリティストア越谷店",
@@ -1060,6 +1099,8 @@
       "store_name": "TSUTAYA Trading Card平塚店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "application_end_at": "2026-10-10T21:00:00+09:00",
+      "application_start_at": "2026-10-05T14:50:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card平塚店",
@@ -1072,6 +1113,8 @@
       "store_name": "TSUTAYA北習志野駅前店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "application_end_at": "2026-10-09T23:59:00+09:00",
+      "application_start_at": "2026-10-03T20:27:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA北習志野駅前店",
@@ -1152,6 +1195,8 @@
       "store_name": "プリキュア プリティストア越谷店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-06T03:12:02.603000+00:00",
+      "application_end_at": "2026-10-14T12:30:00+09:00",
+      "application_start_at": "2026-10-04T18:00:00+09:00",
       "stores": [
         {
           "name": "プリキュア プリティストア越谷店",
@@ -3231,5 +3276,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-17T09:53:56.646045+00:00"
+  "updated_at": "2026-10-17T11:05:49.633731+00:00"
 }

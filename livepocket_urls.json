@@ -1753,7 +1753,13 @@
           "name": "TSUTAYA籠原店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-08T21:30:00+09:00",
+      "application_start_at": "2026-10-06T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/mjum5",
@@ -1799,7 +1805,13 @@
           "name": "新宿高島屋 9階おもちゃ売場 総合レジカウンター",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T19:30:00+09:00",
+      "application_start_at": "2026-10-09T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/0pazm",
@@ -1819,7 +1831,13 @@
           "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T20:00:00+09:00",
+      "application_start_at": "2026-10-05T08:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/irssg",
@@ -1869,16 +1887,48 @@
       "store_name": "晴れる屋2 東日本店舗",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATION カードセット (9種セット)",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
       "stores": [
         {
-          "name": "晴れる屋2 東日本店舗",
+          "name": "晴れる屋2秋葉原タワー店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2高田馬場店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2水戸店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2大宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2仙台店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2郡山店",
+          "prefecture": ""
+        },
+        {
+          "name": "晴れる屋2池袋店",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-05T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/57_nt",
@@ -1952,7 +2002,13 @@
           "name": "プリキュア プリティストア越谷店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-13T20:30:00+09:00",
+      "application_start_at": "2026-10-04T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/illuy",
@@ -1992,7 +2048,13 @@
           "name": "TSUTAYA Trading Card平塚店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-10T21:00:00+09:00",
+      "application_start_at": "2026-10-05T14:50:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/v8vpq",
@@ -2012,7 +2074,13 @@
           "name": "TSUTAYA北習志野駅前店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-09T23:59:00+09:00",
+      "application_start_at": "2026-10-03T20:27:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/k1kbb",
@@ -2164,7 +2232,13 @@
           "name": "プリキュア プリティストア越谷店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-14T12:30:00+09:00",
+      "application_start_at": "2026-10-04T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ms12p",
@@ -6727,12 +6801,12 @@
     "prefecture": 147,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 26,
+    "product_name": 27,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 79,
-    "application_start_at": 79,
+    "application_end_at": 87,
+    "application_start_at": 87,
     "stores_events": 186
   },
   "collector_state": {
@@ -7158,6 +7232,38 @@
         "https://livepocket.jp/e/irssg": {
           "checked_at": "2026-10-17T09:53:36.028656+00:00",
           "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/cyqww": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/6mr30": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/0pazm": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ynwy7": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/v8vpq": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/rbbol": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/p7l99": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/p5xy5": {
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -7207,6 +7313,20 @@
           "attempts": 1,
           "last_attempt_at": "2026-10-17T06:53:08.723448+00:00",
           "last_status": "checked_retry_no_new_details"
+        }
+      }
+    },
+    "v21_3": {
+      "title_rechecks": {
+        "https://livepocket.jp/e/1maxl": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "ok"
+        },
+        "https://livepocket.jp/e/vt2ev": {
+          "attempts": 1,
+          "checked_at": "2026-10-17T11:05:49.633731+00:00",
+          "status": "ok"
         }
       }
     }
