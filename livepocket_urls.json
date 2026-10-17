@@ -1,8 +1,8 @@
 {
-  "collected_at": "2026-10-17T21:12:19.502362+00:00",
+  "collected_at": "2026-10-17T23:10:47.465929+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 70,
+  "messages_scanned": 71,
   "unique_livepocket_urls": 348,
   "items": [
     {
@@ -7287,12 +7287,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561109504987500720"
+      "1551580466266644552": "1561144648229982228"
     },
     "last_run": {
-      "checked_at": "2026-10-17T21:12:19.502362+00:00",
-      "new_urls": 5,
-      "original_urls": 343,
+      "checked_at": "2026-10-17T23:10:47.465929+00:00",
+      "new_urls": 0,
+      "original_urls": 348,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0
@@ -7626,7 +7626,7 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/u62m7": {
-          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "checked_at": "2026-10-17T23:11:18.564465+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/t4s-9": {
@@ -7790,12 +7790,12 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/26civ": {
-          "checked_at": "2026-10-17T13:10:03.821729+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-17T23:11:18.564465+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/0_ugz": {
-          "checked_at": "2026-10-17T13:10:03.821729+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-17T23:11:18.564465+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/b1c0d": {
           "checked_at": "2026-10-17T13:10:03.821729+00:00",
@@ -7950,17 +7950,17 @@
         "https://livepocket.jp/e/u62m7": {
           "detected_at": "2026-10-17T09:46:49.693536+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-17T16:30:31.792537+00:00"
+          "checked_at": "2026-10-17T23:11:18.564465+00:00"
         },
         "https://livepocket.jp/e/0_ugz": {
           "detected_at": "2026-10-17T13:09:26.462486+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T13:10:03.821729+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-17T23:11:18.564465+00:00"
         },
         "https://livepocket.jp/e/26civ": {
           "detected_at": "2026-10-17T13:09:26.462486+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T13:10:03.821729+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-17T23:11:18.564465+00:00"
         },
         "https://livepocket.jp/e/6ys9i": {
           "detected_at": "2026-10-17T13:09:26.462486+00:00",
@@ -8013,8 +8013,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/u62m7": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-17T16:30:31.792537+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-17T23:11:18.564465+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/s9-lf": {
@@ -8051,6 +8051,16 @@
           "attempts": 1,
           "last_attempt_at": "2026-10-17T21:12:44.537734+00:00",
           "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/26civ": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-17T23:11:18.564465+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/0_ugz": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-17T23:11:18.564465+00:00",
+          "last_status": "checked_retry_no_new_details"
         }
       }
     },
@@ -8085,15 +8095,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/rfsy5": {
-          "attempts": 1,
-          "checked_at": "2026-10-17T13:10:03.821729+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-17T23:11:18.564465+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
         },
         "https://livepocket.jp/e/vmmju": {
-          "attempts": 1,
-          "checked_at": "2026-10-17T13:10:03.821729+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-17T23:11:18.564465+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
