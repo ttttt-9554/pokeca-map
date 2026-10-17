@@ -468,9 +468,9 @@
     },
     {
       "url": "https://livepocket.jp/e/1ydm_",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "application_end_at": "2026-10-12T22:00:00+09:00",
-      "application_start_at": "2026-10-10T10:00:00+09:00"
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/birt9",
@@ -509,9 +509,9 @@
       "url": "https://livepocket.jp/e/4a-uj",
       "store_name": "TSUTAYA17号北浦和店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T22:00:00+09:00",
       "application_start_at": "2026-10-10T10:00:00+09:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "TSUTAYA17号北浦和店",
@@ -631,19 +631,19 @@
     },
     {
       "url": "https://livepocket.jp/e/qf-o3",
+      "application_start_at": "2026-10-09T09:00:00+09:00",
+      "application_end_at": "2026-10-16T09:00:00+09:00",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
       "source_preview": "ONE PIECEカードゲーム...",
-      "review_category": "onepiece",
-      "application_end_at": "2026-10-16T09:00:00+09:00",
-      "application_start_at": "2026-10-09T09:00:00+09:00"
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/zdj8h",
       "store_name": "TSUTAYA籠原店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
-      "application_end_at": "2026-10-11T21:30:00+09:00",
       "application_start_at": "2026-10-09T09:00:00+09:00",
+      "application_end_at": "2026-10-11T21:30:00+09:00",
+      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
       "stores": [
         {
           "name": "TSUTAYA籠原店",
@@ -666,9 +666,9 @@
     {
       "url": "https://livepocket.jp/e/zfehv_08gw",
       "store_name": "イトーヨーカドー",
-      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
-      "application_end_at": "2026-10-11T23:59:00+09:00",
       "application_start_at": "2026-09-29T19:35:00+09:00",
+      "application_end_at": "2026-10-11T23:59:00+09:00",
+      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
       "stores": [
         {
           "name": "イトーヨーカドー",
@@ -702,9 +702,9 @@
     {
       "url": "https://livepocket.jp/e/p6y6i",
       "store_name": "フルコンプ",
-      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
-      "application_end_at": "2026-10-10T23:59:00+09:00",
       "application_start_at": "2026-10-09T17:15:00+09:00",
+      "application_end_at": "2026-10-10T23:59:00+09:00",
+      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
       "stores": [
         {
           "name": "フルコンプ八王子本店",
@@ -816,9 +816,9 @@
       "url": "https://livepocket.jp/e/o0z6y",
       "store_name": "カードショップ オリオンベース",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
-      "application_end_at": "2026-10-11T21:00:00+09:00",
       "application_start_at": "2026-10-09T14:51:00+09:00",
+      "application_end_at": "2026-10-11T21:00:00+09:00",
+      "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
       "stores": [
         {
           "name": "カードショップ オリオンベース",
@@ -3139,5 +3139,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-17T06:53:33.485164+00:00"
+  "updated_at": "2026-10-17T08:56:05.050758+00:00"
 }
