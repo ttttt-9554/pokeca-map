@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261015-2">
+  <link rel="stylesheet" href="style.css?v=20261017-lottery1">
 
   <style>
     [hidden] { display: none !important; }
@@ -446,6 +446,61 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
 
     </section>
 
+
+    <!-- LivePocket抽選：発見マップと統合（地図ピンは追加しない） -->
+    <section id="lotteryView" class="view" aria-labelledby="lpHeading">
+      <div class="lp-heading">
+        <div>
+          <h2 id="lpHeading">🎟️ 抽選・LivePocket</h2>
+          <p class="hint">Discordから収集した抽選イベントを一覧表示。地図にはピンを追加しません。</p>
+        </div>
+        <button id="lpRefresh" type="button" class="lp-refresh">↻ 更新</button>
+      </div>
+      <p id="lpLoadStatus" class="hint" role="status" aria-live="polite">抽選情報はタブを開くと読み込みます。</p>
+      <div id="lpSummary" class="lp-summary" aria-live="polite"></div>
+
+      <section class="lp-filter" aria-label="抽選イベントの検索条件">
+        <label for="lpQuery">商品名・イベント名・店舗名で検索</label>
+        <input id="lpQuery" type="search" autocomplete="off" maxlength="120"
+               placeholder="例：30th CELEBRATION、イトーヨーカドー" list="lpProductSuggestions">
+        <datalist id="lpProductSuggestions"></datalist>
+        <div class="lp-filter-grid">
+          <label for="lpGenre">ジャンル
+            <select id="lpGenre"><option value="pokemon">ポケカ</option><option value="all">すべて（未分類も含む）</option></select>
+          </label>
+          <label for="lpPrefecture">都道府県
+            <select id="lpPrefecture"><option value="all">全国</option></select>
+          </label>
+          <label for="lpStatus">応募状況
+            <select id="lpStatus">
+              <option value="all">すべて</option>
+              <option value="open">受付中（日時確認済み）</option>
+              <option value="upcoming">開始前</option>
+              <option value="unknown">受付状況・期限未確認</option>
+              <option value="closed">受付終了</option>
+            </select>
+          </label>
+          <label for="lpType">商品区分
+            <select id="lpType">
+              <option value="all">すべて</option>
+              <option value="pack">拡張パック</option>
+              <option value="deck">構築デッキ</option>
+              <option value="unknown">区分未確認</option>
+            </select>
+          </label>
+        </div>
+        <label class="lp-wishlist" for="lpWishlistOnly">
+          <input id="lpWishlistOnly" type="checkbox">
+          <span id="lpWishlistLabel">⭐ 「探している商品」に登録したものだけ表示</span>
+        </label>
+        <p class="hint">「探している商品」はマップの絞り込み画面で登録できます。商品が特定されていないイベントは対象外です。</p>
+        <button id="lpClearFilters" type="button" class="lp-clear">検索条件をリセット</button>
+      </section>
+      <p id="lpResultCount" class="lp-count" aria-live="polite"></p>
+      <div id="lpCards" class="lp-cards" aria-live="polite"></div>
+      <button id="lpMore" class="lp-more" type="button" hidden>さらに50件表示</button>
+      <p class="hint">応募状況・締切は取得済み情報に基づきます。内容や応募条件は各イベントの公式ページでご確認ください。</p>
+    </section>
 
     <!-- ======================================
          発見情報登録画面
@@ -925,6 +980,11 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
     </button>
 
 
+    <button type="button" data-tab="lottery" aria-label="抽選・LivePocketを開く">
+      🎟️
+      <span>抽選</span>
+    </button>
+
     <button
       type="button"
       data-tab="add"
@@ -979,7 +1039,7 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261016-discord-display-name-1"></script>
+  <script src="app.js?v=20261017-lottery1"></script>
 
 <script>
 /* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */

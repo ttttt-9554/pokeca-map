@@ -489,6 +489,7 @@
     });
 
     if (tab === 'map') refreshMap();
+    if (tab === 'lottery') loadLotteryEvents();
     render();
   }
 
@@ -1064,6 +1065,7 @@
           }
 
           mergeCloudProducts();
+          fillLotteryProductSuggestions();
           console.log(
             category, '商品数:', products.length
           );
@@ -1304,6 +1306,7 @@
     wishlist = normalizeWishlist(wishlist);
     writeLocalWishlist();
     renderWishlist();
+    if ($('lotteryView')?.classList.contains('active')) renderLottery();
     if (!supabaseClient || !authUser) {
       wishlistStatus('端末内に保存しました。Discordログインで同期できます。');
       return;
@@ -1338,6 +1341,7 @@
     get('wishlistEmpty').hidden = wishlist.length > 0;
     get('wishlistSelectedHeading').textContent = `② 登録済みの探している商品（${wishlist.length}件）`;
     get('wishlistApply').disabled = wishlist.length === 0;
+    updateLotteryWishlistControl();
   }
   function showWishlistChoices() {
     const input = get('wishlistSearch');
@@ -2200,7 +2204,7 @@
     }
     cloudProducts=p.data||[];
     cloudStores=(s.data||[]).filter(isStore).map(x=>({...x,lat:Number(x.lat),lng:Number(x.lng)}));
-    mergeCloudProducts(); updateStoreCount(); renderCloudAdminLists();
+    mergeCloudProducts(); updateStoreCount(); renderCloudAdminLists(); fillLotteryProductSuggestions();
     if (document.activeElement===$('product')) showProductDropdown();
     if (document.activeElement===$('mapProductSearch')) showMapProductDropdown();
     if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・共有店舗 ${cloudStores.length}件`;
@@ -2303,6 +2307,319 @@
     apply();
   }
 
+
+  // ========================================
+  // LivePocket 抽選一覧（既存の地図とは独立）
+  // ========================================
+  const LP_JSON_URL = './livepocket_public.json';
+  const LP_PAGE_SIZE = 50;
+  const LP_REFRESH_MS = 10 * 60 * 1000;
+  const LP_PREFECTURES = [
+    '北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県',
+    '茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県',
+    '新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県',
+    '滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県',
+    '鳥取県','島根県','岡山県','広島県','山口県',
+    '徳島県','香川県','愛媛県','高知県',
+    '福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'
+  ];
+  let lotteryItems = [];
+  let lotteryLastFetch = 0;
+  let lotteryLoading = null;
+  let lotteryVisibleLimit = LP_PAGE_SIZE;
+  let lotteryTimer = null;
+  let lotteryCountdownTimer = null;
+
+  function safeLotteryUrl(value) {
+    return typeof value === 'string' &&
+      /^https:\/\/livepocket\.jp\/e\/[a-zA-Z0-9_-]+\/?$/.test(value);
+  }
+
+  function lotteryStoreEntries(item) {
+    const raw = Array.isArray(item.stores) ? item.stores : [];
+    const entries = raw.filter(x => x && typeof x.name === 'string' && x.name.trim())
+      .map(x => ({name:x.name.trim(),prefecture:String(x.prefecture||'').trim()}));
+    if (entries.length) return entries;
+    if (item.store_name) return [{name:String(item.store_name),prefecture:String(item.prefecture||'')}];
+    return [];
+  }
+
+  function lotteryPrefectures(item) {
+    const names = new Set(lotteryStoreEntries(item).map(s => s.prefecture).filter(Boolean));
+    if (!names.size && item.prefecture) names.add(item.prefecture);
+    return [...names];
+  }
+
+  function lotteryDate(value) {
+    if (!value) return NaN;
+    const time = Date.parse(value);
+    return Number.isFinite(time) ? time : NaN;
+  }
+
+  function lotteryState(item, now = Date.now()) {
+    const end = lotteryDate(item.application_end_at);
+    const start = lotteryDate(item.application_start_at);
+    if (Number.isFinite(end) && now > end) return 'closed';
+    if (Number.isFinite(start) && now < start) return 'upcoming';
+    if (Number.isFinite(start) && Number.isFinite(end) && now >= start && now <= end) return 'open';
+    // 終了日時のみが判明していても、開始を確認できなければ受付中と断定しない。
+    return 'unknown';
+  }
+
+  function lotteryJapaneseDate(value) {
+    const time = lotteryDate(value);
+    if (!Number.isFinite(time)) return '';
+    return new Intl.DateTimeFormat('ja-JP',{
+      timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',hour12:false
+    }).format(new Date(time));
+  }
+
+  function lotteryGenre(item) {
+    const explicit = String(item.review_category || '').toLowerCase();
+    if (explicit === 'pokemon' || (item.pokemon_map_match && explicit !== 'onepiece' && explicit !== 'yugioh')) return 'pokemon';
+    return explicit || 'unknown';
+  }
+
+  function lotteryProductType(item) {
+    const kind = String(item.pokemon_map_type || '').toLowerCase();
+    return ['pack','deck','pack/deck'].includes(kind) ? kind : 'unknown';
+  }
+
+  function lotteryMatchedWishlist(item) {
+    const matched = productNorm(item.pokemon_map_match || '');
+    const observed = productNorm(item.product_name || '');
+    const title = productNorm(item.event_title || '');
+    return wishlist.some(p => {
+      const target = productNorm(p.name);
+      const knownType = lotteryProductType(item);
+      if (knownType !== 'unknown' && !knownType.split('/').includes(p.category)) return false;
+      if (!target || target.length < 5) return false;
+      if (matched && target === matched) return true;
+      if (observed && observed.includes(target)) return true;
+      if (title && title.includes(target)) return true;
+      return false;
+    });
+  }
+
+  function updateLotteryWishlistControl() {
+    const checkbox = $('lpWishlistOnly');
+    const label = $('lpWishlistLabel');
+    if (!checkbox || !label) return;
+    label.textContent = `⭐ 「探している商品」のみ（${wishlist.length}種類）`;
+    checkbox.disabled = wishlist.length === 0;
+    if (!wishlist.length) checkbox.checked = false;
+  }
+
+  function fillLotteryProductSuggestions() {
+    const root = $('lpProductSuggestions');
+    if (!root) return;
+    root.replaceChildren();
+    const seen = new Set();
+    for (const p of [...packs,...decks]) {
+      if (!p?.name || seen.has(p.name)) continue;
+      seen.add(p.name);
+      const option = document.createElement('option');
+      option.value = p.name;
+      root.append(option);
+      if (seen.size >= 500) break;
+    }
+  }
+
+  function renderLotteryPrefectures() {
+    const selected = $('lpPrefecture').value;
+    const actual = new Set(lotteryItems.flatMap(lotteryPrefectures));
+    const root = $('lpPrefecture');
+    root.replaceChildren();
+    const all = document.createElement('option');
+    all.value = 'all'; all.textContent = '全国';root.append(all);
+    const unknown = document.createElement('option');
+    unknown.value = 'unknown'; unknown.textContent = '都道府県未確認';root.append(unknown);
+    for (const name of LP_PREFECTURES) {
+      if (!actual.has(name)) continue;
+      const option = document.createElement('option');
+      option.value = name; option.textContent = name; root.append(option);
+    }
+    root.value = [...root.options].some(x => x.value === selected) ? selected : 'all';
+  }
+
+  async function loadLotteryEvents(force = false) {
+    if (!force && lotteryItems.length && Date.now() - lotteryLastFetch < LP_REFRESH_MS) {
+      renderLottery(); return;
+    }
+    if (lotteryLoading) return lotteryLoading;
+    const button = $('lpRefresh');
+    const status = $('lpLoadStatus');
+    button.disabled = true;
+    status.textContent = '抽選情報を取得しています…';
+    lotteryLoading = (async () => {
+      try {
+        const response = await fetch(LP_JSON_URL, {cache:'no-store'});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        if (!data || !Array.isArray(data.items)) throw new Error('公開JSONの形式が正しくありません');
+        // URLが確認できたLivePocketイベントだけ受け入れ、同一URLは1件にまとめる。
+        const seen = new Set();
+        const clean = [];
+        for (const item of data.items) {
+          if (!item || !safeLotteryUrl(item.url) || seen.has(item.url)) continue;
+          seen.add(item.url);
+          clean.push(item);
+        }
+        lotteryItems = clean;
+        lotteryLastFetch = Date.now();
+        renderLotteryPrefectures();
+        const update = data.updated_at || data.collected_at;
+        const info = lotteryJapaneseDate(update);
+        status.textContent = `取得済み ${clean.length}イベント` +
+          (info ? ` ／ データ更新 ${info}（日本時間）` : '') +
+          ' ／ GitHub Actionsの更新を反映します';
+        renderLottery();
+      } catch(error) {
+        console.error('LivePocket取得エラー:',error);
+        status.textContent = '抽選情報を読み込めませんでした。更新をお試しください：' + error.message +
+          (lotteryItems.length ? '（最後に取得した一覧を表示中）' : '');
+        renderLottery();
+      } finally {
+        button.disabled = false;
+        lotteryLoading = null;
+      }
+    })();
+    return lotteryLoading;
+  }
+
+  function lotteryStatusText(state, item) {
+    if (state === 'unknown') return Number.isFinite(lotteryDate(item.application_end_at)) ? '受付状況未確認' : '応募期限未確認';
+    return ({open:'受付中',upcoming:'開始前',closed:'受付終了'})[state] || '応募状況未確認';
+  }
+
+  function lotteryCategoryText(value) {
+    return ({pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'})[value] || value;
+  }
+
+  function lotteryCard(item, state) {
+    const stores = lotteryStoreEntries(item);
+    const places = lotteryPrefectures(item);
+    const label = item.product_name || item.event_title || item.source_preview ||
+      (stores[0]?.name ? stores[0].name + ' のイベント' : '詳細未取得のイベント');
+    const typ = lotteryProductType(item);
+    const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
+    const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
+      ? lotteryJapaneseDate(item.application_end_at) + ' 締切' : '応募締切：未確認';
+    const start = Number.isFinite(lotteryDate(item.application_start_at)) ? lotteryJapaneseDate(item.application_start_at) : '';
+    let countdown = '';
+    if (state === 'open') {
+      const minutes = Math.max(0, Math.floor((lotteryDate(item.application_end_at) - Date.now()) / 60000));
+      const days = Math.floor(minutes / 1440);
+      const hours = Math.floor((minutes % 1440) / 60);
+      countdown = days ? ` ／ 残り${days}日${hours}時間` : ` ／ 残り${hours}時間${minutes % 60}分`;
+    }
+    const placeText = places.length ? places.join('・') : '都道府県未確認';
+    const genre = lotteryGenre(item);
+    const list = stores.length ? `
+      <details class="lp-store-details">
+        <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
+        <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small></li>`).join('')}</ul>
+      </details>` : `<p class="lp-store-muted">対象店舗：未確認</p>`;
+    return `<article class="lp-card ${state === 'closed' ? 'lp-closed' : ''}">
+      <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
+        <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
+        ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
+      </div>
+      <h3>${escape(label)}</h3>
+      ${item.product_name && item.event_title && item.product_name !== item.event_title ? `<p class="lp-sub">${escape(item.event_title)}</p>` : ''}
+      ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
+      <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
+      ${list}
+      <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">公式ページで確認 ↗</a>
+    </article>`;
+  }
+
+  function renderLottery() {
+    if (!$('lpCards')) return;
+    const now = Date.now();
+    const query = productNorm($('lpQuery').value);
+    const genre = $('lpGenre').value;
+    const prefecture = $('lpPrefecture').value;
+    const status = $('lpStatus').value;
+    const type = $('lpType').value;
+    const wishlistOnly = $('lpWishlistOnly').checked;
+    const visible = lotteryItems.filter(item => {
+      if (genre !== 'all' && lotteryGenre(item) !== genre) return false;
+      if (prefecture === 'unknown' && lotteryPrefectures(item).length) return false;
+      if (prefecture !== 'all' && prefecture !== 'unknown' && !lotteryPrefectures(item).includes(prefecture)) return false;
+      if (status !== 'all' && lotteryState(item, now) !== status) return false;
+      if (type !== 'all' && !(type === 'unknown' ? lotteryProductType(item) === 'unknown' : lotteryProductType(item).split('/').includes(type))) return false;
+      if (wishlistOnly && !lotteryMatchedWishlist(item)) return false;
+      if (query) {
+        const text = [item.product_name,item.event_title,item.source_preview,item.store_name,
+          item.pokemon_map_match,...lotteryStoreEntries(item).map(s => s.name)]
+          .filter(Boolean).join(' ');
+        if (!productNorm(text).includes(query)) return false;
+      }
+      return true;
+    });
+    const priority = {open:0,upcoming:1,unknown:2,closed:3};
+    visible.sort((a,b) => {
+      const sa = lotteryState(a,now), sb = lotteryState(b,now);
+      if (sa !== sb) return priority[sa] - priority[sb];
+      if (sa === 'open' || sa === 'upcoming') {
+        const ea = lotteryDate(a.application_end_at), eb = lotteryDate(b.application_end_at);
+        if (Number.isFinite(ea) && Number.isFinite(eb) && ea !== eb) return ea - eb;
+      }
+      return (lotteryDate(b.discord_posted_at) || 0) - (lotteryDate(a.discord_posted_at) || 0);
+    });
+    const pokemonCount = lotteryItems.filter(x => lotteryGenre(x) === 'pokemon').length;
+    const knownCount = lotteryItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
+    const openCount = lotteryItems.filter(x => lotteryState(x,now) === 'open').length;
+    $('lpSummary').innerHTML = `<span>全イベント <strong>${lotteryItems.length}</strong>件</span>
+      <span>ポケカ <strong>${pokemonCount}</strong>件</span>
+      <span>締切確認済み <strong>${knownCount}</strong>件</span>
+      <span>受付中（確認済み） <strong>${openCount}</strong>件</span>`;
+    $('lpResultCount').textContent = `検索結果：${visible.length}件` +
+      (visible.length > lotteryVisibleLimit ? `（${lotteryVisibleLimit}件まで表示中）` : '');
+    $('lpCards').innerHTML = visible.length ? visible.slice(0,lotteryVisibleLimit)
+      .map(x => lotteryCard(x, lotteryState(x,now))).join('') :
+      '<p class="lp-empty">該当する抽選イベントがありません。ジャンルや応募状況を変更してみてください。</p>';
+    const more = $('lpMore');
+    more.hidden = visible.length <= lotteryVisibleLimit;
+    more.textContent = `さらに${Math.min(LP_PAGE_SIZE,visible.length-lotteryVisibleLimit)}件表示`;
+  }
+
+  function initLottery() {
+    for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpWishlistOnly']) {
+      $(id).addEventListener(id === 'lpQuery' ? 'input' : 'change', () => {
+        lotteryVisibleLimit = LP_PAGE_SIZE;
+        renderLottery();
+      });
+    }
+    $('lpRefresh').addEventListener('click',() => loadLotteryEvents(true));
+    $('lpMore').addEventListener('click',() => {lotteryVisibleLimit += LP_PAGE_SIZE;renderLottery();});
+    $('lpClearFilters').addEventListener('click',() => {
+      $('lpQuery').value = '';
+      $('lpGenre').value = 'pokemon';
+      $('lpPrefecture').value = 'all';
+      $('lpStatus').value = 'all';
+      $('lpType').value = 'all';
+      $('lpWishlistOnly').checked = false;
+      lotteryVisibleLimit = LP_PAGE_SIZE;
+      renderLottery();
+    });
+    fillLotteryProductSuggestions();
+    updateLotteryWishlistControl();
+    lotteryTimer = setInterval(() => {
+      if (document.visibilityState === 'visible' && $('lotteryView').classList.contains('active')) {
+        loadLotteryEvents();
+      }
+    }, LP_REFRESH_MS);
+    lotteryCountdownTimer = setInterval(() => {
+      if (document.visibilityState === 'visible' && $('lotteryView').classList.contains('active')) renderLottery();
+    }, 60000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && $('lotteryView').classList.contains('active')) loadLotteryEvents();
+    });
+  }
+
   // ========================================
   // 起動
   // ========================================
@@ -2322,6 +2639,7 @@
       initChainDropdown();
       initCloudAdmin();
       initFriendPresence();
+      initLottery();
       bindEvents();
 
       get('foundAt').value = nowLocal();
