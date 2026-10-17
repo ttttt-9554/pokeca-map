@@ -98,6 +98,14 @@
     .display-options input {accent-color:var(--pink);width:17px;height:17px;margin:0}
     .display-options .hint {font-size:11px;color:var(--muted)}
     .event-hint {color:#8a6475;font-size:12px;margin:5px 0 0}
+    .store-list {margin:10px 0 9px;padding:10px 11px;background:#f5f7fa;border:1px solid #e3eaf2;border-radius:10px}
+    .store-list-label {font-weight:750;font-size:11px;color:#556477;margin:0 0 7px}
+    .store-list-entry {display:flex;gap:8px;align-items:baseline;justify-content:space-between;padding:5px 0;border-top:1px solid #e5ebf3;font-size:12px}
+    .store-list-entry:first-of-type {border:0}
+    .store-list-entry span:first-child {font-weight:700;overflow-wrap:anywhere;min-width:0}
+    .store-list-entry span:last-child {color:#7d8ba0;white-space:nowrap}
+    .event.is-ended .store-list {background:#e7ebf0;border-color:#d7dfe9}
+    .event.is-ended .store-list-entry {color:#657180}
 
     .hidden {display:none!important}
     @media(min-width:650px) {
@@ -120,7 +128,7 @@
     <div class="wrap">
       <div class="hero-top"><span class="eyebrow">POKECA MAP / LIVEPOCKET</span><button type="button" id="refresh" class="refresh">↻ 更新</button></div>
       <h1>LivePocket イベント一覧</h1>
-      <p>確認済みの店名・商品名を優先表示。元投稿で確認できる店舗見出しも反映。名前がないURLは推測しません。</p>
+      <p>1つのイベントに複数店舗がある場合も、店舗ごとに表示・都道府県検索できます。未確認の店舗や商品名は推測しません。</p>
       <div class="stats" aria-live="polite">
         <div class="stat"><strong id="totalCount">—</strong><span>収集済みURL</span></div>
         <div class="stat"><strong id="namedCount">—</strong><span>店舗名確認済み</span></div>
@@ -161,7 +169,7 @@
     <div id="message" class="hidden" role="status"></div>
     <div id="results" class="cards" aria-live="off"></div>
     <button type="button" id="loadMore" class="more hidden">さらに30件表示</button>
-    <p class="smallnote">※ 店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。確認済みの申込締切日時を過ぎたカードは、開始日時が不明でもグレー表示します。締切時刻はその分の終わりまで有効として扱います。期間不明のカードはグレー表示しません。イベント内容は必ずリンク先で確認してください。</p>
+    <p class="smallnote">※ 1つのURLに複数店舗がある場合もイベントは1件として数えます。都道府県の絞り込みは各店舗の所在地を参照します。地域が未確認の店舗には所在地を推測して補完しません。店舗名や商品名の未登録は実際のイベントに情報がないことを意味しません。商品名が店舗名欄に記録されたデータは店舗として数えません。「期間内」は登録されている申込開始・終了日時による判定です。実際の受付・在庫状況を保証するものではありません。年が不明な受付期間や情報未取得のイベントは「判定できない」に含まれます。確認済みの申込締切日時を過ぎたカードは、開始日時が不明でもグレー表示します。締切時刻はその分の終わりまで有効として扱います。期間不明のカードはグレー表示しません。イベント内容は必ずリンク先で確認してください。</p>
   </main>
   <script>
   (() => {
@@ -204,14 +212,42 @@
       return 'active';
     }
     const statuses = { active:'期間内', upcoming:'受付前', ended:'期間終了', unknown:'期間不明' };
-    function knownShop(item) {
+    function legacyShop(item) {
       const store = clean(item.store_name);
       const product = clean(item.product_name);
-      // v5の一部は商品名をstore_nameにも保持している。店舗名として数えない。
-      if (!store || (product && norm(store.replace(/^\*\s*/,'')).startsWith(norm(product)))) {
+      if (!store || (product && norm(store.replace(/^\*\s*/,'' )).startsWith(norm(product)))) {
         return clean(item.venue_name);
       }
       return store;
+    }
+    function storeEntries(item) {
+      // v19: only use event-specific, verified per-store entries. Backward
+      // compatibility with older public JSONs is handled by the fallback.
+      if (Array.isArray(item.stores) && item.stores.length) {
+        const unique = new Set();
+        return item.stores.filter(s => s && typeof s === 'object').map(s => ({
+          name: clean(s.name), prefecture: clean(s.prefecture)
+        })).filter(s => {
+          const key=s.name+'\u0000'+s.prefecture;
+          if (!s.name || unique.has(key)) return false;
+          unique.add(key);return true;
+        });
+      }
+      const old = legacyShop(item);
+      return old ? [{name:old,prefecture:clean(item.prefecture)}] : [];
+    }
+    function knownShop(item) {
+      const entries=storeEntries(item);
+      return entries.length ? entries[0].name : legacyShop(item);
+    }
+    function storeRegions(item) {
+      const entries=storeEntries(item);
+      return [...new Set(entries.map(s=>s.prefecture).filter(Boolean))];
+    }
+    function matchesPrefecture(item, pref) {
+      if (!pref) return true;
+      const entries=storeEntries(item);
+      return entries.length ? entries.some(s=>s.prefecture===pref) : clean(item.prefecture)===pref;
     }
     function candidateTitle(item) {
       const v = clean(item.source_preview);
@@ -264,17 +300,30 @@
       if (status === 'active' && end !== null && end-Date.now() <= 48*3600000) tags.append(tag('締切間近','urgency'));
       top.append(tags);
       el.append(top);
-      el.append(text('div',clean(item.prefecture)||'都道府県未確認','label-region'));
+      const shops = storeEntries(item);
+      const regions = storeRegions(item);
+      el.append(text('div',regions.length ? regions.join('・') : (shops.length?'都道府県未確認':(clean(item.prefecture)||'都道府県未確認')),'label-region'));
       const shop = knownShop(item);
       const product = clean(item.product_name);
       const possible = candidateTitle(item);
-      const heading = shop || product || clean(item.event_title) || possible || '店舗・商品名未登録';
+      const heading = shops.length > 1 ? `${shops[0].name} ほか${shops.length-1}店舗` : (shop || product || clean(item.event_title) || possible || '店舗・商品名未登録');
       el.append(text('h3',heading,'name'));
       if (!shop) {
         const note = product ? '商品名を表示中・店舗名は未登録'
           : clean(item.event_title) ? 'イベント名を表示中・店舗名は未登録'
           : possible ? 'Discord投稿の名称候補（未確認）' : '詳細情報が未登録';
         el.append(text('p',note,'event-hint'));
+      }
+      if (shops.length>1) {
+        tags.append(tag('対象'+shops.length+'店舗','multi-store'));
+        const list = text('div','','store-list');
+        list.append(text('p','対象店舗（'+shops.length+'店舗）','store-list-label'));
+        shops.forEach(entry => {
+          const line=text('div','','store-list-entry');
+          line.append(text('span',entry.name),text('span',entry.prefecture||'地域未確認'));
+          list.append(line);
+        });
+        el.append(list);
       }
       if (clean(item.event_title) && heading !== clean(item.event_title)) el.append(text('p',item.event_title,'product'));
       if (product && heading !== product) fact(el,'商品名',product);
@@ -306,7 +355,7 @@
     function populatePrefectures(items) {
       const previous = $('prefecture').value;
       $('prefecture').querySelectorAll('option:not(:first-child)').forEach(e=>e.remove());
-      [...new Set(items.map(x=>clean(x.prefecture)).filter(Boolean))].sort(collator.compare).forEach(value => {
+      [...new Set(items.flatMap(x=>storeEntries(x).map(s=>s.prefecture)).concat(items.filter(x=>!storeEntries(x).length).map(x=>clean(x.prefecture))).filter(Boolean))].sort(collator.compare).forEach(value => {
         const opt = document.createElement('option');
         opt.value=value; opt.textContent=value;
         $('prefecture').append(opt);
@@ -326,12 +375,12 @@
       const sort = $('sort').value;
       const onlyInfo = $('onlyInfo').checked;
       state.filtered = state.items.filter(item => {
-        if (pref && item.prefecture !== pref) return false;
+        if (!matchesPrefecture(item,pref)) return false;
         if (cat && categoryOf(item) !== cat) return false;
         if (status && periodState(item) !== status) return false;
         if (onlyInfo && !hasUsefulName(item)) return false;
         if (query) {
-          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.source_preview,item.url].join(' '));
+          const search = norm([item.store_name,item.venue_name,item.prefecture,item.product_name,item.event_title,item.source_preview,item.url,...storeEntries(item).flatMap(s=>[s.name,s.prefecture])].join(' '));
           if (!search.includes(query)) return false;
         }
         return true;
