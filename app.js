@@ -2313,7 +2313,7 @@
   // ========================================
   const LP_JSON_URL = './livepocket_public.json';
   const LP_PAGE_SIZE = 50;
-  const LP_REFRESH_MS = 10 * 60 * 1000;
+  const LP_REFRESH_MS = 5 * 60 * 1000;
   const LP_PREFECTURES = [
     '北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県',
     '茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県',
@@ -2454,7 +2454,8 @@
     status.textContent = '抽選情報を取得しています…';
     lotteryLoading = (async () => {
       try {
-        const response = await fetch(LP_JSON_URL, {cache:'no-store'});
+        // Cache-busting query avoids older Pages/CDN/browser copies after a new commit.
+        const response = await fetch(LP_JSON_URL + '?refresh=' + Date.now(), {cache:'no-store'});
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
         if (!data || !Array.isArray(data.items)) throw new Error('公開JSONの形式が正しくありません');
@@ -2471,9 +2472,13 @@
         renderLotteryPrefectures();
         const update = data.updated_at || data.collected_at;
         const info = lotteryJapaneseDate(update);
+        // JSON update time is not a proof that Actions has run recently.
+        const viewedAt = new Intl.DateTimeFormat('ja-JP', {
+          timeZone:'Asia/Tokyo', hour:'2-digit',minute:'2-digit',hour12:false
+        }).format(new Date());
         status.textContent = `取得済み ${clean.length}イベント` +
-          (info ? ` ／ データ更新 ${info}（日本時間）` : '') +
-          ' ／ GitHub Actionsの更新を反映します';
+          (info ? ` ／ データ最終変更 ${info}（日本時間）` : '') +
+          ` ／ 画面で最新データを取得 ${viewedAt}`;
         renderLottery();
       } catch(error) {
         console.error('LivePocket取得エラー:',error);
@@ -2500,8 +2505,16 @@
   function lotteryCard(item, state) {
     const stores = lotteryStoreEntries(item);
     const places = lotteryPrefectures(item);
-    const label = item.product_name || item.event_title || item.source_preview ||
-      (stores[0]?.name ? stores[0].name + ' のイベント' : '詳細未取得のイベント');
+    const sourcePreview = typeof item.source_preview === 'string' ? item.source_preview.trim() : '';
+    // A Discord excerpt ending in '...' is not a full product name.
+    // Never render it as an authoritative event/product title.
+    const incompletePreview = /(?:\.{3}|…|⋯)\s*$/.test(sourcePreview);
+    const reliableName = (item.product_name || item.event_title || '').trim();
+    const label = reliableName || (!incompletePreview && sourcePreview) ||
+      '商品名・イベント名を確認中';
+    const partialNotice = !reliableName && incompletePreview
+      ? `<p class="lp-source-preview"><strong>Discord投稿の抜粋（途中省略）：</strong>${escape(sourcePreview)}<span>正式名称は公式ページで確認してください。</span></p>`
+      : '';
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
@@ -2526,7 +2539,8 @@
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
         ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
       </div>
-      <h3>${escape(label)}</h3>
+      <h3 class="lp-full-title">${escape(label)}</h3>
+      ${partialNotice}
       ${item.product_name && item.event_title && item.product_name !== item.event_title ? `<p class="lp-sub">${escape(item.event_title)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>

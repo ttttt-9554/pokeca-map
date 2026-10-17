@@ -644,3 +644,27 @@ html[data-theme="dark"] .lp-status.lp-upcoming{background:#17375d!important;colo
 html[data-theme="dark"] .lp-status.lp-unknown,html[data-theme="dark"] .lp-status.lp-closed{background:#344154!important;color:#ebf3fc!important}
 html[data-theme="dark"] .lp-official{background:#245cb9!important;color:#fff!important}
 @media(max-width:390px){.lp-filter-grid{grid-template-columns:1fr}.lp-summary strong{font-size:16px}}
+
+/* v21.2: Show verified complete names on any number of lines. */
+#lotteryView .lp-full-title{
+  display:block!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+#lotteryView .lp-source-preview{
+  margin:8px 0 12px;
+  font-size:13px;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+  color:var(--app-muted,#64748b);
+}
+#lotteryView .lp-source-preview strong{display:block;font-weight:700;color:var(--app-muted,#475569)}
+#lotteryView .lp-source-preview span{display:block;margin-top:4px;font-size:12px;}
+html[data-theme="dark"] #lotteryView .lp-source-preview,
+html[data-theme="dark"] #lotteryView .lp-source-preview strong,
+html[data-theme="dark"] #lotteryView .lp-source-preview span{color:#c9d7eb!important;}
