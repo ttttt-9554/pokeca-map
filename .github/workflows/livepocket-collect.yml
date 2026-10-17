@@ -12,10 +12,11 @@ name: LivePocket Discord URL Collector
         options: ['true', 'false']
 
   schedule:
-    # Discordの新着URLを約10分おきに確認
-    - cron: '7,17,27,37,47,57 * * * *'
+    # 新しいDiscord投稿を約5分おきに確認
+    # GitHub側の事情で遅延・スキップされる場合があります
+    - cron: '2,7,12,17,22,27,32,37,42,47,52,57 * * * *'
 
-    # 未確認の過去URLを1日2回確認（UTC）
+    # 過去URLの未確認チェックは1日2回（UTC）
     - cron: '23 1,13 * * *'
 
 permissions:
@@ -68,7 +69,7 @@ jobs:
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
-      # Discordの埋め込み情報を補完
+      # 無料のDiscord埋め込み情報で補完
       - name: Enrich Discord embeds without Brave (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -93,33 +94,30 @@ jobs:
       - name: Confirm yearful application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      # 新着URLを最優先で確認対象にする
+      # 新着URLを最優先で確認
       - name: Queue new URLs for immediate content checks (v14)
         id: priorities
         run: python scripts/livepocket_v14.py prepare
 
-      # v21: 新着・再確認・過去URLを計画
+      # 新着・再確認・過去URLの確認を計画
       - name: Plan new, due retries and ticket products and verified store locations (v21)
         id: v21plan
         run: python scripts/livepocket_v21.py plan
 
-      # 必要な場合だけ無料ブラウザを導入
+      # 必要な場合だけ無料ブラウザをインストール
       - name: Install free browser only when needed
         if: ${{ steps.v21plan.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
 
-      # v21:
-      # LivePocketのチケット・商品名・店舗情報を確認
-      # 発見マップのポケカ商品マスタと部分一致照合
-      # 複数店舗の未取得判定を改善
+      # 商品名・店舗情報・発見マップ商品マスタを照合
       - name: Check ticket products and multiple-store prefectures (v21)
         env:
           LIVEPOCKET_V21_BROWSER_READY: ${{ steps.v21plan.outputs.browser_needed }}
         run: python scripts/livepocket_v21.py process
 
-      # 最新のJSONと確認レポートをGitHubに保存
+      # 最新データをGitHubへ保存
       - name: Save public data and check reports
         shell: bash
         run: |
@@ -135,7 +133,7 @@ jobs:
             git push
           fi
 
-      # バックアップ
+      # 収集データをバックアップ
       - name: Backup full JSON for authorized maintainers
         if: always()
         uses: actions/upload-artifact@v4
