@@ -211,9 +211,9 @@
       "url": "https://livepocket.jp/e/qelp_",
       "store_name": "TSUTAYA入間仏子店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
-      "application_end_at": "2026-10-18T21:45:00+09:00",
       "application_start_at": "2026-10-12T07:00:00+09:00",
+      "application_end_at": "2026-10-18T21:45:00+09:00",
+      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "stores": [
         {
           "name": "TSUTAYA入間仏子店",
@@ -224,10 +224,10 @@
     {
       "url": "https://livepocket.jp/e/i6s-n",
       "store_name": "晴れる屋",
-      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "product_name": "『リアリティ・フラクチャー』 Secret Lair Bundle (●英語版)",
-      "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-12T17:00:00+09:00",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "stores": [
         {
           "name": "晴れる屋",
@@ -239,9 +239,9 @@
       "url": "https://livepocket.jp/e/bqj23",
       "store_name": "蔦屋書店茂原店 トレカコーナー",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
-      "application_end_at": "2026-10-13T21:00:00+09:00",
       "application_start_at": "2026-10-11T17:13:00+09:00",
+      "application_end_at": "2026-10-13T21:00:00+09:00",
+      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "stores": [
         {
           "name": "蔦屋書店茂原店 トレカコーナー",
@@ -251,11 +251,11 @@
     },
     {
       "url": "https://livepocket.jp/e/uay8k",
+      "application_start_at": "2026-10-12T00:00:00+09:00",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "source_preview": "※再入荷分 ポケカ商品【スター...",
       "review_category": "pokemon",
-      "application_end_at": "2026-10-18T23:59:00+09:00",
-      "application_start_at": "2026-10-12T00:00:00+09:00",
       "stores": [
         {
           "name": "豊橋店",
@@ -291,9 +291,9 @@
       "url": "https://livepocket.jp/e/ld_6t",
       "store_name": "TAUTAYA秩父店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
-      "application_end_at": "2026-10-14T20:00:00+09:00",
       "application_start_at": "2026-10-12T09:00:00+09:00",
+      "application_end_at": "2026-10-14T20:00:00+09:00",
+      "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "stores": [
         {
           "name": "TAUTAYA秩父店",
@@ -303,11 +303,11 @@
     },
     {
       "url": "https://livepocket.jp/e/vddw3",
+      "application_start_at": "2026-10-12T00:00:00+09:00",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
       "discord_posted_at": "2026-10-12T15:14:05.804000+00:00",
       "source_preview": "※再入荷分 ポケカ商品【メガブ...",
       "review_category": "pokemon",
-      "application_end_at": "2026-10-18T23:59:00+09:00",
-      "application_start_at": "2026-10-12T00:00:00+09:00",
       "stores": [
         {
           "name": "豊橋店",
@@ -341,12 +341,11 @@
     },
     {
       "url": "https://livepocket.jp/e/miwqx",
-      "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
-      "source_preview": "10月再販：ワンピースカードゲ...",
-      "review_category": "onepiece",
       "product_name": "ワンピースカードゲーム「世界最強の戦士」",
+      "application_start_at": "2026-10-11T09:00:00+09:00",
       "application_end_at": "2026-10-14T20:05:00+09:00",
-      "application_start_at": "2026-10-11T09:00:00+09:00"
+      "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/iups6",
@@ -364,9 +363,9 @@
       "url": "https://livepocket.jp/e/risz5",
       "store_name": "コロコロBASE",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
-      "application_end_at": "2026-10-12T23:59:00+09:00",
       "application_start_at": "2026-10-09T10:00:00+09:00",
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
       "stores": [
         {
           "name": "コロコロBASE",
