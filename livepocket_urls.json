@@ -556,38 +556,39 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "v20_official_store_url_scoped"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-12T00:00:00+09:00",
       "stores": [
         {
           "name": "豊橋店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "とよかわ店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "荒尾店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "領家店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "中島新町店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "佐鳴台店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "蒲郡三谷店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         }
       ]
     },
@@ -633,38 +634,39 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "v20_official_store_url_scoped"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-12T00:00:00+09:00",
       "stores": [
         {
           "name": "豊橋店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "とよかわ店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "荒尾店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "領家店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "中島新町店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "佐鳴台店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "蒲郡三谷店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         }
       ]
     },
@@ -711,7 +713,13 @@
           "name": "トレカエース春日部店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T23:00:00+09:00",
+      "application_start_at": "2026-10-11T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/risz5",
@@ -757,7 +765,8 @@
           "name": "イトーヨーカドー",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {}
     },
     {
       "url": "https://livepocket.jp/e/lx6zx",
@@ -797,7 +806,13 @@
           "name": "古本市場柏豊四季店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/dsvro",
@@ -857,7 +872,13 @@
           "name": "銀座三越 新館3階ジェラート ピケ",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T18:00:00+09:00",
+      "application_start_at": "2026-10-08T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/1ydm_",
@@ -975,7 +996,13 @@
           "name": "古本市場与野本町店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-09T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/q8of5",
@@ -1015,7 +1042,13 @@
           "name": "ふるいちトップブックスひたちなか店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T08:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/y4w0_",
@@ -1035,7 +1068,13 @@
           "name": "伊勢丹浦和店 2階 ジェラートピケ",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T18:00:00+09:00",
+      "application_start_at": "2026-10-08T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/6d7t6",
@@ -1075,7 +1114,13 @@
           "name": "TSUTAYA Trading Card府中駅前",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T21:00:00+09:00",
+      "application_start_at": "2026-10-10T14:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/qf-o3",
@@ -6131,14 +6176,15 @@
       "store_name": "イトーヨーカドー",
       "prefecture": null,
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "stores": "v19_user_verified_store_csv"
+        "stores": "v19_user_verified_store_csv",
+        "product_name": "v20_user_verified_event_product"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
@@ -6317,12 +6363,12 @@
     "prefecture": 147,
     "event_title": 1,
     "event_date": 1,
-    "product_name": 23,
+    "product_name": 24,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 39,
-    "application_start_at": 39,
+    "application_end_at": 46,
+    "application_start_at": 46,
     "stores_events": 182
   },
   "collector_state": {
@@ -6563,6 +6609,38 @@
         "https://livepocket.jp/e/miwqx": {
           "checked_at": "2026-10-17T04:40:50.371545+00:00",
           "status": "checked_product_deadline"
+        },
+        "https://livepocket.jp/e/iups6": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ae88o": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/zy0lo": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/zhv4i": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/y4w0_": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/xnr8d": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/vo0as": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/tx5dc": {
+          "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
         }
       }
     },

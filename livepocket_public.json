@@ -1,5 +1,5 @@
 {
-  "schema_version": 19,
+  "schema_version": 20,
   "collected_at": "2026-10-17T00:30:00.714215+00:00",
   "unique_livepocket_urls": 332,
   "items": [
@@ -259,31 +259,31 @@
       "stores": [
         {
           "name": "豊橋店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "とよかわ店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "荒尾店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "領家店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "中島新町店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "佐鳴台店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "蒲郡三谷店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         }
       ]
     },
@@ -311,31 +311,31 @@
       "stores": [
         {
           "name": "豊橋店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "とよかわ店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "荒尾店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "領家店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "中島新町店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "佐鳴台店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "蒲郡三谷店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         }
       ]
     },
@@ -352,6 +352,8 @@
       "store_name": "トレカエース春日部店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
+      "application_end_at": "2026-10-11T23:00:00+09:00",
+      "application_start_at": "2026-10-11T09:00:00+09:00",
       "stores": [
         {
           "name": "トレカエース春日部店",
@@ -401,6 +403,8 @@
       "store_name": "古本市場柏豊四季店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "stores": [
         {
           "name": "古本市場柏豊四季店",
@@ -437,6 +441,8 @@
       "store_name": "銀座三越 新館3階ジェラート ピケ",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T18:00:00+09:00",
+      "application_start_at": "2026-10-08T12:00:00+09:00",
       "stores": [
         {
           "name": "銀座三越 新館3階ジェラート ピケ",
@@ -500,6 +506,8 @@
       "store_name": "古本市場与野本町店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-09T10:00:00+09:00",
       "stores": [
         {
           "name": "古本市場与野本町店",
@@ -524,6 +532,8 @@
       "store_name": "ふるいちトップブックスひたちなか店",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T08:00:00+09:00",
       "stores": [
         {
           "name": "ふるいちトップブックスひたちなか店",
@@ -536,6 +546,8 @@
       "store_name": "伊勢丹浦和店 2階 ジェラートピケ",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-11T18:00:00+09:00",
+      "application_start_at": "2026-10-08T12:00:00+09:00",
       "stores": [
         {
           "name": "伊勢丹浦和店 2階 ジェラートピケ",
@@ -560,6 +572,8 @@
       "store_name": "TSUTAYA Trading Card府中駅前",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T21:00:00+09:00",
+      "application_start_at": "2026-10-10T14:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card府中駅前",
@@ -2914,7 +2928,9 @@
           "name": "イトーヨーカドーグランツリー武蔵小杉店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/q8-1nh5bh5",
