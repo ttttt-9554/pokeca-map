@@ -9,13 +9,12 @@ name: LivePocket Discord URL Collector
         required: true
         default: 'false'
         type: choice
-        options: ['true', 'false']
+        options:
+          - 'true'
+          - 'false'
 
   schedule:
-    # 新しいDiscord投稿を約10分おきに検知
     - cron: '7,17,27,37,47,57 * * * *'
-
-    # 過去URLを1日2回確認（UTC）
     - cron: '23 1,13 * * *'
 
 permissions:
@@ -38,23 +37,19 @@ jobs:
       LIVEPOCKET_V14_RUN_BACKGROUND: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && 'true' || 'false' }}
 
     steps:
-      # 1. GitHubファイルを取得
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: true
 
-      # 2. Pythonを準備
       - name: Python setup
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      # 3. 既存URLを記録
-      - name: Snapshot existing URLs before Discord collection (v14)
+      - name: Snapshot existing URLs (v14)
         run: python scripts/livepocket_v14.py snapshot
 
-      # 4. DiscordからURLを収集
       - name: Collect Discord URLs
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -62,15 +57,12 @@ jobs:
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/livepocket_collect.py
 
-      # 5. Discord投稿の商品情報を取得
       - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
-      # 6. 確認済み情報を反映
       - name: Apply verified event details (v4)
         run: python scripts/livepocket_merge_details.py
 
-      # 7. Discord埋め込み情報を取得（Brave不使用）
       - name: Enrich Discord embeds without Brave (v8)
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -79,46 +71,37 @@ jobs:
           LIVEPOCKET_V8_BRAVE_PER_RUN: '0'
         run: python scripts/livepocket_v8.py
 
-      # 8. 店舗名整理・公開JSON生成
-      - name: Recover store names and create public JSON (v7)
+      - name: Recover store names and public JSON (v7)
         run: python scripts/livepocket_v7.py
 
-      # 9. 都道府県補完
       - name: Prefecture matching and review previews (v9)
         run: python scripts/livepocket_v9.py
 
-      # 10. ジャンル分類と確認待ちリスト
       - name: Verified updates and review classification (v10)
         run: python scripts/livepocket_v10.py
 
-      # 11. 応募締切の確認
-      - name: Confirm yearful application deadlines (v11)
+      - name: Confirm application deadlines (v11)
         run: python scripts/livepocket_v11.py
 
-      # 12. 新着URLを優先登録
-      - name: Queue new URLs for immediate content checks (v14)
+      - name: Queue newly discovered URLs (v14)
         id: priorities
         run: python scripts/livepocket_v14.py prepare
 
-      # 13. 新着・再確認・複数店舗チェックを計画
-      - name: Plan new, due retries and multi-store checks (v19)
-        id: v19plan
-        run: python scripts/livepocket_v19.py plan
+      - name: Plan new, retry and historical checks (v20)
+        id: v20plan
+        run: python scripts/livepocket_v20.py plan
 
-      # 14. 必要なときだけ無料ブラウザを準備
       - name: Install free browser only when needed
-        if: ${{ steps.v19plan.outputs.browser_needed == 'true' }}
+        if: ${{ steps.v20plan.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
 
-      # 15. 新着URL・応募締切・複数店舗の確認
-      - name: Check event pages and multiple stores (v19)
+      - name: Check ticket products and store prefectures (v20)
         env:
-          LIVEPOCKET_V19_BROWSER_READY: ${{ steps.v19plan.outputs.browser_needed }}
-        run: python scripts/livepocket_v19.py process
+          LIVEPOCKET_V20_BROWSER_READY: ${{ steps.v20plan.outputs.browser_needed }}
+        run: python scripts/livepocket_v20.py process
 
-      # 16. 取得結果をGitHubへ保存
       - name: Save public data and check reports
         shell: bash
         run: |
@@ -130,12 +113,11 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
-            git commit -m 'Update LivePocket v19 multi-store event listings'
+            git commit -m 'Update LivePocket v20 products and verified prefectures'
             git push
           fi
 
-      # 17. 全URLデータのバックアップ
-      - name: Backup full JSON for authorized maintainers
+      - name: Backup full JSON
         if: always()
         uses: actions/upload-artifact@v4
         with:
