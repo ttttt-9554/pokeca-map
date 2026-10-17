@@ -1,7 +1,7 @@
 {
-  "schema_version": 13,
-  "collected_at": "2026-10-16T22:44:52.567906+00:00",
-  "unique_livepocket_urls": 331,
+  "schema_version": 14,
+  "collected_at": "2026-10-17T00:30:00.714215+00:00",
+  "unique_livepocket_urls": 332,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -1737,6 +1737,13 @@
       "url": "https://livepocket.jp/e/yv07y",
       "store_name": "イトーヨーカドー",
       "discord_posted_at": "2026-10-16T21:48:08.701000+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/w6vl0",
+      "store_name": "TSUTAYAテクノ店",
+      "discord_posted_at": "2026-10-17T00:23:28.303000+00:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-17T07:00:00+09:00"
     }
   ]
 }
