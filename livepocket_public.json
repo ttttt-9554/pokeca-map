@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-17T00:30:00.714215+00:00",
-  "unique_livepocket_urls": 332,
+  "collected_at": "2026-10-17T09:46:48.613943+00:00",
+  "unique_livepocket_urls": 338,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -656,6 +656,8 @@
       "store_name": "TSUTAYA鎌ケ谷店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-25T21:45:00+09:00",
+      "application_start_at": "2026-10-09T09:30:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA鎌ケ谷店",
@@ -692,6 +694,8 @@
       "url": "https://livepocket.jp/e/5mcaz",
       "store_name": "HMVトレカショップ",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-11T20:59:00+09:00",
+      "application_start_at": "2026-10-09T13:00:00+09:00",
       "stores": [
         {
           "name": "HMVトレカショップ",
@@ -745,6 +749,8 @@
       "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-08T10:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
@@ -757,6 +763,8 @@
       "store_name": "トレカエース常陸太田店",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-06T16:45:00+09:00",
       "stores": [
         {
           "name": "トレカエース常陸太田店",
@@ -769,6 +777,8 @@
       "store_name": "ヤマト屋書店TSUTAYA中里店",
       "prefecture": "宮城県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-12T21:00:00+09:00",
+      "application_start_at": "2026-10-08T18:15:00+09:00",
       "stores": [
         {
           "name": "ヤマト屋書店TSUTAYA中里店",
@@ -781,6 +791,8 @@
       "store_name": "TSUTAYA町田木曽店",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-12T01:00:00+09:00",
+      "application_start_at": "2026-10-09T08:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA町田木曽店",
@@ -793,6 +805,8 @@
       "store_name": "古本市場与野本町店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-09T10:00:00+09:00",
       "stores": [
         {
           "name": "古本市場与野本町店",
@@ -3137,7 +3151,71 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/u62m7",
+      "product_name": "Heroines Edition vol.2",
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "application_end_at": "2026-10-18T20:00:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/s9-lf",
+      "product_name": "Heroines Edition vol.2",
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-16T12:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/t4s-9",
+      "store_name": "ストーム",
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "stores": [
+        {
+          "name": "ストーム",
+          "prefecture": ""
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/kvys2",
+      "store_name": "30th",
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "application_end_at": "2026-10-18T21:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "30th",
+          "prefecture": ""
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/1hvyn",
+      "store_name": "ストーム",
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "application_end_at": "2026-10-18T21:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "ストーム",
+          "prefecture": ""
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/79p_y",
+      "store_name": "30th",
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "30th",
+          "prefecture": ""
+        }
+      ]
     }
   ],
-  "updated_at": "2026-10-17T08:56:05.050758+00:00"
+  "updated_at": "2026-10-17T09:47:51.511787+00:00"
 }
