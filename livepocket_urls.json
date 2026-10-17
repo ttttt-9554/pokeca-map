@@ -786,7 +786,13 @@
           "name": "古本市場柏豊四季店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/vo0as",
@@ -832,7 +838,13 @@
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/q78jb",
@@ -852,7 +864,13 @@
           "name": "文教堂あきる野店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "application_start_at": "2026-10-09T13:46:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/xnr8d",
@@ -913,10 +931,37 @@
       "extraction_status": "parsed",
       "stores": [
         {
-          "name": "フルコンプ",
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ大阪日本橋店",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-10T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/4a-uj",
@@ -956,7 +1001,13 @@
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ruq6l",
@@ -976,7 +1027,13 @@
           "name": "TSUTAYA Trading Card平塚店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T20:00:00+09:00",
+      "application_start_at": "2026-10-07T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/zhv4i",
@@ -1022,7 +1079,8 @@
           "name": "TSUTAYA BOOKSTORE川崎駅前店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {}
     },
     {
       "url": "https://livepocket.jp/e/tx5dc",
@@ -1094,7 +1152,13 @@
           "name": "文教堂書店浦安西友店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/zy0lo",
@@ -6367,8 +6431,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 46,
-    "application_start_at": 46,
+    "application_end_at": 53,
+    "application_start_at": 53,
     "stores_events": 182
   },
   "collector_state": {
@@ -6640,6 +6704,38 @@
         },
         "https://livepocket.jp/e/tx5dc": {
           "checked_at": "2026-10-17T05:20:14.616938+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ruq6l": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/q8of5": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/q78jb": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/lx6zx": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/jdpux": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/dsvro": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/birt9": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/6d7t6": {
+          "checked_at": "2026-10-17T05:41:06.518557+00:00",
           "status": "checked_deadline"
         }
       }

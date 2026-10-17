@@ -351,9 +351,9 @@
       "url": "https://livepocket.jp/e/iups6",
       "store_name": "トレカエース春日部店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
-      "application_end_at": "2026-10-11T23:00:00+09:00",
       "application_start_at": "2026-10-11T09:00:00+09:00",
+      "application_end_at": "2026-10-11T23:00:00+09:00",
+      "discord_posted_at": "2026-10-11T13:40:21.826000+00:00",
       "stores": [
         {
           "name": "トレカエース春日部店",
@@ -391,6 +391,8 @@
       "store_name": "古本市場柏豊四季店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "stores": [
         {
           "name": "古本市場柏豊四季店",
@@ -402,9 +404,9 @@
       "url": "https://livepocket.jp/e/vo0as",
       "store_name": "古本市場柏豊四季店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T22:00:00+09:00",
       "application_start_at": "2026-10-10T10:00:00+09:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "古本市場柏豊四季店",
@@ -417,6 +419,8 @@
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -429,6 +433,8 @@
       "store_name": "文教堂あきる野店",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "application_start_at": "2026-10-09T13:46:00+09:00",
       "stores": [
         {
           "name": "文教堂あきる野店",
@@ -440,9 +446,9 @@
       "url": "https://livepocket.jp/e/xnr8d",
       "store_name": "銀座三越 新館3階ジェラート ピケ",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T18:00:00+09:00",
       "application_start_at": "2026-10-08T12:00:00+09:00",
+      "application_end_at": "2026-10-12T18:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "銀座三越 新館3階ジェラート ピケ",
@@ -458,9 +464,31 @@
       "url": "https://livepocket.jp/e/birt9",
       "store_name": "フルコンプ",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T23:59:00+09:00",
+      "application_start_at": "2026-10-10T09:00:00+09:00",
       "stores": [
         {
-          "name": "フルコンプ",
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ大阪日本橋店",
           "prefecture": ""
         }
       ]
@@ -482,6 +510,8 @@
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -494,6 +524,8 @@
       "store_name": "TSUTAYA Trading Card平塚店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-18T20:00:00+09:00",
+      "application_start_at": "2026-10-07T18:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card平塚店",
@@ -505,9 +537,9 @@
       "url": "https://livepocket.jp/e/zhv4i",
       "store_name": "古本市場与野本町店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-11T22:00:00+09:00",
       "application_start_at": "2026-10-09T10:00:00+09:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "古本市場与野本町店",
@@ -531,9 +563,9 @@
       "url": "https://livepocket.jp/e/tx5dc",
       "store_name": "ふるいちトップブックスひたちなか店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T22:00:00+09:00",
       "application_start_at": "2026-10-10T08:00:00+09:00",
+      "application_end_at": "2026-10-12T22:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "ふるいちトップブックスひたちなか店",
@@ -545,9 +577,9 @@
       "url": "https://livepocket.jp/e/y4w0_",
       "store_name": "伊勢丹浦和店 2階 ジェラートピケ",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-11T18:00:00+09:00",
       "application_start_at": "2026-10-08T12:00:00+09:00",
+      "application_end_at": "2026-10-11T18:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "伊勢丹浦和店 2階 ジェラートピケ",
@@ -560,6 +592,8 @@
       "store_name": "文教堂書店浦安西友店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "application_end_at": "2026-10-12T20:30:00+09:00",
+      "application_start_at": "2026-10-10T10:00:00+09:00",
       "stores": [
         {
           "name": "文教堂書店浦安西友店",
@@ -571,9 +605,9 @@
       "url": "https://livepocket.jp/e/zy0lo",
       "store_name": "TSUTAYA Trading Card府中駅前",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
-      "application_end_at": "2026-10-12T21:00:00+09:00",
       "application_start_at": "2026-10-10T14:00:00+09:00",
+      "application_end_at": "2026-10-12T21:00:00+09:00",
+      "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card府中駅前",
@@ -2888,9 +2922,11 @@
     {
       "url": "https://livepocket.jp/e/39gwbz6j-d",
       "store_name": "イトーヨーカドー",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "イトーヨーカドー大和鶴間店",
@@ -2928,9 +2964,7 @@
           "name": "イトーヨーカドーグランツリー武蔵小杉店",
           "prefecture": "神奈川県"
         }
-      ],
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
-      "review_category": "pokemon"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/q8-1nh5bh5",
