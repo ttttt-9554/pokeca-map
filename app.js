@@ -2674,20 +2674,20 @@
     const stats = lastManual.stats || {};
     const updates = lastManual.updates || {};
     const fields = [
-      ['ページ確認回数（延べ）',lastManual.page_check_attempts],
-      ['既存イベントの確認',lpDevNumeric(stats,'historical_attempted')],
-      ['イベント名の更新',lpDevNumeric(updates,'title_updated')],
-      ['商品名の更新',lpDevNumeric(updates,'product_updated')],
-      ['応募日時の更新',lpDevNumeric(updates,'deadline_updated')],
-      ['店舗情報の更新',lpDevNumeric(updates,'store_updated')],
-      ['公式タイトルの確認',lpDevNumeric(stats,'official_title_attempted')],
-      ['取得制限の検出回数',lpDevNumeric(stats,'official_fetch_blocked') + lpDevNumeric(stats,'title_recheck_blocked') + lpDevNumeric(stats,'retry_blocked')],
+      ['手動再確認の対象',lpDevNumeric(stats,'manual_selected')],
+      ['実際にページ確認',lpDevNumeric(stats,'manual_attempted')],
+      ['ページ取得成功',lpDevNumeric(stats,'manual_success')],
+      ['イベント名の更新',lpDevNumeric(stats,'manual_title_updated')],
+      ['商品名の更新',lpDevNumeric(stats,'manual_product_updated')],
+      ['応募日時の更新',lpDevNumeric(stats,'manual_deadline_updated')],
+      ['店舗情報の更新',lpDevNumeric(stats,'manual_store_updated')],
+      ['取得制限の検出',lpDevNumeric(stats,'manual_blocked')],
     ];
     const safeId = /^\d+$/.test(String(lastManual.run_id || '')) ? String(lastManual.run_id) : '';
     const runLink = safeId ? `<a href="https://github.com/ttttt-9554/pokeca-map/actions/runs/${safeId}" target="_blank" rel="noopener noreferrer">この実行をGitHubで確認 ↗</a>` : '';
     return `<p class="lp-dev-results-date"><strong>最終手動確認：</strong>${escape(lpDevReportDate(lastManual.completed_process_at))}</p>
       <div class="lp-dev-results-grid">${fields.map(([name,count]) => `<div class="lp-dev-result-cell"><span>${escape(name)}</span><strong>${Number.isSafeInteger(count) && count >= 0 ? count : 0}</strong></div>`).join('')}</div>
-      <p class="hint">※確認回数は延べ回数です。名称・応募日時・店舗の更新件数は、この実行の確認処理中に変更された既存イベント数です。対象なしの0件も正常です。</p>
+      <p class="hint">※手動で選んだイベントのみの集計です。ページ取得に成功した対象の差分を数えています。通常収集での全体データ整形は含めません。取得制限中は確認を停止します。</p>
       ${runLink}`;
   }
 
