@@ -105,9 +105,25 @@ jobs:
           python -m playwright install --with-deps chromium
 
       - name: Check ticket products and multiple-store prefectures (v21)
+        shell: bash
         env:
           LIVEPOCKET_V21_BROWSER_READY: ${{ steps.v21plan.outputs.browser_needed }}
-        run: python scripts/livepocket_v21.py process
+        run: |
+          set -o pipefail
+          cp livepocket_public.json "$RUNNER_TEMP/livepocket-public-before-process.json"
+          python scripts/livepocket_v21.py process | tee "$RUNNER_TEMP/livepocket-v21-process.log"
+
+      # 公開しても安全な集計数字のみ出力（URL・Discord本文・トークン等は含めない）。
+      - name: Build LivePocket developer results (v21.11)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' }}
+        env:
+          REVIEW_BATCH: ${{ inputs.review_batch || '8' }}
+        run: |
+          python scripts/livepocket_check_summary.py \
+            --log "$RUNNER_TEMP/livepocket-v21-process.log" \
+            --output livepocket_check_summary.json \
+            --before-public "$RUNNER_TEMP/livepocket-public-before-process.json" \
+            --after-public livepocket_public.json
 
       - name: Save public data and check reports
         shell: bash
@@ -115,6 +131,9 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv livepocket_content_checks.csv
+          if [ -f livepocket_check_summary.json ]; then
+            git add livepocket_check_summary.json
+          fi
           if git diff --cached --quiet; then
             echo 'No changes to commit.'
           else
