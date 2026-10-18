@@ -2510,7 +2510,11 @@
     // A Discord excerpt ending in '...' is not a full product name.
     // Never render it as an authoritative event/product title.
     const incompletePreview = /(?:\.{3}|…|⋯)\s*$/.test(sourcePreview);
-    const reliableName = (item.product_name || item.event_title || '').trim();
+    // Once the exact-URL official title is verified, show it as the primary
+    // heading even if an older Discord snippet remains in product_name.
+    const officialName = item.official_event_title && item.official_event_title === item.event_title
+      ? String(item.event_title).trim() : '';
+    const reliableName = (officialName || item.product_name || item.event_title || '').trim();
     const label = reliableName || (!incompletePreview && sourcePreview) ||
       '商品名・イベント名を確認中';
     const partialNotice = !reliableName && incompletePreview
@@ -2542,7 +2546,7 @@
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
       ${partialNotice}
-      ${item.product_name && item.event_title && item.product_name !== item.event_title ? `<p class="lp-sub">${escape(item.event_title)}</p>` : ''}
+      ${!officialName && item.product_name && item.event_title && item.product_name !== item.event_title ? `<p class="lp-sub">${escape(item.event_title)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
@@ -2677,7 +2681,12 @@
       ['手動再確認の対象',lpDevNumeric(stats,'manual_selected')],
       ['実際にページ確認',lpDevNumeric(stats,'manual_attempted')],
       ['ページ取得成功',lpDevNumeric(stats,'manual_success')],
+      ['公式イベント名を検出',lpDevNumeric(stats,'manual_title_detected')],
+      ['タイトル候補なし',lpDevNumeric(stats,'manual_title_no_candidates')],
+      ['候補を安全性判定で除外',lpDevNumeric(stats,'manual_title_rejected')],
+      ['タイトル取得のアクセス制限',lpDevNumeric(stats,'manual_title_access_blocked')],
       ['イベント名の更新',lpDevNumeric(stats,'manual_title_updated')],
+      ['確認済み名称の補完',lpDevNumeric(stats,'manual_verified_titles_updated')],
       ['商品名の更新',lpDevNumeric(stats,'manual_product_updated')],
       ['応募日時の更新',lpDevNumeric(stats,'manual_deadline_updated')],
       ['店舗情報の更新',lpDevNumeric(stats,'manual_store_updated')],
@@ -2687,6 +2696,7 @@
     const runLink = safeId ? `<a href="https://github.com/ttttt-9554/pokeca-map/actions/runs/${safeId}" target="_blank" rel="noopener noreferrer">この実行をGitHubで確認 ↗</a>` : '';
     return `<p class="lp-dev-results-date"><strong>最終手動確認：</strong>${escape(lpDevReportDate(lastManual.completed_process_at))}</p>
       <div class="lp-dev-results-grid">${fields.map(([name,count]) => `<div class="lp-dev-result-cell"><span>${escape(name)}</span><strong>${Number.isSafeInteger(count) && count >= 0 ? count : 0}</strong></div>`).join('')}</div>
+      <p class="hint">※「公式イベント名を検出」は更新件数とは異なります。取得できても既存名と同じ場合があります。</p>
       <p class="hint">※手動で選んだイベントのみの集計です。ページ取得に成功した対象の差分を数えています。通常収集での全体データ整形は含めません。取得制限中は確認を停止します。</p>
       ${runLink}`;
   }
