@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.9.2: distinguish robot-verification pages from event content.
+"""LivePocket v21.12: bounded developer manual rechecks with audited metrics.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -489,20 +489,110 @@ def verified_product(page, url):
     return None, ''
 
 
+# v21.12 developer-only background selection. It is enabled ONLY by the
+# workflow's explicit manual input, never by the regular 5-minute Cron.
+# The ordinary v14/v15/v20 extractors remain responsible for writing facts.
+MANUAL_RECHECK_LIMIT = 12
+MANUAL_MIN_REPEAT = timedelta(hours=2)
+
+
+def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT):
+    """Oldest/never-checked, incomplete, still-applicable URLs; bounded/rotating.
+
+    No URL currently queued as *new* is chosen again. A hard global bot-block
+    cooldown always wins. Manual mode bypasses the historical 7-day wait but
+    NEVER the global block cooldown or a 2-hour per-URL repeat guard.
+    """
+    now = v14._utc(now)
+    limit = max(0, min(int(limit), MANUAL_RECHECK_LIMIT))
+    ri, pi = v11.indices(raw, public)
+    state = raw.get('collector_state', {})
+    v14state = state.get('v14', {})
+    if not limit or v14._cooldown_active(v14state, now):
+        return []
+    pending = set(v14state.get('pending_new_urls', []))
+    browser_checks = state.get('v13', {}).get('browser_checks', {})
+    # Events already due in the normal retry channel are handled separately.
+    # Manual mode disables that separate retry pass to keep its total at 12.
+    selected = []
+    for url, item in ri.items():
+        if url in pending:
+            continue
+        event = pi[url]
+        deadline = v11.parse_datetime(event.get('application_end_at'))
+        if deadline and deadline.astimezone(timezone.utc) <= now:
+            continue
+        check = browser_checks.get(url, {})
+        if not isinstance(check, dict) or check.get('status') == 'browser_redirected':
+            continue
+        last = v19.v18.v17.check_time(check.get('checked_at'))
+        if check.get('checked_at') and not last:
+            continue  # malformed check timestamps are quarantined
+        if last and (last > now or now - last < MANUAL_MIN_REPEAT):
+            continue
+        # Non-working, repeated official checks must also respect the guard.
+        official = state.get('v21_9', {}).get('official_checks', {}).get(url, {})
+        official_last = v19.v18.v17.check_time(official.get('checked_at'))
+        if official.get('checked_at') and not official_last:
+            continue
+        if official_last and (official_last > now or now - official_last < MANUAL_MIN_REPEAT):
+            continue
+        missing = missing_details_v21(event)
+        # First unvisited URLs, then incomplete older pages, then complete
+        # pages if free slots remain. Least-recent visit wins within a tier.
+        tier = 0 if not last else 1 if missing else 2
+        selected.append((tier, last or datetime.min.replace(tzinfo=timezone.utc), url))
+    selected.sort(key=lambda row: (row[0], row[1], row[2]))
+    return [url for _, _, url in selected[:limit]]
+
+
+@contextmanager
+def use_manual_background(urls):
+    """Replace v18's *historical selector* only during a single call.
+
+    v18._use_selector() delegates to v18.select; wrap only that function,
+    keeping the new-priority branch and global cooldown intact. The original
+    selector is restored even if an upstream extractor raises an exception.
+    """
+    if not urls:
+        yield
+        return
+    original = v19.v18.select
+    def _manual_select(raw, public, now, *, new_limit=15, background_limit=0, retry_days=7):
+        urgent, _, cooling = original(raw, public, now, new_limit=new_limit,
+                                      background_limit=0, retry_days=retry_days)
+        if cooling or background_limit <= 0:
+            return urgent, [], cooling
+        valid = {item.get('url') for item in raw.get('items', [])}
+        historical = [u for u in urls if u in valid and u not in urgent]
+        return urgent, historical[:background_limit], False
+    v19.v18.select = _manual_select
+    try:
+        yield
+    finally:
+        v19.v18.select = original
+
+
 def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None,
-            title_limit=TITLE_RECHECK_DEFAULT_PER_RUN):
-    """v21.1 checks first, then bounded title-specific rechecks on older URLs."""
+            title_limit=TITLE_RECHECK_DEFAULT_PER_RUN,
+            manual_recheck=False, manual_limit=MANUAL_RECHECK_LIMIT):
+    """v21.12: manual old-URL scans via ordinary conservative page extractors."""
     now = v14._utc(now)
     snapshot = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
                 for item in public['items']}
+    before_items = {item['url']: json.loads(json.dumps(item, ensure_ascii=False))
+                    for item in public['items']}
+    manual_urls = (manual_recheck_candidates(raw, public, now=now, limit=manual_limit)
+                   if manual_recheck else [])
     # Selection before the upstream pass prevents fresh discoveries from being
     # rechecked twice in the same job. An overlap with upstream is skipped.
-    queued = title_recheck_candidates(raw, public, now=now, limit=title_limit)
+    queued = (title_recheck_candidates(raw, public, now=now, limit=title_limit)
+              if not manual_recheck else [])
     # Only in background/manual cycles; 5-minute new-only runs add NO extra
     # official-page requests. Queue is selected before upstream processing.
     official_queue, official_reasons, _ = (
-        official_title_diagnostics(raw, public, now=now)
+        official_title_diagnostics(raw, public, now=now, limit=0 if manual_recheck else OFFICIAL_TITLE_CHECK_PER_RUN)
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     seen = set()
     observations = {}
@@ -514,10 +604,12 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             observations[url] = result
         return result
 
-    raw, public, review, deadlines, sources, content, stats = process_v21_1(
-        raw, public, record, catalog=catalog, now=now,
-        new_limit=new_limit, background_limit=background_limit,
-        retry_limit=retry_limit, verified=verified, v19_verified=v19_verified)
+    with use_manual_background(manual_urls if manual_recheck else []):
+        raw, public, review, deadlines, sources, content, stats = process_v21_1(
+            raw, public, record, catalog=catalog, now=now,
+            new_limit=new_limit, background_limit=background_limit,
+            retry_limit=0 if manual_recheck else retry_limit,
+            verified=verified, v19_verified=v19_verified)
     ri, pi = v11.indices(raw, public)
     state = raw.setdefault('collector_state', {})
     log = state.setdefault('v21_3', {}).setdefault('title_rechecks', {})
@@ -705,6 +797,53 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             retry_next_at(retry, end=v11.parse_datetime(pub.get('application_end_at')),
                           now=now, checked=checked))
 
+    # These numbers describe ONLY URLs actually visited as part of manual
+    # background work. Whole-dataset normalizations (e.g. 208 store records)
+    # must never be advertised as 208 verified page updates.
+    if manual_recheck:
+        visited = [url for url in manual_urls if url in observations]
+        successful = [url for url in visited if
+                      observations[url].get('status') == 'ok' and
+                      v12.exact_event_url(observations[url].get('final_url')) == url]
+        blocked = sum(observations[u].get('status') in
+                      ('browser_blocked','browser_blocked_or_empty') for u in visited)
+        stats.update(manual_selected=len(manual_urls),
+                     manual_attempted=len(visited),
+                     manual_success=len(successful), manual_blocked=blocked)
+        groups = {
+            'manual_title_updated': ('event_title',),
+            'manual_product_updated': ('product_name',),
+            'manual_deadline_updated': ('application_start_at', 'application_end_at'),
+            'manual_store_updated': ('store_name', 'prefecture', 'stores'),
+            'manual_genre_updated': ('review_category',),
+        }
+        def page_supported_change(url, metric, keys):
+            if not any(before_items[url].get(k) != pi[url].get(k) for k in keys):
+                return False
+            result = observations[url]
+            fields = ri[url].get('field_sources') or {}
+            if metric == 'manual_store_updated':
+                # Only label store changes as page-derived if the same event
+                # actually contained an explicit store. Whole-catalog legacy
+                # store-list normalization is NOT evidence of a page update.
+                text = result.get('text') or ''
+                return bool(v19.page_stores(text) or v20.v15.explicit_store(text)[0])
+            if metric == 'manual_genre_updated':
+                return bool(pi[url].get('official_event_title'))
+            if metric == 'manual_title_updated':
+                return str(fields.get('event_title') or '').startswith(
+                    ('v14_', 'v15_', 'v16_', 'v21_'))
+            if metric == 'manual_product_updated':
+                return str(fields.get('product_name') or '').startswith(
+                    ('v14_', 'v15_', 'v16_', 'v20_', 'v21_'))
+            if metric == 'manual_deadline_updated':
+                return any(str(fields.get(key) or '').startswith(
+                    ('v14_', 'v15_', 'v16_', 'v21_')) for key in keys)
+            return False
+        for metric, keys in groups.items():
+            stats[metric] = sum(page_supported_change(u, metric, keys)
+                                for u in successful)
+    
     if any(snapshot.get(i['url']) != json.dumps(i, ensure_ascii=False, sort_keys=True)
            for i in public['items']):
         public['updated_at'] = now.isoformat()
@@ -1073,18 +1212,25 @@ def main():
     new_limit = v14.safe_limit('LIVEPOCKET_V14_NEW_PER_RUN', 15, 25)
     background_limit = (v14.safe_limit('LIVEPOCKET_V14_BACKGROUND_PER_RUN', 8, 12)
                         if v14.wants_background() else 0)
+    manual_recheck = os.getenv('LIVEPOCKET_DEVELOPER_RECHECK') == 'true'
+    if manual_recheck:
+        # The button deliberately requests a full 12 historical URLs. The
+        # standard 5-minute schedule never receives this environment flag.
+        background_limit = MANUAL_RECHECK_LIMIT
     retry_limit = v14.safe_limit('LIVEPOCKET_V16_RETRY_PER_RUN', 3, 5)
-    with use_store_aware_missing():
+    manual_urls = manual_recheck_candidates(raw, public) if manual_recheck else []
+    with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):
         work = v19.v18.plan(raw, public, new_limit=new_limit,
-                           background_limit=background_limit, retry_limit=retry_limit)
+                           background_limit=background_limit,
+                           retry_limit=0 if manual_recheck else retry_limit)
     title_limit = v14.safe_limit('LIVEPOCKET_V21_3_TITLE_PER_RUN', 2, 3)
-    titles_due = title_recheck_candidates(raw, public, limit=title_limit)
+    titles_due = [] if manual_recheck else title_recheck_candidates(raw, public, limit=title_limit)
     official_due, official_counts, _ = (
-        official_title_diagnostics(raw, public) if background_limit
-        else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
+        official_title_diagnostics(raw, public, limit=0 if manual_recheck else OFFICIAL_TITLE_CHECK_PER_RUN)
+        if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.9.2 browser plan:', work, 'title_due:', len(titles_due),
+        print('v21.12 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
               'map catalog products:', len(catalog))
@@ -1109,7 +1255,9 @@ def main():
                        new_limit=new_limit, background_limit=background_limit,
                        retry_limit=retry_limit, verified=verified,
                        v19_verified=v19_verified,
-                       title_limit=title_limit)
+                       title_limit=title_limit,
+                       manual_recheck=manual_recheck,
+                       manual_limit=MANUAL_RECHECK_LIMIT)
     finally:
         close()
     raw, public, review, deadlines, sources, content, stats = data

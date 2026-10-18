@@ -29,6 +29,9 @@ ALLOWED_METRICS = (
     'ticket_products_added', 'verified_products_added',
     'verified_prefectures_added', 'multi_store_urls',
     'map_matches', 'map_conflicts_skipped',
+    'manual_selected', 'manual_attempted', 'manual_success', 'manual_blocked',
+    'manual_title_updated', 'manual_product_updated',
+    'manual_deadline_updated', 'manual_store_updated', 'manual_genre_updated',
 )
 METRIC_LINE = re.compile(r'^([a-z][a-z0-9_]*)\s*:\s*([0-9]+)\s*$', re.MULTILINE)
 
@@ -106,6 +109,7 @@ def report(log: str, previous: dict, *, run_id: str, run_number: str,
     attempt_keys = ('new_attempted','historical_attempted','retry_attempted',
                     'title_recheck_attempted','official_title_attempted')
     result['page_check_attempts'] = sum(metrics.get(k, 0) for k in attempt_keys)
+    result['manual_page_check_attempts'] = metrics.get('manual_attempted', 0)
     # Checkpoint recorded after Python process; separate from overall GitHub job success.
     payload = {'schema_version': 1, 'last_run': result}
     old_manual = previous.get('last_manual')
