@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39173231915",
-    "run_number": "189",
-    "completed_process_at": "2026-10-18T22:41:15Z",
+    "run_id": "39175780775",
+    "run_number": "193",
+    "completed_process_at": "2026-10-18T23:17:11Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -79,9 +79,9 @@
     "manual_page_check_attempts": 12
   },
   "last_manual": {
-    "run_id": "39173231915",
-    "run_number": "189",
-    "completed_process_at": "2026-10-18T22:41:15Z",
+    "run_id": "39175780775",
+    "run_number": "193",
+    "completed_process_at": "2026-10-18T23:17:11Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
