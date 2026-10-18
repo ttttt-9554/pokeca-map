@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-18T04:12:29.105841+00:00",
-  "unique_livepocket_urls": 357,
+  "collected_at": "2026-10-18T13:00:56.283910+00:00",
+  "unique_livepocket_urls": 361,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -4301,7 +4301,63 @@
           "prefecture": "栃木県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/lk0z7",
+      "store_name": "キントレ竹の塚店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-18T12:57:48.138000+00:00",
+      "application_end_at": "2026-10-21T22:00:00+09:00",
+      "application_start_at": "2026-10-17T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "キントレ竹の塚店",
+          "prefecture": "東京都"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/6vevi",
+      "store_name": "晴れる屋 川崎店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-18T12:57:48.138000+00:00",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-10-16T17:00:00+09:00",
+      "stores": [
+        {
+          "name": "晴れる屋 川崎店",
+          "prefecture": "神奈川県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/3i7a4",
+      "store_name": "トレカ丸幸手店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-18T12:57:48.138000+00:00",
+      "application_end_at": "2026-10-21T22:00:00+09:00",
+      "application_start_at": "2026-10-17T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "トレカ丸幸手店",
+          "prefecture": "埼玉県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/8h3tm",
+      "store_name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-18T12:57:48.138000+00:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-17T07:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
+          "prefecture": "栃木県"
+        }
+      ]
     }
   ],
-  "updated_at": "2026-10-18T12:50:57.610213+00:00"
+  "updated_at": "2026-10-18T13:01:24.730811+00:00"
 }
