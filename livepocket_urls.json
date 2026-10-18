@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-17T23:10:47.465929+00:00",
+  "collected_at": "2026-10-18T03:30:55.126077+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 71,
-  "unique_livepocket_urls": 348,
+  "messages_scanned": 72,
+  "unique_livepocket_urls": 357,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -2835,7 +2835,13 @@
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/tle89",
@@ -2855,7 +2861,13 @@
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/tm7em",
@@ -2981,7 +2993,13 @@
           "name": "CARDWINGS八王子駅前店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-06T23:59:00+09:00",
+      "application_start_at": "2026-10-03T12:20:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/gvgo8",
@@ -3021,7 +3039,13 @@
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/lyypz",
@@ -3041,7 +3065,13 @@
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-10-03T13:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/tvuq4",
@@ -3202,7 +3232,13 @@
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-03T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/pl03d",
@@ -3222,7 +3258,13 @@
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/c5feg",
@@ -3288,7 +3330,13 @@
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-10-03T13:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/xmmhx",
@@ -6935,7 +6983,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🎫LivePocket\n\n【関東】\nFEWMANY新宿\nストームエメラルダ\nhttps://livepocket.jp/e/1maxl\nイーブイex\nhttps://livepocket.jp/e/vt2ev\n⏰10/17 20:00\n\nTSUTAYA北千住\nHeroines Edition vol.2\nhttps://livepocket.jp/e/u62m7\n⏰10/18 20:00\n\nTSUTAYA平塚\nhttps://livepocket.jp/e/ruq6l\n⏰10/18 20:00\n\nTSUTAYA真岡\nhttps://livepocket.jp/e/ih5ta\n⏰10/18 22:00\n\nホビステ\nHeroines Edition vol.2\nhttps://livepocket.jp/e/s9-lf\n⏰10/18 23:59\n\n古本市場 市川鬼高\n30th\nhttps://livepocket.jp/e/3010thfu\nストーム\nhttps://livepocket.jp/e/st1030ft\n\n古本市場 新小岩\n30th\nhttps://livepocket.jp/e/zof6r\nストーム\nhttps://livepocket.jp/e/t4s-9\n\nふるいち八王子みなみ野\n30th\nhttps://livepocket.jp/e/kvys2\nストーム\nhttps://livepocket.jp/e/1hvyn\n\nふるいち富士見\n30th\nhttps://livepocket.jp/e/jbkc-\n\nふるいち前橋\n30th\nhttps://livepocket.jp/e/79p_y\nストーム\nhttps://livepocket.jp/e/x2n7b\n\n【東北】\nJUMP SHOP仙台\nHeroines Edition vol.2\n⏰10/17 23:59\n\n📱ライポケ以外\n\nビックカメラ立川\n30th／店頭抽選\n⏰10/18 18:00\n\nポケモンカードラウンジ渋谷\n30thカードセット／Cloud Pass\n⏰10/18 23:59",
       "store_name": "30th",
-      "prefecture": null,
+      "prefecture": "群馬県",
       "details_source": "discord_post",
       "product_name": null,
       "application_period": null,
@@ -6943,14 +6991,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "application_end_at": "2026-10-18T21:00:00+09:00",
       "application_start_at": "2026-10-16T09:00:00+09:00",
       "stores": [
         {
           "name": "30th",
-          "prefecture": ""
+          "prefecture": "群馬県"
         }
       ]
     },
@@ -6987,7 +7036,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🎫LivePocket\n\n【関東】\nFEWMANY新宿\nストームエメラルダ\nhttps://livepocket.jp/e/1maxl\nイーブイex\nhttps://livepocket.jp/e/vt2ev\n⏰10/17 20:00\n\nTSUTAYA北千住\nHeroines Edition vol.2\nhttps://livepocket.jp/e/u62m7\n⏰10/18 20:00\n\nTSUTAYA平塚\nhttps://livepocket.jp/e/ruq6l\n⏰10/18 20:00\n\nTSUTAYA真岡\nhttps://livepocket.jp/e/ih5ta\n⏰10/18 22:00\n\nホビステ\nHeroines Edition vol.2\nhttps://livepocket.jp/e/s9-lf\n⏰10/18 23:59\n\n古本市場 市川鬼高\n30th\nhttps://livepocket.jp/e/3010thfu\nストーム\nhttps://livepocket.jp/e/st1030ft\n\n古本市場 新小岩\n30th\nhttps://livepocket.jp/e/zof6r\nストーム\nhttps://livepocket.jp/e/t4s-9\n\nふるいち八王子みなみ野\n30th\nhttps://livepocket.jp/e/kvys2\nストーム\nhttps://livepocket.jp/e/1hvyn\n\nふるいち富士見\n30th\nhttps://livepocket.jp/e/jbkc-\n\nふるいち前橋\n30th\nhttps://livepocket.jp/e/79p_y\nストーム\nhttps://livepocket.jp/e/x2n7b\n\n【東北】\nJUMP SHOP仙台\nHeroines Edition vol.2\n⏰10/17 23:59\n\n📱ライポケ以外\n\nビックカメラ立川\n30th／店頭抽選\n⏰10/18 18:00\n\nポケモンカードラウンジ渋谷\n30thカードセット／Cloud Pass\n⏰10/18 23:59",
       "store_name": "30th",
-      "prefecture": null,
+      "prefecture": "群馬県",
       "details_source": "discord_post",
       "product_name": null,
       "application_period": null,
@@ -7002,7 +7051,7 @@
       "stores": [
         {
           "name": "30th",
-          "prefecture": ""
+          "prefecture": "群馬県"
         }
       ]
     },
@@ -7265,33 +7314,267 @@
           "prefecture": "宮城県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/zp2ru",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "ヴィレッジヴァンガード渋谷本店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-18T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "ヴィレッジヴァンガード渋谷本店",
+          "prefecture": "東京都"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/dgffhgkljjgf-hjg",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "古本市場新小岩店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-16T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "古本市場新小岩店",
+          "prefecture": "東京都"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/vd5i7",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T21:00:00+09:00",
+      "application_start_at": "2026-10-18T09:37:00+09:00",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/d89xs",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T21:00:00+09:00",
+      "application_start_at": "2026-10-18T09:47:00+09:00",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/8qub1",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "古本市場戸田店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T22:00:00+09:00",
+      "application_start_at": "2026-10-17T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "古本市場戸田店",
+          "prefecture": "埼玉県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ilzq0",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "TSUTAYA大利根店トレカ売場",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-17T07:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA大利根店トレカ売場",
+          "prefecture": "埼玉県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/62c5y",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "TSUTAYA作新学院前店トレカ売場",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "application_start_at": "2026-10-17T07:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA作新学院前店トレカ売場",
+          "prefecture": "栃木県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ib2ki",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "トレカ丸足利助戸店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-21T22:00:00+09:00",
+      "application_start_at": "2026-10-17T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "トレカ丸足利助戸店",
+          "prefecture": "栃木県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/lf49b",
+      "discord_message_id": "1561218392524849155",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nヴィレッジヴァンガード渋谷本店\nhttps://livepocket.jp/e/zp2ru\n\n📍東京都\n古本市場新小岩店\nhttps://livepocket.jp/e/dgffhgkljjgf-hjg\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/vd5i7\n\n📍神奈川県\nトレカパーク横浜西口店\nhttps://livepocket.jp/e/d89xs\n\n📍埼玉県\n古本市場戸田店\nhttps://livepocket.jp/e/8qub1\n\n📍埼玉県\nTSUTAYA大利根店トレカ売場\nhttps://livepocket.jp/e/ilzq0\n\n📍栃木県\nTSUTAYA作新学院前店トレカ売場\nhttps://livepocket.jp/e/62c5y\n\n📍栃木県\nトレカ丸足利助戸店\nhttps://livepocket.jp/e/ib2ki\n\n📍栃木県\nTSUTAYA宇都宮南店\nhttps://livepocket.jp/e/lf49b\n\n📍群馬県\nふるいち前橋みなみモール店\nhttps://livepocket.jp/e/79p_y",
+      "store_name": "TSUTAYA宇都宮南店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "application_start_at": "2026-10-17T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮南店",
+          "prefecture": "栃木県"
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 198,
+    "parsed": 207,
     "no_structured_details": 150
   },
   "field_counts": {
-    "store_name": 194,
-    "prefecture": 157,
+    "store_name": 203,
+    "prefecture": 168,
     "event_title": 1,
     "event_date": 1,
     "product_name": 33,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 128,
-    "application_start_at": 128,
-    "stores_events": 196
+    "application_end_at": 145,
+    "application_start_at": 145,
+    "stores_events": 205
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561144648229982228"
+      "1551580466266644552": "1561218392524849155"
     },
     "last_run": {
-      "checked_at": "2026-10-17T23:10:47.465929+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-18T03:30:55.126077+00:00",
+      "new_urls": 9,
       "original_urls": 348,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -7344,7 +7627,8 @@
         "1560810443990372372": "2026-10-17T00:30:00.941775+00:00",
         "1560943049637502976": "2026-10-17T09:46:48.891665+00:00",
         "1561000953623220349": "2026-10-17T13:09:25.814469+00:00",
-        "1561109504987500720": "2026-10-17T21:12:19.773947+00:00"
+        "1561109504987500720": "2026-10-17T21:12:19.773947+00:00",
+        "1561218392524849155": "2026-10-18T03:30:55.398904+00:00"
       },
       "checked_search_urls": {}
     },
@@ -7862,16 +8146,16 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/sy415": {
-          "checked_at": "2026-10-17T21:12:44.537734+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/p997-": {
-          "checked_at": "2026-10-17T21:12:44.537734+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/lli1u": {
-          "checked_at": "2026-10-17T21:12:44.537734+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jlwei": {
           "checked_at": "2026-10-17T21:12:44.537734+00:00",
@@ -7911,6 +8195,74 @@
         },
         "https://livepocket.jp/e/tm7em": {
           "checked_at": "2026-10-17T21:12:44.537734+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/zp2ru": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/vd5i7": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/lf49b": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ilzq0": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ib2ki": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/dgffhgkljjgf-hjg": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/d89xs": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/8qub1": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/62c5y": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/tle89": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/pp-t2": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/pl03d": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/nv1k2": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/lyypz": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/l3bu7": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/kr0g5": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/kjby1": {
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
           "status": "checked_deadline"
         }
       }
@@ -7989,18 +8341,63 @@
         },
         "https://livepocket.jp/e/lli1u": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T21:12:44.537734+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
         },
         "https://livepocket.jp/e/p997-": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T21:12:44.537734+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
         },
         "https://livepocket.jp/e/sy415": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/62c5y": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
           "status": "checked_deadline",
-          "checked_at": "2026-10-17T21:12:44.537734+00:00"
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/8qub1": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/d89xs": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/dgffhgkljjgf-hjg": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/ib2ki": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/ilzq0": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/lf49b": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/vd5i7": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
+        },
+        "https://livepocket.jp/e/zp2ru": {
+          "detected_at": "2026-10-18T03:30:56.091782+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T03:31:18.771812+00:00"
         }
       },
       "pending_new_urls": []
@@ -8060,6 +8457,21 @@
         "https://livepocket.jp/e/0_ugz": {
           "attempts": 1,
           "last_attempt_at": "2026-10-17T23:11:18.564465+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/sy415": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-18T03:31:18.771812+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/p997-": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-18T03:31:18.771812+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/lli1u": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-18T03:31:18.771812+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -8139,6 +8551,13 @@
         "https://livepocket.jp/e/jbkc-": {
           "attempts": 1,
           "checked_at": "2026-10-17T16:40:47.382099+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/ldloz": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T03:31:18.771812+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
