@@ -2680,7 +2680,11 @@
     const fields = [
       ['手動再確認の対象',lpDevNumeric(stats,'manual_selected')],
       ['実際にページ確認',lpDevNumeric(stats,'manual_attempted')],
-      ['ページ取得成功',lpDevNumeric(stats,'manual_success')],
+      ['イベントページ取得成功',lpDevNumeric(stats,'manual_success')],
+      ...(Object.hasOwn(stats,'manual_page_unconfirmed') ? [
+        ['イベント本文を確認',lpDevNumeric(stats,'manual_page_event_confirmed')],
+        ['イベントページと確認できず',lpDevNumeric(stats,'manual_page_unconfirmed')]
+      ] : []),
       ['公式イベント名を検出',lpDevNumeric(stats,'manual_title_detected')],
       ['タイトル候補なし',lpDevNumeric(stats,'manual_title_no_candidates')],
       ['タイトル候補を未採用',lpDevNumeric(stats,'manual_title_rejected')],
@@ -2693,7 +2697,12 @@
       ...(Object.hasOwn(stats,'manual_title_meta_template_cleaned') ? [
         ['公式ページのメタ情報を整形',lpDevNumeric(stats,'manual_title_meta_template_cleaned')],
         ['イベント名の見出し候補あり',lpDevNumeric(stats,'manual_title_heading_seen')],
-        ['省略されたタイトルを除外',lpDevNumeric(stats,'manual_title_truncated')]
+        ['省略されたタイトルを除外',lpDevNumeric(stats,'manual_title_truncated')],
+        ...(Object.hasOwn(stats,'manual_title_truncated_tail') ? [
+          ['末尾が省略された候補',lpDevNumeric(stats,'manual_title_truncated_tail')],
+          ['途中に省略記号のある候補',lpDevNumeric(stats,'manual_title_truncated_inner')],
+          ['文字化け候補',lpDevNumeric(stats,'manual_title_replacement_char')]
+        ] : [])
       ] : []),
       ['タイトル取得のアクセス制限',lpDevNumeric(stats,'manual_title_access_blocked')],
       ['イベント名の更新',lpDevNumeric(stats,'manual_title_updated')],
@@ -2708,6 +2717,7 @@
     return `<p class="lp-dev-results-date"><strong>最終手動確認：</strong>${escape(lpDevReportDate(lastManual.completed_process_at))}</p>
       <div class="lp-dev-results-grid">${fields.map(([name,count]) => `<div class="lp-dev-result-cell"><span>${escape(name)}</span><strong>${Number.isSafeInteger(count) && count >= 0 ? count : 0}</strong></div>`).join('')}</div>
       <p class="hint">※「公式イベント名を検出」は更新件数とは異なります。取得できても既存名と同じ場合があります。</p>
+      <p class="hint">※ 「イベントページと確認できず」は通信失敗と同義ではありません。HTTP応答があっても、イベント本文を確認できないページは正式名の自動反映に使いません。</p>
       <p class="hint">※ メタ情報の整形や見出し候補があっても、正式イベント名の検出・更新が成功したとは限りません。省略表示は採用せず、CSVには判定コードと件数だけを記録します。</p>
       <p class="hint">※手動で選んだイベントのみの集計です。ページ取得に成功した対象の差分を数えています。通常収集での全体データ整形は含めません。取得制限中は確認を停止します。</p>
       ${runLink}`;
