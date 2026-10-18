@@ -311,7 +311,7 @@
       : '共有するには「共有」タブからDiscordでログインしてください。';
     renderMyShared();
     updateDeveloperTab();
-    if (isDeveloper()) renderCloudAdminLists();
+    if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
     refreshWishlistForAccount();
     queueMicrotask(() => friendPresenceAuthChanged());
   }
@@ -490,6 +490,7 @@
 
     if (tab === 'map') refreshMap();
     if (tab === 'lottery') loadLotteryEvents();
+    if (tab === 'dev' && isDeveloper()) loadLotteryDevResults();
     render();
   }
 
@@ -2601,6 +2602,9 @@
   }
 
   function initLottery() {
+    // 初期表示はジャンル全件・日時確認済みの受付中のみ。
+    $('lpGenre').value = 'all';
+    $('lpStatus').value = 'open';
     for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpWishlistOnly']) {
       $(id).addEventListener(id === 'lpQuery' ? 'input' : 'change', () => {
         lotteryVisibleLimit = LP_PAGE_SIZE;
@@ -2611,9 +2615,9 @@
     $('lpMore').addEventListener('click',() => {lotteryVisibleLimit += LP_PAGE_SIZE;renderLottery();});
     $('lpClearFilters').addEventListener('click',() => {
       $('lpQuery').value = '';
-      $('lpGenre').value = 'pokemon';
+      $('lpGenre').value = 'all';
       $('lpPrefecture').value = 'all';
-      $('lpStatus').value = 'all';
+      $('lpStatus').value = 'open';
       $('lpType').value = 'all';
       $('lpWishlistOnly').checked = false;
       lotteryVisibleLimit = LP_PAGE_SIZE;
@@ -2640,11 +2644,115 @@
   // ========================================
   const LP_DEV_RECHECK_API = 'https://livepocket-backup-trigger.takahiro9455.workers.dev/admin/recheck';
   let lpDevRecheckBusy = false;
+  const LP_DEV_RESULTS_URL = './livepocket_check_summary.json';
+  let lpDevReportLoading = false;
+  let lpDevReportTimer = null;
+  let lpDevReportSince = 0;
+  let lpDevLastSeenManualRun = '';
+  let lpDevWaitingPreviousRun = '';
+  const LP_DEV_REPORT_POLL_MS = 15000;
+  const LP_DEV_REPORT_TIMEOUT_MS = 5 * 60 * 1000;
+
+  function lpDevReportDate(value) {
+    const date = new Date(value || '');
+    return Number.isFinite(date.getTime()) ? new Intl.DateTimeFormat('ja-JP', {
+      timeZone: 'Asia/Tokyo', year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',hour12:false
+    }).format(date) : '不明';
+  }
+
+  function lpDevNumeric(stats, key) {
+    const value = stats?.[key];
+    return Number.isSafeInteger(value) && value >= 0 ? value : 0;
+  }
+
+  function lpDevReportMarkup(lastManual, lastRun) {
+    if (!lastManual || !lastManual.completed_process_at) {
+      return `<p class="hint">開発者ボタンによる再確認結果はまだありません。ボタンから実行し、GitHub Actionsの処理完了後に表示されます。</p>
+      ${lastRun?.completed_process_at ? `<p class="hint">最新の自動処理：${escape(lpDevReportDate(lastRun.completed_process_at))}</p>` : ''}`;
+    }
+    const stats = lastManual.stats || {};
+    const updates = lastManual.updates || {};
+    const fields = [
+      ['ページ確認回数（延べ）',lastManual.page_check_attempts],
+      ['既存イベントの確認',lpDevNumeric(stats,'historical_attempted')],
+      ['イベント名の更新',lpDevNumeric(updates,'title_updated')],
+      ['商品名の更新',lpDevNumeric(updates,'product_updated')],
+      ['応募日時の更新',lpDevNumeric(updates,'deadline_updated')],
+      ['店舗情報の更新',lpDevNumeric(updates,'store_updated')],
+      ['公式タイトルの確認',lpDevNumeric(stats,'official_title_attempted')],
+      ['取得制限の検出回数',lpDevNumeric(stats,'official_fetch_blocked') + lpDevNumeric(stats,'title_recheck_blocked') + lpDevNumeric(stats,'retry_blocked')],
+    ];
+    const safeId = /^\d+$/.test(String(lastManual.run_id || '')) ? String(lastManual.run_id) : '';
+    const runLink = safeId ? `<a href="https://github.com/ttttt-9554/pokeca-map/actions/runs/${safeId}" target="_blank" rel="noopener noreferrer">この実行をGitHubで確認 ↗</a>` : '';
+    return `<p class="lp-dev-results-date"><strong>最終手動確認：</strong>${escape(lpDevReportDate(lastManual.completed_process_at))}</p>
+      <div class="lp-dev-results-grid">${fields.map(([name,count]) => `<div class="lp-dev-result-cell"><span>${escape(name)}</span><strong>${Number.isSafeInteger(count) && count >= 0 ? count : 0}</strong></div>`).join('')}</div>
+      <p class="hint">※確認回数は延べ回数です。名称・応募日時・店舗の更新件数は、この実行の確認処理中に変更された既存イベント数です。対象なしの0件も正常です。</p>
+      ${runLink}`;
+  }
+
+  async function loadLotteryDevResults() {
+    if (!isDeveloper() || lpDevReportLoading) return;
+    const output = $('lpDevResultsContent');
+    const state = $('lpDevResultsState');
+    if (!output || !state) return;
+    lpDevReportLoading = true;
+    try {
+      const response = await fetch(LP_DEV_RESULTS_URL + '?t=' + Date.now(), {cache:'no-store'});
+      if (response.status === 404) {
+        state.textContent = '結果ファイルはまだありません。GitHub側のv21.11を反映後、最初の実行で作成されます。';
+        output.replaceChildren();
+        return;
+      }
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const result = await response.json();
+      if (!result || result.schema_version !== 1) throw new Error('結果データの形式が異なります');
+      const lastManual = result.last_manual;
+      if (lastManual?.run_id) lpDevLastSeenManualRun = String(lastManual.run_id);
+      state.textContent = '結果を取得しました。';
+      output.innerHTML = lpDevReportMarkup(lastManual, result.last_run);
+      if (lpDevReportSince && lastManual?.completed_process_at) {
+        const checkedAt = Date.parse(lastManual.completed_process_at);
+        // Old reports must not be treated as this button press's result.
+        const isNewRun = String(lastManual.run_id || '') !== lpDevWaitingPreviousRun;
+        if (isNewRun && Number.isFinite(checkedAt) && checkedAt >= lpDevReportSince - 10000) {
+          clearInterval(lpDevReportTimer);
+          lpDevReportTimer = null;
+          lpDevReportSince = 0;
+          state.textContent = '✅ 今回の手動再確認の結果が反映されました。';
+          loadLotteryEvents(true);
+        }
+      }
+    } catch (error) {
+      state.textContent = '結果を取得できませんでした：' + (error?.message || '通信エラー');
+    } finally {
+      lpDevReportLoading = false;
+    }
+  }
+
+  function watchLotteryDevResults(startTime) {
+    if (lpDevReportTimer) clearInterval(lpDevReportTimer);
+    lpDevReportSince = startTime;
+    lpDevWaitingPreviousRun = lpDevLastSeenManualRun;
+    lpDevReportTimer = setInterval(() => {
+      if (!isDeveloper() || Date.now() - lpDevReportSince > LP_DEV_REPORT_TIMEOUT_MS) {
+        clearInterval(lpDevReportTimer);
+        lpDevReportTimer = null;
+        lpDevReportSince = 0;
+        const state = $('lpDevResultsState');
+        if (state && isDeveloper()) state.textContent = '反映待ちです。GitHub Actionsを確認するか、「結果を更新」を押してください。';
+        return;
+      }
+      loadLotteryDevResults();
+    }, LP_DEV_REPORT_POLL_MS);
+  }
+
 
   function initLotteryDevRecheck() {
     const button = $('lpDevRecheckButton');
     const status = $('lpDevRecheckStatus');
     if (!button || !status) return;
+    $('lpDevResultsRefresh')?.addEventListener('click', loadLotteryDevResults);
 
     button.addEventListener('click', async () => {
       if (lpDevRecheckBusy) return;
@@ -2673,7 +2781,9 @@
         });
         const result = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(result.error || 'サーバー応答 HTTP ' + response.status);
-        status.textContent = '✅ 確認処理を依頼しました。完了状況は下の「GitHub Actions」で確認できます。';
+        status.textContent = '✅ 確認処理を依頼しました。結果が反映されるまで自動確認します。';
+        watchLotteryDevResults(Date.now());
+        loadLotteryDevResults();
       } catch (error) {
         status.textContent = '⚠ ' + (error?.message || '起動できませんでした。');
       } finally {

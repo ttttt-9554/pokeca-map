@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261017-lottery21_2">
+  <link rel="stylesheet" href="style.css?v=20261018-dev-results21_11">
 
   <style>
     [hidden] { display: none !important; }
@@ -466,7 +466,7 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
         <datalist id="lpProductSuggestions"></datalist>
         <div class="lp-filter-grid">
           <label for="lpGenre">ジャンル
-            <select id="lpGenre"><option value="pokemon">ポケカ</option><option value="all">すべて（未分類も含む）</option></select>
+            <select id="lpGenre"><option value="all" selected>すべて（未分類も含む）</option><option value="pokemon">ポケカ</option></select>
           </label>
           <label for="lpPrefecture">都道府県
             <select id="lpPrefecture"><option value="all">全国</option></select>
@@ -474,7 +474,7 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
           <label for="lpStatus">応募状況
             <select id="lpStatus">
               <option value="all">すべて</option>
-              <option value="open">受付中（日時確認済み）</option>
+              <option value="open" selected>受付中（日時確認済み）</option>
               <option value="upcoming">開始前</option>
               <option value="unknown">受付状況・期限未確認</option>
               <option value="closed">受付終了</option>
@@ -854,6 +854,14 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
         <p class="hint">登録済みのイベントから、未確認・再確認時期が来たものを最大12件ずつ確認します。新着収集はそのまま継続します。</p>
         <button type="button" class="primary" id="lpDevRecheckButton">登録済み抽選を12件再確認</button>
         <p class="hint" role="status" aria-live="polite" id="lpDevRecheckStatus">実行待ち</p>
+        <section class="lp-dev-results" aria-label="抽選イベントの再確認結果">
+          <div class="lp-dev-results-header">
+            <h4>📊 再確認の実行結果</h4>
+            <button type="button" id="lpDevResultsRefresh">結果を更新</button>
+          </div>
+          <p class="hint" id="lpDevResultsState" role="status" aria-live="polite">確認結果を読み込んでいます…</p>
+          <div id="lpDevResultsContent"></div>
+        </section>
         <a id="lpDevRecheckActions" href="https://github.com/ttttt-9554/pokeca-map/actions/workflows/livepocket-collect.yml" target="_blank" rel="noopener noreferrer">GitHub Actionsで実行状況を見る ↗</a>
         <p class="hint">※ 実行依頼後、GitHub Actionsが約1〜数分で処理します。データに変更がない場合、表示件数は変わりません。直近の確認済みイベントは再確認対象から外れます。</p>
       </div>
@@ -1049,7 +1057,7 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261018-dev-recheck21_10"></script>
+  <script src="app.js?v=20261018-dev-results21_11"></script>
 
 <script>
 /* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */
