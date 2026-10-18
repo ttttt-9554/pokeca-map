@@ -2631,7 +2631,13 @@
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ucdrl",
@@ -2697,7 +2703,13 @@
           "name": "古本市場深谷店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-03T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/zpned",
@@ -2769,7 +2781,13 @@
           "name": "フルコンプ",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-05T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/z7_94",
@@ -2815,7 +2833,13 @@
           "name": "CARDWINGS八王子駅前店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-06T23:59:00+09:00",
+      "application_start_at": "2026-10-03T12:20:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/pp-t2",
@@ -2933,7 +2957,13 @@
           "name": "ブックエース坂東店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-09-30T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/5n05s",
@@ -3019,7 +3049,13 @@
           "name": "トレカ丸幸手店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-07T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/kjby1",
@@ -3212,7 +3248,13 @@
           "name": "古本市場深谷店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-03T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/l3bu7",
@@ -3382,7 +3424,13 @@
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/bm1g5",
@@ -7564,8 +7612,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 145,
-    "application_start_at": 145,
+    "application_end_at": 153,
+    "application_start_at": 153,
     "stores_events": 205
   },
   "collector_state": {
@@ -8062,7 +8110,7 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/ldloz": {
-          "checked_at": "2026-10-17T21:12:44.537734+00:00",
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/70ppw": {
@@ -8158,12 +8206,12 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jlwei": {
-          "checked_at": "2026-10-17T21:12:44.537734+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/d08fb": {
-          "checked_at": "2026-10-17T21:12:44.537734+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/z7_94": {
           "checked_at": "2026-10-17T21:12:44.537734+00:00",
@@ -8264,6 +8312,38 @@
         "https://livepocket.jp/e/kjby1": {
           "checked_at": "2026-10-18T03:31:18.771812+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/j_8s0": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/j7uqd": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/io5nq": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/hjya8": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/gvgo8": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/guj70": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/fysn-": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/e3bcl": {
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -8327,17 +8407,17 @@
         "https://livepocket.jp/e/ldloz": {
           "detected_at": "2026-10-17T13:09:26.462486+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-17T21:12:44.537734+00:00"
+          "checked_at": "2026-10-18T03:41:24.100659+00:00"
         },
         "https://livepocket.jp/e/d08fb": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T21:12:44.537734+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-18T03:41:24.100659+00:00"
         },
         "https://livepocket.jp/e/jlwei": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-17T21:12:44.537734+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-18T03:41:24.100659+00:00"
         },
         "https://livepocket.jp/e/lli1u": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
@@ -8435,8 +8515,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ldloz": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-17T21:12:44.537734+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-18T03:41:24.100659+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/70ppw": {
@@ -8472,6 +8552,16 @@
         "https://livepocket.jp/e/lli1u": {
           "attempts": 1,
           "last_attempt_at": "2026-10-18T03:31:18.771812+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/jlwei": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-18T03:41:24.100659+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/d08fb": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-18T03:41:24.100659+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -8535,15 +8625,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/1hvyn": {
-          "attempts": 1,
-          "checked_at": "2026-10-17T16:30:31.792537+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
         },
         "https://livepocket.jp/e/o35r4": {
-          "attempts": 1,
-          "checked_at": "2026-10-17T16:40:47.382099+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T03:41:24.100659+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""

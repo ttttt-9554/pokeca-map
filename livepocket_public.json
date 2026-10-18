@@ -1399,6 +1399,8 @@
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1437,6 +1439,8 @@
       "store_name": "古本市場深谷店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-03T10:00:00+09:00",
       "stores": [
         {
           "name": "古本市場深谷店",
@@ -1476,6 +1480,8 @@
       "url": "https://livepocket.jp/e/j_8s0",
       "store_name": "フルコンプ",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-05T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00",
       "stores": [
         {
           "name": "フルコンプ",
@@ -1502,6 +1508,8 @@
       "store_name": "CARDWINGS八王子駅前店",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-06T23:59:00+09:00",
+      "application_start_at": "2026-10-03T12:20:00+09:00",
       "stores": [
         {
           "name": "CARDWINGS八王子駅前店",
@@ -1513,9 +1521,9 @@
       "url": "https://livepocket.jp/e/pp-t2",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T20:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1527,9 +1535,9 @@
       "url": "https://livepocket.jp/e/tle89",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T20:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1568,6 +1576,8 @@
       "store_name": "ブックエース坂東店",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-09-30T10:00:00+09:00",
       "stores": [
         {
           "name": "ブックエース坂東店",
@@ -1603,9 +1613,9 @@
       "url": "https://livepocket.jp/e/kr0g5",
       "store_name": "CARDWINGS八王子駅前店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-06T23:59:00+09:00",
       "application_start_at": "2026-10-03T12:20:00+09:00",
+      "application_end_at": "2026-10-06T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "CARDWINGS八王子駅前店",
@@ -1618,6 +1628,8 @@
       "store_name": "トレカ丸幸手店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-07T23:59:00+09:00",
+      "application_start_at": "2026-10-03T09:00:00+09:00",
       "stores": [
         {
           "name": "トレカ丸幸手店",
@@ -1629,9 +1641,9 @@
       "url": "https://livepocket.jp/e/kjby1",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T20:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1643,9 +1655,9 @@
       "url": "https://livepocket.jp/e/lyypz",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T21:00:00+09:00",
       "application_start_at": "2026-10-03T13:00:00+09:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -1724,6 +1736,8 @@
       "store_name": "古本市場深谷店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-03T10:00:00+09:00",
       "stores": [
         {
           "name": "古本市場深谷店",
@@ -1735,9 +1749,9 @@
       "url": "https://livepocket.jp/e/l3bu7",
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-03T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
@@ -1749,9 +1763,9 @@
       "url": "https://livepocket.jp/e/pl03d",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T20:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1789,9 +1803,9 @@
       "url": "https://livepocket.jp/e/nv1k2",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T21:00:00+09:00",
       "application_start_at": "2026-10-03T13:00:00+09:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -1818,6 +1832,8 @@
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T20:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -3358,10 +3374,10 @@
     {
       "url": "https://livepocket.jp/e/kvys2",
       "store_name": "30th",
+      "prefecture": "群馬県",
       "application_start_at": "2026-10-16T09:00:00+09:00",
       "application_end_at": "2026-10-18T21:00:00+09:00",
       "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
-      "prefecture": "群馬県",
       "stores": [
         {
           "name": "30th",
@@ -3540,9 +3556,9 @@
       "url": "https://livepocket.jp/e/zp2ru",
       "store_name": "ヴィレッジヴァンガード渋谷本店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-18T00:00:00+09:00",
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "ヴィレッジヴァンガード渋谷本店",
@@ -3554,9 +3570,9 @@
       "url": "https://livepocket.jp/e/dgffhgkljjgf-hjg",
       "store_name": "古本市場新小岩店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-18T22:00:00+09:00",
       "application_start_at": "2026-10-16T10:00:00+09:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "古本市場新小岩店",
@@ -3568,9 +3584,9 @@
       "url": "https://livepocket.jp/e/vd5i7",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-19T21:00:00+09:00",
       "application_start_at": "2026-10-18T09:37:00+09:00",
+      "application_end_at": "2026-10-19T21:00:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -3582,9 +3598,9 @@
       "url": "https://livepocket.jp/e/d89xs",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-19T21:00:00+09:00",
       "application_start_at": "2026-10-18T09:47:00+09:00",
+      "application_end_at": "2026-10-19T21:00:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
@@ -3596,9 +3612,9 @@
       "url": "https://livepocket.jp/e/8qub1",
       "store_name": "古本市場戸田店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-19T22:00:00+09:00",
       "application_start_at": "2026-10-17T10:00:00+09:00",
+      "application_end_at": "2026-10-19T22:00:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "古本市場戸田店",
@@ -3610,9 +3626,9 @@
       "url": "https://livepocket.jp/e/ilzq0",
       "store_name": "TSUTAYA大利根店トレカ売場",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-19T23:59:00+09:00",
       "application_start_at": "2026-10-17T07:00:00+09:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "TSUTAYA大利根店トレカ売場",
@@ -3624,9 +3640,9 @@
       "url": "https://livepocket.jp/e/62c5y",
       "store_name": "TSUTAYA作新学院前店トレカ売場",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-19T23:59:00+09:00",
       "application_start_at": "2026-10-17T07:00:00+09:00",
+      "application_end_at": "2026-10-19T23:59:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "TSUTAYA作新学院前店トレカ売場",
@@ -3638,9 +3654,9 @@
       "url": "https://livepocket.jp/e/ib2ki",
       "store_name": "トレカ丸足利助戸店",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-21T22:00:00+09:00",
       "application_start_at": "2026-10-17T09:00:00+09:00",
+      "application_end_at": "2026-10-21T22:00:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "トレカ丸足利助戸店",
@@ -3652,9 +3668,9 @@
       "url": "https://livepocket.jp/e/lf49b",
       "store_name": "TSUTAYA宇都宮南店",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
-      "application_end_at": "2026-10-18T22:00:00+09:00",
       "application_start_at": "2026-10-17T09:00:00+09:00",
+      "application_end_at": "2026-10-18T22:00:00+09:00",
+      "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
       "stores": [
         {
           "name": "TSUTAYA宇都宮南店",
@@ -3663,5 +3679,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T03:31:18.771812+00:00"
+  "updated_at": "2026-10-18T03:41:24.100659+00:00"
 }
