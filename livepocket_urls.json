@@ -7976,13 +7976,86 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_3_uniform_multi_store_tickets"
+        "product_name": "v21_3_uniform_multi_store_tickets",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "stores": [
         {
-          "name": "イトーヨーカドー",
+          "name": "イトーヨーカドー武蔵境店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー多摩センター店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー和光店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー三島店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー赤羽店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ葛西店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー甲府昭和店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー木場店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー湘南台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー立場店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大宮宮原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー国領店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大森店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ川口店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ八尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ鳳店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー武蔵小金井店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ市原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ柏店",
           "prefecture": ""
         }
       ]
@@ -8003,13 +8076,78 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_3_uniform_multi_store_tickets"
+        "product_name": "v21_3_uniform_multi_store_tickets",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "stores": [
         {
-          "name": "イトーヨーカドー",
+          "name": "イトーヨーカドー浦和店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー昭島店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ加古川店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー古淵店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー東久留米店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー南大沢店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー能見台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー八王子店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー横浜別所店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー川崎店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー四街道店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー三郷店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー曳舟店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ鷲宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ上尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドープライムツリー赤池店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー トイロスクール天美店",
           "prefecture": ""
         }
       ]
@@ -8030,13 +8168,62 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_3_uniform_multi_store_tickets"
+        "product_name": "v21_3_uniform_multi_store_tickets",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "stores": [
         {
-          "name": "イトーヨーカドー",
+          "name": "イトーヨーカドー大船店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー船橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー若葉台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー伊勢原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー上尾駅前店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー草加店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー小田原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー我孫子店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大井町店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー知多店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー明石店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー宇都宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー甲子園店",
           "prefecture": ""
         }
       ]
@@ -8864,8 +9051,8 @@
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/fg69z": {
-          "checked_at": "2026-10-16T22:58:46.920284+00:00",
-          "status": "browser_deadline_found"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/pjg_2": {
           "checked_at": "2026-10-16T22:58:46.920284+00:00",
@@ -8876,7 +9063,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yv07y": {
-          "checked_at": "2026-10-17T02:47:39.619385+00:00",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/x2n7b": {
@@ -8884,39 +9071,39 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/q8-1nh5bh5": {
-          "checked_at": "2026-10-17T02:47:39.619385+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/k6x2c": {
           "checked_at": "2026-10-17T02:47:39.619385+00:00",
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/jbkc-": {
-          "checked_at": "2026-10-17T02:47:39.619385+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/ih5ta": {
           "checked_at": "2026-10-17T02:47:39.619385+00:00",
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/i44fhaaluv": {
-          "checked_at": "2026-10-17T02:47:39.619385+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/h2dkqnh0f0": {
-          "checked_at": "2026-10-17T02:47:39.619385+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/7ck7b": {
-          "checked_at": "2026-10-17T04:12:07.743203+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/39gwbz6j-d": {
-          "checked_at": "2026-10-17T04:12:07.743203+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/vm68e": {
-          "checked_at": "2026-10-17T04:12:07.743203+00:00",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/mm2c4": {
@@ -8924,16 +9111,16 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/v7i-m": {
-          "checked_at": "2026-10-17T04:12:07.743203+00:00",
-          "status": "checked_product_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/p2b1t": {
-          "checked_at": "2026-10-17T04:12:07.743203+00:00",
-          "status": "checked_product_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/moozm": {
-          "checked_at": "2026-10-17T04:12:07.743203+00:00",
-          "status": "checked_product_deadline"
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/yiucw": {
           "checked_at": "2026-10-17T04:12:07.743203+00:00",
@@ -10900,13 +11087,15 @@
           "conflict": false
         },
         "https://livepocket.jp/e/39gwbz6j-d": {
-          "status": "ok",
-          "checked_at": "2026-10-18T04:48:25.339155+00:00",
+          "status": "ok_no_title",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "v20_user_verified_event_product",
           "title_origin": "",
-          "conflict": false
+          "conflict": false,
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
         },
         "https://livepocket.jp/e/u62m7": {
           "attempts": 1,
@@ -11091,13 +11280,15 @@
           "conflict": false
         },
         "https://livepocket.jp/e/moozm": {
-          "status": "ok",
-          "checked_at": "2026-10-18T05:26:19.551497+00:00",
+          "status": "ok_no_title",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "",
-          "conflict": false
+          "conflict": false,
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
         },
         "https://livepocket.jp/e/ng5hk": {
           "status": "ok",
@@ -11172,22 +11363,26 @@
           "conflict": false
         },
         "https://livepocket.jp/e/p2b1t": {
-          "status": "ok",
-          "checked_at": "2026-10-18T05:36:27.213600+00:00",
+          "status": "ok_no_title",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "",
-          "conflict": false
+          "conflict": false,
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
         },
         "https://livepocket.jp/e/v7i-m": {
-          "status": "ok",
-          "checked_at": "2026-10-18T05:36:27.213600+00:00",
+          "status": "ok_no_title",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "",
-          "conflict": false
+          "conflict": false,
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
         },
         "https://livepocket.jp/e/yexbv": {
           "status": "ok",
@@ -12332,6 +12527,94 @@
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
           "checked_at": "2026-10-18T10:41:59.294302+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/fg69z": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/h2dkqnh0f0": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "v21_3_uniform_multi_store_tickets",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/i44fhaaluv": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "v21_3_uniform_multi_store_tickets",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/jbkc-": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/q8-1nh5bh5": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "v21_3_uniform_multi_store_tickets",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/yv07y": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/7ck7b": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/vm68e": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:43:00.443638+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",

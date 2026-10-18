@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39115029560",
-    "run_number": "100",
-    "completed_process_at": "2026-10-18T09:21:57Z",
+    "run_id": "39120312520",
+    "run_number": "110",
+    "completed_process_at": "2026-10-18T10:43:35Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -13,12 +13,12 @@
       "retry_attempted": 0,
       "retry_new_fields": 0,
       "retry_blocked": 0,
-      "historical_attempted": 0,
+      "historical_attempted": 12,
       "registered_urls": 357,
       "deadlines_known": 332,
-      "store_lists_added": 0,
-      "multi_store_urls": 11,
-      "stores_from_pages": 0,
+      "store_lists_added": 3,
+      "multi_store_urls": 14,
+      "stores_from_pages": 4,
       "stores_from_discord": 0,
       "ticket_products_added": 0,
       "verified_products_added": 0,
@@ -36,7 +36,16 @@
       "official_titles_upgraded": 0,
       "official_products_added": 0,
       "official_genres_confirmed": 0,
-      "official_fetch_blocked": 0
+      "official_fetch_blocked": 0,
+      "manual_selected": 12,
+      "manual_attempted": 12,
+      "manual_success": 12,
+      "manual_blocked": 0,
+      "manual_title_updated": 0,
+      "manual_product_updated": 0,
+      "manual_deadline_updated": 0,
+      "manual_store_updated": 4,
+      "manual_genre_updated": 0
     },
     "updates": {
       "title_updated": 0,
@@ -46,12 +55,13 @@
       "genre_updated": 12,
       "new_urls": 0
     },
-    "page_check_attempts": 0
+    "page_check_attempts": 12,
+    "manual_page_check_attempts": 12
   },
   "last_manual": {
-    "run_id": "39115029560",
-    "run_number": "100",
-    "completed_process_at": "2026-10-18T09:21:57Z",
+    "run_id": "39120312520",
+    "run_number": "110",
+    "completed_process_at": "2026-10-18T10:43:35Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -61,12 +71,12 @@
       "retry_attempted": 0,
       "retry_new_fields": 0,
       "retry_blocked": 0,
-      "historical_attempted": 0,
+      "historical_attempted": 12,
       "registered_urls": 357,
       "deadlines_known": 332,
-      "store_lists_added": 0,
-      "multi_store_urls": 11,
-      "stores_from_pages": 0,
+      "store_lists_added": 3,
+      "multi_store_urls": 14,
+      "stores_from_pages": 4,
       "stores_from_discord": 0,
       "ticket_products_added": 0,
       "verified_products_added": 0,
@@ -84,7 +94,16 @@
       "official_titles_upgraded": 0,
       "official_products_added": 0,
       "official_genres_confirmed": 0,
-      "official_fetch_blocked": 0
+      "official_fetch_blocked": 0,
+      "manual_selected": 12,
+      "manual_attempted": 12,
+      "manual_success": 12,
+      "manual_blocked": 0,
+      "manual_title_updated": 0,
+      "manual_product_updated": 0,
+      "manual_deadline_updated": 0,
+      "manual_store_updated": 4,
+      "manual_genre_updated": 0
     },
     "updates": {
       "title_updated": 0,
@@ -94,6 +113,7 @@
       "genre_updated": 12,
       "new_urls": 0
     },
-    "page_check_attempts": 0
+    "page_check_attempts": 12,
+    "manual_page_check_attempts": 12
   }
 }

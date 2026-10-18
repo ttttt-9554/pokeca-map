@@ -3716,7 +3716,79 @@
       "review_category": "pokemon",
       "stores": [
         {
-          "name": "イトーヨーカドー",
+          "name": "イトーヨーカドー武蔵境店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー多摩センター店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー和光店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー三島店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー赤羽店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ葛西店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー甲府昭和店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー木場店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー湘南台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー立場店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大宮宮原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー国領店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大森店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ川口店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ八尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ鳳店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー武蔵小金井店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ市原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ柏店",
           "prefecture": ""
         }
       ],
@@ -3734,7 +3806,71 @@
       "review_category": "pokemon",
       "stores": [
         {
-          "name": "イトーヨーカドー",
+          "name": "イトーヨーカドー浦和店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー昭島店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ加古川店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー古淵店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー東久留米店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー南大沢店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー能見台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー八王子店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー横浜別所店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー川崎店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー四街道店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー三郷店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー曳舟店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ鷲宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ上尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドープライムツリー赤池店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー トイロスクール天美店",
           "prefecture": ""
         }
       ],
@@ -3752,7 +3888,55 @@
       "review_category": "pokemon",
       "stores": [
         {
-          "name": "イトーヨーカドー",
+          "name": "イトーヨーカドー大船店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー船橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー若葉台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー伊勢原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー上尾駅前店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー草加店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー小田原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー我孫子店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大井町店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー知多店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー明石店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー宇都宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー甲子園店",
           "prefecture": ""
         }
       ],
@@ -4119,5 +4303,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T10:41:59.294302+00:00"
+  "updated_at": "2026-10-18T10:43:00.443638+00:00"
 }
