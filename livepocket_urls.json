@@ -11046,15 +11046,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/717w_": {
-          "attempts": 2,
-          "checked_at": "2026-10-18T10:36:20.813480+00:00",
+          "attempts": 3,
+          "checked_at": "2026-10-18T23:11:22.611905+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
         },
         "https://livepocket.jp/e/opyur-hugr": {
-          "attempts": 2,
-          "checked_at": "2026-10-18T10:41:59.294302+00:00",
+          "attempts": 3,
+          "checked_at": "2026-10-18T23:11:22.611905+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12814,7 +12814,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T10:36:20.813480+00:00",
+          "checked_at": "2026-10-18T23:11:22.611905+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -12825,7 +12825,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T10:41:59.294302+00:00",
+          "checked_at": "2026-10-18T23:11:22.611905+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -13978,6 +13978,30 @@
         },
         "https://livepocket.jp/e/3hemk": {
           "checked_at": "2026-10-18T23:01:20.709179+00:00",
+          "reason": "title_candidates_rejected",
+          "candidate_count": 2,
+          "valid_candidate_count": 0,
+          "detail": "filtered_all_candidates",
+          "candidate_sources": "og:1;document:1",
+          "title_detected": false,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0
+        },
+        "https://livepocket.jp/e/717w_": {
+          "checked_at": "2026-10-18T23:11:22.611905+00:00",
+          "reason": "title_candidates_rejected",
+          "candidate_count": 2,
+          "valid_candidate_count": 0,
+          "detail": "filtered_all_candidates",
+          "candidate_sources": "og:1;document:1",
+          "title_detected": false,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0
+        },
+        "https://livepocket.jp/e/opyur-hugr": {
+          "checked_at": "2026-10-18T23:11:22.611905+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
