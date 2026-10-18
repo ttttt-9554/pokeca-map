@@ -10585,8 +10585,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3i7a4": {
-          "checked_at": "2026-10-18T13:01:24.730811+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-18T19:21:21.628177+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/0opt9": {
           "checked_at": "2026-10-18T13:31:35.069870+00:00",
@@ -10728,8 +10728,8 @@
         },
         "https://livepocket.jp/e/3i7a4": {
           "detected_at": "2026-10-18T13:00:57.379019+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-18T13:01:24.730811+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-18T19:21:21.628177+00:00"
         },
         "https://livepocket.jp/e/6vevi": {
           "detected_at": "2026-10-18T13:00:57.379019+00:00",
@@ -10894,6 +10894,11 @@
         "https://livepocket.jp/e/6vevi": {
           "attempts": 1,
           "last_attempt_at": "2026-10-18T19:11:25.227643+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/3i7a4": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-18T19:21:21.628177+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -13116,7 +13121,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T19:11:25.227643+00:00",
+          "checked_at": "2026-10-18T19:21:21.628177+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -13580,7 +13585,7 @@
           "title_detected": false
         },
         "https://livepocket.jp/e/3i7a4": {
-          "checked_at": "2026-10-18T19:11:25.227643+00:00",
+          "checked_at": "2026-10-18T19:21:21.628177+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
