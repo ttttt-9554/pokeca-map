@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.4: bounded title retries with diagnostic reasons + catalog classifier.
+"""LivePocket v21.9: conservative official-page title/product priority + classifier.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -251,6 +251,7 @@ def process_v21_1(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=background_limit, retry_limit=retry_limit,
             verified=verified, v19_verified=v19_verified)
     stats.update(classify(raw, public, catalog))
+    stats['official_genres_restored'] = restore_official_genres(raw, public)
     _, pi = v11.indices(raw, public)
     for row in content:
         item = pi[row['url']]
@@ -469,11 +470,18 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     # Selection before the upstream pass prevents fresh discoveries from being
     # rechecked twice in the same job. An overlap with upstream is skipped.
     queued = title_recheck_candidates(raw, public, now=now, limit=title_limit)
+    # Only in background/manual cycles; 5-minute new-only runs add NO extra
+    # official-page requests. Queue is selected before upstream processing.
+    official_queue = official_title_candidates(raw, public, now=now) if background_limit else []
     seen = set()
+    observations = {}
 
     def record(url):
         seen.add(url)
-        return fetch(url)
+        result = fetch(url)
+        if isinstance(result, dict):
+            observations[url] = result
+        return result
 
     raw, public, review, deadlines, sources, content, stats = process_v21_1(
         raw, public, record, catalog=catalog, now=now,
@@ -492,7 +500,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         if pi[url].get('event_title'):
             continue
         try:
-            result = fetch(url)
+            result = record(url)
         except Exception:
             result = {'status': 'browser_error'}
         if not isinstance(result, dict):
@@ -554,6 +562,71 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         review = [r for r in new_review if r.get('needs_store') or r.get('needs_product')]
         stats['review_remaining'] = len(review)
 
+    # Official-title checks follow upstream new/retry/background work.
+    stats.update(official_title_planned=len(official_queue),
+                 official_title_attempted=0, official_titles_upgraded=0,
+                 official_products_added=0, official_genres_confirmed=0,
+                 official_title_conflicts=0, official_fetch_blocked=0)
+    official_state = state.setdefault('v21_9', {}).setdefault('official_checks', {})
+    for url in official_queue:
+        if url in seen or v14._cooldown_active(state.setdefault('v14', {}), now):
+            continue
+        try:
+            page_result = record(url)
+        except Exception:
+            page_result = {'status':'browser_error'}
+            observations[url] = page_result
+        status = str(page_result.get('status') or 'browser_error')
+        entry = official_state.get(url, {})
+        official_state[url] = {
+            'attempts': recheck_attempts(entry) + 1,
+            'checked_at': now.isoformat(), 'status': status,
+            'http_status': page_result.get('http_status') or '',
+        }
+        stats['official_title_attempted'] += 1
+        if status in ('browser_blocked', 'browser_blocked_or_empty'):
+            state.setdefault('v14', {})['blocked_until'] = (
+                now + timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
+            stats['official_fetch_blocked'] += 1
+            break
+
+    # Apply exact-URL official facts from this run's already-fetched pages.
+    # v10/v20 may have set an old category based on Discord excerpts. The
+    # official genre deliberately wins only when explicitly present in title.
+    for url, page_result in observations.items():
+        if url not in ri:
+            continue
+        outcome = apply_official_observation(ri[url], pi[url], page_result)
+        if outcome['title_changed']:
+            stats['official_titles_upgraded'] += 1
+        if outcome['product_changed']:
+            stats['official_products_added'] += 1
+        if outcome['genre']:
+            stats['official_genres_confirmed'] += 1
+        if outcome['conflict']:
+            stats['official_title_conflicts'] += 1
+        record_state = official_state.setdefault(url, {})
+        record_state.update(status=page_result.get('status') or 'browser_error',
+                            checked_at=now.isoformat(),
+                            title_observed=outcome['title'],
+                            genre=outcome['genre'],
+                            product_origin=ri[url].get('field_sources', {}).get('product_name', ''),
+                            title_origin=ri[url].get('field_sources', {}).get('event_title', ''),
+                            conflict=bool(outcome['conflict']))
+
+    stats['official_genres_restored'] += restore_official_genres(raw, public)
+    for row in review:
+        pub = pi[row['url']]
+        cat = pub.get('review_category') or ''
+        row['review_category'] = cat
+        if pub.get('event_title') or pub.get('product_name'):
+            row['needs_product'] = ''
+            row['review_reason'] = ';'.join(
+                term for term in (row.get('review_reason') or '').split(';')
+                if term != 'product_or_event_unknown')
+    review[:] = [row for row in review if row.get('needs_store') or row.get('needs_product')]
+    stats['review_remaining'] = len(review)
+
     for row in content:
         item, pub = ri[row['url']], pi[row['url']]
         row['event_title'] = v12._safe_csv(pub.get('event_title') or '')
@@ -565,6 +638,14 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['map_catalog_match'] = v12._safe_csv(pub.get('pokemon_map_match') or '')
         row['map_catalog_type'] = pub.get('pokemon_map_type') or ''
         row['map_catalog_evidence'] = pub.get('pokemon_map_evidence') or ''
+        observed = official_state.get(row['url'], {})
+        row['official_page_status'] = observed.get('status', '')
+        row['official_title_observed'] = v12._safe_csv(observed.get('title_observed') or '')
+        row['official_genre'] = observed.get('genre', '')
+        row['official_title_source'] = observed.get('title_origin', '')
+        row['official_product_source'] = observed.get('product_origin', '')
+        row['official_page_checked_at'] = observed.get('checked_at', '')
+        row['official_title_conflict'] = 'yes' if observed.get('conflict') else ''
         retry = log.get(row['url'], {})
         row['title_recheck_attempts'] = recheck_attempts(retry)
         row['title_recheck_at'] = retry.get('checked_at', '')
@@ -713,6 +794,182 @@ def structured_event_titles(blocks, url):
     return list(names) if len(names) == 1 else []
 
 
+
+
+# v21.9: An OFFICIAL title is stronger than a URL-paired Discord shorthand.
+# Browser access stays on the exact original LivePocket event URL; CAPTCHA,
+# login, robot checks and redirected pages are never bypassed.
+OFFICIAL_TITLE_CHECK_PER_RUN = 2
+OFFICIAL_TITLE_RETRY_MAX = 3
+OFFICIAL_TITLE_CHECK_WAIT = timedelta(hours=6)
+OFFICIAL_TITLE_GRACE = timedelta(hours=12)
+OFFICIAL_GENRE_PATTERNS = {
+    'onepiece': re.compile(r'ONE\s*PIECE\s*(?:カードゲーム|CARD\s*GAME)|ワンピース\s*カード', re.I),
+    'pokemon': re.compile(r'ポケモンカード(?:ゲーム)?|ポケカ|POK[EÉ]MON\s*(?:TCG|CARD)', re.I),
+    'yugioh': re.compile(r'遊戯王|YU[\s-]?GI[\s-]?OH', re.I),
+}
+OFFICIAL_COLUMNS = (
+    'official_page_status', 'official_title_observed', 'official_genre',
+    'official_title_source', 'official_product_source', 'official_page_checked_at',
+    'official_title_conflict',
+)
+REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS
+
+
+def official_genre(title):
+    """Explicit TCG named IN the exact-URL official event title only."""
+    if not isinstance(title, str) or not title:
+        return ''
+    genres = [genre for genre, rx in OFFICIAL_GENRE_PATTERNS.items() if rx.search(title)]
+    return genres[0] if len(genres) == 1 else ''
+
+
+def official_quoted_product(title):
+    """Use a product explicitly quoted after an identifiable TCG brand.
+
+    This never treats a generic event name / timetable as a product. A
+    ONE PIECE branded official event '...「EXブースター ...」抽選販売受付'
+    can specify a distinct product; a plain 'Heroines Edition' cannot.
+    """
+    genre = official_genre(title)
+    if not genre:
+        return None
+    # Only a single bracketed / quoted product name is unambiguous.
+    chunks = re.findall(r'『([^』]{6,110})』|「([^」]{6,110})」', title)
+    if len(chunks) != 1:
+        return None
+    value = next(part for part in chunks[0] if part).strip()
+    if re.search(r'(?:\.\.\.|…|https?://|整理券|参加条件|購入方法|応募期間)', value, re.I):
+        return None
+    if not re.search(r'ブースター|拡張パック|強化拡張|スターター|デッキ|\bEB[-－]?\d{2}\b|\bBOX\b', value, re.I):
+        return None
+    return v20.v15.clean_value(value, 'product_name')
+
+
+def title_is_provisional(raw_item):
+    source = str((raw_item.get('field_sources') or {}).get('event_title') or '')
+    return source.startswith(('discord_url_title:', 'discord_url_pair:', 'discord_embed:'))
+
+
+def product_is_provisional(raw_item):
+    source = str((raw_item.get('field_sources') or {}).get('product_name') or '')
+    return source.startswith(('discord_url_pair:', 'discord_embed:'))
+
+
+
+def restore_official_genres(raw, public):
+    """Keep an exact-URL official TCG category on later browser-free runs.
+
+    Upstream v10 recomputes categories using source_preview (often the text
+    of a multi-event Discord roundup). It must not undo a verified title.
+    """
+    raw_index, pub_index = v11.indices(raw, public)
+    changed = 0
+    for url, pub in pub_index.items():
+        source = str(raw_index[url].get('field_sources', {}).get('event_title') or '')
+        title = pub.get('official_event_title') or ''
+        if source != 'v21_9_official_exact_url_title' or title != pub.get('event_title'):
+            continue
+        genre = official_genre(title)
+        if not genre:
+            continue
+        if pub.get('review_category') != genre:
+            changed += 1
+        pub['review_category'] = genre
+        pub['official_genre'] = genre
+        if genre != 'pokemon':
+            for key in ('pokemon_map_match', 'pokemon_map_type', 'pokemon_map_evidence'):
+                pub.pop(key, None)
+    return changed
+
+def official_title_candidates(raw, public, *, now=None, limit=OFFICIAL_TITLE_CHECK_PER_RUN):
+    """Retry only time-relevant events with provisional Discord titles.
+
+    Never queue older events on the 5-minute new-only run; the caller runs
+    these ONLY in the manual or twice-daily background window.  Respect
+    v13 checks and v21.9 cooldown to avoid hitting the same page repeatedly.
+    """
+    now = v14._utc(now)
+    if limit < 1:
+        return []
+    rindex, pindex = v11.indices(raw, public)
+    state = raw.get('collector_state', {})
+    if v14._cooldown_active(state.get('v14', {}), now):
+        return []
+    pending = set(state.get('v14', {}).get('pending_new_urls', []))
+    checks = state.get('v13', {}).get('browser_checks', {})
+    prior = state.get('v21_9', {}).get('official_checks', {})
+    options = []
+    for url, ritem in rindex.items():
+        pub = pindex[url]
+        if url in pending or not pub.get('event_title') or not title_is_provisional(ritem):
+            continue
+        deadline = v11.parse_datetime(pub.get('application_end_at'))
+        if not deadline or not (now - OFFICIAL_TITLE_GRACE < deadline < now + timedelta(days=7)):
+            continue
+        record = prior.get(url, {})
+        if recheck_attempts(record) >= OFFICIAL_TITLE_RETRY_MAX:
+            continue
+        last = (v19.v18.v17.check_time(record.get('checked_at')) or
+                v19.v18.v17.check_time(checks.get(url, {}).get('checked_at')))
+        if last and now - last < OFFICIAL_TITLE_CHECK_WAIT:
+            continue
+        options.append((deadline, url))
+    options.sort()
+    return [u for _,u in options[:limit]]
+
+
+def apply_official_observation(raw_item, pub_item, page):
+    """Reconcile facts from ONE successfully fetched official event page.
+
+    Never overwrite verified/manual event data, only short Discord fields.
+    Event genre is authoritative only when explicit in official title.
+    """
+    url = raw_item['url']
+    title, _ = verified_title(page, url)
+    if not title:
+        return {'title': '', 'product': '', 'genre': '', 'title_changed': False,
+                'product_changed': False, 'conflict': False}
+    genre = official_genre(title)
+    product, product_source = verified_product(page, url)
+    if not product:
+        product = official_quoted_product(title)
+        product_source = 'v21_9_official_title_quoted_tcg_product' if product else ''
+    title_changed = product_changed = conflict = False
+    old_title = raw_item.get('event_title') or pub_item.get('event_title') or ''
+    if not old_title or title_is_provisional(raw_item):
+        if old_title != title:
+            for obj in (raw_item, pub_item):
+                obj['event_title'] = title
+            title_changed = True
+        # Even when a short Discord text happens to equal the verified
+        # official title, upgrade its provenance so category stays stable.
+        raw_item.setdefault('field_sources', {})['event_title'] = 'v21_9_official_exact_url_title'
+    elif old_title != title:
+        conflict = True
+    old_product = raw_item.get('product_name') or pub_item.get('product_name') or ''
+    if product and (not old_product or product_is_provisional(raw_item)):
+        if old_product != product:
+            for obj in (raw_item, pub_item):
+                obj['product_name'] = product
+            product_changed = True
+        raw_item.setdefault('field_sources', {})['product_name'] = product_source
+    elif product and old_product != product:
+        conflict = True
+    if genre:
+        # Source-preview text may describe another product in the same multi-
+        # URL Discord post. Ignore it ONLY after an exact official title.
+        pub_item['review_category'] = genre
+        pub_item['official_genre'] = genre
+        if genre != 'pokemon':
+            for key in ('pokemon_map_match','pokemon_map_type','pokemon_map_evidence'):
+                pub_item.pop(key, None)
+    pub_item['official_event_title'] = title
+    return {'title': title, 'product': product or '', 'genre': genre,
+            'title_changed': title_changed, 'product_changed': product_changed,
+            'conflict': conflict}
+
+
 def main():
     import sys
     if len(sys.argv) != 2 or sys.argv[1] not in ('plan', 'process'):
@@ -731,10 +988,11 @@ def main():
                            background_limit=background_limit, retry_limit=retry_limit)
     title_limit = v14.safe_limit('LIVEPOCKET_V21_3_TITLE_PER_RUN', 2, 3)
     titles_due = title_recheck_candidates(raw, public, limit=title_limit)
-    browser_needed = bool(work['browser_needed'] or titles_due)
+    official_due = (official_title_candidates(raw, public) if background_limit else [])
+    browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.4 browser plan:', work, 'title_due:', len(titles_due),
-              'map catalog products:', len(catalog))
+        print('v21.9 browser plan:', work, 'title_due:', len(titles_due),
+              'official_due:', len(official_due), 'map catalog products:', len(catalog))
         if os.getenv('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
                 fh.write('browser_needed=' + ('true' if browser_needed else 'false') + '\n')
