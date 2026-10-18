@@ -2015,9 +2015,9 @@
       "url": "https://livepocket.jp/e/19wmh",
       "store_name": "キデイランド浦和美園",
       "product_name": "30th CELEBRATION",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T23:59:00+09:00",
       "application_start_at": "2026-10-02T10:00:00+09:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "キデイランド浦和美園",
@@ -2221,9 +2221,9 @@
       "url": "https://livepocket.jp/e/z5i6s",
       "store_name": "TSUTAYA佐野店",
       "prefecture": "栃木県",
-      "discord_posted_at": "2026-09-29T22:12:48.611000+00:00",
-      "application_end_at": "2026-10-04T23:00:00+09:00",
       "application_start_at": "2026-09-28T23:41:00+09:00",
+      "application_end_at": "2026-10-04T23:00:00+09:00",
+      "discord_posted_at": "2026-09-29T22:12:48.611000+00:00",
       "stores": [
         {
           "name": "TSUTAYA佐野店",
@@ -2235,9 +2235,9 @@
       "url": "https://livepocket.jp/e/sko2i",
       "store_name": "TSUTAYA Trading Card 戸塚店",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-09-29T22:12:48.611000+00:00",
-      "application_end_at": "2026-10-04T21:00:00+09:00",
       "application_start_at": "2026-09-29T10:30:00+09:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "discord_posted_at": "2026-09-29T22:12:48.611000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 戸塚店",
@@ -2249,9 +2249,9 @@
       "url": "https://livepocket.jp/e/amageo",
       "store_name": "ふるいちイオンモール上尾店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-09-29T09:03:35.479000+00:00",
-      "application_end_at": "2026-09-29T21:00:00+09:00",
       "application_start_at": "2026-09-28T13:22:00+09:00",
+      "application_end_at": "2026-09-29T21:00:00+09:00",
+      "discord_posted_at": "2026-09-29T09:03:35.479000+00:00",
       "stores": [
         {
           "name": "ふるいちイオンモール上尾店",
@@ -2263,9 +2263,9 @@
       "url": "https://livepocket.jp/e/nvuh2",
       "store_name": "トレカエース TSUTAYAデイズタウンつくば",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-09-29T09:03:35.479000+00:00",
-      "application_end_at": "2026-09-29T22:00:00+09:00",
       "application_start_at": "2026-09-28T10:00:00+09:00",
+      "application_end_at": "2026-09-29T22:00:00+09:00",
+      "discord_posted_at": "2026-09-29T09:03:35.479000+00:00",
       "stores": [
         {
           "name": "トレカエース TSUTAYAデイズタウンつくば",
@@ -2278,6 +2278,8 @@
       "store_name": "キデイランド ららぽーと富士見店",
       "product_name": "ストームエメラルダ",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "application_end_at": "2026-09-28T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
@@ -2293,10 +2295,10 @@
       "url": "https://livepocket.jp/e/flwm5",
       "store_name": "キデイランド ららぽーと富士見店",
       "product_name": "エーフィ・ブラッキー",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
+      "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "review_category": "pokemon",
-      "application_end_at": "2026-09-28T23:59:00+09:00",
-      "application_start_at": "2026-09-26T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
@@ -2311,10 +2313,10 @@
       "url": "https://livepocket.jp/e/prp_c",
       "store_name": "キデイランド ららぽーと富士見店",
       "product_name": "メガシンフォニア",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
+      "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "review_category": "pokemon",
-      "application_end_at": "2026-09-28T23:59:00+09:00",
-      "application_start_at": "2026-09-26T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
@@ -2332,6 +2334,8 @@
       "product_name": "ストームエメラルダ",
       "application_period": "9/28 10:00〜9/30 23:59",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "application_end_at": "2026-09-30T23:59:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド吉祥寺店",
@@ -2349,10 +2353,16 @@
       "prefecture": "東京都",
       "product_name": "30th CELEBRATION",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "application_end_at": "2026-09-30T23:59:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
+        },
+        {
+          "name": "キデイランド 吉祥寺店",
+          "prefecture": ""
         }
       ],
       "review_category": "pokemon",
@@ -2365,10 +2375,10 @@
       "store_name": "キデイランド吉祥寺店",
       "prefecture": "東京都",
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
+      "application_start_at": "2026-09-28T10:00:00+09:00",
+      "application_end_at": "2026-09-30T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "review_category": "pokemon",
-      "application_end_at": "2026-09-30T23:59:00+09:00",
-      "application_start_at": "2026-09-28T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド吉祥寺店",
@@ -2384,9 +2394,15 @@
       "store_name": "キデイランド ららぽーと富士見店",
       "product_name": "30th CELEBRATION",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "application_end_at": "2026-09-28T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
+          "prefecture": ""
+        },
+        {
+          "name": "キデイランドららぽーと富士見店",
           "prefecture": ""
         }
       ],
@@ -2399,7 +2415,9 @@
       "url": "https://livepocket.jp/e/j1mv8",
       "discord_posted_at": "2026-09-28T10:58:06.722000+00:00",
       "source_preview": "※再入荷分 ポケカ商品【30t...",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-09-28T00:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/y2s_f",
@@ -2417,7 +2435,9 @@
       "url": "https://livepocket.jp/e/wrgdu",
       "discord_posted_at": "2026-09-28T10:58:06.722000+00:00",
       "source_preview": "※再入荷 ポケカ商品【30th...",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-09-28T00:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ba_89",
@@ -2435,7 +2455,9 @@
       "url": "https://livepocket.jp/e/g5mbn",
       "discord_posted_at": "2026-09-28T10:58:06.722000+00:00",
       "source_preview": "※再入荷分 ポケカ商品【ストー...",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-09-28T00:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/rzrdz",
@@ -3763,5 +3785,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T04:21:23.922272+00:00"
+  "updated_at": "2026-10-18T04:31:20.821076+00:00"
 }
