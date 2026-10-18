@@ -36,6 +36,7 @@ jobs:
     timeout-minutes: 20
     env:
       LIVEPOCKET_V14_SNAPSHOT: '.livepocket_v14_before.json'
+      LIVEPOCKET_DEVELOPER_RECHECK: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && 'true' || 'false' }}
       LIVEPOCKET_V14_NEW_PER_RUN: '15'
       LIVEPOCKET_V14_BACKGROUND_PER_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && '12' || '8' }}
       LIVEPOCKET_V16_RETRY_PER_RUN: '3'
@@ -114,7 +115,7 @@ jobs:
           python scripts/livepocket_v21.py process | tee "$RUNNER_TEMP/livepocket-v21-process.log"
 
       # 公開しても安全な集計数字のみ出力（URL・Discord本文・トークン等は含めない）。
-      - name: Build LivePocket developer results (v21.11)
+      - name: Build LivePocket developer results (v21.12)
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' }}
         env:
           REVIEW_BATCH: ${{ inputs.review_batch || '8' }}
