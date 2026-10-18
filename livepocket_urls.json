@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-18T13:00:56.283910+00:00",
+  "collected_at": "2026-10-18T13:30:57.514597+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 73,
-  "unique_livepocket_urls": 361,
+  "messages_scanned": 74,
+  "unique_livepocket_urls": 362,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9025,12 +9025,32 @@
           "prefecture": "栃木県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/0opt9",
+      "discord_message_id": "1561369117775364216",
+      "discord_posted_at": "2026-10-18T13:23:26.513000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/0opt9",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-18T23:59:00+09:00",
+      "application_start_at": "2026-10-17T11:50:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 211,
-    "no_structured_details": 150
+    "no_structured_details": 151
   },
   "field_counts": {
     "store_name": 210,
@@ -9041,18 +9061,18 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 336,
-    "application_start_at": 336,
+    "application_end_at": 337,
+    "application_start_at": 337,
     "stores_events": 212
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561362665362694174"
+      "1551580466266644552": "1561369117775364216"
     },
     "last_run": {
-      "checked_at": "2026-10-18T13:00:56.283910+00:00",
-      "new_urls": 4,
-      "original_urls": 357,
+      "checked_at": "2026-10-18T13:30:57.514597+00:00",
+      "new_urls": 1,
+      "original_urls": 361,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -9110,7 +9130,8 @@
         "1561000953623220349": "2026-10-17T13:09:25.814469+00:00",
         "1561109504987500720": "2026-10-17T21:12:19.773947+00:00",
         "1561218392524849155": "2026-10-18T03:30:55.398904+00:00",
-        "1561362665362694174": "2026-10-18T13:00:56.568901+00:00"
+        "1561362665362694174": "2026-10-18T13:00:56.568901+00:00",
+        "1561369117775364216": "2026-10-18T13:30:57.785431+00:00"
       },
       "checked_search_urls": {}
     },
@@ -10566,6 +10587,10 @@
         "https://livepocket.jp/e/3i7a4": {
           "checked_at": "2026-10-18T13:01:24.730811+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/0opt9": {
+          "checked_at": "2026-10-18T13:31:35.069870+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -10720,6 +10745,11 @@
           "detected_at": "2026-10-18T13:00:57.379019+00:00",
           "status": "checked_deadline",
           "checked_at": "2026-10-18T13:01:24.730811+00:00"
+        },
+        "https://livepocket.jp/e/0opt9": {
+          "detected_at": "2026-10-18T13:30:58.761518+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-18T13:31:35.069870+00:00"
         }
       },
       "pending_new_urls": []
@@ -13037,6 +13067,17 @@
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
           "checked_at": "2026-10-18T13:01:24.730811+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/0opt9": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T13:31:35.069870+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
