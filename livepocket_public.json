@@ -62,10 +62,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/moozm",
@@ -1938,10 +1938,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -2006,10 +2006,10 @@
           "prefecture": "埼玉県"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -2028,10 +2028,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -2060,10 +2060,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -2286,10 +2286,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -2342,10 +2342,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -2365,10 +2365,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2406,10 +2406,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2480,9 +2480,9 @@
       "url": "https://livepocket.jp/e/4f1c3",
       "store_name": "ふるいちイオンモール羽生店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
-      "application_end_at": "2026-09-28T21:00:00+09:00",
       "application_start_at": "2026-09-26T20:00:00+09:00",
+      "application_end_at": "2026-09-28T21:00:00+09:00",
+      "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
       "stores": [
         {
           "name": "ふるいちイオンモール羽生店",
@@ -2494,10 +2494,10 @@
       "url": "https://livepocket.jp/e/5ng9r",
       "store_name": "キデイランド吉祥寺店",
       "prefecture": "東京都",
-      "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
-      "application_end_at": "2026-10-01T23:59:00+09:00",
-      "application_start_at": "2026-09-29T10:00:00+09:00",
       "product_name": "ベイブレードX「BX-56ストリングランチャーLホワイト×バイオレット",
+      "application_start_at": "2026-09-29T10:00:00+09:00",
+      "application_end_at": "2026-10-01T23:59:00+09:00",
+      "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
       "stores": [
         {
           "name": "キデイランド吉祥寺店",
@@ -2581,12 +2581,11 @@
     },
     {
       "url": "https://livepocket.jp/e/68ats",
-      "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
-      "source_preview": "10月再販：ポケモンカードゲー...",
-      "review_category": "pokemon",
       "product_name": "ポケモンカードゲームMEGA 拡張パック「ストームエメラルダ」",
-      "application_end_at": "2026-09-30T23:59:00+09:00",
       "application_start_at": "2026-09-27T09:00:00+09:00",
+      "application_end_at": "2026-09-30T23:59:00+09:00",
+      "discord_posted_at": "2026-09-27T07:04:52.406000+00:00",
+      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name"
@@ -2611,13 +2610,15 @@
     },
     {
       "url": "https://livepocket.jp/e/oskxn",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-27T22:00:00+09:00",
+      "application_start_at": "2026-09-26T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/u9mor",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_start_at": "2026-09-26T09:30:00+09:00",
       "application_end_at": "2026-09-26T21:00:00+09:00",
-      "application_start_at": "2026-09-26T09:30:00+09:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/9jgtg",
@@ -2625,7 +2626,9 @@
     },
     {
       "url": "https://livepocket.jp/e/dlx-m",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-27T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:21:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7jwhw",
@@ -2641,27 +2644,39 @@
     },
     {
       "url": "https://livepocket.jp/e/d5fbg",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "product_name": "ポケモンカードゲーム拡張パック「30th CELEBRATION 」",
+      "application_end_at": "2026-09-27T20:05:00+09:00",
+      "application_start_at": "2026-09-26T08:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/c-0bd",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-26T21:00:00+09:00",
+      "application_start_at": "2026-09-26T09:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/h58ie",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-27T21:00:00+09:00",
+      "application_start_at": "2026-09-25T10:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ts-50",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
       "event_title": "プレミアムデッキセット抽選販売のチケット情報",
-      "application_end_at": "2026-09-27T23:59:00+09:00",
       "application_start_at": "2026-09-26T10:26:00+09:00",
-      "official_event_title": "プレミアムデッキセット抽選販売のチケット情報"
+      "application_end_at": "2026-09-27T23:59:00+09:00",
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/lf1m-",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-27T22:00:00+09:00",
+      "application_start_at": "2026-09-25T19:14:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/1pprb",
@@ -2669,23 +2684,27 @@
     },
     {
       "url": "https://livepocket.jp/e/puo6o",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_start_at": "2026-09-25T18:58:00+09:00",
       "application_end_at": "2026-09-29T11:59:00+09:00",
-      "application_start_at": "2026-09-25T18:58:00+09:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ei41k",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-27T20:59:00+09:00",
+      "application_start_at": "2026-09-26T13:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/uyjhv",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
       "application_end_at": "2026-09-28T22:00:00+09:00",
-      "application_start_at": "2026-09-26T10:00:00+09:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/hvwjy",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "application_end_at": "2026-09-27T22:00:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/0-re-",
@@ -2704,10 +2723,10 @@
       "url": "https://livepocket.jp/e/0a2vu",
       "product_name": "30th CELEBRATION",
       "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/asb1y",
@@ -3175,10 +3194,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/vt2ev",
@@ -3194,10 +3213,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "スターターセットex イーブイex",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "discord_url_pair_unique_suffix"
+      "pokemon_map_evidence": "discord_url_pair_unique_suffix",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/zof6r",
@@ -3453,7 +3472,12 @@
           "name": "イトーヨーカドー",
           "prefecture": ""
         }
-      ]
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/h2dkqnh0f0",
@@ -3466,7 +3490,12 @@
           "name": "イトーヨーカドー",
           "prefecture": ""
         }
-      ]
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/yv07y",
@@ -3827,5 +3856,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T04:48:25.339155+00:00"
+  "updated_at": "2026-10-18T04:56:19.738376+00:00"
 }
