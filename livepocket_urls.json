@@ -11067,15 +11067,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/i6s-n": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T21:01:30.251617+00:00",
           "status": "product_only",
           "reason": "official_product_but_no_title",
           "http_status": ""
         },
         "https://livepocket.jp/e/uay8k": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T21:01:30.251617+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12926,7 +12926,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T14:52:32.651862+00:00",
+          "checked_at": "2026-10-18T21:01:30.251617+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "v14_livepocket_explicit_product_label",
@@ -12937,7 +12937,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T14:52:32.651862+00:00",
+          "checked_at": "2026-10-18T21:01:30.251617+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -13338,7 +13338,7 @@
           "title_detected": false
         },
         "https://livepocket.jp/e/i6s-n": {
-          "checked_at": "2026-10-18T14:52:32.651862+00:00",
+          "checked_at": "2026-10-18T21:01:30.251617+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
@@ -13374,7 +13374,7 @@
           "title_detected": false
         },
         "https://livepocket.jp/e/uay8k": {
-          "checked_at": "2026-10-18T14:52:32.651862+00:00",
+          "checked_at": "2026-10-18T21:01:30.251617+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
