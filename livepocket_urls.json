@@ -9348,11 +9348,11 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jlwei": {
-          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/d08fb": {
-          "checked_at": "2026-10-18T03:41:24.100659+00:00",
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/z7_94": {
@@ -10326,12 +10326,12 @@
         "https://livepocket.jp/e/d08fb": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-18T03:41:24.100659+00:00"
+          "checked_at": "2026-10-18T10:18:35.763148+00:00"
         },
         "https://livepocket.jp/e/jlwei": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-18T03:41:24.100659+00:00"
+          "checked_at": "2026-10-18T10:18:35.763148+00:00"
         },
         "https://livepocket.jp/e/lli1u": {
           "detected_at": "2026-10-17T21:12:20.431784+00:00",
@@ -10469,13 +10469,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jlwei": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-18T03:41:24.100659+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-18T10:18:35.763148+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/d08fb": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-18T03:41:24.100659+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-18T10:18:35.763148+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/zp2ru": {
@@ -10633,15 +10633,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/mm2c4": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
         },
         "https://livepocket.jp/e/ih5ta": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12232,7 +12232,40 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T10:11:22.953668+00:00",
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/d08fb": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/mm2c4": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ih5ta": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:18:35.763148+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
