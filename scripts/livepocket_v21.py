@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.13: prioritize event titles and record why extraction fails.
+"""LivePocket v21.14: classify exact-URL title rejection reasons without exposing page text.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -490,24 +490,104 @@ def verified_product(page, url):
 
 
 
-# v21.13: Never expose page body or rejected title strings in reports/logs.
-def title_observation_reason(page, url):
+# v21.14: SAFE title diagnostics. Never persist rejected candidate strings,
+# document contents, user data, arbitrary markup, or exception messages.
+TITLE_SOURCE_CODES = ('og', 'twitter', 'h1', 'event_heading', 'document',
+                      'jsonld', 'body_label', 'unknown')
+SITE_ONLY_TITLE = re.compile(
+    r'^(?:(?:LivePocket(?:-Ticket)?|ライブポケット)(?:\s*[\-|｜:：]\s*'
+    r'(?:チケット|イベント|Ticket(?:s)?|イベント・チケット販売))*|'
+    r'チケット|イベント情報|イベント詳細|お申し込み|ログイン|受付)$', re.I)
+
+
+def _title_candidates(page):
+    """Bound untrusted result size; only raw data is used transiently."""
+    vals = page.get('titles')
+    vals = vals[:12] if isinstance(vals, list) else []
+    sources = page.get('title_sources')
+    sources = sources if isinstance(sources, list) and len(sources) == len(vals) else []
+    candidates = []
+    for i, v in enumerate(vals):
+        if not isinstance(v, str) or not v.strip():
+            continue
+        origin = sources[i] if i < len(sources) else 'unknown'
+        if origin not in TITLE_SOURCE_CODES:
+            origin = 'unknown'
+        candidates.append((v[:300], origin))
+    label = v20.v15.event_title(page)
+    if isinstance(label, str) and label.strip():
+        candidates.append((label[:300], 'body_label'))
+    return candidates
+
+
+def _site_common_title(value):
+    normalized = unicodedata.normalize('NFKC', value).strip()
+    return bool(SITE_ONLY_TITLE.fullmatch(normalized))
+
+
+def title_diagnostic_details(page, url):
+    """Classify missing titles without weakening the existing validation.
+
+    The filter and final title selection are the original verified_title();
+    codes/counts are finite and never contain candidate values."""
+    result = {'reason': '', 'candidate_count': 0, 'valid_candidate_count': 0,
+              'detail': '', 'candidate_sources': '', 'title_detected': False}
     if not isinstance(page, dict):
-        return 'invalid_fetch_result', 0, ''
+        result['reason'] = 'invalid_fetch_result'
+        return result
     status = str(page.get('status') or 'browser_error')
     if status != 'ok':
-        return ('access_blocked' if status in ('browser_blocked', 'browser_blocked_or_empty')
-                else 'fetch_' + status), 0, ''
+        if status in ('browser_blocked', 'browser_blocked_or_empty'):
+            result['reason'] = 'access_blocked'
+        else:
+            # Never export page-controlled or unexpected status text.
+            result['reason'] = 'fetch_failed'
+        return result
     if v12.exact_event_url(page.get('final_url')) != url:
-        return 'wrong_event_url', 0, ''
-    proposals = [v for v in (page.get('titles') or []) if isinstance(v, str) and v.strip()]
-    label = v20.v15.event_title(page)
+        result['reason'] = 'wrong_event_url'
+        return result
+    candidates = _title_candidates(page)
+    source_counts = {origin: 0 for origin in TITLE_SOURCE_CODES}
+    filtered = set()
+    for value, origin in candidates:
+        source_counts[origin] += 1
+        try:
+            safe = v14.clean_title(value)
+        except (ValueError, TypeError):
+            safe = None
+        if safe:
+            filtered.add(safe)
+    result['candidate_count'] = len(candidates)
+    result['valid_candidate_count'] = len(filtered)
+    # Canonical codes and non-negative integers ONLY. No untrusted text.
+    result['candidate_sources'] = ';'.join(
+        f'{key}:{source_counts[key]}' for key in TITLE_SOURCE_CODES
+        if source_counts[key] > 0)
     found, _ = verified_title(page, url)
     if found:
-        return 'official_title_detected', len(proposals) + bool(label), found
-    if proposals or label:
-        return 'title_candidates_rejected', len(proposals) + bool(label), ''
-    return 'no_title_candidates', 0, ''
+        result['reason'] = 'official_title_detected'
+        result['title_detected'] = True
+    elif not candidates:
+        result['reason'] = 'no_title_candidates'
+        result['detail'] = 'no_source_candidates'
+    else:
+        result['reason'] = 'title_candidates_rejected'
+        if all(_site_common_title(value) for value, _ in candidates):
+            result['detail'] = 'site_common_only'
+        elif not filtered:
+            result['detail'] = 'filtered_all_candidates'
+        elif len(filtered) > 1:
+            result['detail'] = 'multiple_valid_unresolved'
+        else:
+            result['detail'] = 'valid_candidate_not_selected'
+    return result
+
+
+def title_observation_reason(page, url):
+    """v21.13 compatibility: (reason, number, verified title or empty)."""
+    result = title_diagnostic_details(page, url)
+    value = verified_title(page, url)[0] if result['title_detected'] else ''
+    return result['reason'], result['candidate_count'], value or ''
 
 
 # A GitHub-committed, URL-scoped official screenshot/page verification list.
@@ -856,12 +936,8 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     stats.update(apply_verified_titles(raw, public, verified_titles or {}))
     title_state = state.setdefault('v21_13', {}).setdefault('title_diagnostics', {})
     for url, page_result in observations.items():
-        reason, candidate_count, observed_title = title_observation_reason(page_result, url)
-        title_state[url] = {
-            'checked_at': now.isoformat(), 'reason': reason,
-            'candidate_count': candidate_count,
-            'title_detected': bool(observed_title),
-        }
+        diagnosis = title_diagnostic_details(page_result, url)
+        title_state[url] = {'checked_at': now.isoformat(), **diagnosis}
     for row in review:
         pub = pi[row['url']]
         cat = pub.get('review_category') or ''
@@ -908,6 +984,9 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['title_diagnostic_candidates'] = diag.get('candidate_count', '')
         row['title_diagnostic_checked_at'] = diag.get('checked_at', '')
         row['title_diagnostic_title_detected'] = 'yes' if diag.get('title_detected') else ''
+        row['title_diagnostic_detail'] = diag.get('detail', '')
+        row['title_diagnostic_sources'] = diag.get('candidate_sources', '')
+        row['title_diagnostic_valid_candidates'] = diag.get('valid_candidate_count', '')
         row['title_recheck_status'] = retry.get('status', '')
         row['title_recheck_reason'] = retry.get('reason', '')
         row['title_recheck_http_status'] = retry.get('http_status', '')
@@ -938,6 +1017,11 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats['manual_title_other_failure'] = len(visited) - sum((
             stats['manual_title_detected'], stats['manual_title_no_candidates'],
             stats['manual_title_rejected'], stats['manual_title_access_blocked']))
+        details = [title_state.get(u, {}).get('detail') for u in visited]
+        stats['manual_title_site_common'] = details.count('site_common_only')
+        stats['manual_title_filtered_all'] = details.count('filtered_all_candidates')
+        stats['manual_title_multiple_unresolved'] = details.count('multiple_valid_unresolved')
+        stats['manual_title_valid_unselected'] = details.count('valid_candidate_not_selected')
         groups = {
             'manual_title_updated': ('event_title',),
             'manual_product_updated': ('product_name',),
@@ -1025,27 +1109,44 @@ def browser_fetcher():
                 return {'status': 'browser_blocked_or_empty',
                         'gate_reason': 'robot_verification_page' if ROBOT_VERIFICATION.search(body)
                         else 'blocked_or_empty'}
-            titles = []
-            for selector in ('meta[property="og:title"]', 'meta[name="twitter:title"]'):
+            titles, title_sources = [], []
+            def add_title(value, source):
+                if isinstance(value, str) and value.strip() and len(titles) < 12:
+                    titles.append(value[:300])
+                    title_sources.append(source)
+            for selector, origin in (
+                ('meta[property="og:title"]', 'og'),
+                ('meta[name="twitter:title"]', 'twitter')):
                 try:
-                    value = page.locator(selector).first.get_attribute('content', timeout=800)
-                    if value:
-                        titles.append(value)
+                    add_title(page.locator(selector).first.get_attribute('content', timeout=800), origin)
                 except Exception:
                     pass
             try:
-                titles.extend(page.locator('h1').all_inner_texts(timeout=1200)[:3])
+                for value in page.locator('h1').all_inner_texts(timeout=1200)[:3]:
+                    add_title(value, 'h1')
+            except Exception:
+                pass
+            # Some event pages render the name as a component heading, not H1.
+            # This adds candidates to the EXISTING safe title filter only.
+            try:
+                event_heads = page.locator(
+                    '[data-testid="event-title"], [class~="event-title"], '
+                    '[class*="eventTitle"], [class*="EventTitle"]'
+                ).all_inner_texts(timeout=1200)
+                for value in event_heads[:3]:
+                    add_title(value, 'event_heading')
             except Exception:
                 pass
             try:
-                titles.append(page.title())
+                add_title(page.title(), 'document')
             except Exception:
                 pass
-            # Event-specific JSON-LD only (ignore unrelated product lists,
-            # breadcrumbs, other event URLs and global Website metadata).
+            # Event JSON-LD names remain restricted by the existing exact-URL
+            # event-only selector; unrelated product and website schemas ignored.
             try:
                 blocks = page.locator('script[type="application/ld+json"]').all_text_contents(timeout=1300)
-                titles.extend(structured_event_titles(blocks, url))
+                for value in structured_event_titles(blocks, url):
+                    add_title(value, 'jsonld')
             except Exception:
                 pass
             if '受付・チケット情報' in body and not v19.ticket_option_stores(body):
@@ -1061,7 +1162,8 @@ def browser_fetcher():
                 except Exception:
                     pass
             return {'status': 'ok', 'final_url': page.url,
-                    'text': body[:30000], 'titles': titles[:12]}
+                    'text': body[:30000], 'titles': titles,
+                    'title_sources': title_sources}
         except BrowserTimeout:
             return {'status': 'browser_timeout'}
         except Exception:
@@ -1139,6 +1241,8 @@ OFFICIAL_COLUMNS = (
 REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS + (
     'title_diagnostic_reason', 'title_diagnostic_candidates',
     'title_diagnostic_checked_at', 'title_diagnostic_title_detected',
+    'title_diagnostic_detail', 'title_diagnostic_sources',
+    'title_diagnostic_valid_candidates',
 )
 
 
@@ -1362,7 +1466,7 @@ def main():
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.13 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
+        print('v21.14 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
               'map catalog products:', len(catalog))

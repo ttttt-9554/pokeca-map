@@ -34,6 +34,8 @@ ALLOWED_METRICS = (
     'manual_deadline_updated', 'manual_store_updated', 'manual_genre_updated',
     'manual_title_detected', 'manual_title_no_candidates',
     'manual_title_rejected', 'manual_title_access_blocked', 'manual_title_other_failure',
+    'manual_title_site_common', 'manual_title_filtered_all',
+    'manual_title_multiple_unresolved', 'manual_title_valid_unselected',
     'manual_verified_titles_applied', 'manual_verified_titles_updated',
     'manual_verified_title_conflicts',
 )
