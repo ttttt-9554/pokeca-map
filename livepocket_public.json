@@ -1960,9 +1960,9 @@
       "url": "https://livepocket.jp/e/94gmw",
       "store_name": "平塚",
       "prefecture": "神奈川県",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T20:00:00+09:00",
       "application_start_at": "2026-09-28T18:01:00+09:00",
+      "application_end_at": "2026-10-04T20:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "平塚",
@@ -1974,10 +1974,10 @@
       "url": "https://livepocket.jp/e/ampml",
       "store_name": "キデイランド浦和美園",
       "product_name": "エーフィ＆ブラッキー",
+      "application_start_at": "2026-10-02T10:00:00+09:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "review_category": "pokemon",
-      "application_end_at": "2026-10-04T23:59:00+09:00",
-      "application_start_at": "2026-10-02T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド浦和美園",
@@ -2016,9 +2016,15 @@
       "store_name": "キデイランド浦和美園",
       "product_name": "30th CELEBRATION",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド浦和美園",
+          "prefecture": ""
+        },
+        {
+          "name": "キデイランド浦和美園店",
           "prefecture": ""
         }
       ],
@@ -2045,9 +2051,9 @@
       "url": "https://livepocket.jp/e/7r2ey",
       "store_name": "ホビーステーション",
       "product_name": "30th CELEBRATION",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T23:59:00+09:00",
       "application_start_at": "2026-10-02T12:00:00+09:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "ホビーステーション",
@@ -2064,10 +2070,10 @@
       "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
       "product_name": "遊戯王 ART WORK COLLECTION系",
+      "application_start_at": "2026-10-02T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "review_category": "yugioh",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
-      "application_start_at": "2026-10-02T10:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
@@ -2107,9 +2113,9 @@
     {
       "url": "https://livepocket.jp/e/7_zc2",
       "store_name": "山陽",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-11T22:00:00+09:00",
       "application_start_at": "2026-09-30T09:00:00+09:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "山陽",
@@ -2133,9 +2139,9 @@
     {
       "url": "https://livepocket.jp/e/cbovd",
       "store_name": "ヤマシロ",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-03T23:59:00+09:00",
       "application_start_at": "2026-10-01T10:00:00+09:00",
+      "application_end_at": "2026-10-03T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "ヤマシロ",
@@ -2147,9 +2153,9 @@
       "url": "https://livepocket.jp/e/h2dg6",
       "store_name": "鎌ケ谷",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T21:45:00+09:00",
       "application_start_at": "2026-09-30T09:30:00+09:00",
+      "application_end_at": "2026-10-04T21:45:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "鎌ケ谷",
@@ -2174,9 +2180,9 @@
       "url": "https://livepocket.jp/e/hwrag",
       "store_name": "鮎川",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-09-30T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "鮎川",
@@ -2216,6 +2222,8 @@
       "store_name": "TSUTAYA佐野店",
       "prefecture": "栃木県",
       "discord_posted_at": "2026-09-29T22:12:48.611000+00:00",
+      "application_end_at": "2026-10-04T23:00:00+09:00",
+      "application_start_at": "2026-09-28T23:41:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA佐野店",
@@ -2228,6 +2236,8 @@
       "store_name": "TSUTAYA Trading Card 戸塚店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-09-29T22:12:48.611000+00:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-09-29T10:30:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 戸塚店",
@@ -2240,6 +2250,8 @@
       "store_name": "ふるいちイオンモール上尾店",
       "prefecture": "埼玉県",
       "discord_posted_at": "2026-09-29T09:03:35.479000+00:00",
+      "application_end_at": "2026-09-29T21:00:00+09:00",
+      "application_start_at": "2026-09-28T13:22:00+09:00",
       "stores": [
         {
           "name": "ふるいちイオンモール上尾店",
@@ -2252,6 +2264,8 @@
       "store_name": "トレカエース TSUTAYAデイズタウンつくば",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-09-29T09:03:35.479000+00:00",
+      "application_end_at": "2026-09-29T22:00:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00",
       "stores": [
         {
           "name": "トレカエース TSUTAYAデイズタウンつくば",
@@ -2281,6 +2295,8 @@
       "product_name": "エーフィ・ブラッキー",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "review_category": "pokemon",
+      "application_end_at": "2026-09-28T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
@@ -2297,6 +2313,8 @@
       "product_name": "メガシンフォニア",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "review_category": "pokemon",
+      "application_end_at": "2026-09-28T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
@@ -2349,6 +2367,8 @@
       "product_name": "プレミアムデッキセット エーフィ・ブラッキー",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
       "review_category": "pokemon",
+      "application_end_at": "2026-09-30T23:59:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド吉祥寺店",
@@ -3743,5 +3763,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T04:12:54.125922+00:00"
+  "updated_at": "2026-10-18T04:21:23.922272+00:00"
 }

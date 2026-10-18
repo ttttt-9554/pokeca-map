@@ -3770,15 +3770,24 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "store_name_original": "30th CELEBRATION",
       "stores": [
         {
           "name": "キデイランド浦和美園",
           "prefecture": ""
+        },
+        {
+          "name": "キデイランド浦和美園店",
+          "prefecture": ""
         }
-      ]
+      ],
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -4144,7 +4153,13 @@
           "name": "TSUTAYA佐野店",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T23:00:00+09:00",
+      "application_start_at": "2026-09-28T23:41:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/sko2i",
@@ -4164,7 +4179,13 @@
           "name": "TSUTAYA Trading Card 戸塚店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-09-29T10:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/amageo",
@@ -4184,7 +4205,13 @@
           "name": "ふるいちイオンモール上尾店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-29T21:00:00+09:00",
+      "application_start_at": "2026-09-28T13:22:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/nvuh2",
@@ -4204,7 +4231,13 @@
           "name": "トレカエース TSUTAYAデイズタウンつくば",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-29T22:00:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/8knv_",
@@ -4246,7 +4279,10 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
-        "store_name": "discord_heading:1554137435812667473"
+        "store_name": "discord_heading:1554137435812667473",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "store_name_original": "* エーフィ・ブラッキー",
       "stores": [
@@ -4254,7 +4290,9 @@
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": ""
         }
-      ]
+      ],
+      "application_end_at": "2026-09-28T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/prp_c",
@@ -4271,7 +4309,10 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
-        "store_name": "discord_heading:1554137435812667473"
+        "store_name": "discord_heading:1554137435812667473",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "store_name_original": "* メガシンフォニア",
       "stores": [
@@ -4279,7 +4320,9 @@
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": ""
         }
-      ]
+      ],
+      "application_end_at": "2026-09-28T23:59:00+09:00",
+      "application_start_at": "2026-09-26T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/8wkbq",
@@ -4350,7 +4393,10 @@
       "field_sources": {
         "product_name": "discord_post:1554137435812667473",
         "store_name": "discord_heading:1554137435812667473",
-        "prefecture": "v9_exact_store_cross_reference"
+        "prefecture": "v9_exact_store_cross_reference",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "store_name_original": "* プレミアムデッキセット エーフィ・ブラッキー",
       "stores": [
@@ -4358,7 +4404,9 @@
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "application_end_at": "2026-09-30T23:59:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/adjql",
@@ -7788,8 +7836,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 182,
-    "application_start_at": 182,
+    "application_end_at": 190,
+    "application_start_at": 190,
     "stores_events": 205
   },
   "collector_state": {
@@ -8652,6 +8700,38 @@
         "https://livepocket.jp/e/7_zc2": {
           "checked_at": "2026-10-18T04:12:54.125922+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/19wmh": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/z5i6s": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/sko2i": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/nvuh2": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/amageo": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/tle-s": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/prp_c": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/flwm5": {
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -9005,6 +9085,20 @@
         "https://livepocket.jp/e/3010thfu": {
           "attempts": 1,
           "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/3hemk": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/717w_": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:21:23.922272+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
