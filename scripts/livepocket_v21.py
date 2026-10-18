@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.9: conservative official-page title/product priority + classifier.
+"""LivePocket v21.9.1: official title recovery with eligibility diagnostics.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -472,7 +472,9 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     queued = title_recheck_candidates(raw, public, now=now, limit=title_limit)
     # Only in background/manual cycles; 5-minute new-only runs add NO extra
     # official-page requests. Queue is selected before upstream processing.
-    official_queue = official_title_candidates(raw, public, now=now) if background_limit else []
+    official_queue, official_reasons, _ = (
+        official_title_diagnostics(raw, public, now=now)
+        if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     seen = set()
     observations = {}
 
@@ -563,6 +565,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats['review_remaining'] = len(review)
 
     # Official-title checks follow upstream new/retry/background work.
+    stats['official_title_eligibility'] = json.dumps(official_reasons, ensure_ascii=False, sort_keys=True)
     stats.update(official_title_planned=len(official_queue),
                  official_title_attempted=0, official_titles_upgraded=0,
                  official_products_added=0, official_genres_confirmed=0,
@@ -627,6 +630,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     review[:] = [row for row in review if row.get('needs_store') or row.get('needs_product')]
     stats['review_remaining'] = len(review)
 
+    _, _, final_official_detail = official_title_diagnostics(raw, public, now=now)
     for row in content:
         item, pub = ri[row['url']], pi[row['url']]
         row['event_title'] = v12._safe_csv(pub.get('event_title') or '')
@@ -639,6 +643,10 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['map_catalog_type'] = pub.get('pokemon_map_type') or ''
         row['map_catalog_evidence'] = pub.get('pokemon_map_evidence') or ''
         observed = official_state.get(row['url'], {})
+        reason, next_at = final_official_detail.get(row['url'], ('', ''))
+        row['official_title_queue_reason'] = reason
+        row['official_title_next_eligible_at'] = next_at
+        row['official_title_attempts'] = recheck_attempts(observed)
         row['official_page_status'] = observed.get('status', '')
         row['official_title_observed'] = v12._safe_csv(observed.get('title_observed') or '')
         row['official_genre'] = observed.get('genre', '')
@@ -802,6 +810,9 @@ def structured_event_titles(blocks, url):
 OFFICIAL_TITLE_CHECK_PER_RUN = 2
 OFFICIAL_TITLE_RETRY_MAX = 3
 OFFICIAL_TITLE_CHECK_WAIT = timedelta(hours=6)
+# First official-title attempt is more urgent for event names supplied as
+# provisional Discord shorthand. Subsequent attempts use the longer backoff.
+OFFICIAL_TITLE_INITIAL_WAIT = timedelta(hours=2)
 OFFICIAL_TITLE_GRACE = timedelta(hours=12)
 OFFICIAL_GENRE_PATTERNS = {
     'onepiece': re.compile(r'ONE\s*PIECE\s*(?:カードゲーム|CARD\s*GAME)|ワンピース\s*カード', re.I),
@@ -812,6 +823,8 @@ OFFICIAL_COLUMNS = (
     'official_page_status', 'official_title_observed', 'official_genre',
     'official_title_source', 'official_product_source', 'official_page_checked_at',
     'official_title_conflict',
+    'official_title_queue_reason', 'official_title_next_eligible_at',
+    'official_title_attempts',
 )
 REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS
 
@@ -853,7 +866,10 @@ def title_is_provisional(raw_item):
 
 def product_is_provisional(raw_item):
     source = str((raw_item.get('field_sources') or {}).get('product_name') or '')
-    return source.startswith(('discord_url_pair:', 'discord_embed:'))
+    # Discord's event summary is a provisional product source as well. It
+    # must never outrank a product explicitly quoted in an exact-URL official
+    # event title (or a verified product label from that same page).
+    return source.startswith(('discord_url_pair:', 'discord_embed:', 'discord_post:'))
 
 
 
@@ -882,41 +898,73 @@ def restore_official_genres(raw, public):
                 pub.pop(key, None)
     return changed
 
-def official_title_candidates(raw, public, *, now=None, limit=OFFICIAL_TITLE_CHECK_PER_RUN):
-    """Retry only time-relevant events with provisional Discord titles.
+def _official_title_status(url, ritem, pub, *, state, now):
+    """Explain official-title eligibility without touching the network.
 
-    Never queue older events on the 5-minute new-only run; the caller runs
-    these ONLY in the manual or twice-daily background window.  Respect
-    v13 checks and v21.9 cooldown to avoid hitting the same page repeatedly.
+    An initial 2-hour wait applies only to unverified Discord titles. A
+    subsequent official check waits 6 hours; three checks are the maximum.
+    Returned timestamps are UTC ISO-8601 and may be displayed in the report.
     """
+    if not pub.get('event_title'):
+        return 'no_event_title', ''
+    if not title_is_provisional(ritem):
+        return 'nonprovisional_title', ''
+    if url in set(state.get('v14', {}).get('pending_new_urls', [])):
+        return 'new_queue_has_priority', ''
+    deadline = v11.parse_datetime(pub.get('application_end_at'))
+    if not deadline:
+        return 'no_confirmed_deadline', ''
+    if not (now - OFFICIAL_TITLE_GRACE < deadline < now + timedelta(days=7)):
+        return 'outside_application_window', ''
+    record = state.get('v21_9', {}).get('official_checks', {}).get(url, {})
+    attempts = recheck_attempts(record)
+    if attempts >= OFFICIAL_TITLE_RETRY_MAX:
+        return 'official_check_limit_reached', ''
+    checks = state.get('v13', {}).get('browser_checks', {})
+    checked_at = v19.v18.v17.check_time(checks.get(url, {}).get('checked_at'))
+    official_at = v19.v18.v17.check_time(record.get('checked_at'))
+    if official_at:
+        due = official_at + OFFICIAL_TITLE_CHECK_WAIT
+        # A previous official check is the authority for the retry cooldown,
+        # even if the generic browser checked the same URL afterwards.
+        if now < due:
+            return 'waiting_official_retry', due.astimezone(timezone.utc).isoformat()
+    elif checked_at:
+        due = checked_at + OFFICIAL_TITLE_INITIAL_WAIT
+        if now < due:
+            return 'waiting_initial_page_gap', due.astimezone(timezone.utc).isoformat()
+    return 'eligible', ''
+
+
+def official_title_diagnostics(raw, public, *, now=None, limit=OFFICIAL_TITLE_CHECK_PER_RUN):
+    """Return queue, human-auditable summary and per-URL reasons."""
     now = v14._utc(now)
-    if limit < 1:
-        return []
     rindex, pindex = v11.indices(raw, public)
     state = raw.get('collector_state', {})
-    if v14._cooldown_active(state.get('v14', {}), now):
-        return []
-    pending = set(state.get('v14', {}).get('pending_new_urls', []))
-    checks = state.get('v13', {}).get('browser_checks', {})
-    prior = state.get('v21_9', {}).get('official_checks', {})
+    from collections import Counter
+    counts = Counter()
+    details = {}
     options = []
+    cooldown = v14._cooldown_active(state.get('v14', {}), now)
     for url, ritem in rindex.items():
         pub = pindex[url]
-        if url in pending or not pub.get('event_title') or not title_is_provisional(ritem):
-            continue
-        deadline = v11.parse_datetime(pub.get('application_end_at'))
-        if not deadline or not (now - OFFICIAL_TITLE_GRACE < deadline < now + timedelta(days=7)):
-            continue
-        record = prior.get(url, {})
-        if recheck_attempts(record) >= OFFICIAL_TITLE_RETRY_MAX:
-            continue
-        last = (v19.v18.v17.check_time(record.get('checked_at')) or
-                v19.v18.v17.check_time(checks.get(url, {}).get('checked_at')))
-        if last and now - last < OFFICIAL_TITLE_CHECK_WAIT:
-            continue
-        options.append((deadline, url))
+        reason, due_at = _official_title_status(url, ritem, pub, state=state, now=now)
+        if cooldown and reason == 'eligible':
+            reason = 'global_access_cooldown'
+        details[url] = (reason, due_at)
+        counts[reason] += 1
+        if reason == 'eligible':
+            options.append((v11.parse_datetime(pub.get('application_end_at')), url))
     options.sort()
-    return [u for _,u in options[:limit]]
+    result = [url for _, url in options[:max(0,limit)]]
+    for _, url in options[max(0,limit):]:
+        details[url] = ('queued_after_limit', '')
+    return result, dict(counts), details
+
+
+def official_title_candidates(raw, public, *, now=None, limit=OFFICIAL_TITLE_CHECK_PER_RUN):
+    """Select up to two urgent provisional Discord titles, with safe cooldowns."""
+    return official_title_diagnostics(raw, public, now=now, limit=limit)[0]
 
 
 def apply_official_observation(raw_item, pub_item, page):
@@ -988,11 +1036,15 @@ def main():
                            background_limit=background_limit, retry_limit=retry_limit)
     title_limit = v14.safe_limit('LIVEPOCKET_V21_3_TITLE_PER_RUN', 2, 3)
     titles_due = title_recheck_candidates(raw, public, limit=title_limit)
-    official_due = (official_title_candidates(raw, public) if background_limit else [])
+    official_due, official_counts, _ = (
+        official_title_diagnostics(raw, public) if background_limit
+        else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.9 browser plan:', work, 'title_due:', len(titles_due),
-              'official_due:', len(official_due), 'map catalog products:', len(catalog))
+        print('v21.9.1 browser plan:', work, 'title_due:', len(titles_due),
+              'official_due:', len(official_due), 'official_reasons:', official_counts,
+              'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
+              'map catalog products:', len(catalog))
         if os.getenv('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
                 fh.write('browser_needed=' + ('true' if browser_needed else 'false') + '\n')
