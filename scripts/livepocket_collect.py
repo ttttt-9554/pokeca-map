@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.7: incremental Discord collector and safe URL-product pairing.
+"""LivePocket v21.8: safe Discord URL-to-product and URL-to-event-title pairing.
 
 Keeps previously captured URLs and their metadata. Does not scrape LivePocket
 or bypass verification screens. Designed for GitHub Actions.
@@ -205,6 +205,146 @@ def message_url_product_pairs(message: dict[str, Any], catalog: dict[str, set[st
     return {url: label for url, label in results.items() if url not in conflicting}
 
 
+
+# v21.8: Event titles are not product names. Store a title only when a
+# URL-specific source makes the pairing clear; keep generic headings out.
+EVENT_TITLE_PREFIX = re.compile(
+    r'^(?:イベント名|イベントタイトル|抽選イベント名|公演名|企画名|抽選名|対象イベント|催事名)\s*[：:]\s*', re.I
+)
+EVENT_TITLE_SIGNAL = re.compile(
+    r'(?:Edition\s+vol\.?\s*\d+|入店整理券|入場整理券|入店抽選|入場抽選|'
+    r'抽選販売(?:の|について|受付|イベント|開催)|購入整理券|優先入場券)', re.I
+)
+GENERIC_EVENT_TITLES = {
+    'livepocket', 'livepocketjp', 'イベント', 'イベント名', '抽選', '抽選販売',
+    '応募ページ', '公式ページ', '受付', '入場', '入店', '整理券', '抽選受付',
+}
+
+
+def event_title_label(text: str, *, allow_implicit: bool = True) -> str | None:
+    """Return literal Discord title only with an explicit or distinctive cue.
+
+    No catalog-based product-name expansion, no guessing from prefecture or
+    store headings, and no truncated Discord snippets.
+    """
+    value = str(text or '').strip()
+    value = re.sub(r'^(?:\s*[•●-]\s+)+', '', value).strip()
+    if value.startswith('**') and value.endswith('**'):
+        value = value[2:-2].strip()
+    explicit = EVENT_TITLE_PREFIX.match(value)
+    if explicit:
+        value = value[explicit.end():].strip()
+    elif not allow_implicit or not EVENT_TITLE_SIGNAL.search(value):
+        return None
+    if not 6 <= len(value) <= 140:
+        return None
+    if ('...' in value or '…' in value or EVENT_RE.search(value)
+            or value.startswith(('※', '📍', '🔗', '⚠', '#'))):
+        return None
+    normal = product_norm(value)
+    if normal in GENERIC_EVENT_TITLES or len(normal) < 6:
+        return None
+    if re.search(r'https?://|(?:^|\s)(?:商品名|対象商品)\s*[：:]', value):
+        return None
+    return value
+
+
+def discord_url_event_title_pairs(content: str) -> dict[str, str]:
+    """Map titles to adjacent URLs. Multiple URLs on one line are unsafe."""
+    candidates: dict[str, str] = {}
+    ambiguous: set[str] = set()
+    lines = content.splitlines()
+    for i, raw in enumerate(lines):
+        line = raw.strip()
+        urls = event_urls(line)
+        if len(urls) != 1:
+            continue
+        url = urls[0]
+        title = None
+        only_url = _single_url_line(line)
+        if only_url == url and i:
+            title = event_title_label(lines[i-1])
+        elif not only_url:
+            match = EVENT_RE.search(line)
+            if match:
+                prefix = line[:match.start()].strip().rstrip('｜|→-— ').strip()
+                suffix = line[match.end():].strip()
+                if not suffix and EVENT_TITLE_PREFIX.match(prefix):
+                    title = event_title_label(prefix, allow_implicit=False)
+        if title:
+            if url in candidates and product_norm(candidates[url]) != product_norm(title):
+                ambiguous.add(url)
+            else:
+                candidates[url] = title
+    return {url: label for url, label in candidates.items() if url not in ambiguous}
+
+
+def message_url_event_title_pairs(message: dict[str, Any]) -> dict[str, str]:
+    """Keep body/embeds isolated, including when embed title is a generic link."""
+    results: dict[str, str] = {}
+    conflicts: set[str] = set()
+
+    def merge(pairs: dict[str, str]):
+        for url, label in pairs.items():
+            if url in results and product_norm(results[url]) != product_norm(label):
+                conflicts.add(url)
+            else:
+                results[url] = label
+
+    if isinstance(message.get('content'), str):
+        merge(discord_url_event_title_pairs(message['content']))
+    for embed in message.get('embeds') or []:
+        if not isinstance(embed, dict):
+            continue
+        url = _single_url_line(str(embed.get('url') or ''))
+        title = embed.get('title')
+        if url and isinstance(title, str):
+            label = event_title_label(title)
+            if label:
+                merge({url: label})
+        if isinstance(embed.get('description'), str):
+            merge(discord_url_event_title_pairs(embed['description']))
+        for field in embed.get('fields') or []:
+            if not isinstance(field, dict):
+                continue
+            value = field.get('value')
+            if isinstance(value, str):
+                # No cross-field matching; a single field must identify both.
+                merge(discord_url_event_title_pairs(value))
+    return {url: title for url, title in results.items() if url not in conflicts}
+
+
+def enrich_event_title_batch(items: dict[str, dict[str, Any]], candidates: dict[str, list]
+                            ) -> tuple[int, int, int]:
+    """Fill missing titles only, with same-batch ambiguity detection."""
+    added = conflicts = ambiguous = 0
+    for url, observations in candidates.items():
+        item = items.get(url)
+        if item is None or not observations:
+            continue
+        titles = {product_norm(label) for label, _message, _channel in observations}
+        if len(titles) != 1:
+            ambiguous += 1
+            continue
+        title, message, channel = max(observations,
+                                      key=lambda row: int(str(row[1].get('id') or 0)))
+        old = item.get('event_title')
+        if old:
+            if product_norm(old) != product_norm(title):
+                conflicts += 1
+            continue
+        message_id = str(message.get('id') or '')
+        item['event_title'] = title
+        item.setdefault('field_sources', {})['event_title'] = 'discord_url_title:' + message_id
+        item['discord_title_source_message_id'] = message_id
+        item['discord_title_source_channel_id'] = channel
+        item['discord_title_source_posted_at'] = message.get('timestamp') or ''
+        item['extraction_status'] = 'parsed'
+        item['details_source'] = item.get('details_source') or 'discord_url_title'
+        added += 1
+    return added, conflicts, ambiguous
+
+
 def apply_url_product_pair(item: dict[str, Any], url: str, label: str,
                            message: dict[str, Any], channel: str) -> tuple[int, int]:
     """Fill only missing names and keep originals/verified values untouched."""
@@ -350,7 +490,7 @@ def parse_text(text: str, catalog: dict[str, set[str]] | None = None) -> dict[st
             continue
         # Do not mistake a Discord product label (or a short, explicit
         # shorthand) for the shop. Keep the shop heading across product lines.
-        if (adjacent_catalog_label(line, catalog) or product_norm(line) in {'30th', 'ストーム', 'メガブ'}
+        if (event_title_label(line) or adjacent_catalog_label(line, catalog) or product_norm(line) in {'30th', 'ストーム', 'メガブ'}
                 or re.search(r'Heroines\s*Edition|世界最強の戦士|ART\s*WORK\s*COLLECTION', line, re.I)):
             continue
         # Only a preceding line can be a store. Never use a post title as a store.
@@ -526,6 +666,7 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
     product_pairs_added = 0
     product_pairs_conflicts = 0
     pair_candidates: dict[str, list] = {}
+    title_candidates: dict[str, list] = {}
     for channel in channels:
         boundary = int(checkpoint.get(channel) or 0)
         newest_id: int | None = None
@@ -555,6 +696,9 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
                     for url, label in message_url_product_pairs(message, catalog).items():
                         if url in items:
                             pair_candidates.setdefault(url, []).append((label, message, channel))
+                    for url, title in message_url_event_title_pairs(message).items():
+                        if url in items:
+                            title_candidates.setdefault(url, []).append((title, message, channel))
             if not backfill and boundary and min(ids) <= boundary:
                 completed = True
                 break
@@ -571,6 +715,9 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
 
     product_pairs_added, product_pairs_conflicts, ambiguous_pairs = enrich_paired_batch(
         items, pair_candidates,
+    )
+    title_pairs_added, title_pairs_conflicts, ambiguous_titles = enrich_event_title_batch(
+        items, title_candidates,
     )
     output["items"] = list(items.values())
     output["collected_at"] = now_iso()
@@ -591,6 +738,9 @@ def run_collector(data: dict[str, Any], channels: list[str], token: str, backfil
         "discord_url_pairs_added": product_pairs_added,
         "discord_url_pairs_conflicts": product_pairs_conflicts,
         "discord_url_pairs_ambiguous_skipped": ambiguous_pairs,
+        "discord_url_titles_added": title_pairs_added,
+        "discord_url_titles_conflicts": title_pairs_conflicts,
+        "discord_url_titles_ambiguous_skipped": ambiguous_titles,
     }
     return output
 
@@ -631,6 +781,9 @@ def main() -> int:
     print(f"Discord URL-paired product names added: {result['collector_state']['last_run']['discord_url_pairs_added']}")
     print(f"Discord URL-paired conflicts preserved: {result['collector_state']['last_run']['discord_url_pairs_conflicts']}")
     print(f"Discord URL-paired ambiguous URLs skipped: {result['collector_state']['last_run']['discord_url_pairs_ambiguous_skipped']}")
+    print(f"Discord URL-paired event titles added: {result['collector_state']['last_run']['discord_url_titles_added']}")
+    print(f"Discord URL-paired event title conflicts preserved: {result['collector_state']['last_run']['discord_url_titles_conflicts']}")
+    print(f"Discord URL-paired ambiguous event titles skipped: {result['collector_state']['last_run']['discord_url_titles_ambiguous_skipped']}")
     print(f"Filled fields: {result['field_counts']}")
     return 0
 
