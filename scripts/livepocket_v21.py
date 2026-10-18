@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.14: classify exact-URL title rejection reasons without exposing page text.
+"""LivePocket v21.15: recover exact-URL event names while preserving safety.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import io
+import html
 import json
 import os
 import re
@@ -531,7 +532,8 @@ def title_diagnostic_details(page, url):
     The filter and final title selection are the original verified_title();
     codes/counts are finite and never contain candidate values."""
     result = {'reason': '', 'candidate_count': 0, 'valid_candidate_count': 0,
-              'detail': '', 'candidate_sources': '', 'title_detected': False}
+              'detail': '', 'candidate_sources': '', 'title_detected': False,
+              'rejection_codes': '', 'meta_template_cleaned': 0, 'heading_seen': 0}
     if not isinstance(page, dict):
         result['reason'] = 'invalid_fetch_result'
         return result
@@ -557,22 +559,29 @@ def title_diagnostic_details(page, url):
             safe = None
         if safe:
             filtered.add(safe)
-    result['candidate_count'] = len(candidates)
+    result['candidate_count'] = (page.get('title_candidates_seen')
+                                 if isinstance(page.get('title_candidates_seen'), int)
+                                 else len(candidates))
     result['valid_candidate_count'] = len(filtered)
+    result['rejection_codes'] = str(page.get('title_filter_counts') or '')[:150]
+    result['meta_template_cleaned'] = max(0, int(page.get('title_template_cleaned') or 0))
+    result['heading_seen'] = max(0, int(page.get('title_heading_seen') or 0))
     # Canonical codes and non-negative integers ONLY. No untrusted text.
-    result['candidate_sources'] = ';'.join(
+    result['candidate_sources'] = (str(page.get('title_source_counts') or '')[:200] or ';'.join(
         f'{key}:{source_counts[key]}' for key in TITLE_SOURCE_CODES
-        if source_counts[key] > 0)
+        if source_counts[key] > 0))
     found, _ = verified_title(page, url)
     if found:
         result['reason'] = 'official_title_detected'
         result['title_detected'] = True
-    elif not candidates:
+    elif not result['candidate_count']:
         result['reason'] = 'no_title_candidates'
         result['detail'] = 'no_source_candidates'
     else:
         result['reason'] = 'title_candidates_rejected'
-        if all(_site_common_title(value) for value, _ in candidates):
+        if not candidates and page.get('title_filter_counts'):
+            result['detail'] = 'filtered_all_candidates'
+        elif all(_site_common_title(value) for value, _ in candidates):
             result['detail'] = 'site_common_only'
         elif not filtered:
             result['detail'] = 'filtered_all_candidates'
@@ -589,6 +598,118 @@ def title_observation_reason(page, url):
     value = verified_title(page, url)[0] if result['title_detected'] else ''
     return result['reason'], result['candidate_count'], value or ''
 
+
+
+# v21.15: Support the OFFICIAL page-title template used by LivePocket event
+# pages, without accepting incomplete, marketing or unrelated site titles.
+# A suffix is stripped only if it fully matches an expected LivePocket format.
+LP_META_TEMPLATE = re.compile(
+    r'\s*のチケット情報\s*[|｜]\s*LivePocket(?:\s*[（(]ライブポケット[）)])?\s*$', re.I)
+LP_EXPLICIT_LABEL = re.compile(r'^(?:イベント名|イベントタイトル)\s*[：:]\s*(.{5,160})$')
+LP_LABEL_ONLY = re.compile(r'^(?:イベント名|イベントタイトル)\s*[：:]?\s*$')
+LP_GENERIC_TITLE = re.compile(
+    r'^(?:チケット情報|イベント詳細|イベント概要|開催概要|申し込み|お申し込み|'
+    r'チケットの購入|チケット予約・購入|チケット購入・予約・販売|'
+    r'新着イベント|すべてのイベント|イベントを探す|検索結果|LivePocket(?:-Ticket-?)?)$', re.I)
+TITLE_FILTER_CODES = ('truncated', 'site_generic', 'unsafe_phrase',
+                      'length', 'invalid', 'other')
+
+
+def event_name_from_labelled_body(text):
+    """Only a literal event-name label; never infer name from ticket/body prose."""
+    if not isinstance(text, str):
+        return None
+    lines = [re.sub(r'\s+', ' ', x).strip() for x in text.splitlines()[:160]]
+    names = set()
+    for i, value in enumerate(lines):
+        match = LP_EXPLICIT_LABEL.fullmatch(value)
+        if match:
+            item = v14.clean_title(match.group(1))
+        elif LP_LABEL_ONLY.fullmatch(value) and i + 1 < len(lines):
+            item = v14.clean_title(lines[i + 1])
+        else:
+            continue
+        if item and not LP_GENERIC_TITLE.fullmatch(item) and not _site_common_title(item):
+            names.add(item)
+    return next(iter(names)) if len(names) == 1 else None
+
+
+def clean_livepocket_event_title(value, source):
+    """Return (clean name, diagnostic code, stripped-template flag).
+
+    Every name is still validated by the existing v14 filter. The metadata
+    template removal never repairs a truncated or uncertain event name.
+    """
+    if not isinstance(value, str):
+        return None, 'invalid', False
+    text = html.unescape(value).strip()
+    if re.search(r'(?:\.\.\.|…|\ufffd)', text):
+        return None, 'truncated', False
+    stripped = False
+    if source in ('og', 'twitter', 'document'):
+        amended = LP_META_TEMPLATE.sub('', text).strip()
+        stripped = amended != text
+        text = amended
+    if LP_GENERIC_TITLE.fullmatch(text) or _site_common_title(text):
+        return None, 'site_generic', stripped
+    if len(re.sub(r'\s+', ' ', text)) < 5 or len(re.sub(r'\s+', ' ', text)) > 160:
+        return None, 'length', stripped
+    safe = v14.clean_title(text)
+    if not safe:
+        return None, 'unsafe_phrase', stripped
+    if LP_GENERIC_TITLE.fullmatch(safe) or _site_common_title(safe):
+        return None, 'site_generic', stripped
+    return safe, '', stripped
+
+
+def normalize_event_title_observation(page, url):
+    """Normalize candidates before legacy v14/15/20 see this same fetch.
+
+    No additional network requests, and no raw rejected candidates in the
+    returned diagnostics or persistent files. Already accepted names remain
+    plain titles, keeping existing official-title provenance rules intact.
+    """
+    if not isinstance(page, dict) or page.get('status') != 'ok' or \
+            v12.exact_event_url(page.get('final_url')) != url:
+        return page
+    result = dict(page)
+    raw = page.get('titles')
+    raw = raw[:16] if isinstance(raw, list) else []
+    sources = page.get('title_sources')
+    sources = sources if isinstance(sources, list) and len(sources) == len(raw) else []
+    entries = [(v, sources[i] if i < len(sources) and sources[i] in TITLE_SOURCE_CODES
+                else 'unknown') for i, v in enumerate(raw)]
+    name = event_name_from_labelled_body(page.get('text'))
+    if name:
+        entries.append((name, 'body_label'))
+    filtered = {key: 0 for key in TITLE_FILTER_CODES}
+    source_counts = {key: 0 for key in TITLE_SOURCE_CODES}
+    accepted = []
+    template_fixed = 0
+    for text, source in entries:
+        source_counts[source] += 1
+        candidate, code, fixed = clean_livepocket_event_title(text, source)
+        if fixed and candidate:
+            template_fixed += 1
+        if candidate and candidate not in (x[0] for x in accepted):
+            accepted.append((candidate, source))
+        elif code:
+            filtered[code] += 1
+    # Prefer event-specific visible headings and explicit labels, then JSON-LD,
+    # then site metadata. Do NOT promote arbitrary ticket names or body snippets.
+    priority = {'event_heading':0, 'h1':1, 'body_label':2, 'jsonld':3,
+                'og':4, 'twitter':5, 'document':6, 'unknown':7}
+    accepted.sort(key=lambda pair: priority[pair[1]])
+    result['titles'] = [v for v, _ in accepted[:12]]
+    result['title_sources'] = [v for _, v in accepted[:12]]
+    result['title_candidates_seen'] = len(entries)
+    result['title_source_counts'] = ';'.join(
+        f'{k}:{source_counts[k]}' for k in TITLE_SOURCE_CODES if source_counts[k])
+    result['title_filter_counts'] = ';'.join(
+        f'{k}:{filtered[k]}' for k in TITLE_FILTER_CODES if filtered[k])
+    result['title_template_cleaned'] = template_fixed
+    result['title_heading_seen'] = sum(source_counts.get(k, 0) for k in ('h1','event_heading','body_label','jsonld'))
+    return result
 
 # A GitHub-committed, URL-scoped official screenshot/page verification list.
 # Only a developer who can commit files to this repository can approve a row.
@@ -786,6 +907,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     def record(url):
         seen.add(url)
         result = normalize_verification_page(fetch(url))
+        result = normalize_event_title_observation(result, url)
         if isinstance(result, dict):
             observations[url] = result
         return result
@@ -987,6 +1109,9 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['title_diagnostic_detail'] = diag.get('detail', '')
         row['title_diagnostic_sources'] = diag.get('candidate_sources', '')
         row['title_diagnostic_valid_candidates'] = diag.get('valid_candidate_count', '')
+        row['title_diagnostic_rejection_codes'] = diag.get('rejection_codes', '')
+        row['title_diagnostic_meta_template_cleaned'] = diag.get('meta_template_cleaned', '')
+        row['title_diagnostic_heading_seen'] = diag.get('heading_seen', '')
         row['title_recheck_status'] = retry.get('status', '')
         row['title_recheck_reason'] = retry.get('reason', '')
         row['title_recheck_http_status'] = retry.get('http_status', '')
@@ -1022,6 +1147,9 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats['manual_title_filtered_all'] = details.count('filtered_all_candidates')
         stats['manual_title_multiple_unresolved'] = details.count('multiple_valid_unresolved')
         stats['manual_title_valid_unselected'] = details.count('valid_candidate_not_selected')
+        stats['manual_title_meta_template_cleaned'] = sum(bool(title_state.get(u, {}).get('meta_template_cleaned')) for u in visited)
+        stats['manual_title_heading_seen'] = sum(bool(title_state.get(u, {}).get('heading_seen')) for u in visited)
+        stats['manual_title_truncated'] = sum('truncated:' in str(title_state.get(u, {}).get('rejection_codes') or '') for u in visited)
         groups = {
             'manual_title_updated': ('event_title',),
             'manual_product_updated': ('product_name',),
@@ -1126,15 +1254,20 @@ def browser_fetcher():
                     add_title(value, 'h1')
             except Exception:
                 pass
-            # Some event pages render the name as a component heading, not H1.
-            # This adds candidates to the EXISTING safe title filter only.
+            # Page layouts sometimes place the hero title in a styled DIV/P
+            # or ARIA heading instead of H1. Limit to event-specific selectors;
+            # do not mine all headings or guess from product/ticket cards.
             try:
                 event_heads = page.locator(
-                    '[data-testid="event-title"], [class~="event-title"], '
-                    '[class*="eventTitle"], [class*="EventTitle"]'
-                ).all_inner_texts(timeout=1200)
-                for value in event_heads[:3]:
-                    add_title(value, 'event_heading')
+                    '[data-testid="event-title"], [data-testid="eventTitle"], '
+                    '[class~="event-title"], [class*="eventTitle"], '
+                    '[class*="EventTitle"], [class*="event_title"], '
+                    'main [role="heading"][aria-level="1"], '
+                    '[itemscope][itemtype*="schema.org/Event"] [itemprop="name"]'
+                ).all_inner_texts(timeout=1500)
+                for value in event_heads[:6]:
+                    if isinstance(value, str) and len(value.strip()) <= 200:
+                        add_title(value, 'event_heading')
             except Exception:
                 pass
             try:
@@ -1243,6 +1376,8 @@ REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS + (
     'title_diagnostic_checked_at', 'title_diagnostic_title_detected',
     'title_diagnostic_detail', 'title_diagnostic_sources',
     'title_diagnostic_valid_candidates',
+    'title_diagnostic_rejection_codes', 'title_diagnostic_meta_template_cleaned',
+    'title_diagnostic_heading_seen',
 )
 
 
@@ -1466,7 +1601,7 @@ def main():
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.14 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
+        print('v21.15 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
               'map catalog products:', len(catalog))
