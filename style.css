@@ -668,3 +668,13 @@ html[data-theme="dark"] .lp-official{background:#245cb9!important;color:#fff!imp
 html[data-theme="dark"] #lotteryView .lp-source-preview,
 html[data-theme="dark"] #lotteryView .lp-source-preview strong,
 html[data-theme="dark"] #lotteryView .lp-source-preview span{color:#c9d7eb!important;}
+
+/* 開発者専用：抽選イベントの手動確認 */
+.lp-dev-recheck { border-color: #759be4; }
+.lp-dev-recheck h3 { margin: 3px 0 9px; }
+.lp-dev-recheck .primary { margin-top: 8px; }
+.lp-dev-recheck .primary:disabled { opacity: .65; cursor: wait; }
+.lp-dev-recheck a { display: inline-block; margin: 8px 0 4px; overflow-wrap: anywhere; }
+.lp-dev-recheck [role="status"] { font-weight: 650; overflow-wrap: anywhere; }
+html[data-theme="dark"] .lp-dev-recheck { background: #172337; color: #eef4ff; border-color: #526681; }
+html[data-theme="dark"] .lp-dev-recheck a { color: #9ac2ff; }

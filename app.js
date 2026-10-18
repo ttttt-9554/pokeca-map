@@ -2635,6 +2635,56 @@
   }
 
   // ========================================
+  // 開発者専用：LivePocketの登録済みイベントを手動再確認
+  // サーバーでもSupabase JWTを検証する。ブラウザにGitHub PATは置かない。
+  // ========================================
+  const LP_DEV_RECHECK_API = 'https://livepocket-backup-trigger.takahiro9455.workers.dev/admin/recheck';
+  let lpDevRecheckBusy = false;
+
+  function initLotteryDevRecheck() {
+    const button = $('lpDevRecheckButton');
+    const status = $('lpDevRecheckStatus');
+    if (!button || !status) return;
+
+    button.addEventListener('click', async () => {
+      if (lpDevRecheckBusy) return;
+      if (!isDeveloper() || !supabaseClient) {
+        status.textContent = '開発者としてDiscordログインしてください。';
+        return;
+      }
+      if (!window.confirm('登録済みの抽選イベントを最大12件、GitHub Actionsで再確認しますか？\n通常の自動収集は停止しません。')) return;
+      lpDevRecheckBusy = true;
+      button.disabled = true;
+      button.textContent = 'GitHubに起動依頼中…';
+      status.textContent = 'ログインを検証し、確認処理を起動しています…';
+      try {
+        const {data, error} = await supabaseClient.auth.getSession();
+        if (error || !data?.session?.access_token) throw new Error('ログイン情報が期限切れです。共有タブでログインし直してください。');
+        if (data.session.user?.id !== DEVELOPER_USER_ID) throw new Error('開発者権限を確認できません。');
+        const response = await fetch(LP_DEV_RECHECK_API, {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-store',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + data.session.access_token
+          },
+          body: JSON.stringify({batch: 12})
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || 'サーバー応答 HTTP ' + response.status);
+        status.textContent = '✅ 確認処理を依頼しました。完了状況は下の「GitHub Actions」で確認できます。';
+      } catch (error) {
+        status.textContent = '⚠ ' + (error?.message || '起動できませんでした。');
+      } finally {
+        lpDevRecheckBusy = false;
+        button.disabled = false;
+        button.textContent = '登録済み抽選を12件再確認';
+      }
+    });
+  }
+
+  // ========================================
   // 起動
   // ========================================
 
@@ -2652,6 +2702,7 @@
       initMapFilterDrawer();
       initChainDropdown();
       initCloudAdmin();
+      initLotteryDevRecheck();
       initFriendPresence();
       initLottery();
       bindEvents();
