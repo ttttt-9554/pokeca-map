@@ -2690,6 +2690,11 @@
         ['うち複数候補が競合',lpDevNumeric(stats,'manual_title_multiple_unresolved')],
         ['うち有効候補を確定できず',lpDevNumeric(stats,'manual_title_valid_unselected')]
       ] : []),
+      ...(Object.hasOwn(stats,'manual_title_meta_template_cleaned') ? [
+        ['公式ページのメタ情報を整形',lpDevNumeric(stats,'manual_title_meta_template_cleaned')],
+        ['イベント名の見出し候補あり',lpDevNumeric(stats,'manual_title_heading_seen')],
+        ['省略されたタイトルを除外',lpDevNumeric(stats,'manual_title_truncated')]
+      ] : []),
       ['タイトル取得のアクセス制限',lpDevNumeric(stats,'manual_title_access_blocked')],
       ['イベント名の更新',lpDevNumeric(stats,'manual_title_updated')],
       ['確認済み名称の補完',lpDevNumeric(stats,'manual_verified_titles_updated')],
@@ -2703,7 +2708,7 @@
     return `<p class="lp-dev-results-date"><strong>最終手動確認：</strong>${escape(lpDevReportDate(lastManual.completed_process_at))}</p>
       <div class="lp-dev-results-grid">${fields.map(([name,count]) => `<div class="lp-dev-result-cell"><span>${escape(name)}</span><strong>${Number.isSafeInteger(count) && count >= 0 ? count : 0}</strong></div>`).join('')}</div>
       <p class="hint">※「公式イベント名を検出」は更新件数とは異なります。取得できても既存名と同じ場合があります。</p>
-      <p class="hint">※「未採用」の内訳は理由を分類したもので、候補が本当に公式名だったことを示しません。CSVには判定コードと候補の出所・件数のみを記録します。</p>
+      <p class="hint">※ メタ情報の整形や見出し候補があっても、正式イベント名の検出・更新が成功したとは限りません。省略表示は採用せず、CSVには判定コードと件数だけを記録します。</p>
       <p class="hint">※手動で選んだイベントのみの集計です。ページ取得に成功した対象の差分を数えています。通常収集での全体データ整形は含めません。取得制限中は確認を停止します。</p>
       ${runLink}`;
   }
