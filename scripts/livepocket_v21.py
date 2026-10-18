@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.15: recover exact-URL event names while preserving safety.
+"""LivePocket v21.16: verified-page classification and safe title diagnosis.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -37,7 +37,11 @@ ROBOT_VERIFICATION = re.compile(
     r"(?:verify\s+that\s+you(?:'|’)?re\s+not\s+a\s+robot|"
     r"verify\s+that\s+you\s+are\s+not\s+a\s+robot|"
     r"javascript\s+is\s+disabled[\s\S]{0,250}(?:robot|reload\s+the\s+page)|"
-    r"requires\s+javascript[\s\S]{0,120}reload\s+the\s+page)",
+    r"requires\s+javascript[\s\S]{0,120}reload\s+the\s+page|"
+    r"(?:just\s+a\s+moment|checking\s+your\s+browser|attention\s+required)"
+    r"[\s\S]{0,240}(?:cloudflare|security\s+check|verify|challenge)|"
+    r"(?:cloudflare|security\s+challenge)[\s\S]{0,240}"
+    r"(?:checking\s+your\s+browser|verify\s+(?:you|that)|captcha))",
     re.I,
 )
 
@@ -57,6 +61,73 @@ def normalize_verification_page(page):
                 'gate_reason': 'robot_verification_page',
                 'http_status': page.get('http_status') or ''}
     return page
+
+
+# v21.16: challenge recognition never bypasses an access gate. A successful
+# navigation is NOT evidence that a real event page was loaded. These conservative
+# event-specific body markers identify some valid pages; other pages remain
+# "unconfirmed" rather than being treated as verified event names.
+EVENT_BODY_MARKERS = (
+    '受付・チケット情報', 'チケット販売情報', 'チケット販売受付',
+    'イベント詳細', 'イベント概要', '受付期間',
+)
+EVENT_TICKET_MARKERS = ('チケット', '受付', '申し込み', '申込み', '購入', '抽選')
+EVENT_HEADING_ORIGINS = ('h1', 'event_heading', 'body_label', 'jsonld')
+
+
+def confirm_event_page(page, url):
+    """Return a finite provenance code; do not trust HTTP 200 alone.
+
+    A page with no identifiable event content is quarantined, not labelled
+    blocked, as access gates and loading shells can look similar. All checks
+    are local to the single already-requested, exact event URL.
+    """
+    if not isinstance(page, dict) or page.get('status') != 'ok':
+        return 'not_ok'
+    if v12.exact_event_url(page.get('final_url')) != url:
+        return 'wrong_event_url'
+    body = page.get('text') if isinstance(page.get('text'), str) else ''
+    titles = page.get('titles') if isinstance(page.get('titles'), list) else []
+    sources = page.get('title_sources') if isinstance(page.get('title_sources'), list) else []
+    if ROBOT_VERIFICATION.search(body) or any(
+            isinstance(t, str) and ROBOT_VERIFICATION.search(t) for t in titles[:12]):
+        return 'access_challenge'
+    # Source labels come from local DOM selectors, not the remote page text.
+    # A site navigation h1 alone is not proof of an event: require a clean,
+    # event-specific title or explicit body evidence alongside ticket context.
+    valid_header = any(
+        source in EVENT_HEADING_ORIGINS and isinstance(title, str) and
+        clean_livepocket_event_title(title, source)[0]
+        for title, source in zip(titles[:12], sources[:12])
+    )
+    event_body = any(marker in body for marker in EVENT_BODY_MARKERS)
+    ticket_body = any(marker in body for marker in EVENT_TICKET_MARKERS)
+    if (event_body and ticket_body) or (valid_header and ticket_body):
+        return 'event_confirmed'
+    return 'event_unconfirmed'
+
+
+def quarantine_unconfirmed_event(page, url):
+    """Do not let a loading shell overwrite verified official event facts.
+
+    The candidate counters remain available for debugging. Retain the
+    original HTTP success code separately in page_identity, but mark the
+    extraction result non-OK so every existing upstream extractor is guarded.
+    """
+    if not isinstance(page, dict) or page.get('status') != 'ok':
+        return page
+    identity = confirm_event_page(page, url)
+    output = dict(page)
+    output['page_identity'] = identity
+    if identity == 'access_challenge':
+        output['status'] = 'browser_blocked_or_empty'
+        output['gate_reason'] = 'robot_verification_page'
+    elif identity == 'event_unconfirmed':
+        output['status'] = 'browser_unverified_page'
+        output['gate_reason'] = 'event_page_unconfirmed'
+    elif identity == 'wrong_event_url':
+        output['status'] = 'browser_redirected'
+    return output
 
 
 REPORT_COLUMNS = v20.REPORT_COLUMNS + (
@@ -541,9 +612,18 @@ def title_diagnostic_details(page, url):
     if status != 'ok':
         if status in ('browser_blocked', 'browser_blocked_or_empty'):
             result['reason'] = 'access_blocked'
+        elif status == 'browser_unverified_page':
+            result['reason'] = 'event_page_unconfirmed'
+            result['detail'] = 'event_body_not_verified'
         else:
             # Never export page-controlled or unexpected status text.
             result['reason'] = 'fetch_failed'
+        # Even unconfirmed/blocked pages may have misleading <title> strings;
+        # retain only bounded counters generated by the safe normalizer.
+        seen = page.get('title_candidates_seen')
+        result['candidate_count'] = min(20, max(0, seen)) if isinstance(seen, int) else 0
+        filters = str(page.get('title_filter_counts') or '')
+        result['rejection_codes'] = filters[:150] if re.fullmatch(r'[a-z0-9_:;]+', filters) else ''
         return result
     if v12.exact_event_url(page.get('final_url')) != url:
         result['reason'] = 'wrong_event_url'
@@ -604,14 +684,17 @@ def title_observation_reason(page, url):
 # pages, without accepting incomplete, marketing or unrelated site titles.
 # A suffix is stripped only if it fully matches an expected LivePocket format.
 LP_META_TEMPLATE = re.compile(
-    r'\s*のチケット情報\s*[|｜]\s*LivePocket(?:\s*[（(]ライブポケット[）)])?\s*$', re.I)
+    r'\s*のチケット情報(?:・予約・購入・販売)?\s*[|｜]\s*'
+    r'(?:LivePocket(?:-Ticket-?)?(?:\s*[（(]ライブポケット[）)])?|'
+    r'ライヴポケット)\s*$', re.I)
 LP_EXPLICIT_LABEL = re.compile(r'^(?:イベント名|イベントタイトル)\s*[：:]\s*(.{5,160})$')
 LP_LABEL_ONLY = re.compile(r'^(?:イベント名|イベントタイトル)\s*[：:]?\s*$')
 LP_GENERIC_TITLE = re.compile(
     r'^(?:チケット情報|イベント詳細|イベント概要|開催概要|申し込み|お申し込み|'
     r'チケットの購入|チケット予約・購入|チケット購入・予約・販売|'
     r'新着イベント|すべてのイベント|イベントを探す|検索結果|LivePocket(?:-Ticket-?)?)$', re.I)
-TITLE_FILTER_CODES = ('truncated', 'site_generic', 'unsafe_phrase',
+TITLE_FILTER_CODES = ('truncated', 'truncated_tail', 'truncated_inner',
+                      'replacement_char', 'site_generic', 'unsafe_phrase',
                       'length', 'invalid', 'other')
 
 
@@ -632,6 +715,26 @@ def event_name_from_labelled_body(text):
         if item and not LP_GENERIC_TITLE.fullmatch(item) and not _site_common_title(item):
             names.add(item)
     return next(iter(names)) if len(names) == 1 else None
+
+
+def truncation_type(value, source):
+    """Finite reason: genuine ellipsis at tail, embedded, or replacement char.
+
+    Only an exact official metadata template can be peeled for this diagnostic.
+    The resulting event name is still NEVER completed by guessing.
+    """
+    if not isinstance(value, str):
+        return ''
+    text = html.unescape(value).strip()
+    if '\ufffd' in text:
+        return 'replacement_char'
+    if source in ('og', 'twitter', 'document'):
+        text = LP_META_TEMPLATE.sub('', text).strip()
+    if text.endswith(('...', '…')):
+        return 'truncated_tail'
+    if '...' in text or '…' in text:
+        return 'truncated_inner'
+    return ''
 
 
 def clean_livepocket_event_title(value, source):
@@ -695,6 +798,10 @@ def normalize_event_title_observation(page, url):
             accepted.append((candidate, source))
         elif code:
             filtered[code] += 1
+            if code == 'truncated':
+                subtype = truncation_type(text, source)
+                if subtype:
+                    filtered[subtype] += 1
     # Prefer event-specific visible headings and explicit labels, then JSON-LD,
     # then site metadata. Do NOT promote arbitrary ticket names or body snippets.
     priority = {'event_heading':0, 'h1':1, 'body_label':2, 'jsonld':3,
@@ -908,6 +1015,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         seen.add(url)
         result = normalize_verification_page(fetch(url))
         result = normalize_event_title_observation(result, url)
+        result = quarantine_unconfirmed_event(result, url)
         if isinstance(result, dict):
             observations[url] = result
         return result
@@ -1112,6 +1220,8 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['title_diagnostic_rejection_codes'] = diag.get('rejection_codes', '')
         row['title_diagnostic_meta_template_cleaned'] = diag.get('meta_template_cleaned', '')
         row['title_diagnostic_heading_seen'] = diag.get('heading_seen', '')
+        row['title_page_identity'] = (observations.get(row['url'], {}).get('page_identity')
+                                      or 'not_checked')
         row['title_recheck_status'] = retry.get('status', '')
         row['title_recheck_reason'] = retry.get('reason', '')
         row['title_recheck_http_status'] = retry.get('http_status', '')
@@ -1150,6 +1260,16 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats['manual_title_meta_template_cleaned'] = sum(bool(title_state.get(u, {}).get('meta_template_cleaned')) for u in visited)
         stats['manual_title_heading_seen'] = sum(bool(title_state.get(u, {}).get('heading_seen')) for u in visited)
         stats['manual_title_truncated'] = sum('truncated:' in str(title_state.get(u, {}).get('rejection_codes') or '') for u in visited)
+        stats['manual_page_unconfirmed'] = sum(
+            observations[u].get('page_identity') == 'event_unconfirmed' for u in visited)
+        stats['manual_page_event_confirmed'] = sum(
+            observations[u].get('page_identity') == 'event_confirmed' for u in visited)
+        stats['manual_title_truncated_tail'] = sum(
+            'truncated_tail:' in str(title_state.get(u, {}).get('rejection_codes') or '') for u in visited)
+        stats['manual_title_truncated_inner'] = sum(
+            'truncated_inner:' in str(title_state.get(u, {}).get('rejection_codes') or '') for u in visited)
+        stats['manual_title_replacement_char'] = sum(
+            'replacement_char:' in str(title_state.get(u, {}).get('rejection_codes') or '') for u in visited)
         groups = {
             'manual_title_updated': ('event_title',),
             'manual_product_updated': ('product_name',),
@@ -1377,7 +1497,7 @@ REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS + (
     'title_diagnostic_detail', 'title_diagnostic_sources',
     'title_diagnostic_valid_candidates',
     'title_diagnostic_rejection_codes', 'title_diagnostic_meta_template_cleaned',
-    'title_diagnostic_heading_seen',
+    'title_diagnostic_heading_seen', 'title_page_identity',
 )
 
 
@@ -1601,7 +1721,7 @@ def main():
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.15 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
+        print('v21.16 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
               'map catalog products:', len(catalog))
