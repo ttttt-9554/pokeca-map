@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.9.1: official title recovery with eligibility diagnostics.
+"""LivePocket v21.9.2: distinguish robot-verification pages from event content.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -29,6 +29,35 @@ RAW_PATH = v14.RAW_PATH
 PUBLIC_PATH = v14.PUBLIC_PATH
 PACK_PATH = Path(os.environ.get('POKEMON_PACKS_FILE', 'pokemon_packs.csv'))
 DECK_PATH = Path(os.environ.get('POKEMON_DECKS_FILE', 'pokemon_decks.csv'))
+# Some LivePocket verification pages return HTTP 200 and a body longer than
+# v13's 40-character threshold.  These are NOT usable event pages.  Do not
+# bypass the verification; accurately classify it and preserve prior fields.
+ROBOT_VERIFICATION = re.compile(
+    r"(?:verify\s+that\s+you(?:'|’)?re\s+not\s+a\s+robot|"
+    r"verify\s+that\s+you\s+are\s+not\s+a\s+robot|"
+    r"javascript\s+is\s+disabled[\s\S]{0,250}(?:robot|reload\s+the\s+page)|"
+    r"requires\s+javascript[\s\S]{0,120}reload\s+the\s+page)",
+    re.I,
+)
+
+
+def normalize_verification_page(page):
+    """Downgrade HTTP 200 robot challenge to a blocked status, not a title.
+
+    Works both for the v21.9.x browser and for upstream v20's shared result.
+    Never stores the challenge text or attempts to defeat it.
+    """
+    if not isinstance(page, dict) or page.get('status') != 'ok':
+        return page
+    text = str(page.get('text') or '')
+    titles = ' '.join(str(t) for t in (page.get('titles') or []) if isinstance(t, str))
+    if ROBOT_VERIFICATION.search(text) or ROBOT_VERIFICATION.search(titles):
+        return {'status': 'browser_blocked_or_empty',
+                'gate_reason': 'robot_verification_page',
+                'http_status': page.get('http_status') or ''}
+    return page
+
+
 REPORT_COLUMNS = v20.REPORT_COLUMNS + (
     'map_catalog_match', 'map_catalog_type', 'map_catalog_evidence',
     'store_info_complete',
@@ -480,7 +509,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
 
     def record(url):
         seen.add(url)
-        result = fetch(url)
+        result = normalize_verification_page(fetch(url))
         if isinstance(result, dict):
             observations[url] = result
         return result
@@ -609,7 +638,15 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         if outcome['conflict']:
             stats['official_title_conflicts'] += 1
         record_state = official_state.setdefault(url, {})
-        record_state.update(status=page_result.get('status') or 'browser_error',
+        page_status = page_result.get('status') or 'browser_error'
+        if page_status == 'ok' and not outcome['title']:
+            page_status = 'ok_no_title'
+        page_reason = (page_result.get('gate_reason') or
+                       ('official_title_verified' if outcome['title'] else
+                        'no_verifiable_title_on_page' if page_status == 'ok_no_title' else
+                        'fetch_' + str(page_status)))
+        record_state.update(status=page_status, reason=page_reason,
+                            http_status=page_result.get('http_status') or '',
                             checked_at=now.isoformat(),
                             title_observed=outcome['title'],
                             genre=outcome['genre'],
@@ -648,6 +685,8 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['official_title_next_eligible_at'] = next_at
         row['official_title_attempts'] = recheck_attempts(observed)
         row['official_page_status'] = observed.get('status', '')
+        row['official_page_reason'] = observed.get('reason', '')
+        row['official_page_http_status'] = observed.get('http_status', '')
         row['official_title_observed'] = v12._safe_csv(observed.get('title_observed') or '')
         row['official_genre'] = observed.get('genre', '')
         row['official_title_source'] = observed.get('title_origin', '')
@@ -714,8 +753,11 @@ def browser_fetcher():
                 if len(body.strip()) > 80:
                     break
                 page.wait_for_timeout(1500)
-            if v14.v13.BLOCK_WORDS.search(body) or len(body.strip()) < 40:
-                return {'status': 'browser_blocked_or_empty'}
+            if (v14.v13.BLOCK_WORDS.search(body) or ROBOT_VERIFICATION.search(body)
+                    or len(body.strip()) < 40):
+                return {'status': 'browser_blocked_or_empty',
+                        'gate_reason': 'robot_verification_page' if ROBOT_VERIFICATION.search(body)
+                        else 'blocked_or_empty'}
             titles = []
             for selector in ('meta[property="og:title"]', 'meta[name="twitter:title"]'):
                 try:
@@ -825,6 +867,7 @@ OFFICIAL_COLUMNS = (
     'official_title_conflict',
     'official_title_queue_reason', 'official_title_next_eligible_at',
     'official_title_attempts',
+    'official_page_reason', 'official_page_http_status',
 )
 REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS
 
@@ -1041,7 +1084,7 @@ def main():
         else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.9.1 browser plan:', work, 'title_due:', len(titles_due),
+        print('v21.9.2 browser plan:', work, 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
               'map catalog products:', len(catalog))
