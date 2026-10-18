@@ -10675,15 +10675,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/opyur-hugr": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T04:31:20.821076+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T10:41:59.294302+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
         },
         "https://livepocket.jp/e/st1030ft": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T04:31:20.821076+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T10:41:59.294302+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12310,6 +12310,28 @@
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
           "checked_at": "2026-10-18T10:36:20.813480+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/opyur-hugr": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:41:59.294302+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/st1030ft": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-18T10:41:59.294302+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
