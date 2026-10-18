@@ -1565,9 +1565,9 @@
       "url": "https://livepocket.jp/e/2cc0p",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T20:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1593,9 +1593,9 @@
       "url": "https://livepocket.jp/e/5n05s",
       "store_name": "古本市場深谷店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-03T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "古本市場深谷店",
@@ -1873,9 +1873,9 @@
       "url": "https://livepocket.jp/e/2h41m",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T20:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
@@ -1889,6 +1889,8 @@
       "prefecture": "埼玉県",
       "product_name": "プレミアムデッキセット",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
@@ -1899,9 +1901,9 @@
     {
       "url": "https://livepocket.jp/e/vduyy",
       "store_name": "府中",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-03T15:00:00+09:00",
       "application_start_at": "2026-10-01T15:00:00+09:00",
+      "application_end_at": "2026-10-03T15:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "府中",
@@ -1914,6 +1916,8 @@
       "store_name": "鎌ケ谷",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T21:45:00+09:00",
+      "application_start_at": "2026-09-30T09:30:00+09:00",
       "stores": [
         {
           "name": "鎌ケ谷",
@@ -1926,6 +1930,8 @@
       "store_name": "竜星のPAO",
       "product_name": "ストームエメラルダ",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T11:50:00+09:00",
       "stores": [
         {
           "name": "竜星のPAO",
@@ -1941,6 +1947,8 @@
       "url": "https://livepocket.jp/e/ping7",
       "store_name": "錦糸町マルイ",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-01T15:40:00+09:00",
       "stores": [
         {
           "name": "錦糸町マルイ",
@@ -1981,9 +1989,9 @@
       "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
       "product_name": "30th CELEBRATION",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
@@ -2016,6 +2024,8 @@
       "store_name": "鮎川",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-09-30T10:00:00+09:00",
       "stores": [
         {
           "name": "鮎川",
@@ -2068,10 +2078,10 @@
       "url": "https://livepocket.jp/e/tupcdz",
       "store_name": "竜星のPAO",
       "product_name": "エーフィ＆ブラッキー",
+      "application_start_at": "2026-10-02T11:50:00+09:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "review_category": "pokemon",
-      "application_end_at": "2026-10-04T23:59:00+09:00",
-      "application_start_at": "2026-10-02T11:50:00+09:00",
       "stores": [
         {
           "name": "竜星のPAO",
@@ -2097,6 +2107,8 @@
       "url": "https://livepocket.jp/e/pli05",
       "store_name": "吹上",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-09-30T09:00:00+09:00",
       "stores": [
         {
           "name": "吹上",
@@ -2131,6 +2143,8 @@
       "url": "https://livepocket.jp/e/j_tif",
       "store_name": "北習志野",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-02T23:59:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00",
       "stores": [
         {
           "name": "北習志野",
@@ -2154,6 +2168,8 @@
       "url": "https://livepocket.jp/e/kyqq3",
       "store_name": "山陽",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-09-30T09:00:00+09:00",
       "stores": [
         {
           "name": "山陽",
@@ -2165,9 +2181,9 @@
       "url": "https://livepocket.jp/e/sgq88",
       "store_name": "JUMP SHOP名古屋",
       "product_name": "世界最強の戦士／Heroines Edition",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-03T23:59:00+09:00",
       "application_start_at": "2026-09-28T17:00:00+09:00",
+      "application_end_at": "2026-10-03T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "JUMP SHOP名古屋",
@@ -3705,5 +3721,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T03:55:09.076110+00:00"
+  "updated_at": "2026-10-18T04:06:27.242669+00:00"
 }

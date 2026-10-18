@@ -3544,7 +3544,9 @@
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756",
-        "prefecture": "v9_exact_store_cross_reference"
+        "prefecture": "v9_exact_store_cross_reference",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "store_name_original": "プレミアムデッキセット",
       "stores": [
@@ -3552,7 +3554,9 @@
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/vduyy",
@@ -3598,7 +3602,13 @@
           "name": "鎌ケ谷",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:45:00+09:00",
+      "application_start_at": "2026-09-30T09:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/mtgl4",
@@ -3615,7 +3625,9 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "store_name_original": "ストームエメラルダ",
       "stores": [
@@ -3623,7 +3635,9 @@
           "name": "竜星のPAO",
           "prefecture": ""
         }
-      ]
+      ],
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T11:50:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -3643,7 +3657,13 @@
           "name": "錦糸町マルイ",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-01T15:40:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/94gmw",
@@ -3763,7 +3783,13 @@
           "name": "鮎川",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-09-30T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7r2ey",
@@ -3904,7 +3930,13 @@
           "name": "吹上",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "application_start_at": "2026-09-30T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/cbovd",
@@ -3964,7 +3996,13 @@
           "name": "北習志野",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-02T23:59:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/hwrag",
@@ -4004,7 +4042,13 @@
           "name": "山陽",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-09-30T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/sgq88",
@@ -7687,8 +7731,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 166,
-    "application_start_at": 166,
+    "application_end_at": 174,
+    "application_start_at": 174,
     "stores_events": 205
   },
   "collector_state": {
@@ -8483,6 +8527,38 @@
         "https://livepocket.jp/e/qz-dx": {
           "checked_at": "2026-10-18T03:55:09.076110+00:00",
           "status": "checked_no_new_details"
+        },
+        "https://livepocket.jp/e/qhoza": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/pli05": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ping7": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/p158q": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/mtgl4": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ms0m8": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/kyqq3": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/j_tif": {
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -8808,6 +8884,20 @@
         "https://livepocket.jp/e/pjg_2": {
           "attempts": 1,
           "checked_at": "2026-10-18T03:55:09.076110+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/mm2c4": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/ih5ta": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:06:27.242669+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
