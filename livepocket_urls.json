@@ -11145,8 +11145,8 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/lli1u": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T09:41:20.352900+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T16:21:23.409135+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -11166,8 +11166,8 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/jlwei": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T10:11:22.953668+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-18T16:21:23.409135+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12479,7 +12479,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T10:11:22.953668+00:00",
+          "checked_at": "2026-10-18T16:21:23.409135+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -12633,7 +12633,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-18T10:18:35.763148+00:00",
+          "checked_at": "2026-10-18T16:21:23.409135+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -13376,6 +13376,24 @@
         },
         "https://livepocket.jp/e/lf49b": {
           "checked_at": "2026-10-18T15:51:23.867016+00:00",
+          "reason": "title_candidates_rejected",
+          "candidate_count": 2,
+          "valid_candidate_count": 0,
+          "detail": "filtered_all_candidates",
+          "candidate_sources": "og:1;document:1",
+          "title_detected": false
+        },
+        "https://livepocket.jp/e/lli1u": {
+          "checked_at": "2026-10-18T16:21:23.409135+00:00",
+          "reason": "title_candidates_rejected",
+          "candidate_count": 2,
+          "valid_candidate_count": 0,
+          "detail": "filtered_all_candidates",
+          "candidate_sources": "og:1;document:1",
+          "title_detected": false
+        },
+        "https://livepocket.jp/e/jlwei": {
+          "checked_at": "2026-10-18T16:21:23.409135+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
