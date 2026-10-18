@@ -4539,7 +4539,13 @@
           "name": "文教堂書店浦安西友店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T20:30:00+09:00",
+      "application_start_at": "2026-09-28T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/g5mbn",
@@ -4570,7 +4576,7 @@
       "store_name": "キデイランド吉祥寺店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ベイブレードX「BX-53オールインワンセット",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -4579,7 +4585,15 @@
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-01T23:59:00+09:00",
+      "application_start_at": "2026-09-29T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/4f1c3",
@@ -4630,7 +4644,7 @@
       "store_name": "キデイランド二子玉川店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ベイブレードX「BX-52ラスタードラグーン6-60LC",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -4639,7 +4653,15 @@
           "name": "キデイランド二子玉川店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-01T23:59:00+09:00",
+      "application_start_at": "2026-09-29T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/fmw8w",
@@ -4650,7 +4672,7 @@
       "store_name": "キデイランド二子玉川店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ベイブレードX「BX-53オールインワンセット",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -4659,7 +4681,15 @@
           "name": "キデイランド二子玉川店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-01T23:59:00+09:00",
+      "application_start_at": "2026-09-29T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/pc516",
@@ -4670,7 +4700,7 @@
       "store_name": "キデイランド吉祥寺店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ベイブレードX「BX-52ラスタードラグーン6-60LC",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -4679,7 +4709,15 @@
           "name": "キデイランド吉祥寺店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-01T23:59:00+09:00",
+      "application_start_at": "2026-09-29T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/68ayl",
@@ -4699,7 +4737,13 @@
           "name": "トレカエース植田店",
           "prefecture": "福島県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-28T21:00:00+09:00",
+      "application_start_at": "2026-09-26T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/dqq-m",
@@ -4710,7 +4754,7 @@
       "store_name": "キデイランド二子玉川店",
       "prefecture": "東京都",
       "details_source": "discord_post",
-      "product_name": null,
+      "product_name": "ベイブレードX「BX-56ストリングランチャーLホワイト×バイオレット",
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
@@ -4719,7 +4763,15 @@
           "name": "キデイランド二子玉川店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-10-01T23:59:00+09:00",
+      "application_start_at": "2026-09-29T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/68ats",
@@ -4757,7 +4809,13 @@
           "name": "トレカエース植田店",
           "prefecture": "福島県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-28T21:00:00+09:00",
+      "application_start_at": "2026-09-26T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/pp-3l",
@@ -7878,12 +7936,12 @@
     "prefecture": 168,
     "event_title": 3,
     "event_date": 1,
-    "product_name": 33,
+    "product_name": 38,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 197,
-    "application_start_at": 197,
+    "application_end_at": 205,
+    "application_start_at": 205,
     "stores_events": 205
   },
   "collector_state": {
@@ -8810,6 +8868,38 @@
         "https://livepocket.jp/e/g5mbn": {
           "checked_at": "2026-10-18T04:31:20.821076+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ba_89": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/uo6gp": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/rzrdz": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline_product"
+        },
+        "https://livepocket.jp/e/pc516": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline_product"
+        },
+        "https://livepocket.jp/e/k4jty": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline_product"
+        },
+        "https://livepocket.jp/e/fmw8w": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline_product"
+        },
+        "https://livepocket.jp/e/dqq-m": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline_product"
+        },
+        "https://livepocket.jp/e/68ayl": {
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -9191,6 +9281,20 @@
         "https://livepocket.jp/e/st1030ft": {
           "attempts": 1,
           "checked_at": "2026-10-18T04:31:20.821076+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/i6s-n": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
+          "status": "product_only",
+          "reason": "official_product_but_no_title",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/uay8k": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:41:22.974156+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
