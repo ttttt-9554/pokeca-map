@@ -32,6 +32,10 @@ ALLOWED_METRICS = (
     'manual_selected', 'manual_attempted', 'manual_success', 'manual_blocked',
     'manual_title_updated', 'manual_product_updated',
     'manual_deadline_updated', 'manual_store_updated', 'manual_genre_updated',
+    'manual_title_detected', 'manual_title_no_candidates',
+    'manual_title_rejected', 'manual_title_access_blocked', 'manual_title_other_failure',
+    'manual_verified_titles_applied', 'manual_verified_titles_updated',
+    'manual_verified_title_conflicts',
 )
 METRIC_LINE = re.compile(r'^([a-z][a-z0-9_]*)\s*:\s*([0-9]+)\s*$', re.MULTILINE)
 

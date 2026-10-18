@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.12: bounded developer manual rechecks with audited metrics.
+"""LivePocket v21.13: prioritize event titles and record why extraction fails.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -489,7 +489,100 @@ def verified_product(page, url):
     return None, ''
 
 
-# v21.12 developer-only background selection. It is enabled ONLY by the
+
+# v21.13: Never expose page body or rejected title strings in reports/logs.
+def title_observation_reason(page, url):
+    if not isinstance(page, dict):
+        return 'invalid_fetch_result', 0, ''
+    status = str(page.get('status') or 'browser_error')
+    if status != 'ok':
+        return ('access_blocked' if status in ('browser_blocked', 'browser_blocked_or_empty')
+                else 'fetch_' + status), 0, ''
+    if v12.exact_event_url(page.get('final_url')) != url:
+        return 'wrong_event_url', 0, ''
+    proposals = [v for v in (page.get('titles') or []) if isinstance(v, str) and v.strip()]
+    label = v20.v15.event_title(page)
+    found, _ = verified_title(page, url)
+    if found:
+        return 'official_title_detected', len(proposals) + bool(label), found
+    if proposals or label:
+        return 'title_candidates_rejected', len(proposals) + bool(label), ''
+    return 'no_title_candidates', 0, ''
+
+
+# A GitHub-committed, URL-scoped official screenshot/page verification list.
+# Only a developer who can commit files to this repository can approve a row.
+# The CSV is public: NEVER put secrets or personal account details in it.
+MANUAL_TITLES_PATH = Path(os.environ.get('LIVEPOCKET_VERIFIED_TITLES_FILE',
+                                         'livepocket_verified_titles.csv'))
+MANUAL_TITLE_SOURCE = 'v21_13_verified_manual_exact_url'
+
+
+def read_verified_titles(path=MANUAL_TITLES_PATH):
+    path = Path(path)
+    if not path.is_file():
+        return {}  # optional registry, backward-compatible installation
+    entries = {}
+    with path.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream)
+        required = {'url', 'event_title', 'evidence', 'approved'}
+        if not reader.fieldnames or not required <= set(reader.fieldnames):
+            raise ValueError('Verified event title CSV requires: url,event_title,evidence,approved')
+        for n, row in enumerate(reader, start=2):
+            if (row.get('approved') or '').strip().lower() != 'yes':
+                continue
+            original_url = (row.get('url') or '').strip()
+            url = v12.exact_event_url(original_url)
+            if not url or url != original_url:
+                raise ValueError(f'Invalid exact LivePocket URL in verified titles row {n}')
+            evidence = (row.get('evidence') or '').strip()
+            if evidence not in ('official_page_viewed', 'official_screenshot_viewed'):
+                raise ValueError(f'Unverified evidence in titles row {n}')
+            candidate = (row.get('event_title') or '').strip()
+            title = v14.clean_title(candidate)
+            if not title or title != candidate:
+                raise ValueError(f'Invalid or noncanonical event title in row {n}')
+            if url in entries and entries[url] != title:
+                raise ValueError(f'Conflicting manually verified titles for {url}')
+            entries[url] = title
+    return entries
+
+
+def apply_verified_titles(raw, public, registry):
+    ri, pi = v11.indices(raw, public)
+    result = {'manual_verified_titles_applied': 0,
+              'manual_verified_titles_updated': 0,
+              'manual_verified_title_conflicts': 0}
+    for url, title in registry.items():
+        if url not in ri:
+            continue
+        item, pub = ri[url], pi[url]
+        existing = item.get('event_title') or pub.get('event_title') or ''
+        source = str((item.get('field_sources') or {}).get('event_title') or '')
+        # Do not overwrite *another* already verified source silently.
+        if existing and existing != title and source not in (
+                '', MANUAL_TITLE_SOURCE) and not title_is_provisional(item):
+            result['manual_verified_title_conflicts'] += 1
+            continue
+        if existing != title:
+            result['manual_verified_titles_updated'] += 1
+        for entry in (item, pub):
+            entry['event_title'] = title
+        item.setdefault('field_sources', {})['event_title'] = MANUAL_TITLE_SOURCE
+        pub['official_event_title'] = title
+        genre = official_genre(title)
+        if genre:
+            pub['review_category'] = genre
+            pub['official_genre'] = genre
+            if genre != 'pokemon':
+                for key in ('pokemon_map_match','pokemon_map_type','pokemon_map_evidence'):
+                    pub.pop(key, None)
+        # This is an event TITLE registry; do not guess or replace product name.
+        result['manual_verified_titles_applied'] += 1
+    return result
+
+
+# v21.13 developer-only background selection. It is enabled ONLY by the
 # workflow's explicit manual input, never by the regular 5-minute Cron.
 # The ordinary v14/v15/v20 extractors remain responsible for writing facts.
 MANUAL_RECHECK_LIMIT = 12
@@ -538,12 +631,24 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         if official_last and (official_last > now or now - official_last < MANUAL_MIN_REPEAT):
             continue
         missing = missing_details_v21(event)
-        # First unvisited URLs, then incomplete older pages, then complete
-        # pages if free slots remain. Least-recent visit wins within a tier.
-        tier = 0 if not last else 1 if missing else 2
-        selected.append((tier, last or datetime.min.replace(tzinfo=timezone.utc), url))
-    selected.sort(key=lambda row: (row[0], row[1], row[2]))
-    return [url for _, _, url in selected[:limit]]
+        event_title = event.get('event_title') or item.get('event_title') or ''
+        # Title recovery has priority over general freshness. Only exact-URL
+        # human-verified or official-page names count as confirmed.
+        source = str((item.get('field_sources') or {}).get('event_title') or '')
+        confirmed = bool(event.get('official_event_title')) and source in (
+            'v21_9_official_exact_url_title', 'v21_13_verified_manual_exact_url')
+        if not event_title:
+            tier = 0  # no event name
+        elif title_is_provisional(item) and not confirmed:
+            tier = 1  # short Discord event name
+        elif missing:
+            tier = 2  # other incomplete page
+        else:
+            tier = 3  # mostly complete event
+        selected.append((tier, last is not None,
+                         last or datetime.min.replace(tzinfo=timezone.utc), url))
+    selected.sort()
+    return [url for *_, url in selected[:limit]]
 
 
 @contextmanager
@@ -576,8 +681,9 @@ def use_manual_background(urls):
 def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None,
             title_limit=TITLE_RECHECK_DEFAULT_PER_RUN,
-            manual_recheck=False, manual_limit=MANUAL_RECHECK_LIMIT):
-    """v21.12: manual old-URL scans via ordinary conservative page extractors."""
+            manual_recheck=False, manual_limit=MANUAL_RECHECK_LIMIT,
+            verified_titles=None):
+    """v21.13: title-priority checks, URL-scoped results and verified titles."""
     now = v14._utc(now)
     snapshot = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
                 for item in public['items']}
@@ -747,6 +853,15 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
                             conflict=bool(outcome['conflict']))
 
     stats['official_genres_restored'] += restore_official_genres(raw, public)
+    stats.update(apply_verified_titles(raw, public, verified_titles or {}))
+    title_state = state.setdefault('v21_13', {}).setdefault('title_diagnostics', {})
+    for url, page_result in observations.items():
+        reason, candidate_count, observed_title = title_observation_reason(page_result, url)
+        title_state[url] = {
+            'checked_at': now.isoformat(), 'reason': reason,
+            'candidate_count': candidate_count,
+            'title_detected': bool(observed_title),
+        }
     for row in review:
         pub = pi[row['url']]
         cat = pub.get('review_category') or ''
@@ -788,6 +903,11 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         retry = log.get(row['url'], {})
         row['title_recheck_attempts'] = recheck_attempts(retry)
         row['title_recheck_at'] = retry.get('checked_at', '')
+        diag = title_state.get(row['url'], {})
+        row['title_diagnostic_reason'] = diag.get('reason', '')
+        row['title_diagnostic_candidates'] = diag.get('candidate_count', '')
+        row['title_diagnostic_checked_at'] = diag.get('checked_at', '')
+        row['title_diagnostic_title_detected'] = 'yes' if diag.get('title_detected') else ''
         row['title_recheck_status'] = retry.get('status', '')
         row['title_recheck_reason'] = retry.get('reason', '')
         row['title_recheck_http_status'] = retry.get('http_status', '')
@@ -810,6 +930,14 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats.update(manual_selected=len(manual_urls),
                      manual_attempted=len(visited),
                      manual_success=len(successful), manual_blocked=blocked)
+        reasons = [title_state.get(u, {}).get('reason') for u in visited]
+        stats['manual_title_detected'] = reasons.count('official_title_detected')
+        stats['manual_title_no_candidates'] = reasons.count('no_title_candidates')
+        stats['manual_title_rejected'] = reasons.count('title_candidates_rejected')
+        stats['manual_title_access_blocked'] = reasons.count('access_blocked')
+        stats['manual_title_other_failure'] = len(visited) - sum((
+            stats['manual_title_detected'], stats['manual_title_no_candidates'],
+            stats['manual_title_rejected'], stats['manual_title_access_blocked']))
         groups = {
             'manual_title_updated': ('event_title',),
             'manual_product_updated': ('product_name',),
@@ -1008,7 +1136,10 @@ OFFICIAL_COLUMNS = (
     'official_title_attempts',
     'official_page_reason', 'official_page_http_status',
 )
-REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS
+REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS + (
+    'title_diagnostic_reason', 'title_diagnostic_candidates',
+    'title_diagnostic_checked_at', 'title_diagnostic_title_detected',
+)
 
 
 def official_genre(title):
@@ -1066,7 +1197,7 @@ def restore_official_genres(raw, public):
     for url, pub in pub_index.items():
         source = str(raw_index[url].get('field_sources', {}).get('event_title') or '')
         title = pub.get('official_event_title') or ''
-        if source != 'v21_9_official_exact_url_title' or title != pub.get('event_title'):
+        if source not in ('v21_9_official_exact_url_title', MANUAL_TITLE_SOURCE) or title != pub.get('event_title'):
             continue
         genre = official_genre(title)
         if not genre:
@@ -1218,6 +1349,7 @@ def main():
         # standard 5-minute schedule never receives this environment flag.
         background_limit = MANUAL_RECHECK_LIMIT
     retry_limit = v14.safe_limit('LIVEPOCKET_V16_RETRY_PER_RUN', 3, 5)
+    verified_titles = read_verified_titles()
     manual_urls = manual_recheck_candidates(raw, public) if manual_recheck else []
     with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):
         work = v19.v18.plan(raw, public, new_limit=new_limit,
@@ -1230,7 +1362,7 @@ def main():
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due)
     if sys.argv[1] == 'plan':
-        print('v21.12 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
+        print('v21.13 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
               'map catalog products:', len(catalog))
@@ -1257,7 +1389,8 @@ def main():
                        v19_verified=v19_verified,
                        title_limit=title_limit,
                        manual_recheck=manual_recheck,
-                       manual_limit=MANUAL_RECHECK_LIMIT)
+                       manual_limit=MANUAL_RECHECK_LIMIT,
+                       verified_titles=verified_titles)
     finally:
         close()
     raw, public, review, deadlines, sources, content, stats = data
