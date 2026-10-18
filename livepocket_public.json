@@ -3032,25 +3032,27 @@
     },
     {
       "url": "https://livepocket.jp/e/3558y",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_end_at": "2026-09-21T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/w6blb",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_start_at": "2026-09-21T17:00:00+09:00",
       "application_end_at": "2026-09-26T23:59:00+09:00",
-      "application_start_at": "2026-09-21T17:00:00+09:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/masa6",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_start_at": "2026-09-20T10:00:00+09:00",
       "application_end_at": "2026-09-22T22:00:00+09:00",
-      "application_start_at": "2026-09-20T10:00:00+09:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/o_p14",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_start_at": "2026-09-21T10:00:00+09:00",
       "application_end_at": "2026-09-21T21:00:00+09:00",
-      "application_start_at": "2026-09-21T10:00:00+09:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/yfaf-",
@@ -3058,35 +3060,58 @@
     },
     {
       "url": "https://livepocket.jp/e/5uc5s",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "event_title": "ポケカ抽選販売(30th)のチケット情報",
+      "application_end_at": "2026-09-22T22:01:00+09:00",
+      "application_start_at": "2026-09-20T19:12:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケカ抽選販売(30th)のチケット情報"
     },
     {
       "url": "https://livepocket.jp/e/77ks9",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/ydr3m",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
-      "application_end_at": "2026-09-21T22:00:00+09:00",
-      "application_start_at": "2026-09-21T08:00:00+09:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/i-5y5",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
-      "application_end_at": "2026-09-22T22:00:00+09:00",
-      "application_start_at": "2026-09-20T10:00:00+09:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/f5xvu",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/z-3a8",
       "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
       "application_end_at": "2026-09-21T23:59:00+09:00",
       "application_start_at": "2026-09-19T10:00:00+09:00",
       "product_name": "ポケモンカードゲーム",
+      "store_name": "キデイランドららぽーと富士見店",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "キデイランドららぽーと富士見店",
+          "prefecture": ""
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ydr3m",
+      "application_start_at": "2026-09-21T08:00:00+09:00",
+      "application_end_at": "2026-09-21T22:00:00+09:00",
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/i-5y5",
+      "application_start_at": "2026-09-20T10:00:00+09:00",
+      "application_end_at": "2026-09-22T22:00:00+09:00",
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/f5xvu",
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "event_title": "ポケカ抽選(デッキセット)のチケット情報",
+      "application_end_at": "2026-09-22T22:01:00+09:00",
+      "application_start_at": "2026-09-20T19:21:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケカ抽選(デッキセット)のチケット情報"
+    },
+    {
+      "url": "https://livepocket.jp/e/z-3a8",
       "store_name": "キデイランド ららぽーと富士見店",
+      "product_name": "ポケモンカードゲーム",
+      "application_start_at": "2026-09-19T10:00:00+09:00",
+      "application_end_at": "2026-09-21T23:59:00+09:00",
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
       "review_category": "pokemon",
       "stores": [
         {
@@ -3097,25 +3122,33 @@
     },
     {
       "url": "https://livepocket.jp/e/bcev6",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_end_at": "2026-09-21T23:59:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/72t_2",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_end_at": "2026-09-21T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7pk94",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_end_at": "2026-09-23T23:59:00+09:00",
+      "application_start_at": "2026-09-21T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7geue",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_end_at": "2026-09-21T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/m0p3n",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "application_start_at": "2026-09-22T11:46:00+09:00",
       "application_end_at": "2026-09-23T23:59:00+09:00",
-      "application_start_at": "2026-09-22T11:46:00+09:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/izdnf",
@@ -3994,5 +4027,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T06:02:57.571163+00:00"
+  "updated_at": "2026-10-18T06:11:22.042180+00:00"
 }

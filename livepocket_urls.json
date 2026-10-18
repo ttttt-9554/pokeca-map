@@ -6208,7 +6208,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-21T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/w6blb",
@@ -6297,7 +6303,15 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケカ抽選販売(30th)のチケット情報",
+      "application_end_at": "2026-09-22T22:01:00+09:00",
+      "application_start_at": "2026-09-20T19:12:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/77ks9",
@@ -6305,13 +6319,28 @@
       "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\nhttps://livepocket.jp/e/m0p3n\nhttps://livepocket.jp/e/w6blb\nhttps://livepocket.jp/e/8cycb\nhttps://livepocket.jp/e/ydr3m\nhttps://livepocket.jp/e/f5xvu\nhttps://livepocket.jp/e/5uc5s\nhttps://livepocket.jp/e/o_p14\nhttps://livepocket.jp/e/bcev6\nhttps://livepocket.jp/e/3558y\nhttps://livepocket.jp/e/7pk94\nhttps://livepocket.jp/e/fvxoh\nhttps://livepocket.jp/e/77ks9\nhttps://livepocket.jp/e/72t_2\nhttps://livepocket.jp/e/7geue\nhttps://livepocket.jp/e/masa6\nhttps://livepocket.jp/e/i-5y5\nhttps://livepocket.jp/e/yfaf-\nhttps://livepocket.jp/e/z-3a8\nhttps://livepocket.jp/e/zmplg\nhttps://livepocket.jp/p/hpmzs",
-      "store_name": null,
+      "store_name": "キデイランドららぽーと富士見店",
       "prefecture": null,
       "details_source": null,
-      "product_name": null,
+      "product_name": "ポケモンカードゲーム",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "store_name": "v15_page_store_label",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "application_end_at": "2026-09-21T23:59:00+09:00",
+      "application_start_at": "2026-09-19T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "キデイランドららぽーと富士見店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/ydr3m",
@@ -6365,7 +6394,15 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケカ抽選(デッキセット)のチケット情報",
+      "application_end_at": "2026-09-22T22:01:00+09:00",
+      "application_start_at": "2026-09-20T19:21:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/z-3a8",
@@ -6408,7 +6445,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-21T23:59:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/72t_2",
@@ -6422,7 +6465,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-21T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7pk94",
@@ -6436,7 +6485,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-23T23:59:00+09:00",
+      "application_start_at": "2026-09-21T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7geue",
@@ -6450,7 +6505,13 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-09-21T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/m0p3n",
@@ -8392,17 +8453,17 @@
     "no_structured_details": 150
   },
   "field_counts": {
-    "store_name": 205,
+    "store_name": 206,
     "prefecture": 168,
-    "event_title": 5,
+    "event_title": 7,
     "event_date": 1,
-    "product_name": 47,
+    "product_name": 48,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 276,
-    "application_start_at": 276,
-    "stores_events": 207
+    "application_end_at": 284,
+    "application_start_at": 284,
+    "stores_events": 208
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -9680,6 +9741,38 @@
         "https://livepocket.jp/e/i-5y5": {
           "checked_at": "2026-10-18T06:02:57.571163+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/f5xvu": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/bcev6": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/7pk94": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/7geue": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/77ks9": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_deadline_product_store"
+        },
+        "https://livepocket.jp/e/72t_2": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/5uc5s": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/3558y": {
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -10817,6 +10910,78 @@
         "https://livepocket.jp/e/i-5y5": {
           "status": "ok",
           "checked_at": "2026-10-18T06:02:57.571163+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/f5xvu": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "ポケカ抽選(デッキセット)のチケット情報",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/bcev6": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/7pk94": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/7geue": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/77ks9": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "v15_page_product_label",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/72t_2": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/5uc5s": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
+          "title_observed": "ポケカ抽選販売(30th)のチケット情報",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/3558y": {
+          "status": "ok",
+          "checked_at": "2026-10-18T06:11:22.042180+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
