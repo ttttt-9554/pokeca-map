@@ -3196,31 +3196,33 @@
     },
     {
       "url": "https://livepocket.jp/e/540ki",
-      "discord_posted_at": "2026-09-22T10:01:32.166000+00:00",
+      "application_start_at": "2026-09-21T10:00:00+09:00",
       "application_end_at": "2026-09-22T22:00:00+09:00",
-      "application_start_at": "2026-09-21T10:00:00+09:00"
+      "discord_posted_at": "2026-09-22T10:01:32.166000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/bw7ls",
-      "discord_posted_at": "2026-09-22T10:01:32.166000+00:00",
+      "application_start_at": "2026-09-22T17:49:00+09:00",
       "application_end_at": "2026-09-23T21:00:00+09:00",
-      "application_start_at": "2026-09-22T17:49:00+09:00"
+      "discord_posted_at": "2026-09-22T10:01:32.166000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/03dun",
-      "discord_posted_at": "2026-09-22T10:01:32.166000+00:00",
+      "application_start_at": "2026-09-19T10:00:00+09:00",
       "application_end_at": "2026-09-22T22:00:00+09:00",
-      "application_start_at": "2026-09-19T10:00:00+09:00"
+      "discord_posted_at": "2026-09-22T10:01:32.166000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/n9w61",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
+      "application_start_at": "2026-09-19T10:00:00+09:00",
       "application_end_at": "2026-09-21T22:01:00+09:00",
-      "application_start_at": "2026-09-19T10:00:00+09:00"
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3fcrh",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
+      "application_end_at": "2026-09-23T21:00:00+09:00",
+      "application_start_at": "2026-09-21T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/eqcmy",
@@ -3228,37 +3230,45 @@
     },
     {
       "url": "https://livepocket.jp/e/5wpcb",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
+      "application_end_at": "2026-09-21T22:00:00+09:00",
+      "application_start_at": "2026-09-18T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/4i-a7",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/gayn8",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
-      "application_end_at": "2026-09-22T22:00:00+09:00",
-      "application_start_at": "2026-09-21T10:00:00+09:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/uoxbv",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
-      "application_end_at": "2026-09-24T23:59:00+09:00",
-      "application_start_at": "2026-09-16T17:03:00+09:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/3q74t",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
-    },
-    {
-      "url": "https://livepocket.jp/e/noo06",
       "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
       "application_end_at": "2026-09-23T21:00:00+09:00",
       "application_start_at": "2026-09-21T10:00:00+09:00"
     },
     {
-      "url": "https://livepocket.jp/e/1wuc1",
+      "url": "https://livepocket.jp/e/gayn8",
+      "application_start_at": "2026-09-21T10:00:00+09:00",
+      "application_end_at": "2026-09-22T22:00:00+09:00",
       "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/uoxbv",
+      "application_start_at": "2026-09-16T17:03:00+09:00",
+      "application_end_at": "2026-09-24T23:59:00+09:00",
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3q74t",
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
+      "application_end_at": "2026-09-24T23:59:00+09:00",
+      "application_start_at": "2026-09-16T17:01:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/noo06",
+      "application_start_at": "2026-09-21T10:00:00+09:00",
+      "application_end_at": "2026-09-23T21:00:00+09:00",
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/1wuc1",
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
+      "application_end_at": "2026-09-24T23:59:00+09:00",
+      "application_start_at": "2026-09-04T17:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/5qcxn",
@@ -3282,11 +3292,15 @@
     },
     {
       "url": "https://livepocket.jp/e/skpz1",
-      "discord_posted_at": "2026-09-22T10:01:14.917000+00:00"
+      "discord_posted_at": "2026-09-22T10:01:14.917000+00:00",
+      "application_end_at": "2026-09-23T21:01:00+09:00",
+      "application_start_at": "2026-09-22T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/w6d_w",
-      "discord_posted_at": "2026-09-22T10:01:14.917000+00:00"
+      "discord_posted_at": "2026-09-22T10:01:14.917000+00:00",
+      "application_end_at": "2026-09-23T23:59:00+09:00",
+      "application_start_at": "2026-09-21T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/12upt",
@@ -3310,7 +3324,9 @@
     },
     {
       "url": "https://livepocket.jp/e/sdrwqzxcv",
-      "discord_posted_at": "2026-09-22T10:01:14.917000+00:00"
+      "discord_posted_at": "2026-09-22T10:01:14.917000+00:00",
+      "application_end_at": "2026-09-22T21:00:00+09:00",
+      "application_start_at": "2026-09-21T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/fann-",
@@ -4053,5 +4069,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T06:31:20.866007+00:00"
+  "updated_at": "2026-10-18T06:41:22.451449+00:00"
 }
