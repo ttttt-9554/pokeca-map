@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-18T03:30:55.126077+00:00",
+  "collected_at": "2026-10-18T04:12:29.105841+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 72,
@@ -3683,7 +3683,13 @@
           "name": "平塚",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T20:00:00+09:00",
+      "application_start_at": "2026-09-28T18:01:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ampml",
@@ -3700,15 +3706,24 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
       },
       "store_name_original": "エーフィ＆ブラッキー",
       "stores": [
         {
           "name": "キデイランド浦和美園",
           "prefecture": ""
+        },
+        {
+          "name": "キデイランド 浦和美園店",
+          "prefecture": ""
         }
-      ]
+      ],
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -3806,7 +3821,9 @@
       "extraction_status": "parsed",
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
-        "store_name": "discord_heading:1555858034461511756"
+        "store_name": "discord_heading:1555858034461511756",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "store_name_original": "30th CELEBRATION 再販",
       "stores": [
@@ -3814,7 +3831,9 @@
           "name": "ホビーステーション",
           "prefecture": ""
         }
-      ]
+      ],
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T12:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -3832,7 +3851,9 @@
       "field_sources": {
         "product_name": "discord_post:1555858034461511756",
         "store_name": "discord_heading:1555858034461511756",
-        "prefecture": "v9_exact_store_cross_reference"
+        "prefecture": "v9_exact_store_cross_reference",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "store_name_original": "遊戯王 ART WORK COLLECTION系",
       "stores": [
@@ -3840,7 +3861,9 @@
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/qz-dx",
@@ -3910,7 +3933,13 @@
           "name": "山陽",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-09-30T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/pli05",
@@ -3956,7 +3985,13 @@
           "name": "ヤマシロ",
           "prefecture": ""
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-03T23:59:00+09:00",
+      "application_start_at": "2026-10-01T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/h2dg6",
@@ -3976,7 +4011,13 @@
           "name": "鎌ケ谷",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T21:45:00+09:00",
+      "application_start_at": "2026-09-30T09:30:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/j_tif",
@@ -4022,7 +4063,13 @@
           "name": "鮎川",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "field_sources": {
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-09-30T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/kyqq3",
@@ -7095,11 +7142,16 @@
       "field_sources": {
         "product_name": "discord_post:1560943049637502976",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "event_title": "discord_url_title:1560943049637502976"
       },
       "store_name_original": "Heroines Edition vol.2",
       "application_end_at": "2026-10-18T20:00:00+09:00",
-      "application_start_at": "2026-10-16T10:00:00+09:00"
+      "application_start_at": "2026-10-16T10:00:00+09:00",
+      "event_title": "Heroines Edition vol.2",
+      "discord_title_source_message_id": "1560943049637502976",
+      "discord_title_source_channel_id": "1551580466266644552",
+      "discord_title_source_posted_at": "2026-10-17T09:10:23.953000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s9-lf",
@@ -7117,11 +7169,16 @@
       "field_sources": {
         "product_name": "discord_post:1560943049637502976",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "event_title": "discord_url_title:1560943049637502976"
       },
       "store_name_original": "Heroines Edition vol.2",
       "application_end_at": "2026-10-18T23:59:00+09:00",
-      "application_start_at": "2026-10-16T12:00:00+09:00"
+      "application_start_at": "2026-10-16T12:00:00+09:00",
+      "event_title": "Heroines Edition vol.2",
+      "discord_title_source_message_id": "1560943049637502976",
+      "discord_title_source_channel_id": "1551580466266644552",
+      "discord_title_source_posted_at": "2026-10-17T09:10:23.953000+00:00"
     },
     {
       "url": "https://livepocket.jp/e/t4s-9",
@@ -7725,14 +7782,14 @@
   "field_counts": {
     "store_name": 203,
     "prefecture": 168,
-    "event_title": 1,
+    "event_title": 3,
     "event_date": 1,
     "product_name": 33,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 174,
-    "application_start_at": 174,
+    "application_end_at": 182,
+    "application_start_at": 182,
     "stores_events": 205
   },
   "collector_state": {
@@ -7740,12 +7797,16 @@
       "1551580466266644552": "1561218392524849155"
     },
     "last_run": {
-      "checked_at": "2026-10-18T03:30:55.126077+00:00",
-      "new_urls": 9,
-      "original_urls": 348,
+      "checked_at": "2026-10-18T04:12:29.105841+00:00",
+      "new_urls": 0,
+      "original_urls": 357,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
-      "discord_url_pairs_conflicts": 0
+      "discord_url_pairs_conflicts": 0,
+      "discord_url_pairs_ambiguous_skipped": 0,
+      "discord_url_titles_added": 2,
+      "discord_url_titles_conflicts": 0,
+      "discord_url_titles_ambiguous_skipped": 0
     },
     "livepocket_page_enrichment": {
       "blocked_until": "2026-10-17T12:19:57.811101+00:00",
@@ -8559,6 +8620,38 @@
         "https://livepocket.jp/e/j_tif": {
           "checked_at": "2026-10-18T04:06:27.242669+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ie8vo": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/hwrag": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/h2dg6": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/cbovd": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/ampml": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/94gmw": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/7r2ey": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/7_zc2": {
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "checked_deadline"
         }
       }
     },
@@ -8898,6 +8991,20 @@
         "https://livepocket.jp/e/ih5ta": {
           "attempts": 1,
           "checked_at": "2026-10-18T04:06:27.242669+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/x2n7b": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": ""
+        },
+        "https://livepocket.jp/e/3010thfu": {
+          "attempts": 1,
+          "checked_at": "2026-10-18T04:12:54.125922+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""

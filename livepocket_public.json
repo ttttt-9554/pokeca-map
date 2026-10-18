@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-18T03:30:55.126077+00:00",
+  "collected_at": "2026-10-18T04:12:29.105841+00:00",
   "unique_livepocket_urls": 357,
   "items": [
     {
@@ -1888,9 +1888,9 @@
       "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
       "product_name": "プレミアムデッキセット",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-10-02T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
@@ -1915,9 +1915,9 @@
       "url": "https://livepocket.jp/e/qhoza",
       "store_name": "鎌ケ谷",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T21:45:00+09:00",
       "application_start_at": "2026-09-30T09:30:00+09:00",
+      "application_end_at": "2026-10-04T21:45:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "鎌ケ谷",
@@ -1929,9 +1929,9 @@
       "url": "https://livepocket.jp/e/mtgl4",
       "store_name": "竜星のPAO",
       "product_name": "ストームエメラルダ",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T23:59:00+09:00",
       "application_start_at": "2026-10-02T11:50:00+09:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "竜星のPAO",
@@ -1946,9 +1946,9 @@
     {
       "url": "https://livepocket.jp/e/ping7",
       "store_name": "錦糸町マルイ",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T23:59:00+09:00",
       "application_start_at": "2026-10-01T15:40:00+09:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "錦糸町マルイ",
@@ -1961,6 +1961,8 @@
       "store_name": "平塚",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T20:00:00+09:00",
+      "application_start_at": "2026-09-28T18:01:00+09:00",
       "stores": [
         {
           "name": "平塚",
@@ -1974,9 +1976,15 @@
       "product_name": "エーフィ＆ブラッキー",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "review_category": "pokemon",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00",
       "stores": [
         {
           "name": "キデイランド浦和美園",
+          "prefecture": ""
+        },
+        {
+          "name": "キデイランド 浦和美園店",
           "prefecture": ""
         }
       ],
@@ -2023,9 +2031,9 @@
       "url": "https://livepocket.jp/e/p158q",
       "store_name": "鮎川",
       "prefecture": "茨城県",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T22:00:00+09:00",
       "application_start_at": "2026-09-30T10:00:00+09:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "鮎川",
@@ -2038,6 +2046,8 @@
       "store_name": "ホビーステーション",
       "product_name": "30th CELEBRATION",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T23:59:00+09:00",
+      "application_start_at": "2026-10-02T12:00:00+09:00",
       "stores": [
         {
           "name": "ホビーステーション",
@@ -2056,6 +2066,8 @@
       "product_name": "遊戯王 ART WORK COLLECTION系",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "review_category": "yugioh",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-10-02T10:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
@@ -2096,6 +2108,8 @@
       "url": "https://livepocket.jp/e/7_zc2",
       "store_name": "山陽",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "application_start_at": "2026-09-30T09:00:00+09:00",
       "stores": [
         {
           "name": "山陽",
@@ -2106,9 +2120,9 @@
     {
       "url": "https://livepocket.jp/e/pli05",
       "store_name": "吹上",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-04T21:00:00+09:00",
       "application_start_at": "2026-09-30T09:00:00+09:00",
+      "application_end_at": "2026-10-04T21:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "吹上",
@@ -2120,6 +2134,8 @@
       "url": "https://livepocket.jp/e/cbovd",
       "store_name": "ヤマシロ",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-03T23:59:00+09:00",
+      "application_start_at": "2026-10-01T10:00:00+09:00",
       "stores": [
         {
           "name": "ヤマシロ",
@@ -2132,6 +2148,8 @@
       "store_name": "鎌ケ谷",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T21:45:00+09:00",
+      "application_start_at": "2026-09-30T09:30:00+09:00",
       "stores": [
         {
           "name": "鎌ケ谷",
@@ -2142,9 +2160,9 @@
     {
       "url": "https://livepocket.jp/e/j_tif",
       "store_name": "北習志野",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-02T23:59:00+09:00",
       "application_start_at": "2026-09-28T10:00:00+09:00",
+      "application_end_at": "2026-10-02T23:59:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "北習志野",
@@ -2157,6 +2175,8 @@
       "store_name": "鮎川",
       "prefecture": "茨城県",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "application_end_at": "2026-10-04T22:00:00+09:00",
+      "application_start_at": "2026-09-30T10:00:00+09:00",
       "stores": [
         {
           "name": "鮎川",
@@ -2167,9 +2187,9 @@
     {
       "url": "https://livepocket.jp/e/kyqq3",
       "store_name": "山陽",
-      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
-      "application_end_at": "2026-10-11T22:00:00+09:00",
       "application_start_at": "2026-09-30T09:00:00+09:00",
+      "application_end_at": "2026-10-11T22:00:00+09:00",
+      "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
       "stores": [
         {
           "name": "山陽",
@@ -3391,6 +3411,7 @@
     {
       "url": "https://livepocket.jp/e/u62m7",
       "product_name": "Heroines Edition vol.2",
+      "event_title": "Heroines Edition vol.2",
       "application_start_at": "2026-10-16T10:00:00+09:00",
       "application_end_at": "2026-10-18T20:00:00+09:00",
       "discord_posted_at": "2026-10-17T09:10:23.953000+00:00"
@@ -3398,6 +3419,7 @@
     {
       "url": "https://livepocket.jp/e/s9-lf",
       "product_name": "Heroines Edition vol.2",
+      "event_title": "Heroines Edition vol.2",
       "application_start_at": "2026-10-16T12:00:00+09:00",
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "discord_posted_at": "2026-10-17T09:10:23.953000+00:00"
@@ -3721,5 +3743,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-18T04:06:27.242669+00:00"
+  "updated_at": "2026-10-18T04:12:54.125922+00:00"
 }
