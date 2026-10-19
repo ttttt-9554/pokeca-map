@@ -2703,6 +2703,11 @@
     not_applied:'未応募', applied:'応募済み', won:'当選・受取待ち',
     lost:'落選', received:'受取済み'
   };
+  // v21.37: Group the private management list by current application status.
+  const LP_TRACK_GROUPS = [
+    ['applied','✉️'], ['won','🎉'], ['lost','📪'],
+    ['received','✅'], ['not_applied','◻️']
+  ];
   let lotteryTrackRecords = new Map();
   let lotteryTrackUserId = '';
   let lotteryTrackSequence = 0;
@@ -2734,7 +2739,21 @@
       .lp-track-toolbar label{font-size:12px;font-weight:700}
       #lpTrackFilter{font-size:13px;min-height:38px;max-width:200px;color:var(--app-text,#172033);background:var(--app-surface2,#fff);border:1px solid var(--app-border,#cbd5e1)}
       #lpTrackReload{min-height:38px;font-size:12px}
+      /* Clear, separated sections for each application status. */
+      .lp-track-group{--lp-group-accent:#94a3b8;margin:17px 0 0;padding:0 12px 9px;
+        border:1px solid var(--app-border,#cbd5e1);border-top:3px solid var(--lp-group-accent);
+        border-radius:12px;background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033)}
+      .lp-track-group[data-status="applied"]{--lp-group-accent:#60a5fa}
+      .lp-track-group[data-status="won"]{--lp-group-accent:#34d399}
+      .lp-track-group[data-status="lost"]{--lp-group-accent:#fb923c}
+      .lp-track-group[data-status="received"]{--lp-group-accent:#a78bfa}
+      .lp-track-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;
+        margin:0!important;padding:12px 0 9px;font-size:15px!important;font-weight:800;
+        color:var(--app-text,#172033)!important;line-height:1.45}
+      .lp-track-group-count{flex-shrink:0;padding:3px 9px;border-radius:999px;font-size:12px;
+        background:var(--app-surface,#fff);border:1px solid var(--app-border,#cbd5e1)}
       .lp-track-row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--app-border,#dbe3ed)}
+      .lp-track-row>div{min-width:0;flex:1}
       .lp-track-row strong{display:block;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
       .lp-track-row p{margin:4px 0;font-size:12px;color:var(--app-muted,#64748b);line-height:1.5}
       .lp-track-row button{flex-shrink:0;min-height:38px;font-size:12px}
@@ -2857,7 +2876,7 @@
       <p id="lpTrackStatus" role="status" aria-live="polite"></p>
       <div id="lpTrackCounts" class="lp-track-counts"></div>
       <div class="lp-track-toolbar"><label for="lpTrackFilter">自分の記録を表示</label>
-        <select id="lpTrackFilter"><option value="all">すべて</option><option value="applied">応募済み</option><option value="won">当選・受取待ち</option><option value="received">受取済み</option><option value="lost">落選</option><option value="onsite">現地対応待ち</option></select>
+        <select id="lpTrackFilter"><option value="all">すべて</option><option value="applied">応募済み</option><option value="won">当選・受取待ち</option><option value="lost">落選</option><option value="received">受取済み</option><option value="not_applied">未応募</option><option value="onsite">現地対応待ち</option></select>
         <button type="button" id="lpTrackReload">記録を更新</button></div>
       <div id="lpTrackList"></div>`;
     $('lotteryManageView').append(container);
@@ -2982,6 +3001,7 @@
     const counts=[
       ['応募済み',records.filter(x=>x.status==='applied').length],
       ['当選・受取待ち',records.filter(x=>x.status==='won').length],
+      ['落選',records.filter(x=>x.status==='lost').length],
       ['受取済み',records.filter(x=>x.status==='received').length],
       ['自分の現地対応未完了',records.filter(x=>lotteryOnsiteSummary(x.event_url).state==='required'&&!x.onsite_done).length]
     ];
@@ -2989,17 +3009,31 @@
     const filtered=records.filter(x=>lotteryTrackFilter==='all' ||
       (lotteryTrackFilter==='onsite'?lotteryOnsiteSummary(x.event_url).state==='required'&&!x.onsite_done:x.status===lotteryTrackFilter))
       .sort(lotteryTrackSort);
-    $('lpTrackList').innerHTML=filtered.length ? filtered.slice(0,100).map(x=>{
-      const msg=lotteryTrackPickupMessage(x);
-      const warn=msg.startsWith('⚠') ? (msg.includes('今日')?'lp-track-today':'lp-track-overdue'):'';
-      return `<div class="lp-track-row"><div>
-        <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
-        <p>${escape(LP_TRACK_LABELS[x.status])}${lotteryOnsiteSummary(x.event_url).state==='required'?' ／ 自分の現地対応'+(x.onsite_done?'済み':'待ち'):''}</p>
-        ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
-        <a href="${escape(x.event_url)}" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>
-      </div><button type="button" data-lp-track="edit" data-url="${escape(x.event_url)}">管理</button></div>`;
-    }).join('')+(filtered.length>100?'<p class="lp-tracker-intro">最初の100件を表示しています。</p>':'') :
-      `<p class="lp-tracker-intro">${records.length?'該当する管理記録はありません。':'まだ記録はありません。各抽選の「応募済みにする」から登録できます。'}</p>`;
+    // Keep the existing 100-entry display cap and sorting within each status.
+    const displayed=filtered.slice(0,100);
+    const sections=LP_TRACK_GROUPS.map(([key,icon])=>{
+      const group=displayed.filter(x=>x.status===key);
+      if(!group.length)return '';
+      const total=filtered.filter(x=>x.status===key).length;
+      const rows=group.map(x=>{
+        const msg=lotteryTrackPickupMessage(x);
+        const warn=msg.startsWith('⚠') ? (msg.includes('今日')?'lp-track-today':'lp-track-overdue'):'';
+        const onsite=lotteryOnsiteSummary(x.event_url).state==='required'
+          ? `<p>自分の現地対応：${x.onsite_done?'完了':'未完了'}</p>`:'';
+        return `<div class="lp-track-row"><div>
+          <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
+          ${onsite}
+          ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
+          <a href="${escape(x.event_url)}" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>
+        </div><button type="button" data-lp-track="edit" data-url="${escape(x.event_url)}">管理</button></div>`;
+      }).join('');
+      return `<section class="lp-track-group" data-status="${key}" aria-label="${escape(LP_TRACK_LABELS[key])}">
+        <h4 class="lp-track-group-head"><span>${icon} ${escape(LP_TRACK_LABELS[key])}</span>
+        <span class="lp-track-group-count">${total}件</span></h4>${rows}</section>`;
+    }).join('');
+    $('lpTrackList').innerHTML=filtered.length
+      ? sections+(filtered.length>100?'<p class="lp-tracker-intro">最初の100件を表示しています。絞り込みでほかの記録を表示できます。</p>':'')
+      : `<p class="lp-tracker-intro">${records.length?'該当する管理記録はありません。':'まだ記録はありません。各抽選の「応募済みにする」から登録できます。'}</p>`;
   }
 
   function lotteryTrackerActionsHtml(item) {
