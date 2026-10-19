@@ -210,7 +210,8 @@ def main() -> None:
     now = datetime.now(timezone.utc).isoformat(timespec='seconds').replace('+00:00', 'Z')
     changed = field_differences(read_json(Path(args.before_public)),
                                read_json(Path(args.after_public))) if args.before_public and args.after_public else {}
-    payload = report(raw_log, safe_previous(output), run_id=args.run_id,
+    previous = safe_previous(output)
+    payload = report(raw_log, previous, run_id=args.run_id,
                      run_number=args.run_number, event_name=args.event,
                      review_batch=args.review_batch, timestamp=now, differences=changed)
     # Aggregate only: no event URL or Discord contents are exposed on Pages.
@@ -219,6 +220,19 @@ def main() -> None:
         payload['daily_additions'] = daily
     else:
         payload['daily_additions'] = {'status': 'unavailable'}
+    # Automatic scans may run frequently, but only daily count changes or a
+    # new JST date need a public JSON update. Manual recheck results ALWAYS
+    # refresh and preserve the existing last_manual behavior.
+    previous_daily = previous.get('daily_additions')
+    comparable = ('date_jst', 'today', 'yesterday', 'last_7_days',
+                  'registered_total', 'tracked_since_jst', 'source')
+    is_manual = args.event == 'workflow_dispatch' and args.review_batch == '12'
+    if (not is_manual and isinstance(daily, dict)
+            and isinstance(previous_daily, dict)
+            and all(daily.get(key) == previous_daily.get(key)
+                    for key in comparable)):
+        print('LivePocket daily additions unchanged; summary retained')
+        return
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print('LivePocket public summary created; mode:', payload['last_run']['mode'],
           '; page_check_attempts:', payload['last_run']['page_check_attempts'])
