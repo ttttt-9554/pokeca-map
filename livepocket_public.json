@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T06:05:54.282560+00:00",
-  "unique_livepocket_urls": 387,
+  "collected_at": "2026-10-19T07:00:55.134874+00:00",
+  "unique_livepocket_urls": 388,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -4771,7 +4771,26 @@
         }
       ],
       "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ixm84",
+      "store_name": "受付終了: 10/25 22:00（残り6日5時間）",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-19T07:00:05.863000+00:00",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "受付終了: 10/25 22:00（残り6日5時間）",
+          "prefecture": "千葉県"
+        }
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2",
+      "first_detected_at": "2026-10-19T07:00:56.139583+00:00"
     }
   ],
-  "updated_at": "2026-10-19T06:50:58.230959+00:00"
+  "updated_at": "2026-10-19T07:01:21.413946+00:00"
 }
