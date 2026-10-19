@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.20: official title recovery plus first-seen NEW timestamps.
+"""LivePocket v21.21: safe diagnostic for unrecovered visible event headings.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -604,7 +604,18 @@ def title_diagnostic_details(page, url):
     codes/counts are finite and never contain candidate values."""
     result = {'reason': '', 'candidate_count': 0, 'valid_candidate_count': 0,
               'detail': '', 'candidate_sources': '', 'title_detected': False,
-              'rejection_codes': '', 'meta_template_cleaned': 0, 'heading_seen': 0}
+              'rejection_codes': '', 'meta_template_cleaned': 0, 'heading_seen': 0,
+              'recovery_probe': ''}
+    if isinstance(page, dict):
+        probe = page.get('title_recovery_probe')
+        # Whitelist only our own finite diagnostic values, never remote text.
+        if probe in ('invalid_page', 'missing_inputs', 'invalid_sources',
+                     'event_tabs_missing', 'event_tabs_ambiguous',
+                     'heading_area_empty', 'truncated_prefix_missing',
+                     'heading_recovered', 'multiple_matching_headings',
+                     'possible_wrapped_heading', 'prefix_not_at_heading_start',
+                     'heading_prefix_mismatch'):
+            result['recovery_probe'] = probe
     if not isinstance(page, dict):
         result['reason'] = 'invalid_fetch_result'
         return result
@@ -773,20 +784,24 @@ def clean_livepocket_event_title(value, source):
 #  - a unique full visible line closely preceding the known event tabs, and
 #  - that line begins with the exact metadata prefix (after whitespace/NFKC).
 # Do not guess the omitted ending or collect headings from unrelated paragraphs.
-def recover_visible_event_title(page):
-    """Return the full on-page event title only on strong structural agreement."""
+def inspect_visible_event_title(page):
+    """Return (verified title or None, SAFE finite failure code).
+
+    Diagnostic categories never contain a title, event text, or URL. Do not
+    expand the acceptance criteria until live runs explain what is missing.
+    """
     if not isinstance(page, dict):
-        return None
+        return None, 'invalid_page'
     body = page.get('text')
     raw = page.get('titles')
     origins = page.get('title_sources')
     if not isinstance(body, str) or not isinstance(raw, list) or not isinstance(origins, list):
-        return None
+        return None, 'missing_inputs'
     if len(raw) != len(origins):
-        return None
+        return None, 'invalid_sources'
 
-    # Body text is already produced by Playwright's body.inner_text() on the
-    # official URL. Do not use the event description or ticket names below tabs.
+    # Only rendered page text from the SAME requested event URL. Never use
+    # unrelated recommendations or ticket details below the navigation tabs.
     lines = [re.sub(r'\s+', ' ', html.unescape(x)).strip()
              for x in body[:25000].splitlines()[:220]]
     lines = [x for x in lines if x]
@@ -797,20 +812,20 @@ def recover_visible_event_title(page):
             continue
         if line != '概要':
             continue
-        # The screenshot confirms this distinctive four-tab event page header.
         tail = lines[i:i+9]
         if ('詳細' in tail and '受付・チケット情報' in tail and
                 'お問い合わせ' in tail and
                 tail.index('詳細') < tail.index('受付・チケット情報')
                 < tail.index('お問い合わせ')):
             overview_indexes.append(i)
+    if not overview_indexes:
+        return None, 'event_tabs_missing'
     if len(overview_indexes) != 1:
-        return None  # absent or ambiguous navigation
+        return None, 'event_tabs_ambiguous'
     nav = overview_indexes[0]
-    # There may be share/favorite accessibility labels between hero and tabs.
     nearby = lines[max(0,nav-12):nav]
     if not nearby:
-        return None
+        return None, 'heading_area_empty'
 
     def canonical(value):
         return re.sub(r'\s+', '', unicodedata.normalize('NFKC', value)).casefold()
@@ -824,16 +839,13 @@ def recover_visible_event_title(page):
             continue
         prefix = text[:-3].rstrip() if text.endswith('...') else text[:-1].rstrip()
         key = canonical(prefix)
-        # Tiny ellipsized labels could coincidentally match unrelated controls.
         if 12 <= len(key) <= 155 and not LP_GENERIC_TITLE.fullmatch(prefix):
             prefixes.add(key)
     if not prefixes:
-        return None
+        return None, 'truncated_prefix_missing'
 
     complete = set()
     for candidate in nearby:
-        # Preserve DOM inner_text line boundaries.  Never concatenate the
-        # title with a share/favorite button, announcement, or ticket detail.
         key = canonical(candidate)
         if any(len(key) > len(prefix) and key.startswith(prefix)
                for prefix in prefixes):
@@ -841,8 +853,28 @@ def recover_visible_event_title(page):
             if accepted and not LP_GENERIC_TITLE.fullmatch(accepted) and \
                     not _site_common_title(accepted):
                 complete.add(accepted)
-    # A conflicting header candidate must never be auto-selected.
-    return next(iter(complete)) if len(complete) == 1 else None
+    if len(complete) == 1:
+        return next(iter(complete)), 'heading_recovered'
+    if len(complete) > 1:
+        return None, 'multiple_matching_headings'
+
+    # Diagnostic ONLY: a visual title can be split into multiple DOM lines,
+    # but concatenating them can also make unrelated controls look like titles.
+    # Never accept these joined strings as official event names automatically.
+    if any(len(canonical(a + b)) > len(prefix) and
+           canonical(a + b).startswith(prefix)
+           for a, b in zip(nearby, nearby[1:]) for prefix in prefixes):
+        return None, 'possible_wrapped_heading'
+    # Look for a non-leading prefix on a single line (decorative front label).
+    if any(prefix in canonical(line) for prefix in prefixes for line in nearby):
+        return None, 'prefix_not_at_heading_start'
+    return None, 'heading_prefix_mismatch'
+
+
+def recover_visible_event_title(page):
+    """Backward-compatible: return only a uniquely verified visible title."""
+    value, _probe = inspect_visible_event_title(page)
+    return value
 
 
 def normalize_event_title_observation(page, url):
@@ -866,7 +898,8 @@ def normalize_event_title_observation(page, url):
     if name:
         entries.append((name, 'body_label'))
     # Visible title must agree with a truncated official metadata prefix.
-    matched_heading = recover_visible_event_title(page)
+    matched_heading, title_probe = inspect_visible_event_title(page)
+    result['title_recovery_probe'] = title_probe
     if matched_heading:
         entries.append((matched_heading, 'event_heading'))
     filtered = {key: 0 for key in TITLE_FILTER_CODES}
@@ -1359,6 +1392,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         row['title_diagnostic_rejection_codes'] = diag.get('rejection_codes', '')
         row['title_diagnostic_meta_template_cleaned'] = diag.get('meta_template_cleaned', '')
         row['title_diagnostic_heading_seen'] = diag.get('heading_seen', '')
+        row['title_diagnostic_recovery_probe'] = diag.get('recovery_probe', '')
         row['title_page_identity'] = (observations.get(row['url'], {}).get('page_identity')
                                       or 'not_checked')
         row['title_recheck_status'] = retry.get('status', '')
@@ -1719,7 +1753,8 @@ REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS + (
     'title_diagnostic_detail', 'title_diagnostic_sources',
     'title_diagnostic_valid_candidates',
     'title_diagnostic_rejection_codes', 'title_diagnostic_meta_template_cleaned',
-    'title_diagnostic_heading_seen', 'title_page_identity',
+    'title_diagnostic_heading_seen', 'title_diagnostic_recovery_probe',
+    'title_page_identity',
 )
 
 
