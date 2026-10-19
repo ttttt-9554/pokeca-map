@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T12:04:37.364563+00:00",
+  "collected_at": "2026-10-19T15:00:56.562842+00:00",
   "unique_livepocket_urls": 400,
   "items": [
     {
@@ -4663,8 +4663,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4685,8 +4683,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4704,8 +4700,6 @@
           "prefecture": "福島県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -5206,5 +5200,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T14:51:27.526005+00:00"
+  "updated_at": "2026-10-19T15:00:57.596106+00:00"
 }

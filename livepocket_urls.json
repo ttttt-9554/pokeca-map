@@ -1,8 +1,8 @@
 {
-  "collected_at": "2026-10-19T12:04:37.364563+00:00",
+  "collected_at": "2026-10-19T15:00:56.562842+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 99,
+  "messages_scanned": 100,
   "unique_livepocket_urls": 400,
   "items": [
     {
@@ -10312,10 +10312,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561710583626207244"
+      "1551580466266644552": "1561755871678038118"
     },
     "last_run": {
-      "checked_at": "2026-10-19T12:04:37.364563+00:00",
+      "checked_at": "2026-10-19T15:00:56.562842+00:00",
       "new_urls": 0,
       "original_urls": 400,
       "suspect_legacy_store_names": 0,
