@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T10:30:57.267211+00:00",
-  "unique_livepocket_urls": 398,
+  "collected_at": "2026-10-19T11:00:56.279620+00:00",
+  "unique_livepocket_urls": 399,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5108,7 +5108,12 @@
         }
       ],
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/65560",
+      "discord_posted_at": "2026-10-19T11:00:04.446000+00:00",
+      "first_detected_at": "2026-10-19T11:00:57.404010+00:00"
     }
   ],
-  "updated_at": "2026-10-19T10:50:56.535634+00:00"
+  "updated_at": "2026-10-19T11:01:23.472993+00:00"
 }
