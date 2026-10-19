@@ -10289,7 +10289,7 @@
     "prefecture": 207,
     "event_title": 81,
     "event_date": 1,
-    "product_name": 58,
+    "product_name": 59,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
@@ -11935,12 +11935,12 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/kh3_-": {
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-19T12:16:21.037448+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vd847": {
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-19T12:16:21.037448+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ixm84": {
           "checked_at": "2026-10-19T07:01:21.413946+00:00",
@@ -12270,13 +12270,13 @@
         },
         "https://livepocket.jp/e/vd847": {
           "detected_at": "2026-10-19T06:05:55.400853+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-19T06:06:18.740911+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-19T12:16:21.037448+00:00"
         },
         "https://livepocket.jp/e/kh3_-": {
           "detected_at": "2026-10-19T06:05:55.400853+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-19T06:06:18.740911+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-19T12:16:21.037448+00:00"
         },
         "https://livepocket.jp/e/ixm84": {
           "detected_at": "2026-10-19T07:00:56.139583+00:00",
@@ -12606,6 +12606,16 @@
         "https://livepocket.jp/e/3pk7b": {
           "attempts": 1,
           "last_attempt_at": "2026-10-19T11:41:27.085382+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/vd847": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T12:16:21.037448+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/kh3_-": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T12:16:21.037448+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -15180,7 +15190,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
+          "checked_at": "2026-10-19T12:16:21.037448+00:00",
           "title_observed": "抽選販売 ワンピースカードゲーム『EXブースター ヒロインズエディション Vol.2』",
           "genre": "onepiece",
           "product_origin": "v21_9_official_title_quoted_tcg_product",
@@ -15191,7 +15201,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
+          "checked_at": "2026-10-19T12:16:21.037448+00:00",
           "title_observed": "【ふるいち川越クレアモール店】ポケカ抽選販売（ﾎﾟｹﾓﾝｶｰﾄﾞｹﾞｰﾑMEGA30thCELEBRATIONｶｰﾄﾞｾｯﾄﾌｼｷﾞﾀﾞﾈ･ﾋﾄｶｹﾞ･ｾﾞﾆｶﾞﾒ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -16543,7 +16553,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/kh3_-": {
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
+          "checked_at": "2026-10-19T12:16:21.037448+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -16556,7 +16566,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vd847": {
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
+          "checked_at": "2026-10-19T12:16:21.037448+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
