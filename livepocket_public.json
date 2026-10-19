@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T11:30:54.504228+00:00",
+  "collected_at": "2026-10-19T12:04:37.364563+00:00",
   "unique_livepocket_urls": 400,
   "items": [
     {
@@ -580,12 +580,16 @@
       "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
       "prefecture": "神奈川県",
       "discord_posted_at": "2026-10-10T09:00:57.836000+00:00",
+      "event_title": "ONE PIECEカードゲーム「ONE PIECE Heroines Edition vol.2」抽選販売",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA BOOKSTORE川崎駅前店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム「ONE PIECE Heroines Edition vol.2」抽選販売"
     },
     {
       "url": "https://livepocket.jp/e/tx5dc",
@@ -3301,7 +3305,11 @@
     },
     {
       "url": "https://livepocket.jp/e/eqcmy",
-      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00"
+      "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
+      "event_title": "【9/16発売】ポケモンカードゲーム MEGA 『30thセレブレーション』 (2回目)抽選販売【TSUTAYAあべの橋店】",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【9/16発売】ポケモンカードゲーム MEGA 『30thセレブレーション』 (2回目)抽選販売【TSUTAYAあべの橋店】"
     },
     {
       "url": "https://livepocket.jp/e/5wpcb",
@@ -4633,12 +4641,16 @@
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T02:00:05.012000+00:00",
+      "event_title": "遊戯王OCG 「ORIGINAL ARTWORK COLLECTION」抽選受付",
+      "review_category": "yugioh",
       "stores": [
         {
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "yugioh",
+      "official_event_title": "遊戯王OCG 「ORIGINAL ARTWORK COLLECTION」抽選受付",
       "first_detected_at": "2026-10-19T02:00:55.901745+00:00"
     },
     {
@@ -4715,12 +4727,16 @@
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-19T03:00:13.898000+00:00",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "トレカエース植田店",
           "prefecture": "福島県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売受付",
       "first_detected_at": "2026-10-19T03:05:55.123260+00:00"
     },
     {
@@ -4791,12 +4807,19 @@
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4806,12 +4829,20 @@
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
+      "event_title": "ポケモンカードゲーム MEGA「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "product_name": "30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4821,12 +4852,16 @@
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -5039,12 +5074,16 @@
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T09:30:08.526000+00:00",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "トレカエース下妻店",
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
     },
     {
@@ -5101,17 +5140,58 @@
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T10:30:03.956000+00:00",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "トレカエース常陸太田店",
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
       "url": "https://livepocket.jp/e/65560",
       "discord_posted_at": "2026-10-19T11:00:04.446000+00:00",
+      "prefecture": "東京都",
+      "event_title": "10/31(土)発売 ワンピースカードゲーム エクストラブースターパック 『 Heroines Edition vol.2』",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-19T00:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "豊橋店",
+          "prefecture": ""
+        },
+        {
+          "name": "とよかわ店",
+          "prefecture": ""
+        },
+        {
+          "name": "荒尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "領家店",
+          "prefecture": ""
+        },
+        {
+          "name": "中島新町店",
+          "prefecture": ""
+        },
+        {
+          "name": "佐鳴台店",
+          "prefecture": ""
+        },
+        {
+          "name": "蒲郡三谷店",
+          "prefecture": ""
+        }
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "10/31(土)発売 ワンピースカードゲーム エクストラブースターパック 『 Heroines Edition vol.2』",
       "first_detected_at": "2026-10-19T11:00:57.404010+00:00"
     },
     {
@@ -5127,5 +5207,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T11:58:36.658978+00:00"
+  "updated_at": "2026-10-19T12:05:02.814652+00:00"
 }
