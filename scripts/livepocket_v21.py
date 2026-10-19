@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.24: developer-triggered recheck without the manual 2-hour per-URL limit.
+"""LivePocket v21.25: prioritize missing official names before lottery deadlines.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -1240,13 +1240,13 @@ MANUAL_RECHECK_LIMIT = 12
 
 
 def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT):
-    """Oldest/never-checked, incomplete, still-applicable URLs; bounded/rotating.
+    """Developer-only recheck: missing names, imminent deadlines, then older work.
 
-    No URL currently queued as *new* is chosen again. A hard global bot-block
-    cooldown always wins. Manual mode bypasses the historical 7-day wait but
-    NEVER the global bot-block cooldown, invalid timestamps, or future checks.
-    No 2-hour per-URL guard for a developer-requested run. The normal scheduled
-    recheck cadence and its existing cooldowns are unchanged.
+    Only the explicit developer invocation uses this selector; ordinary GitHub
+    schedules, new URL prioritization, and normal retry intervals are untouched.
+    Same URL may be rechecked immediately (no two-hour ban), but a recent
+    check is *deprioritized* when other eligible URLs are available so rapidly
+    re-opening the developer tab makes progress through the missing-name queue.
     """
     now = v14._utc(now)
     limit = max(0, min(int(limit), MANUAL_RECHECK_LIMIT))
@@ -1257,50 +1257,73 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         return []
     pending = set(v14state.get('pending_new_urls', []))
     browser_checks = state.get('v13', {}).get('browser_checks', {})
-    # Events already due in the normal retry channel are handled separately.
-    # Manual mode disables that separate retry pass to keep its total at 12.
+    official_checks = state.get('v21_9', {}).get('official_checks', {})
+    # v21.25: urgency matters for unlabelled, still-applicable lotteries.
+    # A soft 20-minute preference is NOT a hard cooldown. If the queue contains
+    # fewer than 12 other eligible URLs, even just-checked URLs remain usable.
+    recent_window = timedelta(minutes=20)
     selected = []
     for url, item in ri.items():
         if url in pending:
             continue
         event = pi[url]
         deadline = v11.parse_datetime(event.get('application_end_at'))
-        if deadline and deadline.astimezone(timezone.utc) <= now:
+        deadline_utc = deadline.astimezone(timezone.utc) if deadline else None
+        if deadline_utc and deadline_utc <= now:
             continue
         check = browser_checks.get(url, {})
         if not isinstance(check, dict) or check.get('status') == 'browser_redirected':
             continue
         last = v19.v18.v17.check_time(check.get('checked_at'))
         if check.get('checked_at') and not last:
-            continue  # malformed check timestamps are quarantined
+            continue  # malformed timestamps are quarantined
         if last and last > now:
             continue
-        # Non-working, repeated official checks must also respect the guard.
-        official = state.get('v21_9', {}).get('official_checks', {}).get(url, {})
+        official = official_checks.get(url, {})
+        if not isinstance(official, dict):
+            continue
         official_last = v19.v18.v17.check_time(official.get('checked_at'))
         if official.get('checked_at') and not official_last:
             continue
         if official_last and official_last > now:
             continue
+        latest_check = max((date for date in (last, official_last) if date),
+                           default=None)
         missing = missing_details_v21(event)
         event_title = event.get('event_title') or item.get('event_title') or ''
-        # Title recovery has priority over general freshness. Only exact-URL
-        # human-verified or official-page names count as confirmed.
-        source = str((item.get('field_sources') or {}).get('event_title') or '')
-        confirmed = bool(event.get('official_event_title')) and source in (
-            'v21_9_official_exact_url_title', 'v21_13_verified_manual_exact_url')
-        if not event_title:
-            tier = 0  # no event name
-        elif title_is_provisional(item) and not confirmed:
-            tier = 1  # short Discord event name
+        is_provisional = (title_is_provisional(item) or
+                          bool(event.get('event_title_provisional')))
+        # The card hides unverified Discord titles, so they remain missing.
+        if not event_title or is_provisional:
+            tier = 0
         elif missing:
-            tier = 2  # other incomplete page
+            tier = 1
         else:
-            tier = 3  # mostly complete event
-        selected.append((tier, last is not None,
-                         last or datetime.min.replace(tzinfo=timezone.utc), url))
+            tier = 2
+        # A near-closing event needs its name before its application ends.
+        # Unknown deadlines stay eligible, but follow known imminent ones.
+        if deadline_utc is None:
+            urgency = 4
+        else:
+            remaining = deadline_utc - now
+            if remaining <= timedelta(days=1):
+                urgency = 0
+            elif remaining <= timedelta(days=3):
+                urgency = 1
+            elif remaining <= timedelta(days=7):
+                urgency = 2
+            else:
+                urgency = 3
+        recently_checked = bool(latest_check and now - latest_check < recent_window)
+        # Prefer missing names, then other incomplete entries; among those,
+        # rotate away from just-checked entries, respect deadlines and age.
+        selected.append((tier, recently_checked, urgency,
+                         latest_check is not None,
+                         latest_check or datetime.min.replace(tzinfo=timezone.utc),
+                         deadline_utc or datetime.max.replace(tzinfo=timezone.utc),
+                         url))
     selected.sort()
-    return [url for *_, url in selected[:limit]]
+    return [row[-1] for row in selected[:limit]]
 
 
 @contextmanager
