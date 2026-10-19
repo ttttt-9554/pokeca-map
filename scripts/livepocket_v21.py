@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.25: prioritize missing official names before lottery deadlines.
+"""LivePocket v21.26: distinguish genuine event hero headings from ticket options.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -947,7 +947,10 @@ def recover_same_page_dom_title(page):
     prefixes = truncated_livepocket_meta_prefixes(page)
     if not prefixes:
         return None, 'dom_prefix_missing'
-    verified = set()
+    # v21.26: whitespace, Unicode width and case differences do not produce
+    # competing event names. Preserve the first official visible spelling;
+    # never remove meaningful suffixes, dates, edition numbers or ticket types.
+    verified = {}
     for raw in candidates[:12]:
         if not isinstance(raw, str) or len(raw) > 240:
             continue
@@ -959,9 +962,9 @@ def recover_same_page_dom_title(page):
             continue
         safe, _code, _fixed = clean_livepocket_event_title(candidate, 'event_heading')
         if safe and not _site_common_title(safe):
-            verified.add(safe)
+            verified.setdefault(key, safe)
     if len(verified) == 1:
-        return verified.pop(), 'dom_heading_verified'
+        return next(iter(verified.values())), 'dom_heading_verified'
     if len(verified) > 1:
         return None, 'dom_heading_ambiguous'
     return None, 'dom_prefix_mismatch'
@@ -995,12 +998,62 @@ DOM_EVENT_HEADING_JS = r"""(prefixes) => {
     if (!wanted.some(prefix => normalized.startsWith(prefix) && normalized.length > prefix.length)) continue;
     found.push({el, text});
   }
-  // Prefer the smallest element containing an identical visible title, not
-  // broad ancestors whose innerText also includes share buttons or captions.
+  // Prefer innermost title nodes, rather than large ancestors with captions.
   const leaf = found.filter(a => !found.some(b => a !== b && a.el.contains(b.el)));
-  const out = [];
-  for (const {text} of leaf) if (!out.includes(text)) out.push(text);
-  return out.slice(0, 12);
+  const distinct = [];
+  for (const item of leaf) {
+    // Exact same heading rendered with spacing/width variations is one title.
+    if (!distinct.some(a => canonical(a.text) === canonical(item.text))) distinct.push(item);
+  }
+  if (distinct.length <= 1) return distinct.map(x => x.text);
+
+  // v21.26: Sometimes a ticket option repeats the beginning of the EVENT
+  // name with a *different* ending. Never choose an arbitrary first/longest
+  // candidate. Accept a single independently marked event hero when the other
+  // candidates are non-hero text/ticket headings. All candidates still match
+  // the same exact-page truncated OG/document prefix above.
+  const eventTitleSelector = [
+    '[data-testid="event-title"]', '[data-testid="eventTitle"]',
+    '[data-qa="event-title"]', '[id="event-title"]', '[id="eventTitle"]',
+    '[id="event_name"]', '[class~="event-title"]',
+    '[class~="event_name"]', '[class*="eventTitle"]',
+    '[class*="EventTitle"]', '[class*="event_title"]',
+    '[class*="event-name"]'
+  ].join(',');
+  const inTicketArea = el => Boolean(el.closest(
+    '[data-testid*="ticket"], [class*="ticket-card"], ' +
+    '[class*="ticketCard"], [class*="TicketCard"], ' +
+    '[class*="recommend"], [class*="Recommend"]'
+  ));
+  const explicit = distinct.filter(({el}) => !inTicketArea(el) &&
+    (el.closest(eventTitleSelector) || el.closest('h1,[role="heading"][aria-level="1"]')));
+  const uniqueExplicit = [];
+  for (const item of explicit) if (!uniqueExplicit.some(x => canonical(x.text) === canonical(item.text)))
+    uniqueExplicit.push(item);
+  if (uniqueExplicit.length === 1) return [uniqueExplicit[0].text];
+  if (uniqueExplicit.length > 1) return distinct.slice(0, 12).map(x => x.text);
+
+  // A second independent way to recognize a hero is its location BEFORE the
+  // event-specific "受付・チケット情報" navigation tab. If exactly one title is
+  // above a unique visible tab and alternatives are below it, that earlier
+  // title is an event hero. Missing/duplicate tabs leave names unresolved.
+  const tabs = Array.from(document.querySelectorAll('a,button,[role="tab"],span,p,div'))
+    .filter(el => {
+      if (el.children.length > 2 || (el.innerText || '').trim() !== '受付・チケット情報') return false;
+      const style = window.getComputedStyle(el);
+      return style.display !== 'none' && style.visibility !== 'hidden' &&
+        el.getBoundingClientRect().height > 0;
+    });
+  const tabLeaf = tabs.filter(a => !tabs.some(b => a !== b && a.contains(b)));
+  if (tabLeaf.length === 1) {
+    const tab = tabLeaf[0];
+    const before = distinct.filter(({el}) =>
+      Boolean(el.compareDocumentPosition(tab) & Node.DOCUMENT_POSITION_FOLLOWING));
+    const after = distinct.length - before.length;
+    if (before.length === 1 && after >= 1) return [before[0].text];
+  }
+  // Genuine different top-level candidates remain ambiguous; do not guess.
+  return distinct.slice(0, 12).map(x => x.text);
 }"""
 
 
