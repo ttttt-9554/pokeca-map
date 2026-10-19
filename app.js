@@ -3643,6 +3643,48 @@
       <p class="hint">※記録開始${since ? `：${escape(since)}（日本時間）` : '以前の日別内訳なし'}。それ以前の登録分を推測して加算しません。更新はGitHub Actions成功後「結果を更新」で反映されます。</p>`;
   }
 
+  // v21.41: Only safe aggregate counts are rendered. No event URLs or
+  // browser page content are included in the published developer summary.
+  function lpDevFailureReasonsMarkup(stats) {
+    const keys = [
+      ['manual_fail_timeout','時間切れ','ページの読み込み時間が上限を超えた'],
+      ['manual_fail_no_response','HTTP応答なし','ブラウザーがHTTP応答を取得できなかった'],
+      ['manual_fail_http_error','HTTPエラー','対象ページがエラーを返した（詳細コードはCSVで確認）'],
+      ['manual_fail_redirected','別ページへ移動','元のLivePocketイベントURLとは異なるページになった'],
+      ['manual_fail_page_unconfirmed','イベント本文を確認できず','通信できてもイベント固有の本文を検証できなかった'],
+      ['manual_fail_access_blocked','アクセス制限・確認画面','アクセス制限や確認画面などで読み取れなかった'],
+      ['manual_fail_browser_error','ブラウザー処理のエラー','ブラウザーの処理中に例外が発生した'],
+      ['manual_fail_other','その他・分類対象外','上記には含まれない取得不成功']
+    ];
+    // Old summaries were generated before these fields existed.
+    if (!Object.hasOwn(stats, 'manual_fail_other')) {
+      return '<section class="lp-dev-failure-report"><h4>🔎 取得できなかった理由</h4>'+
+        '<p class="hint">詳しい内訳は、次回の手動再確認が完了した後に表示されます。</p></section>';
+    }
+    const checked = lpDevNumeric(stats,'manual_attempted');
+    const successful = lpDevNumeric(stats,'manual_success');
+    const failed = Math.max(0,checked-successful);
+    const rows = keys.map(([key,label,description]) => ({
+      label,description,count:lpDevNumeric(stats,key)
+    }));
+    const sum = rows.reduce((n,row) => n+row.count,0);
+    const problems = rows.filter(row => row.count>0);
+    const details = problems.length
+      ? problems.map(row => '<div class="lp-dev-failure-reason">'+
+        '<strong>'+escape(row.label)+' <span>'+row.count+'件</span></strong>'+
+        '<p>'+escape(row.description)+'</p></div>').join('')
+      : '<p class="hint">今回の手動確認ではページ取得の失敗は記録されていません。</p>';
+    return '<section class="lp-dev-failure-report" aria-label="再確認の失敗理由">'+
+      '<h4>🔎 取得できなかった理由</h4>'+
+      '<p><strong>確認 '+checked+'件 ／ ページ取得成功 '+successful+
+      '件 ／ 取得不成功 '+failed+'件</strong></p>'+
+      '<div class="lp-dev-failure-list">'+details+'</div>'+
+      (sum!==failed?'<p class="hint">※診断件数に不一致があります。集計処理の確認が必要です。</p>':'')+
+      '<p class="hint">※上記はページ取得不成功の内訳で、重複しない集計です。'+
+      '「公式イベント名が更新されなかった件数」とは別です。'+
+      'イベント名・URLなどは集計データに含めません。</p></section>';
+  }
+
   function lpDevReportMarkup(lastManual, lastRun) {
     if (!lastManual || !lastManual.completed_process_at) {
       return `<p class="hint">開発者ボタンによる再確認結果はまだありません。ボタンから実行し、GitHub Actionsの処理完了後に表示されます。</p>
@@ -3693,6 +3735,7 @@
     const runLink = safeId ? `<a href="https://github.com/ttttt-9554/pokeca-map/actions/runs/${safeId}" target="_blank" rel="noopener noreferrer">この実行をGitHubで確認 ↗</a>` : '';
     return `<p class="lp-dev-results-date"><strong>最終手動確認：</strong>${escape(lpDevReportDate(lastManual.completed_process_at))}</p>
       <div class="lp-dev-results-grid">${fields.map(([name,count]) => `<div class="lp-dev-result-cell"><span>${escape(name)}</span><strong>${Number.isSafeInteger(count) && count >= 0 ? count : 0}</strong></div>`).join('')}</div>
+      ${lpDevFailureReasonsMarkup(stats)}
       <p class="hint">※「公式イベント名を検出」は更新件数とは異なります。取得できても既存名と同じ場合があります。</p>
       <p class="hint">※ 「イベントページと確認できず」は通信失敗と同義ではありません。HTTP応答があっても、イベント本文を確認できないページは正式名の自動反映に使いません。</p>
       <p class="hint">※ メタ情報の整形や見出し候補があっても、正式イベント名の検出・更新が成功したとは限りません。省略表示は採用せず、CSVには判定コードと件数だけを記録します。</p>
