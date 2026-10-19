@@ -4937,6 +4937,8 @@
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-19T06:00:18.534000+00:00",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "抽選販売 ワンピースカードゲーム『EXブースター ヒロインズエディション Vol.2』",
       "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
     },
     {
@@ -4957,6 +4959,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（ﾎﾟｹﾓﾝｶｰﾄﾞｹﾞｰﾑMEGA30thCELEBRATIONｶｰﾄﾞｾｯﾄﾌｼｷﾞﾀﾞﾈ･ﾋﾄｶｹﾞ･ｾﾞﾆｶﾞﾒ）",
       "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
     },
     {
@@ -5200,5 +5204,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T18:15:58.052787+00:00"
+  "updated_at": "2026-10-19T18:26:32.980154+00:00"
 }
