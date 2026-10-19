@@ -41,6 +41,11 @@ ALLOWED_METRICS = (
     'manual_title_dom_candidates', 'manual_title_state_candidates',
     'manual_title_truncated',
     'manual_page_unconfirmed', 'manual_page_event_confirmed',
+    # Mutually exclusive failure classifications for manual page visits.
+    'manual_fail_timeout', 'manual_fail_no_response',
+    'manual_fail_http_error', 'manual_fail_redirected',
+    'manual_fail_page_unconfirmed', 'manual_fail_access_blocked',
+    'manual_fail_browser_error', 'manual_fail_other',
     'manual_title_truncated_tail', 'manual_title_truncated_inner',
     'manual_title_replacement_char',
     'manual_verified_titles_applied', 'manual_verified_titles_updated',
