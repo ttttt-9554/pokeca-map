@@ -9068,7 +9068,7 @@
       "discord_posted_at": "2026-10-19T00:10:37.455000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 本日0時から現在まで】\n\n📍群馬県\nトレカ丸倉賀野店\n受付終了: 10/21 22:00（残り2日12時間）\nhttps://livepocket.jp/e/c6zph",
-      "store_name": "受付終了: 10/21 22:00（残り2日12時間）",
+      "store_name": "トレカ丸倉賀野店",
       "prefecture": "群馬県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9077,13 +9077,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "application_start_at": "2026-10-17T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/21 22:00（残り2日12時間）",
+          "name": "トレカ丸倉賀野店",
           "prefecture": "群馬県"
         }
       ]
@@ -9094,7 +9096,7 @@
       "discord_posted_at": "2026-10-19T01:30:04.540000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日9時間）\nhttps://livepocket.jp/e/fei7k\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/os9ab\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/0jn3t",
-      "store_name": "受付終了: 10/25 20:30（残り6日9時間）",
+      "store_name": "文教堂書店浦安西友店",
       "prefecture": "千葉県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9104,13 +9106,15 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T20:30:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 20:30（残り6日9時間）",
+          "name": "文教堂書店浦安西友店",
           "prefecture": "千葉県"
         }
       ],
@@ -9122,7 +9126,7 @@
       "discord_posted_at": "2026-10-19T01:30:04.540000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日9時間）\nhttps://livepocket.jp/e/fei7k\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/os9ab\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/0jn3t",
-      "store_name": "受付終了: 10/25 22:00（残り6日11時間）",
+      "store_name": "トレカエース新取手店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9132,13 +9136,15 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日11時間）",
+          "name": "トレカエース新取手店",
           "prefecture": "茨城県"
         }
       ],
@@ -9150,7 +9156,7 @@
       "discord_posted_at": "2026-10-19T01:30:04.540000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日9時間）\nhttps://livepocket.jp/e/fei7k\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/os9ab\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/0jn3t",
-      "store_name": "受付終了: 10/25 22:00（残り6日11時間）",
+      "store_name": "トレカエース新取手店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9160,13 +9166,15 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日11時間）",
+          "name": "トレカエース新取手店",
           "prefecture": "茨城県"
         }
       ],
@@ -9178,7 +9186,7 @@
       "discord_posted_at": "2026-10-19T01:30:04.540000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日9時間）\nhttps://livepocket.jp/e/fei7k\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/os9ab\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/0jn3t",
-      "store_name": "受付終了: 10/25 22:00（残り6日11時間）",
+      "store_name": "トレカエース新取手店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9188,13 +9196,15 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日11時間）",
+          "name": "トレカエース新取手店",
           "prefecture": "茨城県"
         }
       ],
@@ -9206,7 +9216,7 @@
       "discord_posted_at": "2026-10-19T01:30:04.540000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日9時間）\nhttps://livepocket.jp/e/fei7k\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/os9ab\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日11時間）\nhttps://livepocket.jp/e/0jn3t",
-      "store_name": "受付終了: 10/25 22:00（残り6日11時間）",
+      "store_name": "トレカエース上荒川店",
       "prefecture": "福島県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9216,13 +9226,15 @@
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日11時間）",
+          "name": "トレカエース上荒川店",
           "prefecture": "福島県"
         }
       ],
@@ -9234,7 +9246,7 @@
       "discord_posted_at": "2026-10-19T02:00:05.012000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA加須店\n受付終了: 10/21 22:00（残り2日10時間）\nhttps://livepocket.jp/e/q-jxn",
-      "store_name": "受付終了: 10/21 22:00（残り2日10時間）",
+      "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9243,13 +9255,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/21 22:00（残り2日10時間）",
+          "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
       ]
@@ -9260,7 +9274,7 @@
       "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 10/25 22:00（残り6日10時間）\nhttps://livepocket.jp/e/8ymwg\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日9時間）\nhttps://livepocket.jp/e/l95rk\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 10/25 22:00（残り6日10時間）\nhttps://livepocket.jp/e/m740m",
-      "store_name": "受付終了: 10/25 22:00（残り6日10時間）",
+      "store_name": "トレカエース TSUTAYAデイズタウンつくば",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9269,13 +9283,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日10時間）",
+          "name": "トレカエース TSUTAYAデイズタウンつくば",
           "prefecture": "茨城県"
         }
       ]
@@ -9286,7 +9302,7 @@
       "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 10/25 22:00（残り6日10時間）\nhttps://livepocket.jp/e/8ymwg\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日9時間）\nhttps://livepocket.jp/e/l95rk\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 10/25 22:00（残り6日10時間）\nhttps://livepocket.jp/e/m740m",
-      "store_name": "受付終了: 10/21 21:00（残り2日9時間）",
+      "store_name": "ふるいちトップブックス前橋吉岡店",
       "prefecture": "群馬県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9295,13 +9311,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-21T21:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/21 21:00（残り2日9時間）",
+          "name": "ふるいちトップブックス前橋吉岡店",
           "prefecture": "群馬県"
         }
       ]
@@ -9312,7 +9330,7 @@
       "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 10/25 22:00（残り6日10時間）\nhttps://livepocket.jp/e/8ymwg\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日9時間）\nhttps://livepocket.jp/e/l95rk\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 10/25 22:00（残り6日10時間）\nhttps://livepocket.jp/e/m740m",
-      "store_name": "受付終了: 10/25 22:00（残り6日10時間）",
+      "store_name": "ブックエース小名浜住吉店",
       "prefecture": "福島県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9321,13 +9339,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日10時間）",
+          "name": "ブックエース小名浜住吉店",
           "prefecture": "福島県"
         }
       ]
@@ -9338,7 +9358,7 @@
       "discord_posted_at": "2026-10-19T03:00:13.898000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日8時間）\nhttps://livepocket.jp/e/fei7k\n\n📍埼玉県\nTSUTAYA加須店\n受付終了: 10/21 22:00（残り2日9時間）\nhttps://livepocket.jp/e/q-jxn\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/os9ab\n\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/8ymwg\n\n📍茨城県\nブックエースTSUTAYAイオンタウン水戸南店\n受付終了: 10/25 21:00（残り6日8時間）\nhttps://livepocket.jp/e/iia3c\n\n📍群馬県\nトレカ丸倉賀野店\n受付終了: 10/21 22:00（残り2日9時間）\nhttps://livepocket.jp/e/c6zph\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日8時間）\nhttps://livepocket.jp/e/l95rk\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/0jn3t\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/m740m\n\n📍福島県\nトレカエース植田店\n受付終了: 10/25 21:00（残り6日8時間）\nhttps://livepocket.jp/e/4c30v",
-      "store_name": "受付終了: 10/25 21:00（残り6日8時間）",
+      "store_name": "ブックエースTSUTAYAイオンタウン水戸南店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9347,13 +9367,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 21:00（残り6日8時間）",
+          "name": "ブックエースTSUTAYAイオンタウン水戸南店",
           "prefecture": "茨城県"
         }
       ]
@@ -9364,7 +9386,7 @@
       "discord_posted_at": "2026-10-19T03:00:13.898000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日8時間）\nhttps://livepocket.jp/e/fei7k\n\n📍埼玉県\nTSUTAYA加須店\n受付終了: 10/21 22:00（残り2日9時間）\nhttps://livepocket.jp/e/q-jxn\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/yqdc9\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/9j60m\n\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/os9ab\n\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/8ymwg\n\n📍茨城県\nブックエースTSUTAYAイオンタウン水戸南店\n受付終了: 10/25 21:00（残り6日8時間）\nhttps://livepocket.jp/e/iia3c\n\n📍群馬県\nトレカ丸倉賀野店\n受付終了: 10/21 22:00（残り2日9時間）\nhttps://livepocket.jp/e/c6zph\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日8時間）\nhttps://livepocket.jp/e/l95rk\n\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/0jn3t\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 10/25 22:00（残り6日9時間）\nhttps://livepocket.jp/e/m740m\n\n📍福島県\nトレカエース植田店\n受付終了: 10/25 21:00（残り6日8時間）\nhttps://livepocket.jp/e/4c30v",
-      "store_name": "受付終了: 10/25 21:00（残り6日8時間）",
+      "store_name": "トレカエース植田店",
       "prefecture": "福島県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9373,13 +9395,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 21:00（残り6日8時間）",
+          "name": "トレカエース植田店",
           "prefecture": "福島県"
         }
       ]
@@ -9390,7 +9414,7 @@
       "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA北習志野駅前店\n受付終了: 10/23 23:59（残り4日11時間）\nhttps://livepocket.jp/e/h295z\n\n📍都道府県不明\nONE PIECE Heroi...\n受付終了: 10/23 20:05（残り4日7時間）\nhttps://livepocket.jp/e/vxe8h",
-      "store_name": "受付終了: 10/23 23:59（残り4日11時間）",
+      "store_name": "TSUTAYA北習志野駅前店",
       "prefecture": "千葉県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9399,13 +9423,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-23T23:59:00+09:00",
       "application_start_at": "2026-10-19T10:21:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/23 23:59（残り4日11時間）",
+          "name": "TSUTAYA北習志野駅前店",
           "prefecture": "千葉県"
         }
       ]
@@ -9416,7 +9442,6 @@
       "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA北習志野駅前店\n受付終了: 10/23 23:59（残り4日11時間）\nhttps://livepocket.jp/e/h295z\n\n📍都道府県不明\nONE PIECE Heroi...\n受付終了: 10/23 20:05（残り4日7時間）\nhttps://livepocket.jp/e/vxe8h",
-      "store_name": "受付終了: 10/23 20:05（残り4日7時間）",
       "prefecture": null,
       "details_source": "discord_post",
       "product_name": "エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
@@ -9429,13 +9454,7 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-23T20:05:00+09:00",
-      "application_start_at": "2026-10-19T09:00:00+09:00",
-      "stores": [
-        {
-          "name": "受付終了: 10/23 20:05（残り4日7時間）",
-          "prefecture": ""
-        }
-      ]
+      "application_start_at": "2026-10-19T09:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/nexus-opening-futuristic-30th",
@@ -9443,7 +9462,6 @@
       "discord_posted_at": "2026-10-19T04:30:03.819000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n当選者の方に限り、ECサイトにてご購入いただけます\n受付終了: 10/25 23:59（残り6日10時間）\nhttps://livepocket.jp/e/nexus-opening-futuristic-30th",
-      "store_name": "受付終了: 10/25 23:59（残り6日10時間）",
       "prefecture": "東京都",
       "details_source": "discord_post",
       "product_name": "30th CELEBRATION FUTURISTIC BOX",
@@ -9456,13 +9474,7 @@
         "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "application_end_at": "2026-10-25T23:59:00+09:00",
-      "application_start_at": "2026-10-18T00:00:00+09:00",
-      "stores": [
-        {
-          "name": "受付終了: 10/25 23:59（残り6日10時間）",
-          "prefecture": "東京都"
-        }
-      ]
+      "application_start_at": "2026-10-18T00:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/1nu7h",
@@ -9470,7 +9482,7 @@
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場志木店\n受付終了: 10/20 22:00（残り1日7時間）\nhttps://livepocket.jp/e/1nu7h\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/ogkmz\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/mr_q1\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/2-bec\n\n📍茨城県\nブックエース茨大前店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/v_2b1",
-      "store_name": "受付終了: 10/20 22:00（残り1日7時間）",
+      "store_name": "古本市場志木店",
       "prefecture": "埼玉県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9479,13 +9491,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-20T22:00:00+09:00",
       "application_start_at": "2026-10-18T20:30:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/20 22:00（残り1日7時間）",
+          "name": "古本市場志木店",
           "prefecture": "埼玉県"
         }
       ]
@@ -9496,7 +9510,7 @@
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場志木店\n受付終了: 10/20 22:00（残り1日7時間）\nhttps://livepocket.jp/e/1nu7h\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/ogkmz\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/mr_q1\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/2-bec\n\n📍茨城県\nブックエース茨大前店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/v_2b1",
-      "store_name": "受付終了: 10/21 22:00（残り2日7時間）",
+      "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9505,13 +9519,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/21 22:00（残り2日7時間）",
+          "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ]
@@ -9522,7 +9538,7 @@
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場志木店\n受付終了: 10/20 22:00（残り1日7時間）\nhttps://livepocket.jp/e/1nu7h\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/ogkmz\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/mr_q1\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/2-bec\n\n📍茨城県\nブックエース茨大前店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/v_2b1",
-      "store_name": "受付終了: 10/21 22:00（残り2日7時間）",
+      "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9531,13 +9547,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/21 22:00（残り2日7時間）",
+          "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ]
@@ -9548,7 +9566,7 @@
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場志木店\n受付終了: 10/20 22:00（残り1日7時間）\nhttps://livepocket.jp/e/1nu7h\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/ogkmz\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/mr_q1\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/2-bec\n\n📍茨城県\nブックエース茨大前店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/v_2b1",
-      "store_name": "受付終了: 10/25 22:00（残り6日7時間）",
+      "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9557,13 +9575,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日7時間）",
+          "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ]
@@ -9574,7 +9594,7 @@
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場志木店\n受付終了: 10/20 22:00（残り1日7時間）\nhttps://livepocket.jp/e/1nu7h\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/ogkmz\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日7時間）\nhttps://livepocket.jp/e/mr_q1\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/2-bec\n\n📍茨城県\nブックエース茨大前店\n受付終了: 10/25 22:00（残り6日7時間）\nhttps://livepocket.jp/e/v_2b1",
-      "store_name": "受付終了: 10/25 22:00（残り6日7時間）",
+      "store_name": "ブックエース茨大前店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9583,13 +9603,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日7時間）",
+          "name": "ブックエース茨大前店",
           "prefecture": "茨城県"
         }
       ]
@@ -9600,7 +9622,7 @@
       "discord_posted_at": "2026-10-19T05:30:06.320000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nCARDWINGS八王子駅前店\n受付終了: 10/20 23:59（残り1日9時間）\nhttps://livepocket.jp/e/5xmz8\n\n📍茨城県\nふるいちイオンモール水戸内原店\n受付終了: 10/20 21:01（残り1日6時間）\nhttps://livepocket.jp/e/3pk7b\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日6時間）\nhttps://livepocket.jp/e/tnwja",
-      "store_name": "受付終了: 10/20 23:59（残り1日9時間）",
+      "store_name": "CARDWINGS八王子駅前店",
       "prefecture": "東京都",
       "details_source": "discord_post",
       "product_name": null,
@@ -9609,13 +9631,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-20T23:59:00+09:00",
       "application_start_at": "2026-10-19T14:05:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/20 23:59（残り1日9時間）",
+          "name": "CARDWINGS八王子駅前店",
           "prefecture": "東京都"
         }
       ]
@@ -9626,7 +9650,7 @@
       "discord_posted_at": "2026-10-19T05:30:06.320000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nCARDWINGS八王子駅前店\n受付終了: 10/20 23:59（残り1日9時間）\nhttps://livepocket.jp/e/5xmz8\n\n📍茨城県\nふるいちイオンモール水戸内原店\n受付終了: 10/20 21:01（残り1日6時間）\nhttps://livepocket.jp/e/3pk7b\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日6時間）\nhttps://livepocket.jp/e/tnwja",
-      "store_name": "受付終了: 10/20 21:01（残り1日6時間）",
+      "store_name": "ふるいちイオンモール水戸内原店",
       "prefecture": "茨城県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9635,13 +9659,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-20T21:01:00+09:00",
       "application_start_at": "2026-10-19T12:57:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/20 21:01（残り1日6時間）",
+          "name": "ふるいちイオンモール水戸内原店",
           "prefecture": "茨城県"
         }
       ]
@@ -9652,7 +9678,7 @@
       "discord_posted_at": "2026-10-19T05:30:06.320000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nCARDWINGS八王子駅前店\n受付終了: 10/20 23:59（残り1日9時間）\nhttps://livepocket.jp/e/5xmz8\n\n📍茨城県\nふるいちイオンモール水戸内原店\n受付終了: 10/20 21:01（残り1日6時間）\nhttps://livepocket.jp/e/3pk7b\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日6時間）\nhttps://livepocket.jp/e/tnwja",
-      "store_name": "受付終了: 10/21 21:00（残り2日6時間）",
+      "store_name": "ふるいちトップブックス前橋吉岡店",
       "prefecture": "群馬県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9661,13 +9687,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-21T21:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/21 21:00（残り2日6時間）",
+          "name": "ふるいちトップブックス前橋吉岡店",
           "prefecture": "群馬県"
         }
       ]
@@ -9698,7 +9726,7 @@
       "discord_posted_at": "2026-10-19T06:00:18.226000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 15時まとめ】\n\n📍東京都\n当選者の方に限り、ECサイトにてご購入いただけます\n受付終了: 10/25 23:59（残り6日8時間）\nhttps://livepocket.jp/e/nexus-opening-futuristic-30th\n\n📍東京都\nCARDWINGS八王子駅前店\n受付終了: 10/20 23:59（残り1日8時間）\nhttps://livepocket.jp/e/5xmz8\n\n🔁 再通知\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 10/25 20:30（残り6日5時間）\nhttps://livepocket.jp/e/fei7k\n\n📍千葉県\nTSUTAYA北習志野駅前店\n受付終了: 10/23 23:59（残り4日8時間）\nhttps://livepocket.jp/e/h295z\n\n🔁 再通知\n📍埼玉県\nTSUTAYA加須店\n受付終了: 10/21 22:00（残り2日6時間）\nhttps://livepocket.jp/e/q-jxn\n\n📍埼玉県\n古本市場志木店\n受付終了: 10/20 22:00（残り1日6時間）\nhttps://livepocket.jp/e/1nu7h\n\n📍埼玉県\nふるいち川越クレアモール店\n受付終了: 10/20 21:00（残り1日5時間）\nhttps://livepocket.jp/e/vd847\n\n🔁 再通知\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/yqdc9\n\n🔁 再通知\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/9j60m\n\n🔁 再通知\n📍茨城県\nトレカエース新取手店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/os9ab\n\n🔁 再通知\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/8ymwg\n\n🔁 再通知\n📍茨城県\nブックエースTSUTAYAイオンタウン水戸南店\n受付終了: 10/25 21:00（残り6日5時間）\nhttps://livepocket.jp/e/iia3c\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日6時間）\nhttps://livepocket.jp/e/ogkmz\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/21 22:00（残り2日6時間）\nhttps://livepocket.jp/e/mr_q1\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/2-bec\n\n📍茨城県\nブックエース茨大前店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/v_2b1\n\n📍茨城県\nふるいちイオンモール水戸内原店\n受付終了: 10/20 21:01（残り1日6時間）\nhttps://livepocket.jp/e/3pk7b\n\n🔁 再通知\n📍群馬県\nトレカ丸倉賀野店\n受付終了: 10/21 22:00（残り2日6時間）\nhttps://livepocket.jp/e/c6zph\n\n🔁 再通知\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日5時間）\nhttps://livepocket.jp/e/l95rk\n\n📍群馬県\nふるいちトップブックス前橋吉岡店\n受付終了: 10/21 21:00（残り2日5時間）\nhttps://livepocket.jp/e/tnwja\n\n🔁 再通知\n📍福島県\nトレカエース上荒川店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/0jn3t\n\n🔁 再通知\n📍福島県\nブックエース小名浜住吉店\n受付終了: 10/25 22:00（残り6日6時間）\nhttps://livepocket.jp/e/m740m\n\n🔁 再通知\n📍福島県\nトレカエース植田店\n受付終了: 10/25 21:00（残り6日5時間）\nhttps://livepocket.jp/e/4c30v\n\n📍都道府県不明",
-      "store_name": "受付終了: 10/20 21:00（残り1日5時間）",
+      "store_name": "ふるいち川越クレアモール店",
       "prefecture": "埼玉県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9707,13 +9735,15 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "application_end_at": "2026-10-20T21:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/20 21:00（残り1日5時間）",
+          "name": "ふるいち川越クレアモール店",
           "prefecture": "埼玉県"
         }
       ]
@@ -9724,7 +9754,7 @@
       "discord_posted_at": "2026-10-19T07:00:05.863000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYABOOKSTOREそよら成田ニュータウン\n受付終了: 10/25 22:00（残り6日5時間）\nhttps://livepocket.jp/e/ixm84",
-      "store_name": "受付終了: 10/25 22:00（残り6日5時間）",
+      "store_name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
       "prefecture": "千葉県",
       "details_source": "discord_post",
       "product_name": null,
@@ -9734,14 +9764,16 @@
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store"
       },
       "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "stores": [
         {
-          "name": "受付終了: 10/25 22:00（残り6日5時間）",
+          "name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
           "prefecture": "千葉県"
         }
       ]
@@ -9753,7 +9785,7 @@
     "no_structured_details": 152
   },
   "field_counts": {
-    "store_name": 235,
+    "store_name": 233,
     "prefecture": 196,
     "event_title": 19,
     "event_date": 1,
@@ -9763,7 +9795,7 @@
     "lottery_result_period": 1,
     "application_end_at": 363,
     "application_start_at": 363,
-    "stores_events": 237
+    "stores_events": 235
   },
   "collector_state": {
     "last_seen_message_ids": {
