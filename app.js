@@ -11,6 +11,9 @@
   const SHARED_TABLE = 'shared_reports';
   let supabaseClient = null;
   let authUser = null;
+  // Manual app refresh can restore any ordinary tab immediately.
+  // The developer tab must wait until Discord authentication confirms access.
+  let restoreDeveloperTabPending = false;
 
   // Supabase > Authentication > Users に表示される自分の User UID を設定
   // 指定したUIDでログインしたときだけ開発タブを表示します。
@@ -311,6 +314,10 @@
       : '共有するには「共有」タブからDiscordでログインしてください。';
     renderMyShared();
     updateDeveloperTab();
+    if (restoreDeveloperTabPending && isDeveloper()) {
+      restoreDeveloperTabPending = false;
+      switchTab('dev');
+    }
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
     refreshWishlistForAccount();
     refreshLotteryTrackerForAccount();
@@ -3601,7 +3608,26 @@
       updateCategoryHint();
 
       initMap();
-      switchTab('map');
+      // v21.35: Only manual app refresh restores the tab saved in the URL.
+      // A regular app launch still opens the map as before.
+      let initialTab = 'map';
+      try {
+        const currentUrl = new URL(window.location.href);
+        const requestedTab = currentUrl.searchParams.has('app_refresh')
+          ? currentUrl.searchParams.get('app_tab') : null;
+        const allowedTabs = ['map','add','history','lottery','lotteryManage','group','dev'];
+        if (allowedTabs.includes(requestedTab)) {
+          if (requestedTab === 'dev') restoreDeveloperTabPending = true;
+          else initialTab = requestedTab;
+        }
+        if (currentUrl.searchParams.has('app_tab')) {
+          currentUrl.searchParams.delete('app_tab');
+          window.history.replaceState(window.history.state, '', currentUrl.href);
+        }
+      } catch (error) {
+        console.warn('更新時のタブ復元をスキップ:', error);
+      }
+      switchTab(initialTab);
 
       loadStoreCSV();
       loadProducts();
