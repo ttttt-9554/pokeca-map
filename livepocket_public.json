@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T02:00:55.022713+00:00",
-  "unique_livepocket_urls": 369,
+  "collected_at": "2026-10-19T02:35:55.432048+00:00",
+  "unique_livepocket_urls": 372,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -4464,7 +4464,49 @@
           "prefecture": "埼玉県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/8ymwg",
+      "store_name": "受付終了: 10/25 22:00（残り6日10時間）",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "受付終了: 10/25 22:00（残り6日10時間）",
+          "prefecture": "茨城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/l95rk",
+      "store_name": "受付終了: 10/21 21:00（残り2日9時間）",
+      "prefecture": "群馬県",
+      "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
+      "application_end_at": "2026-10-21T21:00:00+09:00",
+      "application_start_at": "2026-10-19T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "受付終了: 10/21 21:00（残り2日9時間）",
+          "prefecture": "群馬県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/m740m",
+      "store_name": "受付終了: 10/25 22:00（残り6日10時間）",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-19T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "受付終了: 10/25 22:00（残り6日10時間）",
+          "prefecture": "福島県"
+        }
+      ]
     }
   ],
-  "updated_at": "2026-10-19T02:27:12.924299+00:00"
+  "updated_at": "2026-10-19T02:36:20.527078+00:00"
 }
