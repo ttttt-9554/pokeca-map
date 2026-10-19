@@ -3565,6 +3565,9 @@
   let lpDevRecheckBusy = false;
   const LP_DEV_RESULTS_URL = './livepocket_check_summary.json';
   let lpDevReportLoading = false;
+  // A tap made while an automatic poll is active is queued, never discarded.
+  let lpDevManualRefreshQueued = false;
+  let lpDevResultSignature = '';
   let lpDevReportTimer = null;
   let lpDevReportSince = 0;
   let lpDevLastSeenManualRun = '';
@@ -3697,16 +3700,50 @@
       ${runLink}`;
   }
 
-  async function loadLotteryDevResults() {
-    if (!isDeveloper() || lpDevReportLoading) return;
+  // v21.40: Immediate feedback on manual result refresh, even when the
+  // published JSON is unchanged or another request is already running.
+  async function loadLotteryDevResults({manual = false} = {}) {
     const output = $('lpDevResultsContent');
     const state = $('lpDevResultsState');
+    const button = $('lpDevResultsRefresh');
     if (!output || !state) return;
+
+    if (!isDeveloper()) {
+      if (manual) state.textContent = '⚠ 開発者としてログインしてください。';
+      return;
+    }
+    if (lpDevReportLoading) {
+      if (manual) {
+        lpDevManualRefreshQueued = true;
+        state.textContent = '⏳ 結果を取得中です。完了後に最新データを再確認します…';
+        if (button) {
+          button.disabled = true;
+          button.textContent = '更新待ち…';
+        }
+      }
+      return;
+    }
+
     lpDevReportLoading = true;
+    if (manual) {
+      if (button) {
+        button.disabled = true;
+        button.textContent = '更新中…';
+        button.setAttribute('aria-busy','true');
+      }
+      state.textContent = '🔄 最新の再確認結果を取得しています…';
+    }
+    const previousSignature = lpDevResultSignature;
+    const controller = typeof AbortController === 'function' ? new AbortController() : null;
+    let abortTimer = null;
     try {
-      const response = await fetch(LP_DEV_RESULTS_URL + '?t=' + Date.now(), {cache:'no-store'});
+      if (controller) abortTimer = setTimeout(() => controller.abort(), 15000);
+      const response = await fetch(LP_DEV_RESULTS_URL + '?t=' + Date.now(), {
+        cache:'no-store',
+        signal: controller ? controller.signal : undefined
+      });
       if (response.status === 404) {
-        state.textContent = '結果ファイルはまだありません。GitHub側のv21.11を反映後、最初の実行で作成されます。';
+        state.textContent = '結果ファイルはまだありません。GitHub Actionsの実行完了後に再度更新してください。';
         renderLpDevDailyGrowth(null);
         output.replaceChildren();
         return;
@@ -3717,7 +3754,25 @@
       renderLpDevDailyGrowth(result.daily_additions);
       const lastManual = result.last_manual;
       if (lastManual?.run_id) lpDevLastSeenManualRun = String(lastManual.run_id);
-      state.textContent = '結果を取得しました。';
+      const signature = [
+        lastManual?.run_id || '',
+        lastManual?.completed_process_at || '',
+        result.last_run?.run_id || '',
+        result.last_run?.completed_process_at || '',
+        result.daily_additions?.as_of || ''
+      ].join('|');
+      lpDevResultSignature = signature;
+
+      const viewedAt = new Intl.DateTimeFormat('ja-JP',{
+        timeZone:'Asia/Tokyo', hour:'2-digit',minute:'2-digit',second:'2-digit',
+        hour12:false
+      }).format(new Date());
+      const same = previousSignature && previousSignature === signature;
+      state.textContent = manual
+        ? '✅ '+viewedAt+' に確認しました。'+
+          (same?'公開結果は前回と同じです。GitHub Actions完了後に更新されます。':
+            '公開結果を読み込みました。')
+        : '結果を取得しました。';
       output.innerHTML = lpDevReportMarkup(lastManual, result.last_run);
       if (lpDevReportSince && lastManual?.completed_process_at) {
         const checkedAt = Date.parse(lastManual.completed_process_at);
@@ -3727,15 +3782,29 @@
           clearInterval(lpDevReportTimer);
           lpDevReportTimer = null;
           lpDevReportSince = 0;
-          state.textContent = '✅ 今回の手動再確認の結果が反映されました。';
+          state.textContent = '✅ 今回の手動再確認の結果が反映されました（確認 '+viewedAt+'）。';
           loadLotteryEvents(true);
         }
       }
     } catch (error) {
-      renderLpDevDailyGrowth(null);
-      state.textContent = '結果を取得できませんでした：' + (error?.message || '通信エラー');
+      // Keep previously fetched results visible when a network check fails.
+      state.textContent = error?.name === 'AbortError'
+        ? '⚠ 読み込みが15秒を超えました。通信を確認してもう一度「結果を更新」を押してください。'
+        : '⚠ 結果を取得できませんでした：'+(error?.message || '通信エラー');
+      console.warn('再確認の結果取得エラー:',error);
     } finally {
+      if (abortTimer) clearTimeout(abortTimer);
       lpDevReportLoading = false;
+      if (button) {
+        button.disabled = false;
+        button.textContent = '結果を更新';
+        button.removeAttribute('aria-busy');
+      }
+      if (lpDevManualRefreshQueued) {
+        lpDevManualRefreshQueued = false;
+        // Follow the user's explicit tap with a fresh no-cache request.
+        queueMicrotask(() => loadLotteryDevResults({manual:true}));
+      }
     }
   }
 
@@ -3812,7 +3881,7 @@
     const button = $('lpDevRecheckButton');
     const status = $('lpDevRecheckStatus');
     if (!button || !status) return;
-    $('lpDevResultsRefresh')?.addEventListener('click', loadLotteryDevResults);
+    $('lpDevResultsRefresh')?.addEventListener('click', () => loadLotteryDevResults({manual:true}));
     button.addEventListener('click', () => requestLotteryDevRecheck({automatic: false}));
   }
 
