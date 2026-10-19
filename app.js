@@ -313,6 +313,8 @@
     updateDeveloperTab();
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
     refreshWishlistForAccount();
+    refreshLotteryTrackerForAccount();
+    refreshLotteryOnsiteReports(true);
     queueMicrotask(() => friendPresenceAuthChanged());
   }
 
@@ -350,11 +352,12 @@
     displayAuth();
     await loadSharedReports();
     await loadCloudData();
+    refreshLotteryOnsiteReports(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); refreshWishlistForAccount(); });
+    window.addEventListener('focus',()=>{ loadCloudData(); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); });
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
         payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
@@ -489,7 +492,7 @@
     });
 
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') loadLotteryEvents();
+    if (tab === 'lottery') { loadLotteryEvents(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'dev' && isDeveloper()) loadLotteryDevResults();
     render();
   }
@@ -2507,6 +2510,7 @@
           (info ? ` ／ データ最終変更 ${info}（日本時間）` : '') +
           ` ／ 画面で最新データを取得 ${viewedAt}`;
         renderLottery();
+        refreshLotteryOnsiteReports();
       } catch(error) {
         console.error('LivePocket取得エラー:',error);
         status.textContent = '抽選情報を読み込めませんでした。更新をお試しください：' + error.message +
@@ -2570,7 +2574,9 @@
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
+      ${lotteryOnsiteSharedHtml(item.url)}
       <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">公式ページで確認 ↗</a>
+      ${lotteryTrackerActionsHtml(item)}
     </article>`;
   }
 
@@ -2623,10 +2629,14 @@
     const more = $('lpMore');
     more.hidden = visible.length <= lotteryVisibleLimit;
     more.textContent = `さらに${Math.min(LP_PAGE_SIZE,visible.length-lotteryVisibleLimit)}件表示`;
+    renderLotteryTrackerSummary();
   }
 
   function initLottery() {
     ensureLotteryNewBadgeStyle();
+    ensureLotteryTrackerUI();
+    $('lotteryView').addEventListener('click', lotteryTrackerHandleClick);
+    $('lotteryView').addEventListener('click', lotteryOnsiteHandleClick);
     // 初期表示はジャンル全件・日時確認済みの受付中のみ。
     $('lpGenre').value = 'all';
     $('lpStatus').value = 'open';
@@ -2661,6 +2671,568 @@
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible' && $('lotteryView').classList.contains('active')) loadLotteryEvents();
     });
+  }
+
+
+  // ========================================
+  // v21.27: Each Discord account privately manages its own lottery progress.
+  // This data is NEVER added to public LivePocket JSON, reports or Discord.
+  // Supabase RLS enforces user_id=auth.uid() for every operation.
+  // ========================================
+  const LP_TRACK_TABLE = 'lottery_user_entries';
+  const LP_TRACK_STATUSES = ['not_applied','applied','won','lost','received'];
+  const LP_TRACK_LABELS = {
+    not_applied:'未応募', applied:'応募済み', won:'当選・受取待ち',
+    lost:'落選', received:'受取済み'
+  };
+  let lotteryTrackRecords = new Map();
+  let lotteryTrackUserId = '';
+  let lotteryTrackSequence = 0;
+  let lotteryTrackLastLoad = 0;
+  let lotteryTrackFetching = null;
+  let lotteryTrackSaving = false;
+  let lotteryTrackFilter = 'all';
+  let lotteryTrackError = '';
+
+  function lotteryTrackCss() {
+    if ($('lpTrackerStyle')) return;
+    const sheet = document.createElement('style');
+    sheet.id = 'lpTrackerStyle';
+    sheet.textContent = `
+      #lpTrackerPanel{padding:14px;margin:14px 0;border:1px solid var(--app-border,#cbd5e1);border-radius:16px;background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+      #lpTrackerPanel h3{margin:0 0 8px;font-size:16px}
+      #lpTrackerPanel .lp-tracker-intro{font-size:12px;line-height:1.65;color:var(--app-muted,#64748b);margin:5px 0 10px}
+      .lp-track-counts{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
+      .lp-track-counts span{padding:5px 8px;border-radius:9px;border:1px solid var(--app-border,#cbd5e1);font-size:12px;background:var(--app-surface2,#f8fafc)}
+      .lp-track-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+      .lp-track-toolbar label{font-size:12px;font-weight:700}
+      #lpTrackFilter{font-size:13px;min-height:38px;max-width:200px;color:var(--app-text,#172033);background:var(--app-surface2,#fff);border:1px solid var(--app-border,#cbd5e1)}
+      #lpTrackReload{min-height:38px;font-size:12px}
+      .lp-track-row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--app-border,#dbe3ed)}
+      .lp-track-row strong{display:block;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+      .lp-track-row p{margin:4px 0;font-size:12px;color:var(--app-muted,#64748b);line-height:1.5}
+      .lp-track-row button{flex-shrink:0;min-height:38px;font-size:12px}
+      .lp-track-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:11px 0 0}
+      .lp-track-actions button{min-height:40px;font-size:12px;padding:8px 10px}
+      .lp-track-pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:750;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#eef2ff)}
+      .lp-track-note{font-size:12px;line-height:1.5;color:var(--app-muted,#64748b);margin:7px 0}
+      .lp-track-overdue{font-weight:800;color:#c2410c!important}
+      .lp-track-today{font-weight:800;color:#be123c!important}
+      #lpTrackStatus{font-size:12px;line-height:1.55;color:var(--app-muted,#64748b)}
+      #lpTrackerEditor{width:min(95vw,560px);max-height:90dvh;overflow:auto;border-radius:17px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);color:var(--app-text,#172033);padding:18px}
+      #lpTrackerEditor::backdrop{background:#0009}
+      #lpTrackerForm{display:grid;gap:13px;padding:0}
+      #lpTrackerForm label:not(.lp-check-line){display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700}
+      #lpTrackerForm select,#lpTrackerForm input[type=date],#lpTrackerForm textarea{width:100%;min-width:0;min-height:40px;border-radius:8px;padding:7px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#fff);color:var(--app-text,#172033)}
+      #lpTrackerForm textarea{min-height:74px;resize:vertical}
+      #lpTrackerForm .lp-check-line{display:flex;align-items:center;gap:9px;font-size:13px}
+      #lpTrackerForm .lp-check-line input{width:20px;height:20px}
+      .lp-track-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+      .lp-track-modal-actions button{min-height:42px}
+      .lp-onsite-shared{border:1px solid var(--app-border,#cbd5e1);border-radius:11px;padding:10px;margin:12px 0;background:var(--app-surface2,#f8fafc);font-size:12px;line-height:1.6}
+      .lp-onsite-shared strong{font-size:13px;color:var(--app-text,#172033)}
+      .lp-onsite-shared p{margin:4px 0;color:var(--app-muted,#64748b)}
+      .lp-onsite-shared details{margin:6px 0}
+      .lp-onsite-shared ul{padding-left:18px;margin:6px 0;overflow-wrap:anywhere}
+      .lp-onsite-shared li{margin-bottom:5px}
+      .lp-onsite-shared button{min-height:38px;margin-top:5px;font-size:12px}
+      #lpOnsiteEditor{width:min(95vw,560px);max-height:90dvh;overflow:auto;border-radius:17px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);color:var(--app-text,#172033);padding:18px}
+      #lpOnsiteEditor::backdrop{background:#0009}
+      #lpOnsiteForm{display:grid;gap:12px;padding:0}
+      #lpOnsiteForm label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700}
+      #lpOnsiteForm select,#lpOnsiteForm textarea{width:100%;min-width:0;border-radius:8px;padding:8px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#fff);color:var(--app-text,#172033)}
+      #lpOnsiteForm textarea{min-height:100px;resize:vertical}
+      #lpOnsiteMessage{font-size:12px;overflow-wrap:anywhere}
+      html[data-theme=dark] .lp-onsite-shared{background:var(--app-surface2,#1d293c)!important}
+      html[data-theme=dark] #lpOnsiteEditor{background:var(--app-surface)!important;color:var(--app-text)!important}
+      #lpTrackEditorMessage{font-size:12px;min-height:16px;line-height:1.5}
+      html[data-theme=dark] #lpTrackerPanel,html[data-theme=dark] #lpTrackerEditor{background:var(--app-surface)!important;color:var(--app-text)!important}
+      html[data-theme=dark] .lp-track-overdue{color:#fdba74!important}
+      html[data-theme=dark] .lp-track-today{color:#fda4af!important}
+    `;
+    document.head.append(sheet);
+  }
+
+  function ensureLotteryTrackerUI() {
+    if ($('lpTrackerPanel')) return;
+    lotteryTrackCss();
+    const container = document.createElement('section');
+    container.id = 'lpTrackerPanel';
+    container.setAttribute('aria-label','自分の抽選管理');
+    container.innerHTML = `<h3>✅ 自分の抽選管理</h3>
+      <p class="lp-tracker-intro">応募、当選、受け取り期間と「自分の現地対応完了」を非公開で管理します。現地対応が必要かどうか・対応内容は別枠で全ユーザーに共有します。</p>
+      <p id="lpTrackStatus" role="status" aria-live="polite"></p>
+      <div id="lpTrackCounts" class="lp-track-counts"></div>
+      <div class="lp-track-toolbar"><label for="lpTrackFilter">自分の記録を表示</label>
+        <select id="lpTrackFilter"><option value="all">すべて</option><option value="applied">応募済み</option><option value="won">当選・受取待ち</option><option value="received">受取済み</option><option value="lost">落選</option><option value="onsite">現地対応待ち</option></select>
+        <button type="button" id="lpTrackReload">記録を更新</button></div>
+      <div id="lpTrackList"></div>`;
+    $('lpSummary').after(container);
+    $('lpTrackFilter').addEventListener('change', e => {
+      lotteryTrackFilter = e.target.value;
+      renderLotteryTrackerSummary();
+    });
+    $('lpTrackReload').addEventListener('click',()=>refreshLotteryTrackerForAccount(true));
+    const dialog = document.createElement('dialog');
+    dialog.id = 'lpTrackerEditor';
+    dialog.setAttribute('aria-label','抽選の個別管理');
+    dialog.innerHTML = '<div id="lpTrackerEditorBody"></div>';
+    document.body.append(dialog);
+    dialog.addEventListener('click', e => {
+      if (e.target === dialog) dialog.close();
+    });
+    renderLotteryTrackerSummary();
+  }
+
+  function lotteryTrackRecord(url) {
+    return lotteryTrackRecords.get(url) || null;
+  }
+
+  function lotteryTrackClean(row) {
+    if (!row || !safeLotteryUrl(row.event_url)) return null;
+    return {
+      event_url:row.event_url,
+      status:LP_TRACK_STATUSES.includes(row.status) ? row.status : 'not_applied',
+      onsite_required:row.onsite_required === true,
+      onsite_done:row.onsite_done === true,
+      pickup_start:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_start||'')?row.pickup_start:'',
+      pickup_end:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_end||'')?row.pickup_end:'',
+      note:typeof row.note==='string'?row.note.slice(0,500):'',
+      updated_at:row.updated_at||''
+    };
+  }
+
+  async function refreshLotteryTrackerForAccount(force = false) {
+    const user = authUser?.id || '';
+    if (!user || !supabaseClient) {
+      ++lotteryTrackSequence;
+      lotteryTrackUserId = '';
+      lotteryTrackRecords.clear();
+      lotteryTrackError = '';
+      lotteryTrackLastLoad = 0;
+      renderLotteryTrackerSummary();
+      if ($('lpCards')) renderLottery();
+      return;
+    }
+    if (!force && user === lotteryTrackUserId && Date.now()-lotteryTrackLastLoad < 45000) return;
+    if (lotteryTrackFetching && user === lotteryTrackUserId) return lotteryTrackFetching;
+    const seq = ++lotteryTrackSequence;
+    if (lotteryTrackUserId !== user) {
+      lotteryTrackRecords.clear();
+      lotteryTrackLastLoad = 0;
+    }
+    lotteryTrackUserId = user;
+    const run = (async() => {
+      try {
+        const {data,error} = await supabaseClient.from(LP_TRACK_TABLE)
+          .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
+          .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000);
+        if (error) throw error;
+        if (seq !== lotteryTrackSequence || authUser?.id !== user) return;
+        lotteryTrackRecords = new Map((data||[]).map(lotteryTrackClean).filter(Boolean).map(x=>[x.event_url,x]));
+        lotteryTrackError='';
+        lotteryTrackLastLoad=Date.now();
+      } catch(e) {
+        if (seq !== lotteryTrackSequence || authUser?.id !== user) return;
+        lotteryTrackError='クラウド同期に失敗しました。SQLの設定と通信をご確認ください：'+String(e.message||e);
+      } finally {
+        if (seq === lotteryTrackSequence) {
+          renderLotteryTrackerSummary();
+          if ($('lpCards')) renderLottery();
+        }
+      }
+    })();
+    lotteryTrackFetching=run;
+    try {await run;} finally {if (lotteryTrackFetching===run) lotteryTrackFetching=null;}
+  }
+
+  function lotteryTrackPickupMessage(record) {
+    if (!record || record.status!=='won') return '';
+    // Japan date-only deadline, never reinterpret as a UTC instant.
+    const tokyo = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    const start = record.pickup_start || '';
+    const end = record.pickup_end || '';
+    if (end && tokyo > end) return '⚠ 受取期限を過ぎています：'+end;
+    if (end && tokyo === end) return '⚠ 今日が受取期限：'+end;
+    if (start && tokyo < start) return '受取開始：'+start+(end?' ／ 期限：'+end:'');
+    if (start && end) return '受取期間：'+start+' ～ '+end;
+    if (end) return '受取期限：'+end;
+    if (start) return '受取開始：'+start;
+    return '受取期間：未登録';
+  }
+
+  function lotteryTrackItemName(url) {
+    const item=lotteryItems.find(x=>x.url===url);
+    if (!item) return url;
+    return String(item.official_event_title || item.product_name || (item.event_title_provisional?'':item.event_title) || item.store_name || url).trim().slice(0,160);
+  }
+
+  function lotteryTrackSort(a,b) {
+    const priority = r => r.status==='won' ? 0 : lotteryOnsiteSummary(r.event_url).state==='required' && !r.onsite_done ? 1 : r.status==='applied' ? 2 : r.status==='not_applied' ? 3 : r.status==='received' ? 4 : 5;
+    if(priority(a)!==priority(b))return priority(a)-priority(b);
+    if(a.status==='won'&&a.pickup_end&&b.pickup_end&&a.pickup_end!==b.pickup_end)return a.pickup_end.localeCompare(b.pickup_end);
+    return String(b.updated_at).localeCompare(String(a.updated_at));
+  }
+
+  function renderLotteryTrackerSummary() {
+    const host=$('lpTrackerPanel');
+    if(!host)return;
+    const status=$('lpTrackStatus');
+    if(!supabaseClient || !authUser){
+      status.textContent='Discordログインすると、自分専用の応募・当選記録を保存できます。「共有」タブからログインしてください。';
+      $('lpTrackCounts').replaceChildren();
+      $('lpTrackList').innerHTML='';
+      return;
+    }
+    status.textContent=lotteryTrackError || '🔒 自分のDiscordアカウントに非公開で保存します。';
+    const records=[...lotteryTrackRecords.values()];
+    const counts=[
+      ['応募済み',records.filter(x=>x.status==='applied').length],
+      ['当選・受取待ち',records.filter(x=>x.status==='won').length],
+      ['受取済み',records.filter(x=>x.status==='received').length],
+      ['自分の現地対応未完了',records.filter(x=>lotteryOnsiteSummary(x.event_url).state==='required'&&!x.onsite_done).length]
+    ];
+    $('lpTrackCounts').innerHTML=counts.map(([label,n])=>`<span>${escape(label)} <strong>${n}</strong>件</span>`).join('');
+    const filtered=records.filter(x=>lotteryTrackFilter==='all' ||
+      (lotteryTrackFilter==='onsite'?lotteryOnsiteSummary(x.event_url).state==='required'&&!x.onsite_done:x.status===lotteryTrackFilter))
+      .sort(lotteryTrackSort);
+    $('lpTrackList').innerHTML=filtered.length ? filtered.slice(0,100).map(x=>{
+      const msg=lotteryTrackPickupMessage(x);
+      const warn=msg.startsWith('⚠') ? (msg.includes('今日')?'lp-track-today':'lp-track-overdue'):'';
+      return `<div class="lp-track-row"><div>
+        <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
+        <p>${escape(LP_TRACK_LABELS[x.status])}${lotteryOnsiteSummary(x.event_url).state==='required'?' ／ 自分の現地対応'+(x.onsite_done?'済み':'待ち'):''}</p>
+        ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
+        <a href="${escape(x.event_url)}" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>
+      </div><button type="button" data-lp-track="edit" data-url="${escape(x.event_url)}">管理</button></div>`;
+    }).join('')+(filtered.length>100?'<p class="lp-tracker-intro">最初の100件を表示しています。</p>':'') :
+      `<p class="lp-tracker-intro">${records.length?'該当する管理記録はありません。':'まだ記録はありません。各抽選の「応募済みにする」から登録できます。'}</p>`;
+  }
+
+  function lotteryTrackerActionsHtml(item) {
+    const record=lotteryTrackRecord(item.url);
+    const applied=record && record.status!=='not_applied';
+    const show=record?LP_TRACK_LABELS[record.status]:'未応募';
+    const onsite=lotteryOnsiteSummary(item.url).state==='required' ? (record?.onsite_done?'現地対応済み':'現地対応待ち') : '';
+    const warning=lotteryTrackPickupMessage(record);
+    const css=warning.startsWith('⚠')?'lp-track-overdue':'';
+    return `<div class="lp-track-actions" aria-label="自分の応募管理">
+      ${record?`<span class="lp-track-pill">${escape(show)}${onsite?' ／ '+escape(onsite):''}</span>`:''}
+      <button type="button" data-lp-track="apply" data-url="${escape(item.url)}">${applied?'✅ 応募状況を確認':'☐ 応募済みにする'}</button>
+      <button type="button" data-lp-track="edit" data-url="${escape(item.url)}">⚙ 個別管理</button>
+    </div>${warning?`<p class="lp-track-note ${css}">${escape(warning)}</p>`:''}`;
+  }
+
+  function lotteryTrackerHandleClick(event) {
+    const button=event.target.closest('button[data-lp-track]');
+    if(!button || !event.currentTarget.contains(button))return;
+    const url=button.dataset.url;
+    if(!safeLotteryUrl(url))return;
+    if(!authUser||!supabaseClient){
+      alert('抽選の個人管理にはDiscordログインが必要です。「共有」タブでログインしてください。');
+      switchTab('group');return;
+    }
+    if(button.dataset.lpTrack==='apply'){
+      const old=lotteryTrackRecord(url);
+      if(old?.status && old.status!=='not_applied'){
+        lotteryTrackerOpenEditor(url);return;
+      }
+      lotteryTrackerSave(url,{...lotteryTrackerDefaults(url),status:'applied'});
+    }else if(button.dataset.lpTrack==='edit') lotteryTrackerOpenEditor(url);
+  }
+
+  function lotteryTrackerDefaults(url) {
+    return lotteryTrackRecord(url) || {
+      event_url:url,status:'not_applied',onsite_required:false,onsite_done:false,
+      pickup_start:'',pickup_end:'',note:'',updated_at:''
+    };
+  }
+
+  function lotteryTrackerOpenEditor(url) {
+    if(!authUser || !safeLotteryUrl(url))return;
+    const data=lotteryTrackerDefaults(url);
+    const dlg=$('lpTrackerEditor');
+    if(!dlg)return;
+    $('lpTrackerEditorBody').innerHTML=`<h3>抽選の個別管理</h3>
+      <p class="lp-tracker-intro">${escape(lotteryTrackItemName(url))}</p>
+      <form id="lpTrackerForm">
+      <label>応募・当選状況
+        <select name="status">${LP_TRACK_STATUSES.map(k=>`<option value="${k}" ${data.status===k?'selected':''}>${escape(LP_TRACK_LABELS[k])}</option>`).join('')}</select>
+      </label>
+      <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
+      <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
+      <label>受け取り開始日（わかる場合）<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
+      <label>受け取り期限日（わかる場合）<input type="date" name="pickup_end" value="${escape(data.pickup_end)}"></label>
+      <p class="lp-tracker-intro">当選したら「当選・受取待ち」を選び、公式案内の受取期間を入力してください。アプリ内で期限が確認できます。公式条件は自動確定しません。</p>
+      <label>自分用メモ（500文字まで）<textarea name="note" maxlength="500" rows="3" placeholder="例：店頭で本人確認が必要／受取時に身分証を持参">${escape(data.note)}</textarea></label>
+      <div class="lp-track-modal-actions"><button type="submit" class="primary">保存</button><button type="button" id="lpTrackEditorClose">閉じる</button>
+      ${lotteryTrackRecord(url)?'<button type="button" id="lpTrackEditorDelete">記録を削除</button>':''}</div>
+      <p id="lpTrackEditorMessage" role="status" aria-live="polite"></p>
+      </form>`;
+    $('lpTrackEditorClose').addEventListener('click',()=>dlg.close());
+    $('lpTrackEditorDelete')?.addEventListener('click',async()=>{
+      if(!confirm('この抽選の個人管理記録を削除しますか？'))return;
+      await lotteryTrackerDelete(url);
+    });
+    $('lpTrackerForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const form=e.currentTarget,fd=new FormData(form);
+      const status=String(fd.get('status')||'not_applied');
+      const completed=fd.get('onsite_done')==='on';
+      const data={status,onsite_required:completed,onsite_done:completed,
+        pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
+        note:String(fd.get('note')||'').trim().slice(0,500)};
+      if(data.pickup_start&&data.pickup_end&&data.pickup_start>data.pickup_end){
+        $('lpTrackEditorMessage').textContent='受取開始日は受取期限日より前にしてください。';return;
+      }
+      await lotteryTrackerSave(url,data,true);
+    });
+    if(typeof dlg.showModal==='function')dlg.showModal();
+    else {alert('このブラウザでは管理画面を開けません。');}
+  }
+
+  async function lotteryTrackerSave(url,values,closeOnSuccess=false) {
+    if(lotteryTrackSaving || !authUser || !supabaseClient)return;
+    if(!safeLotteryUrl(url))return;
+    const uid=authUser.id;
+    const status=String(values.status||'not_applied');
+    if(!LP_TRACK_STATUSES.includes(status))return;
+    const completed=values.onsite_done===true;
+    // Legacy private column exists only for the v21.27 SQL compatibility constraint.
+    const payload={user_id:uid,event_url:url,status,onsite_required:completed,
+      onsite_done:completed,
+      pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
+      note:String(values.note||'').slice(0,500)};
+    if(payload.pickup_start&&payload.pickup_end&&payload.pickup_start>payload.pickup_end)return;
+    lotteryTrackSaving=true;
+    const message=$('lpTrackEditorMessage');
+    if(message)message.textContent='保存中…';
+    try{
+      const {data,error}=await supabaseClient.from(LP_TRACK_TABLE).upsert(payload,{onConflict:'user_id,event_url'})
+        .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
+      if(error)throw error;
+      if(authUser?.id!==uid)return;
+      const parsed=lotteryTrackClean(data);
+      if(parsed)lotteryTrackRecords.set(url,parsed);
+      lotteryTrackError='';
+      renderLotteryTrackerSummary();renderLottery();
+      if(closeOnSuccess&&$('lpTrackerEditor')?.open)$('lpTrackerEditor').close();
+    }catch(error){
+      if(authUser?.id===uid){
+        const msg='保存できませんでした。SupabaseのSQL設定をご確認ください：'+(error.message||error);
+        if(message)message.textContent=msg;
+        else alert(msg);
+      }
+    }finally{lotteryTrackSaving=false;}
+  }
+
+  async function lotteryTrackerDelete(url) {
+    if(lotteryTrackSaving || !authUser || !supabaseClient)return;
+    const uid=authUser.id;
+    lotteryTrackSaving=true;
+    try{
+      const {error}=await supabaseClient.from(LP_TRACK_TABLE).delete().eq('user_id',uid).eq('event_url',url);
+      if(error)throw error;
+      if(authUser?.id!==uid)return;
+      lotteryTrackRecords.delete(url);
+      $('lpTrackerEditor')?.close();
+      renderLotteryTrackerSummary();renderLottery();
+    }catch(error){
+      const msg=$('lpTrackEditorMessage');
+      if(msg)msg.textContent='削除できませんでした：'+(error.message||error);
+    }finally{lotteryTrackSaving=false;}
+  }
+
+
+  // =====================================================
+  // v21.27 shared onsite REQUIREMENT reports vs private completion.
+  // Reports are always user-submitted and NOT an official confirmation.
+  // Each user can edit ONLY their own report (RLS); conflicts stay visible.
+  // =====================================================
+  const LP_ONSITE_TABLE = 'lottery_onsite_reports';
+  let lotteryOnsiteReports = new Map();
+  let lotteryOnsiteFetching = null;
+  let lotteryOnsiteSequence = 0;
+  let lotteryOnsiteLastFetch = 0;
+  let lotteryOnsiteError = '';
+  let lotteryOnsiteSaving = false;
+
+  function lotteryOnsiteClean(row) {
+    if (!row || !safeLotteryUrl(row.event_url) || typeof row.user_id !== 'string' ||
+        !['required','not_required'].includes(row.requirement)) return null;
+    return {event_url:row.event_url,user_id:row.user_id,requirement:row.requirement,
+      details:typeof row.details==='string'?row.details.slice(0,500):'',
+      updated_at:typeof row.updated_at==='string'?row.updated_at:''};
+  }
+
+  function lotteryOnsiteSummary(url) {
+    const reports=lotteryOnsiteReports.get(url) || [];
+    const yes=reports.filter(x=>x.requirement==='required').length;
+    const no=reports.filter(x=>x.requirement==='not_required').length;
+    return {state:yes&&no?'conflict':yes?'required':no?'not_required':'unknown',
+      yes,no,reports};
+  }
+
+  function lotteryOnsiteMyReport(url) {
+    const uid=authUser?.id;
+    return uid ? (lotteryOnsiteReports.get(url)||[]).find(x=>x.user_id===uid)||null : null;
+  }
+
+  function lotteryOnsiteSharedHtml(url) {
+    const data=lotteryOnsiteSummary(url);
+    const names={required:'現地対応が必要との報告あり',not_required:'現地対応は不要との報告あり',
+      conflict:'⚠ 報告が分かれています',unknown:'現地対応：情報未登録'};
+    // Report text is user provided, unverified and escaped against HTML injection.
+    const details=data.reports.filter(x=>x.details).slice(0,3)
+      .map(x=>`<li><strong>${x.requirement==='required'?'必要':'不要'}との報告：</strong> ${escape(x.details)}</li>`).join('');
+    return `<section class="lp-onsite-shared" aria-label="みんなの現地対応情報">
+      <strong>📍 ${lotteryOnsiteError?'⚠ 現地対応情報の取得に失敗':names[data.state]}</strong>
+      ${lotteryOnsiteError?`<p>${escape(lotteryOnsiteError)}</p>`:''}
+      ${data.reports.length?`<p>利用者からの報告：必要 ${data.yes}件 ／ 不要 ${data.no}件</p>`:''}
+      ${details?`<details><summary>現地対応に関する報告内容</summary><ul>${details}</ul></details>`:''}
+      <p class="lp-onsite-disclaimer">利用者の報告です。正確な応募条件は公式ページで確認してください。</p>
+      <button type="button" data-lp-onsite="edit" data-url="${escape(url)}">${lotteryOnsiteMyReport(url)?'自分の報告を編集':'現地対応情報を共有'}</button>
+    </section>`;
+  }
+
+  async function refreshLotteryOnsiteReports(force=false) {
+    if (!supabaseClient) return;
+    if (!force && lotteryOnsiteLastFetch && Date.now()-lotteryOnsiteLastFetch<60000) return;
+    if (lotteryOnsiteFetching) return lotteryOnsiteFetching;
+    const seq=++lotteryOnsiteSequence;
+    const run=(async()=>{
+      try {
+        const all=[];
+        // Supabase projects often cap a query at 1,000 rows. Paginate so
+        // growing community reports do not silently omit older events.
+        for(let offset=0;offset<10000;offset+=500){
+          const {data,error}=await supabaseClient.from(LP_ONSITE_TABLE)
+            .select('user_id,event_url,requirement,details,updated_at')
+            .order('updated_at',{ascending:false}).range(offset,offset+499);
+          if(error) throw error;
+          if(seq!==lotteryOnsiteSequence) return;
+          all.push(...(data||[]));
+          if(!data || data.length<500) break;
+        }
+        const next=new Map();
+        for(const row of all){
+          const record=lotteryOnsiteClean(row);
+          if (!record) continue;
+          const group=next.get(record.event_url)||[];
+          if (!group.some(x=>x.user_id===record.user_id)) group.push(record);
+          next.set(record.event_url,group);
+        }
+        lotteryOnsiteReports=next;
+        lotteryOnsiteLastFetch=Date.now();
+        lotteryOnsiteError='';
+      } catch(e) {
+        if(seq!==lotteryOnsiteSequence) return;
+        lotteryOnsiteError='共有の現地対応情報を取得できませんでした：'+String(e.message||e);
+        console.warn(lotteryOnsiteError);
+      } finally {
+        if(seq===lotteryOnsiteSequence && $('lpCards')) renderLottery();
+      }
+    })();
+    lotteryOnsiteFetching=run;
+    try {await run;} finally {if(lotteryOnsiteFetching===run)lotteryOnsiteFetching=null;}
+  }
+
+  function lotteryOnsiteHandleClick(event) {
+    const button=event.target.closest('button[data-lp-onsite]');
+    if(!button || !event.currentTarget.contains(button))return;
+    const url=button.dataset.url;
+    if(!safeLotteryUrl(url))return;
+    if(!authUser || !supabaseClient){
+      alert('現地対応の情報を共有するにはDiscordログインが必要です。閲覧はログイン不要です。');
+      switchTab('group');return;
+    }
+    lotteryOnsiteOpenEditor(url);
+  }
+
+  function lotteryOnsiteOpenEditor(url) {
+    if (!authUser || !safeLotteryUrl(url)) return;
+    const existing=lotteryOnsiteMyReport(url);
+    let dlg=$('lpOnsiteEditor');
+    if(!dlg){
+      dlg=document.createElement('dialog');
+      dlg.id='lpOnsiteEditor';
+      document.body.append(dlg);
+      dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+    }
+    dlg.innerHTML=`<h3>📍 みんなに現地対応情報を共有</h3>
+      <p class="lp-tracker-intro">${escape(lotteryTrackItemName(url))}</p>
+      <p class="lp-tracker-intro">ここで報告した「現地対応の要否・内容」は全ユーザーに表示されます。応募・当選・自分の完了状況は共有されません。</p>
+      <form id="lpOnsiteForm">
+        <label>現地対応の要否
+          <select name="requirement" required>
+            <option value="required" ${existing?.requirement==='required'?'selected':''}>現地で追加対応が必要</option>
+            <option value="not_required" ${existing?.requirement==='not_required'?'selected':''}>現地対応は不要</option>
+          </select></label>
+        <label>対応内容・条件（500文字まで）<textarea name="details" maxlength="500" rows="4" placeholder="例：抽選前に店頭で会員登録が必要。対象店舗・期限なども記入してください。">${escape(existing?.details||'')}</textarea></label>
+        <p class="lp-tracker-intro">※利用者による情報提供です。ほかの利用者と内容が異なる場合は両方の報告を表示します。公式ページで条件をご確認ください。</p>
+        <div class="lp-track-modal-actions"><button type="submit" class="primary">全ユーザーに共有する</button><button type="button" id="lpOnsiteClose">閉じる</button>
+          ${existing?'<button type="button" id="lpOnsiteDelete">自分の報告を削除</button>':''}</div>
+        <p id="lpOnsiteMessage" role="status" aria-live="polite"></p>
+      </form>`;
+    $('lpOnsiteClose').addEventListener('click',()=>dlg.close());
+    $('lpOnsiteDelete')?.addEventListener('click',async()=>{
+      if(confirm('自分が共有した現地対応情報を削除しますか？'))await lotteryOnsiteDelete(url);
+    });
+    $('lpOnsiteForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const fd=new FormData(e.currentTarget);
+      await lotteryOnsiteSave(url,{requirement:String(fd.get('requirement')),
+        details:String(fd.get('details')||'').trim().slice(0,500)});
+    });
+    if(typeof dlg.showModal==='function')dlg.showModal();
+  }
+
+  async function lotteryOnsiteSave(url,values) {
+    if(lotteryOnsiteSaving || !authUser || !supabaseClient || !safeLotteryUrl(url))return;
+    if(!['required','not_required'].includes(values.requirement))return;
+    const uid=authUser.id;
+    const payload={user_id:uid,event_url:url,requirement:values.requirement,
+      details:String(values.details||'').slice(0,500)};
+    lotteryOnsiteSaving=true;
+    const status=$('lpOnsiteMessage');
+    if(status)status.textContent='共有内容を保存中…';
+    try{
+      const {data,error}=await supabaseClient.from(LP_ONSITE_TABLE)
+        .upsert(payload,{onConflict:'user_id,event_url'})
+        .select('user_id,event_url,requirement,details,updated_at').single();
+      if(error)throw error;
+      if(authUser?.id!==uid)return;
+      const record=lotteryOnsiteClean(data);
+      if(record){
+        const group=(lotteryOnsiteReports.get(url)||[]).filter(x=>x.user_id!==uid);
+        lotteryOnsiteReports.set(url,[record,...group]);
+      }
+      lotteryOnsiteLastFetch=0;
+      $('lpOnsiteEditor')?.close();
+      renderLottery();renderLotteryTrackerSummary();
+      refreshLotteryOnsiteReports(true);
+    } catch(e) {
+      if(authUser?.id===uid && status)status.textContent='保存失敗：'+String(e.message||e);
+    } finally {lotteryOnsiteSaving=false;}
+  }
+
+  async function lotteryOnsiteDelete(url) {
+    if(lotteryOnsiteSaving || !authUser || !supabaseClient || !safeLotteryUrl(url))return;
+    const uid=authUser.id;
+    lotteryOnsiteSaving=true;
+    try{
+      const {error}=await supabaseClient.from(LP_ONSITE_TABLE)
+        .delete().eq('user_id',uid).eq('event_url',url);
+      if(error)throw error;
+      if(authUser?.id!==uid)return;
+      lotteryOnsiteReports.set(url,(lotteryOnsiteReports.get(url)||[]).filter(x=>x.user_id!==uid));
+      lotteryOnsiteLastFetch=0;
+      $('lpOnsiteEditor')?.close();
+      renderLottery();renderLotteryTrackerSummary();
+      refreshLotteryOnsiteReports(true);
+    } catch(e) {
+      const status=$('lpOnsiteMessage');if(status)status.textContent='削除失敗：'+String(e.message||e);
+    } finally {lotteryOnsiteSaving=false;}
   }
 
   // ========================================
