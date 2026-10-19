@@ -5060,6 +5060,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【戸田店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
       "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
     },
     {
@@ -5077,6 +5079,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
     },
     {
@@ -5200,5 +5204,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T15:30:58.231645+00:00"
+  "updated_at": "2026-10-19T15:51:21.318716+00:00"
 }
