@@ -680,6 +680,21 @@ html[data-theme="dark"] .lp-dev-recheck { background: #172337; color: #eef4ff; b
 html[data-theme="dark"] .lp-dev-recheck a { color: #9ac2ff; }
 
 
+/* v21.41 開発者専用：手動再確認の安全な失敗理由別集計 */
+.lp-dev-failure-report{margin:16px 0;padding:14px;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:12px;background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033)}
+.lp-dev-failure-report h4{margin:0 0 10px;font-size:15px;font-weight:800}
+.lp-dev-failure-report>p{margin:8px 0 12px;font-size:12px;line-height:1.6}
+.lp-dev-failure-list{display:grid;gap:8px}
+.lp-dev-failure-reason{border:1px solid var(--app-border,#cbd5e1);border-radius:10px;
+  padding:10px;background:var(--app-surface,#fff)}
+.lp-dev-failure-reason strong{display:flex;justify-content:space-between;gap:8px;font-size:13px;
+  line-height:1.5;color:var(--app-text,#172033)}
+.lp-dev-failure-reason strong span{flex-shrink:0;white-space:nowrap}
+.lp-dev-failure-reason p{margin:5px 0 0;font-size:11px;line-height:1.55;color:var(--app-muted,#64748b)}
+html[data-theme="dark"] .lp-dev-failure-report{background:#203149;border-color:#526681}
+html[data-theme="dark"] .lp-dev-failure-reason{background:#172337;border-color:#526681}
+
 /* v21.11 開発者専用：LivePocket手動再確認の集計結果 */
 .lp-dev-results{margin-top:16px;padding:13px;border:1px solid var(--app-border,#ccd6e2);border-radius:12px;background:var(--app-surface2,#eef3f9)}
 .lp-dev-results-header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
