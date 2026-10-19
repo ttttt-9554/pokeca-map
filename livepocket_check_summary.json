@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39180336262",
-    "run_number": "200",
-    "completed_process_at": "2026-10-19T00:21:53Z",
-    "mode": "developer_manual",
+    "run_id": "39189527466",
+    "run_number": "213",
+    "completed_process_at": "2026-10-19T02:20:58Z",
+    "mode": "automatic",
     "stats": {
       "new_attempted": 0,
       "new_titles_added": 0,
@@ -13,9 +13,9 @@
       "retry_attempted": 0,
       "retry_new_fields": 0,
       "retry_blocked": 0,
-      "historical_attempted": 12,
-      "registered_urls": 363,
-      "deadlines_known": 338,
+      "historical_attempted": 0,
+      "registered_urls": 369,
+      "deadlines_known": 344,
       "store_lists_added": 0,
       "multi_store_urls": 14,
       "stores_from_pages": 0,
@@ -39,44 +39,18 @@
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
-      "manual_verified_title_conflicts": 0,
-      "manual_selected": 12,
-      "manual_attempted": 12,
-      "manual_success": 11,
-      "manual_blocked": 0,
-      "manual_title_detected": 0,
-      "manual_title_no_candidates": 0,
-      "manual_title_rejected": 11,
-      "manual_title_access_blocked": 0,
-      "manual_title_other_failure": 1,
-      "manual_title_site_common": 0,
-      "manual_title_filtered_all": 11,
-      "manual_title_multiple_unresolved": 0,
-      "manual_title_valid_unselected": 0,
-      "manual_title_meta_template_cleaned": 0,
-      "manual_title_heading_seen": 0,
-      "manual_title_truncated": 12,
-      "manual_page_unconfirmed": 1,
-      "manual_page_event_confirmed": 11,
-      "manual_title_truncated_tail": 12,
-      "manual_title_truncated_inner": 0,
-      "manual_title_replacement_char": 0,
-      "manual_title_updated": 0,
-      "manual_product_updated": 0,
-      "manual_deadline_updated": 0,
-      "manual_store_updated": 0,
-      "manual_genre_updated": 0
+      "manual_verified_title_conflicts": 0
     },
     "updates": {
       "title_updated": 0,
       "product_updated": 0,
       "deadline_updated": 0,
-      "store_updated": 213,
+      "store_updated": 219,
       "genre_updated": 12,
       "new_urls": 0
     },
-    "page_check_attempts": 12,
-    "manual_page_check_attempts": 12
+    "page_check_attempts": 0,
+    "manual_page_check_attempts": 0
   },
   "last_manual": {
     "run_id": "39180336262",
@@ -155,5 +129,15 @@
     },
     "page_check_attempts": 12,
     "manual_page_check_attempts": 12
+  },
+  "daily_additions": {
+    "date_jst": "2026-10-19",
+    "today": 7,
+    "yesterday": 19,
+    "last_7_days": 38,
+    "registered_total": 369,
+    "tracked_since_jst": "2026-10-17",
+    "as_of": "2026-10-19T02:20:58Z",
+    "source": "v14_first_detected_urls"
   }
 }
