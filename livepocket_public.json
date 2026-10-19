@@ -4990,6 +4990,7 @@
           "prefecture": "東京都"
         }
       ],
+      "official_event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5027,6 +5028,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5043,6 +5046,7 @@
           "prefecture": "福島県"
         }
       ],
+      "official_event_title": "【晴れる屋 郡山店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5200,5 +5204,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T20:35:58.009457+00:00"
+  "updated_at": "2026-10-19T20:46:21.425462+00:00"
 }
