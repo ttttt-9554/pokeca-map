@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.19: recover visible event heading from truncated matching metadata.
+"""LivePocket v21.20: official title recovery plus first-seen NEW timestamps.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -1070,6 +1070,61 @@ def use_manual_background(urls):
         v19.v18.select = original
 
 
+# v21.20: Public, URL-scoped initial discovery timestamp for the NEW badge.
+# This is collected from the persisted first-seen v14 ledger, NOT from a
+# Discord post date, last manual recheck, page fetch, or event modification.
+def publish_first_detected_at(raw, public, *, now=None):
+    now = v14._utc(now)
+    state = raw.get('collector_state') if isinstance(raw, dict) else None
+    v14_state = state.get('v14') if isinstance(state, dict) else None
+    ledger = v14_state.get('new_url_checks') if isinstance(v14_state, dict) else None
+    if not isinstance(ledger, dict):
+        return 0
+    added = 0
+    for item in public.get('items', []):
+        if not isinstance(item, dict) or not isinstance(item.get('url'), str):
+            continue
+        record = ledger.get(item['url'])
+        value = record.get('detected_at') if isinstance(record, dict) else None
+        if not isinstance(value, str) or not value:
+            continue
+        try:
+            parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
+        except ValueError:
+            continue
+        if parsed.tzinfo is None or parsed.utcoffset() is None or parsed > now:
+            continue
+        if item.get('first_detected_at') != value:
+            item['first_detected_at'] = value
+            added += 1
+    return added
+
+
+# Discord URL-paired event names are unverified shorthand, never the public
+# authoritative event heading. Keep the raw provenance for exact-URL official
+# verification, but mark it in public data so UI can omit the provisional name.
+def mark_provisional_discord_event_titles(raw, public):
+    index = {i.get('url'): i for i in raw.get('items', [])
+             if isinstance(i, dict) and isinstance(i.get('url'), str)}
+    updated = 0
+    for item in public.get('items', []):
+        if not isinstance(item, dict):
+            continue
+        record = index.get(item.get('url'), {})
+        source = str((record.get('field_sources') or {}).get('event_title') or '')
+        provisional = (bool(item.get('event_title')) and
+                       source.startswith(('discord_url_title:', 'discord_url_pair:',
+                                          'discord_embed:')) and
+                       item.get('official_event_title') != item.get('event_title'))
+        if provisional and item.get('event_title_provisional') is not True:
+            item['event_title_provisional'] = True
+            updated += 1
+        elif not provisional and 'event_title_provisional' in item:
+            item.pop('event_title_provisional', None)
+            updated += 1
+    return updated
+
+
 def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None,
             title_limit=TITLE_RECHECK_DEFAULT_PER_RUN,
@@ -1396,6 +1451,9 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             stats[metric] = sum(page_supported_change(u, metric, keys)
                                 for u in successful)
     
+    stats['first_detection_times_published'] = publish_first_detected_at(
+        raw, public, now=now)
+    stats['provisional_discord_titles_marked'] = mark_provisional_discord_event_titles(raw, public)
     if any(snapshot.get(i['url']) != json.dumps(i, ensure_ascii=False, sort_keys=True)
            for i in public['items']):
         public['updated_at'] = now.isoformat()
