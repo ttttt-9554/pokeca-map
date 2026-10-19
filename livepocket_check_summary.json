@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39251666282",
-    "run_number": "285",
-    "completed_process_at": "2026-10-19T12:24:38Z",
+    "run_id": "39266152101",
+    "run_number": "296",
+    "completed_process_at": "2026-10-19T14:08:57Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -34,8 +34,8 @@
       "official_title_planned": 0,
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
-      "official_products_added": 1,
-      "official_genres_confirmed": 10,
+      "official_products_added": 0,
+      "official_genres_confirmed": 6,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -63,27 +63,27 @@
       "manual_title_truncated_tail": 11,
       "manual_title_truncated_inner": 0,
       "manual_title_replacement_char": 0,
-      "manual_title_updated": 6,
-      "manual_product_updated": 1,
+      "manual_title_updated": 0,
+      "manual_product_updated": 0,
       "manual_deadline_updated": 0,
       "manual_store_updated": 0,
-      "manual_genre_updated": 6
+      "manual_genre_updated": 0
     },
     "updates": {
-      "title_updated": 6,
-      "product_updated": 1,
+      "title_updated": 0,
+      "product_updated": 0,
       "deadline_updated": 0,
       "store_updated": 246,
-      "genre_updated": 17,
+      "genre_updated": 11,
       "new_urls": 0
     },
     "page_check_attempts": 12,
     "manual_page_check_attempts": 12
   },
   "last_manual": {
-    "run_id": "39251666282",
-    "run_number": "285",
-    "completed_process_at": "2026-10-19T12:24:38Z",
+    "run_id": "39266152101",
+    "run_number": "296",
+    "completed_process_at": "2026-10-19T14:08:57Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -114,8 +114,8 @@
       "official_title_planned": 0,
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
-      "official_products_added": 1,
-      "official_genres_confirmed": 10,
+      "official_products_added": 0,
+      "official_genres_confirmed": 6,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -143,18 +143,18 @@
       "manual_title_truncated_tail": 11,
       "manual_title_truncated_inner": 0,
       "manual_title_replacement_char": 0,
-      "manual_title_updated": 6,
-      "manual_product_updated": 1,
+      "manual_title_updated": 0,
+      "manual_product_updated": 0,
       "manual_deadline_updated": 0,
       "manual_store_updated": 0,
-      "manual_genre_updated": 6
+      "manual_genre_updated": 0
     },
     "updates": {
-      "title_updated": 6,
-      "product_updated": 1,
+      "title_updated": 0,
+      "product_updated": 0,
       "deadline_updated": 0,
       "store_updated": 246,
-      "genre_updated": 17,
+      "genre_updated": 11,
       "new_urls": 0
     },
     "page_check_attempts": 12,
@@ -167,7 +167,7 @@
     "last_7_days": 69,
     "registered_total": 400,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-19T12:24:38Z",
+    "as_of": "2026-10-19T14:08:57Z",
     "source": "v14_first_detected_urls"
   }
 }
