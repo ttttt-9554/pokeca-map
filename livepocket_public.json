@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T03:35:55.549915+00:00",
-  "unique_livepocket_urls": 376,
+  "collected_at": "2026-10-19T04:35:55.443702+00:00",
+  "unique_livepocket_urls": 377,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -4609,7 +4609,27 @@
         }
       ],
       "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nexus-opening-futuristic-30th",
+      "store_name": "受付終了: 10/25 23:59（残り6日10時間）",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-19T04:30:03.819000+00:00",
+      "product_name": "30th CELEBRATION FUTURISTIC BOX",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-18T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "受付終了: 10/25 23:59（残り6日10時間）",
+          "prefecture": "東京都"
+        }
+      ],
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "first_detected_at": "2026-10-19T04:35:56.497989+00:00"
     }
   ],
-  "updated_at": "2026-10-19T04:25:57.492313+00:00"
+  "updated_at": "2026-10-19T04:36:20.179868+00:00"
 }

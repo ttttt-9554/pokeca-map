@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-19T03:35:55.549915+00:00",
+  "collected_at": "2026-10-19T04:35:55.443702+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 82,
-  "unique_livepocket_urls": 376,
+  "messages_scanned": 83,
+  "unique_livepocket_urls": 377,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9410,34 +9410,61 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/nexus-opening-futuristic-30th",
+      "discord_message_id": "1561597276613255268",
+      "discord_posted_at": "2026-10-19T04:30:03.819000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n当選者の方に限り、ECサイトにてご購入いただけます\n受付終了: 10/25 23:59（残り6日10時間）\nhttps://livepocket.jp/e/nexus-opening-futuristic-30th",
+      "store_name": "受付終了: 10/25 23:59（残り6日10時間）",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": "30th CELEBRATION FUTURISTIC BOX",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-18T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "受付終了: 10/25 23:59（残り6日10時間）",
+          "prefecture": "東京都"
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 225,
+    "parsed": 226,
     "no_structured_details": 151
   },
   "field_counts": {
-    "store_name": 224,
-    "prefecture": 185,
+    "store_name": 225,
+    "prefecture": 186,
     "event_title": 7,
     "event_date": 1,
-    "product_name": 49,
+    "product_name": 50,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 351,
-    "application_start_at": 351,
-    "stores_events": 226
+    "application_end_at": 352,
+    "application_start_at": 352,
+    "stores_events": 227
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561582183800373298"
+      "1551580466266644552": "1561597276613255268"
     },
     "last_run": {
-      "checked_at": "2026-10-19T03:35:55.549915+00:00",
-      "new_urls": 2,
-      "original_urls": 374,
+      "checked_at": "2026-10-19T04:35:55.443702+00:00",
+      "new_urls": 1,
+      "original_urls": 376,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -9502,7 +9529,8 @@
         "1561559532881191002": "2026-10-19T02:00:55.244744+00:00",
         "1561567084528406623": "2026-10-19T02:35:55.734090+00:00",
         "1561574669646307438": "2026-10-19T03:05:54.422953+00:00",
-        "1561582183800373298": "2026-10-19T03:35:55.948710+00:00"
+        "1561582183800373298": "2026-10-19T03:35:55.948710+00:00",
+        "1561597276613255268": "2026-10-19T04:35:55.740443+00:00"
       },
       "checked_search_urls": {}
     },
@@ -11018,6 +11046,10 @@
         "https://livepocket.jp/e/h295z": {
           "checked_at": "2026-10-19T03:36:20.995160+00:00",
           "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
+          "checked_at": "2026-10-19T04:36:20.179868+00:00",
+          "status": "checked_product_deadline"
         }
       }
     },
@@ -11247,6 +11279,11 @@
           "detected_at": "2026-10-19T03:35:56.939105+00:00",
           "status": "checked_product_deadline",
           "checked_at": "2026-10-19T03:36:20.995160+00:00"
+        },
+        "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
+          "detected_at": "2026-10-19T04:35:56.497989+00:00",
+          "status": "checked_product_deadline",
+          "checked_at": "2026-10-19T04:36:20.179868+00:00"
         }
       },
       "pending_new_urls": []
@@ -13845,6 +13882,17 @@
           "product_origin": "",
           "title_origin": "",
           "conflict": false
+        },
+        "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
+          "status": "ok_no_title",
+          "reason": "no_verifiable_title_on_page",
+          "http_status": "",
+          "checked_at": "2026-10-19T04:36:20.179868+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "v14_livepocket_explicit_product_label",
+          "title_origin": "",
+          "conflict": false
         }
       }
     },
@@ -14896,6 +14944,18 @@
         },
         "https://livepocket.jp/e/h295z": {
           "checked_at": "2026-10-19T03:36:20.995160+00:00",
+          "reason": "title_candidates_rejected",
+          "candidate_count": 2,
+          "valid_candidate_count": 0,
+          "detail": "filtered_all_candidates",
+          "candidate_sources": "og:1;document:1",
+          "title_detected": false,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0
+        },
+        "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
+          "checked_at": "2026-10-19T04:36:20.179868+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
