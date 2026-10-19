@@ -12036,8 +12036,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/l58br": {
-          "checked_at": "2026-10-19T23:32:51.700799+00:00",
-          "status": "checked_no_new_details"
+          "checked_at": "2026-10-19T23:48:29.170033+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/sx0cg": {
           "checked_at": "2026-10-19T23:39:33.964113+00:00",
@@ -12390,7 +12390,7 @@
         "https://livepocket.jp/e/l58br": {
           "detected_at": "2026-10-19T11:30:55.344195+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T17:36:25.431938+00:00"
+          "checked_at": "2026-10-19T23:48:29.170033+00:00"
         },
         "https://livepocket.jp/e/sx0cg": {
           "detected_at": "2026-10-19T23:39:08.283491+00:00",
@@ -12733,8 +12733,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/l58br": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T17:36:25.431938+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T23:48:29.170033+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -15430,7 +15430,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T23:32:51.700799+00:00",
+          "checked_at": "2026-10-19T23:48:29.170033+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット9種セット」 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -16860,7 +16860,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/l58br": {
-          "checked_at": "2026-10-19T23:32:51.700799+00:00",
+          "checked_at": "2026-10-19T23:48:29.170033+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
