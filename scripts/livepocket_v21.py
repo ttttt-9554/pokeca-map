@@ -1720,6 +1720,36 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats.update(manual_selected=len(manual_urls),
                      manual_attempted=len(visited),
                      manual_success=len(successful), manual_blocked=blocked)
+        # v21.41: Publicly safe, mutually exclusive diagnostic counts for manual
+        # visits that did NOT verify the requested exact event page. Do not
+        # publish URLs, titles, HTML content, browser exceptions, or tokens.
+        successful_urls = set(successful)
+        unsuccessful_urls = [u for u in visited if u not in successful_urls]
+        failed_statuses = Counter(
+            str(observations[u].get('status') or 'browser_error')
+            for u in unsuccessful_urls
+        )
+        failed_redirects = failed_statuses['browser_redirected'] + sum(
+            observations[u].get('status') == 'ok' and
+            v12.exact_event_url(observations[u].get('final_url')) != u
+            for u in unsuccessful_urls
+        )
+        manual_failure_counts = {
+            'manual_fail_timeout': failed_statuses['browser_timeout'],
+            'manual_fail_no_response': failed_statuses['browser_no_response'],
+            'manual_fail_http_error': failed_statuses['browser_http_error'],
+            'manual_fail_redirected': failed_redirects,
+            'manual_fail_page_unconfirmed': failed_statuses['browser_unverified_page'],
+            'manual_fail_access_blocked': (
+                failed_statuses['browser_blocked'] +
+                failed_statuses['browser_blocked_or_empty']
+            ),
+            'manual_fail_browser_error': failed_statuses['browser_error'],
+        }
+        manual_failure_counts['manual_fail_other'] = max(
+            0, len(unsuccessful_urls) - sum(manual_failure_counts.values())
+        )
+        stats.update(manual_failure_counts)
         reasons = [title_state.get(u, {}).get('reason') for u in visited]
         stats['manual_title_detected'] = reasons.count('official_title_detected')
         stats['manual_title_no_candidates'] = reasons.count('no_title_candidates')
