@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.16: verified-page classification and safe title diagnosis.
+"""LivePocket v21.17: explicit page-state event titles and broader heading detection.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -72,7 +72,7 @@ EVENT_BODY_MARKERS = (
     'イベント詳細', 'イベント概要', '受付期間',
 )
 EVENT_TICKET_MARKERS = ('チケット', '受付', '申し込み', '申込み', '購入', '抽選')
-EVENT_HEADING_ORIGINS = ('h1', 'event_heading', 'body_label', 'jsonld')
+EVENT_HEADING_ORIGINS = ('h1', 'event_heading', 'body_label', 'jsonld', 'event_state')
 
 
 def confirm_event_page(page, url):
@@ -565,7 +565,7 @@ def verified_product(page, url):
 # v21.14: SAFE title diagnostics. Never persist rejected candidate strings,
 # document contents, user data, arbitrary markup, or exception messages.
 TITLE_SOURCE_CODES = ('og', 'twitter', 'h1', 'event_heading', 'document',
-                      'jsonld', 'body_label', 'unknown')
+                      'jsonld', 'event_state', 'body_label', 'unknown')
 SITE_ONLY_TITLE = re.compile(
     r'^(?:(?:LivePocket(?:-Ticket)?|ライブポケット)(?:\s*[\-|｜:：]\s*'
     r'(?:チケット|イベント|Ticket(?:s)?|イベント・チケット販売))*|'
@@ -804,8 +804,8 @@ def normalize_event_title_observation(page, url):
                     filtered[subtype] += 1
     # Prefer event-specific visible headings and explicit labels, then JSON-LD,
     # then site metadata. Do NOT promote arbitrary ticket names or body snippets.
-    priority = {'event_heading':0, 'h1':1, 'body_label':2, 'jsonld':3,
-                'og':4, 'twitter':5, 'document':6, 'unknown':7}
+    priority = {'event_heading':0, 'h1':1, 'body_label':2, 'event_state':3,
+                'jsonld':4, 'og':5, 'twitter':6, 'document':7, 'unknown':8}
     accepted.sort(key=lambda pair: priority[pair[1]])
     result['titles'] = [v for v, _ in accepted[:12]]
     result['title_sources'] = [v for _, v in accepted[:12]]
@@ -815,7 +815,7 @@ def normalize_event_title_observation(page, url):
     result['title_filter_counts'] = ';'.join(
         f'{k}:{filtered[k]}' for k in TITLE_FILTER_CODES if filtered[k])
     result['title_template_cleaned'] = template_fixed
-    result['title_heading_seen'] = sum(source_counts.get(k, 0) for k in ('h1','event_heading','body_label','jsonld'))
+    result['title_heading_seen'] = sum(source_counts.get(k, 0) for k in ('h1','event_heading','body_label','jsonld','event_state'))
     return result
 
 # A GitHub-committed, URL-scoped official screenshot/page verification list.
@@ -1259,6 +1259,14 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         stats['manual_title_valid_unselected'] = details.count('valid_candidate_not_selected')
         stats['manual_title_meta_template_cleaned'] = sum(bool(title_state.get(u, {}).get('meta_template_cleaned')) for u in visited)
         stats['manual_title_heading_seen'] = sum(bool(title_state.get(u, {}).get('heading_seen')) for u in visited)
+        stats['manual_title_dom_candidates'] = sum(
+            bool(re.search(r'(?:^|;)(?:h1|event_heading):[1-9]',
+                           str(title_state.get(u, {}).get('candidate_sources') or '')))
+            for u in visited)
+        stats['manual_title_state_candidates'] = sum(
+            bool(re.search(r'(?:^|;)event_state:[1-9]',
+                           str(title_state.get(u, {}).get('candidate_sources') or '')))
+            for u in visited)
         stats['manual_title_truncated'] = sum('truncated:' in str(title_state.get(u, {}).get('rejection_codes') or '') for u in visited)
         stats['manual_page_unconfirmed'] = sum(
             observations[u].get('page_identity') == 'event_unconfirmed' for u in visited)
@@ -1382,6 +1390,10 @@ def browser_fetcher():
                     '[data-testid="event-title"], [data-testid="eventTitle"], '
                     '[class~="event-title"], [class*="eventTitle"], '
                     '[class*="EventTitle"], [class*="event_title"], '
+                    '[id="event-title"], [id="eventTitle"], [id="event_name"], '
+                    '[data-testid="event_name"], [data-qa="event-title"], '
+                    '[class*="eventName"], [class*="EventName"], '
+                    '[class*="event-name"], [class*="event_name"], '
                     'main [role="heading"][aria-level="1"], '
                     '[itemscope][itemtype*="schema.org/Event"] [itemprop="name"]'
                 ).all_inner_texts(timeout=1500)
@@ -1400,6 +1412,16 @@ def browser_fetcher():
                 blocks = page.locator('script[type="application/ld+json"]').all_text_contents(timeout=1300)
                 for value in structured_event_titles(blocks, url):
                     add_title(value, 'jsonld')
+            except Exception:
+                pass
+            # First-party, server-embedded page state from THIS SAME event URL.
+            # No API/second request, page script execution, or access-control bypass.
+            # Only explicit event objects are searched, never recommendations or
+            # arbitrary product titles. The raw page-state JSON is never saved.
+            try:
+                state_blocks = page.locator('script#__NEXT_DATA__').all_text_contents(timeout=1300)
+                for value in structured_page_state_event_titles(state_blocks, url):
+                    add_title(value, 'event_state')
             except Exception:
                 pass
             if '受付・チケット情報' in body and not v19.ticket_option_stores(body):
@@ -1464,6 +1486,64 @@ def structured_event_titles(blocks, url):
                     if key in node:
                         stack.append((node[key], depth+1))
     return list(names) if len(names) == 1 else []
+
+
+# v21.17: Next.js server-provided page state can contain the complete event
+# title even when og:title / document.title intentionally end in ellipsis.
+# Search ONLY the primary event object under pageProps, NOT related events,
+# ticket products, arbitrary embedded JavaScript, or client-wide stores.
+PAGE_STATE_EVENT_KEYS = (
+    'event', 'eventInfo', 'eventDetail', 'eventDetails', 'eventData',
+    'event_info', 'event_detail', 'event_data',
+)
+PAGE_STATE_TITLE_KEYS = ('eventTitle', 'event_title', 'eventName', 'event_name')
+PAGE_STATE_URL_KEYS = ('url', 'eventUrl', 'event_url', 'eventPageUrl', 'event_page_url')
+
+
+def structured_page_state_event_titles(blocks, url):
+    """Unique, explicit event name from the primary exact-URL page state.
+
+    A matching page URL is already checked by browser_fetcher. If an event
+    record additionally supplies its own URL, that must match too. Never
+    derive an event name from a description, ticket, organizer, or product.
+    """
+    titles = set()
+    for source in (blocks[:2] if isinstance(blocks, list) else []):
+        if not isinstance(source, str) or len(source) > 500000:
+            continue
+        try:
+            root = json.loads(source)
+        except (TypeError, ValueError):
+            continue
+        if not isinstance(root, dict):
+            continue
+        props = root.get('props')
+        page_props = props.get('pageProps') if isinstance(props, dict) else None
+        if not isinstance(page_props, dict):
+            continue
+        # No recursive search: related/promoted events can coexist in state.
+        # `data.event` is an explicitly named primary-event envelope often
+        # used by server-side page props, not an arbitrary search of `data`.
+        primary_nodes = [page_props.get(key) for key in PAGE_STATE_EVENT_KEYS]
+        nested = page_props.get('data')
+        if isinstance(nested, dict):
+            primary_nodes.extend(nested.get(key) for key in PAGE_STATE_EVENT_KEYS)
+        for node in primary_nodes:
+            if not isinstance(node, dict):
+                continue
+            embedded_urls = [node.get(k) for k in PAGE_STATE_URL_KEYS
+                             if isinstance(node.get(k), str) and node.get(k).strip()]
+            if embedded_urls and any(v12.exact_event_url(u) != url for u in embedded_urls):
+                continue
+            # An ordinary `title` / `name` is only accepted inside an explicit
+            # primary event object (never at the pageProps root).
+            candidates = [node.get(k) for k in (*PAGE_STATE_TITLE_KEYS, 'title', 'name')]
+            for value in candidates:
+                if isinstance(value, str):
+                    valid = v14.clean_title(value)
+                    if valid and not LP_GENERIC_TITLE.fullmatch(valid) and not _site_common_title(valid):
+                        titles.add(valid)
+    return list(titles) if len(titles) == 1 else []
 
 
 

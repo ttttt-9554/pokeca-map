@@ -37,6 +37,7 @@ ALLOWED_METRICS = (
     'manual_title_site_common', 'manual_title_filtered_all',
     'manual_title_multiple_unresolved', 'manual_title_valid_unselected',
     'manual_title_meta_template_cleaned', 'manual_title_heading_seen',
+    'manual_title_dom_candidates', 'manual_title_state_candidates',
     'manual_title_truncated',
     'manual_page_unconfirmed', 'manual_page_event_confirmed',
     'manual_title_truncated_tail', 'manual_title_truncated_inner',
