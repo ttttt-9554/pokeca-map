@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T07:00:55.134874+00:00",
-  "unique_livepocket_urls": 388,
+  "collected_at": "2026-10-19T08:30:57.572504+00:00",
+  "unique_livepocket_urls": 392,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -62,10 +62,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/moozm",
@@ -1947,10 +1947,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -2015,10 +2015,10 @@
           "prefecture": "埼玉県"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -2037,10 +2037,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -2069,10 +2069,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -2295,10 +2295,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -2351,10 +2351,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -2374,10 +2374,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2415,10 +2415,10 @@
           "prefecture": ""
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2755,10 +2755,10 @@
       "application_start_at": "2026-09-25T10:00:00+09:00",
       "application_end_at": "2026-09-27T20:00:00+09:00",
       "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/asb1y",
@@ -3466,10 +3466,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/vt2ev",
@@ -3485,10 +3485,10 @@
           "prefecture": "東京都"
         }
       ],
-      "review_category": "pokemon",
       "pokemon_map_match": "スターターセットex イーブイex",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "discord_url_pair_unique_suffix"
+      "pokemon_map_evidence": "discord_url_pair_unique_suffix",
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/zof6r",
@@ -3982,6 +3982,8 @@
           "prefecture": ""
         }
       ],
+      "event_title": "【宇都宮テクノ店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
+      "review_category": "onepiece",
       "first_detected_at": "2026-10-17T00:30:01.547257+00:00"
     },
     {
@@ -4639,10 +4641,10 @@
       "application_start_at": "2026-10-18T00:00:00+09:00",
       "application_end_at": "2026-10-25T23:59:00+09:00",
       "discord_posted_at": "2026-10-19T04:30:03.819000+00:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "review_category": "pokemon",
       "first_detected_at": "2026-10-19T04:35:56.497989+00:00"
     },
     {
@@ -4803,7 +4805,74 @@
         }
       ],
       "first_detected_at": "2026-10-19T07:00:56.139583+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/9-0r8",
+      "store_name": "髙島屋新宿店3階BAO BAO ISSEY MIYAKE",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "stores": [
+        {
+          "name": "髙島屋新宿店3階BAO BAO ISSEY MIYAKE",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
+      "application_end_at": "2026-10-23T19:30:00+09:00",
+      "application_start_at": "2026-10-21T10:30:00+09:00",
+      "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/1gpoh",
+      "store_name": "古本市場蓮田店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "stores": [
+        {
+          "name": "古本市場蓮田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
+      "application_end_at": "2026-10-20T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3dfit",
+      "store_name": "トレカエース日立鮎川店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース日立鮎川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/al-c0",
+      "store_name": "晴れる屋 郡山店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "stores": [
+        {
+          "name": "晴れる屋 郡山店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "【晴れる屋 郡山店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-10-16T17:00:00+09:00",
+      "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     }
   ],
-  "updated_at": "2026-10-19T08:20:55.463198+00:00"
+  "updated_at": "2026-10-19T08:31:28.586738+00:00"
 }

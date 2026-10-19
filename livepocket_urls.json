@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-19T07:00:55.134874+00:00",
+  "collected_at": "2026-10-19T08:30:57.572504+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
-  "messages_scanned": 89,
-  "unique_livepocket_urls": 388,
+  "messages_scanned": 90,
+  "unique_livepocket_urls": 392,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8278,7 +8278,8 @@
       "extraction_status": "parsed",
       "field_sources": {
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "event_title": "v21_3_official_page_title"
       },
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "application_start_at": "2026-10-17T07:00:00+09:00",
@@ -8287,7 +8288,8 @@
           "name": "TSUTAYAテクノ店",
           "prefecture": ""
         }
-      ]
+      ],
+      "event_title": "【宇都宮テクノ店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/u62m7",
@@ -9777,34 +9779,152 @@
           "prefecture": "千葉県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/9-0r8",
+      "discord_message_id": "1561657691955396608",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n髙島屋新宿店3階BAO BAO ISSEY MIYAKE\n受付終了: 10/23 19:30（残り4日1時間）\nhttps://livepocket.jp/e/9-0r8\n\n📍埼玉県\n古本市場蓮田店\n受付終了: 10/20 22:00（残り1日4時間）\nhttps://livepocket.jp/e/1gpoh\n\n📍茨城県\nトレカエース日立鮎川店\n受付終了: 10/25 22:00（残り6日4時間）\nhttps://livepocket.jp/e/3dfit\n\n📍福島県\n晴れる屋 郡山店\n受付終了: 11/05 23:59（残り17日6時間）\nhttps://livepocket.jp/e/al-c0",
+      "store_name": "髙島屋新宿店3階BAO BAO ISSEY MIYAKE",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "髙島屋新宿店3階BAO BAO ISSEY MIYAKE",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
+      "application_end_at": "2026-10-23T19:30:00+09:00",
+      "application_start_at": "2026-10-21T10:30:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/1gpoh",
+      "discord_message_id": "1561657691955396608",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n髙島屋新宿店3階BAO BAO ISSEY MIYAKE\n受付終了: 10/23 19:30（残り4日1時間）\nhttps://livepocket.jp/e/9-0r8\n\n📍埼玉県\n古本市場蓮田店\n受付終了: 10/20 22:00（残り1日4時間）\nhttps://livepocket.jp/e/1gpoh\n\n📍茨城県\nトレカエース日立鮎川店\n受付終了: 10/25 22:00（残り6日4時間）\nhttps://livepocket.jp/e/3dfit\n\n📍福島県\n晴れる屋 郡山店\n受付終了: 11/05 23:59（残り17日6時間）\nhttps://livepocket.jp/e/al-c0",
+      "store_name": "古本市場蓮田店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場蓮田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
+      "application_end_at": "2026-10-20T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3dfit",
+      "discord_message_id": "1561657691955396608",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n髙島屋新宿店3階BAO BAO ISSEY MIYAKE\n受付終了: 10/23 19:30（残り4日1時間）\nhttps://livepocket.jp/e/9-0r8\n\n📍埼玉県\n古本市場蓮田店\n受付終了: 10/20 22:00（残り1日4時間）\nhttps://livepocket.jp/e/1gpoh\n\n📍茨城県\nトレカエース日立鮎川店\n受付終了: 10/25 22:00（残り6日4時間）\nhttps://livepocket.jp/e/3dfit\n\n📍福島県\n晴れる屋 郡山店\n受付終了: 11/05 23:59（残り17日6時間）\nhttps://livepocket.jp/e/al-c0",
+      "store_name": "トレカエース日立鮎川店",
+      "prefecture": "茨城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース日立鮎川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/al-c0",
+      "discord_message_id": "1561657691955396608",
+      "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n髙島屋新宿店3階BAO BAO ISSEY MIYAKE\n受付終了: 10/23 19:30（残り4日1時間）\nhttps://livepocket.jp/e/9-0r8\n\n📍埼玉県\n古本市場蓮田店\n受付終了: 10/20 22:00（残り1日4時間）\nhttps://livepocket.jp/e/1gpoh\n\n📍茨城県\nトレカエース日立鮎川店\n受付終了: 10/25 22:00（残り6日4時間）\nhttps://livepocket.jp/e/3dfit\n\n📍福島県\n晴れる屋 郡山店\n受付終了: 11/05 23:59（残り17日6時間）\nhttps://livepocket.jp/e/al-c0",
+      "store_name": "晴れる屋 郡山店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "晴れる屋 郡山店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【晴れる屋 郡山店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-10-16T17:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 236,
+    "parsed": 240,
     "no_structured_details": 152
   },
   "field_counts": {
-    "store_name": 233,
-    "prefecture": 196,
-    "event_title": 19,
+    "store_name": 237,
+    "prefecture": 200,
+    "event_title": 23,
     "event_date": 1,
     "product_name": 50,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 363,
-    "application_start_at": 363,
-    "stores_events": 235
+    "application_end_at": 367,
+    "application_start_at": 367,
+    "stores_events": 239
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561635033922535515"
+      "1551580466266644552": "1561657691955396608"
     },
     "last_run": {
-      "checked_at": "2026-10-19T07:00:55.134874+00:00",
-      "new_urls": 1,
-      "original_urls": 387,
+      "checked_at": "2026-10-19T08:30:57.572504+00:00",
+      "new_urls": 4,
+      "original_urls": 388,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -9875,7 +9995,8 @@
         "1561612386597601300": "2026-10-19T05:35:54.859481+00:00",
         "1561619987574165585": "2026-10-19T06:05:54.579994+00:00",
         "1561619986282188891": "2026-10-19T06:05:54.579994+00:00",
-        "1561635033922535515": "2026-10-19T07:00:55.436705+00:00"
+        "1561635033922535515": "2026-10-19T07:00:55.436705+00:00",
+        "1561657691955396608": "2026-10-19T08:30:57.841175+00:00"
       },
       "checked_search_urls": {}
     },
@@ -11439,6 +11560,22 @@
         "https://livepocket.jp/e/ixm84": {
           "checked_at": "2026-10-19T07:01:21.413946+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/al-c0": {
+          "checked_at": "2026-10-19T08:31:28.586738+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/9-0r8": {
+          "checked_at": "2026-10-19T08:31:28.586738+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/3dfit": {
+          "checked_at": "2026-10-19T08:31:28.586738+00:00",
+          "status": "checked_deadline"
+        },
+        "https://livepocket.jp/e/1gpoh": {
+          "checked_at": "2026-10-19T08:31:28.586738+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -11728,6 +11865,26 @@
           "detected_at": "2026-10-19T07:00:56.139583+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-19T07:01:21.413946+00:00"
+        },
+        "https://livepocket.jp/e/1gpoh": {
+          "detected_at": "2026-10-19T08:30:58.551035+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-19T08:31:28.586738+00:00"
+        },
+        "https://livepocket.jp/e/3dfit": {
+          "detected_at": "2026-10-19T08:30:58.551035+00:00",
+          "status": "checked_deadline",
+          "checked_at": "2026-10-19T08:31:28.586738+00:00"
+        },
+        "https://livepocket.jp/e/9-0r8": {
+          "detected_at": "2026-10-19T08:30:58.551035+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-19T08:31:28.586738+00:00"
+        },
+        "https://livepocket.jp/e/al-c0": {
+          "detected_at": "2026-10-19T08:30:58.551035+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-19T08:31:28.586738+00:00"
         }
       },
       "pending_new_urls": []
@@ -12136,10 +12293,10 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/w6vl0": {
-          "attempts": 2,
-          "checked_at": "2026-10-18T17:19:39.299899+00:00",
-          "status": "ok_no_title",
-          "reason": "no_verifiable_title_on_page",
+          "attempts": 3,
+          "checked_at": "2026-10-19T08:31:28.586738+00:00",
+          "status": "title_found",
+          "reason": "official_title_verified",
           "http_status": ""
         },
         "https://livepocket.jp/e/moozm": {
