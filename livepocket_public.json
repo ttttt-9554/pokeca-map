@@ -4782,8 +4782,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4864,6 +4862,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【抽選】ポケモンカードゲームMEGA 『 30th CELEBRATION カードセット 全９種』",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -4881,6 +4881,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール水戸内原店】 ポケカ店頭抽選販売（ポケモンＭ ３０ｔｈカードセット 全９種）",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -4901,6 +4903,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION １ＢＯＸ",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -5118,18 +5122,16 @@
     },
     {
       "url": "https://livepocket.jp/e/l58br",
-      "discord_posted_at": "2026-10-19T11:30:04.386000+00:00",
       "event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット9種セット」 抽選販売受付",
-      "application_end_at": "2026-10-20T19:59:00+09:00",
       "application_start_at": "2026-10-19T20:00:00+09:00",
+      "application_end_at": "2026-10-20T19:59:00+09:00",
+      "discord_posted_at": "2026-10-19T11:30:04.386000+00:00",
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット9種セット」 抽選販売受付",
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T11:31:15.497889+00:00"
+  "updated_at": "2026-10-19T11:41:27.085382+00:00"
 }
