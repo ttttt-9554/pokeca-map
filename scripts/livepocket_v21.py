@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.22: wait for event content and confirm same-page DOM headings.
+"""LivePocket v21.23: preserve verified event titles and repair Discord status-as-store labels.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -342,15 +342,137 @@ def classify(raw, public, catalog):
     return stats
 
 
+# v21.23: Some Discord roundups place an application status between the
+# shop heading and the URL.  Older parsing treated that status as the shop,
+# including in persisted public `stores`.  Correct exact-URL mistakes without
+# importing another event's store or guessing a shop from an event title.
+STORE_STATUS_HEADING = re.compile(
+    r'^(?:(?:受付|販売|応募|申込|抽選|予約)\s*'
+    r'(?:終了|中|開始前|開始|締切|停止|予定|期間|受付中|受付終了)|'
+    r'(?:応募|申込|販売|受付)\s*期限|締切|残り\s*[0-9０-９])',
+    re.I,
+)
+URL_ONLY = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{3,64}/?')
+
+
+def status_mistaken_for_store(value):
+    return isinstance(value, str) and bool(STORE_STATUS_HEADING.match(value.strip()))
+
+
+def shop_from_exact_discord_url(excerpt, event_url):
+    """Recognize ONLY prefecture -> shop -> status -> the exact event URL.
+
+    A multi-URL Discord roundup is fine because this strictly checks the
+    neighboring lines belonging to the requested URL.  Ambiguous observations
+    do not create a store.  Nothing here classifies an event title.
+    """
+    if not isinstance(excerpt, str) or not isinstance(event_url, str):
+        return None
+    if len(excerpt) > 100000:
+        return None
+    lines = [s.strip() for s in excerpt.splitlines() if s.strip()]
+    found = {}
+    for i in range(3, len(lines)):
+        matched_url = lines[i].strip('<> ')
+        if matched_url.rstrip('/') != event_url.rstrip('/') or not URL_ONLY.fullmatch(matched_url):
+            continue
+        if not status_mistaken_for_store(lines[i-1]):
+            continue
+        shop = v19.safe_name(lines[i-2])
+        pref_line = re.fullmatch(r'📍\s*(.+)', lines[i-3])
+        pref = pref_line.group(1).strip() if pref_line else ''
+        if (not shop or status_mistaken_for_store(shop) or
+                pref not in v10.PREFS or shop == pref):
+            continue
+        found[(shop, pref)] = {'name': shop, 'prefecture': pref}
+    return next(iter(found.values())) if len(found) == 1 else None
+
+
+def repair_status_as_store(raw, public):
+    """Idempotently sanitize raw/public stores; leave unrelated fields intact."""
+    pindex = {i.get('url'): i for i in public.get('items', [])
+              if isinstance(i, dict) and isinstance(i.get('url'), str)}
+    fixed = recovered = 0
+    for r in raw.get('items', []):
+        if not isinstance(r, dict) or r.get('url') not in pindex:
+            continue
+        p = pindex[r['url']]
+        items = [r, p]
+        bad = any(status_mistaken_for_store(i.get('store_name')) for i in items)
+        for obj in items:
+            if any(isinstance(s, dict) and status_mistaken_for_store(s.get('name'))
+                   for s in obj.get('stores') or []):
+                bad = True
+        if not bad:
+            continue
+        fixed += 1
+        valid = []
+        seen = set()
+        for obj in items:
+            for shop in obj.get('stores') or []:
+                if not isinstance(shop, dict):
+                    continue
+                name = v19.safe_name(shop.get('name'))
+                pref = shop.get('prefecture') or ''
+                if name and not status_mistaken_for_store(name) and pref in (v10.PREFS | {''}):
+                    key = (name, pref)
+                    if key not in seen:
+                        seen.add(key)
+                        valid.append({'name': name, 'prefecture': pref})
+        name = next((v19.safe_name(obj.get('store_name')) for obj in items
+                     if isinstance(obj.get('store_name'), str) and
+                     v19.safe_name(obj.get('store_name')) and
+                     not status_mistaken_for_store(obj.get('store_name'))), None)
+        if not valid and name:
+            pref = r.get('prefecture') or p.get('prefecture') or ''
+            valid = [{'name': name, 'prefecture': pref if pref in v10.PREFS else ''}]
+        inferred = None
+        if not valid and not name:
+            inferred = shop_from_exact_discord_url(r.get('post_excerpt'), r['url'])
+            # Do not attach a shop from a different prefecture than the
+            # existing URL-scoped source.  Better unknown than wrong.
+            existing_pref = r.get('prefecture') or p.get('prefecture') or ''
+            if inferred and existing_pref and existing_pref != inferred['prefecture']:
+                inferred = None
+            if inferred:
+                valid = [inferred]
+                name = inferred['name']
+                recovered += 1
+        if not name and len(valid) == 1:
+            name = valid[0]['name']
+        for obj in items:
+            if name:
+                obj['store_name'] = name
+            else:
+                obj.pop('store_name', None)
+            if valid:
+                obj['stores'] = [dict(v) for v in valid]
+            else:
+                obj.pop('stores', None)
+        if inferred:
+            sources = r.setdefault('field_sources', {})
+            sources['store_name'] = 'v21_23_discord_exact_url_adjacent_store'
+            sources['stores'] = 'v21_23_discord_exact_url_adjacent_store'
+    return {'status_store_entries_cleaned': fixed,
+            'status_store_names_recovered': recovered}
+
+
 def process_v21_1(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None):
     before = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
               for item in public.get('items', [])}
+    # The collector and v7 have already run.  Remove a status-as-store value
+    # BEFORE v19 re-merges legacy stores; do not allow it to be resurrected.
+    repaired_before = repair_status_as_store(raw, public)
     with use_store_aware_missing():
         raw, public, review, deadlines, sources, content, stats = v20.process(
             raw, public, fetch, now=now, new_limit=new_limit,
             background_limit=background_limit, retry_limit=retry_limit,
             verified=verified, v19_verified=v19_verified)
+    # Also guard any status-only shop emitted by upstream during this run.
+    repaired_after = repair_status_as_store(raw, public)
+    stats.update({key: repaired_before[key] + repaired_after[key]
+                  for key in repaired_before})
     stats.update(classify(raw, public, catalog))
     stats['official_genres_restored'] = restore_official_genres(raw, public)
     _, pi = v11.indices(raw, public)
