@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.21: safe diagnostic for unrecovered visible event headings.
+"""LivePocket v21.22: wait for event content and confirm same-page DOM headings.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -614,7 +614,8 @@ def title_diagnostic_details(page, url):
                      'heading_area_empty', 'truncated_prefix_missing',
                      'heading_recovered', 'multiple_matching_headings',
                      'possible_wrapped_heading', 'prefix_not_at_heading_start',
-                     'heading_prefix_mismatch'):
+                     'heading_prefix_mismatch', 'dom_heading_verified',
+                     'dom_heading_ambiguous'):
             result['recovery_probe'] = probe
     if not isinstance(page, dict):
         result['reason'] = 'invalid_fetch_result'
@@ -784,6 +785,103 @@ def clean_livepocket_event_title(value, source):
 #  - a unique full visible line closely preceding the known event tabs, and
 #  - that line begins with the exact metadata prefix (after whitespace/NFKC).
 # Do not guess the omitted ending or collect headings from unrelated paragraphs.
+def truncated_livepocket_meta_prefixes(page):
+    """Trusted exact-page truncated metadata prefixes, never Discord text.
+
+    These are verification hints only. A truncated prefix is NOT an event name.
+    """
+    if not isinstance(page, dict):
+        return set()
+    raw = page.get('titles')
+    origins = page.get('title_sources')
+    if not isinstance(raw, list) or not isinstance(origins, list) or len(raw) != len(origins):
+        return set()
+    out = set()
+    for value, origin in zip(raw[:12], origins[:12]):
+        if origin not in ('og', 'document', 'twitter') or not isinstance(value, str):
+            continue
+        title = LP_META_TEMPLATE.sub('', html.unescape(value).strip()).strip()
+        if not title.endswith(('…', '...')) or '\ufffd' in title:
+            continue
+        prefix = title[:-3].rstrip() if title.endswith('...') else title[:-1].rstrip()
+        key = re.sub(r'\s+', '', unicodedata.normalize('NFKC', prefix)).casefold()
+        if 12 <= len(key) <= 155 and not LP_GENERIC_TITLE.fullmatch(prefix):
+            out.add(key)
+    return out
+
+
+def recover_same_page_dom_title(page):
+    """Verify visible DOM title(s) against exact LivePocket metadata prefixes.
+
+    Browser extraction is bounded to top-of-page, visible, innermost nodes;
+    strict prefix agreement plus single-candidate uniqueness is required.
+    It cannot read Discord, search engines, other URLs or ticket description.
+    """
+    if not isinstance(page, dict):
+        return None, 'dom_heading_missing'
+    candidates = page.get('dom_title_candidates')
+    if not isinstance(candidates, list) or not candidates:
+        return None, 'dom_heading_missing'
+    prefixes = truncated_livepocket_meta_prefixes(page)
+    if not prefixes:
+        return None, 'dom_prefix_missing'
+    verified = set()
+    for raw in candidates[:12]:
+        if not isinstance(raw, str) or len(raw) > 240:
+            continue
+        candidate = re.sub(r'\s+', ' ', html.unescape(raw)).strip()
+        if '…' in candidate or '...' in candidate or '\ufffd' in candidate:
+            continue
+        key = re.sub(r'\s+', '', unicodedata.normalize('NFKC', candidate)).casefold()
+        if not any(len(key) > len(prefix) and key.startswith(prefix) for prefix in prefixes):
+            continue
+        safe, _code, _fixed = clean_livepocket_event_title(candidate, 'event_heading')
+        if safe and not _site_common_title(safe):
+            verified.add(safe)
+    if len(verified) == 1:
+        return verified.pop(), 'dom_heading_verified'
+    if len(verified) > 1:
+        return None, 'dom_heading_ambiguous'
+    return None, 'dom_prefix_mismatch'
+
+
+# The browser runs this against DOM of the same event URL it already loaded.
+# No secondary network request, API, login or challenge evasion is performed.
+# Return only bounded title-like text from visible nodes close to page top.
+DOM_EVENT_HEADING_JS = r"""(prefixes) => {
+  const canonical = s => (s || '').normalize('NFKC').replace(/\s+/g, '').toLowerCase();
+  const wanted = Array.isArray(prefixes) ? prefixes.slice(0, 12) : [];
+  if (!wanted.length) return [];
+  const found = [];
+  const selectors = 'h1,h2,h3,p,span,div,strong,[role="heading"]';
+  const els = document.querySelectorAll(selectors);
+  const max = Math.min(els.length, 4000);
+  for (let i = 0; i < max; ++i) {
+    const el = els[i];
+    if (el.closest('header,nav,footer,aside,dialog,[role="navigation"],[aria-hidden="true"]')) continue;
+    const style = window.getComputedStyle(el);
+    if (style.display === 'none' || style.visibility === 'hidden') continue;
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 10 || rect.height < 8 || rect.top + window.scrollY > 2100) continue;
+    const raw = (el.innerText || '').trim();
+    if (raw.length < 12 || raw.length > 220) continue;
+    if (raw.includes('受付・チケット情報') || raw.includes('お問い合わせ')) continue;
+    if (raw.split(/\n+/).filter(x => x.trim()).length > 2) continue;
+    const text = raw.replace(/\s+/g, ' ').trim();
+    if (text.includes('…') || text.includes('...')) continue;
+    const normalized = canonical(text);
+    if (!wanted.some(prefix => normalized.startsWith(prefix) && normalized.length > prefix.length)) continue;
+    found.push({el, text});
+  }
+  // Prefer the smallest element containing an identical visible title, not
+  // broad ancestors whose innerText also includes share buttons or captions.
+  const leaf = found.filter(a => !found.some(b => a !== b && a.el.contains(b.el)));
+  const out = [];
+  for (const {text} of leaf) if (!out.includes(text)) out.push(text);
+  return out.slice(0, 12);
+}"""
+
+
 def inspect_visible_event_title(page):
     """Return (verified title or None, SAFE finite failure code).
 
@@ -899,6 +997,12 @@ def normalize_event_title_observation(page, url):
         entries.append((name, 'body_label'))
     # Visible title must agree with a truncated official metadata prefix.
     matched_heading, title_probe = inspect_visible_event_title(page)
+    if not matched_heading:
+        dom_heading, dom_probe = recover_same_page_dom_title(page)
+        if dom_heading:
+            matched_heading, title_probe = dom_heading, dom_probe
+        elif dom_probe == 'dom_heading_ambiguous':
+            title_probe = dom_probe  # Never auto-select conflicting headings.
     result['title_recovery_probe'] = title_probe
     if matched_heading:
         entries.append((matched_heading, 'event_heading'))
@@ -1528,14 +1632,22 @@ def browser_fetcher():
             if v12.exact_event_url(page.url) != url:
                 return {'status': 'browser_redirected'}
             body = ''
-            for _ in range(3):
+            # v21.22: the global navigation/announcements alone often exceed
+            # 80 characters BEFORE the event hero/tabs hydrate. Do not treat
+            # that shell as a fully-rendered event. Wait a bounded ~5 seconds
+            # for the event section; never bypass login/challenge pages.
+            for attempt in range(7):
                 try:
                     body = page.locator('body').inner_text(timeout=4000)
                 except BrowserTimeout:
                     body = ''
-                if len(body.strip()) > 80:
+                if ROBOT_VERIFICATION.search(body) or v14.v13.BLOCK_WORDS.search(body):
                     break
-                page.wait_for_timeout(1500)
+                if ('概要' in body and '詳細' in body and
+                        '受付・チケット情報' in body and 'お問い合わせ' in body):
+                    break
+                if attempt < 6:
+                    page.wait_for_timeout(800)
             if (v14.v13.BLOCK_WORDS.search(body) or ROBOT_VERIFICATION.search(body)
                     or len(body.strip()) < 40):
                 return {'status': 'browser_blocked_or_empty',
@@ -1600,6 +1712,18 @@ def browser_fetcher():
                     add_title(value, 'event_state')
             except Exception:
                 pass
+            # v21.22: the event heading may be a styled DIV/P rather than H1;
+            # the page may also omit the navigation labels used by v21.19.
+            # Match only the full visible DOM heading to exact-URL truncated
+            # LivePocket metadata; conflicting or missing names stay unknown.
+            dom_title_candidates = []
+            try:
+                prefixes = sorted(truncated_livepocket_meta_prefixes({
+                    'titles': titles, 'title_sources': title_sources}))
+                if prefixes:
+                    dom_title_candidates = page.evaluate(DOM_EVENT_HEADING_JS, prefixes)
+            except Exception:
+                dom_title_candidates = []
             if '受付・チケット情報' in body and not v19.ticket_option_stores(body):
                 try:
                     tab = page.get_by_text('受付・チケット情報', exact=True).first
@@ -1614,7 +1738,8 @@ def browser_fetcher():
                     pass
             return {'status': 'ok', 'final_url': page.url,
                     'text': body[:30000], 'titles': titles,
-                    'title_sources': title_sources}
+                    'title_sources': title_sources,
+                    'dom_title_candidates': dom_title_candidates if isinstance(dom_title_candidates, list) else []}
         except BrowserTimeout:
             return {'status': 'browser_timeout'}
         except Exception:
