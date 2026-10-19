@@ -62,10 +62,10 @@
           "prefecture": "東京都"
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/moozm",
@@ -1947,10 +1947,10 @@
           "prefecture": ""
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/ping7",
@@ -2015,10 +2015,10 @@
           "prefecture": "埼玉県"
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/19wmh",
@@ -2037,10 +2037,10 @@
           "prefecture": ""
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -2069,10 +2069,10 @@
           "prefecture": ""
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/ie8vo",
@@ -2295,10 +2295,10 @@
           "prefecture": ""
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/flwm5",
@@ -2351,10 +2351,10 @@
           "prefecture": "東京都"
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/c6b-4",
@@ -2374,10 +2374,10 @@
           "prefecture": ""
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/tle-s",
@@ -2415,10 +2415,10 @@
           "prefecture": ""
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/j1mv8",
@@ -2615,7 +2615,11 @@
     },
     {
       "url": "https://livepocket.jp/e/pp-3l",
-      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00"
+      "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "event_title": "遊戯王ラッシュデュエル「CROSS ART COLLECTION」",
+      "review_category": "yugioh",
+      "official_genre": "yugioh",
+      "official_event_title": "遊戯王ラッシュデュエル「CROSS ART COLLECTION」"
     },
     {
       "url": "https://livepocket.jp/e/oskxn",
@@ -2755,10 +2759,10 @@
       "application_start_at": "2026-09-25T10:00:00+09:00",
       "application_end_at": "2026-09-27T20:00:00+09:00",
       "discord_posted_at": "2026-09-25T11:25:36.501000+00:00",
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/asb1y",
@@ -2940,7 +2944,14 @@
     },
     {
       "url": "https://livepocket.jp/e/y4-lv",
-      "discord_posted_at": "2026-09-22T15:01:54.867000+00:00"
+      "discord_posted_at": "2026-09-22T15:01:54.867000+00:00",
+      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/uau4g",
@@ -2972,7 +2983,14 @@
     },
     {
       "url": "https://livepocket.jp/e/jv0go",
-      "discord_posted_at": "2026-09-22T15:01:54.867000+00:00"
+      "discord_posted_at": "2026-09-22T15:01:54.867000+00:00",
+      "event_title": "ポケモンカードゲーム 「インフェルノX」再入荷分 抽選販売受付",
+      "review_category": "pokemon",
+      "pokemon_map_match": "インフェルノX",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「インフェルノX」再入荷分 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/fvxoh",
@@ -3042,7 +3060,14 @@
     },
     {
       "url": "https://livepocket.jp/e/wxos5",
-      "discord_posted_at": "2026-09-22T15:01:54.867000+00:00"
+      "discord_posted_at": "2026-09-22T15:01:54.867000+00:00",
+      "event_title": "ポケモンカードゲーム 「30th CELEBRATION」キャンセル分 抽選販売受付",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION」キャンセル分 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/3558y",
@@ -3466,10 +3491,10 @@
           "prefecture": "東京都"
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/vt2ev",
@@ -3485,10 +3510,10 @@
           "prefecture": "東京都"
         }
       ],
+      "review_category": "pokemon",
       "pokemon_map_match": "スターターセットex イーブイex",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "discord_url_pair_unique_suffix",
-      "review_category": "pokemon"
+      "pokemon_map_evidence": "discord_url_pair_unique_suffix"
     },
     {
       "url": "https://livepocket.jp/e/zof6r",
@@ -3973,17 +3998,17 @@
     {
       "url": "https://livepocket.jp/e/w6vl0",
       "store_name": "TSUTAYAテクノ店",
+      "event_title": "【宇都宮テクノ店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-17T00:23:28.303000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYAテクノ店",
           "prefecture": ""
         }
       ],
-      "event_title": "【宇都宮テクノ店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
-      "review_category": "onepiece",
       "first_detected_at": "2026-10-17T00:30:01.547257+00:00"
     },
     {
@@ -4101,12 +4126,17 @@
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
+      "event_title": "【自治医大店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA自治医大店トレカ売場",
           "prefecture": "栃木県"
         }
       ],
+      "product_name": "Heroines Edition vol.2【EB-05】",
+      "official_genre": "onepiece",
+      "official_event_title": "【自治医大店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
@@ -4161,12 +4191,17 @@
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "event_title": "【所沢山口店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA所沢山口店トレカ売場",
           "prefecture": "埼玉県"
         }
       ],
+      "product_name": "Heroines Edition vol.2【EB-05】",
+      "official_genre": "onepiece",
+      "official_event_title": "【所沢山口店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
@@ -4191,12 +4226,14 @@
       "application_start_at": "2026-10-17T09:00:00+09:00",
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "discord_posted_at": "2026-10-17T20:11:50.001000+00:00",
+      "event_title": "【葉鹿店】『Heroines Edition vol.2』抽選予約",
       "stores": [
         {
           "name": "トレカ丸葉鹿店",
           "prefecture": "栃木県"
         }
       ],
+      "official_event_title": "【葉鹿店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
@@ -4251,12 +4288,19 @@
       "application_start_at": "2026-10-18T09:37:00+09:00",
       "application_end_at": "2026-10-19T21:00:00+09:00",
       "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ストームエメラルダ）",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
       ],
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4266,12 +4310,19 @@
       "application_start_at": "2026-10-18T09:47:00+09:00",
       "application_end_at": "2026-10-19T21:00:00+09:00",
       "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION）",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
       ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4296,12 +4347,17 @@
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "event_title": "【大利根店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA大利根店トレカ売場",
           "prefecture": "埼玉県"
         }
       ],
+      "product_name": "Heroines Edition vol.2【EB-05】",
+      "official_genre": "onepiece",
+      "official_event_title": "【大利根店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4326,12 +4382,14 @@
       "application_start_at": "2026-10-17T09:00:00+09:00",
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "event_title": "【足利助戸店】『Heroines Edition vol.2』抽選予約",
       "stores": [
         {
           "name": "トレカ丸足利助戸店",
           "prefecture": "栃木県"
         }
       ],
+      "official_event_title": "【足利助戸店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4641,10 +4699,10 @@
       "application_start_at": "2026-10-18T00:00:00+09:00",
       "application_end_at": "2026-10-25T23:59:00+09:00",
       "discord_posted_at": "2026-10-19T04:30:03.819000+00:00",
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "review_category": "pokemon",
       "first_detected_at": "2026-10-19T04:35:56.497989+00:00"
     },
     {
@@ -4810,6 +4868,9 @@
       "url": "https://livepocket.jp/e/9-0r8",
       "store_name": "髙島屋新宿店3階BAO BAO ISSEY MIYAKE",
       "prefecture": "東京都",
+      "event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
+      "application_start_at": "2026-10-21T10:30:00+09:00",
+      "application_end_at": "2026-10-23T19:30:00+09:00",
       "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
       "stores": [
         {
@@ -4817,26 +4878,23 @@
           "prefecture": "東京都"
         }
       ],
-      "event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
-      "application_end_at": "2026-10-23T19:30:00+09:00",
-      "application_start_at": "2026-10-21T10:30:00+09:00",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
       "url": "https://livepocket.jp/e/1gpoh",
       "store_name": "古本市場蓮田店",
       "prefecture": "埼玉県",
+      "event_title": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "application_end_at": "2026-10-20T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場蓮田店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
-      "application_end_at": "2026-10-20T22:00:00+09:00",
-      "application_start_at": "2026-10-19T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
@@ -4846,6 +4904,8 @@
       "url": "https://livepocket.jp/e/3dfit",
       "store_name": "トレカエース日立鮎川店",
       "prefecture": "茨城県",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
       "stores": [
         {
@@ -4853,14 +4913,15 @@
           "prefecture": "茨城県"
         }
       ],
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-19T10:00:00+09:00",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
       "url": "https://livepocket.jp/e/al-c0",
       "store_name": "晴れる屋 郡山店",
       "prefecture": "福島県",
+      "event_title": "【晴れる屋 郡山店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+      "application_start_at": "2026-10-16T17:00:00+09:00",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
       "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
       "stores": [
         {
@@ -4868,11 +4929,8 @@
           "prefecture": "福島県"
         }
       ],
-      "event_title": "【晴れる屋 郡山店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
-      "application_end_at": "2026-11-05T23:59:00+09:00",
-      "application_start_at": "2026-10-16T17:00:00+09:00",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     }
   ],
-  "updated_at": "2026-10-19T08:31:28.586738+00:00"
+  "updated_at": "2026-10-19T08:39:15.680371+00:00"
 }
