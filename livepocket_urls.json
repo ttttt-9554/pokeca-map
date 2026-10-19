@@ -11956,7 +11956,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ixm84": {
-          "checked_at": "2026-10-19T13:11:24.995684+00:00",
+          "checked_at": "2026-10-19T19:16:21.738663+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/al-c0": {
@@ -12294,7 +12294,7 @@
         "https://livepocket.jp/e/ixm84": {
           "detected_at": "2026-10-19T07:00:56.139583+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T13:11:24.995684+00:00"
+          "checked_at": "2026-10-19T19:16:21.738663+00:00"
         },
         "https://livepocket.jp/e/1gpoh": {
           "detected_at": "2026-10-19T08:30:58.551035+00:00",
@@ -12632,8 +12632,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ixm84": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T13:11:24.995684+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T19:16:21.738663+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/al-c0": {
@@ -15290,7 +15290,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T13:11:24.995684+00:00",
+          "checked_at": "2026-10-19T19:16:21.738663+00:00",
           "title_observed": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2",
           "genre": "onepiece",
           "product_origin": "",
@@ -16691,7 +16691,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ixm84": {
-          "checked_at": "2026-10-19T13:11:24.995684+00:00",
+          "checked_at": "2026-10-19T19:16:21.738663+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
