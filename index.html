@@ -337,8 +337,7 @@ html[data-theme="dark"] .friend-member-state.offline,html[data-theme="dark"] .fr
 </style>
 
 <style id="ios-form-scroll-fix">
-/* v21.33: iOS PWA - fix bottom tab drift by removing document-level scrolling.
-   The header and main are in one scroll container; nav is a separate flex footer. */
+/* v21.35: Both header and bottom navigation are siblings OUTSIDE scroll area. */
 html {
   height: 100%;
   min-height: 0;
@@ -358,6 +357,59 @@ body:not(.map-filter-locked) {
   display: flex;
   flex-direction: column;
   overflow: hidden !important;
+}
+#appFixedHeader {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: calc(7px + env(safe-area-inset-top)) 12px 8px;
+  background: var(--app-surface, #fff);
+  color: var(--app-text, #172033);
+  border-bottom: 1px solid var(--app-border, #cfdbec);
+  z-index: 20;
+}
+#appFixedHeader .app-header-brand { flex: 1 1 auto; min-width: 0; }
+#appFixedHeader .eyebrow,
+#appFixedHeader .app-header-brand p { display: none; }
+#appFixedHeader h1 {
+  margin: 0;
+  font-size: clamp(16px, 4.2vw, 21px);
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#appFixedHeader .app-header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+}
+#appFixedHeader .app-update-button,
+#appFixedHeader .app-settings-button {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  min-height: 42px;
+  padding: 8px 10px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+  z-index: auto;
+}
+@media (max-width: 360px) {
+  #appFixedHeader { gap: 5px; padding-left: 8px; padding-right: 8px; }
+  #appFixedHeader .app-header-actions { gap: 4px; }
+  #appFixedHeader .app-update-button,
+  #appFixedHeader .app-settings-button { padding: 8px 6px; font-size: 12px; }
 }
 #appScrollArea {
   position: relative;
@@ -382,8 +434,6 @@ body.map-filter-locked #appScrollArea { overflow: hidden !important; }
   overflow: visible;
 }
 #reportForm > :last-child { margin-bottom: 18px; }
-
-/* The nav is no longer position:fixed: it is an ordinary footer outside the scroller. */
 nav[aria-label="メインメニュー"] {
   position: relative !important;
   inset: auto !important;
@@ -402,23 +452,8 @@ nav[aria-label="メインメニュー"] {
 </head>
 
 <body>
-<div id="appScrollArea">
-<button id="appUpdateNow" class="app-update-button" type="button" aria-label="最新版に更新">↻ 更新</button>
-<div id="appUpdateFeedback" class="app-update-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div>
-<button id="appSettingsOpen" class="app-settings-button" type="button" aria-haspopup="dialog">⚙ 設定</button>
-<div id="appSettingsBackdrop" class="app-settings-backdrop" hidden></div>
-<section id="appSettingsPanel" class="app-settings-panel" role="dialog" aria-modal="true" aria-label="アプリ設定" hidden>
-<h2>⚙ アプリ設定</h2><label for="appThemeChoice">画面のテーマ</label>
-<select id="appThemeChoice"><option value="system">端末の設定に合わせる</option><option value="light">ライトモード</option><option value="dark">ダークモード</option></select>
-<p class="hint">選択したテーマは次回起動時も維持されます。</p>
-<p class="hint" id="appUpdateStatus" role="status">最新版への更新は画面上部の「↻ 更新」から行えます。端末内の登録データは削除しません。</p>
-<button id="appSettingsClose" type="button">閉じる</button></section>
-
-  <!-- ======================================
-       ヘッダー
-       ====================================== -->
-
-  <header>
+<header id="appFixedHeader">
+  <div class="app-header-brand">
     <div class="eyebrow">
       PRIVATE DISCOVERY LOG
     </div>
@@ -428,8 +463,22 @@ nav[aria-label="メインメニュー"] {
     <p>
       友達と共有するための発見記録・試作版
     </p>
-  </header>
-
+  
+  </div>
+  <div class="app-header-actions">
+    <button id="appUpdateNow" class="app-update-button" type="button" aria-label="最新版に更新">↻ 更新</button>
+    <button id="appSettingsOpen" class="app-settings-button" type="button" aria-haspopup="dialog">⚙ 設定</button>
+  </div>
+</header>
+<div id="appUpdateFeedback" class="app-update-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+<div id="appSettingsBackdrop" class="app-settings-backdrop" hidden></div>
+<section id="appSettingsPanel" class="app-settings-panel" role="dialog" aria-modal="true" aria-label="アプリ設定" hidden>
+<h2>⚙ アプリ設定</h2><label for="appThemeChoice">画面のテーマ</label>
+<select id="appThemeChoice"><option value="system">端末の設定に合わせる</option><option value="light">ライトモード</option><option value="dark">ダークモード</option></select>
+<p class="hint">選択したテーマは次回起動時も維持されます。</p>
+<p class="hint" id="appUpdateStatus" role="status">最新版への更新は画面上部の「↻ 更新」から行えます。端末内の登録データは削除しません。</p>
+<button id="appSettingsClose" type="button">閉じる</button></section>
+<div id="appScrollArea">
   <main>
 
     <!-- ======================================
@@ -1126,7 +1175,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_34-genre-filter"></script>
+  <script src="app.js?v=20261020-v21_35-compact-fixed-header-tab-restore"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
@@ -1180,6 +1229,12 @@ nav[aria-label="メインメニュー"] {
       var next=new URL('./index.html',location.href);
       var token=String(Date.now());
       next.searchParams.set('app_refresh',token);
+      // Preserve the visible tab across the full-page refresh.
+      var selected = document.querySelector('nav[aria-label="メインメニュー"] button.active[data-tab]');
+      var currentTab = selected ? selected.dataset.tab : '';
+      if (/^(map|add|history|lottery|lotteryManage|group|dev)$/.test(currentTab)) {
+        next.searchParams.set('app_tab',currentTab);
+      }
       if(controller)timeout=setTimeout(function(){controller.abort();},12000);
       var response=await fetch(next.href,{cache:'no-store',signal:controller?controller.signal:undefined});
       if(!response.ok)throw new Error('HTTP '+response.status);
