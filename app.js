@@ -2670,6 +2670,61 @@
     return Number.isSafeInteger(value) && value >= 0 ? value : 0;
   }
 
+  // v21.18: server-aggregated Japanese-calendar daily new event counts.
+  // Counts originate from first-seen URL checkpoints, not update timestamps
+  // or user-local storage. Render ONLY within the developer-only view.
+  function lpDevDailyPanel() {
+    if (!isDeveloper()) return null;
+    let host = $('lpDevDailyPanel');
+    if (!host) {
+      const before = $('lpDevRecheckPanel');
+      if (!before) return null;
+      host = document.createElement('div');
+      host.id = 'lpDevDailyPanel';
+      host.className = 'store-tools lp-dev-recheck';
+      host.innerHTML = '<h3>📈 今日の抽選追加数</h3><div id="lpDevDailyContent" role="status" aria-live="polite"></div>';
+      before.before(host);
+    }
+    return $('lpDevDailyContent');
+  }
+
+  function renderLpDevDailyGrowth(daily) {
+    const host = lpDevDailyPanel();
+    if (!host) return;
+    const valid = Number.isSafeInteger(daily?.today) && daily.today >= 0 &&
+      Number.isSafeInteger(daily?.yesterday) && daily.yesterday >= 0 &&
+      Number.isSafeInteger(daily?.last_7_days) && daily.last_7_days >= 0 &&
+      Number.isSafeInteger(daily?.registered_total) && daily.registered_total >= 0 &&
+      daily.source === 'v14_first_detected_urls' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(daily.date_jst || '');
+    if (!valid) {
+      host.innerHTML = '<p class="hint">新規追加数は集計準備中です。次のGitHub Actions成功後に「結果を更新」を押してください。</p>';
+      return;
+    }
+    const localDay = new Intl.DateTimeFormat('sv-SE', {
+      timeZone:'Asia/Tokyo', year:'numeric', month:'2-digit', day:'2-digit'
+    }).format(new Date());
+    if (daily.date_jst !== localDay) {
+      // Do not display yesterday's value under the heading "today".
+      host.innerHTML = `<p class="hint">本日分は次の自動収集後に表示されます。直近の集計日：${escape(daily.date_jst)}（日本時間）</p>`;
+      return;
+    }
+    const fields = [
+      ['今日の新規追加', daily.today],
+      ['昨日の新規追加', daily.yesterday],
+      ['直近7日間の新規追加', daily.last_7_days],
+      ['登録イベント総数', daily.registered_total]
+    ];
+    const since = /^\d{4}-\d{2}-\d{2}$/.test(daily.tracked_since_jst || '') ?
+      daily.tracked_since_jst : '';
+    host.innerHTML = `
+      <p class="hint">${escape(daily.date_jst)}（日本時間）／最終集計 ${escape(lpDevReportDate(daily.as_of))}</p>
+      <div class="lp-dev-results-grid">${fields.map(([label,count]) =>
+        `<div class="lp-dev-result-cell"><span>${escape(label)}</span><strong>${count.toLocaleString('ja-JP')}</strong></div>`).join('')}</div>
+      <p class="hint">※抽選イベントURLの初登録数です。受付終了を含み、手動再確認・名称変更・同一URLの再投稿は増加に含めません。</p>
+      <p class="hint">※記録開始${since ? `：${escape(since)}（日本時間）` : '以前の日別内訳なし'}。それ以前の登録分を推測して加算しません。更新はGitHub Actions成功後「結果を更新」で反映されます。</p>`;
+  }
+
   function lpDevReportMarkup(lastManual, lastRun) {
     if (!lastManual || !lastManual.completed_process_at) {
       return `<p class="hint">開発者ボタンによる再確認結果はまだありません。ボタンから実行し、GitHub Actionsの処理完了後に表示されます。</p>
@@ -2737,12 +2792,14 @@
       const response = await fetch(LP_DEV_RESULTS_URL + '?t=' + Date.now(), {cache:'no-store'});
       if (response.status === 404) {
         state.textContent = '結果ファイルはまだありません。GitHub側のv21.11を反映後、最初の実行で作成されます。';
+        renderLpDevDailyGrowth(null);
         output.replaceChildren();
         return;
       }
       if (!response.ok) throw new Error('HTTP ' + response.status);
       const result = await response.json();
       if (!result || result.schema_version !== 1) throw new Error('結果データの形式が異なります');
+      renderLpDevDailyGrowth(result.daily_additions);
       const lastManual = result.last_manual;
       if (lastManual?.run_id) lpDevLastSeenManualRun = String(lastManual.run_id);
       state.textContent = '結果を取得しました。';
@@ -2760,6 +2817,7 @@
         }
       }
     } catch (error) {
+      renderLpDevDailyGrowth(null);
       state.textContent = '結果を取得できませんでした：' + (error?.message || '通信エラー');
     } finally {
       lpDevReportLoading = false;
