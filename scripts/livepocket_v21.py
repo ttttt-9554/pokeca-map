@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.23: preserve verified event titles and repair Discord status-as-store labels.
+"""LivePocket v21.24: developer-triggered recheck without the manual 2-hour per-URL limit.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -1237,7 +1237,6 @@ def apply_verified_titles(raw, public, registry):
 # workflow's explicit manual input, never by the regular 5-minute Cron.
 # The ordinary v14/v15/v20 extractors remain responsible for writing facts.
 MANUAL_RECHECK_LIMIT = 12
-MANUAL_MIN_REPEAT = timedelta(hours=2)
 
 
 def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT):
@@ -1245,7 +1244,9 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
 
     No URL currently queued as *new* is chosen again. A hard global bot-block
     cooldown always wins. Manual mode bypasses the historical 7-day wait but
-    NEVER the global block cooldown or a 2-hour per-URL repeat guard.
+    NEVER the global bot-block cooldown, invalid timestamps, or future checks.
+    No 2-hour per-URL guard for a developer-requested run. The normal scheduled
+    recheck cadence and its existing cooldowns are unchanged.
     """
     now = v14._utc(now)
     limit = max(0, min(int(limit), MANUAL_RECHECK_LIMIT))
@@ -1272,14 +1273,14 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         last = v19.v18.v17.check_time(check.get('checked_at'))
         if check.get('checked_at') and not last:
             continue  # malformed check timestamps are quarantined
-        if last and (last > now or now - last < MANUAL_MIN_REPEAT):
+        if last and last > now:
             continue
         # Non-working, repeated official checks must also respect the guard.
         official = state.get('v21_9', {}).get('official_checks', {}).get(url, {})
         official_last = v19.v18.v17.check_time(official.get('checked_at'))
         if official.get('checked_at') and not official_last:
             continue
-        if official_last and (official_last > now or now - official_last < MANUAL_MIN_REPEAT):
+        if official_last and official_last > now:
             continue
         missing = missing_details_v21(event)
         event_title = event.get('event_title') or item.get('event_title') or ''
