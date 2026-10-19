@@ -337,13 +337,33 @@ html[data-theme="dark"] .friend-member-state.offline,html[data-theme="dark"] .fr
 </style>
 
 <style id="ios-form-scroll-fix">
-/* iPhone Safari/PWA: 登録フォームの末尾が固定タブバーの下に隠れないようにする */
-html { min-height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-body:not(.map-filter-locked) { min-height: 100%; height: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+/* v21.32: iOS Safari/PWA - rootだけをスクロールさせ固定ナビのズレを防止 */
+html {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body:not(.map-filter-locked) {
+  min-height: 100%;
+  height: auto;
+  overflow: visible;
+}
+html:has(body.map-filter-locked) { overflow: hidden; }
 main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 #addView { height: auto; max-height: none; overflow: visible; }
 #reportForm { height: auto; max-height: none; overflow: visible; }
 #reportForm > :last-child { margin-bottom: 18px; }
+
+/* スクロール対象から分離してビューポート最下部に固定 */
+nav[aria-label="メインメニュー"] {
+  position: fixed !important;
+  inset: auto 0 0 !important;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  z-index: 5000;
+}
 </style>
 </head>
 
@@ -1064,7 +1084,7 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_31-update-feedback"></script>
+  <script src="app.js?v=20261020-v21_32-bottom-nav-fix"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
