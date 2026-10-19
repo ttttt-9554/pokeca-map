@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-19T15:00:56.562842+00:00",
+  "collected_at": "2026-10-19T23:15:56.036211+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -10312,10 +10312,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561755871678038118"
+      "1551580466266644552": "1561879759594594394"
     },
     "last_run": {
-      "checked_at": "2026-10-19T15:00:56.562842+00:00",
+      "checked_at": "2026-10-19T23:15:56.036211+00:00",
       "new_urls": 0,
       "original_urls": 400,
       "suspect_legacy_store_names": 0,
@@ -12000,7 +12000,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/65560": {
-          "checked_at": "2026-10-19T17:06:32.475905+00:00",
+          "checked_at": "2026-10-19T23:16:35.248338+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/l58br": {
@@ -12349,7 +12349,7 @@
         "https://livepocket.jp/e/65560": {
           "detected_at": "2026-10-19T11:00:57.404010+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T17:06:32.475905+00:00"
+          "checked_at": "2026-10-19T23:16:35.248338+00:00"
         },
         "https://livepocket.jp/e/l58br": {
           "detected_at": "2026-10-19T11:30:55.344195+00:00",
@@ -12687,8 +12687,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/65560": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T17:06:32.475905+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T23:16:35.248338+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/l58br": {
@@ -15378,7 +15378,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T17:06:32.475905+00:00",
+          "checked_at": "2026-10-19T23:16:35.248338+00:00",
           "title_observed": "10/31(土)発売 ワンピースカードゲーム エクストラブースターパック 『 Heroines Edition vol.2』",
           "genre": "onepiece",
           "product_origin": "",
@@ -16795,7 +16795,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/65560": {
-          "checked_at": "2026-10-19T17:06:32.475905+00:00",
+          "checked_at": "2026-10-19T23:16:35.248338+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
