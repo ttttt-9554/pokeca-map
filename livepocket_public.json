@@ -4539,9 +4539,9 @@
       "url": "https://livepocket.jp/e/h295z",
       "store_name": "受付終了: 10/23 23:59（残り4日11時間）",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
-      "application_end_at": "2026-10-23T23:59:00+09:00",
       "application_start_at": "2026-10-19T10:21:00+09:00",
+      "application_end_at": "2026-10-23T23:59:00+09:00",
+      "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "stores": [
         {
           "name": "受付終了: 10/23 23:59（残り4日11時間）",
@@ -4552,10 +4552,10 @@
     {
       "url": "https://livepocket.jp/e/vxe8h",
       "store_name": "受付終了: 10/23 20:05（残り4日7時間）",
-      "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "product_name": "エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
-      "application_end_at": "2026-10-23T20:05:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
+      "application_end_at": "2026-10-23T20:05:00+09:00",
+      "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "review_category": "onepiece",
       "stores": [
         {
@@ -4565,5 +4565,5 @@
       ]
     }
   ],
-  "updated_at": "2026-10-19T03:36:20.995160+00:00"
+  "updated_at": "2026-10-19T03:45:57.384588+00:00"
 }
