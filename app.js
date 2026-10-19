@@ -2740,6 +2740,45 @@
       .lp-track-counts{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
       .lp-track-counts span{padding:5px 8px;border-radius:9px;border:1px solid var(--app-border,#cbd5e1);font-size:12px;background:var(--app-surface2,#f8fafc)}
       .lp-track-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+
+      /* v21.39: Local in-app alerts for approaching pickup dates (not push). */
+      .lp-pickup-alerts{display:grid;gap:10px;margin:14px 0 17px;padding:13px;
+        border:2px solid #eab308;border-radius:14px;background:#fffbeb;color:#713f12}
+      .lp-pickup-alerts[hidden]{display:none!important}
+      .lp-pickup-alert-head{display:flex;align-items:center;justify-content:space-between;
+        gap:8px;flex-wrap:wrap}
+      .lp-pickup-alert-head h4{margin:0;font-size:15px;font-weight:800;color:inherit}
+      .lp-pickup-alert-count{border:1px solid #ca8a04;border-radius:999px;
+        padding:3px 10px;font-weight:800;font-size:12px}
+      .lp-pickup-alert-row{display:flex;align-items:flex-start;justify-content:space-between;
+        gap:10px;padding:10px;border:1px solid #facc15;border-radius:10px;
+        background:#fffef5}
+      .lp-pickup-alert-row>div{flex:1;min-width:0}
+      .lp-pickup-alert-row strong{display:block;font-size:13px;line-height:1.5;
+        overflow-wrap:anywhere;color:#422006}
+      .lp-pickup-alert-row p{margin:5px 0 0;font-size:12px;font-weight:800;color:#854d0e}
+      .lp-pickup-alert-row.urgent{border-color:#fca5a5;background:#fff1f2}
+      .lp-pickup-alert-row.urgent p{color:#9f1239}
+      .lp-pickup-alert-row button{flex-shrink:0;min-height:39px;
+        padding:7px 10px;border:1px solid #d97706;border-radius:9px;
+        background:#fff;color:#78350f;font-size:12px;font-weight:800}
+      .lp-pickup-alerts .lp-pickup-alert-help{font-size:11px;line-height:1.55;
+        margin:0;color:#713f12}
+      html[data-theme="dark"] .lp-pickup-alerts{
+        background:#332715!important;color:#fde68a!important;border-color:#b58927!important}
+      html[data-theme="dark"] .lp-pickup-alert-row{
+        background:#3b2d1a!important;border-color:#a16207!important}
+      html[data-theme="dark"] .lp-pickup-alert-row.urgent{
+        background:#44212c!important;border-color:#e87979!important}
+      html[data-theme="dark"] .lp-pickup-alert-row strong{
+        color:#fff5dd!important}
+      html[data-theme="dark"] .lp-pickup-alert-row p,
+      html[data-theme="dark"] .lp-pickup-alerts .lp-pickup-alert-help{
+        color:#fde68a!important}
+      html[data-theme="dark"] .lp-pickup-alert-row.urgent p{color:#fecdd3!important}
+      html[data-theme="dark"] .lp-pickup-alert-row button{
+        background:#4c3821!important;color:#fff3d6!important;border-color:#b58927!important}
+
       .lp-track-toolbar label{font-size:12px;font-weight:700}
       #lpTrackFilter{font-size:13px;min-height:38px;max-width:200px;color:var(--app-text,#172033);background:var(--app-surface2,#fff);border:1px solid var(--app-border,#cbd5e1)}
       #lpTrackReload{min-height:38px;font-size:12px}
@@ -2906,6 +2945,7 @@
     container.setAttribute('aria-label','自分の抽選管理');
     container.innerHTML = `<h3>✅ 自分の抽選管理</h3>
       <p class="lp-tracker-intro">応募、当選、受け取り期間と「自分の現地対応完了」を非公開で管理します。現地対応が必要かどうか・対応内容は別枠で全ユーザーに共有します。</p>
+      <section id="lpPickupAlerts" class="lp-pickup-alerts" aria-label="当選商品の受取期限のお知らせ" hidden></section>
       <p id="lpTrackStatus" role="status" aria-live="polite"></p>
       <div id="lpTrackCounts" class="lp-track-counts"></div>
       <div class="lp-track-toolbar"><label for="lpTrackFilter">自分の記録を表示</label>
@@ -3071,6 +3111,59 @@
     return String(b.updated_at).localeCompare(String(a.updated_at));
   }
 
+  // v21.39: Show reminders ONLY inside the private management tab.
+  // No system push permission or background worker is needed.
+  const LP_PICKUP_ALERT_DAYS = 3;
+  function lotteryPickupAlertItems(records, now = Date.now()) {
+    const today = new Intl.DateTimeFormat('sv-SE',{
+      timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'
+    }).format(new Date(now));
+    const dayAsUtc = iso => Date.UTC(
+      Number(iso.slice(0,4)),Number(iso.slice(5,7))-1,Number(iso.slice(8,10))
+    );
+    return records.filter(r => r.status==='won' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(r.pickup_end || '')).map(record => {
+      const days = Math.round((dayAsUtc(record.pickup_end)-dayAsUtc(today))/86400000);
+      const level = days<0?'overdue':days===0?'today':'soon';
+      return {record,days,level};
+    }).filter(x => x.days<=LP_PICKUP_ALERT_DAYS)
+      .sort((a,b) => a.record.pickup_end.localeCompare(b.record.pickup_end));
+  }
+
+  function renderLotteryPickupAlerts(records) {
+    const root=$('lpPickupAlerts');
+    if(!root)return;
+    if(!authUser || !supabaseClient) {
+      root.hidden=true;
+      root.replaceChildren();
+      return;
+    }
+    const alerts=lotteryPickupAlertItems(records);
+    if(!alerts.length) {
+      root.hidden=true;
+      root.replaceChildren();
+      return;
+    }
+    const visible=alerts.slice(0,15);
+    root.innerHTML='<div class="lp-pickup-alert-head">'+
+      '<h4>🔔 受取期限のお知らせ</h4><span class="lp-pickup-alert-count">'+
+      alerts.length+'件</span></div>'+
+      visible.map(({record,days,level}) => {
+        const label=level==='overdue'?'⚠ 期限日を過ぎています':
+          level==='today'?'⚠ 今日が受取期限日':'あと'+days+'日で受取期限日';
+        return '<div class="lp-pickup-alert-row '+
+          (level==='soon'?'':'urgent')+'"><div>'+
+          '<strong>'+escape(lotteryTrackItemName(record.event_url))+'</strong>'+
+          '<p>'+escape(label+'：'+lotteryPickupDateText(record.pickup_end))+'</p>'+
+          '</div><button type="button" data-lp-track="edit" data-url="'+
+          escape(record.event_url)+'">管理</button></div>';
+      }).join('')+
+      (alerts.length>15?'<p class="lp-pickup-alert-help">ほか'+
+        (alerts.length-15)+'件も受取期限の確認が必要です。</p>':'')+
+      '<p class="lp-pickup-alert-help">※終了時刻は登録されていません。実際の受取条件・締切時刻は公式案内で確認してください。</p>';
+    root.hidden=false;
+  }
+
   function renderLotteryTrackerSummary() {
     const host=$('lpTrackerPanel');
     if(!host)return;
@@ -3079,10 +3172,12 @@
       status.textContent='Discordログインすると、自分専用の応募・当選記録を保存できます。「共有」タブからログインしてください。';
       $('lpTrackCounts').replaceChildren();
       $('lpTrackList').innerHTML='';
+      renderLotteryPickupAlerts([]);
       return;
     }
     status.textContent=lotteryTrackError || '🔒 自分のDiscordアカウントに非公開で保存します。';
     const records=[...lotteryTrackRecords.values()];
+    renderLotteryPickupAlerts(records);
     const counts=[
       ['応募済み',records.filter(x=>x.status==='applied').length],
       ['当選・受取待ち',records.filter(x=>x.status==='won').length],
