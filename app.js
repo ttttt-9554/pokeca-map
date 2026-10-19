@@ -2357,6 +2357,27 @@
     return Number.isFinite(time) ? time : NaN;
   }
 
+  // v21.20: NEW lasts 24 hours after this URL was first registered.
+  // Never infer newness from Discord message time: old URLs may be reposted.
+  const LP_NEW_WINDOW_MS = 24 * 60 * 60 * 1000;
+  function lotteryIsNew(item, now = Date.now()) {
+    if (!item || typeof item.first_detected_at !== 'string') return false;
+    const detectedAt = lotteryDate(item.first_detected_at);
+    return Number.isFinite(detectedAt) && detectedAt <= now &&
+      now - detectedAt < LP_NEW_WINDOW_MS;
+  }
+
+  function ensureLotteryNewBadgeStyle() {
+    if (document.getElementById('lpNewBadgeStyle')) return;
+    const sheet = document.createElement('style');
+    sheet.id = 'lpNewBadgeStyle';
+    sheet.textContent = '.lp-new-badge{display:inline-flex;align-items:center;' +
+      'padding:3px 9px;border-radius:999px;background:#ffe58f;color:#523600;' +
+      'font-size:12px;font-weight:900;letter-spacing:.07em;' +
+      'border:1px solid #edb94c;line-height:1.5;white-space:nowrap}';
+    document.head.appendChild(sheet);
+  }
+
   function lotteryState(item, now = Date.now()) {
     const end = lotteryDate(item.application_end_at);
     const start = lotteryDate(item.application_start_at);
@@ -2390,7 +2411,7 @@
   function lotteryMatchedWishlist(item) {
     const matched = productNorm(item.pokemon_map_match || '');
     const observed = productNorm(item.product_name || '');
-    const title = productNorm(item.event_title || '');
+    const title = productNorm(item.event_title_provisional ? '' : item.event_title || '');
     return wishlist.some(p => {
       const target = productNorm(p.name);
       const knownType = lotteryProductType(item);
@@ -2506,20 +2527,14 @@
   function lotteryCard(item, state) {
     const stores = lotteryStoreEntries(item);
     const places = lotteryPrefectures(item);
-    const sourcePreview = typeof item.source_preview === 'string' ? item.source_preview.trim() : '';
-    // A Discord excerpt ending in '...' is not a full product name.
-    // Never render it as an authoritative event/product title.
-    const incompletePreview = /(?:\.{3}|…|⋯)\s*$/.test(sourcePreview);
     // Once the exact-URL official title is verified, show it as the primary
     // heading even if an older Discord snippet remains in product_name.
     const officialName = item.official_event_title && item.official_event_title === item.event_title
       ? String(item.event_title).trim() : '';
-    const reliableName = (officialName || item.product_name || item.event_title || '').trim();
-    const label = reliableName || (!incompletePreview && sourcePreview) ||
-      '商品名・イベント名を確認中';
-    const partialNotice = !reliableName && incompletePreview
-      ? `<p class="lp-source-preview"><strong>Discord投稿の抜粋（途中省略）：</strong>${escape(sourcePreview)}<span>正式名称は公式ページで確認してください。</span></p>`
-      : '';
+    const trustedTitle = item.event_title_provisional ? '' : item.event_title;
+    const reliableName = (officialName || item.product_name || trustedTitle || '').trim();
+    // Discord excerpt is a discovery hint only, not an authoritative heading.
+    const label = reliableName || '商品名・イベント名を確認中';
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
@@ -2541,12 +2556,12 @@
       </details>` : `<p class="lp-store-muted">対象店舗：未確認</p>`;
     return `<article class="lp-card ${state === 'closed' ? 'lp-closed' : ''}">
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
+        ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
         ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
-      ${partialNotice}
-      ${!officialName && item.product_name && item.event_title && item.product_name !== item.event_title ? `<p class="lp-sub">${escape(item.event_title)}</p>` : ''}
+      ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
@@ -2571,7 +2586,7 @@
       if (type !== 'all' && !(type === 'unknown' ? lotteryProductType(item) === 'unknown' : lotteryProductType(item).split('/').includes(type))) return false;
       if (wishlistOnly && !lotteryMatchedWishlist(item)) return false;
       if (query) {
-        const text = [item.product_name,item.event_title,item.source_preview,item.store_name,
+        const text = [item.product_name,item.event_title_provisional ? '' : item.event_title,item.source_preview,item.store_name,
           item.pokemon_map_match,...lotteryStoreEntries(item).map(s => s.name)]
           .filter(Boolean).join(' ');
         if (!productNorm(text).includes(query)) return false;
@@ -2606,6 +2621,7 @@
   }
 
   function initLottery() {
+    ensureLotteryNewBadgeStyle();
     // 初期表示はジャンル全件・日時確認済みの受付中のみ。
     $('lpGenre').value = 'all';
     $('lpStatus').value = 'open';
