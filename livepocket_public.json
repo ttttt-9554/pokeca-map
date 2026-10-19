@@ -22,12 +22,16 @@
       "store_name": "TSUTAYA TRADING CARD錦糸町",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-16T02:19:35.423000+00:00",
+      "event_title": "ワンピースカード 再入荷分 EB-03『Heroiness Edition』 抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカード 再入荷分 EB-03『Heroiness Edition』 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/p2b1t",
@@ -162,12 +166,19 @@
       "store_name": "TSUTAYA六高台店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
+      "event_title": "ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー 再販分",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA六高台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー 再販分"
     },
     {
       "url": "https://livepocket.jp/e/o35r4",
@@ -685,12 +696,19 @@
       "store_name": "TSUTAYA六高台店",
       "prefecture": "千葉県",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット」【９種セット】",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA六高台店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット」【９種セット】"
     },
     {
       "url": "https://livepocket.jp/e/5mcaz",
@@ -821,12 +839,16 @@
       "store_name": "TSUTAYA TRADING CARD錦糸町",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-09T15:02:32.116000+00:00",
+      "event_title": "ワンピースカード『Heroines Edition vol.2』 抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカード『Heroines Edition vol.2』 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/o0z6y",
@@ -987,12 +1009,19 @@
       "store_name": "TSUTAYA TRADING CARD錦糸町",
       "prefecture": "東京都",
       "discord_posted_at": "2026-10-07T03:11:08.315000+00:00",
+      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」キャンセル分 抽選販売受付",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」キャンセル分 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/cq6ix",
@@ -2094,12 +2123,16 @@
       "url": "https://livepocket.jp/e/qz-dx",
       "store_name": "錦糸",
       "discord_posted_at": "2026-10-03T08:24:21.860000+00:00",
+      "event_title": "遊戯王OCG キャンセル分「ORIGINAL ARTWORK COLLECTION」",
+      "review_category": "yugioh",
       "stores": [
         {
           "name": "錦糸",
           "prefecture": ""
         }
-      ]
+      ],
+      "official_genre": "yugioh",
+      "official_event_title": "遊戯王OCG キャンセル分「ORIGINAL ARTWORK COLLECTION」"
     },
     {
       "url": "https://livepocket.jp/e/tupcdz",
@@ -3087,7 +3120,14 @@
     },
     {
       "url": "https://livepocket.jp/e/yfaf-",
-      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00"
+      "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "event_title": "【ふるいちイオンモール熱田店】ポケカ抽選販売 ポケモンカードゲームＭＥＧＡ 拡張パック「ストームエメラルダ」",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール熱田店】ポケカ抽選販売 ポケモンカードゲームＭＥＧＡ 拡張パック「ストームエメラルダ」"
     },
     {
       "url": "https://livepocket.jp/e/5uc5s",
@@ -3681,12 +3721,16 @@
       "application_start_at": "2026-10-16T12:00:00+09:00",
       "application_end_at": "2026-10-19T21:00:00+09:00",
       "discord_posted_at": "2026-10-16T21:48:08.701000+00:00",
+      "event_title": "TSUTAYA中里店 10/31発売ワンピースカード抽選",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "ヤマト屋書店TSUTAYA中里店",
           "prefecture": "宮城県"
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "TSUTAYA中里店 10/31発売ワンピースカード抽選"
     },
     {
       "url": "https://livepocket.jp/e/39gwbz6j-d",
@@ -4136,12 +4180,17 @@
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-17T13:00:29.339000+00:00",
+      "event_title": "【栃木城内店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA栃木城内店トレカ売場",
           "prefecture": "栃木県"
         }
       ],
+      "product_name": "Heroines Edition vol.2【EB-05】",
+      "official_genre": "onepiece",
+      "official_event_title": "【栃木城内店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
@@ -4315,12 +4364,19 @@
       "application_start_at": "2026-10-17T10:00:00+09:00",
       "application_end_at": "2026-10-19T22:00:00+09:00",
       "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "event_title": "【古本市場戸田店】ポケカ抽選（30th CELEBRATION）",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場戸田店",
           "prefecture": "埼玉県"
         }
       ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場戸田店】ポケカ抽選（30th CELEBRATION）",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4348,12 +4404,17 @@
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-18T03:24:30.813000+00:00",
+      "event_title": "【作新学院前店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA作新学院前店トレカ売場",
           "prefecture": "栃木県"
         }
       ],
+      "product_name": "Heroines Edition vol.2【EB-05】",
+      "official_genre": "onepiece",
+      "official_event_title": "【作新学院前店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4592,10 +4653,10 @@
       "url": "https://livepocket.jp/e/l95rk",
       "store_name": "ふるいちトップブックス前橋吉岡店",
       "prefecture": "群馬県",
+      "event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "application_end_at": "2026-10-21T21:00:00+09:00",
       "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
-      "event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
       "review_category": "pokemon",
       "stores": [
         {
@@ -4606,8 +4667,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4919,5 +4978,5 @@
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     }
   ],
-  "updated_at": "2026-10-19T08:46:21.585997+00:00"
+  "updated_at": "2026-10-19T08:48:33.170259+00:00"
 }
