@@ -997,12 +997,6 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
       <span>マップ</span>
     </button>
 
-
-    <button type="button" data-tab="lottery" aria-label="抽選・LivePocketを開く">
-      🎟️
-      <span>抽選</span>
-    </button>
-
     <button
       type="button"
       data-tab="add"
@@ -1010,7 +1004,6 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
       ➕
       <span>登録</span>
     </button>
-
 
     <button
       type="button"
@@ -1020,6 +1013,15 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
       <span>履歴</span>
     </button>
 
+    <button type="button" data-tab="lottery" aria-label="抽選・LivePocketを開く">
+      🎟️
+      <span>抽選</span>
+    </button>
+
+    <button type="button" data-tab="lotteryManage" aria-label="自分の抽選管理を開く">
+      ✅
+      <span>抽選管理</span>
+    </button>
 
     <button
       type="button"
@@ -1028,7 +1030,6 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
       👥
       <span>共有</span>
     </button>
-
 
     <button
       type="button"
@@ -1057,7 +1058,7 @@ main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150p
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261018-dev-results21_11"></script>
+  <script src="app.js?v=20261020-v21_30-management-tab-fix"></script>
 
 <script>
 /* アプリ内更新: 保存データを消さずに、HTMLを別URLとして再取得する */
