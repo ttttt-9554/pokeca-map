@@ -12136,15 +12136,15 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/sy415": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T21:31:22.174838+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-19T06:36:27.119391+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
         },
         "https://livepocket.jp/e/d08fb": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T21:41:20.201268+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-19T06:36:27.119391+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -13612,7 +13612,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:36:27.119391+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -13656,7 +13656,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:36:27.119391+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -14464,7 +14464,7 @@
           "heading_seen": 0
         },
         "https://livepocket.jp/e/sy415": {
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:36:27.119391+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
@@ -14476,7 +14476,7 @@
           "heading_seen": 0
         },
         "https://livepocket.jp/e/d08fb": {
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:36:27.119391+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
