@@ -2973,6 +2973,50 @@
     return '受取期間：未登録';
   }
 
+  // v21.38: Pickup dates contain no end-of-day cutoff time. Count down to
+  // the START (00:00 JST) of the deadline date, never a made-up closing time.
+  function lotteryPickupDateText(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return '未登録';
+    const parts=value.split('-').map(Number);
+    const day=new Date(Date.UTC(parts[0],parts[1]-1,parts[2]));
+    const weekday='日月火水木金土'[day.getUTCDay()];
+    return parts[0]+'/'+String(parts[1]).padStart(2,'0')+'/'+
+      String(parts[2]).padStart(2,'0')+'（'+weekday+'）';
+  }
+
+  function lotteryPickupRemaining(end, now=Date.now()) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(end || '')) {
+      return {text:'⚠ 受取期限未登録',style:'unregistered'};
+    }
+    const today=new Intl.DateTimeFormat('sv-SE',{
+      timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'
+    }).format(new Date(now));
+    if (today>end) return {text:'⚠ 受取期限日を過ぎています',style:'overdue'};
+    if (today===end) return {text:'⚠ 今日が受取期限日',style:'today'};
+    const deadlineDateStart=Date.parse(end+'T00:00:00+09:00');
+    if (!Number.isFinite(deadlineDateStart)) return {text:'⚠ 期限日を確認してください',style:'unregistered'};
+    const remaining=Math.max(0,deadlineDateStart-now);
+    const days=Math.floor(remaining/86400000);
+    const hours=Math.floor((remaining%86400000)/3600000);
+    return {text:'⏳ 期限日まで あと'+(days?days+'日':'')+hours+'時間',
+      style:days<3?'soon':'normal'};
+  }
+
+  function lotteryPickupDetailsHtml(record) {
+    if (!record || record.status!=='won') return '';
+    const remaining=lotteryPickupRemaining(record.pickup_end);
+    const help=record.pickup_end
+      ? '※残り時間は期限日の午前0時までの目安です。実際の受取終了時刻は未登録のため、必ず公式案内で確認してください。'
+      : '管理ボタンから受取期限を登録できます。実際の終了時刻は公式案内で確認してください。';
+    return '<div class="lp-pickup-details" aria-label="受け取り期間と期限日の案内">'+
+      '<div class="lp-pickup-date-line"><span>受取開始</span><strong>'+
+        escape(lotteryPickupDateText(record.pickup_start))+'</strong></div>'+
+      '<div class="lp-pickup-date-line"><span>受取期限</span><strong>'+
+        escape(lotteryPickupDateText(record.pickup_end))+'</strong></div>'+
+      '<p class="lp-pickup-remaining '+remaining.style+'">'+escape(remaining.text)+'</p>'+
+      '<p class="lp-pickup-help">'+escape(help)+'</p></div>';
+  }
+
   function lotteryTrackItemName(url) {
     const item=lotteryItems.find(x=>x.url===url);
     if (!item) return url;
@@ -2982,7 +3026,15 @@
   function lotteryTrackSort(a,b) {
     const priority = r => r.status==='won' ? 0 : lotteryOnsiteSummary(r.event_url).state==='required' && !r.onsite_done ? 1 : r.status==='applied' ? 2 : r.status==='not_applied' ? 3 : r.status==='received' ? 4 : 5;
     if(priority(a)!==priority(b))return priority(a)-priority(b);
-    if(a.status==='won'&&a.pickup_end&&b.pickup_end&&a.pickup_end!==b.pickup_end)return a.pickup_end.localeCompare(b.pickup_end);
+    // For won items: the closest dated deadline first, unknown dates last.
+    if(a.status==='won'&&b.status==='won'){
+      const aEnd=a.pickup_end || '9999-12-31';
+      const bEnd=b.pickup_end || '9999-12-31';
+      if(aEnd!==bEnd)return aEnd.localeCompare(bEnd);
+      const aStart=a.pickup_start || '9999-12-31';
+      const bStart=b.pickup_start || '9999-12-31';
+      if(aStart!==bStart)return aStart.localeCompare(bStart);
+    }
     return String(b.updated_at).localeCompare(String(a.updated_at));
   }
 
@@ -3016,13 +3068,14 @@
       if(!group.length)return '';
       const total=filtered.filter(x=>x.status===key).length;
       const rows=group.map(x=>{
-        const msg=lotteryTrackPickupMessage(x);
+        const msg=x.status==='won' ? '' : lotteryTrackPickupMessage(x);
         const warn=msg.startsWith('⚠') ? (msg.includes('今日')?'lp-track-today':'lp-track-overdue'):'';
         const onsite=lotteryOnsiteSummary(x.event_url).state==='required'
           ? `<p>自分の現地対応：${x.onsite_done?'完了':'未完了'}</p>`:'';
         return `<div class="lp-track-row"><div>
           <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
           ${onsite}
+          ${x.status==='won'?lotteryPickupDetailsHtml(x):''}
           ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
           <a href="${escape(x.event_url)}" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>
         </div><button type="button" data-lp-track="edit" data-url="${escape(x.event_url)}">管理</button></div>`;
