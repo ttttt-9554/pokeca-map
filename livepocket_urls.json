@@ -12101,8 +12101,8 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/26civ": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T17:19:39.299899+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-19T06:26:18.361050+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12164,8 +12164,8 @@
           "http_status": ""
         },
         "https://livepocket.jp/e/d89xs": {
-          "attempts": 1,
-          "checked_at": "2026-10-18T22:16:29.479611+00:00",
+          "attempts": 2,
+          "checked_at": "2026-10-19T06:26:18.361050+00:00",
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": ""
@@ -12305,7 +12305,7 @@
         },
         "https://livepocket.jp/e/26civ": {
           "status": "ok_no_title",
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:26:18.361050+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -13557,7 +13557,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:26:18.361050+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -14452,7 +14452,7 @@
           "heading_seen": 0
         },
         "https://livepocket.jp/e/d89xs": {
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:26:18.361050+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
@@ -14929,7 +14929,7 @@
           "heading_seen": 0
         },
         "https://livepocket.jp/e/26civ": {
-          "checked_at": "2026-10-19T00:21:15.891914+00:00",
+          "checked_at": "2026-10-19T06:26:18.361050+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
