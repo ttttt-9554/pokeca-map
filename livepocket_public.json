@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T08:30:57.572504+00:00",
+  "collected_at": "2026-10-19T09:00:22.489702+00:00",
   "unique_livepocket_urls": 392,
   "items": [
     {
@@ -36,11 +36,11 @@
       "store_name": "晴れる屋２秋葉原タワー店",
       "prefecture": "東京都",
       "product_name": "ポケモンカード【MEGA】「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」購入権",
       "application_start_at": "2026-10-14T14:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-14T11:24:12.505000+00:00",
       "review_category": "pokemon",
-      "event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」購入権",
       "stores": [
         {
           "name": "晴れる屋２秋葉原タワー店",
@@ -49,19 +49,17 @@
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」購入権"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/v7i-m",
       "store_name": "晴れる屋２秋葉原タワー店",
       "prefecture": "東京都",
       "product_name": "【MEGA】拡張パック「30th CELEBRATION」BOX",
+      "event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】拡張パック 「30th CELEBRATION BOX」購入権",
       "application_start_at": "2026-10-14T14:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-14T11:24:12.505000+00:00",
-      "event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】拡張パック 「30th CELEBRATION BOX」購入権",
       "review_category": "pokemon",
       "stores": [
         {
@@ -71,20 +69,18 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】拡張パック 「30th CELEBRATION BOX」購入権"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/moozm",
       "store_name": "晴れる屋２秋葉原タワー店",
       "prefecture": "東京都",
       "product_name": "ポケモンカード【MEGA】拡張パック「ストームエメラルダ」",
+      "event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】 拡張パック「ストームエメラルダ」購入権",
       "application_start_at": "2026-10-14T14:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
       "discord_posted_at": "2026-10-14T11:24:12.505000+00:00",
       "review_category": "pokemon",
-      "event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】 拡張パック「ストームエメラルダ」購入権",
       "stores": [
         {
           "name": "晴れる屋２秋葉原タワー店",
@@ -93,9 +89,7 @@
       ],
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "晴れる屋2秋葉原タワー店 ポケモンカードゲーム【MEGA】 拡張パック「ストームエメラルダ」購入権"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/qr8o-",
@@ -1711,8 +1705,9 @@
       "url": "https://livepocket.jp/e/tvuq4",
       "store_name": "TSUTAYA嵐山店",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
+      "product_name": "30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
       "event_title": "ポケモンカードゲーム 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
+      "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
       "review_category": "pokemon",
       "stores": [
         {
@@ -1722,10 +1717,7 @@
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "event_title",
-      "product_name": "30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/7o-si",
@@ -4461,17 +4453,16 @@
       "url": "https://livepocket.jp/e/lk0z7",
       "store_name": "キントレ竹の塚店",
       "prefecture": "東京都",
+      "event_title": "【キントレ竹の塚店】『Heroines Edition vol.2』抽選予約",
       "application_start_at": "2026-10-17T09:00:00+09:00",
       "application_end_at": "2026-10-21T22:00:00+09:00",
       "discord_posted_at": "2026-10-18T12:57:48.138000+00:00",
-      "event_title": "【キントレ竹の塚店】『Heroines Edition vol.2』抽選予約",
       "stores": [
         {
           "name": "キントレ竹の塚店",
           "prefecture": "東京都"
         }
       ],
-      "official_event_title": "【キントレ竹の塚店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
@@ -5025,5 +5016,5 @@
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     }
   ],
-  "updated_at": "2026-10-19T08:59:07.920436+00:00"
+  "updated_at": "2026-10-19T09:00:46.555510+00:00"
 }
