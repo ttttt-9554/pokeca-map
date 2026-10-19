@@ -11880,8 +11880,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/q-jxn": {
-          "checked_at": "2026-10-19T14:11:48.030083+00:00",
-          "status": "checked_no_new_details"
+          "checked_at": "2026-10-19T14:21:27.594632+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/m740m": {
           "checked_at": "2026-10-19T12:23:56.562984+00:00",
@@ -12199,7 +12199,7 @@
         "https://livepocket.jp/e/q-jxn": {
           "detected_at": "2026-10-19T02:00:55.901745+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T08:11:21.215574+00:00"
+          "checked_at": "2026-10-19T14:21:27.594632+00:00"
         },
         "https://livepocket.jp/e/8ymwg": {
           "detected_at": "2026-10-19T02:35:56.483498+00:00",
@@ -12537,8 +12537,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/q-jxn": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T08:11:21.215574+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T14:21:27.594632+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/m740m": {
@@ -15021,7 +15021,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T14:11:48.030083+00:00",
+          "checked_at": "2026-10-19T14:21:27.594632+00:00",
           "title_observed": "遊戯王OCG 「ORIGINAL ARTWORK COLLECTION」抽選受付",
           "genre": "yugioh",
           "product_origin": "",
@@ -16373,7 +16373,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/q-jxn": {
-          "checked_at": "2026-10-19T14:11:48.030083+00:00",
+          "checked_at": "2026-10-19T14:21:27.594632+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
