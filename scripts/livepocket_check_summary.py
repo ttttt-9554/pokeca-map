@@ -12,7 +12,8 @@ import json
 import os
 import re
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 ALLOWED_METRICS = (
@@ -85,6 +86,66 @@ def field_differences(before: object, after: object) -> dict[str, int]:
     return dict(result)
 
 
+
+# v21.18: server-side new-URL totals. Unlike Discord message timestamps,
+# v14's first-seen checkpoint records when an event URL entered the app.
+# The checkpoint is keyed by canonical URL: edits/rechecks never add a URL.
+JST = ZoneInfo('Asia/Tokyo')
+
+
+def daily_new_lotteries(raw: object, *, now: datetime | None = None) -> dict | None:
+    """Privacy-safe daily counts from v14's persisted initial-detection ledger.
+
+    Do not backfill old URLs from Discord timestamps: historical posts, duplicate
+    sightings and manual checks would give misleading 'new today' numbers.
+    """
+    if not isinstance(raw, dict) or not isinstance(raw.get('items'), list):
+        return None
+    state = raw.get('collector_state')
+    v14 = state.get('v14') if isinstance(state, dict) else None
+    history = v14.get('new_url_checks') if isinstance(v14, dict) else None
+    if not isinstance(history, dict):
+        return None  # no trusted initial-detection ledger yet
+    now = (now or datetime.now(timezone.utc))
+    if now.tzinfo is None or now.utcoffset() is None:
+        raise ValueError('now must include a timezone')
+    current = {item['url'] for item in raw['items']
+               if isinstance(item, dict) and isinstance(item.get('url'), str)}
+    days = Counter()
+    for url, record in history.items():
+        if url not in current or not isinstance(record, dict):
+            continue
+        value = record.get('detected_at')
+        if not isinstance(value, str) or not value:
+            continue
+        try:
+            recorded = datetime.fromisoformat(value.replace('Z', '+00:00'))
+        except ValueError:
+            continue
+        if recorded.tzinfo is None or recorded.utcoffset() is None or recorded > now:
+            continue
+        days[recorded.astimezone(JST).date()] += 1
+    today = now.astimezone(JST).date()
+    yesterday = today - timedelta(days=1)
+    return {
+        'date_jst': today.isoformat(),
+        'today': days[today],
+        'yesterday': days[yesterday],
+        'last_7_days': sum(days[today - timedelta(days=i)] for i in range(7)),
+        'registered_total': len(current),
+        'tracked_since_jst': min(days).isoformat() if days else None,
+        'as_of': now.astimezone(timezone.utc).isoformat(timespec='seconds').replace('+00:00', 'Z'),
+        'source': 'v14_first_detected_urls',
+    }
+
+
+def load_daily_new_lotteries(path: Path, *, now: datetime | None = None) -> dict | None:
+    try:
+        raw = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, ValueError, UnicodeError):
+        return None
+    return daily_new_lotteries(raw, now=now)
+
 def read_json(path: Path) -> object:
     try:
         return json.loads(path.read_text(encoding='utf-8'))
@@ -138,6 +199,7 @@ def main() -> None:
     parser.add_argument('--output', default='livepocket_check_summary.json')
     parser.add_argument('--before-public')
     parser.add_argument('--after-public')
+    parser.add_argument('--raw-data', default='livepocket_urls.json')
     parser.add_argument('--run-id', default=os.environ.get('GITHUB_RUN_ID', '0'))
     parser.add_argument('--run-number', default=os.environ.get('GITHUB_RUN_NUMBER', '0'))
     parser.add_argument('--event', default=os.environ.get('GITHUB_EVENT_NAME', 'unknown'))
@@ -151,6 +213,12 @@ def main() -> None:
     payload = report(raw_log, safe_previous(output), run_id=args.run_id,
                      run_number=args.run_number, event_name=args.event,
                      review_batch=args.review_batch, timestamp=now, differences=changed)
+    # Aggregate only: no event URL or Discord contents are exposed on Pages.
+    daily = load_daily_new_lotteries(Path(args.raw_data))
+    if daily is not None:
+        payload['daily_additions'] = daily
+    else:
+        payload['daily_additions'] = {'status': 'unavailable'}
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print('LivePocket public summary created; mode:', payload['last_run']['mode'],
           '; page_check_attempts:', payload['last_run']['page_check_attempts'])
