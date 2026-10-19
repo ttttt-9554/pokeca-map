@@ -11872,11 +11872,11 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9j60m": {
-          "checked_at": "2026-10-19T07:51:33.153385+00:00",
+          "checked_at": "2026-10-19T14:01:36.120133+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/0jn3t": {
-          "checked_at": "2026-10-19T07:51:33.153385+00:00",
+          "checked_at": "2026-10-19T14:01:36.120133+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/q-jxn": {
@@ -12174,12 +12174,12 @@
         "https://livepocket.jp/e/0jn3t": {
           "detected_at": "2026-10-19T01:30:56.144365+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T07:51:33.153385+00:00"
+          "checked_at": "2026-10-19T14:01:36.120133+00:00"
         },
         "https://livepocket.jp/e/9j60m": {
           "detected_at": "2026-10-19T01:30:56.144365+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T07:51:33.153385+00:00"
+          "checked_at": "2026-10-19T14:01:36.120133+00:00"
         },
         "https://livepocket.jp/e/fei7k": {
           "detected_at": "2026-10-19T01:30:56.144365+00:00",
@@ -12527,13 +12527,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9j60m": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T07:51:33.153385+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T14:01:36.120133+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/0jn3t": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T07:51:33.153385+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T14:01:36.120133+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/q-jxn": {
@@ -14999,7 +14999,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T07:51:33.153385+00:00",
+          "checked_at": "2026-10-19T14:01:36.120133+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION/ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
           "genre": "pokemon",
           "product_origin": "",
@@ -15010,7 +15010,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T07:51:33.153385+00:00",
+          "checked_at": "2026-10-19T14:01:36.120133+00:00",
           "title_observed": "抽選販売 ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2",
           "genre": "onepiece",
           "product_origin": "",
@@ -16325,7 +16325,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9j60m": {
-          "checked_at": "2026-10-19T07:51:33.153385+00:00",
+          "checked_at": "2026-10-19T14:01:36.120133+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -16338,7 +16338,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0jn3t": {
-          "checked_at": "2026-10-19T07:51:33.153385+00:00",
+          "checked_at": "2026-10-19T14:01:36.120133+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
