@@ -2684,10 +2684,14 @@
       }
     }, LP_REFRESH_MS);
     lotteryCountdownTimer = setInterval(() => {
-      if (document.visibilityState === 'visible' && $('lotteryView').classList.contains('active')) renderLottery();
+      if (document.visibilityState !== 'visible') return;
+      if ($('lotteryView').classList.contains('active')) renderLottery();
+      if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
     }, 60000);
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && $('lotteryView').classList.contains('active')) loadLotteryEvents();
+      if (document.visibilityState !== 'visible') return;
+      if ($('lotteryView').classList.contains('active')) loadLotteryEvents();
+      if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
     });
   }
 
@@ -2757,6 +2761,35 @@
       .lp-track-row strong{display:block;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
       .lp-track-row p{margin:4px 0;font-size:12px;color:var(--app-muted,#64748b);line-height:1.5}
       .lp-track-row button{flex-shrink:0;min-height:38px;font-size:12px}
+      /* v21.38: Pickup date and deadline countdown in the won section. */
+      .lp-pickup-details{display:grid;gap:6px;margin:10px 0 11px;padding:10px;
+        border:1px solid var(--app-border,#cbd5e1);border-radius:10px;
+        background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+      .lp-pickup-date-line{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 10px;
+        font-size:12px;line-height:1.55}
+      .lp-pickup-date-line>span{min-width:64px;font-weight:700;color:var(--app-muted,#64748b)}
+      .lp-pickup-date-line>strong{display:inline;font-size:13px;font-weight:800;
+        color:var(--app-text,#172033)}
+      .lp-pickup-remaining{margin:3px 0 0!important;padding:8px 10px;
+        border:1px solid #93c5fd;border-radius:9px;background:#eff6ff;
+        color:#1d4ed8!important;font-size:14px!important;font-weight:800;
+        line-height:1.5!important}
+      .lp-pickup-remaining.soon,.lp-pickup-remaining.today,
+      .lp-pickup-remaining.overdue{background:#fff1e6;border-color:#fbbf24;
+        color:#9a3412!important}
+      .lp-pickup-remaining.unregistered{background:var(--app-surface2,#f1f5f9);
+        border-color:var(--app-border,#cbd5e1);color:var(--app-text,#172033)!important}
+      .lp-pickup-help{margin:1px 0 0!important;font-size:10px!important;
+        font-weight:500;line-height:1.5!important;color:var(--app-muted,#64748b)!important}
+      html[data-theme="dark"] .lp-pickup-details{background:#172337!important}
+      html[data-theme="dark"] .lp-pickup-remaining{background:#17375d;
+        color:#dbeafe!important;border-color:#4c82ca}
+      html[data-theme="dark"] .lp-pickup-remaining.soon,
+      html[data-theme="dark"] .lp-pickup-remaining.today,
+      html[data-theme="dark"] .lp-pickup-remaining.overdue{
+        background:#49301c;color:#fde68a!important;border-color:#a16207}
+      html[data-theme="dark"] .lp-pickup-remaining.unregistered{
+        background:#263a55;color:#f1f5f9!important;border-color:#59718d}
       .lp-track-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:11px 0 0}
       .lp-track-actions button{min-height:40px;font-size:12px;padding:8px 10px}
       .lp-track-pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:750;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#eef2ff)}
