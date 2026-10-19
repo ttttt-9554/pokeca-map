@@ -527,7 +527,13 @@ nav[aria-label="メインメニュー"] {
         <datalist id="lpProductSuggestions"></datalist>
         <div class="lp-filter-grid">
           <label for="lpGenre">ジャンル
-            <select id="lpGenre"><option value="all" selected>すべて（未分類も含む）</option><option value="pokemon">ポケカ</option></select>
+            <select id="lpGenre">
+              <option value="all" selected>すべて（未分類も含む）</option>
+              <option value="pokemon">ポケカ</option>
+              <option value="onepiece">ワンピース</option>
+              <option value="yugioh">遊戯王</option>
+              <option value="unknown">未分類</option>
+            </select>
           </label>
           <label for="lpPrefecture">都道府県
             <select id="lpPrefecture"><option value="all">全国</option></select>
@@ -1120,7 +1126,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_33-scroll-container-footer"></script>
+  <script src="app.js?v=20261020-v21_34-genre-filter"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
