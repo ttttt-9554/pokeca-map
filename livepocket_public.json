@@ -4815,6 +4815,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4870,6 +4872,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -5185,8 +5189,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "10/31(土)発売 ワンピースカードゲーム エクストラブースターパック 『 Heroines Edition vol.2』",
       "first_detected_at": "2026-10-19T11:00:57.404010+00:00"
     },
     {
@@ -5202,5 +5204,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T17:06:32.475905+00:00"
+  "updated_at": "2026-10-19T17:16:24.115275+00:00"
 }
