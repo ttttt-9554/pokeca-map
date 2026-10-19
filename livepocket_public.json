@@ -4762,6 +4762,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【オープン記念】ポケモンカードゲーム 30th CELEBRATION FUTURISTIC BOX 購入権抽選",
       "first_detected_at": "2026-10-19T04:35:56.497989+00:00"
     },
     {
@@ -5068,6 +5070,8 @@
       "url": "https://livepocket.jp/e/fb56u",
       "store_name": "ブックエース結城店",
       "prefecture": "茨城県",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T10:30:03.956000+00:00",
       "stores": [
         {
@@ -5075,14 +5079,14 @@
           "prefecture": "茨城県"
         }
       ],
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-19T10:00:00+09:00",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
       "url": "https://livepocket.jp/e/in115",
       "store_name": "トレカエース下館店",
       "prefecture": "茨城県",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T10:30:03.956000+00:00",
       "stores": [
         {
@@ -5090,14 +5094,14 @@
           "prefecture": "茨城県"
         }
       ],
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-19T10:00:00+09:00",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
       "url": "https://livepocket.jp/e/32wcj",
       "store_name": "トレカエース常陸太田店",
       "prefecture": "茨城県",
+      "application_start_at": "2026-10-19T09:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T10:30:03.956000+00:00",
       "stores": [
         {
@@ -5105,10 +5109,8 @@
           "prefecture": "茨城県"
         }
       ],
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-19T09:00:00+09:00",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     }
   ],
-  "updated_at": "2026-10-19T10:31:25.354081+00:00"
+  "updated_at": "2026-10-19T10:41:20.426989+00:00"
 }

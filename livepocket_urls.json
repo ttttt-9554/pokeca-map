@@ -11801,8 +11801,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
-          "checked_at": "2026-10-19T08:50:17.682507+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-19T10:41:20.426989+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/v_2b1": {
           "checked_at": "2026-10-19T10:02:02.440287+00:00",
@@ -12119,8 +12119,8 @@
         },
         "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
           "detected_at": "2026-10-19T04:35:56.497989+00:00",
-          "status": "checked_product_deadline",
-          "checked_at": "2026-10-19T04:36:20.179868+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-19T10:41:20.426989+00:00"
         },
         "https://livepocket.jp/e/1nu7h": {
           "detected_at": "2026-10-19T05:05:57.810321+00:00",
@@ -12445,6 +12445,11 @@
         "https://livepocket.jp/e/h295z": {
           "attempts": 1,
           "last_attempt_at": "2026-10-19T09:56:20.408160+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T10:41:20.426989+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -14920,7 +14925,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T08:50:17.682507+00:00",
+          "checked_at": "2026-10-19T10:41:20.426989+00:00",
           "title_observed": "【オープン記念】ポケモンカードゲーム 30th CELEBRATION FUTURISTIC BOX 購入権抽選",
           "genre": "pokemon",
           "product_origin": "v14_livepocket_explicit_product_label",
@@ -16243,7 +16248,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nexus-opening-futuristic-30th": {
-          "checked_at": "2026-10-19T08:50:17.682507+00:00",
+          "checked_at": "2026-10-19T10:41:20.426989+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
