@@ -10302,7 +10302,7 @@
     "prefecture": 207,
     "event_title": 87,
     "event_date": 1,
-    "product_name": 59,
+    "product_name": 60,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
@@ -11856,8 +11856,8 @@
           "status": "checked_deadline"
         },
         "https://livepocket.jp/e/c6zph": {
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-19T12:31:23.980887+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yqdc9": {
           "checked_at": "2026-10-19T07:41:20.562950+00:00",
@@ -12169,7 +12169,7 @@
         "https://livepocket.jp/e/c6zph": {
           "detected_at": "2026-10-19T00:15:57.253175+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-19T06:19:07.431664+00:00"
+          "checked_at": "2026-10-19T12:31:23.980887+00:00"
         },
         "https://livepocket.jp/e/0jn3t": {
           "detected_at": "2026-10-19T01:30:56.144365+00:00",
@@ -12507,8 +12507,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/c6zph": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-19T06:19:07.431664+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-19T12:31:23.980887+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yqdc9": {
@@ -14950,7 +14950,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
+          "checked_at": "2026-10-19T12:31:23.980887+00:00",
           "title_observed": "【倉賀野店】『Heroines Edition vol.2』抽選予約",
           "genre": "",
           "product_origin": "",
@@ -16268,7 +16268,7 @@
           "heading_seen": 0
         },
         "https://livepocket.jp/e/c6zph": {
-          "checked_at": "2026-10-19T08:53:01.725912+00:00",
+          "checked_at": "2026-10-19T12:31:23.980887+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

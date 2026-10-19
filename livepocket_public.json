@@ -4045,6 +4045,7 @@
     {
       "url": "https://livepocket.jp/e/w6vl0",
       "store_name": "TSUTAYAテクノ店",
+      "product_name": "Heroines Edition vol.2【EB-05】",
       "event_title": "【宇都宮テクノ店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "application_start_at": "2026-10-17T07:00:00+09:00",
       "application_end_at": "2026-10-19T23:59:00+09:00",
@@ -4056,9 +4057,6 @@
           "prefecture": ""
         }
       ],
-      "product_name": "Heroines Edition vol.2【EB-05】",
-      "official_genre": "onepiece",
-      "official_event_title": "【宇都宮テクノ店】ワンピースカード「Heroines Edition vol.2【EB-05】」抽選販売受付",
       "first_detected_at": "2026-10-17T00:30:01.547257+00:00"
     },
     {
@@ -4387,8 +4385,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場戸田店】ポケカ抽選（30th CELEBRATION）",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4545,6 +4541,7 @@
           "prefecture": "群馬県"
         }
       ],
+      "official_event_title": "【倉賀野店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-19T00:15:57.253175+00:00"
     },
     {
@@ -4656,10 +4653,10 @@
       "url": "https://livepocket.jp/e/8ymwg",
       "store_name": "トレカエース TSUTAYAデイズタウンつくば",
       "prefecture": "茨城県",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
-      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "review_category": "onepiece",
       "stores": [
         {
@@ -4667,8 +4664,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4695,10 +4690,10 @@
       "url": "https://livepocket.jp/e/m740m",
       "store_name": "ブックエース小名浜住吉店",
       "prefecture": "福島県",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T02:30:05.465000+00:00",
-      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "review_category": "onepiece",
       "stores": [
         {
@@ -4706,8 +4701,6 @@
           "prefecture": "福島県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4867,10 +4860,10 @@
       "url": "https://livepocket.jp/e/v_2b1",
       "store_name": "ブックエース茨大前店",
       "prefecture": "茨城県",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "application_start_at": "2026-10-19T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T05:00:05.270000+00:00",
-      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "review_category": "onepiece",
       "stores": [
         {
@@ -4878,8 +4871,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4917,8 +4908,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール水戸内原店】 ポケカ店頭抽選販売（ポケモンＭ ３０ｔｈカードセット 全９種）",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -5028,10 +5017,10 @@
       "url": "https://livepocket.jp/e/3dfit",
       "store_name": "トレカエース日立鮎川店",
       "prefecture": "茨城県",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T08:30:07.959000+00:00",
-      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "review_category": "onepiece",
       "stores": [
         {
@@ -5039,8 +5028,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5114,10 +5101,10 @@
       "url": "https://livepocket.jp/e/fb56u",
       "store_name": "ブックエース結城店",
       "prefecture": "茨城県",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T10:30:03.956000+00:00",
-      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "review_category": "onepiece",
       "stores": [
         {
@@ -5125,18 +5112,16 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
       "url": "https://livepocket.jp/e/in115",
       "store_name": "トレカエース下館店",
       "prefecture": "茨城県",
+      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-19T10:30:03.956000+00:00",
-      "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "review_category": "onepiece",
       "stores": [
         {
@@ -5144,8 +5129,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5215,10 +5198,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット9種セット」 抽選販売受付",
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T12:23:56.562984+00:00"
+  "updated_at": "2026-10-19T12:31:23.980887+00:00"
 }
