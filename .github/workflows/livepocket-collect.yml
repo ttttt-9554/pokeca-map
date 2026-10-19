@@ -115,8 +115,9 @@ jobs:
           python scripts/livepocket_v21.py process | tee "$RUNNER_TEMP/livepocket-v21-process.log"
 
       # 公開しても安全な集計数字のみ出力（URL・Discord本文・トークン等は含めない）。
-      - name: Build LivePocket developer results (v21.12)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' }}
+      # Daily new-URL totals are refreshed on every collection run when changed;
+      # manual recheck figures continue to be saved only for review_batch=12.
+      - name: Build LivePocket developer results and daily additions (v21.18)
         env:
           REVIEW_BATCH: ${{ inputs.review_batch || '8' }}
         run: |
