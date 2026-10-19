@@ -337,37 +337,72 @@ html[data-theme="dark"] .friend-member-state.offline,html[data-theme="dark"] .fr
 </style>
 
 <style id="ios-form-scroll-fix">
-/* v21.32: iOS Safari/PWA - rootだけをスクロールさせ固定ナビのズレを防止 */
+/* v21.33: iOS PWA - fix bottom tab drift by removing document-level scrolling.
+   The header and main are in one scroll container; nav is a separate flex footer. */
 html {
-  min-height: 100%;
-  height: auto;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden !important;
+}
+body,
+body:not(.map-filter-locked) {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0 !important;
+  width: 100%;
+  margin: 0;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden !important;
+}
+#appScrollArea {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
-body:not(.map-filter-locked) {
-  min-height: 100%;
+body.map-filter-locked #appScrollArea { overflow: hidden !important; }
+#appScrollArea main {
   height: auto;
+  min-height: 0;
+  overflow: visible;
+  padding-bottom: 30px;
+}
+#addView, #reportForm {
+  height: auto;
+  max-height: none;
   overflow: visible;
 }
-html:has(body.map-filter-locked) { overflow: hidden; }
-main { height: auto; min-height: 0; overflow: visible; padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
-#addView { height: auto; max-height: none; overflow: visible; }
-#reportForm { height: auto; max-height: none; overflow: visible; }
 #reportForm > :last-child { margin-bottom: 18px; }
 
-/* スクロール対象から分離してビューポート最下部に固定 */
+/* The nav is no longer position:fixed: it is an ordinary footer outside the scroller. */
 nav[aria-label="メインメニュー"] {
-  position: fixed !important;
-  inset: auto 0 0 !important;
+  position: relative !important;
+  inset: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  flex: 0 0 auto;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   margin: 0;
-  z-index: 5000;
+  z-index: 1000;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
 }
 </style>
 </head>
 
 <body>
+<div id="appScrollArea">
 <button id="appUpdateNow" class="app-update-button" type="button" aria-label="最新版に更新">↻ 更新</button>
 <div id="appUpdateFeedback" class="app-update-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div>
 <button id="appSettingsOpen" class="app-settings-button" type="button" aria-haspopup="dialog">⚙ 設定</button>
@@ -1006,6 +1041,7 @@ nav[aria-label="メインメニュー"] {
     </section>
 
   </main>
+</div><!-- /#appScrollArea: header + content scroll, nav stays fixed in flex layout -->
 
 
   <!-- ======================================
@@ -1084,7 +1120,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_32-bottom-nav-fix"></script>
+  <script src="app.js?v=20261020-v21_33-scroll-container-footer"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
