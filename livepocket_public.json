@@ -4280,6 +4280,7 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_event_title": "【葉鹿店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
@@ -4437,6 +4438,7 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_event_title": "【足利助戸店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4468,6 +4470,7 @@
           "prefecture": "東京都"
         }
       ],
+      "official_event_title": "【キントレ竹の塚店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
@@ -4500,6 +4503,7 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_event_title": "【幸手店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
@@ -4795,6 +4799,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4890,6 +4896,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【抽選】ポケモンカードゲームMEGA 『 30th CELEBRATION カードセット 全９種』",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -4907,6 +4915,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール水戸内原店】 ポケカ店頭抽選販売（ポケモンＭ ３０ｔｈカードセット 全９種）",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -4957,6 +4967,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（ﾎﾟｹﾓﾝｶｰﾄﾞｹﾞｰﾑMEGA30thCELEBRATIONｶｰﾄﾞｾｯﾄﾌｼｷﾞﾀﾞﾈ･ﾋﾄｶｹﾞ･ｾﾞﾆｶﾞﾒ）",
       "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
     },
     {
@@ -5010,6 +5022,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5128,6 +5142,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5217,5 +5233,5 @@
       "first_detected_at": "2026-10-19T23:39:08.283491+00:00"
     }
   ],
-  "updated_at": "2026-10-19T23:55:57.289155+00:00"
+  "updated_at": "2026-10-19T23:58:37.121728+00:00"
 }
