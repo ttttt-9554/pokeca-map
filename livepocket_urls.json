@@ -9344,7 +9344,8 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "store_name": "v21_23_discord_exact_url_adjacent_store",
-        "stores": "v21_23_discord_exact_url_adjacent_store"
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title"
       },
       "application_end_at": "2026-10-21T21:00:00+09:00",
       "application_start_at": "2026-10-19T09:00:00+09:00",
@@ -9353,7 +9354,8 @@
           "name": "ふるいちトップブックス前橋吉岡店",
           "prefecture": "群馬県"
         }
-      ]
+      ],
+      "event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ"
     },
     {
       "url": "https://livepocket.jp/e/m740m",
@@ -9936,9 +9938,9 @@
   "field_counts": {
     "store_name": 237,
     "prefecture": 200,
-    "event_title": 34,
+    "event_title": 35,
     "event_date": 1,
-    "product_name": 50,
+    "product_name": 53,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
@@ -11515,16 +11517,16 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/m740m": {
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/l95rk": {
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
+          "status": "checked_retry_event_title"
         },
         "https://livepocket.jp/e/8ymwg": {
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
-          "status": "checked_deadline"
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/iia3c": {
           "checked_at": "2026-10-19T03:06:21.533015+00:00",
@@ -11802,18 +11804,18 @@
         },
         "https://livepocket.jp/e/8ymwg": {
           "detected_at": "2026-10-19T02:35:56.483498+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-19T02:36:20.527078+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00"
         },
         "https://livepocket.jp/e/l95rk": {
           "detected_at": "2026-10-19T02:35:56.483498+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-19T02:36:20.527078+00:00"
+          "status": "checked_retry_event_title",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00"
         },
         "https://livepocket.jp/e/m740m": {
           "detected_at": "2026-10-19T02:35:56.483498+00:00",
-          "status": "checked_deadline",
-          "checked_at": "2026-10-19T02:36:20.527078+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00"
         },
         "https://livepocket.jp/e/4c30v": {
           "detected_at": "2026-10-19T03:05:55.123260+00:00",
@@ -12098,6 +12100,21 @@
         "https://livepocket.jp/e/q-jxn": {
           "attempts": 1,
           "last_attempt_at": "2026-10-19T08:11:21.215574+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/m740m": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T08:46:21.585997+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/l95rk": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T08:46:21.585997+00:00",
+          "last_status": "checked_retry_event_title"
+        },
+        "https://livepocket.jp/e/8ymwg": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T08:46:21.585997+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -14496,7 +14513,7 @@
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -14504,21 +14521,21 @@
           "conflict": false
         },
         "https://livepocket.jp/e/l95rk": {
-          "status": "ok_no_title",
-          "reason": "no_verifiable_title_on_page",
+          "status": "ok",
+          "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
-          "title_observed": "",
-          "genre": "",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
+          "title_observed": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/8ymwg": {
           "status": "ok_no_title",
           "reason": "no_verifiable_title_on_page",
           "http_status": "",
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
           "title_observed": "",
           "genre": "",
           "product_origin": "",
@@ -15714,7 +15731,7 @@
           "recovery_probe": "dom_heading_ambiguous"
         },
         "https://livepocket.jp/e/m740m": {
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
@@ -15723,22 +15740,24 @@
           "title_detected": false,
           "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0
+          "heading_seen": 0,
+          "recovery_probe": "dom_heading_ambiguous"
         },
         "https://livepocket.jp/e/l95rk": {
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
-          "reason": "title_candidates_rejected",
-          "candidate_count": 2,
-          "valid_candidate_count": 0,
-          "detail": "filtered_all_candidates",
-          "candidate_sources": "og:1;document:1",
-          "title_detected": false,
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
           "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/8ymwg": {
-          "checked_at": "2026-10-19T02:36:20.527078+00:00",
+          "checked_at": "2026-10-19T08:46:21.585997+00:00",
           "reason": "title_candidates_rejected",
           "candidate_count": 2,
           "valid_candidate_count": 0,
@@ -15747,7 +15766,8 @@
           "title_detected": false,
           "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0
+          "heading_seen": 0,
+          "recovery_probe": "dom_heading_ambiguous"
         },
         "https://livepocket.jp/e/iia3c": {
           "checked_at": "2026-10-19T03:06:21.533015+00:00",
