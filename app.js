@@ -2121,6 +2121,11 @@
     document.querySelectorAll('nav button').forEach(button => {
       button.addEventListener('click', () => {
         switchTab(button.dataset.tab);
+        // v21.24: Open the developer tab to dispatch an on-demand recheck.
+        // The normal scheduled collector cadence is not modified.
+        if (button.dataset.tab === 'dev' && isDeveloper()) {
+          requestLotteryDevRecheck({automatic: true});
+        }
       });
     });
 
@@ -2858,50 +2863,63 @@
   }
 
 
+  // v21.24: The developer tab itself is an explicit on-demand refresh.
+  // The previous dedicated button remains available for an explicit retry.
+  // Both use the same JWT-protected Cloudflare Worker; never expose a PAT.
+  async function requestLotteryDevRecheck({automatic = false} = {}) {
+    const button = $('lpDevRecheckButton');
+    const status = $('lpDevRecheckStatus');
+    if (!button || !status || !isDeveloper()) return;
+    // Do not dispatch a second workflow while the current request/run is pending.
+    if (lpDevRecheckBusy || lpDevReportSince) {
+      if (!automatic) status.textContent = 'すでに再確認中です。完了後にもう一度操作してください。';
+      return;
+    }
+    if (!supabaseClient) {
+      status.textContent = '開発者としてDiscordログインしてください。';
+      return;
+    }
+    if (!automatic && !window.confirm('登録済みの抽選イベントを最大12件、GitHub Actionsで再確認しますか？\n通常の自動収集は停止しません。')) return;
+    lpDevRecheckBusy = true;
+    button.disabled = true;
+    button.textContent = 'GitHubに起動依頼中…';
+    status.textContent = automatic
+      ? '開発タブを開いたため、登録済み抽選の再確認を起動しています…'
+      : 'ログインを検証し、確認処理を起動しています…';
+    try {
+      const {data, error} = await supabaseClient.auth.getSession();
+      if (error || !data?.session?.access_token) throw new Error('ログイン情報が期限切れです。共有タブでログインし直してください。');
+      if (data.session.user?.id !== DEVELOPER_USER_ID) throw new Error('開発者権限を確認できません。');
+      const response = await fetch(LP_DEV_RECHECK_API, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + data.session.access_token
+        },
+        body: JSON.stringify({batch: 12})
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'サーバー応答 HTTP ' + response.status);
+      status.textContent = '✅ 再確認を起動しました。GitHub Actions完了後に結果を自動反映します。';
+      watchLotteryDevResults(Date.now());
+      loadLotteryDevResults();
+    } catch (error) {
+      status.textContent = '⚠ ' + (error?.message || '起動できませんでした。');
+    } finally {
+      lpDevRecheckBusy = false;
+      button.disabled = false;
+      button.textContent = '登録済み抽選を12件再確認';
+    }
+  }
+
   function initLotteryDevRecheck() {
     const button = $('lpDevRecheckButton');
     const status = $('lpDevRecheckStatus');
     if (!button || !status) return;
     $('lpDevResultsRefresh')?.addEventListener('click', loadLotteryDevResults);
-
-    button.addEventListener('click', async () => {
-      if (lpDevRecheckBusy) return;
-      if (!isDeveloper() || !supabaseClient) {
-        status.textContent = '開発者としてDiscordログインしてください。';
-        return;
-      }
-      if (!window.confirm('登録済みの抽選イベントを最大12件、GitHub Actionsで再確認しますか？\n通常の自動収集は停止しません。')) return;
-      lpDevRecheckBusy = true;
-      button.disabled = true;
-      button.textContent = 'GitHubに起動依頼中…';
-      status.textContent = 'ログインを検証し、確認処理を起動しています…';
-      try {
-        const {data, error} = await supabaseClient.auth.getSession();
-        if (error || !data?.session?.access_token) throw new Error('ログイン情報が期限切れです。共有タブでログインし直してください。');
-        if (data.session.user?.id !== DEVELOPER_USER_ID) throw new Error('開発者権限を確認できません。');
-        const response = await fetch(LP_DEV_RECHECK_API, {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-store',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + data.session.access_token
-          },
-          body: JSON.stringify({batch: 12})
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(result.error || 'サーバー応答 HTTP ' + response.status);
-        status.textContent = '✅ 確認処理を依頼しました。結果が反映されるまで自動確認します。';
-        watchLotteryDevResults(Date.now());
-        loadLotteryDevResults();
-      } catch (error) {
-        status.textContent = '⚠ ' + (error?.message || '起動できませんでした。');
-      } finally {
-        lpDevRecheckBusy = false;
-        button.disabled = false;
-        button.textContent = '登録済み抽選を12件再確認';
-      }
-    });
+    button.addEventListener('click', () => requestLotteryDevRecheck({automatic: false}));
   }
 
   // ========================================
