@@ -11972,8 +11972,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1gpoh": {
-          "checked_at": "2026-10-19T14:08:19.401904+00:00",
-          "status": "checked_no_new_details"
+          "checked_at": "2026-10-19T14:43:15.060535+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/wydmh": {
           "checked_at": "2026-10-19T14:11:48.030083+00:00",
@@ -12298,8 +12298,8 @@
         },
         "https://livepocket.jp/e/1gpoh": {
           "detected_at": "2026-10-19T08:30:58.551035+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-19T08:31:28.586738+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-19T14:43:15.060535+00:00"
         },
         "https://livepocket.jp/e/3dfit": {
           "detected_at": "2026-10-19T08:30:58.551035+00:00",
@@ -12649,6 +12649,11 @@
         "https://livepocket.jp/e/3dfit": {
           "attempts": 1,
           "last_attempt_at": "2026-10-19T14:41:27.354915+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/1gpoh": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-19T14:43:15.060535+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -15355,7 +15360,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-19T14:08:19.401904+00:00",
+          "checked_at": "2026-10-19T14:43:15.060535+00:00",
           "title_observed": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
           "genre": "pokemon",
           "product_origin": "",
@@ -16776,7 +16781,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1gpoh": {
-          "checked_at": "2026-10-19T14:08:19.401904+00:00",
+          "checked_at": "2026-10-19T14:43:15.060535+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
