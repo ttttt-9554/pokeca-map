@@ -2316,7 +2316,14 @@
     select.addEventListener('change', () => { choice = select.value; try { localStorage.setItem(key, choice); } catch (_) {} apply(); });
     if (media.addEventListener) media.addEventListener('change', apply);
     else if (media.addListener) media.addListener(apply);
-    function toggle(show) { panel.hidden = !show; backdrop.hidden = !show; if (show) select.focus(); else open.focus(); }
+    // Avoid programmatic focus of native select: it may pop up on iPhone.
+    function toggle(show) {
+      panel.hidden = !show;
+      backdrop.hidden = !show;
+      const target = show ? close : open;
+      try { target.focus({preventScroll:true}); }
+      catch (_) { target.focus(); }
+    }
     open.addEventListener('click', () => toggle(true));
     close.addEventListener('click', () => toggle(false));
     backdrop.addEventListener('click', () => toggle(false));
@@ -3034,12 +3041,24 @@
     };
   }
 
+  // v21.36: Open dialogs with their headings focused, never their first select.
+  function showLotteryEditorDialog(dialog) {
+    if (typeof dialog.showModal !== 'function') return false;
+    dialog.showModal();
+    const heading = dialog.querySelector('[data-dialog-title-focus]');
+    if (heading) {
+      try { heading.focus({preventScroll:true}); }
+      catch (_) { heading.focus(); }
+    }
+    return true;
+  }
+
   function lotteryTrackerOpenEditor(url) {
     if(!authUser || !safeLotteryUrl(url))return;
     const data=lotteryTrackerDefaults(url);
     const dlg=$('lpTrackerEditor');
     if(!dlg)return;
-    $('lpTrackerEditorBody').innerHTML=`<h3>抽選の個別管理</h3>
+    $('lpTrackerEditorBody').innerHTML=`<h3 tabindex="-1" autofocus data-dialog-title-focus>抽選の個別管理</h3>
       <p class="lp-tracker-intro">${escape(lotteryTrackItemName(url))}</p>
       <form id="lpTrackerForm">
       <label>応募・当選状況
@@ -3073,8 +3092,9 @@
       }
       await lotteryTrackerSave(url,data,true);
     });
-    if(typeof dlg.showModal==='function')dlg.showModal();
-    else {alert('このブラウザでは管理画面を開けません。');}
+    if (!showLotteryEditorDialog(dlg)) {
+      alert('このブラウザでは管理画面を開けません。');
+    }
   }
 
   async function lotteryTrackerSave(url,values,closeOnSuccess=false) {
@@ -3245,12 +3265,13 @@
       document.body.append(dlg);
       dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
     }
-    dlg.innerHTML=`<h3>📍 みんなに現地対応情報を共有</h3>
+    dlg.innerHTML=`<h3 tabindex="-1" autofocus data-dialog-title-focus>📍 みんなに現地対応情報を共有</h3>
       <p class="lp-tracker-intro">${escape(lotteryTrackItemName(url))}</p>
       <p class="lp-tracker-intro">ここで報告した「現地対応の要否・内容」は全ユーザーに表示されます。応募・当選・自分の完了状況は共有されません。</p>
       <form id="lpOnsiteForm">
         <label>現地対応の要否
           <select name="requirement" required>
+            <option value="" disabled ${existing?'':'selected'}>選択してください</option>
             <option value="required" ${existing?.requirement==='required'?'selected':''}>現地で追加対応が必要</option>
             <option value="not_required" ${existing?.requirement==='not_required'?'selected':''}>現地対応は不要</option>
           </select></label>
@@ -3270,7 +3291,7 @@
       await lotteryOnsiteSave(url,{requirement:String(fd.get('requirement')),
         details:String(fd.get('details')||'').trim().slice(0,500)});
     });
-    if(typeof dlg.showModal==='function')dlg.showModal();
+    showLotteryEditorDialog(dlg);
   }
 
   async function lotteryOnsiteSave(url,values) {
