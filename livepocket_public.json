@@ -4751,8 +4751,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード 「ヒロインズエディションVol.2」「ヒロインズプレシャスBOX」抽選販売受付",
       "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
     },
     {
@@ -4763,7 +4761,6 @@
       "application_end_at": "2026-10-23T20:05:00+09:00",
       "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "review_category": "onepiece",
-      "official_event_title": "ONE PIECE Heroines Edition vol.2【EB-05】購入権抽選",
       "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
     },
     {
@@ -5097,8 +5094,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:01:34.695185+00:00"
     },
     {
@@ -5116,6 +5111,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5133,6 +5130,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5150,6 +5149,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5205,5 +5206,5 @@
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     }
   ],
-  "updated_at": "2026-10-19T16:21:35.688788+00:00"
+  "updated_at": "2026-10-19T16:36:23.001333+00:00"
 }
