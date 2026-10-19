@@ -2696,7 +2696,11 @@
       ] : []),
       ...(Object.hasOwn(stats,'manual_title_meta_template_cleaned') ? [
         ['公式ページのメタ情報を整形',lpDevNumeric(stats,'manual_title_meta_template_cleaned')],
-        ['イベント名の見出し候補あり',lpDevNumeric(stats,'manual_title_heading_seen')],
+        ['見出し・埋め込みデータの候補あり',lpDevNumeric(stats,'manual_title_heading_seen')],
+        ...(Object.hasOwn(stats,'manual_title_dom_candidates') ? [
+          ['イベント名専用要素の候補あり',lpDevNumeric(stats,'manual_title_dom_candidates')],
+          ['ページ埋め込みデータの候補あり',lpDevNumeric(stats,'manual_title_state_candidates')]
+        ] : []),
         ['省略されたタイトルを除外',lpDevNumeric(stats,'manual_title_truncated')],
         ...(Object.hasOwn(stats,'manual_title_truncated_tail') ? [
           ['末尾が省略された候補',lpDevNumeric(stats,'manual_title_truncated_tail')],
