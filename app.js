@@ -2637,6 +2637,9 @@
     ensureLotteryNewBadgeStyle();
     ensureLotteryTrackerUI();
     $('lotteryView').addEventListener('click', lotteryTrackerHandleClick);
+    // v21.29: The personal-management list lives in a separate view now.
+    // Its '管理' buttons need their own delegated click listener.
+    $('lotteryManageView').addEventListener('click', lotteryTrackerHandleClick);
     $('lotteryView').addEventListener('click', lotteryOnsiteHandleClick);
     // 初期表示はジャンル全件・日時確認済みの受付中のみ。
     $('lpGenre').value = 'all';
@@ -2810,13 +2813,21 @@
         '<p class="hint">応募済み・当選・落選・受け取り期限を管理します。各抽選カードから記録を追加できます。</p>';
       $('lotteryView').after(view);
     }
-    if (!document.querySelector('nav button[data-tab="lotteryManage"]')) {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.dataset.tab = 'lotteryManage';
-      button.setAttribute('aria-label', '自分の抽選管理を開く');
-      button.innerHTML = '✅<span>抽選管理</span>';
-      document.querySelector('nav button[data-tab="lottery"]').after(button);
+    const lotteryButton = document.querySelector('nav button[data-tab="lottery"]');
+    const historyButton = document.querySelector('nav button[data-tab="history"]');
+    let managementButton = document.querySelector('nav button[data-tab="lotteryManage"]');
+    if (!managementButton && lotteryButton) {
+      managementButton = document.createElement('button');
+      managementButton.type = 'button';
+      managementButton.dataset.tab = 'lotteryManage';
+      managementButton.setAttribute('aria-label', '自分の抽選管理を開く');
+      managementButton.innerHTML = '✅<span>抽選管理</span>';
+      lotteryButton.after(managementButton);
+    }
+    // v21.29: Map → Register → History → Lottery → Lottery Management → Share → Dev.
+    // Move existing buttons, preserving their event handlers and data-tab values.
+    if (historyButton && lotteryButton && managementButton) {
+      historyButton.after(lotteryButton, managementButton);
     }
   }
 
