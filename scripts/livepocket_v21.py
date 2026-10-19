@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LivePocket v21.17: explicit page-state event titles and broader heading detection.
+"""LivePocket v21.19: recover visible event heading from truncated matching metadata.
 
 Reads existing map catalog CSVs; no API, no new event fetch. v20 remains
 responsible for browsing, deadlines, all stores, new-arrival prioritization.
@@ -765,6 +765,86 @@ def clean_livepocket_event_title(value, source):
     return safe, '', stripped
 
 
+
+# v21.19: LivePocket's visible event heading can be styled text (not an H1).
+# Some page metadata ends in an ellipsis even while the full heading is visible.
+# Recover ONLY when the SAME already-loaded exact-URL page has:
+#  - a truncated official metadata prefix,
+#  - a unique full visible line closely preceding the known event tabs, and
+#  - that line begins with the exact metadata prefix (after whitespace/NFKC).
+# Do not guess the omitted ending or collect headings from unrelated paragraphs.
+def recover_visible_event_title(page):
+    """Return the full on-page event title only on strong structural agreement."""
+    if not isinstance(page, dict):
+        return None
+    body = page.get('text')
+    raw = page.get('titles')
+    origins = page.get('title_sources')
+    if not isinstance(body, str) or not isinstance(raw, list) or not isinstance(origins, list):
+        return None
+    if len(raw) != len(origins):
+        return None
+
+    # Body text is already produced by Playwright's body.inner_text() on the
+    # official URL. Do not use the event description or ticket names below tabs.
+    lines = [re.sub(r'\s+', ' ', html.unescape(x)).strip()
+             for x in body[:25000].splitlines()[:220]]
+    lines = [x for x in lines if x]
+    overview_indexes = []
+    for i, line in enumerate(lines):
+        if re.fullmatch(r'概要\s+詳細\s+受付・チケット情報\s+お問い合わせ', line):
+            overview_indexes.append(i)
+            continue
+        if line != '概要':
+            continue
+        # The screenshot confirms this distinctive four-tab event page header.
+        tail = lines[i:i+9]
+        if ('詳細' in tail and '受付・チケット情報' in tail and
+                'お問い合わせ' in tail and
+                tail.index('詳細') < tail.index('受付・チケット情報')
+                < tail.index('お問い合わせ')):
+            overview_indexes.append(i)
+    if len(overview_indexes) != 1:
+        return None  # absent or ambiguous navigation
+    nav = overview_indexes[0]
+    # There may be share/favorite accessibility labels between hero and tabs.
+    nearby = lines[max(0,nav-12):nav]
+    if not nearby:
+        return None
+
+    def canonical(value):
+        return re.sub(r'\s+', '', unicodedata.normalize('NFKC', value)).casefold()
+
+    prefixes = set()
+    for value, origin in zip(raw[:12], origins[:12]):
+        if origin not in ('og', 'document', 'twitter') or not isinstance(value, str):
+            continue
+        text = LP_META_TEMPLATE.sub('', html.unescape(value).strip()).strip()
+        if not text.endswith(('…', '...')) or '\ufffd' in text:
+            continue
+        prefix = text[:-3].rstrip() if text.endswith('...') else text[:-1].rstrip()
+        key = canonical(prefix)
+        # Tiny ellipsized labels could coincidentally match unrelated controls.
+        if 12 <= len(key) <= 155 and not LP_GENERIC_TITLE.fullmatch(prefix):
+            prefixes.add(key)
+    if not prefixes:
+        return None
+
+    complete = set()
+    for candidate in nearby:
+        # Preserve DOM inner_text line boundaries.  Never concatenate the
+        # title with a share/favorite button, announcement, or ticket detail.
+        key = canonical(candidate)
+        if any(len(key) > len(prefix) and key.startswith(prefix)
+               for prefix in prefixes):
+            accepted = v14.clean_title(candidate)
+            if accepted and not LP_GENERIC_TITLE.fullmatch(accepted) and \
+                    not _site_common_title(accepted):
+                complete.add(accepted)
+    # A conflicting header candidate must never be auto-selected.
+    return next(iter(complete)) if len(complete) == 1 else None
+
+
 def normalize_event_title_observation(page, url):
     """Normalize candidates before legacy v14/15/20 see this same fetch.
 
@@ -785,6 +865,10 @@ def normalize_event_title_observation(page, url):
     name = event_name_from_labelled_body(page.get('text'))
     if name:
         entries.append((name, 'body_label'))
+    # Visible title must agree with a truncated official metadata prefix.
+    matched_heading = recover_visible_event_title(page)
+    if matched_heading:
+        entries.append((matched_heading, 'event_heading'))
     filtered = {key: 0 for key in TITLE_FILTER_CODES}
     source_counts = {key: 0 for key in TITLE_SOURCE_CODES}
     accepted = []
