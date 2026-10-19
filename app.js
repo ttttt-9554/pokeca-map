@@ -493,6 +493,7 @@
 
     if (tab === 'map') refreshMap();
     if (tab === 'lottery') { loadLotteryEvents(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
+    if (tab === 'lotteryManage') { loadLotteryEvents(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'dev' && isDeveloper()) loadLotteryDevResults();
     render();
   }
@@ -2699,6 +2700,14 @@
     const sheet = document.createElement('style');
     sheet.id = 'lpTrackerStyle';
     sheet.textContent = `
+      /* v21.28: 6 tabs for regular users, 7 for developers. */
+      nav:has(button[data-tab="lotteryManage"]){grid-template-columns:repeat(6,minmax(0,1fr))}
+      nav:has(button[data-tab="lotteryManage"]):has(button[data-tab="dev"]:not([hidden])){grid-template-columns:repeat(7,minmax(0,1fr))}
+      nav button[data-tab="lotteryManage"]{font-size:20px}
+      nav button[data-tab="lotteryManage"] span{font-size:10px}
+      #lotteryManageView{padding-bottom:25px;color:var(--app-text,#172033)}
+      #lotteryManageView>h2{margin:3px 0 10px}
+      #lotteryManageView>.hint{color:var(--app-muted,#64748b)}
       #lpTrackerPanel{padding:14px;margin:14px 0;border:1px solid var(--app-border,#cbd5e1);border-radius:16px;background:var(--app-surface,#fff);color:var(--app-text,#172033)}
       #lpTrackerPanel h3{margin:0 0 8px;font-size:16px}
       #lpTrackerPanel .lp-tracker-intro{font-size:12px;line-height:1.65;color:var(--app-muted,#64748b);margin:5px 0 10px}
@@ -2722,6 +2731,14 @@
       #lpTrackerEditor{width:min(95vw,560px);max-height:90dvh;overflow:auto;border-radius:17px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);color:var(--app-text,#172033);padding:18px}
       #lpTrackerEditor::backdrop{background:#0009}
       #lpTrackerForm{display:grid;gap:13px;padding:0}
+      /* v21.28: Suppress global form background (#fff) inside both dialogs. */
+      #lpTrackerEditor form#lpTrackerForm,#lpOnsiteEditor form#lpOnsiteForm{
+        background:transparent!important;color:inherit!important;box-shadow:none!important;
+        padding:0!important;margin:0!important;border:0!important;border-radius:0!important;
+      }
+      #lpTrackerEditor form label,#lpOnsiteEditor form label{color:var(--app-text,#172033)}
+      #lpTrackerEditor input[type=checkbox]{appearance:checkbox;-webkit-appearance:checkbox;
+        accent-color:#3b82f6;background:transparent;min-width:20px;flex-shrink:0}
       #lpTrackerForm label:not(.lp-check-line){display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700}
       #lpTrackerForm select,#lpTrackerForm input[type=date],#lpTrackerForm textarea{width:100%;min-width:0;min-height:40px;border-radius:8px;padding:7px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#fff);color:var(--app-text,#172033)}
       #lpTrackerForm textarea{min-height:74px;resize:vertical}
@@ -2744,7 +2761,35 @@
       #lpOnsiteForm textarea{min-height:100px;resize:vertical}
       #lpOnsiteMessage{font-size:12px;overflow-wrap:anywhere}
       html[data-theme=dark] .lp-onsite-shared{background:var(--app-surface2,#1d293c)!important}
-      html[data-theme=dark] #lpOnsiteEditor{background:var(--app-surface)!important;color:var(--app-text)!important}
+      html[data-theme=dark] #lpOnsiteEditor{background:var(--app-surface,#172337)!important;color:var(--app-text,#eaf1ff)!important}
+      html[data-theme=dark] #lpTrackerEditor{background:var(--app-surface,#172337)!important;color:var(--app-text,#eaf1ff)!important}
+      html[data-theme=dark] #lpTrackerEditor form#lpTrackerForm,html[data-theme=dark] #lpOnsiteEditor form#lpOnsiteForm{
+        background:transparent!important;color:var(--app-text,#eaf1ff)!important;
+      }
+      html[data-theme=dark] #lpTrackerEditor form label,html[data-theme=dark] #lpOnsiteEditor form label{
+        color:var(--app-text,#eaf1ff)!important;
+      }
+      html[data-theme=dark] #lpTrackerEditor .lp-tracker-intro,html[data-theme=dark] #lpOnsiteEditor .lp-tracker-intro{
+        color:var(--app-muted,#c5d4e9)!important;
+      }
+      html[data-theme=dark] #lpTrackerForm select,
+      html[data-theme=dark] #lpTrackerForm input[type=date],
+      html[data-theme=dark] #lpTrackerForm textarea,
+      html[data-theme=dark] #lpOnsiteForm select,
+      html[data-theme=dark] #lpOnsiteForm textarea{
+        background:var(--app-surface2,#263c54)!important;
+        color:var(--app-text,#f1f6ff)!important;
+        border:1px solid var(--app-border,#59718d)!important;
+        color-scheme:dark;
+      }
+      html[data-theme=dark] #lpTrackerForm textarea::placeholder,
+      html[data-theme=dark] #lpOnsiteForm textarea::placeholder{color:#b9cce4!important;opacity:1}
+      html[data-theme=dark] #lpTrackerEditor button:not(.primary),
+      html[data-theme=dark] #lpOnsiteEditor button:not(.primary){
+        background:var(--app-surface2,#263c54)!important;
+        color:var(--app-text,#f1f6ff)!important;
+        border-color:var(--app-border,#59718d)!important;
+      }
       #lpTrackEditorMessage{font-size:12px;min-height:16px;line-height:1.5}
       html[data-theme=dark] #lpTrackerPanel,html[data-theme=dark] #lpTrackerEditor{background:var(--app-surface)!important;color:var(--app-text)!important}
       html[data-theme=dark] .lp-track-overdue{color:#fdba74!important}
@@ -2753,9 +2798,32 @@
     document.head.append(sheet);
   }
 
+  // v21.28: Personal application management has its own navigation tab.
+  // The cards in the lottery tab still provide quick registration shortcuts.
+  function ensureLotteryTrackingTab() {
+    if (!$('lotteryManageView')) {
+      const view = document.createElement('section');
+      view.id = 'lotteryManageView';
+      view.className = 'view';
+      view.setAttribute('aria-label', '自分の抽選管理');
+      view.innerHTML = '<h2>✅ 抽選管理</h2>' +
+        '<p class="hint">応募済み・当選・落選・受け取り期限を管理します。各抽選カードから記録を追加できます。</p>';
+      $('lotteryView').after(view);
+    }
+    if (!document.querySelector('nav button[data-tab="lotteryManage"]')) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.tab = 'lotteryManage';
+      button.setAttribute('aria-label', '自分の抽選管理を開く');
+      button.innerHTML = '✅<span>抽選管理</span>';
+      document.querySelector('nav button[data-tab="lottery"]').after(button);
+    }
+  }
+
   function ensureLotteryTrackerUI() {
     if ($('lpTrackerPanel')) return;
     lotteryTrackCss();
+    ensureLotteryTrackingTab();
     const container = document.createElement('section');
     container.id = 'lpTrackerPanel';
     container.setAttribute('aria-label','自分の抽選管理');
@@ -2767,7 +2835,7 @@
         <select id="lpTrackFilter"><option value="all">すべて</option><option value="applied">応募済み</option><option value="won">当選・受取待ち</option><option value="received">受取済み</option><option value="lost">落選</option><option value="onsite">現地対応待ち</option></select>
         <button type="button" id="lpTrackReload">記録を更新</button></div>
       <div id="lpTrackList"></div>`;
-    $('lpSummary').after(container);
+    $('lotteryManageView').append(container);
     $('lpTrackFilter').addEventListener('change', e => {
       lotteryTrackFilter = e.target.value;
       renderLotteryTrackerSummary();
