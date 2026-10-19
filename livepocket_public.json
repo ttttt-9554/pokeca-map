@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-19T09:00:22.489702+00:00",
-  "unique_livepocket_urls": 392,
+  "collected_at": "2026-10-19T09:30:55.406645+00:00",
+  "unique_livepocket_urls": 394,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5014,7 +5014,41 @@
         }
       ],
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/wydmh",
+      "store_name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-19T09:30:08.526000+00:00",
+      "stores": [
+        {
+          "name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【戸田店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-19T12:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【戸田店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
+      "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/22l1o",
+      "store_name": "トレカエース下妻店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-19T09:30:08.526000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース下妻店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-19T10:00:00+09:00",
+      "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
     }
   ],
-  "updated_at": "2026-10-19T09:20:58.320453+00:00"
+  "updated_at": "2026-10-19T09:31:18.419683+00:00"
 }
