@@ -3966,7 +3966,8 @@
           "name": "TSUTAYAテクノ店",
           "prefecture": ""
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T00:30:01.547257+00:00"
     },
     {
       "url": "https://livepocket.jp/e/u62m7",
@@ -3977,7 +3978,8 @@
       "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
       "review_category": "onepiece",
       "official_event_title": "ONE PIECEカードゲーム『EXブースター ヒロインズエディション Vol.2 【EB-05】』抽選販売受付",
-      "official_genre": "onepiece"
+      "official_genre": "onepiece",
+      "first_detected_at": "2026-10-17T09:46:49.693536+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s9-lf",
@@ -3985,7 +3987,9 @@
       "event_title": "Heroines Edition vol.2",
       "application_start_at": "2026-10-16T12:00:00+09:00",
       "application_end_at": "2026-10-18T23:59:00+09:00",
-      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00"
+      "discord_posted_at": "2026-10-17T09:10:23.953000+00:00",
+      "first_detected_at": "2026-10-17T09:46:49.693536+00:00",
+      "event_title_provisional": true
     },
     {
       "url": "https://livepocket.jp/e/t4s-9",
@@ -3996,7 +4000,8 @@
           "name": "ストーム",
           "prefecture": ""
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T09:46:49.693536+00:00"
     },
     {
       "url": "https://livepocket.jp/e/kvys2",
@@ -4010,7 +4015,8 @@
           "name": "30th",
           "prefecture": "群馬県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T09:46:49.693536+00:00"
     },
     {
       "url": "https://livepocket.jp/e/1hvyn",
@@ -4023,7 +4029,8 @@
           "name": "ストーム",
           "prefecture": ""
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T09:46:49.693536+00:00"
     },
     {
       "url": "https://livepocket.jp/e/79p_y",
@@ -4037,7 +4044,8 @@
           "name": "30th",
           "prefecture": "群馬県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T09:46:49.693536+00:00"
     },
     {
       "url": "https://livepocket.jp/e/0_ugz",
@@ -4051,7 +4059,8 @@
           "name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
       "url": "https://livepocket.jp/e/6ys9i",
@@ -4065,7 +4074,8 @@
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
       "url": "https://livepocket.jp/e/26civ",
@@ -4079,7 +4089,8 @@
           "name": "TSUTAYA自治医大店トレカ売場",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
       "url": "https://livepocket.jp/e/70ppw",
@@ -4093,7 +4104,8 @@
           "name": "TSUTAYA栃木城内店トレカ売場",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ldloz",
@@ -4107,7 +4119,8 @@
           "name": "TSUTAYA利府",
           "prefecture": "宮城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T13:09:26.462486+00:00"
     },
     {
       "url": "https://livepocket.jp/e/lli1u",
@@ -4121,7 +4134,8 @@
           "name": "HMVトレカショップ柏の葉",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
       "url": "https://livepocket.jp/e/sy415",
@@ -4135,7 +4149,8 @@
           "name": "TSUTAYA所沢山口店トレカ売場",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
       "url": "https://livepocket.jp/e/jlwei",
@@ -4149,7 +4164,8 @@
           "name": "古本市場蓮田店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
       "url": "https://livepocket.jp/e/d08fb",
@@ -4163,7 +4179,8 @@
           "name": "トレカ丸葉鹿店",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
       "url": "https://livepocket.jp/e/p997-",
@@ -4177,7 +4194,8 @@
           "name": "TSUTAYA仙台荒井店",
           "prefecture": "宮城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
       "url": "https://livepocket.jp/e/zp2ru",
@@ -4191,7 +4209,8 @@
           "name": "ヴィレッジヴァンガード渋谷本店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/dgffhgkljjgf-hjg",
@@ -4205,7 +4224,8 @@
           "name": "古本市場新小岩店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/vd5i7",
@@ -4219,7 +4239,8 @@
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/d89xs",
@@ -4233,7 +4254,8 @@
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/8qub1",
@@ -4247,7 +4269,8 @@
           "name": "古本市場戸田店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ilzq0",
@@ -4261,7 +4284,8 @@
           "name": "TSUTAYA大利根店トレカ売場",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/62c5y",
@@ -4275,7 +4299,8 @@
           "name": "TSUTAYA作新学院前店トレカ売場",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ib2ki",
@@ -4289,7 +4314,8 @@
           "name": "トレカ丸足利助戸店",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/lf49b",
@@ -4303,7 +4329,8 @@
           "name": "TSUTAYA宇都宮南店",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/lk0z7",
@@ -4317,7 +4344,8 @@
           "name": "キントレ竹の塚店",
           "prefecture": "東京都"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/6vevi",
@@ -4331,7 +4359,8 @@
           "name": "晴れる屋 川崎店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3i7a4",
@@ -4345,7 +4374,8 @@
           "name": "トレカ丸幸手店",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/8h3tm",
@@ -4359,13 +4389,15 @@
           "name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
           "prefecture": "栃木県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/0opt9",
       "application_start_at": "2026-10-17T11:50:00+09:00",
       "application_end_at": "2026-10-18T23:59:00+09:00",
-      "discord_posted_at": "2026-10-18T13:23:26.513000+00:00"
+      "discord_posted_at": "2026-10-18T13:23:26.513000+00:00",
+      "first_detected_at": "2026-10-18T13:30:58.761518+00:00"
     },
     {
       "url": "https://livepocket.jp/e/c6zph",
@@ -4379,7 +4411,8 @@
           "name": "受付終了: 10/21 22:00（残り2日12時間）",
           "prefecture": "群馬県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T00:15:57.253175+00:00"
     },
     {
       "url": "https://livepocket.jp/e/fei7k",
@@ -4393,7 +4426,8 @@
           "name": "受付終了: 10/25 20:30（残り6日9時間）",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T01:30:56.144365+00:00"
     },
     {
       "url": "https://livepocket.jp/e/yqdc9",
@@ -4407,7 +4441,8 @@
           "name": "受付終了: 10/25 22:00（残り6日11時間）",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T01:30:56.144365+00:00"
     },
     {
       "url": "https://livepocket.jp/e/9j60m",
@@ -4421,7 +4456,8 @@
           "name": "受付終了: 10/25 22:00（残り6日11時間）",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T01:30:56.144365+00:00"
     },
     {
       "url": "https://livepocket.jp/e/os9ab",
@@ -4435,7 +4471,8 @@
           "name": "受付終了: 10/25 22:00（残り6日11時間）",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T01:30:56.144365+00:00"
     },
     {
       "url": "https://livepocket.jp/e/0jn3t",
@@ -4449,7 +4486,8 @@
           "name": "受付終了: 10/25 22:00（残り6日11時間）",
           "prefecture": "福島県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T01:30:56.144365+00:00"
     },
     {
       "url": "https://livepocket.jp/e/q-jxn",
@@ -4463,7 +4501,8 @@
           "name": "受付終了: 10/21 22:00（残り2日10時間）",
           "prefecture": "埼玉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T02:00:55.901745+00:00"
     },
     {
       "url": "https://livepocket.jp/e/8ymwg",
@@ -4477,7 +4516,8 @@
           "name": "受付終了: 10/25 22:00（残り6日10時間）",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
       "url": "https://livepocket.jp/e/l95rk",
@@ -4491,7 +4531,8 @@
           "name": "受付終了: 10/21 21:00（残り2日9時間）",
           "prefecture": "群馬県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
       "url": "https://livepocket.jp/e/m740m",
@@ -4505,7 +4546,8 @@
           "name": "受付終了: 10/25 22:00（残り6日10時間）",
           "prefecture": "福島県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
       "url": "https://livepocket.jp/e/iia3c",
@@ -4519,7 +4561,8 @@
           "name": "受付終了: 10/25 21:00（残り6日8時間）",
           "prefecture": "茨城県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T03:05:55.123260+00:00"
     },
     {
       "url": "https://livepocket.jp/e/4c30v",
@@ -4533,7 +4576,8 @@
           "name": "受付終了: 10/25 21:00（残り6日8時間）",
           "prefecture": "福島県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T03:05:55.123260+00:00"
     },
     {
       "url": "https://livepocket.jp/e/h295z",
@@ -4547,7 +4591,8 @@
           "name": "受付終了: 10/23 23:59（残り4日11時間）",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
     },
     {
       "url": "https://livepocket.jp/e/vxe8h",
@@ -4562,8 +4607,9 @@
           "name": "受付終了: 10/23 20:05（残り4日7時間）",
           "prefecture": ""
         }
-      ]
+      ],
+      "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
     }
   ],
-  "updated_at": "2026-10-19T04:05:57.015014+00:00"
+  "updated_at": "2026-10-19T04:15:57.022722+00:00"
 }
