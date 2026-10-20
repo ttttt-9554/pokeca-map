@@ -12291,8 +12291,8 @@
           "status": "checked_title_deadline_product_store"
         },
         "https://livepocket.jp/e/zenhp": {
-          "checked_at": "2026-10-20T01:31:31.242224+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-20T07:38:52.437994+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/v4pon": {
           "checked_at": "2026-10-20T07:01:11.507569+00:00",
@@ -12678,8 +12678,8 @@
         },
         "https://livepocket.jp/e/zenhp": {
           "detected_at": "2026-10-20T01:30:57.879735+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-20T01:31:31.242224+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-20T07:38:52.437994+00:00"
         },
         "https://livepocket.jp/e/v4pon": {
           "detected_at": "2026-10-20T03:00:29.377383+00:00",
@@ -13054,6 +13054,11 @@
         "https://livepocket.jp/e/l58br": {
           "attempts": 2,
           "last_attempt_at": "2026-10-19T23:48:29.170033+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/zenhp": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-20T07:38:52.437994+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -15804,7 +15809,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-20T01:31:31.242224+00:00",
+          "checked_at": "2026-10-20T07:38:52.437994+00:00",
           "title_observed": "ワンピースカード ONE PIECE Heroines Edition vol.2 大会参加者限定抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -17332,7 +17337,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/zenhp": {
-          "checked_at": "2026-10-20T01:31:31.242224+00:00",
+          "checked_at": "2026-10-20T07:38:52.437994+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
