@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-20T07:00:41.532200+00:00",
-  "unique_livepocket_urls": 409,
+  "collected_at": "2026-10-20T08:05:55.991848+00:00",
+  "unique_livepocket_urls": 410,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5355,7 +5355,26 @@
         }
       ],
       "first_detected_at": "2026-10-20T07:00:43.055771+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/o9zb2",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-20T08:00:06.664000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム EXブースター『ヒロインズエディション Vol.2』抽選販売受付",
+      "application_end_at": "2026-10-25T20:00:00+09:00",
+      "application_start_at": "2026-10-19T08:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム EXブースター『ヒロインズエディション Vol.2』抽選販売受付",
+      "first_detected_at": "2026-10-20T08:05:57.207760+00:00"
     }
   ],
-  "updated_at": "2026-10-20T07:55:56.878103+00:00"
+  "updated_at": "2026-10-20T08:06:22.077562+00:00"
 }
