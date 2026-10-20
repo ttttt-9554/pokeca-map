@@ -4167,6 +4167,20 @@
         }
       }
     });
+    section.addEventListener('click',async event=>{
+      const button=event.target.closest('button[data-cloud-remove]');
+      if(!button || !section.contains(button) || !isDeveloper())return;
+      const url=button.dataset.cloudRemove;
+      if(!lpCloudOverrides.has(url)||!window.confirm('このイベントの公開済み手動修正を解除しますか？\n元の収集データは残ります。'))return;
+      button.disabled=true;button.textContent='解除中…';
+      try{
+        await lpCloudRemove(url);
+        $('lpManualStatus').textContent='✅ 手動修正の解除が完了しました。';
+      }catch(error){
+        button.disabled=false;button.textContent='修正を解除';
+        $('lpManualStatus').textContent='⚠ 解除できませんでした：'+(error?.message||error);
+      }
+    });
     $('lpManualCopy').addEventListener('click',()=>lpManualExport('copy'));
     $('lpManualDownload').addEventListener('click',()=>lpManualExport('download'));
     $('lpManualClose').addEventListener('click',()=>dialog.close());
@@ -4265,88 +4279,100 @@
     }
   }
 
+  // v21.45: keep an editable "対応済み" area separate from unresolved failures.
+  // Do not interpret a local title draft as already published. A local
+  // "pending" decision is handled separately from public corrections.
   function lpManualRender() {
     if(!isDeveloper())return;
     const list=$('lpManualList'),status=$('lpManualStatus');
     const resolved=$('lpManualResolved');
-    if(!list||!status||!resolved)return;
+    if(!list||!status)return;
     const validDrafts=Object.entries(lpManualDrafts).filter(([url,data])=>
       lpManualValidUrl(url)&&lpManualValidTitle(data?.event_title)&&
-      ['official_page_viewed','official_screenshot_viewed'].includes(data?.evidence) &&
-      !lpCloudOverrides.has(url));
+      ['official_page_viewed','official_screenshot_viewed'].includes(data?.evidence));
     $('lpManualExport').hidden=validDrafts.length===0||!lpManualLoaded;
+    // CSV export remains a legacy backup option, not the primary save flow.
     const missingExport=$('lpMissingExport');
     if(missingExport){
       const eligible=new Set(lpManualRows.map(x=>x.url));
-      const canExport=lpMissingLoaded&&Object.entries(lpMissingDrafts).some(([url,draft])=>
-        eligible.has(url)&&!lpCloudOverrides.has(url)&&
-        (Object.hasOwn(LP_MISSING_EVIDENCE,draft?.reason)||
-         (draft?.reason==='clear'&&lpMissingOriginal.some(x=>x.url===url&&x.approved==='yes'))));
-      missingExport.hidden=!canExport;
+      missingExport.hidden=!(lpMissingLoaded&&Object.entries(lpMissingDrafts)
+        .some(([url,draft])=>eligible.has(url)&&
+          (Object.hasOwn(LP_MISSING_EVIDENCE,draft?.reason)||
+          (draft?.reason==='clear'&&lpMissingOriginal.some(x=>x.url===url&&x.approved==='yes')))));
     }
-
-    if(!lpManualLoaded){
-      status.textContent='候補未読込 ／ 下書き '+validDrafts.length+'件';
+    if(!lpManualLoaded) {
+      status.textContent='未読み込み（端末内の下書き '+validDrafts.length+'件）';
       return;
     }
-    const saved=new Map();
-    for(const row of lpMissingOriginal){
-      if(row.approved==='yes'&&lpManualValidUrl(row.url))
-        saved.set(row.url,{url:row.url,kind:'legacy',label:'CSVでページなし登録済み'});
+    const byUrl=new Map();
+    for(const row of lpManualRows)if(lpManualValidUrl(row.url))byUrl.set(row.url,row);
+    // Old CSV registrations are considered resolved. Keep them accessible.
+    for(const row of lpManualOriginal)if(row.approved==='yes'&&lpManualValidUrl(row.url)&&!byUrl.has(row.url)){
+      const v={url:row.url,event_title:row.event_title||'',title_diagnostic_reason:'',title_diagnostic_checked_at:''};
+      byUrl.set(row.url,v);lpManualRows.push(v);
     }
     for(const [url,draft] of Object.entries(lpMissingDrafts)){
-      if(lpManualValidUrl(url)&&draft?.reason==='pending'&&!lpCloudOverrides.has(url)){
-        saved.set(url,{url,kind:'pending',label:'⏳ 判断保留（端末内）'});
+      if(draft?.reason==='pending'&&lpManualValidUrl(url)&&!byUrl.has(url)){
+        const v={url,event_title:'判断保留のイベント',title_diagnostic_reason:'fetch_failed'};
+        byUrl.set(url,v);lpManualRows.push(v);
       }
     }
-    for(const record of lpCloudOverrides.values()){
-      if(!lpManualValidUrl(record.event_url))continue;
-      const label=record.resolution==='title'
-        ? '✅ 正式イベント名を保存：'+(record.event_title||'')
-        : record.resolution==='unavailable'
-          ? '🚫 ページなし登録：'+(LP_MISSING_LABELS[record.reason]||'確認済み')
-          : '✅ ページ復旧を確認済み';
-      saved.set(record.event_url,{url:record.event_url,
-        kind:'cloud',resolution:record.resolution,label,at:record.updated_at||''});
+    const doneTitles=new Set(lpManualOriginal.filter(x=>x.approved==='yes').map(x=>x.url));
+    const doneMissing=new Set(lpMissingOriginal.filter(x=>x.approved==='yes').map(x=>x.url));
+    const finished=[],pending=[],unresolved=[];
+    for(const row of byUrl.values()){
+      const override=lpCloudOverrides.get(row.url);
+      const onHold=lpMissingDrafts[row.url]?.reason==='pending';
+      if(override||doneTitles.has(row.url)||doneMissing.has(row.url))finished.push(row);
+      else if(onHold)pending.push(row);
+      else unresolved.push(row);
     }
-    const remaining=lpManualRows.filter(row=>!saved.has(row.url));
-    const notice=!lpCloudReady
-      ? ' ⚠ クラウド設定未完了：'+(lpCloudError||'接続待ち')+'。直接保存は利用できません。'
-      : '';
-    status.textContent='未対応エラー '+remaining.length+'件 ／ 対応済み・保留 '+
-      saved.size+'件'+notice;
-    list.innerHTML='<h4 class="lp-manual-list-title">⚠ 未対応のエラー '+
-      remaining.length+'件</h4>'+
-      (remaining.length?remaining.slice(0,100).map(row=>{
-        const draft=lpManualDrafts[row.url];
-        const label=LP_MANUAL_REASONS[row.title_diagnostic_reason]||'未確認';
-        const current=(row.event_title||row.store_name||'イベント名は未確認').slice(0,150);
-        const checked=row.title_diagnostic_checked_at?lpDevReportDate(row.title_diagnostic_checked_at):'不明';
+    const cloudError=!lpCloudReady?' ⚠ クラウド未接続：'+(lpCloudError||'Supabase設定を確認'):''; 
+    status.textContent='要確認 '+unresolved.length+'件 ／ 対応済み '+finished.length+
+      '件 ／ 保留 '+pending.length+'件'+cloudError;
+    list.innerHTML=unresolved.length?unresolved.slice(0,100).map(row=>{
+      const draft=lpManualDrafts[row.url];
+      const reason=LP_MANUAL_REASONS[row.title_diagnostic_reason]||'手動確認が必要';
+      const title=(row.event_title||row.store_name||'イベント名未確認').slice(0,150);
+      const checked=row.title_diagnostic_checked_at?lpDevReportDate(row.title_diagnostic_checked_at):'不明';
+      return '<div class="lp-manual-row"><div><strong>'+escape(title)+'</strong>'+
+        '<p>'+escape(reason)+' ／ 確認：'+escape(checked)+'</p>'+
+        (draft?'<p class="lp-manual-ready">📝 入力中：'+escape(draft.event_title)+'</p>':'')+
+        '<a href="'+escape(row.url)+'" target="_blank" rel="noopener noreferrer">公式ページを確認 ↗</a>'+
+        '</div><div class="lp-manual-row-actions">'+
+        '<button type="button" data-manual-url="'+escape(row.url)+'">名前を修正</button>'+
+        '<button type="button" data-missing-url="'+escape(row.url)+'">ページなし・保留</button></div></div>';
+    }).join('')+(unresolved.length>100?'<p class="hint">先頭100件を表示しています。</p>':'')
+      :'<p class="hint">✅ 現在のエラーリストに未対応の候補はありません。</p>';
+    if(resolved) {
+      const renderResolved=(row,onHold)=>{
+        const cloud=lpCloudOverrides.get(row.url);
+        const savedTitle=cloud?.resolution==='title'?cloud.event_title:
+          lpManualOriginal.find(x=>x.url===row.url&&x.approved==='yes')?.event_title;
+        const originalReason=lpMissingOriginal.find(x=>x.url===row.url&&x.approved==='yes')?.reason;
+        const state=onHold?'⏳ 判断保留（このiPhoneのみ）':
+          cloud?.resolution==='unavailable'?'🚫 ページなし（公開済み）':
+          cloud?.resolution==='active'?'✅ ページ復旧（公開済み）':
+          cloud?.resolution==='title'?'✅ イベント名修正（公開済み）':
+          doneMissing.has(row.url)?'🚫 ページなし（CSV登録済み）':
+          '✅ イベント名修正（CSV登録済み）';
         return '<div class="lp-manual-row"><div>'+
-          '<strong>'+escape(current)+'</strong>'+
-          '<p>'+escape(label)+' ／ 確認：'+escape(checked)+'</p>'+
-          (draft?'<p class="lp-manual-ready">📝 名前の下書き：'+escape(draft.event_title)+'</p>':'')+
-          '<a href="'+escape(row.url)+'" target="_blank" rel="noopener noreferrer">公式ページを確認 ↗</a>'+
+          '<strong>'+escape(savedTitle||row.event_title||row.url)+'</strong>'+
+          '<p>'+escape(state)+'</p>'+
+          (originalReason&&!cloud?'<p>以前の記録：'+escape(LP_MISSING_LABELS[originalReason]||originalReason)+'</p>':'')+
+          '<a href="'+escape(row.url)+'" target="_blank" rel="noopener noreferrer">公式ページ ↗</a>'+
           '</div><div class="lp-manual-row-actions">'+
-          '<button type="button" data-manual-url="'+escape(row.url)+'">名前を修正</button>'+
-          '<button type="button" data-missing-url="'+escape(row.url)+'">ページなし・保留</button>'+
+          '<button type="button" data-manual-url="'+escape(row.url)+'">名称を編集</button>'+
+          '<button type="button" data-missing-url="'+escape(row.url)+'">状態を編集</button>'+
+          (cloud?'<button type="button" data-cloud-remove="'+escape(row.url)+'">修正を解除</button>':'')+
           '</div></div>';
-      }).join('')+'': '<p class="hint">未対応のエラーはありません。</p>')+
-      (remaining.length>100?'<p class="hint">先頭100件を表示中</p>':'');
-    const sorted=[...saved.values()].sort((a,b)=>(b.at||'').localeCompare(a.at||''));
-    resolved.innerHTML='<h4 class="lp-manual-list-title">✅ 対応済み・保留 '+
-      sorted.length+'件</h4><p class="hint">保存したイベントは上のエラー一覧には表示しません。こちらから再編集・解除できます。</p>'+
-      (sorted.length?sorted.slice(0,100).map(row=>{
-        const editTitle=row.resolution==='title';
-        return '<div class="lp-manual-row"><div><strong>'+escape(row.label)+'</strong>'+
-          '<p>'+escape(row.url)+'</p></div>'+
-          '<div class="lp-manual-row-actions">'+
-          '<button type="button" '+(editTitle?'data-manual-url':'data-missing-url')+
-          '="'+escape(row.url)+'">編集</button>'+
-          (row.kind==='cloud'?'<button type="button" data-cloud-remove="'+
-            escape(row.url)+'">修正を解除</button>':'')+
-          '</div></div>';
-      }).join(''):'<p class="hint">まだ対応済みの記録はありません。</p>');
+      };
+      const records=[...finished.map(row=>renderResolved(row,false)),
+        ...pending.map(row=>renderResolved(row,true))];
+      resolved.innerHTML='<h4>✅ 対応済み・判断保留（'+records.length+'件）</h4>'+
+        '<p class="hint">保存した項目は上のエラー一覧に出ません。ここから編集・解除できます。</p>'+
+        (records.length?records.join(''):'<p class="hint">まだ対応済みの記録はありません。</p>');
+    }
   }
 
   function lpManualOpen(url) {
