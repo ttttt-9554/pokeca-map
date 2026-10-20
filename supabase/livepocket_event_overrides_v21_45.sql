@@ -77,7 +77,9 @@ on public.livepocket_event_overrides for delete
 to authenticated using (auth.uid() = '0ba965da-445b-4055-8d8d-ead585fa0d09'::uuid);
 
 revoke all on public.livepocket_event_overrides from anon, authenticated;
-grant select on public.livepocket_event_overrides to anon, authenticated;
+-- Public clients can read the event correction, not the developer's user ID.
+grant select (event_url, resolution, event_title, reason, evidence, updated_at)
+  on public.livepocket_event_overrides to anon, authenticated;
 grant insert, update, delete on public.livepocket_event_overrides to authenticated;
 
 -- Public reads expose only event information; never store private account data.
