@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-20T09:00:59.245734+00:00",
+  "collected_at": "2026-10-20T09:30:56.736465+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 411,
+  "unique_livepocket_urls": 412,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10621,34 +10621,65 @@
       "event_title": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
       "application_end_at": "2026-10-22T22:00:00+09:00",
       "application_start_at": "2026-10-20T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3g_ll",
+      "discord_message_id": "1562035177381961849",
+      "discord_posted_at": "2026-10-20T09:30:07.498000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nトレカエース春日部店\n受付終了: 10/25 23:00（残り5日4時間）\nhttps://livepocket.jp/e/3g_ll",
+      "store_name": "トレカエース春日部店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": "ONE PIECE Heroines Edition vol.2【EB-05】",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース春日部店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product"
+      },
+      "event_title": "ワンピースカードゲーム エクストラブースター 『ONE PIECE Heroines Edition vol.2【EB-05】』抽選販売受付",
+      "application_end_at": "2026-10-25T23:00:00+09:00",
+      "application_start_at": "2026-10-19T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 258,
+    "parsed": 259,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 254,
-    "prefecture": 217,
-    "event_title": 98,
+    "store_name": 255,
+    "prefecture": 218,
+    "event_title": 99,
     "event_date": 1,
     "product_name": 61,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 386,
-    "application_start_at": 386,
-    "stores_events": 257
+    "application_end_at": 387,
+    "application_start_at": 387,
+    "stores_events": 258
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562027645800026112"
+      "1551580466266644552": "1562035177381961849"
     },
     "last_run": {
-      "checked_at": "2026-10-20T09:00:59.245734+00:00",
+      "checked_at": "2026-10-20T09:30:56.736465+00:00",
       "new_urls": 1,
-      "original_urls": 410,
+      "original_urls": 411,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -10735,7 +10766,8 @@
         "1561989884804341760": "2026-10-20T06:35:57.581902+00:00",
         "1561997432512847932": "2026-10-20T07:00:41.880632+00:00",
         "1562012524642046003": "2026-10-20T08:05:56.313111+00:00",
-        "1562027645800026112": "2026-10-20T09:00:59.560106+00:00"
+        "1562027645800026112": "2026-10-20T09:00:59.560106+00:00",
+        "1562035177381961849": "2026-10-20T09:30:56.928777+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12361,8 +12393,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/588-t": {
-          "checked_at": "2026-10-20T03:31:19.386830+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-20T09:31:25.954157+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/a2wte": {
           "checked_at": "2026-10-20T04:31:28.502699+00:00",
@@ -12390,6 +12422,10 @@
         },
         "https://livepocket.jp/e/m30dt9": {
           "checked_at": "2026-10-20T09:01:25.604394+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/3g_ll": {
+          "checked_at": "2026-10-20T09:31:25.954157+00:00",
           "status": "checked_title_deadline"
         }
       }
@@ -12758,8 +12794,8 @@
         },
         "https://livepocket.jp/e/588-t": {
           "detected_at": "2026-10-20T03:30:57.058812+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-20T03:31:19.386830+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-20T09:31:25.954157+00:00"
         },
         "https://livepocket.jp/e/a2wte": {
           "detected_at": "2026-10-20T04:30:58.798364+00:00",
@@ -12795,6 +12831,11 @@
           "detected_at": "2026-10-20T09:01:00.332205+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-20T09:01:25.604394+00:00"
+        },
+        "https://livepocket.jp/e/3g_ll": {
+          "detected_at": "2026-10-20T09:30:57.570807+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-20T09:31:25.954157+00:00"
         }
       },
       "pending_new_urls": []
@@ -13144,6 +13185,11 @@
         "https://livepocket.jp/e/v4pon": {
           "attempts": 1,
           "last_attempt_at": "2026-10-20T09:01:25.604394+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/588-t": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-20T09:31:25.954157+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -15916,7 +15962,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-20T03:31:19.386830+00:00",
+          "checked_at": "2026-10-20T09:31:25.954157+00:00",
           "title_observed": "ワンピースカードゲーム『ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -15997,6 +16043,17 @@
           "title_observed": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
           "genre": "pokemon",
           "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/3g_ll": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-20T09:31:25.954157+00:00",
+          "title_observed": "ワンピースカードゲーム エクストラブースター 『ONE PIECE Heroines Edition vol.2【EB-05】』抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
         }
@@ -17470,7 +17527,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/588-t": {
-          "checked_at": "2026-10-20T03:31:19.386830+00:00",
+          "checked_at": "2026-10-20T09:31:25.954157+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -17562,6 +17619,19 @@
         },
         "https://livepocket.jp/e/m30dt9": {
           "checked_at": "2026-10-20T09:01:25.604394+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/3g_ll": {
+          "checked_at": "2026-10-20T09:31:25.954157+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
