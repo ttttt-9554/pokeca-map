@@ -721,6 +721,18 @@ html[data-theme="dark"] .lp-manual-list-title{
 html[data-theme="dark"] #lpManualResolved .lp-manual-row p{
   color:#c9d7eb!important}
 
+/* v21.45: reviewed changes and pending checks live outside error results. */
+.lp-manual-resolved{margin:18px 0 0;padding:13px;
+  border:1px solid var(--app-border,#cbd5e1);border-radius:13px;
+  background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033)}
+.lp-manual-resolved h4{margin:0 0 9px;font-size:16px}
+.lp-manual-resolved .hint{margin:5px 0 12px;line-height:1.6}
+.lp-manual-resolved .lp-manual-row{border-top:1px solid var(--app-border,#cbd5e1)}
+.lp-manual-resolved .lp-manual-row p{font-size:12px}
+html[data-theme="dark"] .lp-manual-resolved{background:#263a55!important;
+  color:#edf4ff!important;border-color:#526681!important}
+html[data-theme="dark"] .lp-manual-resolved .hint{color:#c9d7eb!important}
+
 /* v21.44: page unavailable/review hold, separate from manual title edits. */
 .lp-manual-row-actions{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:0 0 auto}
 .lp-manual-row-actions button{width:100%;min-width:112px}
