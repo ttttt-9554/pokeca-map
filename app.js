@@ -4118,6 +4118,8 @@
       ).sort((a,b)=>String(b.title_diagnostic_checked_at).localeCompare(String(a.title_diagnostic_checked_at)));
       lpManualLoaded=true;
       lpManualRender();
+      // Load independently verified page-unavailable reports after candidates.
+      await lpMissingLoad();
     }catch(error) {
       status.textContent='⚠ 失敗候補を読み込めませんでした：'+(error?.message||error);
     }finally {
@@ -4148,10 +4150,13 @@
       return '<div class="lp-manual-row"><div>'+
         '<strong>'+escape(current)+'</strong>'+
         '<p>'+escape(label)+' ／ 確認：'+escape(checked)+'</p>'+
-        (draft?'<p class="lp-manual-ready">✅ 下書き：'+escape(draft.event_title)+'</p>':'')+
+        (draft?'<p class="lp-manual-ready">✅ 名前の下書き：'+escape(draft.event_title)+'</p>':'')+
+        lpMissingRowInfo(row.url)+
         '<a href="'+escape(row.url)+'" target="_blank" rel="noopener noreferrer">公式ページを確認 ↗</a>'+
-        '</div><button type="button" data-manual-url="'+escape(row.url)+'">'+
-          (draft?'修正する':'手動修正')+'</button></div>';
+        '</div><div class="lp-manual-row-actions">'+
+        '<button type="button" data-manual-url="'+escape(row.url)+'">'+
+          (draft?'修正する':'名前を修正')+'</button>'+
+        '<button type="button" data-missing-url="'+escape(row.url)+'">ページなし・保留</button></div></div>';
     }).join('')+(lpManualRows.length>100?
       '<p class="hint">先頭100件まで表示しています。</p>':'');
   }
@@ -4232,11 +4237,235 @@
     }
   }
 
+
+  // v21.44: A page that is confirmed absent has a different meaning from
+  // a title extraction failure or a transient browser/connection problem.
+  // Nothing is deleted. The only published action is via a reviewed GitHub CSV.
+  const LP_MISSING_DRAFT_KEY='pokeca-livepocket-page-status-v1';
+  const LP_MISSING_CSV_EDITOR=
+    'https://github.com/ttttt-9554/pokeca-map/edit/main/livepocket_verified_unavailable.csv';
+  const LP_MISSING_EVIDENCE={
+    not_found_404_410:'observed_404_410',
+    official_removed_notice:'official_notice_viewed'
+  };
+  const LP_MISSING_LABELS={
+    not_found_404_410:'404／410（ページが見つからない・削除済み）',
+    official_removed_notice:'公式ページに削除・公開終了の案内あり',
+    pending:'判定保留（通信エラー・ログイン・確認画面など）',
+    clear:'ページの復旧を確認・登録解除'
+  };
+  let lpMissingLoaded=false,lpMissingOriginal=[],lpMissingDrafts={};
+  let lpMissingEditing='';
+
+  function lpMissingInitUI() {
+    if($('lpMissingPanel'))return;
+    const manual=$('lpManualPanel');
+    if(!manual)return;
+    const pane=document.createElement('section');
+    pane.id='lpMissingPanel';
+    pane.innerHTML='<h4>🚫 ページなし・再確認待ちの管理</h4>'+
+      '<p class="hint">ページが消えた場合は404／410や公式の削除案内を確認して記録します。'+
+      '通信失敗・ログイン画面・アクセス制限だけの場合は「判断保留」にしてください。'+
+      'ページが復旧した場合は登録解除できます。イベント・応募履歴は削除されません。</p>'+
+      '<p id="lpMissingStatus" class="hint" role="status" aria-live="polite">候補一覧の読込後に使えます。</p>'+
+      '<div id="lpMissingExport" hidden>'+
+      '<div class="lp-manual-export-buttons">'+
+      '<button type="button" id="lpMissingCopy">ページ状態CSVをコピー</button>'+
+      '<button type="button" id="lpMissingDownload">ページ状態CSVを保存</button></div>'+
+      '<a href="'+LP_MISSING_CSV_EDITOR+'" target="_blank" rel="noopener noreferrer">GitHubでページ状態CSVを編集 ↗</a>'+
+      '<p class="hint">ファイル名：livepocket_verified_unavailable.csv。'+
+      '既存の確認記録を残して統合した内容です。GitHubに貼り付けてCommitすると、次の収集処理で反映されます。'+
+      '誤って登録した場合も「ページの復旧を確認」を選んで再出力できます。</p></div>';
+    manual.append(pane);
+    const dialog=document.createElement('dialog');
+    dialog.id='lpMissingDialog';
+    dialog.setAttribute('aria-label','LivePocketのページ状態を手動確認');
+    dialog.innerHTML='<h3 id="lpMissingHeading" tabindex="-1" autofocus>公式ページの状態を記録</h3>'+
+      '<p id="lpMissingDescription" class="hint"></p>'+
+      '<form id="lpMissingForm">'+
+      '<label>公式ページを確認した結果<select name="reason" required>'+
+      '<option value="" selected disabled>選択してください</option>'+
+      '<option value="not_found_404_410">404／410 と確認した</option>'+
+      '<option value="official_removed_notice">公式の削除・公開終了案内を確認した</option>'+
+      '<option value="pending">一時的に開けない・不明（判断保留）</option>'+
+      '<option value="clear">ページが復旧した（登録解除）</option></select></label>'+
+      '<p class="hint">※アクセス制限や通信エラーのみで「ページなし」と確定しないでください。'+
+      '「判断保留」はiPhone内のメモだけで、公開一覧には反映しません。</p>'+
+      '<label class="lp-manual-consent">'+
+      '<input type="checkbox" name="checked" required>'+
+      '<span>このイベントURLを実際に確認し、選択した結果であることを確認しました</span></label>'+
+      '<div class="lp-manual-export-buttons">'+
+      '<button type="submit" class="primary">端末に記録を保存</button>'+
+      '<button type="button" id="lpMissingClose">閉じる</button>'+
+      '<button type="button" id="lpMissingRemoveDraft">下書きを削除</button></div>'+
+      '<p id="lpMissingEditorStatus" class="hint" role="status" aria-live="polite"></p></form>';
+    document.body.append(dialog);
+    try {
+      const saved=JSON.parse(localStorage.getItem(LP_MISSING_DRAFT_KEY)||'{}');
+      if(saved && typeof saved==='object'&&!Array.isArray(saved))lpMissingDrafts=saved;
+    }catch(ignore){}
+    manual.addEventListener('click',e=>{
+      const btn=e.target.closest('button[data-missing-url]');
+      if(btn&&manual.contains(btn))lpMissingOpen(btn.dataset.missingUrl);
+    });
+    $('lpMissingClose').addEventListener('click',()=>dialog.close());
+    $('lpMissingRemoveDraft').addEventListener('click',()=>{
+      if(!isDeveloper()||!lpMissingEditing)return;
+      const old=lpMissingDrafts[lpMissingEditing];
+      delete lpMissingDrafts[lpMissingEditing];
+      try{lpMissingSave();}catch(error){
+        if(old)lpMissingDrafts[lpMissingEditing]=old;
+        $('lpMissingEditorStatus').textContent=error.message;return;
+      }
+      dialog.close();lpManualRender();
+    });
+    $('lpMissingForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      if(!isDeveloper() || !lpManualValidUrl(lpMissingEditing))return;
+      const data=new FormData(e.currentTarget),reason=String(data.get('reason')||'');
+      if(!Object.hasOwn(LP_MISSING_LABELS,reason)||data.get('checked')!=='on'){
+        $('lpMissingEditorStatus').textContent='ページの確認結果と確認チェックを選択してください。';
+        return;
+      }
+      const old=lpMissingDrafts[lpMissingEditing];
+      lpMissingDrafts[lpMissingEditing]={reason};
+      try{lpMissingSave();}catch(error){
+        if(old)lpMissingDrafts[lpMissingEditing]=old;
+        else delete lpMissingDrafts[lpMissingEditing];
+        $('lpMissingEditorStatus').textContent=error.message;return;
+      }
+      dialog.close();lpManualRender();
+    });
+    $('lpMissingCopy').addEventListener('click',()=>lpMissingExportCsv('copy'));
+    $('lpMissingDownload').addEventListener('click',()=>lpMissingExportCsv('download'));
+  }
+
+  function lpMissingSave() {
+    try{localStorage.setItem(LP_MISSING_DRAFT_KEY,JSON.stringify(lpMissingDrafts));}
+    catch(e){throw Error('端末に保存できません：'+(e?.message||e));}
+  }
+
+  async function lpMissingLoad() {
+    if(!isDeveloper())return;
+    const status=$('lpMissingStatus');
+    try{
+      const response=await fetch('./livepocket_verified_unavailable.csv?v='+Date.now(),{cache:'no-store'});
+      if(!response.ok)throw Error('HTTP '+response.status);
+      const parsed=lpManualParseCsv(await response.text());
+      for(const column of ['url','reason','evidence','approved'])
+        if(!parsed.header.includes(column))throw Error('ページ状態CSVに列がありません：'+column);
+      lpMissingOriginal=parsed.rows;
+      // Keep previously marked URLs editable, even if their failure reason
+      // disappeared after the last recheck. A developer can revoke a report.
+      const known=new Set(lpManualRows.map(row=>row.url));
+      for(const row of parsed.rows){
+        if(row.approved==='yes' && lpManualValidUrl(row.url) && !known.has(row.url)){
+          lpManualRows.push({url:row.url,event_title:'以前ページなしと確認したイベント',
+            title_diagnostic_reason:'fetch_failed',title_diagnostic_checked_at:''});
+          known.add(row.url);
+        }
+      }
+      lpMissingLoaded=true;
+      status.textContent='✅ ページなし確認記録 '+parsed.rows.filter(x=>x.approved==='yes').length+'件を取得';
+      lpManualRender();
+    }catch(e){
+      lpMissingLoaded=false;
+      status.textContent='⚠ ページ状態CSVの取得に失敗：'+(e?.message||e);
+      lpManualRender();
+    }
+  }
+
+  function lpMissingRowInfo(url) {
+    const draft=lpMissingDrafts[url];
+    const original=lpMissingOriginal.find(row=>row.url===url&&row.approved==='yes');
+    if(draft && LP_MISSING_LABELS[draft.reason]){
+      const published=draft.reason!=='pending';
+      return '<p class="lp-manual-ready">'+
+        (published?'📝 ページ状態の下書き：':'⏳ 端末内の保留：')+
+        escape(LP_MISSING_LABELS[draft.reason])+'</p>';
+    }
+    return original ? '<p class="lp-manual-ready">🚫 公開済み：'+
+      escape(LP_MISSING_LABELS[original.reason]||'ページなし')+'</p>':'';
+  }
+
+  function lpMissingOpen(url) {
+    if(!isDeveloper()||!lpManualLoaded||!lpMissingLoaded||
+       !lpManualRows.some(row=>row.url===url)) {
+      const status=$('lpMissingStatus');
+      if(status)status.textContent='⚠ 先に失敗候補を読み込み、ページ状態CSVの取得完了を待ってください。';
+      return;
+    }
+    lpMissingEditing=url;
+    const draft=lpMissingDrafts[url];
+    const original=lpMissingOriginal.find(row=>row.url===url&&row.approved==='yes');
+    $('lpMissingDescription').textContent=
+      '対象：'+url+'。公式ページを開いてから状態を選択してください。'+
+      (original?' 現在「'+(LP_MISSING_LABELS[original.reason]||'ページなし')+'」で登録されています。':'');
+    const form=$('lpMissingForm');
+    form.reset();
+    form.elements.namedItem('reason').value=draft?.reason||'';
+    form.elements.namedItem('checked').checked=false;
+    $('lpMissingRemoveDraft').hidden=!draft;
+    $('lpMissingEditorStatus').textContent='';
+    $('lpMissingDialog').showModal();
+    $('lpMissingHeading').focus({preventScroll:true});
+  }
+
+  function lpMissingBuildCsv() {
+    if(!lpMissingLoaded||!lpManualLoaded)throw Error('先に失敗候補を読み込んでください');
+    const entries=new Map();
+    for(const row of lpMissingOriginal)if(lpManualValidUrl(row.url))
+      entries.set(row.url,{url:row.url,reason:row.reason,evidence:row.evidence,approved:row.approved});
+    const eligible=new Set(lpManualRows.map(row=>row.url));
+    let changed=0;
+    for(const [url,draft] of Object.entries(lpMissingDrafts)){
+      if(!eligible.has(url)||!lpManualValidUrl(url))continue;
+      const reason=draft?.reason;
+      if(reason==='pending')continue; // local reminder only
+      if(reason==='clear'){
+        if(entries.has(url)){entries.delete(url);changed++;}
+      }else if(Object.hasOwn(LP_MISSING_EVIDENCE,reason)){
+        const entry={url,reason,evidence:LP_MISSING_EVIDENCE[reason],approved:'yes'};
+        if(JSON.stringify(entries.get(url))!==JSON.stringify(entry)){
+          entries.set(url,entry);changed++;
+        }
+      }
+    }
+    if(!changed)throw Error('公開用CSVに反映できる変更がありません（判断保留は端末のみ保存します）。');
+    const fields=['url','reason','evidence','approved'];
+    const body=[lpManualCsvLine(fields),...Array.from(entries.values(),row=>
+      lpManualCsvLine(fields.map(key=>row[key]||'')))].join('\r\n')+'\r\n';
+    return {text:body,total:changed};
+  }
+
+  async function lpMissingExportCsv(mode) {
+    if(!isDeveloper())return;
+    const status=$('lpMissingStatus');
+    let result;
+    try{result=lpMissingBuildCsv();}catch(e){status.textContent='⚠ '+e.message;return;}
+    if(mode==='copy'){
+      try{
+        if(!navigator.clipboard?.writeText)throw Error('コピー非対応');
+        await navigator.clipboard.writeText(result.text);
+        status.textContent='✅ ページ状態の変更 '+result.total+
+          '件を含むCSVをコピーしました。GitHubの該当CSVに貼り付けて保存してください。';
+      }catch(e){status.textContent='⚠ コピーできません。CSVを保存してGitHubへ反映してください。';}
+    }else{
+      const blob=new Blob(['\uFEFF'+result.text],{type:'text/csv;charset=utf-8'});
+      const target=URL.createObjectURL(blob),link=document.createElement('a');
+      link.href=target;link.download='livepocket_verified_unavailable.csv';
+      document.body.append(link);link.click();link.remove();
+      setTimeout(()=>URL.revokeObjectURL(target),2000);
+      status.textContent='✅ ページ状態CSVを保存しました。GitHubへ反映してください。';
+    }
+  }
+
   function initLotteryDevRecheck() {
     const button = $('lpDevRecheckButton');
     const status = $('lpDevRecheckStatus');
     if (!button || !status) return;
     lpManualInitUI();
+    lpMissingInitUI();
     $('lpDevResultsRefresh')?.addEventListener('click', () => loadLotteryDevResults({manual:true}));
     button.addEventListener('click', () => requestLotteryDevRecheck({automatic: false}));
   }
