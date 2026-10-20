@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-20T03:00:28.006496+00:00",
-  "unique_livepocket_urls": 403,
+  "collected_at": "2026-10-20T03:30:55.829524+00:00",
+  "unique_livepocket_urls": 404,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5249,7 +5249,26 @@
         }
       ],
       "first_detected_at": "2026-10-20T03:00:29.377383+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/588-t",
+      "store_name": "TSUTAYA入間仏子店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-20T03:30:08.891000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA入間仏子店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム『ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】抽選販売",
+      "application_end_at": "2026-10-25T21:45:00+09:00",
+      "application_start_at": "2026-10-19T07:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム『ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】抽選販売",
+      "first_detected_at": "2026-10-20T03:30:57.058812+00:00"
     }
   ],
-  "updated_at": "2026-10-20T03:20:57.258660+00:00"
+  "updated_at": "2026-10-20T03:31:19.386830+00:00"
 }
