@@ -12432,7 +12432,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/j_tt7": {
-          "checked_at": "2026-10-20T11:41:18.769928+00:00",
+          "checked_at": "2026-10-20T17:51:33.493026+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/m3kf4": {
@@ -12840,7 +12840,7 @@
         "https://livepocket.jp/e/j_tt7": {
           "detected_at": "2026-10-20T05:35:56.042356+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-20T11:41:18.769928+00:00"
+          "checked_at": "2026-10-20T17:51:33.493026+00:00"
         },
         "https://livepocket.jp/e/7vpd4": {
           "detected_at": "2026-10-20T06:35:58.433827+00:00",
@@ -13238,8 +13238,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/j_tt7": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-20T11:41:18.769928+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-20T17:51:33.493026+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/y6kid": {
@@ -16054,7 +16054,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-20T11:41:18.769928+00:00",
+          "checked_at": "2026-10-20T17:51:33.493026+00:00",
           "title_observed": "ガンダムカード ブースターパック Stardust Trails[GD06] 深夜販売入場券",
           "genre": "",
           "product_origin": "",
@@ -17634,7 +17634,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/j_tt7": {
-          "checked_at": "2026-10-20T11:41:18.769928+00:00",
+          "checked_at": "2026-10-20T17:51:33.493026+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
