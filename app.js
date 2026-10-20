@@ -360,12 +360,13 @@
     await loadSharedReports();
     await loadCloudData();
     await lpCloudRefresh(true);
+    await lpLocationRefresh(true);
     refreshLotteryOnsiteReports(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); });
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
         payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
@@ -500,9 +501,9 @@
     });
 
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
-    if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
-    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); }
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
+    if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
+    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); }
     render();
   }
 
@@ -2352,6 +2353,12 @@
   let lotteryBaseItems = [];
   const LP_CLOUD_TABLE = 'livepocket_event_overrides';
   let lpCloudOverrides = new Map();
+  const LP_LOCATION_TABLE = 'livepocket_location_overrides';
+  let lpLocationOverrides = new Map();
+  let lpLocationReady = false, lpLocationLoading = null;
+  let lpLocationLastFetch = 0, lpLocationError = '';
+  let lpLocationBusy = false, lpLocationEditing = '';
+  let lpLocationFilter = 'all', lpLocationSearch = '', lpLocationLimit = 60;
   let lpCloudReady = false;
   let lpCloudLastFetch = 0;
   let lpCloudLoading = null;
@@ -2506,9 +2513,10 @@
   function lpCloudApply() {
     lotteryItems = lotteryBaseItems.map(base=>{
       const override=lpCloudOverrides.get(base.url);
-      if(!override)return base;
+      const location=lpLocationOverrides.get(base.url);
+      if(!override&&!location)return base;
       const item={...base};
-      if(override.resolution==='title' && lpManualValidTitle(override.event_title)){
+      if(override?.resolution==='title' && lpManualValidTitle(override.event_title)){
         // A validated title also supersedes a historical unavailable CSV flag.
         item.manual_page_unavailable=false;
         delete item.manual_page_unavailable_reason;
@@ -2525,15 +2533,29 @@
         else if(/遊戯王|YU-GI-OH/i.test(override.event_title))item.review_category='yugioh';
         else if(/ポケモン|ポケカ|POKEMON/i.test(override.event_title))item.review_category='pokemon';
       }
-      if(override.resolution==='unavailable') {
+      if(override?.resolution==='unavailable') {
         item.manual_page_unavailable=true;
         item.manual_page_unavailable_reason=override.reason;
-      }else if(override.resolution==='active'){
+      }else if(override?.resolution==='active'){
         item.manual_page_unavailable=false;
         delete item.manual_page_unavailable_reason;
       }
+      // Preserve multi-store events: never collapse several branches to one.
+      if(location && (!Array.isArray(base.stores)||base.stores.length<=1)){
+        const name=typeof location.store_name==='string'?location.store_name.trim():'';
+        const area=LP_PREFECTURES.includes(location.prefecture)?location.prefecture:'';
+        if(name)item.store_name=name;
+        if(area)item.prefecture=area;
+        if(Array.isArray(base.stores)&&base.stores.length===1){
+          const entry={...base.stores[0]};
+          if(name)entry.name=name;
+          if(area)entry.prefecture=area;
+          item.stores=[entry];
+        }
+      }
       return item;
     });
+    if($('lpPrefecture'))renderLotteryPrefectures();
     if($('lotteryView')?.classList.contains('active'))renderLottery();
   }
 
@@ -2595,6 +2617,53 @@
     lpCloudLastFetch=0;
     lpCloudApply();
     if(isDeveloper() && lpManualLoaded)lpManualRender();
+  }
+
+  // v21.48: Public location corrections; RLS protects developer-only writes.
+  async function lpLocationRefresh(force=false){
+    if(!supabaseClient){lpLocationError='Supabase接続待ち';return false;}
+    if(!force&&lpLocationReady&&Date.now()-lpLocationLastFetch<30000)return true;
+    if(lpLocationLoading)return lpLocationLoading;
+    lpLocationLoading=(async()=>{
+      try{
+        const {data,error}=await supabaseClient.from(LP_LOCATION_TABLE)
+          .select('event_url,store_name,prefecture,evidence,updated_at').limit(2000);
+        if(error)throw error;
+        lpLocationOverrides=new Map((data||[]).filter(x=>safeLotteryUrl(x.event_url))
+          .map(x=>[x.event_url,x]));
+        lpLocationReady=true;lpLocationError='';lpLocationLastFetch=Date.now();
+        lpCloudApply();lpLocationRender();return true;
+      }catch(error){
+        lpLocationReady=false;lpLocationError=error?.message||String(error);
+        console.warn('店舗・地域の修正データが取得できません:',error);
+        lpLocationRender();return false;
+      }finally{lpLocationLoading=null;}
+    })();return lpLocationLoading;
+  }
+  async function lpLocationSave(row){
+    if(!isDeveloper()||!supabaseClient||!lpLocationReady)
+      throw Error('開発者ログインまたはクラウド接続を確認してください');
+    const base=lotteryBaseItems.find(x=>x.url===row.event_url);
+    if(!base||(Array.isArray(base.stores)&&base.stores.length>1))
+      throw Error('複数店舗イベントは一括上書きできません');
+    const {data,error}=await supabaseClient.from(LP_LOCATION_TABLE)
+      .upsert(row,{onConflict:'event_url'})
+      .select('event_url,store_name,prefecture,evidence,updated_at').single();
+    if(error)throw Error(error.message);
+    if(!data||data.event_url!==row.event_url)throw Error('保存を確認できませんでした');
+    lpLocationOverrides.set(data.event_url,data);lpLocationLastFetch=0;
+    lpCloudApply();lpLocationRender();
+  }
+  async function lpLocationRemove(url){
+    if(!isDeveloper()||!supabaseClient||!lpLocationReady)
+      throw Error('開発者ログインまたはクラウド接続を確認してください');
+    const {data,error}=await supabaseClient.from(LP_LOCATION_TABLE)
+      .delete().eq('event_url',url).select('event_url');
+    if(error)throw Error(error.message);
+    if(!Array.isArray(data)||!data.some(row=>row.event_url===url))
+      throw Error('修正の解除を確認できませんでした');
+    lpLocationOverrides.delete(url);lpLocationLastFetch=0;
+    lpCloudApply();lpLocationRender();
   }
 
   async function loadLotteryEvents(force = false) {
@@ -2807,11 +2876,12 @@
           (isDeveloper() && $('devView').classList.contains('active'))) {
         // Other users pick up saved event corrections without reloading the app.
         lpCloudRefresh();
+        lpLocationRefresh();
       }
     }, 60000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
-      if ($('lotteryView').classList.contains('active')) loadLotteryEvents();
+      if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();lpLocationRefresh(true);}
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
     });
   }
