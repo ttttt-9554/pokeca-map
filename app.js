@@ -359,12 +359,13 @@
     displayAuth();
     await loadSharedReports();
     await loadCloudData();
+    await lpCloudRefresh(true);
     refreshLotteryOnsiteReports(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); });
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
         payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
@@ -499,9 +500,9 @@
     });
 
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
-    if (tab === 'lotteryManage') { loadLotteryEvents(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
-    if (tab === 'dev' && isDeveloper()) loadLotteryDevResults();
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
+    if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
+    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); }
     render();
   }
 
@@ -2348,6 +2349,13 @@
     '福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'
   ];
   let lotteryItems = [];
+  let lotteryBaseItems = [];
+  const LP_CLOUD_TABLE = 'livepocket_event_overrides';
+  let lpCloudOverrides = new Map();
+  let lpCloudReady = false;
+  let lpCloudLastFetch = 0;
+  let lpCloudLoading = null;
+  let lpCloudError = '';
   let lotteryLastFetch = 0;
   let lotteryLoading = null;
   let lotteryVisibleLimit = LP_PAGE_SIZE;
@@ -2491,6 +2499,96 @@
     root.value = [...root.options].some(x => x.value === selected) ? selected : 'all';
   }
 
+
+  // v21.45: Supabase overrides are a separate authoritative display layer.
+  // The GitHub-collected base JSON and a user's private lottery history remain
+  // untouched. A backend RLS policy limits writes to the developer UID.
+  function lpCloudApply() {
+    lotteryItems = lotteryBaseItems.map(base=>{
+      const override=lpCloudOverrides.get(base.url);
+      if(!override)return base;
+      const item={...base};
+      if(override.resolution==='title' && lpManualValidTitle(override.event_title)){
+        item.event_title=override.event_title;
+        item.official_event_title=override.event_title;
+        item.event_title_provisional=false;
+        // The genre helper is deliberately narrow: don't guess based on snippets.
+        if(/ワンピース|ONE\s*PIECE/i.test(override.event_title))item.review_category='onepiece';
+        else if(/遊戯王|YU-GI-OH/i.test(override.event_title))item.review_category='yugioh';
+        else if(/ポケモン|ポケカ|POKEMON/i.test(override.event_title))item.review_category='pokemon';
+      }
+      if(override.resolution==='unavailable') {
+        item.manual_page_unavailable=true;
+        item.manual_page_unavailable_reason=override.reason;
+      }else if(override.resolution==='active'){
+        item.manual_page_unavailable=false;
+        delete item.manual_page_unavailable_reason;
+      }
+      return item;
+    });
+    if($('lotteryView')?.classList.contains('active'))renderLottery();
+  }
+
+  async function lpCloudRefresh(force=false){
+    if(!supabaseClient){
+      lpCloudError='Supabase接続待ち';
+      return false;
+    }
+    if(!force && lpCloudReady && Date.now()-lpCloudLastFetch<30000)return true;
+    if(lpCloudLoading)return lpCloudLoading;
+    lpCloudLoading=(async()=>{
+      try{
+        const {data,error}=await supabaseClient.from(LP_CLOUD_TABLE)
+          .select('event_url,resolution,event_title,reason,evidence,updated_at')
+          .limit(2000);
+        if(error)throw error;
+        lpCloudOverrides=new Map((data||[]).filter(x=>safeLotteryUrl(x.event_url))
+          .map(x=>[x.event_url,x]));
+        lpCloudReady=true;
+        lpCloudError='';
+        lpCloudLastFetch=Date.now();
+        lpCloudApply();
+        if(isDeveloper() && lpManualLoaded)lpManualRender();
+        return true;
+      }catch(error){
+        lpCloudReady=false;
+        lpCloudError=error?.message||String(error);
+        console.warn('抽選の手動修正情報を取得できません:',error);
+        if(isDeveloper() && lpManualLoaded)lpManualRender();
+        return false;
+      }finally{lpCloudLoading=null;}
+    })();
+    return lpCloudLoading;
+  }
+
+  async function lpCloudSave(payload) {
+    if(!isDeveloper()||!supabaseClient)throw Error('開発者のDiscordログインが必要です。');
+    if(!lpCloudReady)throw Error('Supabaseの手動修正テーブルが利用できません。SQL設定を確認してください：'+lpCloudError);
+    const {data,error}=await supabaseClient.from(LP_CLOUD_TABLE)
+      .upsert(payload,{onConflict:'event_url'})
+      .select('event_url,resolution,event_title,reason,evidence,updated_at')
+      .single();
+    if(error)throw Error(error.message);
+    if(!data || data.event_url!==payload.event_url)throw Error('サーバーで保存が確認できませんでした');
+    lpCloudOverrides.set(data.event_url,data);
+    lpCloudLastFetch=0;
+    lpCloudApply();
+    if(isDeveloper() && lpManualLoaded)lpManualRender();
+    return data;
+  }
+
+  async function lpCloudRemove(url) {
+    if(!isDeveloper()||!supabaseClient||!lpCloudReady)throw Error('開発者権限・データベース接続を確認してください。');
+    const {data,error}=await supabaseClient.from(LP_CLOUD_TABLE)
+      .delete().eq('event_url',url).select('event_url');
+    if(error)throw Error(error.message);
+    if(!Array.isArray(data)||!data.some(row=>row.event_url===url))throw Error('対象の保存済み修正を削除できませんでした。');
+    lpCloudOverrides.delete(url);
+    lpCloudLastFetch=0;
+    lpCloudApply();
+    if(isDeveloper() && lpManualLoaded)lpManualRender();
+  }
+
   async function loadLotteryEvents(force = false) {
     if (!force && lotteryItems.length && Date.now() - lotteryLastFetch < LP_REFRESH_MS) {
       renderLottery(); return;
@@ -2515,7 +2613,8 @@
           seen.add(item.url);
           clean.push(item);
         }
-        lotteryItems = clean;
+        lotteryBaseItems = clean;
+        lpCloudApply();
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
         const update = data.updated_at || data.collected_at;
