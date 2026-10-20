@@ -618,6 +618,12 @@ nav[aria-label="メインメニュー"] {
               <option value="unknown">区分未確認</option>
             </select>
           </label>
+          <label for="lpSort">並び順
+            <select id="lpSort">
+              <option value="newest" selected>新着順（初回登録が新しい順）</option>
+              <option value="status">受付状況・締切順</option>
+            </select>
+          </label>
         </div>
         <label class="lp-wishlist" for="lpWishlistOnly">
           <input id="lpWishlistOnly" type="checkbox">
@@ -1189,7 +1195,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_53-onsite-archive"></script>
+  <script src="app.js?v=20261020-v21_54-lottery-newest-sort"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
