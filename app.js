@@ -2349,6 +2349,9 @@
     '徳島県','香川県','愛媛県','高知県',
     '福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'
   ];
+  // 「全国」は47県の別名ではなく、任意の都道府県の抽選に一致する範囲。
+  const LP_NATIONWIDE = '全国';
+  const LP_MANUAL_AREAS = [...LP_PREFECTURES,LP_NATIONWIDE];
   let lotteryItems = [];
   let lotteryBaseItems = [];
   const LP_CLOUD_TABLE = 'livepocket_event_overrides';
@@ -2502,6 +2505,9 @@
   function renderLotteryPrefectures() {
     const selected = $('lpPrefecture').value;
     const actual = new Set(lotteryItems.flatMap(lotteryPrefectures));
+    // Nationwide events must be reachable even if that prefecture has
+    // no local-only events yet (otherwise its filter option disappears).
+    const hasNationwide = actual.has(LP_NATIONWIDE);
     const root = $('lpPrefecture');
     root.replaceChildren();
     const all = document.createElement('option');
@@ -2509,7 +2515,7 @@
     const unknown = document.createElement('option');
     unknown.value = 'unknown'; unknown.textContent = '都道府県未確認';root.append(unknown);
     for (const name of LP_PREFECTURES) {
-      if (!actual.has(name)) continue;
+      if (!hasNationwide && !actual.has(name)) continue;
       const option = document.createElement('option');
       option.value = name; option.textContent = name; root.append(option);
     }
@@ -2553,7 +2559,7 @@
       // Preserve multi-store events: never collapse several branches to one.
       if(location && (!Array.isArray(base.stores)||base.stores.length<=1)){
         const name=typeof location.store_name==='string'?location.store_name.trim():'';
-        const area=LP_PREFECTURES.includes(location.prefecture)?location.prefecture:'';
+        const area=LP_MANUAL_AREAS.includes(location.prefecture)?location.prefecture:'';
         if(name)item.store_name=name;
         if(area)item.prefecture=area;
         if(Array.isArray(base.stores)&&base.stores.length===1){
@@ -2797,7 +2803,10 @@
     const visible = lotteryItems.filter(item => {
       if (genre !== 'all' && lotteryGenre(item) !== genre) return false;
       if (prefecture === 'unknown' && lotteryPrefectures(item).length) return false;
-      if (prefecture !== 'all' && prefecture !== 'unknown' && !lotteryPrefectures(item).includes(prefecture)) return false;
+      if (prefecture !== 'all' && prefecture !== 'unknown') {
+        const areas=lotteryPrefectures(item);
+        if(!areas.includes(prefecture)&&!areas.includes(LP_NATIONWIDE))return false;
+      }
       if (status !== 'all' && lotteryState(item, now) !== status) return false;
       if (type !== 'all' && !(type === 'unknown' ? lotteryProductType(item) === 'unknown' : lotteryProductType(item).split('/').includes(type))) return false;
       if (wishlistOnly && !lotteryMatchedWishlist(item)) return false;
@@ -4897,6 +4906,7 @@
         '<input type="text" name="store_name" maxlength="160" placeholder="例：○○カードショップ △△店" autocomplete="off"></label>'+
       '<label>確認できた都道府県（省略可）'+
         '<select name="prefecture"><option value="">未確認・変更しない</option>'+
+          '<option value="'+LP_NATIONWIDE+'">🌏 全国（すべての都道府県で表示）</option>'+
           LP_PREFECTURES.map(p=>'<option value="'+escape(p)+'">'+escape(p)+'</option>').join('')+
         '</select></label>'+
       '<p class="hint">※どちらか1項目以上入力してください。空欄の項目は自動収集の値を維持します。'+
@@ -5086,7 +5096,7 @@
     const message=$('lpLocationEditorStatus');
     if((!name&&!area)||(name&&(name.length<2||name.length>160||
         /[\x00-\x1f\x7f]/.test(name))) ||
-      (area&&!LP_PREFECTURES.includes(area)) ||
+      (area&&!LP_MANUAL_AREAS.includes(area)) ||
       !['official_page_viewed','official_screenshot_viewed','official_store_notice_viewed'].includes(evidence) ||
       !checked){
       message.textContent='⚠ 店舗名・都道府県を1項目以上入力し、確認方法と確認チェックを選択してください。';
