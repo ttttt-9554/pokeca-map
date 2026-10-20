@@ -67,7 +67,7 @@ def due_retries(raw, public, now=None, *, limit=3):
             continue
         current = pindex[url]
         deadline = v11.parse_datetime(current.get('application_end_at'))
-        if deadline and deadline.astimezone(now.tzinfo) < now:
+        if deadline and deadline.astimezone(now.tzinfo) <= now:
             continue  # expired events do not consume the free retry budget
         if not missing_details(current):
             continue
