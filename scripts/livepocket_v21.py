@@ -1287,6 +1287,62 @@ def apply_verified_titles(raw, public, registry):
     return result
 
 
+# v21.44: URL-scoped manual page availability, never an automatic 404 guess.
+MANUAL_UNAVAILABLE_PATH = Path(os.environ.get(
+    'LIVEPOCKET_VERIFIED_UNAVAILABLE_FILE', 'livepocket_verified_unavailable.csv'))
+MANUAL_UNAVAILABLE_REASONS = {
+    'not_found_404_410': 'observed_404_410',
+    'official_removed_notice': 'official_notice_viewed',
+}
+
+
+def read_verified_unavailable(path=MANUAL_UNAVAILABLE_PATH):
+    path = Path(path)
+    if not path.is_file():
+        return {}
+    entries = {}
+    with path.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream)
+        required = {'url', 'reason', 'evidence', 'approved'}
+        if not reader.fieldnames or not required <= set(reader.fieldnames):
+            raise ValueError('Unavailable CSV requires url,reason,evidence,approved')
+        for line, row in enumerate(reader, 2):
+            if (row.get('approved') or '').strip().lower() != 'yes':
+                continue
+            url = (row.get('url') or '').strip()
+            if not url or v12.exact_event_url(url) != url:
+                raise ValueError(f'Unavailable CSV line {line}: invalid exact event URL')
+            reason = (row.get('reason') or '').strip()
+            evidence = (row.get('evidence') or '').strip()
+            if MANUAL_UNAVAILABLE_REASONS.get(reason) != evidence:
+                raise ValueError(f'Unavailable CSV line {line}: invalid reason/evidence')
+            if url in entries and entries[url] != reason:
+                raise ValueError(f'Unavailable CSV line {line}: duplicate conflicting URL')
+            entries[url] = reason
+    return entries
+
+
+def apply_verified_unavailable(raw, public, registry):
+    # Do not delete event history, application dates, or private user records.
+    stats = {'manual_unavailable_applied': 0, 'manual_unavailable_cleared': 0}
+    for data in (raw, public):
+        for item in data.get('items', []):
+            if not isinstance(item, dict):
+                continue
+            reason = registry.get(item.get('url'))
+            if reason:
+                item['manual_page_unavailable'] = True
+                item['manual_page_unavailable_reason'] = reason
+                if data is public:
+                    stats['manual_unavailable_applied'] += 1
+            else:
+                had = item.pop('manual_page_unavailable', None)
+                item.pop('manual_page_unavailable_reason', None)
+                if data is public and had:
+                    stats['manual_unavailable_cleared'] += 1
+    return stats
+
+
 # v21.13 developer-only background selection. It is enabled ONLY by the
 # workflow's explicit manual input, never by the regular 5-minute Cron.
 # The ordinary v14/v15/v20 extractors remain responsible for writing facts.
@@ -1466,7 +1522,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None,
             title_limit=TITLE_RECHECK_DEFAULT_PER_RUN,
             manual_recheck=False, manual_limit=MANUAL_RECHECK_LIMIT,
-            verified_titles=None):
+            verified_titles=None, verified_unavailable=None):
     """v21.13: title-priority checks, URL-scoped results and verified titles."""
     now = v14._utc(now)
     snapshot = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
@@ -1819,6 +1875,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             stats[metric] = sum(page_supported_change(u, metric, keys)
                                 for u in successful)
     
+    stats.update(apply_verified_unavailable(raw, public, verified_unavailable or {}))
     stats['first_detection_times_published'] = publish_first_detected_at(
         raw, public, now=now)
     stats['provisional_discord_titles_marked'] = mark_provisional_discord_event_titles(raw, public)
@@ -2321,6 +2378,7 @@ def main():
         background_limit = MANUAL_RECHECK_LIMIT
     retry_limit = v14.safe_limit('LIVEPOCKET_V16_RETRY_PER_RUN', 3, 5)
     verified_titles = read_verified_titles()
+    verified_unavailable = read_verified_unavailable()
     manual_urls = manual_recheck_candidates(raw, public) if manual_recheck else []
     with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):
         work = v19.v18.plan(raw, public, new_limit=new_limit,
@@ -2361,7 +2419,8 @@ def main():
                        title_limit=title_limit,
                        manual_recheck=manual_recheck,
                        manual_limit=MANUAL_RECHECK_LIMIT,
-                       verified_titles=verified_titles)
+                       verified_titles=verified_titles,
+                       verified_unavailable=verified_unavailable)
     finally:
         close()
     raw, public, review, deadlines, sources, content, stats = data
