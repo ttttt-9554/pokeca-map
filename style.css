@@ -691,6 +691,40 @@ html[data-theme="dark"] .lp-status.lp-unavailable{background:#4c2430!important;
 html[data-theme="dark"] .lp-missing-notice{background:#422f20!important;
   color:#fde68a!important;border-color:#a16207!important}
 
+/* v21.46: Native accessible collapsible resolved/held items. */
+#lpManualResolved{padding:0!important;overflow:hidden}
+#lpManualResolved details.lp-manual-fold{display:block}
+#lpManualResolved .lp-manual-fold-summary{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:9px;min-height:48px;box-sizing:border-box;
+  padding:13px 14px;cursor:pointer;list-style:none;
+  color:var(--app-text,#172033);font-size:15px;font-weight:800;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent
+}
+#lpManualResolved .lp-manual-fold-summary::-webkit-details-marker{display:none}
+#lpManualResolved .lp-manual-fold-summary::marker{content:""}
+#lpManualResolved .lp-manual-fold-label{min-width:0;flex:1}
+#lpManualResolved .lp-manual-fold-count{
+  flex:0 0 auto;background:var(--app-surface,#fff);
+  border:1px solid var(--app-border,#cbd5e1);border-radius:999px;
+  padding:4px 9px;font-size:12px
+}
+#lpManualResolved .lp-manual-fold-chevron{
+  flex:0 0 10px;width:9px;height:9px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(45deg);transition:transform .2s ease;margin:0 5px 4px
+}
+#lpManualResolved details[open] .lp-manual-fold-chevron{
+  transform:rotate(225deg);margin:5px 5px 0
+}
+#lpManualResolved .lp-manual-fold-summary:focus-visible{outline:2px solid #3b82f6;outline-offset:-3px}
+#lpManualResolved .lp-manual-fold-content{padding:0 13px 13px;border-top:1px solid var(--app-border,#cbd5e1)}
+#lpManualResolved .lp-manual-fold-content>.hint{margin:11px 0}
+html[data-theme="dark"] #lpManualResolved .lp-manual-fold-summary{color:#f4f8ff!important}
+html[data-theme="dark"] #lpManualResolved .lp-manual-fold-count{
+  background:#172337!important;border-color:#627896!important;color:#f4f8ff!important
+}
+
 /* v21.45: unresolved vs resolved developer review list. */
 .lp-manual-list-title{
   margin:18px 0 8px;padding:10px 12px;border-radius:10px;
