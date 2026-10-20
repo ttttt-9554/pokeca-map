@@ -4131,7 +4131,8 @@
       '<p class="hint">自動取得できなかったイベントを一覧で確認し、公式ページ・公式画面のスクリーンショットから正式イベント名を入力できます。'+
       '開発者として「保存して反映」を押すとSupabaseへ保存され、全ユーザーの一覧へ反映されます。既存のCSVはバックアップ用に残します。</p>'+
       '<button type="button" id="lpManualLoad">失敗候補を読み込む</button>'+
-      '<p id="lpManualStatus" class="hint" role="status" aria-live="polite">未読み込み</p>'+
+      '<p id="lpManualStatus" class="hint" role="status" aria-live="polite">未読み込み</p>'+ 
+      '<p id="lpManualFeedback" class="hint" role="status" aria-live="polite"></p>'+
       '<div id="lpManualList"></div>'+ 
       '<div id="lpManualResolved" class="lp-manual-resolved"></div>'+
       '<details id="lpManualExportLegacy" class="lp-manual-legacy">'+
@@ -4221,8 +4222,8 @@
         delete lpManualDrafts[url];
         try{lpManualSaveDrafts();}catch(ignore){}
         $('lpManualEditor').close();
-        $('lpManualStatus').textContent='✅ 正式イベント名を保存しました。全ユーザーの一覧へ反映されます。';
         lpManualRender();
+        $('lpManualFeedback').textContent='✅ 正式イベント名を保存しました。エラー一覧から対応済みに移動しました。';
       }catch(error){
         $('lpManualEditorStatus').textContent='⚠ 保存できませんでした：'+(error?.message||error)+
           '。入力内容は残っています。Supabase設定を確認してください。';
