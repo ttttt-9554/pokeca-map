@@ -680,6 +680,55 @@ html[data-theme="dark"] .lp-dev-recheck { background: #172337; color: #eef4ff; b
 html[data-theme="dark"] .lp-dev-recheck a { color: #9ac2ff; }
 
 
+/* v21.42: Failed-event manual editor for iPhone PWA. */
+.lp-dev-manual-panel{color:var(--app-text,#172033)}
+.lp-dev-manual-panel h3{margin:0 0 10px;font-size:17px}
+.lp-dev-manual-panel>p{font-size:12px;line-height:1.6}
+.lp-dev-manual-panel #lpManualStatus{margin:10px 0;font-weight:700}
+.lp-manual-row{display:flex;align-items:flex-start;justify-content:space-between;
+  gap:10px;padding:12px 0;border-top:1px solid var(--app-border,#cbd5e1)}
+.lp-manual-row>div{flex:1;min-width:0}
+.lp-manual-row strong{display:block;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.lp-manual-row p{margin:6px 0;font-size:12px;line-height:1.6;color:var(--app-muted,#64748b)}
+.lp-manual-row a{font-size:12px;display:inline-block;margin-top:5px}
+.lp-manual-row button{flex-shrink:0;min-height:44px;padding:9px 11px;font-size:12px;
+  border:1px solid var(--app-border,#cbd5e1)}
+.lp-manual-row .lp-manual-ready{color:#047857;font-weight:700}
+.lp-manual-export-buttons{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+.lp-manual-export-buttons button{flex:1 1 130px;min-height:44px;font-size:13px}
+#lpManualExport{padding:12px;margin:12px 0 0;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:12px;background:var(--app-surface2,#f1f5f9)}
+#lpManualExport[hidden]{display:none!important}
+#lpManualExport p{font-size:12px;line-height:1.6}
+#lpManualExport a{display:inline-block;margin:9px 0 0;font-size:13px}
+#lpManualEditor{box-sizing:border-box;width:min(94vw,600px);max-width:600px;
+  max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 30px);
+  padding:18px;overflow-y:auto;overscroll-behavior:contain;
+  border:1px solid var(--app-border,#cbd5e1);border-radius:15px;
+  background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+#lpManualEditor::backdrop{background:#07111ecc}
+#lpManualEditor h3{margin:0 0 12px;font-size:17px}
+#lpManualEditor p{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+#lpManualEditor form>label{display:block;font-size:13px;font-weight:700;margin:13px 0;line-height:1.6}
+#lpManualEditor textarea,#lpManualEditor select{display:block;width:100%;margin-top:7px;
+  font-size:16px;min-height:48px;background:var(--app-surface2,#f8fafc);
+  color:var(--app-text,#172033);border:1px solid var(--app-border,#cbd5e1)}
+#lpManualEditor textarea{min-height:110px}
+#lpManualEditor .lp-manual-consent{display:flex;align-items:flex-start;gap:10px}
+#lpManualEditor .lp-manual-consent input{flex-shrink:0;width:22px;height:22px;
+  margin:2px 0;accent-color:#2563eb}
+html[data-theme="dark"] .lp-manual-row .lp-manual-ready{color:#86efac!important}
+html[data-theme="dark"] #lpManualExport{background:#263a55!important}
+html[data-theme="dark"] #lpManualEditor{background:#172337!important;color:#edf4ff!important}
+html[data-theme="dark"] #lpManualEditor textarea,
+html[data-theme="dark"] #lpManualEditor select{background:#263a55!important;
+  color:#f4f8ff!important;border-color:#7085a2!important}
+html[data-theme="dark"] #lpManualEditor :is(h3,label,strong){color:#edf4ff!important}
+@media (max-width:390px){
+  .lp-manual-row{flex-direction:column}
+  .lp-manual-row button{align-self:flex-end}
+}
+
 /* v21.41 開発者専用：手動再確認の安全な失敗理由別集計 */
 .lp-dev-failure-report{margin:16px 0;padding:14px;border:1px solid var(--app-border,#cbd5e1);
   border-radius:12px;background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033)}
