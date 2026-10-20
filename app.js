@@ -2402,6 +2402,9 @@
   }
 
   function lotteryState(item, now = Date.now()) {
+    // Manual-confirmed unavailable pages are never labelled "受付中".
+    // Keep them in the "すべて" list and preserve saved lottery history.
+    if (item.manual_page_unavailable === true) return 'unavailable';
     const end = lotteryDate(item.application_end_at);
     const start = lotteryDate(item.application_start_at);
     if (Number.isFinite(end) && now > end) return 'closed';
@@ -2541,7 +2544,7 @@
 
   function lotteryStatusText(state, item) {
     if (state === 'unknown') return Number.isFinite(lotteryDate(item.application_end_at)) ? '受付状況未確認' : '応募期限未確認';
-    return ({open:'受付中',upcoming:'開始前',closed:'受付終了'})[state] || '応募状況未確認';
+    return ({open:'受付中',upcoming:'開始前',closed:'受付終了',unavailable:'ページなし（手動確認）'})[state] || '応募状況未確認';
   }
 
   function lotteryCategoryText(value) {
@@ -2578,13 +2581,14 @@
         <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
         <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small></li>`).join('')}</ul>
       </details>` : `<p class="lp-store-muted">対象店舗：未確認</p>`;
-    return `<article class="lp-card ${state === 'closed' ? 'lp-closed' : ''}">
+    return `<article class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}">
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
         ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
         ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
+      ${state === 'unavailable' ? '<p class="lp-missing-notice">⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。</p>' : ''}
       ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
@@ -2619,7 +2623,7 @@
       }
       return true;
     });
-    const priority = {open:0,upcoming:1,unknown:2,closed:3};
+    const priority = {open:0,upcoming:1,unknown:2,closed:3,unavailable:4};
     visible.sort((a,b) => {
       const sa = lotteryState(a,now), sb = lotteryState(b,now);
       if (sa !== sb) return priority[sa] - priority[sb];
