@@ -4858,14 +4858,18 @@
   }
 
 
-  // v21.48: Developer UI for exact-URL store/prefecture verification.
-  // Store and prefecture can be saved independently; original source
-  // fields remain intact, and multiple-store records cannot be flattened.
-  let lpLocationListLoaded=false;
+  // v21.52: An official page confirmed removed is also a resolution for
+  // an unknown region, recorded in the existing event status override table.
+  let lpLocationListLoaded=false, lpLocationPageEditing='';
 
   function lpLocationBaseList(){
     return lotteryBaseItems.filter(item=>item&&safeLotteryUrl(item.url)&&
       (!Array.isArray(item.stores)||item.stores.length<=1));
+  }
+
+  function lpLocationPageMissing(base){
+    const shown=lotteryItems.find(item=>item.url===base.url)||base;
+    return shown.manual_page_unavailable===true;
   }
 
   function lpLocationInitUI(){
@@ -4878,6 +4882,7 @@
     panel.innerHTML='<h3>📍 店舗・地域未確認の手動修正</h3>'+
       '<p class="hint">店舗名・都道府県は別々に確認・保存できます。'+
       '正式名称や地域は公式イベントページ・公式案内で確認してください。'+
+      '地域不明のイベントの公式ページが削除された場合は「ページなしを記録」を利用できます。'+
       '「保存して反映」で全ユーザーの抽選一覧に適用し、自動取得では上書きされません。'+
       '複数店舗イベントは誤った一括上書きを防ぐため対象外です。</p>'+
       '<button type="button" id="lpLocationLoad">店舗・地域未確認を読み込む</button>'+
@@ -4927,6 +4932,30 @@
       '</div><p id="lpLocationEditorStatus" role="status" aria-live="polite" class="hint"></p>'+
       '</form>';
     document.body.append(dialog);
+    const pageDialog=document.createElement('dialog');
+    pageDialog.id='lpLocationPageDialog';
+    pageDialog.setAttribute('aria-label','地域未確認イベントのページ状態を記録');
+    pageDialog.innerHTML='<h3 tabindex="-1" id="lpLocationPageTitle">地域未確認：ページ状態を確認</h3>'+
+      '<p id="lpLocationPageDescription" class="hint"></p>'+
+      '<form id="lpLocationPageForm">'+
+      '<label>LivePocket公式ページの確認結果<select name="reason" required>'+
+      '<option value="" disabled selected>確認結果を選択してください</option>'+
+      '<option value="not_found_404_410">404／410（ページが存在しない）</option>'+
+      '<option value="official_removed_notice">公式に削除・非公開の案内あり</option>'+
+      '<option value="clear">ページが復旧した（ページなしの記録を解除）</option>'+
+      '</select></label>'+
+      '<p class="hint">通信エラー・ログイン画面・アクセス制限だけの場合は削除済みと確定しないでください。'+
+      'ページなしを保存しても抽選データは削除されず、全ユーザーに状態だけ反映します。</p>'+
+      '<label class="lp-location-check"><input type="checkbox" name="confirmed" required>'+
+      '<span>対象の公式URLを確認し、選択した結果であることを確認しました</span></label>'+
+      '<div class="lp-manual-export-buttons">'+
+      '<button type="submit" class="primary">ページ状態を保存して反映</button>'+
+      '<button type="button" id="lpLocationPageClose">閉じる</button></div>'+
+      '<p id="lpLocationPageEditorStatus" class="hint" role="status" aria-live="polite"></p>'+
+      '</form>';
+    document.body.append(pageDialog);
+    $('lpLocationPageClose').addEventListener('click',()=>pageDialog.close());
+    $('lpLocationPageForm').addEventListener('submit',lpLocationPageSubmit);
     $('lpLocationLoad').addEventListener('click',lpLocationLoad);
     $('lpLocationQuery').addEventListener('input',e=>{
       lpLocationSearch=e.target.value.trim().toLocaleLowerCase('ja-JP');
@@ -4938,6 +4967,8 @@
     panel.addEventListener('click',async e=>{
       const edit=e.target.closest('button[data-lp-location-edit]');
       if(edit&&panel.contains(edit)){lpLocationOpen(edit.dataset.lpLocationEdit);return;}
+      const page=e.target.closest('button[data-lp-location-page]');
+      if(page&&panel.contains(page)){lpLocationPageOpen(page.dataset.lpLocationPage);return;}
       const more=e.target.closest('button[data-lp-location-more]');
       if(more&&panel.contains(more)){lpLocationLimit+=60;lpLocationRender();return;}
       const remove=e.target.closest('button[data-lp-location-remove]');
@@ -4966,9 +4997,10 @@
     button.disabled=true;button.textContent='読込中…';
     status.textContent='🔄 抽選情報と店舗・地域の修正記録を取得しています…';
     try{
-      await Promise.all([loadLotteryEvents(true),lpLocationRefresh(true)]);
+      await Promise.all([loadLotteryEvents(true),lpLocationRefresh(true),lpCloudRefresh(true)]);
       if(!lotteryBaseItems.length)throw Error('公開抽選一覧がまだ取得できていません');
       if(!lpLocationReady)throw Error(lpLocationError||'修正データの接続を確認できません');
+      if(!lpCloudReady)throw Error(lpCloudError||'ページ状態の保存先に接続できません');
       lpLocationListLoaded=true;
       $('lpLocationFilters').hidden=false;
       lpLocationRender();
@@ -4992,13 +5024,17 @@
     const now=Date.now();
     const active=bases.filter(base=>!lpApplicationExpired(base.url,base.application_end_at,now));
     const incomplete=active.filter(base=>
-      !lotteryStoreEntries(base).length||!lotteryPrefectures(base).length);
-    // Existing confirmed corrections remain available in the folded saved list.
-    const byUrl=new Map([...incomplete,...bases.filter(x=>lpLocationOverrides.has(x.url))]
-      .map(x=>[x.url,x]));
+      (!lotteryStoreEntries(base).length||!lotteryPrefectures(base).length) &&
+      !lpLocationPageMissing(base));
+    // A confirmed removed page resolves an unknown region; keep it accessible
+    // in the folded handled list, including after the application deadline.
+    const pageResolved=bases.filter(base=>
+      !lotteryPrefectures(base).length&&lpLocationPageMissing(base));
+    const byUrl=new Map([...incomplete,...pageResolved,
+      ...bases.filter(x=>lpLocationOverrides.has(x.url))].map(x=>[x.url,x]));
     const all=[...byUrl.values()];
-    const stored=all.filter(base=>lpLocationOverrides.has(base.url));
-    const missing=all.filter(base=>!lpLocationOverrides.has(base.url));
+    const stored=all.filter(base=>lpLocationOverrides.has(base.url)||lpLocationPageMissing(base));
+    const missing=all.filter(base=>!lpLocationOverrides.has(base.url)&&!lpLocationPageMissing(base));
     const search=base=>{
       if(!lpLocationSearch)return true;
       return [base.url,base.event_title,base.product_name,base.store_name,
@@ -5016,10 +5052,11 @@
     $('lpLocationStatus').textContent='未対応 '+missing.length+'件 ／ 店舗名未確認 '+
       missing.filter(x=>!lotteryStoreEntries(x).length).length+
       '件 ／ 都道府県未確認 '+missing.filter(x=>!lotteryPrefectures(x).length).length+
-      '件 ／ 保存済み '+stored.length+'件'+
+      '件 ／ 対応済み '+stored.length+'件（ページなし '+stored.filter(lpLocationPageMissing).length+'件）'+
       (unsafe?' ／ 複数店舗・地域未確認（編集対象外） '+unsafe+'件':'');
     function card(base,done){
       const saved=lpLocationOverrides.get(base.url);
+      const pageMissing=lpLocationPageMissing(base);
       const item=lotteryItems.find(x=>x.url===base.url)||base;
       const oldStores=lotteryStoreEntries(base);
       const oldAreas=lotteryPrefectures(base);
@@ -5034,11 +5071,14 @@
           escape(oldAreas.join('・')||'都道府県未確認')+'</p>'+
         (saved?'<p class="lp-location-stored">✅ 手動修正済み'+
           (saved.store_name?'・店舗':'')+(saved.prefecture?'・地域':'')+'</p>':'')+
+        (pageMissing?'<p class="lp-location-stored">🚫 ページなし（保存済み）</p>':'')+
         '<a href="'+escape(base.url)+'" target="_blank" rel="noopener noreferrer">公式ページ ↗</a>'+
         '</div><div class="lp-location-actions">'+
           '<button type="button" data-lp-location-edit="'+escape(base.url)+'">'+
             (done?'再編集':'店舗・地域を編集')+'</button>'+
-          (done?'<button type="button" data-lp-location-remove="'+
+          (!oldAreas.length?'<button type="button" data-lp-location-page="'+escape(base.url)+'">'+
+            (pageMissing?'ページ状態を再編集':'ページなしを記録')+'</button>':'')+
+          (done&&saved?'<button type="button" data-lp-location-remove="'+
             escape(base.url)+'">修正を解除</button>':'')+
         '</div></div>';
     }
@@ -5052,9 +5092,9 @@
     const expanded=saved.querySelector('details.lp-location-saved-fold')?.open===true;
     const matching=stored.filter(search);
     saved.innerHTML='<details class="lp-location-saved-fold">'+
-      '<summary>✅ 店舗・地域 修正済み <span>'+stored.length+'件</span></summary>'+
+      '<summary>✅ 店舗・地域 対応済み・ページなし <span>'+stored.length+'件</span></summary>'+
       '<div class="lp-location-saved-content">'+
-      '<p class="hint">保存済みは未対応一覧から移動しています。再編集・解除もできます。</p>'+
+      '<p class="hint">保存済みとページなしの記録を表示します。ページ復旧の確認や再編集もここからできます。</p>'+
       (matching.length?matching.map(x=>card(x,true)).join(''):
         '<p class="hint">表示する保存済みデータはありません。</p>')+
       '</div></details>';
@@ -5084,6 +5124,75 @@
     $('lpLocationEditorStatus').textContent='';
     $('lpLocationDialog').showModal();
     $('lpLocationDialogTitle').focus({preventScroll:true});
+  }
+
+  function lpLocationPageOpen(url){
+    if(!isDeveloper()||!lpLocationListLoaded||!safeLotteryUrl(url))return;
+    const base=lpLocationBaseList().find(item=>item.url===url);
+    if(!base||lotteryPrefectures(base).length){
+      $('lpLocationFeedback').textContent='⚠ この操作は地域未確認イベントのみ利用できます。';return;
+    }
+    if(!lpCloudReady){
+      $('lpLocationFeedback').textContent='⚠ ページ状態の保存先に接続できません：'+
+        (lpCloudError||'再読み込みしてください');return;
+    }
+    lpLocationPageEditing=url;
+    const cloud=lpCloudOverrides.get(url);
+    const form=$('lpLocationPageForm');
+    form.reset();
+    const existingReason=cloud?.resolution==='unavailable'?cloud.reason:
+      (base.manual_page_unavailable?base.manual_page_unavailable_reason:'');
+    if(Object.hasOwn(LP_MISSING_EVIDENCE,existingReason))
+      form.elements.namedItem('reason').value=existingReason;
+    $('lpLocationPageDescription').textContent='対象：'+url+
+      ' ／ 元の地域は未確認。ページなしを登録すると地域未対応の一覧から外れます。'+
+      (lpLocationPageMissing(base)?' 現在ページなしと記録されています。':'');
+    $('lpLocationPageEditorStatus').textContent='';
+    $('lpLocationPageDialog').showModal();
+    $('lpLocationPageTitle').focus({preventScroll:true});
+  }
+
+  async function lpLocationPageSubmit(event){
+    event.preventDefault();
+    if(!isDeveloper()||lpLocationBusy||!lpCloudReady)return;
+    const form=event.currentTarget,values=new FormData(form);
+    const reason=String(values.get('reason')||'');
+    const checked=values.get('confirmed')==='on';
+    const message=$('lpLocationPageEditorStatus');
+    if((!Object.hasOwn(LP_MISSING_EVIDENCE,reason)&&reason!=='clear')||!checked){
+      message.textContent='⚠ 公式ページの確認結果と確認チェックを選択してください。';return;
+    }
+    const url=lpLocationPageEditing;
+    const base=lpLocationBaseList().find(item=>item.url===url);
+    if(!base||lotteryPrefectures(base).length){
+      message.textContent='⚠ 対象が地域未確認イベントではありません。';return;
+    }
+    if(reason==='clear'&&!lpLocationPageMissing(base)){
+      message.textContent='⚠ ページなしの記録がありません。';return;
+    }
+    const existing=lpCloudOverrides.get(url);
+    if(existing?.resolution==='title' &&
+       !window.confirm('既存のイベント名の手動修正をページ状態の記録に置き換えます。続けますか？'))return;
+    lpLocationBusy=true;
+    const button=form.querySelector('button[type=submit]');
+    button.disabled=true;button.textContent='保存中…';
+    message.textContent='🔄 ページ状態をSupabaseへ保存しています…';
+    try{
+      const unavailable=reason!=='clear';
+      await lpCloudSave({event_url:url,resolution:unavailable?'unavailable':'active',
+        event_title:null,reason:unavailable?reason:null,
+        evidence:unavailable?LP_MISSING_EVIDENCE[reason]:'official_page_reopened'});
+      $('lpLocationPageDialog').close();
+      lpLocationRender();
+      $('lpLocationFeedback').textContent=unavailable
+        ? '✅ ページなしを保存しました。地域未対応から対応済みに移動しました。'
+        : '✅ ページ復旧を保存しました。地域が未確認なら未対応に戻ります。';
+    }catch(error){
+      message.textContent='⚠ 保存できませんでした：'+(error?.message||error)+
+        '。入力内容は保持しています。';
+    }finally{
+      lpLocationBusy=false;button.disabled=false;button.textContent='ページ状態を保存して反映';
+    }
   }
 
   async function lpLocationSubmit(event){
