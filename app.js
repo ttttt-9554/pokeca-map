@@ -2796,6 +2796,34 @@
     </article>`;
   }
 
+  // v21.54: Newest means the first URL registration time (not a repost).
+  // Historical URLs without first_detected_at fall back to Discord post time.
+  function lotteryFirstSeenTime(item) {
+    const first = lotteryDate(item.first_detected_at);
+    if (Number.isFinite(first)) return first;
+    const posted = lotteryDate(item.discord_posted_at);
+    return Number.isFinite(posted) ? posted : 0;
+  }
+
+  function lotterySortCards(cards, order = 'newest', now = Date.now()) {
+    const priority = {open:0,upcoming:1,unknown:2,closed:3,unavailable:4};
+    cards.sort((a,b) => {
+      if (order === 'status') {
+        // Keep the original status/deadline sort as an optional view.
+        const sa=lotteryState(a,now), sb=lotteryState(b,now);
+        if(sa!==sb) return priority[sa]-priority[sb];
+        if(sa==='open'||sa==='upcoming'){
+          const ea=lotteryDate(a.application_end_at), eb=lotteryDate(b.application_end_at);
+          if(Number.isFinite(ea)&&Number.isFinite(eb)&&ea!==eb)return ea-eb;
+        }
+      }
+      const newest=lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a);
+      if(newest)return newest;
+      return String(a.url||'').localeCompare(String(b.url||''));
+    });
+    return cards;
+  }
+
   function renderLottery() {
     if (!$('lpCards')) return;
     const now = Date.now();
@@ -2823,16 +2851,7 @@
       }
       return true;
     });
-    const priority = {open:0,upcoming:1,unknown:2,closed:3,unavailable:4};
-    visible.sort((a,b) => {
-      const sa = lotteryState(a,now), sb = lotteryState(b,now);
-      if (sa !== sb) return priority[sa] - priority[sb];
-      if (sa === 'open' || sa === 'upcoming') {
-        const ea = lotteryDate(a.application_end_at), eb = lotteryDate(b.application_end_at);
-        if (Number.isFinite(ea) && Number.isFinite(eb) && ea !== eb) return ea - eb;
-      }
-      return (lotteryDate(b.discord_posted_at) || 0) - (lotteryDate(a.discord_posted_at) || 0);
-    });
+    lotterySortCards(visible, $('lpSort').value, now);
     const pokemonCount = lotteryItems.filter(x => lotteryGenre(x) === 'pokemon').length;
     const knownCount = lotteryItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
     const openCount = lotteryItems.filter(x => lotteryState(x,now) === 'open').length;
@@ -2870,7 +2889,8 @@
     // 初期表示はジャンル全件・日時確認済みの受付中のみ。
     $('lpGenre').value = 'all';
     $('lpStatus').value = 'open';
-    for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpWishlistOnly']) {
+    $('lpSort').value = 'newest';
+    for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpSort','lpWishlistOnly']) {
       $(id).addEventListener(id === 'lpQuery' ? 'input' : 'change', () => {
         lotteryVisibleLimit = LP_PAGE_SIZE;
         renderLottery();
@@ -2884,6 +2904,7 @@
       $('lpPrefecture').value = 'all';
       $('lpStatus').value = 'open';
       $('lpType').value = 'all';
+      $('lpSort').value = 'newest';
       $('lpWishlistOnly').checked = false;
       lotteryVisibleLimit = LP_PAGE_SIZE;
       renderLottery();
