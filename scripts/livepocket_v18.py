@@ -37,14 +37,13 @@ def historical_class(raw, public, url, now=None):
         raise ValueError('Unknown event URL')
     state = raw.get('collector_state', {})
     v14state = state.get('v14', {})
+    pub = pindex[url]
+    if application_closed(pub, now):
+        return 'application_closed', ''
     if url in v14state.get('pending_new_urls', []):
         return 'new_pending', ''
     if url in v14state.get('new_url_checks', {}):
         return 'new_priority', ''
-    pub = pindex[url]
-    deadline = v11.parse_datetime(pub.get('application_end_at'))
-    if deadline and deadline.astimezone(timezone.utc) <= now:
-        return 'application_closed', ''
     record = state.get('v13', {}).get('browser_checks', {}).get(url, {})
     if not isinstance(record, dict):
         return 'invalid_check_record', ''
@@ -67,6 +66,12 @@ def historical_class(raw, public, url, now=None):
             v11.iso(next_at))
 
 
+def application_closed(event, now):
+    """End-date known and application already closed (inclusive boundary)."""
+    deadline = v11.parse_datetime(event.get('application_end_at'))
+    return bool(deadline and deadline.astimezone(timezone.utc) <= v14._utc(now))
+
+
 def select(raw, public, now, *, new_limit=15, background_limit=0, retry_days=7):
     """Drop-in v14 selector. Unchecked historical URLs ALWAYS precede rechecks."""
     now = v14._utc(now)
@@ -74,7 +79,8 @@ def select(raw, public, now, *, new_limit=15, background_limit=0, retry_days=7):
     state = raw.setdefault('collector_state', {}).setdefault('v14', {})
     if v14._cooldown_active(state, now):
         return [], [], True
-    pending = [url for url in state.get('pending_new_urls', []) if url in rindex]
+    pending = [url for url in state.get('pending_new_urls', [])
+               if url in rindex and not application_closed(pindex[url], now)]
     pending.sort(key=lambda u: (rindex[u].get('discord_posted_at') or '', u), reverse=True)
     urgent = pending[:max(0, new_limit)]
     if background_limit <= 0:
@@ -87,8 +93,7 @@ def select(raw, public, now, *, new_limit=15, background_limit=0, retry_days=7):
         if url in history:
             continue  # New events have their own bounded 6-hour retry queue.
         event = pindex[url]
-        deadline = v11.parse_datetime(event.get('application_end_at'))
-        if deadline and deadline.astimezone(timezone.utc) <= now:
+        if application_closed(event, now):
             continue
         entry = raw.get('collector_state', {}).get('v13', {}).get('browser_checks', {}).get(url, {})
         if not isinstance(entry, dict) or entry.get('status') == 'browser_redirected':
