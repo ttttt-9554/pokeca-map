@@ -12424,7 +12424,7 @@
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/588-t": {
-          "checked_at": "2026-10-20T09:31:25.954157+00:00",
+          "checked_at": "2026-10-20T15:41:21.267070+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/a2wte": {
@@ -12830,7 +12830,7 @@
         "https://livepocket.jp/e/588-t": {
           "detected_at": "2026-10-20T03:30:57.058812+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-20T09:31:25.954157+00:00"
+          "checked_at": "2026-10-20T15:41:21.267070+00:00"
         },
         "https://livepocket.jp/e/a2wte": {
           "detected_at": "2026-10-20T04:30:58.798364+00:00",
@@ -13228,8 +13228,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/588-t": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-20T09:31:25.954157+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-20T15:41:21.267070+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/a2wte": {
@@ -16027,7 +16027,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-20T09:31:25.954157+00:00",
+          "checked_at": "2026-10-20T15:41:21.267070+00:00",
           "title_observed": "ワンピースカードゲーム『ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -17603,7 +17603,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/588-t": {
-          "checked_at": "2026-10-20T09:31:25.954157+00:00",
+          "checked_at": "2026-10-20T15:41:21.267070+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
