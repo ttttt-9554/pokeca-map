@@ -2790,6 +2790,12 @@
       if (document.visibilityState !== 'visible') return;
       if ($('lotteryView').classList.contains('active')) renderLottery();
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
+      if ($('lotteryView').classList.contains('active') ||
+          $('lotteryManageView').classList.contains('active') ||
+          (isDeveloper() && $('devView').classList.contains('active'))) {
+        // Other users pick up saved event corrections without reloading the app.
+        lpCloudRefresh();
+      }
     }, 60000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
