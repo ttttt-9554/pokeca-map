@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-20T08:05:55.991848+00:00",
-  "unique_livepocket_urls": 410,
+  "collected_at": "2026-10-20T09:00:59.245734+00:00",
+  "unique_livepocket_urls": 411,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5248,6 +5248,8 @@
           "prefecture": "神奈川県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム エクストラブースター 『ONE PIECE Heroines Edition vol.2』 抽選予約",
       "first_detected_at": "2026-10-20T03:00:29.377383+00:00"
     },
     {
@@ -5372,7 +5374,29 @@
         }
       ],
       "first_detected_at": "2026-10-20T08:05:57.207760+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/m30dt9",
+      "store_name": "古本市場市川鬼高店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-20T09:00:11.829000+00:00",
+      "stores": [
+        {
+          "name": "古本市場市川鬼高店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
+      "application_end_at": "2026-10-22T22:00:00+09:00",
+      "application_start_at": "2026-10-20T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
+      "first_detected_at": "2026-10-20T09:01:00.332205+00:00"
     }
   ],
-  "updated_at": "2026-10-20T08:50:58.360268+00:00"
+  "updated_at": "2026-10-20T09:01:25.604394+00:00"
 }
