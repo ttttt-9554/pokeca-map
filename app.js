@@ -2509,6 +2509,9 @@
       if(!override)return base;
       const item={...base};
       if(override.resolution==='title' && lpManualValidTitle(override.event_title)){
+        // A validated title also supersedes a historical unavailable CSV flag.
+        item.manual_page_unavailable=false;
+        delete item.manual_page_unavailable_reason;
         item.event_title=override.event_title;
         item.official_event_title=override.event_title;
         item.event_title_provisional=false;
