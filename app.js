@@ -4428,7 +4428,7 @@
       '<input type="checkbox" name="checked" required>'+
       '<span>このイベントURLを実際に確認し、選択した結果であることを確認しました</span></label>'+
       '<div class="lp-manual-export-buttons">'+
-      '<button type="submit" class="primary">端末に記録を保存</button>'+
+      '<button type="submit" class="primary">保存して反映</button>'+
       '<button type="button" id="lpMissingClose">閉じる</button>'+
       '<button type="button" id="lpMissingRemoveDraft">下書きを削除</button></div>'+
       '<p id="lpMissingEditorStatus" class="hint" role="status" aria-live="polite"></p></form>';
@@ -4452,22 +4452,52 @@
       }
       dialog.close();lpManualRender();
     });
-    $('lpMissingForm').addEventListener('submit',e=>{
-      e.preventDefault();
-      if(!isDeveloper() || !lpManualValidUrl(lpMissingEditing))return;
-      const data=new FormData(e.currentTarget),reason=String(data.get('reason')||'');
-      if(!Object.hasOwn(LP_MISSING_LABELS,reason)||data.get('checked')!=='on'){
+    $('lpMissingForm').addEventListener('submit',async event=>{
+      event.preventDefault();
+      if(!isDeveloper()||!lpManualValidUrl(lpMissingEditing))return;
+      const form=event.currentTarget,fd=new FormData(form);
+      const reason=String(fd.get('reason')||'');
+      if(!Object.hasOwn(LP_MISSING_LABELS,reason)||fd.get('checked')!=='on'){
         $('lpMissingEditorStatus').textContent='ページの確認結果と確認チェックを選択してください。';
         return;
       }
-      const old=lpMissingDrafts[lpMissingEditing];
-      lpMissingDrafts[lpMissingEditing]={reason};
-      try{lpMissingSave();}catch(error){
-        if(old)lpMissingDrafts[lpMissingEditing]=old;
-        else delete lpMissingDrafts[lpMissingEditing];
-        $('lpMissingEditorStatus').textContent=error.message;return;
+      const url=lpMissingEditing,button=form.querySelector('button[type=submit]');
+      button.disabled=true;button.textContent='保存中…';
+      $('lpMissingEditorStatus').textContent='🔄 確認結果を保存しています…';
+      try{
+        if(reason==='pending') {
+          // Transient failures remain private on this device, not public.
+          const previous=lpMissingDrafts[url];
+          lpMissingDrafts[url]={reason:'pending'};
+          try{lpMissingSave();}catch(error){
+            if(previous)lpMissingDrafts[url]=previous;
+            else delete lpMissingDrafts[url];
+            throw error;
+          }
+        }else{
+          const isUnavailable=Object.hasOwn(LP_MISSING_EVIDENCE,reason);
+          await lpCloudSave({
+            event_url:url,
+            resolution:isUnavailable?'unavailable':'active',
+            event_title:null,
+            reason:isUnavailable?reason:null,
+            evidence:isUnavailable?LP_MISSING_EVIDENCE[reason]:'official_page_reopened'
+          });
+          // Cloud-confirmed rows must not linger as old local CSV drafts.
+          delete lpMissingDrafts[url];
+          try{lpMissingSave();}catch(ignore){}
+        }
+        $('lpMissingDialog').close();
+        lpManualRender();
+        $('lpMissingStatus').textContent=reason==='pending'
+          ? '✅ 判断保留として端末内に保存しました。エラー一覧から移動しました（全ユーザーには非公開）。'
+          : '✅ ページ状態をSupabaseに保存しました。全ユーザーの一覧に反映されます。';
+      }catch(error){
+        $('lpMissingEditorStatus').textContent='⚠ 保存できませんでした：'+
+          (error?.message||error)+'。入力内容はそのまま残っています。';
+      }finally{
+        button.disabled=false;button.textContent='保存して反映';
       }
-      dialog.close();lpManualRender();
     });
     $('lpMissingCopy').addEventListener('click',()=>lpMissingExportCsv('copy'));
     $('lpMissingDownload').addEventListener('click',()=>lpMissingExportCsv('download'));
@@ -4536,7 +4566,10 @@
       (original?' 現在「'+(LP_MISSING_LABELS[original.reason]||'ページなし')+'」で登録されています。':'');
     const form=$('lpMissingForm');
     form.reset();
-    form.elements.namedItem('reason').value=draft?.reason||'';
+    const cloud=lpCloudOverrides.get(url);
+    form.elements.namedItem('reason').value=draft?.reason||
+      (cloud?.resolution==='unavailable'?cloud.reason:
+       cloud?.resolution==='active'?'clear':'');
     form.elements.namedItem('checked').checked=false;
     $('lpMissingRemoveDraft').hidden=!draft;
     $('lpMissingEditorStatus').textContent='';
