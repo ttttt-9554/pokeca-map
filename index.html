@@ -897,11 +897,20 @@ nav[aria-label="メインメニュー"] {
 
     <section id="historyView" class="view">
 
-      <h2>
-        発見履歴
-      </h2>
+      <h2>📅 自分の発見履歴</h2>
+      <p class="hint">自分が共有した発見情報と、この端末だけに保存した記録を確認・編集できます。</p>
 
-      <div id="historyList"></div>
+      <section aria-label="自分の共有投稿">
+        <h3>👥 自分の共有投稿</h3>
+        <p class="hint">Discordで共有した投稿です。編集・削除はほかのユーザーにも反映されます。</p>
+        <button type="button" id="historySharedRefresh">共有投稿を更新</button>
+        <div id="mySharedList"></div>
+      </section>
+
+      <section aria-label="端末内の発見履歴">
+        <h3>📱 端末内の発見記録</h3>
+        <div id="historyList"></div>
+      </section>
 
     </section>
 
@@ -946,8 +955,6 @@ nav[aria-label="メインメニュー"] {
           <div id="friendPresenceList" aria-live="polite"></div>
         </div>
       </section>
-      <h3>自分の共有投稿</h3>
-      <div id="mySharedList"></div>
       <h3>端末内データのバックアップ</h3>
 
       <button
@@ -1195,7 +1202,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_54-lottery-newest-sort"></script>
+  <script src="app.js?v=20261021-v21_56-history-shared-scroll"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261020-v21_55"></script>
 
 <script>
