@@ -1031,3 +1031,26 @@ html[data-theme="dark"] .lp-dev-result-cell{background:#172337;border-color:#526
 html[data-theme="dark"] .lp-dev-result-cell span{color:#c9d7eb}
 html[data-theme="dark"] .lp-dev-result-cell strong{color:#f3f7ff}
 @media (max-width:360px){.lp-dev-results-grid{grid-template-columns:1fr}}
+
+/* v21.49: Fix map/history card contrast in dark mode */
+html[data-theme="dark"] #mapList .entry,
+html[data-theme="dark"] #historyList .entry,
+html[data-theme="dark"] #mySharedList .entry{
+  background:#172337!important;color:#eaf1fc!important;
+  border-color:#526681!important;box-shadow:none
+}
+html[data-theme="dark"] #mapList .entry :is(h3,strong),
+html[data-theme="dark"] #historyList .entry :is(h3,strong),
+html[data-theme="dark"] #mySharedList .entry :is(h3,strong){
+  color:#f4f8ff!important
+}
+html[data-theme="dark"] #mapList .entry :is(p,small),
+html[data-theme="dark"] #historyList .entry :is(p,small),
+html[data-theme="dark"] #mySharedList .entry :is(p,small){
+  color:#cbd8eb!important
+}
+html[data-theme="dark"] #mapList .entry .share-tag,
+html[data-theme="dark"] #historyList .entry .share-tag,
+html[data-theme="dark"] #mySharedList .entry .share-tag{
+  color:#9dc4ff!important
+}
