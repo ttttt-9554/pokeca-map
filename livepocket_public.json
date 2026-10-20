@@ -5307,43 +5307,39 @@
       "url": "https://livepocket.jp/e/7vpd4",
       "store_name": "ふるいちイオンモール座間店",
       "prefecture": "神奈川県",
+      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+      "application_start_at": "2026-10-20T15:00:00+09:00",
+      "application_end_at": "2026-10-20T21:00:00+09:00",
       "discord_posted_at": "2026-10-20T06:30:08.906000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール座間店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
-      "application_end_at": "2026-10-20T21:00:00+09:00",
-      "application_start_at": "2026-10-20T15:00:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
       "first_detected_at": "2026-10-20T06:35:58.433827+00:00"
     },
     {
       "url": "https://livepocket.jp/e/m3kf4",
       "store_name": "ふるいちイオンモール座間店",
       "prefecture": "神奈川県",
+      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「ストームエメラルダ」",
+      "application_start_at": "2026-10-20T15:00:00+09:00",
+      "application_end_at": "2026-10-20T21:00:00+09:00",
       "discord_posted_at": "2026-10-20T06:30:08.906000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール座間店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「ストームエメラルダ」",
-      "application_end_at": "2026-10-20T21:00:00+09:00",
-      "application_start_at": "2026-10-20T15:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「ストームエメラルダ」",
       "first_detected_at": "2026-10-20T06:35:58.433827+00:00"
     }
   ],
-  "updated_at": "2026-10-20T06:36:24.915273+00:00"
+  "updated_at": "2026-10-20T06:46:01.687493+00:00"
 }
