@@ -2799,6 +2799,10 @@
       if ($('lotteryView').classList.contains('active')) renderLottery();
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('lotteryView').classList.contains('active') ||
+          $('lotteryManageView').classList.contains('active')) {
+        lpCloudRefresh();
+      }
+      if ($('lotteryView').classList.contains('active') ||
           $('lotteryManageView').classList.contains('active') ||
           (isDeveloper() && $('devView').classList.contains('active'))) {
         // Other users pick up saved event corrections without reloading the app.
@@ -4130,6 +4134,8 @@
       '<p id="lpManualStatus" class="hint" role="status" aria-live="polite">未読み込み</p>'+
       '<div id="lpManualList"></div>'+ 
       '<div id="lpManualResolved" class="lp-manual-resolved"></div>'+
+      '<details id="lpManualExportLegacy" class="lp-manual-legacy">'+
+      '<summary>旧方式：CSVバックアップ（通常は操作不要）</summary>'+
       '<div id="lpManualExport" hidden>'+
       '<p class="hint"><strong>修正CSVの確定</strong>：下書きに追加したものを、既存の承認済みイベント名を残して統合します。'+
       'GitHubへ反映するまでは公開データは変わりません。</p>'+
@@ -4138,7 +4144,7 @@
       '<button type="button" id="lpManualDownload">CSVを保存</button></div>'+
       '<a href="'+LP_MANUAL_GITHUB_EDITOR+'" target="_blank" rel="noopener noreferrer">GitHubでCSVを編集 ↗</a>'+
       '<p class="hint">GitHubで <code>livepocket_verified_titles.csv</code> の内容を丸ごと置き換え、Commit changesを押してください。'+
-      '次の収集処理で反映されます。GitHubの権限が必要です。</p></div>';
+      '次の収集処理で反映されます。GitHubの権限が必要です。</p></div></details>';
     before.after(section);
     const dialog=document.createElement('dialog');
     dialog.id='lpManualEditor';
@@ -4485,6 +4491,7 @@
       '通信失敗・ログイン画面・アクセス制限だけの場合は「判断保留」にしてください。'+
       'ページが復旧した場合は登録解除できます。イベント・応募履歴は削除されません。</p>'+
       '<p id="lpMissingStatus" class="hint" role="status" aria-live="polite">候補一覧の読込後に使えます。</p>'+
+      '<details class="lp-manual-legacy"><summary>旧方式：ページ状態CSVバックアップ</summary>'+
       '<div id="lpMissingExport" hidden>'+
       '<div class="lp-manual-export-buttons">'+
       '<button type="button" id="lpMissingCopy">ページ状態CSVをコピー</button>'+
@@ -4492,7 +4499,7 @@
       '<a href="'+LP_MISSING_CSV_EDITOR+'" target="_blank" rel="noopener noreferrer">GitHubでページ状態CSVを編集 ↗</a>'+
       '<p class="hint">ファイル名：livepocket_verified_unavailable.csv。'+
       '既存の確認記録を残して統合した内容です。GitHubに貼り付けてCommitすると、次の収集処理で反映されます。'+
-      '誤って登録した場合も「ページの復旧を確認」を選んで再出力できます。</p></div>';
+      '誤って登録した場合も「ページの復旧を確認」を選んで再出力できます。</p></div></details>';
     manual.append(pane);
     const dialog=document.createElement('dialog');
     dialog.id='lpMissingDialog';
