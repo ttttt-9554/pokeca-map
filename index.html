@@ -569,6 +569,19 @@ nav[aria-label="メインメニュー"] {
       <p id="lpLoadStatus" class="hint" role="status" aria-live="polite">抽選情報はタブを開くと読み込みます。</p>
       <div id="lpSummary" class="lp-summary" aria-live="polite"></div>
 
+      <details id="lpOnsiteArchive" aria-label="現地対応アーカイブ">
+        <summary>📚 現地対応アーカイブ（<span id="lpOnsiteArchiveCount">0件</span>）</summary>
+        <div class="lp-onsite-archive-body">
+          <p>応募期間が終了した「現地対応が必要」という報告を、店舗と対応内容を付けて自動保存します。過去の利用者報告であり、現在の応募条件ではありません。</p>
+          <div class="lp-onsite-archive-controls">
+            <input id="lpOnsiteArchiveSearch" type="search" autocomplete="off" placeholder="店舗名・地域・対応内容を検索" aria-label="アーカイブ内を検索">
+            <button type="button" id="lpOnsiteArchiveRefresh">再読み込み</button>
+          </div>
+          <p id="lpOnsiteArchiveStatus" role="status" aria-live="polite">アーカイブを確認しています…</p>
+          <div id="lpOnsiteArchiveList"></div>
+          <button type="button" id="lpOnsiteArchiveMore" hidden>さらに表示</button>
+        </div>
+      </details>
       <section class="lp-filter" aria-label="抽選イベントの検索条件">
         <label for="lpQuery">商品名・イベント名・店舗名で検索</label>
         <input id="lpQuery" type="search" autocomplete="off" maxlength="120"
@@ -1176,7 +1189,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261020-v21_52-removed-region"></script>
+  <script src="app.js?v=20261020-v21_53-onsite-archive"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
