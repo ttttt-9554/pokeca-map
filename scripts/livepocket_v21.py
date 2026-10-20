@@ -522,7 +522,8 @@ def write_content(path, rows):
 from datetime import timedelta
 
 TITLE_RECHECK_HOURS = 6
-TITLE_END_GRACE_HOURS = 12
+# v21.50: Application end is a hard boundary; never retry after closing.
+TITLE_END_GRACE_HOURS = 0
 # v21.3 stopped all URLs forever after the first extra check. Instead, use
 # a capped backoff tied to that event's last attempt. Legacy v21.3 state
 # (attempts, checked_at, status) is reused without migration or data resets.
@@ -575,8 +576,9 @@ def retry_next_at(record, *, end, now, checked=None):
     if not last:
         return ''
     due = last + retry_wait(count)
-    # A recheck cannot happen once the application has been closed for 12h.
-    if end and due >= end + timedelta(hours=TITLE_END_GRACE_HOURS):
+    # Never schedule a retry when the application is already closed, nor
+    # schedule one that would run at/after the application deadline.
+    if end and (end <= now or due >= end):
         return ''
     if end and due > now + timedelta(days=7):
         return ''
@@ -635,7 +637,7 @@ def title_recheck_candidates(raw, public, *, now=None, limit=TITLE_RECHECK_DEFAU
             continue
         end = v11.parse_datetime(pub.get('application_end_at'))
         start = v11.parse_datetime(pub.get('application_start_at'))
-        if not end or not (now - timedelta(hours=TITLE_END_GRACE_HOURS) < end <= now + timedelta(days=7)):
+        if not end or not (now < end <= now + timedelta(days=7)):
             continue
         if start and now < start:
             continue
@@ -2145,7 +2147,8 @@ OFFICIAL_TITLE_CHECK_WAIT = timedelta(hours=6)
 # First official-title attempt is more urgent for event names supplied as
 # provisional Discord shorthand. Subsequent attempts use the longer backoff.
 OFFICIAL_TITLE_INITIAL_WAIT = timedelta(hours=2)
-OFFICIAL_TITLE_GRACE = timedelta(hours=12)
+# v21.50: The official title check also stops exactly at the deadline.
+OFFICIAL_TITLE_GRACE = timedelta(0)
 OFFICIAL_GENRE_PATTERNS = {
     'onepiece': re.compile(r'ONE\s*PIECE\s*(?:カードゲーム|CARD\s*GAME)|ワンピース\s*カード', re.I),
     'pokemon': re.compile(r'ポケモンカード(?:ゲーム)?|ポケカ|POK[EÉ]MON\s*(?:TCG|CARD)', re.I),
@@ -2255,7 +2258,7 @@ def _official_title_status(url, ritem, pub, *, state, now):
     deadline = v11.parse_datetime(pub.get('application_end_at'))
     if not deadline:
         return 'no_confirmed_deadline', ''
-    if not (now - OFFICIAL_TITLE_GRACE < deadline < now + timedelta(days=7)):
+    if not (now < deadline < now + timedelta(days=7)):
         return 'outside_application_window', ''
     record = state.get('v21_9', {}).get('official_checks', {}).get(url, {})
     attempts = recheck_attempts(record)
