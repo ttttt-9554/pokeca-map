@@ -2595,6 +2595,9 @@
         lpCloudLastFetch=Date.now();
         lpCloudApply();
         if(isDeveloper() && lpManualLoaded)lpManualRender();
+        // Refresh the location management list when another device changes
+        // the page status or the existing manual title correction.
+        if(isDeveloper() && lpLocationListLoaded)lpLocationRender();
         return true;
       }catch(error){
         lpCloudReady=false;
