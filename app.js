@@ -3614,6 +3614,10 @@
   // Each user can edit ONLY their own report (RLS); conflicts stay visible.
   // =====================================================
   const LP_ONSITE_TABLE = 'lottery_onsite_reports';
+  const LP_ONSITE_ARCHIVE_TABLE = 'lottery_onsite_archive';
+  let lotteryOnsiteArchiveRows=[],lotteryOnsiteArchiveLastFetch=0;
+  let lotteryOnsiteArchiveFetching=null,lotteryOnsiteArchiveError='';
+  let lotteryOnsiteArchiveLimit=40;
   let lotteryOnsiteReports = new Map();
   let lotteryOnsiteFetching = null;
   let lotteryOnsiteSequence = 0;
@@ -3626,7 +3630,11 @@
         !['required','not_required'].includes(row.requirement)) return null;
     return {event_url:row.event_url,user_id:row.user_id,requirement:row.requirement,
       details:typeof row.details==='string'?row.details.slice(0,500):'',
-      updated_at:typeof row.updated_at==='string'?row.updated_at:''};
+      updated_at:typeof row.updated_at==='string'?row.updated_at:'',
+      application_end_at:typeof row.application_end_at==='string'?row.application_end_at:null,
+      store_name:typeof row.store_name==='string'?row.store_name:'',
+      prefecture:typeof row.prefecture==='string'?row.prefecture:'',
+      event_title:typeof row.event_title==='string'?row.event_title:''};
   }
 
   function lotteryOnsiteSummary(url) {
@@ -3671,7 +3679,7 @@
         // growing community reports do not silently omit older events.
         for(let offset=0;offset<10000;offset+=500){
           const {data,error}=await supabaseClient.from(LP_ONSITE_TABLE)
-            .select('user_id,event_url,requirement,details,updated_at')
+            .select('user_id,event_url,requirement,details,updated_at,application_end_at,store_name,prefecture,event_title')
             .order('updated_at',{ascending:false}).range(offset,offset+499);
           if(error) throw error;
           if(seq!==lotteryOnsiteSequence) return;
@@ -3756,15 +3764,26 @@
     if(lotteryOnsiteSaving || !authUser || !supabaseClient || !safeLotteryUrl(url))return;
     if(!['required','not_required'].includes(values.requirement))return;
     const uid=authUser.id;
+    // Save event identity while the live event is still in the public feed.
+    const item=lotteryItems.find(x=>x.url===url)||lotteryBaseItems.find(x=>x.url===url);
+    const previous=lotteryOnsiteMyReport(url);
+    const names=item?[...new Set(lotteryStoreEntries(item).map(x=>x.name).filter(Boolean))]:[];
+    const areas=item?lotteryPrefectures(item):[];
+    const end=item?lotteryDate(item.application_end_at):NaN;
     const payload={user_id:uid,event_url:url,requirement:values.requirement,
-      details:String(values.details||'').slice(0,500)};
+      details:String(values.details||'').slice(0,500),
+      application_end_at:Number.isFinite(end)?new Date(end).toISOString():(previous?.application_end_at||null),
+      store_name:String(names.join('・')||item?.store_name||previous?.store_name||'').slice(0,1000),
+      prefecture:String(areas.join('・')||previous?.prefecture||'').slice(0,600),
+      event_title:String(item?.official_event_title||item?.product_name||
+        (item?.event_title_provisional?'':item?.event_title)||previous?.event_title||'').slice(0,500)};
     lotteryOnsiteSaving=true;
     const status=$('lpOnsiteMessage');
     if(status)status.textContent='共有内容を保存中…';
     try{
       const {data,error}=await supabaseClient.from(LP_ONSITE_TABLE)
         .upsert(payload,{onConflict:'user_id,event_url'})
-        .select('user_id,event_url,requirement,details,updated_at').single();
+        .select('user_id,event_url,requirement,details,updated_at,application_end_at,store_name,prefecture,event_title').single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
       const record=lotteryOnsiteClean(data);
