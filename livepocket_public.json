@@ -199,9 +199,7 @@
       "application_start_at": "2026-10-13T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【TSUTAYA金沢店】10/31発売予定ワンピースカードゲーム『Heroines Edition vol.2』(1BOX)抽選販売受付"
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/yiucw",
@@ -683,9 +681,7 @@
           "name": "TSUTAYA鎌ケ谷店",
           "prefecture": "千葉県"
         }
-      ],
-      "official_genre": "onepiece",
-      "official_event_title": "【抽選販売】ワンピースカードゲーム EXブースター『ヒロインズエディション Vol.2』"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/zfehv_08gw",
@@ -4667,8 +4663,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4706,8 +4700,6 @@
           "prefecture": "福島県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4759,8 +4751,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード 「ヒロインズエディションVol.2」「ヒロインズプレシャスBOX」抽選販売受付",
       "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
     },
     {
@@ -4771,7 +4761,6 @@
       "application_end_at": "2026-10-23T20:05:00+09:00",
       "discord_posted_at": "2026-10-19T03:30:05.412000+00:00",
       "review_category": "onepiece",
-      "official_event_title": "ONE PIECE Heroines Edition vol.2【EB-05】購入権抽選",
       "first_detected_at": "2026-10-19T03:35:56.939105+00:00"
     },
     {
@@ -5001,7 +4990,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5366,7 +5354,6 @@
           "prefecture": "群馬県"
         }
       ],
-      "official_event_title": "【新井店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-20T07:00:43.055771+00:00"
     },
     {
@@ -5444,10 +5431,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいち イオンモール高崎店】ポケカ抽選(30th CELEBRATION)",
       "first_detected_at": "2026-10-20T10:00:56.346596+00:00"
     }
   ],
-  "updated_at": "2026-10-20T15:13:50.207169+00:00"
+  "updated_at": "2026-10-20T15:21:24.111335+00:00"
 }
