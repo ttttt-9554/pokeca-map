@@ -408,7 +408,9 @@
           "name": "イトーヨーカドー",
           "prefecture": ""
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "【イトーヨーカドー】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB－05】"
     },
     {
       "url": "https://livepocket.jp/e/lx6zx",
@@ -1753,7 +1755,9 @@
       "url": "https://livepocket.jp/e/9_bzs",
       "event_title": "【10/16〜10/18購入可能】ポケモンカードゲームMEGA 新品商品 抽選購入権応募受付",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【10/16〜10/18購入可能】ポケモンカードゲームMEGA 新品商品 抽選購入権応募受付"
     },
     {
       "url": "https://livepocket.jp/e/cq9ue",
@@ -1910,7 +1914,9 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」"
     },
     {
       "url": "https://livepocket.jp/e/2h41m",
@@ -2840,7 +2846,9 @@
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット／拡張パック ストームエメラルダ"
     },
     {
       "url": "https://livepocket.jp/e/wyl-k",
@@ -3025,7 +3033,9 @@
       "review_category": "pokemon",
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「インフェルノX」再入荷分 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/fvxoh",
@@ -3650,7 +3660,8 @@
           "name": "晴れる屋 千葉店",
           "prefecture": "千葉県"
         }
-      ]
+      ],
+      "official_event_title": "【晴れる屋 千葉店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付"
     },
     {
       "url": "https://livepocket.jp/e/pjg_2",
@@ -4484,6 +4495,7 @@
           "prefecture": "神奈川県"
         }
       ],
+      "official_event_title": "【晴れる屋 川崎店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
       "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
@@ -4775,8 +4787,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【オープン記念】ポケモンカードゲーム 30th CELEBRATION FUTURISTIC BOX 購入権抽選",
       "first_detected_at": "2026-10-19T04:35:56.497989+00:00"
     },
     {
@@ -4855,8 +4865,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4941,8 +4949,6 @@
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-19T06:00:18.534000+00:00",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "抽選販売 ワンピースカードゲーム『EXブースター ヒロインズエディション Vol.2』",
       "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
     },
     {
@@ -4980,6 +4986,8 @@
           "prefecture": "千葉県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2",
       "first_detected_at": "2026-10-19T07:00:56.139583+00:00"
     },
     {
@@ -4996,7 +5004,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_event_title": "髙島屋新宿店【BAO BAO ISSEY MIYAKE】11月１日(日)入場整理券",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5034,8 +5041,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5052,6 +5057,7 @@
           "prefecture": "福島県"
         }
       ],
+      "official_event_title": "【晴れる屋 郡山店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5069,8 +5075,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【戸田店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
       "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
     },
     {
@@ -5088,8 +5092,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T09:30:56.380373+00:00"
     },
     {
@@ -5107,8 +5109,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:01:34.695185+00:00"
     },
     {
@@ -5126,6 +5126,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5160,8 +5162,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2抽選販売",
       "first_detected_at": "2026-10-19T10:30:58.433917+00:00"
     },
     {
@@ -5214,8 +5214,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット9種セット」 抽選販売受付",
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     },
     {
@@ -5236,5 +5234,5 @@
       "first_detected_at": "2026-10-19T23:39:08.283491+00:00"
     }
   ],
-  "updated_at": "2026-10-20T00:15:53.154849+00:00"
+  "updated_at": "2026-10-20T00:17:43.513322+00:00"
 }
