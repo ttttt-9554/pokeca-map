@@ -707,6 +707,58 @@ html[data-theme="dark"] .lp-dev-recheck a { color: #9ac2ff; }
   border:1px solid var(--app-border,#cbd5e1);border-radius:15px;
   background:var(--app-surface,#fff);color:var(--app-text,#172033)}
 #lpManualEditor::backdrop{background:#07111ecc}
+
+/* v21.43: the generic form{background:#fff} must NOT paint a white card
+   inside the dark-mode dialog. The dialog itself owns the surface. */
+#lpManualEditor #lpManualForm{
+  box-sizing:border-box;
+  display:grid;
+  gap:12px;
+  min-width:0;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent!important;
+  color:inherit!important;
+}
+#lpManualEditor #lpManualForm>label{
+  min-width:0;
+  margin:4px 0;
+  color:var(--app-text,#172033)!important;
+}
+#lpManualEditor #lpManualEditorDescription,
+#lpManualEditor #lpManualEditorStatus{
+  color:var(--app-muted,#53627b)!important;
+}
+#lpManualEditor #lpManualForm textarea,
+#lpManualEditor #lpManualForm select{
+  box-sizing:border-box;
+  -webkit-text-fill-color:var(--app-text,#172033);
+}
+#lpManualEditor #lpManualForm textarea::placeholder{
+  opacity:1;
+  color:var(--app-muted,#53627b)!important;
+  -webkit-text-fill-color:var(--app-muted,#53627b);
+}
+#lpManualEditor #lpManualEditorTitle:focus{
+  outline:none; /* heading receives focus to prevent iOS select auto-popup */
+}
+html[data-theme="dark"] #lpManualEditor #lpManualForm{
+  background:transparent!important;
+  color:#edf4ff!important;
+}
+html[data-theme="dark"] #lpManualEditor #lpManualForm>label,
+html[data-theme="dark"] #lpManualEditor #lpManualForm .lp-manual-consent{
+  color:#edf4ff!important;
+  -webkit-text-fill-color:#edf4ff;
+}
+html[data-theme="dark"] #lpManualEditor #lpManualEditorDescription,
+html[data-theme="dark"] #lpManualEditor #lpManualEditorStatus{
+  color:#c9d7eb!important;
+}
+
 #lpManualEditor h3{margin:0 0 12px;font-size:17px}
 #lpManualEditor p{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
 #lpManualEditor form>label{display:block;font-size:13px;font-weight:700;margin:13px 0;line-height:1.6}
