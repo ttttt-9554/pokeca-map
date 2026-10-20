@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-20T06:35:57.281811+00:00",
-  "unique_livepocket_urls": 408,
+  "collected_at": "2026-10-20T07:00:41.532200+00:00",
+  "unique_livepocket_urls": 409,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -4683,6 +4683,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4795,6 +4797,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4890,6 +4894,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【抽選】ポケモンカードゲームMEGA 『 30th CELEBRATION カードセット 全９種』",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -4907,6 +4913,8 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール水戸内原店】 ポケカ店頭抽選販売（ポケモンＭ ３０ｔｈカードセット 全９種）",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -4957,6 +4965,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（ﾎﾟｹﾓﾝｶｰﾄﾞｹﾞｰﾑMEGA30thCELEBRATIONｶｰﾄﾞｾｯﾄﾌｼｷﾞﾀﾞﾈ･ﾋﾄｶｹﾞ･ｾﾞﾆｶﾞﾒ）",
       "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
     },
     {
@@ -5010,6 +5020,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場蓮田店】ポケカ抽選販売(30th CELEBRATION 9種セット)",
       "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
@@ -5197,6 +5209,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット9種セット」 抽選販売受付",
       "first_detected_at": "2026-10-19T11:30:55.344195+00:00"
     },
     {
@@ -5248,6 +5262,8 @@
           "prefecture": "神奈川県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム エクストラブースター 『ONE PIECE Heroines Edition vol.2』 抽選予約",
       "first_detected_at": "2026-10-20T03:00:29.377383+00:00"
     },
     {
@@ -5318,6 +5334,8 @@
           "prefecture": "神奈川県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
       "first_detected_at": "2026-10-20T06:35:58.433827+00:00"
     },
     {
@@ -5338,8 +5356,27 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「ストームエメラルダ」",
       "first_detected_at": "2026-10-20T06:35:58.433827+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/y6kid",
+      "store_name": "トレカ丸新井店",
+      "prefecture": "群馬県",
+      "discord_posted_at": "2026-10-20T07:00:08.420000+00:00",
+      "stores": [
+        {
+          "name": "トレカ丸新井店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "event_title": "【新井店】『Heroines Edition vol.2』抽選予約",
+      "application_end_at": "2026-10-21T22:00:00+09:00",
+      "application_start_at": "2026-10-17T09:00:00+09:00",
+      "official_event_title": "【新井店】『Heroines Edition vol.2』抽選予約",
+      "first_detected_at": "2026-10-20T07:00:43.055771+00:00"
     }
   ],
-  "updated_at": "2026-10-20T06:55:57.352054+00:00"
+  "updated_at": "2026-10-20T07:01:11.507569+00:00"
 }
