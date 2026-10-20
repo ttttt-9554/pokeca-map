@@ -12428,8 +12428,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/a2wte": {
-          "checked_at": "2026-10-20T15:11:17.857527+00:00",
-          "status": "checked_no_new_details"
+          "checked_at": "2026-10-20T16:51:22.877388+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/j_tt7": {
           "checked_at": "2026-10-20T11:41:18.769928+00:00",
@@ -12835,7 +12835,7 @@
         "https://livepocket.jp/e/a2wte": {
           "detected_at": "2026-10-20T04:30:58.798364+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-20T10:41:20.528831+00:00"
+          "checked_at": "2026-10-20T16:51:22.877388+00:00"
         },
         "https://livepocket.jp/e/j_tt7": {
           "detected_at": "2026-10-20T05:35:56.042356+00:00",
@@ -13233,8 +13233,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/a2wte": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-20T10:41:20.528831+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-20T16:51:22.877388+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/j_tt7": {
@@ -16043,7 +16043,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-20T15:11:17.857527+00:00",
+          "checked_at": "2026-10-20T16:51:22.877388+00:00",
           "title_observed": "【古本市場松戸店】ポケカ抽選販売（30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -17621,7 +17621,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/a2wte": {
-          "checked_at": "2026-10-20T15:11:17.857527+00:00",
+          "checked_at": "2026-10-20T16:51:22.877388+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
