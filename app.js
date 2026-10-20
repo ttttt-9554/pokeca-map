@@ -322,6 +322,7 @@
     refreshWishlistForAccount();
     refreshLotteryTrackerForAccount();
     refreshLotteryOnsiteReports(true);
+    refreshLotteryOnsiteArchive(true);
     queueMicrotask(() => friendPresenceAuthChanged());
   }
 
@@ -362,11 +363,12 @@
     await lpCloudRefresh(true);
     await lpLocationRefresh(true);
     refreshLotteryOnsiteReports(true);
+    refreshLotteryOnsiteArchive(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
         payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
@@ -501,7 +503,7 @@
     });
 
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); }
     render();
@@ -2852,6 +2854,14 @@
   function initLottery() {
     ensureLotteryNewBadgeStyle();
     ensureLotteryTrackerUI();
+    $('lpOnsiteArchiveSearch')?.addEventListener('input',()=>{
+      lotteryOnsiteArchiveLimit=40;renderLotteryOnsiteArchive();
+    });
+    $('lpOnsiteArchiveMore')?.addEventListener('click',()=>{
+      lotteryOnsiteArchiveLimit+=40;renderLotteryOnsiteArchive();
+    });
+    $('lpOnsiteArchiveRefresh')?.addEventListener('click',()=>refreshLotteryOnsiteArchive(true));
+    renderLotteryOnsiteArchive();
     $('lotteryView').addEventListener('click', lotteryTrackerHandleClick);
     // v21.29: The personal-management list lives in a separate view now.
     // Its '管理' buttons need their own delegated click listener.
@@ -2905,6 +2915,7 @@
       if (document.visibilityState !== 'visible') return;
       if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();lpLocationRefresh(true);}
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
+      if ($('lotteryView').classList.contains('active')) refreshLotteryOnsiteArchive(true);
     });
   }
 
@@ -3082,6 +3093,20 @@
       #lpTrackerForm .lp-check-line input{width:20px;height:20px}
       .lp-track-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
       .lp-track-modal-actions button{min-height:42px}
+      #lpOnsiteArchive{margin:10px 0 16px;border:1px solid var(--app-border,#cbd5e1);border-radius:12px;background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+      #lpOnsiteArchive>summary{cursor:pointer;font-weight:800;padding:13px 14px}
+      .lp-onsite-archive-body{padding:0 14px 14px}
+      .lp-onsite-archive-body>p{color:var(--app-muted,#64748b);font-size:12px}
+      .lp-onsite-archive-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+      .lp-onsite-archive-controls input{flex:1 1 170px;min-width:0;padding:10px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);border-radius:9px}
+      .lp-onsite-archive-controls button,#lpOnsiteArchiveMore{min-height:40px}
+      .lp-onsite-archive-card{background:var(--app-surface2,#f8fafc);border:1px solid var(--app-border,#cbd5e1);border-radius:10px;padding:12px;margin:10px 0}
+      .lp-onsite-archive-card h4{margin:0 0 7px;color:var(--app-text,#172033);font-size:15px;overflow-wrap:anywhere}
+      .lp-onsite-archive-card p{margin:5px 0;color:var(--app-muted,#64748b)}
+      .lp-onsite-archive-card ul{padding-left:20px;overflow-wrap:anywhere}
+      .lp-onsite-archive-card li{margin:5px 0}
+      .lp-onsite-archive-card a{display:inline-block;margin-top:5px}
+      #lpOnsiteArchiveStatus{font-size:12px;color:var(--app-muted,#64748b);overflow-wrap:anywhere}
       .lp-onsite-shared{border:1px solid var(--app-border,#cbd5e1);border-radius:11px;padding:10px;margin:12px 0;background:var(--app-surface2,#f8fafc);font-size:12px;line-height:1.6}
       .lp-onsite-shared strong{font-size:13px;color:var(--app-text,#172033)}
       .lp-onsite-shared p{margin:4px 0;color:var(--app-muted,#64748b)}
@@ -3707,6 +3732,83 @@
     })();
     lotteryOnsiteFetching=run;
     try {await run;} finally {if(lotteryOnsiteFetching===run)lotteryOnsiteFetching=null;}
+  }
+
+
+  // The Postgres cron snapshots finished community reports independently
+  // of any client. This browser only reads immutable archived results.
+  async function refreshLotteryOnsiteArchive(force=false){
+    if(!supabaseClient)return;
+    if(!force && lotteryOnsiteArchiveLastFetch &&
+      Date.now()-lotteryOnsiteArchiveLastFetch<60000)return;
+    if(lotteryOnsiteArchiveFetching)return lotteryOnsiteArchiveFetching;
+    lotteryOnsiteArchiveFetching=(async()=>{
+      try{
+        const rows=[];
+        for(let offset=0;offset<10000;offset+=500){
+          const {data,error}=await supabaseClient.from(LP_ONSITE_ARCHIVE_TABLE)
+            .select('event_url,store_name,prefecture,event_title,application_end_at,required_count,not_required_count,required_details,archived_at')
+            .order('application_end_at',{ascending:false}).range(offset,offset+499);
+          if(error)throw error;
+          rows.push(...(data||[]));
+          if(!data || data.length<500)break;
+        }
+        lotteryOnsiteArchiveRows=rows.filter(x=>safeLotteryUrl(x.event_url));
+        lotteryOnsiteArchiveLastFetch=Date.now();
+        lotteryOnsiteArchiveError='';
+      }catch(error){
+        lotteryOnsiteArchiveError='アーカイブ取得失敗：'+String(error?.message||error);
+        console.warn(lotteryOnsiteArchiveError);
+      }finally{
+        lotteryOnsiteArchiveFetching=null;
+        renderLotteryOnsiteArchive();
+      }
+    })();
+    return lotteryOnsiteArchiveFetching;
+  }
+
+  function renderLotteryOnsiteArchive(){
+    const root=$('lpOnsiteArchive'),list=$('lpOnsiteArchiveList'),
+      status=$('lpOnsiteArchiveStatus');
+    if(!root||!list||!status)return;
+    $('lpOnsiteArchiveCount').textContent=lotteryOnsiteArchiveRows.length+'件';
+    const search=String($('lpOnsiteArchiveSearch')?.value||'')
+      .trim().toLocaleLowerCase('ja-JP');
+    const matching=lotteryOnsiteArchiveRows.filter(row=>{
+      if(!search)return true;
+      return [row.store_name,row.prefecture,row.event_title,row.event_url,
+        ...(Array.isArray(row.required_details)?row.required_details:[])]
+        .filter(v=>typeof v==='string').join(' ')
+        .toLocaleLowerCase('ja-JP').includes(search);
+    });
+    status.textContent=lotteryOnsiteArchiveError||
+      ('保存済み '+lotteryOnsiteArchiveRows.length+'件 ／ 表示 '+
+      Math.min(lotteryOnsiteArchiveLimit,matching.length)+'件'+
+      (search?'（検索結果 '+matching.length+'件）':''));
+    list.innerHTML=matching.length?matching.slice(0,lotteryOnsiteArchiveLimit).map(row=>{
+      const notes=Array.isArray(row.required_details)?row.required_details
+        .filter(x=>typeof x==='string'&&x.trim()).slice(0,40):[];
+      return '<article class="lp-onsite-archive-card">'+
+        '<h4>'+escape(row.store_name||'店舗名未確認')+'</h4>'+
+        '<p>地域：'+escape(row.prefecture||'未確認')+'</p>'+
+        '<p>抽選：'+escape(row.event_title||'イベント名未確認')+'</p>'+
+        '<p>応募終了：'+escape(lotteryJapaneseDate(row.application_end_at)||'未確認')+'</p>'+
+        '<p>現地対応が必要 '+Number(row.required_count||0)+'件'+
+          (Number(row.not_required_count)>0?' ／ 不要 '+Number(row.not_required_count)+'件':'')+'</p>'+
+        (notes.length?'<strong>当時報告された対応内容</strong><ul>'+
+          notes.map(note=>'<li>'+escape(note)+'</li>').join('')+'</ul>':
+          '<p>具体的な対応内容の記載はありません。</p>')+
+        '<p>※過去の利用者報告です。現在の条件は公式情報を確認してください。</p>'+
+        '<a href="'+escape(row.event_url)+
+          '" target="_blank" rel="noopener noreferrer">当時の抽選URL ↗</a>'+
+        '</article>';
+    }).join(''):
+      '<p class="hint">'+(search?'検索に一致する記録はありません。':
+        'まだアーカイブはありません。締切日時が確認できた現地対応必須の報告が、応募終了後に自動保存されます。')+'</p>';
+    const more=$('lpOnsiteArchiveMore');
+    more.hidden=matching.length<=lotteryOnsiteArchiveLimit;
+    more.textContent='さらに表示（残り'+
+      Math.max(0,matching.length-lotteryOnsiteArchiveLimit)+'件）';
   }
 
   function lotteryOnsiteHandleClick(event) {
