@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-20T04:30:57.766928+00:00",
-  "unique_livepocket_urls": 405,
+  "collected_at": "2026-10-20T05:35:55.182610+00:00",
+  "unique_livepocket_urls": 406,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5286,7 +5286,24 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-20T04:30:58.798364+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/j_tt7",
+      "store_name": "カードボックス青馬堂矢向店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-20T05:30:05.051000+00:00",
+      "stores": [
+        {
+          "name": "カードボックス青馬堂矢向店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "ガンダムカード ブースターパック Stardust Trails[GD06] 深夜販売入場券",
+      "application_end_at": "2026-10-26T23:00:00+09:00",
+      "application_start_at": "2026-10-20T14:00:00+09:00",
+      "official_event_title": "ガンダムカード ブースターパック Stardust Trails[GD06] 深夜販売入場券",
+      "first_detected_at": "2026-10-20T05:35:56.042356+00:00"
     }
   ],
-  "updated_at": "2026-10-20T05:25:58.950705+00:00"
+  "updated_at": "2026-10-20T05:36:18.406340+00:00"
 }

@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-20T04:30:57.766928+00:00",
+  "collected_at": "2026-10-20T05:35:55.182610+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 405,
+  "unique_livepocket_urls": 406,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10441,34 +10441,64 @@
       "event_title": "【古本市場松戸店】ポケカ抽選販売（30th CELEBRATION）",
       "application_end_at": "2026-10-21T23:59:00+09:00",
       "application_start_at": "2026-10-20T12:15:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/j_tt7",
+      "discord_message_id": "1561974769140637707",
+      "discord_posted_at": "2026-10-20T05:30:05.051000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nカードボックス青馬堂矢向店\n受付終了: 10/26 23:00（残り6日8時間）\nhttps://livepocket.jp/e/j_tt7",
+      "store_name": "カードボックス青馬堂矢向店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "カードボックス青馬堂矢向店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ガンダムカード ブースターパック Stardust Trails[GD06] 深夜販売入場券",
+      "application_end_at": "2026-10-26T23:00:00+09:00",
+      "application_start_at": "2026-10-20T14:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 252,
+    "parsed": 253,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 248,
-    "prefecture": 211,
-    "event_title": 92,
+    "store_name": 249,
+    "prefecture": 212,
+    "event_title": 93,
     "event_date": 1,
     "product_name": 61,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 380,
-    "application_start_at": 380,
-    "stores_events": 251
+    "application_end_at": 381,
+    "application_start_at": 381,
+    "stores_events": 252
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1561959676864893010"
+      "1551580466266644552": "1561974769140637707"
     },
     "last_run": {
-      "checked_at": "2026-10-20T04:30:57.766928+00:00",
+      "checked_at": "2026-10-20T05:35:55.182610+00:00",
       "new_urls": 1,
-      "original_urls": 404,
+      "original_urls": 405,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -10550,7 +10580,8 @@
         "1561914389672628247": "2026-10-20T01:30:57.159313+00:00",
         "1561937043850793020": "2026-10-20T03:00:28.258828+00:00",
         "1561944586257956966": "2026-10-20T03:30:56.134593+00:00",
-        "1561959676864893010": "2026-10-20T04:30:58.079397+00:00"
+        "1561959676864893010": "2026-10-20T04:30:58.079397+00:00",
+        "1561974769140637707": "2026-10-20T05:35:55.389698+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12182,6 +12213,10 @@
         "https://livepocket.jp/e/a2wte": {
           "checked_at": "2026-10-20T04:31:28.502699+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/j_tt7": {
+          "checked_at": "2026-10-20T05:36:18.406340+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -12556,6 +12591,11 @@
           "detected_at": "2026-10-20T04:30:58.798364+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-20T04:31:28.502699+00:00"
+        },
+        "https://livepocket.jp/e/j_tt7": {
+          "detected_at": "2026-10-20T05:35:56.042356+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-20T05:36:18.406340+00:00"
         }
       },
       "pending_new_urls": []
@@ -15684,6 +15724,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/j_tt7": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-20T05:36:18.406340+00:00",
+          "title_observed": "ガンダムカード ブースターパック Stardust Trails[GD06] 深夜販売入場券",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -17169,6 +17220,19 @@
         },
         "https://livepocket.jp/e/a2wte": {
           "checked_at": "2026-10-20T04:31:28.502699+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/j_tt7": {
+          "checked_at": "2026-10-20T05:36:18.406340+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
