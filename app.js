@@ -4111,10 +4111,11 @@
     section.className='store-tools lp-dev-manual-panel';
     section.innerHTML='<h3>🛠️ 取得失敗イベントの手動修正</h3>'+
       '<p class="hint">自動取得できなかったイベントを一覧で確認し、公式ページ・公式画面のスクリーンショットから正式イベント名を入力できます。'+
-      '下書きはこの端末に保存され、CSVをGitHubに反映した後の自動収集で公開されます。</p>'+
+      '開発者として「保存して反映」を押すとSupabaseへ保存され、全ユーザーの一覧へ反映されます。既存のCSVはバックアップ用に残します。</p>'+
       '<button type="button" id="lpManualLoad">失敗候補を読み込む</button>'+
       '<p id="lpManualStatus" class="hint" role="status" aria-live="polite">未読み込み</p>'+
-      '<div id="lpManualList"></div>'+
+      '<div id="lpManualList"></div>'+ 
+      '<div id="lpManualResolved" class="lp-manual-resolved"></div>'+
       '<div id="lpManualExport" hidden>'+
       '<p class="hint"><strong>修正CSVの確定</strong>：下書きに追加したものを、既存の承認済みイベント名を残して統合します。'+
       'GitHubへ反映するまでは公開データは変わりません。</p>'+
@@ -4138,7 +4139,7 @@
       '<option value="official_screenshot_viewed">同じURLの公式画面スクリーンショットを確認</option></select></label>'+
       '<label class="lp-manual-consent"><input type="checkbox" name="confirmed" required>このイベントURLと正式名称が一致することを自分で確認しました</label>'+
       '<div class="lp-manual-export-buttons">'+
-      '<button type="submit" class="primary">端末に下書き保存</button>'+
+      '<button type="submit" class="primary">保存して全ユーザーに反映</button>'+
       '<button type="button" id="lpManualClose">閉じる</button>'+
       '<button type="button" id="lpManualRemoveDraft">下書きを削除</button></div>'+
       '<p id="lpManualEditorStatus" class="hint" role="status" aria-live="polite"></p></form>';
@@ -4162,24 +4163,38 @@
       dialog.close();
       lpManualRender();
     });
-    $('lpManualForm').addEventListener('submit',event=>{
+    $('lpManualForm').addEventListener('submit',async event=>{
       event.preventDefault();
       if(!isDeveloper()||!lpManualValidUrl(lpManualEditing))return;
-      const fd=new FormData(event.currentTarget);
+      const form=event.currentTarget,fd=new FormData(form);
       const title=lpManualValidTitle(fd.get('event_title'));
       const evidence=String(fd.get('evidence')||'');
-      if(!title || !['official_page_viewed','official_screenshot_viewed'].includes(evidence) ||
-          fd.get('confirmed')!=='on') {
-        $('lpManualEditorStatus').textContent='正式名称・証拠・確認チェックを見直してください。省略されたタイトルは登録できません。';
+      if(!title||!['official_page_viewed','official_screenshot_viewed'].includes(evidence)||
+          fd.get('confirmed')!=='on'){
+        $('lpManualEditorStatus').textContent='正式名称・証拠・確認チェックを見直してください。';
         return;
       }
       const url=lpManualEditing;
-      const previous=lpManualDrafts[url];
-      lpManualDrafts[url]={event_title:title,evidence};
-      try{lpManualSaveDrafts();}
-      catch(error){if(previous)lpManualDrafts[url]=previous;else delete lpManualDrafts[url];$('lpManualEditorStatus').textContent=error.message;return;}
-      dialog.close();
-      lpManualRender();
+      const button=form.querySelector('button[type=submit]');
+      button.disabled=true;button.textContent='クラウドに保存中…';
+      $('lpManualEditorStatus').textContent='🔄 Supabaseへ保存しています…';
+      try{
+        await lpCloudSave({
+          event_url:url,resolution:'title',event_title:title,
+          reason:null,evidence
+        });
+        // Local drafts must not be exported again after successful publishing.
+        delete lpManualDrafts[url];
+        try{lpManualSaveDrafts();}catch(ignore){}
+        $('lpManualEditor').close();
+        $('lpManualStatus').textContent='✅ 正式イベント名を保存しました。全ユーザーの一覧へ反映されます。';
+        lpManualRender();
+      }catch(error){
+        $('lpManualEditorStatus').textContent='⚠ 保存できませんでした：'+(error?.message||error)+
+          '。入力内容は残っています。Supabase設定を確認してください。';
+      }finally{
+        button.disabled=false;button.textContent='保存して全ユーザーに反映';
+      }
     });
     dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
   }
@@ -4215,9 +4230,17 @@
         !done.has(row.url) &&
         !['v21_9_official_exact_url_title','v21_13_verified_manual_exact_url'].includes(row.title_source||'')
       ).sort((a,b)=>String(b.title_diagnostic_checked_at).localeCompare(String(a.title_diagnostic_checked_at)));
+      await lpCloudRefresh(true);
+      const loadedUrls=new Set(lpManualRows.map(row=>row.url));
+      for(const record of lpCloudOverrides.values()) {
+        if(!loadedUrls.has(record.event_url)){
+          lpManualRows.push({url:record.event_url,event_title:record.event_title||'',
+            title_diagnostic_reason:'fetch_failed',title_diagnostic_checked_at:record.updated_at||''});
+          loadedUrls.add(record.event_url);
+        }
+      }
       lpManualLoaded=true;
       lpManualRender();
-      // Load independently verified page-unavailable reports after candidates.
       await lpMissingLoad();
     }catch(error) {
       status.textContent='⚠ 失敗候補を読み込めませんでした：'+(error?.message||error);
@@ -4279,8 +4302,11 @@
       '。公式ページを開き、表示される名称をそのまま入力してください。';
     const form=$('lpManualForm');
     form.reset();
-    form.elements.namedItem('event_title').value=draft?.event_title||'';
-    form.elements.namedItem('evidence').value=draft?.evidence||'';
+    const cloud=lpCloudOverrides.get(url);
+    form.elements.namedItem('event_title').value=draft?.event_title||
+      (cloud?.resolution==='title'?cloud.event_title:'')||'';
+    form.elements.namedItem('evidence').value=draft?.evidence||
+      (cloud?.resolution==='title'?cloud.evidence:'')||'';
     form.elements.namedItem('confirmed').checked=false;
     $('lpManualEditorStatus').textContent='';
     $('lpManualRemoveDraft').hidden=!draft;
