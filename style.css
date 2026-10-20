@@ -691,6 +691,36 @@ html[data-theme="dark"] .lp-status.lp-unavailable{background:#4c2430!important;
 html[data-theme="dark"] .lp-missing-notice{background:#422f20!important;
   color:#fde68a!important;border-color:#a16207!important}
 
+/* v21.45: unresolved vs resolved developer review list. */
+.lp-manual-list-title{
+  margin:18px 0 8px;padding:10px 12px;border-radius:10px;
+  background:var(--app-surface2,#f1f5f9);
+  color:var(--app-text,#172033);
+  font-size:15px;font-weight:800;line-height:1.5
+}
+#lpManualResolved{margin:18px 0 8px;padding:10px 12px;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:12px;background:var(--app-surface2,#f1f5f9);
+  color:var(--app-text,#172033)}
+#lpManualResolved>.lp-manual-list-title{margin:0 0 8px;
+  background:transparent;padding:0}
+#lpManualResolved .lp-manual-row{background:transparent}
+#lpManualResolved .lp-manual-row p{
+  overflow-wrap:anywhere;color:var(--app-muted,#64748b)}
+#lpManualResolved .lp-manual-row strong{
+  color:var(--app-text,#172033)}
+#lpManualResolved .lp-manual-row-actions button{
+  min-height:44px}
+#lpManualStatus{overflow-wrap:anywhere}
+html[data-theme="dark"] #lpManualResolved{
+  background:#263a55!important;
+  border-color:#627896!important;
+  color:#f4f8ff!important}
+html[data-theme="dark"] .lp-manual-list-title{
+  background:#263a55!important;color:#f4f8ff!important}
+html[data-theme="dark"] #lpManualResolved .lp-manual-row p{
+  color:#c9d7eb!important}
+
 /* v21.44: page unavailable/review hold, separate from manual title edits. */
 .lp-manual-row-actions{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:0 0 auto}
 .lp-manual-row-actions button{width:100%;min-width:112px}
