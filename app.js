@@ -4136,6 +4136,14 @@
       lpManualValidUrl(url)&&lpManualValidTitle(data?.event_title)&&
       ['official_page_viewed','official_screenshot_viewed'].includes(data?.evidence));
     $('lpManualExport').hidden=validDrafts.length===0 || !lpManualLoaded;
+    const missingExport=$('lpMissingExport');
+    if(missingExport){
+      const eligible=new Set(lpManualRows.map(x=>x.url));
+      const canExport=lpMissingLoaded && Object.entries(lpMissingDrafts).some(([url,draft])=>
+        eligible.has(url) && (Object.hasOwn(LP_MISSING_EVIDENCE,draft?.reason) ||
+        (draft?.reason==='clear' && lpMissingOriginal.some(x=>x.url===url&&x.approved==='yes'))));
+      missingExport.hidden=!canExport;
+    }
     if(!lpManualLoaded){status.textContent='未読み込み（端末内の下書き '+validDrafts.length+'件）';return;}
     status.textContent='取得未完了の候補 '+lpManualRows.length+'件 ／ 修正下書き '+validDrafts.length+'件';
     if(!lpManualRows.length) {
@@ -4250,7 +4258,7 @@
   };
   const LP_MISSING_LABELS={
     not_found_404_410:'404／410（ページが見つからない・削除済み）',
-    official_removed_notice:'公式ページに削除・公開終了の案内あり',
+    official_removed_notice:'公式ページに削除・非公開の案内あり',
     pending:'判定保留（通信エラー・ログイン・確認画面など）',
     clear:'ページの復旧を確認・登録解除'
   };
@@ -4286,7 +4294,7 @@
       '<label>公式ページを確認した結果<select name="reason" required>'+
       '<option value="" selected disabled>選択してください</option>'+
       '<option value="not_found_404_410">404／410 と確認した</option>'+
-      '<option value="official_removed_notice">公式の削除・公開終了案内を確認した</option>'+
+      '<option value="official_removed_notice">公式の削除・非公開案内を確認した</option>'+
       '<option value="pending">一時的に開けない・不明（判断保留）</option>'+
       '<option value="clear">ページが復旧した（登録解除）</option></select></label>'+
       '<p class="hint">※アクセス制限や通信エラーのみで「ページなし」と確定しないでください。'+
