@@ -3920,10 +3920,319 @@
     }
   }
 
+
+  // v21.42: Developer-assisted corrections for event names the parser could
+  // not verify. GitHub credentials are NEVER placed in a browser bundle.
+  // Drafts stay on this device; approval happens by committing the exported
+  // allowlisted CSV to the existing GitHub repository.
+  const LP_MANUAL_DRAFT_KEY = 'pokeca-livepocket-title-fixes-v1';
+  const LP_MANUAL_GITHUB_EDITOR =
+    'https://github.com/ttttt-9554/pokeca-map/edit/main/livepocket_verified_titles.csv';
+  const LP_MANUAL_REASONS = {
+    event_page_unconfirmed:'イベント本文を確認できず',
+    fetch_failed:'ページ取得を確認できず',
+    title_candidates_rejected:'イベント名候補を採用できず',
+    no_title_candidates:'イベント名候補なし',
+    access_blocked:'アクセス制限・認証画面',
+    wrong_event_url:'別のイベントURL',
+    invalid_fetch_result:'確認データを取得できず'
+  };
+  let lpManualRows = [];
+  let lpManualOriginal = [];
+  let lpManualDrafts = {};
+  let lpManualLoaded = false;
+  let lpManualBusy = false;
+  let lpManualEditing = '';
+
+  // A proper quote-aware CSV reader: Japanese titles may contain commas or
+  // quoted text. Invalid/missing columns must never be silently overwritten.
+  function lpManualParseCsv(text) {
+    const lines=[], row=[];
+    let field='', quoted=false;
+    const input=String(text||'').replace(/^\uFEFF/,'');
+    for(let i=0;i<input.length;i++) {
+      const c=input[i];
+      if(quoted) {
+        if(c==='"' && input[i+1]==='"'){field+='"';i++;}
+        else if(c==='"'){quoted=false;}
+        else field+=c;
+      }else if(c==='"'){quoted=true;}
+      else if(c===','){row.push(field);field='';}
+      else if(c==='\n'){row.push(field);if(row.some(v=>v!==''))lines.push(row.slice());row.length=0;field='';}
+      else if(c!=='\r'){field+=c;}
+    }
+    if(quoted)throw Error('CSVに閉じられていない引用符があります');
+    if(field || row.length){row.push(field);lines.push(row.slice());}
+    if(!lines.length)throw Error('CSVが空です');
+    const head=lines.shift();
+    if(new Set(head).size!==head.length)throw Error('CSV列名が重複しています');
+    return {header:head,rows:lines.map(parts=>{
+      const data={};
+      head.forEach((name,index)=>{data[name]=parts[index]??'';});
+      return data;
+    })};
+  }
+
+  function lpManualCsvLine(values) {
+    return values.map(value=>{
+      const s=String(value??'');
+      return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;
+    }).join(',');
+  }
+
+  function lpManualValidTitle(value) {
+    const title=String(value||'').replace(/\s+/g,' ').trim();
+    if(title.length<5 || title.length>160 ||
+       /(\.\.\.|…|https?:\/\/|[\uFFFD„<>]|\b(?:captcha|access denied|just a moment|403 forbidden|robot check)\b|アクセスが制限|チケット購入・予約・販売)/i.test(title) ||
+       /[\x00-\x1F\x7F]/.test(title) ||
+       /[-–—|｜]\s*(LivePocket(?:-Ticket-)?|ライヴポケット)\s*$/i.test(title) ||
+       ['イベント','イベント情報','チケット','チケット情報','受付中'].includes(title)) return '';
+    return title;
+  }
+
+  function lpManualValidUrl(url) {
+    return /^https:\/\/livepocket\.jp\/e\/[a-zA-Z0-9_-]{4,64}$/.test(url||'');
+  }
+
+  function lpManualSaveDrafts() {
+    try { localStorage.setItem(LP_MANUAL_DRAFT_KEY,JSON.stringify(lpManualDrafts)); }
+    catch(error) { throw Error('端末に下書きを保存できません：'+(error?.message||error)); }
+  }
+
+  function lpManualInitUI() {
+    if($('lpManualPanel'))return;
+    const before=$('lpDevRecheckPanel');
+    if(!before)return;
+    const section=document.createElement('section');
+    section.id='lpManualPanel';
+    section.className='store-tools lp-dev-manual-panel';
+    section.innerHTML='<h3>🛠️ 取得失敗イベントの手動修正</h3>'+
+      '<p class="hint">自動取得できなかったイベントを一覧で確認し、公式ページ・公式画面のスクリーンショットから正式イベント名を入力できます。'+
+      '下書きはこの端末に保存され、CSVをGitHubに反映した後の自動収集で公開されます。</p>'+
+      '<button type="button" id="lpManualLoad">失敗候補を読み込む</button>'+
+      '<p id="lpManualStatus" class="hint" role="status" aria-live="polite">未読み込み</p>'+
+      '<div id="lpManualList"></div>'+
+      '<div id="lpManualExport" hidden>'+
+      '<p class="hint"><strong>修正CSVの確定</strong>：下書きに追加したものを、既存の承認済みイベント名を残して統合します。'+
+      'GitHubへ反映するまでは公開データは変わりません。</p>'+
+      '<div class="lp-manual-export-buttons">'+
+      '<button type="button" id="lpManualCopy">GitHub用CSVをコピー</button>'+
+      '<button type="button" id="lpManualDownload">CSVを保存</button></div>'+
+      '<a href="'+LP_MANUAL_GITHUB_EDITOR+'" target="_blank" rel="noopener noreferrer">GitHubでCSVを編集 ↗</a>'+
+      '<p class="hint">GitHubで <code>livepocket_verified_titles.csv</code> の内容を丸ごと置き換え、Commit changesを押してください。'+
+      '次の収集処理で反映されます。GitHubの権限が必要です。</p></div>';
+    before.after(section);
+    const dialog=document.createElement('dialog');
+    dialog.id='lpManualEditor';
+    dialog.setAttribute('aria-label','失敗イベントの正式名称を手動修正');
+    dialog.innerHTML='<h3 tabindex="-1" autofocus id="lpManualEditorTitle">正式イベント名の手動修正</h3>'+
+      '<p id="lpManualEditorDescription" class="hint"></p>'+
+      '<form id="lpManualForm">'+
+      '<label>正式イベント名（5〜160文字）<textarea name="event_title" rows="4" maxlength="160" required placeholder="公式ページに実際に掲載されている正式名称"></textarea></label>'+
+      '<label>確認できた証拠の種類<select name="evidence" required>'+
+      '<option value="" selected disabled>選択してください</option>'+
+      '<option value="official_page_viewed">同じURLの公式イベントページを確認</option>'+
+      '<option value="official_screenshot_viewed">同じURLの公式画面スクリーンショットを確認</option></select></label>'+
+      '<label class="lp-manual-consent"><input type="checkbox" name="confirmed" required>このイベントURLと正式名称が一致することを自分で確認しました</label>'+
+      '<div class="lp-manual-export-buttons">'+
+      '<button type="submit" class="primary">端末に下書き保存</button>'+
+      '<button type="button" id="lpManualClose">閉じる</button>'+
+      '<button type="button" id="lpManualRemoveDraft">下書きを削除</button></div>'+
+      '<p id="lpManualEditorStatus" class="hint" role="status" aria-live="polite"></p></form>';
+    document.body.append(dialog);
+    try {
+      const stored=JSON.parse(localStorage.getItem(LP_MANUAL_DRAFT_KEY)||'{}');
+      if(stored && typeof stored==='object' && !Array.isArray(stored))lpManualDrafts=stored;
+    }catch(ignore){}
+    $('lpManualLoad').addEventListener('click',lpManualLoad);
+    section.addEventListener('click',event=>{
+      const btn=event.target.closest('button[data-manual-url]');
+      if(btn && section.contains(btn))lpManualOpen(btn.dataset.manualUrl);
+    });
+    $('lpManualCopy').addEventListener('click',()=>lpManualExport('copy'));
+    $('lpManualDownload').addEventListener('click',()=>lpManualExport('download'));
+    $('lpManualClose').addEventListener('click',()=>dialog.close());
+    $('lpManualRemoveDraft').addEventListener('click',()=>{
+      if(!isDeveloper()||!lpManualEditing)return;
+      delete lpManualDrafts[lpManualEditing];
+      try{lpManualSaveDrafts();}catch(error){$('lpManualEditorStatus').textContent=error.message;return;}
+      dialog.close();
+      lpManualRender();
+    });
+    $('lpManualForm').addEventListener('submit',event=>{
+      event.preventDefault();
+      if(!isDeveloper()||!lpManualValidUrl(lpManualEditing))return;
+      const fd=new FormData(event.currentTarget);
+      const title=lpManualValidTitle(fd.get('event_title'));
+      const evidence=String(fd.get('evidence')||'');
+      if(!title || !['official_page_viewed','official_screenshot_viewed'].includes(evidence) ||
+          fd.get('confirmed')!=='on') {
+        $('lpManualEditorStatus').textContent='正式名称・証拠・確認チェックを見直してください。省略されたタイトルは登録できません。';
+        return;
+      }
+      const url=lpManualEditing;
+      const previous=lpManualDrafts[url];
+      lpManualDrafts[url]={event_title:title,evidence};
+      try{lpManualSaveDrafts();}
+      catch(error){if(previous)lpManualDrafts[url]=previous;else delete lpManualDrafts[url];$('lpManualEditorStatus').textContent=error.message;return;}
+      dialog.close();
+      lpManualRender();
+    });
+    dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+  }
+
+  async function lpManualLoad() {
+    if(!isDeveloper())return;
+    if(lpManualBusy)return;
+    lpManualBusy=true;
+    const btn=$('lpManualLoad'),status=$('lpManualStatus');
+    btn.disabled=true;
+    btn.textContent='読込中…';
+    status.textContent='🔄 失敗候補と現在の承認済み修正を取得しています…';
+    try {
+      const suffix='?v='+Date.now();
+      const [failed,approved] = await Promise.all([
+        fetch('./livepocket_content_checks.csv'+suffix,{cache:'no-store'}),
+        fetch('./livepocket_verified_titles.csv'+suffix,{cache:'no-store'})
+      ]);
+      if(!failed.ok||!approved.ok)throw Error('CSV取得 HTTP '+failed.status+'/'+approved.status);
+      const source=lpManualParseCsv(await failed.text());
+      const verified=lpManualParseCsv(await approved.text());
+      for(const column of ['url','title_diagnostic_reason','event_title','title_diagnostic_checked_at']) {
+        if(!source.header.includes(column))throw Error('抽選チェックCSVに列がありません：'+column);
+      }
+      for(const column of ['url','event_title','evidence','approved']) {
+        if(!verified.header.includes(column))throw Error('承認済みCSVに列がありません：'+column);
+      }
+      lpManualOriginal=verified.rows;
+      const done=new Set(verified.rows.filter(x=>x.approved==='yes').map(x=>x.url));
+      lpManualRows=source.rows.filter(row=>
+        lpManualValidUrl(row.url) &&
+        Object.hasOwn(LP_MANUAL_REASONS,row.title_diagnostic_reason||'') &&
+        !done.has(row.url) &&
+        !['v21_9_official_exact_url_title','v21_13_verified_manual_exact_url'].includes(row.title_source||'')
+      ).sort((a,b)=>String(b.title_diagnostic_checked_at).localeCompare(String(a.title_diagnostic_checked_at)));
+      lpManualLoaded=true;
+      lpManualRender();
+    }catch(error) {
+      status.textContent='⚠ 失敗候補を読み込めませんでした：'+(error?.message||error);
+    }finally {
+      btn.disabled=false;
+      btn.textContent='失敗候補を再読み込み';
+      lpManualBusy=false;
+    }
+  }
+
+  function lpManualRender() {
+    if(!isDeveloper())return;
+    const list=$('lpManualList'),status=$('lpManualStatus');
+    const validDrafts=Object.entries(lpManualDrafts).filter(([url,data])=>
+      lpManualValidUrl(url)&&lpManualValidTitle(data?.event_title)&&
+      ['official_page_viewed','official_screenshot_viewed'].includes(data?.evidence));
+    $('lpManualExport').hidden=validDrafts.length===0 || !lpManualLoaded;
+    if(!lpManualLoaded){status.textContent='未読み込み（端末内の下書き '+validDrafts.length+'件）';return;}
+    status.textContent='取得未完了の候補 '+lpManualRows.length+'件 ／ 修正下書き '+validDrafts.length+'件';
+    if(!lpManualRows.length) {
+      list.innerHTML='<p class="hint">現在、手動修正が必要な候補はありません。</p>';
+      return;
+    }
+    list.innerHTML=lpManualRows.slice(0,100).map(row=>{
+      const draft=lpManualDrafts[row.url];
+      const label=LP_MANUAL_REASONS[row.title_diagnostic_reason]||'未確認';
+      const current=(row.event_title||row.store_name||'イベント名は未確認').slice(0,150);
+      const checked=row.title_diagnostic_checked_at ? lpDevReportDate(row.title_diagnostic_checked_at) : '不明';
+      return '<div class="lp-manual-row"><div>'+
+        '<strong>'+escape(current)+'</strong>'+
+        '<p>'+escape(label)+' ／ 確認：'+escape(checked)+'</p>'+
+        (draft?'<p class="lp-manual-ready">✅ 下書き：'+escape(draft.event_title)+'</p>':'')+
+        '<a href="'+escape(row.url)+'" target="_blank" rel="noopener noreferrer">公式ページを確認 ↗</a>'+
+        '</div><button type="button" data-manual-url="'+escape(row.url)+'">'+
+          (draft?'修正する':'手動修正')+'</button></div>';
+    }).join('')+(lpManualRows.length>100?
+      '<p class="hint">先頭100件まで表示しています。</p>':'');
+  }
+
+  function lpManualOpen(url) {
+    if(!isDeveloper()||!lpManualLoaded||!lpManualRows.some(row=>row.url===url))return;
+    const dialog=$('lpManualEditor');
+    lpManualEditing=url;
+    const row=lpManualRows.find(record=>record.url===url);
+    const draft=lpManualDrafts[url];
+    $('lpManualEditorDescription').textContent=
+      '対象：'+url+' ／ 現在の候補：'+(row.event_title||'未確認')+
+      '。公式ページを開き、表示される名称をそのまま入力してください。';
+    const form=$('lpManualForm');
+    form.reset();
+    form.elements.namedItem('event_title').value=draft?.event_title||'';
+    form.elements.namedItem('evidence').value=draft?.evidence||'';
+    form.elements.namedItem('confirmed').checked=false;
+    $('lpManualEditorStatus').textContent='';
+    $('lpManualRemoveDraft').hidden=!draft;
+    dialog.showModal();
+    $('lpManualEditorTitle').focus({preventScroll:true});
+  }
+
+  function lpManualBuildCsv() {
+    if(!lpManualLoaded)throw Error('先に失敗候補を読み込んでください');
+    const map=new Map();
+    for(const row of lpManualOriginal) {
+      if(lpManualValidUrl(row.url))map.set(row.url,{
+        url:row.url,event_title:row.event_title,evidence:row.evidence,approved:row.approved
+      });
+    }
+    const eligible=new Set(lpManualRows.map(row=>row.url));
+    let additions=0;
+    for(const [url,fix] of Object.entries(lpManualDrafts)) {
+      if(!eligible.has(url) || !lpManualValidUrl(url))continue;
+      const title=lpManualValidTitle(fix?.event_title);
+      if(!title || !['official_page_viewed','official_screenshot_viewed'].includes(fix?.evidence))continue;
+      // Do not override previously approved independent claims in the CSV.
+      if(map.has(url)&&map.get(url).approved==='yes')continue;
+      map.set(url,{url,event_title:title,evidence:fix.evidence,approved:'yes'});
+      additions++;
+    }
+    if(additions===0)throw Error('出力する新しい修正下書きがありません');
+    const header=['url','event_title','evidence','approved'];
+    return {total:additions,text:[lpManualCsvLine(header),
+      ...Array.from(map.values(), row=>lpManualCsvLine(header.map(key=>row[key]||'')))
+    ].join('\r\n')+'\r\n'};
+  }
+
+  async function lpManualExport(mode) {
+    if(!isDeveloper())return;
+    const status=$('lpManualStatus');
+    let csv;
+    try{csv=lpManualBuildCsv();}
+    catch(error){status.textContent='⚠ '+error.message;return;}
+    if(mode==='copy') {
+      try {
+        if(navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(csv.text);
+        }else{
+          const area=document.createElement('textarea');
+          area.value=csv.text;area.style.position='fixed';area.style.opacity='0';
+          document.body.append(area);area.select();
+          const ok=document.execCommand('copy');area.remove();
+          if(!ok)throw Error('このiPhoneでコピーできません');
+        }
+        status.textContent='✅ '+csv.total+'件の修正を含むCSVをコピーしました。GitHubで貼り付けてCommitしてください。';
+      }catch(error){status.textContent='⚠ コピーできませんでした。CSVを保存するボタンをお試しください。';}
+    }else{
+      const blob=new Blob(['\uFEFF'+csv.text],{type:'text/csv;charset=utf-8'});
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement('a');
+      link.href=url;link.download='livepocket_verified_titles.csv';
+      document.body.append(link);link.click();link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
+      status.textContent='✅ '+csv.total+'件の修正CSVを作成しました。GitHubへファイルを反映してください。';
+    }
+  }
+
   function initLotteryDevRecheck() {
     const button = $('lpDevRecheckButton');
     const status = $('lpDevRecheckStatus');
     if (!button || !status) return;
+    lpManualInitUI();
     $('lpDevResultsRefresh')?.addEventListener('click', () => loadLotteryDevResults({manual:true}));
     button.addEventListener('click', () => requestLotteryDevRecheck({automatic: false}));
   }
