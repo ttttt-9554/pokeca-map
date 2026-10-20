@@ -680,6 +680,17 @@ html[data-theme="dark"] .lp-dev-recheck { background: #172337; color: #eef4ff; b
 html[data-theme="dark"] .lp-dev-recheck a { color: #9ac2ff; }
 
 
+/* v21.44: historical unavailable records stay searchable without looking open. */
+.lp-status.lp-unavailable{background:#fee2e2!important;color:#991b1b!important;
+  border:1px solid #fecaca!important;font-weight:800}
+.lp-missing-notice{padding:10px 12px;margin:8px 0 12px;border-radius:10px;
+  border:1px solid #f59e0b;background:#fffbeb;color:#92400e;
+  font-weight:700;font-size:12px;line-height:1.6}
+html[data-theme="dark"] .lp-status.lp-unavailable{background:#4c2430!important;
+  color:#fecdd3!important;border-color:#be6477!important}
+html[data-theme="dark"] .lp-missing-notice{background:#422f20!important;
+  color:#fde68a!important;border-color:#a16207!important}
+
 /* v21.44: page unavailable/review hold, separate from manual title edits. */
 .lp-manual-row-actions{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:0 0 auto}
 .lp-manual-row-actions button{width:100%;min-width:112px}
