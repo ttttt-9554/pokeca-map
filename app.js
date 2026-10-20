@@ -4376,9 +4376,20 @@
       };
       const records=[...finished.map(row=>renderResolved(row,false)),
         ...pending.map(row=>renderResolved(row,true))];
-      resolved.innerHTML='<h4>✅ 対応済み・判断保留（'+records.length+'件）</h4>'+
-        '<p class="hint">保存した項目は上のエラー一覧に出ません。ここから編集・解除できます。</p>'+
-        (records.length?records.join(''):'<p class="hint">まだ対応済みの記録はありません。</p>');
+      // v21.46: Fold resolved entries initially and preserve the opened state
+      // whenever the list re-renders during a background refresh or save.
+      const wasExpanded=resolved.querySelector('details.lp-manual-fold')?.open===true;
+      resolved.innerHTML='<details class="lp-manual-fold">'+
+        '<summary class="lp-manual-fold-summary">'+
+          '<span class="lp-manual-fold-label">✅ 対応済み・判断保留</span>'+
+          '<span class="lp-manual-fold-count">'+records.length+'件</span>'+
+          '<span class="lp-manual-fold-chevron" aria-hidden="true"></span>'+
+        '</summary>'+
+        '<div class="lp-manual-fold-content">'+
+          '<p class="hint">保存した項目は上のエラー一覧に出ません。ここから編集・解除できます。</p>'+
+          (records.length?records.join(''):'<p class="hint">まだ対応済みの記録はありません。</p>')+
+        '</div></details>';
+      if(wasExpanded)resolved.querySelector('details.lp-manual-fold').open=true;
     }
   }
 
