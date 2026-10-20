@@ -4181,20 +4181,6 @@
         }
       }
     });
-    section.addEventListener('click',async event=>{
-      const button=event.target.closest('button[data-cloud-remove]');
-      if(!button || !section.contains(button) || !isDeveloper())return;
-      const url=button.dataset.cloudRemove;
-      if(!lpCloudOverrides.has(url)||!window.confirm('このイベントの公開済み手動修正を解除しますか？\n元の収集データは残ります。'))return;
-      button.disabled=true;button.textContent='解除中…';
-      try{
-        await lpCloudRemove(url);
-        $('lpManualStatus').textContent='✅ 手動修正の解除が完了しました。';
-      }catch(error){
-        button.disabled=false;button.textContent='修正を解除';
-        $('lpManualStatus').textContent='⚠ 解除できませんでした：'+(error?.message||error);
-      }
-    });
     $('lpManualCopy').addEventListener('click',()=>lpManualExport('copy'));
     $('lpManualDownload').addEventListener('click',()=>lpManualExport('download'));
     $('lpManualClose').addEventListener('click',()=>dialog.close());
