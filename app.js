@@ -2515,6 +2515,11 @@
         item.event_title=override.event_title;
         item.official_event_title=override.event_title;
         item.event_title_provisional=false;
+        // A title verified from this exact URL also supersedes older CSV
+        // page-unavailable reports. Otherwise a corrected event could remain
+        // incorrectly marked as deleted for other users.
+        item.manual_page_unavailable=false;
+        delete item.manual_page_unavailable_reason;
         // The genre helper is deliberately narrow: don't guess based on snippets.
         if(/ワンピース|ONE\s*PIECE/i.test(override.event_title))item.review_category='onepiece';
         else if(/遊戯王|YU-GI-OH/i.test(override.event_title))item.review_category='yugioh';
