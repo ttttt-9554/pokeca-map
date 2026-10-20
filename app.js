@@ -2395,6 +2395,16 @@
     return Number.isFinite(time) ? time : NaN;
   }
 
+  // v21.50: An application that already ended is historical, not a
+  // manual-error/recheck task. Prefer the latest public deadline, falling
+  // back to the diagnostic CSV for older events. Unknown dates stay eligible.
+  function lpApplicationExpired(url, diagnosticEnd='', now=Date.now()) {
+    const publicItem=lotteryBaseItems.find(item=>item.url===url);
+    const publishedEnd=lotteryDate(publicItem?.application_end_at);
+    const end=Number.isFinite(publishedEnd)?publishedEnd:lotteryDate(diagnosticEnd);
+    return Number.isFinite(end)&&end<=now;
+  }
+
   // v21.20: NEW lasts 24 hours after this URL was first registered.
   // Never infer newness from Discord message time: old URLs may be reposted.
   const LP_NEW_WINDOW_MS = 24 * 60 * 60 * 1000;
@@ -4343,6 +4353,9 @@
     btn.textContent='読込中…';
     status.textContent='🔄 失敗候補と現在の承認済み修正を取得しています…';
     try {
+      // Pull current public deadlines so a stale diagnostic row never forces
+      // the developer to correct an already expired application.
+      await loadLotteryEvents();
       const suffix='?v='+Date.now();
       const [failed,approved] = await Promise.all([
         fetch('./livepocket_content_checks.csv'+suffix,{cache:'no-store'}),
@@ -4359,8 +4372,10 @@
       }
       lpManualOriginal=verified.rows;
       const done=new Set(verified.rows.filter(x=>x.approved==='yes').map(x=>x.url));
+      const now=Date.now();
       lpManualRows=source.rows.filter(row=>
         lpManualValidUrl(row.url) &&
+        !lpApplicationExpired(row.url,row.application_end_at,now) &&
         Object.hasOwn(LP_MANUAL_REASONS,row.title_diagnostic_reason||'') &&
         !done.has(row.url) &&
         !['v21_9_official_exact_url_title','v21_13_verified_manual_exact_url'].includes(row.title_source||'')
@@ -4427,16 +4442,20 @@
     const doneTitles=new Set(lpManualOriginal.filter(x=>x.approved==='yes').map(x=>x.url));
     const doneMissing=new Set(lpMissingOriginal.filter(x=>x.approved==='yes').map(x=>x.url));
     const finished=[],pending=[],unresolved=[];
+    let excludedClosed=0;
+    const now=Date.now();
     for(const row of byUrl.values()){
       const override=lpCloudOverrides.get(row.url);
       const onHold=lpMissingDrafts[row.url]?.reason==='pending';
       if(override||doneTitles.has(row.url)||doneMissing.has(row.url))finished.push(row);
+      else if(lpApplicationExpired(row.url,row.application_end_at,now))excludedClosed++;
       else if(onHold)pending.push(row);
       else unresolved.push(row);
     }
     const cloudError=!lpCloudReady?' ⚠ クラウド未接続：'+(lpCloudError||'Supabase設定を確認'):''; 
     status.textContent='要確認 '+unresolved.length+'件 ／ 対応済み '+finished.length+
-      '件 ／ 保留 '+pending.length+'件'+cloudError;
+      '件 ／ 保留 '+pending.length+'件'+
+      (excludedClosed?' ／ 応募終了で確認不要 '+excludedClosed+'件':'')+cloudError;
     list.innerHTML=unresolved.length?unresolved.slice(0,100).map(row=>{
       const draft=lpManualDrafts[row.url];
       const reason=LP_MANUAL_REASONS[row.title_diagnostic_reason]||'手動確認が必要';
@@ -4959,8 +4978,11 @@
       return;
     }
     const bases=lpLocationBaseList();
-    const incomplete=bases.filter(base=>
+    const now=Date.now();
+    const active=bases.filter(base=>!lpApplicationExpired(base.url,base.application_end_at,now));
+    const incomplete=active.filter(base=>
       !lotteryStoreEntries(base).length||!lotteryPrefectures(base).length);
+    // Existing confirmed corrections remain available in the folded saved list.
     const byUrl=new Map([...incomplete,...bases.filter(x=>lpLocationOverrides.has(x.url))]
       .map(x=>[x.url,x]));
     const all=[...byUrl.values()];
@@ -4977,6 +4999,7 @@
       (lpLocationFilter==='area'&&!lotteryPrefectures(base).length);
     const visible=missing.filter(base=>search(base)&&kind(base));
     const unsafe=lotteryBaseItems.filter(item=>
+      !lpApplicationExpired(item.url,item.application_end_at,now) &&
       Array.isArray(item.stores)&&item.stores.length>1 &&
       (!lotteryStoreEntries(item).length||!lotteryPrefectures(item).length)).length;
     $('lpLocationStatus').textContent='未対応 '+missing.length+'件 ／ 店舗名未確認 '+
