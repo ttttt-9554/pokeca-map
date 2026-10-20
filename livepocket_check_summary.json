@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39357320769",
-    "run_number": "375",
-    "completed_process_at": "2026-10-20T02:09:57Z",
+    "run_id": "39358172958",
+    "run_number": "377",
+    "completed_process_at": "2026-10-20T02:19:30Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -18,7 +18,7 @@
       "deadlines_known": 377,
       "store_lists_added": 0,
       "multi_store_urls": 15,
-      "stores_from_pages": 0,
+      "stores_from_pages": 1,
       "stores_from_discord": 0,
       "ticket_products_added": 0,
       "verified_products_added": 0,
@@ -35,7 +35,7 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 6,
+      "official_genres_confirmed": 8,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -74,7 +74,7 @@
       "manual_title_updated": 0,
       "manual_product_updated": 0,
       "manual_deadline_updated": 0,
-      "manual_store_updated": 0,
+      "manual_store_updated": 1,
       "manual_genre_updated": 0
     },
     "updates": {
@@ -89,9 +89,9 @@
     "manual_page_check_attempts": 12
   },
   "last_manual": {
-    "run_id": "39357320769",
-    "run_number": "375",
-    "completed_process_at": "2026-10-20T02:09:57Z",
+    "run_id": "39358172958",
+    "run_number": "377",
+    "completed_process_at": "2026-10-20T02:19:30Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -106,7 +106,7 @@
       "deadlines_known": 377,
       "store_lists_added": 0,
       "multi_store_urls": 15,
-      "stores_from_pages": 0,
+      "stores_from_pages": 1,
       "stores_from_discord": 0,
       "ticket_products_added": 0,
       "verified_products_added": 0,
@@ -123,7 +123,7 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 6,
+      "official_genres_confirmed": 8,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -162,7 +162,7 @@
       "manual_title_updated": 0,
       "manual_product_updated": 0,
       "manual_deadline_updated": 0,
-      "manual_store_updated": 0,
+      "manual_store_updated": 1,
       "manual_genre_updated": 0
     },
     "updates": {
@@ -183,7 +183,7 @@
     "last_7_days": 71,
     "registered_total": 402,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-20T02:09:57Z",
+    "as_of": "2026-10-20T02:19:30Z",
     "source": "v14_first_detected_urls"
   }
 }
