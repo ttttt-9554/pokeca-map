@@ -4875,7 +4875,7 @@
     const panel=document.createElement('section');
     panel.id='lpLocationPanel';
     panel.className='store-tools lp-dev-location-panel';
-    panel.innerHTML='<h3>📍 店舗・都道府県未確認の手動修正</h3>'+
+    panel.innerHTML='<h3>📍 店舗・地域未確認の手動修正</h3>'+
       '<p class="hint">店舗名・都道府県は別々に確認・保存できます。'+
       '正式名称や地域は公式イベントページ・公式案内で確認してください。'+
       '「保存して反映」で全ユーザーの抽選一覧に適用し、自動取得では上書きされません。'+
@@ -4904,12 +4904,13 @@
       '<form id="lpLocationForm">'+
       '<label>確認できた店舗名（省略可）'+
         '<input type="text" name="store_name" maxlength="160" placeholder="例：○○カードショップ △△店" autocomplete="off"></label>'+
-      '<label>確認できた都道府県（省略可）'+
+      '<label>確認できた地域（都道府県・全国／省略可）'+
         '<select name="prefecture"><option value="">未確認・変更しない</option>'+
           '<option value="'+LP_NATIONWIDE+'">🌏 全国（すべての都道府県で表示）</option>'+
           LP_PREFECTURES.map(p=>'<option value="'+escape(p)+'">'+escape(p)+'</option>').join('')+
         '</select></label>'+
-      '<p class="hint">※どちらか1項目以上入力してください。空欄の項目は自動収集の値を維持します。'+
+      '<p class="hint">※「全国」で保存すると、抽選一覧では47都道府県のどの絞り込みにも表示されます。'+
+        'どちらか1項目以上入力してください。空欄の項目は自動収集の値を維持します。'+
         '既存の修正を消す場合は一覧から「修正を解除」を押してください。</p>'+
       '<label>公式情報を確認した方法'+
         '<select name="evidence" required>'+
