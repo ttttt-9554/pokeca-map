@@ -341,8 +341,9 @@
   function renderMyShared() {
     const target = $('mySharedList'); if (!target) return;
     const own = authUser ? sharedReports.filter(r => r.ownerId === authUser.id) : [];
-    target.innerHTML = own.length ? own.map(card).join('') :
-      '<p class="hint">共有した投稿はありません。</p>';
+    target.innerHTML = own.length ? [...own]
+      .sort((a,b)=>b.foundAt.localeCompare(a.foundAt)).map(card).join('') :
+      '<p class="hint">'+(authUser?'共有した投稿はありません。':'Discordでログインすると自分の共有投稿が表示されます。')+'</p>';
   }
 
   async function initShared() {
@@ -490,6 +491,7 @@
   function switchTab(tab) {
     if ($('mapFilterDrawer') && !$('mapFilterDrawer').hidden && tab !== 'map') setMapFilterOpen(false);
     if (tab === 'dev' && !isDeveloper()) tab = 'map';
+    const changedTab = !document.getElementById(tab+'View')?.classList.contains('active');
     document.querySelectorAll('.view').forEach(view => {
       view.classList.toggle(
         'active', view.id === `${tab}View`
@@ -502,6 +504,16 @@
       );
     });
 
+    // The content shares one scroll container across tabs. Retaining the prior
+    // tab's scroll position can make short views such as History appear blank.
+    if (changedTab) {
+      const area=$('appScrollArea');
+      if(area)area.scrollTop=0;
+    }
+    if (tab === 'history') {
+      renderMyShared();
+      if (supabaseClient) loadSharedReports();
+    }
     if (tab === 'map') refreshMap();
     if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
@@ -2192,6 +2204,7 @@
     get('discordLogin').addEventListener('click',discordLogin);
     get('discordLogout').addEventListener('click',discordLogout);
     get('sharedRefresh').addEventListener('click',loadSharedReports);
+    get('historySharedRefresh').addEventListener('click',loadSharedReports);
     get('mySharedList').addEventListener('click',handleCard);
 
     get('locate').addEventListener('click', locate);
