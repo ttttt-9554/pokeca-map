@@ -5466,6 +5466,7 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_event_title": "【晴れる屋 仙台店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
       "first_detected_at": "2026-10-21T02:35:56.174339+00:00"
     },
     {
@@ -5565,46 +5566,42 @@
       "url": "https://livepocket.jp/e/684iy",
       "store_name": "古本市場竹の塚店",
       "prefecture": "東京都",
+      "event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
+      "application_start_at": "2026-10-21T13:18:00+09:00",
+      "application_end_at": "2026-10-23T22:00:00+09:00",
       "discord_posted_at": "2026-10-21T08:30:06.469000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場竹の塚店",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
-      "application_end_at": "2026-10-23T22:00:00+09:00",
-      "application_start_at": "2026-10-21T13:18:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
       "first_detected_at": "2026-10-21T08:30:56.713219+00:00"
     },
     {
       "url": "https://livepocket.jp/e/c6ups",
       "store_name": "ふるいちイオンモール船橋店",
       "prefecture": "千葉県",
+      "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_start_at": "2026-10-21T10:00:00+09:00",
+      "application_end_at": "2026-10-21T21:00:00+09:00",
       "discord_posted_at": "2026-10-21T08:30:06.469000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール船橋店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（30th CELEBRATION）",
-      "application_end_at": "2026-10-21T21:00:00+09:00",
-      "application_start_at": "2026-10-21T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-21T08:30:56.713219+00:00"
     }
   ],
-  "updated_at": "2026-10-21T08:31:17.785953+00:00"
+  "updated_at": "2026-10-21T08:41:31.069052+00:00"
 }
