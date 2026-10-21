@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Regression tests: do not recheck completed LivePocket events repeatedly."""
 import unittest
+import json
+import tempfile
+from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
 import livepocket_v21 as v21
 import livepocket_manual_completed as cloud
+import livepocket_check_summary as summary
 
 NOW = datetime(2026, 10, 21, 10, 0, tzinfo=timezone.utc)
 FUTURE = "2026-11-01T21:00:00+09:00"
@@ -130,6 +134,31 @@ class CandidateTests(unittest.TestCase):
         item=next(x for x in public["items"]
                   if x["url"]==url("productoptional"))
         self.assertNotIn("product_name",v21.missing_details_v21(item))
+
+    def test_public_report_uses_same_review_selector_without_urls(self):
+        raw, public=fixtures()
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            raw_path=root/"raw.json"
+            public_path=root/"public.json"
+            raw_path.write_text(json.dumps(raw),encoding="utf-8")
+            public_path.write_text(json.dumps(public),encoding="utf-8")
+            with patch.object(summary.v21,"PUBLIC_PATH",public_path):
+                with patch.object(summary,"read_manual_completed",
+                                  return_value=({url("manualdone"),url("manualtitle")},
+                                                {url("removed")},
+                                                {url("manualdone"),url("manualplace")})):
+                    result=summary.current_manual_review_progress(raw_path,now=NOW)
+        self.assertEqual(result["status"],"ok")
+        self.assertEqual(result["total"],len(raw["items"]))
+        self.assertEqual(result["source"],"v21_65_manual_selector")
+        self.assertEqual(result["next_batch_size"],result["ready"])
+        self.assertNotIn("livepocket.jp",json.dumps(result))
+
+    def test_public_report_is_safe_when_snapshot_missing(self):
+        result=summary.current_manual_review_progress(
+            Path("/file/that/does/not/exist/review.json"),now=NOW)
+        self.assertEqual(result,{"status":"unavailable"})
 
     def test_public_override_sync_classification(self):
         cloud.read_manual_completed.cache_clear()
