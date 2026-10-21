@@ -3811,8 +3811,8 @@
     $('lpAppNew')?.setAttribute('aria-expanded','false');
     $('lpAppNew')?.removeAttribute('aria-pressed');
   }
-  function lpAppCloseEditor(){
-    if(lpAppBusy)return;
+  function lpAppCloseEditor(force=false){
+    if(lpAppBusy&&force!==true)return;
     lpAppEditing='';
     const form=$('lpAppForm');
     if(form)form.reset();
@@ -3951,7 +3951,7 @@
       lpAppRows.set(data.id,data);
       lpAppMerge();
       if(!await lpAppRefresh(true))throw Error('保存後の再取得に失敗しました：'+lpAppError);
-      lpAppCloseEditor();
+      lpAppCloseEditor(true);
       $('lpAppStatus').textContent='✅ 登録内容を保存し、共有一覧へ反映しました。';
     }catch(error){
       lpAppFormMessage('⚠ 保存・確認に失敗しました：'+String(error?.message||error));
@@ -3975,7 +3975,7 @@
       if(data?.id!==row.id||data.is_hidden!==hide)throw Error('公開状態の保存を確認できませんでした。');
       lpAppRows.set(row.id,data);lpAppMerge();
       if(!await lpAppRefresh(true))throw Error('再取得に失敗しました：'+lpAppError);
-      lpAppCloseEditor();
+      lpAppCloseEditor(true);
       $('lpAppStatus').textContent=hide
         ?'✅ 非表示にしました。応募履歴は保持しています。'
         :'✅ 共有一覧へ再公開しました。';
@@ -4008,7 +4008,7 @@
       lpAppMerge();
       if(!await lpAppRefresh(true))throw Error('削除後の再取得に失敗しました：'+lpAppError);
       // Private application records are never removed.
-      lpAppCloseEditor();
+      lpAppCloseEditor(true);
       $('lpAppStatus').textContent='✅ 登録を削除しました。個人の応募履歴は保持しています。';
     }catch(error){
       lpAppFormMessage('⚠ 削除を確認できませんでした：'+String(error?.message||error));
