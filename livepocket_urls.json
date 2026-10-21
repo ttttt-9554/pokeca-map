@@ -12836,7 +12836,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/g1lus": {
-          "checked_at": "2026-10-21T15:41:18.869275+00:00",
+          "checked_at": "2026-10-21T21:46:27.051468+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/cn3fn": {
@@ -13305,7 +13305,7 @@
         "https://livepocket.jp/e/g1lus": {
           "detected_at": "2026-10-21T09:35:57.551214+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-21T15:41:18.869275+00:00"
+          "checked_at": "2026-10-21T21:46:27.051468+00:00"
         },
         "https://livepocket.jp/e/cn3fn": {
           "detected_at": "2026-10-21T13:05:59.927040+00:00",
@@ -13728,8 +13728,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/g1lus": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-21T15:41:18.869275+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-21T21:46:27.051468+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/cn3fn": {
@@ -16716,7 +16716,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-21T15:41:18.869275+00:00",
+          "checked_at": "2026-10-21T21:46:27.051468+00:00",
           "title_observed": "ワンピースカードゲームエクストラブースター Heroines Edition vol.2抽選予約受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -18451,7 +18451,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/g1lus": {
-          "checked_at": "2026-10-21T15:41:18.869275+00:00",
+          "checked_at": "2026-10-21T21:46:27.051468+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
