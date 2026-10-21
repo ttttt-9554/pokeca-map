@@ -1392,7 +1392,7 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
             counters['new_pending'] += 1
             continue
         event = pi[url]
-         deadline = v11.parse_datetime(event.get('application_end_at'))
+        deadline = v11.parse_datetime(event.get('application_end_at'))
         deadline_utc = deadline.astimezone(timezone.utc) if deadline else None
         if deadline_utc and deadline_utc <= now:
             counters['expired'] += 1
