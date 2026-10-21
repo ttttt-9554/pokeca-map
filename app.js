@@ -3099,66 +3099,96 @@
     return lpExtLoading;
   }
 
-  // Developer refresh: fetch the currently published Discord URL catalog AND
-  // the Supabase moderation state. Collection itself runs in GitHub Actions.
+  // v21.69: This refreshes the PUBLISHED Discord URL catalog and all manual
+  // overlays. GitHub Actions collects Discord posts separately.
   let lpExtPublishedRefreshBusy=false;
   async function lpExtRefreshPublished(){
     const button=$('lpExtRefresh'),feedback=$('lpExtRefreshFeedback');
-    if(!button||!feedback||!isDeveloper()||lpExtPublishedRefreshBusy)return false;
+    if(!button||!feedback||lpExtPublishedRefreshBusy)return false;
+    if(!isDeveloper()){
+      feedback.textContent='⚠ 開発者アカウントでログインしてください。';
+      return false;
+    }
     lpExtPublishedRefreshBusy=true;
     const buttonLabel=button.textContent;
     button.disabled=true;
+    button.setAttribute('aria-busy','true');
     button.textContent='取得中…';
-    feedback.textContent='🔄 公開済みの外部URLと手動編集情報を取得しています…';
+    feedback.textContent='🔄 GitHubで公開されている外部抽選URLを取得しています…';
+    // Without a timeout, a stalled iPhone connection can leave the button
+    // disabled indefinitely and look as if tapping it had no effect.
+    const controller=typeof AbortController==='function'?new AbortController():null;
+    let timeout=null;
     try{
-      // Wait for a concurrently running lottery feed load before replacing
-      // its cache. Force a fresh network fetch rather than trusting the timer.
-      if(lotteryLoading)await lotteryLoading;
-      const response=await fetch(LP_OTHER_JSON_URL+'?refresh='+Date.now(),{cache:'no-store'});
-      if(!response.ok)throw Error('外部URL一覧 HTTP '+response.status);
+      if(!supabaseClient)throw Error('Supabase接続待ちです。ログイン状態を確認してください');
+      if(lotteryLoading){
+        let waitTimer=null;
+        try{
+          await Promise.race([lotteryLoading,new Promise((_,reject)=>{
+            waitTimer=setTimeout(()=>reject(Error('既存の抽選データ取得が完了しません。画面を更新してください')),15000);
+          })]);
+        }finally{if(waitTimer!==null)clearTimeout(waitTimer);}
+      }
+      if(controller)timeout=setTimeout(()=>controller.abort(),16000);
+      const response=await fetch(LP_OTHER_JSON_URL+'?refresh='+Date.now(),{
+        cache:'no-store',signal:controller?.signal
+      });
+      if(timeout!==null){clearTimeout(timeout);timeout=null;}
+      if(!response.ok)throw Error('公開URL一覧 HTTP '+response.status);
       const data=await response.json();
-      if(!data||!Array.isArray(data.items))
-        throw Error('外部URL一覧のデータ形式が不正です');
+      if(!data||!Array.isArray(data.items))throw Error('公開URL一覧のデータ形式が不正です');
       const fresh=new Map();
       for(const item of data.items){
         if(!item||!safeLotteryUrl(item.url)||isLivePocketEventUrl(item.url))continue;
         if(!fresh.has(item.url))fresh.set(item.url,item);
       }
-      const old=new Set(lotteryBaseItems.filter(item=>
-        item&&!isLivePocketEventUrl(item.url)).map(item=>item.url));
-      const updated=await lpExtRefresh(true);
-      if(!updated)throw Error(lpExtError||'Supabaseの編集情報を取得できません');
-      // Preserve all existing LivePocket entries and their separate overlays.
+      feedback.textContent='🔄 外部URL '+fresh.size+'件を取得しました。手動修正情報を再照合しています…';
+      const updated=await Promise.all([
+        lpExtRefresh(true),lpCloudRefresh(true),lpLocationRefresh(true),lpCardRefresh(true)
+      ]);
+      if(updated.some(ok=>!ok))throw Error('保存済みの修正情報を再取得できませんでした。接続状況を確認してください');
+      const old=new Map(lotteryBaseItems.filter(item=>item&&
+        !isLivePocketEventUrl(item.url)).map(item=>[item.url,item]));
+      const additions=[...fresh.keys()].filter(url=>!old.has(url)).length;
+      const removed=[...old.keys()].filter(url=>!fresh.has(url)).length;
+      const changed=[...fresh].filter(([url,item])=>old.has(url)&&
+        JSON.stringify(old.get(url))!==JSON.stringify(item)).length;
+      // Only replace local data AFTER both published JSON and Supabase reads succeed.
+      // Existing LivePocket items, personal application states and edits survive.
       lotteryBaseItems=[
         ...lotteryBaseItems.filter(item=>item&&isLivePocketEventUrl(item.url)),
         ...fresh.values()
       ];
+      lotteryLastFetch=Date.now();
       lpCloudApply();
-      const additions=[...fresh.keys()].filter(url=>!old.has(url)).length;
-      const removed=[...old].filter(url=>!fresh.has(url)).length;
+      renderLotteryPrefectures();
       const stamp=new Intl.DateTimeFormat('ja-JP',{
         timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',second:'2-digit',
         hour12:false
       }).format(new Date());
       const publishedAt=lotteryJapaneseDate(data.collected_at);
-      feedback.textContent='✅ '+stamp+' に取得完了：外部URL '+fresh.size+
-        '件 ／ 新規 '+additions+'件 ／ 公開一覧から消えたURL '+removed+'件'+
-        (publishedAt?' ／ Discord最終収集 '+publishedAt+'（日本時間）':'')+
-        '。データが変わっていなくても再取得済みです。';
+      feedback.textContent='✅ '+stamp+' 再取得完了：外部URL '+fresh.size+
+        '件 ／ 新規 '+additions+'件 ／ 内容更新 '+changed+'件 ／ 掲載終了 '+removed+'件'+
+        (publishedAt?' ／ Discord収集日時 '+publishedAt+'（日本時間）':' ／ Discord収集日時は不明')+
+        '。件数が同じでも取得は完了しています。新しいDiscord投稿の収集はGitHub Actionsで別途実行されます。';
       return true;
     }catch(error){
-      feedback.textContent='⚠ 取得失敗：'+String(error?.message||error)+
-        '。現在の一覧は変更していません。';
+      const reason=error?.name==='AbortError'
+        ? '通信がタイムアウトしました。接続を確認して再実行してください'
+        : String(error?.message||error);
+      feedback.textContent='⚠ 再取得に失敗：'+reason+'。表示中の一覧は保持しています。';
       console.warn('外部抽選の最新情報を取得できません:',error);
       return false;
     }finally{
+      if(timeout!==null)clearTimeout(timeout);
       lpExtPublishedRefreshBusy=false;
       button.disabled=false;
+      button.removeAttribute('aria-busy');
       button.textContent=buttonLabel;
     }
   }
 
-  function lpExtDateInput(iso){
+    function lpExtDateInput(iso){
     const ms=Date.parse(iso||'');
     if(!Number.isFinite(ms))return '';
     return new Intl.DateTimeFormat('sv-SE',{
