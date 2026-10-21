@@ -88,6 +88,33 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(v21.manual_recheck_candidates(
             raw,public,now=NOW,limit=0),[])
 
+    def test_progress_categories_partition_catalog(self):
+        raw,public=fixtures()
+        counts=v21.manual_recheck_candidates(
+            raw,public,now=NOW,limit=12,summary=True,
+            completed_titles={url("manualdone"),url("manualtitle")},
+            removed_pages={url("removed")},
+            completed_locations={url("manualdone"),url("manualplace")})
+        keys=("ready","retry_wait","completed","expired","removed",
+              "new_pending","quarantined")
+        self.assertEqual(counts["total"],len(raw["items"]))
+        self.assertEqual(sum(counts[key] for key in keys),counts["total"])
+        self.assertEqual(counts["next_batch_size"],counts["ready"])
+        self.assertGreater(counts["completed"],0)
+        self.assertEqual(counts["removed"],1)
+        self.assertEqual(counts["expired"],1)
+        self.assertEqual(counts["retry_wait"],2)
+
+    def test_progress_cooldown_pauses_next_batch_without_losing_counts(self):
+        raw,public=fixtures()
+        raw["collector_state"]["v14"]["blocked_until"]=(NOW+timedelta(hours=1)).isoformat()
+        counts=v21.manual_recheck_candidates(
+            raw,public,now=NOW,summary=True)
+        self.assertTrue(counts["access_cooldown"])
+        self.assertEqual(counts["next_batch_size"],0)
+        self.assertGreater(counts["ready"],0)
+        self.assertEqual(v21.manual_recheck_candidates(raw,public,now=NOW),[])
+
     def test_expired_and_manual_page_unavailable(self):
         raw,public=fixtures()
         for x in public["items"]:
