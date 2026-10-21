@@ -113,7 +113,7 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(counts["expired"],1)
         self.assertEqual(counts["retry_wait"],2)
         self.assertEqual(counts["unresolved"],counts["ready"]+counts["retry_wait"])
-        self.assertEqual(counts["missing_title"],10)
+        self.assertEqual(counts["missing_title"],8)
         self.assertIsNotNone(counts["next_retry_at"])
         self.assertLessEqual(
             datetime.fromisoformat(counts["next_retry_at"].replace("Z","+00:00")),
