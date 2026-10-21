@@ -728,6 +728,96 @@ nav[aria-label="メインメニュー"] {
       <p class="hint">応募状況・締切は取得済み情報に基づきます。内容や応募条件は各イベントの公式ページでご確認ください。</p>
     </section>
 
+
+    <!-- v21.70: User-registered lottery events that live inside mobile apps. -->
+    <section id="appLotteryView" class="view" aria-labelledby="lpAppHeading">
+      <div class="lp-heading">
+        <div>
+          <h2 id="lpAppHeading">📱 アプリ抽選</h2>
+          <p class="hint">自動収集できない公式アプリ内の抽選を、ユーザー同士で登録・共有します。</p>
+        </div>
+        <button type="button" id="lpAppReload" class="lp-refresh">↻ 更新</button>
+      </div>
+      <p id="lpAppAccountHint" class="hint" aria-live="polite"></p>
+      <button type="button" class="primary lp-app-add" id="lpAppNew">➕ アプリ抽選を登録</button>
+      <details id="lpAppFormFold" class="lp-app-form-fold">
+        <summary>📝 アプリ抽選 登録・編集フォーム</summary>
+        <h3 id="lpAppFormHeading" tabindex="-1">アプリ抽選を新しく登録</h3>
+        <form id="lpAppForm" autocomplete="off">
+          <label>アプリ名（必須）
+            <input type="text" name="app_name" maxlength="100" minlength="2" required placeholder="例：○○ショップ公式アプリ">
+          </label>
+          <label>抽選名（必須）
+            <input type="text" name="event_title" maxlength="200" minlength="2" required placeholder="公式アプリに表示されている抽選名">
+          </label>
+          <label>商品名（任意）
+            <input type="text" name="product_name" maxlength="200" placeholder="例：ポケモンカード新商品">
+          </label>
+          <label>店舗名（任意）
+            <input type="text" name="store_name" maxlength="200" placeholder="店舗限定の場合は入力">
+          </label>
+          <label>対象地域（任意）
+            <select name="prefecture" id="lpAppPrefecture"><option value="">未確認</option></select>
+          </label>
+          <div class="lp-app-form-grid">
+            <label>ジャンル
+              <select name="review_category">
+                <option value="pokemon" selected>ポケカ</option>
+                <option value="onepiece">ワンピース</option>
+                <option value="yugioh">遊戯王</option>
+                <option value="unknown">未分類</option>
+              </select>
+            </label>
+            <label>商品区分
+              <select name="product_type">
+                <option value="unknown" selected>未確認</option>
+                <option value="pack">拡張パック</option>
+                <option value="deck">構築デッキ</option>
+                <option value="pack/deck">両方</option>
+              </select>
+            </label>
+          </div>
+          <label>応募開始（日本時間・任意）
+            <input type="datetime-local" name="application_start_at">
+          </label>
+          <label>応募締切（日本時間・任意）
+            <input type="datetime-local" name="application_end_at">
+          </label>
+          <label>公式案内・参照URL（任意）
+            <input type="url" name="source_url" maxlength="2000" inputmode="url" placeholder="https://...（リンクがない場合は空欄）">
+          </label>
+          <label>抽選に関する共有メモ（任意・600文字以内）
+            <textarea name="details" maxlength="600" rows="3" placeholder="応募方法や対象店舗など、公式アプリで確認した内容"></textarea>
+          </label>
+          <p class="hint">登録した抽選情報は全ユーザーに公開されます。応募済み・当選・落選・受け取り期限・個人メモは従来の「抽選管理」に非公開で保存されます。公式情報に変更があった場合は登録者または管理者が編集できます。</p>
+          <div class="lp-app-form-actions">
+            <button type="submit" class="primary">共有一覧に保存</button>
+            <button type="button" id="lpAppCancel">閉じる</button>
+            <button type="button" id="lpAppToggle" hidden>登録を非表示（履歴保持）</button>
+          </div>
+          <p id="lpAppFormStatus" class="hint" role="status" aria-live="polite"></p>
+        </form>
+      </details>
+      <section class="lp-app-search" aria-label="アプリ抽選検索">
+        <label for="lpAppSearch">アプリ名・商品名・店舗名で検索</label>
+        <input type="search" id="lpAppSearch" maxlength="120" placeholder="抽選を検索" autocomplete="off">
+        <label for="lpAppFilter">応募受付状況</label>
+        <select id="lpAppFilter">
+          <option value="all">すべて</option>
+          <option value="open">受付中（日時確認済み）</option>
+          <option value="upcoming">開始前</option>
+          <option value="unknown">応募期間未確認</option>
+          <option value="closed">受付終了</option>
+        </select>
+      </section>
+      <p id="lpAppStatus" class="hint" role="status" aria-live="polite">アプリ抽選情報を確認しています…</p>
+      <div id="lpAppList" class="lp-cards" aria-live="polite"></div>
+      <details id="lpAppArchived" class="lp-app-archived" hidden>
+        <summary>📁 非表示の登録</summary>
+      </details>
+      <p class="hint">登録情報は利用者の申告です。応募条件や受付期間は必ず公式アプリで確認してください。</p>
+    </section>
+
     <!-- ======================================
          発見情報登録画面
          ====================================== -->
@@ -1382,6 +1472,11 @@ nav[aria-label="メインメニュー"] {
       <span>抽選</span>
     </button>
 
+    <button type="button" data-tab="appLottery" aria-label="アプリ抽選を開く">
+      📱
+      <span>アプリ抽選</span>
+    </button>
+
     <button type="button" data-tab="lotteryManage" aria-label="自分の抽選管理を開く">
       ✅
       <span>抽選管理</span>
@@ -1422,7 +1517,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261022-v21_69-external-refresh"></script>
+  <script src="app.js?v=20261022-v21_70-app-lottery"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
@@ -1480,7 +1575,7 @@ nav[aria-label="メインメニュー"] {
       // Preserve the visible tab across the full-page refresh.
       var selected = document.querySelector('nav[aria-label="メインメニュー"] button.active[data-tab]');
       var currentTab = selected ? selected.dataset.tab : '';
-      if (/^(map|add|history|lottery|lotteryManage|group|dev)$/.test(currentTab)) {
+      if (/^(map|add|history|lottery|appLottery|lotteryManage|group|dev)$/.test(currentTab)) {
         next.searchParams.set('app_tab',currentTab);
       }
       if(controller)timeout=setTimeout(function(){controller.abort();},12000);
