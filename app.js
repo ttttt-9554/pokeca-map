@@ -356,6 +356,7 @@
     supabaseClient.auth.onAuthStateChange((_event,session) => {
       authUser = session?.user || null;
       displayAuth();
+      lpAppRefresh(true).catch(error=>console.warn('アプリ抽選のログイン更新に失敗:',error));
     });
     const {data,error} = await supabaseClient.auth.getSession();
     if (error) $('sharedStatus').textContent = 'ログイン状態の確認に失敗: ' + error.message;
@@ -367,15 +368,19 @@
     await lpLocationRefresh(true);
     await lpExtRefresh(true);
     await lpCardRefresh(true);
+    await lpAppRefresh(true);
     refreshLotteryOnsiteReports(true);
     refreshLotteryOnsiteArchive(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); lpCardRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); lpCardRefresh(true); lpAppRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
     supabaseClient.channel('pokeca-lottery-card-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
+      .subscribe();
+    supabaseClient.channel('pokeca-app-lottery-updates')
+      .on('postgres_changes',{event:'*',schema:'public',table:LP_APP_TABLE},()=>lpAppRefresh(true))
       .subscribe();
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
@@ -523,6 +528,7 @@
     }
     if (tab === 'map') refreshMap();
     if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
+    if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); }
     render();
@@ -2423,6 +2429,7 @@
   }
 
   function lotterySite(item) {
+    if(item?.app_lottery)return String(item.app_lottery_name||'アプリ抽選');
     if(isLivePocketEventUrl(item?.url))return 'LivePocket';
     const site=String(item?.source_site||'').trim();
     if(site)return site;
@@ -2484,7 +2491,7 @@
   function lotteryState(item, now = Date.now()) {
     // Manual-confirmed unavailable pages are never labelled "受付中".
     // Keep them in the "すべて" list and preserve saved lottery history.
-    if (item.manual_page_unavailable === true) return 'unavailable';
+    if (item.manual_page_unavailable === true || item.app_lottery_hidden === true) return 'unavailable';
     const end = lotteryDate(item.application_end_at);
     const start = lotteryDate(item.application_start_at);
     if (Number.isFinite(end) && now > end) return 'closed';
@@ -3031,8 +3038,8 @@
           seen.add(item.url);
           clean.push(item);
         }
-        lotteryBaseItems=clean;
-        if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); }
+        lotteryBaseItems=[...clean,...lpAppMergedItems()];
+        if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); await lpAppRefresh(); }
         lpCloudApply();
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
@@ -3148,7 +3155,7 @@
       ]);
       if(updated.some(ok=>!ok))throw Error('保存済みの修正情報を再取得できませんでした。接続状況を確認してください');
       const old=new Map(lotteryBaseItems.filter(item=>item&&
-        !isLivePocketEventUrl(item.url)).map(item=>[item.url,item]));
+        !isLivePocketEventUrl(item.url)&&!item.app_lottery).map(item=>[item.url,item]));
       const additions=[...fresh.keys()].filter(url=>!old.has(url)).length;
       const removed=[...old.keys()].filter(url=>!fresh.has(url)).length;
       const changed=[...fresh].filter(([url,item])=>old.has(url)&&
@@ -3156,7 +3163,7 @@
       // Only replace local data AFTER both published JSON and Supabase reads succeed.
       // Existing LivePocket items, personal application states and edits survive.
       lotteryBaseItems=[
-        ...lotteryBaseItems.filter(item=>item&&isLivePocketEventUrl(item.url)),
+        ...lotteryBaseItems.filter(item=>item&&(isLivePocketEventUrl(item.url)||item.app_lottery)),
         ...fresh.values()
       ];
       lotteryLastFetch=Date.now();
@@ -3238,7 +3245,7 @@
     const editedOpen=$('lpExtEdited')?.open===true;
     const excludedOpen=$('lpExtExcluded')?.open===true;
     const input=String($('lpExtSearch')?.value||'').trim().toLocaleLowerCase('ja-JP');
-    const candidates=new Map(lotteryBaseItems.filter(x=>x&&!isLivePocketEventUrl(x.url))
+    const candidates=new Map(lotteryBaseItems.filter(x=>x&&!x.app_lottery&&!isLivePocketEventUrl(x.url))
       .map(x=>[x.url,x]));
     for(const [url,row] of lpExtOverrides)
       if(!candidates.has(url))candidates.set(url,{
@@ -3429,7 +3436,7 @@
     const trustedTitle = item.event_title_provisional ? '' : item.event_title;
     const reliableName = (item.manual_card_title ? (trustedTitle || item.product_name) : (officialName || item.product_name || trustedTitle) || '').trim();
     // Discord excerpt is a discovery hint only, not an authoritative heading.
-    const external=!isLivePocketEventUrl(item.url);
+    const external=!isLivePocketEventUrl(item.url)&&!item.app_lottery;
     const label = reliableName || (external?'外部サイト・抽選内容未確認':'商品名・イベント名を確認中');
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
@@ -3460,14 +3467,17 @@
       <h3 class="lp-full-title">${escape(label)}</h3>
       ${lpCardOverrides.get(item.url)?.edited_fields?.includes('product_name') && item.product_name && item.product_name !== label ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
       ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
-      ${state === 'unavailable' ? '<p class="lp-missing-notice">⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。</p>' : ''}
+      ${item.app_lottery?'<p class="lp-store-muted">📱 ユーザー登録のアプリ内抽選（公式情報は各アプリで確認）</p>':''}
+      ${item.app_lottery_details?'<p class="lp-store-muted">共有メモ：'+escape(item.app_lottery_details)+'</p>':''}
+      ${state === 'unavailable' ? '<p class="lp-missing-notice">'+(item.app_lottery_hidden?'📁 このアプリ抽選は一覧から非表示です。過去の応募履歴は保持しています。':'⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。')+'</p>' : ''}
       ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
       ${lotteryOnsiteSharedHtml(item.url)}
-      <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">${external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗'}</a>
+      ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">アプリ公式案内を確認 ↗</a>':'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>') : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
       ${lotteryTrackerActionsHtml(item)}
+      ${item.app_lottery&&lpAppCanEdit(item)?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">✏️ 登録情報を編集</button></div>':''}
       ${isDeveloper()? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
   }
@@ -3511,7 +3521,9 @@
     const site = $('lpSite').value;
     const wishlistOnly = $('lpWishlistOnly').checked;
     const visible = lotteryItems.filter(item => {
-      if(site==='external'&&isLivePocketEventUrl(item.url))return false;
+      if(item.app_lottery_hidden)return false;
+      if(site==='app'&&!item.app_lottery)return false;
+      if(site==='external'&&(isLivePocketEventUrl(item.url)||item.app_lottery))return false;
       if(site==='livepocket'&&!isLivePocketEventUrl(item.url))return false;
       if (genre !== 'all' && lotteryGenre(item) !== genre) return false;
       if (prefecture === 'unknown' && lotteryPrefectures(item).length) return false;
@@ -3534,9 +3546,11 @@
     const pokemonCount = lotteryItems.filter(x => lotteryGenre(x) === 'pokemon').length;
     const knownCount = lotteryItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
     const openCount = lotteryItems.filter(x => lotteryState(x,now) === 'open').length;
-    const externalCount=lotteryItems.filter(x=>!isLivePocketEventUrl(x.url)).length;
+    const externalCount=lotteryItems.filter(x=>!isLivePocketEventUrl(x.url)&&!x.app_lottery).length;
+    const appCount=lotteryItems.filter(x=>x.app_lottery&&!x.app_lottery_hidden).length;
     $('lpSummary').innerHTML = `<span>全イベント <strong>${lotteryItems.length}</strong>件</span>
       <span>外部URL <strong>${externalCount}</strong>件</span>
+      <span>アプリ抽選 <strong>${appCount}</strong>件</span>
       <span>ポケカ <strong>${pokemonCount}</strong>件</span>
       <span>締切確認済み <strong>${knownCount}</strong>件</span>
       <span>受付中（確認済み） <strong>${openCount}</strong>件</span>`;
@@ -3556,6 +3570,7 @@
     ensureLotteryTrackerUI();
     lpExtInitUI();
     lpCardInitUI();
+    lpAppInitUI();
     $('lpOnsiteArchiveSearch')?.addEventListener('input',()=>{
       lotteryOnsiteArchiveLimit=40;renderLotteryOnsiteArchive();
     });
@@ -3616,16 +3631,306 @@
         lpCloudRefresh();
         lpLocationRefresh();
         lpExtRefresh();
+        lpAppRefresh();
+      }
+      if($('appLotteryView')?.classList.contains('active')){
+        lpAppRefresh();
+        lpAppRender();
       }
     }, 60000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
       if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();lpLocationRefresh(true);}
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
+      if ($('appLotteryView')?.classList.contains('active')) lpAppRefresh(true);
       if ($('lotteryView').classList.contains('active')) refreshLotteryOnsiteArchive(true);
     });
   }
 
+
+
+  // v21.70: User-submitted in-app lotteries. Public event facts are shared,
+  // but application results and pickup notes stay in the existing private RLS tables.
+  const LP_APP_TABLE='lottery_app_events';
+  const LP_APP_URL_PREFIX='https://ttttt-9554.github.io/pokeca-map/?app_lottery=';
+  const LP_APP_SELECT='id,created_by,app_name,event_title,product_name,store_name,prefecture,review_category,product_type,application_start_at,application_end_at,source_url,details,is_hidden,created_at,updated_at';
+  let lpAppRows=new Map(),lpAppReady=false,lpAppError='',lpAppFetch=null,lpAppLastFetch=0;
+  let lpAppSeq=0,lpAppUser='',lpAppBusy=false,lpAppEditing='';
+  function lpAppUrl(id){
+    return LP_APP_URL_PREFIX+String(id||'');
+  }
+  function lpAppEventId(url){
+    if(typeof url!=='string'||!url.startsWith(LP_APP_URL_PREFIX))return '';
+    const id=url.slice(LP_APP_URL_PREFIX.length);
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)?id:'';
+  }
+  function lpAppItem(row){
+    return {
+      url:lpAppUrl(row.id),app_lottery:true,app_lottery_id:row.id,
+      app_lottery_owner:row.created_by,app_lottery_hidden:row.is_hidden===true,
+      app_lottery_name:row.app_name,app_lottery_details:row.details||'',
+      app_lottery_source_url:safeLotteryUrl(row.source_url)?row.source_url:'',
+      source_site:row.app_name+'（アプリ抽選）',event_title:row.event_title,
+      official_event_title:row.event_title,event_title_provisional:false,
+      product_name:row.product_name||'',store_name:row.store_name||'',
+      prefecture:row.prefecture||'',review_category:row.review_category||'unknown',
+      manual_card_genre:true,pokemon_map_type:row.product_type||'unknown',
+      application_start_at:row.application_start_at||null,
+      application_end_at:row.application_end_at||null,
+      first_detected_at:row.created_at,created_at:row.created_at
+    };
+  }
+  function lpAppCanEdit(item){
+    return !!authUser&&(isDeveloper()||item?.app_lottery_owner===authUser.id);
+  }
+  function lpAppMergedItems(){
+    return [...lpAppRows.values()].map(lpAppItem);
+  }
+  function lpAppMerge(){
+    lotteryBaseItems=[
+      ...lotteryBaseItems.filter(x=>!x?.app_lottery),
+      ...lpAppMergedItems()
+    ];
+    lpCloudApply();
+    lpAppRender();
+  }
+  async function lpAppRefresh(force=false){
+    if(!supabaseClient){
+      lpAppError='共有データベースへの接続待ちです';
+      lpAppRender();
+      return false;
+    }
+    const user=authUser?.id||'';
+    if(user!==lpAppUser){
+      lpAppUser=user;lpAppRows=new Map();lpAppReady=false;
+      lpAppLastFetch=0;lpAppSeq++;lpAppFetch=null;
+      lpAppMerge();
+    }
+    if(!force&&lpAppReady&&Date.now()-lpAppLastFetch<45000)return true;
+    if(lpAppFetch)return lpAppFetch;
+    const seq=++lpAppSeq;
+    const task=(async()=>{
+      try{
+        const {data,error}=await supabaseClient.from(LP_APP_TABLE)
+          .select(LP_APP_SELECT).order('created_at',{ascending:false}).limit(3000);
+        if(error)throw error;
+        if(seq!==lpAppSeq)return false;
+        lpAppRows=new Map((data||[]).filter(x=>
+          /^[0-9a-f-]{36}$/i.test(x.id||'')).map(x=>[x.id,x]));
+        lpAppError='';lpAppReady=true;lpAppLastFetch=Date.now();
+        lpAppMerge();
+        return true;
+      }catch(error){
+        if(seq!==lpAppSeq)return false;
+        lpAppError=String(error?.message||error);
+        console.warn('アプリ抽選の共有情報を取得できません:',error);
+        lpAppRender();
+        return false;
+      }finally{
+        if(lpAppFetch===task)lpAppFetch=null;
+      }
+    })();
+    lpAppFetch=task;
+    return task;
+  }
+  function lpAppRender(){
+    const root=$('lpAppList'),status=$('lpAppStatus');
+    if(!root||!status)return;
+    const rows=[...lpAppRows.values()].map(lpAppItem);
+    const ownHidden=rows.filter(x=>x.app_lottery_hidden&&lpAppCanEdit(x));
+    const active=rows.filter(x=>!x.app_lottery_hidden);
+    const q=productNorm($('lpAppSearch')?.value||'');
+    const mode=$('lpAppFilter')?.value||'all';
+    const now=Date.now();
+    const matches=item=>{
+      if(q&&!productNorm([item.app_lottery_name,item.event_title,item.product_name,
+        item.store_name,item.prefecture,item.app_lottery_details].join(' ')).includes(q))return false;
+      return mode==='all'||lotteryState(item,now)===mode;
+    };
+    const shown=active.filter(matches).sort((a,b)=>
+      lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
+    status.textContent=(lpAppError?'⚠ '+lpAppError+' ／ ':'')+
+      '共有中 '+active.length+'件 ／ 表示 '+shown.length+'件 ／ 自分が編集できる非表示 '+ownHidden.length+'件';
+    $('lpAppAccountHint').textContent=authUser
+      ?'Discordログイン中：新規登録できます。公開情報は全ユーザーに共有され、応募・当選・個人メモは非公開です。'
+      :'閲覧できます。新規登録と応募管理には「共有」タブからDiscordログインしてください。';
+    root.innerHTML=shown.length
+      ?shown.slice(0,100).map(x=>lotteryCard(
+        lpCardOverlay(lpLegacyApply(x))||x,lotteryState(x,now))).join('')+
+        (shown.length>100?'<p class="hint">先頭100件を表示しています。検索で絞り込んでください。</p>':'')
+      :'<p class="lp-empty">条件に合うアプリ抽選はまだありません。確認できた抽選を登録して共有できます。</p>';
+    const archived=$('lpAppArchived');
+    if(archived){
+      const wasOpen=archived.open;
+      archived.hidden=!ownHidden.length;
+      archived.innerHTML='<summary>📁 非表示の登録（'+ownHidden.length+'件）</summary>'+
+        '<div class="lp-app-archived-list">'+ownHidden.map(item=>
+          '<div class="lp-app-archived-row"><strong>'+escape(item.app_lottery_name+
+          ' ／ '+item.event_title)+'</strong>'+
+          '<button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">編集・再公開</button></div>'
+        ).join('')+'</div>';
+      archived.open=wasOpen;
+    }
+  }
+  function lpAppFormMessage(message){
+    const target=$('lpAppFormStatus');
+    if(target)target.textContent=message;
+  }
+  function lpAppPrepare(id=''){
+    if(!authUser||!supabaseClient){
+      alert('アプリ抽選の登録にはDiscordログインが必要です。「共有」タブからログインしてください。');
+      switchTab('group');return;
+    }
+    if(!lpAppReady){
+      lpAppFormMessage('⚠ 登録先への接続を確認してください：'+lpAppError);
+      return;
+    }
+    const row=id?lpAppRows.get(id):null;
+    if(id&&(!row||!lpAppCanEdit(lpAppItem(row))))return;
+    lpAppEditing=row?.id||'';
+    const form=$('lpAppForm');
+    form.reset();
+    const set=(name,value)=>{
+      const el=form.elements.namedItem(name);
+      if(el)el.value=value||'';
+    };
+    if(row){
+      for(const field of ['app_name','event_title','product_name','store_name',
+        'prefecture','review_category','product_type','source_url','details'])set(field,row[field]);
+      set('application_start_at',lpExtDateInput(row.application_start_at));
+      set('application_end_at',lpExtDateInput(row.application_end_at));
+    }else{
+      set('review_category','pokemon');set('product_type','unknown');
+    }
+    const toggle=$('lpAppToggle');
+    toggle.hidden=!row;
+    toggle.textContent=row?.is_hidden?'一覧へ再公開':'登録を非表示（履歴保持）';
+    $('lpAppFormHeading').textContent=row?'アプリ抽選を編集':'アプリ抽選を新しく登録';
+    lpAppFormMessage('公式アプリ内の情報を確認して入力してください。URLは任意です。');
+    $('lpAppFormFold').open=true;
+    $('lpAppFormHeading').focus({preventScroll:true});
+    $('lpAppFormFold').scrollIntoView({block:'nearest',behavior:'smooth'});
+  }
+  function lpAppPayload(){
+    const form=$('lpAppForm'),val=name=>
+      String(form.elements.namedItem(name)?.value||'').trim();
+    const payload={
+      app_name:val('app_name'),event_title:val('event_title'),
+      product_name:val('product_name')||null,store_name:val('store_name')||null,
+      prefecture:val('prefecture')||null,
+      review_category:val('review_category')||'unknown',
+      product_type:val('product_type')||'unknown',
+      application_start_at:lpExtDateSave(val('application_start_at')),
+      application_end_at:lpExtDateSave(val('application_end_at')),
+      source_url:val('source_url')||null,details:val('details')||null
+    };
+    if(payload.app_name.length<2||payload.app_name.length>100 ||
+       payload.event_title.length<2||payload.event_title.length>200)
+      throw Error('アプリ名・抽選名は2文字以上で入力してください。');
+    if(payload.product_name?.length>200||payload.store_name?.length>200||
+       payload.details?.length>600)throw Error('文字数制限を確認してください。');
+    if(payload.prefecture&&!LP_MANUAL_AREAS.includes(payload.prefecture))
+      throw Error('都道府県を選択してください。');
+    if(!['unknown','pokemon','onepiece','yugioh'].includes(payload.review_category)||
+       !['unknown','pack','deck','pack/deck'].includes(payload.product_type))
+      throw Error('ジャンルまたは商品区分を確認してください。');
+    if(payload.source_url&&!safeLotteryUrl(payload.source_url))
+      throw Error('参考URLは有効なhttp/httpsのリンクを入力してください。Xのリンクは登録できません。');
+    if(payload.application_start_at&&payload.application_end_at&&
+       Date.parse(payload.application_start_at)>Date.parse(payload.application_end_at))
+      throw Error('応募開始日は締切より前にしてください。');
+    return payload;
+  }
+  async function lpAppSubmit(event){
+    event.preventDefault();
+    if(lpAppBusy||!authUser||!supabaseClient||!lpAppReady)return;
+    let payload;
+    try{
+      payload=lpAppPayload();
+      if(!lpAppEditing){
+        const same=[...lpAppRows.values()].find(row=>!row.is_hidden&&
+          productNorm(row.app_name)===productNorm(payload.app_name)&&
+          productNorm(row.event_title)===productNorm(payload.event_title)&&
+          productNorm(row.store_name||'')===productNorm(payload.store_name||'')&&
+          (row.application_end_at||'').slice(0,10)===(payload.application_end_at||'').slice(0,10));
+        if(same)throw Error('同じアプリ・抽選名・店舗・締切の登録があります。既存のカードを確認してください。');
+      }
+    }catch(error){lpAppFormMessage('⚠ '+(error.message||error));return;}
+    const user=authUser.id,id=lpAppEditing;
+    lpAppBusy=true;
+    const buttons=[...$('lpAppForm').querySelectorAll('button')];
+    buttons.forEach(b=>b.disabled=true);
+    lpAppFormMessage('🔄 全ユーザーの共有一覧へ保存しています…');
+    try{
+      const query=id?supabaseClient.from(LP_APP_TABLE).update(payload).eq('id',id):
+        supabaseClient.from(LP_APP_TABLE).insert({...payload,created_by:user});
+      const {data,error}=await query.select(LP_APP_SELECT).single();
+      if(error)throw error;
+      if(!data?.id||authUser?.id!==user||(id&&data.id!==id))
+        throw Error('保存結果を確認できませんでした。');
+      lpAppRows.set(data.id,data);
+      lpAppMerge();
+      if(!await lpAppRefresh(true))throw Error('保存後の再取得に失敗しました：'+lpAppError);
+      $('lpAppFormFold').open=false;
+      $('lpAppForm').reset();
+      lpAppEditing='';
+      $('lpAppStatus').textContent='✅ 登録内容を保存し、共有一覧へ反映しました。';
+    }catch(error){
+      lpAppFormMessage('⚠ 保存・確認に失敗しました：'+String(error?.message||error));
+    }finally{
+      lpAppBusy=false;buttons.forEach(b=>b.disabled=false);
+    }
+  }
+  async function lpAppToggleVisibility(){
+    const row=lpAppRows.get(lpAppEditing);
+    if(!row||lpAppBusy||!authUser||!lpAppCanEdit(lpAppItem(row)))return;
+    const hide=!row.is_hidden;
+    if(hide&&!confirm('この登録を共有一覧から非表示にしますか？ 応募履歴は残り、あとで再公開できます。'))return;
+    lpAppBusy=true;
+    const button=$('lpAppToggle'),oldText=button.textContent;
+    button.disabled=true;button.textContent='変更中…';
+    lpAppFormMessage('🔄 公開状態を保存しています…');
+    try{
+      const {data,error}=await supabaseClient.from(LP_APP_TABLE)
+        .update({is_hidden:hide}).eq('id',row.id).select(LP_APP_SELECT).single();
+      if(error)throw error;
+      if(data?.id!==row.id||data.is_hidden!==hide)throw Error('公開状態の保存を確認できませんでした。');
+      lpAppRows.set(row.id,data);lpAppMerge();
+      if(!await lpAppRefresh(true))throw Error('再取得に失敗しました：'+lpAppError);
+      $('lpAppFormFold').open=false;lpAppEditing='';
+      $('lpAppStatus').textContent=hide
+        ?'✅ 非表示にしました。応募履歴は保持しています。'
+        :'✅ 共有一覧へ再公開しました。';
+    }catch(error){
+      lpAppFormMessage('⚠ 公開状態を変更できません：'+String(error?.message||error));
+    }finally{
+      lpAppBusy=false;button.disabled=false;button.textContent=oldText;
+    }
+  }
+  function lpAppInitUI(){
+    const form=$('lpAppForm');
+    if(!form)return;
+    $('lpAppPrefecture').innerHTML='<option value="">未確認・指定なし</option>'+
+      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
+    $('lpAppNew').addEventListener('click',()=>lpAppPrepare());
+    $('lpAppSearch').addEventListener('input',lpAppRender);
+    $('lpAppFilter').addEventListener('change',lpAppRender);
+    $('lpAppReload').addEventListener('click',()=>lpAppRefresh(true));
+    $('lpAppCancel').addEventListener('click',()=>{
+      $('lpAppFormFold').open=false;lpAppEditing='';form.reset();
+    });
+    $('lpAppToggle').addEventListener('click',lpAppToggleVisibility);
+    form.addEventListener('submit',lpAppSubmit);
+    for(const view of [$('appLotteryView'),$('lotteryView')]){
+      view.addEventListener('click',event=>{
+        const button=event.target.closest('button[data-lp-app-edit]');
+        if(button)lpAppPrepare(button.dataset.lpAppEdit);
+      });
+    }
+    $('appLotteryView').addEventListener('click',lotteryTrackerHandleClick);
+    $('appLotteryView').addEventListener('click',lotteryOnsiteHandleClick);
+    lpAppRender();
+  }
 
   // ========================================
   // v21.27: Each Discord account privately manages its own lottery progress.
@@ -4179,7 +4484,7 @@
           ${onsite}
           ${x.status==='won'?lotteryPickupDetailsHtml(x):''}
           ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
-          <a href="${escape(x.event_url)}" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>
+          ${lpAppEventId(x.event_url) ? (lotteryItems.find(y=>y.url===x.event_url)?.app_lottery_source_url?'<a href="'+escape(lotteryItems.find(y=>y.url===x.event_url).app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">アプリ公式案内 ↗</a>':'<p>📱 アプリ内で確認</p>') : '<a href="'+escape(x.event_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>'}
         </div><button type="button" data-lp-track="edit" data-url="${escape(x.event_url)}">管理</button></div>`;
       }).join('');
       if(key==='lost'){
@@ -6187,7 +6492,7 @@
         const currentUrl = new URL(window.location.href);
         const requestedTab = currentUrl.searchParams.has('app_refresh')
           ? currentUrl.searchParams.get('app_tab') : null;
-        const allowedTabs = ['map','add','history','lottery','lotteryManage','group','dev'];
+        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','group','dev'];
         if (allowedTabs.includes(requestedTab)) {
           if (requestedTab === 'dev') restoreDeveloperTabPending = true;
           else initialTab = requestedTab;
@@ -6199,6 +6504,7 @@
       } catch (error) {
         console.warn('更新時のタブ復元をスキップ:', error);
       }
+      try { if(/^[0-9a-f-]{36}$/i.test(new URL(window.location.href).searchParams.get('app_lottery')||'')) initialTab='appLottery'; } catch(_) {}
       switchTab(initialTab);
 
       loadStoreCSV();
