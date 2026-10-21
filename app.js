@@ -3778,14 +3778,19 @@
     const target=$('lpAppFormStatus');
     if(target)target.textContent=message;
   }
-  function lpAppPrepare(id=''){
+  async function lpAppPrepare(id=''){
     if(!authUser||!supabaseClient){
       alert('アプリ抽選の登録にはDiscordログインが必要です。「共有」タブからログインしてください。');
       switchTab('group');return;
     }
+    const user=authUser.id;
     if(!lpAppReady){
-      lpAppFormMessage('⚠ 登録先への接続を確認してください：'+lpAppError);
-      return;
+      $('lpAppStatus').textContent='🔄 アプリ抽選の登録先を確認しています…';
+      const ok=await lpAppRefresh(true);
+      if(!ok||authUser?.id!==user){
+        $('lpAppStatus').textContent='⚠ 登録先へ接続できません：'+lpAppError;
+        return;
+      }
     }
     const row=id?lpAppRows.get(id):null;
     if(id&&(!row||!lpAppCanEdit(lpAppItem(row))))return;
