@@ -320,6 +320,7 @@
     }
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
     lpExtRenderAdmin();
+    if ($('lpCards')) renderLottery();
     refreshWishlistForAccount();
     refreshLotteryTrackerForAccount();
     refreshLotteryOnsiteReports(true);
@@ -365,13 +366,17 @@
     await lpCloudRefresh(true);
     await lpLocationRefresh(true);
     await lpExtRefresh(true);
+    await lpCardRefresh(true);
     refreshLotteryOnsiteReports(true);
     refreshLotteryOnsiteArchive(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); lpCardRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
+    supabaseClient.channel('pokeca-lottery-card-updates')
+      .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
+      .subscribe();
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
         payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
@@ -517,9 +522,9 @@
       if (supabaseClient) loadSharedReports();
     }
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
-    if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
-    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); }
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
+    if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
+    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); }
     render();
   }
 
@@ -2500,6 +2505,7 @@
 
   function lotteryGenre(item) {
     const explicit = String(item.review_category || '').toLowerCase();
+    if (item.manual_card_genre) return explicit || 'unknown';
     if (explicit === 'pokemon' || (item.pokemon_map_match && explicit !== 'onepiece' && explicit !== 'yugioh')) return 'pokemon';
     return explicit || 'unknown';
   }
@@ -2573,8 +2579,7 @@
   // v21.45: Supabase overrides are a separate authoritative display layer.
   // The GitHub-collected base JSON and a user's private lottery history remain
   // untouched. A backend RLS policy limits writes to the developer UID.
-  function lpCloudApply() {
-    lotteryItems = lotteryBaseItems.map(base=>{
+  function lpLegacyApply(base) {
       if(!isLivePocketEventUrl(base.url)){
         // Never display an excluded URL simply because the Discord collector
         // discovers it again. Until the moderation table is loaded, hold all
@@ -2641,7 +2646,243 @@
         }
       }
       return item;
-    }).filter(Boolean);
+  }
+
+
+  // v21.68: Per-card admin corrections are a separate layer ABOVE existing manual fixes.
+  // An edited_fields entry means an intentional override, including clearing a date.
+  const LP_CARD_TABLE = 'lottery_card_overrides';
+  const LP_CARD_FIELDS = ['event_title','product_name','store_name','prefecture',
+    'application_start_at','application_end_at','review_category','product_type'];
+  let lpCardOverrides = new Map(), lpCardReady = false, lpCardLoading = null;
+  let lpCardLastFetch = 0, lpCardError = '', lpCardEditing = '', lpCardBusy = false;
+
+  function lpCardOverlay(base) {
+    if (!base) return null;
+    const row = lpCardOverrides.get(base.url);
+    if (!row || !Array.isArray(row.edited_fields) || !row.edited_fields.length) return base;
+    const item = {...base}, fields = new Set(row.edited_fields);
+    if (fields.has('event_title')) {
+      item.event_title = row.event_title || '';
+      item.official_event_title = item.event_title;
+      item.event_title_provisional = false;
+      item.manual_card_title = true;
+    }
+    if (fields.has('product_name')) item.product_name = row.product_name || '';
+    if (fields.has('review_category')) {
+      item.review_category = row.review_category || 'unknown';
+      item.manual_card_genre = true;
+    }
+    if (fields.has('product_type')) item.pokemon_map_type = row.product_type || 'unknown';
+    if (fields.has('application_start_at')) item.application_start_at = row.application_start_at || null;
+    if (fields.has('application_end_at')) item.application_end_at = row.application_end_at || null;
+    const storeEdited = fields.has('store_name'), areaEdited = fields.has('prefecture');
+    if ((storeEdited || areaEdited) && (!Array.isArray(base.stores) || base.stores.length <= 1)) {
+      if (storeEdited) item.store_name = row.store_name || '';
+      if (areaEdited) item.prefecture = row.prefecture || '';
+      const existing = Array.isArray(base.stores) ? base.stores[0] : null;
+      const name = storeEdited ? item.store_name : (existing?.name || item.store_name || '');
+      const area = areaEdited ? item.prefecture : (existing?.prefecture || item.prefecture || '');
+      if (name) item.stores = [{...(existing || {}),name,prefecture:area}];
+      else delete item.stores;
+    }
+    item.manual_card_edit = true;
+    return item;
+  }
+
+  async function lpCardRefresh(force = false) {
+    if (!supabaseClient) { lpCardError = 'Supabaseに接続できていません'; return false; }
+    if (!force && lpCardReady && Date.now()-lpCardLastFetch < 30000) return true;
+    if (lpCardLoading) return lpCardLoading;
+    lpCardLoading = (async () => {
+      try {
+        const {data,error} = await supabaseClient.from(LP_CARD_TABLE)
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .limit(5000);
+        if (error) throw error;
+        lpCardOverrides = new Map((data || []).filter(x=>safeLotteryUrl(x.event_url))
+          .map(x=>[x.event_url,x]));
+        lpCardReady = true; lpCardError = ''; lpCardLastFetch = Date.now();
+        lpCloudApply();
+        return true;
+      } catch(error) {
+        lpCardError = String(error?.message || error);
+        console.warn('抽選カード編集情報の取得に失敗:',error);
+        return false;
+      } finally { lpCardLoading = null; }
+    })();
+    return lpCardLoading;
+  }
+
+  function lpCardEditableValue(item, field) {
+    if (!item) return '';
+    if (field === 'event_title') return item.event_title_provisional ? '' : String(item.event_title || '');
+    if (field === 'store_name') return String(lotteryStoreEntries(item)[0]?.name || item.store_name || '');
+    if (field === 'prefecture') return String(lotteryStoreEntries(item)[0]?.prefecture || item.prefecture || '');
+    if (field === 'review_category') return lotteryGenre(item);
+    if (field === 'product_type') return lotteryProductType(item);
+    if (field === 'application_start_at' || field === 'application_end_at') return lpExtDateInput(item[field]);
+    return String(item[field] || '');
+  }
+
+  function lpCardSetStatus(message) {
+    const target = $('lpCardStatus');
+    if (target) target.textContent = message;
+  }
+
+  function lpCardOpen(url) {
+    if (!isDeveloper() || !safeLotteryUrl(url)) return;
+    const base = lotteryBaseItems.find(x=>x.url === url);
+    const dialog = $('lpCardDialog'), form = $('lpCardForm');
+    if (!base || !dialog || !form) return;
+    if (!lpCardReady) {
+      alert('カード編集用データの取得を確認できません。再読み込みしてください。 '+lpCardError);
+      return;
+    }
+    const item = lpCardOverlay(lpLegacyApply(base));
+    if (!item) return;
+    lpCardEditing = url;
+    form.reset();
+    for (const field of LP_CARD_FIELDS) {
+      const el = form.elements.namedItem(field);
+      if (el) el.value = lpCardEditableValue(item,field);
+    }
+    const multiStore = Array.isArray(base.stores) && base.stores.length > 1;
+    for (const field of ['store_name','prefecture']) {
+      form.elements.namedItem(field).disabled = multiStore;
+    }
+    $('lpCardMultipleStores').hidden = !multiStore;
+    const link = $('lpCardSourceLink');
+    link.href = url;
+    link.textContent = '🔗 元の抽選ページ ↗';
+    $('lpCardReset').hidden = !lpCardOverrides.has(url);
+    $('lpCardHistoryFold').open = false;
+    $('lpCardHistory').textContent = '履歴を開くと直近の編集履歴を読み込みます。';
+    lpCardSetStatus('変更した項目のみ上書きします。元の手動修正は保持されます。');
+    dialog.showModal();
+    // Prevent an iPhone keyboard popup by focusing a non-editable heading.
+    $('lpCardDialogTitle')?.focus({preventScroll:true});
+  }
+
+  async function lpCardHistoryLoad() {
+    if (!isDeveloper() || !lpCardEditing || !$('lpCardHistoryFold').open) return;
+    const url = lpCardEditing, panel = $('lpCardHistory');
+    panel.textContent = '編集履歴を取得しています…';
+    const {data,error} = await supabaseClient.from('lottery_card_edit_history')
+      .select('action,edited_at,previous_value,new_value')
+      .eq('event_url',url).order('edited_at',{ascending:false}).limit(12);
+    if (lpCardEditing !== url) return;
+    if (error) { panel.textContent = '履歴を取得できません：'+error.message; return; }
+    if (!data?.length) { panel.textContent = 'カード編集の履歴はまだありません。'; return; }
+    const labels = {event_title:'イベント名',product_name:'商品名',store_name:'店舗',
+      prefecture:'地域',review_category:'ジャンル',product_type:'商品区分',
+      application_start_at:'応募開始',application_end_at:'応募締切'};
+    panel.innerHTML = '<ol>'+data.map(row => {
+      const before = row.previous_value || {}, after = row.new_value || {};
+      const changes = LP_CARD_FIELDS.filter(k=>JSON.stringify(before[k]) !== JSON.stringify(after[k])
+        || (!!before.edited_fields?.includes(k) !== !!after.edited_fields?.includes(k)));
+      const when = lotteryJapaneseDate(row.edited_at) || String(row.edited_at || '');
+      return '<li><strong>'+escape(when)+'</strong> ／ '+
+        escape(row.action === 'DELETE' ? 'カード修正を解除' : row.action === 'INSERT' ? '新規修正' : '修正更新')+
+        '<div>'+escape(changes.map(x=>labels[x]).join('・') || '修正内容の整理')+'</div></li>';
+    }).join('')+'</ol>';
+  }
+
+  async function lpCardWrite(reset = false) {
+    if (!isDeveloper() || !lpCardReady || lpCardBusy || !lpCardEditing) return;
+    const url=lpCardEditing, base=lotteryBaseItems.find(x=>x.url===url);
+    if (!base) { lpCardSetStatus('元の抽選情報がありません。'); return; }
+    const form=$('lpCardForm');
+    const legacy=lpLegacyApply(base);
+    if (!legacy) { lpCardSetStatus('除外済みのイベントです。'); return; }
+    const saved=lpCardOverrides.get(url);
+    const payload={event_url:url,updated_by:authUser.id,updated_at:new Date().toISOString()};
+    const edited=[];
+    try {
+      if (reset) {
+        if (!saved) return;
+        if (!confirm('カードからの手動修正を解除し、従来の修正内容に戻しますか？ 編集履歴は残ります。')) return;
+      } else {
+        for (const field of LP_CARD_FIELDS) {
+          const raw=String(form.elements.namedItem(field)?.value || '').trim();
+          const original=lpCardEditableValue(legacy,field);
+          if (field==='store_name' || field==='prefecture') {
+            if (form.elements.namedItem(field).disabled) continue;
+          }
+          if (raw.length > (field==='prefecture' ? 30 : 200)) throw Error('入力文字数を確認してください：'+field);
+          if (field==='prefecture' && raw && !LP_MANUAL_AREAS.includes(raw))
+            throw Error('都道府県を選択してください。');
+          if (field==='review_category' && !['unknown','pokemon','onepiece','yugioh'].includes(raw))
+            throw Error('ジャンルが不正です。');
+          if (field==='product_type' && !['unknown','pack','deck','pack/deck'].includes(raw))
+            throw Error('商品区分が不正です。');
+          if (raw !== original) {
+            edited.push(field);
+            payload[field] = field==='application_start_at' || field==='application_end_at'
+              ? lpExtDateSave(raw) : raw;
+          } else payload[field] = null;
+        }
+        const start = lpExtDateSave(String(form.elements.namedItem('application_start_at').value || ''));
+        const end = lpExtDateSave(String(form.elements.namedItem('application_end_at').value || ''));
+        if (start && end && Date.parse(start)>Date.parse(end))
+          throw Error('応募開始日時は締切より前にしてください。');
+        payload.edited_fields=edited;
+        if (!edited.length && !saved) {
+          lpCardSetStatus('変更された項目はありません。'); return;
+        }
+      }
+    } catch(error) { lpCardSetStatus('⚠ '+(error?.message || error)); return; }
+    lpCardBusy=true;
+    const buttons=[...form.querySelectorAll('button')];
+    buttons.forEach(x=>x.disabled=true);
+    lpCardSetStatus('Supabaseへ保存しています…');
+    try {
+      if (reset || !edited.length) {
+        const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
+          .delete().eq('event_url',url).select('event_url');
+        if (error) throw error;
+        if (!data?.some(row=>row.event_url===url)) throw Error('修正の解除を確認できませんでした');
+        lpCardOverrides.delete(url);
+      } else {
+        const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
+          .upsert(payload,{onConflict:'event_url'})
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .single();
+        if (error) throw error;
+        if (data?.event_url !== url || !Array.isArray(data.edited_fields)) throw Error('保存結果を確認できませんでした');
+        lpCardOverrides.set(url,data);
+      }
+      // Fetch again from the server instead of relying solely on local state.
+      lpCardLastFetch=0;
+      if (!await lpCardRefresh(true)) throw Error('保存されましたが再取得できません：'+lpCardError);
+      $('lpCardDialog').close();
+      lpCloudApply();
+    } catch(error) {
+      lpCardSetStatus('⚠ 保存または再取得に失敗しました：'+(error?.message || error));
+    } finally {
+      lpCardBusy=false;
+      buttons.forEach(x=>x.disabled=false);
+    }
+  }
+
+  function lpCardInitUI() {
+    const dialog=$('lpCardDialog'), form=$('lpCardForm');
+    if (!dialog || !form) return;
+    const area=$('lpCardPrefecture');
+    area.innerHTML='<option value="">未確認・指定なし</option>'+
+      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
+    $('lotteryView').addEventListener('click', event=>{
+      const target=event.target.closest('button[data-lp-card-edit]');
+      if (target) lpCardOpen(target.dataset.lpCardEdit);
+    });
+    form.addEventListener('submit', event=>{event.preventDefault();lpCardWrite(false);});
+    $('lpCardReset').addEventListener('click',()=>lpCardWrite(true));
+    $('lpCardCancel').addEventListener('click',()=>dialog.close());
+    $('lpCardHistoryFold').addEventListener('toggle',lpCardHistoryLoad);
+  }
+
+  function lpCloudApply() {
+    lotteryItems = lotteryBaseItems.map(base=>lpCardOverlay(lpLegacyApply(base))).filter(Boolean);
     if($('lpPrefecture'))renderLotteryPrefectures();
     if($('lotteryView')?.classList.contains('active'))renderLottery();
     lpExtRenderAdmin();
@@ -2791,7 +3032,7 @@
           clean.push(item);
         }
         lotteryBaseItems=clean;
-        if(supabaseClient)await lpExtRefresh();
+        if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); }
         lpCloudApply();
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
@@ -3156,7 +3397,7 @@
     const officialName = item.official_event_title && item.official_event_title === item.event_title
       ? String(item.event_title).trim() : '';
     const trustedTitle = item.event_title_provisional ? '' : item.event_title;
-    const reliableName = (officialName || item.product_name || trustedTitle || '').trim();
+    const reliableName = (item.manual_card_title ? (trustedTitle || item.product_name) : (officialName || item.product_name || trustedTitle) || '').trim();
     // Discord excerpt is a discovery hint only, not an authoritative heading.
     const external=!isLivePocketEventUrl(item.url);
     const label = reliableName || (external?'外部サイト・抽選内容未確認':'商品名・イベント名を確認中');
@@ -3196,7 +3437,7 @@
       ${lotteryOnsiteSharedHtml(item.url)}
       <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">${external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗'}</a>
       ${lotteryTrackerActionsHtml(item)}
-      ${external&&isDeveloper()? `<div class="lp-external-dev-actions"><button type="button" data-lp-ext-edit="${escape(item.url)}">🛠 外部抽選を編集・除外</button></div>`:''}
+      ${isDeveloper()? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
   }
 
@@ -3283,6 +3524,7 @@
     ensureLotteryNewBadgeStyle();
     ensureLotteryTrackerUI();
     lpExtInitUI();
+    lpCardInitUI();
     $('lpOnsiteArchiveSearch')?.addEventListener('input',()=>{
       lotteryOnsiteArchiveLimit=40;renderLotteryOnsiteArchive();
     });

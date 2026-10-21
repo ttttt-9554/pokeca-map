@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261021-v21_66-location-page-dark">
+  <link rel="stylesheet" href="style.css?v=20261021-v21_68-card-editor">
 
   <style>
     [hidden] { display: none !important; }
@@ -1237,6 +1237,63 @@ nav[aria-label="メインメニュー"] {
 </div><!-- /#appScrollArea: header + content scroll, nav stays fixed in flex layout -->
 
 
+
+  <!-- v21.68: shared admin card editor (no input autofocus for iPhone). -->
+  <dialog id="lpCardDialog" aria-label="抽選カードの管理者編集">
+    <div class="lp-card-editor">
+      <h3 id="lpCardDialogTitle" tabindex="-1" autofocus>🛠 抽選カードを編集</h3>
+      <a id="lpCardSourceLink" href="#" target="_blank" rel="noopener noreferrer">元の抽選ページ ↗</a>
+      <form id="lpCardForm" autocomplete="off">
+        <label>イベント名
+          <input type="text" name="event_title" maxlength="200" autocomplete="off" placeholder="公式イベント名">
+        </label>
+        <label>商品名
+          <input type="text" name="product_name" maxlength="200" autocomplete="off" placeholder="ポケモンカード商品名">
+        </label>
+        <label>店舗名
+          <input type="text" name="store_name" maxlength="200" autocomplete="off" placeholder="店舗名">
+        </label>
+        <label>地域・都道府県
+          <select name="prefecture" id="lpCardPrefecture"><option value="">未確認</option></select>
+        </label>
+        <p id="lpCardMultipleStores" class="hint" hidden>複数店舗が含まれるイベントの店舗名と地域は、店舗別の情報を守るため、この画面では一括変更できません。</p>
+        <label>ジャンル
+          <select name="review_category">
+            <option value="unknown">未分類</option>
+            <option value="pokemon">ポケカ</option>
+            <option value="onepiece">ワンピース</option>
+            <option value="yugioh">遊戯王</option>
+          </select>
+        </label>
+        <label>商品区分
+          <select name="product_type">
+            <option value="unknown">未確認</option>
+            <option value="pack">拡張パック</option>
+            <option value="deck">構築デッキ</option>
+            <option value="pack/deck">パック・デッキ両方</option>
+          </select>
+        </label>
+        <label>応募開始（日本時間）
+          <input type="datetime-local" name="application_start_at">
+        </label>
+        <label>応募締切（日本時間）
+          <input type="datetime-local" name="application_end_at">
+        </label>
+        <p class="hint">変更した項目だけ全ユーザーの表示に反映します。空欄にすると該当項目を未確認に戻せます。元の自動取得情報や従来の手動修正は削除されません。</p>
+        <div class="lp-card-editor-actions">
+          <button class="primary" type="submit">変更を保存</button>
+          <button id="lpCardReset" type="button" hidden>カード修正を解除</button>
+          <button id="lpCardCancel" type="button">閉じる</button>
+        </div>
+        <p id="lpCardStatus" role="status" aria-live="polite"></p>
+        <details id="lpCardHistoryFold">
+          <summary>カード編集履歴</summary>
+          <div id="lpCardHistory" class="lp-card-history">履歴を開くと表示されます。</div>
+        </details>
+      </form>
+    </div>
+  </dialog>
+
   <dialog id="lpExtDialog" aria-label="外部抽選の手動編集">
     <div class="lp-ext-editor">
       <h3 id="lpExtDialogTitle" tabindex="-1" autofocus>🛠 外部抽選の編集・削除</h3>
@@ -1365,7 +1422,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_67-incomplete-retry"></script>
+  <script src="app.js?v=20261021-v21_68-card-editor"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
