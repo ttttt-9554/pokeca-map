@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-21T03:05:57.354826+00:00",
+  "collected_at": "2026-10-21T04:35:55.814119+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 417,
+  "unique_livepocket_urls": 418,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10803,34 +10803,64 @@
       "event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「30th CELEBRATION」",
       "application_end_at": "2026-10-22T21:00:00+09:00",
       "application_start_at": "2026-10-21T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/q-2l1",
+      "discord_message_id": "1562322066839965727",
+      "discord_posted_at": "2026-10-21T04:30:07.275000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nふるいちイオンモール日の出店\n受付終了: 10/24 21:00（残り3日7時間）\nhttps://livepocket.jp/e/q-2l1",
+      "store_name": "ふるいちイオンモール日の出店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール日の出店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちイオンモール日の出店】ポケモン抽選販売（ポケモン30周年・拡張パック）",
+      "application_end_at": "2026-10-24T21:00:00+09:00",
+      "application_start_at": "2026-10-21T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 264,
+    "parsed": 265,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 260,
-    "prefecture": 223,
-    "event_title": 104,
+    "store_name": 261,
+    "prefecture": 224,
+    "event_title": 105,
     "event_date": 1,
     "product_name": 63,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 392,
-    "application_start_at": 392,
-    "stores_events": 263
+    "application_end_at": 393,
+    "application_start_at": 393,
+    "stores_events": 264
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562299450217472033"
+      "1551580466266644552": "1562322066839965727"
     },
     "last_run": {
-      "checked_at": "2026-10-21T03:05:57.354826+00:00",
-      "new_urls": 2,
-      "original_urls": 415,
+      "checked_at": "2026-10-21T04:35:55.814119+00:00",
+      "new_urls": 1,
+      "original_urls": 417,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -10922,7 +10952,8 @@
         "1562042728538181702": "2026-10-20T10:00:55.559547+00:00",
         "1562276771036926072": "2026-10-21T01:35:55.435333+00:00",
         "1562291861324832859": "2026-10-21T02:35:55.421861+00:00",
-        "1562299450217472033": "2026-10-21T03:05:57.625941+00:00"
+        "1562299450217472033": "2026-10-21T03:05:57.625941+00:00",
+        "1562322066839965727": "2026-10-21T04:35:56.129355+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12602,6 +12633,10 @@
         "https://livepocket.jp/e/4ukll": {
           "checked_at": "2026-10-21T03:06:37.059863+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/q-2l1": {
+          "checked_at": "2026-10-21T04:36:20.969047+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13036,6 +13071,11 @@
           "detected_at": "2026-10-21T03:05:58.354609+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-21T03:06:37.059863+00:00"
+        },
+        "https://livepocket.jp/e/q-2l1": {
+          "detected_at": "2026-10-21T04:35:56.961264+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-21T04:36:20.969047+00:00"
         }
       },
       "pending_new_urls": []
@@ -16341,6 +16381,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/q-2l1": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-21T04:36:20.969047+00:00",
+          "title_observed": "【ふるいちイオンモール日の出店】ポケモン抽選販売（ポケモン30周年・拡張パック）",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -17982,6 +18033,19 @@
         },
         "https://livepocket.jp/e/4ukll": {
           "checked_at": "2026-10-21T03:06:37.059863+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/q-2l1": {
+          "checked_at": "2026-10-21T04:36:20.969047+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

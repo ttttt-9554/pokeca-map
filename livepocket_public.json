@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-21T03:05:57.354826+00:00",
-  "unique_livepocket_urls": 417,
+  "collected_at": "2026-10-21T04:35:55.814119+00:00",
+  "unique_livepocket_urls": 418,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5507,7 +5507,24 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/q-2l1",
+      "store_name": "ふるいちイオンモール日の出店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-21T04:30:07.275000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール日の出店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "【ふるいちイオンモール日の出店】ポケモン抽選販売（ポケモン30周年・拡張パック）",
+      "application_end_at": "2026-10-24T21:00:00+09:00",
+      "application_start_at": "2026-10-21T09:00:00+09:00",
+      "official_event_title": "【ふるいちイオンモール日の出店】ポケモン抽選販売（ポケモン30周年・拡張パック）",
+      "first_detected_at": "2026-10-21T04:35:56.961264+00:00"
     }
   ],
-  "updated_at": "2026-10-21T04:25:57.062954+00:00"
+  "updated_at": "2026-10-21T04:36:20.969047+00:00"
 }
