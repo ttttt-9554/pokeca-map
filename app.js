@@ -2958,7 +2958,9 @@
     const form=$('lpExtForm'),dialog=$('lpExtDialog');
     if(!form||!dialog)return;
     form.reset();
-    $('lpExtEditingUrl').textContent=url;
+    const sourceLink=$('lpExtEditingUrl');
+    sourceLink.href=url;
+    sourceLink.textContent='🔗 元の抽選ページを開く ↗\n'+url;
     const set=(name,value)=>{form.elements.namedItem(name).value=value||'';};
     set('event_title',row?row.event_title:(base?.event_title_provisional?'':base?.event_title));
     set('store_name',row?row.store_name:base?.store_name);
