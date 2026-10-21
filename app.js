@@ -2843,9 +2843,9 @@
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
-      ${lotteryOnsiteSharedHtml(item.url)}
-      <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">公式ページで確認 ↗</a>
-      ${lotteryTrackerActionsHtml(item)}
+      ${external?'<p class="lp-store-muted">この外部URLの抽選管理・現地対応共有は現在準備中です。</p>':lotteryOnsiteSharedHtml(item.url)}
+      <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">${external?'URLを開いて確認 ↗':'公式ページで確認 ↗'}</a>
+      ${external?'':lotteryTrackerActionsHtml(item)}
     </article>`;
   }
 
