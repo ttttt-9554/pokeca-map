@@ -2904,6 +2904,9 @@
     if(!root||!list||!status)return;
     root.hidden=!isDeveloper();
     if(!isDeveloper())return;
+    // Keep sections the user expanded open across saves and background refreshes.
+    const editedOpen=$('lpExtEdited')?.open===true;
+    const excludedOpen=$('lpExtExcluded')?.open===true;
     const input=String($('lpExtSearch')?.value||'').trim().toLocaleLowerCase('ja-JP');
     const candidates=new Map(lotteryBaseItems.filter(x=>x&&!isLivePocketEventUrl(x.url))
       .map(x=>[x.url,x]));
@@ -2912,23 +2915,29 @@
         url,source_site:'以前の収集URL',event_title:row.event_title||'',store_name:row.store_name||''
       });
     const all=[...candidates.values()];
-    const excluded=all.filter(x=>lpExtOverrides.get(x.url)?.state==='excluded').length;
     const matched=all.filter(item=>{
       if(!input)return true;
       const row=lpExtOverrides.get(item.url);
       return [item.url,item.event_title,item.store_name,item.source_site,
         row?.event_title,row?.store_name,row?.prefecture,row?.exclusion_reason]
         .filter(Boolean).join(' ').toLocaleLowerCase('ja-JP').includes(input);
-    }).sort((a,b)=>{
-      const removedA=lpExtOverrides.get(a.url)?.state==='excluded'?0:1;
-      const removedB=lpExtOverrides.get(b.url)?.state==='excluded'?0:1;
-      if(removedA!==removedB)return removedA-removedB;
-      return (lotteryFirstSeenTime(b)||0)-(lotteryFirstSeenTime(a)||0);
+    }).sort((a,b)=>(lotteryFirstSeenTime(b)||0)-(lotteryFirstSeenTime(a)||0));
+    const pending=matched.filter(item=>!lpExtOverrides.has(item.url));
+    const edited=matched.filter(item=>{
+      const row=lpExtOverrides.get(item.url);
+      return row&&row.state!=='excluded';
     });
+    const excluded=matched.filter(item=>lpExtOverrides.get(item.url)?.state==='excluded');
+    const totalExcluded=all.filter(item=>lpExtOverrides.get(item.url)?.state==='excluded').length;
+    const totalEdited=all.filter(item=>{
+      const row=lpExtOverrides.get(item.url);
+      return row&&row.state!=='excluded';
+    }).length;
     status.textContent=(lpExtError?'⚠ 保存先：'+lpExtError+' ／ ':'')+
-      '外部URL '+all.length+'件・除外済み '+excluded+'件'+
+      '未編集 '+(all.length-totalEdited-totalExcluded)+'件 ／ 編集済み '+totalEdited+
+      '件 ／ 除外済み '+totalExcluded+'件'+
       (input?' ／ 検索結果 '+matched.length+'件':'');
-    list.innerHTML=matched.slice(0,lpExtListLimit).map(item=>{
+    function card(item){
       const row=lpExtOverrides.get(item.url);
       const hidden=row?.state==='excluded';
       const title=row?.event_title||item.event_title||item.source_site||'イベント名未確認';
@@ -2940,9 +2949,31 @@
           (row?.exclusion_reason?'<p>理由：'+escape(row.exclusion_reason)+'</p>':'')+
         '</div><button type="button" data-lp-ext-edit="'+escape(item.url)+'">'+
           (hidden?'編集・復元':'編集・除外')+'</button></div>';
-    }).join('')||'<p class="hint">該当する外部抽選URLはありません。</p>';
+    }
+    list.innerHTML=
+      '<section class="lp-ext-unchecked" aria-label="未編集の外部URL">'+
+        '<h4>📝 未編集 <span>'+pending.length+'件</span></h4>'+
+        (pending.length?pending.slice(0,lpExtListLimit).map(card).join(''):
+          '<p class="hint">未編集の外部URLはありません。</p>')+
+      '</section>'+
+      '<details id="lpExtEdited" class="lp-ext-fold"'+
+        ((editedOpen||!!input)&&edited.length?' open':'')+'>'+
+        '<summary>✅ 編集済み <span>'+edited.length+'件</span></summary>'+
+        '<div class="lp-ext-fold-content">'+
+          (edited.length?edited.slice(0,lpExtListLimit).map(card).join(''):
+            '<p class="hint">編集済みの外部URLはありません。</p>')+
+        '</div>'+
+      '</details>'+
+      '<details id="lpExtExcluded" class="lp-ext-fold"'+
+        ((excludedOpen||!!input)&&excluded.length?' open':'')+'>'+
+        '<summary>🚫 除外済み <span>'+excluded.length+'件</span></summary>'+
+        '<div class="lp-ext-fold-content">'+
+          (excluded.length?excluded.slice(0,lpExtListLimit).map(card).join(''):
+            '<p class="hint">除外済みの外部URLはありません。</p>')+
+        '</div>'+
+      '</details>';
     const more=$('lpExtMore');
-    if(more)more.hidden=matched.length<=lpExtListLimit;
+    if(more)more.hidden=[pending,edited,excluded].every(items=>items.length<=lpExtListLimit);
   }
 
   function lpExtOpen(url){
@@ -2977,7 +3008,8 @@
       ? '🚫 除外済みです。編集して保存しても「復元」を押すまで非表示のままです。'
       : '確認できた情報だけを入力してください。未確認の項目は空欄にできます。';
     dialog.showModal();
-    $('lpExtForm').querySelector('[name="event_title"]')?.focus({preventScroll:true});
+    // Focus a non-editable heading: iOS must not open its keyboard automatically.
+    $('lpExtDialogTitle')?.focus({preventScroll:true});
   }
 
   async function lpExtWrite(mode){
