@@ -12832,7 +12832,7 @@
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/684iy": {
-          "checked_at": "2026-10-21T14:36:28.464684+00:00",
+          "checked_at": "2026-10-21T20:46:27.326215+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/g1lus": {
@@ -13295,7 +13295,7 @@
         "https://livepocket.jp/e/684iy": {
           "detected_at": "2026-10-21T08:30:56.713219+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-21T14:36:28.464684+00:00"
+          "checked_at": "2026-10-21T20:46:27.326215+00:00"
         },
         "https://livepocket.jp/e/c6ups": {
           "detected_at": "2026-10-21T08:30:56.713219+00:00",
@@ -13723,8 +13723,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/684iy": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-21T14:36:28.464684+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-21T20:46:27.326215+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/g1lus": {
@@ -16705,7 +16705,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-21T14:36:28.464684+00:00",
+          "checked_at": "2026-10-21T20:46:27.326215+00:00",
           "title_observed": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
           "genre": "pokemon",
           "product_origin": "",
@@ -18438,7 +18438,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/684iy": {
-          "checked_at": "2026-10-21T14:36:28.464684+00:00",
+          "checked_at": "2026-10-21T20:46:27.326215+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
