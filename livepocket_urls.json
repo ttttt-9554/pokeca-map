@@ -12820,7 +12820,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fgvl7": {
-          "checked_at": "2026-10-21T11:31:25.460611+00:00",
+          "checked_at": "2026-10-21T17:41:25.162233+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bz6gm": {
@@ -13285,7 +13285,7 @@
         "https://livepocket.jp/e/fgvl7": {
           "detected_at": "2026-10-21T05:20:56.911000+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-21T11:31:25.460611+00:00"
+          "checked_at": "2026-10-21T17:41:25.162233+00:00"
         },
         "https://livepocket.jp/e/bz6gm": {
           "detected_at": "2026-10-21T08:05:58.542292+00:00",
@@ -13718,8 +13718,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fgvl7": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-21T11:31:25.460611+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-21T17:41:25.162233+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/684iy": {
@@ -16667,7 +16667,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-21T11:31:25.460611+00:00",
+          "checked_at": "2026-10-21T17:41:25.162233+00:00",
           "title_observed": "ポケモンカードゲームMEGA スペシャルデッキセットMEGA抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -18394,7 +18394,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fgvl7": {
-          "checked_at": "2026-10-21T11:31:25.460611+00:00",
+          "checked_at": "2026-10-21T17:41:25.162233+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
