@@ -1227,3 +1227,81 @@ html[data-theme="dark"] #lpCardDialog :is(input,select){
   color:#edf4ff!important;-webkit-text-fill-color:#edf4ff!important;
 }
 html[data-theme="dark"] #lpCardDialog :is(.hint,#lpCardStatus,#lpCardHistory){color:#c9d7eb!important}
+
+
+/* v21.70 app lottery registration and shared listing */
+nav[aria-label="メインメニュー"]{
+  display:flex!important;align-items:stretch;justify-content:flex-start;
+  overflow-x:auto;overflow-y:hidden;gap:2px;scrollbar-width:none;
+  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+}
+nav[aria-label="メインメニュー"]::-webkit-scrollbar{display:none}
+nav[aria-label="メインメニュー"]>button{
+  flex:1 0 52px;min-width:52px;max-width:none;padding:5px 1px;
+  font-size:20px;min-height:46px;touch-action:manipulation;
+}
+nav[aria-label="メインメニュー"]>button span{
+  font-size:9px;line-height:1.25;white-space:nowrap;
+}
+#appLotteryView{padding-bottom:30px;color:var(--app-text,#172033)}
+#appLotteryView .lp-heading{margin:5px 0 12px}
+#appLotteryView .hint{color:var(--app-muted,#64748b);line-height:1.65;overflow-wrap:anywhere}
+#appLotteryView>.lp-app-add{display:block;width:100%;min-height:47px;margin:12px 0 17px;font-weight:800}
+#lpAppFormFold,#lpAppArchived,.lp-app-search{
+  margin:12px 0 15px;padding:14px;border:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);
+  border-radius:15px;
+}
+#lpAppFormFold summary,#lpAppArchived summary{
+  cursor:pointer;font-weight:750;min-height:28px;
+}
+#lpAppFormHeading{font-size:17px;margin:18px 0 12px}
+#lpAppFormHeading:focus{outline:none}
+#lpAppForm{
+  display:grid;gap:11px;margin:0;padding:0!important;background:transparent!important;
+  border:0!important;box-shadow:none!important;color:inherit!important;
+}
+#lpAppForm label,.lp-app-search label{
+  display:grid;gap:5px;font-size:13px;font-weight:700;color:var(--app-text,#172033);
+}
+#lpAppForm input,#lpAppForm select,#lpAppForm textarea,
+.lp-app-search input,.lp-app-search select{
+  box-sizing:border-box;width:100%;min-width:0;min-height:43px;
+  border-radius:9px;border:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+  font-size:16px;padding:9px;
+}
+#lpAppForm textarea{min-height:84px;resize:vertical;line-height:1.55}
+.lp-app-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.lp-app-form-actions{display:flex;flex-wrap:wrap;gap:9px;margin:5px 0}
+.lp-app-form-actions button{min-height:44px;font-weight:700}
+#lpAppFormStatus{font-size:13px;white-space:pre-wrap}
+.lp-app-search{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}
+.lp-app-search label:first-child,.lp-app-search input:first-of-type{grid-column:1/-1}
+#lpAppStatus{font-size:13px;margin:10px 0 13px}
+.lp-app-archived-list{display:grid;gap:10px;margin-top:9px}
+.lp-app-archived-row{display:flex;gap:9px;justify-content:space-between;align-items:center;
+  padding:10px;background:var(--app-surface2,#f8fafc);
+  border:1px solid var(--app-border,#cbd5e1);border-radius:10px;font-size:13px;
+}
+.lp-app-archived-row strong{min-width:0;overflow-wrap:anywhere}
+.lp-app-archived-row button{flex-shrink:0;min-height:40px}
+html[data-theme="dark"] #lpAppFormFold,
+html[data-theme="dark"] #lpAppArchived,
+html[data-theme="dark"] .lp-app-search,
+html[data-theme="dark"] .lp-app-archived-row{
+  background:var(--app-surface,#18283f)!important;
+  border-color:var(--app-border,#596d86)!important;
+  color:var(--app-text,#edf3ff)!important;
+}
+html[data-theme="dark"] #lpAppForm label,
+html[data-theme="dark"] .lp-app-search label{color:#edf3ff!important}
+html[data-theme="dark"] #lpAppForm input,
+html[data-theme="dark"] #lpAppForm select,
+html[data-theme="dark"] #lpAppForm textarea,
+html[data-theme="dark"] .lp-app-search input,
+html[data-theme="dark"] .lp-app-search select{
+  color:#edf3ff!important;background:var(--app-surface2,#263850)!important;
+  border-color:var(--app-border,#61768f)!important;color-scheme:dark;
+}
+@media(max-width:380px){.lp-app-form-grid{grid-template-columns:1fr}}
