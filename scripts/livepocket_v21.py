@@ -26,6 +26,7 @@ import livepocket_v14 as v14
 import livepocket_v16 as v16
 import livepocket_v19 as v19
 import livepocket_v20 as v20
+from livepocket_manual_completed import read_manual_completed
 
 RAW_PATH = v14.RAW_PATH
 PUBLIC_PATH = v14.PUBLIC_PATH
@@ -287,7 +288,12 @@ def stores_known(item):
 def missing_details_v21(item):
     missing = v16_original_missing(item)
     if stores_known(item):
-        return [key for key in missing if key != 'store_name']
+        missing = [key for key in missing if key != 'store_name']
+    # A fully verified event title may legitimately describe an event that
+    # has no single product. Product-name blank alone is not incomplete.
+    if (item.get('official_event_title') and
+            not item.get('event_title_provisional')):
+        missing = [key for key in missing if key != 'product_name']
     return missing
 
 
@@ -1351,14 +1357,16 @@ def apply_verified_unavailable(raw, public, registry):
 MANUAL_RECHECK_LIMIT = 12
 
 
-def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT):
-    """Developer-only recheck: missing names, imminent deadlines, then older work.
+def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT,
+                              completed_titles=(), removed_pages=(),
+                              completed_locations=()):
+    """Select only actionable and eligible LivePocket events.
 
-    Only the explicit developer invocation uses this selector; ordinary GitHub
-    schedules, new URL prioritization, and normal retry intervals are untouched.
-    Same URL may be rechecked immediately (no two-hour ban), but a recent
-    check is *deprioritized* when other eligible URLs are available so rapidly
-    re-opening the developer tab makes progress through the missing-name queue.
+    Successful page checks, failed requests, and developer-saved corrections
+    are durable records. An event already checked recently is NOT new work;
+    incomplete unsuccessful events may be tried again after 24 hours, while
+    successfully fetched but still incomplete events wait at least seven days.
+    Completed/expired/manual-unavailable items never enter the queue.
     """
     now = v14._utc(now)
     limit = max(0, min(int(limit), MANUAL_RECHECK_LIMIT))
@@ -1367,18 +1375,19 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
     v14state = state.get('v14', {})
     if not limit or v14._cooldown_active(v14state, now):
         return []
+    completed_titles = set(completed_titles)
+    removed_pages = set(removed_pages)
+    completed_locations = set(completed_locations)
     pending = set(v14state.get('pending_new_urls', []))
     browser_checks = state.get('v13', {}).get('browser_checks', {})
     official_checks = state.get('v21_9', {}).get('official_checks', {})
-    # v21.25: urgency matters for unlabelled, still-applicable lotteries.
-    # A soft 20-minute preference is NOT a hard cooldown. If the queue contains
-    # fewer than 12 other eligible URLs, even just-checked URLs remain usable.
-    recent_window = timedelta(minutes=20)
     selected = []
     for url, item in ri.items():
-        if url in pending:
+        if url in pending or url in removed_pages:
             continue
         event = pi[url]
+        if event.get('manual_page_unavailable') or item.get('manual_page_unavailable'):
+            continue
         deadline = v11.parse_datetime(event.get('application_end_at'))
         deadline_utc = deadline.astimezone(timezone.utc) if deadline else None
         if deadline_utc and deadline_utc <= now:
@@ -1399,37 +1408,39 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
             continue
         if official_last and official_last > now:
             continue
-        latest_check = max((date for date in (last, official_last) if date),
-                           default=None)
-        missing = missing_details_v21(event)
-        event_title = event.get('event_title') or item.get('event_title') or ''
+        latest_check = max((x for x in (last, official_last) if x), default=None)
+
+        title = event.get('event_title') or item.get('event_title') or ''
         is_provisional = (title_is_provisional(item) or
                           bool(event.get('event_title_provisional')))
-        # The card hides unverified Discord titles, so they remain missing.
-        if not event_title or is_provisional:
-            tier = 0
-        elif missing:
-            tier = 1
-        else:
-            tier = 2
-        # A near-closing event needs its name before its application ends.
-        # Unknown deadlines stay eligible, but follow known imminent ones.
+        verified_title = bool(title and not is_provisional) or url in completed_titles
+        store_complete = (stores_known(event) or
+                          bool(v19.safe_name(event.get('store_name'))) or
+                          url in completed_locations)
+        missing_title = not verified_title
+        missing_store = not store_complete
+        missing_deadline = deadline_utc is None
+        if not (missing_title or missing_store or missing_deadline):
+            continue  # fully resolved; never fill the batch with completed URLs
+
+        # A successfully fetched event page has already been inspected.
+        # Even with an unreported detail it should not use every developer
+        # click; e.g. no individual product is a legitimate event design.
+        successful = str(check.get('status') or '').startswith('checked_')
+        if latest_check:
+            wait = timedelta(days=7) if successful else timedelta(hours=24)
+            if now - latest_check < wait:
+                continue
+
+        tier = 0 if missing_title else 1
         if deadline_utc is None:
             urgency = 4
         else:
             remaining = deadline_utc - now
-            if remaining <= timedelta(days=1):
-                urgency = 0
-            elif remaining <= timedelta(days=3):
-                urgency = 1
-            elif remaining <= timedelta(days=7):
-                urgency = 2
-            else:
-                urgency = 3
-        recently_checked = bool(latest_check and now - latest_check < recent_window)
-        # Prefer missing names, then other incomplete entries; among those,
-        # rotate away from just-checked entries, respect deadlines and age.
-        selected.append((tier, recently_checked, urgency,
+            urgency = (0 if remaining <= timedelta(days=1) else
+                       1 if remaining <= timedelta(days=3) else
+                       2 if remaining <= timedelta(days=7) else 3)
+        selected.append((tier, urgency,
                          latest_check is not None,
                          latest_check or datetime.min.replace(tzinfo=timezone.utc),
                          deadline_utc or datetime.max.replace(tzinfo=timezone.utc),
@@ -1531,8 +1542,15 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
                 for item in public['items']}
     before_items = {item['url']: json.loads(json.dumps(item, ensure_ascii=False))
                     for item in public['items']}
-    manual_urls = (manual_recheck_candidates(raw, public, now=now, limit=manual_limit)
-                   if manual_recheck else [])
+    if manual_recheck:
+        cloud_titles, cloud_removed, cloud_locations = read_manual_completed()
+        manual_urls = manual_recheck_candidates(
+            raw, public, now=now, limit=manual_limit,
+            completed_titles=cloud_titles,
+            removed_pages=cloud_removed | set(verified_unavailable or {}),
+            completed_locations=cloud_locations)
+    else:
+        manual_urls = []
     # Selection before the upstream pass prevents fresh discoveries from being
     # rechecked twice in the same job. An overlap with upstream is skipped.
     queued = (title_recheck_candidates(raw, public, now=now, limit=title_limit)
@@ -2382,7 +2400,14 @@ def main():
     retry_limit = v14.safe_limit('LIVEPOCKET_V16_RETRY_PER_RUN', 3, 5)
     verified_titles = read_verified_titles()
     verified_unavailable = read_verified_unavailable()
-    manual_urls = manual_recheck_candidates(raw, public) if manual_recheck else []
+    if manual_recheck:
+        cloud_titles, cloud_removed, cloud_locations = read_manual_completed()
+        manual_urls = manual_recheck_candidates(
+            raw, public, completed_titles=cloud_titles,
+            removed_pages=cloud_removed | set(verified_unavailable),
+            completed_locations=cloud_locations)
+    else:
+        manual_urls = []
     with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):
         work = v19.v18.plan(raw, public, new_limit=new_limit,
                            background_limit=background_limit,
