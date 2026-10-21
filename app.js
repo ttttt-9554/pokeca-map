@@ -3477,7 +3477,7 @@
       ${lotteryOnsiteSharedHtml(item.url)}
       ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">アプリ公式案内を確認 ↗</a>':'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>') : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
       ${lotteryTrackerActionsHtml(item)}
-      ${item.app_lottery&&lpAppCanEdit(item)?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">✏️ 登録情報を編集</button></div>':''}
+      ${item.app_lottery&&isDeveloper()&&item.app_lottery_owner!==authUser.id?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">🛠 管理者編集</button></div>':''}
       ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
   }
@@ -3734,47 +3734,72 @@
     lpAppFetch=task;
     return task;
   }
+  // v21.71: This tab is ONLY a registration/editing workspace.
+  // Public lottery cards and personal application actions stay in the Lottery tab.
   function lpAppRender(){
-    const root=$('lpAppList'),status=$('lpAppStatus');
-    if(!root||!status)return;
-    const rows=[...lpAppRows.values()].map(lpAppItem);
-    const ownHidden=rows.filter(x=>x.app_lottery_hidden&&lpAppCanEdit(x));
-    const active=rows.filter(x=>!x.app_lottery_hidden);
+    const root=$('lpAppList'),status=$('lpAppStatus'),archived=$('lpAppArchived');
+    if(!root||!status||!archived)return;
+    const uid=authUser?.id||'';
+    const mine=[...lpAppRows.values()].filter(row=>uid&&row.created_by===uid)
+      .map(lpAppItem);
+    const published=mine.filter(item=>!item.app_lottery_hidden);
+    const hidden=mine.filter(item=>item.app_lottery_hidden);
     const q=productNorm($('lpAppSearch')?.value||'');
     const mode=$('lpAppFilter')?.value||'all';
-    const now=Date.now();
-    const matches=item=>{
-      if(q&&!productNorm([item.app_lottery_name,item.event_title,item.product_name,
-        item.store_name,item.prefecture,item.app_lottery_details].join(' ')).includes(q))return false;
-      return mode==='all'||lotteryState(item,now)===mode;
-    };
-    const shown=active.filter(matches).sort((a,b)=>
-      lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
+    const matches=item=>!q||productNorm([
+      item.app_lottery_name,item.event_title,item.product_name,
+      item.store_name,item.prefecture,item.app_lottery_details
+    ].filter(Boolean).join(' ')).includes(q);
+    const shownPublished=(mode==='hidden'?[]:published.filter(matches))
+      .sort((a,b)=>lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
+    const shownHidden=(mode==='active'?[]:hidden.filter(matches))
+      .sort((a,b)=>lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
+    const matched=shownPublished.length+shownHidden.length;
+    $('lpAppAccountHint').textContent=uid
+      ? 'この画面では自分の登録だけを編集できます。抽選カード・応募・当選・落選は「🎟️ 抽選」「✅ 抽選管理」で扱います。'
+      : '登録・再編集にはDiscordログインが必要です。「共有」タブからログインしてください。抽選カードは「🎟️ 抽選」で閲覧できます。';
     status.textContent=(lpAppError?'⚠ '+lpAppError+' ／ ':'')+
-      '共有中 '+active.length+'件 ／ 表示 '+shown.length+'件 ／ 自分が編集できる非表示 '+ownHidden.length+'件';
-    $('lpAppAccountHint').textContent=authUser
-      ?'Discordログイン中：新規登録できます。公開情報は全ユーザーに共有され、応募・当選・個人メモは非公開です。'
-      :'閲覧できます。新規登録と応募管理には「共有」タブからDiscordログインしてください。';
-    root.innerHTML=shown.length
-      ?shown.slice(0,100).map(x=>{
-        const item=lpCardOverlay(lpLegacyApply(x))||x;
-        return lotteryCard(item,lotteryState(item,now));
-      }).join('')+
-        (shown.length>100?'<p class="hint">先頭100件を表示しています。検索で絞り込んでください。</p>':'')
-      :'<p class="lp-empty">条件に合うアプリ抽選はまだありません。確認できた抽選を登録して共有できます。</p>';
-    const archived=$('lpAppArchived');
-    if(archived){
-      const wasOpen=archived.open;
-      archived.hidden=!ownHidden.length;
-      archived.innerHTML='<summary>📁 非表示の登録（'+ownHidden.length+'件）</summary>'+
-        '<div class="lp-app-archived-list">'+ownHidden.map(item=>
-          '<div class="lp-app-archived-row"><strong>'+escape(item.app_lottery_name+
-          ' ／ '+item.event_title)+'</strong>'+
-          '<button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">編集・再公開</button></div>'
-        ).join('')+'</div>';
-      archived.open=wasOpen;
+      (uid?'自分の登録 '+mine.length+'件 ／ 公開中 '+published.length+
+        '件 ／ 非表示 '+hidden.length+'件 ／ 検索結果 '+matched+'件':
+        '自分の登録を見るにはDiscordログインしてください。');
+    function editorRow(item,isArchived){
+      const id=escape(item.app_lottery_id);
+      const info=[item.app_lottery_name,item.product_name,item.store_name,item.prefecture]
+        .filter(Boolean).join(' ／ ');
+      const deadline=lotteryJapaneseDate(item.application_end_at)||'未確認';
+      return '<div class="lp-app-edit-row">'+
+        '<div class="lp-app-edit-main">'+
+          '<strong>'+escape(item.event_title)+'</strong>'+
+          '<p class="lp-app-edit-meta">'+escape(info)+'</p>'+
+          '<p class="lp-app-edit-deadline">応募締切：'+escape(deadline)+'</p>'+
+          '<span class="lp-app-state'+(isArchived?' is-hidden':'')+'">'+
+            (isArchived?'非表示':'公開中')+'</span>'+
+        '</div><div class="lp-app-edit-actions">'+
+          '<button type="button" data-lp-app-edit="'+id+'">'+
+            (isArchived?'編集・再公開':'登録内容を編集')+'</button>'+
+          (isArchived?'':'<button type="button" data-lp-app-view="'+id+
+            '">抽選タブで見る ↗</button>')+
+        '</div></div>';
     }
+    root.innerHTML=!uid
+      ? '<p class="lp-empty">Discordでログインすると、自分が登録したアプリ抽選をここから修正できます。</p>'
+      : shownPublished.length
+        ?shownPublished.slice(0,100).map(item=>editorRow(item,false)).join('')+
+          (shownPublished.length>100?'<p class="hint">公開中の登録は100件まで表示しています。検索で絞り込んでください。</p>':'')
+        :'<p class="lp-empty">'+(mode==='hidden'
+          ?'非表示の登録は下の折りたたみ一覧から編集できます。'
+          :mine.length?'公開中の登録はありません。検索条件を変えるか、非表示の一覧を確認してください。'
+          :'自分が登録したアプリ抽選はまだありません。「アプリ抽選を登録」から追加できます。')+'</p>';
+    const wasOpen=archived.open;
+    archived.hidden=!shownHidden.length;
+    archived.innerHTML='<summary>📁 自分の非表示登録（'+shownHidden.length+'件）</summary>'+
+      '<div class="lp-app-archived-list">'+
+      shownHidden.slice(0,100).map(item=>editorRow(item,true)).join('')+
+      (shownHidden.length>100?'<p class="hint">最初の100件を表示中です。検索で絞り込んでください。</p>':'')+
+      '</div>';
+    archived.open=mode==='hidden'||wasOpen;
   }
+
   function lpAppFormMessage(message){
     const target=$('lpAppFormStatus');
     if(target)target.textContent=message;
@@ -3917,6 +3942,24 @@
       lpAppBusy=false;button.disabled=false;button.textContent=oldText;
     }
   }
+  function lpAppViewInLottery(id){
+    const row=lpAppRows.get(id);
+    if(!row||row.is_hidden||row.created_by!==authUser?.id)return;
+    // Show this app's card even if the Lottery tab was previously filtered to
+    // LivePocket, a prefecture, a different genre or "受付中".
+    $('lpQuery').value=row.event_title||'';
+    $('lpSite').value='app';
+    $('lpStatus').value='all';
+    $('lpGenre').value='all';
+    $('lpType').value='all';
+    $('lpPrefecture').value='all';
+    $('lpWishlistOnly').checked=false;
+    $('lpSort').value='newest';
+    lotteryVisibleLimit=LP_PAGE_SIZE;
+    switchTab('lottery');
+    renderLottery();
+  }
+
   function lpAppInitUI(){
     const form=$('lpAppForm');
     if(!form)return;
@@ -3931,14 +3974,18 @@
     });
     $('lpAppToggle').addEventListener('click',lpAppToggleVisibility);
     form.addEventListener('submit',lpAppSubmit);
-    for(const view of [$('appLotteryView'),$('lotteryView')]){
-      view.addEventListener('click',event=>{
-        const button=event.target.closest('button[data-lp-app-edit]');
-        if(button)lpAppPrepare(button.dataset.lpAppEdit);
-      });
-    }
-    $('appLotteryView').addEventListener('click',lotteryTrackerHandleClick);
-    $('appLotteryView').addEventListener('click',lotteryOnsiteHandleClick);
+    $('appLotteryView').addEventListener('click',event=>{
+      const edit=event.target.closest('button[data-lp-app-edit]');
+      if(edit){lpAppPrepare(edit.dataset.lpAppEdit);return;}
+      const view=event.target.closest('button[data-lp-app-view]');
+      if(view)lpAppViewInLottery(view.dataset.lpAppView);
+    });
+    // Administrator moderation may still open the same editing form from
+    // a public lottery card; ordinary users manage their own rows here.
+    $('lotteryView').addEventListener('click',event=>{
+      const edit=event.target.closest('button[data-lp-app-edit]');
+      if(edit)lpAppPrepare(edit.dataset.lpAppEdit);
+    });
     lpAppRender();
   }
 
