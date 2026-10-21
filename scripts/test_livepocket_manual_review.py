@@ -25,7 +25,7 @@ def fixtures():
         "finished", "needsname", "justchecked", "justfailed",
         "retryfailed", "retrychecked", "expired", "removed",
         "manualdone", "manualtitle", "manualplace", "productoptional",
-        "deadlineunknown"
+        "deadlineunknown","readyafterfail","readyaftercheck"
     )
     raw, public = [], []
     for name in names:
@@ -35,7 +35,8 @@ def fixtures():
         }
         original = {"url":url(name),"event_title":event["event_title"]}
         if name in ("needsname","justchecked","justfailed","retryfailed",
-                    "retrychecked","manualdone","manualtitle","manualplace"):
+                    "retrychecked","readyafterfail","readyaftercheck",
+                    "manualdone","manualtitle","manualplace"):
             event["event_title"] = ""
             original["event_title"] = ""
         if name in ("manualdone","manualtitle","manualplace"):
@@ -52,6 +53,8 @@ def fixtures():
         ("justfailed",timedelta(hours=2),"browser_error"),
         ("retryfailed",timedelta(days=2),"browser_error"),
         ("retrychecked",timedelta(days=8),"checked_no_new_details"),
+        ("readyafterfail",timedelta(hours=7),"browser_error"),
+        ("readyaftercheck",timedelta(hours=25),"checked_no_new_details"),
     ):
         check[url(name)] = {
             "checked_at":(NOW-age).isoformat(),"status":status
@@ -75,7 +78,8 @@ class CandidateTests(unittest.TestCase):
         )
         expected={url(name) for name in (
             "needsname","retryfailed","retrychecked","manualtitle",
-            "manualplace","deadlineunknown"
+            "manualplace","deadlineunknown",
+            "readyafterfail","readyaftercheck"
         )}
         self.assertEqual(set(found),expected)
         self.assertEqual(len(found),len(set(found)))
@@ -108,6 +112,12 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(counts["removed"],1)
         self.assertEqual(counts["expired"],1)
         self.assertEqual(counts["retry_wait"],2)
+        self.assertEqual(counts["unresolved"],counts["ready"]+counts["retry_wait"])
+        self.assertEqual(counts["missing_title"],10)
+        self.assertIsNotNone(counts["next_retry_at"])
+        self.assertLessEqual(
+            datetime.fromisoformat(counts["next_retry_at"].replace("Z","+00:00")),
+            NOW+timedelta(hours=5))
 
     def test_progress_cooldown_pauses_next_batch_without_losing_counts(self):
         raw,public=fixtures()
@@ -152,7 +162,10 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(result["status"],"ok")
         self.assertEqual(result["total"],len(raw["items"]))
         self.assertEqual(result["source"],"v21_65_manual_selector")
-        self.assertEqual(result["next_batch_size"],result["ready"])
+        self.assertEqual(result["next_batch_size"],min(12,result["ready"]))
+        self.assertEqual(result["unresolved"],result["ready"]+result["retry_wait"])
+        self.assertGreater(result["missing_title"],0)
+        self.assertIsNotNone(result["next_retry_at"])
         self.assertNotIn("livepocket.jp",json.dumps(result))
 
     def test_public_report_is_safe_when_snapshot_missing(self):
