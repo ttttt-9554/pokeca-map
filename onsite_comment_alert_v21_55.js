@@ -2,12 +2,25 @@
 (function install(){
   'use strict';
   const STORAGE='pokeca-onsite-comment-alerts-v21_55';
-  const SOURCE='lottery_onsite_reports';
+  // The old table keeps its LivePocket comments; the new table stores other sites.
+  const SOURCES=['lottery_onsite_reports','lottery_external_onsite_reports'];
   const API_URL='https://aypcmtlaaygmiexboypk.supabase.co';
   const API_KEY='sb_publishable_C0YESv-nDjR7PvAoMPscQg_uznt6foN';
   const get=id=>document.getElementById(id);
   const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const validUrl=u=>/^https:\/\/livepocket\.jp\/e\/[A-Za-z0-9_-]{4,64}\/?$/.test(String(u||''));
+  const validUrl=u=>{
+    if(typeof u!=='string'||u.length<12||u.length>2000||
+       /[\\\s\u0000-\u001f]/.test(u))return false;
+    try{
+      const url=new URL(u);
+      const host=url.hostname.toLowerCase().replace(/\.$/,'');
+      return ['http:','https:'].includes(url.protocol)&&!url.username&&!url.password&&
+        /^([a-z0-9-]+\.)+[a-z0-9-]+$/.test(host)&&
+        !['x.com','twitter.com','t.co','fxtwitter.com','vxtwitter.com','fixupx.com']
+          .some(x=>host===x||host.endsWith('.'+x))&&
+        !host.endsWith('.local')&&!host.endsWith('.internal')&&!host.endsWith('.localhost');
+    }catch(_){return false;}
+  };
   const displayDate=v=>{const t=Date.parse(v||'');return Number.isFinite(t)?new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(t)):'';};
   let state={initialized:false,seen:{},notices:[]},client,busy=false,unreadToast=0;
   function restore(){
@@ -70,11 +83,15 @@
     busy=true;
     try{
       const rows=[];
-      for(let offset=0;offset<10000;offset+=500){
-        const {data,error}=await client.from(SOURCE).select('user_id,event_url,requirement,details,store_name,event_title,updated_at')
-          .order('updated_at',{ascending:false}).range(offset,offset+499);
-        if(error)throw error;
-        rows.push(...(data||[]));if(!data||data.length<500)break;
+      for(const table of SOURCES){
+        for(let offset=0;offset<10000;offset+=500){
+          const {data,error}=await client.from(table)
+            .select('user_id,event_url,requirement,details,store_name,event_title,updated_at')
+            .order('updated_at',{ascending:false}).range(offset,offset+499);
+          if(error)throw error;
+          rows.push(...(data||[]));
+          if(!data||data.length<500)break;
+        }
       }
       reconcile(rows);
     }catch(e){
