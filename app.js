@@ -2858,6 +2858,65 @@
     return lpExtLoading;
   }
 
+  // Developer refresh: fetch the currently published Discord URL catalog AND
+  // the Supabase moderation state. Collection itself runs in GitHub Actions.
+  let lpExtPublishedRefreshBusy=false;
+  async function lpExtRefreshPublished(){
+    const button=$('lpExtRefresh'),feedback=$('lpExtRefreshFeedback');
+    if(!button||!feedback||!isDeveloper()||lpExtPublishedRefreshBusy)return false;
+    lpExtPublishedRefreshBusy=true;
+    const buttonLabel=button.textContent;
+    button.disabled=true;
+    button.textContent='取得中…';
+    feedback.textContent='🔄 公開済みの外部URLと手動編集情報を取得しています…';
+    try{
+      // Wait for a concurrently running lottery feed load before replacing
+      // its cache. Force a fresh network fetch rather than trusting the timer.
+      if(lotteryLoading)await lotteryLoading;
+      const response=await fetch(LP_OTHER_JSON_URL+'?refresh='+Date.now(),{cache:'no-store'});
+      if(!response.ok)throw Error('外部URL一覧 HTTP '+response.status);
+      const data=await response.json();
+      if(!data||!Array.isArray(data.items))
+        throw Error('外部URL一覧のデータ形式が不正です');
+      const fresh=new Map();
+      for(const item of data.items){
+        if(!item||!safeLotteryUrl(item.url)||isLivePocketEventUrl(item.url))continue;
+        if(!fresh.has(item.url))fresh.set(item.url,item);
+      }
+      const old=new Set(lotteryBaseItems.filter(item=>
+        item&&!isLivePocketEventUrl(item.url)).map(item=>item.url));
+      const updated=await lpExtRefresh(true);
+      if(!updated)throw Error(lpExtError||'Supabaseの編集情報を取得できません');
+      // Preserve all existing LivePocket entries and their separate overlays.
+      lotteryBaseItems=[
+        ...lotteryBaseItems.filter(item=>item&&isLivePocketEventUrl(item.url)),
+        ...fresh.values()
+      ];
+      lpCloudApply();
+      const additions=[...fresh.keys()].filter(url=>!old.has(url)).length;
+      const removed=[...old].filter(url=>!fresh.has(url)).length;
+      const stamp=new Intl.DateTimeFormat('ja-JP',{
+        timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',second:'2-digit',
+        hour12:false
+      }).format(new Date());
+      const publishedAt=lotteryJapaneseDate(data.collected_at);
+      feedback.textContent='✅ '+stamp+' に取得完了：外部URL '+fresh.size+
+        '件 ／ 新規 '+additions+'件 ／ 公開一覧から消えたURL '+removed+'件'+
+        (publishedAt?' ／ Discord最終収集 '+publishedAt+'（日本時間）':'')+
+        '。データが変わっていなくても再取得済みです。';
+      return true;
+    }catch(error){
+      feedback.textContent='⚠ 取得失敗：'+String(error?.message||error)+
+        '。現在の一覧は変更していません。';
+      console.warn('外部抽選の最新情報を取得できません:',error);
+      return false;
+    }finally{
+      lpExtPublishedRefreshBusy=false;
+      button.disabled=false;
+      button.textContent=buttonLabel;
+    }
+  }
+
   function lpExtDateInput(iso){
     const ms=Date.parse(iso||'');
     if(!Number.isFinite(ms))return '';
@@ -3070,7 +3129,7 @@
       LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
     $('lpExtSearch').addEventListener('input',()=>{lpExtListLimit=80;lpExtRenderAdmin();});
     $('lpExtMore').addEventListener('click',()=>{lpExtListLimit+=80;lpExtRenderAdmin();});
-    $('lpExtRefresh').addEventListener('click',()=>lpExtRefresh(true));
+    $('lpExtRefresh').addEventListener('click',lpExtRefreshPublished);
     $('lpExtManageList').addEventListener('click',event=>{
       const target=event.target.closest('button[data-lp-ext-edit]');
       if(target)lpExtOpen(target.dataset.lpExtEdit);
