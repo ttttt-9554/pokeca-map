@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39598651082",
-    "run_number": "596",
-    "completed_process_at": "2026-10-21T12:19:27Z",
+    "run_id": "39599114940",
+    "run_number": "597",
+    "completed_process_at": "2026-10-21T12:22:58Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -89,9 +89,9 @@
     "manual_page_check_attempts": 0
   },
   "last_manual": {
-    "run_id": "39598651082",
-    "run_number": "596",
-    "completed_process_at": "2026-10-21T12:19:27Z",
+    "run_id": "39599114940",
+    "run_number": "597",
+    "completed_process_at": "2026-10-21T12:22:58Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -183,7 +183,7 @@
     "last_7_days": 92,
     "registered_total": 423,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-21T12:19:27Z",
+    "as_of": "2026-10-21T12:22:58Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
@@ -199,6 +199,6 @@
     "next_batch_size": 0,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-21T12:19:28Z"
+    "as_of": "2026-10-21T12:22:59Z"
   }
 }
