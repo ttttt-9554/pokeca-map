@@ -1359,7 +1359,7 @@ MANUAL_RECHECK_LIMIT = 12
 
 def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT,
                               completed_titles=(), removed_pages=(),
-                              completed_locations=()):
+                              completed_locations=(), summary=False):
     """Select only actionable and eligible LivePocket events.
 
     Successful page checks, failed requests, and developer-saved corrections
@@ -1373,8 +1373,10 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
     ri, pi = v11.indices(raw, public)
     state = raw.get('collector_state', {})
     v14state = state.get('v14', {})
-    if not limit or v14._cooldown_active(v14state, now):
+    access_cooldown = v14._cooldown_active(v14state, now)
+    if not limit and not summary:
         return []
+    counters = Counter()
     completed_titles = set(completed_titles)
     removed_pages = set(removed_pages)
     completed_locations = set(completed_locations)
@@ -1383,30 +1385,39 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
     official_checks = state.get('v21_9', {}).get('official_checks', {})
     selected = []
     for url, item in ri.items():
-        if url in pending or url in removed_pages:
+        if url in removed_pages or item.get('manual_page_unavailable') or pi[url].get('manual_page_unavailable'):
+            counters['removed'] += 1
+            continue
+        if url in pending:
+            counters['new_pending'] += 1
             continue
         event = pi[url]
-        if event.get('manual_page_unavailable') or item.get('manual_page_unavailable'):
-            continue
-        deadline = v11.parse_datetime(event.get('application_end_at'))
+         deadline = v11.parse_datetime(event.get('application_end_at'))
         deadline_utc = deadline.astimezone(timezone.utc) if deadline else None
         if deadline_utc and deadline_utc <= now:
+            counters['expired'] += 1
             continue
         check = browser_checks.get(url, {})
         if not isinstance(check, dict) or check.get('status') == 'browser_redirected':
+            counters['quarantined'] += 1
             continue
         last = v19.v18.v17.check_time(check.get('checked_at'))
         if check.get('checked_at') and not last:
+            counters['quarantined'] += 1
             continue  # malformed timestamps are quarantined
         if last and last > now:
+            counters['quarantined'] += 1
             continue
         official = official_checks.get(url, {})
         if not isinstance(official, dict):
+            counters['quarantined'] += 1
             continue
         official_last = v19.v18.v17.check_time(official.get('checked_at'))
         if official.get('checked_at') and not official_last:
+            counters['quarantined'] += 1
             continue
         if official_last and official_last > now:
+            counters['quarantined'] += 1
             continue
         latest_check = max((x for x in (last, official_last) if x), default=None)
 
@@ -1421,6 +1432,7 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         missing_store = not store_complete
         missing_deadline = deadline_utc is None
         if not (missing_title or missing_store or missing_deadline):
+            counters['completed'] += 1
             continue  # fully resolved; never fill the batch with completed URLs
 
         # A successfully fetched event page has already been inspected.
@@ -1430,6 +1442,7 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         if latest_check:
             wait = timedelta(days=7) if successful else timedelta(hours=24)
             if now - latest_check < wait:
+                counters['retry_wait'] += 1
                 continue
 
         tier = 0 if missing_title else 1
@@ -1440,12 +1453,25 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
             urgency = (0 if remaining <= timedelta(days=1) else
                        1 if remaining <= timedelta(days=3) else
                        2 if remaining <= timedelta(days=7) else 3)
+        counters['ready'] += 1
         selected.append((tier, urgency,
                          latest_check is not None,
                          latest_check or datetime.min.replace(tzinfo=timezone.utc),
                          deadline_utc or datetime.max.replace(tzinfo=timezone.utc),
                          url))
     selected.sort()
+    if summary:
+        keys=('ready','retry_wait','completed','expired','removed',
+              'new_pending','quarantined')
+        result={key:int(counters.get(key,0)) for key in keys}
+        result['total']=len(ri)
+        result['access_cooldown']=bool(access_cooldown)
+        result['next_batch_size']=min(limit, len(selected)) if not access_cooldown else 0
+        if sum(result[key] for key in keys) != result['total']:
+            raise ValueError('Manual review progress categories do not total the catalog')
+        return result
+    if access_cooldown:
+        return []
     return [row[-1] for row in selected[:limit]]
 
 
