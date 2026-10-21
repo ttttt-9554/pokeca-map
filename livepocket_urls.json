@@ -12789,8 +12789,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/q-2l1": {
-          "checked_at": "2026-10-21T04:36:20.969047+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-21T10:51:23.835087+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fgvl7": {
           "checked_at": "2026-10-21T10:21:11.254272+00:00",
@@ -13248,8 +13248,8 @@
         },
         "https://livepocket.jp/e/q-2l1": {
           "detected_at": "2026-10-21T04:35:56.961264+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-21T04:36:20.969047+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-21T10:51:23.835087+00:00"
         },
         "https://livepocket.jp/e/fgvl7": {
           "detected_at": "2026-10-21T05:20:56.911000+00:00",
@@ -13674,6 +13674,11 @@
         "https://livepocket.jp/e/4ukll": {
           "attempts": 1,
           "last_attempt_at": "2026-10-21T09:11:22.610277+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/q-2l1": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-21T10:51:23.835087+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -16600,7 +16605,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-21T04:36:20.969047+00:00",
+          "checked_at": "2026-10-21T10:51:23.835087+00:00",
           "title_observed": "【ふるいちイオンモール日の出店】ポケモン抽選販売（ポケモン30周年・拡張パック）",
           "genre": "",
           "product_origin": "",
@@ -18314,7 +18319,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/q-2l1": {
-          "checked_at": "2026-10-21T04:36:20.969047+00:00",
+          "checked_at": "2026-10-21T10:51:23.835087+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
