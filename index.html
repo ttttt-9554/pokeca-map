@@ -734,8 +734,8 @@ nav[aria-label="メインメニュー"] {
     <section id="appLotteryView" class="view" aria-labelledby="lpAppHeading">
       <div class="lp-heading">
         <div>
-          <h2 id="lpAppHeading">📱 アプリ抽選</h2>
-          <p class="hint">自動収集できない公式アプリ内の抽選を、ユーザー同士で登録・共有します。</p>
+          <h2 id="lpAppHeading">📱 アプリ抽選の登録・編集</h2>
+          <p class="hint">このタブは自分の登録情報を追加・修正する場所です。抽選カードや応募状況の管理は「🎟️ 抽選」「✅ 抽選管理」で行います。</p>
         </div>
         <button type="button" id="lpAppReload" class="lp-refresh">↻ 更新</button>
       </div>
@@ -790,7 +790,7 @@ nav[aria-label="メインメニュー"] {
           <label>抽選に関する共有メモ（任意・600文字以内）
             <textarea name="details" maxlength="600" rows="3" placeholder="応募方法や対象店舗など、公式アプリで確認した内容"></textarea>
           </label>
-          <p class="hint">登録した抽選情報は全ユーザーに公開されます。応募済み・当選・落選・受け取り期限・個人メモは従来の「抽選管理」に非公開で保存されます。公式情報に変更があった場合は登録者または管理者が編集できます。</p>
+          <p class="hint">登録した情報は「🎟️ 抽選」タブのカードとして全ユーザーに表示されます。応募済み・当選・落選・受取期限と個人メモは「✅ 抽選管理」で非公開のまま扱えます。このタブからはいつでも自分の登録を再編集・非表示・再公開できます。</p>
           <div class="lp-app-form-actions">
             <button type="submit" class="primary">共有一覧に保存</button>
             <button type="button" id="lpAppCancel">閉じる</button>
@@ -799,24 +799,22 @@ nav[aria-label="メインメニュー"] {
           <p id="lpAppFormStatus" class="hint" role="status" aria-live="polite"></p>
         </form>
       </details>
-      <section class="lp-app-search" aria-label="アプリ抽選検索">
-        <label for="lpAppSearch">アプリ名・商品名・店舗名で検索</label>
-        <input type="search" id="lpAppSearch" maxlength="120" placeholder="抽選を検索" autocomplete="off">
-        <label for="lpAppFilter">応募受付状況</label>
+      <section class="lp-app-search" aria-label="自分のアプリ抽選登録を検索">
+        <label for="lpAppSearch">自分の登録を検索（アプリ名・抽選名・商品名・店舗名）</label>
+        <input type="search" id="lpAppSearch" maxlength="120" placeholder="自分の登録を検索" autocomplete="off">
+        <label for="lpAppFilter">登録の公開状態</label>
         <select id="lpAppFilter">
           <option value="all">すべて</option>
-          <option value="open">受付中（日時確認済み）</option>
-          <option value="upcoming">開始前</option>
-          <option value="unknown">応募期間未確認</option>
-          <option value="closed">受付終了</option>
+          <option value="active">公開中のみ</option>
+          <option value="hidden">非表示のみ</option>
         </select>
       </section>
-      <p id="lpAppStatus" class="hint" role="status" aria-live="polite">アプリ抽選情報を確認しています…</p>
-      <div id="lpAppList" class="lp-cards" aria-live="polite"></div>
+      <p id="lpAppStatus" class="hint" role="status" aria-live="polite">自分の登録情報を読み込んでいます…</p>
+      <div id="lpAppList" class="lp-app-own-list" aria-live="polite"></div>
       <details id="lpAppArchived" class="lp-app-archived" hidden>
         <summary>📁 非表示の登録</summary>
       </details>
-      <p class="hint">登録情報は利用者の申告です。応募条件や受付期間は必ず公式アプリで確認してください。</p>
+      <p class="hint">応募や当落の記録は「抽選管理」で行います。公式情報の変更はこの画面から再編集し、実際の応募条件は公式アプリで確認してください。</p>
     </section>
 
     <!-- ======================================
@@ -1518,7 +1516,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261022-v21_70-app-lottery"></script>
+  <script src="app.js?v=20261022-v21_71-app-lottery-editor"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
