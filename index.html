@@ -652,12 +652,6 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpLoadStatus" class="hint" role="status" aria-live="polite">抽選情報はタブを開くと読み込みます。</p>
       <div id="lpSummary" class="lp-summary" aria-live="polite"></div>
-      <div class="lp-filter" aria-label="LivePocket以外の抽選URL">
-        <strong>🔗 外部サイトのURL：<span id="lpExternalCount">0件</span></strong>
-        <p class="hint">X・Twitter以外のURLをDiscordから収集します。外部ページは自動確認していないため、応募期限や抽選内容は未確認です。</p>
-        <button id="lpExternalShow" type="button" hidden>外部サイトのURL一覧を見る</button>
-      </div>
-
       <details id="lpOnsiteArchive" aria-label="現地対応アーカイブ">
         <summary>📚 現地対応アーカイブ（<span id="lpOnsiteArchiveCount">0件</span>）</summary>
         <div class="lp-onsite-archive-body">
@@ -1365,7 +1359,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_62-external-refresh-feedback"></script>
+  <script src="app.js?v=20261021-v21_63-no-external-box"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
