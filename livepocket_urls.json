@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-20T15:00:56.419096+00:00",
+  "collected_at": "2026-10-21T01:35:55.156165+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 413,
+  "unique_livepocket_urls": 414,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10682,33 +10682,64 @@
       "event_title": "【ふるいち イオンモール高崎店】ポケカ抽選(30th CELEBRATION)",
       "application_end_at": "2026-10-22T21:00:00+09:00",
       "application_start_at": "2026-10-20T17:40:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/blr50",
+      "discord_message_id": "1562276771036926072",
+      "discord_posted_at": "2026-10-21T01:30:07.914000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA籠原店\n受付終了: 10/22 21:30（残り1日10時間）\nhttps://livepocket.jp/e/blr50",
+      "store_name": "TSUTAYA籠原店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA籠原店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product"
+      },
+      "event_title": "再入荷『ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」』 抽選販売受付",
+      "application_end_at": "2026-10-22T21:30:00+09:00",
+      "application_start_at": "2026-10-21T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 260,
+    "parsed": 261,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 256,
-    "prefecture": 219,
-    "event_title": 100,
+    "store_name": 257,
+    "prefecture": 220,
+    "event_title": 101,
     "event_date": 1,
     "product_name": 62,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 388,
-    "application_start_at": 388,
-    "stores_events": 259
+    "application_end_at": 389,
+    "application_start_at": 389,
+    "stores_events": 260
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562118259241779292"
+      "1551580466266644552": "1562276771036926072"
     },
     "last_run": {
-      "checked_at": "2026-10-20T15:00:56.419096+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-21T01:35:55.156165+00:00",
+      "new_urls": 1,
       "original_urls": 413,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -10798,7 +10829,8 @@
         "1562012524642046003": "2026-10-20T08:05:56.313111+00:00",
         "1562027645800026112": "2026-10-20T09:00:59.560106+00:00",
         "1562035177381961849": "2026-10-20T09:30:56.928777+00:00",
-        "1562042728538181702": "2026-10-20T10:00:55.559547+00:00"
+        "1562042728538181702": "2026-10-20T10:00:55.559547+00:00",
+        "1562276771036926072": "2026-10-21T01:35:55.435333+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12462,6 +12494,10 @@
         "https://livepocket.jp/e/mbny1": {
           "checked_at": "2026-10-20T22:21:23.872432+00:00",
           "status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/blr50": {
+          "checked_at": "2026-10-21T01:36:26.393146+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -12876,6 +12912,11 @@
           "detected_at": "2026-10-20T10:00:56.346596+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-10-20T22:21:23.872432+00:00"
+        },
+        "https://livepocket.jp/e/blr50": {
+          "detected_at": "2026-10-21T01:35:56.167152+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-21T01:36:26.393146+00:00"
         }
       },
       "pending_new_urls": []
@@ -16137,6 +16178,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/blr50": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-21T01:36:26.393146+00:00",
+          "title_observed": "再入荷『ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」』 抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -17726,6 +17778,19 @@
         },
         "https://livepocket.jp/e/mbny1": {
           "checked_at": "2026-10-20T22:21:23.872432+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/blr50": {
+          "checked_at": "2026-10-21T01:36:26.393146+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
