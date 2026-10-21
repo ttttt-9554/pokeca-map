@@ -1100,11 +1100,17 @@ nav[aria-label="メインメニュー"] {
       <div class="store-tools lp-dev-recheck" id="lpDevRecheckPanel">
         <h3>🎟️ 抽選イベントの手動再確認</h3>
         <p class="hint">登録済みのイベントから、未確認・再確認時期が来たものを最大12件ずつ確認します。新着収集はそのまま継続します。</p>
-        <button type="button" class="primary" id="lpDevRecheckButton">登録済み抽選を12件再確認</button>
+        <button type="button" class="primary" id="lpDevRecheckButton">未解決の抽選を最大12件再確認</button>
         <p class="hint" role="status" aria-live="polite" id="lpDevRecheckStatus">実行待ち</p>
+        <section class="lp-dev-results" aria-label="現在の抽選確認状況">
+          <h4>📋 現在の確認状況</h4>
+          <div id="lpDevReviewProgress" role="status" aria-live="polite">
+            <p class="hint">現在の確認状況を集計中です…</p>
+          </div>
+        </section>
         <section class="lp-dev-results" aria-label="抽選イベントの再確認結果">
           <div class="lp-dev-results-header">
-            <h4>📊 再確認の実行結果</h4>
+            <h4>📊 前回の手動再確認結果</h4>
             <button type="button" id="lpDevResultsRefresh">結果を更新</button>
           </div>
           <p class="hint" id="lpDevResultsState" role="status" aria-live="polite">確認結果を読み込んでいます…</p>
@@ -1359,7 +1365,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_64-recheck-completed"></script>
+  <script src="app.js?v=20261021-v21_65-review-progress"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
