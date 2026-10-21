@@ -12840,8 +12840,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/cn3fn": {
-          "checked_at": "2026-10-21T13:06:31.104616+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-21T19:16:20.855788+00:00",
+          "status": "checked_retry_no_new_details"
         }
       }
     },
@@ -13309,8 +13309,8 @@
         },
         "https://livepocket.jp/e/cn3fn": {
           "detected_at": "2026-10-21T13:05:59.927040+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-21T13:06:31.104616+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-21T19:16:20.855788+00:00"
         }
       },
       "pending_new_urls": []
@@ -13730,6 +13730,11 @@
         "https://livepocket.jp/e/g1lus": {
           "attempts": 1,
           "last_attempt_at": "2026-10-21T15:41:18.869275+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/cn3fn": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-21T19:16:20.855788+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -16722,7 +16727,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-21T13:06:31.104616+00:00",
+          "checked_at": "2026-10-21T19:16:20.855788+00:00",
           "title_observed": "ワンピースカードゲーム 「ヒロインズエディション Vol.2」",
           "genre": "onepiece",
           "product_origin": "",
@@ -18459,7 +18464,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/cn3fn": {
-          "checked_at": "2026-10-21T13:06:31.104616+00:00",
+          "checked_at": "2026-10-21T19:16:20.855788+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
