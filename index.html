@@ -645,8 +645,8 @@ nav[aria-label="メインメニュー"] {
     <section id="lotteryView" class="view" aria-labelledby="lpHeading">
       <div class="lp-heading">
         <div>
-          <h2 id="lpHeading">🎟️ 抽選・LivePocket</h2>
-          <p class="hint">Discordから収集した抽選イベントを一覧表示。地図にはピンを追加しません。</p>
+          <h2 id="lpHeading">🎟️ 抽選</h2>
+          <p class="hint">Discordで収集した抽選と、ユーザーが登録したアプリ抽選をまとめて表示します。地図にはピンを追加しません。</p>
         </div>
         <button id="lpRefresh" type="button" class="lp-refresh">↻ 更新</button>
       </div>
@@ -701,11 +701,12 @@ nav[aria-label="メインメニュー"] {
               <option value="unknown">区分未確認</option>
             </select>
           </label>
-          <label for="lpSite">抽選サイト
+          <label for="lpSite">収集元・登録種類
             <select id="lpSite">
               <option value="all" selected>すべてのサイト</option>
               <option value="livepocket">LivePocket</option>
-              <option value="external">その他（X除外）</option>
+              <option value="external">その他のサイト（X除外）</option>
+              <option value="app">アプリ抽選</option>
             </select>
           </label>
           <label for="lpSort">並び順
