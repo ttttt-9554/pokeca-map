@@ -1305,3 +1305,43 @@ html[data-theme="dark"] .lp-app-search select{
   border-color:var(--app-border,#61768f)!important;color-scheme:dark;
 }
 @media(max-width:380px){.lp-app-form-grid{grid-template-columns:1fr}}
+
+
+/* v21.71: App lotteries are edited here; their full cards live in the Lottery tab. */
+.lp-app-own-list{display:grid;gap:10px;margin:12px 0 16px}
+.lp-app-edit-row{
+  display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  border:1px solid var(--app-border,#cbd5e1);border-radius:13px;
+  padding:13px;background:var(--app-surface,#fff);color:var(--app-text,#172033)
+}
+.lp-app-edit-main{min-width:0;flex:1 1 180px;overflow-wrap:anywhere}
+.lp-app-edit-main strong{display:block;font-size:15px;line-height:1.5;color:inherit}
+.lp-app-edit-meta,.lp-app-edit-deadline{
+  font-size:12px;line-height:1.55;color:var(--app-muted,#64748b);margin:6px 0
+}
+.lp-app-edit-actions{display:flex;flex:0 1 auto;align-self:center;gap:7px;flex-wrap:wrap}
+.lp-app-edit-actions button{
+  min-height:40px;padding:8px 10px;font-size:12px;font-weight:750;
+  border:1px solid var(--app-border,#cbd5e1);border-radius:9px;
+  color:var(--app-text,#172033);background:var(--app-surface2,#f1f5f9)
+}
+.lp-app-state{
+  display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;
+  border:1px solid #86efac;border-radius:999px;background:#dcfce7;color:#166534
+}
+.lp-app-state.is-hidden{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
+html[data-theme="dark"] .lp-app-edit-row{
+  background:var(--app-surface,#18283f)!important;
+  color:var(--app-text,#edf3ff)!important;border-color:var(--app-border,#596d86)!important
+}
+html[data-theme="dark"] .lp-app-edit-actions button{
+  background:var(--app-surface2,#263850)!important;
+  border-color:var(--app-border,#61768f)!important;color:#edf3ff!important
+}
+html[data-theme="dark"] .lp-app-state{
+  background:#124728!important;border-color:#279653!important;color:#c5fbd4!important
+}
+html[data-theme="dark"] .lp-app-state.is-hidden{
+  background:#344154!important;border-color:#60718a!important;color:#e5ebf4!important
+}
+@media(max-width:440px){.lp-app-edit-actions{width:100%}.lp-app-edit-actions button{flex:1 1 auto}}
