@@ -408,9 +408,7 @@
           "name": "イトーヨーカドー",
           "prefecture": ""
         }
-      ],
-      "official_genre": "onepiece",
-      "official_event_title": "【イトーヨーカドー】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB－05】"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/lx6zx",
@@ -589,9 +587,7 @@
           "name": "TSUTAYA BOOKSTORE川崎駅前店",
           "prefecture": "神奈川県"
         }
-      ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム「ONE PIECE Heroines Edition vol.2」抽選販売"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tx5dc",
@@ -1723,9 +1719,7 @@
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」"
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/7o-si",
@@ -1759,9 +1753,7 @@
       "url": "https://livepocket.jp/e/9_bzs",
       "event_title": "【10/16〜10/18購入可能】ポケモンカードゲームMEGA 新品商品 抽選購入権応募受付",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "【10/16〜10/18購入可能】ポケモンカードゲームMEGA 新品商品 抽選購入権応募受付"
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/cq9ue",
@@ -1918,9 +1910,7 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/2h41m",
@@ -2789,9 +2779,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー 再販分"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/e7ec9",
@@ -2852,9 +2840,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット／拡張パック ストームエメラルダ"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/wyl-k",
@@ -3039,9 +3025,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「インフェルノX」再入荷分 抽選販売受付"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/fvxoh",
@@ -3321,9 +3305,7 @@
       "url": "https://livepocket.jp/e/eqcmy",
       "event_title": "【9/16発売】ポケモンカードゲーム MEGA 『30thセレブレーション』 (2回目)抽選販売【TSUTAYAあべの橋店】",
       "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "【9/16発売】ポケモンカードゲーム MEGA 『30thセレブレーション』 (2回目)抽選販売【TSUTAYAあべの橋店】"
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/5wpcb",
@@ -5637,5 +5619,5 @@
       "first_detected_at": "2026-10-21T09:35:57.551214+00:00"
     }
   ],
-  "updated_at": "2026-10-21T12:45:59.919562+00:00"
+  "updated_at": "2026-10-21T12:56:00.591085+00:00"
 }
