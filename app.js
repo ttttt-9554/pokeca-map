@@ -2353,6 +2353,7 @@
   // LivePocket 抽選一覧（既存の地図とは独立）
   // ========================================
   const LP_JSON_URL = './livepocket_public.json';
+  const LP_OTHER_JSON_URL = './other_lottery_public.json';
   const LP_PAGE_SIZE = 50;
   const LP_REFRESH_MS = 5 * 60 * 1000;
   const LP_PREFECTURES = [
@@ -2387,9 +2388,34 @@
   let lotteryTimer = null;
   let lotteryCountdownTimer = null;
 
+  // External event references may use any ordinary website except X/Twitter.
+  // Do not permit unsafe schemes, X redirect hosts, embedded credentials, etc.
   function safeLotteryUrl(value) {
-    return typeof value === 'string' &&
-      /^https:\/\/livepocket\.jp\/e\/[a-zA-Z0-9_-]+\/?$/.test(value);
+    if(typeof value!=='string'||value.length<12||value.length>2000||
+       /[\\\s\u0000-\u001f]/.test(value))return false;
+    try{
+      const link=new URL(value);
+      const host=link.hostname.toLowerCase().replace(/\.$/,'');
+      if(!['https:','http:'].includes(link.protocol) || link.username ||
+         link.password || !/^([a-z0-9-]+\.)+[a-z0-9-]+$/.test(host) ||
+         !['','80','443'].includes(link.port) ||
+         host.endsWith('.local')||host.endsWith('.internal')||
+         host.endsWith('.localhost'))return false;
+      return !['x.com','twitter.com','t.co','fxtwitter.com',
+        'vxtwitter.com','fixupx.com'].some(x=>host===x||host.endsWith('.'+x));
+    }catch(_){return false;}
+  }
+
+  function isLivePocketEventUrl(url) {
+    return typeof url==='string' &&
+      /^https:\/\/livepocket\.jp\/e\/[a-zA-Z0-9_-]{4,64}\/?$/.test(url);
+  }
+
+  function lotterySite(item) {
+    if(isLivePocketEventUrl(item?.url))return 'LivePocket';
+    const site=String(item?.source_site||'').trim();
+    if(site)return site;
+    try{return new URL(item.url).hostname;}catch(_){return '外部サイト';}
   }
 
   function lotteryStoreEntries(item) {
@@ -2716,15 +2742,24 @@
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
         if (!data || !Array.isArray(data.items)) throw new Error('公開JSONの形式が正しくありません');
-        // URLが確認できたLivePocketイベントだけ受け入れ、同一URLは1件にまとめる。
-        const seen = new Set();
-        const clean = [];
-        for (const item of data.items) {
-          if (!item || !safeLotteryUrl(item.url) || seen.has(item.url)) continue;
+        // The LivePocket source remains authoritative for its own event URLs.
+        // External links are metadata-only. Never crawl untrusted third-party URLs.
+        let external=[],externalError='';
+        try{
+          const other=await fetch(LP_OTHER_JSON_URL+'?refresh='+Date.now(),{cache:'no-store'});
+          if(!other.ok)throw Error('HTTP '+other.status);
+          const more=await other.json();
+          if(!more||!Array.isArray(more.items))throw Error('外部URLデータ形式不正');
+          external=more.items.filter(x=>x&&safeLotteryUrl(x.url)&&
+            !isLivePocketEventUrl(x.url));
+        }catch(err){externalError=String(err?.message||err);}
+        const seen=new Set(),clean=[];
+        for(const item of [...data.items,...external]){
+          if(!item||!safeLotteryUrl(item.url)||seen.has(item.url))continue;
           seen.add(item.url);
           clean.push(item);
         }
-        lotteryBaseItems = clean;
+        lotteryBaseItems=clean;
         lpCloudApply();
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
@@ -2734,8 +2769,10 @@
         const viewedAt = new Intl.DateTimeFormat('ja-JP', {
           timeZone:'Asia/Tokyo', hour:'2-digit',minute:'2-digit',hour12:false
         }).format(new Date());
-        status.textContent = `取得済み ${clean.length}イベント` +
-          (info ? ` ／ データ最終変更 ${info}（日本時間）` : '') +
+        const otherCount=clean.filter(x=>!isLivePocketEventUrl(x.url)).length;
+        status.textContent = `取得済み ${clean.length}件（外部URL ${otherCount}件）`+
+          (externalError?' ／ 外部URL取得失敗：'+externalError:'')+
+          (info ? ` ／ LivePocket最終変更 ${info}（日本時間）` : '') +
           ` ／ 画面で最新データを取得 ${viewedAt}`;
         renderLottery();
         refreshLotteryOnsiteReports();
@@ -2771,7 +2808,8 @@
     const trustedTitle = item.event_title_provisional ? '' : item.event_title;
     const reliableName = (officialName || item.product_name || trustedTitle || '').trim();
     // Discord excerpt is a discovery hint only, not an authoritative heading.
-    const label = reliableName || '商品名・イベント名を確認中';
+    const external=!isLivePocketEventUrl(item.url);
+    const label = reliableName || (external?'外部URL・応募内容未確認':'商品名・イベント名を確認中');
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
@@ -2795,9 +2833,11 @@
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
         ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
+        <span class="lp-tag">${escape(lotterySite(item))}</span>
         ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
+      ${external?'<p class="lp-store-muted">Discordから取得した外部URLです。抽選内容・応募期間は未確認のため、公式ページをご確認ください。</p>':''}
       ${state === 'unavailable' ? '<p class="lp-missing-notice">⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。</p>' : ''}
       ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
@@ -2845,8 +2885,11 @@
     const prefecture = $('lpPrefecture').value;
     const status = $('lpStatus').value;
     const type = $('lpType').value;
+    const site = $('lpSite').value;
     const wishlistOnly = $('lpWishlistOnly').checked;
     const visible = lotteryItems.filter(item => {
+      if(site==='external'&&isLivePocketEventUrl(item.url))return false;
+      if(site==='livepocket'&&!isLivePocketEventUrl(item.url))return false;
       if (genre !== 'all' && lotteryGenre(item) !== genre) return false;
       if (prefecture === 'unknown' && lotteryPrefectures(item).length) return false;
       if (prefecture !== 'all' && prefecture !== 'unknown') {
@@ -2868,7 +2911,11 @@
     const pokemonCount = lotteryItems.filter(x => lotteryGenre(x) === 'pokemon').length;
     const knownCount = lotteryItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
     const openCount = lotteryItems.filter(x => lotteryState(x,now) === 'open').length;
+    const externalCount=lotteryItems.filter(x=>!isLivePocketEventUrl(x.url)).length;
+    $('lpExternalCount').textContent=externalCount+'件';
+    $('lpExternalShow').hidden=!externalCount;
     $('lpSummary').innerHTML = `<span>全イベント <strong>${lotteryItems.length}</strong>件</span>
+      <span>外部URL <strong>${externalCount}</strong>件</span>
       <span>ポケカ <strong>${pokemonCount}</strong>件</span>
       <span>締切確認済み <strong>${knownCount}</strong>件</span>
       <span>受付中（確認済み） <strong>${openCount}</strong>件</span>`;
@@ -2903,7 +2950,19 @@
     $('lpGenre').value = 'all';
     $('lpStatus').value = 'open';
     $('lpSort').value = 'newest';
-    for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpSort','lpWishlistOnly']) {
+    $('lpSite').value = 'all';
+    $('lpExternalShow').addEventListener('click',()=>{
+      $('lpQuery').value='';
+      $('lpGenre').value='all';
+      $('lpPrefecture').value='all';
+      $('lpStatus').value='all';
+      $('lpType').value='all';
+      $('lpSite').value='external';
+      $('lpWishlistOnly').checked=false;
+      lotteryVisibleLimit=LP_PAGE_SIZE;
+      renderLottery();
+    });
+    for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpSort','lpSite','lpWishlistOnly']) {
       $(id).addEventListener(id === 'lpQuery' ? 'input' : 'change', () => {
         lotteryVisibleLimit = LP_PAGE_SIZE;
         renderLottery();
@@ -2918,6 +2977,7 @@
       $('lpStatus').value = 'open';
       $('lpType').value = 'all';
       $('lpSort').value = 'newest';
+      $('lpSite').value = 'all';
       $('lpWishlistOnly').checked = false;
       lotteryVisibleLimit = LP_PAGE_SIZE;
       renderLottery();
@@ -5021,7 +5081,7 @@
   let lpLocationListLoaded=false, lpLocationPageEditing='';
 
   function lpLocationBaseList(){
-    return lotteryBaseItems.filter(item=>item&&safeLotteryUrl(item.url)&&
+    return lotteryBaseItems.filter(item=>item&&isLivePocketEventUrl(item.url)&&
       (!Array.isArray(item.stores)||item.stores.length<=1));
   }
 
