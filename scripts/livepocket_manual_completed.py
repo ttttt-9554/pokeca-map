@@ -11,6 +11,7 @@ import re
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from functools import lru_cache
 
 ROOT = Path(__file__).resolve().parents[1]
 OVERRIDE_FIELDS = {
@@ -53,7 +54,8 @@ def _read_rows(endpoint: str, key: str, table: str, fields: str) -> list[dict]:
     return [row for row in payload if isinstance(row, dict)]
 
 
-def read_manual_completed() -> tuple[set[str], set[str]]:
+@lru_cache(maxsize=1)
+def read_manual_completed() -> tuple[set[str], set[str], set[str]]:
     """Returns fully resolved event URLs and manually corrected location URLs.
 
     Location-only repairs count as complete when the event already has a
@@ -65,11 +67,14 @@ def read_manual_completed() -> tuple[set[str], set[str]]:
                         OVERRIDE_FIELDS["livepocket_event_overrides"])
     locations = _read_rows(endpoint, key, "livepocket_location_overrides",
                            OVERRIDE_FIELDS["livepocket_location_overrides"])
-    finalized = {row["event_url"] for row in titles
-                 if row.get("resolution") in ("title", "unavailable")
-                 and URL_PATTERN.fullmatch(str(row.get("event_url", "")))}
+    resolved_title = {row["event_url"] for row in titles
+                      if row.get("resolution") == "title"
+                      and URL_PATTERN.fullmatch(str(row.get("event_url", "")))}
+    removed = {row["event_url"] for row in titles
+               if row.get("resolution") == "unavailable"
+               and URL_PATTERN.fullmatch(str(row.get("event_url", "")))}
     corrected_locations = {row["event_url"] for row in locations
                            if URL_PATTERN.fullmatch(str(row.get("event_url", "")))}
-    print("Manual completions synced: resolved", len(finalized),
-          "location fixes", len(corrected_locations))
-    return finalized, corrected_locations
+    print("Manual completions synced: verified titles", len(resolved_title),
+          "removed pages", len(removed), "location fixes", len(corrected_locations))
+    return resolved_title, removed, corrected_locations
