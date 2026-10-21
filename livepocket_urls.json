@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-21T09:00:55.003549+00:00",
+  "collected_at": "2026-10-21T09:35:56.035134+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 422,
+  "unique_livepocket_urls": 423,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10953,33 +10953,63 @@
       "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（30th CELEBRATION）",
       "application_end_at": "2026-10-21T21:00:00+09:00",
       "application_start_at": "2026-10-21T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/g1lus",
+      "discord_message_id": "1562397654414004284",
+      "discord_posted_at": "2026-10-21T09:30:28.757000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA宇都宮竹林店\n受付終了: 10/25 22:00（残り4日3時間）\nhttps://livepocket.jp/e/g1lus",
+      "store_name": "TSUTAYA宇都宮竹林店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮竹林店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ワンピースカードゲームエクストラブースター Heroines Edition vol.2抽選予約受付",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-21T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 269,
+    "parsed": 270,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 265,
-    "prefecture": 228,
-    "event_title": 109,
+    "store_name": 266,
+    "prefecture": 229,
+    "event_title": 110,
     "event_date": 1,
     "product_name": 63,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 397,
-    "application_start_at": 397,
-    "stores_events": 268
+    "application_end_at": 398,
+    "application_start_at": 398,
+    "stores_events": 269
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562390117618942042"
+      "1551580466266644552": "1562397654414004284"
     },
     "last_run": {
-      "checked_at": "2026-10-21T09:00:55.003549+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-21T09:35:56.035134+00:00",
+      "new_urls": 1,
       "original_urls": 422,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -11076,7 +11106,8 @@
         "1562322066839965727": "2026-10-21T04:35:56.129355+00:00",
         "1562332377806536764": "2026-10-21T05:20:56.038444+00:00",
         "1562374909760372766": "2026-10-21T08:05:57.706715+00:00",
-        "1562382461437083668": "2026-10-21T08:30:56.079286+00:00"
+        "1562382461437083668": "2026-10-21T08:30:56.079286+00:00",
+        "1562397654414004284": "2026-10-21T09:35:56.758160+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12776,6 +12807,10 @@
         "https://livepocket.jp/e/684iy": {
           "checked_at": "2026-10-21T08:31:17.785953+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/g1lus": {
+          "checked_at": "2026-10-21T09:36:23.577116+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13235,6 +13270,11 @@
           "detected_at": "2026-10-21T08:30:56.713219+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-21T08:31:17.785953+00:00"
+        },
+        "https://livepocket.jp/e/g1lus": {
+          "detected_at": "2026-10-21T09:35:57.551214+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-21T09:36:23.577116+00:00"
         }
       },
       "pending_new_urls": []
@@ -16610,6 +16650,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/g1lus": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-21T09:36:23.577116+00:00",
+          "title_observed": "ワンピースカードゲームエクストラブースター Heroines Edition vol.2抽選予約受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -18316,6 +18367,19 @@
         },
         "https://livepocket.jp/e/684iy": {
           "checked_at": "2026-10-21T08:31:17.785953+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/g1lus": {
+          "checked_at": "2026-10-21T09:36:23.577116+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
