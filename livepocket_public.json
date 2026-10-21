@@ -5486,6 +5486,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「ストームエメラルダ」",
       "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
     },
     {
@@ -5506,6 +5508,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「30th CELEBRATION」",
       "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
     },
     {
@@ -5602,5 +5606,5 @@
       "first_detected_at": "2026-10-21T08:30:56.713219+00:00"
     }
   ],
-  "updated_at": "2026-10-21T09:00:56.531444+00:00"
+  "updated_at": "2026-10-21T09:11:22.610277+00:00"
 }
