@@ -1,0 +1,28 @@
+name: LivePocket Regression Checks
+
+'on':
+  push:
+    paths:
+      - 'scripts/livepocket_v21.py'
+      - 'scripts/livepocket_check_summary.py'
+      - 'scripts/livepocket_manual_completed.py'
+      - 'scripts/test_livepocket_manual_review.py'
+      - '.github/workflows/livepocket-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Python syntax
+        run: python -m py_compile scripts/livepocket_v21.py scripts/livepocket_check_summary.py scripts/livepocket_manual_completed.py scripts/test_livepocket_manual_review.py
+      - name: Run regression tests
+        run: python scripts/test_livepocket_manual_review.py
