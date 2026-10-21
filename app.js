@@ -2150,10 +2150,10 @@
     document.querySelectorAll('nav button').forEach(button => {
       button.addEventListener('click', () => {
         switchTab(button.dataset.tab);
-        // v21.24: Open the developer tab to dispatch an on-demand recheck.
-        // The normal scheduled collector cadence is not modified.
+        // Showing developer diagnostics must not dispatch an expensive browser
+        // recheck on its own. Only the explicit "再確認" button starts Actions.
         if (button.dataset.tab === 'dev' && isDeveloper()) {
-          requestLotteryDevRecheck({automatic: true});
+          loadLotteryDevResults();
         }
       });
     });
@@ -4445,10 +4445,24 @@
       host.innerHTML='<p class="hint">⚠ 現在の未解決件数を取得できません。GitHub Actionsでの次回集計をお待ちください。前回実行の12件とは別の表示です。</p>';
       return;
     }
+    const extraKeys=['unresolved','missing_title','missing_store','missing_deadline'];
+    const extended=extraKeys.every(key=>Number.isSafeInteger(progress[key])&&progress[key]>=0);
+    const unresolved=extended?progress.unresolved:progress.ready+progress.retry_wait;
+    const nextAt=Number.isFinite(Date.parse(progress.next_retry_at||''))?
+      lpDevReportDate(progress.next_retry_at):'未定';
     const checkedAt=Number.isFinite(Date.parse(progress.as_of||''))?
       lpDevReportDate(progress.as_of):'不明';
     host.innerHTML='<p class="hint">GitHub Actions集計：'+escape(checkedAt)+
       ' ／ 登録済みURL '+progress.total+'件</p>'+
+      '<p class="hint"><strong>🔎 未解決 '+unresolved+'件</strong>（今すぐ確認 '+progress.ready+
+        '件 ／ 時間待ち '+progress.retry_wait+'件）。'+
+        (progress.ready===0&&progress.retry_wait>0?
+          '対象が0件でも、未取得がなくなったわけではありません。':'')+'</p>'+
+      (extended?
+        '<p class="hint">未取得項目（重複あり）：イベント名 '+progress.missing_title+
+        '件 ／ 店舗 '+progress.missing_store+'件 ／ 応募締切 '+progress.missing_deadline+
+        '件。次の再試行予定：'+escape(nextAt)+'</p>':
+        '<p class="hint">未取得項目と再試行予定は次のGitHub集計後に表示されます。</p>')+
       '<div class="lp-dev-results-grid">'+names.map(([key,label])=>
         '<div class="lp-dev-result-cell"><span>'+escape(label)+'</span><strong>'+
         progress[key].toLocaleString('ja-JP')+'</strong></div>').join('')+
@@ -4456,7 +4470,7 @@
         progress.next_batch_size.toLocaleString('ja-JP')+'</strong></div></div>'+
       (progress.access_cooldown?
         '<p class="hint">⚠ 現在はアクセス制限の待機中です。解除まで手動再確認を起動してもページ取得されません。</p>':'')+
-      '<p class="hint">※現在の状態を示す集計です。下の「再確認の実行結果」は前回の作業履歴です。確認済みには、商品名が不要な抽選も含みます。新着は通常の自動収集で確認します。</p>';
+      '<p class="hint">※「前回の手動再確認結果」の0件は未取得0件ではありません。手動確認はボタンを押したときだけ起動します。確認済みには商品名が不要な抽選も含みます。</p>';
   }
 
   function renderLpDevDailyGrowth(daily) {
