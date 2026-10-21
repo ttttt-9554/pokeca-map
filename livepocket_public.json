@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-21T02:35:55.151302+00:00",
-  "unique_livepocket_urls": 415,
+  "collected_at": "2026-10-21T03:05:57.354826+00:00",
+  "unique_livepocket_urls": 417,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5467,7 +5467,51 @@
         }
       ],
       "first_detected_at": "2026-10-21T02:35:56.174339+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/pzb5z",
+      "store_name": "ふるいちイオンモール太田店",
+      "prefecture": "群馬県",
+      "discord_posted_at": "2026-10-21T03:00:15.052000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール太田店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「ストームエメラルダ」",
+      "application_end_at": "2026-10-22T21:00:00+09:00",
+      "application_start_at": "2026-10-21T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「ストームエメラルダ」",
+      "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/4ukll",
+      "store_name": "ふるいちイオンモール太田店",
+      "prefecture": "群馬県",
+      "discord_posted_at": "2026-10-21T03:00:15.052000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール太田店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「30th CELEBRATION」",
+      "application_end_at": "2026-10-22T21:00:00+09:00",
+      "application_start_at": "2026-10-21T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「30th CELEBRATION」",
+      "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
     }
   ],
-  "updated_at": "2026-10-21T02:56:00.147000+00:00"
+  "updated_at": "2026-10-21T03:06:37.059863+00:00"
 }
