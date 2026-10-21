@@ -3800,11 +3800,57 @@
     archived.open=mode==='hidden'||wasOpen;
   }
 
+
+  // v21.72: One form, moved between the new-registration inline panel and
+  // an actual modal dialog for edits. Never duplicate input IDs or handlers.
+  function lpAppRestoreForm(){
+    const section=$('lpAppFormFold'),host=$('lpAppNewHost'),dialog=$('lpAppDialog');
+    if(section&&host&&section.parentElement!==host)host.appendChild(section);
+    if(section)section.hidden=true;
+    if(dialog?.open)dialog.close();
+    $('lpAppNew')?.setAttribute('aria-expanded','false');
+    $('lpAppNew')?.removeAttribute('aria-pressed');
+  }
+  function lpAppCloseEditor(){
+    if(lpAppBusy)return;
+    lpAppEditing='';
+    const form=$('lpAppForm');
+    if(form)form.reset();
+    lpAppFormMessage('');
+    lpAppRestoreForm();
+  }
+  function lpAppShowEditor(isExisting){
+    const section=$('lpAppFormFold'),button=$('lpAppNew'),dialog=$('lpAppDialog');
+    if(!section||!button||!dialog)return false;
+    if(isExisting){
+      $('lpAppDialogBody').appendChild(section);
+      section.hidden=false;
+      button.setAttribute('aria-expanded','false');
+      // Focus a heading, not an input, so iOS does not open the keyboard.
+      const title=$('lpAppFormHeading');
+      title?.setAttribute('autofocus','');
+      if(!dialog.open)dialog.showModal();
+      try{title?.focus({preventScroll:true});}catch(_){title?.focus();}
+    }else{
+      lpAppRestoreForm();
+      section.hidden=false;
+      button.setAttribute('aria-expanded','true');
+      try{$('lpAppFormHeading')?.focus({preventScroll:true});}catch(_){}
+      section.scrollIntoView({block:'nearest',behavior:'smooth'});
+    }
+    return true;
+  }
   function lpAppFormMessage(message){
     const target=$('lpAppFormStatus');
     if(target)target.textContent=message;
   }
   async function lpAppPrepare(id=''){
+    // The large "登録" button is also the close control while a blank form is open.
+    if(!id&&!lpAppEditing&&!$('lpAppFormFold')?.hidden&&
+       $('lpAppFormFold')?.parentElement===$('lpAppNewHost')){
+      lpAppCloseEditor();
+      return;
+    }
     if(!authUser||!supabaseClient){
       alert('アプリ抽選の登録にはDiscordログインが必要です。「共有」タブからログインしてください。');
       switchTab('group');return;
@@ -3840,11 +3886,10 @@
     const toggle=$('lpAppToggle');
     toggle.hidden=!row;
     toggle.textContent=row?.is_hidden?'一覧へ再公開':'登録を非表示（履歴保持）';
+    $('lpAppDelete').hidden=!row;
     $('lpAppFormHeading').textContent=row?'アプリ抽選を編集':'アプリ抽選を新しく登録';
     lpAppFormMessage('公式アプリ内の情報を確認して入力してください。URLは任意です。');
-    $('lpAppFormFold').open=true;
-    $('lpAppFormHeading').focus({preventScroll:true});
-    $('lpAppFormFold').scrollIntoView({block:'nearest',behavior:'smooth'});
+    lpAppShowEditor(!!row);
   }
   function lpAppPayload(){
     const form=$('lpAppForm'),val=name=>
@@ -3906,9 +3951,7 @@
       lpAppRows.set(data.id,data);
       lpAppMerge();
       if(!await lpAppRefresh(true))throw Error('保存後の再取得に失敗しました：'+lpAppError);
-      $('lpAppFormFold').open=false;
-      $('lpAppForm').reset();
-      lpAppEditing='';
+      lpAppCloseEditor();
       $('lpAppStatus').textContent='✅ 登録内容を保存し、共有一覧へ反映しました。';
     }catch(error){
       lpAppFormMessage('⚠ 保存・確認に失敗しました：'+String(error?.message||error));
@@ -3932,7 +3975,7 @@
       if(data?.id!==row.id||data.is_hidden!==hide)throw Error('公開状態の保存を確認できませんでした。');
       lpAppRows.set(row.id,data);lpAppMerge();
       if(!await lpAppRefresh(true))throw Error('再取得に失敗しました：'+lpAppError);
-      $('lpAppFormFold').open=false;lpAppEditing='';
+      lpAppCloseEditor();
       $('lpAppStatus').textContent=hide
         ?'✅ 非表示にしました。応募履歴は保持しています。'
         :'✅ 共有一覧へ再公開しました。';
@@ -3942,6 +3985,40 @@
       lpAppBusy=false;button.disabled=false;button.textContent=oldText;
     }
   }
+  async function lpAppDelete(){
+    const row=lpAppRows.get(lpAppEditing);
+    if(!row||lpAppBusy||!authUser||!supabaseClient||
+       !lpAppCanEdit(lpAppItem(row)))return;
+    const label=(row.app_name||'アプリ抽選')+' ／ '+(row.event_title||'登録');
+    if(!window.confirm('「'+label+'」を共有登録から完全に削除しますか？\n\n元に戻せません。すべての利用者の抽選一覧から消えます。\n個人の応募・当選記録と編集履歴は削除しません。'))return;
+    const uid=authUser.id,button=$('lpAppDelete');
+    lpAppBusy=true;
+    const buttons=[...$('lpAppForm').querySelectorAll('button')];
+    buttons.forEach(b=>b.disabled=true);
+    button.textContent='削除中…';
+    lpAppFormMessage('🔄 登録情報を削除しています…');
+    try{
+      const {data,error}=await supabaseClient.from(LP_APP_TABLE)
+        .delete().eq('id',row.id).select('id');
+      if(error)throw error;
+      if(authUser?.id!==uid)throw Error('ログイン状態が変更されました');
+      if(!Array.isArray(data)||!data.some(x=>x.id===row.id))
+        throw Error('削除結果が確認できませんでした');
+      lpAppRows.delete(row.id);
+      lpAppMerge();
+      if(!await lpAppRefresh(true))throw Error('削除後の再取得に失敗しました：'+lpAppError);
+      // Private application records are never removed.
+      lpAppCloseEditor();
+      $('lpAppStatus').textContent='✅ 登録を削除しました。個人の応募履歴は保持しています。';
+    }catch(error){
+      lpAppFormMessage('⚠ 削除を確認できませんでした：'+String(error?.message||error));
+    }finally{
+      lpAppBusy=false;
+      buttons.forEach(b=>b.disabled=false);
+      button.textContent='🗑 登録を削除';
+    }
+  }
+
   function lpAppViewInLottery(id){
     const row=lpAppRows.get(id);
     if(!row||row.is_hidden||row.created_by!==authUser?.id)return;
@@ -3969,10 +4046,21 @@
     $('lpAppSearch').addEventListener('input',lpAppRender);
     $('lpAppFilter').addEventListener('change',lpAppRender);
     $('lpAppReload').addEventListener('click',()=>lpAppRefresh(true));
-    $('lpAppCancel').addEventListener('click',()=>{
-      $('lpAppFormFold').open=false;lpAppEditing='';form.reset();
-    });
+    $('lpAppCancel').addEventListener('click',lpAppCloseEditor);
     $('lpAppToggle').addEventListener('click',lpAppToggleVisibility);
+    $('lpAppDelete').addEventListener('click',lpAppDelete);
+    $('lpAppDialog').addEventListener('close',()=>{
+      // Escape/backdrop close must restore the form to the registration tab.
+      if(!lpAppBusy){
+        $('lpAppForm')?.reset();
+        lpAppEditing='';
+        lpAppFormMessage('');
+        lpAppRestoreForm();
+      }
+    });
+    $('lpAppDialog').addEventListener('click',event=>{
+      if(event.target===$('lpAppDialog')&&!lpAppBusy)$('lpAppDialog').close();
+    });
     form.addEventListener('submit',lpAppSubmit);
     $('appLotteryView').addEventListener('click',event=>{
       const edit=event.target.closest('button[data-lp-app-edit]');
