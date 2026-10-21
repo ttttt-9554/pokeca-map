@@ -135,6 +135,9 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
   #lpExtManage label,#lpExtDialog label{display:block;margin:10px 0 5px;color:var(--app-text,#172033)}
   .lp-ext-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
   .lp-ext-toolbar p{font-size:12px;color:var(--app-muted,#64748b);flex:1;overflow-wrap:anywhere}
+  #lpExtRefreshFeedback{font-size:13px;line-height:1.65;overflow-wrap:anywhere;
+    color:var(--app-muted,#64748b)!important;margin:9px 0 12px}
+  #lpExtRefresh:disabled{opacity:.75;cursor:wait}
   .lp-ext-admin-row{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;
     border:1px solid var(--app-border,#94a3b8);border-radius:10px;
     background:var(--app-surface2,#f8fafc);padding:11px;margin:10px 0;
@@ -1094,6 +1097,7 @@ nav[aria-label="メインメニュー"] {
           <button id="lpExtRefresh" type="button">最新情報を取得</button>
           <p id="lpExtManageStatus" role="status" aria-live="polite">保存先を確認しています…</p>
         </div>
+        <p id="lpExtRefreshFeedback" class="lp-ext-refresh-feedback" role="status" aria-live="polite">公開済みの外部URLと編集情報を再取得できます。</p>
         <div id="lpExtManageList"></div>
         <button id="lpExtMore" type="button" hidden>さらに表示</button>
       </section>
@@ -1361,7 +1365,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_61-external-folded-review"></script>
+  <script src="app.js?v=20261021-v21_62-external-refresh-feedback"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
