@@ -5466,6 +5466,7 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_event_title": "【晴れる屋 仙台店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
       "first_detected_at": "2026-10-21T02:35:56.174339+00:00"
     },
     {
@@ -5579,8 +5580,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
       "first_detected_at": "2026-10-21T08:30:56.713219+00:00"
     },
     {
@@ -5636,5 +5635,5 @@
       "first_detected_at": "2026-10-21T13:05:59.927040+00:00"
     }
   ],
-  "updated_at": "2026-10-21T14:36:28.464684+00:00"
+  "updated_at": "2026-10-21T14:42:02.159300+00:00"
 }
