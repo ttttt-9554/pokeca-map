@@ -3263,8 +3263,6 @@
     const knownCount = lotteryItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
     const openCount = lotteryItems.filter(x => lotteryState(x,now) === 'open').length;
     const externalCount=lotteryItems.filter(x=>!isLivePocketEventUrl(x.url)).length;
-    $('lpExternalCount').textContent=externalCount+'件';
-    $('lpExternalShow').hidden=!externalCount;
     $('lpSummary').innerHTML = `<span>全イベント <strong>${lotteryItems.length}</strong>件</span>
       <span>外部URL <strong>${externalCount}</strong>件</span>
       <span>ポケカ <strong>${pokemonCount}</strong>件</span>
@@ -3303,17 +3301,6 @@
     $('lpStatus').value = 'open';
     $('lpSort').value = 'newest';
     $('lpSite').value = 'all';
-    $('lpExternalShow').addEventListener('click',()=>{
-      $('lpQuery').value='';
-      $('lpGenre').value='all';
-      $('lpPrefecture').value='all';
-      $('lpStatus').value='all';
-      $('lpType').value='all';
-      $('lpSite').value='external';
-      $('lpWishlistOnly').checked=false;
-      lotteryVisibleLimit=LP_PAGE_SIZE;
-      renderLottery();
-    });
     for (const id of ['lpQuery','lpGenre','lpPrefecture','lpStatus','lpType','lpSort','lpSite','lpWishlistOnly']) {
       $(id).addEventListener(id === 'lpQuery' ? 'input' : 'change', () => {
         lotteryVisibleLimit = LP_PAGE_SIZE;
