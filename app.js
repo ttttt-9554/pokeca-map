@@ -319,6 +319,7 @@
       switchTab('dev');
     }
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
+    lpExtRenderAdmin();
     refreshWishlistForAccount();
     refreshLotteryTrackerForAccount();
     refreshLotteryOnsiteReports(true);
@@ -363,13 +364,14 @@
     await loadCloudData();
     await lpCloudRefresh(true);
     await lpLocationRefresh(true);
+    await lpExtRefresh(true);
     refreshLotteryOnsiteReports(true);
     refreshLotteryOnsiteArchive(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
         payload => { if (payload.new?.user_id === authUser?.id) refreshWishlistForAccount(); })
@@ -515,9 +517,9 @@
       if (supabaseClient) loadSharedReports();
     }
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
-    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); }
+    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); }
     render();
   }
 
@@ -2354,6 +2356,10 @@
   // ========================================
   const LP_JSON_URL = './livepocket_public.json';
   const LP_OTHER_JSON_URL = './other_lottery_public.json';
+  const LP_EXT_OVERRIDE_TABLE = 'lottery_external_event_overrides';
+  let lpExtOverrides = new Map();
+  let lpExtReady = false,lpExtError='',lpExtLastFetch=0,lpExtLoading=null;
+  let lpExtEditing='',lpExtBusy=false,lpExtListLimit=80;
   const LP_PAGE_SIZE = 50;
   const LP_REFRESH_MS = 5 * 60 * 1000;
   const LP_PREFECTURES = [
@@ -2569,6 +2575,30 @@
   // untouched. A backend RLS policy limits writes to the developer UID.
   function lpCloudApply() {
     lotteryItems = lotteryBaseItems.map(base=>{
+      if(!isLivePocketEventUrl(base.url)){
+        // Never display an excluded URL simply because the Discord collector
+        // discovers it again. Until the moderation table is loaded, hold all
+        // external cards rather than risk revealing excluded entries.
+        if(!lpExtReady)return null;
+        const row=lpExtOverrides.get(base.url);
+        if(row?.state==='excluded')return null;
+        if(!row)return base;
+        const item={...base};
+        if(row.event_title){
+          item.event_title=row.event_title;
+          item.official_event_title=row.event_title;
+          item.event_title_provisional=false;
+        }
+        item.store_name=row.store_name||'';
+        item.prefecture=row.prefecture||'';
+        delete item.stores;
+        item.review_category=row.review_category||'unknown';
+        item.pokemon_map_type=row.product_type||'unknown';
+        item.application_start_at=row.application_start_at||null;
+        item.application_end_at=row.application_end_at||null;
+        item.manual_external_edit=true;
+        return item;
+      }
       const override=lpCloudOverrides.get(base.url);
       const location=lpLocationOverrides.get(base.url);
       if(!override&&!location)return base;
@@ -2611,9 +2641,10 @@
         }
       }
       return item;
-    });
+    }).filter(Boolean);
     if($('lpPrefecture'))renderLotteryPrefectures();
     if($('lotteryView')?.classList.contains('active'))renderLottery();
+    lpExtRenderAdmin();
   }
 
   async function lpCloudRefresh(force=false){
@@ -2760,6 +2791,7 @@
           clean.push(item);
         }
         lotteryBaseItems=clean;
+        if(supabaseClient)await lpExtRefresh();
         lpCloudApply();
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
@@ -2796,6 +2828,231 @@
 
   function lotteryCategoryText(value) {
     return ({pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'})[value] || value;
+  }
+
+
+  // v21.59: Human review for external sites with incompatible page structures.
+  // These overlays do not mutate the GitHub-collected URLs or user histories.
+  async function lpExtRefresh(force=false){
+    if(!supabaseClient){lpExtError='Supabase接続待ち';lpExtRenderAdmin();return false;}
+    if(!force&&lpExtReady&&Date.now()-lpExtLastFetch<30000)return true;
+    if(lpExtLoading)return lpExtLoading;
+    lpExtLoading=(async()=>{
+      try{
+        const {data,error}=await supabaseClient.from(LP_EXT_OVERRIDE_TABLE)
+          .select('event_url,state,event_title,store_name,prefecture,review_category,product_type,application_start_at,application_end_at,exclusion_reason,updated_at')
+          .limit(5000);
+        if(error)throw error;
+        lpExtOverrides=new Map((data||[]).filter(x=>safeLotteryUrl(x.event_url)&&
+          !isLivePocketEventUrl(x.event_url)).map(x=>[x.event_url,x]));
+        lpExtReady=true;lpExtError='';lpExtLastFetch=Date.now();
+        lpCloudApply();
+        return true;
+      }catch(error){
+        lpExtError=String(error?.message||error);
+        console.warn('外部抽選の手動修正情報を取得できません:',error);
+        lpExtRenderAdmin();
+        return false;
+      }finally{lpExtLoading=null;}
+    })();
+    return lpExtLoading;
+  }
+
+  function lpExtDateInput(iso){
+    const ms=Date.parse(iso||'');
+    if(!Number.isFinite(ms))return '';
+    return new Intl.DateTimeFormat('sv-SE',{
+      timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',hour12:false
+    }).format(new Date(ms)).replace(' ','T');
+  }
+
+  function lpExtDateSave(value){
+    if(!value)return null;
+    if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value))
+      throw Error('応募日時の入力形式を確認してください。');
+    const date=new Date(value+':00+09:00');
+    if(!Number.isFinite(date.getTime()))throw Error('応募日時が正しくありません。');
+    if(lpExtDateInput(date.toISOString())!==value)
+      throw Error('存在しない日時が入力されています。');
+    return date.toISOString();
+  }
+
+  function lpExtFormRow(){
+    const form=$('lpExtForm'),url=lpExtEditing;
+    if(!form||!url||!safeLotteryUrl(url)||isLivePocketEventUrl(url))
+      throw Error('外部抽選URLが不正です。');
+    const val=name=>String(form.elements.namedItem(name)?.value||'').trim();
+    const title=val('event_title'),store=val('store_name'),area=val('prefecture'),
+      category=val('review_category'),type=val('product_type'),reason=val('exclusion_reason');
+    if(title.length>200||store.length>200||reason.length>300)
+      throw Error('入力した文字数が上限を超えています。');
+    if(area&&!LP_MANUAL_AREAS.includes(area))throw Error('都道府県を確認してください。');
+    if(!['pokemon','onepiece','yugioh','unknown'].includes(category)||
+       !['unknown','pack','deck'].includes(type))throw Error('ジャンル・商品区分が不正です。');
+    const start=lpExtDateSave(val('application_start_at')),
+      end=lpExtDateSave(val('application_end_at'));
+    if(start&&end&&Date.parse(start)>Date.parse(end))
+      throw Error('応募開始日時は締切日時より前にしてください。');
+    return {event_url:url,event_title:title||null,store_name:store||null,
+      prefecture:area||null,review_category:category,product_type:type,
+      application_start_at:start,application_end_at:end,exclusion_reason:reason||null};
+  }
+
+  function lpExtRenderAdmin(){
+    const root=$('lpExtManage'),list=$('lpExtManageList'),status=$('lpExtManageStatus');
+    if(!root||!list||!status)return;
+    root.hidden=!isDeveloper();
+    if(!isDeveloper())return;
+    const input=String($('lpExtSearch')?.value||'').trim().toLocaleLowerCase('ja-JP');
+    const candidates=new Map(lotteryBaseItems.filter(x=>x&&!isLivePocketEventUrl(x.url))
+      .map(x=>[x.url,x]));
+    for(const [url,row] of lpExtOverrides)
+      if(!candidates.has(url))candidates.set(url,{
+        url,source_site:'以前の収集URL',event_title:row.event_title||'',store_name:row.store_name||''
+      });
+    const all=[...candidates.values()];
+    const excluded=all.filter(x=>lpExtOverrides.get(x.url)?.state==='excluded').length;
+    const matched=all.filter(item=>{
+      if(!input)return true;
+      const row=lpExtOverrides.get(item.url);
+      return [item.url,item.event_title,item.store_name,item.source_site,
+        row?.event_title,row?.store_name,row?.prefecture,row?.exclusion_reason]
+        .filter(Boolean).join(' ').toLocaleLowerCase('ja-JP').includes(input);
+    }).sort((a,b)=>{
+      const removedA=lpExtOverrides.get(a.url)?.state==='excluded'?0:1;
+      const removedB=lpExtOverrides.get(b.url)?.state==='excluded'?0:1;
+      if(removedA!==removedB)return removedA-removedB;
+      return (lotteryFirstSeenTime(b)||0)-(lotteryFirstSeenTime(a)||0);
+    });
+    status.textContent=(lpExtError?'⚠ 保存先：'+lpExtError+' ／ ':'')+
+      '外部URL '+all.length+'件・除外済み '+excluded+'件'+
+      (input?' ／ 検索結果 '+matched.length+'件':'');
+    list.innerHTML=matched.slice(0,lpExtListLimit).map(item=>{
+      const row=lpExtOverrides.get(item.url);
+      const hidden=row?.state==='excluded';
+      const title=row?.event_title||item.event_title||item.source_site||'イベント名未確認';
+      return '<div class="lp-ext-admin-row">'+
+        '<div><strong>'+escape(title)+'</strong>'+
+          '<p>'+escape(item.url)+'</p>'+
+          (hidden?'<strong class="lp-ext-excluded">🚫 一覧から除外中</strong>':
+            row?'<small>✏ 手動修正あり</small>':'<small>未確認</small>')+
+          (row?.exclusion_reason?'<p>理由：'+escape(row.exclusion_reason)+'</p>':'')+
+        '</div><button type="button" data-lp-ext-edit="'+escape(item.url)+'">'+
+          (hidden?'編集・復元':'編集・除外')+'</button></div>';
+    }).join('')||'<p class="hint">該当する外部抽選URLはありません。</p>';
+    const more=$('lpExtMore');
+    if(more)more.hidden=matched.length<=lpExtListLimit;
+  }
+
+  function lpExtOpen(url){
+    if(!isDeveloper()||!safeLotteryUrl(url)||isLivePocketEventUrl(url))return;
+    const base=lotteryBaseItems.find(x=>x.url===url);
+    const row=lpExtOverrides.get(url);
+    if(!base&&!row)return;
+    if(!lpExtReady){
+      alert('手動修正の保存先を取得できていません。再読み込みしてください。'+lpExtError);
+      return;
+    }
+    lpExtEditing=url;
+    const form=$('lpExtForm'),dialog=$('lpExtDialog');
+    if(!form||!dialog)return;
+    form.reset();
+    $('lpExtEditingUrl').textContent=url;
+    const set=(name,value)=>{form.elements.namedItem(name).value=value||'';};
+    set('event_title',row?row.event_title:(base?.event_title_provisional?'':base?.event_title));
+    set('store_name',row?row.store_name:base?.store_name);
+    set('prefecture',row?row.prefecture:base?.prefecture);
+    set('review_category',row?.review_category||base?.review_category||'unknown');
+    set('product_type',row?.product_type||base?.pokemon_map_type||'unknown');
+    set('application_start_at',lpExtDateInput(row?row.application_start_at:base?.application_start_at));
+    set('application_end_at',lpExtDateInput(row?row.application_end_at:base?.application_end_at));
+    set('exclusion_reason',row?.exclusion_reason);
+    $('lpExtDelete').hidden=row?.state==='excluded';
+    $('lpExtRestore').hidden=row?.state!=='excluded';
+    $('lpExtReset').hidden=!row;
+    $('lpExtEditorStatus').textContent=row?.state==='excluded'
+      ? '🚫 除外済みです。編集して保存しても「復元」を押すまで非表示のままです。'
+      : '確認できた情報だけを入力してください。未確認の項目は空欄にできます。';
+    dialog.showModal();
+    $('lpExtForm').querySelector('[name="event_title"]')?.focus({preventScroll:true});
+  }
+
+  async function lpExtWrite(mode){
+    if(!isDeveloper()||lpExtBusy||!supabaseClient||!lpExtReady)return;
+    const message=$('lpExtEditorStatus');
+    let payload;
+    try{payload=lpExtFormRow();}
+    catch(error){message.textContent='⚠ '+(error.message||error);return;}
+    const old=lpExtOverrides.get(payload.event_url);
+    if(mode==='exclude'){
+      if(!confirm('このURLを全ユーザーの抽選一覧から除外しますか？ 再収集されても復活せず、あとで復元できます。'))return;
+    }else if(mode==='reset'){
+      if(!old)return;
+      if(!confirm('このURLの手動修正と除外状態を解除しますか？ 再収集データの表示に戻ります。'))return;
+    }
+    lpExtBusy=true;
+    const buttons=[...$('lpExtForm').querySelectorAll('button')];
+    buttons.forEach(x=>x.disabled=true);
+    message.textContent='🔄 Supabaseに保存しています…';
+    try{
+      const url=payload.event_url;
+      if(mode==='reset'){
+        const {data,error}=await supabaseClient.from(LP_EXT_OVERRIDE_TABLE)
+          .delete().eq('event_url',url).select('event_url');
+        if(error)throw error;
+        if(!Array.isArray(data)||!data.some(x=>x.event_url===url))
+          throw Error('手動修正の解除が確認できませんでした');
+        lpExtOverrides.delete(url);
+      }else{
+        payload.state=mode==='exclude'?'excluded':
+          mode==='restore'?'active':old?.state||'active';
+        payload.exclusion_reason=payload.state==='excluded'
+          ?payload.exclusion_reason||old?.exclusion_reason||null:null;
+        const {data,error}=await supabaseClient.from(LP_EXT_OVERRIDE_TABLE)
+          .upsert(payload,{onConflict:'event_url'})
+          .select('event_url,state,event_title,store_name,prefecture,review_category,product_type,application_start_at,application_end_at,exclusion_reason,updated_at').single();
+        if(error)throw error;
+        if(!data||data.event_url!==url||data.state!==payload.state)
+          throw Error('保存結果が確認できませんでした');
+        lpExtOverrides.set(url,data);
+      }
+      lpExtLastFetch=Date.now();
+      $('lpExtDialog').close();
+      lpCloudApply();
+      $('lpExtManageStatus').textContent='✅ 保存しました。ほかの利用者にも反映されます。';
+    }catch(error){
+      message.textContent='⚠ 保存に失敗しました：'+(error?.message||error);
+    }finally{
+      lpExtBusy=false;
+      buttons.forEach(x=>x.disabled=false);
+    }
+  }
+
+  function lpExtInitUI(){
+    const root=$('lpExtManage'),dialog=$('lpExtDialog');
+    if(!root||!dialog)return;
+    $('lpExtPrefecture').innerHTML='<option value="">未確認</option>'+
+      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
+    $('lpExtSearch').addEventListener('input',()=>{lpExtListLimit=80;lpExtRenderAdmin();});
+    $('lpExtMore').addEventListener('click',()=>{lpExtListLimit+=80;lpExtRenderAdmin();});
+    $('lpExtRefresh').addEventListener('click',()=>lpExtRefresh(true));
+    $('lpExtManageList').addEventListener('click',event=>{
+      const target=event.target.closest('button[data-lp-ext-edit]');
+      if(target)lpExtOpen(target.dataset.lpExtEdit);
+    });
+    $('lotteryView').addEventListener('click',event=>{
+      const target=event.target.closest('button[data-lp-ext-edit]');
+      if(target)lpExtOpen(target.dataset.lpExtEdit);
+    });
+    $('lpExtForm').addEventListener('submit',event=>{
+      event.preventDefault();lpExtWrite('save');
+    });
+    $('lpExtDelete').addEventListener('click',()=>lpExtWrite('exclude'));
+    $('lpExtRestore').addEventListener('click',()=>lpExtWrite('restore'));
+    $('lpExtReset').addEventListener('click',()=>lpExtWrite('reset'));
+    $('lpExtCancel').addEventListener('click',()=>dialog.close());
+    lpExtRenderAdmin();
   }
 
   function lotteryCard(item, state) {
@@ -2846,6 +3103,7 @@
       ${lotteryOnsiteSharedHtml(item.url)}
       <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">${external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗'}</a>
       ${lotteryTrackerActionsHtml(item)}
+      ${external&&isDeveloper()? `<div class="lp-external-dev-actions"><button type="button" data-lp-ext-edit="${escape(item.url)}">🛠 外部抽選を編集・除外</button></div>`:''}
     </article>`;
   }
 
@@ -2933,6 +3191,7 @@
   function initLottery() {
     ensureLotteryNewBadgeStyle();
     ensureLotteryTrackerUI();
+    lpExtInitUI();
     $('lpOnsiteArchiveSearch')?.addEventListener('input',()=>{
       lotteryOnsiteArchiveLimit=40;renderLotteryOnsiteArchive();
     });
@@ -3003,6 +3262,7 @@
         // Other users pick up saved event corrections without reloading the app.
         lpCloudRefresh();
         lpLocationRefresh();
+        lpExtRefresh();
       }
     }, 60000);
     document.addEventListener('visibilitychange', () => {
