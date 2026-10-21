@@ -2809,7 +2809,7 @@
     const reliableName = (officialName || item.product_name || trustedTitle || '').trim();
     // Discord excerpt is a discovery hint only, not an authoritative heading.
     const external=!isLivePocketEventUrl(item.url);
-    const label = reliableName || (external?'外部URL・応募内容未確認':'商品名・イベント名を確認中');
+    const label = reliableName || (external?'外部サイト・抽選内容未確認':'商品名・イベント名を確認中');
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
@@ -2837,15 +2837,15 @@
         ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
-      ${external?'<p class="lp-store-muted">Discordから取得した外部URLです。抽選内容・応募期間は未確認のため、公式ページをご確認ください。</p>':''}
+      ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
       ${state === 'unavailable' ? '<p class="lp-missing-notice">⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。</p>' : ''}
       ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
       <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
-      ${external?'<p class="lp-store-muted">この外部URLの抽選管理・現地対応共有は現在準備中です。</p>':lotteryOnsiteSharedHtml(item.url)}
-      <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">${external?'URLを開いて確認 ↗':'公式ページで確認 ↗'}</a>
-      ${external?'':lotteryTrackerActionsHtml(item)}
+      ${lotteryOnsiteSharedHtml(item.url)}
+      <a class="lp-official" href="${escape(item.url)}" target="_blank" rel="noopener noreferrer">${external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗'}</a>
+      ${lotteryTrackerActionsHtml(item)}
     </article>`;
   }
 
@@ -3020,6 +3020,10 @@
   // Supabase RLS enforces user_id=auth.uid() for every operation.
   // ========================================
   const LP_TRACK_TABLE = 'lottery_user_entries';
+  const LP_EXT_TRACK_TABLE = 'lottery_external_user_entries';
+  function lotteryTrackTableFor(url){
+    return isLivePocketEventUrl(url)?LP_TRACK_TABLE:LP_EXT_TRACK_TABLE;
+  }
   const LP_TRACK_STATUSES = ['not_applied','applied','won','lost','received'];
   const LP_TRACK_LABELS = {
     not_applied:'未応募', applied:'応募済み', won:'当選・受取待ち',
@@ -3364,12 +3368,14 @@
     lotteryTrackUserId = user;
     const run = (async() => {
       try {
-        const {data,error} = await supabaseClient.from(LP_TRACK_TABLE)
-          .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
-          .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000);
-        if (error) throw error;
+        const fetched=await Promise.all([LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
+          supabaseClient.from(table)
+            .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
+            .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)));
+        for(const response of fetched)if(response.error)throw response.error;
         if (seq !== lotteryTrackSequence || authUser?.id !== user) return;
-        lotteryTrackRecords = new Map((data||[]).map(lotteryTrackClean).filter(Boolean).map(x=>[x.event_url,x]));
+        lotteryTrackRecords = new Map(fetched.flatMap(x=>x.data||[])
+          .map(lotteryTrackClean).filter(Boolean).map(x=>[x.event_url,x]));
         lotteryTrackError='';
         lotteryTrackLastLoad=Date.now();
       } catch(e) {
@@ -3691,7 +3697,7 @@
     const message=$('lpTrackEditorMessage');
     if(message)message.textContent='保存中…';
     try{
-      const {data,error}=await supabaseClient.from(LP_TRACK_TABLE).upsert(payload,{onConflict:'user_id,event_url'})
+      const {data,error}=await supabaseClient.from(lotteryTrackTableFor(url)).upsert(payload,{onConflict:'user_id,event_url'})
         .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
@@ -3714,7 +3720,7 @@
     const uid=authUser.id;
     lotteryTrackSaving=true;
     try{
-      const {error}=await supabaseClient.from(LP_TRACK_TABLE).delete().eq('user_id',uid).eq('event_url',url);
+      const {error}=await supabaseClient.from(lotteryTrackTableFor(url)).delete().eq('user_id',uid).eq('event_url',url);
       if(error)throw error;
       if(authUser?.id!==uid)return;
       lotteryTrackRecords.delete(url);
@@ -3733,7 +3739,12 @@
   // Each user can edit ONLY their own report (RLS); conflicts stay visible.
   // =====================================================
   const LP_ONSITE_TABLE = 'lottery_onsite_reports';
+  const LP_EXT_ONSITE_TABLE = 'lottery_external_onsite_reports';
   const LP_ONSITE_ARCHIVE_TABLE = 'lottery_onsite_archive';
+  const LP_EXT_ONSITE_ARCHIVE_TABLE = 'lottery_external_onsite_archive';
+  function lotteryOnsiteTableFor(url){
+    return isLivePocketEventUrl(url)?LP_ONSITE_TABLE:LP_EXT_ONSITE_TABLE;
+  }
   let lotteryOnsiteArchiveRows=[],lotteryOnsiteArchiveLastFetch=0;
   let lotteryOnsiteArchiveFetching=null,lotteryOnsiteArchiveError='';
   let lotteryOnsiteArchiveLimit=40;
@@ -3796,14 +3807,16 @@
         const all=[];
         // Supabase projects often cap a query at 1,000 rows. Paginate so
         // growing community reports do not silently omit older events.
-        for(let offset=0;offset<10000;offset+=500){
-          const {data,error}=await supabaseClient.from(LP_ONSITE_TABLE)
-            .select('user_id,event_url,requirement,details,updated_at,application_end_at,store_name,prefecture,event_title')
-            .order('updated_at',{ascending:false}).range(offset,offset+499);
-          if(error) throw error;
-          if(seq!==lotteryOnsiteSequence) return;
-          all.push(...(data||[]));
-          if(!data || data.length<500) break;
+        for(const table of [LP_ONSITE_TABLE,LP_EXT_ONSITE_TABLE]){
+          for(let offset=0;offset<10000;offset+=500){
+            const {data,error}=await supabaseClient.from(table)
+              .select('user_id,event_url,requirement,details,updated_at,application_end_at,store_name,prefecture,event_title')
+              .order('updated_at',{ascending:false}).range(offset,offset+499);
+            if(error)throw error;
+            if(seq!==lotteryOnsiteSequence)return;
+            all.push(...(data||[]));
+            if(!data||data.length<500)break;
+          }
         }
         const next=new Map();
         for(const row of all){
@@ -3839,15 +3852,18 @@
     lotteryOnsiteArchiveFetching=(async()=>{
       try{
         const rows=[];
-        for(let offset=0;offset<10000;offset+=500){
-          const {data,error}=await supabaseClient.from(LP_ONSITE_ARCHIVE_TABLE)
-            .select('event_url,store_name,prefecture,event_title,application_end_at,required_count,not_required_count,required_details,archived_at')
-            .order('application_end_at',{ascending:false}).range(offset,offset+499);
-          if(error)throw error;
-          rows.push(...(data||[]));
-          if(!data || data.length<500)break;
+        for(const table of [LP_ONSITE_ARCHIVE_TABLE,LP_EXT_ONSITE_ARCHIVE_TABLE]){
+          for(let offset=0;offset<10000;offset+=500){
+            const {data,error}=await supabaseClient.from(table)
+              .select('event_url,store_name,prefecture,event_title,application_end_at,required_count,not_required_count,required_details,archived_at')
+              .order('application_end_at',{ascending:false}).range(offset,offset+499);
+            if(error)throw error;
+            rows.push(...(data||[]));
+            if(!data||data.length<500)break;
+          }
         }
-        lotteryOnsiteArchiveRows=rows.filter(x=>safeLotteryUrl(x.event_url));
+        lotteryOnsiteArchiveRows=rows.filter(x=>safeLotteryUrl(x.event_url))
+          .sort((a,b)=>Date.parse(b.application_end_at)-Date.parse(a.application_end_at));
         lotteryOnsiteArchiveLastFetch=Date.now();
         lotteryOnsiteArchiveError='';
       }catch(error){
@@ -3977,7 +3993,7 @@
     const status=$('lpOnsiteMessage');
     if(status)status.textContent='共有内容を保存中…';
     try{
-      const {data,error}=await supabaseClient.from(LP_ONSITE_TABLE)
+      const {data,error}=await supabaseClient.from(lotteryOnsiteTableFor(url))
         .upsert(payload,{onConflict:'user_id,event_url'})
         .select('user_id,event_url,requirement,details,updated_at,application_end_at,store_name,prefecture,event_title').single();
       if(error)throw error;
@@ -4001,7 +4017,7 @@
     const uid=authUser.id;
     lotteryOnsiteSaving=true;
     try{
-      const {error}=await supabaseClient.from(LP_ONSITE_TABLE)
+      const {error}=await supabaseClient.from(lotteryOnsiteTableFor(url))
         .delete().eq('user_id',uid).eq('event_url',url);
       if(error)throw error;
       if(authUser?.id!==uid)return;
