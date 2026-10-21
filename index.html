@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261022-v21_71-app-editor-only">
+  <link rel="stylesheet" href="style.css?v=20261022-v21_72-app-modal">
 
   <style>
     [hidden] { display: none !important; }
@@ -740,9 +740,9 @@ nav[aria-label="メインメニュー"] {
         <button type="button" id="lpAppReload" class="lp-refresh">↻ 更新</button>
       </div>
       <p id="lpAppAccountHint" class="hint" aria-live="polite"></p>
-      <button type="button" class="primary lp-app-add" id="lpAppNew">➕ アプリ抽選を登録</button>
-      <details id="lpAppFormFold" class="lp-app-form-fold">
-        <summary>📝 アプリ抽選 登録・編集フォーム</summary>
+      <button type="button" class="primary lp-app-add" id="lpAppNew" aria-expanded="false" aria-controls="lpAppFormFold">➕ アプリ抽選を登録</button>
+      <div id="lpAppNewHost">
+      <section id="lpAppFormFold" class="lp-app-form-fold" hidden>
         <h3 id="lpAppFormHeading" tabindex="-1">アプリ抽選を新しく登録</h3>
         <form id="lpAppForm" autocomplete="off">
           <label>アプリ名（必須）
@@ -790,15 +790,17 @@ nav[aria-label="メインメニュー"] {
           <label>抽選に関する共有メモ（任意・600文字以内）
             <textarea name="details" maxlength="600" rows="3" placeholder="応募方法や対象店舗など、公式アプリで確認した内容"></textarea>
           </label>
-          <p class="hint">登録した情報は「🎟️ 抽選」タブのカードとして全ユーザーに表示されます。応募済み・当選・落選・受取期限と個人メモは「✅ 抽選管理」で非公開のまま扱えます。このタブからはいつでも自分の登録を再編集・非表示・再公開できます。</p>
+          <p class="hint">登録した情報は「🎟️ 抽選」タブのカードとして全ユーザーに表示されます。応募済み・当選・落選・受取期限と個人メモは「✅ 抽選管理」で非公開のまま扱えます。自分の登録はポップアップから再編集・非表示・再公開・削除できます。</p>
           <div class="lp-app-form-actions">
             <button type="submit" class="primary">共有一覧に保存</button>
             <button type="button" id="lpAppCancel">閉じる</button>
             <button type="button" id="lpAppToggle" hidden>登録を非表示（履歴保持）</button>
+            <button type="button" id="lpAppDelete" class="lp-app-delete" hidden>🗑 登録を削除</button>
           </div>
           <p id="lpAppFormStatus" class="hint" role="status" aria-live="polite"></p>
         </form>
-      </details>
+      </section>
+      </div>
       <section class="lp-app-search" aria-label="自分のアプリ抽選登録を検索">
         <label for="lpAppSearch">自分の登録を検索（アプリ名・抽選名・商品名・店舗名）</label>
         <input type="search" id="lpAppSearch" maxlength="120" placeholder="自分の登録を検索" autocomplete="off">
@@ -1327,6 +1329,11 @@ nav[aria-label="メインメニュー"] {
 
 
 
+  <!-- v21.72: reuse the same form in this modal when editing existing registrations. -->
+  <dialog id="lpAppDialog" aria-labelledby="lpAppFormHeading" aria-modal="true">
+    <div id="lpAppDialogBody"></div>
+  </dialog>
+
   <!-- v21.68: shared admin card editor (no input autofocus for iPhone). -->
   <dialog id="lpCardDialog" aria-label="抽選カードの管理者編集">
     <div class="lp-card-editor">
@@ -1516,7 +1523,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261022-v21_71b-app-lottery-editor"></script>
+  <script src="app.js?v=20261022-v21_72-app-modal"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
