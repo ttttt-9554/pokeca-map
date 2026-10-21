@@ -63,6 +63,14 @@ jobs:
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/livepocket_collect.py
 
+      # Other sites: independent metadata-only collection. LivePocket stays untouched.
+      - name: Collect external non-X URLs
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL_IDS: ${{ secrets.DISCORD_CHANNEL_IDS || secrets.DISCORD_CHANNEL_ID }}
+          BACKFILL: ${{ inputs.backfill || 'false' }}
+        run: python scripts/collect_other_lottery.py
+
       - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
@@ -132,7 +140,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv livepocket_content_checks.csv
+          git add other_lottery_public.json livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv livepocket_content_checks.csv
           if [ -f livepocket_check_summary.json ]; then
             git add livepocket_check_summary.json
           fi
