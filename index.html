@@ -154,6 +154,49 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
   .lp-ext-editor-actions button{min-height:40px}
   #lpExtDelete{border-color:#b45309;color:var(--app-text,#172033)}
   #lpExtEditorStatus{font-size:13px;overflow-wrap:anywhere}
+  /* Global form{background:#fff} must not create a white panel inside
+     a dark-mode dialog on iOS. */
+  #lpExtDialog #lpExtForm{
+    display:grid;gap:12px;box-sizing:border-box;min-width:0;width:100%;
+    margin:0;padding:0;border:0;border-radius:0;
+    background:transparent!important;color:var(--app-text,#172033)!important;
+  }
+  #lpExtDialog #lpExtForm>label{
+    display:block;min-width:0;margin:4px 0;
+    font-size:13px;font-weight:700;line-height:1.6;
+    color:var(--app-text,#172033)!important;
+    -webkit-text-fill-color:var(--app-text,#172033)!important;
+  }
+  #lpExtDialog #lpExtForm :is(input,select,textarea){
+    display:block;width:100%;box-sizing:border-box;min-height:45px;margin-top:7px;
+    background:var(--app-surface2,#f8fafc)!important;
+    color:var(--app-text,#172033)!important;
+    -webkit-text-fill-color:var(--app-text,#172033)!important;
+    border:1px solid var(--app-border,#94a3b8)!important;
+    font-size:16px;
+  }
+  #lpExtDialog #lpExtForm :is(input,textarea)::placeholder{
+    color:var(--app-muted,#64748b)!important;
+    -webkit-text-fill-color:var(--app-muted,#64748b)!important;
+    opacity:1;
+  }
+  #lpExtDialog #lpExtForm .hint,#lpExtDialog #lpExtEditorStatus{
+    color:var(--app-muted,#64748b)!important;
+    -webkit-text-fill-color:var(--app-muted,#64748b)!important;
+    line-height:1.6;
+  }
+  #lpExtDialog{box-sizing:border-box;width:min(94vw,540px);max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);overscroll-behavior:contain}
+  #lpExtDialog .lp-ext-url{
+    display:block;box-sizing:border-box;padding:11px 12px;
+    margin:8px 0 16px;min-height:45px;line-height:1.65;
+    overflow-wrap:anywhere;word-break:break-word;border-radius:9px;
+    border:1px solid var(--app-border,#94a3b8);
+    background:var(--app-surface2,#f8fafc);
+    color:var(--app-accent,#2563eb)!important;
+    -webkit-text-fill-color:var(--app-accent,#2563eb)!important;
+    font-weight:650;text-decoration:underline;text-underline-offset:3px;
+  }
+  #lpExtDialog .lp-ext-url:focus-visible{outline:3px solid var(--app-accent,#2563eb);outline-offset:3px}
   #lpExtManage[hidden],#lpExtDelete[hidden],#lpExtRestore[hidden],#lpExtReset[hidden]{display:none!important}
 </style>
 <style id="dark-contrast-fix">
@@ -1185,7 +1228,8 @@ nav[aria-label="メインメニュー"] {
   <dialog id="lpExtDialog" aria-label="外部抽選の手動編集">
     <div class="lp-ext-editor">
       <h3>🛠 外部抽選の編集・削除</h3>
-      <p id="lpExtEditingUrl" class="lp-ext-url"></p>
+      <a id="lpExtEditingUrl" class="lp-ext-url" href="#" target="_blank"
+         rel="noopener noreferrer" title="元の抽選ページを開く"></a>
       <form id="lpExtForm">
         <label>イベント名・商品名
           <input name="event_title" maxlength="200" autocomplete="off" placeholder="公式ページで確認した名称">
@@ -1309,7 +1353,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_59-external-manual-review"></script>
+  <script src="app.js?v=20261021-v21_59b-external-dialog-link"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
