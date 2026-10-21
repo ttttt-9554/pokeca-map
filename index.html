@@ -126,6 +126,36 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
 .app-settings-panel h2{margin:0 0 16px}.app-settings-panel label{display:block;margin:12px 0 7px;font-weight:700}.app-settings-panel select{width:100%;min-height:48px;background:var(--app-surface2);color:var(--app-text);border:1px solid var(--app-border);border-radius:10px;padding:10px;font-size:16px}.app-settings-panel button{margin-top:16px;min-height:44px;width:100%}
 @media(display-mode:standalone){body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)} }
 </style>
+<style id="lp-ext-editor-style">
+  #lpExtManage input,#lpExtDialog input,#lpExtDialog select,#lpExtDialog textarea{
+    width:100%;max-width:100%;box-sizing:border-box;
+    background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+    border:1px solid var(--app-border,#94a3b8);border-radius:9px;padding:10px;font-size:16px;
+  }
+  #lpExtManage label,#lpExtDialog label{display:block;margin:10px 0 5px;color:var(--app-text,#172033)}
+  .lp-ext-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .lp-ext-toolbar p{font-size:12px;color:var(--app-muted,#64748b);flex:1;overflow-wrap:anywhere}
+  .lp-ext-admin-row{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;
+    border:1px solid var(--app-border,#94a3b8);border-radius:10px;
+    background:var(--app-surface2,#f8fafc);padding:11px;margin:10px 0;
+    color:var(--app-text,#172033)}
+  .lp-ext-admin-row>div{min-width:0;overflow-wrap:anywhere;flex:1}
+  .lp-ext-admin-row p{font-size:12px;margin:6px 0;color:var(--app-muted,#64748b);word-break:break-all}
+  .lp-ext-admin-row button{flex-shrink:0}
+  .lp-ext-excluded{color:#d97706}
+  .lp-external-dev-actions{margin-top:10px}
+  #lpExtDialog{width:min(94vw,540px);max-width:540px;max-height:84dvh;overflow-y:auto;
+    border:1px solid var(--app-border,#94a3b8);border-radius:14px;
+    padding:18px;background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+  #lpExtDialog::backdrop{background:rgba(0,0,0,.62)}
+  .lp-ext-editor h3{margin:0 0 7px}
+  .lp-ext-url{overflow-wrap:anywhere;font-size:12px;color:var(--app-muted,#64748b)}
+  .lp-ext-editor-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .lp-ext-editor-actions button{min-height:40px}
+  #lpExtDelete{border-color:#b45309;color:var(--app-text,#172033)}
+  #lpExtEditorStatus{font-size:13px;overflow-wrap:anywhere}
+  #lpExtManage[hidden],#lpExtDelete[hidden],#lpExtRestore[hidden],#lpExtReset[hidden]{display:none!important}
+</style>
 <style id="dark-contrast-fix">
 
 /* ダークモード可読性修正 v2: 既存機能・データ処理は変更しない */
@@ -1003,6 +1033,20 @@ nav[aria-label="メインメニュー"] {
       </h2>
 
 
+      <!-- Developer-only moderation for collected non-LivePocket URLs -->
+      <section id="lpExtManage" class="store-tools lp-ext-manage" hidden aria-label="外部サイト抽選の手動編集">
+        <h3>🛠 外部抽選の手動編集・削除</h3>
+        <p class="hint">LivePocket以外のURLを修正・除外できます。編集は全ユーザーに共有されます。削除しても収集元や個人の応募記録は消さず、再収集による復活を防ぎます。</p>
+        <label for="lpExtSearch">URL・店舗・イベント名で検索</label>
+        <input id="lpExtSearch" type="search" autocomplete="off" placeholder="URL・タイトル・店舗名・除外理由">
+        <div class="lp-ext-toolbar">
+          <button id="lpExtRefresh" type="button">最新情報を取得</button>
+          <p id="lpExtManageStatus" role="status" aria-live="polite">保存先を確認しています…</p>
+        </div>
+        <div id="lpExtManageList"></div>
+        <button id="lpExtMore" type="button" hidden>さらに表示</button>
+      </section>
+
       <!-- LivePocket: 開発者専用・登録済み抽選の手動再確認 -->
       <div class="store-tools lp-dev-recheck" id="lpDevRecheckPanel">
         <h3>🎟️ 抽選イベントの手動再確認</h3>
@@ -1138,6 +1182,57 @@ nav[aria-label="メインメニュー"] {
 </div><!-- /#appScrollArea: header + content scroll, nav stays fixed in flex layout -->
 
 
+  <dialog id="lpExtDialog" aria-label="外部抽選の手動編集">
+    <div class="lp-ext-editor">
+      <h3>🛠 外部抽選の編集・削除</h3>
+      <p id="lpExtEditingUrl" class="lp-ext-url"></p>
+      <form id="lpExtForm">
+        <label>イベント名・商品名
+          <input name="event_title" maxlength="200" autocomplete="off" placeholder="公式ページで確認した名称">
+        </label>
+        <label>対象店舗
+          <input name="store_name" maxlength="200" autocomplete="off" placeholder="店舗名（未確認なら空欄）">
+        </label>
+        <label>都道府県
+          <select id="lpExtPrefecture" name="prefecture"><option value="">未確認</option></select>
+        </label>
+        <label>ジャンル
+          <select name="review_category">
+            <option value="unknown">未分類</option>
+            <option value="pokemon">ポケカ</option>
+            <option value="onepiece">ワンピース</option>
+            <option value="yugioh">遊戯王</option>
+          </select>
+        </label>
+        <label>商品区分
+          <select name="product_type">
+            <option value="unknown">未確認</option>
+            <option value="pack">拡張パック</option>
+            <option value="deck">構築デッキ</option>
+          </select>
+        </label>
+        <label>応募開始（日本時間）
+          <input name="application_start_at" type="datetime-local">
+        </label>
+        <label>応募締切（日本時間）
+          <input name="application_end_at" type="datetime-local">
+        </label>
+        <label>除外する理由（任意）
+          <textarea name="exclusion_reason" maxlength="300" rows="2" placeholder="例：抽選ではない商品ページ／リンク切れ"></textarea>
+        </label>
+        <p class="hint">確認できない項目は空欄にできます。日付は日本時間で保存します。除外済みのカードを編集しても「復元」を押すまで公開されません。</p>
+        <div class="lp-ext-editor-actions">
+          <button type="submit" class="primary">編集内容を保存</button>
+          <button id="lpExtDelete" type="button">一覧から削除（復元可）</button>
+          <button id="lpExtRestore" type="button" hidden>一覧に復元</button>
+          <button id="lpExtReset" type="button">手動修正を解除</button>
+          <button id="lpExtCancel" type="button">閉じる</button>
+        </div>
+        <p id="lpExtEditorStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </dialog>
+
   <!-- ======================================
        下部ナビゲーション
        ====================================== -->
@@ -1214,7 +1309,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_58b-external-unified"></script>
+  <script src="app.js?v=20261021-v21_59-external-manual-review"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
