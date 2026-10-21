@@ -1364,8 +1364,8 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
 
     Successful page checks, failed requests, and developer-saved corrections
     are durable records. An event already checked recently is NOT new work;
-    incomplete unsuccessful events may be tried again after 24 hours, while
-    successfully fetched but still incomplete events wait at least seven days.
+    incomplete unsuccessful events may be tried again after 6 hours, while
+    successfully fetched but still incomplete events wait at least 24 hours.
     Completed/expired/manual-unavailable items never enter the queue.
     """
     now = v14._utc(now)
@@ -1384,6 +1384,9 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
     browser_checks = state.get('v13', {}).get('browser_checks', {})
     official_checks = state.get('v21_9', {}).get('official_checks', {})
     selected = []
+    next_retries = []
+    # These counts overlap because one incomplete event may lack multiple fields.
+    missing_fields = Counter()
     for url, item in ri.items():
         if url in removed_pages or item.get('manual_page_unavailable') or pi[url].get('manual_page_unavailable'):
             counters['removed'] += 1
@@ -1434,15 +1437,22 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         if not (missing_title or missing_store or missing_deadline):
             counters['completed'] += 1
             continue  # fully resolved; never fill the batch with completed URLs
+        if missing_title: missing_fields['missing_title'] += 1
+        if missing_store: missing_fields['missing_store'] += 1
+        if missing_deadline: missing_fields['missing_deadline'] += 1
 
         # A successfully fetched event page has already been inspected.
         # Even with an unreported detail it should not use every developer
         # click; e.g. no individual product is a legitimate event design.
         successful = str(check.get('status') or '').startswith('checked_')
         if latest_check:
-            wait = timedelta(days=7) if successful else timedelta(hours=24)
-            if now - latest_check < wait:
+            # Do not hammer the same page each five-minute job. But a lottery
+            # ends quickly, so seven days is too long for a missing deadline.
+            wait = timedelta(hours=24) if successful else timedelta(hours=6)
+            next_at = latest_check + wait
+            if now < next_at:
                 counters['retry_wait'] += 1
+                next_retries.append(next_at)
                 continue
 
         tier = 0 if missing_title else 1
@@ -1465,6 +1475,12 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
               'new_pending','quarantined')
         result={key:int(counters.get(key,0)) for key in keys}
         result['total']=len(ri)
+        result['unresolved']=result['ready']+result['retry_wait']
+        result['missing_title']=int(missing_fields['missing_title'])
+        result['missing_store']=int(missing_fields['missing_store'])
+        result['missing_deadline']=int(missing_fields['missing_deadline'])
+        result['next_retry_at']=(min(next_retries).isoformat(timespec='seconds').replace('+00:00','Z')
+                                 if next_retries else None)
         result['access_cooldown']=bool(access_cooldown)
         result['next_batch_size']=min(limit, len(selected)) if not access_cooldown else 0
         if sum(result[key] for key in keys) != result['total']:
