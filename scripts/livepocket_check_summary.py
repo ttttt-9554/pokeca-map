@@ -16,6 +16,9 @@ from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from pathlib import Path
 
+import livepocket_v21 as v21
+from livepocket_manual_completed import read_manual_completed
+
 ALLOWED_METRICS = (
     'registered_urls', 'deadlines_known', 'deadline_missing',
     'new_attempted', 'new_titles_added', 'new_products_added',
@@ -151,6 +154,32 @@ def load_daily_new_lotteries(path: Path, *, now: datetime | None = None) -> dict
         return None
     return daily_new_lotteries(raw, now=now)
 
+def current_manual_review_progress(raw_path: Path, *, now: datetime | None = None) -> dict:
+    """Current queue status using exactly the same selector as developer recheck.
+
+    No event URLs or Supabase records are published. A broken snapshot or
+    unavailable cloud read must NEVER halt ordinary Discord collection.
+    """
+    try:
+        raw = json.loads(raw_path.read_text(encoding='utf-8'))
+        public = json.loads(v21.PUBLIC_PATH.read_text(encoding='utf-8'))
+        titles, removed, locations = read_manual_completed()
+        counts = v21.manual_recheck_candidates(
+            raw, public, now=now, limit=v21.MANUAL_RECHECK_LIMIT,
+            completed_titles=titles, removed_pages=removed,
+            completed_locations=locations, summary=True)
+        counts.update(
+            status='ok', source='v21_65_manual_selector',
+            as_of=(now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+                .isoformat(timespec='seconds').replace('+00:00','Z')
+        )
+        return counts
+    except (OSError, ValueError, TypeError, KeyError, RuntimeError) as error:
+        # Avoid printing any credentials, URL, raw payload, or personal data.
+        print('LivePocket review progress unavailable:', type(error).__name__)
+        return {'status':'unavailable'}
+
+
 def read_json(path: Path) -> object:
     try:
         return json.loads(path.read_text(encoding='utf-8'))
@@ -225,14 +254,23 @@ def main() -> None:
         payload['daily_additions'] = daily
     else:
         payload['daily_additions'] = {'status': 'unavailable'}
-    # Automatic scans may run frequently, but only daily count changes or a
-    # new JST date need a public JSON update. Manual recheck results ALWAYS
-    # refresh and preserve the existing last_manual behavior.
+    # Current queue status is separate from the historical last-manual stats.
+    # Collect on every run; never silently show stale queue figures as current.
+    payload['review_progress'] = current_manual_review_progress(Path(args.raw_data))
+    # Automatic scans may run frequently: publish when the daily totals OR
+    # review queue categories change. Manual results always get published.
+    previous_progress = previous.get('review_progress')
+    progress_fields = ('status','source','total','ready','retry_wait',
+                       'completed','expired','removed','new_pending',
+                       'quarantined','access_cooldown','next_batch_size')
+    unchanged_progress = (isinstance(previous_progress, dict) and
+        all(payload['review_progress'].get(key) == previous_progress.get(key)
+            for key in progress_fields))
     previous_daily = previous.get('daily_additions')
     comparable = ('date_jst', 'today', 'yesterday', 'last_7_days',
                   'registered_total', 'tracked_since_jst', 'source')
     is_manual = args.event == 'workflow_dispatch' and args.review_batch == '12'
-    if (not is_manual and isinstance(daily, dict)
+    if (not is_manual and unchanged_progress and isinstance(daily, dict)
             and isinstance(previous_daily, dict)
             and all(daily.get(key) == previous_daily.get(key)
                     for key in comparable)):
