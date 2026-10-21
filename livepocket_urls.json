@@ -12832,8 +12832,8 @@
           "status": "checked_no_new_details"
         },
         "https://livepocket.jp/e/684iy": {
-          "checked_at": "2026-10-21T10:21:11.254272+00:00",
-          "status": "checked_no_new_details"
+          "checked_at": "2026-10-21T14:36:28.464684+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/g1lus": {
           "checked_at": "2026-10-21T09:36:23.577116+00:00",
@@ -13294,8 +13294,8 @@
         },
         "https://livepocket.jp/e/684iy": {
           "detected_at": "2026-10-21T08:30:56.713219+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-21T08:31:17.785953+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-21T14:36:28.464684+00:00"
         },
         "https://livepocket.jp/e/c6ups": {
           "detected_at": "2026-10-21T08:30:56.713219+00:00",
@@ -13720,6 +13720,11 @@
         "https://livepocket.jp/e/fgvl7": {
           "attempts": 1,
           "last_attempt_at": "2026-10-21T11:31:25.460611+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/684iy": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-21T14:36:28.464684+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -16690,7 +16695,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-21T10:21:11.254272+00:00",
+          "checked_at": "2026-10-21T14:36:28.464684+00:00",
           "title_observed": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
           "genre": "pokemon",
           "product_origin": "",
@@ -18423,7 +18428,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/684iy": {
-          "checked_at": "2026-10-21T10:21:11.254272+00:00",
+          "checked_at": "2026-10-21T14:36:28.464684+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
