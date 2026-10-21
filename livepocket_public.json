@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-21T01:35:55.156165+00:00",
-  "unique_livepocket_urls": 414,
+  "collected_at": "2026-10-21T02:35:55.151302+00:00",
+  "unique_livepocket_urls": 415,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5451,7 +5451,24 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-10-21T01:35:56.167152+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/13e82",
+      "store_name": "晴れる屋 仙台店",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-10-21T02:30:05.719000+00:00",
+      "stores": [
+        {
+          "name": "晴れる屋 仙台店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "event_title": "【晴れる屋 仙台店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-10-16T17:00:00+09:00",
+      "official_event_title": "【晴れる屋 仙台店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+      "first_detected_at": "2026-10-21T02:35:56.174339+00:00"
     }
   ],
-  "updated_at": "2026-10-21T02:25:57.164528+00:00"
+  "updated_at": "2026-10-21T02:36:24.548307+00:00"
 }
