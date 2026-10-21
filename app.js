@@ -4507,7 +4507,7 @@
     const stats = lastManual.stats || {};
     const updates = lastManual.updates || {};
     const fields = [
-      ['手動再確認の対象',lpDevNumeric(stats,'manual_selected')],
+      ['前回実行で選択した対象',lpDevNumeric(stats,'manual_selected')],
       ['実際にページ確認',lpDevNumeric(stats,'manual_attempted')],
       ['イベントページ取得成功',lpDevNumeric(stats,'manual_success')],
       ...(Object.hasOwn(stats,'manual_page_unconfirmed') ? [
@@ -4553,6 +4553,7 @@
       <p class="hint">※「公式イベント名を検出」は更新件数とは異なります。取得できても既存名と同じ場合があります。</p>
       <p class="hint">※ 「イベントページと確認できず」は通信失敗と同義ではありません。HTTP応答があっても、イベント本文を確認できないページは正式名の自動反映に使いません。</p>
       <p class="hint">※ メタ情報の整形や見出し候補があっても、正式イベント名の検出・更新が成功したとは限りません。省略表示は採用せず、CSVには判定コードと件数だけを記録します。</p>
+      <p class="hint">※これは上記の最終手動実行時の履歴です。「選択した対象」は現在の未解決件数ではありません。自動確認済み・手動で解決済み・応募終了したイベントは次回の再確認候補から除外し、確認失敗は間隔を空けて再試行します。</p>
       <p class="hint">※手動で選んだイベントのみの集計です。ページ取得に成功した対象の差分を数えています。通常収集での全体データ整形は含めません。取得制限中は確認を停止します。</p>
       ${runLink}`;
   }
@@ -4699,7 +4700,7 @@
       status.textContent = '開発者としてDiscordログインしてください。';
       return;
     }
-    if (!automatic && !window.confirm('登録済みの抽選イベントを最大12件、GitHub Actionsで再確認しますか？\n通常の自動収集は停止しません。')) return;
+    if (!automatic && !window.confirm('未解決の抽選イベントを最大12件、GitHub Actionsで再確認しますか？\n通常の自動収集は停止しません。')) return;
     lpDevRecheckBusy = true;
     button.disabled = true;
     button.textContent = 'GitHubに起動依頼中…';
@@ -4730,7 +4731,7 @@
     } finally {
       lpDevRecheckBusy = false;
       button.disabled = false;
-      button.textContent = '登録済み抽選を12件再確認';
+      button.textContent = '未解決の抽選を最大12件再確認';
     }
   }
 
