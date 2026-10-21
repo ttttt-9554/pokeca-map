@@ -1345,3 +1345,50 @@ html[data-theme="dark"] .lp-app-state.is-hidden{
   background:#344154!important;border-color:#60718a!important;color:#e5ebf4!important
 }
 @media(max-width:440px){.lp-app-edit-actions{width:100%}.lp-app-edit-actions button{flex:1 1 auto}}
+
+
+/* v21.72: Single inline creation form + true iPhone-sized edit popup. */
+#lpAppNewHost:empty{display:none}
+#lpAppFormFold[hidden],#lpAppDelete[hidden]{display:none!important}
+#lpAppFormFold{scroll-margin-top:20px}
+#lpAppDialog{
+  box-sizing:border-box;width:min(94vw,580px);max-width:580px;
+  max-height:min(88dvh,900px);margin:auto;overflow-x:hidden;overflow-y:auto;
+  padding:16px 15px 20px;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:17px;background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);box-shadow:0 16px 60px #0006;
+}
+#lpAppDialog::backdrop{background:#020817b8}
+#lpAppDialog #lpAppFormFold{
+  border:none;background:transparent;box-shadow:none;
+  margin:0;padding:0;border-radius:0;
+}
+#lpAppDialog #lpAppFormHeading{margin:0 0 18px}
+#lpAppDialog #lpAppForm{background:transparent!important;box-shadow:none!important}
+#lpAppDialog #lpAppForm :is(input,select,textarea){
+  background:var(--app-surface2,#f8fafc)!important;
+  color:var(--app-text,#172033)!important;
+}
+#lpAppNew[aria-expanded="true"]{filter:brightness(.95)}
+#lpAppDelete{
+  border-color:#c2410c!important;background:transparent!important;
+  color:#b91c1c!important;
+}
+html[data-theme="dark"] #lpAppDialog{
+  background:var(--app-surface,#19263a)!important;
+  color:var(--app-text,#eaf1ff)!important;
+  border-color:var(--app-border,#566980)!important;color-scheme:dark;
+}
+html[data-theme="dark"] #lpAppDialog #lpAppFormFold{
+  background:transparent!important;border:none!important;
+}
+html[data-theme="dark"] #lpAppDialog #lpAppForm :is(input,select,textarea){
+  background:var(--app-surface2,#263850)!important;
+  color:var(--app-text,#eaf1ff)!important;border-color:var(--app-border,#5d7087)!important;
+}
+html[data-theme="dark"] #lpAppDelete{color:#fca5a5!important;border-color:#f87171!important}
+@media(max-width:440px){
+  #lpAppDialog{width:calc(100vw - 24px);max-height:86dvh;padding:15px 12px 19px}
+  #lpAppDialog .lp-app-form-actions button{flex:1 1 110px}
+  #lpAppDialog #lpAppDelete{flex-basis:100%}
+}
