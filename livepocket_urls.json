@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-21T08:05:56.802354+00:00",
+  "collected_at": "2026-10-21T08:30:55.353396+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 420,
+  "unique_livepocket_urls": 422,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10893,34 +10893,94 @@
       "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（ストームエメラルダ）",
       "application_end_at": "2026-10-21T21:00:00+09:00",
       "application_start_at": "2026-10-21T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/684iy",
+      "discord_message_id": "1562382461437083668",
+      "discord_posted_at": "2026-10-21T08:30:06.469000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n古本市場竹の塚店\n受付終了: 10/23 22:00（残り2日4時間）\nhttps://livepocket.jp/e/684iy\n\n📍千葉県\nふるいちイオンモール船橋店\n受付終了: 10/21 21:00（残り3時間29分）\nhttps://livepocket.jp/e/c6ups",
+      "store_name": "古本市場竹の塚店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場竹の塚店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
+      "application_end_at": "2026-10-23T22:00:00+09:00",
+      "application_start_at": "2026-10-21T13:18:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/c6ups",
+      "discord_message_id": "1562382461437083668",
+      "discord_posted_at": "2026-10-21T08:30:06.469000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n古本市場竹の塚店\n受付終了: 10/23 22:00（残り2日4時間）\nhttps://livepocket.jp/e/684iy\n\n📍千葉県\nふるいちイオンモール船橋店\n受付終了: 10/21 21:00（残り3時間29分）\nhttps://livepocket.jp/e/c6ups",
+      "store_name": "ふるいちイオンモール船橋店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール船橋店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-21T21:00:00+09:00",
+      "application_start_at": "2026-10-21T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 267,
+    "parsed": 269,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 263,
-    "prefecture": 226,
-    "event_title": 107,
+    "store_name": 265,
+    "prefecture": 228,
+    "event_title": 109,
     "event_date": 1,
     "product_name": 63,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 395,
-    "application_start_at": 395,
-    "stores_events": 266
+    "application_end_at": 397,
+    "application_start_at": 397,
+    "stores_events": 268
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562374909760372766"
+      "1551580466266644552": "1562382461437083668"
     },
     "last_run": {
-      "checked_at": "2026-10-21T08:05:56.802354+00:00",
-      "new_urls": 1,
-      "original_urls": 419,
+      "checked_at": "2026-10-21T08:30:55.353396+00:00",
+      "new_urls": 2,
+      "original_urls": 420,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -11015,7 +11075,8 @@
         "1562299450217472033": "2026-10-21T03:05:57.625941+00:00",
         "1562322066839965727": "2026-10-21T04:35:56.129355+00:00",
         "1562332377806536764": "2026-10-21T05:20:56.038444+00:00",
-        "1562374909760372766": "2026-10-21T08:05:57.706715+00:00"
+        "1562374909760372766": "2026-10-21T08:05:57.706715+00:00",
+        "1562382461437083668": "2026-10-21T08:30:56.079286+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12707,6 +12768,14 @@
         "https://livepocket.jp/e/bz6gm": {
           "checked_at": "2026-10-21T08:06:24.868686+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/c6ups": {
+          "checked_at": "2026-10-21T08:31:17.785953+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/684iy": {
+          "checked_at": "2026-10-21T08:31:17.785953+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13156,6 +13225,16 @@
           "detected_at": "2026-10-21T08:05:58.542292+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-21T08:06:24.868686+00:00"
+        },
+        "https://livepocket.jp/e/684iy": {
+          "detected_at": "2026-10-21T08:30:56.713219+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-21T08:31:17.785953+00:00"
+        },
+        "https://livepocket.jp/e/c6ups": {
+          "detected_at": "2026-10-21T08:30:56.713219+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-21T08:31:17.785953+00:00"
         }
       },
       "pending_new_urls": []
@@ -16494,6 +16573,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/c6ups": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-21T08:31:17.785953+00:00",
+          "title_observed": "【ふるいちイオンモール船橋店】ポケカ抽選販売（30th CELEBRATION）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/684iy": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-21T08:31:17.785953+00:00",
+          "title_observed": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -18174,6 +18275,32 @@
         },
         "https://livepocket.jp/e/bz6gm": {
           "checked_at": "2026-10-21T08:06:24.868686+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/c6ups": {
+          "checked_at": "2026-10-21T08:31:17.785953+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/684iy": {
+          "checked_at": "2026-10-21T08:31:17.785953+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
