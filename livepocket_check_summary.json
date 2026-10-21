@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39553839006",
-    "run_number": "555",
-    "completed_process_at": "2026-10-21T06:12:11Z",
+    "run_id": "39563148148",
+    "run_number": "564",
+    "completed_process_at": "2026-10-21T07:37:20Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -35,7 +35,7 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 4,
+      "official_genres_confirmed": 5,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -89,9 +89,9 @@
     "manual_page_check_attempts": 12
   },
   "last_manual": {
-    "run_id": "39553839006",
-    "run_number": "555",
-    "completed_process_at": "2026-10-21T06:12:11Z",
+    "run_id": "39563148148",
+    "run_number": "564",
+    "completed_process_at": "2026-10-21T07:37:20Z",
     "mode": "developer_manual",
     "stats": {
       "new_attempted": 0,
@@ -123,7 +123,7 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 4,
+      "official_genres_confirmed": 5,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -183,7 +183,7 @@
     "last_7_days": 88,
     "registered_total": 419,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-21T06:12:11Z",
+    "as_of": "2026-10-21T07:37:20Z",
     "source": "v14_first_detected_urls"
   }
 }
