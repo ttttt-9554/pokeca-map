@@ -102,6 +102,12 @@ jobs:
         run: python scripts/livepocket_v14.py prepare
 
       # v18: 新着→6時間経過した新着の再確認→未確認の過去URL
+      # v21.64: stop manual recheck regressions before planning browser work.
+      - name: Test completed and retryable lottery review selection
+        run: |
+          python -m py_compile scripts/livepocket_v21.py scripts/livepocket_manual_completed.py
+          python scripts/test_livepocket_manual_review.py
+
       - name: Plan new, due retries and ticket products and verified store locations (v21)
         id: v21plan
         run: python scripts/livepocket_v21.py plan
