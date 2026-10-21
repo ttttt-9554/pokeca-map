@@ -29,9 +29,7 @@
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
-      ],
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード 再入荷分 EB-03『Heroiness Edition』 抽選販売受付"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/p2b1t",
@@ -179,9 +177,7 @@
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー 再販分"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/o35r4",
@@ -412,7 +408,9 @@
           "name": "イトーヨーカドー",
           "prefecture": ""
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "【イトーヨーカドー】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB－05】"
     },
     {
       "url": "https://livepocket.jp/e/lx6zx",
@@ -591,7 +589,9 @@
           "name": "TSUTAYA BOOKSTORE川崎駅前店",
           "prefecture": "神奈川県"
         }
-      ]
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム「ONE PIECE Heroines Edition vol.2」抽選販売"
     },
     {
       "url": "https://livepocket.jp/e/tx5dc",
@@ -715,9 +715,7 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 「30th CELEBRATION カードセット」【９種セット】"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/5mcaz",
@@ -855,9 +853,7 @@
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
-      ],
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード『Heroines Edition vol.2』 抽選販売受付"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/o0z6y",
@@ -1028,9 +1024,7 @@
       ],
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」キャンセル分 抽選販売受付"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/cq6ix",
@@ -1729,7 +1723,9 @@
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」"
     },
     {
       "url": "https://livepocket.jp/e/7o-si",
@@ -1763,7 +1759,9 @@
       "url": "https://livepocket.jp/e/9_bzs",
       "event_title": "【10/16〜10/18購入可能】ポケモンカードゲームMEGA 新品商品 抽選購入権応募受付",
       "discord_posted_at": "2026-10-03T15:07:58.228000+00:00",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【10/16〜10/18購入可能】ポケモンカードゲームMEGA 新品商品 抽選購入権応募受付"
     },
     {
       "url": "https://livepocket.jp/e/cq9ue",
@@ -1920,7 +1918,9 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」"
     },
     {
       "url": "https://livepocket.jp/e/2h41m",
@@ -2145,9 +2145,7 @@
           "name": "錦糸",
           "prefecture": ""
         }
-      ],
-      "official_genre": "yugioh",
-      "official_event_title": "遊戯王OCG キャンセル分「ORIGINAL ARTWORK COLLECTION」"
+      ]
     },
     {
       "url": "https://livepocket.jp/e/tupcdz",
@@ -2665,9 +2663,7 @@
       "url": "https://livepocket.jp/e/pp-3l",
       "event_title": "遊戯王ラッシュデュエル「CROSS ART COLLECTION」",
       "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
-      "review_category": "yugioh",
-      "official_genre": "yugioh",
-      "official_event_title": "遊戯王ラッシュデュエル「CROSS ART COLLECTION」"
+      "review_category": "yugioh"
     },
     {
       "url": "https://livepocket.jp/e/oskxn",
@@ -2793,7 +2789,9 @@
       "review_category": "pokemon",
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー 再販分"
     },
     {
       "url": "https://livepocket.jp/e/e7ec9",
@@ -2854,7 +2852,9 @@
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット／拡張パック ストームエメラルダ"
     },
     {
       "url": "https://livepocket.jp/e/wyl-k",
@@ -3002,9 +3002,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/uau4g",
@@ -3041,7 +3039,9 @@
       "review_category": "pokemon",
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title"
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「インフェルノX」再入荷分 抽選販売受付"
     },
     {
       "url": "https://livepocket.jp/e/fvxoh",
@@ -3116,9 +3116,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION」キャンセル分 抽選販売受付"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/3558y",
@@ -3151,9 +3149,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール熱田店】ポケカ抽選販売 ポケモンカードゲームＭＥＧＡ 拡張パック「ストームエメラルダ」"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/5uc5s",
@@ -3325,7 +3321,9 @@
       "url": "https://livepocket.jp/e/eqcmy",
       "event_title": "【9/16発売】ポケモンカードゲーム MEGA 『30thセレブレーション』 (2回目)抽選販売【TSUTAYAあべの橋店】",
       "discord_posted_at": "2026-09-22T10:01:23.534000+00:00",
-      "review_category": "pokemon"
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【9/16発売】ポケモンカードゲーム MEGA 『30thセレブレーション』 (2回目)抽選販売【TSUTAYAあべの橋店】"
     },
     {
       "url": "https://livepocket.jp/e/5wpcb",
@@ -4060,9 +4058,7 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売"
+      "pokemon_map_evidence": "event_title"
     },
     {
       "url": "https://livepocket.jp/e/w6vl0",
@@ -5207,8 +5203,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "10/31(土)発売 ワンピースカードゲーム エクストラブースターパック 『 Heroines Edition vol.2』",
       "first_detected_at": "2026-10-19T11:00:57.404010+00:00"
     },
     {
@@ -5643,5 +5637,5 @@
       "first_detected_at": "2026-10-21T09:35:57.551214+00:00"
     }
   ],
-  "updated_at": "2026-10-21T12:42:19.165978+00:00"
+  "updated_at": "2026-10-21T12:45:59.919562+00:00"
 }
