@@ -3478,7 +3478,7 @@
       ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">アプリ公式案内を確認 ↗</a>':'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>') : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
       ${lotteryTrackerActionsHtml(item)}
       ${item.app_lottery&&lpAppCanEdit(item)?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">✏️ 登録情報を編集</button></div>':''}
-      ${isDeveloper()? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
+      ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
   }
 
@@ -3755,8 +3755,10 @@
       ?'Discordログイン中：新規登録できます。公開情報は全ユーザーに共有され、応募・当選・個人メモは非公開です。'
       :'閲覧できます。新規登録と応募管理には「共有」タブからDiscordログインしてください。';
     root.innerHTML=shown.length
-      ?shown.slice(0,100).map(x=>lotteryCard(
-        lpCardOverlay(lpLegacyApply(x))||x,lotteryState(x,now))).join('')+
+      ?shown.slice(0,100).map(x=>{
+        const item=lpCardOverlay(lpLegacyApply(x))||x;
+        return lotteryCard(item,lotteryState(item,now));
+      }).join('')+
         (shown.length>100?'<p class="hint">先頭100件を表示しています。検索で絞り込んでください。</p>':'')
       :'<p class="lp-empty">条件に合うアプリ抽選はまだありません。確認できた抽選を登録して共有できます。</p>';
     const archived=$('lpAppArchived');
@@ -3787,6 +3789,8 @@
     }
     const row=id?lpAppRows.get(id):null;
     if(id&&(!row||!lpAppCanEdit(lpAppItem(row))))return;
+    // Editors opened from the main lottery list must switch to the visible form.
+    if(!$('appLotteryView').classList.contains('active'))switchTab('appLottery');
     lpAppEditing=row?.id||'';
     const form=$('lpAppForm');
     form.reset();
@@ -3852,7 +3856,7 @@
           productNorm(row.app_name)===productNorm(payload.app_name)&&
           productNorm(row.event_title)===productNorm(payload.event_title)&&
           productNorm(row.store_name||'')===productNorm(payload.store_name||'')&&
-          (row.application_end_at||'').slice(0,10)===(payload.application_end_at||'').slice(0,10));
+          lpExtDateInput(row.application_end_at)===lpExtDateInput(payload.application_end_at));
         if(same)throw Error('同じアプリ・抽選名・店舗・締切の登録があります。既存のカードを確認してください。');
       }
     }catch(error){lpAppFormMessage('⚠ '+(error.message||error));return;}
