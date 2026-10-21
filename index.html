@@ -143,6 +143,14 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
   .lp-ext-admin-row p{font-size:12px;margin:6px 0;color:var(--app-muted,#64748b);word-break:break-all}
   .lp-ext-admin-row button{flex-shrink:0}
   .lp-ext-excluded{color:#d97706}
+  .lp-ext-unchecked h4{margin:12px 0;color:var(--app-text,#172033);font-size:15px}
+  .lp-ext-fold{margin:12px 0;border:1px solid var(--app-border,#94a3b8);border-radius:11px;
+    background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033)}
+  .lp-ext-fold>summary{cursor:pointer;list-style-position:inside;padding:14px;
+    font-weight:750;color:var(--app-text,#172033);min-height:22px}
+  .lp-ext-fold-content{padding:0 10px 10px}
+  .lp-ext-fold>summary span,.lp-ext-unchecked h4 span{font-variant-numeric:tabular-nums}
+  #lpExtDialogTitle:focus{outline:none}
   .lp-external-dev-actions{margin-top:10px}
   #lpExtDialog{width:min(94vw,540px);max-width:540px;max-height:84dvh;overflow-y:auto;
     border:1px solid var(--app-border,#94a3b8);border-radius:14px;
@@ -1227,7 +1235,7 @@ nav[aria-label="メインメニュー"] {
 
   <dialog id="lpExtDialog" aria-label="外部抽選の手動編集">
     <div class="lp-ext-editor">
-      <h3>🛠 外部抽選の編集・削除</h3>
+      <h3 id="lpExtDialogTitle" tabindex="-1" autofocus>🛠 外部抽選の編集・削除</h3>
       <a id="lpExtEditingUrl" class="lp-ext-url" href="#" target="_blank"
          rel="noopener noreferrer" title="元の抽選ページを開く"></a>
       <form id="lpExtForm">
@@ -1353,7 +1361,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261021-v21_59b-external-dialog-link"></script>
+  <script src="app.js?v=20261021-v21_61-external-folded-review"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
