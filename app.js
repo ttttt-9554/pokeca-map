@@ -3543,12 +3543,13 @@
       return true;
     });
     lotterySortCards(visible, $('lpSort').value, now);
-    const pokemonCount = lotteryItems.filter(x => lotteryGenre(x) === 'pokemon').length;
-    const knownCount = lotteryItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
-    const openCount = lotteryItems.filter(x => lotteryState(x,now) === 'open').length;
-    const externalCount=lotteryItems.filter(x=>!isLivePocketEventUrl(x.url)&&!x.app_lottery).length;
-    const appCount=lotteryItems.filter(x=>x.app_lottery&&!x.app_lottery_hidden).length;
-    $('lpSummary').innerHTML = `<span>全イベント <strong>${lotteryItems.length}</strong>件</span>
+    const publicItems=lotteryItems.filter(x=>!x.app_lottery_hidden);
+    const pokemonCount = publicItems.filter(x => lotteryGenre(x) === 'pokemon').length;
+    const knownCount = publicItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
+    const openCount = publicItems.filter(x => lotteryState(x,now) === 'open').length;
+    const externalCount=publicItems.filter(x=>!isLivePocketEventUrl(x.url)&&!x.app_lottery).length;
+    const appCount=publicItems.filter(x=>x.app_lottery).length;
+    $('lpSummary').innerHTML = `<span>全イベント <strong>${publicItems.length}</strong>件</span>
       <span>外部URL <strong>${externalCount}</strong>件</span>
       <span>アプリ抽選 <strong>${appCount}</strong>件</span>
       <span>ポケカ <strong>${pokemonCount}</strong>件</span>
