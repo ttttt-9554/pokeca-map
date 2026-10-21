@@ -262,7 +262,9 @@ def main() -> None:
     previous_progress = previous.get('review_progress')
     progress_fields = ('status','source','total','ready','retry_wait',
                        'completed','expired','removed','new_pending',
-                       'quarantined','access_cooldown','next_batch_size')
+                       'quarantined','access_cooldown','next_batch_size',
+                       'unresolved','missing_title','missing_store',
+                       'missing_deadline','next_retry_at')
     unchanged_progress = (isinstance(previous_progress, dict) and
         all(payload['review_progress'].get(key) == previous_progress.get(key)
             for key in progress_fields))
