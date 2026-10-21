@@ -4428,7 +4428,9 @@
 
   function lotteryTrackItemName(url) {
     const item=lotteryItems.find(x=>x.url===url);
-    if (!item) return url;
+    // If another registrant has hidden their app event, preserve personal
+    // application history without exposing an unusable synthetic event URL.
+    if (!item) return lpAppEventId(url)?'アプリ抽選（登録者が非表示にしています）':url;
     return String(item.official_event_title || item.product_name || (item.event_title_provisional?'':item.event_title) || item.store_name || url).trim().slice(0,160);
   }
 
