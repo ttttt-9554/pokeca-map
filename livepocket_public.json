@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-21T12:00:57.360497+00:00",
-  "unique_livepocket_urls": 423,
+  "collected_at": "2026-10-21T13:05:58.440716+00:00",
+  "unique_livepocket_urls": 424,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5617,7 +5617,24 @@
         }
       ],
       "first_detected_at": "2026-10-21T09:35:57.551214+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/cn3fn",
+      "store_name": "TSUTAYA嵐山店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-21T13:00:06.244000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA嵐山店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム 「ヒロインズエディション Vol.2」",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム 「ヒロインズエディション Vol.2」",
+      "first_detected_at": "2026-10-21T13:05:59.927040+00:00"
     }
   ],
-  "updated_at": "2026-10-21T12:56:00.591085+00:00"
+  "updated_at": "2026-10-21T13:06:31.104616+00:00"
 }
