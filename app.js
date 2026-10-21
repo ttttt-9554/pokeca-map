@@ -4420,6 +4420,45 @@
     return $('lpDevDailyContent');
   }
 
+  // v21.65: current outstanding queue, independent of the previous run's 12.
+  function renderLpDevReviewProgress(progress){
+    const host=$('lpDevReviewProgress');
+    if(!host||!isDeveloper())return;
+    const names=[
+      ['ready','今すぐ再確認できるURL'],
+      ['retry_wait','再試行の待機中'],
+      ['completed','必要情報の確認完了'],
+      ['expired','応募期間終了'],
+      ['removed','ページなし確定'],
+      ['new_pending','新着・自動処理待ち'],
+      ['quarantined','異常データ等で保留']
+    ];
+    const valid=progress?.status==='ok' &&
+      progress.source==='v21_65_manual_selector' &&
+      Number.isSafeInteger(progress.total) && progress.total>=0 &&
+      names.every(([key])=>Number.isSafeInteger(progress[key])&&progress[key]>=0) &&
+      Number.isSafeInteger(progress.next_batch_size) &&
+      progress.next_batch_size>=0 && progress.next_batch_size<=12 &&
+      typeof progress.access_cooldown==='boolean' &&
+      names.reduce((total,[key])=>total+progress[key],0)===progress.total;
+    if(!valid){
+      host.innerHTML='<p class="hint">⚠ 現在の未解決件数を取得できません。GitHub Actionsでの次回集計をお待ちください。前回実行の12件とは別の表示です。</p>';
+      return;
+    }
+    const checkedAt=Number.isFinite(Date.parse(progress.as_of||''))?
+      lpDevReportDate(progress.as_of):'不明';
+    host.innerHTML='<p class="hint">GitHub Actions集計：'+escape(checkedAt)+
+      ' ／ 登録済みURL '+progress.total+'件</p>'+
+      '<div class="lp-dev-results-grid">'+names.map(([key,label])=>
+        '<div class="lp-dev-result-cell"><span>'+escape(label)+'</span><strong>'+
+        progress[key].toLocaleString('ja-JP')+'</strong></div>').join('')+
+      '<div class="lp-dev-result-cell"><span>次回の手動実行で選ぶ最大件数</span><strong>'+
+        progress.next_batch_size.toLocaleString('ja-JP')+'</strong></div></div>'+
+      (progress.access_cooldown?
+        '<p class="hint">⚠ 現在はアクセス制限の待機中です。解除まで手動再確認を起動してもページ取得されません。</p>':'')+
+      '<p class="hint">※現在の状態を示す集計です。下の「再確認の実行結果」は前回の作業履歴です。確認済みには、商品名が不要な抽選も含みます。新着は通常の自動収集で確認します。</p>';
+  }
+
   function renderLpDevDailyGrowth(daily) {
     const host = lpDevDailyPanel();
     if (!host) return;
@@ -4603,6 +4642,7 @@
       if (response.status === 404) {
         state.textContent = '結果ファイルはまだありません。GitHub Actionsの実行完了後に再度更新してください。';
         renderLpDevDailyGrowth(null);
+        renderLpDevReviewProgress(null);
         output.replaceChildren();
         return;
       }
@@ -4610,6 +4650,7 @@
       const result = await response.json();
       if (!result || result.schema_version !== 1) throw new Error('結果データの形式が異なります');
       renderLpDevDailyGrowth(result.daily_additions);
+      renderLpDevReviewProgress(result.review_progress);
       const lastManual = result.last_manual;
       if (lastManual?.run_id) lpDevLastSeenManualRun = String(lastManual.run_id);
       const signature = [
@@ -4617,7 +4658,8 @@
         lastManual?.completed_process_at || '',
         result.last_run?.run_id || '',
         result.last_run?.completed_process_at || '',
-        result.daily_additions?.as_of || ''
+        result.daily_additions?.as_of || '',
+        result.review_progress?.as_of || ''
       ].join('|');
       lpDevResultSignature = signature;
 
