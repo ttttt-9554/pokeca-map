@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39605003827",
-    "run_number": "603",
-    "completed_process_at": "2026-10-21T13:06:36Z",
+    "run_id": "39621933743",
+    "run_number": "615",
+    "completed_process_at": "2026-10-21T15:01:01Z",
     "mode": "automatic",
     "stats": {
-      "new_attempted": 1,
-      "new_titles_added": 1,
+      "new_attempted": 0,
+      "new_titles_added": 0,
       "new_products_added": 0,
       "new_stores_added": 0,
       "retry_attempted": 0,
@@ -35,21 +35,21 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 1,
+      "official_genres_confirmed": 0,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
       "manual_verified_title_conflicts": 0
     },
     "updates": {
-      "title_updated": 1,
+      "title_updated": 0,
       "product_updated": 0,
       "deadline_updated": 0,
       "store_updated": 270,
-      "genre_updated": 12,
+      "genre_updated": 11,
       "new_urls": 0
     },
-    "page_check_attempts": 1,
+    "page_check_attempts": 0,
     "manual_page_check_attempts": 0
   },
   "last_manual": {
@@ -141,20 +141,20 @@
     "manual_page_check_attempts": 9
   },
   "daily_additions": {
-    "date_jst": "2026-10-21",
-    "today": 11,
-    "yesterday": 13,
+    "date_jst": "2026-10-22",
+    "today": 0,
+    "yesterday": 11,
     "last_7_days": 93,
     "registered_total": 424,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-21T13:06:36Z",
+    "as_of": "2026-10-21T15:01:01Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 0,
     "retry_wait": 21,
-    "completed": 47,
-    "expired": 351,
+    "completed": 45,
+    "expired": 353,
     "removed": 2,
     "new_pending": 0,
     "quarantined": 3,
@@ -168,6 +168,6 @@
     "next_batch_size": 0,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-21T13:06:37Z"
+    "as_of": "2026-10-21T15:01:02Z"
   }
 }
