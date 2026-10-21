@@ -4280,6 +4280,7 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_event_title": "【葉鹿店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-17T21:12:20.431784+00:00"
     },
     {
@@ -4437,6 +4438,7 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_event_title": "【足利助戸店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
@@ -4468,6 +4470,7 @@
           "prefecture": "東京都"
         }
       ],
+      "official_event_title": "【キントレ竹の塚店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
@@ -4500,6 +4503,7 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_event_title": "【幸手店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
@@ -4541,6 +4545,7 @@
           "prefecture": "群馬県"
         }
       ],
+      "official_event_title": "【倉賀野店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-19T00:15:57.253175+00:00"
     },
     {
@@ -4646,6 +4651,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "yugioh",
+      "official_event_title": "遊戯王OCG 「ORIGINAL ARTWORK COLLECTION」抽選受付",
       "first_detected_at": "2026-10-19T02:00:55.901745+00:00"
     },
     {
@@ -4683,6 +4690,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ １ＢＯＸ",
       "first_detected_at": "2026-10-19T02:35:56.483498+00:00"
     },
     {
@@ -4815,6 +4824,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-10-19T05:05:57.810321+00:00"
     },
     {
@@ -4927,6 +4938,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場前橋吉岡店】ポケカ抽選販売 ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION １ＢＯＸ",
       "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
@@ -5354,6 +5367,7 @@
           "prefecture": "群馬県"
         }
       ],
+      "official_event_title": "【新井店】『Heroines Edition vol.2』抽選予約",
       "first_detected_at": "2026-10-20T07:00:43.055771+00:00"
     },
     {
@@ -5545,24 +5559,22 @@
       "url": "https://livepocket.jp/e/bz6gm",
       "store_name": "ふるいちイオンモール船橋店",
       "prefecture": "千葉県",
+      "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_start_at": "2026-10-21T10:00:00+09:00",
+      "application_end_at": "2026-10-21T21:00:00+09:00",
       "discord_posted_at": "2026-10-21T08:00:06.009000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール船橋店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（ストームエメラルダ）",
-      "application_end_at": "2026-10-21T21:00:00+09:00",
-      "application_start_at": "2026-10-21T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール船橋店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-21T08:05:58.542292+00:00"
     }
   ],
-  "updated_at": "2026-10-21T08:06:24.868686+00:00"
+  "updated_at": "2026-10-21T08:08:08.275395+00:00"
 }
