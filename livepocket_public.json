@@ -5435,25 +5435,23 @@
       "url": "https://livepocket.jp/e/blr50",
       "store_name": "TSUTAYA籠原店",
       "prefecture": "埼玉県",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION",
+      "event_title": "再入荷『ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」』 抽選販売受付",
+      "application_start_at": "2026-10-21T09:00:00+09:00",
+      "application_end_at": "2026-10-22T21:30:00+09:00",
       "discord_posted_at": "2026-10-21T01:30:07.914000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA籠原店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "再入荷『ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」』 抽選販売受付",
-      "application_end_at": "2026-10-22T21:30:00+09:00",
-      "application_start_at": "2026-10-21T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION",
-      "official_genre": "pokemon",
-      "official_event_title": "再入荷『ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」』 抽選販売受付",
+      "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-10-21T01:35:56.167152+00:00"
     }
   ],
-  "updated_at": "2026-10-21T01:36:26.393146+00:00"
+  "updated_at": "2026-10-21T01:45:59.706796+00:00"
 }
