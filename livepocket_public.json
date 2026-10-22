@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-22T12:00:56.471159+00:00",
-  "unique_livepocket_urls": 431,
+  "collected_at": "2026-10-22T15:05:58.418590+00:00",
+  "unique_livepocket_urls": 432,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5754,7 +5754,29 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-22T10:00:57.486466+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/qarxc",
+      "store_name": "古本市場川口伊刈店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-22T15:00:18.086000+00:00",
+      "stores": [
+        {
+          "name": "古本市場川口伊刈店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
+      "application_start_at": "2026-10-22T15:20:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
+      "first_detected_at": "2026-10-22T15:06:01.070513+00:00"
     }
   ],
-  "updated_at": "2026-10-22T14:55:59.125973+00:00"
+  "updated_at": "2026-10-22T15:16:42.318282+00:00"
 }

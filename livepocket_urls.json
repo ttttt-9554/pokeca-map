@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-22T12:00:56.471159+00:00",
+  "collected_at": "2026-10-22T15:05:58.418590+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 431,
+  "unique_livepocket_urls": 432,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11212,33 +11212,63 @@
       "event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATIONカードセット 9種セット)",
       "application_end_at": "2026-10-24T21:00:00+09:00",
       "application_start_at": "2026-10-22T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/qarxc",
+      "discord_message_id": "1562843044741390337",
+      "discord_posted_at": "2026-10-22T15:00:18.086000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n🔁 再通知\n📍千葉県\n古本市場松戸店\n受付終了: 10/24 23:59（残り1日23時間）\nhttps://livepocket.jp/e/8gql1\n\n🔁 再通知\n📍千葉県\n蔦屋書店茂原店 トレカコーナー\n受付終了: 10/24 22:00（残り1日21時間）\nhttps://livepocket.jp/e/dyl5v\n\n🔁 再通知\n📍千葉県\nTSUTAYA流山おおたかの森駅前店\n受付終了: 10/24 21:00（残り1日20時間）\nhttps://livepocket.jp/e/moz5t\n\n🔁 再通知\n📍埼玉県\nふるいち ららぽーと富士見店\n受付終了: 10/24 21:00（残り1日20時間）\nhttps://livepocket.jp/e/63y9h\n\n📍埼玉県\n古本市場川口伊刈店\n受付終了: 10/24 22:00（残り1日21時間）\nhttps://livepocket.jp/e/qarxc\n\n🔁 再通知\n📍栃木県\nTSUTAYA鹿沼店\n受付終了: 10/25 22:00（残り2日21時間）\nhttps://livepocket.jp/e/0j8h9\n\n🔁 再通知\n📍栃木県\nTSUTAYA鹿沼店\n受付終了: 10/25 22:00（残り2日21時間）\nhttps://livepocket.jp/e/w4gw2\n\n🔁 再通知\n📍宮城県\nヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店\n受付終了: 10/25 23:59（残り2日23時間）\nhttps://livepocket.jp/e/hybaa",
+      "store_name": "古本市場川口伊刈店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場川口伊刈店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
+      "application_start_at": "2026-10-22T15:20:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 278,
+    "parsed": 279,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 274,
-    "prefecture": 237,
-    "event_title": 118,
+    "store_name": 275,
+    "prefecture": 238,
+    "event_title": 119,
     "event_date": 1,
     "product_name": 64,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 403,
-    "application_start_at": 403,
-    "stores_events": 277
+    "application_end_at": 404,
+    "application_start_at": 404,
+    "stores_events": 278
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562797739601825895"
+      "1551580466266644552": "1562843044741390337"
     },
     "last_run": {
-      "checked_at": "2026-10-22T12:00:56.471159+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-22T15:05:58.418590+00:00",
+      "new_urls": 1,
       "original_urls": 431,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -11342,7 +11372,8 @@
         "1562684439836893357": "2026-10-22T04:35:54.788501+00:00",
         "1562714639845032018": "2026-10-22T06:30:55.830240+00:00",
         "1562737295461843005": "2026-10-22T08:00:57.404958+00:00",
-        "1562767501304275006": "2026-10-22T10:00:56.653034+00:00"
+        "1562767501304275006": "2026-10-22T10:00:56.653034+00:00",
+        "1562843044741390337": "2026-10-22T15:05:59.330033+00:00"
       },
       "checked_search_urls": {}
     },
@@ -13078,6 +13109,10 @@
         "https://livepocket.jp/e/63y9h": {
           "checked_at": "2026-10-22T10:01:23.071196+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/qarxc": {
+          "checked_at": "2026-10-22T15:16:42.318282+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13582,6 +13617,11 @@
           "detected_at": "2026-10-22T10:00:57.486466+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-22T10:01:23.071196+00:00"
+        },
+        "https://livepocket.jp/e/qarxc": {
+          "detected_at": "2026-10-22T15:06:01.070513+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-22T15:16:42.318282+00:00"
         }
       },
       "pending_new_urls": []
@@ -17101,6 +17141,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/qarxc": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-22T15:16:42.318282+00:00",
+          "title_observed": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -18924,6 +18975,19 @@
         },
         "https://livepocket.jp/e/63y9h": {
           "checked_at": "2026-10-22T10:01:23.071196+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/qarxc": {
+          "checked_at": "2026-10-22T15:16:42.318282+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
