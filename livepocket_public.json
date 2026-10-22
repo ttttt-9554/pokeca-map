@@ -5733,6 +5733,8 @@
           "prefecture": "千葉県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム エクストラブースター「ONE PIECE Heroines Edition vol.2」",
       "first_detected_at": "2026-10-22T10:00:57.486466+00:00"
     },
     {
@@ -5753,6 +5755,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATIONカードセット 9種セット)",
       "first_detected_at": "2026-10-22T10:00:57.486466+00:00"
     },
     {
@@ -5776,5 +5780,5 @@
       "first_detected_at": "2026-10-22T15:06:01.070513+00:00"
     }
   ],
-  "updated_at": "2026-10-22T22:10:57.827290+00:00"
+  "updated_at": "2026-10-22T22:28:46.304903+00:00"
 }
