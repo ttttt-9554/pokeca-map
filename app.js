@@ -5116,6 +5116,7 @@
     if (!panel || panel.parentElement?.matches('details.dev-accordion')) return;
     const heading=panel.querySelector(':scope > h3, :scope > h4, :scope > strong');
     const title=heading?.textContent?.trim() || '管理項目';
+    heading?.classList.add('dev-accordion-original-heading');
     const fold=document.createElement('details');
     fold.className='dev-accordion';
     const summary=document.createElement('summary');
