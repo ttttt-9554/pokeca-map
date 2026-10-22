@@ -5759,24 +5759,22 @@
       "url": "https://livepocket.jp/e/qarxc",
       "store_name": "古本市場川口伊刈店",
       "prefecture": "埼玉県",
+      "event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
+      "application_start_at": "2026-10-22T15:20:00+09:00",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
       "discord_posted_at": "2026-10-22T15:00:18.086000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場川口伊刈店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
-      "application_end_at": "2026-10-24T22:00:00+09:00",
-      "application_start_at": "2026-10-22T15:20:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-22T15:06:01.070513+00:00"
     }
   ],
-  "updated_at": "2026-10-22T15:16:42.318282+00:00"
+  "updated_at": "2026-10-22T15:20:59.241129+00:00"
 }
