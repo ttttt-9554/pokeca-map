@@ -1948,6 +1948,53 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     return raw, public, review, deadlines, sources, content, stats
 
 
+def ticket_tab_needs_check(body):
+    """Check the same event's ticket tab whenever its sign-up dates are incomplete.
+
+    v21.69 only opened this tab when store options were missing. That misses
+    real deadlines whenever a store is already visible on the overview tab.
+    No browsing beyond the already verified exact LivePocket event URL.
+    """
+    if not isinstance(body, str) or '受付・チケット情報' not in body:
+        return False
+    start, end = v14.v13.extract_deadline(body)
+    return not start or not end or not v19.ticket_option_stores(body)
+
+
+def combine_ticket_tab_text(original, additional):
+    """Keep explicit ticket-tab signup evidence without guessing event dates.
+
+    In particular, do not discard a valid deadline simply because the ticket
+    tab does not repeat the store name. Existing user card overrides remain
+    entirely separate from this public-page collector.
+    """
+    if (not isinstance(original, str) or not isinstance(additional, str)
+            or not additional.strip() or additional == original):
+        return original
+    start, end = v14.v13.extract_deadline(additional)
+    has_stores = bool(v19.ticket_option_stores(additional))
+    if not (end or has_stores):
+        return original
+    # The original page can be long; ensure a verified ticket deadline isn't
+    # truncated by the 30k-character output limit. Preserve the original lead.
+    if len(original) + 1 + len(additional) <= 30000:
+        return original + '\n' + additional
+    if end:
+        # A short exact-label excerpt is sufficient for the strict date parser.
+        # It contains the label and complete dates, not unrelated event dates.
+        labels = list(v14.v13.LABEL.finditer(additional))
+        snippets = []
+        for m in labels[:20]:
+            snippet = additional[m.start():m.start()+260]
+            if v14.v13.extract_deadline(snippet)[1]:
+                snippets.append(snippet)
+        compact = '\n'.join(dict.fromkeys(snippets))
+        if compact:
+            return original[:max(0, 29999-len(compact))] + '\n' + compact
+    remaining = max(0, 29999-len(original))
+    return original[:30000] + ('\n' + additional[:remaining] if remaining else '')
+
+
 def browser_fetcher():
     """Preserve v20 same-URL browser behavior; also read structured event titles.
 
@@ -2073,7 +2120,7 @@ def browser_fetcher():
                     dom_title_candidates = page.evaluate(DOM_EVENT_HEADING_JS, prefixes)
             except Exception:
                 dom_title_candidates = []
-            if '受付・チケット情報' in body and not v19.ticket_option_stores(body):
+            if ticket_tab_needs_check(body):
                 try:
                     tab = page.get_by_text('受付・チケット情報', exact=True).first
                     tab.click(timeout=1500)
@@ -2081,9 +2128,10 @@ def browser_fetcher():
                     if v12.exact_event_url(page.url) != url:
                         return {'status': 'browser_redirected'}
                     additional = page.locator('body').inner_text(timeout=4000)
-                    if v19.ticket_option_stores(additional) and additional != body:
-                        body += '\n' + additional
+                    body = combine_ticket_tab_text(body, additional)
                 except Exception:
+                    # The verified overview page is still useful if the tab
+                    # cannot be opened in a normal browser visit.
                     pass
             return {'status': 'ok', 'final_url': page.url,
                     'text': body[:30000], 'titles': titles,
