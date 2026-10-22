@@ -13052,7 +13052,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/hybaa": {
-          "checked_at": "2026-10-22T08:11:25.540610+00:00",
+          "checked_at": "2026-10-22T14:16:27.307504+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/w4gw2": {
@@ -13551,7 +13551,7 @@
         "https://livepocket.jp/e/hybaa": {
           "detected_at": "2026-10-22T02:05:56.531883+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-22T08:11:25.540610+00:00"
+          "checked_at": "2026-10-22T14:16:27.307504+00:00"
         },
         "https://livepocket.jp/e/0j8h9": {
           "detected_at": "2026-10-22T04:35:55.446313+00:00",
@@ -14009,8 +14009,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/hybaa": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-22T08:11:25.540610+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-22T14:16:27.307504+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/w4gw2": {
@@ -17029,7 +17029,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-22T08:11:25.540610+00:00",
+          "checked_at": "2026-10-22T14:16:27.307504+00:00",
           "title_observed": "ONE PIECEカード EXブースター Heroines Edition vol.2",
           "genre": "",
           "product_origin": "",
@@ -18845,7 +18845,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/hybaa": {
-          "checked_at": "2026-10-22T08:11:25.540610+00:00",
+          "checked_at": "2026-10-22T14:16:27.307504+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
