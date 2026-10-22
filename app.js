@@ -3801,15 +3801,12 @@
   }
 
 
-  // v21.72: One form, moved between the new-registration inline panel and
-  // an actual modal dialog for edits. Never duplicate input IDs or handlers.
+  // v21.73: New registration and editing share one always-modal form.
+  // Keep the form in the dialog at all times; never render it under the new button.
   function lpAppRestoreForm(){
-    const section=$('lpAppFormFold'),host=$('lpAppNewHost'),dialog=$('lpAppDialog');
-    if(section&&host&&section.parentElement!==host)host.appendChild(section);
+    const section=$('lpAppFormFold'),dialog=$('lpAppDialog');
     if(section)section.hidden=true;
     if(dialog?.open)dialog.close();
-    $('lpAppNew')?.setAttribute('aria-expanded','false');
-    $('lpAppNew')?.removeAttribute('aria-pressed');
   }
   function lpAppCloseEditor(force=false){
     if(lpAppBusy&&force!==true)return;
@@ -3820,24 +3817,15 @@
     lpAppRestoreForm();
   }
   function lpAppShowEditor(isExisting){
-    const section=$('lpAppFormFold'),button=$('lpAppNew'),dialog=$('lpAppDialog');
-    if(!section||!button||!dialog)return false;
-    if(isExisting){
-      $('lpAppDialogBody').appendChild(section);
-      section.hidden=false;
-      button.setAttribute('aria-expanded','false');
-      // Focus a heading, not an input, so iOS does not open the keyboard.
-      const title=$('lpAppFormHeading');
-      title?.setAttribute('autofocus','');
-      if(!dialog.open)dialog.showModal();
-      try{title?.focus({preventScroll:true});}catch(_){title?.focus();}
-    }else{
-      lpAppRestoreForm();
-      section.hidden=false;
-      button.setAttribute('aria-expanded','true');
-      try{$('lpAppFormHeading')?.focus({preventScroll:true});}catch(_){}
-      section.scrollIntoView({block:'nearest',behavior:'smooth'});
-    }
+    const section=$('lpAppFormFold'),dialog=$('lpAppDialog');
+    if(!section||!dialog||typeof dialog.showModal!=='function')return false;
+    section.hidden=false;
+    // Open above the page scroll in both registration and edit modes.
+    if(!dialog.open)dialog.showModal();
+    dialog.scrollTop=0;
+    const heading=$('lpAppFormHeading');
+    // Focusing the heading does not trigger the iPhone software keyboard.
+    try{heading?.focus({preventScroll:true});}catch(_){heading?.focus();}
     return true;
   }
   function lpAppFormMessage(message){
@@ -3845,12 +3833,7 @@
     if(target)target.textContent=message;
   }
   async function lpAppPrepare(id=''){
-    // The large "登録" button is also the close control while a blank form is open.
-    if(!id&&!lpAppEditing&&!$('lpAppFormFold')?.hidden&&
-       $('lpAppFormFold')?.parentElement===$('lpAppNewHost')){
-      lpAppCloseEditor();
-      return;
-    }
+    if(lpAppBusy)return;
     if(!authUser||!supabaseClient){
       alert('アプリ抽選の登録にはDiscordログインが必要です。「共有」タブからログインしてください。');
       switchTab('group');return;
