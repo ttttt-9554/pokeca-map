@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-22T03:05:57.254537+00:00",
-  "unique_livepocket_urls": 425,
+  "collected_at": "2026-10-22T04:35:54.176104+00:00",
+  "unique_livepocket_urls": 427,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5649,7 +5649,41 @@
         }
       ],
       "first_detected_at": "2026-10-22T02:05:56.531883+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/0j8h9",
+      "store_name": "TSUTAYA鹿沼店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-22T04:30:03.730000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鹿沼店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "【再抽選】遊戯王『ORIGINAL ARTWORK COLLECTION』",
+      "review_category": "yugioh",
+      "official_genre": "yugioh",
+      "official_event_title": "【再抽選】遊戯王『ORIGINAL ARTWORK COLLECTION』",
+      "first_detected_at": "2026-10-22T04:35:55.446313+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/w4gw2",
+      "store_name": "TSUTAYA鹿沼店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-22T04:30:03.730000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鹿沼店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム「エクストラブースターヒロインズエディションVol２",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム「エクストラブースターヒロインズエディションVol２",
+      "first_detected_at": "2026-10-22T04:35:55.446313+00:00"
     }
   ],
-  "updated_at": "2026-10-22T04:25:58.302354+00:00"
+  "updated_at": "2026-10-22T04:36:16.430857+00:00"
 }
