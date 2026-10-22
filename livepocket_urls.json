@@ -13064,8 +13064,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8gql1": {
-          "checked_at": "2026-10-22T06:31:30.059048+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-22T12:50:07.489752+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/dyl5v": {
           "checked_at": "2026-10-22T08:01:26.487012+00:00",
@@ -13565,8 +13565,8 @@
         },
         "https://livepocket.jp/e/8gql1": {
           "detected_at": "2026-10-22T06:30:56.591431+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-22T06:31:30.059048+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-22T12:50:07.489752+00:00"
         },
         "https://livepocket.jp/e/dyl5v": {
           "detected_at": "2026-10-22T08:00:58.302133+00:00",
@@ -14021,6 +14021,11 @@
         "https://livepocket.jp/e/0j8h9": {
           "attempts": 1,
           "last_attempt_at": "2026-10-22T10:42:41.138772+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/8gql1": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-22T12:50:07.489752+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -17057,7 +17062,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-22T06:31:30.059048+00:00",
+          "checked_at": "2026-10-22T12:50:07.489752+00:00",
           "title_observed": "【古本市場松戸店】ポケカ抽選販売 (ストームエメラルダ)",
           "genre": "pokemon",
           "product_origin": "",
@@ -18879,7 +18884,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/8gql1": {
-          "checked_at": "2026-10-22T06:31:30.059048+00:00",
+          "checked_at": "2026-10-22T12:50:07.489752+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
