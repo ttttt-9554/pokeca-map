@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "39734398791",
-    "run_number": "712",
-    "completed_process_at": "2026-10-22T06:31:34Z",
+    "run_id": "39744588880",
+    "run_number": "721",
+    "completed_process_at": "2026-10-22T08:01:32Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 1,
@@ -14,8 +14,8 @@
       "retry_new_fields": 0,
       "retry_blocked": 0,
       "historical_attempted": 0,
-      "registered_urls": 428,
-      "deadlines_known": 400,
+      "registered_urls": 429,
+      "deadlines_known": 401,
       "store_lists_added": 0,
       "multi_store_urls": 15,
       "stores_from_pages": 0,
@@ -25,7 +25,7 @@
       "verified_prefectures_added": 0,
       "deadline_missing": 28,
       "map_matches": 68,
-      "map_conflicts_skipped": 55,
+      "map_conflicts_skipped": 56,
       "title_recheck_attempted": 0,
       "title_recheck_titles_added": 0,
       "title_recheck_products_added": 0,
@@ -34,7 +34,7 @@
       "official_title_planned": 0,
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
-      "official_products_added": 0,
+      "official_products_added": 1,
       "official_genres_confirmed": 1,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
@@ -43,9 +43,9 @@
     },
     "updates": {
       "title_updated": 1,
-      "product_updated": 0,
+      "product_updated": 1,
       "deadline_updated": 1,
-      "store_updated": 274,
+      "store_updated": 275,
       "genre_updated": 12,
       "new_urls": 0
     },
@@ -142,23 +142,23 @@
   },
   "daily_additions": {
     "date_jst": "2026-10-22",
-    "today": 4,
+    "today": 5,
     "yesterday": 11,
-    "last_7_days": 97,
-    "registered_total": 428,
+    "last_7_days": 98,
+    "registered_total": 429,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-22T06:31:34Z",
+    "as_of": "2026-10-22T08:01:32Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 0,
     "retry_wait": 23,
-    "completed": 47,
+    "completed": 48,
     "expired": 353,
     "removed": 2,
     "new_pending": 0,
     "quarantined": 3,
-    "total": 428,
+    "total": 429,
     "unresolved": 23,
     "missing_title": 0,
     "missing_store": 0,
@@ -168,6 +168,6 @@
     "next_batch_size": 0,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-22T06:31:36Z"
+    "as_of": "2026-10-22T08:01:33Z"
   }
 }
