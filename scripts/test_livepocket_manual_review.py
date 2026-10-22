@@ -190,5 +190,60 @@ class CandidateTests(unittest.TestCase):
         cloud.read_manual_completed.cache_clear()
 
 
+class TicketTabDeadlineTests(unittest.TestCase):
+    """Regression: single-event ticket-tab signup dates are not lost."""
+
+    def test_missing_date_opens_ticket_tab_even_if_store_is_visible(self):
+        overview = (
+            "概要 詳細 受付・チケット情報 お問い合わせ\n"
+            "対象店舗 TSUTAYA鹿沼店\n"
+            "チケット内容のご案内"
+        )
+        self.assertTrue(v21.ticket_tab_needs_check(overview))
+
+    def test_explicit_ticket_tab_deadline_survives_without_store_cards(self):
+        overview = "概要 詳細 受付・チケット情報 お問い合わせ\nTSUTAYA鹿沼店"
+        ticket_tab = (
+            "受付・チケット情報\n"
+            "抽選受付期間 2026年10月22日 09:00 ～ "
+            "2026年10月25日 22:03\n"
+            "抽選結果は別途ご案内"
+        )
+        self.assertTrue(v21.ticket_tab_needs_check(overview))
+        combined = v21.combine_ticket_tab_text(overview, ticket_tab)
+        self.assertIn("2026年10月25日", combined)
+        start, end = v21.v14.v13.extract_deadline(combined)
+        self.assertEqual(v21.v11.iso(start), "2026-10-22T09:00:00+09:00")
+        self.assertEqual(v21.v11.iso(end), "2026-10-25T22:03:00+09:00")
+
+    def test_unrelated_event_date_never_becomes_application_deadline(self):
+        overview = "概要 受付・チケット情報 お問い合わせ"
+        ticket_tab = "受付・チケット情報\n開催日時 2026年10月30日 19:00"
+        self.assertEqual(v21.combine_ticket_tab_text(overview, ticket_tab), overview)
+
+    def test_conflicting_signup_deadlines_are_not_guessed(self):
+        overview = "概要 受付・チケット情報 お問い合わせ"
+        ticket_tab = (
+            "受付・チケット情報\n"
+            "応募期間 2026年10月22日 09:00 ～ 2026年10月25日 22:03\n"
+            "応募期間 2026年10月22日 09:00 ～ 2026年10月26日 22:03"
+        )
+        self.assertEqual(v21.combine_ticket_tab_text(overview, ticket_tab), overview)
+
+    def test_long_overview_keeps_official_deadline_from_ticket_tab(self):
+        overview = "概要 詳細 受付・チケット情報\n" + "ご利用案内。"*3200
+        ticket_tab = (
+            "受付・チケット情報\n"
+            "抽選受付期間 2026年10月22日 09:00 ～ "
+            "2026年10月25日 22:03"
+        )
+        combined = v21.combine_ticket_tab_text(overview, ticket_tab)
+        self.assertLessEqual(len(combined), 30000)
+        self.assertEqual(
+            v21.v11.iso(v21.v14.v13.extract_deadline(combined)[1]),
+            "2026-10-25T22:03:00+09:00"
+        )
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
