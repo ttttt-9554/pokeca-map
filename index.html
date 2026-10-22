@@ -1272,7 +1272,7 @@ nav[aria-label="メインメニュー"] {
   <!-- v21.73: the single form always lives in a modal for new and existing entries. -->
   <dialog id="lpAppDialog" aria-labelledby="lpAppFormHeading" aria-modal="true">
     <section id="lpAppFormFold" class="lp-app-form-fold" hidden>
-            <h3 id="lpAppFormHeading" tabindex="-1">アプリ抽選を新しく登録</h3>
+            <h3 id="lpAppFormHeading" tabindex="-1" autofocus>アプリ抽選を新しく登録</h3>
             <form id="lpAppForm" autocomplete="off">
               <label>アプリ名（必須）
                 <input type="text" name="app_name" maxlength="100" minlength="2" required placeholder="例：○○ショップ公式アプリ">
@@ -1520,7 +1520,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261022-v21_73-app-new-popup"></script>
+  <script src="app.js?v=20261022-v21_73b-app-new-popup"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
