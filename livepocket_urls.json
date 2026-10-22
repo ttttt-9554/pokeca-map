@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-22T09:00:56.512324+00:00",
+  "collected_at": "2026-10-22T10:00:55.902557+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 429,
+  "unique_livepocket_urls": 431,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11152,33 +11152,93 @@
       "event_title": "蔦屋書店茂原店ワンピースカードゲーム 「エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】」抽選販売",
       "application_end_at": "2026-10-24T22:00:00+09:00",
       "application_start_at": "2026-10-21T15:06:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/moz5t",
+      "discord_message_id": "1562767501304275006",
+      "discord_posted_at": "2026-10-22T10:00:07.127000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA流山おおたかの森駅前店\n受付終了: 10/24 21:00（残り2日1時間）\nhttps://livepocket.jp/e/moz5t\n\n📍埼玉県\nふるいち ららぽーと富士見店\n受付終了: 10/24 21:00（残り2日1時間）\nhttps://livepocket.jp/e/63y9h",
+      "store_name": "TSUTAYA流山おおたかの森駅前店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA流山おおたかの森駅前店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ワンピースカードゲーム エクストラブースター「ONE PIECE Heroines Edition vol.2」",
+      "application_end_at": "2026-10-24T21:00:00+09:00",
+      "application_start_at": "2026-10-22T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/63y9h",
+      "discord_message_id": "1562767501304275006",
+      "discord_posted_at": "2026-10-22T10:00:07.127000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA流山おおたかの森駅前店\n受付終了: 10/24 21:00（残り2日1時間）\nhttps://livepocket.jp/e/moz5t\n\n📍埼玉県\nふるいち ららぽーと富士見店\n受付終了: 10/24 21:00（残り2日1時間）\nhttps://livepocket.jp/e/63y9h",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいち ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATIONカードセット 9種セット)",
+      "application_end_at": "2026-10-24T21:00:00+09:00",
+      "application_start_at": "2026-10-22T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 276,
+    "parsed": 278,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 272,
-    "prefecture": 235,
-    "event_title": 116,
+    "store_name": 274,
+    "prefecture": 237,
+    "event_title": 118,
     "event_date": 1,
     "product_name": 64,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 401,
-    "application_start_at": 401,
-    "stores_events": 275
+    "application_end_at": 403,
+    "application_start_at": 403,
+    "stores_events": 277
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562752429500530712"
+      "1551580466266644552": "1562767501304275006"
     },
     "last_run": {
-      "checked_at": "2026-10-22T09:00:56.512324+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-22T10:00:55.902557+00:00",
+      "new_urls": 2,
       "original_urls": 429,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -11281,7 +11341,8 @@
         "1562646719240609882": "2026-10-22T02:05:55.735486+00:00",
         "1562684439836893357": "2026-10-22T04:35:54.788501+00:00",
         "1562714639845032018": "2026-10-22T06:30:55.830240+00:00",
-        "1562737295461843005": "2026-10-22T08:00:57.404958+00:00"
+        "1562737295461843005": "2026-10-22T08:00:57.404958+00:00",
+        "1562767501304275006": "2026-10-22T10:00:56.653034+00:00"
       },
       "checked_search_urls": {}
     },
@@ -13009,6 +13070,14 @@
         "https://livepocket.jp/e/dyl5v": {
           "checked_at": "2026-10-22T08:01:26.487012+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/moz5t": {
+          "checked_at": "2026-10-22T10:01:23.071196+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/63y9h": {
+          "checked_at": "2026-10-22T10:01:23.071196+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13503,6 +13572,16 @@
           "detected_at": "2026-10-22T08:00:58.302133+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-22T08:01:26.487012+00:00"
+        },
+        "https://livepocket.jp/e/63y9h": {
+          "detected_at": "2026-10-22T10:00:57.486466+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-22T10:01:23.071196+00:00"
+        },
+        "https://livepocket.jp/e/moz5t": {
+          "detected_at": "2026-10-22T10:00:57.486466+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-22T10:01:23.071196+00:00"
         }
       },
       "pending_new_urls": []
@@ -16985,6 +17064,28 @@
           "product_origin": "v21_9_official_title_quoted_tcg_product",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/moz5t": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-22T10:01:23.071196+00:00",
+          "title_observed": "ワンピースカードゲーム エクストラブースター「ONE PIECE Heroines Edition vol.2」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/63y9h": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-22T10:01:23.071196+00:00",
+          "title_observed": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATIONカードセット 9種セット)",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -18782,6 +18883,32 @@
         },
         "https://livepocket.jp/e/dyl5v": {
           "checked_at": "2026-10-22T08:01:26.487012+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/moz5t": {
+          "checked_at": "2026-10-22T10:01:23.071196+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/63y9h": {
+          "checked_at": "2026-10-22T10:01:23.071196+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
