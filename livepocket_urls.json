@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-21T15:00:58.558054+00:00",
+  "collected_at": "2026-10-22T02:05:55.037099+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 424,
+  "unique_livepocket_urls": 425,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11009,33 +11009,63 @@
         "event_title": "v14_livepocket_page_title"
       },
       "event_title": "ワンピースカードゲーム 「ヒロインズエディション Vol.2」"
+    },
+    {
+      "url": "https://livepocket.jp/e/hybaa",
+      "discord_message_id": "1562646719240609882",
+      "discord_posted_at": "2026-10-22T02:00:10.439000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍宮城県\nヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店\n受付終了: 10/25 23:59（残り3日12時間）\nhttps://livepocket.jp/e/hybaa",
+      "store_name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ONE PIECEカード EXブースター Heroines Edition vol.2",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-22T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 271,
+    "parsed": 272,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 267,
-    "prefecture": 230,
-    "event_title": 111,
+    "store_name": 268,
+    "prefecture": 231,
+    "event_title": 112,
     "event_date": 1,
     "product_name": 63,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 398,
-    "application_start_at": 398,
-    "stores_events": 270
+    "application_end_at": 399,
+    "application_start_at": 399,
+    "stores_events": 271
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562480660114051236"
+      "1551580466266644552": "1562646719240609882"
     },
     "last_run": {
-      "checked_at": "2026-10-21T15:00:58.558054+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-22T02:05:55.037099+00:00",
+      "new_urls": 1,
       "original_urls": 424,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -11134,7 +11164,8 @@
         "1562374909760372766": "2026-10-21T08:05:57.706715+00:00",
         "1562382461437083668": "2026-10-21T08:30:56.079286+00:00",
         "1562397654414004284": "2026-10-21T09:35:56.758160+00:00",
-        "1562450408218173511": "2026-10-21T13:05:59.191267+00:00"
+        "1562450408218173511": "2026-10-21T13:05:59.191267+00:00",
+        "1562646719240609882": "2026-10-22T02:05:55.735486+00:00"
       },
       "checked_search_urls": {}
     },
@@ -12842,6 +12873,10 @@
         "https://livepocket.jp/e/cn3fn": {
           "checked_at": "2026-10-22T01:26:16.430399+00:00",
           "status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/hybaa": {
+          "checked_at": "2026-10-22T02:06:21.687175+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13311,6 +13346,11 @@
           "detected_at": "2026-10-21T13:05:59.927040+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-10-22T01:26:16.430399+00:00"
+        },
+        "https://livepocket.jp/e/hybaa": {
+          "detected_at": "2026-10-22T02:05:56.531883+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-22T02:06:21.687175+00:00"
         }
       },
       "pending_new_urls": []
@@ -16733,6 +16773,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/hybaa": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-22T02:06:21.687175+00:00",
+          "title_observed": "ONE PIECEカード EXブースター Heroines Edition vol.2",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -18465,6 +18516,19 @@
         },
         "https://livepocket.jp/e/cn3fn": {
           "checked_at": "2026-10-22T01:26:16.430399+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/hybaa": {
+          "checked_at": "2026-10-22T02:06:21.687175+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
