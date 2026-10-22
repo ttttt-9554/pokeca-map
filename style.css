@@ -1392,3 +1392,75 @@ html[data-theme="dark"] #lpAppDelete{color:#fca5a5!important;border-color:#f8717
   #lpAppDialog .lp-app-form-actions button{flex:1 1 110px}
   #lpAppDialog #lpAppDelete{flex-basis:100%}
 }
+
+
+/* v21.75: Developer tool accordions. Original tools stay mounted unchanged. */
+#devView .dev-accordion{
+  display:block;
+  margin:12px 0;
+  padding:0;
+  background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:15px;
+  overflow:clip;
+}
+#devView .dev-accordion-summary{
+  display:list-item;
+  padding:18px 15px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:800;
+  line-height:1.5;
+  color:var(--app-text,#172033);
+  list-style-position:inside;
+  overflow-wrap:anywhere;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+#devView .dev-accordion-summary::marker{color:var(--app-muted,#64748b)}
+#devView .dev-accordion-summary:focus-visible{
+  outline:2px solid #3b82f6;outline-offset:-3px;border-radius:12px;
+}
+#devView .dev-accordion[open] > .dev-accordion-summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface2,#f8fafc);
+}
+#devView .dev-accordion-original-heading{display:none!important}
+#devView .dev-accordion > .dev-accordion-body{
+  margin:0!important;
+  padding:14px!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:var(--app-surface,#fff)!important;
+  color:var(--app-text,#172033)!important;
+  min-width:0;
+}
+#devView .dev-accordion > .dev-accordion-body[hidden]{display:none!important}
+#devView #devFoldAll{min-height:38px;padding:8px 12px;font-weight:700;
+  font-size:13px;margin:5px 0 8px;
+  background:var(--app-surface2,#f1f5f9);
+  border:1px solid var(--app-border,#cbd5e1);
+  color:var(--app-text,#172033);border-radius:10px}
+html[data-theme="dark"] #devView .dev-accordion{
+  background:#172337!important;color:#eef4ff!important;
+  border-color:#526681!important;
+}
+html[data-theme="dark"] #devView .dev-accordion-summary{
+  color:#eef4ff!important;
+}
+html[data-theme="dark"] #devView .dev-accordion[open] > .dev-accordion-summary{
+  background:#203149!important;border-bottom-color:#526681!important;
+}
+html[data-theme="dark"] #devView .dev-accordion > .dev-accordion-body{
+  background:#172337!important;color:#eef4ff!important;
+}
+html[data-theme="dark"] #devView #devFoldAll{
+  background:#203149!important;color:#eef4ff!important;
+  border-color:#7085a2!important;
+}
+@media(max-width:440px){
+  #devView .dev-accordion-summary{padding:17px 13px;font-size:15px}
+  #devView .dev-accordion > .dev-accordion-body{padding:12px!important}
+}
