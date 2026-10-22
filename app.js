@@ -5109,6 +5109,39 @@
     }).format(date) : '不明';
   }
 
+  // v21.75: Organize developer tools into native, accessible accordions.
+  // Move each existing panel WITHOUT cloning so element IDs, listeners,
+  // Supabase saves and refresh buttons keep working.
+  function devWrapPanel(panel) {
+    if (!panel || panel.parentElement?.matches('details.dev-accordion')) return;
+    const heading=panel.querySelector(':scope > h3, :scope > h4, :scope > strong');
+    const title=heading?.textContent?.trim() || '管理項目';
+    const fold=document.createElement('details');
+    fold.className='dev-accordion';
+    const summary=document.createElement('summary');
+    summary.className='dev-accordion-summary';
+    summary.textContent=title;
+    fold.appendChild(summary);
+    panel.before(fold);
+    fold.appendChild(panel);
+    panel.classList.add('dev-accordion-body');
+    // Intentionally omit the open attribute: default is compact/closed.
+  }
+
+  function initDevAccordions(){
+    const view=$('devView');
+    if(!view)return;
+    for(const panel of [...view.querySelectorAll(':scope > .store-tools')]){
+      devWrapPanel(panel);
+    }
+    // The page-unavailable controls live inside the title-correction panel;
+    // keep their own second-level fold rather than expanding all at once.
+    devWrapPanel($('lpMissingPanel'));
+    $('devFoldAll')?.addEventListener('click',()=>{
+      for(const fold of view.querySelectorAll('details.dev-accordion')) fold.open=false;
+    });
+  }
+
   function lpDevNumeric(stats, key) {
     const value = stats?.[key];
     return Number.isSafeInteger(value) && value >= 0 ? value : 0;
@@ -5121,13 +5154,15 @@
     if (!isDeveloper()) return null;
     let host = $('lpDevDailyPanel');
     if (!host) {
-      const before = $('lpDevRecheckPanel');
+      const panel = $('lpDevRecheckPanel');
+      const before = panel?.closest('details.dev-accordion') || panel;
       if (!before) return null;
       host = document.createElement('div');
       host.id = 'lpDevDailyPanel';
       host.className = 'store-tools lp-dev-recheck';
       host.innerHTML = '<h3>📈 今日の抽選追加数</h3><div id="lpDevDailyContent" role="status" aria-live="polite"></div>';
       before.before(host);
+      devWrapPanel(host);
     }
     return $('lpDevDailyContent');
   }
@@ -6613,6 +6648,7 @@
       initFriendPresence();
       initLottery();
       bindEvents();
+      initDevAccordions();
 
       get('foundAt').value = nowLocal();
       get('cancelEdit').hidden = true;
