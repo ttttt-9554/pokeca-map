@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-22T08:00:56.684644+00:00",
+  "collected_at": "2026-10-22T09:00:56.512324+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -11174,12 +11174,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562737295461843005"
+      "1551580466266644552": "1562752429500530712"
     },
     "last_run": {
-      "checked_at": "2026-10-22T08:00:56.684644+00:00",
-      "new_urls": 1,
-      "original_urls": 428,
+      "checked_at": "2026-10-22T09:00:56.512324+00:00",
+      "new_urls": 0,
+      "original_urls": 429,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
