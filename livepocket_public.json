@@ -5663,6 +5663,8 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_genre": "yugioh",
+      "official_event_title": "【再抽選】遊戯王『ORIGINAL ARTWORK COLLECTION』",
       "first_detected_at": "2026-10-22T04:35:55.446313+00:00"
     },
     {
@@ -5678,6 +5680,8 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム「エクストラブースターヒロインズエディションVol２",
       "first_detected_at": "2026-10-22T04:35:55.446313+00:00"
     },
     {
@@ -5756,5 +5760,5 @@
       "first_detected_at": "2026-10-22T10:00:57.486466+00:00"
     }
   ],
-  "updated_at": "2026-10-22T10:33:38.532055+00:00"
+  "updated_at": "2026-10-22T10:42:41.138772+00:00"
 }
