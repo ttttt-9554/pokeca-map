@@ -11164,7 +11164,7 @@
     "prefecture": 235,
     "event_title": 116,
     "event_date": 1,
-    "product_name": 63,
+    "product_name": 64,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
@@ -12991,8 +12991,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/hybaa": {
-          "checked_at": "2026-10-22T02:06:21.687175+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-22T08:11:25.540610+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/w4gw2": {
           "checked_at": "2026-10-22T04:36:16.430857+00:00",
@@ -13481,8 +13481,8 @@
         },
         "https://livepocket.jp/e/hybaa": {
           "detected_at": "2026-10-22T02:05:56.531883+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-22T02:06:21.687175+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-22T08:11:25.540610+00:00"
         },
         "https://livepocket.jp/e/0j8h9": {
           "detected_at": "2026-10-22T04:35:55.446313+00:00",
@@ -13927,6 +13927,11 @@
         "https://livepocket.jp/e/cn3fn": {
           "attempts": 2,
           "last_attempt_at": "2026-10-22T01:26:16.430399+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/hybaa": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-22T08:11:25.540610+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -16930,7 +16935,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-22T02:06:21.687175+00:00",
+          "checked_at": "2026-10-22T08:11:25.540610+00:00",
           "title_observed": "ONE PIECEカード EXブースター Heroines Edition vol.2",
           "genre": "",
           "product_origin": "",
@@ -18724,7 +18729,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/hybaa": {
-          "checked_at": "2026-10-22T02:06:21.687175+00:00",
+          "checked_at": "2026-10-22T08:11:25.540610+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

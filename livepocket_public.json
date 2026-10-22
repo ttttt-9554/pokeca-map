@@ -5648,6 +5648,7 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_event_title": "ONE PIECEカード EXブースター Heroines Edition vol.2",
       "first_detected_at": "2026-10-22T02:05:56.531883+00:00"
     },
     {
@@ -5704,22 +5705,20 @@
       "url": "https://livepocket.jp/e/dyl5v",
       "store_name": "蔦屋書店茂原店 トレカコーナー",
       "prefecture": "千葉県",
+      "product_name": "エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
+      "event_title": "蔦屋書店茂原店ワンピースカードゲーム 「エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】」抽選販売",
+      "application_start_at": "2026-10-21T15:06:00+09:00",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
       "discord_posted_at": "2026-10-22T08:00:05.493000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "蔦屋書店茂原店 トレカコーナー",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "蔦屋書店茂原店ワンピースカードゲーム 「エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】」抽選販売",
-      "application_end_at": "2026-10-24T22:00:00+09:00",
-      "application_start_at": "2026-10-21T15:06:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
-      "official_genre": "onepiece",
-      "official_event_title": "蔦屋書店茂原店ワンピースカードゲーム 「エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】」抽選販売",
       "first_detected_at": "2026-10-22T08:00:58.302133+00:00"
     }
   ],
-  "updated_at": "2026-10-22T08:01:26.487012+00:00"
+  "updated_at": "2026-10-22T08:11:25.540610+00:00"
 }
