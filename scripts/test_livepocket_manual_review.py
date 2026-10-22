@@ -193,13 +193,24 @@ class CandidateTests(unittest.TestCase):
 class TicketTabDeadlineTests(unittest.TestCase):
     """Regression: single-event ticket-tab signup dates are not lost."""
 
-    def test_missing_date_opens_ticket_tab_even_if_store_is_visible(self):
+    def test_missing_date_opens_ticket_tab_even_with_verified_store_options(self):
         overview = (
             "概要 詳細 受付・チケット情報 お問い合わせ\n"
-            "対象店舗 TSUTAYA鹿沼店\n"
-            "チケット内容のご案内"
+            "【TSUTAYA鹿沼店】\n販売中\n"
+            "【TSUTAYA宇都宮店】\n受付中"
         )
+        self.assertTrue(v21.v19.ticket_option_stores(overview))
         self.assertTrue(v21.ticket_tab_needs_check(overview))
+
+    def test_complete_signup_period_does_not_require_another_tab_click(self):
+        overview = (
+            "受付・チケット情報\n"
+            "【TSUTAYA鹿沼店】\n販売中\n"
+            "【TSUTAYA宇都宮店】\n受付中\n"
+            "抽選受付期間 2026年10月22日 09:00 ～ "
+            "2026年10月25日 22:03"
+        )
+        self.assertFalse(v21.ticket_tab_needs_check(overview))
 
     def test_explicit_ticket_tab_deadline_survives_without_store_cards(self):
         overview = "概要 詳細 受付・チケット情報 お問い合わせ\nTSUTAYA鹿沼店"
@@ -231,7 +242,7 @@ class TicketTabDeadlineTests(unittest.TestCase):
         self.assertEqual(v21.combine_ticket_tab_text(overview, ticket_tab), overview)
 
     def test_long_overview_keeps_official_deadline_from_ticket_tab(self):
-        overview = "概要 詳細 受付・チケット情報\n" + "ご利用案内。"*3200
+        overview = "概要 詳細 受付・チケット情報\n" + "ご利用案内。"*6000
         ticket_tab = (
             "受付・チケット情報\n"
             "抽選受付期間 2026年10月22日 09:00 ～ "
