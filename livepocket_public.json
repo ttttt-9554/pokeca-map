@@ -5684,24 +5684,22 @@
       "url": "https://livepocket.jp/e/8gql1",
       "store_name": "古本市場松戸店",
       "prefecture": "千葉県",
+      "event_title": "【古本市場松戸店】ポケカ抽選販売 (ストームエメラルダ)",
+      "application_start_at": "2026-10-22T09:00:00+09:00",
+      "application_end_at": "2026-10-24T23:59:00+09:00",
       "discord_posted_at": "2026-10-22T06:30:03.973000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場松戸店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "【古本市場松戸店】ポケカ抽選販売 (ストームエメラルダ)",
-      "application_end_at": "2026-10-24T23:59:00+09:00",
-      "application_start_at": "2026-10-22T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場松戸店】ポケカ抽選販売 (ストームエメラルダ)",
       "first_detected_at": "2026-10-22T06:30:56.591431+00:00"
     }
   ],
-  "updated_at": "2026-10-22T06:31:30.059048+00:00"
+  "updated_at": "2026-10-22T06:41:01.121475+00:00"
 }
