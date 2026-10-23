@@ -13774,12 +13774,12 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/mdxh9": {
-          "checked_at": "2026-10-23T00:31:24.258907+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T06:36:36.805247+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1wqyobvsi_": {
-          "checked_at": "2026-10-23T00:31:24.258907+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T06:36:36.805247+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ygkk_": {
           "checked_at": "2026-10-23T01:01:08.387777+00:00",
@@ -14360,13 +14360,13 @@
         },
         "https://livepocket.jp/e/1wqyobvsi_": {
           "detected_at": "2026-10-23T00:30:58.021713+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T00:31:24.258907+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T06:36:36.805247+00:00"
         },
         "https://livepocket.jp/e/mdxh9": {
           "detected_at": "2026-10-23T00:30:58.021713+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T00:31:24.258907+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T06:36:36.805247+00:00"
         },
         "https://livepocket.jp/e/0rw9z": {
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
@@ -14911,6 +14911,16 @@
         "https://livepocket.jp/e/qarxc": {
           "attempts": 2,
           "last_attempt_at": "2026-10-23T03:31:22.549708+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/mdxh9": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T06:36:36.805247+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/1wqyobvsi_": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T06:36:36.805247+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18002,7 +18012,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T00:31:24.258907+00:00",
+          "checked_at": "2026-10-23T06:36:36.805247+00:00",
           "title_observed": "ヒロインズエディション EB-05",
           "genre": "",
           "product_origin": "",
@@ -18013,7 +18023,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T00:31:24.258907+00:00",
+          "checked_at": "2026-10-23T06:36:36.805247+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -20054,7 +20064,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/mdxh9": {
-          "checked_at": "2026-10-23T00:31:24.258907+00:00",
+          "checked_at": "2026-10-23T06:36:36.805247+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -20067,7 +20077,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1wqyobvsi_": {
-          "checked_at": "2026-10-23T00:31:24.258907+00:00",
+          "checked_at": "2026-10-23T06:36:36.805247+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
