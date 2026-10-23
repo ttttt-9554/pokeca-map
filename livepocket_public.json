@@ -5840,10 +5840,11 @@
       "store_name": "TSUTAYA TRADING CARD錦糸町",
       "prefecture": "東京都",
       "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
-      "application_start_at": "2026-10-22T18:50:00+09:00",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-23T01:00:06.319000+00:00",
       "review_category": "pokemon",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-22T18:50:00+09:00",
+      "detail_provenance": "user_verified_csv",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
@@ -6152,6 +6153,8 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【抽選販売】ワンピースカードゲームヒロインズエディション Vol.2【EB-05】",
       "first_detected_at": "2026-10-23T04:00:57.551385+00:00"
     },
     {
@@ -6266,5 +6269,5 @@
       "first_detected_at": "2026-10-23T09:05:59.887396+00:00"
     }
   ],
-  "updated_at": "2026-10-23T10:06:03.626207+00:00"
+  "updated_at": "2026-10-23T10:16:24.768027+00:00"
 }

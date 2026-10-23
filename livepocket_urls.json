@@ -11349,9 +11349,13 @@
       "field_sources": {
         "store_name": "v21_23_discord_exact_url_adjacent_store",
         "stores": "v21_23_discord_exact_url_adjacent_store",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v11_verified_deadline_csv",
+        "application_start_at": "v11_verified_deadline_csv"
       },
-      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付"
+      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-22T18:50:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/ygkk_",
@@ -11991,8 +11995,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 424,
-    "application_start_at": 424,
+    "application_end_at": 425,
+    "application_start_at": 425,
     "stores_events": 298
   },
   "collector_state": {
@@ -13915,8 +13919,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jfpl7": {
-          "checked_at": "2026-10-23T04:09:00.582080+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T10:16:24.768027+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/x-26x": {
           "checked_at": "2026-10-23T04:51:22.846303+00:00",
@@ -14527,8 +14531,8 @@
         },
         "https://livepocket.jp/e/jfpl7": {
           "detected_at": "2026-10-23T04:00:57.551385+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T04:09:00.582080+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T10:16:24.768027+00:00"
         },
         "https://livepocket.jp/e/bt5ty": {
           "detected_at": "2026-10-23T04:50:55.469425+00:00",
@@ -15093,6 +15097,11 @@
         "https://livepocket.jp/e/1rf7i": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T09:36:31.058077+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/jfpl7": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T10:16:24.768027+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18338,7 +18347,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T04:09:00.582080+00:00",
+          "checked_at": "2026-10-23T10:16:24.768027+00:00",
           "title_observed": "【抽選販売】ワンピースカードゲームヒロインズエディション Vol.2【EB-05】",
           "genre": "onepiece",
           "product_origin": "",
@@ -20451,7 +20460,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/jfpl7": {
-          "checked_at": "2026-10-23T04:09:00.582080+00:00",
+          "checked_at": "2026-10-23T10:16:24.768027+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
