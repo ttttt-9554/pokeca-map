@@ -153,7 +153,7 @@ grant execute on function public.lottery_settle_discord_notification(
 -- Deploy updated supabase/functions/discord-notify/index.ts BEFORE scheduling.
 -- Supabase Cron sends a signed request to the same existing Edge Function.
 -- The existing v21.49 minute-by-minute DRAIN task delivers queued notices.
-select cron.schedule('discord_livepocket_new_scan_v21_77','*/5 * * * *',$cmd$
+select cron.schedule('lottery_livepocket_scan_v21_77','*/5 * * * *',$cmd$
   select net.http_post(
     url:='https://aypcmtlaaygmiexboypk.supabase.co/functions/v1/discord-notify',
     headers:=jsonb_build_object(
@@ -162,6 +162,6 @@ select cron.schedule('discord_livepocket_new_scan_v21_77','*/5 * * * *',$cmd$
         where name='discord_notification_dispatch_key')
     ),
     body:='{"type":"LOTTERY_SCAN"}'::jsonb,
-    timeout_milliseconds:=25000
+    timeout_milliseconds:=45000
   );
 $cmd$);
