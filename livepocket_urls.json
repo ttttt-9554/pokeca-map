@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-23T03:30:55.764201+00:00",
+  "collected_at": "2026-10-23T04:00:56.047298+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 446,
+  "unique_livepocket_urls": 447,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11750,34 +11750,64 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/jfpl7",
+      "discord_message_id": "1563039291880251432",
+      "discord_posted_at": "2026-10-23T04:00:07.050000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍宮城県\nヤマト屋書店TSUTAYAあけぼの店\n受付終了: 10/25 23:59（残り2日10時間）\nhttps://livepocket.jp/e/jfpl7",
+      "store_name": "ヤマト屋書店TSUTAYAあけぼの店",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYAあけぼの店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【抽選販売】ワンピースカードゲームヒロインズエディション Vol.2【EB-05】",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-23T12:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 293,
+    "parsed": 294,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 286,
-    "prefecture": 249,
-    "event_title": 133,
+    "store_name": 287,
+    "prefecture": 250,
+    "event_title": 134,
     "event_date": 1,
     "product_name": 67,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 416,
-    "application_start_at": 416,
-    "stores_events": 292
+    "application_end_at": 417,
+    "application_start_at": 417,
+    "stores_events": 293
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563031740010995807"
+      "1551580466266644552": "1563039291880251432"
     },
     "last_run": {
-      "checked_at": "2026-10-23T03:30:55.764201+00:00",
+      "checked_at": "2026-10-23T04:00:56.047298+00:00",
       "new_urls": 1,
-      "original_urls": 445,
+      "original_urls": 446,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -11887,7 +11917,8 @@
         "1563001537352044555": "2026-10-23T01:30:56.754819+00:00",
         "1563016633310773371": "2026-10-23T02:30:55.771090+00:00",
         "1563024243263017051": "2026-10-23T03:00:58.125861+00:00",
-        "1563031740010995807": "2026-10-23T03:30:56.433387+00:00"
+        "1563031740010995807": "2026-10-23T03:30:56.433387+00:00",
+        "1563039291880251432": "2026-10-23T04:00:56.797130+00:00"
       },
       "checked_search_urls": {}
     },
@@ -13683,6 +13714,10 @@
         "https://livepocket.jp/e/1rf7i": {
           "checked_at": "2026-10-23T03:31:22.549708+00:00",
           "status": "checked_title"
+        },
+        "https://livepocket.jp/e/jfpl7": {
+          "checked_at": "2026-10-23T04:09:00.582080+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -14262,6 +14297,11 @@
           "detected_at": "2026-10-23T03:30:57.093702+00:00",
           "status": "checked_title",
           "checked_at": "2026-10-23T03:31:22.549708+00:00"
+        },
+        "https://livepocket.jp/e/jfpl7": {
+          "detected_at": "2026-10-23T04:00:57.551385+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T04:09:00.582080+00:00"
         }
       },
       "pending_new_urls": []
@@ -17961,6 +18001,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/jfpl7": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T04:09:00.582080+00:00",
+          "title_observed": "【抽選販売】ワンピースカードゲームヒロインズエディション Vol.2【EB-05】",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -19979,6 +20030,19 @@
         },
         "https://livepocket.jp/e/1rf7i": {
           "checked_at": "2026-10-23T03:31:22.549708+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/jfpl7": {
+          "checked_at": "2026-10-23T04:09:00.582080+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

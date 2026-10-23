@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T03:30:55.764201+00:00",
-  "unique_livepocket_urls": 446,
+  "collected_at": "2026-10-23T04:00:56.047298+00:00",
+  "unique_livepocket_urls": 447,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6134,7 +6134,26 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-23T03:30:57.093702+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/jfpl7",
+      "store_name": "ヤマト屋書店TSUTAYAあけぼの店",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-10-23T04:00:07.050000+00:00",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYAあけぼの店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "event_title": "【抽選販売】ワンピースカードゲームヒロインズエディション Vol.2【EB-05】",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-23T12:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【抽選販売】ワンピースカードゲームヒロインズエディション Vol.2【EB-05】",
+      "first_detected_at": "2026-10-23T04:00:57.551385+00:00"
     }
   ],
-  "updated_at": "2026-10-23T03:50:59.170335+00:00"
+  "updated_at": "2026-10-23T04:09:00.582080+00:00"
 }
