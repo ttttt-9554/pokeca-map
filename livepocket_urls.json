@@ -14306,7 +14306,7 @@
           "status": "checked_title_deadline"
         },
         "https://livepocket.jp/e/tapjp": {
-          "checked_at": "2026-10-23T12:06:24.293343+00:00",
+          "checked_at": "2026-10-23T18:37:18.558556+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/5ssjy": {
@@ -14346,8 +14346,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vj35o": {
-          "checked_at": "2026-10-23T12:36:24.641930+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T18:37:18.558556+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3v6ni": {
           "checked_at": "2026-10-23T12:46:22.569268+00:00",
@@ -14967,7 +14967,7 @@
         "https://livepocket.jp/e/tapjp": {
           "detected_at": "2026-10-23T06:05:38.114711+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T12:06:24.293343+00:00"
+          "checked_at": "2026-10-23T18:37:18.558556+00:00"
         },
         "https://livepocket.jp/e/5ssjy": {
           "detected_at": "2026-10-23T08:35:56.726942+00:00",
@@ -15016,8 +15016,8 @@
         },
         "https://livepocket.jp/e/vj35o": {
           "detected_at": "2026-10-23T12:35:58.135659+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T12:36:24.641930+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T18:37:18.558556+00:00"
         },
         "https://livepocket.jp/e/3v6ni": {
           "detected_at": "2026-10-23T12:45:58.330512+00:00",
@@ -15585,8 +15585,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/tapjp": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T12:06:24.293343+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-23T18:37:18.558556+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/mz__o": {
@@ -15627,6 +15627,11 @@
         "https://livepocket.jp/e/f6vcu": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T18:16:23.233397+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/vj35o": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T18:37:18.558556+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18916,7 +18921,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T12:06:24.293343+00:00",
+          "checked_at": "2026-10-23T18:37:18.558556+00:00",
           "title_observed": "【ふるいちトップブックス港北ミナモ店】ポケカ抽選販売(30thCELEBRATIONカードセット9種セット)",
           "genre": "pokemon",
           "product_origin": "",
@@ -19026,7 +19031,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T12:36:24.641930+00:00",
+          "checked_at": "2026-10-23T18:37:18.558556+00:00",
           "title_observed": "【ふるいちトップブックス東松山店】ポケカ抽選販売（ストームエメラルダ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -21158,7 +21163,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/tapjp": {
-          "checked_at": "2026-10-23T12:06:24.293343+00:00",
+          "checked_at": "2026-10-23T18:37:18.558556+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -21288,7 +21293,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vj35o": {
-          "checked_at": "2026-10-23T12:36:24.641930+00:00",
+          "checked_at": "2026-10-23T18:37:18.558556+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
