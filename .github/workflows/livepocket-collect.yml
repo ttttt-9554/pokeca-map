@@ -154,7 +154,25 @@ jobs:
             echo 'No changes to commit.'
           else
             git commit -m 'Update LivePocket v21 map catalog classification'
-            git push
+            # The developer may push app/source changes while this 5-minute
+            # collector is running. Rebase our data-only commit on the latest
+            # main instead of losing the collected URLs to a rejected push.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo 'Generated lottery files conflict with newer changes; preserving previous published data.'
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                echo 'Lottery catalog published successfully.'
+                exit 0
+              fi
+              echo "Remote advanced during push (attempt $attempt/3); retrying..."
+              sleep 2
+            done
+            echo 'Collector could not publish after three safe retries.'
+            exit 1
           fi
 
       - name: Backup full JSON for authorized maintainers
