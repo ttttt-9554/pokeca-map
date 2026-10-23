@@ -6156,55 +6156,49 @@
       "url": "https://livepocket.jp/e/bt5ty",
       "store_name": "TSUTAYA二十世紀が丘店",
       "prefecture": "千葉県",
+      "product_name": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】",
+      "event_title": "【抽選受付】26年10月31日発売「ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】」",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "application_end_at": "2026-10-25T21:45:00+09:00",
       "discord_posted_at": "2026-10-23T04:30:08.592000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA二十世紀が丘店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "【抽選受付】26年10月31日発売「ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】」",
-      "application_end_at": "2026-10-25T21:45:00+09:00",
-      "application_start_at": "2026-10-23T09:00:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】",
-      "official_genre": "onepiece",
-      "official_event_title": "【抽選受付】26年10月31日発売「ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】」",
       "first_detected_at": "2026-10-23T04:50:55.469425+00:00"
     },
     {
       "url": "https://livepocket.jp/e/x-26x",
       "store_name": "ふるいちトップブックスいせさきガーデンズ店",
       "prefecture": "群馬県",
+      "event_title": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION）",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-23T04:30:08.592000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちトップブックスいせさきガーデンズ店",
           "prefecture": "群馬県"
         }
       ],
-      "event_title": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION）",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-23T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION）",
       "first_detected_at": "2026-10-23T04:50:55.469425+00:00"
     },
     {
       "url": "https://livepocket.jp/e/k1y8y",
-      "discord_posted_at": "2026-10-23T04:30:08.592000+00:00",
       "event_title": "【HMVトレカショップ】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】【抽選販売】",
-      "application_end_at": "2026-10-25T20:59:00+09:00",
       "application_start_at": "2026-10-23T13:00:00+09:00",
+      "application_end_at": "2026-10-25T20:59:00+09:00",
+      "discord_posted_at": "2026-10-23T04:30:08.592000+00:00",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【HMVトレカショップ】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】【抽選販売】",
       "first_detected_at": "2026-10-23T04:50:55.469425+00:00"
     }
   ],
-  "updated_at": "2026-10-23T04:51:22.846303+00:00"
+  "updated_at": "2026-10-23T05:00:56.600834+00:00"
 }
