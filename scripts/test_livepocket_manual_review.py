@@ -256,5 +256,79 @@ class TicketTabDeadlineTests(unittest.TestCase):
         )
 
 
+class StormEmeraldTicketPeriodTests(unittest.TestCase):
+    """v21.79: TSUTAYA ticket accordion had visible period but missing JSON."""
+
+    PERIOD = ("販売受付期間：2026年10月22日(木) 18:50\n"
+              "～2026年10月25日(日) 21:00")
+    START = "2026-10-22T18:50:00+09:00"
+    END = "2026-10-25T21:00:00+09:00"
+
+    def test_exact_screenshot_period_is_parseable(self):
+        # This text is from the official LivePocket tickets screenshot.
+        text = ("受付・チケット情報\n販売中\n抽選販売受付\n" +
+                self.PERIOD +
+                "\n結果発表予定日\n10月30日(金)発表予定")
+        start, end = v21.v14.v13.extract_deadline(text)
+        self.assertEqual(v21.v11.iso(start), self.START)
+        self.assertEqual(v21.v11.iso(end), self.END)
+
+    def test_collapsed_ticket_dom_evidence_preserves_correct_times(self):
+        overview = "概要 詳細 受付・チケット情報 お問い合わせ"
+        selected = v21.choose_verified_ticket_period([
+            "開催日時：2026年10月29日(金) 20:00",
+            self.PERIOD,
+        ])
+        self.assertEqual(selected, self.PERIOD)
+        merged = v21.combine_ticket_tab_text(overview, selected)
+        start, end = v21.v14.v13.extract_deadline(merged)
+        self.assertEqual(v21.v11.iso(start), self.START)
+        self.assertEqual(v21.v11.iso(end), self.END)
+
+    def test_conflicting_sale_periods_are_not_guessed(self):
+        other = ("販売受付期間：2026年10月22日(木) 18:50"
+                 " ～2026年10月26日(月) 21:00")
+        self.assertEqual(v21.choose_verified_ticket_period([
+            self.PERIOD, other]), '')
+
+    def test_only_result_announcement_is_not_application_period(self):
+        result = "結果発表予定日 2026年10月30日(金) 16:00"
+        self.assertEqual(v21.choose_verified_ticket_period([result]), '')
+
+    def test_same_page_ticket_dom_is_read_even_when_collapsed(self):
+        class Locator:
+            def __init__(self, content):
+                self.content = content
+            def count(self):
+                return 1
+            def nth(self, index):
+                return self
+            def text_content(self, timeout=None):
+                return self.content
+            def locator(self, selector):
+                return self
+
+        class Page:
+            def get_by_text(self, label, exact=False):
+                if label == '販売受付期間':
+                    return Locator(StormEmeraldTicketPeriodTests.PERIOD)
+                return Locator('')
+
+        self.assertEqual(
+            v21.ticket_period_from_dom(Page()), self.PERIOD)
+
+    def test_verified_reference_never_changes_a_different_event(self):
+        import csv
+        import io
+        reader = csv.DictReader(io.StringIO(
+            "url,verified,source_url,application_start_at,application_end_at\n"
+            "https://livepocket.jp/e/uenut,yes,https://livepocket.jp/e/uenut,"
+            + self.START + "," + self.END + "\n"
+        ))
+        checked = v21.v11.verified_rows(reader, {'https://livepocket.jp/e/uenut'})
+        self.assertEqual(list(checked), ['https://livepocket.jp/e/uenut'])
+        self.assertEqual(v21.v11.iso(checked['https://livepocket.jp/e/uenut'][1]), self.END)
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
