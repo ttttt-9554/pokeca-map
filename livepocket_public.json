@@ -6025,8 +6025,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
       "first_detected_at": "2026-10-23T02:30:56.567372+00:00"
     },
     {
@@ -6225,22 +6223,20 @@
       "url": "https://livepocket.jp/e/5ssjy",
       "store_name": "TSUTAYA400号西那須野店",
       "prefecture": "栃木県",
+      "product_name": "エクストラブースター Heroines Edition vol.2",
+      "event_title": "ワンピースカードゲーム 『エクストラブースター Heroines Edition vol.2』抽選予約受付",
+      "application_start_at": "2026-10-23T15:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-23T08:30:08.840000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA400号西那須野店",
           "prefecture": "栃木県"
         }
       ],
-      "event_title": "ワンピースカードゲーム 『エクストラブースター Heroines Edition vol.2』抽選予約受付",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-23T15:00:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "エクストラブースター Heroines Edition vol.2",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム 『エクストラブースター Heroines Edition vol.2』抽選予約受付",
       "first_detected_at": "2026-10-23T08:35:56.726942+00:00"
     }
   ],
-  "updated_at": "2026-10-23T08:36:19.677915+00:00"
+  "updated_at": "2026-10-23T08:45:58.260594+00:00"
 }
