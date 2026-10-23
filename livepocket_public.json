@@ -6280,7 +6280,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_event_title": "ポケモン30thパック",
       "first_detected_at": "2026-10-23T10:35:57.574036+00:00"
     },
     {
@@ -6301,7 +6300,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "ストームエメラルダ抽選",
       "first_detected_at": "2026-10-23T10:35:57.574036+00:00"
     },
     {
@@ -6513,5 +6511,5 @@
       "first_detected_at": "2026-10-23T14:05:58.154398+00:00"
     }
   ],
-  "updated_at": "2026-10-23T22:51:23.088998+00:00"
+  "updated_at": "2026-10-23T23:00:59.146798+00:00"
 }
