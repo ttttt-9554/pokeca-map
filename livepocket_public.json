@@ -5790,7 +5790,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_event_title": "ヒロインズエディション EB-05",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     },
     {
@@ -5834,8 +5833,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     },
     {
@@ -6404,10 +6401,11 @@
     },
     {
       "url": "https://livepocket.jp/e/3v6ni",
-      "discord_posted_at": "2026-10-23T12:45:11.779000+00:00",
+      "product_name": "ポケモンカードゲームMEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
       "event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
-      "application_end_at": "2026-10-25T23:59:00+09:00",
       "application_start_at": "2026-10-23T11:50:00+09:00",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "discord_posted_at": "2026-10-23T12:45:11.779000+00:00",
       "review_category": "pokemon",
       "stores": [
         {
@@ -6459,11 +6457,8 @@
           "prefecture": ""
         }
       ],
-      "product_name": "ポケモンカードゲームMEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
-      "official_genre": "pokemon",
-      "official_event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
       "first_detected_at": "2026-10-23T12:45:58.330512+00:00"
     }
   ],
-  "updated_at": "2026-10-23T12:46:22.569268+00:00"
+  "updated_at": "2026-10-23T12:55:59.270888+00:00"
 }
