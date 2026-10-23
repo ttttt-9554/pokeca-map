@@ -2748,6 +2748,58 @@
     if (target) target.textContent = message;
   }
 
+
+  // v21.80: The admin card dialog supports an ordered, per-store list for
+  // LivePocket and external-site lotteries without mutating source JSON.
+  function lpCardStoreRender(stores) {
+    const root=$('lpCardStoreRows'),summary=$('lpCardStoresSummary');
+    if(!root||!summary)return;
+    const entries=Array.isArray(stores)?stores:[];
+    const shown=entries.length?entries:[{name:'',prefecture:''}];
+    const choices='<option value="">都道府県未確認</option>'+
+      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
+    root.innerHTML=shown.map((store,index)=>{
+      const name=String(store?.name||''),area=String(store?.prefecture||'');
+      const options=choices.replace(
+        'value="'+escape(area)+'"',
+        'value="'+escape(area)+'" selected'
+      );
+      return '<div class="lp-card-store-row" data-lp-store-index="'+index+'">'+
+        '<div class="lp-card-store-header"><strong>店舗 '+(index+1)+'</strong>'+
+        '<button type="button" data-lp-store-remove="'+index+'" aria-label="店舗 '+(index+1)+' を削除">削除</button></div>'+
+        '<label>店舗名<input type="text" data-lp-store-name maxlength="200" autocomplete="off" value="'+escape(name)+'" placeholder="店舗名を入力"></label>'+
+        '<label>地域・都道府県<select data-lp-store-prefecture>'+options+'</select></label>'+
+      '</div>';
+    }).join('');
+    summary.textContent='🏬 対象店舗 '+entries.length+'件（店舗別に編集・追加・削除）';
+  }
+
+  function lpCardStoreRead(strict=true) {
+    const nodes=[...$('lpCardStoreRows').querySelectorAll('.lp-card-store-row')];
+    if(nodes.length>LP_CARD_MAX_STORES)throw Error('店舗登録は最大'+LP_CARD_MAX_STORES+'件です。');
+    const rows=nodes.map(node=>({
+      name:String(node.querySelector('[data-lp-store-name]')?.value||'').trim(),
+      prefecture:String(node.querySelector('[data-lp-store-prefecture]')?.value||'').trim()
+    }));
+    if(strict){
+      const keys=new Set();
+      for(const row of rows){
+        if(!row.name){
+          // An untouched single blank placeholder means no known store.
+          if(rows.length===1&&!row.prefecture)continue;
+          throw Error('店舗名が空欄です。不要な行は「削除」を押してください。');
+        }
+        if(row.name.length>200)throw Error('店舗名は200文字以内で入力してください。');
+        if(row.prefecture&&!LP_MANUAL_AREAS.includes(row.prefecture))
+          throw Error('正しい都道府県を選択してください。');
+        const key=(row.name+'|'+row.prefecture).normalize('NFKC').toLowerCase();
+        if(keys.has(key))throw Error('同じ店舗名・都道府県が重複しています：'+row.name);
+        keys.add(key);
+      }
+    }
+    return strict?rows.filter(row=>row.name):rows;
+  }
+
   function lpCardOpen(url) {
     if (!isDeveloper() || !safeLotteryUrl(url)) return;
     const base = lotteryBaseItems.find(x=>x.url === url);
