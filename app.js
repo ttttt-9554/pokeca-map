@@ -2946,6 +2946,13 @@
     if (!dialog || !form) return;
     $('lpCardAddStore').addEventListener('click',()=>{
       const rows=lpCardStoreRead(false);
+      // A store-less event already shows a single empty entry field.
+      // Focus that placeholder instead of unexpectedly adding two blanks.
+      if (rows.length===1 && !rows[0].name && !rows[0].prefecture) {
+        $('lpCardStoresFold').open=true;
+        $('lpCardStoreRows').querySelector('[data-lp-store-name]')?.focus();
+        return;
+      }
       if (rows.length>=LP_CARD_MAX_STORES) {
         lpCardSetStatus('⚠ 店舗は最大'+LP_CARD_MAX_STORES+'件まで追加できます。');
         return;
