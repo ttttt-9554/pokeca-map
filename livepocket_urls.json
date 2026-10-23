@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-23T01:30:56.005178+00:00",
+  "collected_at": "2026-10-23T02:30:54.988741+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 443,
+  "unique_livepocket_urls": 444,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11594,34 +11594,64 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/13r44",
+      "discord_message_id": "1563016633310773371",
+      "discord_posted_at": "2026-10-23T02:30:04.826000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nキデイランド 吉祥寺店\n受付終了: 10/26 10:00（残り2日22時間）\nhttps://livepocket.jp/e/13r44",
+      "store_name": "キデイランド 吉祥寺店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド 吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v19_livepocket_explicit_store_list",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
+      "application_end_at": "2026-10-28T23:59:00+09:00",
+      "application_start_at": "2026-10-26T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 290,
+    "parsed": 291,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 284,
-    "prefecture": 247,
-    "event_title": 130,
+    "store_name": 285,
+    "prefecture": 248,
+    "event_title": 131,
     "event_date": 1,
     "product_name": 66,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 414,
-    "application_start_at": 414,
-    "stores_events": 289
+    "application_end_at": 415,
+    "application_start_at": 415,
+    "stores_events": 290
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563001537352044555"
+      "1551580466266644552": "1563016633310773371"
     },
     "last_run": {
-      "checked_at": "2026-10-23T01:30:56.005178+00:00",
-      "new_urls": 4,
-      "original_urls": 439,
+      "checked_at": "2026-10-23T02:30:54.988741+00:00",
+      "new_urls": 1,
+      "original_urls": 443,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -11728,7 +11758,8 @@
         "1562843044741390337": "2026-10-22T15:05:59.330033+00:00",
         "1562986435798237294": "2026-10-23T00:30:57.251650+00:00",
         "1562993990331273227": "2026-10-23T01:00:41.142134+00:00",
-        "1563001537352044555": "2026-10-23T01:30:56.754819+00:00"
+        "1563001537352044555": "2026-10-23T01:30:56.754819+00:00",
+        "1563016633310773371": "2026-10-23T02:30:55.771090+00:00"
       },
       "checked_search_urls": {}
     },
@@ -13512,6 +13543,10 @@
         "https://livepocket.jp/e/ayuy4": {
           "checked_at": "2026-10-23T01:34:43.738285+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/13r44": {
+          "checked_at": "2026-10-23T02:31:25.044209+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -14076,6 +14111,11 @@
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-23T01:34:43.738285+00:00"
+        },
+        "https://livepocket.jp/e/13r44": {
+          "detected_at": "2026-10-23T02:30:56.567372+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T02:31:25.044209+00:00"
         }
       },
       "pending_new_urls": []
@@ -17742,6 +17782,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/13r44": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T02:31:25.044209+00:00",
+          "title_observed": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -19721,6 +19772,19 @@
         },
         "https://livepocket.jp/e/ayuy4": {
           "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/13r44": {
+          "checked_at": "2026-10-23T02:31:25.044209+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
