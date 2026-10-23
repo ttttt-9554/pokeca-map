@@ -348,11 +348,23 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://click.mail.pokemoncenter-online.com/?qs=ABp7ImQiOjUwMzgsInQiOjEzNDI1LCJzIjoxfQABAAAAAAJZURuhv2ZUeKbePEAoKwYHdkP8swBdEDfkdtRP7kcQWlp7pVw0EmLOOJOdlpOj2xji9yKdnLegfMS6ZL8GLjvW86Jsj6hZ7aiWqID6",
+      "source_site": "click.mail.pokemoncenter-online.com",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-10-23T13:42:03.739000+00:00",
+      "first_detected_at": "2026-10-23T13:45:58.158635+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1563181170408161280"
+    "1551580466266644552": "1563185743088722111"
   },
-  "collected_at": "2026-10-23T13:25:57.247301+00:00",
+  "collected_at": "2026-10-23T13:45:58.158671+00:00",
   "messages_scanned": 100
 }
