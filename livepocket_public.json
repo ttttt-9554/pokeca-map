@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T08:35:55.383599+00:00",
-  "unique_livepocket_urls": 452,
+  "collected_at": "2026-10-23T09:05:57.775303+00:00",
+  "unique_livepocket_urls": 454,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6236,7 +6236,36 @@
         }
       ],
       "first_detected_at": "2026-10-23T08:35:56.726942+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/exmkt",
+      "store_name": "古本市場志木店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-23T09:00:17.818000+00:00",
+      "stores": [
+        {
+          "name": "古本市場志木店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "ポケカ抽選販売(30th)",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T13:38:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケカ抽選販売(30th)",
+      "first_detected_at": "2026-10-23T09:05:59.887396+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mz__o",
+      "discord_posted_at": "2026-10-23T09:00:17.818000+00:00",
+      "event_title": "【晴れる屋】『マジック：ザ・ギャザリング | スター・トレック』 Collector's Edition Commander Deck 4種セット (●英語版) 抽選申し込み受付",
+      "product_name": "『マジック：ザ・ギャザリング | スター・トレック』 Collector's Edition Commander Deck 4種セット (●英語版)",
+      "application_end_at": "2026-10-29T23:59:00+09:00",
+      "application_start_at": "2026-10-23T17:00:00+09:00",
+      "official_event_title": "【晴れる屋】『マジック：ザ・ギャザリング | スター・トレック』 Collector's Edition Commander Deck 4種セット (●英語版) 抽選申し込み受付",
+      "first_detected_at": "2026-10-23T09:05:59.887396+00:00"
     }
   ],
-  "updated_at": "2026-10-23T08:56:01.257869+00:00"
+  "updated_at": "2026-10-23T09:06:40.531328+00:00"
 }
