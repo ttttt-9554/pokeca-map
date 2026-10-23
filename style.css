@@ -1570,3 +1570,13 @@ html[data-theme="dark"] #lpCardAddStore{
 html[data-theme="dark"] #lpCardDialog :is(button,input,select,summary):focus-visible{
   outline-color:#fbbf24;
 }
+
+/* v21.81: zero-store state for the admin's iPhone dialog. */
+#lpCardStoreRows .lp-card-store-empty{
+  margin:0;padding:12px;border:1px dashed var(--app-border,#cbd5e1);
+  border-radius:9px;background:var(--app-surface,#fff);
+  color:var(--app-muted,#475569);font-size:13px;line-height:1.65;
+}
+html[data-theme="dark"] #lpCardStoreRows .lp-card-store-empty{
+  background:#172337;border-color:#536782;color:#c9d7eb;
+}

@@ -2760,8 +2760,10 @@
     const root=$('lpCardStoreRows'),summary=$('lpCardStoresSummary');
     if(!root||!summary)return;
     const entries=Array.isArray(stores)?stores:[];
-    const shown=entries.length?entries:[{name:'',prefecture:''}];
-    root.innerHTML=shown.map((store,index)=>{
+    // When there are zero stores, do not create a fake input row: tapping
+    // "Add store" must explicitly add a new row (no automatic keyboard).
+    const shown=entries;
+    root.innerHTML=shown.length?shown.map((store,index)=>{
       const name=String(store?.name||''),area=String(store?.prefecture||'');
       // Some imported sources have a custom area label. Preserve it as an
       // explicit option rather than quietly changing it when saving a title.
@@ -2775,7 +2777,8 @@
         '<label>店舗名<input type="text" data-lp-store-name maxlength="200" autocomplete="off" value="'+escape(name)+'" placeholder="店舗名を入力"></label>'+
         '<label>地域・都道府県<select data-lp-store-prefecture>'+options+'</select></label>'+
       '</div>';
-    }).join('');
+    }).join('') :
+      '<p class="lp-card-store-empty">対象店舗は0件です。「＋ 店舗を追加」から新しい店舗を登録できます。</p>';
     summary.textContent='🏬 対象店舗 '+entries.length+'件（店舗別に編集・追加・削除）';
   }
 
@@ -2795,9 +2798,9 @@
       const previousAreas=new Set(lotteryStoreEntries(current||{}).map(x=>x.prefecture).filter(Boolean));
       for(const row of rows){
         if(!row.name){
-          // An untouched single blank placeholder means no known store.
-          if(rows.length===1&&!row.prefecture)continue;
-          throw Error('店舗名が空欄です。不要な行は「削除」を押してください。');
+          // An added row is intentional, not an implicit placeholder.
+          // Do not silently discard it when the admin presses Save.
+          throw Error('店舗名が空欄です。入力するか、不要な行は「削除」を押してください。');
         }
         if(row.name.length>200)throw Error('店舗名は200文字以内で入力してください。');
         if(row.prefecture&&!LP_MANUAL_AREAS.includes(row.prefecture)&&!previousAreas.has(row.prefecture))
@@ -2966,21 +2969,19 @@
     if (!dialog || !form) return;
     $('lpCardAddStore').addEventListener('click',()=>{
       const rows=lpCardStoreRead(false);
-      // A store-less event already shows a single empty entry field.
-      // Focus that placeholder instead of unexpectedly adding two blanks.
-      if (rows.length===1 && !rows[0].name && !rows[0].prefecture) {
-        $('lpCardStoresFold').open=true;
-        $('lpCardStoreRows').querySelector('[data-lp-store-name]')?.focus();
-        return;
-      }
       if (rows.length>=LP_CARD_MAX_STORES) {
         lpCardSetStatus('⚠ 店舗は最大'+LP_CARD_MAX_STORES+'件まで追加できます。');
         return;
       }
+      // On iPhone the previous auto-focus immediately opened the keyboard,
+      // making the Add action appear to navigate into the name field.
+      // Finish any existing input, append a row, and leave focus alone.
+      const active=document.activeElement;
+      if (active && /^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName)) active.blur();
       rows.push({name:'',prefecture:''});
       lpCardStoreRender(rows);
       $('lpCardStoresFold').open=true;
-      $('lpCardStoreRows').lastElementChild?.querySelector('input')?.focus();
+      lpCardSetStatus('店舗を1件追加しました。店舗名と都道府県を入力後、「変更を保存」を押してください。');
     });
     $('lpCardStoreRows').addEventListener('click',event=>{
       const target=event.target.closest('button[data-lp-store-remove]');
@@ -2990,6 +2991,7 @@
       rows.splice(index,1);
       lpCardStoreRender(rows);
       $('lpCardStoresFold').open=true;
+      lpCardSetStatus('店舗を一覧から削除しました。反映するには「変更を保存」を押してください。');
     });
     $('lotteryView').addEventListener('click', event=>{
       const target=event.target.closest('button[data-lp-card-edit]');
