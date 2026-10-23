@@ -6270,6 +6270,9 @@
       "url": "https://livepocket.jp/e/ng31e",
       "store_name": "古本市場春日部緑町店",
       "prefecture": "埼玉県",
+      "event_title": "ポケモン30thパック",
+      "application_start_at": "2026-10-23T17:51:00+09:00",
+      "application_end_at": "2026-10-24T23:59:00+09:00",
       "discord_posted_at": "2026-10-23T10:30:04.348000+00:00",
       "stores": [
         {
@@ -6277,16 +6280,15 @@
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "ポケモン30thパック",
-      "application_end_at": "2026-10-24T23:59:00+09:00",
-      "application_start_at": "2026-10-23T17:51:00+09:00",
-      "official_event_title": "ポケモン30thパック",
       "first_detected_at": "2026-10-23T10:35:57.574036+00:00"
     },
     {
       "url": "https://livepocket.jp/e/126bw",
       "store_name": "古本市場春日部緑町店",
       "prefecture": "埼玉県",
+      "event_title": "ストームエメラルダ抽選",
+      "application_start_at": "2026-10-23T17:46:00+09:00",
+      "application_end_at": "2026-10-24T23:59:00+09:00",
       "discord_posted_at": "2026-10-23T10:30:04.348000+00:00",
       "stores": [
         {
@@ -6294,16 +6296,12 @@
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "ストームエメラルダ抽選",
-      "application_end_at": "2026-10-24T23:59:00+09:00",
-      "application_start_at": "2026-10-23T17:46:00+09:00",
       "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "ストームエメラルダ抽選",
       "first_detected_at": "2026-10-23T10:35:57.574036+00:00"
     }
   ],
-  "updated_at": "2026-10-23T10:36:18.233145+00:00"
+  "updated_at": "2026-10-23T10:45:57.581135+00:00"
 }
