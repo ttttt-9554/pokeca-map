@@ -287,26 +287,6 @@ Deno.serve(async (req: Request) => {
   try { payload = await req.json(); }
   catch { return new Response("Invalid JSON", { status: 400 }); }
 
-  // An internal, signed, explicit one-off test. Never publish a fake lottery
-  // event or expose the dedicated webhook URL in a response or log.
-  if (payload.type === "LOTTERY_WEBHOOK_TEST") {
-    const target = Deno.env.get("LOTTERY_DISCORD_WEBHOOK_URL");
-    if (!target) return new Response("Dedicated lottery webhook not configured", { status: 503 });
-    try {
-      await sendDiscord(target, {
-        username: "ポケカ発見マップ",
-        content: "✅ **抽選通知先の接続テスト**\n#新規抽選アラート向けの通知設定を確認しました。\n※これは接続確認用で、新しい抽選の登録ではありません。",
-        allowed_mentions: { parse: [] }
-      });
-      return new Response(JSON.stringify({ ok: true, type: "lottery-webhook-test" }), {
-        status: 200, headers: { "Content-Type": "application/json" }
-      });
-    } catch (error) {
-      console.error("Dedicated lottery webhook test failed:", String(error));
-      return new Response("Lottery webhook test failed", { status: 502 });
-    }
-  }
-
   // Legacy webhook handling during deployment transition; removed after the
   // database queue trigger replaces the per-row HTTP webhook.
   if (payload.type === "INSERT" && payload.table === "shared_reports" && payload.record) {
