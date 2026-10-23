@@ -14286,7 +14286,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1rf7i": {
-          "checked_at": "2026-10-23T09:36:31.058077+00:00",
+          "checked_at": "2026-10-23T15:46:24.564758+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jfpl7": {
@@ -14942,7 +14942,7 @@
         "https://livepocket.jp/e/1rf7i": {
           "detected_at": "2026-10-23T03:30:57.093702+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T09:36:31.058077+00:00"
+          "checked_at": "2026-10-23T15:46:24.564758+00:00"
         },
         "https://livepocket.jp/e/jfpl7": {
           "detected_at": "2026-10-23T04:00:57.551385+00:00",
@@ -15565,8 +15565,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1rf7i": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T09:36:31.058077+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-23T15:46:24.564758+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jfpl7": {
@@ -18831,7 +18831,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T09:36:31.058077+00:00",
+          "checked_at": "2026-10-23T15:46:24.564758+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "",
@@ -21063,7 +21063,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1rf7i": {
-          "checked_at": "2026-10-23T09:36:31.058077+00:00",
+          "checked_at": "2026-10-23T15:46:24.564758+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
