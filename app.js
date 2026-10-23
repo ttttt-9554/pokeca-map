@@ -4214,10 +4214,10 @@
   // ========================================
 
 
-  // v21.83: Anonymous, privacy-thresholded counts derived on the server
-  // from the existing private tracker. No per-user data is fetched here.
+  // v21.84: Anonymous counts are available from the first recorded applicant.
+  // Per-user identities, metadata and private notes are never sent to clients.
   const LP_RESULTS_COUNT_RPC='lottery_result_counts_v21_83';
-  const LP_RESULTS_PUBLIC_MIN=5;
+  const LP_RESULTS_PUBLIC_MIN=1;
   let lpResultsCounts=new Map(),lpResultsReady=false,lpResultsError='';
   let lpResultsUserId='',lpResultsFetchSeq=0,lpResultsLastFetch=0,lpResultsLoading=null;
 
@@ -4229,12 +4229,11 @@
       '匿名集計を表示しています。誰が応募・当選したかは公開されません。';
   }
 
-  // Never treat missing / suppressed values as zero. The RPC returns only
-  // events with at least five participants, and category cells below five
-  // are null even for those events.
+  // Zero is a valid status count for lotteries with records. Missing
+  // aggregate rows indicate no known non-'not_applied' entries.
   function lpResultsCountDisplay(value){
-    return Number.isSafeInteger(value)&&value>=LP_RESULTS_PUBLIC_MIN
-      ? value+'人' : '非表示';
+    return Number.isSafeInteger(value)&&value>=0
+      ? value+'人' : '未確認';
   }
 
   function lpResultsKnownEvents(){
@@ -4260,15 +4259,15 @@
     const events=lpResultsKnownEvents();
     const published=events.filter(item=>lpResultsCounts.has(item.url)).length;
     summary.innerHTML='<span>🎟️ 抽選 '+events.length+'件</span>'+
-      '<span>🔒 匿名集計対象 '+published+'件</span>'+
-      '<span>📊 '+LP_RESULTS_PUBLIC_MIN+'人未満は非表示</span>';
+      '<span>📊 記録あり '+published+'件</span>'+
+      '<span>👥 1人から集計</span>';
     if(!authUser||!supabaseClient){
       status.textContent='応募状況の匿名集計を表示するにはDiscordログインが必要です。';
       list.innerHTML='<p class="hint">「共有」タブからログインすると、対象の抽選結果を確認できます。</p>';
       return;
     }
     status.textContent=lpResultsError?'⚠ 匿名集計を取得できませんでした：'+lpResultsError:
-      '既存の抽選管理を自動集計しています。本人名・個人メモは公開せず、少人数の結果は非表示にしています。';
+      '既存の抽選管理を1人から自動集計します。氏名・ユーザーID・個人メモは表示しません。';
     const query=String($('lpResultsSearch')?.value||'').trim().toLocaleLowerCase();
     const filter=$('lpResultsFilter')?.value||'all';
     const matches=events.filter(item=>{
@@ -4290,11 +4289,12 @@
     list.innerHTML=matches.length?matches.slice(0,100).map(item=>{
       const record=lpResultsCounts.get(item.url);
       const title=lotteryTrackItemName(item.url);
-      // The total returned by the server is a rounded-down group of five.
-      const total=record?Math.floor(Number(record.total_count)/5)*5:0;
+      // Accurate group counts are provided by the authenticated-only RPC.
+      // Never infer participant details from an aggregate row.
+      const total=record?Number(record.total_count):0;
       const header=record
-        ? '👥 応募者 '+total+'人以上'
-        : '🔒 集計対象者が5人未満、または記録なし';
+        ? '👥 応募記録 '+total+'人'
+        : '📭 応募記録なし';
       const statusHtml=record
         ? '<div class="lp-results-card-summary">'+
           '<span>✉️ 応募済み '+lpResultsCountDisplay(record.applied_count)+'</span>'+

@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_83-anonymous-results-hidden">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_84-anonymous-one-plus">
 
   <style>
     [hidden] { display: none !important; }
@@ -747,16 +747,16 @@ nav[aria-label="メインメニュー"] {
         <label>表示する結果
           <select id="lpResultsFilter">
             <option value="all">すべての抽選</option>
-            <option value="applied">応募済み（5人以上）</option>
-            <option value="won">当選（5人以上）</option>
-            <option value="lost">落選（5人以上）</option>
-            <option value="received">受取済み（5人以上）</option>
+            <option value="applied">応募済み</option>
+            <option value="won">当選</option>
+            <option value="lost">落選</option>
+            <option value="received">受取済み</option>
           </select>
         </label>
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
-      <p class="hint">匿名保護のため、抽選の記録が5人未満なら件数を表示しません。5人以上でも各結果が5人未満の場合は内訳を伏せ、合計人数は5人単位の下限で表示します。集計対象は本アプリに登録された応募管理記録です。</p>
+      <p class="hint">応募管理に1人でも記録があれば、応募・当選・落選・受取済みの人数を表示します。名前・ユーザーID・個人メモは表示しません。ただし少人数では結果から個人を推測できる場合があります。</p>
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
 
@@ -1556,7 +1556,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_83-anonymous-results-hidden"></script>
+  <script src="app.js?v=20261024-v21_84-anonymous-one-plus"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
