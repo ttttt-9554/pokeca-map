@@ -5790,7 +5790,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_event_title": "ヒロインズエディション EB-05",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     },
     {
@@ -5834,8 +5833,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     },
     {
@@ -6223,5 +6220,5 @@
       "first_detected_at": "2026-10-23T06:05:38.114711+00:00"
     }
   ],
-  "updated_at": "2026-10-23T06:36:36.805247+00:00"
+  "updated_at": "2026-10-23T06:45:58.239886+00:00"
 }
