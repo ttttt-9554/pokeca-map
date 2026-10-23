@@ -13802,16 +13802,16 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/txclv": {
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/h0r8an9sy9": {
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/d59un": {
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ayuy4": {
           "checked_at": "2026-10-23T01:34:43.738285+00:00",
@@ -14400,18 +14400,18 @@
         },
         "https://livepocket.jp/e/d59un": {
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T01:34:43.738285+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00"
         },
         "https://livepocket.jp/e/h0r8an9sy9": {
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T01:34:43.738285+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00"
         },
         "https://livepocket.jp/e/txclv": {
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T01:34:43.738285+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00"
         },
         "https://livepocket.jp/e/13r44": {
           "detected_at": "2026-10-23T02:30:56.567372+00:00",
@@ -14946,6 +14946,21 @@
         "https://livepocket.jp/e/0rw9z": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T07:16:26.392955+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/txclv": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T07:44:23.538371+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/h0r8an9sy9": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T07:44:23.538371+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/d59un": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T07:44:23.538371+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18114,7 +18129,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
           "title_observed": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（ストームエメラルダ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -18125,7 +18140,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー/拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -18136,7 +18151,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
           "title_observed": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -20180,7 +20195,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/txclv": {
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -20193,7 +20208,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/h0r8an9sy9": {
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -20206,7 +20221,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/d59un": {
-          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "checked_at": "2026-10-23T07:44:23.538371+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
