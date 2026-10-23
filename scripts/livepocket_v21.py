@@ -1995,6 +1995,69 @@ def combine_ticket_tab_text(original, additional):
     return original[:30000] + ('\n' + additional[:remaining] if remaining else '')
 
 
+def choose_verified_ticket_period(chunks):
+    """Pick only a unique, expressly labelled signup period from one event page.
+
+    Browser inner_text can omit collapsed ticket details even though their
+    text nodes exist in the DOM. We examine short, same-page ticket blocks
+    independently to avoid unrelated result/visit dates. Conflicting ticket
+    deadlines always stay unconfirmed.
+    """
+    found = {}
+    for text in (chunks or [])[:50]:
+        if not isinstance(text, str) or not (15 <= len(text) <= 6000):
+            continue
+        start, end = v14.v13.extract_deadline(text)
+        if not end:
+            continue
+        key = (v11.iso(start) if start else None, v11.iso(end))
+        previous = found.get(key)
+        if previous is None or len(text) < len(previous):
+            found[key] = text
+    if not found:
+        return ''
+    ends = {key[1] for key in found}
+    starts = {key[0] for key in found if key[0]}
+    if len(ends) != 1 or len(starts) > 1:
+        return ''
+    # Prefer one explicit complete period to an end-only label.
+    options = [(not bool(key[0]), len(value), value) for key, value in found.items()]
+    return min(options)[2]
+
+
+def ticket_period_from_dom(page):
+    """Read only labelled sale/application blocks on the verified exact URL.
+
+    This is ordinary first-party DOM text, including an already-rendered
+    collapsed ticket accordion. No hidden APIs, login, new URL or bypass.
+    A missing or contradictory value is never guessed.
+    """
+    chunks = []
+    for label in ('販売受付期間', '抽選受付期間', '応募期間', '申込期間', '申込み期間'):
+        try:
+            matches = page.get_by_text(label, exact=False)
+            count = min(matches.count(), 12)
+        except Exception:
+            continue
+        for index in range(count):
+            try:
+                candidate = matches.nth(index)
+            except Exception:
+                continue
+            for relative in (None, 'xpath=..', 'xpath=../..', 'xpath=../../..', 'xpath=../../../..'):
+                try:
+                    loc = candidate if relative is None else candidate.locator(relative)
+                    text = loc.text_content(timeout=700)
+                except Exception:
+                    continue
+                if not isinstance(text, str) or not (15 <= len(text) <= 6000):
+                    continue
+                if v14.v13.extract_deadline(text)[1]:
+                    chunks.append(text)
+                    break
+    return choose_verified_ticket_period(chunks)
+
+
 def browser_fetcher():
     """Preserve v20 same-URL browser behavior; also read structured event titles.
 
@@ -2121,18 +2184,50 @@ def browser_fetcher():
             except Exception:
                 dom_title_candidates = []
             if ticket_tab_needs_check(body):
+                # Switch to the public tickets tab, but still read the
+                # accessible ticket DOM if the tab navigation is unclickable.
                 try:
                     tab = page.get_by_text('受付・チケット情報', exact=True).first
                     tab.click(timeout=1500)
-                    page.wait_for_timeout(350)
-                    if v12.exact_event_url(page.url) != url:
-                        return {'status': 'browser_redirected'}
-                    additional = page.locator('body').inner_text(timeout=4000)
-                    body = combine_ticket_tab_text(body, additional)
+                    page.wait_for_timeout(450)
                 except Exception:
-                    # The verified overview page is still useful if the tab
-                    # cannot be opened in a normal browser visit.
                     pass
+                if v12.exact_event_url(page.url) != url:
+                    return {'status': 'browser_redirected'}
+                # Lazy ticket panels can hydrate after the common navigation
+                # labels; one 350ms snapshot is not necessarily enough.
+                for attempt in range(3):
+                    try:
+                        additional = page.locator('body').inner_text(timeout=4000)
+                        body = combine_ticket_tab_text(body, additional)
+                        evidence = ticket_period_from_dom(page)
+                        if evidence:
+                            body = combine_ticket_tab_text(body, evidence)
+                            break
+                        if v14.v13.extract_deadline(body)[1]:
+                            break
+                    except Exception:
+                        pass
+                    if attempt < 2:
+                        page.wait_for_timeout(550)
+                # Some ticket lists render only when their accordion opens.
+                # Click only the named public receipt header, never a login or
+                # application control; retain prior text if it cannot open.
+                if not v14.v13.extract_deadline(body)[1]:
+                    try:
+                        header = page.get_by_text('抽選販売受付', exact=True).first
+                        if header.is_visible(timeout=700):
+                            header.click(timeout=1200)
+                            page.wait_for_timeout(350)
+                            if v12.exact_event_url(page.url) != url:
+                                return {'status': 'browser_redirected'}
+                            additional = page.locator('body').inner_text(timeout=4000)
+                            body = combine_ticket_tab_text(body, additional)
+                            evidence = ticket_period_from_dom(page)
+                            if evidence:
+                                body = combine_ticket_tab_text(body, evidence)
+                    except Exception:
+                        pass
             return {'status': 'ok', 'final_url': page.url,
                     'text': body[:30000], 'titles': titles,
                     'title_sources': title_sources,
