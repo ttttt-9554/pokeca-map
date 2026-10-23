@@ -13782,16 +13782,16 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ygkk_": {
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/uenut": {
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/r8mus": {
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ija-d": {
           "checked_at": "2026-10-23T01:01:08.387777+00:00",
@@ -14380,18 +14380,18 @@
         },
         "https://livepocket.jp/e/r8mus": {
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T01:01:08.387777+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00"
         },
         "https://livepocket.jp/e/uenut": {
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-23T01:01:08.387777+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00"
         },
         "https://livepocket.jp/e/ygkk_": {
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T01:01:08.387777+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00"
         },
         "https://livepocket.jp/e/ayuy4": {
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
@@ -14921,6 +14921,21 @@
         "https://livepocket.jp/e/1wqyobvsi_": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T06:36:36.805247+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/ygkk_": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T07:06:26.160667+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/uenut": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T07:06:26.160667+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/r8mus": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T07:06:26.160667+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18034,7 +18049,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
           "title_observed": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -18045,7 +18060,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
           "title_observed": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -18056,7 +18071,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
           "title_observed": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（ストームエメラルダ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -20090,7 +20105,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ygkk_": {
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -20103,7 +20118,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/uenut": {
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -20116,7 +20131,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/r8mus": {
-          "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "checked_at": "2026-10-23T07:06:26.160667+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
