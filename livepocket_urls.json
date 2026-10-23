@@ -14362,8 +14362,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1dpkl": {
-          "checked_at": "2026-10-23T14:06:25.073109+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-23T20:16:24.680640+00:00",
+          "status": "checked_retry_no_new_details"
         }
       }
     },
@@ -15036,8 +15036,8 @@
         },
         "https://livepocket.jp/e/1dpkl": {
           "detected_at": "2026-10-23T14:05:58.154398+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-23T14:06:25.073109+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T20:16:24.680640+00:00"
         }
       },
       "pending_new_urls": []
@@ -15647,6 +15647,11 @@
         "https://livepocket.jp/e/jrssp": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T19:31:22.967335+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/1dpkl": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T20:16:24.680640+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -19090,7 +19095,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T14:06:25.073109+00:00",
+          "checked_at": "2026-10-23T20:16:24.680640+00:00",
           "title_observed": "ポケモンカードゲーム 「30th CELEBRATION」再入荷分 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -21360,7 +21365,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1dpkl": {
-          "checked_at": "2026-10-23T14:06:25.073109+00:00",
+          "checked_at": "2026-10-23T20:16:24.680640+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
