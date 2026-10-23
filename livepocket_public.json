@@ -5948,8 +5948,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
@@ -5967,6 +5965,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（30th セレブレーション）",
       "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
@@ -5987,8 +5987,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ）",
       "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
@@ -6012,8 +6010,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー/拡張パック ストームエメラルダ",
       "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
@@ -6226,5 +6222,5 @@
       "first_detected_at": "2026-10-23T06:05:38.114711+00:00"
     }
   ],
-  "updated_at": "2026-10-23T07:44:23.538371+00:00"
+  "updated_at": "2026-10-23T07:46:29.665153+00:00"
 }
