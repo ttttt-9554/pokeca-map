@@ -10298,7 +10298,7 @@
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "https://livepocket.jp/e/sx0cg",
       "store_name": "キデイランド 吉祥寺店",
-      "prefecture": null,
+      "prefecture": "東京都",
       "details_source": null,
       "product_name": "ポケモンカードゲーム",
       "application_period": null,
@@ -10310,7 +10310,8 @@
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v15_page_product_label",
         "store_name": "v15_page_store_label",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "event_title": "キデイランド 吉祥寺店 ポケモンカードゲーム 拡張パック「30th セレブレーション」（再販）購入券 抽選",
       "application_end_at": "2026-10-21T23:59:00+09:00",
@@ -10318,7 +10319,7 @@
       "stores": [
         {
           "name": "キデイランド 吉祥寺店",
-          "prefecture": ""
+          "prefecture": "東京都"
         }
       ]
     },
@@ -11633,7 +11634,7 @@
   },
   "field_counts": {
     "store_name": 285,
-    "prefecture": 248,
+    "prefecture": 249,
     "event_title": 131,
     "event_date": 1,
     "product_name": 66,

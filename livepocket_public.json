@@ -5207,11 +5207,12 @@
       "application_start_at": "2026-10-19T10:00:00+09:00",
       "application_end_at": "2026-10-21T23:59:00+09:00",
       "discord_posted_at": "2026-10-19T23:34:37.703000+00:00",
+      "prefecture": "東京都",
       "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド 吉祥寺店",
-          "prefecture": ""
+          "prefecture": "東京都"
         }
       ],
       "first_detected_at": "2026-10-19T23:39:08.283491+00:00"
@@ -6013,21 +6014,19 @@
       "url": "https://livepocket.jp/e/13r44",
       "store_name": "キデイランド 吉祥寺店",
       "prefecture": "東京都",
+      "event_title": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "application_end_at": "2026-10-28T23:59:00+09:00",
       "discord_posted_at": "2026-10-23T02:30:04.826000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド 吉祥寺店",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
-      "application_end_at": "2026-10-28T23:59:00+09:00",
-      "application_start_at": "2026-10-26T10:00:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
       "first_detected_at": "2026-10-23T02:30:56.567372+00:00"
     }
   ],
-  "updated_at": "2026-10-23T02:31:25.044209+00:00"
+  "updated_at": "2026-10-23T02:40:57.741744+00:00"
 }
