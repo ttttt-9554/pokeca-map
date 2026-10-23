@@ -2659,8 +2659,10 @@
   // v21.68: Per-card admin corrections are a separate layer ABOVE existing manual fixes.
   // An edited_fields entry means an intentional override, including clearing a date.
   const LP_CARD_TABLE = 'lottery_card_overrides';
-  const LP_CARD_FIELDS = ['event_title','product_name','store_name','prefecture',
+  const LP_CARD_FIELDS = ['event_title','product_name','store_name','prefecture','stores',
     'application_start_at','application_end_at','review_category','product_type'];
+  const LP_CARD_FORM_FIELDS = LP_CARD_FIELDS.filter(x=>!['store_name','prefecture','stores'].includes(x));
+  const LP_CARD_MAX_STORES = 60;
   let lpCardOverrides = new Map(), lpCardReady = false, lpCardLoading = null;
   let lpCardLastFetch = 0, lpCardError = '', lpCardEditing = '', lpCardBusy = false;
 
@@ -2684,7 +2686,16 @@
     if (fields.has('application_start_at')) item.application_start_at = row.application_start_at || null;
     if (fields.has('application_end_at')) item.application_end_at = row.application_end_at || null;
     const storeEdited = fields.has('store_name'), areaEdited = fields.has('prefecture');
-    if ((storeEdited || areaEdited) && (!Array.isArray(base.stores) || base.stores.length <= 1)) {
+    if (fields.has('stores') && Array.isArray(row.stores)) {
+      // Store-specific corrections supersede old single-store fields. The
+      // collected base and the legacy/manual location layers stay untouched.
+      item.stores=row.stores.map(x=>({
+        name:String(x?.name||''),prefecture:String(x?.prefecture||'')
+      })).filter(x=>x.name.trim());
+      item.store_name=item.stores[0]?.name||'';
+      item.prefecture=item.stores[0]?.prefecture||'';
+    } else if ((storeEdited || areaEdited) && (!Array.isArray(base.stores) || base.stores.length <= 1)) {
+      // Keep already-saved single-store overrides from earlier versions.
       if (storeEdited) item.store_name = row.store_name || '';
       if (areaEdited) item.prefecture = row.prefecture || '';
       const existing = Array.isArray(base.stores) ? base.stores[0] : null;
@@ -2704,7 +2715,7 @@
     lpCardLoading = (async () => {
       try {
         const {data,error} = await supabaseClient.from(LP_CARD_TABLE)
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,application_start_at,application_end_at,review_category,product_type,updated_at')
           .limit(5000);
         if (error) throw error;
         lpCardOverrides = new Map((data || []).filter(x=>safeLotteryUrl(x.event_url))
@@ -2750,15 +2761,12 @@
     if (!item) return;
     lpCardEditing = url;
     form.reset();
-    for (const field of LP_CARD_FIELDS) {
+    for (const field of LP_CARD_FORM_FIELDS) {
       const el = form.elements.namedItem(field);
       if (el) el.value = lpCardEditableValue(item,field);
     }
-    const multiStore = Array.isArray(base.stores) && base.stores.length > 1;
-    for (const field of ['store_name','prefecture']) {
-      form.elements.namedItem(field).disabled = multiStore;
-    }
-    $('lpCardMultipleStores').hidden = !multiStore;
+    lpCardStoreRender(lotteryStoreEntries(item));
+    $('lpCardStoresFold').open=false;
     const link = $('lpCardSourceLink');
     link.href = url;
     link.textContent = '🔗 元の抽選ページ ↗';
@@ -2782,7 +2790,7 @@
     if (error) { panel.textContent = '履歴を取得できません：'+error.message; return; }
     if (!data?.length) { panel.textContent = 'カード編集の履歴はまだありません。'; return; }
     const labels = {event_title:'イベント名',product_name:'商品名',store_name:'店舗',
-      prefecture:'地域',review_category:'ジャンル',product_type:'商品区分',
+      prefecture:'地域',stores:'対象店舗一覧',review_category:'ジャンル',product_type:'商品区分',
       application_start_at:'応募開始',application_end_at:'応募締切'};
     panel.innerHTML = '<ol>'+data.map(row => {
       const before = row.previous_value || {}, after = row.new_value || {};
@@ -2810,15 +2818,10 @@
         if (!saved) return;
         if (!confirm('カードからの手動修正を解除し、従来の修正内容に戻しますか？ 編集履歴は残ります。')) return;
       } else {
-        for (const field of LP_CARD_FIELDS) {
+        for (const field of LP_CARD_FORM_FIELDS) {
           const raw=String(form.elements.namedItem(field)?.value || '').trim();
           const original=lpCardEditableValue(legacy,field);
-          if (field==='store_name' || field==='prefecture') {
-            if (form.elements.namedItem(field).disabled) continue;
-          }
-          if (raw.length > (field==='prefecture' ? 30 : 200)) throw Error('入力文字数を確認してください：'+field);
-          if (field==='prefecture' && raw && !LP_MANUAL_AREAS.includes(raw))
-            throw Error('都道府県を選択してください。');
+          if (raw.length > 200) throw Error('入力文字数を確認してください：'+field);
           if (field==='review_category' && !['unknown','pokemon','onepiece','yugioh'].includes(raw))
             throw Error('ジャンルが不正です。');
           if (field==='product_type' && !['unknown','pack','deck','pack/deck'].includes(raw))
@@ -2829,6 +2832,20 @@
               ? lpExtDateSave(raw) : raw;
           } else payload[field] = null;
         }
+        // Compare against the unmodified legacy view. An already-saved list
+        // survives unrelated title/date edits, and never overwrites the source.
+        const desiredStores=lpCardStoreRead();
+        const legacyStores=lotteryStoreEntries(legacy).map(x=>({
+          name:x.name.trim(),prefecture:x.prefecture.trim()
+        }));
+        if (JSON.stringify(desiredStores)!==JSON.stringify(legacyStores)) {
+          edited.push('stores');
+          payload.stores=desiredStores;
+        } else payload.stores=null;
+        // Former single-store override values migrate to the ordered list
+        // only when the edited store list differs from the legacy view.
+        payload.store_name=null;
+        payload.prefecture=null;
         const start = lpExtDateSave(String(form.elements.namedItem('application_start_at').value || ''));
         const end = lpExtDateSave(String(form.elements.namedItem('application_end_at').value || ''));
         if (start && end && Date.parse(start)>Date.parse(end))
@@ -2853,7 +2870,7 @@
       } else {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .upsert(payload,{onConflict:'event_url'})
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,application_start_at,application_end_at,review_category,product_type,updated_at')
           .single();
         if (error) throw error;
         if (data?.event_url !== url || !Array.isArray(data.edited_fields)) throw Error('保存結果を確認できませんでした');
@@ -2875,9 +2892,26 @@
   function lpCardInitUI() {
     const dialog=$('lpCardDialog'), form=$('lpCardForm');
     if (!dialog || !form) return;
-    const area=$('lpCardPrefecture');
-    area.innerHTML='<option value="">未確認・指定なし</option>'+
-      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
+    $('lpCardAddStore').addEventListener('click',()=>{
+      const rows=lpCardStoreRead(false);
+      if (rows.length>=LP_CARD_MAX_STORES) {
+        lpCardSetStatus('⚠ 店舗は最大'+LP_CARD_MAX_STORES+'件まで追加できます。');
+        return;
+      }
+      rows.push({name:'',prefecture:''});
+      lpCardStoreRender(rows);
+      $('lpCardStoresFold').open=true;
+      $('lpCardStoreRows').lastElementChild?.querySelector('input')?.focus();
+    });
+    $('lpCardStoreRows').addEventListener('click',event=>{
+      const target=event.target.closest('button[data-lp-store-remove]');
+      if (!target) return;
+      const rows=lpCardStoreRead(false),index=Number(target.dataset.lpStoreRemove);
+      if(!Number.isInteger(index)||index<0||index>=rows.length)return;
+      rows.splice(index,1);
+      lpCardStoreRender(rows);
+      $('lpCardStoresFold').open=true;
+    });
     $('lotteryView').addEventListener('click', event=>{
       const target=event.target.closest('button[data-lp-card-edit]');
       if (target) lpCardOpen(target.dataset.lpCardEdit);
