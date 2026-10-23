@@ -6306,24 +6306,22 @@
       "url": "https://livepocket.jp/e/zv6gu",
       "store_name": "ふるいちトップブックス東松山店",
       "prefecture": "埼玉県",
+      "event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-23T11:30:06.533000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちトップブックス東松山店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（30th CELEBRATION）",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-23T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-23T11:35:58.013964+00:00"
     }
   ],
-  "updated_at": "2026-10-23T11:45:32.044987+00:00"
+  "updated_at": "2026-10-23T11:45:59.785582+00:00"
 }
