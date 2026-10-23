@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_81-store-add-no-autofocus">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_82-shared-lottery-results">
 
   <style>
     [hidden] { display: none !important; }
@@ -729,6 +729,73 @@ nav[aria-label="メインメニュー"] {
       <p class="hint">応募状況・締切は取得済み情報に基づきます。内容や応募条件は各イベントの公式ページでご確認ください。</p>
     </section>
 
+
+    <!-- v21.82: Voluntary group-shared lottery applications and results. -->
+    <section id="lotteryResultsView" class="view" aria-labelledby="lpResultsHeading">
+      <div class="lp-heading">
+        <div>
+          <h2 id="lpResultsHeading">🏆 抽選結果</h2>
+          <p class="hint">誰が応募・当選したかを共有します。登録は本人の意思で行い、個人用「抽選管理」の記録は公開しません。</p>
+        </div>
+        <button type="button" id="lpResultsReload" class="lp-refresh">↻ 更新</button>
+      </div>
+      <p id="lpResultsAccount" class="hint"></p>
+      <button type="button" id="lpResultsNew" class="primary lp-results-new">＋ 自分の抽選結果を共有</button>
+      <div class="lp-results-controls">
+        <label>抽選名・ユーザー名・店舗名で検索
+          <input type="search" id="lpResultsSearch" placeholder="抽選名、参加者、店舗名" autocomplete="off" maxlength="120">
+        </label>
+        <label>表示する結果
+          <select id="lpResultsFilter">
+            <option value="all">すべて</option>
+            <option value="applied">応募済み</option>
+            <option value="won">当選</option>
+            <option value="lost">落選</option>
+            <option value="received">受取済み</option>
+          </select>
+        </label>
+      </div>
+      <p id="lpResultsStatus" class="hint" role="status" aria-live="polite">共有結果を読み込んでいます…</p>
+      <div id="lpResultsCounts" class="lp-results-counts"></div>
+      <div id="lpResultsList" class="lp-results-list"></div>
+    </section>
+
+    <dialog id="lpResultsDialog" aria-label="自分の抽選結果を共有">
+      <div class="lp-results-editor">
+        <h3 tabindex="-1" id="lpResultsDialogTitle" autofocus>🏆 自分の抽選結果</h3>
+        <p class="hint">ここで保存した表示名・応募先・当落は、Discordログイン済みの利用者全員に公開されます。他人の記録は編集できません。</p>
+        <form id="lpResultsForm" autocomplete="off">
+          <label>抽選を検索
+            <input id="lpResultsEventSearch" type="search" placeholder="抽選名・店舗名で絞り込み" autocomplete="off">
+          </label>
+          <label>対象の抽選
+            <select id="lpResultsEventSelect" required></select>
+          </label>
+          <p id="lpResultsEventHint" class="hint"></p>
+          <label>公開する表示名
+            <input id="lpResultsName" type="text" maxlength="60" required placeholder="共有用の名前">
+          </label>
+          <label>応募店舗（複数店舗の抽選で指定可能）
+            <input id="lpResultsStore" type="text" maxlength="200" list="lpResultsStoreChoices" placeholder="店舗名（任意）" autocomplete="off">
+            <datalist id="lpResultsStoreChoices"></datalist>
+          </label>
+          <label>応募・抽選結果
+            <select id="lpResultsOutcome" required>
+              <option value="applied">✉️ 応募済み</option>
+              <option value="won">🎉 当選・受取待ち</option>
+              <option value="lost">📪 落選</option>
+              <option value="received">✅ 受取済み</option>
+            </select>
+          </label>
+          <p id="lpResultsEditorStatus" role="status" aria-live="polite"></p>
+          <div class="lp-results-editor-actions">
+            <button type="submit" class="primary">みんなに共有して保存</button>
+            <button type="button" id="lpResultsDelete" hidden>自分の報告を削除</button>
+            <button type="button" id="lpResultsCancel">閉じる</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
 
     <!-- v21.70: User-registered lottery events that live inside mobile apps. -->
     <section id="appLotteryView" class="view" aria-labelledby="lpAppHeading">
@@ -1486,6 +1553,11 @@ nav[aria-label="メインメニュー"] {
       <span>抽選管理</span>
     </button>
 
+    <button type="button" data-tab="lotteryResults" aria-label="みんなの抽選結果を開く">
+      🏆
+      <span>抽選結果</span>
+    </button>
+
     <button
       type="button"
       data-tab="group"
@@ -1521,7 +1593,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_81-store-add-no-autofocus"></script>
+  <script src="app.js?v=20261024-v21_82-shared-lottery-results"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
@@ -1579,7 +1651,7 @@ nav[aria-label="メインメニュー"] {
       // Preserve the visible tab across the full-page refresh.
       var selected = document.querySelector('nav[aria-label="メインメニュー"] button.active[data-tab]');
       var currentTab = selected ? selected.dataset.tab : '';
-      if (/^(map|add|history|lottery|appLottery|lotteryManage|group|dev)$/.test(currentTab)) {
+      if (/^(map|add|history|lottery|appLottery|lotteryManage|lotteryResults|group|dev)$/.test(currentTab)) {
         next.searchParams.set('app_tab',currentTab);
       }
       if(controller)timeout=setTimeout(function(){controller.abort();},12000);

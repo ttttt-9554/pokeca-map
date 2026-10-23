@@ -323,6 +323,7 @@
     if ($('lpCards')) renderLottery();
     refreshWishlistForAccount();
     refreshLotteryTrackerForAccount();
+    lpResultsRefresh(true);
     refreshLotteryOnsiteReports(true);
     refreshLotteryOnsiteArchive(true);
     queueMicrotask(() => friendPresenceAuthChanged());
@@ -369,18 +370,22 @@
     await lpExtRefresh(true);
     await lpCardRefresh(true);
     await lpAppRefresh(true);
+    await lpResultsRefresh(true);
     refreshLotteryOnsiteReports(true);
     refreshLotteryOnsiteArchive(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); lpCardRefresh(true); lpAppRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
+    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); lpCardRefresh(true); lpAppRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); lpResultsRefresh(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
     supabaseClient.channel('pokeca-lottery-card-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
       .subscribe();
     supabaseClient.channel('pokeca-app-lottery-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_APP_TABLE},()=>lpAppRefresh(true))
+      .subscribe();
+    supabaseClient.channel('pokeca-lottery-results-updates')
+      .on('postgres_changes',{event:'*',schema:'public',table:LP_RESULTS_TABLE},()=>lpResultsRefresh(true))
       .subscribe();
     supabaseClient.channel('pokeca-wishlist-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:WISHLIST_TABLE},
@@ -530,6 +535,7 @@
     if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
+    if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); }
     render();
   }
@@ -3592,6 +3598,7 @@
       ${lotteryOnsiteSharedHtml(item.url)}
       ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">アプリ公式案内を確認 ↗</a>':'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>') : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
       ${lotteryTrackerActionsHtml(item)}
+      <div class="lp-result-card-actions"><button type="button" data-lp-results-open="${escape(item.url)}">🏆 結果を共有</button></div>
       ${item.app_lottery&&isDeveloper()&&item.app_lottery_owner!==authUser.id?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">🛠 管理者編集</button></div>':''}
       ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
@@ -3696,6 +3703,10 @@
     $('lpOnsiteArchiveRefresh')?.addEventListener('click',()=>refreshLotteryOnsiteArchive(true));
     renderLotteryOnsiteArchive();
     $('lotteryView').addEventListener('click', lotteryTrackerHandleClick);
+    $('lotteryView').addEventListener('click', event=>{
+      const button=event.target.closest('button[data-lp-results-open]');
+      if(button)lpResultsOpen(button.dataset.lpResultsOpen);
+    });
     // v21.29: The personal-management list lives in a separate view now.
     // Its '管理' buttons need their own delegated click listener.
     $('lotteryManageView').addEventListener('click', lotteryTrackerHandleClick);
@@ -4197,6 +4208,265 @@
   // This data is NEVER added to public LivePocket JSON, reports or Discord.
   // Supabase RLS enforces user_id=auth.uid() for every operation.
   // ========================================
+
+  // v21.82: Community results are an explicit opt-in layer, never a copy of
+  // private lottery_user_entries / lottery_external_user_entries.
+  const LP_RESULTS_TABLE='lottery_shared_results';
+  const LP_RESULTS_STATUSES=['applied','won','lost','received'];
+  const LP_RESULTS_LABELS={applied:'✉️ 応募済み',won:'🎉 当選・受取待ち',lost:'📪 落選',received:'✅ 受取済み'};
+  let lpResultsRows=[],lpResultsLoaded=false,lpResultsBusy=false,lpResultsLastFetch=0;
+  let lpResultsFetchSeq=0,lpResultsEditing='',lpResultsUserId='',lpResultsError='';
+
+  function lpResultsDefaultName(){
+    const meta=authUser?.user_metadata||{};
+    return String(meta.global_name||meta.globalName||meta.custom_claims?.global_name||
+      meta.name||meta.user_name||meta.preferred_username||'Discordユーザー').trim().slice(0,60);
+  }
+  function lpResultsTitle(url){
+    const current=lotteryItems.find(x=>x.url===url);
+    if(current)return lotteryTrackItemName(url);
+    const old=lpResultsRows.find(x=>x.event_url===url);
+    return String(old?.event_title||url);
+  }
+  function lpResultsItemStores(url){
+    const item=lotteryItems.find(x=>x.url===url);
+    return item?lotteryStoreEntries(item):[];
+  }
+  function lpResultsOwn(url){
+    return lpResultsRows.find(x=>x.user_id===authUser?.id&&x.event_url===url)||null;
+  }
+  function lpResultsStoreChoices(url){
+    const datalist=$('lpResultsStoreChoices');
+    const values=[...new Set(lpResultsItemStores(url).map(s=>s.name))];
+    datalist.innerHTML=values.map(x=>'<option value="'+escape(x)+'"></option>').join('');
+    $('lpResultsEventHint').textContent=values.length
+      ? '対象店舗：'+values.slice(0,12).join('・')+(values.length>12?' ほか':'')
+      : '応募店舗がある場合は自由入力できます。';
+  }
+  function lpResultsEventOptions(query='',selected=''){
+    const selector=$('lpResultsEventSelect');
+    if(!selector)return;
+    const term=String(query).trim().toLocaleLowerCase();
+    const current=lotteryItems.filter(x=>!x.app_lottery_hidden&&safeLotteryUrl(x.url));
+    const old=lpResultsRows.filter(x=>safeLotteryUrl(x.event_url))
+      .map(x=>({url:x.event_url,event_title:x.event_title}));
+    const all=new Map([...old,...current].map(x=>[x.url,x]));
+    if(selected&&!all.has(selected)&&safeLotteryUrl(selected))
+      all.set(selected,{url:selected,event_title:lpResultsTitle(selected)});
+    const matches=[...all.values()].filter(x=>!term||
+      (String(x.official_event_title||'')+' '+String(x.event_title||'')+' '+
+       String(x.product_name||'')+' '+String(x.store_name||'')+' '+
+       String(x.url)+' '+lotteryStoreEntries(x).map(s=>s.name).join(' '))
+      .toLocaleLowerCase().includes(term));
+    matches.sort((a,b)=>a.url===selected?-1:b.url===selected?1:
+      (lotteryFirstSeenTime(b)||0)-(lotteryFirstSeenTime(a)||0));
+    const visible=matches.slice(0,200);
+    selector.innerHTML='<option value="">抽選を選択してください</option>'+
+      visible.map(x=>'<option value="'+escape(x.url)+'">'+escape(
+        String(x.official_event_title||x.product_name||x.event_title||x.store_name||x.url).slice(0,120)
+      )+'</option>').join('');
+    selector.value=visible.some(x=>x.url===selected)?selected:'';
+    const hint=$('lpResultsEventHint');
+    if(!selector.value)hint.textContent=matches.length
+      ? '候補 '+matches.length+'件。検索欄で絞り込んでください。'
+      : '該当する抽選がありません。先に「抽選」タブで登録状況を確認してください。';
+    else lpResultsStoreChoices(selected);
+  }
+  function lpResultsAccount(){
+    const target=$('lpResultsAccount');
+    if(!target)return;
+    target.textContent=!supabaseClient?'共有サーバーへ接続できません。':
+      !authUser?'閲覧・登録には「共有」タブからDiscordログインしてください。':
+      'Discordログイン済み：自分で共有した抽選結果のみ編集できます。';
+    $('lpResultsNew').disabled=!authUser||!supabaseClient;
+  }
+  async function lpResultsRefresh(force=false){
+    const uid=authUser?.id||'';
+    lpResultsAccount();
+    if(!supabaseClient||!uid){
+      ++lpResultsFetchSeq;lpResultsRows=[];lpResultsLoaded=false;
+      lpResultsUserId='';lpResultsError='';lpResultsRender();return false;
+    }
+    if(!force&&lpResultsLoaded&&lpResultsUserId===uid&&Date.now()-lpResultsLastFetch<30000)return true;
+    const seq=++lpResultsFetchSeq;
+    lpResultsUserId=uid;
+    const status=$('lpResultsStatus');
+    if(status)status.textContent='みんなの抽選結果を読み込み中…';
+    try{
+      const {data,error}=await supabaseClient.from(LP_RESULTS_TABLE)
+        .select('user_id,event_url,event_title,store_name,display_name,status,updated_at')
+        .order('updated_at',{ascending:false}).limit(3000);
+      if(error)throw error;
+      if(seq!==lpResultsFetchSeq||authUser?.id!==uid)return false;
+      lpResultsRows=(data||[]).filter(r=>safeLotteryUrl(r.event_url)&&
+        LP_RESULTS_STATUSES.includes(r.status));
+      lpResultsLoaded=true;lpResultsLastFetch=Date.now();lpResultsError='';
+      lpResultsRender();return true;
+    }catch(error){
+      if(seq!==lpResultsFetchSeq||authUser?.id!==uid)return false;
+      lpResultsError=String(error?.message||error);
+      lpResultsRender();return false;
+    }
+  }
+  function lpResultsRender(){
+    const status=$('lpResultsStatus'),counts=$('lpResultsCounts'),list=$('lpResultsList');
+    if(!status||!counts||!list)return;
+    lpResultsAccount();
+    if(!authUser||!supabaseClient){
+      status.textContent='Discordでログインすると、みんなが共有した応募・当落結果を確認できます。';
+      counts.replaceChildren();list.innerHTML='<p class="hint">「共有」タブからログインしてください。</p>';
+      return;
+    }
+    if(lpResultsError)status.textContent='⚠ 読み込みに失敗しました：'+lpResultsError;
+    else status.textContent='共有結果 '+lpResultsRows.length+'件'+
+      (lpResultsRows.length===3000?'（最大3000件まで表示）':'')+
+      ' ／ 本人が共有した記録です。公式の当選確認とは異なります。';
+    const totals=k=>lpResultsRows.filter(x=>x.status===k).length;
+    counts.innerHTML='<span>👥 応募報告 '+lpResultsRows.length+'件</span>'+
+      '<span>🎉 当選 '+totals('won')+'件</span>'+
+      '<span>📪 落選 '+totals('lost')+'件</span>'+
+      '<span>✅ 受取済み '+totals('received')+'件</span>';
+    const term=String($('lpResultsSearch').value||'').trim().toLocaleLowerCase();
+    const filter=$('lpResultsFilter').value;
+    const filtered=lpResultsRows.filter(x=>(filter==='all'||x.status===filter)&&
+      (!term||(lpResultsTitle(x.event_url)+' '+x.event_title+' '+x.display_name+' '+
+        x.store_name+' '+x.event_url).toLocaleLowerCase().includes(term)));
+    const byEvent=new Map();
+    for(const record of filtered){
+      if(!byEvent.has(record.event_url))byEvent.set(record.event_url,[]);
+      byEvent.get(record.event_url).push(record);
+    }
+    const cards=[...byEvent].sort((a,b)=>String(b[1][0]?.updated_at||'')
+      .localeCompare(String(a[1][0]?.updated_at||''))).slice(0,100);
+    list.innerHTML=cards.length?cards.map(([url,rows])=>{
+      const sum=key=>rows.filter(x=>x.status===key).length;
+      const title=lpResultsTitle(url);
+      const own=lpResultsOwn(url);
+      const names=rows.map(x=>'<li class="lp-results-person">'+
+        '<strong>'+escape(x.display_name)+'</strong>'+
+        '<span class="lp-results-outcome lp-result-'+escape(x.status)+'">'+
+          escape(LP_RESULTS_LABELS[x.status])+'</span>'+
+        (x.store_name?'<small>🏬 '+escape(x.store_name)+'</small>':'')+
+        (x.user_id===authUser?.id?'<button type="button" data-lp-results-edit="'+escape(url)+'">自分の報告を編集</button>':'')+
+        '</li>').join('');
+      return '<article class="lp-results-card">'+
+        '<h3>'+escape(title)+'</h3>'+
+        '<div class="lp-results-card-summary"><span>👥 '+rows.length+'人</span>'+
+        '<span>🎉 当選 '+sum('won')+'人</span>'+
+        '<span>📪 落選 '+sum('lost')+'人</span>'+
+        '<span>✅ 受取済み '+sum('received')+'人</span></div>'+
+        '<details><summary>参加者 '+rows.length+'人の結果を見る</summary>'+
+        '<ul class="lp-results-people">'+names+'</ul></details>'+
+        '<div class="lp-results-card-footer"><a href="'+escape(url)+'" target="_blank" rel="noopener noreferrer">抽選ページを開く ↗</a>'+
+        '<button type="button" data-lp-results-edit="'+escape(url)+'">'+
+          (own?'自分の結果を変更':'この抽選に結果を登録')+'</button></div>'+
+        '</article>';
+    }).join('')+(byEvent.size>100?'<p class="hint">最初の100抽選を表示しています。検索で絞り込んでください。</p>':''):
+      '<p class="hint">'+(lpResultsRows.length?'条件に一致する結果はありません。':'共有された抽選結果はまだありません。最初の結果を登録できます。')+'</p>';
+  }
+  function lpResultsOpen(url=''){
+    if(!supabaseClient||!authUser){
+      alert('結果を共有するにはDiscordログインが必要です。「共有」タブでログインしてください。');
+      switchTab('group');return;
+    }
+    const dialog=$('lpResultsDialog');
+    const form=$('lpResultsForm');
+    if(!dialog||dialog.open)return;
+    form.reset();
+    lpResultsEditing='';
+    $('lpResultsEventSearch').value='';
+    lpResultsEventOptions('',url);
+    const chosen=$('lpResultsEventSelect').value;
+    lpResultsSetSelected(chosen);
+    $('lpResultsEditorStatus').textContent='';
+    dialog.showModal();
+    $('lpResultsDialogTitle')?.focus({preventScroll:true});
+  }
+  function lpResultsSetSelected(url){
+    lpResultsEditing=url;
+    const old=lpResultsOwn(url);
+    const personal=lotteryTrackRecord(url);
+    $('lpResultsName').value=old?.display_name||lpResultsDefaultName();
+    $('lpResultsStore').value=old?.store_name||'';
+    $('lpResultsOutcome').value=old?.status||
+      (personal&&LP_RESULTS_STATUSES.includes(personal.status)?personal.status:'applied');
+    $('lpResultsDelete').hidden=!old;
+    if(url)lpResultsStoreChoices(url);
+  }
+  async function lpResultsSave(event){
+    event.preventDefault();
+    if(lpResultsBusy||!authUser||!supabaseClient)return;
+    const url=$('lpResultsEventSelect').value;
+    const name=$('lpResultsName').value.trim(),store=$('lpResultsStore').value.trim();
+    const result=$('lpResultsOutcome').value;
+    const message=$('lpResultsEditorStatus');
+    if(!safeLotteryUrl(url)||!name||name.length>60||store.length>200||!LP_RESULTS_STATUSES.includes(result)){
+      message.textContent='⚠ 抽選・表示名・結果を確認してください。';return;
+    }
+    const own=lpResultsOwn(url);
+    const item=lotteryItems.find(x=>x.url===url);
+    const title=String(item?lotteryTrackItemName(url):own?.event_title||lpResultsTitle(url)).slice(0,200);
+    const uid=authUser.id;
+    lpResultsBusy=true;lpResultsToggleButtons(true);
+    message.textContent='みんなの共有結果へ保存しています…';
+    try{
+      const {data,error}=await supabaseClient.from(LP_RESULTS_TABLE).upsert({
+        user_id:uid,event_url:url,event_title:title,store_name:store,
+        display_name:name,status:result,updated_at:new Date().toISOString()
+      },{onConflict:'user_id,event_url'})
+        .select('user_id,event_url,status').single();
+      if(error)throw error;
+      if(data?.user_id!==uid||data?.event_url!==url)throw Error('保存の確認ができません');
+      if(authUser?.id!==uid)return;
+      if(!await lpResultsRefresh(true))throw Error('保存後の再取得に失敗しました');
+      $('lpResultsDialog').close();
+      lpResultsRender();
+    }catch(error){
+      if(authUser?.id===uid)message.textContent='⚠ 保存に失敗：'+String(error?.message||error);
+    }finally{lpResultsBusy=false;lpResultsToggleButtons(false);}
+  }
+  function lpResultsToggleButtons(busy){
+    $('lpResultsForm').querySelectorAll('button').forEach(x=>x.disabled=busy);
+  }
+  async function lpResultsDelete(){
+    const url=$('lpResultsEventSelect').value;
+    const own=lpResultsOwn(url);
+    if(!own||lpResultsBusy||!authUser||!supabaseClient)return;
+    if(!confirm('自分が共有した抽選結果を削除しますか？ 個人用の応募管理記録は残ります。'))return;
+    const uid=authUser.id;
+    lpResultsBusy=true;lpResultsToggleButtons(true);
+    const message=$('lpResultsEditorStatus');
+    message.textContent='削除しています…';
+    try{
+      const {data,error}=await supabaseClient.from(LP_RESULTS_TABLE)
+        .delete().eq('user_id',uid).eq('event_url',url).select('event_url');
+      if(error)throw error;
+      if(!data?.some(x=>x.event_url===url))throw Error('削除を確認できませんでした');
+      if(authUser?.id!==uid)return;
+      if(!await lpResultsRefresh(true))throw Error('削除後の再取得に失敗しました');
+      $('lpResultsDialog').close();
+    }catch(error){
+      if(authUser?.id===uid)message.textContent='⚠ 削除に失敗：'+String(error?.message||error);
+    }finally{lpResultsBusy=false;lpResultsToggleButtons(false);}
+  }
+  function lpResultsInit(){
+    $('lpResultsReload').addEventListener('click',()=>lpResultsRefresh(true));
+    $('lpResultsNew').addEventListener('click',()=>lpResultsOpen());
+    $('lpResultsSearch').addEventListener('input',lpResultsRender);
+    $('lpResultsFilter').addEventListener('change',lpResultsRender);
+    $('lpResultsList').addEventListener('click',e=>{
+      const button=e.target.closest('button[data-lp-results-edit]');
+      if(button)lpResultsOpen(button.dataset.lpResultsEdit);
+    });
+    $('lpResultsEventSearch').addEventListener('input',e=>
+      lpResultsEventOptions(e.target.value,$('lpResultsEventSelect').value));
+    $('lpResultsEventSelect').addEventListener('change',e=>lpResultsSetSelected(e.target.value));
+    $('lpResultsForm').addEventListener('submit',lpResultsSave);
+    $('lpResultsDelete').addEventListener('click',lpResultsDelete);
+    $('lpResultsCancel').addEventListener('click',()=>$('lpResultsDialog').close());
+    lpResultsAccount();lpResultsRender();
+  }
+
   const LP_TRACK_TABLE = 'lottery_user_entries';
   const LP_EXT_TRACK_TABLE = 'lottery_external_user_entries';
   function lotteryTrackTableFor(url){
@@ -6776,6 +7046,7 @@
       initLotteryDevRecheck();
       initFriendPresence();
       initLottery();
+      lpResultsInit();
       bindEvents();
       initDevAccordions();
 
@@ -6791,7 +7062,7 @@
         const currentUrl = new URL(window.location.href);
         const requestedTab = currentUrl.searchParams.has('app_refresh')
           ? currentUrl.searchParams.get('app_tab') : null;
-        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','group','dev'];
+        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','lotteryResults','group','dev'];
         if (allowedTabs.includes(requestedTab)) {
           if (requestedTab === 'dev') restoreDeveloperTabPending = true;
           else initialTab = requestedTab;
