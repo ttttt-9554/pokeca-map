@@ -14282,7 +14282,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "checked_at": "2026-10-23T09:16:23.634884+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1rf7i": {
@@ -14314,12 +14314,12 @@
           "status": "checked_title_deadline"
         },
         "https://livepocket.jp/e/mz__o": {
-          "checked_at": "2026-10-23T09:06:40.531328+00:00",
-          "status": "checked_title_product_deadline"
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/exmkt": {
-          "checked_at": "2026-10-23T09:06:40.531328+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ng31e": {
           "checked_at": "2026-10-23T10:36:18.233145+00:00",
@@ -14937,7 +14937,7 @@
         "https://livepocket.jp/e/fdhbjwub5y": {
           "detected_at": "2026-10-23T03:00:58.955190+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T09:16:23.634884+00:00"
+          "checked_at": "2026-10-23T15:16:31.553110+00:00"
         },
         "https://livepocket.jp/e/1rf7i": {
           "detected_at": "2026-10-23T03:30:57.093702+00:00",
@@ -14976,13 +14976,13 @@
         },
         "https://livepocket.jp/e/exmkt": {
           "detected_at": "2026-10-23T09:05:59.887396+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T09:06:40.531328+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00"
         },
         "https://livepocket.jp/e/mz__o": {
           "detected_at": "2026-10-23T09:05:59.887396+00:00",
-          "status": "checked_title_product_deadline",
-          "checked_at": "2026-10-23T09:06:40.531328+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00"
         },
         "https://livepocket.jp/e/126bw": {
           "detected_at": "2026-10-23T10:35:57.574036+00:00",
@@ -15560,8 +15560,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T09:16:23.634884+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-23T15:16:31.553110+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1rf7i": {
@@ -15587,6 +15587,16 @@
         "https://livepocket.jp/e/tapjp": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T12:06:24.293343+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/mz__o": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T15:16:31.553110+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/exmkt": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T15:16:31.553110+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18810,7 +18820,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T09:16:23.634884+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -18898,7 +18908,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T09:06:40.531328+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "title_observed": "【晴れる屋】『マジック：ザ・ギャザリング | スター・トレック』 Collector's Edition Commander Deck 4種セット (●英語版) 抽選申し込み受付",
           "genre": "",
           "product_origin": "v14_livepocket_explicit_product_label",
@@ -18909,7 +18919,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T09:06:40.531328+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "title_observed": "ポケカ抽選販売(30th)",
           "genre": "pokemon",
           "product_origin": "",
@@ -21040,7 +21050,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "checked_at": "2026-10-23T09:16:23.634884+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -21144,7 +21154,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/mz__o": {
-          "checked_at": "2026-10-23T09:06:40.531328+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -21157,7 +21167,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/exmkt": {
-          "checked_at": "2026-10-23T09:06:40.531328+00:00",
+          "checked_at": "2026-10-23T15:16:31.553110+00:00",
           "reason": "official_title_detected",
           "candidate_count": 2,
           "valid_candidate_count": 1,
