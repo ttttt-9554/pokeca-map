@@ -4321,9 +4321,9 @@
     else status.textContent='共有結果 '+lpResultsRows.length+'件'+
       (lpResultsRows.length===3000?'（最大3000件まで表示）':'')+
       ' ／ 本人が共有した記録です。公式の当選確認とは異なります。';
-    const totals=k=>lpResultsRows.filter(x=>x.status===k).length;
+    const totals=k=>lpResultsRows.filter(x=>k==='won' ? (x.status==='won'||x.status==='received') : x.status===k).length;
     counts.innerHTML='<span>👥 応募報告 '+lpResultsRows.length+'件</span>'+
-      '<span>🎉 当選 '+totals('won')+'件</span>'+
+      '<span>🎉 当選（受取済み含む） '+totals('won')+'件</span>'+
       '<span>📪 落選 '+totals('lost')+'件</span>'+
       '<span>✅ 受取済み '+totals('received')+'件</span>';
     const term=String($('lpResultsSearch').value||'').trim().toLocaleLowerCase();
@@ -4339,7 +4339,7 @@
     const cards=[...byEvent].sort((a,b)=>String(b[1][0]?.updated_at||'')
       .localeCompare(String(a[1][0]?.updated_at||''))).slice(0,100);
     list.innerHTML=cards.length?cards.map(([url,rows])=>{
-      const sum=key=>rows.filter(x=>x.status===key).length;
+      const sum=key=>rows.filter(x=>key==='won' ? (x.status==='won'||x.status==='received') : x.status===key).length;
       const title=lpResultsTitle(url);
       const own=lpResultsOwn(url);
       const names=rows.map(x=>'<li class="lp-results-person">'+
@@ -4352,7 +4352,7 @@
       return '<article class="lp-results-card">'+
         '<h3>'+escape(title)+'</h3>'+
         '<div class="lp-results-card-summary"><span>👥 '+rows.length+'人</span>'+
-        '<span>🎉 当選 '+sum('won')+'人</span>'+
+        '<span>🎉 当選（受取済み含む） '+sum('won')+'人</span>'+
         '<span>📪 落選 '+sum('lost')+'人</span>'+
         '<span>✅ 受取済み '+sum('received')+'人</span></div>'+
         '<details><summary>参加者 '+rows.length+'人の結果を見る</summary>'+
