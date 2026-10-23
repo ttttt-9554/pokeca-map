@@ -15,7 +15,10 @@ API = "https://discord.com/api/v10"
 RE = re.compile(r'https?://[^\s<>"\x27\u3000]+', re.I)
 LP = re.compile(r"^https?://(?:www\.)?livepocket\.jp/e/[A-Za-z0-9_-]{4,64}/?$", re.I)
 BLOCK = ("x.com", "twitter.com", "t.co", "fxtwitter.com",
-         "vxtwitter.com", "fixupx.com")
+         "vxtwitter.com", "fixupx.com",
+         # v21.77: Discord notifications link back to this app; these are not
+         # external lottery source URLs and must not be re-imported.
+         "ttttt-9554.github.io")
 PREFS = ("北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県",
  "栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県",
  "石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県",
