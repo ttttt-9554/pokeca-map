@@ -3457,7 +3457,7 @@
         <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
         <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small></li>`).join('')}</ul>
       </details>` : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
-    return `<article class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}">
+    return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}">
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
         ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
@@ -3681,6 +3681,7 @@
       first_detected_at:row.created_at,created_at:row.created_at
     };
   }
+  let lpAppDeepLinkId='';
   function lpAppCanEdit(item){
     return !!authUser&&(isDeveloper()||item?.app_lottery_owner===authUser.id);
   }
@@ -3694,6 +3695,13 @@
     ];
     lpCloudApply();
     lpAppRender();
+    if(lpAppDeepLinkId){
+      const linked=lpAppRows.get(lpAppDeepLinkId);
+      if(linked&&!linked.is_hidden){
+        lpAppViewInLottery(lpAppDeepLinkId);
+        lpAppDeepLinkId='';
+      }
+    }
   }
   async function lpAppRefresh(force=false){
     if(!supabaseClient){
@@ -4004,7 +4012,9 @@
 
   function lpAppViewInLottery(id){
     const row=lpAppRows.get(id);
-    if(!row||row.is_hidden||row.created_by!==authUser?.id)return;
+    if(!row||row.is_hidden)return;
+    // Discord notifications must open this publicly visible lottery card,
+    // not the registration/editor tab. No login is needed just to view.
     // Show this app's card even if the Lottery tab was previously filtered to
     // LivePocket, a prefecture, a different genre or "受付中".
     $('lpQuery').value=row.event_title||'';
@@ -4018,6 +4028,9 @@
     lotteryVisibleLimit=LP_PAGE_SIZE;
     switchTab('lottery');
     renderLottery();
+    const card=[...$('lpCards').querySelectorAll('article[data-lp-event-url]')]
+      .find(el=>el.dataset.lpEventUrl===lpAppUrl(id));
+    try{card?.scrollIntoView({block:'start',behavior:'smooth'});}catch(_){}
   }
 
   function lpAppInitUI(){
@@ -6675,7 +6688,19 @@
       } catch (error) {
         console.warn('更新時のタブ復元をスキップ:', error);
       }
-      try { if(/^[0-9a-f-]{36}$/i.test(new URL(window.location.href).searchParams.get('app_lottery')||'')) initialTab='appLottery'; } catch(_) {}
+      try {
+        const linkedId=new URL(window.location.href).searchParams.get('app_lottery')||'';
+        if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(linkedId)){
+          lpAppDeepLinkId=linkedId;
+          initialTab='lottery';
+          $('lpSite').value='app';
+          $('lpStatus').value='all';
+          $('lpGenre').value='all';
+          $('lpType').value='all';
+          $('lpPrefecture').value='all';
+          $('lpQuery').value='';
+        }
+      }catch(_) {}
       switchTab(initialTab);
 
       loadStoreCSV();
