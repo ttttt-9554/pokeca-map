@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-23T04:50:54.189317+00:00",
+  "collected_at": "2026-10-23T06:05:36.588441+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 450,
+  "unique_livepocket_urls": 451,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11862,34 +11862,64 @@
       "event_title": "【HMVトレカショップ】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】【抽選販売】",
       "application_end_at": "2026-10-25T20:59:00+09:00",
       "application_start_at": "2026-10-23T13:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/tapjp",
+      "discord_message_id": "1563069544539496448",
+      "discord_posted_at": "2026-10-23T06:00:19.846000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 15時まとめ】\n\n🔁 再通知\n📍東京都\nTSUTAYA TRADING CARD錦糸町\n受付終了: 10/25 21:00（残り2日5時間）\nhttps://livepocket.jp/e/uenut\n\n🔁 再通知\n📍神奈川県\nふるいちイオンモール大和店\n受付終了: 10/23 21:00（残り5時間59分）\nhttps://livepocket.jp/e/ygkk_\n\n🔁 再通知\n📍神奈川県\nふるいちイオンモール大和店\n受付終了: 10/23 21:00（残り5時間59分）\nhttps://livepocket.jp/e/r8mus\n\n🔁 再通知\n📍神奈川県\nふるいちイオンモール大和店\n受付終了: 10/23 21:00（残り5時間59分）\nhttps://livepocket.jp/e/0rw9z\n\n📍神奈川県\nふるいちトップブックス港北ミナモ店\n受付終了: 10/25 22:00（残り2日6時間）\nhttps://livepocket.jp/e/tapjp\n\n📍千葉県\nTSUTAYA二十世紀が丘店\n受付終了: 10/25 21:45（残り2日6時間）\nhttps://livepocket.jp/e/bt5ty\n\n🔁 再通知\n📍埼玉県\n古本市場川口伊刈店\n受付終了: 10/24 22:00（残り1日6時間）\nhttps://livepocket.jp/e/ija-d\n\n🔁 再通知\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日6時間）\nhttps://livepocket.jp/e/txclv\n\n🔁 再通知\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日6時間）\nhttps://livepocket.jp/e/ayuy4\n\n🔁 再通知\n📍茨城県\nTSUTAYA鹿嶋南店\n受付終了: 10/26 21:00（残り3日5時間）\nhttps://livepocket.jp/e/mdxh9\n\n🔁 再通知\n📍群馬県\nふるいちトップブックスいせさきガーデンズ店\n受付終了: 10/25 22:00（残り2日6時間）\nhttps://livepocket.jp/e/d59un\n\n📍群馬県\nふるいちトップブックスいせさきガーデンズ店\n受付終了: 10/25 22:00（残り2日6時間）\nhttps://livepocket.jp/e/x-26x\n\n📍宮城県\nヤマト屋書店TSUTAYAあけぼの店\n受付終了: 10/25 23:59（残り2日8時間）\nhttps://livepocket.jp/e/jfpl7\n\n🔁 再通知\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日8時間）\nhttps://livepocket.jp/e/1wqyobvsi_\n\n🔁 再通知\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日8時間）\nhttps://livepocket.jp/e/h0r8an9sy9\n\n🔁 再通知\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日8時間）\nhttps://livepocket.jp/e/fdhbjwub5y\n\n📍都道府県不明\nイトーヨーカドー\nhttps://livepocket.jp/e/1rf7i\n\n📍都道府県不明\nHMVトレカショップ\n受付終了: 10/25 20:59（残り2日5時間）\nhttps://livepocket.jp/e/k1y8y",
+      "store_name": "ふるいちトップブックス港北ミナモ店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス港北ミナモ店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックス港北ミナモ店】ポケカ抽選販売(30thCELEBRATIONカードセット9種セット)",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 297,
+    "parsed": 298,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 289,
-    "prefecture": 252,
-    "event_title": 137,
+    "store_name": 290,
+    "prefecture": 253,
+    "event_title": 138,
     "event_date": 1,
     "product_name": 68,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 420,
-    "application_start_at": 420,
-    "stores_events": 295
+    "application_end_at": 421,
+    "application_start_at": 421,
+    "stores_events": 296
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563046848095064104"
+      "1551580466266644552": "1563069544539496448"
     },
     "last_run": {
-      "checked_at": "2026-10-23T04:50:54.189317+00:00",
-      "new_urls": 3,
-      "original_urls": 447,
+      "checked_at": "2026-10-23T06:05:36.588441+00:00",
+      "new_urls": 1,
+      "original_urls": 450,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -12001,7 +12031,8 @@
         "1563024243263017051": "2026-10-23T03:00:58.125861+00:00",
         "1563031740010995807": "2026-10-23T03:30:56.433387+00:00",
         "1563039291880251432": "2026-10-23T04:00:56.797130+00:00",
-        "1563046848095064104": "2026-10-23T04:50:54.781448+00:00"
+        "1563046848095064104": "2026-10-23T04:50:54.781448+00:00",
+        "1563069544539496448": "2026-10-23T06:05:37.337725+00:00"
       },
       "checked_search_urls": {}
     },
@@ -13813,6 +13844,10 @@
         "https://livepocket.jp/e/bt5ty": {
           "checked_at": "2026-10-23T04:51:22.846303+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/tapjp": {
+          "checked_at": "2026-10-23T06:06:12.978690+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -14412,6 +14447,11 @@
           "detected_at": "2026-10-23T04:50:55.469425+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-23T04:51:22.846303+00:00"
+        },
+        "https://livepocket.jp/e/tapjp": {
+          "detected_at": "2026-10-23T06:05:38.114711+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T06:06:12.978690+00:00"
         }
       },
       "pending_new_urls": []
@@ -18155,6 +18195,17 @@
           "product_origin": "v21_9_official_title_quoted_tcg_product",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/tapjp": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T06:06:12.978690+00:00",
+          "title_observed": "【ふるいちトップブックス港北ミナモ店】ポケカ抽選販売(30thCELEBRATIONカードセット9種セット)",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -20225,6 +20276,19 @@
         },
         "https://livepocket.jp/e/bt5ty": {
           "checked_at": "2026-10-23T04:51:22.846303+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/tapjp": {
+          "checked_at": "2026-10-23T06:06:12.978690+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
