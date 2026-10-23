@@ -13907,8 +13907,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "checked_at": "2026-10-23T03:04:56.761140+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T09:16:23.634884+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1rf7i": {
           "checked_at": "2026-10-23T03:31:22.549708+00:00",
@@ -14517,8 +14517,8 @@
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
           "detected_at": "2026-10-23T03:00:58.955190+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T03:04:56.761140+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T09:16:23.634884+00:00"
         },
         "https://livepocket.jp/e/1rf7i": {
           "detected_at": "2026-10-23T03:30:57.093702+00:00",
@@ -15083,6 +15083,11 @@
         "https://livepocket.jp/e/13r44": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T08:36:19.677915+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/fdhbjwub5y": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T09:16:23.634884+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -18306,7 +18311,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T03:04:56.761140+00:00",
+          "checked_at": "2026-10-23T09:16:23.634884+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -20415,7 +20420,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "checked_at": "2026-10-23T03:04:56.761140+00:00",
+          "checked_at": "2026-10-23T09:16:23.634884+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
