@@ -3467,7 +3467,7 @@
       <h3 class="lp-full-title">${escape(label)}</h3>
       ${lpCardOverrides.get(item.url)?.edited_fields?.includes('product_name') && item.product_name && item.product_name !== label ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
       ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
-      ${item.app_lottery?'<p class="lp-store-muted">📱 ユーザー登録のアプリ内抽選（公式情報は各アプリで確認）</p>':''}
+      ${item.app_lottery?'<p class="lp-store-muted lp-app-name">📱 アプリ名：<strong>'+escape(String(item.app_lottery_name||'未設定'))+'</strong><span>（アプリ内抽選・公式情報はアプリ内で確認）</span></p>':''}
       ${item.app_lottery_details?'<p class="lp-store-muted">共有メモ：'+escape(item.app_lottery_details)+'</p>':''}
       ${state === 'unavailable' ? '<p class="lp-missing-notice">'+(item.app_lottery_hidden?'📁 このアプリ抽選は一覧から非表示です。過去の応募履歴は保持しています。':'⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。')+'</p>' : ''}
       ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
