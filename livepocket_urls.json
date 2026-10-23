@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-23T12:45:56.829270+00:00",
+  "collected_at": "2026-10-23T13:05:57.706911+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 462,
+  "unique_livepocket_urls": 463,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12263,34 +12263,64 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ogn4x",
+      "discord_message_id": "1563175192434450503",
+      "discord_posted_at": "2026-10-23T13:00:08.267000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場与野本町店\n受付終了: 10/25 22:00（残り1日23時間）\nhttps://livepocket.jp/e/ogn4x",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場与野本町店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場与野本町店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION ）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 308,
+    "parsed": 309,
     "no_structured_details": 154
   },
   "field_counts": {
-    "store_name": 299,
-    "prefecture": 262,
-    "event_title": 149,
+    "store_name": 300,
+    "prefecture": 263,
+    "event_title": 150,
     "event_date": 1,
     "product_name": 71,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 433,
-    "application_start_at": 433,
-    "stores_events": 306
+    "application_end_at": 434,
+    "application_start_at": 434,
+    "stores_events": 307
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563171432291246102"
+      "1551580466266644552": "1563175192434450503"
     },
     "last_run": {
-      "checked_at": "2026-10-23T12:45:56.829270+00:00",
+      "checked_at": "2026-10-23T13:05:57.706911+00:00",
       "new_urls": 1,
-      "original_urls": 461,
+      "original_urls": 462,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -12410,7 +12440,8 @@
         "1563152535919796224": "2026-10-23T11:35:57.307710+00:00",
         "1563160156165111882": "2026-10-23T12:05:57.612712+00:00",
         "1563167644310577253": "2026-10-23T12:35:57.292630+00:00",
-        "1563171432291246102": "2026-10-23T12:45:57.549053+00:00"
+        "1563171432291246102": "2026-10-23T12:45:57.549053+00:00",
+        "1563175192434450503": "2026-10-23T13:05:58.440364+00:00"
       },
       "checked_search_urls": {}
     },
@@ -14164,7 +14195,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/uenut": {
-          "checked_at": "2026-10-23T07:06:26.160667+00:00",
+          "checked_at": "2026-10-23T13:06:27.552873+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/r8mus": {
@@ -14269,6 +14300,10 @@
         },
         "https://livepocket.jp/e/3v6ni": {
           "checked_at": "2026-10-23T12:46:22.569268+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/ogn4x": {
+          "checked_at": "2026-10-23T13:06:27.552873+00:00",
           "status": "checked_title_deadline"
         }
       }
@@ -14808,7 +14843,7 @@
         "https://livepocket.jp/e/uenut": {
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T07:06:26.160667+00:00"
+          "checked_at": "2026-10-23T13:06:27.552873+00:00"
         },
         "https://livepocket.jp/e/ygkk_": {
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
@@ -14929,6 +14964,11 @@
           "detected_at": "2026-10-23T12:45:58.330512+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-23T12:46:22.569268+00:00"
+        },
+        "https://livepocket.jp/e/ogn4x": {
+          "detected_at": "2026-10-23T13:05:59.608580+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T13:06:27.552873+00:00"
         }
       },
       "pending_new_urls": []
@@ -15406,8 +15446,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/uenut": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T07:06:26.160667+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-23T13:06:27.552873+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/r8mus": {
@@ -18602,7 +18642,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T07:06:26.160667+00:00",
+          "checked_at": "2026-10-23T13:06:27.552873+00:00",
           "title_observed": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -18892,6 +18932,17 @@
           "title_observed": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ogn4x": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T13:06:27.552873+00:00",
+          "title_observed": "【古本市場与野本町店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION ）",
+          "genre": "pokemon",
+          "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
         }
@@ -20781,7 +20832,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/uenut": {
-          "checked_at": "2026-10-23T07:06:26.160667+00:00",
+          "checked_at": "2026-10-23T13:06:27.552873+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -21120,6 +21171,19 @@
         },
         "https://livepocket.jp/e/3v6ni": {
           "checked_at": "2026-10-23T12:46:22.569268+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ogn4x": {
+          "checked_at": "2026-10-23T13:06:27.552873+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

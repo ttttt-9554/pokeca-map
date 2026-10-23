@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T12:45:56.829270+00:00",
-  "unique_livepocket_urls": 462,
+  "collected_at": "2026-10-23T13:05:57.706911+00:00",
+  "unique_livepocket_urls": 463,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5854,6 +5854,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
       "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
     },
     {
@@ -6458,7 +6460,29 @@
         }
       ],
       "first_detected_at": "2026-10-23T12:45:58.330512+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ogn4x",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-23T13:00:08.267000+00:00",
+      "stores": [
+        {
+          "name": "古本市場与野本町店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場与野本町店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION ）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION ）",
+      "first_detected_at": "2026-10-23T13:05:59.608580+00:00"
     }
   ],
-  "updated_at": "2026-10-23T12:55:59.270888+00:00"
+  "updated_at": "2026-10-23T13:06:27.552873+00:00"
 }
