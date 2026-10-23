@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T12:35:56.583314+00:00",
-  "unique_livepocket_urls": 461,
+  "collected_at": "2026-10-23T12:45:56.829270+00:00",
+  "unique_livepocket_urls": 462,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5790,6 +5790,7 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_event_title": "ヒロインズエディション EB-05",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     },
     {
@@ -5833,6 +5834,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     },
     {
@@ -6383,24 +6386,84 @@
       "url": "https://livepocket.jp/e/vj35o",
       "store_name": "ふるいちトップブックス東松山店",
       "prefecture": "埼玉県",
+      "event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-23T12:30:08.654000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちトップブックス東松山店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（ストームエメラルダ）",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-23T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-23T12:35:58.135659+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3v6ni",
+      "discord_posted_at": "2026-10-23T12:45:11.779000+00:00",
+      "event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-23T11:50:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": ""
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": ""
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": ""
+        }
+      ],
+      "product_name": "ポケモンカードゲームMEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
+      "first_detected_at": "2026-10-23T12:45:58.330512+00:00"
     }
   ],
-  "updated_at": "2026-10-23T12:36:24.641930+00:00"
+  "updated_at": "2026-10-23T12:46:22.569268+00:00"
 }
