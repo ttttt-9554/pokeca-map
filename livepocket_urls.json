@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-23T01:00:40.459096+00:00",
+  "collected_at": "2026-10-23T01:30:56.005178+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 439,
+  "unique_livepocket_urls": 443,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11471,34 +11471,157 @@
       "event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（30th CELEBRATION）",
       "application_end_at": "2026-10-24T22:00:00+09:00",
       "application_start_at": "2026-10-22T15:03:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/txclv",
+      "discord_message_id": "1563001537352044555",
+      "discord_posted_at": "2026-10-23T01:30:05.669000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/txclv\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/ayuy4\n\n📍群馬県\nふるいちトップブックスいせさきガーデンズ店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/d59un\n\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日13時間）\nhttps://livepocket.jp/e/h0r8an9sy9",
+      "store_name": "ふるいちトップブックス本庄早稲田店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス本庄早稲田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ayuy4",
+      "discord_message_id": "1563001537352044555",
+      "discord_posted_at": "2026-10-23T01:30:05.669000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/txclv\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/ayuy4\n\n📍群馬県\nふるいちトップブックスいせさきガーデンズ店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/d59un\n\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日13時間）\nhttps://livepocket.jp/e/h0r8an9sy9",
+      "store_name": "ふるいちトップブックス本庄早稲田店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス本庄早稲田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（30th セレブレーション）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/d59un",
+      "discord_message_id": "1563001537352044555",
+      "discord_posted_at": "2026-10-23T01:30:05.669000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/txclv\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/ayuy4\n\n📍群馬県\nふるいちトップブックスいせさきガーデンズ店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/d59un\n\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日13時間）\nhttps://livepocket.jp/e/h0r8an9sy9",
+      "store_name": "ふるいちトップブックスいせさきガーデンズ店",
+      "prefecture": "群馬県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックスいせさきガーデンズ店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/h0r8an9sy9",
+      "discord_message_id": "1563001537352044555",
+      "discord_posted_at": "2026-10-23T01:30:05.669000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/txclv\n\n📍埼玉県\nふるいちトップブックス本庄早稲田店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/ayuy4\n\n📍群馬県\nふるいちトップブックスいせさきガーデンズ店\n受付終了: 10/25 22:00（残り2日11時間）\nhttps://livepocket.jp/e/d59un\n\n📍都道府県不明\nイトーヨーカドー\n受付終了: 10/25 23:59（残り2日13時間）\nhttps://livepocket.jp/e/h0r8an9sy9",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー/拡張パック ストームエメラルダ",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list",
+        "product_name": "v20_uniform_multi_shop_tickets"
+      },
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー/拡張パック ストームエメラルダ",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-15T14:28:00+09:00",
+      "stores": [
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーららぽーと横浜店",
+          "prefecture": ""
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 286,
+    "parsed": 290,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 281,
-    "prefecture": 244,
-    "event_title": 126,
+    "store_name": 284,
+    "prefecture": 247,
+    "event_title": 130,
     "event_date": 1,
-    "product_name": 65,
+    "product_name": 66,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 410,
-    "application_start_at": 410,
-    "stores_events": 285
+    "application_end_at": 414,
+    "application_start_at": 414,
+    "stores_events": 289
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1562993990331273227"
+      "1551580466266644552": "1563001537352044555"
     },
     "last_run": {
-      "checked_at": "2026-10-23T01:00:40.459096+00:00",
-      "new_urls": 5,
-      "original_urls": 434,
+      "checked_at": "2026-10-23T01:30:56.005178+00:00",
+      "new_urls": 4,
+      "original_urls": 439,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -11604,7 +11727,8 @@
         "1562767501304275006": "2026-10-22T10:00:56.653034+00:00",
         "1562843044741390337": "2026-10-22T15:05:59.330033+00:00",
         "1562986435798237294": "2026-10-23T00:30:57.251650+00:00",
-        "1562993990331273227": "2026-10-23T01:00:41.142134+00:00"
+        "1562993990331273227": "2026-10-23T01:00:41.142134+00:00",
+        "1563001537352044555": "2026-10-23T01:30:56.754819+00:00"
       },
       "checked_search_urls": {}
     },
@@ -13372,6 +13496,22 @@
         "https://livepocket.jp/e/0rw9z": {
           "checked_at": "2026-10-23T01:01:08.387777+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/txclv": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/h0r8an9sy9": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/d59un": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/ayuy4": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -13916,6 +14056,26 @@
           "detected_at": "2026-10-23T01:00:42.029630+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-23T01:01:08.387777+00:00"
+        },
+        "https://livepocket.jp/e/ayuy4": {
+          "detected_at": "2026-10-23T01:30:57.574006+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00"
+        },
+        "https://livepocket.jp/e/d59un": {
+          "detected_at": "2026-10-23T01:30:57.574006+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00"
+        },
+        "https://livepocket.jp/e/h0r8an9sy9": {
+          "detected_at": "2026-10-23T01:30:57.574006+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00"
+        },
+        "https://livepocket.jp/e/txclv": {
+          "detected_at": "2026-10-23T01:30:57.574006+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00"
         }
       },
       "pending_new_urls": []
@@ -17538,6 +17698,50 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/txclv": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "title_observed": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（ストームエメラルダ）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/h0r8an9sy9": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー/拡張パック ストームエメラルダ",
+          "genre": "pokemon",
+          "product_origin": "v20_uniform_multi_shop_tickets",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/d59un": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "title_observed": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ayuy4": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "title_observed": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（30th セレブレーション）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -19465,6 +19669,58 @@
         },
         "https://livepocket.jp/e/0rw9z": {
           "checked_at": "2026-10-23T01:01:08.387777+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/txclv": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/h0r8an9sy9": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/d59un": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ayuy4": {
+          "checked_at": "2026-10-23T01:34:43.738285+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
