@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261023-v21_77-discord-lottery-links">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_80-multi-store-editor">
 
   <style>
     [hidden] { display: none !important; }
@@ -1344,13 +1344,13 @@ nav[aria-label="メインメニュー"] {
         <label>商品名
           <input type="text" name="product_name" maxlength="200" autocomplete="off" placeholder="ポケモンカード商品名">
         </label>
-        <label>店舗名
-          <input type="text" name="store_name" maxlength="200" autocomplete="off" placeholder="店舗名">
-        </label>
-        <label>地域・都道府県
-          <select name="prefecture" id="lpCardPrefecture"><option value="">未確認</option></select>
-        </label>
-        <p id="lpCardMultipleStores" class="hint" hidden>複数店舗が含まれるイベントの店舗名と地域は、店舗別の情報を守るため、この画面では一括変更できません。</p>
+        <details id="lpCardStoresFold" class="lp-card-stores-fold">
+          <summary id="lpCardStoresSummary">🏬 対象店舗・地域を編集（店舗別・追加可能）</summary>
+          <p class="hint">店舗ごとに店舗名・都道府県を設定できます。元の自動取得一覧は保持し、このカードへの修正だけを共有します。</p>
+          <div id="lpCardStoreRows" class="lp-card-store-rows"></div>
+          <button id="lpCardAddStore" type="button" class="lp-card-add-store">＋ 店舗を追加</button>
+          <p class="hint">最大60店舗。削除する店舗は各行の「削除」を押してください。</p>
+        </details>
         <label>ジャンル
           <select name="review_category">
             <option value="unknown">未分類</option>
@@ -1521,7 +1521,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261023-v21_77-discord-lottery-links"></script>
+  <script src="app.js?v=20261024-v21_80-multi-store-editor"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
