@@ -360,11 +360,23 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://www.pokemoncenter-online.com/lottery/apply.html",
+      "source_site": "www.pokemoncenter-online.com",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-10-23T13:50:45.369000+00:00",
+      "first_detected_at": "2026-10-23T13:55:56.966732+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1563185743088722111"
+    "1551580466266644552": "1563187930963386500"
   },
-  "collected_at": "2026-10-23T13:45:58.158671+00:00",
+  "collected_at": "2026-10-23T13:55:56.966778+00:00",
   "messages_scanned": 100
 }

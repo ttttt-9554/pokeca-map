@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-23T13:45:57.777551+00:00",
+  "collected_at": "2026-10-23T13:55:56.565814+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -12338,10 +12338,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563185743088722111"
+      "1551580466266644552": "1563187930963386500"
     },
     "last_run": {
-      "checked_at": "2026-10-23T13:45:57.777551+00:00",
+      "checked_at": "2026-10-23T13:55:56.565814+00:00",
       "new_urls": 0,
       "original_urls": 464,
       "suspect_legacy_store_names": 0,
@@ -14247,7 +14247,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ayuy4": {
-          "checked_at": "2026-10-23T07:46:29.665153+00:00",
+          "checked_at": "2026-10-23T13:56:23.956666+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/13r44": {
@@ -14881,7 +14881,7 @@
         "https://livepocket.jp/e/ayuy4": {
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T07:46:29.665153+00:00"
+          "checked_at": "2026-10-23T13:56:23.956666+00:00"
         },
         "https://livepocket.jp/e/d59un": {
           "detected_at": "2026-10-23T01:30:57.574006+00:00",
@@ -15514,8 +15514,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ayuy4": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T07:46:29.665153+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-23T13:56:23.956666+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/13r44": {
@@ -18752,7 +18752,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T07:46:29.665153+00:00",
+          "checked_at": "2026-10-23T13:56:23.956666+00:00",
           "title_observed": "【ふるいちトップブックス本庄早稲田店】ポケカ抽選販売（30th セレブレーション）",
           "genre": "pokemon",
           "product_origin": "",
@@ -20967,7 +20967,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ayuy4": {
-          "checked_at": "2026-10-23T07:46:29.665153+00:00",
+          "checked_at": "2026-10-23T13:56:23.956666+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
