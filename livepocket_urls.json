@@ -14278,7 +14278,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/13r44": {
-          "checked_at": "2026-10-23T08:36:19.677915+00:00",
+          "checked_at": "2026-10-23T14:54:43.302328+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
@@ -14932,7 +14932,7 @@
         "https://livepocket.jp/e/13r44": {
           "detected_at": "2026-10-23T02:30:56.567372+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T08:36:19.677915+00:00"
+          "checked_at": "2026-10-23T14:54:43.302328+00:00"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
           "detected_at": "2026-10-23T03:00:58.955190+00:00",
@@ -15555,8 +15555,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/13r44": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T08:36:19.677915+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-23T14:54:43.302328+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
@@ -18799,7 +18799,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T08:36:19.677915+00:00",
+          "checked_at": "2026-10-23T14:54:43.302328+00:00",
           "title_observed": "キデイランド 吉祥寺店 ポケモンカード30THセレブレーション カードセット9種（再販） 購入券（抽選）",
           "genre": "pokemon",
           "product_origin": "",
@@ -21027,7 +21027,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/13r44": {
-          "checked_at": "2026-10-23T08:36:19.677915+00:00",
+          "checked_at": "2026-10-23T14:54:43.302328+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
