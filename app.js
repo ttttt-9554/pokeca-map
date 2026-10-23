@@ -4239,13 +4239,15 @@
 
   function lpResultsKnownEvents(){
     const entries=new Map();
+    const hiddenUrls=new Set(lotteryItems.filter(item=>item?.app_lottery_hidden).map(item=>item.url));
     for(const item of lotteryItems){
       if(!item||item.app_lottery_hidden||!safeLotteryUrl(item.url))continue;
       entries.set(item.url,item);
     }
-    // Historical events that are no longer in the current collected JSON
-    // can still be searched by URL when their anonymous count is publishable.
+    // Never surface an intentionally hidden app lottery through its historic
+    // aggregate row. Other historical lotteries may still appear by URL.
     for(const url of lpResultsCounts.keys()){
+      if(hiddenUrls.has(url))continue;
       if(!entries.has(url)&&safeLotteryUrl(url))entries.set(url,{url});
     }
     return [...entries.values()];
