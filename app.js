@@ -2662,7 +2662,7 @@
   const LP_CARD_FIELDS = ['event_title','product_name','store_name','prefecture','stores',
     'application_start_at','application_end_at','review_category','product_type'];
   const LP_CARD_FORM_FIELDS = LP_CARD_FIELDS.filter(x=>!['store_name','prefecture','stores'].includes(x));
-  const LP_CARD_MAX_STORES = 60;
+  const LP_CARD_MAX_STORES = 100;
   let lpCardOverrides = new Map(), lpCardReady = false, lpCardLoading = null;
   let lpCardLastFetch = 0, lpCardError = '', lpCardEditing = '', lpCardBusy = false;
 
@@ -2686,10 +2686,15 @@
     if (fields.has('application_start_at')) item.application_start_at = row.application_start_at || null;
     if (fields.has('application_end_at')) item.application_end_at = row.application_end_at || null;
     const storeEdited = fields.has('store_name'), areaEdited = fields.has('prefecture');
-    if (fields.has('stores') && Array.isArray(row.stores)) {
+    // v21.80: Prefer the new 100-store JSONB column. Older rows that used
+    // "stores" remain readable, as do v21.68 single-store corrections.
+    // "stores" stays the edited_fields marker for database compatibility.
+    const correctedStores=Array.isArray(row.stores_override)
+      ? row.stores_override : row.stores;
+    if (fields.has('stores') && Array.isArray(correctedStores)) {
       // Store-specific corrections supersede old single-store fields. The
       // collected base and the legacy/manual location layers stay untouched.
-      item.stores=row.stores.map(x=>({
+      item.stores=correctedStores.map(x=>({
         name:String(x?.name||''),prefecture:String(x?.prefecture||'')
       })).filter(x=>x.name.trim());
       item.store_name=item.stores[0]?.name||'';
@@ -2715,7 +2720,7 @@
     lpCardLoading = (async () => {
       try {
         const {data,error} = await supabaseClient.from(LP_CARD_TABLE)
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,updated_at')
           .limit(5000);
         if (error) throw error;
         lpCardOverrides = new Map((data || []).filter(x=>safeLotteryUrl(x.event_url))
@@ -2756,14 +2761,14 @@
     if(!root||!summary)return;
     const entries=Array.isArray(stores)?stores:[];
     const shown=entries.length?entries:[{name:'',prefecture:''}];
-    const choices='<option value="">都道府県未確認</option>'+
-      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
     root.innerHTML=shown.map((store,index)=>{
       const name=String(store?.name||''),area=String(store?.prefecture||'');
-      const options=choices.replace(
-        'value="'+escape(area)+'"',
-        'value="'+escape(area)+'" selected'
-      );
+      // Some imported sources have a custom area label. Preserve it as an
+      // explicit option rather than quietly changing it when saving a title.
+      const customArea=area&&!LP_MANUAL_AREAS.includes(area)
+        ? '<option value="'+escape(area)+'" selected>既存地域：'+escape(area)+'</option>' : '';
+      const options=customArea+'<option value=""'+(!area?' selected':'')+'>都道府県未確認</option>'+
+        LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'"'+(x===area?' selected':'')+'>'+escape(x)+'</option>').join('');
       return '<div class="lp-card-store-row" data-lp-store-index="'+index+'">'+
         '<div class="lp-card-store-header"><strong>店舗 '+(index+1)+'</strong>'+
         '<button type="button" data-lp-store-remove="'+index+'" aria-label="店舗 '+(index+1)+' を削除">削除</button></div>'+
@@ -2783,6 +2788,11 @@
     }));
     if(strict){
       const keys=new Set();
+      // Keep nonstandard area values already present in legacy or card
+      // overrides; newly selected values must be recognized prefectures.
+      const base=lotteryBaseItems.find(x=>x.url===lpCardEditing);
+      const current=base ? lpCardOverlay(lpLegacyApply(base)) : null;
+      const previousAreas=new Set(lotteryStoreEntries(current||{}).map(x=>x.prefecture).filter(Boolean));
       for(const row of rows){
         if(!row.name){
           // An untouched single blank placeholder means no known store.
@@ -2790,7 +2800,7 @@
           throw Error('店舗名が空欄です。不要な行は「削除」を押してください。');
         }
         if(row.name.length>200)throw Error('店舗名は200文字以内で入力してください。');
-        if(row.prefecture&&!LP_MANUAL_AREAS.includes(row.prefecture))
+        if(row.prefecture&&!LP_MANUAL_AREAS.includes(row.prefecture)&&!previousAreas.has(row.prefecture))
           throw Error('正しい都道府県を選択してください。');
         const key=(row.name+'|'+row.prefecture).normalize('NFKC').toLowerCase();
         if(keys.has(key))throw Error('同じ店舗名・都道府県が重複しています：'+row.name);
@@ -2817,8 +2827,10 @@
       const el = form.elements.namedItem(field);
       if (el) el.value = lpCardEditableValue(item,field);
     }
-    lpCardStoreRender(lotteryStoreEntries(item));
-    $('lpCardStoresFold').open=false;
+    const currentStores=lotteryStoreEntries(item);
+    lpCardStoreRender(currentStores);
+    // Automatically expose multi-store controls; single-store stays folded.
+    $('lpCardStoresFold').open=currentStores.length>1;
     const link = $('lpCardSourceLink');
     link.href = url;
     link.textContent = '🔗 元の抽選ページ ↗';
@@ -2846,8 +2858,14 @@
       application_start_at:'応募開始',application_end_at:'応募締切'};
     panel.innerHTML = '<ol>'+data.map(row => {
       const before = row.previous_value || {}, after = row.new_value || {};
-      const changes = LP_CARD_FIELDS.filter(k=>JSON.stringify(before[k]) !== JSON.stringify(after[k])
-        || (!!before.edited_fields?.includes(k) !== !!after.edited_fields?.includes(k)));
+      // The audit trigger records both JSONB columns. Compare the effective
+      // list so repeated edits are visible even when the marker stays "stores".
+      const changes = LP_CARD_FIELDS.filter(k=>{
+        const previous=k==='stores' ? (before.stores_override ?? before.stores) : before[k];
+        const current=k==='stores' ? (after.stores_override ?? after.stores) : after[k];
+        return JSON.stringify(previous)!==JSON.stringify(current)
+          || (!!before.edited_fields?.includes(k) !== !!after.edited_fields?.includes(k));
+      });
       const when = lotteryJapaneseDate(row.edited_at) || String(row.edited_at || '');
       return '<li><strong>'+escape(when)+'</strong> ／ '+
         escape(row.action === 'DELETE' ? 'カード修正を解除' : row.action === 'INSERT' ? '新規修正' : '修正更新')+
@@ -2892,10 +2910,12 @@
         }));
         if (JSON.stringify(desiredStores)!==JSON.stringify(legacyStores)) {
           edited.push('stores');
-          payload.stores=desiredStores;
-        } else payload.stores=null;
-        // Former single-store override values migrate to the ordered list
-        // only when the edited store list differs from the legacy view.
+          payload.stores_override=desiredStores;
+        } else payload.stores_override=null;
+        // The new column supports 100 rows; clear the old 60-row column on
+        // rewrite while retaining older rows through lpCardOverlay fallback.
+        // Legacy/manual fixes remain stored in their original tables.
+        payload.stores=null;
         payload.store_name=null;
         payload.prefecture=null;
         const start = lpExtDateSave(String(form.elements.namedItem('application_start_at').value || ''));
@@ -2922,7 +2942,7 @@
       } else {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .upsert(payload,{onConflict:'event_url'})
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,updated_at')
           .single();
         if (error) throw error;
         if (data?.event_url !== url || !Array.isArray(data.edited_fields)) throw Error('保存結果を確認できませんでした');

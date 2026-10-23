@@ -1551,3 +1551,22 @@ html[data-theme="dark"] #lpCardAddStore{
   background:#25354b!important;color:#edf4ff!important;
   border-color:#667d9b!important;
 }
+
+/* v21.80 store override follow-up: safe mobile scroll and visible focus. */
+#lpCardDialog .lp-card-editor,
+#lpCardDialog #lpCardStoreRows,
+#lpCardDialog .lp-card-store-row{min-width:0;max-width:100%}
+#lpCardDialog :is(button,input,select,summary):focus-visible{
+  outline:3px solid var(--app-accent,#2563eb);outline-offset:2px;
+}
+@media (max-width:560px){
+  #lpCardDialog{
+    width:calc(100vw - 16px);max-width:none;
+    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
+    padding:14px;
+  }
+  #lpCardStoreRows .lp-card-store-row{padding:10px}
+}
+html[data-theme="dark"] #lpCardDialog :is(button,input,select,summary):focus-visible{
+  outline-color:#fbbf24;
+}
