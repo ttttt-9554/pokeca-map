@@ -14350,8 +14350,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3v6ni": {
-          "checked_at": "2026-10-23T12:46:22.569268+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-23T18:52:00.439827+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ogn4x": {
           "checked_at": "2026-10-23T13:06:27.552873+00:00",
@@ -15021,8 +15021,8 @@
         },
         "https://livepocket.jp/e/3v6ni": {
           "detected_at": "2026-10-23T12:45:58.330512+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-23T12:46:22.569268+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-23T18:52:00.439827+00:00"
         },
         "https://livepocket.jp/e/ogn4x": {
           "detected_at": "2026-10-23T13:05:59.608580+00:00",
@@ -15632,6 +15632,11 @@
         "https://livepocket.jp/e/vj35o": {
           "attempts": 1,
           "last_attempt_at": "2026-10-23T18:37:18.558556+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/3v6ni": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-23T18:52:00.439827+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -19042,7 +19047,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T12:46:22.569268+00:00",
+          "checked_at": "2026-10-23T18:52:00.439827+00:00",
           "title_observed": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -21306,7 +21311,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/3v6ni": {
-          "checked_at": "2026-10-23T12:46:22.569268+00:00",
+          "checked_at": "2026-10-23T18:52:00.439827+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
