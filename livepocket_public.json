@@ -5908,8 +5908,6 @@
           "prefecture": "神奈川県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（30ｔｈ御三家デッキ9種セット）",
       "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
     },
     {
@@ -5930,8 +5928,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
     },
     {
@@ -6224,5 +6220,5 @@
       "first_detected_at": "2026-10-23T06:05:38.114711+00:00"
     }
   ],
-  "updated_at": "2026-10-23T07:16:26.392955+00:00"
+  "updated_at": "2026-10-23T07:25:57.148107+00:00"
 }
