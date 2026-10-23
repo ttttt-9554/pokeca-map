@@ -6191,6 +6191,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックスいせさきガーデンズ店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION）",
       "first_detected_at": "2026-10-23T04:50:55.469425+00:00"
     },
     {
@@ -6200,6 +6202,8 @@
       "application_end_at": "2026-10-25T20:59:00+09:00",
       "discord_posted_at": "2026-10-23T04:30:08.592000+00:00",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【HMVトレカショップ】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】【抽選販売】",
       "first_detected_at": "2026-10-23T04:50:55.469425+00:00"
     },
     {
@@ -6511,5 +6515,5 @@
       "first_detected_at": "2026-10-23T14:05:58.154398+00:00"
     }
   ],
-  "updated_at": "2026-10-23T16:51:00.242544+00:00"
+  "updated_at": "2026-10-23T17:01:25.462109+00:00"
 }
