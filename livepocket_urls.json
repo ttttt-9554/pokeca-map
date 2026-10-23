@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-23T10:35:56.300516+00:00",
+  "collected_at": "2026-10-23T11:35:56.549758+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 456,
+  "unique_livepocket_urls": 457,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12039,34 +12039,64 @@
       "event_title": "ストームエメラルダ抽選",
       "application_end_at": "2026-10-24T23:59:00+09:00",
       "application_start_at": "2026-10-23T17:46:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/zv6gu",
+      "discord_message_id": "1563152535919796224",
+      "discord_posted_at": "2026-10-23T11:30:06.533000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちトップブックス東松山店\n受付終了: 10/25 22:00（残り2日1時間）\nhttps://livepocket.jp/e/zv6gu",
+      "store_name": "ふるいちトップブックス東松山店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス東松山店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 303,
+    "parsed": 304,
     "no_structured_details": 153
   },
   "field_counts": {
-    "store_name": 294,
-    "prefecture": 257,
-    "event_title": 143,
+    "store_name": 295,
+    "prefecture": 258,
+    "event_title": 144,
     "event_date": 1,
     "product_name": 70,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 427,
-    "application_start_at": 427,
-    "stores_events": 300
+    "application_end_at": 428,
+    "application_start_at": 428,
+    "stores_events": 301
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563137427260969020"
+      "1551580466266644552": "1563152535919796224"
     },
     "last_run": {
-      "checked_at": "2026-10-23T10:35:56.300516+00:00",
-      "new_urls": 2,
-      "original_urls": 454,
+      "checked_at": "2026-10-23T11:35:56.549758+00:00",
+      "new_urls": 1,
+      "original_urls": 456,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -12182,7 +12212,8 @@
         "1563069544539496448": "2026-10-23T06:05:37.337725+00:00",
         "1563107247112978503": "2026-10-23T08:35:56.069380+00:00",
         "1563114834516643840": "2026-10-23T09:05:58.485535+00:00",
-        "1563137427260969020": "2026-10-23T10:35:56.911327+00:00"
+        "1563137427260969020": "2026-10-23T10:35:56.911327+00:00",
+        "1563152535919796224": "2026-10-23T11:35:57.307710+00:00"
       },
       "checked_search_urls": {}
     },
@@ -14018,6 +14049,10 @@
         "https://livepocket.jp/e/126bw": {
           "checked_at": "2026-10-23T10:36:18.233145+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/zv6gu": {
+          "checked_at": "2026-10-23T11:45:32.044987+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -14647,6 +14682,11 @@
           "detected_at": "2026-10-23T10:35:57.574036+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-23T10:36:18.233145+00:00"
+        },
+        "https://livepocket.jp/e/zv6gu": {
+          "detected_at": "2026-10-23T11:35:58.013964+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-23T11:45:32.044987+00:00"
         }
       },
       "pending_new_urls": []
@@ -18541,6 +18581,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/zv6gu": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-23T11:45:32.044987+00:00",
+          "title_observed": "【ふるいちトップブックス東松山店】ポケカ抽選販売（30th CELEBRATION）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -20699,6 +20750,19 @@
           "meta_template_cleaned": 2,
           "heading_seen": 0,
           "recovery_probe": "event_tabs_missing"
+        },
+        "https://livepocket.jp/e/zv6gu": {
+          "checked_at": "2026-10-23T11:45:32.044987+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         }
       }
     }
