@@ -1632,3 +1632,15 @@ html[data-theme="dark"] #lpResultsDialog :is(h3,label,.hint),html[data-theme="da
  #lotteryResultsView .lp-results-controls{grid-template-columns:1fr}
  #lpResultsDialog{width:calc(100vw - 16px);max-width:none;padding:14px}
 }
+
+
+/* v21.83: Anonymous result count text. */
+.lp-results-anonymous-total{
+ margin:9px 0 12px; padding:10px 12px; font-weight:750;
+ color:var(--app-text,#172033); background:var(--app-surface2,#f8fafc);
+ border:1px solid var(--app-border,#cbd5e1); border-radius:9px;
+ line-height:1.65;font-size:13px;
+}
+html[data-theme="dark"] .lp-results-anonymous-total{
+ background:#25354b;color:#edf4ff;border-color:#667d9b;
+}

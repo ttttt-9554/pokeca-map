@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_82-shared-lottery-results-counts">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_83-anonymous-results">
 
   <style>
     [hidden] { display: none !important; }
@@ -730,72 +730,35 @@ nav[aria-label="メインメニュー"] {
     </section>
 
 
-    <!-- v21.82: Voluntary group-shared lottery applications and results. -->
+    <!-- v21.83: Anonymous group-level lottery results from the private tracker. -->
     <section id="lotteryResultsView" class="view" aria-labelledby="lpResultsHeading">
       <div class="lp-heading">
         <div>
-          <h2 id="lpResultsHeading">🏆 抽選結果</h2>
-          <p class="hint">誰が応募・当選したかを共有します。登録は本人の意思で行い、個人用「抽選管理」の記録は公開しません。</p>
+          <h2 id="lpResultsHeading">🏆 抽選結果（匿名）</h2>
+          <p class="hint">抽選管理の応募・当選・落選・受取済みを自動集計します。ユーザー名・メモ・受取情報は公開しません。</p>
         </div>
         <button type="button" id="lpResultsReload" class="lp-refresh">↻ 更新</button>
       </div>
       <p id="lpResultsAccount" class="hint"></p>
-      <button type="button" id="lpResultsNew" class="primary lp-results-new">＋ 自分の抽選結果を共有</button>
       <div class="lp-results-controls">
-        <label>抽選名・ユーザー名・店舗名で検索
-          <input type="search" id="lpResultsSearch" placeholder="抽選名、参加者、店舗名" autocomplete="off" maxlength="120">
+        <label>抽選名・店舗名で検索
+          <input type="search" id="lpResultsSearch" placeholder="抽選名や店舗名" autocomplete="off" maxlength="120">
         </label>
         <label>表示する結果
           <select id="lpResultsFilter">
-            <option value="all">すべて</option>
-            <option value="applied">応募済み</option>
-            <option value="won">当選</option>
-            <option value="lost">落選</option>
-            <option value="received">受取済み</option>
+            <option value="all">すべての抽選</option>
+            <option value="applied">応募済み（5人以上）</option>
+            <option value="won">当選（5人以上）</option>
+            <option value="lost">落選（5人以上）</option>
+            <option value="received">受取済み（5人以上）</option>
           </select>
         </label>
       </div>
-      <p id="lpResultsStatus" class="hint" role="status" aria-live="polite">共有結果を読み込んでいます…</p>
+      <p id="lpResultsStatus" class="hint" role="status" aria-live="polite">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
-      <div id="lpResultsList" class="lp-results-list"></div>
+      <p class="hint">匿名保護のため、抽選の記録が5人未満なら件数を表示しません。5人以上でも各結果が5人未満の場合は内訳を伏せ、合計人数は5人単位の下限で表示します。集計対象は本アプリに登録された応募管理記録です。</p>
+      <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
-
-    <dialog id="lpResultsDialog" aria-label="自分の抽選結果を共有">
-      <div class="lp-results-editor">
-        <h3 tabindex="-1" id="lpResultsDialogTitle" autofocus>🏆 自分の抽選結果</h3>
-        <p class="hint">ここで保存した表示名・応募先・当落は、Discordログイン済みの利用者全員に公開されます。他人の記録は編集できません。</p>
-        <form id="lpResultsForm" autocomplete="off">
-          <label>抽選を検索
-            <input id="lpResultsEventSearch" type="search" placeholder="抽選名・店舗名で絞り込み" autocomplete="off">
-          </label>
-          <label>対象の抽選
-            <select id="lpResultsEventSelect" required></select>
-          </label>
-          <p id="lpResultsEventHint" class="hint"></p>
-          <label>公開する表示名
-            <input id="lpResultsName" type="text" maxlength="60" required placeholder="共有用の名前">
-          </label>
-          <label>応募店舗（複数店舗の抽選で指定可能）
-            <input id="lpResultsStore" type="text" maxlength="200" list="lpResultsStoreChoices" placeholder="店舗名（任意）" autocomplete="off">
-            <datalist id="lpResultsStoreChoices"></datalist>
-          </label>
-          <label>応募・抽選結果
-            <select id="lpResultsOutcome" required>
-              <option value="applied">✉️ 応募済み</option>
-              <option value="won">🎉 当選・受取待ち</option>
-              <option value="lost">📪 落選</option>
-              <option value="received">✅ 受取済み</option>
-            </select>
-          </label>
-          <p id="lpResultsEditorStatus" role="status" aria-live="polite"></p>
-          <div class="lp-results-editor-actions">
-            <button type="submit" class="primary">みんなに共有して保存</button>
-            <button type="button" id="lpResultsDelete" hidden>自分の報告を削除</button>
-            <button type="button" id="lpResultsCancel">閉じる</button>
-          </div>
-        </form>
-      </div>
-    </dialog>
 
     <!-- v21.70: User-registered lottery events that live inside mobile apps. -->
     <section id="appLotteryView" class="view" aria-labelledby="lpAppHeading">
@@ -1593,7 +1556,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_82-shared-lottery-results-counts"></script>
+  <script src="app.js?v=20261024-v21_83-anonymous-results"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
