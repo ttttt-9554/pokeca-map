@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T00:30:56.500825+00:00",
-  "unique_livepocket_urls": 434,
+  "collected_at": "2026-10-23T01:00:40.459096+00:00",
+  "unique_livepocket_urls": 439,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5833,7 +5833,112 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/uenut",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-23T01:00:06.319000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ygkk_",
+      "store_name": "ふるいちイオンモール大和店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-23T01:00:06.319000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール大和店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-23T21:00:00+09:00",
+      "application_start_at": "2026-10-22T16:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（30th CELEBRATION）",
+      "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/r8mus",
+      "store_name": "ふるいちイオンモール大和店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-23T01:00:06.319000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール大和店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（ストームエメラルダ）",
+      "application_end_at": "2026-10-23T21:00:00+09:00",
+      "application_start_at": "2026-10-22T16:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（ストームエメラルダ）",
+      "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/0rw9z",
+      "store_name": "ふるいちイオンモール大和店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-23T01:00:06.319000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール大和店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（30ｔｈ御三家デッキ9種セット）",
+      "application_end_at": "2026-10-23T21:00:00+09:00",
+      "application_start_at": "2026-10-22T16:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "｛ふるいちイオンモール大和店｝ポケカ抽選販売（30ｔｈ御三家デッキ9種セット）",
+      "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ija-d",
+      "store_name": "古本市場川口伊刈店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-23T01:00:06.319000+00:00",
+      "stores": [
+        {
+          "name": "古本市場川口伊刈店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
+      "application_start_at": "2026-10-22T15:03:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場川口伊刈店】ポケモンカード抽選販売（30th CELEBRATION）",
+      "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
     }
   ],
-  "updated_at": "2026-10-23T00:50:58.726884+00:00"
+  "updated_at": "2026-10-23T01:01:08.387777+00:00"
 }
