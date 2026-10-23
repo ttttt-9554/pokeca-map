@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T02:30:54.988741+00:00",
-  "unique_livepocket_urls": 444,
+  "collected_at": "2026-10-23T03:00:57.375487+00:00",
+  "unique_livepocket_urls": 445,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6026,7 +6026,100 @@
         }
       ],
       "first_detected_at": "2026-10-23T02:30:56.567372+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/fdhbjwub5y",
+      "discord_posted_at": "2026-10-23T03:00:19.180000+00:00",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-15T15:18:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "イトーヨーカドー武蔵境店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー多摩センター店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー和光店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー三島店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー赤羽店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ葛西店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー甲府昭和店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー木場店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー湘南台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー トイロマート立場店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大宮宮原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー国領店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー大森店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ川口店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ八尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ鳳店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー武蔵小金井店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ市原店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ柏店",
+          "prefecture": ""
+        }
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "first_detected_at": "2026-10-23T03:00:58.955190+00:00"
     }
   ],
-  "updated_at": "2026-10-23T02:50:57.486117+00:00"
+  "updated_at": "2026-10-23T03:04:56.761140+00:00"
 }
