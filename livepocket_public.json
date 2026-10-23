@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-22T15:05:58.418590+00:00",
-  "unique_livepocket_urls": 432,
+  "collected_at": "2026-10-23T00:30:56.500825+00:00",
+  "unique_livepocket_urls": 434,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -5774,7 +5774,69 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-22T15:06:01.070513+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mdxh9",
+      "store_name": "TSUTAYA鹿嶋南店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-23T00:30:05.178000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鹿嶋南店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ヒロインズエディション EB-05",
+      "application_end_at": "2026-10-26T21:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "official_event_title": "ヒロインズエディション EB-05",
+      "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/1wqyobvsi_",
+      "discord_posted_at": "2026-10-23T00:30:05.178000+00:00",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "application_end_at": "2026-10-25T23:59:00+09:00",
+      "application_start_at": "2026-10-15T15:18:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー グランツリー武蔵小杉店",
+          "prefecture": ""
+        }
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "first_detected_at": "2026-10-23T00:30:58.021713+00:00"
     }
   ],
-  "updated_at": "2026-10-23T00:21:00.208941+00:00"
+  "updated_at": "2026-10-23T00:31:24.258907+00:00"
 }
