@@ -1464,3 +1464,27 @@ html[data-theme="dark"] #devView #devFoldAll{
   #devView .dev-accordion-summary{padding:17px 13px;font-size:15px}
   #devView .dev-accordion > .dev-accordion-body{padding:12px!important}
 }
+
+/* v21.76: app lottery name on public cards */
+#lotteryView .lp-app-name{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:4px;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+#lotteryView .lp-app-name strong{
+  font-weight:800;
+  color:var(--app-text,#172033);
+}
+#lotteryView .lp-app-name span{
+  font-size:12px;
+  color:var(--app-muted,#64748b);
+}
+html[data-theme="dark"] #lotteryView .lp-app-name strong{
+  color:var(--app-text,#eef4ff)!important;
+}
+html[data-theme="dark"] #lotteryView .lp-app-name span{
+  color:var(--app-muted,#c9d7eb)!important;
+}
