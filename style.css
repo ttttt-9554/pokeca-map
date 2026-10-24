@@ -1956,3 +1956,71 @@ html[data-theme="dark"] #addView .report-step-num{
  #addView .store-category-grid label{padding:7px 6px;font-size:11px}
  #addView .report-product-types .category-option{font-size:11px;padding:7px}
 }
+
+
+/* v21.95: The second and third registration steps use the same
+   rounded card treatment as step 1, without changing the form fields. */
+#addView #reportForm > .report-step-card{
+ display:grid;
+ gap:7px;
+ min-width:0;
+ margin:0;
+ padding:12px;
+ border:1px solid var(--app-border,#cbd5e1);
+ border-radius:14px;
+ background:var(--app-surface,#fff);
+ color:var(--app-text,#172033);
+}
+#addView #reportForm > .report-step-card > .report-step-header{
+ margin:0 0 4px;
+}
+#addView #reportForm > .report-step-card > .report-step-header strong{
+ font-size:15px;
+}
+#addView #reportForm > .report-step-card > label{
+ font-size:12px;
+ font-weight:750;
+}
+#addView #reportForm > .report-details-card .share-option{
+ display:flex;
+ align-items:flex-start;
+ gap:9px;
+ margin:6px 0 0;
+ padding:10px;
+ border:1px solid var(--app-border,#cbd5e1);
+ border-radius:10px;
+ background:var(--app-surface2,#f0f5fc);
+}
+#addView #reportForm > .report-details-card .share-option input[type="checkbox"]{
+ width:20px;
+ height:20px;
+ min-width:20px;
+ flex:0 0 20px;
+ padding:0;
+ margin:1px 0 0;
+}
+#addView #reportForm > .report-details-card .share-option span{
+ min-width:0;
+ font-size:12px;
+ line-height:1.55;
+}
+#addView #reportForm > .report-step-card > .hint{
+ margin:2px 0;
+ font-size:11px;
+}
+#addView #reportForm > .report-step-card .product-category-group{
+ padding:0;
+ margin:0;
+}
+html[data-theme="dark"] #addView #reportForm > .report-step-card{
+ background:var(--app-surface,#172337)!important;
+ color:var(--app-text,#eef4ff)!important;
+ border-color:var(--app-border,#526681)!important;
+}
+html[data-theme="dark"] #addView #reportForm > .report-details-card .share-option{
+ background:var(--app-surface2,#203149)!important;
+ border-color:var(--app-border,#526681)!important;
+}
+@media(max-width:390px){
+ #addView #reportForm > .report-step-card{padding:10px}
+}

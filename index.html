@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_94-compact-registration">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_95-registration-step-cards">
 
   <style>
     [hidden] { display: none !important; }
@@ -862,6 +862,7 @@ nav[aria-label="メインメニュー"] {
              商品カテゴリ：チェックボックス式
              ================================== -->
 
+        <section class="report-step-card report-product-card" aria-label="② 商品を選ぶ">
         <div class="report-step-header">
           <span class="report-step-num" aria-hidden="true">2</span>
           <strong>商品を選ぶ</strong>
@@ -890,6 +891,9 @@ nav[aria-label="メインメニュー"] {
           <summary>複数商品の登録について</summary>
           <p class="hint">同じ店舗・日時・販売状況・メモで、商品ごとに1件ずつ保存します。編集時は1商品ずつ変更できます。</p>
         </details>
+        </section>
+
+        <section class="report-step-card report-details-card" aria-label="③ 発見内容を入力">
         <div class="report-step-header">
           <span class="report-step-num" aria-hidden="true">3</span>
           <strong>発見内容を入力</strong>
@@ -954,6 +958,8 @@ nav[aria-label="メインメニュー"] {
 
         <label class="share-option"><input type="checkbox" id="publishReport"><span>Discordでログインしたアカウントから、発見情報をみんなに共有する</span></label>
         <p class="hint" id="publishHint">チェックしない場合は、この端末だけに保存します。</p>
+        </section>
+
         <!-- 保存ボタン -->
         <button
           type="submit"
@@ -1491,7 +1497,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_94-compact-registration"></script>
+  <script src="app.js?v=20261024-v21_95-registration-step-cards"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
