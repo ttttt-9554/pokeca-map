@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T03:05:54.684309+00:00",
+  "collected_at": "2026-10-24T04:05:55.758583+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 481,
+  "unique_livepocket_urls": 483,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12821,34 +12821,94 @@
       "event_title": "キデイランドららぽーと富士見店 ワンピースカードゲーム 拡張パック「世界最強の戦士」購入券 抽選",
       "application_end_at": "2026-10-26T23:59:00+09:00",
       "application_start_at": "2026-10-24T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ganvl",
+      "discord_message_id": "1563401664109617184",
+      "discord_posted_at": "2026-10-24T04:00:03.322000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちイオンモール羽生店\n受付終了: 10/25 21:00（残り1日7時間）\nhttps://livepocket.jp/e/ganvl\n\n📍埼玉県\nTSUTAYA鴻巣吹上店\n受付終了: 10/25 21:00（残り1日7時間）\nhttps://livepocket.jp/e/fmrx2",
+      "store_name": "ふるいちイオンモール羽生店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール羽生店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T08:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/fmrx2",
+      "discord_message_id": "1563401664109617184",
+      "discord_posted_at": "2026-10-24T04:00:03.322000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちイオンモール羽生店\n受付終了: 10/25 21:00（残り1日7時間）\nhttps://livepocket.jp/e/ganvl\n\n📍埼玉県\nTSUTAYA鴻巣吹上店\n受付終了: 10/25 21:00（残り1日7時間）\nhttps://livepocket.jp/e/fmrx2",
+      "store_name": "TSUTAYA鴻巣吹上店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA鴻巣吹上店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T08:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 325,
+    "parsed": 327,
     "no_structured_details": 156
   },
   "field_counts": {
-    "store_name": 316,
-    "prefecture": 286,
-    "event_title": 168,
+    "store_name": 318,
+    "prefecture": 288,
+    "event_title": 170,
     "event_date": 1,
     "product_name": 76,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 450,
-    "application_start_at": 450,
-    "stores_events": 323
+    "application_end_at": 452,
+    "application_start_at": 452,
+    "stores_events": 325
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563386633347272734"
+      "1551580466266644552": "1563401664109617184"
     },
     "last_run": {
-      "checked_at": "2026-10-24T03:05:54.684309+00:00",
-      "new_urls": 5,
-      "original_urls": 476,
+      "checked_at": "2026-10-24T04:05:55.758583+00:00",
+      "new_urls": 2,
+      "original_urls": 481,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -12978,7 +13038,8 @@
         "1563371480174174323": "2026-10-24T02:05:56.539977+00:00",
         "1563379072137170974": "2026-10-24T02:35:56.631108+00:00",
         "1563386633347272734": "2026-10-24T03:05:55.350870+00:00",
-        "1563386587339956284": "2026-10-24T03:05:55.350870+00:00"
+        "1563386587339956284": "2026-10-24T03:05:55.350870+00:00",
+        "1563401664109617184": "2026-10-24T04:05:56.475803+00:00"
       },
       "checked_search_urls": {}
     },
@@ -14914,6 +14975,14 @@
         "https://livepocket.jp/e/4zcdj": {
           "checked_at": "2026-10-24T03:06:31.041657+00:00",
           "status": "checked_title_deadline_product"
+        },
+        "https://livepocket.jp/e/ganvl": {
+          "checked_at": "2026-10-24T04:06:26.559481+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/fmrx2": {
+          "checked_at": "2026-10-24T04:06:26.559481+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -15668,6 +15737,16 @@
           "detected_at": "2026-10-24T03:05:56.634899+00:00",
           "status": "checked_title_deadline_product",
           "checked_at": "2026-10-24T03:06:31.041657+00:00"
+        },
+        "https://livepocket.jp/e/fmrx2": {
+          "detected_at": "2026-10-24T04:05:57.204038+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T04:06:26.559481+00:00"
+        },
+        "https://livepocket.jp/e/ganvl": {
+          "detected_at": "2026-10-24T04:05:57.204038+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T04:06:26.559481+00:00"
         }
       },
       "pending_new_urls": []
@@ -19907,6 +19986,28 @@
           "product_origin": "v15_page_product_label",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/ganvl": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T04:06:26.559481+00:00",
+          "title_observed": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/fmrx2": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T04:06:26.559481+00:00",
+          "title_observed": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -22380,6 +22481,32 @@
         },
         "https://livepocket.jp/e/4zcdj": {
           "checked_at": "2026-10-24T03:06:31.041657+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ganvl": {
+          "checked_at": "2026-10-24T04:06:26.559481+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/fmrx2": {
+          "checked_at": "2026-10-24T04:06:26.559481+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

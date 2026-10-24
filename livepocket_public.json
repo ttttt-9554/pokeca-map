@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T03:05:54.684309+00:00",
-  "unique_livepocket_urls": 481,
+  "collected_at": "2026-10-24T04:05:55.758583+00:00",
+  "unique_livepocket_urls": 483,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6795,7 +6795,43 @@
         }
       ],
       "first_detected_at": "2026-10-24T03:05:56.634899+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ganvl",
+      "store_name": "ふるいちイオンモール羽生店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T04:00:03.322000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール羽生店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T08:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
+      "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/fmrx2",
+      "store_name": "TSUTAYA鴻巣吹上店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T04:00:03.322000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鴻巣吹上店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T08:00:00+09:00",
+      "official_event_title": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
+      "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
     }
   ],
-  "updated_at": "2026-10-24T03:56:00.657117+00:00"
+  "updated_at": "2026-10-24T04:06:26.559481+00:00"
 }
