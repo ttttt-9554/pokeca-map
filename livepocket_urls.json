@@ -16554,8 +16554,9 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8rswc": {
-          "checked_at": "2026-10-24T06:11:26.649408+00:00",
-          "status": "checked_retry_no_new_details"
+          "checked_at": "2026-10-24T12:16:27.414609+00:00",
+          "status": "checked_retry_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/xw_dt": {
           "checked_at": "2026-10-24T06:41:24.420465+00:00",
@@ -17584,7 +17585,8 @@
         "https://livepocket.jp/e/8rswc": {
           "detected_at": "2026-10-24T00:00:58.433607+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T06:11:26.649408+00:00"
+          "checked_at": "2026-10-24T12:16:27.414609+00:00",
+          "http_status": null
         },
         "https://livepocket.jp/e/8qn_a": {
           "detected_at": "2026-10-24T00:30:57.216063+00:00",
@@ -18605,8 +18607,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8rswc": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T06:11:26.649408+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T12:16:27.414609+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/xw_dt": {
@@ -22176,7 +22178,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T06:11:26.649408+00:00",
+          "checked_at": "2026-10-24T12:16:27.414609+00:00",
           "title_observed": "【古本市場小平店】 ポケカ抽選販売30thCELEBRATIONカードセット 9種セット",
           "genre": "pokemon",
           "product_origin": "",
@@ -25306,7 +25308,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/8rswc": {
-          "checked_at": "2026-10-24T06:11:26.649408+00:00",
+          "checked_at": "2026-10-24T12:16:27.414609+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
