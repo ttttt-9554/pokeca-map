@@ -14537,7 +14537,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jrssp": {
-          "checked_at": "2026-10-23T19:31:22.967335+00:00",
+          "checked_at": "2026-10-24T01:41:22.131264+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1dpkl": {
@@ -15235,7 +15235,7 @@
         "https://livepocket.jp/e/jrssp": {
           "detected_at": "2026-10-23T13:25:58.460541+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T19:31:22.967335+00:00"
+          "checked_at": "2026-10-24T01:41:22.131264+00:00"
         },
         "https://livepocket.jp/e/1dpkl": {
           "detected_at": "2026-10-23T14:05:58.154398+00:00",
@@ -15878,8 +15878,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jrssp": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T19:31:22.967335+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T01:41:22.131264+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1dpkl": {
@@ -19317,7 +19317,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T19:31:22.967335+00:00",
+          "checked_at": "2026-10-24T01:41:22.131264+00:00",
           "title_observed": "ホビーステーション「ポケモンカードゲームMEGA 拡張パック ストームエメラルダ（再販）」抽選販売",
           "genre": "pokemon",
           "product_origin": "v21_9_official_title_quoted_tcg_product",
@@ -21651,7 +21651,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/jrssp": {
-          "checked_at": "2026-10-23T19:31:22.967335+00:00",
+          "checked_at": "2026-10-24T01:41:22.131264+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
