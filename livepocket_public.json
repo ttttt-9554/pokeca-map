@@ -6825,8 +6825,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
       "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
     },
     {
@@ -6843,7 +6841,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_event_title": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
       "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
     },
     {
@@ -6913,6 +6910,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場上尾店】ポケカ抽選販売（30th CEREBRATION）",
       "first_detected_at": "2026-10-24T05:35:57.334167+00:00"
     },
     {
@@ -6933,6 +6932,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場上尾店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-24T05:35:57.334167+00:00"
     },
     {
@@ -7892,5 +7893,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T17:46:21.604911+00:00"
+  "updated_at": "2026-10-24T17:56:28.632598+00:00"
 }
