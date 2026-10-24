@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_93-six-counts-one-row">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_94-compact-registration">
 
   <style>
     [hidden] { display: none !important; }
@@ -805,73 +805,50 @@ nav[aria-label="メインメニュー"] {
       <div id="shareAuthStatus" class="share-panel" aria-live="polite">共有機能の接続を確認しています。</div>
       <form id="reportForm">
 
-        <!-- 店舗検索 -->
-        <div class="searchbox">
-
-          <strong>
-            栃木県の店舗を検索
-          </strong>
-
-          <p class="hint">
-            登録済みの店舗一覧から検索できます。
-          </p>
-
-          <fieldset class="store-category-group">
-            <legend>① 店舗カテゴリ（複数選択可）</legend>
-            <div class="store-category-grid">
-              <label><input type="checkbox" name="storeCategory" value="コンビニ" checked> コンビニ</label>
-              <label><input type="checkbox" name="storeCategory" value="TSUTAYA" checked> TSUTAYA</label>
-              <label><input type="checkbox" name="storeCategory" value="GEO" checked> GEO</label>
-              <label><input type="checkbox" name="storeCategory" value="ヨドバシカメラ" checked> ヨドバシカメラ</label>
-              <label><input type="checkbox" name="storeCategory" value="コジマ" checked> コジマ</label>
-              <label><input type="checkbox" name="storeCategory" value="ヤマダデンキ" checked> ヤマダデンキ</label>
-              <label><input type="checkbox" name="storeCategory" value="カードショップ" checked> カードショップ</label>
+        <!-- 店舗検索：v21.94 コンパクトな検索優先レイアウト -->
+        <div class="searchbox report-store-search">
+          <div class="report-step-header">
+            <span class="report-step-num" aria-hidden="true">1</span>
+            <div>
+              <strong>店舗を探す</strong>
+              <p class="hint">栃木県の登録店舗から選択</p>
             </div>
-            <div class="store-category-actions">
-              <button type="button" id="storeSelectAll">すべて選択</button>
-              <button type="button" id="storeClearAll">すべて解除</button>
-            </div>
-            <p class="hint" id="storeDataStatus" aria-live="polite">店舗データを読み込み中です。</p>
-          </fieldset>
-
-          <label for="searchArea">
-            ② 地域・市区町村（省略可）
-          </label>
-
-          <input
-            id="searchArea"
-            type="search"
-            placeholder="例：宇都宮市、平松本町"
-            autocomplete="off"
-          >
-
-          <label for="storeQuery">
-            ③ 店舗名・チェーン名
-          </label>
-
-          <div class="searchrow">
-
-            <input
-              id="storeQuery"
-              type="search"
-              placeholder="タップして選択、または入力"
-              autocomplete="off"
-            >
-
-            <button
-              id="storeSearch"
-              type="button"
-            >
-              店舗検索
-            </button>
-
           </div>
 
-          <div
-            id="storeResults"
-            aria-live="polite"
-          ></div>
+          <label for="storeQuery">店舗名・チェーン名</label>
+          <div class="searchrow">
+            <input id="storeQuery" type="search" placeholder="店名・コンビニ名など" autocomplete="off">
+            <button id="storeSearch" type="button">検索</button>
+          </div>
 
+          <label for="searchArea">地域・市区町村 <small>任意</small></label>
+          <input id="searchArea" type="search" placeholder="例：宇都宮市、平松本町" autocomplete="off">
+
+          <details id="storeCategoryFold" class="store-category-fold">
+            <summary>
+              <span>対象カテゴリを変更</span>
+              <span class="store-category-summary" id="storeCategorySummary" aria-live="polite">全7種類</span>
+              <span class="report-fold-icon" aria-hidden="true">⌄</span>
+            </summary>
+            <fieldset class="store-category-group">
+              <legend>対象店舗（複数選択可）</legend>
+              <div class="store-category-grid">
+                <label><input type="checkbox" name="storeCategory" value="コンビニ" checked> コンビニ</label>
+                <label><input type="checkbox" name="storeCategory" value="TSUTAYA" checked> TSUTAYA</label>
+                <label><input type="checkbox" name="storeCategory" value="GEO" checked> GEO</label>
+                <label><input type="checkbox" name="storeCategory" value="ヨドバシカメラ" checked> ヨドバシカメラ</label>
+                <label><input type="checkbox" name="storeCategory" value="コジマ" checked> コジマ</label>
+                <label><input type="checkbox" name="storeCategory" value="ヤマダデンキ" checked> ヤマダデンキ</label>
+                <label><input type="checkbox" name="storeCategory" value="カードショップ" checked> カードショップ</label>
+              </div>
+              <div class="store-category-actions">
+                <button type="button" id="storeSelectAll">すべて選択</button>
+                <button type="button" id="storeClearAll">すべて解除</button>
+              </div>
+            </fieldset>
+          </details>
+          <p class="hint" id="storeDataStatus" aria-live="polite">店舗データを読み込み中です。</p>
+          <div id="storeResults" aria-live="polite"></div>
         </div>
 
 
@@ -885,83 +862,38 @@ nav[aria-label="メインメニュー"] {
              商品カテゴリ：チェックボックス式
              ================================== -->
 
+        <div class="report-step-header">
+          <span class="report-step-num" aria-hidden="true">2</span>
+          <strong>商品を選ぶ</strong>
+        </div>
         <fieldset class="product-category-group">
-
-          <legend>
-            商品カテゴリ
-          </legend>
-
-          <label class="category-option">
-
-            <input
-              id="categoryPack"
-              name="productCategory"
-              type="checkbox"
-              value="pack"
-              checked
-            >
-
-            <span>
-              拡張パック
-            </span>
-
-          </label>
-
-          <label class="category-option">
-
-            <input
-              id="categoryDeck"
-              name="productCategory"
-              type="checkbox"
-              value="deck"
-            >
-
-            <span>
-              構築デッキ・スターターセット
-            </span>
-
-          </label>
-
-          <p
-            class="hint"
-            id="categoryHint"
-            aria-live="polite"
-          >
-            拡張パックの商品を検索します。
-          </p>
-
+          <legend>商品カテゴリ</legend>
+          <div class="report-product-types">
+            <label class="category-option">
+              <input id="categoryPack" name="productCategory" type="checkbox" value="pack" checked>
+              <span>拡張パック</span>
+            </label>
+            <label class="category-option">
+              <input id="categoryDeck" name="productCategory" type="checkbox" value="deck">
+              <span>構築デッキ・スターター</span>
+            </label>
+          </div>
+          <p class="hint" id="categoryHint" aria-live="polite">拡張パックの商品を検索します。</p>
         </fieldset>
-
-
-        <!-- ==================================
-             商品名検索
-             ================================== -->
-
-        <label for="product">
-          商品名
-        </label>
-
-        <input
-          id="product"
-          type="search"
-          required
-          maxlength="120"
+        <label for="product">商品名</label>
+        <input id="product" type="search" required maxlength="120"
           placeholder="商品名・ひらがな・省略名で検索"
-          autocomplete="off"
-          aria-expanded="false"
-          aria-controls="packDropdown"
-        >
-
-        <p class="hint">
-          チェックしたカテゴリの商品を検索します。
-          両方にチェックすると、拡張パックと
-          構築デッキをまとめて検索できます。
-        </p>
-
-
+          autocomplete="off" aria-expanded="false" aria-controls="packDropdown">
         <div id="registrationSelectedProducts" class="map-selected-products" aria-live="polite"></div>
         <p id="registrationSelectionHint" class="hint">候補をタップすると複数の商品を追加できます。</p>
-        <p class="hint">同じ店舗・日時・販売状況・メモで、商品ごとに1件ずつ保存します。編集時は1商品ずつ変更できます。</p>
+        <details class="report-help">
+          <summary>複数商品の登録について</summary>
+          <p class="hint">同じ店舗・日時・販売状況・メモで、商品ごとに1件ずつ保存します。編集時は1商品ずつ変更できます。</p>
+        </details>
+        <div class="report-step-header">
+          <span class="report-step-num" aria-hidden="true">3</span>
+          <strong>発見内容を入力</strong>
+        </div>
 
         <!-- 発見日時 -->
         <label for="foundAt">
@@ -1559,7 +1491,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_93-six-counts-one-row"></script>
+  <script src="app.js?v=20261024-v21_94-compact-registration"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>

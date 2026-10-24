@@ -1832,6 +1832,18 @@
       .map(input => input.value);
   }
 
+  // v21.94: Compact summary always reflects the actual checkbox state.
+  function updateStoreCategorySummary() {
+    const all=document.querySelectorAll('input[name="storeCategory"]');
+    const selected=selectedStoreCategories().length;
+    const summary=$('storeCategorySummary');
+    if(!summary)return;
+    summary.textContent=selected===all.length
+      ? '全'+all.length+'種類'
+      : selected+' / '+all.length+'種類';
+    summary.dataset.empty=selected===0?'true':'false';
+  }
+
   function searchStores() {
     const area = norm(get('searchArea').value);
     const query = brandNorm(get('storeQuery').value);
@@ -1840,6 +1852,7 @@
     output.replaceChildren();
 
     if (!selected.length) {
+      $('storeCategoryFold').open=true;
       output.textContent = '店舗カテゴリを1つ以上選択してください。';
       return;
     }
@@ -2185,10 +2198,16 @@
 
     get('storeSelectAll').addEventListener('click', () => {
       document.querySelectorAll('input[name="storeCategory"]').forEach(input => { input.checked = true; });
+      updateStoreCategorySummary();
     });
     get('storeClearAll').addEventListener('click', () => {
       document.querySelectorAll('input[name="storeCategory"]').forEach(input => { input.checked = false; });
+      updateStoreCategorySummary();
     });
+    document.querySelectorAll('input[name="storeCategory"]').forEach(input=>{
+      input.addEventListener('change',updateStoreCategorySummary);
+    });
+    updateStoreCategorySummary();
     get('storeSearch').addEventListener('click', () => {
       closeChainDropdown();
       searchStores();
