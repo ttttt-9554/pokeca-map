@@ -7367,6 +7367,16 @@
         .select('payload').eq('id','current').maybeSingle();
       if(error)throw error;
       developerSaleSnapshot=data?.payload||{events:[],items:[]};
+      const {data:targets,error:targetError}=await supabaseClient.from('guerrilla_sale_monitor_targets')
+        .select('id,shop,product,url,enabled').order('shop',{ascending:true});
+      if(targetError)throw targetError;
+      const activeItems=Array.isArray(developerSaleSnapshot.items)?developerSaleSnapshot.items:[];
+      const statuses=new Map(activeItems.map(item=>[item.id,item]));
+      developerSaleSnapshot.items=(targets||[]).map(target=>({
+        ...target,...(statuses.get(target.id)||{}),
+        status:target.enabled?(statuses.get(target.id)?.status||'unknown'):'設定待ち',
+        reason:target.enabled?'':'商品ページと判定条件の設定待ち'
+      }));
       renderDeveloperSalePreview();
       status.textContent='開発者専用プレビュー（認証済みの非公開データ）';
     }catch(error){status.textContent='監視結果の取得に失敗：'+error.message;}
