@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T11:35:55.604838+00:00",
-  "unique_livepocket_urls": 542,
+  "collected_at": "2026-10-24T12:05:56.412005+00:00",
+  "unique_livepocket_urls": 543,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -7826,7 +7826,29 @@
         }
       ],
       "first_detected_at": "2026-10-24T11:35:57.103447+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/jvq-n",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-24T12:00:34.315000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム スタートデッキ100 バトルコレクション抽選販売",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "スタートデッキ100 バトルコレクション",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム スタートデッキ100 バトルコレクション抽選販売",
+      "first_detected_at": "2026-10-24T12:05:58.157724+00:00"
     }
   ],
-  "updated_at": "2026-10-24T11:55:58.936942+00:00"
+  "updated_at": "2026-10-24T12:06:27.285343+00:00"
 }
