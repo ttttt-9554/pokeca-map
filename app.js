@@ -2998,8 +2998,16 @@
           payload.review_deadline_unpublished=unpublished&&!end;
           payload.review_note=unpublished?'公式ページに応募締切の記載なし':null;
         }
-        if (!edited.length && !saved && lpCardReviewUrl!==url) {
-          lpCardSetStatus('変更された項目はありません。'); return;
+        if (!edited.length && lpCardReviewUrl!==url) {
+          // Manual verification is an independent durable record: do not
+          // clear a review-only override on an unchanged ordinary card save.
+          if(saved?.review_complete){
+            lpCardSetStatus('変更された項目はありません。確認完了の記録は維持しています。');
+            return;
+          }
+          if(!saved){
+            lpCardSetStatus('変更された項目はありません。'); return;
+          }
         }
       }
     } catch(error) { lpCardSetStatus('⚠ '+(error?.message || error)); return; }
