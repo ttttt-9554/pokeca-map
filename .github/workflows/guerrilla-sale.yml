@@ -5,6 +5,7 @@ name: Guerrilla Sale Status Monitor
   push:
     paths:
       - 'scripts/guerrilla_sale_monitor.py'
+      - 'scripts/guerrilla_sale_probe.py'
       - 'scripts/test_guerrilla_sale_monitor.py'
       - 'guerrilla_sale_dev_v2.js'
       - 'onsite_comment_alert_v21_55.js'
@@ -37,6 +38,10 @@ jobs:
           python -m unittest discover -s scripts -p 'test_guerrilla_sale_monitor.py' -v
           node --check guerrilla_sale_dev_v2.js
           node --check onsite_comment_alert_v21_55.js
+
+      - name: Read-only retailer smoke probe
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: python scripts/guerrilla_sale_probe.py
 
   monitor:
     if: github.event_name != 'push'
