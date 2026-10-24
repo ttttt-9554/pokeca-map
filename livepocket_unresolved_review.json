@@ -1,213 +1,9 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T09:54:17Z",
-  "total": 27,
+  "as_of": "2026-10-24T09:57:25Z",
+  "total": 16,
   "items": [
-    {
-      "url": "https://livepocket.jp/e/52gka",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/756_v",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/9k99x",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/b7svx",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/cipe4",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/etgbn",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/hkxb0",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/hm8em",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/j8-5v",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/l1-6j",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/noe8e",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/vxgpy",
-      "event_title": "",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "title",
-        "store",
-        "deadline"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:16:22.203744+00:00",
-      "next_retry_at": "2026-10-24T09:46:22.203744+00:00",
-      "queue": "ready"
-    },
     {
       "url": "https://livepocket.jp/e/1rf7i",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
@@ -266,6 +62,21 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-24T09:26:29.910131+00:00",
       "next_retry_at": "2026-10-25T09:26:29.910131+00:00",
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/b7svx",
+      "event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-24T09:56:46.179236+00:00",
+      "next_retry_at": "2026-10-25T09:56:46.179236+00:00",
       "queue": "retry_wait"
     },
     {
