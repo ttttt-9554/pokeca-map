@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T13:05:56.084361+00:00",
+  "collected_at": "2026-10-24T15:05:58.125878+00:00",
   "unique_livepocket_urls": 545,
   "items": [
     {
@@ -6709,8 +6709,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場光が丘店 ポケカ抽選販売（30ｔｈセレブレーション）",
       "first_detected_at": "2026-10-24T02:35:57.407896+00:00"
     },
     {
@@ -6728,8 +6726,6 @@
           "prefecture": "栃木県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム EXブースター「ヒロインズエディション Vol.2」抽選販売",
       "first_detected_at": "2026-10-24T02:35:57.407896+00:00"
     },
     {
@@ -7889,5 +7885,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T14:56:31.982180+00:00"
+  "updated_at": "2026-10-24T15:06:00.223490+00:00"
 }
