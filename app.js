@@ -3686,16 +3686,6 @@
     </article>`;
   }
 
-  // Highlight lottery deadlines within 24 hours; readable in light/dark themes.
-  const lpUrgentStyle = document.createElement('style');
-  lpUrgentStyle.textContent = `
-    .lp-card.lp-urgent-card{border:2px solid #e65b25!important;box-shadow:inset 4px 0 0 #e65b25}
-    .lp-urgent-alert{display:inline-block;margin:8px 0 6px;padding:7px 12px;border-radius:8px;background:#9a3412;color:#fff;font-size:13px;font-weight:800}
-    .lp-card .lp-urgent-deadline{color:#ffb17d!important;font-weight:800}
-    @media(prefers-color-scheme:light){.lp-card .lp-urgent-deadline{color:#9a3412!important}}
-  `;
-  document.head.appendChild(lpUrgentStyle);
-
   // v21.54: Newest means the first URL registration time (not a repost).
   // Historical URLs without first_detected_at fall back to Discord post time.
   function lotteryFirstSeenTime(item) {
