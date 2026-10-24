@@ -14494,7 +14494,7 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vj35o": {
-          "checked_at": "2026-10-23T18:37:18.558556+00:00",
+          "checked_at": "2026-10-24T00:41:21.775888+00:00",
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3v6ni": {
@@ -15185,7 +15185,7 @@
         "https://livepocket.jp/e/vj35o": {
           "detected_at": "2026-10-23T12:35:58.135659+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-23T18:37:18.558556+00:00"
+          "checked_at": "2026-10-24T00:41:21.775888+00:00"
         },
         "https://livepocket.jp/e/3v6ni": {
           "detected_at": "2026-10-23T12:45:58.330512+00:00",
@@ -15823,8 +15823,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vj35o": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-23T18:37:18.558556+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T00:41:21.775888+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3v6ni": {
@@ -19244,7 +19244,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T18:37:18.558556+00:00",
+          "checked_at": "2026-10-24T00:41:21.775888+00:00",
           "title_observed": "【ふるいちトップブックス東松山店】ポケカ抽選販売（ストームエメラルダ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -21561,7 +21561,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vj35o": {
-          "checked_at": "2026-10-23T18:37:18.558556+00:00",
+          "checked_at": "2026-10-24T00:41:21.775888+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
