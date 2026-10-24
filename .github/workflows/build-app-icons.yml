@@ -1,0 +1,40 @@
+name: Build Toreca Radar App Icons
+on:
+  push:
+    paths:
+      - 'assets/toreca-radar-icon.svg'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Render PNG icons from SVG
+        run: |
+          python -m pip install --disable-pip-version-check cairosvg
+          python - <<'PY'
+          import cairosvg
+          for size in (192, 512):
+              cairosvg.svg2png(
+                  url="assets/toreca-radar-icon.svg",
+                  write_to=f"icon-{size}.png",
+                  output_width=size,
+                  output_height=size,
+              )
+          PY
+      - name: Publish icon assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add icon-192.png icon-512.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate Toreca Radar app PNG icons"
+            git push
+          fi
