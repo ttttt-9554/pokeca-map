@@ -90,7 +90,7 @@ def parse_signup_text(source):
     normalized = re.sub(r'\s+', ' ', normalized)
     candidate_ranges = []
     for match in RANGE_LABEL.finditer(normalized):
-        tail = normalized[match.end():match.end()+180]
+        tail = normalized[match.end():match.end()+320]
         next_label = OTHER_LABEL.search(tail)
         if next_label:
             tail = tail[:next_label.start()]
