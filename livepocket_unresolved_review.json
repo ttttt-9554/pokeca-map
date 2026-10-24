@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T09:27:26Z",
-  "total": 31,
+  "as_of": "2026-10-24T09:36:34Z",
+  "total": 32,
   "items": [
     {
       "url": "https://livepocket.jp/e/0tw0p",
@@ -156,6 +156,17 @@
       "application_end_at": "",
       "missing": [
         "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/jltryd",
+      "event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
+      "store_name": "古本市場西大島駅前店",
+      "prefecture": "東京都",
+      "application_end_at": "",
+      "missing": [
         "deadline"
       ],
       "queue": "retry_wait"
