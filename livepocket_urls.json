@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T04:35:54.903966+00:00",
+  "collected_at": "2026-10-24T05:35:55.698665+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 485,
+  "unique_livepocket_urls": 487,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12959,34 +12959,94 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/a-wb2",
+      "discord_message_id": "1563424311157727394",
+      "discord_posted_at": "2026-10-24T05:30:02.799000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場上尾店\n受付終了: 10/25 22:00（残り1日7時間）\nhttps://livepocket.jp/e/a-wb2\n\n📍埼玉県\n古本市場上尾店\n受付終了: 10/25 22:00（残り1日7時間）\nhttps://livepocket.jp/e/qqo16",
+      "store_name": "古本市場上尾店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場上尾店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場上尾店】ポケカ抽選販売（30th CEREBRATION）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/qqo16",
+      "discord_message_id": "1563424311157727394",
+      "discord_posted_at": "2026-10-24T05:30:02.799000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場上尾店\n受付終了: 10/25 22:00（残り1日7時間）\nhttps://livepocket.jp/e/a-wb2\n\n📍埼玉県\n古本市場上尾店\n受付終了: 10/25 22:00（残り1日7時間）\nhttps://livepocket.jp/e/qqo16",
+      "store_name": "古本市場上尾店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場上尾店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場上尾店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 329,
+    "parsed": 331,
     "no_structured_details": 156
   },
   "field_counts": {
-    "store_name": 319,
-    "prefecture": 289,
-    "event_title": 172,
+    "store_name": 321,
+    "prefecture": 291,
+    "event_title": 174,
     "event_date": 1,
     "product_name": 76,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 454,
-    "application_start_at": 454,
-    "stores_events": 327
+    "application_end_at": 456,
+    "application_start_at": 456,
+    "stores_events": 329
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563409257473515551"
+      "1551580466266644552": "1563424311157727394"
     },
     "last_run": {
-      "checked_at": "2026-10-24T04:35:54.903966+00:00",
+      "checked_at": "2026-10-24T05:35:55.698665+00:00",
       "new_urls": 2,
-      "original_urls": 483,
+      "original_urls": 485,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -13118,7 +13178,8 @@
         "1563386633347272734": "2026-10-24T03:05:55.350870+00:00",
         "1563386587339956284": "2026-10-24T03:05:55.350870+00:00",
         "1563401664109617184": "2026-10-24T04:05:56.475803+00:00",
-        "1563409257473515551": "2026-10-24T04:35:55.568212+00:00"
+        "1563409257473515551": "2026-10-24T04:35:55.568212+00:00",
+        "1563424311157727394": "2026-10-24T05:35:56.455624+00:00"
       },
       "checked_search_urls": {}
     },
@@ -15070,6 +15131,14 @@
         "https://livepocket.jp/e/up9fr": {
           "checked_at": "2026-10-24T04:36:22.042553+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/qqo16": {
+          "checked_at": "2026-10-24T05:36:23.598662+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/a-wb2": {
+          "checked_at": "2026-10-24T05:36:23.598662+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -15844,6 +15913,16 @@
           "detected_at": "2026-10-24T04:35:56.419014+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-24T04:36:22.042553+00:00"
+        },
+        "https://livepocket.jp/e/a-wb2": {
+          "detected_at": "2026-10-24T05:35:57.334167+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T05:36:23.598662+00:00"
+        },
+        "https://livepocket.jp/e/qqo16": {
+          "detected_at": "2026-10-24T05:35:57.334167+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T05:36:23.598662+00:00"
         }
       },
       "pending_new_urls": []
@@ -20127,6 +20206,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/qqo16": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T05:36:23.598662+00:00",
+          "title_observed": "【古本市場上尾店】ポケカ抽選販売（ストームエメラルダ）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/a-wb2": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T05:36:23.598662+00:00",
+          "title_observed": "【古本市場上尾店】ポケカ抽選販売（30th CEREBRATION）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -22652,6 +22753,32 @@
         },
         "https://livepocket.jp/e/up9fr": {
           "checked_at": "2026-10-24T04:36:22.042553+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/qqo16": {
+          "checked_at": "2026-10-24T05:36:23.598662+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/a-wb2": {
+          "checked_at": "2026-10-24T05:36:23.598662+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
