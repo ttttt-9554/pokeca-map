@@ -84,6 +84,35 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(set(found),expected)
         self.assertEqual(len(found),len(set(found)))
 
+    def test_inline_review_items_match_unresolved_summary(self):
+        raw, public = fixtures()
+        counts = v21.manual_recheck_candidates(
+            raw, public, now=NOW, summary=True, include_items=True)
+        self.assertEqual(len(counts["items"]), counts["unresolved"])
+        self.assertEqual(
+            sum(x["queue"]=="ready" for x in counts["items"]), counts["ready"])
+        self.assertEqual(
+            sum(x["queue"]=="retry_wait" for x in counts["items"]), counts["retry_wait"])
+        self.assertEqual(len({x["url"] for x in counts["items"]}),
+                         counts["unresolved"])
+        self.assertTrue(all(x["missing"] for x in counts["items"]))
+        self.assertTrue(all(set(x).issubset(
+            {"url","event_title","store_name","prefecture",
+             "application_end_at","missing","queue"}) for x in counts["items"]))
+
+    def test_manual_review_completion_is_durable(self):
+        raw, public = fixtures()
+        before = v21.manual_recheck_candidates(
+            raw, public, now=NOW, summary=True, include_items=True)
+        target = url("deadlineunknown")
+        self.assertIn(target, {x["url"] for x in before["items"]})
+        after = v21.manual_recheck_candidates(
+            raw, public, now=NOW, summary=True, include_items=True,
+            completed_reviews={target})
+        self.assertNotIn(target, {x["url"] for x in after["items"]})
+        self.assertEqual(after["unresolved"], before["unresolved"]-1)
+        self.assertEqual(after["completed"], before["completed"]+1)
+
     def test_limit_and_no_filler(self):
         raw,public=fixtures()
         found=v21.manual_recheck_candidates(
@@ -153,7 +182,8 @@ class CandidateTests(unittest.TestCase):
             public_path=root/"public.json"
             raw_path.write_text(json.dumps(raw),encoding="utf-8")
             public_path.write_text(json.dumps(public),encoding="utf-8")
-            with patch.object(summary.v21,"PUBLIC_PATH",public_path):
+            with patch.object(summary.v21,"PUBLIC_PATH",public_path), \
+                 patch.object(summary,"read_review_completed",return_value=set()):
                 with patch.object(summary,"read_manual_completed",
                                   return_value=({url("manualdone"),url("manualtitle")},
                                                 {url("removed")},
