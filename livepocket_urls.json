@@ -16713,7 +16713,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/up9fr": {
-          "checked_at": "2026-10-24T10:36:36.713276+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -16977,8 +16977,9 @@
           "http_status": null
         },
         "https://livepocket.jp/e/0dqin": {
-          "checked_at": "2026-10-24T09:36:21.533615+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
+          "status": "checked_retry_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/w9sy5": {
           "checked_at": "2026-10-24T10:36:36.713276+00:00",
@@ -16996,8 +16997,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/v_zwv": {
-          "checked_at": "2026-10-24T11:36:22.306673+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/jvq-n": {
@@ -17795,7 +17796,7 @@
         "https://livepocket.jp/e/up9fr": {
           "detected_at": "2026-10-24T04:35:56.419014+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T10:36:36.713276+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/zau0z": {
@@ -17835,8 +17836,9 @@
         },
         "https://livepocket.jp/e/0dqin": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T09:36:21.533615+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
+          "http_status": null
         },
         "https://livepocket.jp/e/2-0vm": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
@@ -18137,8 +18139,8 @@
         },
         "https://livepocket.jp/e/v_zwv": {
           "detected_at": "2026-10-24T11:35:57.103447+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T11:36:22.306673+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/jvq-n": {
@@ -18880,8 +18882,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/up9fr": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T10:36:36.713276+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T17:36:26.905022+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/qqo16": {
@@ -19097,6 +19099,16 @@
         "https://livepocket.jp/e/0tw0p": {
           "attempts": 1,
           "last_attempt_at": "2026-10-24T17:33:06.077949+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/v_zwv": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T17:36:26.905022+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/0dqin": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T17:36:26.905022+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -22760,7 +22772,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T10:36:36.713276+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "title_observed": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
           "genre": "onepiece",
           "product_origin": "",
@@ -23343,7 +23355,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T09:36:21.533615+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "title_observed": "【ふるいちイオンモール神戸北店】ポケカ抽選販売（メガブレイブ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -23387,7 +23399,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T11:36:22.306673+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "title_observed": "ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
           "genre": "onepiece",
           "product_origin": "",
@@ -25950,7 +25962,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/up9fr": {
-          "checked_at": "2026-10-24T10:36:36.713276+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26639,7 +26651,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0dqin": {
-          "checked_at": "2026-10-24T09:36:21.533615+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26691,7 +26703,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/v_zwv": {
-          "checked_at": "2026-10-24T11:36:22.306673+00:00",
+          "checked_at": "2026-10-24T17:36:26.905022+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
