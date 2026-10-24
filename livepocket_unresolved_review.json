@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T23:28:45Z",
-  "total": 2,
+  "as_of": "2026-10-24T23:36:52Z",
+  "total": 1,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -17,21 +17,6 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-24T23:28:33.034191+00:00",
       "next_retry_at": "2026-10-25T23:28:33.034191+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/i5bkt",
-      "event_title": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
-      "store_name": "TSUTAYA籠原店",
-      "prefecture": "埼玉県",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T21:01:24.751698+00:00",
-      "next_retry_at": "2026-10-25T21:01:24.751698+00:00",
       "queue": "retry_wait"
     }
   ]
