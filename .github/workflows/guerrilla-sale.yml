@@ -58,7 +58,7 @@ jobs:
       - name: Private developer-only monitoring
         env:
           SUPABASE_URL: https://aypcmtlaaygmiexboypk.supabase.co
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SECRET_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
             echo 'Private database secret is not configured; no sites were monitored.'
