@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T00:00:56.779334+00:00",
-  "unique_livepocket_urls": 466,
+  "collected_at": "2026-10-24T00:30:55.784258+00:00",
+  "unique_livepocket_urls": 470,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6340,8 +6340,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パックストームエメラルダ）",
       "first_detected_at": "2026-10-23T12:05:58.467967+00:00"
     },
     {
@@ -6362,8 +6360,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（30th CELEBRATION カードセット 全9種 コンプリートセット）",
       "first_detected_at": "2026-10-23T12:05:58.467967+00:00"
     },
     {
@@ -6381,8 +6377,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク朝霞店】ポケカ抽選販売（30th 拡張パック）",
       "first_detected_at": "2026-10-23T12:05:58.467967+00:00"
     },
     {
@@ -6535,7 +6529,80 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T00:00:58.433607+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/hbg8_",
+      "store_name": "古本市場西大島駅前店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "stores": [
+        {
+          "name": "古本市場西大島駅前店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
+      "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/xlrs9",
+      "store_name": "文教堂行徳店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "stores": [
+        {
+          "name": "文教堂行徳店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "ONE PIECE EXブースター ヒロインズエディション Vol.2",
+      "application_end_at": "2026-10-27T20:30:00+09:00",
+      "application_start_at": "2026-10-23T19:20:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "ONE PIECE EXブースター ヒロインズエディション Vol.2",
+      "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/8qn_a",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
+      "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/xw_dt",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場深谷店】ポケカ抽選販売（30th カードセット9種類）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th カードセット9種類）",
+      "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     }
   ],
-  "updated_at": "2026-10-24T00:21:23.141990+00:00"
+  "updated_at": "2026-10-24T00:33:20.584525+00:00"
 }

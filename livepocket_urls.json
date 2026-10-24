@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T00:00:56.779334+00:00",
+  "collected_at": "2026-10-24T00:30:55.784258+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 466,
+  "unique_livepocket_urls": 470,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12372,34 +12372,150 @@
       "event_title": "【古本市場小平店】 ポケカ抽選販売30thCELEBRATIONカードセット 9種セット",
       "application_end_at": "2026-10-24T22:00:00+09:00",
       "application_start_at": "2026-10-23T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/hbg8_",
+      "discord_message_id": "1563348822003028079",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り10時間34分）\nhttps://livepocket.jp/e/hbg8_\n\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日10時間）\nhttps://livepocket.jp/e/xlrs9\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/8qn_a\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/xw_dt",
+      "store_name": "古本市場西大島駅前店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場西大島駅前店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title"
+      },
+      "event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）"
+    },
+    {
+      "url": "https://livepocket.jp/e/xlrs9",
+      "discord_message_id": "1563348822003028079",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り10時間34分）\nhttps://livepocket.jp/e/hbg8_\n\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日10時間）\nhttps://livepocket.jp/e/xlrs9\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/8qn_a\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/xw_dt",
+      "store_name": "文教堂行徳店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂行徳店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ONE PIECE EXブースター ヒロインズエディション Vol.2",
+      "application_end_at": "2026-10-27T20:30:00+09:00",
+      "application_start_at": "2026-10-23T19:20:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/8qn_a",
+      "discord_message_id": "1563348822003028079",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り10時間34分）\nhttps://livepocket.jp/e/hbg8_\n\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日10時間）\nhttps://livepocket.jp/e/xlrs9\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/8qn_a\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/xw_dt",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/xw_dt",
+      "discord_message_id": "1563348822003028079",
+      "discord_posted_at": "2026-10-24T00:30:04.782000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り10時間34分）\nhttps://livepocket.jp/e/hbg8_\n\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日10時間）\nhttps://livepocket.jp/e/xlrs9\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/8qn_a\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日12時間）\nhttps://livepocket.jp/e/xw_dt",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場深谷店】ポケカ抽選販売（30th カードセット9種類）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 311,
+    "parsed": 315,
     "no_structured_details": 155
   },
   "field_counts": {
-    "store_name": 302,
-    "prefecture": 265,
-    "event_title": 153,
+    "store_name": 306,
+    "prefecture": 269,
+    "event_title": 157,
     "event_date": 1,
     "product_name": 72,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 436,
-    "application_start_at": 436,
-    "stores_events": 309
+    "application_end_at": 439,
+    "application_start_at": 439,
+    "stores_events": 313
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563341269374337147"
+      "1551580466266644552": "1563348822003028079"
     },
     "last_run": {
-      "checked_at": "2026-10-24T00:00:56.779334+00:00",
-      "new_urls": 1,
-      "original_urls": 465,
+      "checked_at": "2026-10-24T00:30:55.784258+00:00",
+      "new_urls": 4,
+      "original_urls": 466,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -12523,7 +12639,8 @@
         "1563175192434450503": "2026-10-23T13:05:58.440364+00:00",
         "1563181170408161280": "2026-10-23T13:25:57.549832+00:00",
         "1563190285201055914": "2026-10-23T14:05:57.323689+00:00",
-        "1563341269374337147": "2026-10-24T00:00:57.560154+00:00"
+        "1563341269374337147": "2026-10-24T00:00:57.560154+00:00",
+        "1563348822003028079": "2026-10-24T00:30:56.532734+00:00"
       },
       "checked_search_urls": {}
     },
@@ -14399,6 +14516,22 @@
         "https://livepocket.jp/e/8rswc": {
           "checked_at": "2026-10-24T00:01:24.345251+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/xw_dt": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/xlrs9": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/hbg8_": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "status": "checked_title"
+        },
+        "https://livepocket.jp/e/8qn_a": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -15078,6 +15211,26 @@
           "detected_at": "2026-10-24T00:00:58.433607+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-24T00:01:24.345251+00:00"
+        },
+        "https://livepocket.jp/e/8qn_a": {
+          "detected_at": "2026-10-24T00:30:57.216063+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00"
+        },
+        "https://livepocket.jp/e/hbg8_": {
+          "detected_at": "2026-10-24T00:30:57.216063+00:00",
+          "status": "checked_title",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00"
+        },
+        "https://livepocket.jp/e/xlrs9": {
+          "detected_at": "2026-10-24T00:30:57.216063+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00"
+        },
+        "https://livepocket.jp/e/xw_dt": {
+          "detected_at": "2026-10-24T00:30:57.216063+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00"
         }
       },
       "pending_new_urls": []
@@ -19152,6 +19305,50 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/xw_dt": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "title_observed": "【古本市場深谷店】ポケカ抽選販売（30th カードセット9種類）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/xlrs9": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "title_observed": "ONE PIECE EXブースター ヒロインズエディション Vol.2",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/hbg8_": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "title_observed": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/8qn_a": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "title_observed": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -21430,6 +21627,58 @@
         },
         "https://livepocket.jp/e/8rswc": {
           "checked_at": "2026-10-24T00:01:24.345251+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/xw_dt": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/xlrs9": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/hbg8_": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/8qn_a": {
+          "checked_at": "2026-10-24T00:33:20.584525+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
