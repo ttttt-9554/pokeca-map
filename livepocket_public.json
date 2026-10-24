@@ -6967,8 +6967,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム HEROINES PRECIOUS BOX",
       "first_detected_at": "2026-10-24T08:05:58.799266+00:00"
     },
     {
@@ -6989,8 +6987,6 @@
       "pokemon_map_match": "スタートデッキ100 バトルコレクション",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス伊勢崎茂呂店】ポケカ抽選販売(ポケモンカードゲームMEGAスタートデッキ100バトルコレクション）",
       "first_detected_at": "2026-10-24T08:05:58.799266+00:00"
     },
     {
@@ -7893,5 +7889,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T20:11:28.851027+00:00"
+  "updated_at": "2026-10-24T20:20:59.335628+00:00"
 }
