@@ -7223,6 +7223,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【岩国店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7239,8 +7241,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場東大阪店】ポケカ抽選販売（カードセット9種セット）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7293,8 +7293,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場西淀川店】ポケカ抽選販売（30th CELEBRATION カードセット ）9種セット",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7531,12 +7529,14 @@
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "store_name": "キデイランドららぽーと富士見店",
       "stores": [
         {
           "name": "キデイランドららぽーと富士見店",
           "prefecture": ""
         }
       ],
+      "official_event_title": "キデイランドららぽーと富士見店 ドラゴンボールカードゲームFusion World「CROSS FORCE」購入券 抽選",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7565,8 +7565,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7760,6 +7758,8 @@
           "prefecture": "東京都"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
       "first_detected_at": "2026-10-24T09:35:56.228412+00:00"
     },
     {
@@ -7891,5 +7891,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T15:26:34.725635+00:00"
+  "updated_at": "2026-10-24T15:36:27.583037+00:00"
 }
