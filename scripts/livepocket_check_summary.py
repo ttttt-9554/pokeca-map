@@ -17,7 +17,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 
 import livepocket_v21 as v21
-from livepocket_manual_completed import read_manual_completed
+from livepocket_manual_completed import read_manual_completed, read_review_completed
 
 ALLOWED_METRICS = (
     'registered_urls', 'deadlines_known', 'deadline_missing',
@@ -154,7 +154,8 @@ def load_daily_new_lotteries(path: Path, *, now: datetime | None = None) -> dict
         return None
     return daily_new_lotteries(raw, now=now)
 
-def current_manual_review_progress(raw_path: Path, *, now: datetime | None = None) -> dict:
+def current_manual_review_progress(raw_path: Path, *, now: datetime | None = None,
+                                   include_items: bool = False) -> dict:
     """Current queue status using exactly the same selector as developer recheck.
 
     No event URLs or Supabase records are published. A broken snapshot or
@@ -167,7 +168,9 @@ def current_manual_review_progress(raw_path: Path, *, now: datetime | None = Non
         counts = v21.manual_recheck_candidates(
             raw, public, now=now, limit=v21.MANUAL_RECHECK_LIMIT,
             completed_titles=titles, removed_pages=removed,
-            completed_locations=locations, summary=True)
+            completed_locations=locations,
+            completed_reviews=read_review_completed(),
+            summary=True, include_items=include_items)
         counts.update(
             status='ok', source='v21_65_manual_selector',
             as_of=(now or datetime.now(timezone.utc)).astimezone(timezone.utc)
@@ -256,7 +259,19 @@ def main() -> None:
         payload['daily_additions'] = {'status': 'unavailable'}
     # Current queue status is separate from the historical last-manual stats.
     # Collect on every run; never silently show stale queue figures as current.
-    payload['review_progress'] = current_manual_review_progress(Path(args.raw_data))
+    full_review = current_manual_review_progress(Path(args.raw_data), include_items=True)
+    review_rows = full_review.pop('items', None)
+    payload['review_progress'] = full_review
+    if isinstance(review_rows, list):
+        # Public event URLs only; no user profiles, private notes or raw Discord.
+        Path('livepocket_unresolved_review.json').write_text(
+            json.dumps({
+                'schema_version': 1,
+                'source': 'v21_97_manual_review_queue',
+                'as_of': full_review.get('as_of'),
+                'total': full_review.get('unresolved'),
+                'items': review_rows,
+            }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     # Automatic scans may run frequently: publish when the daily totals OR
     # review queue categories change. Manual results always get published.
     previous_progress = previous.get('review_progress')

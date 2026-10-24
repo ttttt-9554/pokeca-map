@@ -26,7 +26,7 @@ import livepocket_v14 as v14
 import livepocket_v16 as v16
 import livepocket_v19 as v19
 import livepocket_v20 as v20
-from livepocket_manual_completed import read_manual_completed
+from livepocket_manual_completed import read_manual_completed, read_review_completed
 
 RAW_PATH = v14.RAW_PATH
 PUBLIC_PATH = v14.PUBLIC_PATH
@@ -1359,7 +1359,8 @@ MANUAL_RECHECK_LIMIT = 12
 
 def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIMIT,
                               completed_titles=(), removed_pages=(),
-                              completed_locations=(), summary=False):
+                              completed_locations=(), completed_reviews=(),
+                              summary=False, include_items=False):
     """Select only actionable and eligible LivePocket events.
 
     Successful page checks, failed requests, and developer-saved corrections
@@ -1380,6 +1381,8 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
     completed_titles = set(completed_titles)
     removed_pages = set(removed_pages)
     completed_locations = set(completed_locations)
+    completed_reviews = set(completed_reviews)
+    detail_rows = []
     pending = set(v14state.get('pending_new_urls', []))
     browser_checks = state.get('v13', {}).get('browser_checks', {})
     official_checks = state.get('v21_9', {}).get('official_checks', {})
@@ -1399,6 +1402,9 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         deadline_utc = deadline.astimezone(timezone.utc) if deadline else None
         if deadline_utc and deadline_utc <= now:
             counters['expired'] += 1
+            continue
+        if url in completed_reviews:
+            counters['completed'] += 1
             continue
         check = browser_checks.get(url, {})
         if not isinstance(check, dict) or check.get('status') == 'browser_redirected':
@@ -1440,6 +1446,17 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         if missing_title: missing_fields['missing_title'] += 1
         if missing_store: missing_fields['missing_store'] += 1
         if missing_deadline: missing_fields['missing_deadline'] += 1
+        if include_items:
+            review_item = {
+                'url': url,
+                'event_title': str(title)[:160],
+                'store_name': str(event.get('store_name') or item.get('store_name') or '')[:160],
+                'prefecture': str(event.get('prefecture') or '')[:40],
+                'application_end_at': str(event.get('application_end_at') or '')[:40],
+                'missing': [key for key,condition in
+                    (('title',missing_title),('store',missing_store),
+                     ('deadline',missing_deadline)) if condition],
+            }
 
         # A successfully fetched event page has already been inspected.
         # Even with an unreported detail it should not use every developer
@@ -1453,6 +1470,9 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
             if now < next_at:
                 counters['retry_wait'] += 1
                 next_retries.append(next_at)
+                if include_items:
+                    review_item['queue'] = 'retry_wait'
+                    detail_rows.append(review_item)
                 continue
 
         tier = 0 if missing_title else 1
@@ -1464,6 +1484,9 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
                        1 if remaining <= timedelta(days=3) else
                        2 if remaining <= timedelta(days=7) else 3)
         counters['ready'] += 1
+        if include_items:
+            review_item['queue'] = 'ready'
+            detail_rows.append(review_item)
         selected.append((tier, urgency,
                          latest_check is not None,
                          latest_check or datetime.min.replace(tzinfo=timezone.utc),
@@ -1483,6 +1506,11 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
                                  if next_retries else None)
         result['access_cooldown']=bool(access_cooldown)
         result['next_batch_size']=min(limit, len(selected)) if not access_cooldown else 0
+        if include_items:
+            if len(detail_rows) != result['unresolved']:
+                raise ValueError('Review list/count mismatch')
+            result['items'] = sorted(detail_rows, key=lambda x:
+                                     (x['queue'] != 'ready', x['url']))
         if sum(result[key] for key in keys) != result['total']:
             raise ValueError('Manual review progress categories do not total the catalog')
         return result
@@ -1586,11 +1614,13 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
                     for item in public['items']}
     if manual_recheck:
         cloud_titles, cloud_removed, cloud_locations = read_manual_completed()
+        cloud_reviews = read_review_completed()
         manual_urls = manual_recheck_candidates(
             raw, public, now=now, limit=manual_limit,
             completed_titles=cloud_titles,
             removed_pages=cloud_removed | set(verified_unavailable or {}),
-            completed_locations=cloud_locations)
+            completed_locations=cloud_locations,
+            completed_reviews=cloud_reviews)
     else:
         manual_urls = []
     # Selection before the upstream pass prevents fresh discoveries from being
@@ -2587,10 +2617,12 @@ def main():
     verified_unavailable = read_verified_unavailable()
     if manual_recheck:
         cloud_titles, cloud_removed, cloud_locations = read_manual_completed()
+        cloud_reviews = read_review_completed()
         manual_urls = manual_recheck_candidates(
             raw, public, completed_titles=cloud_titles,
             removed_pages=cloud_removed | set(verified_unavailable),
-            completed_locations=cloud_locations)
+            completed_locations=cloud_locations,
+            completed_reviews=cloud_reviews)
     else:
         manual_urls = []
     with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):

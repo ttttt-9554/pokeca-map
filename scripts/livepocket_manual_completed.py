@@ -78,3 +78,13 @@ def read_manual_completed() -> tuple[set[str], set[str], set[str]]:
     print("Manual completions synced: verified titles", len(resolved_title),
           "removed pages", len(removed), "location fixes", len(corrected_locations))
     return resolved_title, removed, corrected_locations
+
+
+@lru_cache(maxsize=1)
+def read_review_completed() -> set[str]:
+    """URLs verified and completed by the developer in the card review UI."""
+    endpoint, key = _client_config()
+    rows = _read_rows(endpoint, key, "lottery_card_overrides", "event_url,review_complete")
+    return {row["event_url"] for row in rows
+            if row.get("review_complete") is True and
+            URL_PATTERN.fullmatch(str(row.get("event_url", "")))}
