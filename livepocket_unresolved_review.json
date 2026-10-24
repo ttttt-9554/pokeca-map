@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T10:06:02Z",
-  "total": 7,
+  "as_of": "2026-10-24T10:16:38Z",
+  "total": 1,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -17,96 +17,6 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-23T15:46:24.564758+00:00",
       "next_retry_at": "2026-10-24T15:46:24.564758+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/2qon3",
-      "event_title": "アニマルカードゲーム名古屋冬の陣2026",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-11-05T23:59:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "browser_http_error",
-      "last_http_status": 405,
-      "last_checked_at": "2026-10-24T09:07:05.673487+00:00",
-      "next_retry_at": "2026-10-24T10:07:05.673487+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/3adrx",
-      "event_title": "【抽選販売】ポケモンカードゲーム MEGA拡張パック 「30th CELEBRATION」",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-26T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:53:31.671079+00:00",
-      "next_retry_at": "2026-10-25T09:53:31.671079+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/5-9tt",
-      "event_title": "ポケモンカードゲーム「30th CELEBRATION」抽選",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-11-03T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:26:29.910131+00:00",
-      "next_retry_at": "2026-10-25T09:26:29.910131+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/b7svx",
-      "event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:56:46.179236+00:00",
-      "next_retry_at": "2026-10-25T09:56:46.179236+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/gfalf",
-      "event_title": "UNION ARENA Re:ゼロから始める異世界生活 Vol.2【EX17BT】1ボックス 抽選販売受付",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T18:59:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:26:29.910131+00:00",
-      "next_retry_at": "2026-10-25T09:26:29.910131+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/jltryd",
-      "event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
-      "store_name": "古本市場西大島駅前店",
-      "prefecture": "東京都",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:36:21.533615+00:00",
-      "next_retry_at": "2026-10-25T09:36:21.533615+00:00",
       "queue": "retry_wait"
     }
   ]
