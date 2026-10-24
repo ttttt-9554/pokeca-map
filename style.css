@@ -1770,3 +1770,27 @@ html[data-theme=dark] .lp-track-quantity-summary{
  background:#203149!important;border-color:#59718d!important;color:#edf4ff!important;
 }
 html[data-theme=dark] #lpTrackerForm .lp-track-quantities legend{color:#edf4ff!important}
+
+
+/* v21.90: Match anonymous results button to personal management and keep
+   Apply / Manage / Results on one row on iPhone. */
+#lotteryView .lp-track-actions{
+  display:flex;flex-direction:column;align-items:stretch;gap:7px;
+}
+#lotteryView .lp-track-state{min-width:0;display:flex;align-items:center}
+#lotteryView .lp-track-action-buttons{
+  display:flex;flex-wrap:nowrap;align-items:stretch;gap:6px;
+  width:100%;min-width:0;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+#lotteryView .lp-track-action-buttons::-webkit-scrollbar{display:none}
+#lotteryView .lp-track-action-buttons button{
+  flex:0 0 auto;min-width:0;min-height:40px;
+  font-size:12px;line-height:1.45;font-weight:700;
+  padding:8px 9px;white-space:nowrap;
+  touch-action:manipulation;
+}
+@media(max-width:390px){
+  #lotteryView .lp-track-action-buttons{gap:5px}
+  #lotteryView .lp-track-action-buttons button{font-size:11px;padding:8px 7px}
+}

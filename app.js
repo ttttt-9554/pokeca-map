@@ -3596,7 +3596,6 @@
       ${lotteryOnsiteSharedHtml(item.url)}
       ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">アプリ公式案内を確認 ↗</a>':'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>') : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
       ${lotteryTrackerActionsHtml(item)}
-      <div class="lp-result-card-actions"><button type="button" data-lp-results-show="${escape(item.url)}">🏆 匿名集計を見る</button></div>
       ${item.app_lottery&&isDeveloper()&&item.app_lottery_owner!==authUser.id?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">🛠 管理者編集</button></div>':''}
       ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
@@ -5066,9 +5065,12 @@
     const warning=lotteryTrackPickupMessage(record);
     const css=warning.startsWith('⚠')?'lp-track-overdue':'';
     return `<div class="lp-track-actions" aria-label="自分の応募管理">
-      ${record?`<span class="lp-track-pill">${escape(show)}${onsite?' ／ '+escape(onsite):''}</span>`:''}
-      <button type="button" data-lp-track="apply" data-url="${escape(item.url)}">${applied?'✅ 応募状況を確認':'☐ 応募済みにする'}</button>
-      <button type="button" data-lp-track="edit" data-url="${escape(item.url)}">⚙ 個別管理</button>
+      ${record?`<div class="lp-track-state"><span class="lp-track-pill">${escape(show)}${onsite?' ／ '+escape(onsite):''}</span></div>`:''}
+      <div class="lp-track-action-buttons">
+        <button type="button" data-lp-track="apply" data-url="${escape(item.url)}">${applied?'✅ 応募状況を確認':'☐ 応募済みにする'}</button>
+        <button type="button" data-lp-track="edit" data-url="${escape(item.url)}">⚙ 個別管理</button>
+        <button type="button" data-lp-results-show="${escape(item.url)}" aria-label="この抽選の匿名集計を見る">🏆 匿名集計を見る</button>
+      </div>
     </div>${warning?`<p class="lp-track-note ${css}">${escape(warning)}</p>`:''}`;
   }
 
