@@ -2113,8 +2113,8 @@ html[data-theme=dark] #lpCardReviewConfirm{color:#eef4ff!important;border-color:
 
 /* Lottery cards: less than 24 hours before application deadline */
 .lp-card.lp-urgent-card {
-  border-color: #e65b25;
-  box-shadow: inset 4px 0 0 #e65b25;
+  border: 2px solid #e65b25;
+  box-shadow: none;
 }
 .lp-card .lp-urgent-alert {
   display: inline-block;
