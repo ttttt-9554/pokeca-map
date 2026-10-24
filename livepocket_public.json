@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T12:05:56.412005+00:00",
-  "unique_livepocket_urls": 543,
+  "collected_at": "2026-10-24T13:05:56.084361+00:00",
+  "unique_livepocket_urls": 545,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6598,8 +6598,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
       "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     },
     {
@@ -7848,7 +7846,48 @@
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T12:05:58.157724+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nkcob",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-24T13:00:13.365000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+      "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nc71x",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-24T13:00:13.365000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "【再販分】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ 抽選販売",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【再販分】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ 抽選販売",
+      "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T12:56:28.485338+00:00"
+  "updated_at": "2026-10-24T13:06:27.727620+00:00"
 }
