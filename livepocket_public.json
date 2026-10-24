@@ -195,12 +195,12 @@
     },
     {
       "url": "https://livepocket.jp/e/1q_nh",
+      "store_name": "TSUTAYA金沢店",
       "event_title": "【TSUTAYA金沢店】10/31発売予定ワンピースカードゲーム『Heroines Edition vol.2』(1BOX)抽選販売受付",
       "application_start_at": "2026-10-13T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-13T22:28:18.672000+00:00",
       "review_category": "onepiece",
-      "store_name": "TSUTAYA金沢店",
       "stores": [
         {
           "name": "TSUTAYA金沢店",
@@ -3140,10 +3140,10 @@
     },
     {
       "url": "https://livepocket.jp/e/yfaf-",
+      "store_name": "ふるいちイオンモール熱田店",
       "event_title": "【ふるいちイオンモール熱田店】ポケカ抽選販売 ポケモンカードゲームＭＥＧＡ 拡張パック「ストームエメラルダ」",
       "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいちイオンモール熱田店",
       "stores": [
         {
           "name": "ふるいちイオンモール熱田店",
@@ -7041,12 +7041,12 @@
     },
     {
       "url": "https://livepocket.jp/e/xm634",
-      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
-      "event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（ストームエメラルダ）",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
-      "application_start_at": "2026-10-24T10:00:00+09:00",
-      "review_category": "pokemon",
       "store_name": "ふるいちイオンモール土岐店",
+      "event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール土岐店",
@@ -7056,8 +7056,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7087,21 +7085,35 @@
     },
     {
       "url": "https://livepocket.jp/e/yutwo",
-      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "event_title": "【ふるいちトップブックス長岡古正寺】ポケカ抽選販売（30th CELEBRATION）",
-      "application_end_at": "2026-10-26T22:00:00+09:00",
       "application_start_at": "2026-10-23T09:00:00+09:00",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス長岡古正寺】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
       "url": "https://livepocket.jp/e/xdeb1",
       "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "event_title": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "application_start_at": "2026-10-24T09:30:00+09:00",
+      "review_category": "pokemon",
+      "store_name": "古本市場豊浜店",
+      "stores": [
+        {
+          "name": "古本市場豊浜店",
+          "prefecture": ""
+        }
+      ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7111,13 +7123,11 @@
     },
     {
       "url": "https://livepocket.jp/e/zoqcs",
-      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
       "application_start_at": "2026-10-24T09:00:00+09:00",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7133,11 +7143,36 @@
     {
       "url": "https://livepocket.jp/e/wlon0",
       "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "event_title": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T09:50:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
       "url": "https://livepocket.jp/e/x3hs7",
       "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "event_title": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T18:00:00+09:00",
+      "review_category": "pokemon",
+      "store_name": "古本市場高島店",
+      "stores": [
+        {
+          "name": "古本市場高島店",
+          "prefecture": ""
+        }
+      ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7168,12 +7203,12 @@
     },
     {
       "url": "https://livepocket.jp/e/7qcof",
+      "store_name": "ふるいちトップブックス高田西店",
       "event_title": "【ふるいちトップブックス高田西店】ポケモンカード抽選販売（30thデッキ9種セット）",
       "application_start_at": "2026-10-24T09:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいちトップブックス高田西店",
       "stores": [
         {
           "name": "ふるいちトップブックス高田西店",
@@ -7184,12 +7219,12 @@
     },
     {
       "url": "https://livepocket.jp/e/8rh7p",
+      "store_name": "古本市場 東住吉店",
       "event_title": "【古本市場 東住吉店】 ポケカ抽選販売（拡張パック ストームエメラルダ）",
       "application_start_at": "2026-10-24T09:30:00+09:00",
       "application_end_at": "2026-10-25T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "古本市場 東住吉店",
       "stores": [
         {
           "name": "古本市場 東住吉店",
@@ -7284,12 +7319,12 @@
     },
     {
       "url": "https://livepocket.jp/e/2-0vm",
+      "store_name": "古本市場 新琴似店",
       "event_title": "【古本市場 新琴似店】ふるいちアプリ会員限定 ポケカ抽選販売（30th CELEBRATION カードセット (9種セット）",
       "application_start_at": "2026-10-19T22:05:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "古本市場 新琴似店",
       "stores": [
         {
           "name": "古本市場 新琴似店",
@@ -7303,12 +7338,12 @@
     },
     {
       "url": "https://livepocket.jp/e/bmnvd",
+      "store_name": "ふるいち新潟万代店",
       "event_title": "【ふるいち新潟万代店】ポケモンカードゲーム「30th CELEBRATION」抽選販売",
       "application_start_at": "2026-10-24T08:00:00+09:00",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいち新潟万代店",
       "stores": [
         {
           "name": "ふるいち新潟万代店",
@@ -7330,12 +7365,12 @@
     },
     {
       "url": "https://livepocket.jp/e/89zs9",
+      "store_name": "古本市場三田店",
       "event_title": "【古本市場三田店】ポケカ抽選販売（30th CELEBRATION）",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:01:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "古本市場三田店",
       "stores": [
         {
           "name": "古本市場三田店",
@@ -7349,12 +7384,12 @@
     },
     {
       "url": "https://livepocket.jp/e/qrq-5",
+      "store_name": "古本市場三田店",
       "event_title": "【古本市場三田店】ポケカ抽選販売（ストームエメラルダ）",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-25T22:01:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "古本市場三田店",
       "stores": [
         {
           "name": "古本市場三田店",
@@ -7368,12 +7403,12 @@
     },
     {
       "url": "https://livepocket.jp/e/pjhof",
+      "store_name": "ふるいちイオンモール神戸北店",
       "event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売（スタートデッキ100）",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T21:01:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいちイオンモール神戸北店",
       "stores": [
         {
           "name": "ふるいちイオンモール神戸北店",
@@ -7384,12 +7419,12 @@
     },
     {
       "url": "https://livepocket.jp/e/71ygn",
+      "store_name": "ふるいちイオンモール神戸北店",
       "event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売30thカード9種セット",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T21:01:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいちイオンモール神戸北店",
       "stores": [
         {
           "name": "ふるいちイオンモール神戸北店",
@@ -7400,12 +7435,12 @@
     },
     {
       "url": "https://livepocket.jp/e/0dqin",
+      "store_name": "ふるいちイオンモール神戸北店",
       "event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売（メガブレイブ）",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T21:01:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいちイオンモール神戸北店",
       "stores": [
         {
           "name": "ふるいちイオンモール神戸北店",
@@ -7419,12 +7454,12 @@
     },
     {
       "url": "https://livepocket.jp/e/8y5y0",
+      "store_name": "ふるいちイオンモール神戸北店",
       "event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売（メガシンフォニア）",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T21:01:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
       "review_category": "pokemon",
-      "store_name": "ふるいちイオンモール神戸北店",
       "stores": [
         {
           "name": "ふるいちイオンモール神戸北店",
@@ -7452,5 +7487,5 @@
       "first_detected_at": "2026-10-24T09:35:56.228412+00:00"
     }
   ],
-  "updated_at": "2026-10-24T09:43:09.467373+00:00"
+  "updated_at": "2026-10-24T09:46:23.650214+00:00"
 }
