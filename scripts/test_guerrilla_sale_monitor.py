@@ -46,27 +46,30 @@ class SaleMonitorTests(unittest.TestCase):
             "available_text": ["販売中"],
             "unavailable_text": ["売り切れ"],
         }
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            (root / "targets.json").write_text(json.dumps({"targets": [target]}), encoding="utf-8")
-            with (
-                patch.object(mon, "CONFIG", root / "targets.json"),
-                patch.object(mon, "STATE", root / "state.json"),
-                patch.object(mon, "FEED", root / "feed.json"),
-                patch.object(mon, "post_discord", return_value=True) as send,
-                patch.object(mon, "detect", side_effect=[
-                    ("unavailable", ""), ("available", ""), ("available", ""),
-                ]),
-            ):
-                mon.main()  # establish baseline
-                self.assertEqual(send.call_count, 0)
-                mon.main()  # inventory went available
-                self.assertEqual(send.call_count, 1)
-                mon.main()  # same state, never alert twice
-                self.assertEqual(send.call_count, 1)
-                feed = json.loads((root / "feed.json").read_text(encoding="utf-8"))
-                self.assertEqual(len(feed["events"]), 1)
-                self.assertEqual(feed["items"][0]["status"], "available")
+        store = {"payload": {"targets": {}, "events": []}}
+        def fake_request(path, method="GET", data=None):
+            if "guerrilla_sale_monitor_targets?" in path:
+                return [target]
+            if method == "POST":
+                store["payload"] = data[0]["payload"]
+                return data
+            return [{"payload": store["payload"]}] if store["payload"] else []
+        with (
+            patch.object(mon, "supabase_request", side_effect=fake_request),
+            patch.object(mon, "post_discord", return_value=True) as send,
+            patch.object(mon, "detect", side_effect=[
+                ("unavailable", ""), ("available", ""), ("available", ""),
+            ]),
+        ):
+            mon.main()  # first baseline
+            self.assertEqual(send.call_count, 0)
+            mon.main()  # first sale event
+            self.assertEqual(send.call_count, 1)
+            mon.main()  # same stock condition
+            self.assertEqual(send.call_count, 1)
+            self.assertEqual(len(store["payload"]["events"]), 1)
+            self.assertEqual(store["payload"]["items"][0]["status"], "available")
+
 
 
 if __name__ == "__main__":
