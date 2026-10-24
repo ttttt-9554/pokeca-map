@@ -598,31 +598,30 @@ nav button.active {
 .lp-heading h2{margin:0 0 8px}
 .lp-heading p{margin:0}
 .lp-refresh{flex-shrink:0;min-height:42px}
-/* v21.91: one connected scoreboard; 3 columns x 2 rows, no individual cards. */
+/* v21.93: compact unified scoreboard, six columns on one row. */
 #lotteryView .lp-summary{
- display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
- gap:0;margin:12px 0 16px;
+ display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+ gap:0;margin:10px 0 13px;
  border:1px solid var(--app-border,#dbe3ed);
- border-radius:17px;overflow:hidden;
+ border-radius:13px;overflow:hidden;
  background:var(--app-surface,#fff);
 }
 #lotteryView .lp-summary-cell{
- min-width:0;min-height:88px;
+ min-width:0;min-height:62px;
  display:flex;flex-direction:column;align-items:center;justify-content:center;
- padding:12px 4px 10px;box-sizing:border-box;text-align:center;
+ padding:6px 1px;box-sizing:border-box;text-align:center;
  border:0;border-right:1px solid var(--app-border,#dbe3ed);
- border-bottom:1px solid var(--app-border,#dbe3ed);
 }
-#lotteryView .lp-summary-cell:nth-child(3n){border-right:0}
-#lotteryView .lp-summary-cell:nth-child(n+4){border-bottom:0}
+#lotteryView .lp-summary-cell:last-child{border-right:0}
 #lotteryView .lp-summary-cell strong{
- display:block;font-size:20px;font-weight:800;line-height:1.15;
- letter-spacing:-.6px;color:var(--app-text,#172033);
+ display:block;font-size:clamp(15px,4.5vw,19px);font-weight:800;line-height:1.1;
+ letter-spacing:-.35px;color:var(--app-text,#172033);
  font-variant-numeric:tabular-nums;
 }
 #lotteryView .lp-summary-cell small{
- display:block;margin-top:8px;font-size:11px;font-weight:700;line-height:1.4;
- color:var(--app-muted,#64748b);overflow-wrap:anywhere;
+ display:block;margin-top:4px;font-size:clamp(8px,2.2vw,10px);
+ font-weight:700;line-height:1.25;letter-spacing:-.1px;
+ white-space:nowrap;color:var(--app-muted,#64748b);
 }
 #lotteryView .lp-summary-cell.lp-summary-deadline strong{color:#a16207}
 #lotteryView .lp-summary-cell.lp-summary-open strong{color:#047857}
@@ -674,7 +673,7 @@ html[data-theme="dark"] .lp-status.lp-open{background:#124728!important;color:#c
 html[data-theme="dark"] .lp-status.lp-upcoming{background:#17375d!important;color:#c8dfff!important}
 html[data-theme="dark"] .lp-status.lp-unknown,html[data-theme="dark"] .lp-status.lp-closed{background:#344154!important;color:#ebf3fc!important}
 html[data-theme="dark"] .lp-official{background:#245cb9!important;color:#fff!important}
-@media(max-width:390px){.lp-filter-grid{grid-template-columns:1fr}#lotteryView .lp-summary-cell strong{font-size:19px}#lotteryView .lp-summary-cell small{font-size:10px}}
+@media(max-width:390px){.lp-filter-grid{grid-template-columns:1fr}#lotteryView .lp-summary-cell strong{font-size:clamp(15px,4.5vw,18px)}#lotteryView .lp-summary-cell small{font-size:clamp(8px,2.2vw,9px)}}
 
 /* v21.2: Show verified complete names on any number of lines. */
 #lotteryView .lp-full-title{
