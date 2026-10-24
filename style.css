@@ -2110,3 +2110,26 @@ html[data-theme="dark"] #addView .report-history-section h3{color:#eef4ff!import
 html[data-theme=dark] #devView .lp-dev-review-fold{background:#172337!important;color:#eef4ff!important;border-color:#526681!important}
 html[data-theme=dark] #devView .lp-dev-review-row{background:#203149!important;border-color:#526681!important}
 html[data-theme=dark] #lpCardReviewConfirm{color:#eef4ff!important;border-color:#526681!important}
+
+/* Lottery cards: less than 24 hours before application deadline */
+.lp-card.lp-urgent-card {
+  border: 2px solid #e65b25;
+  box-shadow: inset 4px 0 0 #e65b25;
+}
+.lp-card .lp-urgent-alert {
+  display: inline-block;
+  margin: 8px 0 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #9a3412;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+.lp-card .lp-urgent-deadline {
+  color: #c2410c;
+  font-weight: 800;
+}
+@media (prefers-color-scheme: dark) {
+  .lp-card .lp-urgent-deadline { color: #ffb17d; }
+}
