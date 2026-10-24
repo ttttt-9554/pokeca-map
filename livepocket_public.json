@@ -7223,6 +7223,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【岩国店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7239,8 +7241,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場東大阪店】ポケカ抽選販売（カードセット9種セット）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7293,8 +7293,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場西淀川店】ポケカ抽選販売（30th CELEBRATION カードセット ）9種セット",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7569,8 +7567,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7764,6 +7760,8 @@
           "prefecture": "東京都"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
       "first_detected_at": "2026-10-24T09:35:56.228412+00:00"
     },
     {
@@ -7910,5 +7908,5 @@
       "first_detected_at": "2026-10-24T21:00:57.567755+00:00"
     }
   ],
-  "updated_at": "2026-10-24T21:31:31.452047+00:00"
+  "updated_at": "2026-10-24T21:41:24.634185+00:00"
 }
