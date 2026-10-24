@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T07:30:56.481394+00:00",
-  "unique_livepocket_urls": 488,
+  "collected_at": "2026-10-24T08:05:57.314831+00:00",
+  "unique_livepocket_urls": 490,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6638,6 +6638,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場保木間店】 ポケカ店頭抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     },
     {
@@ -6658,6 +6660,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場戸田店】ポケカ抽選（30th CELEBRATIONカードセット（9種セット））",
       "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     },
     {
@@ -6678,6 +6682,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場戸田店】ポケカ抽選（ストームエメラルダ）",
       "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     },
     {
@@ -6937,7 +6943,48 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T07:30:58.248074+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/oaete",
+      "store_name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-24T08:00:03.891000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム HEROINES PRECIOUS BOX",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T14:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム HEROINES PRECIOUS BOX",
+      "first_detected_at": "2026-10-24T08:05:58.799266+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/l6dsv",
+      "store_name": "ふるいちトップブックス伊勢崎茂呂店",
+      "prefecture": "群馬県",
+      "discord_posted_at": "2026-10-24T08:00:03.891000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス伊勢崎茂呂店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "event_title": "【ふるいちトップブックス伊勢崎茂呂店】ポケカ抽選販売(ポケモンカードゲームMEGAスタートデッキ100バトルコレクション）",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "スタートデッキ100 バトルコレクション",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックス伊勢崎茂呂店】ポケカ抽選販売(ポケモンカードゲームMEGAスタートデッキ100バトルコレクション）",
+      "first_detected_at": "2026-10-24T08:05:58.799266+00:00"
     }
   ],
-  "updated_at": "2026-10-24T07:55:33.786087+00:00"
+  "updated_at": "2026-10-24T08:06:32.201476+00:00"
 }
