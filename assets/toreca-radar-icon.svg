@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Toreca Radar app icon">
+ <defs>
+  <radialGradient id="bg" cx=".5" cy=".35" r=".85"><stop stop-color="#164675"/><stop offset=".6" stop-color="#102e57"/><stop offset="1" stop-color="#07162e"/></radialGradient>
+  <linearGradient id="beam" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#1efce6" stop-opacity=".04"/><stop offset=".65" stop-color="#18f1ef" stop-opacity=".28"/><stop offset="1" stop-color="#6bfaff" stop-opacity=".72"/></linearGradient>
+  <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#83f8ff"/><stop offset=".55" stop-color="#01affc"/><stop offset="1" stop-color="#5b78ff"/></linearGradient>
+  <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#68c1ff"/><stop offset="1" stop-color="#343a92"/></linearGradient>
+  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="7"/></filter>
+ </defs>
+ <rect width="512" height="512" fill="url(#bg)"/>
+ <circle cx="256" cy="245" r="219" fill="#23baff" opacity=".035"/>
+ <!-- Trading-card silhouettes behind the radar -->
+ <g stroke-linejoin="round">
+  <g transform="rotate(-22 119 278)"><rect x="68" y="142" width="119" height="177" rx="13" fill="#101f47" stroke="#609dfc" stroke-width="9"/><rect x="81" y="155" width="93" height="151" rx="6" stroke="#5ce2ff" stroke-opacity=".65" stroke-width="3" fill="url(#card)" opacity=".78"/><circle cx="127" cy="221" r="23" fill="#86d8ff" opacity=".36"/></g>
+  <g transform="rotate(22 395 258)"><rect x="339" y="122" width="112" height="171" rx="13" fill="#232044" stroke="#fb8a78" stroke-width="9"/><rect x="352" y="135" width="86" height="144" rx="6" fill="#452c68" stroke="#fca1ac" stroke-opacity=".7" stroke-width="3"/><path d="M364 231l31-56 33 56Z" fill="#ffc38f" opacity=".65"/></g>
+ </g>
+ <!-- Sonar body -->
+ <circle cx="253" cy="255" r="182" fill="#020e27" opacity=".9"/>
+ <circle cx="253" cy="255" r="179" fill="none" stroke="#1ddcff" stroke-opacity=".7" stroke-width="15" filter="url(#glow)"/>
+ <circle cx="253" cy="255" r="181" fill="none" stroke="url(#ring)" stroke-width="9"/>
+ <circle cx="253" cy="255" r="160" fill="#053058"/>
+ <circle cx="253" cy="255" r="146" fill="#0a3254" opacity=".68"/>
+ <path d="M253 255L285 98A159 159 0 0 1 401 187Z" fill="url(#beam)"/>
+ <path d="M253 255L285 98" stroke="#7bfff7" stroke-width="4" opacity=".85"/>
+ <g fill="none" stroke="#36dfff">
+  <circle cx="253" cy="255" r="42" opacity=".65" stroke-width="2"/>
+  <circle cx="253" cy="255" r="81" opacity=".45" stroke-width="2.5"/>
+  <circle cx="253" cy="255" r="119" opacity=".55" stroke-width="2.5"/>
+  <circle cx="253" cy="255" r="152" opacity=".38" stroke-width="2.5"/>
+  <path d="M253 108V403M106 255H400" opacity=".6" stroke-width="2"/>
+ </g>
+ <g fill="#6efbff"><circle cx="196" cy="214" r="8"/><circle cx="339" cy="222" r="10"/><circle cx="308" cy="324" r="7"/></g>
+ <g fill="#6efbff" filter="url(#glow)" opacity=".85"><circle cx="196" cy="214" r="12"/><circle cx="339" cy="222" r="14"/><circle cx="308" cy="324" r="11"/></g>
+ <circle cx="253" cy="255" r="12" fill="#a9ffff" stroke="#24cbff" stroke-width="5"/>
+ <circle cx="253" cy="255" r="4.5" fill="#fff"/>
+ <!-- Tracking alert dot -->
+ <circle cx="394" cy="122" r="36" fill="#ef486b" opacity=".35" filter="url(#glow)"/>
+ <circle cx="394" cy="122" r="16" fill="#ff5872" stroke="#ffbbc2" stroke-width="3"/>
+ <!-- Bottom accent -->
+ <path d="M137 453Q253 472 370 453" fill="none" stroke="#46ddff" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+</svg>
