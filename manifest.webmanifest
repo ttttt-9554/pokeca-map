@@ -1,7 +1,7 @@
 {
-  "name": "ポケカ発見マップ",
-  "short_name": "ポケカ発見",
-  "description": "ポケモンカードの発見情報を地図で共有",
+  "name": "Toreca Radar",
+  "short_name": "Toreca Radar",
+  "description": "トレーディングカードの販売・抽選・店舗情報をチェック",
   "lang": "ja",
   "start_url": "./",
   "scope": "./",
