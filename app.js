@@ -540,7 +540,7 @@
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
-    if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); }
+    if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
     render();
   }
 
@@ -7322,6 +7322,65 @@
     button.addEventListener('click', () => requestLotteryDevRecheck({automatic: false}));
   }
 
+
+  // Developer-only sale preview. Access is enforced again by Supabase RLS.
+  let developerSaleSnapshot = {events:[],items:[]};
+  let developerSaleBusy = false;
+  function renderDeveloperSalePreview(){
+    if(!isDeveloper() || !$('guerrillaSalePanel')) return;
+    const items = Array.isArray(developerSaleSnapshot.items) ? developerSaleSnapshot.items : [];
+    const events = Array.isArray(developerSaleSnapshot.events) ? developerSaleSnapshot.events : [];
+    const filter=$('guerrillaSaleShop');
+    const value=filter.value;
+    const shops=[...new Set(items.map(e=>String(e.shop||'')).filter(Boolean))].sort();
+    filter.replaceChildren(new Option('全店舗','all'),...shops.map(shop=>new Option(shop,shop)));
+    filter.value=shops.includes(value)?value:'all';
+    const selected=x=>filter.value==='all'||x.shop===filter.value;
+    $('guerrillaSaleCount').textContent=items.length+'件監視中 / 販売表示 '+items.filter(x=>x.status==='available').length+'件';
+    function show(container,rows,message){
+      container.replaceChildren();
+      if(!rows.length){const p=document.createElement('p');p.className='hint';p.textContent=message;container.append(p);}
+      rows.forEach(item=>{
+        const el=document.createElement('article');el.className='guerrilla-sale-card';
+        const head=document.createElement('strong');
+        head.textContent=(item.shop||'店舗')+' / '+(item.product||'商品');
+        const status=document.createElement('small');
+        status.textContent=(item.detected_at?'販売開始を検知':item.status==='available'?'販売表示':item.status==='unavailable'?'在庫なし':item.status||'未確認')+' / '+(item.detected_at||item.checked_at||'未確認');
+        el.append(head,status);
+        try{const url=new URL(item.url);if(url.protocol==='https:'){
+          const link=document.createElement('a');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';
+          link.textContent='販売ページ ↗';el.append(link);
+        }}catch(_){}
+        container.append(el);
+      });
+    }
+    show($('guerrillaSaleEvents'),events.filter(selected).slice(0,15),'販売開始の速報はまだありません。');
+    show($('guerrillaSaleCurrent'),items.filter(selected),'監視対象はまだ登録されていません。');
+    const badge=$('guerrillaSaleBadge');if(badge)badge.hidden=true;
+  }
+  async function refreshDeveloperSalePreview(){
+    if(!isDeveloper()||!supabaseClient||developerSaleBusy)return;
+    developerSaleBusy=true;
+    const status=$('guerrillaSaleStatus');
+    try{
+      const {data,error}=await supabaseClient.from('guerrilla_sale_monitor_snapshot')
+        .select('payload').eq('id','current').maybeSingle();
+      if(error)throw error;
+      developerSaleSnapshot=data?.payload||{events:[],items:[]};
+      renderDeveloperSalePreview();
+      status.textContent='開発者専用プレビュー（認証済みの非公開データ）';
+    }catch(error){status.textContent='監視結果の取得に失敗：'+error.message;}
+    finally{developerSaleBusy=false;}
+  }
+  function initDeveloperSalePreview(){
+    if(!$('guerrillaSalePanel'))return;
+    $('guerrillaSaleRefresh').addEventListener('click',refreshDeveloperSalePreview);
+    $('guerrillaSaleShop').addEventListener('change',renderDeveloperSalePreview);
+    $('guerrillaSalePanel').addEventListener('toggle',()=>{
+      if($('guerrillaSalePanel').open)refreshDeveloperSalePreview();
+    });
+  }
+
   // ========================================
   // 起動
   // ========================================
@@ -7331,6 +7390,7 @@
       console.log('Toreca Radar 地図自動調整版 起動開始');
 
       initAppTheme();
+      initDeveloperSalePreview();
       loadReports();
       loadSavedStores();
 
