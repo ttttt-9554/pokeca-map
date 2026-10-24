@@ -2325,10 +2325,11 @@
       "application_start_at": "2026-09-26T10:00:00+09:00",
       "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
       "review_category": "pokemon",
@@ -2343,11 +2344,12 @@
       "application_start_at": "2026-09-26T10:00:00+09:00",
       "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
@@ -2361,11 +2363,12 @@
       "application_start_at": "2026-09-26T10:00:00+09:00",
       "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
       "pokemon_map_match": "メガシンフォニア",
@@ -2441,10 +2444,11 @@
       "application_start_at": "2026-09-26T10:00:00+09:00",
       "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-28T14:27:19.175000+00:00",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "キデイランドららぽーと富士見店",
@@ -2686,11 +2690,12 @@
       "application_start_at": "2026-09-26T10:00:00+09:00",
       "application_end_at": "2026-09-28T23:59:00+09:00",
       "discord_posted_at": "2026-09-26T14:15:20.036000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "onepiece",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ]
     },
@@ -3150,11 +3155,12 @@
       "application_start_at": "2026-09-19T10:00:00+09:00",
       "application_end_at": "2026-09-21T23:59:00+09:00",
       "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランドららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ]
     },
@@ -3185,11 +3191,12 @@
       "application_start_at": "2026-09-19T10:00:00+09:00",
       "application_end_at": "2026-09-21T23:59:00+09:00",
       "discord_posted_at": "2026-09-22T13:01:37.243000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ]
     },
@@ -6711,26 +6718,28 @@
       "url": "https://livepocket.jp/e/hnad8",
       "store_name": "キデイランド ららぽーと富士見店",
       "prefecture": "埼玉県",
+      "product_name": "ポケモンカードゲーム",
+      "event_title": "キデイランドららぽーと富士見店 ポケモンカードゲーム 拡張パック「30thセレブレーション」購入券 抽選",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T03:00:19.709000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "キデイランドららぽーと富士見店 ポケモンカードゲーム 拡張パック「30thセレブレーション」購入券 抽選",
-      "application_end_at": "2026-10-26T23:59:00+09:00",
-      "application_start_at": "2026-10-24T10:00:00+09:00",
-      "review_category": "pokemon",
-      "product_name": "ポケモンカードゲーム",
-      "official_genre": "pokemon",
-      "official_event_title": "キデイランドららぽーと富士見店 ポケモンカードゲーム 拡張パック「30thセレブレーション」購入券 抽選",
       "first_detected_at": "2026-10-24T03:05:56.634899+00:00"
     },
     {
       "url": "https://livepocket.jp/e/b-91m",
       "store_name": "キデイランドららぽーと富士見店",
       "prefecture": "埼玉県",
+      "product_name": "ドラゴンボールカードゲームアドバンスパック",
+      "event_title": "キデイランドららぽーと富士見店 ドラゴンボールカードゲームアドバンスパック「バトルオブサイヤン」購入券 抽選",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T03:00:19.709000+00:00",
       "stores": [
         {
@@ -6738,65 +6747,55 @@
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "キデイランドららぽーと富士見店 ドラゴンボールカードゲームアドバンスパック「バトルオブサイヤン」購入券 抽選",
-      "application_end_at": "2026-10-26T23:59:00+09:00",
-      "application_start_at": "2026-10-24T10:00:00+09:00",
-      "product_name": "ドラゴンボールカードゲームアドバンスパック",
-      "official_event_title": "キデイランドららぽーと富士見店 ドラゴンボールカードゲームアドバンスパック「バトルオブサイヤン」購入券 抽選",
       "first_detected_at": "2026-10-24T03:05:56.634899+00:00"
     },
     {
       "url": "https://livepocket.jp/e/xl2hc",
       "store_name": "キデイランドららぽーと富士見店",
       "prefecture": "埼玉県",
+      "product_name": "ポケモンカードゲーム",
+      "event_title": "キデイランド ららぽーと富士見店 ポケモンカードゲーム 拡張パック「ストームエメラルダ」購入券 抽選",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T03:00:19.709000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランドららぽーと富士見店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "キデイランド ららぽーと富士見店 ポケモンカードゲーム 拡張パック「ストームエメラルダ」購入券 抽選",
-      "application_end_at": "2026-10-26T23:59:00+09:00",
-      "application_start_at": "2026-10-24T10:00:00+09:00",
-      "review_category": "pokemon",
-      "product_name": "ポケモンカードゲーム",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "キデイランド ららぽーと富士見店 ポケモンカードゲーム 拡張パック「ストームエメラルダ」購入券 抽選",
       "first_detected_at": "2026-10-24T03:05:56.634899+00:00"
     },
     {
       "url": "https://livepocket.jp/e/2qon3",
-      "discord_posted_at": "2026-10-24T03:00:19.709000+00:00",
       "event_title": "アニマルカードゲーム名古屋冬の陣2026",
-      "application_end_at": "2026-11-05T23:59:00+09:00",
       "application_start_at": "2026-10-22T12:05:00+09:00",
-      "official_event_title": "アニマルカードゲーム名古屋冬の陣2026",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "discord_posted_at": "2026-10-24T03:00:19.709000+00:00",
       "first_detected_at": "2026-10-24T03:05:56.634899+00:00"
     },
     {
       "url": "https://livepocket.jp/e/4zcdj",
       "store_name": "キデイランド ららぽーと富士見店",
       "prefecture": "埼玉県",
+      "product_name": "ワンピースカードゲーム",
+      "event_title": "キデイランドららぽーと富士見店 ワンピースカードゲーム 拡張パック「世界最強の戦士」購入券 抽選",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T03:00:08.740000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "キデイランド ららぽーと富士見店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "キデイランドららぽーと富士見店 ワンピースカードゲーム 拡張パック「世界最強の戦士」購入券 抽選",
-      "application_end_at": "2026-10-26T23:59:00+09:00",
-      "application_start_at": "2026-10-24T10:00:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "ワンピースカードゲーム",
-      "official_genre": "onepiece",
-      "official_event_title": "キデイランドららぽーと富士見店 ワンピースカードゲーム 拡張パック「世界最強の戦士」購入券 抽選",
       "first_detected_at": "2026-10-24T03:05:56.634899+00:00"
     }
   ],
-  "updated_at": "2026-10-24T03:06:31.041657+00:00"
+  "updated_at": "2026-10-24T03:15:59.967391+00:00"
 }
