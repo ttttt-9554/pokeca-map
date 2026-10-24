@@ -1,60 +1,35 @@
-# ゲリラ販売速報（初期版）
+# ゲリラ販売監視｜開発者専用プレビュー
 
-## 現在の仕組み
+## 現在の公開範囲
 
-- `guerrilla_sale_targets.json` に管理者が指定した **公開HTTPS商品ページ** を確認します。
-- 独立したGitHub Actions `.github/workflows/guerrilla-sale.yml` を約5分ごとのスケジュールで起動します。GitHub Actionsの実行は遅延・欠落することがあります。
-- 最初の確認では通知せず、**前回「売り切れ・受付前」と判定し、今回「販売表示」と判定したとき** に1件通知します。
-- Discord通知先はGitHub Actions Secretの `GUERRILLA_DISCORD_WEBHOOK_URL` です。Secretが未設定ならDiscord通知は送られません。
-- 結果は `guerrilla_sale_feed.json` に公開され、アプリの「抽選」→「ゲリラ販売速報」で確認できます。
-- iPhoneを閉じているときのOSプッシュ通知は**未実装**です（別途Web Pushサーバー・端末ごとの購読登録・Service Workerが必要）。
-- ログイン、抽選、購入、カート操作、アクセス制限回避、待合室の突破は行いません。
+- 通常ユーザーにはゲリラ販売の速報パネルを表示しません。「開発」タブだけに表示します。
+- Supabase `guerrilla_sale_monitor_targets` と `guerrilla_sale_monitor_snapshot` の参照は開発者UID限定のRLSで制限しています。
+- `guerrilla_sale_feed.json`、`guerrilla_sale_targets.json`、公開JavaScript取得処理は削除しました。Git履歴自体は公開のままですが、削除済みファイルに実際の監視情報は含まれていません。
+- バックエンドは GitHub Actions `.github/workflows/guerrilla-sale.yml` に配置していますが、動かすにはGitHub ActionsのSecret `SUPABASE_SERVICE_ROLE_KEY` が必要です。この秘密鍵はアプリやファイルに絶対に記述しないでください。
+- Discord通知には専用の非公開チャンネルのWebhookを `GUERRILLA_DISCORD_WEBHOOK_URL` として登録します。公開チャンネルのWebhookを登録すると一般ユーザーにも通知されるため、テスト期間中は使用しないでください。
+- 設定を完了しても対象が `enabled=false` の間は販売ページへのチェックもDiscord通知も実行しません。
 
-## 監視対象の追加
+## 登録済みの監視候補
 
-GitHub上で `guerrilla_sale_targets.json` を編集します。たとえば下記のように `targets` に追加します。
+| 店舗 | ホームページ | 状態 |
+| --- | --- | --- |
+| ポケモンセンターオンライン | https://www.pokemoncenter-online.com/ | 未有効化（対象商品未指定） |
+| アメニティードリーム通販部 | https://www.amenitydream.com/ | 未有効化（対象商品未指定） |
 
-~~~json
-{
-  "schema_version": 1,
-  "targets": [
-    {
-      "id": "shop-a-product-a",
-      "shop": "ショップA",
-      "product": "対象トレカ商品",
-      "url": "https://example.com/products/item",
-      "enabled": false,
-      "required_text": ["対象トレカ商品"],
-      "available_text": ["カートに入れる"],
-      "unavailable_text": ["在庫なし", "売り切れ"],
-      "cooldown_minutes": 60
-    }
-  ]
-}
-~~~
+ホームページの「カートに入れる」の文字は他の商品にも存在し得るため、**ホームページを販売開始の判定に使わない**でください。
 
-※上記のURLと店舗は **サンプル** です。そのまま有効化しないでください。
+## 検知対象の設定
 
-- `id` は半角英数・ハイフン・アンダースコア、2～64文字で一意にします。
-- `enabled` を `true` にすると監視します（最大20件）。
-- `required_text` は任意ですが、商品名などを指定すると別商品の誤判定を減らせます。
-- `available_text` と `unavailable_text` は、**その店舗の実際のページ本文に出る文字**で指定してください。
-- `available_text` と `unavailable_text` が両方出ている場合は通知せず「判定不能」にします。
-- JavaScriptでのみ在庫を表示するページ、会員ページ、対策でブロックするサイトは判定できません。
-- サイトの利用規約、robots.txt、サーバー負荷に配慮してください。対象数は必要最低限に絞ってください。
+1. 対象サイトの**具体的な商品ページ**を確認する。
+2. 開発者用のSupabaseテーブル `guerrilla_sale_monitor_targets` の `url` と `product` を具体的な値にする。
+3. `available_text` と `unavailable_text` は対象商品ページ上で販売状態ごとに実際に変わる文字を設定する。
+4. `required_text` にはその商品の固有名などを入れ、別商品や共通ヘッダーの誤検知を防ぐ。
+5. テストしてから `enabled=true` にする。
 
-## Discord通知先
+## 制約
 
-1. Discordの通知を出したいチャンネルで「チャンネルの編集」→「連携サービス」→「ウェブフック」を作成します。
-2. ウェブフックURLをコピーします。
-3. GitHubの `Settings → Secrets and variables → Actions → New repository secret` に進み、名前 `GUERRILLA_DISCORD_WEBHOOK_URL` で保存します。
-4. **ウェブフックURLはJSONやアプリ本体に書かず、Secretにのみ保存**してください。
-5. `Actions → Guerrilla Sale Status Monitor → Run workflow` で手動実行できます。初回は基準状態を記録するだけです。
-
-## 動作確認
-
-- `guerrilla_sale_feed.json` の `items` に監視結果が反映されるか確認。
-- 「売り切れ・受付前」の状態を確認した後、実際に「販売表示」に変わった時だけ通知。
-- `status=unknown` は判定語不一致・ページエラーなど。**販売確定とは扱わない**。
-- 同一の販売状態が続く間は再通知しません。復活時も設定したクールダウン中は再通知しません。
-- 発見後に商品が売り切れる可能性があるため、必ずリンク先で確認してください。
+- 原則約5分間隔の確認。GitHub Actionsの実行時刻は保証されません。
+- 在庫なし→販売中への遷移のみアラート。最初に販売中だった場合は通知しません。
+- ログインが必要なページ、JavaScriptのみで表示される在庫、仮想待合室、アクセス制限中のページには未対応です。
+- Web Push（iPhoneの画面を閉じた状態で届く通知）はまだありません。
+- 一般公開へ切り替えるまで、SupabaseのRLSを緩めたりパブリックJSONを再開したりしないでください。
