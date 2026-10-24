@@ -10,7 +10,6 @@ name: LivePocket New Arrival Repair
 permissions:
   contents: write
 
-# Serialize with the normal collector; never race its state commits.
 concurrency:
   group: livepocket-collect
   cancel-in-progress: false
@@ -18,13 +17,14 @@ concurrency:
 jobs:
   repair:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 8
     env:
       LIVEPOCKET_DEVELOPER_RECHECK: 'false'
-      LIVEPOCKET_V14_NEW_PER_RUN: '2'
-      LIVEPOCKET_V16_RETRY_PER_RUN: '3'
+      LIVEPOCKET_V14_NEW_PER_RUN: '0'
+      LIVEPOCKET_V16_RETRY_PER_RUN: '0'
       LIVEPOCKET_V14_RUN_BACKGROUND: 'false'
       LIVEPOCKET_V21_3_TITLE_PER_RUN: '0'
+      LIVEPOCKET_V21_BROWSER_READY: 'false'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,67 +32,38 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Apply guarded source repair
+      - name: Complete verified-title store recovery
         run: python scripts/repair_livepocket_new_arrivals.py
-      - name: Verify source and all regression tests
+      - name: Verify all source and regression tests
         run: |
           python -m py_compile scripts/livepocket_*.py
           python scripts/test_livepocket_new_arrivals.py
           python scripts/test_livepocket_manual_review.py
           node --check app.js
-      - name: Publish tested source repair
+      - name: Rebuild from existing verified data without browsing
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add app.js index.html scripts/livepocket_collect.py scripts/livepocket_v7.py scripts/livepocket_v9.py scripts/livepocket_v14.py scripts/livepocket_v15.py scripts/livepocket_v17.py scripts/livepocket_v19.py scripts/livepocket_v21.py scripts/test_livepocket_manual_review.py
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Fix failed new-arrival retry timing, placeholder stores and diagnostics'
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort || true
-              exit 1
-            fi
-            if git push origin HEAD:main; then exit 0; fi
-            sleep 2
-          done
-          exit 1
-      - name: Save recovery baseline and rebuild public fields
-        run: |
           cp livepocket_urls.json "$RUNNER_TEMP/livepocket-before-repair.json"
           cp livepocket_public.json "$RUNNER_TEMP/livepocket-public-before-repair.json"
           python scripts/livepocket_v7.py
           python scripts/livepocket_v9.py
           python scripts/livepocket_v10.py
           python scripts/livepocket_v11.py
-      - name: Plan bounded new and failed-new recovery
-        id: plan
-        run: python scripts/livepocket_v21.py plan
-      - name: Install browser only when needed
-        if: steps.plan.outputs.browser_needed == 'true'
-        run: |
-          python -m pip install 'playwright>=1.55,<2'
-          python -m playwright install --with-deps chromium
-      - name: Recover at most two new pages and three failed pages
-        env:
-          LIVEPOCKET_V21_BROWSER_READY: ${{ steps.plan.outputs.browser_needed }}
-        shell: bash
-        run: |
-          set -euo pipefail
           python scripts/livepocket_v21.py process | tee "$RUNNER_TEMP/livepocket-repair-process.log"
           python scripts/livepocket_check_summary.py \
             --log "$RUNNER_TEMP/livepocket-repair-process.log" \
             --before-public "$RUNNER_TEMP/livepocket-public-before-repair.json" \
             --after-public livepocket_public.json
-      - name: Verify preserved URLs and existing verified fields
-        shell: bash
+      - name: Verify data integrity and no event-page requests
         run: |
           python - <<'PY'
-          import json, os
+          import json, os, sys
           from pathlib import Path
-          before = json.loads((Path(os.environ['RUNNER_TEMP']) / 'livepocket-before-repair.json').read_text())
+          sys.path.insert(0, 'scripts')
+          from livepocket_check_summary import parse_metrics
+          root = Path(os.environ['RUNNER_TEMP'])
+          before = json.loads((root / 'livepocket-before-repair.json').read_text())
           after = json.loads(Path('livepocket_urls.json').read_text())
           old = {x['url']: x for x in before['items']}
           new = {x['url']: x for x in after['items']}
@@ -100,15 +71,20 @@ jobs:
           for url, row in old.items():
               for key in ('event_title', 'application_end_at'):
                   assert not row.get(key) or new[url].get(key), 'Existing event field disappeared'
-          print('Recovery integrity passed; URLs preserved:', len(new))
+          metrics = parse_metrics((root / 'livepocket-repair-process.log').read_text())
+          for key in ('new_attempted','retry_attempted','historical_attempted','manual_attempted','official_title_attempted','title_recheck_attempted'):
+              assert metrics.get(key, 0) == 0, 'Unexpected page check'
+          print('No event-page requests; URLs preserved:', len(new))
           PY
-      - name: Publish recovery and current diagnostics
+      - name: Publish verified source and data repair
         shell: bash
         run: |
           set -euo pipefail
-          git add livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv livepocket_content_checks.csv livepocket_check_summary.json livepocket_unresolved_review.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/livepocket_v19.py scripts/test_livepocket_new_arrivals.py livepocket_urls.json livepocket_public.json livepocket_review_queue.csv livepocket_deadline_review.csv livepocket_deadline_sources.csv livepocket_content_checks.csv livepocket_check_summary.json livepocket_unresolved_review.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Repair placeholder data and publish bounded arrival recovery results'
+          git commit -m 'Recover missing shops from exact verified event titles and refresh diagnostics'
           for attempt in 1 2 3; do
             git fetch origin main
             if ! git rebase origin/main; then
