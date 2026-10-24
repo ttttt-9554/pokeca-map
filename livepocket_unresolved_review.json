@@ -1,9 +1,33 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T09:07:11Z",
-  "total": 16,
+  "as_of": "2026-10-24T09:16:29Z",
+  "total": 31,
   "items": [
+    {
+      "url": "https://livepocket.jp/e/0tw0p",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/1_xnn",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
     {
       "url": "https://livepocket.jp/e/1rf7i",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
@@ -11,6 +35,151 @@
       "prefecture": "",
       "application_end_at": "",
       "missing": [
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/3adrx",
+      "event_title": "",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "store",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/52gka",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/756_v",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/9k99x",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/b7svx",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/cipe4",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/etgbn",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/hkxb0",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/hm8em",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/j8-5v",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/l1-6j",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/noe8e",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
         "deadline"
       ],
       "queue": "retry_wait"
@@ -113,6 +282,18 @@
     },
     {
       "url": "https://livepocket.jp/e/vd5ua",
+      "event_title": "",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "application_end_at": "",
+      "missing": [
+        "title",
+        "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/vxgpy",
       "event_title": "",
       "store_name": "店舗名不明",
       "prefecture": "宮城県",
