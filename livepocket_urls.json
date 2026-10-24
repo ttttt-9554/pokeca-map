@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T08:05:57.314831+00:00",
+  "collected_at": "2026-10-24T09:05:56.823954+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 490,
+  "unique_livepocket_urls": 537,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12775,21 +12775,28 @@
       "discord_posted_at": "2026-10-24T03:00:19.709000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り9時間59分）\nhttps://livepocket.jp/e/8rswc\n\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り8時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n📍東京都\n古本市場保木間店\n受付終了: 10/25 22:00（残り1日9時間）\nhttps://livepocket.jp/e/oe6kj\n\n📍東京都\n古本市場光が丘店\n受付終了: 10/25 22:00（残り1日9時間）\nhttps://livepocket.jp/e/c82il\n\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日8時間）\nhttps://livepocket.jp/e/xlrs9\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 10/25 22:00（残り1日9時間）\nhttps://livepocket.jp/e/yigdg\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日9時間）\nhttps://livepocket.jp/e/8qn_a\n\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日9時間）\nhttps://livepocket.jp/e/xw_dt\n\n📍埼玉県\nキデイランド ららぽーと富士見店\n受付終了: 10/26 23:59（残り2日11時間）\nhttps://livepocket.jp/e/hnad8\n\n📍埼玉県\nキデイランドららぽーと富士見店\n受付終了: 10/26 23:59（残り2日11時間）\nhttps://livepocket.jp/e/b-91m\n\n📍埼玉県\n古本市場戸田店\n受付終了: 10/26 22:00（残り2日9時間）\nhttps://livepocket.jp/e/x54u6\n\n📍埼玉県\n古本市場戸田店\n受付終了: 10/26 22:00（残り2日9時間）\nhttps://livepocket.jp/e/cglfk\n\n📍埼玉県\nキデイランドららぽーと富士見店\n受付終了: 10/26 23:59（残り2日11時間）\nhttps://livepocket.jp/e/xl2hc\n\n📍栃木県\nビッグワンTSUTAYAさくら店\n受付終了: 10/25 22:00（残り1日9時間）\nhttps://livepocket.jp/e/p4oqw\n\n📍都道府県不明\nгӮўгғӢгғһгғ«гӮ«гғјгғүгӮІгғјгғ еҗҚеҸӨеұӢеҶ¬гҒ®...гҒ®гғҒгӮұгғғгғҲжғ…е ұпҪңLivePock\nhttps://livepocket.jp/e/2qon3",
-      "store_name": null,
-      "prefecture": null,
-      "details_source": null,
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "event_title": "アニマルカードゲーム名古屋冬の陣2026",
       "application_end_at": "2026-11-05T23:59:00+09:00",
-      "application_start_at": "2026-10-22T12:05:00+09:00"
+      "application_start_at": "2026-10-22T12:05:00+09:00",
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/4zcdj",
@@ -12918,7 +12925,7 @@
       "discord_posted_at": "2026-10-24T04:30:13.721000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nトレカパーク朝霞店\n受付終了: 10/24 22:05（残り8時間34分）\nhttps://livepocket.jp/e/zau0z\n\n📍都道府県不明\nフルコンプ\n受付終了: 10/26 23:59（残り2日10時間）\nhttps://livepocket.jp/e/up9fr",
-      "prefecture": null,
+      "prefecture": "宮城県",
       "details_source": "discord_post",
       "product_name": null,
       "application_period": null,
@@ -12928,7 +12935,8 @@
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v9_exact_store_cross_reference"
       },
       "event_title": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
       "application_end_at": "2026-10-26T23:59:00+09:00",
@@ -12958,7 +12966,8 @@
           "name": "フルコンプ大阪日本橋店",
           "prefecture": ""
         }
-      ]
+      ],
+      "store_name": "店舗名不明"
     },
     {
       "url": "https://livepocket.jp/e/a-wb2",
@@ -13109,16 +13118,1085 @@
       "event_title": "【ふるいちトップブックス伊勢崎茂呂店】ポケカ抽選販売(ポケモンカードゲームMEGAスタートデッキ100バトルコレクション）",
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "application_start_at": "2026-10-24T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3adrx",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details"
+    },
+    {
+      "url": "https://livepocket.jp/e/cipe4",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/etgbn",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/9k99x",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/0tw0p",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/noe8e",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/v29mr",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/hkxb0",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/j8-5v",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/1_xnn",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/xm634",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ul3vw",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/hm8em",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/tryts",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/u98h-",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/b7svx",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/yutwo",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/xdeb1",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ugnmg",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/zoqcs",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/vd5ua",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/v5ucz",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/wlon0",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/x3hs7",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/l1-6j",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/nyxn0",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/52gka",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/756_v",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/tj_mq",
+      "discord_message_id": "1563477249766985778",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/3adrx\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ganvl\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/fmrx2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cipe4\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/etgbn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/9k99x\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0tw0p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/noe8e\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v29mr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zau0z\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/up9fr\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hkxb0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/j8-5v\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/1_xnn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xm634\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ul3vw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hm8em\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/a-wb2\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qqo16\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tryts\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u98h-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b7svx\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yutwo\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xdeb1\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ugnmg\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/zoqcs\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/87-y2\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vd5ua\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/v5ucz\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/wlon0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x3hs7\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l1-6j\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/l6dsv\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oaete\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/nyxn0\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/52gka\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/756_v\n\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/tj_mq",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/7qcof",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/8rh7p",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/vxgpy",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/qemuo",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/u7d0k",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/om3cc",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/vs_p-",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/5-9tt",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/ryfzt",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/2-0vm",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/bmnvd",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/gfalf",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/89zs9",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/qrq-5",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/pjhof",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/71ygn",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/0dqin",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
+    },
+    {
+      "url": "https://livepocket.jp/e/8y5y0",
+      "discord_message_id": "1563477248290586725",
+      "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場小平店\n受付終了: 10/24 22:00（残り3時間59分）\nhttps://livepocket.jp/e/8rswc\n\n🔁 再通知\n📍東京都\n古本市場西大島駅前店\n受付終了: 10/24 20:05（残り2時間4分）\nhttps://livepocket.jp/e/hbg8_\n\n🔁 再通知\n📍千葉県\n文教堂行徳店\n受付終了: 10/27 20:30（残り3日2時間）\nhttps://livepocket.jp/e/xlrs9\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 10/25 22:00（残り1日3時間）\nhttps://livepocket.jp/e/8qn_a\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xw_dt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/7qcof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/yigdg\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8rh7p\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vxgpy\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qemuo\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/hnad8\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/u7d0k\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/b-91m\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/om3cc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/vs_p-\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/oe6kj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/5-9tt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/ryfzt\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/x54u6\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/cglfk\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2-0vm\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/bmnvd\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/p4oqw\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/c82il\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/4zcdj\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/xl2hc\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/gfalf\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/2qon3\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/89zs9\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/qrq-5\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/pjhof\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/71ygn\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/0dqin\n\n🔁 再通知\n📍都道府県不明\n店舗名不明\nhttps://livepocket.jp/e/8y5y0\n\n🔁 再通知\n📍都道府県不明\n店舗名不明",
+      "store_name": "店舗名不明",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "prefecture": "v9_exact_store_cross_reference"
+      },
+      "stores": [
+        {
+          "name": "店舗名不明",
+          "prefecture": "宮城県"
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 334,
+    "parsed": 381,
     "no_structured_details": 156
   },
   "field_counts": {
-    "store_name": 324,
-    "prefecture": 294,
+    "store_name": 372,
+    "prefecture": 342,
     "event_title": 177,
     "event_date": 1,
     "product_name": 76,
@@ -13127,16 +14205,16 @@
     "lottery_result_period": 1,
     "application_end_at": 459,
     "application_start_at": 459,
-    "stores_events": 332
+    "stores_events": 379
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563462064473645202"
+      "1551580466266644552": "1563477249766985778"
     },
     "last_run": {
-      "checked_at": "2026-10-24T08:05:57.314831+00:00",
-      "new_urls": 2,
-      "original_urls": 488,
+      "checked_at": "2026-10-24T09:05:56.823954+00:00",
+      "new_urls": 47,
+      "original_urls": 490,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -13271,7 +14349,9 @@
         "1563409257473515551": "2026-10-24T04:35:55.568212+00:00",
         "1563424311157727394": "2026-10-24T05:35:56.455624+00:00",
         "1563454512172105758": "2026-10-24T07:30:57.228089+00:00",
-        "1563462064473645202": "2026-10-24T08:05:58.058555+00:00"
+        "1563462064473645202": "2026-10-24T08:05:58.058555+00:00",
+        "1563477249766985778": "2026-10-24T09:05:57.539585+00:00",
+        "1563477248290586725": "2026-10-24T09:05:57.539585+00:00"
       },
       "checked_search_urls": {}
     },
@@ -15201,8 +16281,8 @@
           "status": "checked_title_deadline_product"
         },
         "https://livepocket.jp/e/2qon3": {
-          "checked_at": "2026-10-24T03:06:31.041657+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
         },
         "https://livepocket.jp/e/4zcdj": {
           "checked_at": "2026-10-24T03:06:31.041657+00:00",
@@ -15243,6 +16323,66 @@
         "https://livepocket.jp/e/l6dsv": {
           "checked_at": "2026-10-24T08:06:32.201476+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/zoqcs": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/yutwo": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/xm634": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/xdeb1": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/x3hs7": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/wlon0": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/vd5ua": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/v5ucz": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/v29mr": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/ul3vw": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/ugnmg": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/u98h-": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/tryts": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/tj_mq": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
+        },
+        "https://livepocket.jp/e/nyxn0": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "status": "browser_http_error"
         }
       }
     },
@@ -15980,8 +17120,8 @@
         },
         "https://livepocket.jp/e/2qon3": {
           "detected_at": "2026-10-24T03:05:56.634899+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T03:06:31.041657+00:00"
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
         },
         "https://livepocket.jp/e/b-91m": {
           "detected_at": "2026-10-24T03:05:56.634899+00:00",
@@ -16042,9 +17182,245 @@
           "detected_at": "2026-10-24T08:05:58.799266+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-24T08:06:32.201476+00:00"
+        },
+        "https://livepocket.jp/e/0dqin": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/2-0vm": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/5-9tt": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/71ygn": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/7qcof": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/89zs9": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/8rh7p": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/8y5y0": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/bmnvd": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/gfalf": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/om3cc": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/pjhof": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/qemuo": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/qrq-5": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/ryfzt": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/u7d0k": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/vs_p-": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/vxgpy": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/0tw0p": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/1_xnn": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/3adrx": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/52gka": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/756_v": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/9k99x": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/b7svx": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/cipe4": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/etgbn": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/hkxb0": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/hm8em": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/j8-5v": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/l1-6j": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/noe8e": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "queued"
+        },
+        "https://livepocket.jp/e/nyxn0": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/tj_mq": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/tryts": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/u98h-": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/ugnmg": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/ul3vw": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/v29mr": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/v5ucz": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/vd5ua": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/wlon0": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/x3hs7": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/xdeb1": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/xm634": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/yutwo": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
+        },
+        "https://livepocket.jp/e/zoqcs": {
+          "detected_at": "2026-10-24T09:05:58.588451+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-10-24T09:07:05.673487+00:00"
         }
       },
-      "pending_new_urls": []
+      "pending_new_urls": [
+        "https://livepocket.jp/e/0dqin",
+        "https://livepocket.jp/e/2-0vm",
+        "https://livepocket.jp/e/5-9tt",
+        "https://livepocket.jp/e/71ygn",
+        "https://livepocket.jp/e/7qcof",
+        "https://livepocket.jp/e/89zs9",
+        "https://livepocket.jp/e/8rh7p",
+        "https://livepocket.jp/e/8y5y0",
+        "https://livepocket.jp/e/bmnvd",
+        "https://livepocket.jp/e/gfalf",
+        "https://livepocket.jp/e/om3cc",
+        "https://livepocket.jp/e/pjhof",
+        "https://livepocket.jp/e/qemuo",
+        "https://livepocket.jp/e/qrq-5",
+        "https://livepocket.jp/e/ryfzt",
+        "https://livepocket.jp/e/u7d0k",
+        "https://livepocket.jp/e/vs_p-",
+        "https://livepocket.jp/e/vxgpy",
+        "https://livepocket.jp/e/0tw0p",
+        "https://livepocket.jp/e/1_xnn",
+        "https://livepocket.jp/e/3adrx",
+        "https://livepocket.jp/e/52gka",
+        "https://livepocket.jp/e/756_v",
+        "https://livepocket.jp/e/9k99x",
+        "https://livepocket.jp/e/b7svx",
+        "https://livepocket.jp/e/cipe4",
+        "https://livepocket.jp/e/etgbn",
+        "https://livepocket.jp/e/hkxb0",
+        "https://livepocket.jp/e/hm8em",
+        "https://livepocket.jp/e/j8-5v",
+        "https://livepocket.jp/e/l1-6j",
+        "https://livepocket.jp/e/noe8e"
+      ]
     },
     "v16": {
       "retry_log": {
@@ -16712,6 +18088,11 @@
           "attempts": 1,
           "last_attempt_at": "2026-10-24T08:46:24.694611+00:00",
           "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/2qon3": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T09:07:05.673487+00:00",
+          "last_status": "browser_http_error"
         }
       }
     },
@@ -20316,11 +21697,11 @@
           "conflict": false
         },
         "https://livepocket.jp/e/2qon3": {
-          "status": "ok",
-          "reason": "official_title_verified",
-          "http_status": "",
-          "checked_at": "2026-10-24T03:06:31.041657+00:00",
-          "title_observed": "アニマルカードゲーム名古屋冬の陣2026",
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
           "genre": "",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
@@ -20434,6 +21815,171 @@
           "genre": "pokemon",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/zoqcs": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/yutwo": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/xm634": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/xdeb1": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/x3hs7": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/wlon0": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/vd5ua": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/v5ucz": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/v29mr": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ul3vw": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ugnmg": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/u98h-": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/tryts": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/tj_mq": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/nyxn0": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
           "conflict": false
         }
       }
@@ -22894,17 +24440,17 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/2qon3": {
-          "checked_at": "2026-10-24T03:06:31.041657+00:00",
-          "reason": "official_title_detected",
-          "candidate_count": 3,
-          "valid_candidate_count": 1,
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
           "detail": "",
-          "candidate_sources": "og:1;event_heading:1;document:1",
-          "title_detected": true,
-          "rejection_codes": "truncated:2;truncated_tail:2",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
           "meta_template_cleaned": 0,
-          "heading_seen": 1,
-          "recovery_probe": "dom_heading_verified"
+          "heading_seen": 0,
+          "recovery_probe": ""
         },
         "https://livepocket.jp/e/4zcdj": {
           "checked_at": "2026-10-24T03:06:31.041657+00:00",
@@ -23035,6 +24581,201 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/zoqcs": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/yutwo": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/xm634": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/xdeb1": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/x3hs7": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/wlon0": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/vd5ua": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/v5ucz": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/v29mr": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/ul3vw": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/ugnmg": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/u98h-": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/tryts": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/tj_mq": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/nyxn0": {
+          "checked_at": "2026-10-24T09:07:05.673487+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
         }
       }
     }
