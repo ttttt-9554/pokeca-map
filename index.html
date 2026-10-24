@@ -534,6 +534,28 @@ nav[aria-label="メインメニュー"] {
   padding-bottom: calc(8px + env(safe-area-inset-bottom));
 }
 </style>
+<style id="guerrilla-sale-styles">
+  .guerrilla-sale-panel{margin:10px 0 16px;border:1px solid var(--app-border,#cbd5e1);border-radius:13px;background:var(--app-surface,#fff);color:var(--app-text,#172033)}
+  .guerrilla-sale-panel>summary{padding:15px;cursor:pointer;font-weight:800;list-style-position:inside}
+  .guerrilla-sale-badge{display:inline-block;margin-left:7px;padding:3px 7px;border-radius:12px;background:#db2d44;color:white;font-size:11px}
+  .guerrilla-sale-body{padding:0 14px 14px}
+  .guerrilla-sale-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}
+  .guerrilla-sale-toolbar strong{font-size:13px}
+  .guerrilla-sale-toolbar button{min-height:40px}
+  .guerrilla-sale-label{display:block;margin:10px 0 6px;font-size:13px;font-weight:700}
+  .guerrilla-sale-body select{width:100%;min-height:43px;border:1px solid var(--app-border,#cbd5e1);border-radius:9px;background:var(--app-surface2,#f7fafc);color:var(--app-text,#172033)}
+  .guerrilla-sale-body h3{font-size:15px;margin:18px 0 8px}
+  .guerrilla-sale-card{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin:9px 0;padding:12px;border:1px solid var(--app-border,#cbd5e1);border-radius:10px;background:var(--app-surface2,#f7fafc);color:var(--app-text,#172033)}
+  .guerrilla-sale-card strong{font-size:14px;overflow-wrap:anywhere}
+  .guerrilla-sale-card small{font-size:12px;color:var(--app-muted,#64748b)}
+  .guerrilla-sale-card a{font-size:13px;font-weight:700}
+  .guerrilla-sale-status{font-size:12px;font-weight:800}
+  .guerrilla-sale-status.is-available{color:#16915d}
+  .guerrilla-sale-status.is-unavailable{color:var(--app-muted,#64748b)}
+  .guerrilla-sale-status.is-unknown{color:#c17810}
+  html[data-theme="dark"] .guerrilla-sale-status.is-available{color:#65e8ad}
+  html[data-theme="dark"] .guerrilla-sale-status.is-unknown{color:#ffd285}
+</style>
 </head>
 
 <body>
@@ -649,6 +671,27 @@ nav[aria-label="メインメニュー"] {
 
     <!-- LivePocket抽選：発見マップと統合（地図ピンは追加しない） -->
     <section id="lotteryView" class="view" aria-labelledby="lpHeading">
+
+      <!-- Sale status is kept collapsible so the lottery screen stays compact. -->
+      <details id="guerrillaSalePanel" class="guerrilla-sale-panel">
+        <summary>⚡ ゲリラ販売速報 <span id="guerrillaSaleBadge" class="guerrilla-sale-badge" hidden></span></summary>
+        <div class="guerrilla-sale-body">
+          <p class="hint">登録された公式販売ページを定期確認します。通知は管理者が設定したDiscordチャンネルに送信します。</p>
+          <p id="guerrillaSaleStatus" class="hint" role="status" aria-live="polite">情報を読み込み中…</p>
+          <div class="guerrilla-sale-toolbar">
+            <strong id="guerrillaSaleCount">確認中…</strong>
+            <button id="guerrillaSaleRefresh" type="button">↻ 更新</button>
+          </div>
+          <label class="guerrilla-sale-label" for="guerrillaSaleShop">店舗で絞り込み</label>
+          <select id="guerrillaSaleShop"><option value="all">全店舗</option></select>
+          <h3>販売開始の速報</h3>
+          <div id="guerrillaSaleEvents"></div>
+          <h3>監視対象の状態</h3>
+          <div id="guerrillaSaleCurrent"></div>
+          <p class="hint">※ページ上の表示を検知します。ログイン必須・待合室・JavaScriptで更新するページは判定できない場合があります。</p>
+        </div>
+      </details>
+
       <div class="lp-heading">
         <div>
           <h2 id="lpHeading">🎟️ 抽選</h2>
@@ -1519,6 +1562,7 @@ nav[aria-label="メインメニュー"] {
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
   <script src="app.js?v=20261024-toreca-radar"></script>
+  <script src="guerrilla_sale.js?v=20261024-first"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
