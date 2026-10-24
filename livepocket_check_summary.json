@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "40108485453",
-    "run_number": "1064",
-    "completed_process_at": "2026-10-24T15:46:57Z",
+    "run_id": "40114935234",
+    "run_number": "1073",
+    "completed_process_at": "2026-10-24T17:11:38Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 0,
@@ -16,7 +16,7 @@
       "historical_attempted": 0,
       "registered_urls": 545,
       "deadlines_known": 511,
-      "store_lists_added": 1,
+      "store_lists_added": 0,
       "multi_store_urls": 20,
       "stores_from_pages": 0,
       "stores_from_discord": 0,
@@ -147,27 +147,27 @@
     "last_7_days": 183,
     "registered_total": 545,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-24T15:46:57Z",
+    "as_of": "2026-10-24T17:11:38Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 1,
-    "retry_wait": 1,
-    "completed": 154,
+    "retry_wait": 0,
+    "completed": 155,
     "expired": 384,
     "removed": 2,
     "new_pending": 0,
     "quarantined": 3,
     "total": 545,
-    "unresolved": 2,
+    "unresolved": 1,
     "missing_title": 0,
     "missing_store": 0,
-    "missing_deadline": 2,
-    "next_retry_at": "2026-10-25T11:06:16Z",
+    "missing_deadline": 1,
+    "next_retry_at": null,
     "access_cooldown": false,
     "next_batch_size": 1,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-24T15:47:00Z"
+    "as_of": "2026-10-24T17:11:40Z"
   }
 }

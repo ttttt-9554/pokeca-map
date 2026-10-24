@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T17:01:30Z",
-  "total": 2,
+  "as_of": "2026-10-24T17:11:40Z",
+  "total": 1,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -18,21 +18,6 @@
       "last_checked_at": "2026-10-23T15:46:24.564758+00:00",
       "next_retry_at": "2026-10-24T15:46:24.564758+00:00",
       "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/h9fk-",
-      "event_title": "再入荷分 ポケモンカードゲーム MEGA 拡張パック『メガブレイブ』『メガシンフォニア』 再入荷分 抽選販売受付",
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T11:06:16.092130+00:00",
-      "next_retry_at": "2026-10-25T11:06:16.092130+00:00",
-      "queue": "retry_wait"
     }
   ]
 }

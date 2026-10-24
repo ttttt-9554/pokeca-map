@@ -16862,8 +16862,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/756_v": {
-          "checked_at": "2026-10-24T09:56:46.179236+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/52gka": {
@@ -16957,8 +16957,9 @@
           "http_status": null
         },
         "https://livepocket.jp/e/71ygn": {
-          "checked_at": "2026-10-24T09:26:29.910131+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
+          "status": "checked_retry_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/5-9tt": {
           "checked_at": "2026-10-24T09:26:29.910131+00:00",
@@ -16988,8 +16989,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/h9fk-": {
-          "checked_at": "2026-10-24T11:06:16.092130+00:00",
-          "status": "checked_title",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/v_zwv": {
@@ -17847,8 +17848,9 @@
         },
         "https://livepocket.jp/e/71ygn": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T09:26:29.910131+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
+          "http_status": null
         },
         "https://livepocket.jp/e/7qcof": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
@@ -17956,8 +17958,9 @@
         },
         "https://livepocket.jp/e/756_v": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
-          "status": "browser_http_error",
-          "checked_at": "2026-10-24T09:16:22.203744+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
+          "http_status": null
         },
         "https://livepocket.jp/e/9k99x": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
@@ -18120,8 +18123,8 @@
         },
         "https://livepocket.jp/e/h9fk-": {
           "detected_at": "2026-10-24T11:05:55.789401+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-24T11:06:16.092130+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/v_zwv": {
@@ -19041,6 +19044,21 @@
         "https://livepocket.jp/e/7qcof": {
           "attempts": 1,
           "last_attempt_at": "2026-10-24T17:01:18.216809+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/h9fk-": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T17:11:24.820767+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/756_v": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T17:11:24.820767+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/71ygn": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T17:11:24.820767+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -23034,7 +23052,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T09:56:46.179236+00:00",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "title_observed": "【ふるいちイオンモール大和郡山店】ポケカ抽選（30th Celebration）",
           "genre": "pokemon",
           "product_origin": "",
@@ -23243,7 +23261,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T09:26:29.910131+00:00",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "title_observed": "【ふるいちイオンモール神戸北店】ポケカ抽選販売30thカード9種セット",
           "genre": "pokemon",
           "product_origin": "",
@@ -23320,7 +23338,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T11:06:16.092130+00:00",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "title_observed": "再入荷分 ポケモンカードゲーム MEGA 拡張パック『メガブレイブ』『メガシンフォニア』 再入荷分 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -26284,7 +26302,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/756_v": {
-          "checked_at": "2026-10-24T09:56:46.179236+00:00",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26531,7 +26549,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/71ygn": {
-          "checked_at": "2026-10-24T09:26:29.910131+00:00",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26622,7 +26640,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/h9fk-": {
-          "checked_at": "2026-10-24T11:06:16.092130+00:00",
+          "checked_at": "2026-10-24T17:11:24.820767+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

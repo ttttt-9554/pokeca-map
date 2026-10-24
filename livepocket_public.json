@@ -7445,6 +7445,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール大和郡山店】ポケカ抽選（30th Celebration）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7471,8 +7473,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス高田西店】ポケモンカード抽選販売（30thデッキ9種セット）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7492,8 +7492,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場 東住吉店】 ポケカ抽選販売（拡張パック ストームエメラルダ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7658,8 +7656,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場三田店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7711,6 +7707,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売30thカード9種セット",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7818,6 +7816,8 @@
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再入荷分 ポケモンカードゲーム MEGA 拡張パック『メガブレイブ』『メガシンフォニア』 再入荷分 抽選販売受付",
       "first_detected_at": "2026-10-24T11:05:55.789401+00:00"
     },
     {
@@ -7895,5 +7895,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T17:01:18.216809+00:00"
+  "updated_at": "2026-10-24T17:11:24.820767+00:00"
 }
