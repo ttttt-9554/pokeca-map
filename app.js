@@ -4253,6 +4253,48 @@
     return [...entries.values()];
   }
 
+
+  // v21.86: Event target stores are public catalog metadata. Results cannot
+  // be assigned to individual stores because the personal tracker has no
+  // per-user store field.
+  function lpResultsStoreHtml(item){
+    const stores=lotteryStoreEntries(item).filter(s=>String(s?.name||'').trim());
+    const areas=lotteryPrefectures(item).filter(Boolean);
+    if(stores.length===1){
+      const s=stores[0],pref=String(s.prefecture||areas[0]||'').trim();
+      return '<div class="lp-results-store">'+
+        '<span class="lp-results-store-label">🏬 対象店舗</span>'+
+        '<strong>'+escape(s.name)+'</strong>'+
+        (pref?'<span class="lp-results-store-area">📍 '+escape(pref)+'</span>':'')+
+        '</div>';
+    }
+    if(stores.length>1){
+      const preview=stores.slice(0,2).map(s=>s.name).join('・');
+      const more=stores.length>2?' ほか'+(stores.length-2)+'店舗':'';
+      const region=areas.length&&areas.length<=3
+        ? '<span class="lp-results-store-area">📍 '+areas.map(escape).join('・')+'</span>' : '';
+      const names=stores.slice(0,100).map(s=>'<li><strong>'+escape(s.name)+'</strong>'+
+        (s.prefecture?' <span>（'+escape(s.prefecture)+'）</span>':'')+'</li>').join('');
+      return '<div class="lp-results-store lp-results-store-multiple">'+
+        '<span class="lp-results-store-label">🏬 対象店舗 '+stores.length+'件</span>'+
+        '<strong>'+escape(preview+more)+'</strong>'+region+
+        '<details class="lp-results-store-details">'+
+        '<summary>店舗一覧・都道府県を見る</summary>'+
+        '<ul>'+names+'</ul>'+
+        (stores.length>100?'<p>最初の100店舗を表示しています。</p>':'')+
+        '</details>'+
+        '<p class="lp-results-store-caution">※集計人数はイベント全体の合計であり、店舗別ではありません。</p>'+
+        '</div>';
+    }
+    return '<div class="lp-results-store lp-results-store-unknown">'+
+      (areas.length?'<span class="lp-results-store-label">📍 対象地域</span>'+
+        '<strong>'+areas.map(escape).join('・')+'</strong>'+
+        '<span>店舗名は未確認です</span>':
+        '<span class="lp-results-store-label">🏬 対象店舗</span>'+
+        '<strong>店舗名・地域未確認</strong>')+
+      '</div>';
+  }
+
   function lpResultsRender(){
     const status=$('lpResultsStatus'),summary=$('lpResultsCounts'),list=$('lpResultsList');
     if(!status||!summary||!list)return;
@@ -4289,17 +4331,18 @@
     list.innerHTML=matches.length?matches.slice(0,100).map(item=>{
       const record=lpResultsCounts.get(item.url);
       const title=lotteryTrackItemName(item.url);
+      const storeHtml=lpResultsStoreHtml(item);
       // Accurate group counts are provided by the authenticated-only RPC.
       // Never infer participant details from an aggregate row.
       const header='👥 応募記録 '+Number(record.total_count)+'人';
       const statusHtml='<div class="lp-results-card-summary">'+
         '<span>✉️ 応募済み '+lpResultsCountDisplay(record.applied_count)+'</span>'+
-        '<span>🎉 当選（受取済み含む） '+lpResultsCountDisplay(record.won_count)+'</span>'+
+        '<span>🎉 当選 '+lpResultsCountDisplay(record.won_count)+'</span>'+
         '<span>📪 落選 '+lpResultsCountDisplay(record.lost_count)+'</span>'+
-        '<span>✅ 受取済み '+lpResultsCountDisplay(record.received_count)+'</span>'+
         '</div>';
       return '<article class="lp-results-card">'+
         '<h3>'+escape(title)+'</h3>'+
+        storeHtml+
         '<p class="lp-results-anonymous-total">'+escape(header)+'</p>'+
         statusHtml+
         '<div class="lp-results-card-footer"><a href="'+escape(item.url)+
