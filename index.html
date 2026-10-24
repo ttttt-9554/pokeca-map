@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_96-history-within-registration">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_97-dev-review">
 
   <style>
     [hidden] { display: none !important; }
@@ -1108,6 +1108,18 @@ nav[aria-label="メインメニュー"] {
             <p class="hint">現在の確認状況を集計中です…</p>
           </div>
         </section>
+        <details id="lpDevReviewFold" class="lp-dev-review-fold">
+          <summary>🔎 未解決項目の一覧 <span id="lpDevReviewCount">取得前</span></summary>
+          <div class="lp-dev-review-body">
+            <p class="hint">公式ページを確認し、抽選名・対象店舗・応募締切を修正して確認完了にできます。再試行待ちのURLも表示します。</p>
+            <div class="lp-dev-review-toolbar">
+              <input type="search" id="lpDevReviewSearch" placeholder="抽選名・店舗名・URLで検索" autocomplete="off" aria-label="未解決のURLを検索">
+              <button type="button" id="lpDevReviewReload">一覧を更新</button>
+            </div>
+            <p id="lpDevReviewStatus" class="hint" role="status" aria-live="polite">タップして開くと一覧を読み込みます。</p>
+            <div id="lpDevReviewList"></div>
+          </div>
+        </details>
         <section class="lp-dev-results" aria-label="抽選イベントの再確認結果">
           <div class="lp-dev-results-header">
             <h4>📊 前回の手動再確認結果</h4>
@@ -1342,6 +1354,20 @@ nav[aria-label="メインメニュー"] {
           <input type="datetime-local" name="application_end_at">
         </label>
         <p class="hint">変更した項目だけ全ユーザーの表示に反映します。空欄にすると該当項目を未確認に戻せます。元の自動取得情報や従来の手動修正は削除されません。</p>
+        <fieldset id="lpCardReviewConfirm" class="lp-dev-review-confirm" hidden>
+          <legend>🔎 未解決項目の確認完了</legend>
+          <p id="lpCardReviewMissing" class="hint"></p>
+          <label class="lp-dev-review-check"><input type="checkbox" name="review_deadline_unpublished">公式ページに応募締切の記載がないことを確認した（日付は推測しない）</label>
+          <label>証拠の種類
+            <select name="review_evidence">
+              <option value="">選択してください</option>
+              <option value="official_page_viewed">公式イベントページを確認</option>
+              <option value="official_screenshot_viewed">公式画面のスクリーンショットを確認</option>
+            </select>
+          </label>
+          <label class="lp-dev-review-check"><input type="checkbox" name="review_confirmed">このURLの公式情報と修正内容を照合し、確認完了にする</label>
+          <p class="hint">店舗未確認の場合は上の「🏬 対象店舗」を開き、店舗を追加してください。</p>
+        </fieldset>
         <div class="lp-card-editor-actions">
           <button class="primary" type="submit">変更を保存</button>
           <button id="lpCardReset" type="button" hidden>カード修正を解除</button>
@@ -1486,7 +1512,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_96-history-within-registration"></script>
+  <script src="app.js?v=20261024-v21_97-dev-review"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>

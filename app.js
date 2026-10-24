@@ -2760,13 +2760,14 @@
     lpCardLoading = (async () => {
       try {
         const {data,error} = await supabaseClient.from(LP_CARD_TABLE)
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,updated_at')
           .limit(5000);
         if (error) throw error;
         lpCardOverrides = new Map((data || []).filter(x=>safeLotteryUrl(x.event_url))
           .map(x=>[x.event_url,x]));
         lpCardReady = true; lpCardError = ''; lpCardLastFetch = Date.now();
         lpCloudApply();
+        if(isDeveloper()&&lpDevReviewLoaded)lpDevReviewRender();
         return true;
       } catch(error) {
         lpCardError = String(error?.message || error);
@@ -2865,6 +2866,8 @@
     const item = lpCardOverlay(lpLegacyApply(base));
     if (!item) return;
     lpCardEditing = url;
+    lpCardReviewUrl='';
+    $('lpCardReviewConfirm').hidden=true;
     form.reset();
     for (const field of LP_CARD_FORM_FIELDS) {
       const el = form.elements.namedItem(field);
@@ -2925,6 +2928,14 @@
     if (!legacy) { lpCardSetStatus('除外済みのイベントです。'); return; }
     const saved=lpCardOverrides.get(url);
     const payload={event_url:url,updated_by:authUser.id,updated_at:new Date().toISOString()};
+    // Preserve a confirmed review when editing the same card later.
+    if(saved?.review_complete){
+      payload.review_complete=true;
+      payload.review_evidence=saved.review_evidence;
+      payload.review_completed_at=saved.review_completed_at;
+      payload.review_deadline_unpublished=!!saved.review_deadline_unpublished;
+      payload.review_note=saved.review_note||null;
+    }
     const edited=[];
     try {
       if (reset) {
@@ -2966,7 +2977,28 @@
         if (start && end && Date.parse(start)>Date.parse(end))
           throw Error('応募開始日時は締切より前にしてください。');
         payload.edited_fields=edited;
-        if (!edited.length && !saved) {
+        if(lpCardReviewUrl===url){
+          const review=lpDevReviewRows.find(x=>x.url===url);
+          const confirmed=form.elements.namedItem('review_confirmed').checked;
+          const evidence=form.elements.namedItem('review_evidence').value;
+          const unpublished=form.elements.namedItem('review_deadline_unpublished').checked;
+          const title=String(form.elements.namedItem('event_title').value||'').trim();
+          if(!review||!confirmed||!['official_page_viewed','official_screenshot_viewed'].includes(evidence))
+            throw Error('公式ページの確認・証拠の種類・確認チェックが必要です。');
+          if(review.missing.includes('title')&&!lpManualValidTitle(title))
+            throw Error('公式の正式イベント名を入力してください。');
+          if(review.missing.includes('store')&&!desiredStores.some(x=>x.name.trim()))
+            throw Error('対象店舗を追加・修正してください。');
+          if(unpublished&&end)throw Error('締切の日時と「記載なし」は同時に指定できません。');
+          if(review.missing.includes('deadline')&&!end&&!unpublished)
+            throw Error('応募締切の日時を入力するか「公式に記載なし」を選択してください。');
+          payload.review_complete=true;
+          payload.review_evidence=evidence;
+          payload.review_completed_at=new Date().toISOString();
+          payload.review_deadline_unpublished=unpublished&&!end;
+          payload.review_note=unpublished?'公式ページに応募締切の記載なし':null;
+        }
+        if (!edited.length && !saved && lpCardReviewUrl!==url) {
           lpCardSetStatus('変更された項目はありません。'); return;
         }
       }
@@ -2976,7 +3008,7 @@
     buttons.forEach(x=>x.disabled=true);
     lpCardSetStatus('Supabaseへ保存しています…');
     try {
-      if (reset || !edited.length) {
+      if (reset || (!edited.length && lpCardReviewUrl!==url)) {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .delete().eq('event_url',url).select('event_url');
         if (error) throw error;
@@ -2985,7 +3017,7 @@
       } else {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .upsert(payload,{onConflict:'event_url'})
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,updated_at')
           .single();
         if (error) throw error;
         if (data?.event_url !== url || !Array.isArray(data.edited_fields)) throw Error('保存結果を確認できませんでした');
@@ -2996,6 +3028,11 @@
       if (!await lpCardRefresh(true)) throw Error('保存されましたが再取得できません：'+lpCardError);
       $('lpCardDialog').close();
       lpCloudApply();
+      if(lpCardReviewUrl===url&&lpDevReviewLoaded){
+        lpDevReviewRender();
+        $('lpDevReviewStatus').textContent='✅ 修正を保存して確認完了にしました。次回の自動集計でも完了扱いになります。';
+        lpCardReviewUrl='';
+      }
     } catch(error) {
       lpCardSetStatus('⚠ 保存または再取得に失敗しました：'+(error?.message || error));
     } finally {
@@ -5627,6 +5664,11 @@
   // ========================================
   const LP_DEV_RECHECK_API = 'https://livepocket-backup-trigger.takahiro9455.workers.dev/admin/recheck';
   let lpDevRecheckBusy = false;
+  // v21.97: exact unresolved queue generated by the backend's own selector.
+  const LP_DEV_REVIEW_URL='./livepocket_unresolved_review.json';
+  const LP_DEV_MISSING_LABELS={title:'イベント名',store:'店舗名',deadline:'応募締切'};
+  let lpDevReviewRows=[],lpDevReviewLoaded=false,lpDevReviewLoading=false;
+  let lpDevReviewSaving=false,lpCardReviewUrl='';
   const LP_DEV_RESULTS_URL = './livepocket_check_summary.json';
   let lpDevReportLoading = false;
   // A tap made while an automatic poll is active is queued, never discarded.
@@ -5707,6 +5749,77 @@
   }
 
   // v21.65: current outstanding queue, independent of the previous run's 12.
+  function lpDevReviewRender(){
+    const list=$('lpDevReviewList'),status=$('lpDevReviewStatus');
+    if(!isDeveloper()||!list||!lpDevReviewLoaded)return;
+    const search=String($('lpDevReviewSearch')?.value||'').trim().toLocaleLowerCase('ja-JP');
+    const rows=lpDevReviewRows.filter(row=>!lpCardOverrides.get(row.url)?.review_complete);
+    const filtered=rows.filter(row=>!search||
+      [row.url,row.event_title,row.store_name].join(' ').toLocaleLowerCase('ja-JP').includes(search));
+    const resolved=lpDevReviewRows.length-rows.length;
+    $('lpDevReviewCount').textContent=rows.length+'件';
+    status.textContent='未解決 '+rows.length+'件 ／ この一覧で手動確認完了 '+resolved+
+      '件。保存結果は次回GitHub Actionsの集計にも反映されます。';
+    list.innerHTML=filtered.length?filtered.map(row=>{
+      const missing=row.missing.map(x=>LP_DEV_MISSING_LABELS[x]).filter(Boolean);
+      return '<div class="lp-dev-review-row">'+
+        '<strong>'+escape(row.event_title||'イベント名未確認')+'</strong>'+
+        '<span class="lp-dev-review-state">'+(row.queue==='retry_wait'?'⏳ 再試行待ち':'🔎 今すぐ確認')+'</span>'+
+        '<div class="lp-dev-review-missing">'+missing.map(x=>'<span>'+escape(x)+'未確認</span>').join('')+'</div>'+
+        '<p class="hint">店舗：'+escape(row.store_name||'未確認')+
+        ' ／ 地域：'+escape(row.prefecture||'未確認')+'</p>'+
+        '<a href="'+escape(row.url)+'" target="_blank" rel="noopener noreferrer">公式ページを確認 ↗</a>'+
+        '<button type="button" data-lp-dev-review-open="'+escape(row.url)+'">✏️ 修正して確認完了</button>'+
+        '</div>';
+    }).join(''):'<p class="hint">✅ 該当する未解決URLはありません。</p>';
+  }
+
+  async function lpDevReviewLoad(){
+    if(!isDeveloper()||lpDevReviewLoading)return;
+    lpDevReviewLoading=true;
+    const status=$('lpDevReviewStatus'),button=$('lpDevReviewReload');
+    if(button){button.disabled=true;button.textContent='取得中…';}
+    status.textContent='🔄 未解決URL一覧と手動修正を取得しています…';
+    try{
+      const res=await fetch(LP_DEV_REVIEW_URL+'?v='+Date.now(),{cache:'no-store'});
+      if(!res.ok)throw Error(res.status===404?
+        '一覧の生成待ちです。GitHub Actionsの次回集計後に「一覧を更新」を押してください。':
+        'HTTP '+res.status);
+      const body=await res.json();
+      if(body?.schema_version!==1||body?.source!=='v21_97_manual_review_queue'||
+         !Array.isArray(body.items)||body.items.length!==body.total||
+         body.items.some(x=>!isLivePocketEventUrl(x.url)||
+           !Array.isArray(x.missing)||!x.missing.every(k=>Object.hasOwn(LP_DEV_MISSING_LABELS,k))||
+           !['ready','retry_wait'].includes(x.queue)))
+         throw Error('未解決一覧のデータ形式が正しくありません。');
+      if(!await lpCardRefresh(true))throw Error('手動修正データを取得できません：'+lpCardError);
+      lpDevReviewRows=body.items;
+      lpDevReviewLoaded=true;
+      lpDevReviewRender();
+    }catch(error){status.textContent='⚠ '+String(error?.message||error);}
+    finally{
+      lpDevReviewLoading=false;
+      if(button){button.disabled=false;button.textContent='一覧を更新';}
+    }
+  }
+
+  function lpDevReviewOpen(url){
+    if(!isDeveloper()||!lpDevReviewLoaded||!lpDevReviewRows.some(x=>x.url===url))return;
+    lpCardOpen(url);
+    if(!$('lpCardDialog').open){
+      $('lpDevReviewStatus').textContent='⚠ 抽選データを読み込めません。抽選一覧の更新をお試しください。';
+      return;
+    }
+    lpCardReviewUrl=url;
+    const row=lpDevReviewRows.find(x=>x.url===url);
+    const missing=(row.missing||[]).map(k=>LP_DEV_MISSING_LABELS[k]).filter(Boolean);
+    $('lpCardReviewMissing').textContent='今回確認が必要：'+missing.join('・')+
+      '。修正内容と確認方法を入力し、「変更を保存」を押すと完了に移ります。';
+    $('lpCardReviewConfirm').hidden=false;
+    if(row.missing.includes('store'))$('lpCardStoresFold').open=true;
+    $('lpCardReset').hidden=true;
+  }
+
   function renderLpDevReviewProgress(progress){
     const host=$('lpDevReviewProgress');
     if(!host||!isDeveloper())return;
@@ -5738,6 +5851,8 @@
       lpDevReportDate(progress.next_retry_at):'未定';
     const checkedAt=Number.isFinite(Date.parse(progress.as_of||''))?
       lpDevReportDate(progress.as_of):'不明';
+    if($('lpDevReviewCount')&&!lpDevReviewLoaded)
+      $('lpDevReviewCount').textContent=unresolved+'件';
     host.innerHTML='<p class="hint">GitHub Actions集計：'+escape(checkedAt)+
       ' ／ 登録済みURL '+progress.total+'件</p>'+
       '<p class="hint"><strong>🔎 未解決 '+unresolved+'件</strong>（今すぐ確認 '+progress.ready+
@@ -7162,6 +7277,15 @@
     lpMissingInitUI();
     lpLocationInitUI();
     $('lpDevResultsRefresh')?.addEventListener('click', () => loadLotteryDevResults({manual:true}));
+    $('lpDevReviewFold')?.addEventListener('toggle',()=>{
+      if($('lpDevReviewFold').open)lpDevReviewLoad();
+    });
+    $('lpDevReviewReload')?.addEventListener('click',lpDevReviewLoad);
+    $('lpDevReviewSearch')?.addEventListener('input',lpDevReviewRender);
+    $('lpDevReviewList')?.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-lp-dev-review-open]');
+      if(button)lpDevReviewOpen(button.dataset.lpDevReviewOpen);
+    });
     button.addEventListener('click', () => requestLotteryDevRecheck({automatic: false}));
   }
 

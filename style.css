@@ -2084,3 +2084,29 @@ html[data-theme="dark"] #addView .report-history-section h3{color:#eef4ff!import
   #addView .report-history-section{padding:10px}
   #addView .report-history-fold>summary{padding:11px 12px}
 }
+
+
+/* v21.97: developer unresolved URL list and verified completion inside card modal. */
+#devView .lp-dev-review-fold{margin:14px 0;border:1px solid var(--app-border,#526681);border-radius:13px;background:var(--app-surface,#fff);color:var(--app-text,#172033);overflow:hidden}
+#devView .lp-dev-review-fold>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none;padding:13px 14px;font-weight:800}
+#devView .lp-dev-review-fold>summary::-webkit-details-marker{display:none}
+#devView .lp-dev-review-fold>summary span{font-size:12px}
+#devView .lp-dev-review-body{border-top:1px solid var(--app-border,#526681);padding:12px}
+#devView .lp-dev-review-toolbar{display:flex;gap:7px;margin:10px 0}
+#devView .lp-dev-review-toolbar input{flex:1;min-width:0;font-size:16px;min-height:40px}
+#devView .lp-dev-review-toolbar button{flex:0 0 auto;padding:8px;font-size:12px}
+#devView .lp-dev-review-row{border:1px solid var(--app-border,#526681);border-radius:10px;padding:12px;margin:9px 0;background:var(--app-surface2,#f8fafc);overflow-wrap:anywhere}
+#devView .lp-dev-review-row strong{display:block;font-size:14px;margin-bottom:6px}
+#devView .lp-dev-review-row .lp-dev-review-state{font-size:11px;display:inline-block;margin-bottom:6px}
+#devView .lp-dev-review-missing{display:flex;gap:5px;flex-wrap:wrap;margin:4px 0}
+#devView .lp-dev-review-missing span{font-size:11px;border:1px solid var(--app-border,#526681);border-radius:6px;padding:3px 5px}
+#devView .lp-dev-review-row button{display:block;margin-top:10px;font-size:12px;min-height:40px}
+#lpCardReviewConfirm{min-width:0;border:1px solid var(--app-border,#526681);border-radius:11px;padding:10px 12px;display:grid;gap:10px}
+#lpCardReviewConfirm[hidden]{display:none!important}
+#lpCardReviewConfirm legend{font-size:13px;font-weight:800}
+#lpCardReviewConfirm .lp-dev-review-check{display:flex;flex-direction:row;align-items:flex-start;gap:8px;min-height:36px;font-size:12px;line-height:1.5}
+#lpCardReviewConfirm .lp-dev-review-check input{width:20px;height:20px;flex:0 0 20px;margin:0}
+#lpCardReviewConfirm select{min-height:42px;font-size:16px}
+html[data-theme=dark] #devView .lp-dev-review-fold{background:#172337!important;color:#eef4ff!important;border-color:#526681!important}
+html[data-theme=dark] #devView .lp-dev-review-row{background:#203149!important;border-color:#526681!important}
+html[data-theme=dark] #lpCardReviewConfirm{color:#eef4ff!important;border-color:#526681!important}
