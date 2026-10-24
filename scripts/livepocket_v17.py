@@ -4,11 +4,13 @@
 Priorities: first-time NEW URLs -> due new-URL retries -> historical checks
 (only on existing twice-daily/manual background schedule).
 
-Keeps v16's six-hour spacing, maximum two retries, 14-day age window,
+Keeps a maximum of two retries and the 14-day age window; transient NEW
+failures use bounded 15/30/60-minute spacing, access gates keep six hours.
 expired/redirected skips, URL equality, access-block cooldown, and conservative
 field extraction. This module intentionally does not bypass site restrictions.
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import csv
 import io
@@ -79,7 +81,8 @@ def due_retries(raw, public, now=None, *, limit=3):
         if int(log.get('attempts', 0)) >= v16.RETRY_MAX:
             continue
         last = check_time(log.get('last_attempt_at')) or checked
-        if now - last.astimezone(now.tzinfo) < timedelta(hours=v16.RETRY_DELAY_HOURS):
+        wait = arrival_policy.quick_retry_wait(raw, url, now) or timedelta(hours=v16.RETRY_DELAY_HOURS)
+        if now - last.astimezone(now.tzinfo) < wait:
             continue
         choices.append((detected, url))
     choices.sort(key=lambda t: (t[0], t[1]), reverse=True)
@@ -96,6 +99,7 @@ def retry_pass(raw, public, fetch, now=None, *, limit=3):
     firsts = state.setdefault('v14', {}).setdefault('new_url_checks', {})
     checks = state.setdefault('v13', {}).setdefault('browser_checks', {})
     stats = {'retry_attempted': 0, 'retry_new_fields': 0, 'retry_blocked': 0}
+    http_error_streak = 0
     for url in selected:
         try:
             result = fetch(url)
@@ -108,11 +112,15 @@ def retry_pass(raw, public, fetch, now=None, *, limit=3):
         previous = log.get(url, {})
         log[url] = {'attempts': int(previous.get('attempts', 0)) + 1,
                     'last_attempt_at': time, 'last_status': status}
-        checks[url] = {'checked_at': time, 'status': status}
+        checks[url] = {'checked_at': time, 'status': status, 'http_status': result.get('http_status')}
         firsts[url]['checked_at'] = time
         firsts[url]['status'] = status
+        firsts[url]['http_status'] = result.get('http_status')
         stats['retry_attempted'] += 1
         stats['retry_new_fields'] += added
+        http_error_streak, stop_http = arrival_policy.stop_repeated_http_errors(state['v14'], result, http_error_streak, now)
+        if stop_http:
+            break
         if status in ('browser_blocked', 'browser_blocked_or_empty'):
             stats['retry_blocked'] += 1
             state['v14']['blocked_until'] = (now + timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
@@ -153,7 +161,8 @@ def retry_schedule(raw, public, url, now=None):
     if attempts >= v16.RETRY_MAX:
         return '', 'max_retries'
     last = check_time(record.get('last_attempt_at')) or initial_checked
-    eligible = last.astimezone(now.tzinfo) + timedelta(hours=v16.RETRY_DELAY_HOURS)
+    wait = arrival_policy.quick_retry_wait(raw, url, now) or timedelta(hours=v16.RETRY_DELAY_HOURS)
+    eligible = last.astimezone(now.tzinfo) + wait
     expires = detected.astimezone(now.tzinfo) + timedelta(days=v16.RETRY_MAX_AGE_DAYS)
     if eligible > expires:
         return '', 'too_old'

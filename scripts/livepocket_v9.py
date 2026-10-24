@@ -5,6 +5,7 @@ No external requests, no inference from URL IDs, and no changes to verified
 store/product/title/date information. v7 creates the public JSON first.
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import csv
 import io
@@ -81,6 +82,9 @@ def transform(raw, public):
         raise ValueError('Invalid raw JSON')
     if not isinstance(public, dict) or not isinstance(public.get('items'), list):
         raise ValueError('Invalid public JSON')
+    raw = json.loads(json.dumps(raw, ensure_ascii=False))
+    public = json.loads(json.dumps(public, ensure_ascii=False))
+    arrival_policy.clean_placeholders(raw, public)
     raw_items, public_items = raw['items'], public['items']
     raw_urls = [a.get('url') for a in raw_items]
     public_urls = [a.get('url') for a in public_items]
@@ -96,7 +100,7 @@ def transform(raw, public):
     for item in raw_items:
         name = item.get('store_name')
         pref = item.get('prefecture')
-        if isinstance(name, str) and name.strip() and pref in PREFECTURES:
+        if isinstance(name, str) and name.strip() and not arrival_policy.unknown_shop(name) and pref in PREFECTURES:
             shops[name.strip()].add(pref)
 
     raw_out = json.loads(json.dumps(raw, ensure_ascii=False))

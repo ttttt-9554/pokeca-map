@@ -6,6 +6,7 @@ or bypass verification screens. Designed for GitHub Actions.
 """
 
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import copy
 import csv
@@ -427,7 +428,7 @@ def clean_label(text: str | None) -> str | None:
 
 def credible_store(label: str | None) -> bool:
     s = clean_label(label)
-    if not s or not 2 <= len(s) <= 90:
+    if not s or arrival_policy.unknown_shop(s) or not 2 <= len(s) <= 90:
         return False
     if "..." in s or "…" in s or MOJIBAKE_RE.search(s) or PRODUCT_LIKE_RE.search(s):
         return False

@@ -9,6 +9,7 @@ Install next to livepocket_v10.py .. livepocket_v14.py.
 Usage: python scripts/livepocket_v15.py process
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import copy
 import csv
@@ -62,6 +63,8 @@ def clean_value(value, field):
     if re.search(r'[、,，;；]|(?:その他|など|ほかの商品|他の商品)', value) and field == 'product_name':
         return None
     if field == 'store_name':
+        if arrival_policy.unknown_shop(value):
+            return None
         if BAD_STORE.search(value) or re.search(r'(?:\d{4}年|20\d{2}[-/]|\d{1,2}月\d{1,2}日)', value):
             return None
         if not re.search(r'[一-龯ぁ-んァ-ンA-Za-z]', value):

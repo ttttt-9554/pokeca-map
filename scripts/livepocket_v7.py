@@ -10,6 +10,7 @@ collector internals. Publishing a different JSON does NOT make the existing
 raw file private when the repo/GitHub Pages source is public.
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import copy
 import json
@@ -44,6 +45,7 @@ PUBLIC_FIELDS = (
 
 def is_shop(value):
     return (isinstance(value, str) and 2 <= len(value.strip()) <= 80
+            and not arrival_policy.unknown_shop(value)
             and not BAD_NAME.search(value) and STORE_HINTS.search(value)
             and not PRODUCT_HINTS.search(value))
 

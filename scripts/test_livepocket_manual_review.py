@@ -98,7 +98,8 @@ class CandidateTests(unittest.TestCase):
         self.assertTrue(all(x["missing"] for x in counts["items"]))
         self.assertTrue(all(set(x).issubset(
             {"url","event_title","store_name","prefecture",
-             "application_end_at","missing","queue"}) for x in counts["items"]))
+             "application_end_at","missing","queue","last_check_status",
+             "last_http_status","last_checked_at","next_retry_at"}) for x in counts["items"]))
 
     def test_manual_review_completion_is_durable(self):
         raw, public = fixtures()

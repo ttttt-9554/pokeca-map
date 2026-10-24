@@ -10,6 +10,7 @@ The legacy store_name/prefecture fields are left untouched. v7 discards stores
 from its public allowlist, so this step re-publishes them from raw every run.
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import copy
 import csv
@@ -51,7 +52,7 @@ RETAIL = re.compile(r'店$|(?:SHOP|STORE|TSUTAYA|HMV|BOOKS|トレカ|古本市�
 
 def safe_name(s, *, strict_retail=False):
     """Reject prose, truncation, formula-like values and unconstrained stores."""
-    if not isinstance(s, str):
+    if not isinstance(s, str) or arrival_policy.unknown_shop(s):
         return None
     s = re.sub(r'[\s\u3000]+', ' ', s).strip(' \u3000「」『』')
     if not (2 <= len(s) <= 100) or DANGEROUS.search(s) or GENERIC_STORE.search(s) or re.search(r"[。！？!?]|(?:できます|ください|可能です|以下の|上記|ご確認|対象となります)", s):
@@ -284,6 +285,7 @@ def merge_stores(existing, page, manual, legacy_name='', legacy_pref=''):
 
 
 def apply_stores(raw, public, seen_pages=None, manual=None):
+    arrival_policy.clean_placeholders(raw, public)
     seen_pages = seen_pages or {}
     manual = manual or {}
     rindex, pindex = v11.indices(raw, public)
@@ -303,6 +305,14 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
             discord = page_stores(excerpt)
         before = r.get('stores') or []
         legacy = r.get('store_name') or p.get('store_name') or ''
+        origin = str((r.get('field_sources') or {}).get('event_title') or '')
+        if not safe_name(legacy) and origin.startswith(('v14_livepocket_', 'v21_official_')):
+            heading = re.match(r'^【\s*([^【】]{2,90}?店)\s*】', str(r.get('event_title') or ''))
+            observed_shop = safe_name(heading.group(1), strict_retail=True) if heading else None
+            if observed_shop:
+                legacy = observed_shop
+                r['store_name'] = p['store_name'] = observed_shop
+                r.setdefault('field_sources', {})['store_name'] = 'v22_official_title_shop'
         product = r.get('product_name') or p.get('product_name') or ''
         # v5 sometimes copied an item name into the old store_name field.
         # Do not convert that known placeholder into a verified store entry.

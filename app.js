@@ -5770,9 +5770,20 @@
       '件。保存結果は次回GitHub Actionsの集計にも反映されます。';
     list.innerHTML=filtered.length?filtered.map(row=>{
       const missing=row.missing.map(x=>LP_DEV_MISSING_LABELS[x]).filter(Boolean);
+      const http=Number(row.last_http_status);
+      const failures={browser_timeout:'ページ取得がタイムアウト',browser_no_response:'ページから応答なし',
+        browser_http_error:'ページ取得に失敗',browser_blocked:'サイト側のアクセス制限',
+        browser_blocked_or_empty:'認証画面・アクセス制限',browser_error:'ページ取得エラー',
+        browser_unverified_page:'イベント本文を確認できませんでした'};
+      const failure=failures[row.last_check_status]||'';
+      const detail=failure+(failure&&http>=400&&http<=599?'（HTTP '+http+'）':'');
+      const retryAt=row.queue==='retry_wait'&&Number.isFinite(Date.parse(row.next_retry_at||''))?
+        '再確認可能：'+lpDevReportDate(row.next_retry_at):'';
       return '<div class="lp-dev-review-row">'+
         '<strong>'+escape(row.event_title||'イベント名未確認')+'</strong>'+
         '<span class="lp-dev-review-state">'+(row.queue==='retry_wait'?'⏳ 再試行待ち':'🔎 今すぐ確認')+'</span>'+
+        (detail?'<p class="hint">'+escape(detail)+'</p>':'')+
+        (retryAt?'<p class="hint">'+escape(retryAt)+'</p>':'')+
         '<div class="lp-dev-review-missing">'+missing.map(x=>'<span>'+escape(x)+'未確認</span>').join('')+'</div>'+
         '<p class="hint">店舗：'+escape(row.store_name||'未確認')+
         ' ／ 地域：'+escape(row.prefecture||'未確認')+'</p>'+

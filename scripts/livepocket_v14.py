@@ -10,6 +10,7 @@ No CAPTCHA, login, access-control or rate-limit bypass. Unconfirmed dates are
 never used for expiry. Upstream v10, v11, v12 and v13 modules stay unchanged.
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import copy
 import csv
@@ -306,6 +307,7 @@ def process(raw, public, fetch, *, now=None, new_limit=15, background_limit=0):
              'titles_added': 0, 'products_added': 0, 'deadlines_added': 0,
              'starts_added': 0, 'date_conflicts': 0, 'blocked': 0,
              'cooldown_active': bool(cooling)}
+    http_error_streak = 0
     for url in urgent + background:
         is_urgent = url in urgent
         try:
@@ -318,14 +320,17 @@ def process(raw, public, fetch, *, now=None, new_limit=15, background_limit=0):
         if status == 'ok':
             status = _update_fields(rindex[url], pindex[url], result, stats)
         stamp = now.isoformat()
-        checks[url] = {'checked_at': stamp, 'status': status}
+        checks[url] = {'checked_at': stamp, 'status': status, 'http_status': result.get('http_status')}
         if is_urgent:
             stats['urgent_attempted'] += 1
             entry = history.setdefault(url, {'detected_at': stamp})
-            entry.update({'checked_at': stamp, 'status': status})
+            entry.update({'checked_at': stamp, 'status': status, 'http_status': result.get('http_status')})
             state['pending_new_urls'] = [u for u in state['pending_new_urls'] if u != url]
         else:
             stats['background_attempted'] += 1
+        http_error_streak, stop_http = arrival_policy.stop_repeated_http_errors(state, result, http_error_streak, now)
+        if stop_http:
+            break
         if status in ('browser_blocked', 'browser_blocked_or_empty'):
             stats['blocked'] += 1
             state['blocked_until'] = (now + timedelta(hours=BLOCK_DELAY_HOURS)).isoformat()

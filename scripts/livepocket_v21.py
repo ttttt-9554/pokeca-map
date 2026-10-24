@@ -6,6 +6,7 @@ responsible for browsing, deadlines, all stores, new-arrival prioritization.
 The catalog is a classifier, NEVER a source of invented ticket product names.
 """
 from __future__ import annotations
+import livepocket_arrival_policy as arrival_policy
 
 import csv
 import io
@@ -1465,8 +1466,18 @@ def manual_recheck_candidates(raw, public, *, now=None, limit=MANUAL_RECHECK_LIM
         if latest_check:
             # Do not hammer the same page each five-minute job. But a lottery
             # ends quickly, so seven days is too long for a missing deadline.
-            wait = timedelta(hours=24) if successful else timedelta(hours=6)
+            wait = (timedelta(hours=24) if successful else
+                    arrival_policy.quick_retry_wait(raw, url, now) or timedelta(hours=6))
             next_at = latest_check + wait
+            cooldown_at = arrival_policy.stamp(v14state.get('blocked_until'))
+            if cooldown_at and cooldown_at > next_at:
+                next_at = cooldown_at
+            if include_items:
+                last_status, last_http, _ = arrival_policy.latest_result(raw, url)
+                review_item['last_check_status'] = last_status
+                review_item['last_http_status'] = last_http
+                review_item['last_checked_at'] = latest_check.isoformat()
+                review_item['next_retry_at'] = next_at.isoformat()
             if now < next_at:
                 counters['retry_wait'] += 1
                 next_retries.append(next_at)
@@ -2601,6 +2612,7 @@ def main():
         raise SystemExit('Usage: python scripts/livepocket_v21.py plan|process')
     catalog = load_catalog()
     raw, public = v14.read_pair()
+    arrival_policy.clean_placeholders(raw, public)
     known = {item['url'] for item in raw['items']}
     verified = v20.read_verified(v20.MANUAL_PATH, known)
     v19_verified = v19.read_manual(v19.MANUAL_PATH, known)
