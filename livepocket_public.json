@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T01:00:56.381776+00:00",
-  "unique_livepocket_urls": 471,
+  "collected_at": "2026-10-24T02:05:55.827134+00:00",
+  "unique_livepocket_urls": 474,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6612,7 +6612,73 @@
         }
       ],
       "first_detected_at": "2026-10-24T01:00:57.834831+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/oe6kj",
+      "store_name": "古本市場保木間店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-24T02:00:06.911000+00:00",
+      "stores": [
+        {
+          "name": "古本市場保木間店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "【古本市場保木間店】 ポケカ店頭抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場保木間店】 ポケカ店頭抽選販売（30th CELEBRATION）",
+      "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/x54u6",
+      "store_name": "古本市場戸田店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T02:00:06.911000+00:00",
+      "stores": [
+        {
+          "name": "古本市場戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場戸田店】ポケカ抽選（30th CELEBRATIONカードセット（9種セット））",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場戸田店】ポケカ抽選（30th CELEBRATIONカードセット（9種セット））",
+      "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/cglfk",
+      "store_name": "古本市場戸田店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T02:00:06.911000+00:00",
+      "stores": [
+        {
+          "name": "古本市場戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場戸田店】ポケカ抽選（ストームエメラルダ）",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場戸田店】ポケカ抽選（ストームエメラルダ）",
+      "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     }
   ],
-  "updated_at": "2026-10-24T01:55:58.941616+00:00"
+  "updated_at": "2026-10-24T02:06:25.676191+00:00"
 }
