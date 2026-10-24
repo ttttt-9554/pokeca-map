@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_87-results-refresh-feedback">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_88-result-search-clear">
 
   <style>
     [hidden] { display: none !important; }
@@ -741,9 +741,13 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpResultsAccount" class="hint"></p>
       <div class="lp-results-controls">
-        <label>抽選名・店舗名で検索
-          <input type="search" id="lpResultsSearch" placeholder="抽選名や店舗名" autocomplete="off" maxlength="120">
-        </label>
+        <div class="lp-results-search-group">
+          <label for="lpResultsSearch">抽選名・店舗名で検索</label>
+          <div class="lp-results-search-line">
+            <input type="search" id="lpResultsSearch" placeholder="抽選名や店舗名" autocomplete="off" maxlength="120">
+            <button type="button" id="lpResultsSearchClear" aria-label="検索文字をすべて消す" hidden>✕ クリア</button>
+          </div>
+        </div>
         <label>表示する結果
           <select id="lpResultsFilter">
             <option value="all">すべての抽選</option>
@@ -1555,7 +1559,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_87-results-refresh-feedback"></script>
+  <script src="app.js?v=20261024-v21_88-result-search-clear"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>

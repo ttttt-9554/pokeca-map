@@ -4301,6 +4301,8 @@
     const status=$('lpResultsStatus'),summary=$('lpResultsCounts'),list=$('lpResultsList');
     if(!status||!summary||!list)return;
     lpResultsAccount();
+    const searchInput=$('lpResultsSearch'),clearButton=$('lpResultsSearchClear');
+    if(searchInput&&clearButton)clearButton.hidden=!searchInput.value;
     const events=lpResultsKnownEvents();
     summary.innerHTML='<span>🎟️ 応募記録あり '+events.length+'件</span>'+
       '<span>👥 1人から表示</span>';
@@ -4458,7 +4460,16 @@
 
   function lpResultsInit(){
     $('lpResultsReload').addEventListener('click',lpResultsManualReload);
-    $('lpResultsSearch').addEventListener('input',lpResultsRender);
+    const search=$('lpResultsSearch');
+    const clear=$('lpResultsSearchClear');
+    search.addEventListener('input',lpResultsRender);
+    // Safari's built-in search-field X may fire "search" rather than input.
+    search.addEventListener('search',lpResultsRender);
+    clear.addEventListener('click',()=>{
+      search.value='';
+      search.blur();
+      lpResultsRender();
+    });
     $('lpResultsFilter').addEventListener('change',lpResultsRender);
     lpResultsRender();
   }

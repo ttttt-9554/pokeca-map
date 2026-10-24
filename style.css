@@ -1704,3 +1704,29 @@ html[data-theme="dark"] #lotteryResultsView .lp-results-store-details summary{
 /* v21.87: progress state for the results-tab refresh button. */
 #lpResultsReload:disabled{opacity:.72;cursor:progress}
 #lpResultsStatus{min-height:22px;line-height:1.65;overflow-wrap:anywhere}
+
+
+/* v21.88: one-tap clear on the anonymous lottery results search. */
+#lotteryResultsView .lp-results-search-group{display:grid;gap:6px;min-width:0}
+#lotteryResultsView .lp-results-search-group>label{
+  font-size:13px;font-weight:700;color:var(--app-text,#172033);
+}
+#lotteryResultsView .lp-results-search-line{
+  display:flex;gap:8px;align-items:stretch;min-width:0;
+}
+#lotteryResultsView .lp-results-search-line>input{
+  flex:1 1 0;min-width:0;width:100%;
+}
+#lpResultsSearchClear{
+  flex:0 0 auto;min-width:82px;min-height:44px;
+  padding:8px 12px;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:10px;font-size:13px;font-weight:800;
+  background:var(--app-surface2,#f8fafc);
+  color:var(--app-text,#172033);
+  touch-action:manipulation;
+}
+#lpResultsSearchClear[hidden]{display:none!important}
+html[data-theme="dark"] #lpResultsSearchClear{
+  background:#25354b!important;color:#edf4ff!important;
+  border-color:#667d9b!important;
+}
