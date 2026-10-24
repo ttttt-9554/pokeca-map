@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T02:26:42Z",
-  "total": 14,
+  "as_of": "2026-10-24T02:36:46Z",
+  "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -16,28 +16,6 @@
       "queue": "retry_wait"
     },
     {
-      "url": "https://livepocket.jp/e/irssg",
-      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」キャンセル分 抽選販売受付",
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/jrssp",
-      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 拡張パック ストームエメラルダ（再販）」抽選販売",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T23:59:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "queue": "retry_wait"
-    },
-    {
       "url": "https://livepocket.jp/e/k1y8y",
       "event_title": "【HMVトレカショップ】ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】【抽選販売】",
       "store_name": "",
@@ -45,116 +23,6 @@
       "application_end_at": "2026-10-25T20:59:00+09:00",
       "missing": [
         "store"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/m0-8b",
-      "event_title": "ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー 再販分",
-      "store_name": "TSUTAYA六高台店",
-      "prefecture": "千葉県",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/mz__o",
-      "event_title": "【晴れる屋】『マジック：ザ・ギャザリング | スター・トレック』 Collector's Edition Commander Deck 4種セット (●英語版) 抽選申し込み受付",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-29T23:59:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/pp-3l",
-      "event_title": "遊戯王ラッシュデュエル「CROSS ART COLLECTION」",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/qz-dx",
-      "event_title": "遊戯王OCG キャンセル分「ORIGINAL ARTWORK COLLECTION」",
-      "store_name": "錦糸",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/rxcg5",
-      "event_title": "ワンピースカード『Heroines Edition vol.2』 抽選販売受付",
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/vm68e",
-      "event_title": "ワンピースカード 再入荷分 EB-03『Heroiness Edition』 抽選販売受付",
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/wxos5",
-      "event_title": "ポケモンカードゲーム 「30th CELEBRATION」キャンセル分 抽選販売受付",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/y4-lv",
-      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/yfaf-",
-      "event_title": "【ふるいちイオンモール熱田店】ポケカ抽選販売 ポケモンカードゲームＭＥＧＡ 拡張パック「ストームエメラルダ」",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/yv07y",
-      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
-      "store_name": "イトーヨーカドー",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
       ],
       "queue": "retry_wait"
     }

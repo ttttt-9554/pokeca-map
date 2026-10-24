@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T02:05:55.827134+00:00",
-  "unique_livepocket_urls": 474,
+  "collected_at": "2026-10-24T02:35:55.921663+00:00",
+  "unique_livepocket_urls": 476,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6508,8 +6508,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION」再入荷分 抽選販売受付",
       "first_detected_at": "2026-10-23T14:05:58.154398+00:00"
     },
     {
@@ -6674,7 +6672,45 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/c82il",
+      "store_name": "古本市場光が丘店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-24T02:30:16.976000+00:00",
+      "stores": [
+        {
+          "name": "古本市場光が丘店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "古本市場光が丘店 ポケカ抽選販売（30ｔｈセレブレーション）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "古本市場光が丘店 ポケカ抽選販売（30ｔｈセレブレーション）",
+      "first_detected_at": "2026-10-24T02:35:57.407896+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/p4oqw",
+      "store_name": "ビッグワンTSUTAYAさくら店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-24T02:30:16.976000+00:00",
+      "stores": [
+        {
+          "name": "ビッグワンTSUTAYAさくら店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム EXブースター「ヒロインズエディション Vol.2」抽選販売",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム EXブースター「ヒロインズエディション Vol.2」抽選販売",
+      "first_detected_at": "2026-10-24T02:35:57.407896+00:00"
     }
   ],
-  "updated_at": "2026-10-24T02:26:34.835082+00:00"
+  "updated_at": "2026-10-24T02:36:36.163522+00:00"
 }
