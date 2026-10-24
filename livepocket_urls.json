@@ -16522,8 +16522,9 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1wqyobvsi_": {
-          "checked_at": "2026-10-23T12:46:22.569268+00:00",
-          "status": "checked_retry_no_new_details"
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
+          "status": "checked_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/ygkk_": {
           "checked_at": "2026-10-23T07:06:26.160667+00:00",
@@ -16550,8 +16551,9 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/h0r8an9sy9": {
-          "checked_at": "2026-10-23T13:46:20.928616+00:00",
-          "status": "checked_retry_no_new_details"
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
+          "status": "checked_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/d59un": {
           "checked_at": "2026-10-23T13:46:20.928616+00:00",
@@ -16566,12 +16568,14 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "checked_at": "2026-10-23T15:16:31.553110+00:00",
-          "status": "checked_retry_no_new_details"
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
+          "status": "checked_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/1rf7i": {
-          "checked_at": "2026-10-23T15:46:24.564758+00:00",
-          "status": "checked_retry_no_new_details"
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
+          "status": "checked_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/jfpl7": {
           "checked_at": "2026-10-23T16:21:23.205833+00:00",
@@ -22264,7 +22268,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T12:46:22.569268+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -22341,7 +22345,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T13:46:20.928616+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー/拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -22385,7 +22389,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T15:16:31.553110+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -22396,7 +22400,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-23T15:46:24.564758+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "",
@@ -25363,7 +25367,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1wqyobvsi_": {
-          "checked_at": "2026-10-23T12:46:22.569268+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -25454,7 +25458,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/h0r8an9sy9": {
-          "checked_at": "2026-10-23T13:46:20.928616+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -25506,7 +25510,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fdhbjwub5y": {
-          "checked_at": "2026-10-23T15:16:31.553110+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -25519,7 +25523,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1rf7i": {
-          "checked_at": "2026-10-23T15:46:24.564758+00:00",
+          "checked_at": "2026-10-24T23:28:33.034191+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T23:26:36Z",
+  "as_of": "2026-10-24T23:28:45Z",
   "total": 2,
   "items": [
     {
@@ -15,9 +15,9 @@
       ],
       "last_check_status": "ok",
       "last_http_status": null,
-      "last_checked_at": "2026-10-23T15:46:24.564758+00:00",
-      "next_retry_at": "2026-10-24T15:46:24.564758+00:00",
-      "queue": "ready"
+      "last_checked_at": "2026-10-24T23:28:33.034191+00:00",
+      "next_retry_at": "2026-10-25T23:28:33.034191+00:00",
+      "queue": "retry_wait"
     },
     {
       "url": "https://livepocket.jp/e/i5bkt",
