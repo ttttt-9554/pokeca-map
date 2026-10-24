@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T10:35:56.068906+00:00",
-  "unique_livepocket_urls": 540,
+  "collected_at": "2026-10-24T11:05:54.508492+00:00",
+  "unique_livepocket_urls": 541,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -7791,7 +7791,27 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T10:35:58.228616+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/h9fk-",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-24T11:00:02.767000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "再入荷分 ポケモンカードゲーム MEGA 拡張パック『メガブレイブ』『メガシンフォニア』 再入荷分 抽選販売受付",
+      "review_category": "pokemon",
+      "pokemon_map_match": "メガシンフォニア",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再入荷分 ポケモンカードゲーム MEGA 拡張パック『メガブレイブ』『メガシンフォニア』 再入荷分 抽選販売受付",
+      "first_detected_at": "2026-10-24T11:05:55.789401+00:00"
     }
   ],
-  "updated_at": "2026-10-24T10:55:59.099779+00:00"
+  "updated_at": "2026-10-24T11:06:16.092130+00:00"
 }
