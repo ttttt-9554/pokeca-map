@@ -540,7 +540,7 @@
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
-    if (tab === 'dev' && isDeveloper()) { loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); }
+    if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); }
     render();
   }
 
@@ -5676,7 +5676,7 @@
   const LP_DEV_REVIEW_URL='./livepocket_unresolved_review.json';
   const LP_DEV_MISSING_LABELS={title:'イベント名',store:'店舗名',deadline:'応募締切'};
   let lpDevReviewRows=[],lpDevReviewLoaded=false,lpDevReviewLoading=false;
-  let lpDevReviewSaving=false,lpCardReviewUrl='';
+  let lpDevReviewSaving=false,lpCardReviewUrl='',lpDevReviewOpening=false;
   const LP_DEV_RESULTS_URL = './livepocket_check_summary.json';
   let lpDevReportLoading = false;
   // A tap made while an automatic poll is active is queued, never discarded.
@@ -5811,21 +5811,46 @@
     }
   }
 
-  function lpDevReviewOpen(url){
-    if(!isDeveloper()||!lpDevReviewLoaded||!lpDevReviewRows.some(x=>x.url===url))return;
-    lpCardOpen(url);
-    if(!$('lpCardDialog').open){
-      $('lpDevReviewStatus').textContent='⚠ 抽選データを読み込めません。抽選一覧の更新をお試しください。';
-      return;
+  // Review queue entries are loaded independently of the lottery tab.
+  // Ensure the source list and card overrides exist before opening the editor.
+  // Previously the click silently did nothing because lpCardOpen returned
+  // when lotteryBaseItems was empty (typical when opening Developer first).
+  async function lpDevReviewOpen(url){
+    if(!isDeveloper()||!lpDevReviewLoaded||
+       !lpDevReviewRows.some(x=>x.url===url)||lpDevReviewOpening)return;
+    lpDevReviewOpening=true;
+    const status=$('lpDevReviewStatus');
+    const buttons=[...$('lpDevReviewList').querySelectorAll('button[data-lp-dev-review-open]')];
+    buttons.forEach(button=>button.disabled=true);
+    try {
+      if(!lotteryBaseItems.some(x=>x.url===url)){
+        status.textContent='🔄 編集に必要な抽選データを読み込んでいます…';
+        await loadLotteryEvents(true);
+      } else if(lotteryLoading){
+        await lotteryLoading;
+      }
+      if(!lotteryBaseItems.some(x=>x.url===url))
+        throw Error('対象の抽選が公開一覧にありません。抽選タブで「更新」を押し、一覧の同期を確認してください。');
+      if(!lpCardReady && !await lpCardRefresh(true))
+        throw Error('カード修正データを取得できません：'+lpCardError);
+      lpCardOpen(url);
+      if(!$('lpCardDialog')?.open)
+        throw Error('編集画面を開けませんでした。Discordログインとカードデータの読み込みを確認してください。');
+      lpCardReviewUrl=url;
+      const row=lpDevReviewRows.find(x=>x.url===url);
+      const missing=(row.missing||[]).map(k=>LP_DEV_MISSING_LABELS[k]).filter(Boolean);
+      $('lpCardReviewMissing').textContent='今回確認が必要：'+missing.join('・')+
+        '。修正内容と確認方法を入力し、「変更を保存」を押すと完了に移ります。';
+      $('lpCardReviewConfirm').hidden=false;
+      if(row.missing.includes('store'))$('lpCardStoresFold').open=true;
+      $('lpCardReset').hidden=true;
+      status.textContent='✏️ 編集画面を開きました。公式情報を確認して保存してください。';
+    }catch(error){
+      status.textContent='⚠ '+String(error?.message||error);
+    }finally{
+      lpDevReviewOpening=false;
+      buttons.forEach(button=>button.disabled=false);
     }
-    lpCardReviewUrl=url;
-    const row=lpDevReviewRows.find(x=>x.url===url);
-    const missing=(row.missing||[]).map(k=>LP_DEV_MISSING_LABELS[k]).filter(Boolean);
-    $('lpCardReviewMissing').textContent='今回確認が必要：'+missing.join('・')+
-      '。修正内容と確認方法を入力し、「変更を保存」を押すと完了に移ります。';
-    $('lpCardReviewConfirm').hidden=false;
-    if(row.missing.includes('store'))$('lpCardStoresFold').open=true;
-    $('lpCardReset').hidden=true;
   }
 
   function renderLpDevReviewProgress(progress){
