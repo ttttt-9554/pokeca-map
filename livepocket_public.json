@@ -7097,12 +7097,12 @@
     },
     {
       "url": "https://livepocket.jp/e/xdeb1",
-      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
-      "event_title": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
-      "application_end_at": "2026-10-26T22:00:00+09:00",
-      "application_start_at": "2026-10-24T09:30:00+09:00",
-      "review_category": "pokemon",
       "store_name": "古本市場豊浜店",
+      "event_title": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_start_at": "2026-10-24T09:30:00+09:00",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場豊浜店",
@@ -7112,8 +7112,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7142,26 +7140,24 @@
     },
     {
       "url": "https://livepocket.jp/e/wlon0",
-      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "event_title": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-24T09:50:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
       "url": "https://livepocket.jp/e/x3hs7",
-      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
-      "event_title": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-23T18:00:00+09:00",
-      "review_category": "pokemon",
       "store_name": "古本市場高島店",
+      "event_title": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
+      "application_start_at": "2026-10-23T18:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "古本市場高島店",
@@ -7171,8 +7167,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7487,5 +7481,5 @@
       "first_detected_at": "2026-10-24T09:35:56.228412+00:00"
     }
   ],
-  "updated_at": "2026-10-24T09:46:23.650214+00:00"
+  "updated_at": "2026-10-24T09:46:51.122716+00:00"
 }

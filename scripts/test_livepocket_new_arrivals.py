@@ -90,7 +90,7 @@ class PlaceholderTests(unittest.TestCase):
         raw, public = fixture()
         raw['items'][0].update(event_title='【古本市場 東住吉店】ポケモンカード抽選',
             store_name='店舗名不明', prefecture='宮城県',
-            field_sources={'event_title':'v14_livepocket_rendered_public_page',
+            field_sources={'event_title':'v21_9_official_exact_url_title',
                            'prefecture':'v9_exact_store_cross_reference'})
         public['items'] = copy.deepcopy(raw['items'])
         v19.apply_stores(raw, public)

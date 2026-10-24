@@ -306,7 +306,7 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
         before = r.get('stores') or []
         legacy = r.get('store_name') or p.get('store_name') or ''
         origin = str((r.get('field_sources') or {}).get('event_title') or '')
-        if not safe_name(legacy) and origin.startswith(('v14_livepocket_', 'v21_official_')):
+        if not safe_name(legacy) and origin.startswith(('v14_livepocket_', 'v21_official_', 'v21_9_official_exact_url_title')):
             heading = re.match(r'^【\s*([^【】]{2,90}?店)\s*】', str(r.get('event_title') or ''))
             observed_shop = safe_name(heading.group(1), strict_retail=True) if heading else None
             if observed_shop:
