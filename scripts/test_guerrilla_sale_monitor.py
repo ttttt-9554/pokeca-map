@@ -77,6 +77,17 @@ class MonitorTests(unittest.TestCase):
         self.assertIn('pagination_not_advancing',state['errors'])
         self.assertEqual(state['next_page'],2)
         self.assertNotIn('completed_cycles',state)
+    def test_waiting_room_redirect_and_503_are_fail_closed(self):
+        waiting='https://wr.pokemoncenter-online.com/?c=pol&t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fsearch%2F'
+        self.assertEqual(m.redirect_reason(waiting,'pokemon'),'waiting')
+        self.assertEqual(m.redirect_reason('https://example.com/login','pokemon'),'redirect_blocked')
+        client=m.StoreClient()
+        client.robots['amenity']=(type('Robots',(),{'can_fetch':lambda *a:True})(),'User-agent: *\\nAllow: /')
+        with patch.object(client,'raw',side_effect=m.CheckError('http_503')):
+            with self.assertRaisesRegex(m.CheckError,'http_503'):
+                client.get(m.catalog_url('amenity'),'amenity')
+        self.assertEqual(client.halted.get('amenity'),'http_503')
+
     def test_atomic_rpc_has_canonical_id_and_both_scopes(self):
         with patch.object(m,'db') as database:
             row={'url':AM,'product':'test','status':'available'}
