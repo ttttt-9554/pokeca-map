@@ -7050,8 +7050,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場京都太秦店】ポケカ抽選販売（30th CELEBRATION BOX）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7250,8 +7248,6 @@
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7475,6 +7471,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックス高田西店】ポケモンカード抽選販売（30thデッキ9種セット）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7494,6 +7492,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場 東住吉店】 ポケカ抽選販売（拡張パック ストームエメラルダ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7658,6 +7658,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場三田店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7747,8 +7749,6 @@
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売（メガシンフォニア）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7895,5 +7895,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T16:51:20.543704+00:00"
+  "updated_at": "2026-10-24T17:01:18.216809+00:00"
 }
