@@ -672,25 +672,7 @@ nav[aria-label="メインメニュー"] {
     <!-- LivePocket抽選：発見マップと統合（地図ピンは追加しない） -->
     <section id="lotteryView" class="view" aria-labelledby="lpHeading">
 
-      <!-- Sale status is kept collapsible so the lottery screen stays compact. -->
-      <details id="guerrillaSalePanel" class="guerrilla-sale-panel">
-        <summary>⚡ ゲリラ販売速報 <span id="guerrillaSaleBadge" class="guerrilla-sale-badge" hidden></span></summary>
-        <div class="guerrilla-sale-body">
-          <p class="hint">登録された公式販売ページを定期確認します。通知は管理者が設定したDiscordチャンネルに送信します。</p>
-          <p id="guerrillaSaleStatus" class="hint" role="status" aria-live="polite">情報を読み込み中…</p>
-          <div class="guerrilla-sale-toolbar">
-            <strong id="guerrillaSaleCount">確認中…</strong>
-            <button id="guerrillaSaleRefresh" type="button">↻ 更新</button>
-          </div>
-          <label class="guerrilla-sale-label" for="guerrillaSaleShop">店舗で絞り込み</label>
-          <select id="guerrillaSaleShop"><option value="all">全店舗</option></select>
-          <h3>販売開始の速報</h3>
-          <div id="guerrillaSaleEvents"></div>
-          <h3>監視対象の状態</h3>
-          <div id="guerrillaSaleCurrent"></div>
-          <p class="hint">※ページ上の表示を検知します。ログイン必須・待合室・JavaScriptで更新するページは判定できない場合があります。</p>
-        </div>
-      </details>
+
 
       <div class="lp-heading">
         <div>
@@ -1123,6 +1105,25 @@ nav[aria-label="メインメニュー"] {
          ====================================== -->
 
     <section id="devView" class="view" hidden>
+      <!-- Sale status is kept collapsible so the lottery screen stays compact. -->
+      <details id="guerrillaSalePanel" class="guerrilla-sale-panel">
+        <summary>⚡ ゲリラ販売速報 <span id="guerrillaSaleBadge" class="guerrilla-sale-badge" hidden></span></summary>
+        <div class="guerrilla-sale-body">
+          <p class="hint">開発者専用の試験機能です。一般ユーザーには表示されません。</p>
+          <p id="guerrillaSaleStatus" class="hint" role="status" aria-live="polite">情報を読み込み中…</p>
+          <div class="guerrilla-sale-toolbar">
+            <strong id="guerrillaSaleCount">確認中…</strong>
+            <button id="guerrillaSaleRefresh" type="button">↻ 更新</button>
+          </div>
+          <label class="guerrilla-sale-label" for="guerrillaSaleShop">店舗で絞り込み</label>
+          <select id="guerrillaSaleShop"><option value="all">全店舗</option></select>
+          <h3>販売開始の速報</h3>
+          <div id="guerrillaSaleEvents"></div>
+          <h3>監視対象の状態</h3>
+          <div id="guerrillaSaleCurrent"></div>
+          <p class="hint">※ページ上の表示を検知します。ログイン必須・待合室・JavaScriptで更新するページは判定できない場合があります。</p>
+        </div>
+      </details>
 
       <h2>
         開発・データ管理
@@ -1562,7 +1563,7 @@ nav[aria-label="メインメニュー"] {
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
   <script src="app.js?v=20261024-toreca-radar"></script>
-  <script src="guerrilla_sale.js?v=20261024-first"></script>
+  
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
