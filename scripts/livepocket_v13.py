@@ -52,7 +52,7 @@ def extract_deadline(text: str):
     for i, match in enumerate(labels):
         # A second label starts an independent deadline statement. Never let
         # its end date become the first statement's apparent deadline.
-        stop = min(match.start() + 260, labels[i + 1].start() if i + 1 < len(labels) else len(flat))
+        stop = min(match.start() + 420, labels[i + 1].start() if i + 1 < len(labels) else len(flat))
         snippet = flat[match.start():stop]
         parsed = v12.parse_signup_text(snippet)
         if parsed is not None:
