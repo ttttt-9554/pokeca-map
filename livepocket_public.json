@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T11:05:54.508492+00:00",
-  "unique_livepocket_urls": 541,
+  "collected_at": "2026-10-24T11:35:55.604838+00:00",
+  "unique_livepocket_urls": 542,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -7809,7 +7809,26 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T11:05:55.789401+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/v_zwv",
+      "store_name": "文教堂あきる野店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-24T11:30:02.666000+00:00",
+      "stores": [
+        {
+          "name": "文教堂あきる野店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
+      "application_end_at": "2026-10-26T20:30:00+09:00",
+      "application_start_at": "2026-10-22T15:20:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
+      "first_detected_at": "2026-10-24T11:35:57.103447+00:00"
     }
   ],
-  "updated_at": "2026-10-24T11:25:59.396898+00:00"
+  "updated_at": "2026-10-24T11:36:22.306673+00:00"
 }

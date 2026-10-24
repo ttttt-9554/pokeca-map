@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T11:05:54.508492+00:00",
+  "collected_at": "2026-10-24T11:35:55.604838+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 541,
+  "unique_livepocket_urls": 542,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14450,34 +14450,64 @@
         "event_title": "v14_livepocket_page_title"
       },
       "event_title": "再入荷分 ポケモンカードゲーム MEGA 拡張パック『メガブレイブ』『メガシンフォニア』 再入荷分 抽選販売受付"
+    },
+    {
+      "url": "https://livepocket.jp/e/v_zwv",
+      "discord_message_id": "1563514907566149653",
+      "discord_posted_at": "2026-10-24T11:30:02.666000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂あきる野店\n受付終了: 10/26 20:30（残り1日23時間）\nhttps://livepocket.jp/e/v_zwv",
+      "store_name": "文教堂あきる野店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂あきる野店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
+      "application_end_at": "2026-10-26T20:30:00+09:00",
+      "application_start_at": "2026-10-22T15:20:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 384,
+    "parsed": 385,
     "no_structured_details": 157
   },
   "field_counts": {
-    "store_name": 363,
-    "prefecture": 298,
-    "event_title": 228,
+    "store_name": 364,
+    "prefecture": 299,
+    "event_title": 229,
     "event_date": 1,
     "product_name": 78,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 507,
-    "application_start_at": 507,
-    "stores_events": 373
+    "application_end_at": 508,
+    "application_start_at": 508,
+    "stores_events": 374
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563507358242705461"
+      "1551580466266644552": "1563514907566149653"
     },
     "last_run": {
-      "checked_at": "2026-10-24T11:05:54.508492+00:00",
+      "checked_at": "2026-10-24T11:35:55.604838+00:00",
       "new_urls": 1,
-      "original_urls": 540,
+      "original_urls": 541,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -14618,7 +14648,8 @@
         "1563484714919002254": "2026-10-24T09:35:55.579527+00:00",
         "1563499811078930472": "2026-10-24T10:35:57.061210+00:00",
         "1563499103386730516": "2026-10-24T10:35:57.061210+00:00",
-        "1563507358242705461": "2026-10-24T11:05:55.171069+00:00"
+        "1563507358242705461": "2026-10-24T11:05:55.171069+00:00",
+        "1563514907566149653": "2026-10-24T11:35:56.235076+00:00"
       },
       "checked_search_urls": {}
     },
@@ -16832,6 +16863,11 @@
           "checked_at": "2026-10-24T11:06:16.092130+00:00",
           "status": "checked_title",
           "http_status": null
+        },
+        "https://livepocket.jp/e/v_zwv": {
+          "checked_at": "2026-10-24T11:36:22.306673+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -17899,6 +17935,12 @@
           "detected_at": "2026-10-24T11:05:55.789401+00:00",
           "status": "checked_title",
           "checked_at": "2026-10-24T11:06:16.092130+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/v_zwv": {
+          "detected_at": "2026-10-24T11:35:57.103447+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T11:36:22.306673+00:00",
           "http_status": null
         }
       },
@@ -22909,6 +22951,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/v_zwv": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T11:36:22.306673+00:00",
+          "title_observed": "ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -26162,6 +26215,19 @@
         },
         "https://livepocket.jp/e/h9fk-": {
           "checked_at": "2026-10-24T11:06:16.092130+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/v_zwv": {
+          "checked_at": "2026-10-24T11:36:22.306673+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
