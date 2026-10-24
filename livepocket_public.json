@@ -6910,8 +6910,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場上尾店】ポケカ抽選販売（30th CEREBRATION）",
       "first_detected_at": "2026-10-24T05:35:57.334167+00:00"
     },
     {
@@ -6932,8 +6930,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場上尾店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-24T05:35:57.334167+00:00"
     },
     {
@@ -7832,5 +7828,5 @@
       "first_detected_at": "2026-10-24T11:35:57.103447+00:00"
     }
   ],
-  "updated_at": "2026-10-24T11:46:25.364581+00:00"
+  "updated_at": "2026-10-24T11:55:58.936942+00:00"
 }
