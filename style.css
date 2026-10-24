@@ -1730,3 +1730,43 @@ html[data-theme="dark"] #lpResultsSearchClear{
   background:#25354b!important;color:#edf4ff!important;
   border-color:#667d9b!important;
 }
+
+
+/* v21.89: private quantity editor and ticket-count summaries. */
+#lpTrackerForm .lp-track-quantities{
+ min-width:0;box-sizing:border-box;border:1px solid var(--app-border,#cbd5e1);
+ border-radius:11px;padding:10px 12px 6px;margin:0;
+ background:var(--app-surface2,#f8fafc);
+}
+#lpTrackerForm .lp-track-quantities legend{
+ font-weight:800;font-size:13px;padding:0 5px;color:var(--app-text,#172033);
+}
+#lpTrackerForm .lp-track-quantity-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;
+}
+#lpTrackerForm .lp-track-quantity-grid label{min-width:0;font-size:12px;line-height:1.4}
+#lpTrackerForm .lp-track-quantity-grid input[type=number]{
+ width:100%;min-width:0;box-sizing:border-box;margin-top:4px;
+ border-radius:8px;min-height:44px;padding:8px;font-size:16px;
+ border:1px solid var(--app-border,#cbd5e1);
+ color:var(--app-text,#172033);background:var(--app-surface,#fff);
+}
+#lpTrackerForm #lpTrackQuantityInfo{margin:9px 0 4px;font-size:12px}
+.lp-track-quantity-summary{font-size:12px;line-height:1.5;
+ padding:5px 8px;margin:8px 0;overflow-wrap:anywhere;
+ border-radius:7px;background:var(--app-surface2,#f8fafc);
+ border:1px solid var(--app-border,#cbd5e1)}
+#lotteryResultsView .lp-results-people-caption{
+ font-size:12px;margin:3px 0 9px;color:var(--app-muted,#64748b);
+}
+html[data-theme=dark] #lpTrackerForm .lp-track-quantities{
+ background:#203149!important;border-color:#59718d!important;color:#edf4ff!important;
+}
+html[data-theme=dark] #lpTrackerForm .lp-track-quantity-grid input[type=number]{
+ background:#25354b!important;color:#edf4ff!important;border-color:#667d9b!important;
+ -webkit-text-fill-color:#edf4ff!important;
+}
+html[data-theme=dark] .lp-track-quantity-summary{
+ background:#203149!important;border-color:#59718d!important;color:#edf4ff!important;
+}
+html[data-theme=dark] #lpTrackerForm .lp-track-quantities legend{color:#edf4ff!important}

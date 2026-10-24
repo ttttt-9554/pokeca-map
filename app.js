@@ -4216,7 +4216,7 @@
 
   // v21.84: Anonymous counts are available from the first recorded applicant.
   // Per-user identities, metadata and private notes are never sent to clients.
-  const LP_RESULTS_COUNT_RPC='lottery_result_counts_v21_83';
+  const LP_RESULTS_COUNT_RPC='lottery_result_counts_v21_89';
   const LP_RESULTS_PUBLIC_MIN=1;
   let lpResultsCounts=new Map(),lpResultsReady=false,lpResultsError='';
   let lpResultsUserId='',lpResultsFetchSeq=0,lpResultsLastFetch=0,lpResultsLoading=null;
@@ -4346,12 +4346,14 @@
       const storeHtml=lpResultsStoreHtml(item);
       // Accurate group counts are provided by the authenticated-only RPC.
       // Never infer participant details from an aggregate row.
-      const header='👥 応募記録 '+Number(record.total_count)+'人';
+      const header='👥 応募者 '+Number(record.total_count)+'人';
       const statusHtml='<div class="lp-results-card-summary">'+
-        '<span>✉️ 応募済み '+lpResultsCountDisplay(record.applied_count)+'</span>'+
-        '<span>🎉 当選 '+lpResultsCountDisplay(record.won_count)+'</span>'+
-        '<span>📪 落選 '+lpResultsCountDisplay(record.lost_count)+'</span>'+
-        '</div>';
+        '<span>🎟️ 応募 '+Number(record.application_entries)+'口</span>'+
+        '<span>🎉 当選 '+Number(record.won_entries)+'口</span>'+
+        '<span>📪 落選 '+Number(record.lost_entries)+'口</span>'+
+        '<span>⏳ 結果待ち '+Number(record.pending_entries)+'口</span>'+
+        '</div><p class="lp-results-people-caption">当選者 '+lpResultsCountDisplay(record.won_count)+
+        '／落選者 '+lpResultsCountDisplay(record.lost_count)+'（匿名）</p>';
       return '<article class="lp-results-card">'+
         '<h3>'+escape(title)+'</h3>'+
         storeHtml+
@@ -4392,7 +4394,11 @@
           won_count:row.won_count==null?null:Number(row.won_count),
           lost_count:row.lost_count==null?null:Number(row.lost_count),
           received_count:row.received_count==null?null:Number(row.received_count),
-          total_count:Number(row.total_count)
+          total_count:Number(row.total_count),
+          application_entries:Number(row.application_entries||0),
+          won_entries:Number(row.won_entries||0),
+          lost_entries:Number(row.lost_entries||0),
+          pending_entries:Number(row.pending_entries||0)
         }]));
         lpResultsError='';lpResultsReady=true;lpResultsLastFetch=Date.now();
         lpResultsRender();return true;
@@ -4789,9 +4795,18 @@
 
   function lotteryTrackClean(row) {
     if (!row || !safeLotteryUrl(row.event_url)) return null;
+    const status=LP_TRACK_STATUSES.includes(row.status)?row.status:'not_applied';
+    const n=Number(row.application_count||0),w=Number(row.won_count||0),l=Number(row.lost_count||0);
+    // Gracefully read a status-only row from a previous app version.
+    const applications=Math.max(Number.isInteger(n)?n:0,status==='not_applied'?0:1);
+    const won=Math.max(Number.isInteger(w)?w:0,
+      (status==='won'||status==='received')&&w===0&&l===0?1:0);
+    const lost=Math.max(Number.isInteger(l)?l:0,status==='lost'&&l===0&&w===0?1:0);
     return {
       event_url:row.event_url,
-      status:LP_TRACK_STATUSES.includes(row.status) ? row.status : 'not_applied',
+      status,
+      application_count:applications,won_count:Math.min(won,applications),
+      lost_count:Math.min(lost,applications-Math.min(won,applications)),
       onsite_required:row.onsite_required === true,
       onsite_done:row.onsite_done === true,
       pickup_start:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_start||'')?row.pickup_start:'',
@@ -4825,7 +4840,7 @@
       try {
         const fetched=await Promise.all([LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
           supabaseClient.from(table)
-            .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
+            .select('event_url,status,application_count,won_count,lost_count,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
             .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)));
         for(const response of fetched)if(response.error)throw response.error;
         if (seq !== lotteryTrackSequence || authUser?.id !== user) return;
@@ -5021,6 +5036,7 @@
         return `<div class="lp-track-row"><div>
           <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
           ${onsite}
+          <p class="lp-track-quantity-summary">🎟️ 応募 ${x.application_count}口 ／ 🎉 当選 ${x.won_count}口 ／ 📪 落選 ${x.lost_count}口</p>
           ${x.status==='won'?lotteryPickupDetailsHtml(x):''}
           ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
           ${lpAppEventId(x.event_url) ? (lotteryItems.find(y=>y.url===x.event_url)?.app_lottery_source_url?'<a href="'+escape(lotteryItems.find(y=>y.url===x.event_url).app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">アプリ公式案内 ↗</a>':'<p>📱 アプリ内で確認</p>') : '<a href="'+escape(x.event_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>'}
@@ -5070,13 +5086,15 @@
       if(old?.status && old.status!=='not_applied'){
         lotteryTrackerOpenEditor(url);return;
       }
-      lotteryTrackerSave(url,{...lotteryTrackerDefaults(url),status:'applied'});
+      lotteryTrackerSave(url,{...lotteryTrackerDefaults(url),status:'applied',
+        application_count:1,won_count:0,lost_count:0});
     }else if(button.dataset.lpTrack==='edit') lotteryTrackerOpenEditor(url);
   }
 
   function lotteryTrackerDefaults(url) {
     return lotteryTrackRecord(url) || {
       event_url:url,status:'not_applied',onsite_required:false,onsite_done:false,
+      application_count:0,won_count:0,lost_count:0,
       pickup_start:'',pickup_end:'',note:'',updated_at:''
     };
   }
@@ -5104,6 +5122,14 @@
       <label>応募・当選状況
         <select name="status">${LP_TRACK_STATUSES.map(k=>`<option value="${k}" ${data.status===k?'selected':''}>${escape(LP_TRACK_LABELS[k])}</option>`).join('')}</select>
       </label>
+      <fieldset class="lp-track-quantities"><legend>🎟️ 抽選の口数</legend>
+        <div class="lp-track-quantity-grid">
+          <label>応募口数<input name="application_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.application_count}"></label>
+          <label>当選数<input name="won_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.won_count}"></label>
+          <label>落選数<input name="lost_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.lost_count}"></label>
+        </div>
+        <p class="lp-tracker-intro" id="lpTrackQuantityInfo" role="status" aria-live="polite"></p>
+      </fieldset>
       <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
       <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
       <label>受け取り開始日（わかる場合）<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
@@ -5114,6 +5140,36 @@
       ${lotteryTrackRecord(url)?'<button type="button" id="lpTrackEditorDelete">記録を削除</button>':''}</div>
       <p id="lpTrackEditorMessage" role="status" aria-live="polite"></p>
       </form>`;
+    const form=$('lpTrackerForm');
+    const updateQuantityHint=()=>{
+      const applications=Number(form.elements.application_count.value);
+      const won=Number(form.elements.won_count.value);
+      const lost=Number(form.elements.lost_count.value);
+      const remaining=applications-won-lost;
+      $('lpTrackQuantityInfo').textContent=Number.isInteger(remaining)&&remaining>=0
+        ?'結果待ち：'+remaining+'口（当選数＋落選数は応募口数以下）'
+        :'⚠ 当選数と落選数の合計が応募口数を超えています。';
+    };
+    for(const name of ['application_count','won_count','lost_count'])
+      form.elements[name].addEventListener('input',updateQuantityHint);
+    form.elements.status.addEventListener('change',()=>{
+      const status=form.elements.status.value;
+      let applications=Number(form.elements.application_count.value)||0;
+      let won=Number(form.elements.won_count.value)||0;
+      let lost=Number(form.elements.lost_count.value)||0;
+      if(status==='not_applied'){applications=0;won=0;lost=0;}
+      else{
+        applications=Math.max(1,applications);
+        if((status==='won'||status==='received')&&won===0)won=1;
+        if(status==='lost'&&lost===0)lost=1;
+        applications=Math.max(applications,won+lost);
+      }
+      form.elements.application_count.value=String(Math.min(applications,9999));
+      form.elements.won_count.value=String(Math.min(won,9999));
+      form.elements.lost_count.value=String(Math.min(lost,9999));
+      updateQuantityHint();
+    });
+    updateQuantityHint();
     $('lpTrackEditorClose').addEventListener('click',()=>dlg.close());
     $('lpTrackEditorDelete')?.addEventListener('click',async()=>{
       if(!confirm('この抽選の個人管理記録を削除しますか？'))return;
@@ -5124,7 +5180,18 @@
       const form=e.currentTarget,fd=new FormData(form);
       const status=String(fd.get('status')||'not_applied');
       const completed=fd.get('onsite_done')==='on';
-      const data={status,onsite_required:completed,onsite_done:completed,
+      const counts=['application_count','won_count','lost_count']
+        .map(name=>Number(String(fd.get(name)||'')));
+      const [applications,won,lost]=counts;
+      if(counts.some(n=>!Number.isInteger(n)||n<0||n>9999)||won+lost>applications){
+        $('lpTrackEditorMessage').textContent='口数は0〜9999の整数で、当選数＋落選数は応募口数以下にしてください。';
+        return;
+      }
+      const normalizedStatus=applications===0?'not_applied':
+        status==='received'&&won>0?'received':
+        won>0?'won':lost===applications?'lost':'applied';
+      const data={status:normalizedStatus,onsite_required:completed,onsite_done:completed,
+        application_count:applications,won_count:won,lost_count:lost,
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
       if(data.pickup_start&&data.pickup_end&&data.pickup_start>data.pickup_end){
@@ -5144,9 +5211,21 @@
     const status=String(values.status||'not_applied');
     if(!LP_TRACK_STATUSES.includes(status))return;
     const completed=values.onsite_done===true;
+    const applications=Number(values.application_count??(status==='not_applied'?0:1));
+    const won=Number(values.won_count??(status==='won'||status==='received'?1:0));
+    const lost=Number(values.lost_count??(status==='lost'?1:0));
+    if(![applications,won,lost].every(n=>Number.isInteger(n)&&n>=0&&n<=9999)||won+lost>applications){
+      const message='応募口数と当選数・落選数を確認してください。';
+      if($('lpTrackEditorMessage'))$('lpTrackEditorMessage').textContent=message;
+      else alert(message);
+      return;
+    }
+    const canonicalStatus=applications===0?'not_applied':
+      status==='received'&&won>0?'received':
+      won>0?'won':lost===applications?'lost':'applied';
     // Legacy private column exists only for the v21.27 SQL compatibility constraint.
-    const payload={user_id:uid,event_url:url,status,onsite_required:completed,
-      onsite_done:completed,
+    const payload={user_id:uid,event_url:url,status:canonicalStatus,onsite_required:completed,
+      onsite_done:completed,application_count:applications,won_count:won,lost_count:lost,
       pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
       note:String(values.note||'').slice(0,500)};
     if(payload.pickup_start&&payload.pickup_end&&payload.pickup_start>payload.pickup_end)return;
@@ -5155,7 +5234,7 @@
     if(message)message.textContent='保存中…';
     try{
       const {data,error}=await supabaseClient.from(lotteryTrackTableFor(url)).upsert(payload,{onConflict:'user_id,event_url'})
-        .select('event_url,status,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
+        .select('event_url,status,application_count,won_count,lost_count,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
       const parsed=lotteryTrackClean(data);

@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_88-result-search-clear">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_89-ticket-counts">
 
   <style>
     [hidden] { display: none !important; }
@@ -759,7 +759,7 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite" aria-atomic="true">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
-      <p class="hint">応募記録のある抽選だけを表示します。当選人数には受取済みを含みます。複数店舗の抽選は対象店舗一覧を表示しますが、応募者ごとの店舗は判別できません。名前・ユーザーID・個人メモは公開しません。少人数では結果から個人を推測できる場合があります。</p>
+      <p class="hint">応募記録のある抽選だけを表示します。応募人数に加えて、応募・当選・落選の口数を匿名集計します（受取済みも当選に含む）。複数店舗の抽選は対象店舗一覧を表示しますが、応募者ごとの店舗は判別できません。名前・ユーザーID・個人メモは公開しません。少人数では結果から個人を推測できる場合があります。</p>
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
 
@@ -1559,7 +1559,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_88-result-search-clear"></script>
+  <script src="app.js?v=20261024-v21_89-ticket-counts"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>
