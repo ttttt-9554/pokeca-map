@@ -3651,6 +3651,8 @@
       const hours = Math.floor((minutes % 1440) / 60);
       countdown = days ? ` ／ 残り${days}日${hours}時間` : ` ／ 残り${hours}時間${minutes % 60}分`;
     }
+    const deadlineMs = lotteryDate(item.application_end_at) - Date.now();
+    const urgent = state === 'open' && Number.isFinite(deadlineMs) && deadlineMs > 0 && deadlineMs <= 24 * 60 * 60 * 1000;
     const placeText = places.length ? places.join('・') : '都道府県未確認';
     const genre = lotteryGenre(item);
     const list = stores.length ? `
@@ -3658,7 +3660,7 @@
         <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
         <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small></li>`).join('')}</ul>
       </details>` : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
-    return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}">
+    return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}${urgent ? ' lp-urgent-card' : ''}">`
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
         ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
@@ -3673,7 +3675,8 @@
       ${state === 'unavailable' ? '<p class="lp-missing-notice">'+(item.app_lottery_hidden?'📁 このアプリ抽選は一覧から非表示です。過去の応募履歴は保持しています。':'⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。')+'</p>' : ''}
       ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${item.pokemon_map_match ? `<p class="lp-match">発見マップ商品マスタ一致：${escape(item.pokemon_map_match)}</p>` : ''}
-      <p class="lp-deadline">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
+      ${urgent ? '<div class="lp-urgent-alert" role="status">⚠️ 応募締切まで24時間以内！</div>' : ''}
+      <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
       ${lotteryOnsiteSharedHtml(item.url)}
       ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">アプリ公式案内を確認 ↗</a>':'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>') : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
@@ -3682,6 +3685,16 @@
       ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
   }
+
+  // Highlight lottery deadlines within 24 hours; readable in light/dark themes.
+  const lpUrgentStyle = document.createElement('style');
+  lpUrgentStyle.textContent = `
+    .lp-card.lp-urgent-card{border:2px solid #e65b25!important;box-shadow:inset 4px 0 0 #e65b25}
+    .lp-urgent-alert{display:inline-block;margin:8px 0 6px;padding:7px 12px;border-radius:8px;background:#9a3412;color:#fff;font-size:13px;font-weight:800}
+    .lp-card .lp-urgent-deadline{color:#ffb17d!important;font-weight:800}
+    @media(prefers-color-scheme:light){.lp-card .lp-urgent-deadline{color:#9a3412!important}}
+  `;
+  document.head.appendChild(lpUrgentStyle);
 
   // v21.54: Newest means the first URL registration time (not a repost).
   // Historical URLs without first_detected_at fall back to Discord post time.
