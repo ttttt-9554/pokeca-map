@@ -169,14 +169,37 @@ def post_discord(target):
         return False
 
 
+
+def supabase_request(path, method="GET", data=None):
+    base = os.environ.get("SUPABASE_URL", "").rstrip("/")
+    secret = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
+    if not base.startswith("https://") or not secret:
+        raise RuntimeError("Supabase credentials are not set in GitHub Actions secrets")
+    headers = {
+        "apikey": secret,
+        "Authorization": "Bearer " + secret,
+        "Content-Type": "application/json",
+        "Prefer": "resolution=merge-duplicates,return=representation",
+    }
+    req = Request(base + "/rest/v1/" + path,
+                  data=json.dumps(data, ensure_ascii=False).encode("utf-8") if data is not None else None,
+                  headers=headers, method=method)
+    with urlopen(req, timeout=15) as response:
+        raw = response.read(MAX_BYTES + 1)
+        if len(raw) > MAX_BYTES:
+            raise ValueError("Supabase response too large")
+        return json.loads(raw.decode("utf-8")) if raw else []
+
+
 def main():
     now = datetime.now(timezone.utc)
     now_iso = now.isoformat(timespec="seconds").replace("+00:00", "Z")
-    config = load_json(CONFIG, {"targets": []})
+    config = {"targets": supabase_request("guerrilla_sale_monitor_targets?select=*&order=id.asc&limit=20")}
     targets = config.get("targets", [])
     if not isinstance(targets, list):
         targets = []
-    state = load_json(STATE, {"targets": {}, "events": []})
+    snapshot = supabase_request("guerrilla_sale_monitor_snapshot?select=payload&id=eq.current&limit=1")
+    state = snapshot[0].get("payload", {}) if snapshot else {"targets": {}, "events": []}
     records = state.get("targets", {})
     if not isinstance(records, dict):
         records = {}
@@ -241,13 +264,9 @@ def main():
 
     events = [e for e in events if isinstance(e, dict)][:50]
     # State is checked back into the repository to suppress duplicates across runs.
-    write_json_if_changed(STATE, {"schema_version": 1, "targets": records, "events": events})
-    write_json_if_changed(FEED, {
-        "schema_version": 1,
-        "monitored_count": len(active),
-        "items": items,
-        "events": events,
-    })
+    private_state = {"schema_version": 1, "targets": records, "events": events, "items": items}
+    supabase_request("guerrilla_sale_monitor_snapshot?on_conflict=id", "POST",
+                     [{"id": "current", "payload": private_state, "updated_at": now_iso}])
 
 
 if __name__ == "__main__":
