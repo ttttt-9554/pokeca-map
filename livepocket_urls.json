@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T04:05:55.758583+00:00",
+  "collected_at": "2026-10-24T04:35:54.903966+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 483,
+  "unique_livepocket_urls": 485,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12881,34 +12881,112 @@
       "event_title": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "application_start_at": "2026-10-24T08:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/zau0z",
+      "discord_message_id": "1563409257473515551",
+      "discord_posted_at": "2026-10-24T04:30:13.721000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nトレカパーク朝霞店\n受付終了: 10/24 22:05（残り8時間34分）\nhttps://livepocket.jp/e/zau0z\n\n📍都道府県不明\nフルコンプ\n受付終了: 10/26 23:59（残り2日10時間）\nhttps://livepocket.jp/e/up9fr",
+      "store_name": "トレカパーク朝霞店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク朝霞店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【トレカパーク朝霞店】ポケカ抽選販売（30th 拡張パック）",
+      "application_end_at": "2026-10-24T22:05:00+09:00",
+      "application_start_at": "2026-10-23T17:12:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/up9fr",
+      "discord_message_id": "1563409257473515551",
+      "discord_posted_at": "2026-10-24T04:30:13.721000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nトレカパーク朝霞店\n受付終了: 10/24 22:05（残り8時間34分）\nhttps://livepocket.jp/e/zau0z\n\n📍都道府県不明\nフルコンプ\n受付終了: 10/26 23:59（残り2日10時間）\nhttps://livepocket.jp/e/up9fr",
+      "prefecture": null,
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "event_title": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
+      "application_end_at": "2026-10-26T23:59:00+09:00",
+      "application_start_at": "2026-10-24T12:30:00+09:00",
+      "stores": [
+        {
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ大阪日本橋店",
+          "prefecture": ""
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 327,
+    "parsed": 329,
     "no_structured_details": 156
   },
   "field_counts": {
-    "store_name": 318,
-    "prefecture": 288,
-    "event_title": 170,
+    "store_name": 319,
+    "prefecture": 289,
+    "event_title": 172,
     "event_date": 1,
     "product_name": 76,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 452,
-    "application_start_at": 452,
-    "stores_events": 325
+    "application_end_at": 454,
+    "application_start_at": 454,
+    "stores_events": 327
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563401664109617184"
+      "1551580466266644552": "1563409257473515551"
     },
     "last_run": {
-      "checked_at": "2026-10-24T04:05:55.758583+00:00",
+      "checked_at": "2026-10-24T04:35:54.903966+00:00",
       "new_urls": 2,
-      "original_urls": 481,
+      "original_urls": 483,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -13039,7 +13117,8 @@
         "1563379072137170974": "2026-10-24T02:35:56.631108+00:00",
         "1563386633347272734": "2026-10-24T03:05:55.350870+00:00",
         "1563386587339956284": "2026-10-24T03:05:55.350870+00:00",
-        "1563401664109617184": "2026-10-24T04:05:56.475803+00:00"
+        "1563401664109617184": "2026-10-24T04:05:56.475803+00:00",
+        "1563409257473515551": "2026-10-24T04:35:55.568212+00:00"
       },
       "checked_search_urls": {}
     },
@@ -14983,6 +15062,14 @@
         "https://livepocket.jp/e/fmrx2": {
           "checked_at": "2026-10-24T04:06:26.559481+00:00",
           "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/zau0z": {
+          "checked_at": "2026-10-24T04:36:22.042553+00:00",
+          "status": "checked_title_deadline"
+        },
+        "https://livepocket.jp/e/up9fr": {
+          "checked_at": "2026-10-24T04:36:22.042553+00:00",
+          "status": "checked_title_deadline"
         }
       }
     },
@@ -15747,6 +15834,16 @@
           "detected_at": "2026-10-24T04:05:57.204038+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-24T04:06:26.559481+00:00"
+        },
+        "https://livepocket.jp/e/up9fr": {
+          "detected_at": "2026-10-24T04:35:56.419014+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T04:36:22.042553+00:00"
+        },
+        "https://livepocket.jp/e/zau0z": {
+          "detected_at": "2026-10-24T04:35:56.419014+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-24T04:36:22.042553+00:00"
         }
       },
       "pending_new_urls": []
@@ -20008,6 +20105,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/zau0z": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T04:36:22.042553+00:00",
+          "title_observed": "【トレカパーク朝霞店】ポケカ抽選販売（30th 拡張パック）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/up9fr": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T04:36:22.042553+00:00",
+          "title_observed": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -22507,6 +22626,32 @@
         },
         "https://livepocket.jp/e/fmrx2": {
           "checked_at": "2026-10-24T04:06:26.559481+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/zau0z": {
+          "checked_at": "2026-10-24T04:36:22.042553+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/up9fr": {
+          "checked_at": "2026-10-24T04:36:22.042553+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

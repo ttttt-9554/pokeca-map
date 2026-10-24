@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T04:05:55.758583+00:00",
-  "unique_livepocket_urls": 483,
+  "collected_at": "2026-10-24T04:35:54.903966+00:00",
+  "unique_livepocket_urls": 485,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6828,7 +6828,63 @@
         }
       ],
       "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/zau0z",
+      "store_name": "トレカパーク朝霞店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T04:30:13.721000+00:00",
+      "stores": [
+        {
+          "name": "トレカパーク朝霞店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【トレカパーク朝霞店】ポケカ抽選販売（30th 拡張パック）",
+      "application_end_at": "2026-10-24T22:05:00+09:00",
+      "application_start_at": "2026-10-23T17:12:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク朝霞店】ポケカ抽選販売（30th 拡張パック）",
+      "first_detected_at": "2026-10-24T04:35:56.419014+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/up9fr",
+      "discord_posted_at": "2026-10-24T04:30:13.721000+00:00",
+      "event_title": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
+      "application_end_at": "2026-10-26T23:59:00+09:00",
+      "application_start_at": "2026-10-24T12:30:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ大阪日本橋店",
+          "prefecture": ""
+        }
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
+      "first_detected_at": "2026-10-24T04:35:56.419014+00:00"
     }
   ],
-  "updated_at": "2026-10-24T04:25:58.556210+00:00"
+  "updated_at": "2026-10-24T04:36:22.042553+00:00"
 }
