@@ -38,5 +38,10 @@ jobs:
           GUERRILLA_DISCORD_WEBHOOK_URL: ${{ secrets.GUERRILLA_DISCORD_WEBHOOK_URL }}
           SUPABASE_URL: https://aypcmtlaaygmiexboypk.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python scripts/guerrilla_sale_monitor.py
+        run: |
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo 'Private monitor is not configured; skipping target checks.'
+            exit 0
+          fi
+          python scripts/guerrilla_sale_monitor.py
 
