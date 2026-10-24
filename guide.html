@@ -37,6 +37,7 @@ footer{font-size:12px;color:#a7bdd6;text-align:center;margin-top:28px}
 <header><span class="brand">📡 Toreca Radar</span><a class="back" href="./index.html">← アプリへ戻る</a></header>
 <main>
 <section class="intro"><div class="eyebrow">TRADING CARD / DISCOVER · ALERT · TRACK</div><h1>使い方マニュアル</h1><div class="version">v1.0.0 ｜ 2026年10月24日版</div><p>マップで探す、発見情報を登録する、抽選に応募する、当落と受取期限を管理する。主要な操作を順番に解説します。</p><p><small>※ このページはアプリ閲覧向けの操作ガイドです。元の画像入りPDFそのものではありません。</small></p></section>
+<div id="manualPdfAvailable" hidden style="margin:15px 0;padding:14px;background:#1d456e;border:1px solid #6ea5d2;border-radius:12px;"><strong>📄 実際のアプリ画面付き・PDFマニュアル</strong><p style="margin:5px 0 12px;font-size:13px">オリジナルの画像付きPDF（v1.0.0）を表示します。</p><a id="manualPdfOpen" class="open-app" href="#">PDFを開く ↗</a></div>
 <nav class="toc" aria-label="目次"><a class="pill" href="#cat-はじめに">はじめに</a>
 <a class="pill" href="#cat-マップ">マップ</a>
 <a class="pill" href="#cat-登録">登録</a>
@@ -74,4 +75,18 @@ footer{font-size:12px;color:#a7bdd6;text-align:center;margin-top:28px}
 <section class="privacy"><strong>🔒 情報の公開範囲について</strong><p>発見情報：共有チェックを付けた投稿だけ他の利用者にも表示されます。端末内の記録は自動公開されません。</p><p>アプリ抽選：登録した抽選の公開情報はみんなの抽選一覧へ表示されます。自分の応募状況・受取情報・個人メモは非公開です。ただし当落の口数は匿名集計に利用されます。</p></section>
 <div class="actions"><a class="back" href="./index.html">← アプリに戻る</a><button class="print" type="button" onclick="window.print()">印刷・PDFとして保存</button></div>
 <footer>Toreca Radar / User Guide v1.0.0 / 2026.10.24</footer>
-</main></body></html>
+</main>
+<script>
+(function(){
+  var box=document.getElementById('manualPdfAvailable');
+  var link=document.getElementById('manualPdfOpen');
+  var url='./Toreca_Radar_実画面つき使い方マニュアル_v1.0.0_日本語修正版.pdf';
+  fetch(url,{method:'HEAD',cache:'no-store'}).then(function(response){
+    if(response.ok && /pdf/i.test(response.headers.get('content-type')||'')){
+      link.href=url;
+      box.hidden=false;
+    }
+  }).catch(function(){});
+})();
+</script>
+</body></html>
