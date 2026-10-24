@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T15:05:58.125878+00:00",
+  "collected_at": "2026-10-24T16:35:58.817590+00:00",
   "unique_livepocket_urls": 545,
   "items": [
     {
@@ -7088,8 +7088,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【イオンモール福岡店】ポケモンカードMEGA拡張「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7128,6 +7126,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール木曽川店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7144,6 +7144,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7211,6 +7213,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【ブックイン金進堂原田店】ワンピースカード「Heroines Edition vol.2」予約抽選",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7390,8 +7394,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場高島店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7411,8 +7413,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場庄内店】ポケカ抽選販売（MEGA 拡張パック 30th CELEBRATION BOX）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7546,12 +7546,12 @@
     {
       "url": "https://livepocket.jp/e/om3cc",
       "store_name": "キデイランド ららぽーと富士見店",
+      "prefecture": "埼玉県",
       "product_name": "ワンピースカードゲーム",
       "event_title": "キデイランドららぽーと富士見店 ワンピースカードゲーム 拡張パック「Heroines Edition vol.2」購入券 抽選",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
-      "prefecture": "埼玉県",
       "review_category": "onepiece",
       "stores": [
         {
@@ -7895,5 +7895,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T16:26:25.371786+00:00"
+  "updated_at": "2026-10-24T16:36:42.315975+00:00"
 }
