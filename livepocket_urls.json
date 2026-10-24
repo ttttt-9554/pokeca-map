@@ -13133,7 +13133,15 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details"
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA拡張パック 「30th CELEBRATION」",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/cipe4",
@@ -13185,7 +13193,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【古本市場京都太秦店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "store_name": "古本市場京都太秦店",
+      "stores": [
+        {
+          "name": "古本市場京都太秦店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/noe8e",
@@ -13211,7 +13234,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【ふるいちイオンモール甲府昭和店】ポケカ抽選販売（拡張パック『ストームエメラルダ』『メガブレイブ』『メガシンフォニア』）",
+      "application_end_at": "2026-10-25T21:01:00+09:00",
+      "application_start_at": "2026-10-23T12:00:00+09:00",
+      "store_name": "ふるいちイオンモール甲府昭和店",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール甲府昭和店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/hkxb0",
@@ -13250,7 +13288,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION プレミアムデッキセット）",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "store_name": "ふるいちイオンモール土岐店",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール土岐店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/xm634",
@@ -13291,7 +13344,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION カードセット9種セット）",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "store_name": "ふるいちイオンモール土岐店",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール土岐店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/hm8em",
@@ -13317,7 +13385,18 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【岩国店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
+      "store_name": "岩国店",
+      "stores": [
+        {
+          "name": "岩国店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/u98h-",
@@ -13330,7 +13409,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【古本市場東大阪店】ポケカ抽選販売（カードセット9種セット）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T09:00:00+09:00",
+      "store_name": "古本市場東大阪店",
+      "stores": [
+        {
+          "name": "古本市場東大阪店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/b7svx",
@@ -13404,7 +13498,14 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "古本市場西淀川店】ポケカ抽選販売（30th CELEBRATION カードセット ）9種セット",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T15:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/zoqcs",
@@ -13437,7 +13538,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【古本市場東豊中店】ポケカ抽選販売（30th CELEBRATION BOX)",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "store_name": "古本市場東豊中店",
+      "stores": [
+        {
+          "name": "古本市場東豊中店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/v5ucz",
@@ -13450,7 +13566,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【古本市場東豊中店】ポケカ抽選販売（【9種類セット】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット)",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "store_name": "古本市場東豊中店",
+      "stores": [
+        {
+          "name": "古本市場東豊中店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/wlon0",
@@ -13524,7 +13655,22 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {}
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【古本市場庄内店】ポケカ抽選販売（MEGA 拡張パック 30th CELEBRATION BOX）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "store_name": "古本市場庄内店",
+      "stores": [
+        {
+          "name": "古本市場庄内店",
+          "prefecture": ""
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/52gka",
@@ -13563,7 +13709,15 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "parsed"
+      "extraction_status": "parsed",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
+      "application_end_at": "2026-10-26T22:00:00+09:00",
+      "application_start_at": "2026-10-24T18:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/7qcof",
@@ -14047,17 +14201,17 @@
     "no_structured_details": 156
   },
   "field_counts": {
-    "store_name": 340,
+    "store_name": 349,
     "prefecture": 296,
-    "event_title": 201,
+    "event_title": 213,
     "event_date": 1,
     "product_name": 78,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 482,
-    "application_start_at": 482,
-    "stores_events": 350
+    "application_end_at": 493,
+    "application_start_at": 493,
+    "stores_events": 359
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -16208,40 +16362,49 @@
           "http_status": null
         },
         "https://livepocket.jp/e/vd5ua": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/v5ucz": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/v29mr": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/ul3vw": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/ugnmg": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/u98h-": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/tryts": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title",
+          "http_status": null
         },
         "https://livepocket.jp/e/tj_mq": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/nyxn0": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/noe8e": {
           "checked_at": "2026-10-24T09:16:22.203744+00:00",
@@ -16288,16 +16451,19 @@
           "status": "browser_http_error"
         },
         "https://livepocket.jp/e/3adrx": {
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/1_xnn": {
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/0tw0p": {
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "status": "browser_http_error"
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         },
         "https://livepocket.jp/e/vxgpy": {
           "checked_at": "2026-10-24T09:16:22.203744+00:00",
@@ -21915,102 +22081,102 @@
           "conflict": false
         },
         "https://livepocket.jp/e/vd5ua": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【古本市場東豊中店】ポケカ抽選販売（30th CELEBRATION BOX)",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/v5ucz": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【古本市場東豊中店】ポケカ抽選販売（【9種類セット】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット)",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/v29mr": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【ふるいちイオンモール甲府昭和店】ポケカ抽選販売（拡張パック『ストームエメラルダ』『メガブレイブ』『メガシンフォニア』）",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/ul3vw": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION カードセット9種セット）",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/ugnmg": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "古本市場西淀川店】ポケカ抽選販売（30th CELEBRATION カードセット ）9種セット",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/u98h-": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【古本市場東大阪店】ポケカ抽選販売（カードセット9種セット）",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/tryts": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【岩国店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
+          "genre": "onepiece",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/tj_mq": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
+          "genre": "onepiece",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/nyxn0": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【古本市場庄内店】ポケカ抽選販売（MEGA 拡張パック 30th CELEBRATION BOX）",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/noe8e": {
@@ -22135,36 +22301,36 @@
           "conflict": false
         },
         "https://livepocket.jp/e/3adrx": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【抽選販売】ポケモンカードゲーム MEGA拡張パック 「30th CELEBRATION」",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/1_xnn": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION プレミアムデッキセット）",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/0tw0p": {
-          "status": "browser_http_error",
-          "reason": "fetch_browser_http_error",
-          "http_status": 405,
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "title_observed": "",
-          "genre": "",
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "title_observed": "【古本市場京都太秦店】ポケカ抽選販売（ストームエメラルダ）",
+          "genre": "pokemon",
           "product_origin": "",
-          "title_origin": "",
+          "title_origin": "v14_livepocket_page_title",
           "conflict": false
         },
         "https://livepocket.jp/e/vxgpy": {
@@ -25055,121 +25221,121 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vd5ua": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/v5ucz": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/v29mr": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ul3vw": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ugnmg": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/u98h-": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/tryts": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/tj_mq": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nyxn0": {
-          "checked_at": "2026-10-24T09:07:05.673487+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/noe8e": {
           "checked_at": "2026-10-24T09:16:22.203744+00:00",
@@ -25315,43 +25481,43 @@
           "recovery_probe": ""
         },
         "https://livepocket.jp/e/3adrx": {
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/1_xnn": {
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0tw0p": {
-          "checked_at": "2026-10-24T09:16:22.203744+00:00",
-          "reason": "fetch_failed",
-          "candidate_count": 0,
-          "valid_candidate_count": 0,
+          "checked_at": "2026-10-24T09:53:31.671079+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
           "detail": "",
-          "candidate_sources": "",
-          "title_detected": false,
-          "rejection_codes": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
           "meta_template_cleaned": 0,
-          "heading_seen": 0,
-          "recovery_probe": ""
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vxgpy": {
           "checked_at": "2026-10-24T09:16:22.203744+00:00",
