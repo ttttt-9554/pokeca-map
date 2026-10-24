@@ -4220,6 +4220,8 @@
   const LP_RESULTS_PUBLIC_MIN=1;
   let lpResultsCounts=new Map(),lpResultsReady=false,lpResultsError='';
   let lpResultsUserId='',lpResultsFetchSeq=0,lpResultsLastFetch=0,lpResultsLoading=null;
+  // A manual refresh has persistent user-visible progress and a completion time.
+  let lpResultsManualBusy=false,lpResultsManualSuccessAt='',lpResultsManualError='';
 
   function lpResultsAccount(){
     const text=$('lpResultsAccount');
@@ -4307,8 +4309,16 @@
       list.innerHTML='<p class="hint">「共有」タブからログインすると、対象の抽選結果を確認できます。</p>';
       return;
     }
-    status.textContent=lpResultsError?'⚠ 匿名集計を取得できませんでした：'+lpResultsError:
-      '既存の抽選管理を1人から自動集計します。氏名・ユーザーID・個人メモは表示しません。';
+    const explanation='既存の抽選管理を1人から匿名集計します。';
+    status.textContent=lpResultsManualBusy
+      ? '🔄 更新中…応募・当選情報と対象店舗を再取得しています。'
+      : lpResultsError
+        ? '⚠ 匿名集計を取得できませんでした：'+lpResultsError
+        : lpResultsManualError
+          ? '⚠ '+lpResultsManualError
+          : lpResultsManualSuccessAt
+            ? '✅ 更新完了（日本時間 '+lpResultsManualSuccessAt+'）／'+explanation
+            : explanation+'ユーザー名・個人メモは公開しません。';
     const query=String($('lpResultsSearch')?.value||'').trim().toLocaleLowerCase();
     const filter=$('lpResultsFilter')?.value||'all';
     const matches=events.filter(item=>{
@@ -4362,7 +4372,9 @@
       lpResultsRender();return false;
     }
     if(!force&&lpResultsReady&&lpResultsUserId===uid&&Date.now()-lpResultsLastFetch<30000)return true;
-    if(lpResultsLoading&&lpResultsUserId===uid)return lpResultsLoading;
+    // Manual forced refresh always starts a new RPC; the sequence number
+    // prevents an older in-flight response from replacing new results.
+    if(!force&&lpResultsLoading&&lpResultsUserId===uid)return lpResultsLoading;
     const seq=++lpResultsFetchSeq;
     lpResultsUserId=uid;
     const request=(async()=>{
@@ -4393,8 +4405,59 @@
     finally{if(lpResultsLoading===request)lpResultsLoading=null;}
   }
 
+
+  async function lpResultsManualReload(){
+    const button=$('lpResultsReload');
+    if(lpResultsManualBusy)return false;
+    if(!supabaseClient||!authUser){
+      lpResultsManualError='Discordログインしてから更新してください。';
+      lpResultsRender();
+      return false;
+    }
+    const uid=authUser.id;
+    lpResultsManualBusy=true;
+    lpResultsManualError='';
+    lpResultsManualSuccessAt='';
+    button.disabled=true;
+    button.textContent='⏳ 更新中…';
+    button.setAttribute('aria-busy','true');
+    lpResultsRender();
+    try{
+      const countsOk=await lpResultsRefresh(true);
+      if(!countsOk)throw Error(lpResultsError||'応募・当選情報の取得に失敗しました。');
+      // Refresh the actual source lists as well as store corrections. Promise
+      // aggregation keeps manual refresh active until each request finishes.
+      const requests=await Promise.allSettled([
+        loadLotteryEvents(true),lpCardRefresh(true),lpLocationRefresh(true),
+        lpAppRefresh(true),lpExtRefresh(true),lpCloudRefresh(true)
+      ]);
+      if(authUser?.id!==uid)return false;
+      if(requests.some(r=>r.status==='rejected'||r.value===false)){
+        lpResultsManualError='応募結果は更新できましたが、店舗・抽選情報の一部を更新できませんでした。通信状況を確認して再度お試しください。';
+        return false;
+      }
+      lpResultsManualSuccessAt=new Intl.DateTimeFormat('ja-JP',{
+        timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',
+        second:'2-digit',hour12:false
+      }).format(new Date());
+      return true;
+    }catch(error){
+      if(authUser?.id===uid){
+        lpResultsManualError='更新できませんでした：'+String(error?.message||error);
+        console.warn('抽選結果の手動更新に失敗:',error);
+      }
+      return false;
+    }finally{
+      lpResultsManualBusy=false;
+      button.disabled=false;
+      button.textContent='↻ 更新';
+      button.removeAttribute('aria-busy');
+      lpResultsRender();
+    }
+  }
+
   function lpResultsInit(){
-    $('lpResultsReload').addEventListener('click',()=>lpResultsRefresh(true));
+    $('lpResultsReload').addEventListener('click',lpResultsManualReload);
     $('lpResultsSearch').addEventListener('input',lpResultsRender);
     $('lpResultsFilter').addEventListener('change',lpResultsRender);
     lpResultsRender();

@@ -1699,3 +1699,8 @@ html[data-theme="dark"] #lotteryResultsView .lp-results-store-details li{
 html[data-theme="dark"] #lotteryResultsView .lp-results-store-details summary{
   color:#edf4ff!important;
 }
+
+
+/* v21.87: progress state for the results-tab refresh button. */
+#lpResultsReload:disabled{opacity:.72;cursor:progress}
+#lpResultsStatus{min-height:22px;line-height:1.65;overflow-wrap:anywhere}
