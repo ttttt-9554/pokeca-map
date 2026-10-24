@@ -2024,3 +2024,63 @@ html[data-theme="dark"] #addView #reportForm > .report-details-card .share-optio
 @media(max-width:390px){
  #addView #reportForm > .report-step-card{padding:10px}
 }
+
+
+/* v21.96: History moved under the Registration tab, collapsed by default. */
+#addView .report-history-fold{
+  margin:13px 0 6px;min-width:0;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:14px;background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);overflow:hidden;
+}
+#addView .report-history-fold>summary{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;min-height:50px;list-style:none;cursor:pointer;
+  padding:12px 14px;font-size:15px;font-weight:800;
+  color:var(--app-text,#172033);
+}
+#addView .report-history-fold>summary::-webkit-details-marker{display:none}
+#addView .report-history-fold>summary::marker{content:""}
+#addView .report-history-fold>summary small{
+  font-size:11px;font-weight:600;color:var(--app-muted,#64748b);
+  white-space:nowrap;
+}
+#addView .report-history-fold[open]>summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#addView .report-history-fold[open]>summary small span{display:inline-block;transform:rotate(180deg)}
+#addView .report-history-body{display:grid;gap:11px;padding:13px;min-width:0}
+#addView .report-history-body>.hint{font-size:12px;margin:0}
+#addView .report-history-section{
+  min-width:0;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:11px;padding:12px;
+  background:var(--app-surface2,#f8fafc);
+}
+#addView .report-history-section h3{
+  font-size:14px;margin:0 0 8px;color:var(--app-text,#172033);
+}
+#addView .report-history-section .hint{font-size:11px;margin:0 0 9px}
+#addView .report-history-section button{
+  font-size:12px;min-height:39px;padding:8px 10px;
+}
+#addView #historyList,#addView #mySharedList{
+  min-width:0;overflow-wrap:anywhere;margin-top:8px;
+}
+html[data-theme="dark"] #addView .report-history-fold{
+  background:var(--app-surface,#172337)!important;
+  color:var(--app-text,#eef4ff)!important;
+  border-color:var(--app-border,#526681)!important;
+}
+html[data-theme="dark"] #addView .report-history-fold>summary{
+  color:#eef4ff!important;
+}
+html[data-theme="dark"] #addView .report-history-section{
+  background:var(--app-surface2,#203149)!important;
+  border-color:var(--app-border,#526681)!important;
+}
+html[data-theme="dark"] #addView .report-history-section h3{color:#eef4ff!important}
+@media(max-width:390px){
+  #addView .report-history-body{padding:10px}
+  #addView .report-history-section{padding:10px}
+  #addView .report-history-fold>summary{padding:11px 12px}
+}

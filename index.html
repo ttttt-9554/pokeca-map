@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_95-registration-step-cards">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_96-history-within-registration">
 
   <style>
     [hidden] { display: none !important; }
@@ -980,29 +980,26 @@ nav[aria-label="メインメニュー"] {
 
       </form>
 
-    </section>
-
-
-    <!-- ======================================
-         発見履歴
-         ====================================== -->
-
-    <section id="historyView" class="view">
-
-      <h2>📅 自分の発見履歴</h2>
-      <p class="hint">自分が共有した発見情報と、この端末だけに保存した記録を確認・編集できます。</p>
-
-      <section aria-label="自分の共有投稿">
-        <h3>👥 自分の共有投稿</h3>
-        <p class="hint">Discordで共有した投稿です。編集・削除はほかのユーザーにも反映されます。</p>
-        <button type="button" id="historySharedRefresh">共有投稿を更新</button>
-        <div id="mySharedList"></div>
-      </section>
-
-      <section aria-label="端末内の発見履歴">
-        <h3>📱 端末内の発見記録</h3>
-        <div id="historyList"></div>
-      </section>
+      <!-- v21.96: Both shared and local history now live under Registration. -->
+      <details id="reportHistoryFold" class="report-history-fold">
+        <summary>
+          <span>📅 発見履歴</span>
+          <small>タップして展開 <span aria-hidden="true">⌄</span></small>
+        </summary>
+        <div class="report-history-body">
+          <p class="hint">共有した発見情報と端末内に保存した記録を確認・編集できます。</p>
+          <section class="report-history-section" aria-label="自分の共有投稿">
+            <h3>👥 自分の共有投稿</h3>
+            <p class="hint">Discordで共有した投稿です。編集・削除するとほかのユーザーにも反映されます。</p>
+            <button type="button" id="historySharedRefresh">共有投稿を更新</button>
+            <div id="mySharedList"></div>
+          </section>
+          <section class="report-history-section" aria-label="端末内の発見履歴">
+            <h3>📱 端末内の発見記録</h3>
+            <div id="historyList"></div>
+          </section>
+        </div>
+      </details>
 
     </section>
 
@@ -1434,14 +1431,6 @@ nav[aria-label="メインメニュー"] {
       <span>登録</span>
     </button>
 
-    <button
-      type="button"
-      data-tab="history"
-    >
-      📅
-      <span>履歴</span>
-    </button>
-
     <button type="button" data-tab="lottery" aria-label="抽選・LivePocketを開く">
       🎟️
       <span>抽選</span>
@@ -1497,7 +1486,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_95-registration-step-cards"></script>
+  <script src="app.js?v=20261024-v21_96-history-within-registration"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>

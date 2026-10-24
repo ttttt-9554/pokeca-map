@@ -503,6 +503,9 @@
   }
 
   function switchTab(tab) {
+    // Legacy History deep links open the folded section inside Registration.
+    const historyRequested=tab==='history';
+    if(historyRequested)tab='add';
     if ($('mapFilterDrawer') && !$('mapFilterDrawer').hidden && tab !== 'map') setMapFilterOpen(false);
     if (tab === 'dev' && !isDeveloper()) tab = 'map';
     const changedTab = !document.getElementById(tab+'View')?.classList.contains('active');
@@ -524,9 +527,13 @@
       const area=$('appScrollArea');
       if(area)area.scrollTop=0;
     }
-    if (tab === 'history') {
-      renderMyShared();
-      if (supabaseClient) loadSharedReports();
+    if (tab === 'add') {
+      const historyFold=$('reportHistoryFold');
+      if(historyFold && (changedTab||historyRequested)) historyFold.open=historyRequested;
+      if(historyRequested){
+        renderMyShared();
+        if(supabaseClient)loadSharedReports();
+      }
     }
     if (tab === 'map') refreshMap();
     if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
@@ -847,7 +854,12 @@
 
     updateCategoryHint();
     closeProductDropdown();
+    // Editing a report from the inline accordion must return to the top
+    // even though we remain on the Registration tab.
+    if($('reportHistoryFold'))$('reportHistoryFold').open=false;
     switchTab('add');
+    const area=$('appScrollArea');
+    if(area)area.scrollTop=0;
   }
 
   async function saveForm(event) {
@@ -2241,6 +2253,12 @@
     get('sharedRefresh').addEventListener('click',loadSharedReports);
     get('historySharedRefresh').addEventListener('click',loadSharedReports);
     get('mySharedList').addEventListener('click',handleCard);
+    $('reportHistoryFold').addEventListener('toggle',()=>{
+      if(!$('reportHistoryFold').open)return;
+      render();
+      renderMyShared();
+      if(supabaseClient)loadSharedReports();
+    });
 
     get('locate').addEventListener('click', locate);
   }
@@ -4764,7 +4782,7 @@
       $('lotteryView').after(view);
     }
     const lotteryButton = document.querySelector('nav button[data-tab="lottery"]');
-    const historyButton = document.querySelector('nav button[data-tab="history"]');
+    const registrationButton = document.querySelector('nav button[data-tab="add"]');
     let managementButton = document.querySelector('nav button[data-tab="lotteryManage"]');
     if (!managementButton && lotteryButton) {
       managementButton = document.createElement('button');
@@ -4774,10 +4792,10 @@
       managementButton.innerHTML = '✅<span>抽選管理</span>';
       lotteryButton.after(managementButton);
     }
-    // v21.29: Map → Register → History → Lottery → Lottery Management → Share → Dev.
-    // Move existing buttons, preserving their event handlers and data-tab values.
-    if (historyButton && lotteryButton && managementButton) {
-      historyButton.after(lotteryButton, managementButton);
+    // v21.96: History is folded into Register. Keep Lottery / Management
+    // immediately after Register without recreating existing nav handlers.
+    if (registrationButton && lotteryButton && managementButton) {
+      registrationButton.after(lotteryButton, managementButton);
     }
   }
 
