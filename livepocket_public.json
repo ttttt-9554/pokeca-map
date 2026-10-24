@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-23T15:05:58.986731+00:00",
-  "unique_livepocket_urls": 465,
+  "collected_at": "2026-10-24T00:00:56.779334+00:00",
+  "unique_livepocket_urls": 466,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6320,6 +6320,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックス東松山店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-23T11:35:58.013964+00:00"
     },
     {
@@ -6509,7 +6511,29 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-23T14:05:58.154398+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/8rswc",
+      "store_name": "古本市場小平店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-24T00:00:04.095000+00:00",
+      "stores": [
+        {
+          "name": "古本市場小平店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "【古本市場小平店】 ポケカ抽選販売30thCELEBRATIONカードセット 9種セット",
+      "application_end_at": "2026-10-24T22:00:00+09:00",
+      "application_start_at": "2026-10-23T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場小平店】 ポケカ抽選販売30thCELEBRATIONカードセット 9種セット",
+      "first_detected_at": "2026-10-24T00:00:58.433607+00:00"
     }
   ],
-  "updated_at": "2026-10-23T23:50:57.109076+00:00"
+  "updated_at": "2026-10-24T00:01:24.345251+00:00"
 }
