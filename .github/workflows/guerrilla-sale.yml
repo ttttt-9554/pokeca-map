@@ -7,7 +7,7 @@ name: Guerrilla Sale Status Monitor
     - cron: '3,8,13,18,23,28,33,38,43,48,53,58 * * * *'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: guerrilla-sale-monitor
@@ -36,33 +36,7 @@ jobs:
       - name: Check official sale pages
         env:
           GUERRILLA_DISCORD_WEBHOOK_URL: ${{ secrets.GUERRILLA_DISCORD_WEBHOOK_URL }}
+          SUPABASE_URL: https://aypcmtlaaygmiexboypk.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python scripts/guerrilla_sale_monitor.py
 
-      - name: Publish changed status and event history
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add guerrilla_sale_state.json guerrilla_sale_feed.json
-          if git diff --cached --quiet; then
-            echo 'No sale status changes.'
-            exit 0
-          fi
-          git commit -m 'Refresh guerrilla sale status'
-          # The lottery collector or a maintainer may advance main at any time.
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort || true
-              echo 'Sale status files changed upstream; stopping safely.'
-              exit 1
-            fi
-            if git push origin HEAD:main; then
-              echo 'Published sale monitor results.'
-              exit 0
-            fi
-            sleep 2
-          done
-          echo 'Could not publish sale status after safe retries.'
-          exit 1
