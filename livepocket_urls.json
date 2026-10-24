@@ -16753,18 +16753,18 @@
           "http_status": null
         },
         "https://livepocket.jp/e/xdeb1": {
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
-          "status": "checked_retry_event_title_application_end_at",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/x3hs7": {
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
-          "status": "checked_retry_event_title_application_end_at",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/wlon0": {
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
-          "status": "checked_retry_event_title_application_end_at",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/vd5ua": {
@@ -18030,20 +18030,20 @@
         },
         "https://livepocket.jp/e/wlon0": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
-          "status": "checked_retry_event_title_application_end_at",
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/x3hs7": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
-          "status": "checked_retry_event_title_application_end_at",
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/xdeb1": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
-          "status": "checked_retry_event_title_application_end_at",
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/xm634": {
@@ -18803,19 +18803,19 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/xdeb1": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T09:46:23.650214+00:00",
-          "last_status": "checked_retry_event_title_application_end_at"
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T15:56:29.847812+00:00",
+          "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/x3hs7": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T09:46:23.650214+00:00",
-          "last_status": "checked_retry_event_title_application_end_at"
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T15:56:29.847812+00:00",
+          "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/wlon0": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T09:46:23.650214+00:00",
-          "last_status": "checked_retry_event_title_application_end_at"
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T15:56:29.847812+00:00",
+          "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ganvl": {
           "attempts": 1,
@@ -22662,7 +22662,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "title_observed": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -22673,7 +22673,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "title_observed": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
           "genre": "pokemon",
           "product_origin": "",
@@ -22684,7 +22684,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "title_observed": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
           "genre": "pokemon",
           "product_origin": "",
@@ -25870,7 +25870,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/xdeb1": {
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -25883,7 +25883,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/x3hs7": {
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -25896,7 +25896,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/wlon0": {
-          "checked_at": "2026-10-24T09:46:23.650214+00:00",
+          "checked_at": "2026-10-24T15:56:29.847812+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

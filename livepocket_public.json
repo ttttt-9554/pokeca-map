@@ -7177,8 +7177,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7262,8 +7260,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックス長岡古正寺】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7283,6 +7279,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場豊浜店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7304,8 +7302,6 @@
       "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:24.347000+00:00",
       "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7356,6 +7352,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7375,6 +7373,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場高島店】ポケカ抽選販売（30th ＣＥＬＥＢＲＡＴＩＯＮ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7529,12 +7529,12 @@
     {
       "url": "https://livepocket.jp/e/u7d0k",
       "store_name": "キデイランドららぽーと富士見店",
+      "prefecture": "埼玉県",
       "product_name": "ドラゴンボールカードゲームFusionWorld",
       "event_title": "キデイランドららぽーと富士見店 ドラゴンボールカードゲームFusion World「CROSS FORCE」購入券 抽選",
       "application_start_at": "2026-10-24T10:00:00+09:00",
       "application_end_at": "2026-10-26T23:59:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
-      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "キデイランドららぽーと富士見店",
@@ -7893,5 +7893,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T15:46:45.301675+00:00"
+  "updated_at": "2026-10-24T15:56:29.847812+00:00"
 }
