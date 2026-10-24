@@ -16698,12 +16698,12 @@
           "status": "checked_title_deadline_product"
         },
         "https://livepocket.jp/e/ganvl": {
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/fmrx2": {
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -17784,13 +17784,13 @@
         "https://livepocket.jp/e/fmrx2": {
           "detected_at": "2026-10-24T04:05:57.204038+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ganvl": {
           "detected_at": "2026-10-24T04:05:57.204038+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/up9fr": {
@@ -18867,13 +18867,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ganvl": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T10:16:23.778722+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T17:46:21.604911+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fmrx2": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T10:16:23.778722+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T17:46:21.604911+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/zau0z": {
@@ -22739,7 +22739,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "title_observed": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -22750,7 +22750,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "title_observed": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
           "genre": "",
           "product_origin": "",
@@ -25923,7 +25923,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ganvl": {
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -25936,7 +25936,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fmrx2": {
-          "checked_at": "2026-10-24T10:16:23.778722+00:00",
+          "checked_at": "2026-10-24T17:46:21.604911+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

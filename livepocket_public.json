@@ -6825,6 +6825,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール羽生店】ポケモンカードゲーム 拡張パック『30th セレブレーション』抽選販売受付",
       "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
     },
     {
@@ -6841,6 +6843,7 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_event_title": "OP「ヒロインズエディション Vol.2」1BOX抽選受付",
       "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
     },
     {
@@ -6893,8 +6896,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【フルコンプ】10/31(土)発売 ワンピースカードゲーム「Heroines Edition vol.2」「HEROINES PRECIOUS BOX」【抽選受付】",
       "first_detected_at": "2026-10-24T04:35:56.419014+00:00"
     },
     {
@@ -7726,8 +7727,6 @@
       "pokemon_map_match": "メガブレイブ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売（メガブレイブ）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7833,8 +7832,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
       "first_detected_at": "2026-10-24T11:35:57.103447+00:00"
     },
     {
@@ -7895,5 +7892,5 @@
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
     }
   ],
-  "updated_at": "2026-10-24T17:36:26.905022+00:00"
+  "updated_at": "2026-10-24T17:46:21.604911+00:00"
 }
