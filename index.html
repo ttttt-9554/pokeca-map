@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_84-anonymous-one-plus">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_85-hide-zero-applicants">
 
   <style>
     [hidden] { display: none !important; }
@@ -756,7 +756,7 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
-      <p class="hint">応募管理に1人でも記録があれば、応募・当選・落選・受取済みの人数を表示します。名前・ユーザーID・個人メモは表示しません。ただし少人数では結果から個人を推測できる場合があります。</p>
+      <p class="hint">応募管理に1人でも記録がある抽選だけを表示し、応募・当選・落選・受取済みの人数を集計します。名前・ユーザーID・個人メモは表示しません。ただし少人数では結果から個人を推測できる場合があります。</p>
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
 
@@ -1556,7 +1556,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_84-anonymous-one-plus"></script>
+  <script src="app.js?v=20261024-v21_85-hide-zero-applicants"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>

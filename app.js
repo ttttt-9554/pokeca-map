@@ -4240,13 +4240,14 @@
     const entries=new Map();
     const hiddenUrls=new Set(lotteryItems.filter(item=>item?.app_lottery_hidden).map(item=>item.url));
     for(const item of lotteryItems){
-      if(!item||item.app_lottery_hidden||!safeLotteryUrl(item.url))continue;
+      if(!item||item.app_lottery_hidden||!safeLotteryUrl(item.url)||
+         !(Number(lpResultsCounts.get(item.url)?.total_count)>0))continue;
       entries.set(item.url,item);
     }
-    // Never surface an intentionally hidden app lottery through its historic
-    // aggregate row. Other historical lotteries may still appear by URL.
-    for(const url of lpResultsCounts.keys()){
-      if(hiddenUrls.has(url))continue;
+    // Keep only lotteries with a positive aggregate count, including historic
+    // events, while preserving intentionally hidden app lottery visibility.
+    for(const [url,counts] of lpResultsCounts){
+      if(hiddenUrls.has(url)||!(Number(counts?.total_count)>0))continue;
       if(!entries.has(url)&&safeLotteryUrl(url))entries.set(url,{url});
     }
     return [...entries.values()];
@@ -4257,10 +4258,8 @@
     if(!status||!summary||!list)return;
     lpResultsAccount();
     const events=lpResultsKnownEvents();
-    const published=events.filter(item=>lpResultsCounts.has(item.url)).length;
-    summary.innerHTML='<span>🎟️ 抽選 '+events.length+'件</span>'+
-      '<span>📊 記録あり '+published+'件</span>'+
-      '<span>👥 1人から集計</span>';
+    summary.innerHTML='<span>🎟️ 応募記録あり '+events.length+'件</span>'+
+      '<span>👥 1人から表示</span>';
     if(!authUser||!supabaseClient){
       status.textContent='応募状況の匿名集計を表示するにはDiscordログインが必要です。';
       list.innerHTML='<p class="hint">「共有」タブからログインすると、対象の抽選結果を確認できます。</p>';
@@ -4272,7 +4271,8 @@
     const filter=$('lpResultsFilter')?.value||'all';
     const matches=events.filter(item=>{
       const counts=lpResultsCounts.get(item.url);
-      if(filter!=='all'&&!(counts&&Number(counts[filter+'_count'])>=LP_RESULTS_PUBLIC_MIN))return false;
+      if(!counts||!(Number(counts.total_count)>0))return false;
+      if(filter!=='all'&&!(Number(counts[filter+'_count'])>=LP_RESULTS_PUBLIC_MIN))return false;
       if(!query)return true;
       const haystack=[
         lotteryTrackItemName(item.url),
@@ -4291,18 +4291,13 @@
       const title=lotteryTrackItemName(item.url);
       // Accurate group counts are provided by the authenticated-only RPC.
       // Never infer participant details from an aggregate row.
-      const total=record?Number(record.total_count):0;
-      const header=record
-        ? '👥 応募記録 '+total+'人'
-        : '📭 応募記録なし';
-      const statusHtml=record
-        ? '<div class="lp-results-card-summary">'+
-          '<span>✉️ 応募済み '+lpResultsCountDisplay(record.applied_count)+'</span>'+
-          '<span>🎉 当選（受取済み含む） '+lpResultsCountDisplay(record.won_count)+'</span>'+
-          '<span>📪 落選 '+lpResultsCountDisplay(record.lost_count)+'</span>'+
-          '<span>✅ 受取済み '+lpResultsCountDisplay(record.received_count)+'</span>'+
-          '</div>'
-        : '';
+      const header='👥 応募記録 '+Number(record.total_count)+'人';
+      const statusHtml='<div class="lp-results-card-summary">'+
+        '<span>✉️ 応募済み '+lpResultsCountDisplay(record.applied_count)+'</span>'+
+        '<span>🎉 当選（受取済み含む） '+lpResultsCountDisplay(record.won_count)+'</span>'+
+        '<span>📪 落選 '+lpResultsCountDisplay(record.lost_count)+'</span>'+
+        '<span>✅ 受取済み '+lpResultsCountDisplay(record.received_count)+'</span>'+
+        '</div>';
       return '<article class="lp-results-card">'+
         '<h3>'+escape(title)+'</h3>'+
         '<p class="lp-results-anonymous-total">'+escape(header)+'</p>'+
@@ -4312,7 +4307,7 @@
         '</article>';
     }).join('')+(matches.length>100
        ?'<p class="hint">最初の100件を表示しています。検索で絞り込んでください。</p>':''):
-      '<p class="hint">条件に一致する抽選がありません。検索や表示条件を変更してください。</p>';
+      '<p class="hint">応募記録のある抽選が見つかりません。検索や表示条件を変更してください。</p>';
   }
 
   async function lpResultsRefresh(force=false){
