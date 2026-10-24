@@ -2,8 +2,15 @@ name: Guerrilla Sale Status Monitor
 
 'on':
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/guerrilla_sale_monitor.py'
+      - 'scripts/test_guerrilla_sale_monitor.py'
+      - 'guerrilla_sale_dev_v2.js'
+      - 'onsite_comment_alert_v21_55.js'
+      - '.github/workflows/guerrilla-sale.yml'
   schedule:
-    # At most once every 5 minutes; GitHub schedules may run late.
+    # Schedule delivery is best-effort, not an exact five-minute SLA.
     - cron: '3,8,13,18,23,28,33,38,43,48,53,58 * * * *'
 
 permissions:
@@ -14,34 +21,42 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  monitor:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          persist-credentials: true
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+          persist-credentials: false
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Validate sale monitor
+      - name: Validate monitor and developer controls without network
         run: |
           python -m py_compile scripts/guerrilla_sale_monitor.py
-          python -m unittest discover -s scripts -p 'test_guerrilla_sale_monitor.py'
+          python -m unittest discover -s scripts -p 'test_guerrilla_sale_monitor.py' -v
+          node --check guerrilla_sale_dev_v2.js
+          node --check onsite_comment_alert_v21_55.js
 
-      - name: Check official sale pages
+  monitor:
+    if: github.event_name != 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Private developer-only monitoring
         env:
-          GUERRILLA_DISCORD_WEBHOOK_URL: ${{ secrets.GUERRILLA_DISCORD_WEBHOOK_URL }}
           SUPABASE_URL: https://aypcmtlaaygmiexboypk.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
-            echo 'Private monitor is not configured; skipping target checks.'
+            echo 'Private database secret is not configured; no sites were monitored.'
             exit 0
           fi
           python scripts/guerrilla_sale_monitor.py
-

@@ -1,273 +1,414 @@
 #!/usr/bin/env python3
-"""Monitor explicitly configured public product pages for sale-status transitions.
+"""Developer-only beta: catalog sweeps + priority product checks.
 
-No login, checkout, waiting-room bypass, or anti-bot evasion is attempted.
-First observations establish a baseline without generating alerts.
-This script uses only the Python standard library.
+Public pages only. No authentication, checkout, CAPTCHA or queue bypass.
+Private observations/events are persisted in Supabase; no public feed/webhook.
 """
 from __future__ import annotations
-
+import hashlib
+import ipaddress
 import json
 import os
 import re
+import socket
 import sys
-import ipaddress
+import time
 from datetime import datetime, timezone, timedelta
 from html.parser import HTMLParser
-from pathlib import Path
-from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
+from urllib.error import HTTPError
+from urllib.parse import urljoin, urlsplit, urlencode, parse_qs
+from urllib.request import Request, build_opener, HTTPRedirectHandler
+from urllib.robotparser import RobotFileParser
 
-ROOT = Path(__file__).resolve().parent.parent
-CONFIG = ROOT / "guerrilla_sale_targets.json"
-STATE = ROOT / "guerrilla_sale_state.json"
-FEED = ROOT / "guerrilla_sale_feed.json"
-MAX_TARGETS = 20
-MAX_BYTES = 1_000_000
-TIMEOUT_SECONDS = 12
+SITES = {
+    'pokemon': {'host': 'www.pokemoncenter-online.com', 'name': 'ポケモンセンターオンライン', 'catalog': '/search/'},
+    'amenity': {'host': 'www.amenitydream.com', 'name': 'アメニティードリーム', 'catalog': '/product-list'},
+}
+UA = 'TorecaRadarSaleMonitor/2.0'
+MAX_BYTES = 2_000_000
+SELECTED_BATCH = 8
+DETAIL_BATCH = 4
+KNOWN = ('available', 'unavailable')
+VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
 
+class CheckError(Exception):
+    def __init__(self, code):
+        self.code = code
+        super().__init__(code)
 
-class TextOnly(HTMLParser):
-    def __init__(self):
+class Node:
+    def __init__(self, tag='root', attrs=None, parent=None):
+        self.tag, self.attrs, self.parent = tag, dict(attrs or []), parent
+        self.children = []
+    def walk(self):
+        yield self
+        for n in self.children:
+            if isinstance(n, Node):
+                yield from n.walk()
+    def hidden(self):
+        n = self
+        while n:
+            a = n.attrs
+            if ('hidden' in a or a.get('aria-hidden') == 'true' or
+                re.search(r'(display\s*:\s*none|visibility\s*:\s*hidden)', a.get('style', ''), re.I) or
+                set(a.get('class','').split()) & {'hidden','d-none','hide'}):
+                return True
+            n = n.parent
+        return False
+    def text(self, raw=False):
+        if not raw and (self.tag in {'script','style','noscript','svg'} or self.hidden()):
+            return ''
+        return ' '.join(n.text(raw) if isinstance(n,Node) else n for n in self.children)
+
+class Document(HTMLParser):
+    def __init__(self, html):
         super().__init__(convert_charrefs=True)
-        self.hidden_depth = 0
-        self.parts = []
-
+        self.root = Node()
+        self.stack = [self.root]
+        self.feed(html)
     def handle_starttag(self, tag, attrs):
-        if tag.lower() in ("script", "style", "noscript", "svg"):
-            self.hidden_depth += 1
-
+        n = Node(tag, attrs, self.stack[-1])
+        self.stack[-1].children.append(n)
+        if tag not in VOID:
+            self.stack.append(n)
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag,attrs)
+        if tag not in VOID:
+            self.handle_endtag(tag)
     def handle_endtag(self, tag):
-        if tag.lower() in ("script", "style", "noscript", "svg"):
-            self.hidden_depth = max(0, self.hidden_depth - 1)
+        for i in range(len(self.stack)-1,0,-1):
+            if self.stack[i].tag == tag:
+                del self.stack[i:]
+                break
+    def handle_data(self,data):
+        self.stack[-1].children.append(data)
 
-    def handle_data(self, data):
-        if self.hidden_depth == 0:
-            self.parts.append(data)
+def tidy(text):
+    return re.sub(r'\s+',' ',text).strip()
 
-
-def safe_https_url(url):
+def valid_host(url, site):
     try:
-        parsed = urlsplit(str(url))
-        host = (parsed.hostname or "").lower().rstrip(".")
-        if parsed.scheme != "https" or not host or parsed.username or parsed.password:
-            return False
-        if host == "localhost" or host.endswith((".localhost", ".local", ".internal")):
-            return False
+        u = urlsplit(url)
+        return (site in SITES and u.scheme == 'https' and u.hostname == SITES[site]['host']
+                and u.port in (None,443) and not u.username and not u.password
+                and not re.search(r'[\\\s\x00-\x1f]',url))
+    except (ValueError,TypeError):
+        return False
+
+def product_url(url, site):
+    if not valid_host(url,site):
+        return ''
+    u = urlsplit(url)
+    pattern = r'/[0-9]{6,20}(?:-[A-Za-z0-9_-]+)?\.html' if site == 'pokemon' else r'/product/[0-9]+'
+    if not re.fullmatch(pattern,u.path.rstrip('/')):
+        return ''
+    # Variant parameters can affect availability; do not silently monitor a different variant.
+    if any(k.startswith('dwvar_') for k in parse_qs(u.query)):
+        return ''
+    return 'https://' + SITES[site]['host'] + u.path.rstrip('/')
+
+def product_id(site,url):
+    return hashlib.sha256((site+'|'+url).encode()).hexdigest()
+
+def catalog_url(site, page=1):
+    base = 'https://' + SITES[site]['host'] + SITES[site]['catalog']
+    if page == 1:
+        return base
+    return base + '?' + urlencode({'start':(page-1)*40,'sz':40} if site=='pokemon' else {'page':page})
+
+def allowed_read(url,site):
+    if not valid_host(url,site):
+        return False
+    return bool(product_url(url,site)) or urlsplit(url).path in (SITES[site]['catalog'],'/robots.txt')
+
+def product_links(node,site,base):
+    result = {}
+    for n in node.walk():
+        if n.tag == 'a' and not n.hidden():
+            url = product_url(urljoin(base,n.attrs.get('href','')),site)
+            if url:
+                title = tidy(n.text())
+                images = [x.attrs.get('alt','') for x in n.walk() if x.tag == 'img']
+                title = max([title]+images,key=len)
+                if len(title)>len(result.get(url,'')):
+                    result[url]=title
+                else:
+                    result.setdefault(url,title)
+    return result
+
+def page_guard(doc):
+    title = ' '.join(n.text() for n in doc.root.walk() if n.tag == 'title').casefold()
+    if any(s in title for s in ('仮想待合室','waiting room','queue-it')):
+        raise CheckError('waiting')
+    if any(s in title for s in ('access denied','just a moment','captcha','アクセス制限')):
+        raise CheckError('blocked')
+
+def evidence(scope):
+    text = tidy(scope.text()).casefold()
+    if '抽選販売' in text or '抽選に応募' in text:
+        return 'lottery'
+    stock = [int(x.replace(',','')) for x in re.findall(r'在庫数\s*[:：]?\s*([\d,]+)\s*(?:点|個|枚|箱|パック|セット)',text)]
+    negative = bool(stock and 0 in stock) or any(s in text for s in ('在庫なし','在庫切れ','品切れ','sold out','販売終了'))
+    positive = any(x>0 for x in stock)
+    for n in scope.walk():
+        if n.tag not in ('button','input') or n.hidden():
+            continue
+        if 'disabled' in n.attrs or n.attrs.get('aria-disabled') == 'true' or 'disabled' in n.attrs.get('class','').split():
+            continue
+        label = tidy(n.text()+' '+n.attrs.get('value','')+' '+n.attrs.get('alt',''))
+        if any(x in label for x in ('カートに入れる','カートへ入れる','予約する')):
+            positive=True
+    if positive and not negative:
+        return 'available'
+    if negative and not positive:
+        return 'unavailable'
+    return 'unknown'
+
+def parse_catalog(html,site,url):
+    doc=Document(html); page_guard(doc)
+    links=product_links(doc.root,site,url)
+    if not links:
+        raise CheckError('catalog_markup_unverified')
+    items={u:{'url':u,'product':name[:500],'status':'unobserved'} for u,name in links.items()}
+    for a in doc.root.walk():
+        if a.tag!='a':
+            continue
+        u=product_url(urljoin(url,a.attrs.get('href','')),site)
+        if not u or u not in items:
+            continue
+        n=a
+        for _ in range(7):
+            if not n or n.tag in ('body','html','root'):
+                break
+            if set(product_links(n,site,url))-{u}:
+                break
+            state=evidence(n)
+            if state!='unknown':
+                previous=items[u]['status']
+                items[u]['status']=state if previous in ('unobserved',state) else 'unknown'
+                break
+            n=n.parent
+    text=tidy(doc.root.text())
+    counts=[int(n.replace(',','')) for n in re.findall(r'([\d,]+)\s*件',text)]
+    total=max(counts,default=0)
+    next_links=[]
+    for n in doc.root.walk():
+        if n.tag=='a' and (n.attrs.get('rel')=='next' or re.match(r'^(?:次|next|もっと見る)',tidy(n.text()),re.I)):
+            dest=urljoin(url,n.attrs.get('href',''))
+            if valid_host(dest,site) and urlsplit(dest).path==SITES[site]['catalog']:
+                next_links.append(dest)
+    return list(items.values()),total,next_links
+
+def parse_detail(html,site,url):
+    doc=Document(html); page_guard(doc)
+    h1=next((n for n in doc.root.walk() if n.tag=='h1' and not n.hidden()),None)
+    if not h1:
+        raise CheckError('product_markup_unverified')
+    for n in doc.root.walk():
+        if n.tag=='link' and n.attrs.get('rel')=='canonical':
+            canonical=product_url(urljoin(url,n.attrs.get('href','')),site)
+            if canonical and canonical!=url:
+                raise CheckError('product_identity_mismatch')
+    title=tidy(h1.text())[:500]
+    n=h1.parent
+    while n and n.tag not in ('root','html'):
+        if set(product_links(n,site,url))-{url}:
+            break
+        state=evidence(n)
+        if state!='unknown':
+            return {'url':url,'product':title,'status':state}
+        n=n.parent
+    return {'url':url,'product':title,'status':'unknown','reason':'在庫表示を商品単位で確定できません'}
+
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self,req,fp,code,msg,headers,newurl):
+        return None
+
+class StoreClient:
+    def __init__(self):
+        self.opener=build_opener(NoRedirect())
+        self.robots={};self.last={};self.delays={};self.halted={}
+        self.deadline=time.monotonic()+300
+    def raw(self,url,site):
+        if not allowed_read(url,site):
+            raise CheckError('url_not_allowed')
+        if time.monotonic()>self.deadline:
+            raise CheckError('run_budget_exceeded')
+        wait=self.delays.get(site,3)-(time.monotonic()-self.last.get(site,0))
+        if wait>0:time.sleep(wait)
+        host=SITES[site]['host']
+        # Fixed allowlisted retailer host + reject non-public DNS destinations.
         try:
-            ip = ipaddress.ip_address(host)
-            return ip.is_global
-        except ValueError:
-            return "." in host
-    except (ValueError, TypeError):
-        return False
+            ips=socket.getaddrinfo(host,443,type=socket.SOCK_STREAM)
+            if not ips or any(not ipaddress.ip_address(x[4][0]).is_global for x in ips):
+                raise CheckError('unsafe_dns')
+        except OSError:
+            raise CheckError('dns_failed') from None
+        self.last[site]=time.monotonic()
+        try:
+            with self.opener.open(Request(url,headers={'User-Agent':UA,'Accept':'text/html,text/plain'}),timeout=12) as res:
+                if not allowed_read(res.geturl(),site):raise CheckError('redirect_blocked')
+                data=res.read(MAX_BYTES+1)
+                if len(data)>MAX_BYTES:raise CheckError('response_too_large')
+                return data.decode(res.headers.get_content_charset() or 'utf-8',errors='replace')
+        except HTTPError as e:
+            if 300<=e.code<400:
+                dest=urljoin(url,e.headers.get('Location',''))
+                if any(x in dest.lower() for x in ('queue','waiting')):
+                    raise CheckError('waiting') from None
+                # Fail closed: never follow login, cart or off-site redirects.
+                raise CheckError('redirect_blocked') from None
+            raise CheckError('http_'+str(e.code)) from None
+        except (OSError,TimeoutError):
+            raise CheckError('network_error') from None
+    def get(self,url,site):
+        if site in self.halted:raise CheckError(self.halted[site])
+        try:
+            if site not in self.robots:
+                try:
+                    text=self.raw('https://'+SITES[site]['host']+'/robots.txt',site)
+                except CheckError as e:
+                    if e.code=='http_404':text='User-agent: *\nAllow: /'
+                    else:raise CheckError('robots_unavailable') from None
+                if 'user-agent:' not in text.casefold():raise CheckError('robots_unverified')
+                rp=RobotFileParser();rp.parse(text.splitlines())
+                self.robots[site]=(rp,text)
+                self.delays[site]=max(3,rp.crawl_delay(UA) or rp.crawl_delay('*') or 0)
+            rp,text=self.robots[site]
+            if not rp.can_fetch(UA,url):raise CheckError('robots_denied')
+            # robotparser does not implement every wildcard dialect. Conservatively
+            # honor wildcard disallows, even when written for a different crawler.
+            path=urlsplit(url).path+('?' + urlsplit(url).query if urlsplit(url).query else '')
+            for pattern in re.findall(r'^\s*Disallow:\s*(\S+)',text,re.I|re.M):
+                if '*' in pattern:
+                    rx='^'+re.escape(pattern.rstrip('$')).replace(r'\*','.*')+('$' if pattern.endswith('$') else '')
+                    if re.search(rx,path):raise CheckError('robots_denied')
+            return self.raw(url,site)
+        except CheckError as e:
+            if e.code in ('http_403','http_429','waiting','robots_denied','robots_unavailable','robots_unverified','redirect_blocked'):
+                self.halted[site]=e.code
+            raise
 
-
-def text_markers(value):
-    if not isinstance(value, list):
-        return []
-    return [str(x).strip().casefold() for x in value if isinstance(x, str) and x.strip()][:20]
-
-
-def fetch_page(url):
-    req = Request(url, headers={
-        "User-Agent": "TorecaRadarSaleMonitor/1.0 (+public-page-status-check)",
-        "Accept": "text/html,application/xhtml+xml;q=0.9,text/plain;q=0.8",
-    })
-    with urlopen(req, timeout=TIMEOUT_SECONDS) as res:
-        if not safe_https_url(res.geturl()):
-            raise ValueError("Unsafe redirect")
-        ctype = res.headers.get("Content-Type", "").lower()
-        if "html" not in ctype and "text/plain" not in ctype:
-            raise ValueError("Not an HTML/text page")
-        charset = res.headers.get_content_charset() or "utf-8"
-        raw = res.read(MAX_BYTES + 1)
-        if len(raw) > MAX_BYTES:
-            raise ValueError("Page too large")
-        html = raw.decode(charset, errors="replace")
-    parser = TextOnly()
-    parser.feed(html)
-    return re.sub(r"\s+", " ", " ".join(parser.parts)).casefold()
-
-
-def detect(target):
-    url = target.get("url", "")
-    if not safe_https_url(url):
-        return "unknown", "URLがHTTPSの公開ページではありません"
-    available = text_markers(target.get("available_text"))
-    unavailable = text_markers(target.get("unavailable_text"))
-    if not available or not unavailable:
-        return "unknown", "販売中・販売終了の両方の判定語が必要です"
+def db(path,method='GET',data=None):
+    base=os.environ.get('SUPABASE_URL','https://aypcmtlaaygmiexboypk.supabase.co').rstrip('/')
+    secret=os.environ.get('SUPABASE_SERVICE_ROLE_KEY','').strip()
+    if base!='https://aypcmtlaaygmiexboypk.supabase.co' or not secret:
+        raise CheckError('private_database_not_configured')
+    headers={'apikey':secret,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'}
+    if not secret.startswith('sb_secret_'):headers['Authorization']='Bearer '+secret
+    request=Request(base+'/rest/v1/'+path,headers=headers,method=method,
+                    data=json.dumps(data,ensure_ascii=False).encode() if data is not None else None)
     try:
-        text = fetch_page(url)
-        required = text_markers(target.get("required_text"))
-        if required and not all(x in text for x in required):
-            return "unknown", "商品を特定する文字が見つかりません"
-        # Refuse ambiguous evidence: a generic add-to-cart button may coexist
-        # with an out-of-stock message or hidden storefront templates.
-        positives = [x for x in available if x in text]
-        negatives = [x for x in unavailable if x in text]
-        if positives and not negatives:
-            return "available", ""
-        if negatives and not positives:
-            return "unavailable", ""
-        if positives and negatives:
-            return "unknown", "販売中・売り切れの表示が両方あります"
-        return "unknown", "判定語が見つかりません"
-    except (HTTPError, URLError, TimeoutError, ValueError, UnicodeError) as err:
-        # Do not log complete server error bodies or credentials.
-        if isinstance(err, HTTPError):
-            return "unknown", f"HTTP {err.code}"
-        return "unknown", type(err).__name__
-    except Exception as err:
-        return "unknown", type(err).__name__
+        with build_opener(NoRedirect()).open(request,timeout=20) as res:
+            raw=res.read(MAX_BYTES+1)
+            if len(raw)>MAX_BYTES:raise CheckError('database_response_too_large')
+            return json.loads(raw) if raw else None
+    except HTTPError as e:
+        raise CheckError('database_http_'+str(e.code)) from None
 
+def all_targets():
+    rows=[];offset=0
+    while True:
+        part=db('guerrilla_sale_monitor_targets?select=*&enabled=eq.true&order=id&limit=500&offset='+str(offset)) or []
+        rows+=part
+        if len(part)<500:return rows
+        offset+=500
 
-def load_json(path, default):
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        return data if isinstance(data, dict) else default
-    except (OSError, ValueError):
-        return default
+def observe(site,rows,scope,notify_new=False,cooldown=60):
+    clean=[]
+    for row in rows:
+        url=product_url(row.get('url',''),site)
+        if not url:continue
+        clean.append({**row,'url':url,'id':product_id(site,url),'site_key':site,'scopes':[scope],
+                      'notify_new':notify_new,'cooldown_minutes':cooldown})
+    for start in range(0,len(clean),100):
+        db('rpc/guerrilla_sale_observe','POST',{'p_rows':clean[start:start+100]})
 
+def iso():return datetime.now(timezone.utc).isoformat(timespec='seconds')
 
-def write_json_if_changed(path, obj):
-    contents = json.dumps(obj, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-    try:
-        if path.read_text(encoding="utf-8") == contents:
-            return
-    except OSError:
-        pass
-    path.write_text(contents, encoding="utf-8")
-
-
-def post_discord(target):
-    hook = os.environ.get("GUERRILLA_DISCORD_WEBHOOK_URL", "").strip()
-    if not hook:
-        return False
-    if not (hook.startswith("https://discord.com/api/webhooks/") or
-            hook.startswith("https://discordapp.com/api/webhooks/")):
-        print("Webhook URL format is invalid", file=sys.stderr)
-        return False
-    payload = {
-        "content": "⚡ **ゲリラ販売を検知**\n"
-                   f"店舗：{str(target.get('shop', ''))[:80]}\n"
-                   f"商品：{str(target.get('product', ''))[:120]}\n"
-                   f"確認先：{target['url']}\n"
-                   "※販売ページの表示を検知した速報です。購入可能・在庫確保を保証しません。",
-        "allowed_mentions": {"parse": []},
-    }
-    try:
-        req = Request(hook, data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-                      headers={"Content-Type": "application/json", "User-Agent": "TorecaRadar/1.0"},
-                      method="POST")
-        with urlopen(req, timeout=10) as res:
-            return 200 <= res.status < 300
-    except (HTTPError, URLError, TimeoutError, ValueError) as exc:
-        print(f"Discord notification failed: {type(exc).__name__}", file=sys.stderr)
-        return False
-
-
-
-def supabase_request(path, method="GET", data=None):
-    base = os.environ.get("SUPABASE_URL", "").rstrip("/")
-    secret = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
-    if not base.startswith("https://") or not secret:
-        raise RuntimeError("Supabase credentials are not set in GitHub Actions secrets")
-    headers = {
-        "apikey": secret,
-        "Authorization": "Bearer " + secret,
-        "Content-Type": "application/json",
-        "Prefer": "resolution=merge-duplicates,return=representation",
-    }
-    req = Request(base + "/rest/v1/" + path,
-                  data=json.dumps(data, ensure_ascii=False).encode("utf-8") if data is not None else None,
-                  headers=headers, method=method)
-    with urlopen(req, timeout=15) as response:
-        raw = response.read(MAX_BYTES + 1)
-        if len(raw) > MAX_BYTES:
-            raise ValueError("Supabase response too large")
-        return json.loads(raw.decode("utf-8")) if raw else []
-
+def sweep_site(site,targets,state,client):
+    state=dict(state or {})
+    active=[x for x in targets if x.get('site_key')==site and x.get('enabled') is True]
+    if not active:return {**state,'status':'paused','selected_count':0,'catalog_enabled':False}
+    until=state.get('retry_after')
+    if until:
+        try:
+            if datetime.fromisoformat(until)>datetime.now(timezone.utc):return state
+        except ValueError:pass
+    state.update(status='checking',retry_after=None,selected_count=sum(x.get('mode')=='selected' for x in active),catalog_enabled=any(x.get('mode')=='all' for x in active))
+    checked=set();errors=[];checked_count=0
+    selected=sorted([x for x in active if x.get('mode')=='selected'],key=lambda x:x['id'])
+    start=int(state.get('selected_cursor',0))%max(1,len(selected))
+    ordered=(selected[start:]+selected[:start])[:SELECTED_BATCH]
+    def detail(row,scope):
+        nonlocal checked_count
+        url=product_url(row.get('url',''),site)
+        if not url:return
+        if url in checked:return
+        try:
+            result=parse_detail(client.get(url,site),site,url)
+        except CheckError as e:
+            errors.append(e.code)
+            result={'url':url,'product':row.get('product',''),'status':('waiting' if e.code=='waiting' else 'blocked' if e.code in ('http_403','http_429','robots_denied') else 'unknown'),'reason':e.code}
+        observe(site,[result],scope,cooldown=row.get('cooldown_minutes',60))
+        checked.add(url);checked_count+=1
+    for row in ordered:detail(row,'selected')
+    state['selected_cursor']=(start+len(ordered))%max(1,len(selected))
+    if state['catalog_enabled'] and site not in client.halted:
+        cursor=max(1,int(state.get('next_page',1)))
+        for page in sorted({1,cursor}):
+            if site in client.halted:break
+            try:
+                url=catalog_url(site,page)
+                rows,total,links=parse_catalog(client.get(url,site),site,url)
+                fingerprint=hashlib.sha256('|'.join(sorted(r['url'] for r in rows)).encode()).hexdigest()
+                if page>1 and fingerprint==state.get('first_page_fingerprint'):
+                    raise CheckError('pagination_not_advancing')
+                if page==1:state['first_page_fingerprint']=fingerprint
+                # One product cannot create two events across both modes; SQL locks
+                # its canonical identity and updates state/event in one transaction.
+                observe(site,[r for r in rows if r['url'] not in checked],'all',bool(state.get('completed_cycles',0)))
+                state['catalog_total']=total or state.get('catalog_total',0)
+                state['last_catalog_at']=iso()
+                if page==cursor:
+                    size=40 if site=='pokemon' else 50
+                    next_exists=bool(links) or (total>page*size)
+                    terminal=total>0 and page*size>=total
+                    if next_exists:
+                        state['next_page']=page+1
+                    elif terminal:
+                        state['next_page']=1
+                        state['completed_cycles']=int(state.get('completed_cycles',0))+1
+                        state['last_cycle_at']=iso()
+                    else:
+                        errors.append('pagination_unverified')
+                    state['last_page']=page
+            except CheckError as e:
+                errors.append(e.code)
+                break
+        if site not in client.halted:
+            due=db('guerrilla_sale_products?select=url,product&site_key=eq.'+site+'&order=checked_at.asc.nullsfirst,id&limit='+str(DETAIL_BATCH+SELECTED_BATCH)) or []
+            for row in [r for r in due if r['url'] not in checked][:DETAIL_BATCH]:detail(row,'all')
+    state.update(status='partial' if errors else 'ok',last_run_at=iso(),details_checked=checked_count,errors=list(dict.fromkeys(errors))[:8])
+    if site in client.halted:
+        state['status']='blocked'
+        state['retry_after']=(datetime.now(timezone.utc)+timedelta(minutes=15)).isoformat(timespec='seconds')
+    return state
 
 def main():
-    now = datetime.now(timezone.utc)
-    now_iso = now.isoformat(timespec="seconds").replace("+00:00", "Z")
-    config = {"targets": supabase_request("guerrilla_sale_monitor_targets?select=*&order=id.asc&limit=20")}
-    targets = config.get("targets", [])
-    if not isinstance(targets, list):
-        targets = []
-    snapshot = supabase_request("guerrilla_sale_monitor_snapshot?select=payload&id=eq.current&limit=1")
-    state = snapshot[0].get("payload", {}) if snapshot else {"targets": {}, "events": []}
-    records = state.get("targets", {})
-    if not isinstance(records, dict):
-        records = {}
-    events = state.get("events", [])
-    if not isinstance(events, list):
-        events = []
-    active = []
-    seen = set()
-    for target in targets[:MAX_TARGETS]:
-        if not isinstance(target, dict) or target.get("enabled") is not True:
-            continue
-        key = str(target.get("id", ""))
-        if not re.fullmatch(r"[a-zA-Z0-9_-]{2,64}", key) or key in seen:
-            continue
-        seen.add(key)
-        active.append(target)
+    targets=all_targets()
+    stored=db('guerrilla_sale_monitor_snapshot?select=payload&id=eq.current&limit=1') or []
+    old=stored[0].get('payload',{}) if stored else {}
+    states=old.get('sites',{})
+    client=StoreClient()
+    for site in SITES:
+        states[site]=sweep_site(site,targets,states.get(site,{}),client)
+    payload={'schema_version':2,'visibility':'developer','notification_delivery':'developer_in_app_only','sites':states,'items':[],'events':[]}
+    db('guerrilla_sale_monitor_snapshot?on_conflict=id','POST',[{'id':'current','payload':payload,'updated_at':iso()}])
+    print('Developer-only sale monitor finished. Results stored privately.')
 
-    items = []
-    for target in active:
-        key = target["id"]
-        old = records.get(key, {})
-        if not isinstance(old, dict):
-            old = {}
-        observation, reason = detect(target)
-        confirmed = old.get("confirmed_status", "unknown")
-        prev_alert = old.get("last_alert_at", "")
-        last_alert = prev_alert
-        if observation in ("available", "unavailable"):
-            # Only an observed unavailable -> available transition creates an
-            # alert; first scans and transient errors never trigger one.
-            is_new_sale = confirmed == "unavailable" and observation == "available"
-            try:
-                prev_dt = datetime.fromisoformat(prev_alert.replace("Z", "+00:00"))
-                recent = now - prev_dt < timedelta(minutes=max(15, int(target.get("cooldown_minutes", 60))))
-            except (ValueError, TypeError, OverflowError):
-                recent = False
-            if is_new_sale and not recent:
-                event = {"id": f"{key}-{int(now.timestamp())}", "target_id": key,
-                         "shop": str(target.get("shop", ""))[:80],
-                         "product": str(target.get("product", ""))[:120],
-                         "url": target.get("url", ""), "detected_at": now_iso}
-                events.insert(0, event)
-                post_discord(target)
-                last_alert = now_iso
-                print(f"Sale transition detected: {key}")
-            confirmed = observation
-        records[key] = {
-            "confirmed_status": confirmed,
-            "status": observation,
-            "last_error": reason,
-            "checked_hour": now.strftime("%Y-%m-%dT%H:00:00Z"),
-            "last_alert_at": last_alert,
-        }
-        items.append({
-            "id": key, "shop": str(target.get("shop", ""))[:80],
-            "product": str(target.get("product", ""))[:120],
-            "url": target.get("url", "") if safe_https_url(target.get("url")) else "",
-            "status": observation, "reason": reason,
-            "checked_at": now.strftime("%Y-%m-%dT%H:00:00Z"),
-        })
-        print(f"Checked {key}: {observation}")
-
-    events = [e for e in events if isinstance(e, dict)][:50]
-    # State is checked back into the repository to suppress duplicates across runs.
-    private_state = {"schema_version": 1, "targets": records, "events": events, "items": items}
-    supabase_request("guerrilla_sale_monitor_snapshot?on_conflict=id", "POST",
-                     [{"id": "current", "payload": private_state, "updated_at": now_iso}])
-
-
-if __name__ == "__main__":
-    main()
+if __name__=='__main__':
+    try:main()
+    except Exception as e:
+        print('Sale monitor stopped: '+(e.code if isinstance(e,CheckError) else type(e).__name__),file=sys.stderr)
+        sys.exit(1)
