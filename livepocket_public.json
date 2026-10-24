@@ -6922,24 +6922,22 @@
       "url": "https://livepocket.jp/e/87-y2",
       "store_name": "ふるいちイオンモール幕張新都心店",
       "prefecture": "千葉県",
+      "event_title": "【ふるいちイオンモール幕張新都心店】ポケカ抽選販売（30thCELEBRATION）",
+      "application_start_at": "2026-10-24T12:00:00+09:00",
+      "application_end_at": "2026-10-24T17:01:00+09:00",
       "discord_posted_at": "2026-10-24T07:30:03.282000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール幕張新都心店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "【ふるいちイオンモール幕張新都心店】ポケカ抽選販売（30thCELEBRATION）",
-      "application_end_at": "2026-10-24T17:01:00+09:00",
-      "application_start_at": "2026-10-24T12:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール幕張新都心店】ポケカ抽選販売（30thCELEBRATION）",
       "first_detected_at": "2026-10-24T07:30:58.248074+00:00"
     }
   ],
-  "updated_at": "2026-10-24T07:31:26.949002+00:00"
+  "updated_at": "2026-10-24T07:40:57.883986+00:00"
 }
