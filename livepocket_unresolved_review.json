@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T15:36:42Z",
+  "as_of": "2026-10-24T15:47:00Z",
   "total": 2,
   "items": [
     {
@@ -17,7 +17,7 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-23T15:46:24.564758+00:00",
       "next_retry_at": "2026-10-24T15:46:24.564758+00:00",
-      "queue": "retry_wait"
+      "queue": "ready"
     },
     {
       "url": "https://livepocket.jp/e/h9fk-",
