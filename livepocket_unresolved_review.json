@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T09:58:22Z",
-  "total": 16,
+  "as_of": "2026-10-24T10:06:02Z",
+  "total": 7,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -107,141 +107,6 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-24T09:36:21.533615+00:00",
       "next_retry_at": "2026-10-25T09:36:21.533615+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/qemuo",
-      "event_title": "ワンピースカード HEROINES PRECIOUS BOX 抽選販売受付",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T20:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:26:29.910131+00:00",
-      "next_retry_at": "2026-10-25T09:26:29.910131+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/ryfzt",
-      "event_title": "ポケモンカードゲーム「ストームエメラルダ」抽選",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-11-03T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:26:29.910131+00:00",
-      "next_retry_at": "2026-10-25T09:26:29.910131+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/tj_mq",
-      "event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
-      "store_name": "",
-      "prefecture": "宮城県",
-      "application_end_at": "2026-10-26T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:53:31.671079+00:00",
-      "next_retry_at": "2026-10-25T09:53:31.671079+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/tryts",
-      "event_title": "【岩国店】10/31発売ワンピースカードゲーム「ONE PIECE Heroines Edition vol.2」【EB-05】抽選販売",
-      "store_name": "岩国店",
-      "prefecture": "",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:53:31.671079+00:00",
-      "next_retry_at": "2026-10-25T09:53:31.671079+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/ugnmg",
-      "event_title": "古本市場西淀川店】ポケカ抽選販売（30th CELEBRATION カードセット ）9種セット",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:53:31.671079+00:00",
-      "next_retry_at": "2026-10-25T09:53:31.671079+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/vs_p-",
-      "event_title": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:26:29.910131+00:00",
-      "next_retry_at": "2026-10-25T09:26:29.910131+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/wlon0",
-      "event_title": "古本市場香里園店ポケカ抽選販売30th celebration1BOX",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:46:23.650214+00:00",
-      "next_retry_at": "2026-10-25T09:46:23.650214+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/yutwo",
-      "event_title": "【ふるいちトップブックス長岡古正寺】ポケカ抽選販売（30th CELEBRATION）",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-26T22:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:43:09.467373+00:00",
-      "next_retry_at": "2026-10-25T09:43:09.467373+00:00",
-      "queue": "retry_wait"
-    },
-    {
-      "url": "https://livepocket.jp/e/zoqcs",
-      "event_title": "ふるいちイオンモール茨木店ポケカ抽選販売",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-10-24T09:43:09.467373+00:00",
-      "next_retry_at": "2026-10-25T09:43:09.467373+00:00",
       "queue": "retry_wait"
     }
   ]
