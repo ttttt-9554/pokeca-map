@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-24T16:35:58.817590+00:00",
+  "collected_at": "2026-10-24T21:00:55.831320+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 545,
+  "unique_livepocket_urls": 546,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14578,17 +14578,43 @@
       "event_title": "【再販分】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ 抽選販売",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-23T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/i5bkt",
+      "discord_message_id": "1563658357292666891",
+      "discord_posted_at": "2026-10-24T21:00:03.746000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA籠原店\n受付終了: 10/25 21:30（残り15時間29分）\nhttps://livepocket.jp/e/i5bkt",
+      "store_name": "TSUTAYA籠原店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA籠原店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title"
+      },
+      "event_title": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 388,
+    "parsed": 389,
     "no_structured_details": 157
   },
   "field_counts": {
-    "store_name": 369,
-    "prefecture": 304,
-    "event_title": 232,
+    "store_name": 370,
+    "prefecture": 305,
+    "event_title": 233,
     "event_date": 1,
     "product_name": 78,
     "application_period": 2,
@@ -14596,15 +14622,15 @@
     "lottery_result_period": 1,
     "application_end_at": 511,
     "application_start_at": 511,
-    "stores_events": 377
+    "stores_events": 378
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563590006285668373"
+      "1551580466266644552": "1563658357292666891"
     },
     "last_run": {
-      "checked_at": "2026-10-24T16:35:58.817590+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-24T21:00:55.831320+00:00",
+      "new_urls": 1,
       "original_urls": 545,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -14749,7 +14775,8 @@
         "1563507358242705461": "2026-10-24T11:05:55.171069+00:00",
         "1563514907566149653": "2026-10-24T11:35:56.235076+00:00",
         "1563522590058745876": "2026-10-24T12:05:57.130876+00:00",
-        "1563537601682473134": "2026-10-24T13:05:56.918445+00:00"
+        "1563537601682473134": "2026-10-24T13:05:56.918445+00:00",
+        "1563658357292666891": "2026-10-24T21:00:56.628335+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17015,6 +17042,11 @@
           "checked_at": "2026-10-24T19:16:25.326983+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/i5bkt": {
+          "checked_at": "2026-10-24T21:01:24.751698+00:00",
+          "status": "checked_title",
+          "http_status": null
         }
       }
     },
@@ -18159,6 +18191,12 @@
           "detected_at": "2026-10-24T13:05:57.978282+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/i5bkt": {
+          "detected_at": "2026-10-24T21:00:57.567755+00:00",
+          "status": "checked_title",
+          "checked_at": "2026-10-24T21:01:24.751698+00:00",
           "http_status": null
         }
       },
@@ -23453,6 +23491,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/i5bkt": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-24T21:01:24.751698+00:00",
+          "title_observed": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -26758,6 +26807,19 @@
         },
         "https://livepocket.jp/e/nc71x": {
           "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/i5bkt": {
+          "checked_at": "2026-10-24T21:01:24.751698+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

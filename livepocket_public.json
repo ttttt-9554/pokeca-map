@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T16:35:58.817590+00:00",
-  "unique_livepocket_urls": 545,
+  "collected_at": "2026-10-24T21:00:55.831320+00:00",
+  "unique_livepocket_urls": 546,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -7887,7 +7887,23 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-24T13:05:57.978282+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/i5bkt",
+      "store_name": "TSUTAYA籠原店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-24T21:00:03.746000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA籠原店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
+      "review_category": "onepiece",
+      "official_event_title": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
+      "first_detected_at": "2026-10-24T21:00:57.567755+00:00"
     }
   ],
-  "updated_at": "2026-10-24T20:50:59.190406+00:00"
+  "updated_at": "2026-10-24T21:01:24.751698+00:00"
 }
