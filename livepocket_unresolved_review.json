@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-24T02:56:01Z",
-  "total": 1,
+  "as_of": "2026-10-24T03:06:51Z",
+  "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -12,6 +12,17 @@
       "application_end_at": "",
       "missing": [
         "deadline"
+      ],
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/2qon3",
+      "event_title": "アニマルカードゲーム名古屋冬の陣2026",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "missing": [
+        "store"
       ],
       "queue": "retry_wait"
     }
