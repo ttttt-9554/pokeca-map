@@ -16639,8 +16639,9 @@
           "http_status": null
         },
         "https://livepocket.jp/e/yigdg": {
-          "checked_at": "2026-10-24T07:11:26.493023+00:00",
-          "status": "checked_retry_no_new_details"
+          "checked_at": "2026-10-24T13:16:20.242469+00:00",
+          "status": "checked_retry_no_new_details",
+          "http_status": null
         },
         "https://livepocket.jp/e/x54u6": {
           "checked_at": "2026-10-24T08:06:32.201476+00:00",
@@ -17688,7 +17689,8 @@
         "https://livepocket.jp/e/yigdg": {
           "detected_at": "2026-10-24T01:00:57.834831+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T07:11:26.493023+00:00"
+          "checked_at": "2026-10-24T13:16:20.242469+00:00",
+          "http_status": null
         },
         "https://livepocket.jp/e/cglfk": {
           "detected_at": "2026-10-24T02:05:57.476323+00:00",
@@ -18721,8 +18723,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yigdg": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T07:11:26.493023+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T13:16:20.242469+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/x54u6": {
@@ -22322,7 +22324,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T07:11:26.493023+00:00",
+          "checked_at": "2026-10-24T13:16:20.242469+00:00",
           "title_observed": "10/31 ワンピース ヒロインズエディション Vol.2【EB-05】抽選販売",
           "genre": "",
           "product_origin": "",
@@ -25484,7 +25486,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/yigdg": {
-          "checked_at": "2026-10-24T07:11:26.493023+00:00",
+          "checked_at": "2026-10-24T13:16:20.242469+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
