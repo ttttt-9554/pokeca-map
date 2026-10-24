@@ -7015,6 +7015,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【ブックイン金進堂長者原店】ワンピースカード「Heroines Edition vol.2」予約抽選",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7126,8 +7128,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール木曽川店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7144,8 +7144,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION）",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7213,8 +7211,6 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【ブックイン金進堂原田店】ワンピースカード「Heroines Edition vol.2」予約抽選",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7633,6 +7629,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち新潟万代店】ポケモンカードゲーム「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7641,6 +7639,7 @@
       "application_start_at": "2026-10-24T13:00:00+09:00",
       "application_end_at": "2026-10-25T18:59:00+09:00",
       "discord_posted_at": "2026-10-24T09:00:23.995000+00:00",
+      "official_event_title": "UNION ARENA Re:ゼロから始める異世界生活 Vol.2【EX17BT】1ボックス 抽選販売受付",
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
@@ -7910,5 +7909,5 @@
       "first_detected_at": "2026-10-24T21:00:57.567755+00:00"
     }
   ],
-  "updated_at": "2026-10-24T22:46:29.281606+00:00"
+  "updated_at": "2026-10-24T22:56:24.764478+00:00"
 }
