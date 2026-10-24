@@ -15057,16 +15057,16 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/xw_dt": {
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/xlrs9": {
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/hbg8_": {
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
-          "status": "checked_title"
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
+          "status": "browser_redirected"
         },
         "https://livepocket.jp/e/8qn_a": {
           "checked_at": "2026-10-24T00:33:20.584525+00:00",
@@ -15826,18 +15826,18 @@
         },
         "https://livepocket.jp/e/hbg8_": {
           "detected_at": "2026-10-24T00:30:57.216063+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-24T00:33:20.584525+00:00"
+          "status": "browser_redirected",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00"
         },
         "https://livepocket.jp/e/xlrs9": {
           "detected_at": "2026-10-24T00:30:57.216063+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T00:33:20.584525+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00"
         },
         "https://livepocket.jp/e/xw_dt": {
           "detected_at": "2026-10-24T00:30:57.216063+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T00:33:20.584525+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00"
         },
         "https://livepocket.jp/e/yigdg": {
           "detected_at": "2026-10-24T01:00:57.834831+00:00",
@@ -16543,6 +16543,21 @@
           "attempts": 1,
           "last_attempt_at": "2026-10-24T06:11:26.649408+00:00",
           "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/xw_dt": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T06:41:24.420465+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/xlrs9": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T06:41:24.420465+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/hbg8_": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T06:41:24.420465+00:00",
+          "last_status": "browser_redirected"
         }
       }
     },
@@ -20007,7 +20022,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
           "title_observed": "【古本市場深谷店】ポケカ抽選販売（30th カードセット9種類）",
           "genre": "pokemon",
           "product_origin": "",
@@ -20018,7 +20033,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
           "title_observed": "ONE PIECE EXブースター ヒロインズエディション Vol.2",
           "genre": "",
           "product_origin": "",
@@ -20026,12 +20041,12 @@
           "conflict": false
         },
         "https://livepocket.jp/e/hbg8_": {
-          "status": "ok",
-          "reason": "official_title_verified",
+          "status": "browser_redirected",
+          "reason": "fetch_browser_redirected",
           "http_status": "",
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
-          "title_observed": "【古本市場西大島駅前店】 ポケカ店頭抽選販売（30thセレブレーション）",
-          "genre": "pokemon",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
+          "title_observed": "",
+          "genre": "",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
@@ -22523,7 +22538,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/xw_dt": {
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -22536,7 +22551,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/xlrs9": {
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -22549,17 +22564,17 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/hbg8_": {
-          "checked_at": "2026-10-24T00:33:20.584525+00:00",
-          "reason": "official_title_detected",
-          "candidate_count": 3,
-          "valid_candidate_count": 1,
+          "checked_at": "2026-10-24T06:41:24.420465+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
           "detail": "",
-          "candidate_sources": "og:1;event_heading:1;document:1",
-          "title_detected": true,
-          "rejection_codes": "truncated:2;truncated_tail:2",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
           "meta_template_cleaned": 0,
-          "heading_seen": 1,
-          "recovery_probe": "dom_heading_verified"
+          "heading_seen": 0,
+          "recovery_probe": ""
         },
         "https://livepocket.jp/e/8qn_a": {
           "checked_at": "2026-10-24T00:33:20.584525+00:00",
