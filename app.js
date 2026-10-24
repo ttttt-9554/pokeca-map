@@ -7328,7 +7328,7 @@
 
   function init() {
     try {
-      console.log('ポケカ発見マップ 地図自動調整版 起動開始');
+      console.log('Toreca Radar 地図自動調整版 起動開始');
 
       initAppTheme();
       loadReports();
@@ -7393,7 +7393,7 @@
         $('sharedStatus').textContent = '共有機能の初期化に失敗: ' + error.message;
       });
 
-      console.log('ポケカ発見マップ 7カテゴリ版 起動完了');
+      console.log('Toreca Radar 7カテゴリ版 起動完了');
     } catch (error) {
       console.error('アプリ起動エラー:', error);
       alert(
