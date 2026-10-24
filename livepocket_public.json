@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-24T00:30:55.784258+00:00",
-  "unique_livepocket_urls": 470,
+  "collected_at": "2026-10-24T01:00:56.381776+00:00",
+  "unique_livepocket_urls": 471,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -6457,6 +6457,8 @@
           "prefecture": ""
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/13(金)発売予定】",
       "first_detected_at": "2026-10-23T12:45:58.330512+00:00"
     },
     {
@@ -6595,7 +6597,25 @@
         }
       ],
       "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/yigdg",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-24T01:00:04.535000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "10/31 ワンピース ヒロインズエディション Vol.2【EB-05】抽選販売",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-23T20:00:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "10/31 ワンピース ヒロインズエディション Vol.2【EB-05】抽選販売",
+      "first_detected_at": "2026-10-24T01:00:57.834831+00:00"
     }
   ],
-  "updated_at": "2026-10-24T00:51:01.894167+00:00"
+  "updated_at": "2026-10-24T01:01:41.834750+00:00"
 }
