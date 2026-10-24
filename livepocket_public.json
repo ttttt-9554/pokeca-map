@@ -6581,7 +6581,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "official_event_title": "ONE PIECE EXブースター ヒロインズエディション Vol.2",
       "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     },
     {
@@ -6599,6 +6598,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
       "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     },
     {
@@ -6616,8 +6617,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th カードセット9種類）",
       "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     },
     {
@@ -7851,5 +7850,5 @@
       "first_detected_at": "2026-10-24T12:05:58.157724+00:00"
     }
   ],
-  "updated_at": "2026-10-24T12:46:20.609850+00:00"
+  "updated_at": "2026-10-24T12:56:28.485338+00:00"
 }
