@@ -2112,8 +2112,11 @@ html[data-theme=dark] #devView .lp-dev-review-row{background:#203149!important;b
 html[data-theme=dark] #lpCardReviewConfirm{color:#eef4ff!important;border-color:#526681!important}
 
 /* Lottery cards: less than 24 hours before application deadline */
+html[data-theme="dark"] .lp-card.lp-urgent-card,
+html[data-theme="light"] .lp-card.lp-urgent-card,
 .lp-card.lp-urgent-card {
-  border: 2px solid #e65b25;
+  border: 2px solid #e65b25 !important;
+  border-color: #e65b25 !important;
   box-shadow: none;
 }
 .lp-card .lp-urgent-alert {
