@@ -26,7 +26,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261024-v21_90-inline-lottery-results">
+  <link rel="stylesheet" href="style.css?v=20261024-v21_91-summary-grid-3x2">
 
   <style>
     [hidden] { display: none !important; }
@@ -651,7 +651,7 @@ nav[aria-label="メインメニュー"] {
         <button id="lpRefresh" type="button" class="lp-refresh">↻ 更新</button>
       </div>
       <p id="lpLoadStatus" class="hint" role="status" aria-live="polite">抽選情報はタブを開くと読み込みます。</p>
-      <div id="lpSummary" class="lp-summary" aria-live="polite"></div>
+      <div id="lpSummary" class="lp-summary" role="group" aria-label="抽選の件数一覧" aria-live="polite"></div>
       <details id="lpOnsiteArchive" aria-label="現地対応アーカイブ">
         <summary>📚 現地対応アーカイブ（<span id="lpOnsiteArchiveCount">0件</span>）</summary>
         <div class="lp-onsite-archive-body">
@@ -1559,7 +1559,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261024-v21_90-inline-lottery-results"></script>
+  <script src="app.js?v=20261024-v21_91-summary-grid-3x2"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
 <script>

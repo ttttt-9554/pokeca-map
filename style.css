@@ -598,9 +598,34 @@ nav button.active {
 .lp-heading h2{margin:0 0 8px}
 .lp-heading p{margin:0}
 .lp-refresh{flex-shrink:0;min-height:42px}
-.lp-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
-.lp-summary span{border:1px solid var(--app-border,#dbe3ed);border-radius:12px;padding:10px;background:var(--app-surface,#fff);font-size:12px;color:var(--app-muted,#64748b)}
-.lp-summary strong{font-size:18px;color:var(--app-text,#172033)}
+/* v21.91: one connected scoreboard; 3 columns x 2 rows, no individual cards. */
+#lotteryView .lp-summary{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:0;margin:12px 0 16px;
+ border:1px solid var(--app-border,#dbe3ed);
+ border-radius:17px;overflow:hidden;
+ background:var(--app-surface,#fff);
+}
+#lotteryView .lp-summary-cell{
+ min-width:0;min-height:88px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ padding:12px 4px 10px;box-sizing:border-box;text-align:center;
+ border:0;border-right:1px solid var(--app-border,#dbe3ed);
+ border-bottom:1px solid var(--app-border,#dbe3ed);
+}
+#lotteryView .lp-summary-cell:nth-child(3n){border-right:0}
+#lotteryView .lp-summary-cell:nth-child(n+4){border-bottom:0}
+#lotteryView .lp-summary-cell strong{
+ display:block;font-size:27px;font-weight:850;line-height:1.15;
+ letter-spacing:-.6px;color:var(--app-text,#172033);
+ font-variant-numeric:tabular-nums;
+}
+#lotteryView .lp-summary-cell small{
+ display:block;margin-top:8px;font-size:11px;font-weight:700;line-height:1.4;
+ color:var(--app-muted,#64748b);overflow-wrap:anywhere;
+}
+#lotteryView .lp-summary-cell.lp-summary-deadline strong{color:#a16207}
+#lotteryView .lp-summary-cell.lp-summary-open strong{color:#047857}
 .lp-filter{border:1px solid var(--app-border,#dbe3ed);background:var(--app-surface,#fff);border-radius:15px;padding:14px;display:flex;flex-direction:column;gap:12px}
 .lp-filter>label:not(.lp-wishlist),.lp-filter-grid label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}
 .lp-filter input[type=search],.lp-filter select{width:100%;min-width:0;background:var(--app-surface2,#fff);color:var(--app-text,#172033);border-color:var(--app-border,#cbd5e1)}
@@ -635,7 +660,13 @@ nav button.active {
 .lp-more{width:100%;margin:14px 0;min-height:46px}
 .lp-empty{border:1px dashed var(--app-border,#cbd5e1);border-radius:12px;padding:20px;text-align:center;color:var(--app-muted,#64748b);font-size:13px}
 nav:has(button[data-tab="dev"]:not([hidden])){grid-template-columns:repeat(6,minmax(0,1fr))}
-html[data-theme="dark"] .lp-filter,html[data-theme="dark"] .lp-card,html[data-theme="dark"] .lp-summary span,html[data-theme="dark"] .lp-store-details{background:var(--app-surface)!important;color:var(--app-text)!important;border-color:var(--app-border)!important}
+html[data-theme="dark"] .lp-filter,html[data-theme="dark"] .lp-card,html[data-theme="dark"] .lp-store-details{background:var(--app-surface)!important;color:var(--app-text)!important;border-color:var(--app-border)!important}
+html[data-theme="dark"] #lotteryView .lp-summary{background:var(--app-surface,#172337)!important;border-color:var(--app-border,#536782)!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell{border-color:var(--app-border,#536782)!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell strong{color:var(--app-text,#edf4ff)!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell small{color:var(--app-muted,#b9cce4)!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell.lp-summary-deadline strong{color:#fbbf24!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell.lp-summary-open strong{color:#34d399!important}
 html[data-theme="dark"] .lp-card.lp-closed{background:#1d293c!important;opacity:.65}
 html[data-theme="dark"] .lp-tag{background:var(--app-surface2)!important}
 html[data-theme="dark"] .lp-match{color:#9dc4ff!important}
@@ -643,7 +674,7 @@ html[data-theme="dark"] .lp-status.lp-open{background:#124728!important;color:#c
 html[data-theme="dark"] .lp-status.lp-upcoming{background:#17375d!important;color:#c8dfff!important}
 html[data-theme="dark"] .lp-status.lp-unknown,html[data-theme="dark"] .lp-status.lp-closed{background:#344154!important;color:#ebf3fc!important}
 html[data-theme="dark"] .lp-official{background:#245cb9!important;color:#fff!important}
-@media(max-width:390px){.lp-filter-grid{grid-template-columns:1fr}.lp-summary strong{font-size:16px}}
+@media(max-width:390px){.lp-filter-grid{grid-template-columns:1fr}#lotteryView .lp-summary-cell strong{font-size:24px}#lotteryView .lp-summary-cell small{font-size:10px}}
 
 /* v21.2: Show verified complete names on any number of lines. */
 #lotteryView .lp-full-title{

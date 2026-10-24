@@ -3668,12 +3668,27 @@
     const openCount = publicItems.filter(x => lotteryState(x,now) === 'open').length;
     const externalCount=publicItems.filter(x=>!isLivePocketEventUrl(x.url)&&!x.app_lottery).length;
     const appCount=publicItems.filter(x=>x.app_lottery).length;
-    $('lpSummary').innerHTML = `<span>全イベント <strong>${publicItems.length}</strong>件</span>
-      <span>外部URL <strong>${externalCount}</strong>件</span>
-      <span>アプリ抽選 <strong>${appCount}</strong>件</span>
-      <span>ポケカ <strong>${pokemonCount}</strong>件</span>
-      <span>締切確認済み <strong>${knownCount}</strong>件</span>
-      <span>受付中（確認済み） <strong>${openCount}</strong>件</span>`;
+    // v21.91: Preserve all six global counts. Show them in one 3x2
+    // segmented scorecard with the big numbers above compact labels.
+    $('lpSummary').innerHTML = `
+      <div class="lp-summary-cell">
+        <strong>${publicItems.length}</strong><small>全イベント</small>
+      </div>
+      <div class="lp-summary-cell">
+        <strong>${externalCount}</strong><small>外部URL</small>
+      </div>
+      <div class="lp-summary-cell">
+        <strong>${appCount}</strong><small>アプリ抽選</small>
+      </div>
+      <div class="lp-summary-cell">
+        <strong>${pokemonCount}</strong><small>ポケカ</small>
+      </div>
+      <div class="lp-summary-cell lp-summary-deadline">
+        <strong>${knownCount}</strong><small>締切確認済み</small>
+      </div>
+      <div class="lp-summary-cell lp-summary-open">
+        <strong>${openCount}</strong><small>受付中（確認済み）</small>
+      </div>`;
     $('lpResultCount').textContent = `検索結果：${visible.length}件` +
       (visible.length > lotteryVisibleLimit ? `（${lotteryVisibleLimit}件まで表示中）` : '');
     $('lpCards').innerHTML = visible.length ? visible.slice(0,lotteryVisibleLimit)
