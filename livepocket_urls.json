@@ -16809,12 +16809,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/v29mr": {
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/ul3vw": {
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -16914,7 +16914,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/vxgpy": {
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -17971,7 +17971,7 @@
         "https://livepocket.jp/e/vxgpy": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/0tw0p": {
@@ -18090,13 +18090,13 @@
         "https://livepocket.jp/e/ul3vw": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/v29mr": {
           "detected_at": "2026-10-24T09:05:58.588451+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/v5ucz": {
@@ -18945,18 +18945,18 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vxgpy": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T15:16:29.183872+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T21:22:25.519035+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/v29mr": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T15:16:29.183872+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T21:22:25.519035+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ul3vw": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T15:16:29.183872+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-24T21:22:25.519035+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vs_p-": {
@@ -22979,7 +22979,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "title_observed": "【ふるいちイオンモール甲府昭和店】ポケカ抽選販売（拡張パック『ストームエメラルダ』『メガブレイブ』『メガシンフォニア』）",
           "genre": "pokemon",
           "product_origin": "",
@@ -22990,7 +22990,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "title_observed": "【ふるいちイオンモール土岐店】ポケカ抽選販売（30th CELEBLATHION カードセット9種セット）",
           "genre": "pokemon",
           "product_origin": "",
@@ -23210,7 +23210,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "title_observed": "【ふるいち高野店】ポケカ抽選販売（拡張パック「30th CELEBRATION」）",
           "genre": "pokemon",
           "product_origin": "",
@@ -26208,7 +26208,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/v29mr": {
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26221,7 +26221,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ul3vw": {
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26481,7 +26481,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vxgpy": {
-          "checked_at": "2026-10-24T15:16:29.183872+00:00",
+          "checked_at": "2026-10-24T21:22:25.519035+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
