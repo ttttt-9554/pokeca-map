@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-24T05:35:55.698665+00:00",
+  "collected_at": "2026-10-24T06:10:58.244908+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -13041,12 +13041,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563424311157727394"
+      "1551580466266644552": "1563431920967352380"
     },
     "last_run": {
-      "checked_at": "2026-10-24T05:35:55.698665+00:00",
-      "new_urls": 2,
-      "original_urls": 485,
+      "checked_at": "2026-10-24T06:10:58.244908+00:00",
+      "new_urls": 0,
+      "original_urls": 487,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -15053,8 +15053,8 @@
           "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8rswc": {
-          "checked_at": "2026-10-24T00:01:24.345251+00:00",
-          "status": "checked_title_deadline"
+          "checked_at": "2026-10-24T06:11:26.649408+00:00",
+          "status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/xw_dt": {
           "checked_at": "2026-10-24T00:33:20.584525+00:00",
@@ -15816,8 +15816,8 @@
         },
         "https://livepocket.jp/e/8rswc": {
           "detected_at": "2026-10-24T00:00:58.433607+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-24T00:01:24.345251+00:00"
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-24T06:11:26.649408+00:00"
         },
         "https://livepocket.jp/e/8qn_a": {
           "detected_at": "2026-10-24T00:30:57.216063+00:00",
@@ -16537,6 +16537,11 @@
         "https://livepocket.jp/e/1dpkl": {
           "attempts": 2,
           "last_attempt_at": "2026-10-24T02:26:34.835082+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/8rswc": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-24T06:11:26.649408+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -19991,7 +19996,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T00:01:24.345251+00:00",
+          "checked_at": "2026-10-24T06:11:26.649408+00:00",
           "title_observed": "【古本市場小平店】 ポケカ抽選販売30thCELEBRATIONカードセット 9種セット",
           "genre": "pokemon",
           "product_origin": "",
@@ -22505,7 +22510,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/8rswc": {
-          "checked_at": "2026-10-24T00:01:24.345251+00:00",
+          "checked_at": "2026-10-24T06:11:26.649408+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
