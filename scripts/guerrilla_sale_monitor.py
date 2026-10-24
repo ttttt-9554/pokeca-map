@@ -220,6 +220,19 @@ def parse_detail(html,site,url):
         n=n.parent
     return {'url':url,'product':title,'status':'unknown','reason':'在庫表示を商品単位で確定できません'}
 
+def redirect_reason(dest, site):
+    """Classify a refused redirect without following it."""
+    try:
+        u = urlsplit(dest)
+    except (ValueError, TypeError):
+        return 'redirect_blocked'
+    host = (u.hostname or '').lower()
+    if site == 'pokemon' and host == 'wr.pokemoncenter-online.com':
+        return 'waiting'
+    if any(x in dest.lower() for x in ('queue', 'waiting', 'queue-it')):
+        return 'waiting'
+    return 'redirect_blocked'
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self,req,fp,code,msg,headers,newurl):
         return None
@@ -254,10 +267,10 @@ class StoreClient:
         except HTTPError as e:
             if 300<=e.code<400:
                 dest=urljoin(url,e.headers.get('Location',''))
-                if any(x in dest.lower() for x in ('queue','waiting')):
-                    raise CheckError('waiting') from None
-                # Fail closed: never follow login, cart or off-site redirects.
-                raise CheckError('redirect_blocked') from None
+                # Never follow the queue. Recognize the retailer's official
+                # waiting-room host so diagnostics distinguish it from an
+                # unexpected redirect.
+                raise CheckError(redirect_reason(dest, site)) from None
             raise CheckError('http_'+str(e.code)) from None
         except (OSError,TimeoutError):
             raise CheckError('network_error') from None
@@ -285,7 +298,10 @@ class StoreClient:
                     if re.search(rx,path):raise CheckError('robots_denied')
             return self.raw(url,site)
         except CheckError as e:
-            if e.code in ('http_403','http_429','waiting','robots_denied','robots_unavailable','robots_unverified','redirect_blocked'):
+            if e.code in ('http_403','http_429','http_500','http_502','http_503','http_504',
+                           'waiting','robots_denied','robots_unavailable','robots_unverified','redirect_blocked'):
+                # Stop this site's remaining requests for the run. 5xx is
+                # temporary service trouble, not a reason to keep probing.
                 self.halted[site]=e.code
             raise
 
