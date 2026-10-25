@@ -27,6 +27,7 @@ import livepocket_v14 as v14
 import livepocket_v16 as v16
 import livepocket_v19 as v19
 import livepocket_v20 as v20
+from livepocket_venue_prefecture import fill_one as fill_venue_prefecture
 from livepocket_manual_completed import read_manual_completed, read_review_completed
 
 RAW_PATH = v14.RAW_PATH
@@ -1978,6 +1979,19 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             stats[metric] = sum(page_supported_change(u, metric, keys)
                                 for u in successful)
     
+    # Only use exact-URL page observations. Never override known locations.
+    venue_added = 0
+    raw_index = {item.get('url'): item for item in raw.get('items', [])}
+    public_index = {item.get('url'): item for item in public.get('items', [])}
+    for venue_url, observation in observations.items():
+        if not isinstance(observation, dict) or observation.get('status') != 'ok':
+            continue
+        if v12.exact_event_url(observation.get('final_url')) != venue_url:
+            continue
+        raw_row, public_row = raw_index.get(venue_url), public_index.get(venue_url)
+        if raw_row is not None and public_row is not None:
+            venue_added += int(fill_venue_prefecture(raw_row, public_row, observation.get('text')))
+    stats['exact_venue_prefectures_added'] = venue_added
     stats.update(apply_verified_unavailable(raw, public, verified_unavailable or {}))
     stats['first_detection_times_published'] = publish_first_detected_at(
         raw, public, now=now)
