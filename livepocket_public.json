@@ -8006,24 +8006,22 @@
       "url": "https://livepocket.jp/e/efl_e",
       "store_name": "ふるいちトップブックスフォレオ菖蒲店",
       "prefecture": "埼玉県",
+      "event_title": "【ふるいちトップブックスフォレオ菖蒲店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック30th CELEBRATION 1BOX）",
+      "application_start_at": "2026-10-24T08:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-25T03:30:03.586000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちトップブックスフォレオ菖蒲店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【ふるいちトップブックスフォレオ菖蒲店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック30th CELEBRATION 1BOX）",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-24T08:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックスフォレオ菖蒲店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック30th CELEBRATION 1BOX）",
       "first_detected_at": "2026-10-25T03:30:58.211006+00:00"
     }
   ],
-  "updated_at": "2026-10-25T03:31:28.751642+00:00"
+  "updated_at": "2026-10-25T03:40:58.345826+00:00"
 }
