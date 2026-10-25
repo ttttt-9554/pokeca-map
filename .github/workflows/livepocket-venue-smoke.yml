@@ -8,10 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout isolated feature branch
+      - name: Checkout current main (read only)
         uses: actions/checkout@v4
         with:
-          ref: feature/livepocket-prefecture-backfill-20261025
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
