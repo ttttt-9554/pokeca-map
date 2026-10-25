@@ -1567,9 +1567,9 @@ nav[aria-label="メインメニュー"] {
   // requests an update, preventing a stale app.js response in iOS/Chrome.
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
-    var version = token && /^\\d{10,16}$/.test(token)
+    var version = token && /^\d{10,16}$/.test(token)
       ? token : '20261025-store-label-11c3a9c';
-    document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\\/script>');
+    document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
