@@ -47,6 +47,14 @@ def fetch_manual_urls(base_url, service_key, opener=urllib.request.urlopen):
         except urllib.error.HTTPError as exc:
             print("Supabase HTTP status:", exc.code)
             print("Supabase response content type:", exc.headers.get("Content-Type", "unknown"))
+            # Only emit an allowlisted diagnostic code, never response body or credentials.
+            try:
+                payload = json.loads(exc.read(4096).decode("utf-8", "replace"))
+                code = payload.get("code") if isinstance(payload, dict) else None
+                allowed = {"42501", "PGRST301", "PGRST302", "PGRST303", "PGRST116", "invalid_api_key", "bad_jwt"}
+                print("Supabase safe error code:", code if code in allowed else "unclassified")
+            except (ValueError, UnicodeError):
+                print("Supabase safe error code: unavailable")
             print("Supabase request rejected; response body intentionally hidden")
             raise RuntimeError("Supabase authentication or access policy rejected request") from None
         if not isinstance(rows, list):
