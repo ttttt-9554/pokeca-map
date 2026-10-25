@@ -1991,26 +1991,106 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
 
 
 def venue_prefecture_from_overview(text, store_name):
-    """Only an explicit overview venue matching this single store is evidence.
-
-    Do not use event dates, ticket tab text, inferred locality, or multi-store
-    events. A conflicting or ambiguous venue remains unverified.
-    """
+    """Only use a matching, explicitly labelled venue with one prefecture."""
     if not isinstance(text, str) or not isinstance(store_name, str):
         return ''
-    shop = re.sub(r'\\s+', '', store_name)
-    if not shop or len(shop) < 3:
+    shop = re.sub(r'\s+', '', store_name)
+    if len(shop) < 3:
         return ''
-    matches = set()
     lines = [line.strip() for line in text.splitlines() if line.strip()]
-    for index, line in enumerate(lines):
-        # LivePocket may render 会場 and its value in separate DOM elements.
-        if line == '会場' and index + 1 < len(lines):
-            line = '会場 ' + lines[index + 1]
-        # LivePocket overview: 会場 ふるいち○○店（愛知県）
-        m = re.match(r'^会場\\s*[：:]?\\s*(.+?)\\s*[（(](' +
-                     '|'.join(map(re.escape, sorted(v10.PREFS, key=len, reverse=True))) +
-                     r')[）)]\\s*
+    found = set()
+    pattern = re.compile(r'^会場\s*[：:]?\s*(.+?)\s*[（(](' +
+                         '|'.join(map(re.escape, sorted(v10.PREFS, key=len, reverse=True))) +
+                         r')[）)]\s*def main():
+    import sys
+    if len(sys.argv) != 2 or sys.argv[1] not in ('plan', 'process'):
+        raise SystemExit('Usage: python scripts/livepocket_v21.py plan|process')
+    catalog = load_catalog()
+    raw, public = v14.read_pair()
+    arrival_policy.clean_placeholders(raw, public)
+    known = {item['url'] for item in raw['items']}
+    verified = v20.read_verified(v20.MANUAL_PATH, known)
+    v19_verified = v19.read_manual(v19.MANUAL_PATH, known)
+    new_limit = v14.safe_limit('LIVEPOCKET_V14_NEW_PER_RUN', 15, 25)
+    background_limit = (v14.safe_limit('LIVEPOCKET_V14_BACKGROUND_PER_RUN', 8, 12)
+                        if v14.wants_background() else 0)
+    manual_recheck = os.getenv('LIVEPOCKET_DEVELOPER_RECHECK') == 'true'
+    if manual_recheck:
+        # The button deliberately requests a full 12 historical URLs. The
+        # standard 5-minute schedule never receives this environment flag.
+        background_limit = MANUAL_RECHECK_LIMIT
+    retry_limit = v14.safe_limit('LIVEPOCKET_V16_RETRY_PER_RUN', 3, 5)
+    verified_titles = read_verified_titles()
+    verified_unavailable = read_verified_unavailable()
+    if manual_recheck:
+        cloud_titles, cloud_removed, cloud_locations = read_manual_completed()
+        cloud_reviews = read_review_completed()
+        manual_urls = manual_recheck_candidates(
+            raw, public, completed_titles=cloud_titles,
+            removed_pages=cloud_removed | set(verified_unavailable),
+            completed_locations=cloud_locations,
+            completed_reviews=cloud_reviews)
+    else:
+        manual_urls = []
+    with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):
+        work = v19.v18.plan(raw, public, new_limit=new_limit,
+                           background_limit=background_limit,
+                           retry_limit=0 if manual_recheck else retry_limit)
+    title_limit = v14.safe_limit('LIVEPOCKET_V21_3_TITLE_PER_RUN', 2, 3)
+    titles_due = [] if manual_recheck else title_recheck_candidates(raw, public, limit=title_limit)
+    official_due, official_counts, _ = (
+        official_title_diagnostics(raw, public, limit=0 if manual_recheck else OFFICIAL_TITLE_CHECK_PER_RUN)
+        if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
+    browser_needed = bool(work['browser_needed'] or titles_due or official_due)
+    if sys.argv[1] == 'plan':
+        print('v21.16 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
+              'official_due:', len(official_due), 'official_reasons:', official_counts,
+              'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
+              'map catalog products:', len(catalog))
+        if os.getenv('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
+                fh.write('browser_needed=' + ('true' if browser_needed else 'false') + '\n')
+        return
+    ready = os.getenv('LIVEPOCKET_V21_BROWSER_READY', '')
+    if ready == 'false':
+        new_limit = background_limit = retry_limit = title_limit = 0
+        needed = False
+    else:
+        needed = ready == 'true' or browser_needed
+    if needed:
+        fetch, close = browser_fetcher()
+    else:
+        def fetch(_url):
+            raise AssertionError('Unexpected browser fetch')
+        close = lambda: None
+    try:
+        data = process(raw, public, fetch, catalog=catalog,
+                       new_limit=new_limit, background_limit=background_limit,
+                       retry_limit=retry_limit, verified=verified,
+                       v19_verified=v19_verified,
+                       title_limit=title_limit,
+                       manual_recheck=manual_recheck,
+                       manual_limit=MANUAL_RECHECK_LIMIT,
+                       verified_titles=verified_titles,
+                       verified_unavailable=verified_unavailable)
+    finally:
+        close()
+    raw, public, review, deadlines, sources, content, stats = data
+    for k, value in stats.items():
+        print(f'{k}: {value}')
+    print('raw_updated:', v11.write_json(RAW_PATH, raw))
+    print('public_updated:', v11.write_json(PUBLIC_PATH, public))
+    print('review_updated:', v10.write_csv(v20.v15.REVIEW_PATH, review))
+    print('deadline_review_updated:', v11.write_csv(v14.REVIEW_PATH, deadlines))
+    print('deadline_sources_updated:', v12.write_report(v14.SOURCES_PATH, sources))
+    print('content_checks_updated:', write_content(v14.CHECKS_PATH, content))
+
+
+if __name__ == '__main__':
+    main()
+
+
+def ticket_tab_needs_check(body):
     """Check the same event's ticket tab whenever its sign-up dates are incomplete.
 
     v21.69 only opened this tab when store options were missing. That misses
@@ -2714,20 +2794,21 @@ def main():
 
 if __name__ == '__main__':
     main()
-, line)
-        if not m:
-            continue
-        venue = re.sub(r'\\s+', '', m.group(1))
-        if venue == shop:
-            matches.add(m.group(2))
-    return next(iter(matches)) if len(matches) == 1 else ''
+)
+    for i, line in enumerate(lines):
+        if line == '会場' and i + 1 < len(lines):
+            line += ' ' + lines[i + 1]
+        match = pattern.fullmatch(line)
+        if match and re.sub(r'\s+', '', match.group(1)) == shop:
+            found.add(match.group(2))
+    return next(iter(found)) if len(found) == 1 else ''
 
 
 def enrich_exact_venue_prefectures(raw, public, observations):
-    """Fill only missing prefectures on exact-URL single-store events."""
+    """Only fill missing single-store prefectures, never override verified data."""
     ri = {x.get('url'): x for x in raw.get('items', [])}
     pi = {x.get('url'): x for x in public.get('items', [])}
-    changed = 0
+    count = 0
     for url, result in observations.items():
         if url not in ri or url not in pi or not isinstance(result, dict):
             continue
@@ -2738,7 +2819,7 @@ def enrich_exact_venue_prefectures(raw, public, observations):
         if len(stores) != 1 or not isinstance(stores[0], dict):
             continue
         name = stores[0].get('name') or ''
-        if not name or (a.get('prefecture') or b.get('prefecture') or stores[0].get('prefecture')):
+        if not name or a.get('prefecture') or b.get('prefecture') or stores[0].get('prefecture'):
             continue
         pref = venue_prefecture_from_overview(result.get('text'), name)
         if not pref:
@@ -2749,8 +2830,8 @@ def enrich_exact_venue_prefectures(raw, public, observations):
             if isinstance(entries, list) and len(entries) == 1 and entries[0].get('name') == name:
                 entries[0]['prefecture'] = pref
         a.setdefault('field_sources', {})['prefecture'] = 'v21_exact_url_overview_venue'
-        changed += 1
-    return changed
+        count += 1
+    return count
 
 
 def ticket_tab_needs_check(body):
