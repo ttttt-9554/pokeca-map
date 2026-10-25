@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-25T06:35:58.996608+00:00",
-  "unique_livepocket_urls": 557,
+  "collected_at": "2026-10-25T07:05:56.154416+00:00",
+  "unique_livepocket_urls": 558,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8098,7 +8098,29 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-25T06:36:00.675460+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/dz82m",
+      "store_name": "ふるいちイオンモール幕張新都心店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-25T07:00:06.491000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール幕張新都心店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "【ふるいちイオンモール幕張新都心店】ポケカ抽選販売（30thCELEBRATION）",
+      "application_end_at": "2026-10-25T17:01:00+09:00",
+      "application_start_at": "2026-10-25T12:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール幕張新都心店】ポケカ抽選販売（30thCELEBRATION）",
+      "first_detected_at": "2026-10-25T07:05:57.806780+00:00"
     }
   ],
-  "updated_at": "2026-10-25T06:55:59.630732+00:00"
+  "updated_at": "2026-10-25T07:06:23.712318+00:00"
 }
