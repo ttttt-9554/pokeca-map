@@ -17537,8 +17537,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/qg3as": {
-          "checked_at": "2026-10-25T13:31:24.811800+00:00",
-          "status": "checked_title",
+          "checked_at": "2026-10-25T19:36:23.222552+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -18772,8 +18772,8 @@
         },
         "https://livepocket.jp/e/qg3as": {
           "detected_at": "2026-10-25T13:30:58.333064+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-25T13:31:24.811800+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-25T19:36:23.222552+00:00",
           "http_status": null
         }
       },
@@ -19794,6 +19794,11 @@
         "https://livepocket.jp/e/dkbwm": {
           "attempts": 2,
           "last_attempt_at": "2026-10-25T18:46:23.905604+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/qg3as": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-25T19:36:23.222552+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -24282,7 +24287,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-25T13:31:24.811800+00:00",
+          "checked_at": "2026-10-25T19:36:23.222552+00:00",
           "title_observed": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
           "genre": "onepiece",
           "product_origin": "",
@@ -27787,7 +27792,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/qg3as": {
-          "checked_at": "2026-10-25T13:31:24.811800+00:00",
+          "checked_at": "2026-10-25T19:36:23.222552+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
