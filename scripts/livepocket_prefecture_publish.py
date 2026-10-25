@@ -19,7 +19,7 @@ def merge_verified_csv(csv_text, manifest, public, manual_urls):
     if manual_urls is None:
         raise ValueError("Manual override snapshot is required")
     rows = list(csv.DictReader(io.StringIO(csv_text.lstrip("\ufeff"))))
-    if any(set(COLUMNS) - set(row) for row in rows):
+    if rows and any(set(COLUMNS) - set(row) for row in rows):
         raise ValueError("Malformed verified store CSV")
     existing = {(r["url"], r["store_name"]): r for r in rows}
     public_index = {r.get("url"): r for r in public.get("items", [])}
