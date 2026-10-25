@@ -26,4 +26,4 @@ jobs:
       - name: Verify syntax
         run: python -m py_compile scripts/livepocket_v19.py scripts/test_livepocket_verified_store_merge.py scripts/livepocket_prefecture_backfill.py scripts/livepocket_prefecture_manual_snapshot.py scripts/livepocket_prefecture_publish.py
       - name: Test verified prefecture merge
-        run: PYTHONPATH=scripts python -m unittest scripts/test_livepocket_verified_store_merge.py scripts/test_livepocket_prefecture_backfill.py scripts/test_livepocket_prefecture_manual_snapshot.py
+        run: PYTHONPATH=scripts python -m unittest scripts/test_livepocket_verified_store_merge.py scripts/test_livepocket_prefecture_backfill.py scripts/test_livepocket_prefecture_manual_snapshot.py scripts/test_livepocket_prefecture_publish.py
