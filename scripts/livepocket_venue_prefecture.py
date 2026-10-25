@@ -32,6 +32,10 @@ def fill_one(raw_item, public_item, page_text):
     if raw_item.get("url") != public_item.get("url"):
         return False
     stores = public_item.get("stores") or raw_item.get("stores") or []
+    # Never collapse a multiple-store list from either representation.
+    for item in (raw_item, public_item):
+        if isinstance(item.get("stores"), list) and len(item["stores"]) > 1:
+            return False
     if len(stores) != 1 or not isinstance(stores[0], dict):
         return False
     name = stores[0].get("name")
