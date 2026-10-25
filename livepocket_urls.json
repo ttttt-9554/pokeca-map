@@ -17065,7 +17065,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/jvq-n": {
-          "checked_at": "2026-10-24T18:16:24.660658+00:00",
+          "checked_at": "2026-10-25T00:21:24.580042+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -18219,7 +18219,7 @@
         "https://livepocket.jp/e/jvq-n": {
           "detected_at": "2026-10-24T12:05:58.157724+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T18:16:24.660658+00:00",
+          "checked_at": "2026-10-25T00:21:24.580042+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nc71x": {
@@ -19197,8 +19197,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jvq-n": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T18:16:24.660658+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-25T00:21:24.580042+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nkcob": {
@@ -23510,7 +23510,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T18:16:24.660658+00:00",
+          "checked_at": "2026-10-25T00:21:24.580042+00:00",
           "title_observed": "ポケモンカードゲーム スタートデッキ100 バトルコレクション抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -26838,7 +26838,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/jvq-n": {
-          "checked_at": "2026-10-24T18:16:24.660658+00:00",
+          "checked_at": "2026-10-25T00:21:24.580042+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
