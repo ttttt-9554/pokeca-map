@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-25T03:30:56.569716+00:00",
+  "collected_at": "2026-10-25T04:00:56.680875+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 553,
+  "unique_livepocket_urls": 555,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14793,34 +14793,94 @@
       "event_title": "【ふるいちトップブックスフォレオ菖蒲店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック30th CELEBRATION 1BOX）",
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-24T08:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/4td_r",
+      "discord_message_id": "1563764093159080066",
+      "discord_posted_at": "2026-10-25T04:00:13.141000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nトレカパーク横浜西口店\n受付終了: 10/25 21:00（残り7時間59分）\nhttps://livepocket.jp/e/4td_r\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り8時間59分）\nhttps://livepocket.jp/e/s00-4",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
+      "application_start_at": "2026-10-25T09:46:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/s00-4",
+      "discord_message_id": "1563764093159080066",
+      "discord_posted_at": "2026-10-25T04:00:13.141000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nトレカパーク横浜西口店\n受付終了: 10/25 21:00（残り7時間59分）\nhttps://livepocket.jp/e/4td_r\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 10/25 22:00（残り8時間59分）\nhttps://livepocket.jp/e/s00-4",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック インフェルノX抽選販売",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 396,
+    "parsed": 398,
     "no_structured_details": 157
   },
   "field_counts": {
-    "store_name": 374,
-    "prefecture": 312,
-    "event_title": 240,
+    "store_name": 376,
+    "prefecture": 314,
+    "event_title": 242,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 518,
-    "application_start_at": 518,
-    "stores_events": 382
+    "application_end_at": 520,
+    "application_start_at": 520,
+    "stores_events": 384
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563756503335313458"
+      "1551580466266644552": "1563764093159080066"
     },
     "last_run": {
-      "checked_at": "2026-10-25T03:30:56.569716+00:00",
-      "new_urls": 1,
-      "original_urls": 552,
+      "checked_at": "2026-10-25T04:00:56.680875+00:00",
+      "new_urls": 2,
+      "original_urls": 553,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -14970,7 +15030,8 @@
         "1563711220022780024": "2026-10-25T00:30:58.226232+00:00",
         "1563741415538819183": "2026-10-25T02:30:56.651634+00:00",
         "1563749017945505937": "2026-10-25T03:00:58.003897+00:00",
-        "1563756503335313458": "2026-10-25T03:30:57.309262+00:00"
+        "1563756503335313458": "2026-10-25T03:30:57.309262+00:00",
+        "1563764093159080066": "2026-10-25T04:00:57.478048+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17280,6 +17341,16 @@
           "checked_at": "2026-10-25T03:31:28.751642+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/s00-4": {
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/4td_r": {
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -18472,6 +18543,18 @@
           "detected_at": "2026-10-25T03:30:58.211006+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-25T03:31:28.751642+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/4td_r": {
+          "detected_at": "2026-10-25T04:00:58.394789+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/s00-4": {
+          "detected_at": "2026-10-25T04:00:58.394789+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
           "http_status": null
         }
       },
@@ -23859,6 +23942,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/s00-4": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
+          "title_observed": "ポケモンカードゲーム MEGA 拡張パック インフェルノX抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/4td_r": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
+          "title_observed": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -27268,6 +27373,32 @@
         },
         "https://livepocket.jp/e/efl_e": {
           "checked_at": "2026-10-25T03:31:28.751642+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/s00-4": {
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/4td_r": {
+          "checked_at": "2026-10-25T04:01:25.641444+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
