@@ -46,8 +46,13 @@ def backfill(raw, public, fetch, now=None, limit=8):
     raw_index = {x.get("url"): x for x in raw.get("items", [])}
     public_index = {x.get("url"): x for x in public.get("items", [])}
     for url in select(raw, public, now, limit):
-        result = fetch(url)
+        try:
+            result = fetch(url)
+        except Exception:
+            result = {"status": "browser_error"}
         attempted += 1
+        if not isinstance(result, dict):
+            result = {"status": "browser_error"}
         if result.get("status") != "ok" or result.get("final_url") != url:
             if result.get("status", "").startswith("browser_blocked"):
                 break
