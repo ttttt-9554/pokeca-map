@@ -275,6 +275,21 @@ def merge_stores(existing, page, manual, legacy_name='', legacy_pref=''):
                 else:
                     updated[key] = value
             entries = updated
+    # Prefer a single exact-store verified prefecture over an unknown entry.
+    # Never infer a region for another store, and preserve conflicting verified
+    # regions for explicit manual review.
+    for verified_store in manual or []:
+        if not isinstance(verified_store, dict):
+            continue
+        name = safe_name(verified_store.get('name'))
+        pref = verified_store.get('prefecture') or ''
+        if not name or pref not in v10.PREFS:
+            continue
+        known = {p for n, p in entries if n == name and p}
+        if known and known != {pref}:
+            continue
+        entries.pop((name, ''), None)
+        entries[(name, pref)] = {'name': name, 'prefecture': pref}
     # If a store already has a confirmed prefecture, don't also duplicate the
     # exact same shop as an unlocated entry. Distinct confirmed prefectures are
     # separate store locations even where names coincide.
