@@ -1379,7 +1379,12 @@ nav[aria-label="メインメニュー"] {
           <p class="hint">店舗ごとに店舗名・都道府県を設定できます。元の自動取得一覧は保持し、このカードへの修正だけを共有します。</p>
           <div id="lpCardStoreRows" class="lp-card-store-rows"></div>
           <button id="lpCardAddStore" type="button" class="lp-card-add-store">＋ 店舗を追加</button>
-          <button id="lpCardAddYellowSubmarine" type="button" class="lp-card-add-store">🏬 イエローサブマリン全22店舗を追加</button>
+          <label for="lpCardStorePreset">店舗チェーンから一括追加
+            <select id="lpCardStorePreset"><option value="">チェーンを選択</option><option value="yellow-submarine">イエローサブマリン（22店舗）</option></select>
+          </label>
+          <button id="lpCardApplyStorePreset" type="button" class="lp-card-add-store">🏬 選択した店舗一覧を追加</button>
+          <button id="lpCardSaveStorePreset" type="button" class="lp-card-add-store">＋ 現在の店舗一覧をテンプレート保存</button>
+          <p class="hint">保存したテンプレートはこの端末に保存されます。別端末やほかのユーザーとは共有されません。</p>
           <p class="hint">最大100店舗。「＋ 店舗を追加」で入力欄が増えます。店舗名欄を押すとキーボードが開きます。編集後は「変更を保存」を押してください。</p>
         </details>
         <label>ジャンル
@@ -1569,7 +1574,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261026-yellow-submarine-002f15f';
+      ? token : '20261026-chain-presets-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
