@@ -418,7 +418,8 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "event_title": "v14_livepocket_page_title",
-        "store_name": "v22_official_title_shop"
+        "store_name": "v22_official_title_shop",
+        "stores": "v19_user_verified_store_csv"
       },
       "application_end_at": "2026-10-25T22:00:00+09:00",
       "application_start_at": "2026-10-13T09:00:00+09:00",
@@ -426,7 +427,7 @@
       "stores": [
         {
           "name": "TSUTAYA金沢店",
-          "prefecture": ""
+          "prefecture": "石川県"
         }
       ]
     },
@@ -13298,7 +13299,8 @@
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop"
+        "store_name": "v22_official_title_shop",
+        "stores": "v19_user_verified_store_csv"
       },
       "event_title": "【ふるいちイオンモール甲府昭和店】ポケカ抽選販売（拡張パック『ストームエメラルダ』『メガブレイブ』『メガシンフォニア』）",
       "application_end_at": "2026-10-25T21:01:00+09:00",
@@ -13307,7 +13309,7 @@
       "stores": [
         {
           "name": "ふるいちイオンモール甲府昭和店",
-          "prefecture": ""
+          "prefecture": "山梨県"
         }
       ]
     },
@@ -17101,12 +17103,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/nkcob": {
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/nc71x": {
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -18261,13 +18263,13 @@
         "https://livepocket.jp/e/nc71x": {
           "detected_at": "2026-10-24T13:05:57.978282+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nkcob": {
           "detected_at": "2026-10-24T13:05:57.978282+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/i5bkt": {
@@ -19244,13 +19246,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nkcob": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T19:16:25.326983+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-25T01:21:27.506490+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nc71x": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-24T19:16:25.326983+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-25T01:21:27.506490+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -23563,7 +23565,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "title_observed": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -23574,7 +23576,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "title_observed": "【再販分】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ 抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -26904,7 +26906,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nkcob": {
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -26917,7 +26919,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nc71x": {
-          "checked_at": "2026-10-24T19:16:25.326983+00:00",
+          "checked_at": "2026-10-25T01:21:27.506490+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
