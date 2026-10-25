@@ -17497,7 +17497,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/o66rd": {
-          "checked_at": "2026-10-25T09:06:39.450112+00:00",
+          "checked_at": "2026-10-25T15:11:21.589577+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -18725,7 +18725,7 @@
         "https://livepocket.jp/e/o66rd": {
           "detected_at": "2026-10-25T03:00:58.978242+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-25T09:06:39.450112+00:00",
+          "checked_at": "2026-10-25T15:11:21.589577+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/efl_e": {
@@ -19767,8 +19767,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/o66rd": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-25T09:06:39.450112+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-25T15:11:21.589577+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/efl_e": {
@@ -24194,7 +24194,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-25T09:06:39.450112+00:00",
+          "checked_at": "2026-10-25T15:11:21.589577+00:00",
           "title_observed": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
           "genre": "pokemon",
           "product_origin": "v14_livepocket_explicit_product_label",
@@ -27683,7 +27683,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/o66rd": {
-          "checked_at": "2026-10-25T09:06:39.450112+00:00",
+          "checked_at": "2026-10-25T15:11:21.589577+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
