@@ -2002,8 +2002,11 @@ def venue_prefecture_from_overview(text, store_name):
     if not shop or len(shop) < 3:
         return ''
     matches = set()
-    for line in text.splitlines():
-        line = line.strip()
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    for index, line in enumerate(lines):
+        # LivePocket may render 会場 and its value in separate DOM elements.
+        if line == '会場' and index + 1 < len(lines):
+            line = '会場 ' + lines[index + 1]
         # LivePocket overview: 会場 ふるいち○○店（愛知県）
         m = re.match(r'^会場\\s*[：:]?\\s*(.+?)\\s*[（(](' +
                      '|'.join(map(re.escape, sorted(v10.PREFS, key=len, reverse=True))) +
