@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-25T06:00:54.484904+00:00",
-  "unique_livepocket_urls": 556,
+  "collected_at": "2026-10-25T06:35:58.996608+00:00",
+  "unique_livepocket_urls": 557,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -7942,6 +7942,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【再販分④】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
       "first_detected_at": "2026-10-25T00:30:59.088052+00:00"
     },
     {
@@ -8078,7 +8080,29 @@
         }
       ],
       "first_detected_at": "2026-10-25T05:30:57.879734+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/dkbwm",
+      "store_name": "ふるいち川越クレアモール店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-25T06:30:06.988000+00:00",
+      "stores": [
+        {
+          "name": "ふるいち川越クレアモール店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-10-26T21:00:00+09:00",
+      "application_start_at": "2026-10-25T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（30th CELEBRATION）",
+      "first_detected_at": "2026-10-25T06:36:00.675460+00:00"
     }
   ],
-  "updated_at": "2026-10-25T06:25:57.576927+00:00"
+  "updated_at": "2026-10-25T06:36:28.733404+00:00"
 }
