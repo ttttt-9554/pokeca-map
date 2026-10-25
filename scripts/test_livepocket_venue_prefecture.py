@@ -4,13 +4,13 @@ from livepocket_venue_prefecture import venue_prefecture, fill_one
 
 class VenueTests(unittest.TestCase):
     def test_split_venue(self):
-        self.assertEqual(venue_prefecture("概要\\n会場\\nふるいちイオンモール木曽川店（愛知県）", "ふるいちイオンモール木曽川店"), "愛知県")
+        self.assertEqual(venue_prefecture("概要\n会場\nふるいちイオンモール木曽川店（愛知県）", "ふるいちイオンモール木曽川店"), "愛知県")
 
     def test_unrelated(self):
-        self.assertEqual(venue_prefecture("会場\\n別店舗（愛知県）", "ふるいちイオンモール木曽川店"), "")
+        self.assertEqual(venue_prefecture("会場\n別店舗（愛知県）", "ふるいちイオンモール木曽川店"), "")
 
     def test_conflict(self):
-        self.assertEqual(venue_prefecture("会場 A店（愛知県）\\n会場 A店（東京都）", "A店"), "")
+        self.assertEqual(venue_prefecture("会場 A店（愛知県）\n会場 A店（東京都）", "A店"), "")
 
     def test_fill(self):
         a = {"url":"https://livepocket.jp/e/abcde", "stores":[{"name":"A店","prefecture":""}]}
