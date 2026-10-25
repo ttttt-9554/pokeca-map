@@ -1,0 +1,28 @@
+name: LivePocket prefecture backfill tests
+on:
+  push:
+    branches:
+      - feature/livepocket-prefecture-backfill-20261025
+  pull_request:
+    paths:
+      - 'scripts/livepocket_venue_prefecture.py'
+      - 'scripts/livepocket_prefecture_backfill.py'
+      - 'scripts/test_livepocket_*prefecture*.py'
+      - '.github/workflows/test-prefecture-backfill.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax validation
+        run: python -m py_compile scripts/livepocket_v21.py scripts/livepocket_venue_prefecture.py scripts/livepocket_prefecture_backfill.py
+      - name: Isolated unit tests
+        run: |
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_prefecture_backfill.py
+      - name: Dry run without writing
+        run: python scripts/livepocket_prefecture_backfill.py --limit 8
