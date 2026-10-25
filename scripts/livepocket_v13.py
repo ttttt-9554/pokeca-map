@@ -37,6 +37,44 @@ BLOCK_WORDS = re.compile(
 )
 
 
+def detail_signup_period(text: str):
+    """Prefer explicitly labelled application dates in the event details.
+
+    Keep ticket sale dates out of this selection. Ambiguous detail periods
+    remain unconfirmed rather than falling back to a conflicting ticket start.
+    """
+    if not isinstance(text, str):
+        return None
+    # Only consider a distinct details section, ending at the ticket heading.
+    section = re.search(r'(?:^|\\n)\\s*(?:イベント)?詳細\\s*(?:\\n|$)', text)
+    if not section:
+        return None
+    tail = text[section.end():]
+    ticket = re.search(r'(?:^|\\n)\\s*受付[・･]チケット情報', tail)
+    if ticket:
+        tail = tail[:ticket.start()]
+    # A detailed description may contain both application and purchase dates.
+    # Restrict extraction to labelled application statements.
+    labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
+    flat = re.sub(r'\\s+', ' ', tail[:12000])
+    found = []
+    matches = list(labels.finditer(flat))[:30]
+    for i, match in enumerate(matches):
+        stop = min(len(flat), match.start()+220,
+                   matches[i+1].start() if i+1<len(matches) else len(flat))
+        candidate = v12.parse_signup_text(flat[match.start():stop])
+        if candidate:
+            found.append(candidate)
+    if not found:
+        return None
+    ends = {v11.iso(end) for _,end in found}
+    starts = {v11.iso(start) for start,_ in found if start}
+    if len(ends)!=1 or len(starts)>1:
+        return (None,None)
+    return (v11.parse_datetime(next(iter(starts))) if starts else None,
+            v11.parse_datetime(next(iter(ends))))
+
+
 def extract_deadline(text: str):
     """Read only explicit signup statements, never event dates.
 
@@ -45,6 +83,9 @@ def extract_deadline(text: str):
     """
     if not isinstance(text, str) or not text.strip():
         return None, None
+    preferred = detail_signup_period(text)
+    if preferred is not None:
+        return preferred
     # LivePocket may render labels and dates in adjacent DOM nodes/newlines.
     flat = re.sub(r'\s+', ' ', text).strip()
     candidates = []
