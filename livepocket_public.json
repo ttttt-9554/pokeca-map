@@ -8040,6 +8040,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
       "first_detected_at": "2026-10-25T04:00:58.394789+00:00"
     },
     {
@@ -8060,6 +8062,8 @@
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック インフェルノX抽選販売",
       "first_detected_at": "2026-10-25T04:00:58.394789+00:00"
     },
     {
@@ -8120,5 +8124,5 @@
       "first_detected_at": "2026-10-25T07:05:57.806780+00:00"
     }
   ],
-  "updated_at": "2026-10-25T10:00:57.710712+00:00"
+  "updated_at": "2026-10-25T10:11:33.942943+00:00"
 }
