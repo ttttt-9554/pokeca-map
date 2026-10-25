@@ -41,11 +41,11 @@ def detail_signup_period(text: str):
     """Prefer explicit signup dates in event details over ticket-sale dates."""
     if not isinstance(text, str):
         return None
-    section = re.search(r'(?m)^[ \t]*(?:イベント)?詳細[ \t]*, text)
+    section = re.search(r'(?m)^[ \t]*(?:イベント)?詳細[ \t]*' + chr(36), text)
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*, tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -304,7 +304,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -820,7 +820,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -1339,7 +1339,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -1855,7 +1855,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -2370,7 +2370,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -2886,7 +2886,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -3405,7 +3405,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
@@ -3921,7 +3921,7 @@ if __name__ == '__main__':
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
+    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
