@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-25T02:21:05Z",
-  "total": 1,
+  "as_of": "2026-10-25T02:31:40Z",
+  "total": 3,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -17,6 +17,36 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-24T23:28:33.034191+00:00",
       "next_retry_at": "2026-10-25T23:28:33.034191+00:00",
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/e8_r2",
+      "event_title": "SPデッキセット「メガオーダイル・メガカイリュー・メガゲンガー」購入権抽選",
+      "store_name": "",
+      "prefecture": "埼玉県",
+      "application_end_at": "2026-10-28T20:05:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-25T02:31:26.606606+00:00",
+      "next_retry_at": "2026-10-26T02:31:26.606606+00:00",
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/uvvca",
+      "event_title": "1１月再販：ポケモンカードゲーム「ストームエメラルダ」購入権抽選",
+      "store_name": "",
+      "prefecture": "埼玉県",
+      "application_end_at": "2026-10-28T20:05:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-25T02:31:26.606606+00:00",
+      "next_retry_at": "2026-10-26T02:31:26.606606+00:00",
       "queue": "retry_wait"
     }
   ]
