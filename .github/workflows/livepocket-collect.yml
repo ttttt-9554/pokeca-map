@@ -105,8 +105,9 @@ jobs:
       # v21.64: stop manual recheck regressions before planning browser work.
       - name: Test completed and retryable lottery review selection
         run: |
-          python -m py_compile scripts/livepocket_v21.py scripts/livepocket_manual_completed.py scripts/livepocket_check_summary.py
+          python -m py_compile scripts/livepocket_v21.py scripts/livepocket_manual_completed.py scripts/livepocket_check_summary.py scripts/livepocket_venue_prefecture.py
           python scripts/test_livepocket_manual_review.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py
 
       - name: Plan new, due retries and ticket products and verified store locations (v21)
         id: v21plan
