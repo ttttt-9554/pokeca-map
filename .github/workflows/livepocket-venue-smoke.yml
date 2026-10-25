@@ -1,0 +1,36 @@
+name: LivePocket Venue Prefecture Smoke Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout isolated feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/livepocket-prefecture-backfill-20261025
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax and unit tests
+        run: |
+          python -m py_compile scripts/livepocket_v21.py scripts/livepocket_venue_prefecture.py scripts/livepocket_prefecture_backfill.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_prefecture_backfill.py
+      - name: Install browser
+        run: |
+          python -m pip install 'playwright>=1.55,<2'
+          python -m playwright install --with-deps chromium
+      - name: Review up to three live events without publishing
+        run: python scripts/livepocket_prefecture_backfill.py --apply --limit 3
+      - name: Upload candidate data for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: venue-prefecture-smoke-review
+          path: prefecture_backfill_review/
+          if-no-files-found: ignore
+          retention-days: 3
