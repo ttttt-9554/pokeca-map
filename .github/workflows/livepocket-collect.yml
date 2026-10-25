@@ -106,6 +106,7 @@ jobs:
       - name: Test completed and retryable lottery review selection
         run: |
           python -m py_compile scripts/livepocket_v21.py scripts/livepocket_manual_completed.py scripts/livepocket_check_summary.py scripts/livepocket_venue_prefecture.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_detail_priority.py
           python scripts/test_livepocket_manual_review.py
           PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py
 
