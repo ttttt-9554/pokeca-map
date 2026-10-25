@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-25T07:05:56.154416+00:00",
+  "collected_at": "2026-10-25T09:05:56.934219+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -14978,12 +14978,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563809363750162452"
+      "1551580466266644552": "1563839578190647308"
     },
     "last_run": {
-      "checked_at": "2026-10-25T07:05:56.154416+00:00",
-      "new_urls": 1,
-      "original_urls": 557,
+      "checked_at": "2026-10-25T09:05:56.934219+00:00",
+      "new_urls": 0,
+      "original_urls": 558,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -17409,7 +17409,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/i5bkt": {
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -17439,8 +17439,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/o66rd": {
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
-          "status": "checked_title_product_deadline",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/efl_e": {
@@ -18621,7 +18621,7 @@
         "https://livepocket.jp/e/i5bkt": {
           "detected_at": "2026-10-24T21:00:57.567755+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bsu96": {
@@ -18656,8 +18656,8 @@
         },
         "https://livepocket.jp/e/o66rd": {
           "detected_at": "2026-10-25T03:00:58.978242+00:00",
-          "status": "checked_title_product_deadline",
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/efl_e": {
@@ -19662,8 +19662,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/i5bkt": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-25T03:01:29.645220+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-25T09:06:39.450112+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/87rvn": {
@@ -19684,6 +19684,11 @@
         "https://livepocket.jp/e/c8g_7": {
           "attempts": 1,
           "last_attempt_at": "2026-10-25T08:36:22.174617+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/o66rd": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-25T09:06:39.450112+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -24018,7 +24023,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "title_observed": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -24084,7 +24089,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "title_observed": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
           "genre": "pokemon",
           "product_origin": "v14_livepocket_explicit_product_label",
@@ -27473,7 +27478,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/i5bkt": {
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -27551,7 +27556,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/o66rd": {
-          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "checked_at": "2026-10-25T09:06:39.450112+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
