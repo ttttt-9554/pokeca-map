@@ -7901,7 +7901,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_event_title": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
       "first_detected_at": "2026-10-24T21:00:57.567755+00:00"
     },
     {
@@ -7992,19 +7991,17 @@
     {
       "url": "https://livepocket.jp/e/o66rd",
       "prefecture": "埼玉県",
-      "discord_posted_at": "2026-10-25T03:00:18.930000+00:00",
-      "event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
       "product_name": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」",
-      "application_end_at": "2026-10-28T20:05:00+09:00",
+      "event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
       "application_start_at": "2026-10-25T09:00:00+09:00",
+      "application_end_at": "2026-10-28T20:05:00+09:00",
+      "discord_posted_at": "2026-10-25T03:00:18.930000+00:00",
       "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
       "first_detected_at": "2026-10-25T03:00:58.978242+00:00"
     }
   ],
-  "updated_at": "2026-10-25T03:01:29.645220+00:00"
+  "updated_at": "2026-10-25T03:10:59.636526+00:00"
 }
