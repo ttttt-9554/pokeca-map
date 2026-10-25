@@ -79,6 +79,8 @@ def main():
     snapshot = json.loads(args.manual_overrides_json.read_text(encoding="utf-8"))
     if not isinstance(snapshot, dict) or not isinstance(snapshot.get("urls"), list):
         raise ValueError("Invalid manual override snapshot")
+    if not snapshot["urls"]:
+        raise ValueError("Empty manual override snapshot: refusing unsafe backfill")
     manual_urls = set(snapshot["urls"])
     candidates = select(raw, public, datetime.now(timezone.utc), args.limit, manual_urls)
     print("Eligible events:", len(candidates))
