@@ -15,7 +15,7 @@ from livepocket_venue_prefecture import PREFECTURES
 COLUMNS = ("url", "store_name", "prefecture", "verified", "source_url")
 
 
-def merge_verified_csv(csv_text, manifest, public, manual_urls):
+def merge_verified_csv(csv_text, manifest, public, manual_urls, max_changes=3):
     if manual_urls is None:
         raise ValueError("Manual override snapshot is required")
     rows = list(csv.DictReader(io.StringIO(csv_text.lstrip("\ufeff"))))
@@ -27,7 +27,7 @@ def merge_verified_csv(csv_text, manifest, public, manual_urls):
     public_index = {r.get("url"): r for r in public.get("items", [])}
     additions = []
     changes = manifest.get("changes")
-    if not isinstance(changes, list) or len(changes) > 3:
+    if not isinstance(changes, list) or len(changes) > max_changes:
         raise ValueError("Invalid or oversized change manifest")
     for candidate in changes:
         url, name, pref = (candidate.get("url"), candidate.get("store_name"),
@@ -67,6 +67,7 @@ def main():
     p.add_argument("--csv", type=Path, default=Path("livepocket_verified_stores.csv"))
     p.add_argument("--public", type=Path, default=Path("livepocket_public.json"))
     p.add_argument("--write", action="store_true")
+    p.add_argument("--max-changes", type=int, default=3)
     args = p.parse_args()
     snapshot = json.loads(args.manual_overrides_json.read_text(encoding="utf-8"))
     if not isinstance(snapshot.get("urls"), list) or not snapshot["urls"]:
@@ -74,7 +75,7 @@ def main():
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     public = json.loads(args.public.read_text(encoding="utf-8"))
     text, count = merge_verified_csv(args.csv.read_text(encoding="utf-8-sig"),
-                                     manifest, public, set(snapshot["urls"]))
+                                     manifest, public, set(snapshot["urls"]), max_changes=min(max(args.max_changes, 0), 100))
     print("Verified new corrections:", count)
     if args.write and count:
         args.csv.write_text(text, encoding="utf-8")
