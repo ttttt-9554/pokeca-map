@@ -7901,7 +7901,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_event_title": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
       "first_detected_at": "2026-10-24T21:00:57.567755+00:00"
     },
     {
@@ -8001,8 +8000,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
       "first_detected_at": "2026-10-25T03:00:58.978242+00:00"
     },
     {
@@ -8123,5 +8120,5 @@
       "first_detected_at": "2026-10-25T07:05:57.806780+00:00"
     }
   ],
-  "updated_at": "2026-10-25T09:06:39.450112+00:00"
+  "updated_at": "2026-10-25T09:16:01.249554+00:00"
 }
