@@ -1978,6 +1978,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             stats[metric] = sum(page_supported_change(u, metric, keys)
                                 for u in successful)
     
+    stats['exact_venue_prefectures_added'] = enrich_exact_venue_prefectures(raw, public, observations)
     stats.update(apply_verified_unavailable(raw, public, verified_unavailable or {}))
     stats['first_detection_times_published'] = publish_first_detected_at(
         raw, public, now=now)
@@ -1987,6 +1988,766 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         public['updated_at'] = now.isoformat()
     public['schema_version'] = 21
     return raw, public, review, deadlines, sources, content, stats
+
+
+def venue_prefecture_from_overview(text, store_name):
+    """Only an explicit overview venue matching this single store is evidence.
+
+    Do not use event dates, ticket tab text, inferred locality, or multi-store
+    events. A conflicting or ambiguous venue remains unverified.
+    """
+    if not isinstance(text, str) or not isinstance(store_name, str):
+        return ''
+    shop = re.sub(r'\\s+', '', store_name)
+    if not shop or len(shop) < 3:
+        return ''
+    matches = set()
+    for line in text.splitlines():
+        line = line.strip()
+        # LivePocket overview: 会場 ふるいち○○店（愛知県）
+        m = re.match(r'^会場\\s*[：:]?\\s*(.+?)\\s*[（(](' +
+                     '|'.join(map(re.escape, sorted(v10.PREFS, key=len, reverse=True))) +
+                     r')[）)]\\s*
+    """Check the same event's ticket tab whenever its sign-up dates are incomplete.
+
+    v21.69 only opened this tab when store options were missing. That misses
+    real deadlines whenever a store is already visible on the overview tab.
+    No browsing beyond the already verified exact LivePocket event URL.
+    """
+    if not isinstance(body, str) or '受付・チケット情報' not in body:
+        return False
+    start, end = v14.v13.extract_deadline(body)
+    return not start or not end or not v19.ticket_option_stores(body)
+
+
+def combine_ticket_tab_text(original, additional):
+    """Keep explicit ticket-tab signup evidence without guessing event dates.
+
+    In particular, do not discard a valid deadline simply because the ticket
+    tab does not repeat the store name. Existing user card overrides remain
+    entirely separate from this public-page collector.
+    """
+    if (not isinstance(original, str) or not isinstance(additional, str)
+            or not additional.strip() or additional == original):
+        return original
+    start, end = v14.v13.extract_deadline(additional)
+    has_stores = bool(v19.ticket_option_stores(additional))
+    if not (end or has_stores):
+        return original
+    # The original page can be long; ensure a verified ticket deadline isn't
+    # truncated by the 30k-character output limit. Preserve the original lead.
+    if len(original) + 1 + len(additional) <= 30000:
+        return original + '\n' + additional
+    if end:
+        # A short exact-label excerpt is sufficient for the strict date parser.
+        # It contains the label and complete dates, not unrelated event dates.
+        labels = list(v14.v13.LABEL.finditer(additional))
+        snippets = []
+        for m in labels[:20]:
+            snippet = additional[m.start():m.start()+260]
+            if v14.v13.extract_deadline(snippet)[1]:
+                snippets.append(snippet)
+        compact = '\n'.join(dict.fromkeys(snippets))
+        if compact:
+            return original[:max(0, 29999-len(compact))] + '\n' + compact
+    remaining = max(0, 29999-len(original))
+    return original[:30000] + ('\n' + additional[:remaining] if remaining else '')
+
+
+def choose_verified_ticket_period(chunks):
+    """Pick only a unique, expressly labelled signup period from one event page.
+
+    Browser inner_text can omit collapsed ticket details even though their
+    text nodes exist in the DOM. We examine short, same-page ticket blocks
+    independently to avoid unrelated result/visit dates. Conflicting ticket
+    deadlines always stay unconfirmed.
+    """
+    found = {}
+    for text in (chunks or [])[:50]:
+        if not isinstance(text, str) or not (15 <= len(text) <= 6000):
+            continue
+        start, end = v14.v13.extract_deadline(text)
+        if not end:
+            continue
+        key = (v11.iso(start) if start else None, v11.iso(end))
+        previous = found.get(key)
+        if previous is None or len(text) < len(previous):
+            found[key] = text
+    if not found:
+        return ''
+    ends = {key[1] for key in found}
+    starts = {key[0] for key in found if key[0]}
+    if len(ends) != 1 or len(starts) > 1:
+        return ''
+    # Prefer one explicit complete period to an end-only label.
+    options = [(not bool(key[0]), len(value), value) for key, value in found.items()]
+    return min(options)[2]
+
+
+def ticket_period_from_dom(page):
+    """Read only labelled sale/application blocks on the verified exact URL.
+
+    This is ordinary first-party DOM text, including an already-rendered
+    collapsed ticket accordion. No hidden APIs, login, new URL or bypass.
+    A missing or contradictory value is never guessed.
+    """
+    chunks = []
+    for label in ('販売受付期間', '抽選受付期間', '応募期間', '申込期間', '申込み期間'):
+        try:
+            matches = page.get_by_text(label, exact=False)
+            count = min(matches.count(), 12)
+        except Exception:
+            continue
+        for index in range(count):
+            try:
+                candidate = matches.nth(index)
+            except Exception:
+                continue
+            for relative in (None, 'xpath=..', 'xpath=../..', 'xpath=../../..', 'xpath=../../../..'):
+                try:
+                    loc = candidate if relative is None else candidate.locator(relative)
+                    text = loc.text_content(timeout=700)
+                except Exception:
+                    continue
+                if not isinstance(text, str) or not (15 <= len(text) <= 6000):
+                    continue
+                if v14.v13.extract_deadline(text)[1]:
+                    chunks.append(text)
+                    break
+    return choose_verified_ticket_period(chunks)
+
+
+def browser_fetcher():
+    """Preserve v20 same-URL browser behavior; also read structured event titles.
+
+    No new endpoint, API, login, access-block evasion, or second request.
+    """
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as BrowserTimeout
+    except ImportError as exc:
+        raise RuntimeError('Playwrightがインストールされていません') from exc
+    manager = sync_playwright().start()
+    try:
+        browser = manager.chromium.launch(headless=True)
+        context = browser.new_context(locale='ja-JP', timezone_id='Asia/Tokyo')
+    except Exception:
+        manager.stop()
+        raise
+
+    def fetch(url):
+        page = context.new_page()
+        try:
+            try:
+                response = page.goto(url, wait_until='domcontentloaded', timeout=18000)
+            except BrowserTimeout:
+                return {'status': 'browser_timeout'}
+            if response is None:
+                return {'status': 'browser_no_response'}
+            if response.status in (401, 403, 429):
+                return {'status': 'browser_blocked', 'http_status': response.status}
+            if response.status >= 400:
+                return {'status': 'browser_http_error', 'http_status': response.status}
+            if v12.exact_event_url(page.url) != url:
+                return {'status': 'browser_redirected'}
+            body = ''
+            # v21.22: the global navigation/announcements alone often exceed
+            # 80 characters BEFORE the event hero/tabs hydrate. Do not treat
+            # that shell as a fully-rendered event. Wait a bounded ~5 seconds
+            # for the event section; never bypass login/challenge pages.
+            for attempt in range(7):
+                try:
+                    body = page.locator('body').inner_text(timeout=4000)
+                except BrowserTimeout:
+                    body = ''
+                if ROBOT_VERIFICATION.search(body) or v14.v13.BLOCK_WORDS.search(body):
+                    break
+                if ('概要' in body and '詳細' in body and
+                        '受付・チケット情報' in body and 'お問い合わせ' in body):
+                    break
+                if attempt < 6:
+                    page.wait_for_timeout(800)
+            if (v14.v13.BLOCK_WORDS.search(body) or ROBOT_VERIFICATION.search(body)
+                    or len(body.strip()) < 40):
+                return {'status': 'browser_blocked_or_empty',
+                        'gate_reason': 'robot_verification_page' if ROBOT_VERIFICATION.search(body)
+                        else 'blocked_or_empty'}
+            titles, title_sources = [], []
+            def add_title(value, source):
+                if isinstance(value, str) and value.strip() and len(titles) < 12:
+                    titles.append(value[:300])
+                    title_sources.append(source)
+            for selector, origin in (
+                ('meta[property="og:title"]', 'og'),
+                ('meta[name="twitter:title"]', 'twitter')):
+                try:
+                    add_title(page.locator(selector).first.get_attribute('content', timeout=800), origin)
+                except Exception:
+                    pass
+            try:
+                for value in page.locator('h1').all_inner_texts(timeout=1200)[:3]:
+                    add_title(value, 'h1')
+            except Exception:
+                pass
+            # Page layouts sometimes place the hero title in a styled DIV/P
+            # or ARIA heading instead of H1. Limit to event-specific selectors;
+            # do not mine all headings or guess from product/ticket cards.
+            try:
+                event_heads = page.locator(
+                    '[data-testid="event-title"], [data-testid="eventTitle"], '
+                    '[class~="event-title"], [class*="eventTitle"], '
+                    '[class*="EventTitle"], [class*="event_title"], '
+                    '[id="event-title"], [id="eventTitle"], [id="event_name"], '
+                    '[data-testid="event_name"], [data-qa="event-title"], '
+                    '[class*="eventName"], [class*="EventName"], '
+                    '[class*="event-name"], [class*="event_name"], '
+                    'main [role="heading"][aria-level="1"], '
+                    '[itemscope][itemtype*="schema.org/Event"] [itemprop="name"]'
+                ).all_inner_texts(timeout=1500)
+                for value in event_heads[:6]:
+                    if isinstance(value, str) and len(value.strip()) <= 200:
+                        add_title(value, 'event_heading')
+            except Exception:
+                pass
+            try:
+                add_title(page.title(), 'document')
+            except Exception:
+                pass
+            # Event JSON-LD names remain restricted by the existing exact-URL
+            # event-only selector; unrelated product and website schemas ignored.
+            try:
+                blocks = page.locator('script[type="application/ld+json"]').all_text_contents(timeout=1300)
+                for value in structured_event_titles(blocks, url):
+                    add_title(value, 'jsonld')
+            except Exception:
+                pass
+            # First-party, server-embedded page state from THIS SAME event URL.
+            # No API/second request, page script execution, or access-control bypass.
+            # Only explicit event objects are searched, never recommendations or
+            # arbitrary product titles. The raw page-state JSON is never saved.
+            try:
+                state_blocks = page.locator('script#__NEXT_DATA__').all_text_contents(timeout=1300)
+                for value in structured_page_state_event_titles(state_blocks, url):
+                    add_title(value, 'event_state')
+            except Exception:
+                pass
+            # v21.22: the event heading may be a styled DIV/P rather than H1;
+            # the page may also omit the navigation labels used by v21.19.
+            # Match only the full visible DOM heading to exact-URL truncated
+            # LivePocket metadata; conflicting or missing names stay unknown.
+            dom_title_candidates = []
+            try:
+                prefixes = sorted(truncated_livepocket_meta_prefixes({
+                    'titles': titles, 'title_sources': title_sources}))
+                if prefixes:
+                    dom_title_candidates = page.evaluate(DOM_EVENT_HEADING_JS, prefixes)
+            except Exception:
+                dom_title_candidates = []
+            if ticket_tab_needs_check(body):
+                # Switch to the public tickets tab, but still read the
+                # accessible ticket DOM if the tab navigation is unclickable.
+                try:
+                    tab = page.get_by_text('受付・チケット情報', exact=True).first
+                    tab.click(timeout=1500)
+                    page.wait_for_timeout(450)
+                except Exception:
+                    pass
+                if v12.exact_event_url(page.url) != url:
+                    return {'status': 'browser_redirected'}
+                # Lazy ticket panels can hydrate after the common navigation
+                # labels; one 350ms snapshot is not necessarily enough.
+                for attempt in range(3):
+                    try:
+                        additional = page.locator('body').inner_text(timeout=4000)
+                        body = combine_ticket_tab_text(body, additional)
+                        evidence = ticket_period_from_dom(page)
+                        if evidence:
+                            body = combine_ticket_tab_text(body, evidence)
+                            break
+                        if v14.v13.extract_deadline(body)[1]:
+                            break
+                    except Exception:
+                        pass
+                    if attempt < 2:
+                        page.wait_for_timeout(550)
+                # Some ticket lists render only when their accordion opens.
+                # Click only the named public receipt header, never a login or
+                # application control; retain prior text if it cannot open.
+                if not v14.v13.extract_deadline(body)[1]:
+                    try:
+                        header = page.get_by_text('抽選販売受付', exact=True).first
+                        if header.is_visible(timeout=700):
+                            header.click(timeout=1200)
+                            page.wait_for_timeout(350)
+                            if v12.exact_event_url(page.url) != url:
+                                return {'status': 'browser_redirected'}
+                            additional = page.locator('body').inner_text(timeout=4000)
+                            body = combine_ticket_tab_text(body, additional)
+                            evidence = ticket_period_from_dom(page)
+                            if evidence:
+                                body = combine_ticket_tab_text(body, evidence)
+                    except Exception:
+                        pass
+            return {'status': 'ok', 'final_url': page.url,
+                    'text': body[:30000], 'titles': titles,
+                    'title_sources': title_sources,
+                    'dom_title_candidates': dom_title_candidates if isinstance(dom_title_candidates, list) else []}
+        except BrowserTimeout:
+            return {'status': 'browser_timeout'}
+        except Exception:
+            return {'status': 'browser_error'}
+        finally:
+            page.close()
+
+    def close():
+        try:
+            context.close()
+            browser.close()
+        finally:
+            manager.stop()
+    return fetch, close
+
+
+def structured_event_titles(blocks, url):
+    """Only a unique Event name from JSON-LD on the EXACT event URL."""
+    names = set()
+    for source in blocks[:20]:
+        if not isinstance(source, str) or len(source) > 200000:
+            continue
+        try:
+            document = json.loads(source)
+        except (ValueError, TypeError):
+            continue
+        stack = [(document, 0)]
+        while stack:
+            node, depth = stack.pop()
+            if depth > 6:
+                continue
+            if isinstance(node, list):
+                stack.extend((child, depth+1) for child in node[:40])
+            elif isinstance(node, dict):
+                kind = node.get('@type') or ''
+                kinds = kind if isinstance(kind, list) else [kind]
+                if any(isinstance(t,str) and t.casefold() == 'event' for t in kinds):
+                    target = node.get('url')
+                    if target and v12.exact_event_url(target) != url:
+                        continue
+                    value = v14.clean_title(node.get('name'))
+                    if value:
+                        names.add(value)
+                for key in ('@graph','mainEntity','itemListElement'):
+                    if key in node:
+                        stack.append((node[key], depth+1))
+    return list(names) if len(names) == 1 else []
+
+
+# v21.17: Next.js server-provided page state can contain the complete event
+# title even when og:title / document.title intentionally end in ellipsis.
+# Search ONLY the primary event object under pageProps, NOT related events,
+# ticket products, arbitrary embedded JavaScript, or client-wide stores.
+PAGE_STATE_EVENT_KEYS = (
+    'event', 'eventInfo', 'eventDetail', 'eventDetails', 'eventData',
+    'event_info', 'event_detail', 'event_data',
+)
+PAGE_STATE_TITLE_KEYS = ('eventTitle', 'event_title', 'eventName', 'event_name')
+PAGE_STATE_URL_KEYS = ('url', 'eventUrl', 'event_url', 'eventPageUrl', 'event_page_url')
+
+
+def structured_page_state_event_titles(blocks, url):
+    """Unique, explicit event name from the primary exact-URL page state.
+
+    A matching page URL is already checked by browser_fetcher. If an event
+    record additionally supplies its own URL, that must match too. Never
+    derive an event name from a description, ticket, organizer, or product.
+    """
+    titles = set()
+    for source in (blocks[:2] if isinstance(blocks, list) else []):
+        if not isinstance(source, str) or len(source) > 500000:
+            continue
+        try:
+            root = json.loads(source)
+        except (TypeError, ValueError):
+            continue
+        if not isinstance(root, dict):
+            continue
+        props = root.get('props')
+        page_props = props.get('pageProps') if isinstance(props, dict) else None
+        if not isinstance(page_props, dict):
+            continue
+        # No recursive search: related/promoted events can coexist in state.
+        # `data.event` is an explicitly named primary-event envelope often
+        # used by server-side page props, not an arbitrary search of `data`.
+        primary_nodes = [page_props.get(key) for key in PAGE_STATE_EVENT_KEYS]
+        nested = page_props.get('data')
+        if isinstance(nested, dict):
+            primary_nodes.extend(nested.get(key) for key in PAGE_STATE_EVENT_KEYS)
+        for node in primary_nodes:
+            if not isinstance(node, dict):
+                continue
+            embedded_urls = [node.get(k) for k in PAGE_STATE_URL_KEYS
+                             if isinstance(node.get(k), str) and node.get(k).strip()]
+            if embedded_urls and any(v12.exact_event_url(u) != url for u in embedded_urls):
+                continue
+            # An ordinary `title` / `name` is only accepted inside an explicit
+            # primary event object (never at the pageProps root).
+            candidates = [node.get(k) for k in (*PAGE_STATE_TITLE_KEYS, 'title', 'name')]
+            for value in candidates:
+                if isinstance(value, str):
+                    valid = v14.clean_title(value)
+                    if valid and not LP_GENERIC_TITLE.fullmatch(valid) and not _site_common_title(valid):
+                        titles.add(valid)
+    return list(titles) if len(titles) == 1 else []
+
+
+
+
+# v21.9: An OFFICIAL title is stronger than a URL-paired Discord shorthand.
+# Browser access stays on the exact original LivePocket event URL; CAPTCHA,
+# login, robot checks and redirected pages are never bypassed.
+OFFICIAL_TITLE_CHECK_PER_RUN = 2
+OFFICIAL_TITLE_RETRY_MAX = 3
+OFFICIAL_TITLE_CHECK_WAIT = timedelta(hours=6)
+# First official-title attempt is more urgent for event names supplied as
+# provisional Discord shorthand. Subsequent attempts use the longer backoff.
+OFFICIAL_TITLE_INITIAL_WAIT = timedelta(hours=2)
+# v21.50: The official title check also stops exactly at the deadline.
+OFFICIAL_TITLE_GRACE = timedelta(0)
+OFFICIAL_GENRE_PATTERNS = {
+    'onepiece': re.compile(r'ONE\s*PIECE\s*(?:カードゲーム|CARD\s*GAME)|ワンピース\s*カード', re.I),
+    'pokemon': re.compile(r'ポケモンカード(?:ゲーム)?|ポケカ|POK[EÉ]MON\s*(?:TCG|CARD)', re.I),
+    'yugioh': re.compile(r'遊戯王|YU[\s-]?GI[\s-]?OH', re.I),
+}
+OFFICIAL_COLUMNS = (
+    'official_page_status', 'official_title_observed', 'official_genre',
+    'official_title_source', 'official_product_source', 'official_page_checked_at',
+    'official_title_conflict',
+    'official_title_queue_reason', 'official_title_next_eligible_at',
+    'official_title_attempts',
+    'official_page_reason', 'official_page_http_status',
+)
+REPORT_COLUMNS = REPORT_COLUMNS + OFFICIAL_COLUMNS + (
+    'title_diagnostic_reason', 'title_diagnostic_candidates',
+    'title_diagnostic_checked_at', 'title_diagnostic_title_detected',
+    'title_diagnostic_detail', 'title_diagnostic_sources',
+    'title_diagnostic_valid_candidates',
+    'title_diagnostic_rejection_codes', 'title_diagnostic_meta_template_cleaned',
+    'title_diagnostic_heading_seen', 'title_diagnostic_recovery_probe',
+    'title_page_identity',
+)
+
+
+def official_genre(title):
+    """Explicit TCG named IN the exact-URL official event title only."""
+    if not isinstance(title, str) or not title:
+        return ''
+    genres = [genre for genre, rx in OFFICIAL_GENRE_PATTERNS.items() if rx.search(title)]
+    return genres[0] if len(genres) == 1 else ''
+
+
+def official_quoted_product(title):
+    """Use a product explicitly quoted after an identifiable TCG brand.
+
+    This never treats a generic event name / timetable as a product. A
+    ONE PIECE branded official event '...「EXブースター ...」抽選販売受付'
+    can specify a distinct product; a plain 'Heroines Edition' cannot.
+    """
+    genre = official_genre(title)
+    if not genre:
+        return None
+    # Only a single bracketed / quoted product name is unambiguous.
+    chunks = re.findall(r'『([^』]{6,110})』|「([^」]{6,110})」', title)
+    if len(chunks) != 1:
+        return None
+    value = next(part for part in chunks[0] if part).strip()
+    if re.search(r'(?:\.\.\.|…|https?://|整理券|参加条件|購入方法|応募期間)', value, re.I):
+        return None
+    if not re.search(r'ブースター|拡張パック|強化拡張|スターター|デッキ|\bEB[-－]?\d{2}\b|\bBOX\b', value, re.I):
+        return None
+    return v20.v15.clean_value(value, 'product_name')
+
+
+def title_is_provisional(raw_item):
+    source = str((raw_item.get('field_sources') or {}).get('event_title') or '')
+    return source.startswith(('discord_url_title:', 'discord_url_pair:', 'discord_embed:'))
+
+
+def product_is_provisional(raw_item):
+    source = str((raw_item.get('field_sources') or {}).get('product_name') or '')
+    # Discord's event summary is a provisional product source as well. It
+    # must never outrank a product explicitly quoted in an exact-URL official
+    # event title (or a verified product label from that same page).
+    return source.startswith(('discord_url_pair:', 'discord_embed:', 'discord_post:'))
+
+
+
+def restore_official_genres(raw, public):
+    """Keep an exact-URL official TCG category on later browser-free runs.
+
+    Upstream v10 recomputes categories using source_preview (often the text
+    of a multi-event Discord roundup). It must not undo a verified title.
+    """
+    raw_index, pub_index = v11.indices(raw, public)
+    changed = 0
+    for url, pub in pub_index.items():
+        source = str(raw_index[url].get('field_sources', {}).get('event_title') or '')
+        title = pub.get('official_event_title') or ''
+        if source not in ('v21_9_official_exact_url_title', MANUAL_TITLE_SOURCE) or title != pub.get('event_title'):
+            continue
+        genre = official_genre(title)
+        if not genre:
+            continue
+        if pub.get('review_category') != genre:
+            changed += 1
+        pub['review_category'] = genre
+        pub['official_genre'] = genre
+        if genre != 'pokemon':
+            for key in ('pokemon_map_match', 'pokemon_map_type', 'pokemon_map_evidence'):
+                pub.pop(key, None)
+    return changed
+
+def _official_title_status(url, ritem, pub, *, state, now):
+    """Explain official-title eligibility without touching the network.
+
+    An initial 2-hour wait applies only to unverified Discord titles. A
+    subsequent official check waits 6 hours; three checks are the maximum.
+    Returned timestamps are UTC ISO-8601 and may be displayed in the report.
+    """
+    if not pub.get('event_title'):
+        return 'no_event_title', ''
+    if not title_is_provisional(ritem):
+        return 'nonprovisional_title', ''
+    if url in set(state.get('v14', {}).get('pending_new_urls', [])):
+        return 'new_queue_has_priority', ''
+    deadline = v11.parse_datetime(pub.get('application_end_at'))
+    if not deadline:
+        return 'no_confirmed_deadline', ''
+    if not (now < deadline < now + timedelta(days=7)):
+        return 'outside_application_window', ''
+    record = state.get('v21_9', {}).get('official_checks', {}).get(url, {})
+    attempts = recheck_attempts(record)
+    if attempts >= OFFICIAL_TITLE_RETRY_MAX:
+        return 'official_check_limit_reached', ''
+    checks = state.get('v13', {}).get('browser_checks', {})
+    checked_at = v19.v18.v17.check_time(checks.get(url, {}).get('checked_at'))
+    official_at = v19.v18.v17.check_time(record.get('checked_at'))
+    if official_at:
+        due = official_at + OFFICIAL_TITLE_CHECK_WAIT
+        # A previous official check is the authority for the retry cooldown,
+        # even if the generic browser checked the same URL afterwards.
+        if now < due:
+            return 'waiting_official_retry', due.astimezone(timezone.utc).isoformat()
+    elif checked_at:
+        due = checked_at + OFFICIAL_TITLE_INITIAL_WAIT
+        if now < due:
+            return 'waiting_initial_page_gap', due.astimezone(timezone.utc).isoformat()
+    return 'eligible', ''
+
+
+def official_title_diagnostics(raw, public, *, now=None, limit=OFFICIAL_TITLE_CHECK_PER_RUN):
+    """Return queue, human-auditable summary and per-URL reasons."""
+    now = v14._utc(now)
+    rindex, pindex = v11.indices(raw, public)
+    state = raw.get('collector_state', {})
+    from collections import Counter
+    counts = Counter()
+    details = {}
+    options = []
+    cooldown = v14._cooldown_active(state.get('v14', {}), now)
+    for url, ritem in rindex.items():
+        pub = pindex[url]
+        reason, due_at = _official_title_status(url, ritem, pub, state=state, now=now)
+        if cooldown and reason == 'eligible':
+            reason = 'global_access_cooldown'
+        details[url] = (reason, due_at)
+        counts[reason] += 1
+        if reason == 'eligible':
+            options.append((v11.parse_datetime(pub.get('application_end_at')), url))
+    options.sort()
+    result = [url for _, url in options[:max(0,limit)]]
+    for _, url in options[max(0,limit):]:
+        details[url] = ('queued_after_limit', '')
+    return result, dict(counts), details
+
+
+def official_title_candidates(raw, public, *, now=None, limit=OFFICIAL_TITLE_CHECK_PER_RUN):
+    """Select up to two urgent provisional Discord titles, with safe cooldowns."""
+    return official_title_diagnostics(raw, public, now=now, limit=limit)[0]
+
+
+def apply_official_observation(raw_item, pub_item, page):
+    """Reconcile facts from ONE successfully fetched official event page.
+
+    Never overwrite verified/manual event data, only short Discord fields.
+    Event genre is authoritative only when explicit in official title.
+    """
+    url = raw_item['url']
+    title, _ = verified_title(page, url)
+    if not title:
+        return {'title': '', 'product': '', 'genre': '', 'title_changed': False,
+                'product_changed': False, 'conflict': False}
+    genre = official_genre(title)
+    product, product_source = verified_product(page, url)
+    if not product:
+        product = official_quoted_product(title)
+        product_source = 'v21_9_official_title_quoted_tcg_product' if product else ''
+    title_changed = product_changed = conflict = False
+    old_title = raw_item.get('event_title') or pub_item.get('event_title') or ''
+    if not old_title or title_is_provisional(raw_item):
+        if old_title != title:
+            for obj in (raw_item, pub_item):
+                obj['event_title'] = title
+            title_changed = True
+        # Even when a short Discord text happens to equal the verified
+        # official title, upgrade its provenance so category stays stable.
+        raw_item.setdefault('field_sources', {})['event_title'] = 'v21_9_official_exact_url_title'
+    elif old_title != title:
+        conflict = True
+    old_product = raw_item.get('product_name') or pub_item.get('product_name') or ''
+    if product and (not old_product or product_is_provisional(raw_item)):
+        if old_product != product:
+            for obj in (raw_item, pub_item):
+                obj['product_name'] = product
+            product_changed = True
+        raw_item.setdefault('field_sources', {})['product_name'] = product_source
+    elif product and old_product != product:
+        conflict = True
+    if genre:
+        # Source-preview text may describe another product in the same multi-
+        # URL Discord post. Ignore it ONLY after an exact official title.
+        pub_item['review_category'] = genre
+        pub_item['official_genre'] = genre
+        if genre != 'pokemon':
+            for key in ('pokemon_map_match','pokemon_map_type','pokemon_map_evidence'):
+                pub_item.pop(key, None)
+    pub_item['official_event_title'] = title
+    return {'title': title, 'product': product or '', 'genre': genre,
+            'title_changed': title_changed, 'product_changed': product_changed,
+            'conflict': conflict}
+
+
+def main():
+    import sys
+    if len(sys.argv) != 2 or sys.argv[1] not in ('plan', 'process'):
+        raise SystemExit('Usage: python scripts/livepocket_v21.py plan|process')
+    catalog = load_catalog()
+    raw, public = v14.read_pair()
+    arrival_policy.clean_placeholders(raw, public)
+    known = {item['url'] for item in raw['items']}
+    verified = v20.read_verified(v20.MANUAL_PATH, known)
+    v19_verified = v19.read_manual(v19.MANUAL_PATH, known)
+    new_limit = v14.safe_limit('LIVEPOCKET_V14_NEW_PER_RUN', 15, 25)
+    background_limit = (v14.safe_limit('LIVEPOCKET_V14_BACKGROUND_PER_RUN', 8, 12)
+                        if v14.wants_background() else 0)
+    manual_recheck = os.getenv('LIVEPOCKET_DEVELOPER_RECHECK') == 'true'
+    if manual_recheck:
+        # The button deliberately requests a full 12 historical URLs. The
+        # standard 5-minute schedule never receives this environment flag.
+        background_limit = MANUAL_RECHECK_LIMIT
+    retry_limit = v14.safe_limit('LIVEPOCKET_V16_RETRY_PER_RUN', 3, 5)
+    verified_titles = read_verified_titles()
+    verified_unavailable = read_verified_unavailable()
+    if manual_recheck:
+        cloud_titles, cloud_removed, cloud_locations = read_manual_completed()
+        cloud_reviews = read_review_completed()
+        manual_urls = manual_recheck_candidates(
+            raw, public, completed_titles=cloud_titles,
+            removed_pages=cloud_removed | set(verified_unavailable),
+            completed_locations=cloud_locations,
+            completed_reviews=cloud_reviews)
+    else:
+        manual_urls = []
+    with use_store_aware_missing(), use_manual_background(manual_urls if manual_recheck else []):
+        work = v19.v18.plan(raw, public, new_limit=new_limit,
+                           background_limit=background_limit,
+                           retry_limit=0 if manual_recheck else retry_limit)
+    title_limit = v14.safe_limit('LIVEPOCKET_V21_3_TITLE_PER_RUN', 2, 3)
+    titles_due = [] if manual_recheck else title_recheck_candidates(raw, public, limit=title_limit)
+    official_due, official_counts, _ = (
+        official_title_diagnostics(raw, public, limit=0 if manual_recheck else OFFICIAL_TITLE_CHECK_PER_RUN)
+        if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
+    browser_needed = bool(work['browser_needed'] or titles_due or official_due)
+    if sys.argv[1] == 'plan':
+        print('v21.16 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
+              'official_due:', len(official_due), 'official_reasons:', official_counts,
+              'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
+              'map catalog products:', len(catalog))
+        if os.getenv('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
+                fh.write('browser_needed=' + ('true' if browser_needed else 'false') + '\n')
+        return
+    ready = os.getenv('LIVEPOCKET_V21_BROWSER_READY', '')
+    if ready == 'false':
+        new_limit = background_limit = retry_limit = title_limit = 0
+        needed = False
+    else:
+        needed = ready == 'true' or browser_needed
+    if needed:
+        fetch, close = browser_fetcher()
+    else:
+        def fetch(_url):
+            raise AssertionError('Unexpected browser fetch')
+        close = lambda: None
+    try:
+        data = process(raw, public, fetch, catalog=catalog,
+                       new_limit=new_limit, background_limit=background_limit,
+                       retry_limit=retry_limit, verified=verified,
+                       v19_verified=v19_verified,
+                       title_limit=title_limit,
+                       manual_recheck=manual_recheck,
+                       manual_limit=MANUAL_RECHECK_LIMIT,
+                       verified_titles=verified_titles,
+                       verified_unavailable=verified_unavailable)
+    finally:
+        close()
+    raw, public, review, deadlines, sources, content, stats = data
+    for k, value in stats.items():
+        print(f'{k}: {value}')
+    print('raw_updated:', v11.write_json(RAW_PATH, raw))
+    print('public_updated:', v11.write_json(PUBLIC_PATH, public))
+    print('review_updated:', v10.write_csv(v20.v15.REVIEW_PATH, review))
+    print('deadline_review_updated:', v11.write_csv(v14.REVIEW_PATH, deadlines))
+    print('deadline_sources_updated:', v12.write_report(v14.SOURCES_PATH, sources))
+    print('content_checks_updated:', write_content(v14.CHECKS_PATH, content))
+
+
+if __name__ == '__main__':
+    main()
+, line)
+        if not m:
+            continue
+        venue = re.sub(r'\\s+', '', m.group(1))
+        if venue == shop:
+            matches.add(m.group(2))
+    return next(iter(matches)) if len(matches) == 1 else ''
+
+
+def enrich_exact_venue_prefectures(raw, public, observations):
+    """Fill only missing prefectures on exact-URL single-store events."""
+    ri = {x.get('url'): x for x in raw.get('items', [])}
+    pi = {x.get('url'): x for x in public.get('items', [])}
+    changed = 0
+    for url, result in observations.items():
+        if url not in ri or url not in pi or not isinstance(result, dict):
+            continue
+        if result.get('status') != 'ok' or v12.exact_event_url(result.get('final_url')) != url:
+            continue
+        a, b = ri[url], pi[url]
+        stores = b.get('stores') or a.get('stores') or []
+        if len(stores) != 1 or not isinstance(stores[0], dict):
+            continue
+        name = stores[0].get('name') or ''
+        if not name or (a.get('prefecture') or b.get('prefecture') or stores[0].get('prefecture')):
+            continue
+        pref = venue_prefecture_from_overview(result.get('text'), name)
+        if not pref:
+            continue
+        for item in (a, b):
+            item['prefecture'] = pref
+            entries = item.get('stores')
+            if isinstance(entries, list) and len(entries) == 1 and entries[0].get('name') == name:
+                entries[0]['prefecture'] = pref
+        a.setdefault('field_sources', {})['prefecture'] = 'v21_exact_url_overview_venue'
+        changed += 1
+    return changed
 
 
 def ticket_tab_needs_check(body):
