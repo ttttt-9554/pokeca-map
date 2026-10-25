@@ -21,10 +21,10 @@ jobs:
         with:
           python-version: '3.12'
       - name: Syntax validation
-        run: python -m py_compile scripts/livepocket_v21.py scripts/livepocket_venue_prefecture.py scripts/livepocket_prefecture_backfill.py
+        run: python -m py_compile scripts/livepocket_v21.py scripts/livepocket_venue_prefecture.py scripts/livepocket_prefecture_backfill.py scripts/livepocket_prefecture_manual_snapshot.py
       - name: Isolated unit tests
         run: |
-          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_prefecture_backfill.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_prefecture_backfill.py scripts/test_livepocket_prefecture_manual_snapshot.py
       - name: Dry run without writing
         run: python scripts/livepocket_prefecture_backfill.py --limit 8
       - name: Install browser for exact-URL smoke test
