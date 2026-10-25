@@ -13,25 +13,31 @@ class BackfillTests(unittest.TestCase):
 
     def test_select_and_fill(self):
         raw,pub,url=self.data()
-        self.assertEqual(select(raw,pub,datetime.now(timezone.utc)),[url])
+        self.assertEqual(select(raw,pub,datetime.now(timezone.utc),manual_override_urls=set()),[url])
         def fetch(u):
             return {"status":"ok","final_url":u,"text":"概要\n会場\nふるいちイオンモール木曽川店（愛知県）"}
-        self.assertEqual(backfill(raw,pub,fetch)["updated"],1)
+        self.assertEqual(backfill(raw,pub,fetch,manual_override_urls=set())["updated"],1)
         self.assertEqual(pub["items"][0]["prefecture"],"愛知県")
+
+    def test_supabase_manual_override_excluded(self):
+        raw,pub,url=self.data()
+        self.assertEqual(select(raw,pub,datetime.now(timezone.utc),manual_override_urls={url}),[])
+        with self.assertRaises(ValueError):
+            select(raw,pub,datetime.now(timezone.utc))
 
     def test_never_override(self):
         raw,pub,url=self.data()
         pub["items"][0]["prefecture"]="岐阜県"
-        self.assertEqual(select(raw,pub,datetime.now(timezone.utc)),[])
+        self.assertEqual(select(raw,pub,datetime.now(timezone.utc),manual_override_urls=set()),[])
 
     def test_expired(self):
         raw,pub,url=self.data()
         pub["items"][0]["application_end_at"]="2020-01-01T00:00:00+09:00"
-        self.assertEqual(select(raw,pub,datetime.now(timezone.utc)),[])
+        self.assertEqual(select(raw,pub,datetime.now(timezone.utc),manual_override_urls=set()),[])
 
     def test_no_unverified_write(self):
         raw,pub,url=self.data()
-        self.assertEqual(backfill(raw,pub,lambda u:{"status":"browser_blocked"})["updated"],0)
+        self.assertEqual(backfill(raw,pub,lambda u:{"status":"browser_blocked"},manual_override_urls=set())["updated"],0)
 
 
 if __name__=="__main__":
