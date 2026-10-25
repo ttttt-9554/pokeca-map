@@ -99,15 +99,34 @@ def main():
         close()
     print(result)
     if result["updated"]:
-        # Produce reviewable files without changing production JSON.
+        # Export only exact-URL verified changes for human review, not full
+        # production datasets. The published catalog is never written here.
+        original_raw, original_public = read_pair()
+        original_index = {x.get("url"): x for x in original_public.get("items", [])}
+        changes = []
+        for item in public.get("items", []):
+            url = item.get("url")
+            previous = original_index.get(url)
+            if not previous:
+                continue
+            old_stores = previous.get("stores") or []
+            new_stores = item.get("stores") or []
+            if (len(old_stores) == len(new_stores) == 1
+                    and old_stores[0].get("name") == new_stores[0].get("name")
+                    and not old_stores[0].get("prefecture")
+                    and new_stores[0].get("prefecture")
+                    and url not in manual_urls):
+                changes.append({"url": url, "store_name": new_stores[0]["name"],
+                                "prefecture": new_stores[0]["prefecture"],
+                                "source_url": url})
         output = Path("prefecture_backfill_review")
         output.mkdir(exist_ok=True)
-        for name, data in (("livepocket_urls.candidate.json", raw),
-                           ("livepocket_public.candidate.json", public)):
-            (output / name).write_text(
-                json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8")
-        print("Candidate files saved for artifact review; production JSON unchanged")
+        (output / "verified_changes.json").write_text(
+            json.dumps({"changes": changes}, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8")
+        print("Reviewable verified changes:", len(changes))
+        print("Production JSON unchanged")
+        return
 
 
 if __name__ == "__main__":
