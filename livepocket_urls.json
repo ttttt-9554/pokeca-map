@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-25T12:00:56.512277+00:00",
+  "collected_at": "2026-10-25T13:30:56.961324+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 559,
+  "unique_livepocket_urls": 560,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14986,17 +14986,43 @@
       "event_title": "【ふるいちイオンモール水戸内原店】 ポケカ店頭抽選販売（ポケモンＭ 拡張 ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ）",
       "application_end_at": "2026-10-25T21:01:00+09:00",
       "application_start_at": "2026-10-25T09:30:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/qg3as",
+      "discord_message_id": "1563907508148379775",
+      "discord_posted_at": "2026-10-25T13:30:05.939000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA六高台店\n受付終了: 10/26 21:45（残り23時間14分）\nhttps://livepocket.jp/e/qg3as",
+      "store_name": "TSUTAYA六高台店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA六高台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title"
+      },
+      "event_title": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 402,
+    "parsed": 403,
     "no_structured_details": 157
   },
   "field_counts": {
-    "store_name": 380,
-    "prefecture": 318,
-    "event_title": 246,
+    "store_name": 381,
+    "prefecture": 319,
+    "event_title": 247,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
@@ -15004,15 +15030,15 @@
     "lottery_result_period": 1,
     "application_end_at": 524,
     "application_start_at": 524,
-    "stores_events": 388
+    "stores_events": 389
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563884876493623388"
+      "1551580466266644552": "1563907508148379775"
     },
     "last_run": {
-      "checked_at": "2026-10-25T12:00:56.512277+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-25T13:30:56.961324+00:00",
+      "new_urls": 1,
       "original_urls": 559,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -15168,7 +15194,8 @@
         "1563786703276220467": "2026-10-25T05:30:57.144424+00:00",
         "1563801816087400500": "2026-10-25T06:35:59.767237+00:00",
         "1563809363750162452": "2026-10-25T07:05:56.895380+00:00",
-        "1563869762277081159": "2026-10-25T11:00:56.761412+00:00"
+        "1563869762277081159": "2026-10-25T11:00:56.761412+00:00",
+        "1563907508148379775": "2026-10-25T13:30:57.579602+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17508,6 +17535,11 @@
           "checked_at": "2026-10-25T11:01:25.041134+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/qg3as": {
+          "checked_at": "2026-10-25T13:31:24.811800+00:00",
+          "status": "checked_title",
+          "http_status": null
         }
       }
     },
@@ -18736,6 +18768,12 @@
           "detected_at": "2026-10-25T11:00:57.774476+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-25T11:01:25.041134+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/qg3as": {
+          "detected_at": "2026-10-25T13:30:58.333064+00:00",
+          "status": "checked_title",
+          "checked_at": "2026-10-25T13:31:24.811800+00:00",
           "http_status": null
         }
       },
@@ -24239,6 +24277,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/qg3as": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-25T13:31:24.811800+00:00",
+          "title_observed": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -27726,6 +27775,19 @@
         },
         "https://livepocket.jp/e/fve2o": {
           "checked_at": "2026-10-25T11:01:25.041134+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/qg3as": {
+          "checked_at": "2026-10-25T13:31:24.811800+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

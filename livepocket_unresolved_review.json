@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-25T13:21:03Z",
-  "total": 1,
+  "as_of": "2026-10-25T13:31:32Z",
+  "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -17,6 +17,21 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-24T23:28:33.034191+00:00",
       "next_retry_at": "2026-10-25T23:28:33.034191+00:00",
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/qg3as",
+      "event_title": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
+      "store_name": "TSUTAYA六高台店",
+      "prefecture": "千葉県",
+      "application_end_at": "",
+      "missing": [
+        "deadline"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-25T13:31:24.811800+00:00",
+      "next_retry_at": "2026-10-26T13:31:24.811800+00:00",
       "queue": "retry_wait"
     }
   ]
