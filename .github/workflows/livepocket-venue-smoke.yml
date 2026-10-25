@@ -1,6 +1,8 @@
 name: LivePocket Venue Prefecture Smoke Test
-on:
+'on':
   workflow_dispatch:
+  schedule:
+    - cron: '41 2 * * *'
 permissions:
   contents: read
 jobs:
@@ -28,8 +30,12 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python scripts/livepocket_prefecture_manual_snapshot.py
-      - name: Review up to three live events without publishing
-        run: python scripts/livepocket_prefecture_backfill.py --apply --limit 3 --manual-overrides-json prefecture_manual_overrides.json
+      - name: Review rotating batch of three live events without publishing
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          OFFSET=$(( (RUN_NUMBER - 1) * 3 ))
+          python scripts/livepocket_prefecture_backfill.py --apply --limit 3 --offset "$OFFSET" --manual-overrides-json prefecture_manual_overrides.json
       - name: Remove private exclusion snapshot
         if: always()
         run: rm -f prefecture_manual_overrides.json
