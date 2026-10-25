@@ -1,8 +1,6 @@
 name: LivePocket Venue Prefecture Smoke Test
 'on':
   workflow_dispatch:
-  schedule:
-    - cron: '41 2 * * *'
 permissions:
   contents: read
 jobs:
