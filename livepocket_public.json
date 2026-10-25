@@ -7120,7 +7120,7 @@
       "stores": [
         {
           "name": "ふるいちイオンモール木曽川店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
@@ -7139,7 +7139,7 @@
       "stores": [
         {
           "name": "ふるいちイオンモール土岐店",
-          "prefecture": ""
+          "prefecture": "岐阜県"
         }
       ],
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
@@ -7236,7 +7236,7 @@
       "stores": [
         {
           "name": "古本市場東大阪店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
       ],
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
@@ -7273,7 +7273,7 @@
       "stores": [
         {
           "name": "古本市場豊浜店",
-          "prefecture": ""
+          "prefecture": "岡山県"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
@@ -7363,7 +7363,7 @@
       "stores": [
         {
           "name": "古本市場高島店",
-          "prefecture": ""
+          "prefecture": "岡山県"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
@@ -7382,7 +7382,7 @@
       "stores": [
         {
           "name": "古本市場高島店",
-          "prefecture": ""
+          "prefecture": "岡山県"
         }
       ],
       "pokemon_map_match": "ストームエメラルダ",
@@ -7401,7 +7401,7 @@
       "stores": [
         {
           "name": "古本市場庄内店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
@@ -7503,7 +7503,7 @@
       "stores": [
         {
           "name": "ふるいち高野店",
-          "prefecture": ""
+          "prefecture": "京都府"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
@@ -7667,7 +7667,7 @@
       "stores": [
         {
           "name": "古本市場三田店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ],
       "pokemon_map_match": "ストームエメラルダ",
@@ -7686,7 +7686,7 @@
       "stores": [
         {
           "name": "ふるいちイオンモール神戸北店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ],
       "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
@@ -8066,21 +8066,19 @@
       "url": "https://livepocket.jp/e/voozz",
       "store_name": "ふるいちトップブックスひたちなか店",
       "prefecture": "茨城県",
+      "event_title": "【ふるいちトップブックスひたちなか店】ポケカ抽選販売（30TH セレブレーション）",
+      "application_start_at": "2026-10-24T08:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-25T05:30:03.813000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちトップブックスひたちなか店",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "【ふるいちトップブックスひたちなか店】ポケカ抽選販売（30TH セレブレーション）",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-24T08:00:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちトップブックスひたちなか店】ポケカ抽選販売（30TH セレブレーション）",
       "first_detected_at": "2026-10-25T05:30:57.879734+00:00"
     }
   ],
-  "updated_at": "2026-10-25T05:31:25.998084+00:00"
+  "updated_at": "2026-10-25T05:40:58.391749+00:00"
 }
