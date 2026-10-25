@@ -8,7 +8,7 @@ name: Verified LivePocket Store Merge Tests
       - scripts/livepocket_prefecture_backfill.py
       - scripts/livepocket_prefecture_manual_snapshot.py
       - scripts/test_livepocket_prefecture_backfill.py
-      - scripts/test_livepocket_prefecture_manual_snapshot.py scripts/test_livepocket_prefecture_publish.py
+      - scripts/test_livepocket_prefecture_manual_snapshot.py
       - scripts/livepocket_prefecture_publish.py
       - scripts/test_livepocket_prefecture_publish.py
       - .github/workflows/test-livepocket-store-merge.yml
