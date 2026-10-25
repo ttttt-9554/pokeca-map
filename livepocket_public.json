@@ -7928,24 +7928,22 @@
       "url": "https://livepocket.jp/e/87rvn",
       "store_name": "トレカエース春日部店",
       "prefecture": "埼玉県",
+      "event_title": "【再販分④】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
+      "application_start_at": "2026-10-25T09:00:00+09:00",
+      "application_end_at": "2026-10-25T23:00:00+09:00",
       "discord_posted_at": "2026-10-25T00:30:07.203000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカエース春日部店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【再販分④】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
-      "application_end_at": "2026-10-25T23:00:00+09:00",
-      "application_start_at": "2026-10-25T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【再販分④】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
       "first_detected_at": "2026-10-25T00:30:59.088052+00:00"
     }
   ],
-  "updated_at": "2026-10-25T00:31:23.550579+00:00"
+  "updated_at": "2026-10-25T00:40:59.445219+00:00"
 }
