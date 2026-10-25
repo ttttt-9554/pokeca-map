@@ -2797,6 +2797,33 @@
 
   // v21.80: The admin card dialog supports an ordered, per-store list for
   // LivePocket and external-site lotteries without mutating source JSON.
+  // Explicit store directory supplied by the administrator (22 locations).
+  // This preset is never applied without pressing the bulk-add button.
+  const LP_YELLOW_SUBMARINE_STORES = [
+    ['イエローサブマリン札幌GAMESHOP','北海道'],
+    ['イエローサブマリン横浜店','神奈川県'],
+    ['イエローサブマリン新宿店','東京都'],
+    ['イエローサブマリン池袋GAMESHOP','東京都'],
+    ['イエローサブマリン町田GAMESHOP','東京都'],
+    ['イエローサブマリン横浜西口店','神奈川県'],
+    ['イエローサブマリン川越カードショップ','埼玉県'],
+    ['イエローサブマリン大宮本店・プレイソフト','埼玉県'],
+    ['イエローサブマリン千葉ゲームショップ','千葉県'],
+    ['イエローサブマリン宇都宮店','栃木県'],
+    ['イエローサブマリン溝口店','神奈川県'],
+    ['イエローサブマリン川崎店','神奈川県'],
+    ['イエローサブマリン立川店','東京都'],
+    ['イエローサブマリン柏店','千葉県'],
+    ['イエローサブマリン秋葉原本店★ミント','東京都'],
+    ['イエローサブマリン京都店','京都府'],
+    ['イエローサブマリン名古屋GAMESHOP','愛知県'],
+    ['イエローサブマリンなんば本店','大阪府'],
+    ['イエローサブマリン三宮店','兵庫県'],
+    ['イエローサブマリン姫路店','兵庫県'],
+    ['イエローサブマリンマジッカーズ福岡店','福岡県'],
+    ['イエローサブマリン広島店','広島県']
+  ].map(([name,prefecture])=>({name,prefecture}));
+
   function lpCardStoreRender(stores) {
     const root=$('lpCardStoreRows'),summary=$('lpCardStoresSummary');
     if(!root||!summary)return;
@@ -3067,6 +3094,27 @@
       lpCardStoreRender(rows);
       $('lpCardStoresFold').open=true;
       lpCardSetStatus('店舗を1件追加しました。店舗名と都道府県を入力後、「変更を保存」を押してください。');
+    });
+    $('lpCardAddYellowSubmarine').addEventListener('click',()=>{
+      if(!isDeveloper() || !lpCardEditing)return;
+      const current=lpCardStoreRead(false);
+      const key=x=>String(x.name||'').normalize('NFKC').replace(/\\s+/g,'').toLowerCase();
+      const existing=new Set(current.filter(x=>x.name.trim()).map(key));
+      const additions=LP_YELLOW_SUBMARINE_STORES.filter(x=>!existing.has(key(x)));
+      if(current.length+additions.length>LP_CARD_MAX_STORES){
+        lpCardSetStatus('⚠ 最大100店舗を超えるため追加できません。不要な店舗を整理してください。');
+        return;
+      }
+      if(!additions.length){
+        lpCardSetStatus('イエローサブマリン22店舗はすでに登録されています。');
+        return;
+      }
+      if(!confirm('イエローサブマリンの店舗を'+additions.length+'件追加しますか？\\n現在の店舗情報は残ります。')){
+        return;
+      }
+      lpCardStoreRender(current.concat(additions));
+      $('lpCardStoresFold').open=true;
+      lpCardSetStatus('イエローサブマリン '+additions.length+'件を入力しました。「変更を保存」で確定してください。');
     });
     $('lpCardStoreRows').addEventListener('click',event=>{
       const target=event.target.closest('button[data-lp-store-remove]');
