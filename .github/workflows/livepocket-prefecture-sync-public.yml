@@ -1,0 +1,58 @@
+name: Sync Verified LivePocket Regions to Public JSON
+'on':
+  workflow_dispatch:
+  schedule:
+    - cron: '13,43 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: livepocket-collect
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate safe synchronization
+        run: |
+          python -m py_compile scripts/livepocket_prefecture_sync_public.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_prefecture_sync_public.py
+      - name: Read current manual overrides from Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_prefecture_manual_snapshot.py
+      - name: Synchronize only verified unknown regions
+        run: python scripts/livepocket_prefecture_sync_public.py --manual-overrides-json prefecture_manual_overrides.json --write
+      - name: Publish public JSON safely
+        shell: bash
+        run: |
+          git add livepocket_public.json
+          if git diff --cached --quiet; then
+            echo "No location changes to publish."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sync verified LivePocket prefectures into public catalog'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Concurrent catalog update; fail closed."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo "Verified public locations published."
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+      - name: Remove sensitive exclusion snapshot
+        if: always()
+        run: rm -f prefecture_manual_overrides.json
