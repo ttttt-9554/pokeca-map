@@ -38,6 +38,11 @@ jobs:
         run: |
           OFFSET=$(( (RUN_NUMBER - 1) * 3 ))
           python scripts/livepocket_prefecture_backfill.py --apply --limit 3 --offset "$OFFSET" --manual-overrides-json prefecture_manual_overrides.json
+      - name: Refresh manual exclusions immediately before publishing
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_prefecture_manual_snapshot.py
       - name: Publish only newly verified non-conflicting CSV rows
         shell: bash
         run: |
