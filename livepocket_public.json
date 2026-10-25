@@ -8026,46 +8026,42 @@
       "url": "https://livepocket.jp/e/4td_r",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
+      "application_start_at": "2026-10-25T09:46:00+09:00",
+      "application_end_at": "2026-10-25T21:00:00+09:00",
       "discord_posted_at": "2026-10-25T04:00:13.141000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
-      "application_end_at": "2026-10-25T21:00:00+09:00",
-      "application_start_at": "2026-10-25T09:46:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
       "first_detected_at": "2026-10-25T04:00:58.394789+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s00-4",
       "store_name": "トレカエース勝田東石川店",
       "prefecture": "茨城県",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック インフェルノX抽選販売",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
       "discord_posted_at": "2026-10-25T04:00:13.141000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "ポケモンカードゲーム MEGA 拡張パック インフェルノX抽選販売",
-      "application_end_at": "2026-10-25T22:00:00+09:00",
-      "application_start_at": "2026-10-24T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック インフェルノX抽選販売",
       "first_detected_at": "2026-10-25T04:00:58.394789+00:00"
     }
   ],
-  "updated_at": "2026-10-25T04:01:25.641444+00:00"
+  "updated_at": "2026-10-25T04:10:58.450478+00:00"
 }
