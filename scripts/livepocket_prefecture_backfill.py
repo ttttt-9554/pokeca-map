@@ -63,7 +63,6 @@ def main():
     args = parser.parse_args()
     import livepocket_v21 as v21
     from livepocket_v14 import read_pair
-    from livepocket_v11 import write_json
     raw, public = read_pair()
     candidates = select(raw, public, datetime.now(timezone.utc), args.limit)
     print("Eligible events:", len(candidates))
@@ -77,15 +76,15 @@ def main():
         close()
     print(result)
     if result["updated"]:
-        # Never write a partial pair. Produce reviewable candidate files instead.
-        # The ordinary collector owns production JSON publication.
-        from tempfile import TemporaryDirectory
-        with TemporaryDirectory(prefix="livepocket-prefecture-review-") as folder:
-            for name, data in (("livepocket_urls.candidate.json", raw),
-                               ("livepocket_public.candidate.json", public)):
-                path = Path(folder) / name
-                path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
-            print("Verified updates prepared in temporary review files; production JSON unchanged")
+        # Produce reviewable files without changing production JSON.
+        output = Path("prefecture_backfill_review")
+        output.mkdir(exist_ok=True)
+        for name, data in (("livepocket_urls.candidate.json", raw),
+                           ("livepocket_public.candidate.json", public)):
+            (output / name).write_text(
+                json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8")
+        print("Candidate files saved for artifact review; production JSON unchanged")
 
 
 if __name__ == "__main__":
