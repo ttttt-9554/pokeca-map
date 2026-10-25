@@ -1,0 +1,23 @@
+name: Verified LivePocket Store Merge Tests
+'on':
+  push:
+    branches: [main]
+    paths:
+      - scripts/livepocket_v19.py
+      - scripts/test_livepocket_verified_store_merge.py
+      - .github/workflows/test-livepocket-store-merge.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify syntax
+        run: python -m py_compile scripts/livepocket_v19.py scripts/test_livepocket_verified_store_merge.py
+      - name: Test verified prefecture merge
+        run: PYTHONPATH=scripts python -m unittest scripts/test_livepocket_verified_store_merge.py
