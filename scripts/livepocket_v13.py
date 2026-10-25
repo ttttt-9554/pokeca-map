@@ -45,15 +45,15 @@ def detail_signup_period(text: str):
     """
     if not isinstance(text, str):
         return None
-    section = re.search(r'(?m)^\\s*(?:イベント)?詳細\\s*$', text)
+    section = re.search(r'(?m)^\s*(?:イベント)?詳細\s*$', text)
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^\\s*受付[・･]チケット情報\\s*$', tail)
+    ticket = re.search(r'(?m)^\s*受付[・･]チケット情報\s*$', tail)
     if ticket:
         tail = tail[:ticket.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
-    flat = re.sub(r'\\s+', ' ', tail[:12000])
+    flat = re.sub(r'\s+', ' ', tail[:12000])
     found = []
     matches = list(labels.finditer(flat))[:30]
     for i, match in enumerate(matches):
