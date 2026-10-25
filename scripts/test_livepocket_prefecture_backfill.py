@@ -15,7 +15,7 @@ class BackfillTests(unittest.TestCase):
         raw,pub,url=self.data()
         self.assertEqual(select(raw,pub,datetime.now(timezone.utc)),[url])
         def fetch(u):
-            return {"status":"ok","final_url":u,"text":"概要\\n会場\\nふるいちイオンモール木曽川店（愛知県）"}
+            return {"status":"ok","final_url":u,"text":"概要\n会場\nふるいちイオンモール木曽川店（愛知県）"}
         self.assertEqual(backfill(raw,pub,fetch)["updated"],1)
         self.assertEqual(pub["items"][0]["prefecture"],"愛知県")
 
