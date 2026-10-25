@@ -77,8 +77,15 @@ def main():
         close()
     print(result)
     if result["updated"]:
-        write_json(Path("livepocket_urls.json"), raw)
-        write_json(Path("livepocket_public.json"), public)
+        # Never write a partial pair. Produce reviewable candidate files instead.
+        # The ordinary collector owns production JSON publication.
+        from tempfile import TemporaryDirectory
+        with TemporaryDirectory(prefix="livepocket-prefecture-review-") as folder:
+            for name, data in (("livepocket_urls.candidate.json", raw),
+                               ("livepocket_public.candidate.json", public)):
+                path = Path(folder) / name
+                path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+            print("Verified updates prepared in temporary review files; production JSON unchanged")
 
 
 if __name__ == "__main__":
