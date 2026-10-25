@@ -1,0 +1,23 @@
+name: LivePocket Detail Deadline Regression
+'on':
+  push:
+    branches: [main]
+    paths:
+      - scripts/livepocket_v13.py
+      - scripts/test_livepocket_detail_priority.py
+      - .github/workflows/livepocket-detail-deadline-test.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and run detail-priority regression
+        run: |
+          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/test_livepocket_detail_priority.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py
