@@ -25,6 +25,19 @@ class BackfillTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             select(raw,pub,datetime.now(timezone.utc))
 
+    def test_offset_skips_earlier_candidate(self):
+        raw,pub,url=self.data()
+        other="https://livepocket.jp/e/second"
+        import copy
+        extra_raw=copy.deepcopy(raw["items"][0])
+        extra_pub=copy.deepcopy(pub["items"][0])
+        extra_raw["url"]=other
+        extra_pub["url"]=other
+        raw["items"].append(extra_raw)
+        pub["items"].append(extra_pub)
+        self.assertEqual(select(raw,pub,datetime.now(timezone.utc),
+                                manual_override_urls=set(),offset=1),[other])
+
     def test_never_override(self):
         raw,pub,url=self.data()
         pub["items"][0]["prefecture"]="岐阜県"
