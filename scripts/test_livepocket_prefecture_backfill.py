@@ -36,7 +36,9 @@ class BackfillTests(unittest.TestCase):
         raw["items"].append(extra_raw)
         pub["items"].append(extra_pub)
         self.assertEqual(select(raw,pub,datetime.now(timezone.utc),
-                                manual_override_urls=set(),offset=1),[other])
+                                manual_override_urls=set(),offset=1,limit=1),[other])
+        self.assertEqual(select(raw,pub,datetime.now(timezone.utc),
+                                manual_override_urls=set(),offset=1,limit=2),[other,url])
 
     def test_never_override(self):
         raw,pub,url=self.data()
