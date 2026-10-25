@@ -14,7 +14,7 @@ from pathlib import Path
 from livepocket_venue_prefecture import fill_one
 
 
-def select(raw, public, now, limit=8, manual_override_urls=None):
+def select(raw, public, now, limit=8, manual_override_urls=None, offset=0):
     if manual_override_urls is None:
         raise ValueError('Current Supabase manual override URLs are required (fail closed)')
     manual_override_urls = set(manual_override_urls)
@@ -40,15 +40,16 @@ def select(raw, public, now, limit=8, manual_override_urls=None):
         except (ValueError, TypeError):
             continue
         candidates.append(url)
-    return candidates[:max(0, min(int(limit), 8))]
+    start = max(0, int(offset))
+    return candidates[start:start + max(0, min(int(limit), 8))]
 
 
-def backfill(raw, public, fetch, now=None, limit=8, manual_override_urls=None):
+def backfill(raw, public, fetch, now=None, limit=8, manual_override_urls=None, offset=0):
     now = now or datetime.now(timezone.utc)
     attempted = changed = 0
     raw_index = {x.get("url"): x for x in raw.get("items", [])}
     public_index = {x.get("url"): x for x in public.get("items", [])}
-    for url in select(raw, public, now, limit, manual_override_urls=manual_override_urls):
+    for url in select(raw, public, now, limit, manual_override_urls=manual_override_urls, offset=offset):
         try:
             result = fetch(url)
         except Exception:
@@ -68,6 +69,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true", help="Write verified changes")
     parser.add_argument("--limit", type=int, default=8)
+    parser.add_argument("--offset", type=int, default=0, help="Skip this many eligible events for a rotating review batch")
     parser.add_argument("--manual-overrides-json", type=Path, help="Fresh Supabase URL snapshot; required to prevent overwrite")
     args = parser.parse_args()
     import livepocket_v21 as v21
@@ -82,14 +84,14 @@ def main():
     if not snapshot["urls"]:
         raise ValueError("Empty manual override snapshot: refusing unsafe backfill")
     manual_urls = set(snapshot["urls"])
-    candidates = select(raw, public, datetime.now(timezone.utc), args.limit, manual_urls)
+    candidates = select(raw, public, datetime.now(timezone.utc), args.limit, manual_urls, offset=args.offset)
     print("Eligible events:", len(candidates))
     if not args.apply or not candidates:
         print("Dry run: no pages fetched or data written")
         return
     fetch, close = v21.browser_fetcher()
     try:
-        result = backfill(raw, public, fetch, limit=args.limit, manual_override_urls=manual_urls)
+        result = backfill(raw, public, fetch, limit=args.limit, manual_override_urls=manual_urls, offset=args.offset)
     finally:
         close()
     print(result)
