@@ -3098,7 +3098,7 @@
     $('lpCardAddYellowSubmarine').addEventListener('click',()=>{
       if(!isDeveloper() || !lpCardEditing)return;
       const current=lpCardStoreRead(false);
-      const key=x=>String(x.name||'').normalize('NFKC').replace(/\\s+/g,'').toLowerCase();
+      const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();
       const existing=new Set(current.filter(x=>x.name.trim()).map(key));
       const additions=LP_YELLOW_SUBMARINE_STORES.filter(x=>!existing.has(key(x)));
       if(current.length+additions.length>LP_CARD_MAX_STORES){
@@ -3109,7 +3109,7 @@
         lpCardSetStatus('イエローサブマリン22店舗はすでに登録されています。');
         return;
       }
-      if(!confirm('イエローサブマリンの店舗を'+additions.length+'件追加しますか？\\n現在の店舗情報は残ります。')){
+      if(!confirm('イエローサブマリンの店舗を'+additions.length+'件追加しますか？\n現在の店舗情報は残ります。')){
         return;
       }
       lpCardStoreRender(current.concat(additions));
