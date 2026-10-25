@@ -14,13 +14,16 @@ from pathlib import Path
 from livepocket_venue_prefecture import fill_one
 
 
-def select(raw, public, now, limit=8):
+def select(raw, public, now, limit=8, manual_override_urls=None):
+    if manual_override_urls is None:
+        raise ValueError('Current Supabase manual override URLs are required (fail closed)')
+    manual_override_urls = set(manual_override_urls)
     indexed = {x.get("url"): x for x in raw.get("items", [])}
     candidates = []
     for item in public.get("items", []):
         url = item.get("url")
         source = indexed.get(url)
-        if not source or item.get("prefecture") or source.get("prefecture"):
+        if not source or url in manual_override_urls or item.get("prefecture") or source.get("prefecture"):
             continue
         stores = item.get("stores") or source.get("stores") or []
         if len(stores) != 1 or not stores[0].get("name") or stores[0].get("prefecture"):
@@ -40,12 +43,12 @@ def select(raw, public, now, limit=8):
     return candidates[:max(0, min(int(limit), 8))]
 
 
-def backfill(raw, public, fetch, now=None, limit=8):
+def backfill(raw, public, fetch, now=None, limit=8, manual_override_urls=None):
     now = now or datetime.now(timezone.utc)
     attempted = changed = 0
     raw_index = {x.get("url"): x for x in raw.get("items", [])}
     public_index = {x.get("url"): x for x in public.get("items", [])}
-    for url in select(raw, public, now, limit):
+    for url in select(raw, public, now, limit, manual_override_urls=manual_override_urls):
         try:
             result = fetch(url)
         except Exception:
@@ -65,18 +68,26 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true", help="Write verified changes")
     parser.add_argument("--limit", type=int, default=8)
+    parser.add_argument("--manual-overrides-json", type=Path, help="Fresh Supabase URL snapshot; required to prevent overwrite")
     args = parser.parse_args()
     import livepocket_v21 as v21
     from livepocket_v14 import read_pair
     raw, public = read_pair()
-    candidates = select(raw, public, datetime.now(timezone.utc), args.limit)
+    if args.manual_overrides_json is None:
+        print("No current Supabase manual-override snapshot: backfill disabled (fail closed)")
+        return
+    snapshot = json.loads(args.manual_overrides_json.read_text(encoding="utf-8"))
+    if not isinstance(snapshot, dict) or not isinstance(snapshot.get("urls"), list):
+        raise ValueError("Invalid manual override snapshot")
+    manual_urls = set(snapshot["urls"])
+    candidates = select(raw, public, datetime.now(timezone.utc), args.limit, manual_urls)
     print("Eligible events:", len(candidates))
     if not args.apply or not candidates:
         print("Dry run: no pages fetched or data written")
         return
     fetch, close = v21.browser_fetcher()
     try:
-        result = backfill(raw, public, fetch, limit=args.limit)
+        result = backfill(raw, public, fetch, limit=args.limit, manual_override_urls=manual_urls)
     finally:
         close()
     print(result)
