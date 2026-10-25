@@ -40,8 +40,11 @@ def select(raw, public, now, limit=8, manual_override_urls=None, offset=0):
         except (ValueError, TypeError):
             continue
         candidates.append(url)
-    start = max(0, int(offset))
-    return candidates[start:start + max(0, min(int(limit), 8))]
+    if not candidates:
+        return []
+    start = max(0, int(offset)) % len(candidates)
+    count = min(len(candidates), max(0, min(int(limit), 8)))
+    return (candidates[start:] + candidates[:start])[:count]
 
 
 def backfill(raw, public, fetch, now=None, limit=8, manual_override_urls=None, offset=0):
