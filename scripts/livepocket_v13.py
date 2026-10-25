@@ -38,23 +38,20 @@ BLOCK_WORDS = re.compile(
 
 
 def detail_signup_period(text: str):
-    """Prefer explicitly labelled application dates in the event details.
+    """Use the event-details application window before ticket sale dates.
 
-    Keep ticket sale dates out of this selection. Ambiguous detail periods
-    remain unconfirmed rather than falling back to a conflicting ticket start.
+    Only a clearly marked details section qualifies. Conflicting application
+    dates within that section fail closed; ticket dates cannot override it.
     """
     if not isinstance(text, str):
         return None
-    # Only consider a distinct details section, ending at the ticket heading.
-    section = re.search(r'(?:^|\\n)\\s*(?:イベント)?詳細\\s*(?:\\n|$)', text)
+    section = re.search(r'(?m)^\\s*(?:イベント)?詳細\\s*$', text)
     if not section:
         return None
     tail = text[section.end():]
-    ticket = re.search(r'(?:^|\\n)\\s*受付[・･]チケット情報', tail)
+    ticket = re.search(r'(?m)^\\s*受付[・･]チケット情報\\s*$', tail)
     if ticket:
         tail = tail[:ticket.start()]
-    # A detailed description may contain both application and purchase dates.
-    # Restrict extraction to labelled application statements.
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
     flat = re.sub(r'\\s+', ' ', tail[:12000])
     found = []
@@ -67,10 +64,10 @@ def detail_signup_period(text: str):
             found.append(candidate)
     if not found:
         return None
-    ends = {v11.iso(end) for _,end in found}
-    starts = {v11.iso(start) for start,_ in found if start}
-    if len(ends)!=1 or len(starts)>1:
-        return (None,None)
+    ends = {v11.iso(end) for _, end in found}
+    starts = {v11.iso(start) for start, _ in found if start}
+    if len(ends) != 1 or len(starts) > 1:
+        return (None, None)
     return (v11.parse_datetime(next(iter(starts))) if starts else None,
             v11.parse_datetime(next(iter(ends))))
 
