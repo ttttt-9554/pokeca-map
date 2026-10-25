@@ -1562,7 +1562,16 @@ nav[aria-label="メインメニュー"] {
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- アプリ本体 -->
-  <script src="app.js?v=20261025-urgent-deadline-9c11ac1"></script>
+  <script>
+  // Load the app script with the refresh token when the user explicitly
+  // requests an update, preventing a stale app.js response in iOS/Chrome.
+  (function(){
+    var token = new URLSearchParams(location.search).get('app_refresh');
+    var version = token && /^\\d{10,16}$/.test(token)
+      ? token : '20261025-store-label-11c3a9c';
+    document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\\/script>');
+  })();
+  </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
 
