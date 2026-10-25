@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-25T04:00:56.680875+00:00",
-  "unique_livepocket_urls": 555,
+  "collected_at": "2026-10-25T05:30:56.436375+00:00",
+  "unique_livepocket_urls": 556,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8061,7 +8061,26 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-25T04:00:58.394789+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/voozz",
+      "store_name": "ふるいちトップブックスひたちなか店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-25T05:30:03.813000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちトップブックスひたちなか店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "【ふるいちトップブックスひたちなか店】ポケカ抽選販売（30TH セレブレーション）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T08:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックスひたちなか店】ポケカ抽選販売（30TH セレブレーション）",
+      "first_detected_at": "2026-10-25T05:30:57.879734+00:00"
     }
   ],
-  "updated_at": "2026-10-25T05:20:59.212525+00:00"
+  "updated_at": "2026-10-25T05:31:25.998084+00:00"
 }
