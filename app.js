@@ -4605,12 +4605,13 @@
   let lotteryLostGroupExpanded = false;
   let lotteryTrackError = '';
 
+  // Keep the location legible without expanding the existing management cards.
   function lotteryTrackCss() {
     if ($('lpTrackerStyle')) return;
     const sheet = document.createElement('style');
     sheet.id = 'lpTrackerStyle';
     sheet.textContent = `
-      /* v21.28: 6 tabs for regular users, 7 for developers. */
+      .lp-track-store-label{margin:6px 0 8px;font-size:.88em;line-height:1.5;color:var(--muted,#b8c9df);overflow-wrap:anywhere}\n      /* v21.28: 6 tabs for regular users, 7 for developers. */
       nav:has(button[data-tab="lotteryManage"]){grid-template-columns:repeat(6,minmax(0,1fr))}
       nav:has(button[data-tab="lotteryManage"]):has(button[data-tab="dev"]:not([hidden])){grid-template-columns:repeat(7,minmax(0,1fr))}
       nav button[data-tab="lotteryManage"]{font-size:20px}
@@ -5028,6 +5029,25 @@
     return String(item.official_event_title || item.product_name || (item.event_title_provisional?'':item.event_title) || item.store_name || url).trim().slice(0,160);
   }
 
+  // Show the actual store alongside the product in private lottery management.
+  // Prefer explicit store records; never guess a prefecture from the name.
+  function lotteryTrackStoreLabel(url) {
+    const item=lotteryItems.find(x=>x.url===url);
+    if(!item)return '店舗情報なし（掲載終了・非表示の可能性）';
+    const stores=Array.isArray(item.stores)
+      ? item.stores.filter(x=>x && typeof x.name==='string' && x.name.trim())
+      : [];
+    const unique=[...new Map(stores.map(x=>[x.name.trim()+'|'+(x.prefecture||''),x])).values()];
+    if(unique.length===1){
+      const store=unique[0];
+      return store.name.trim()+(store.prefecture?'（'+store.prefecture+'）':'');
+    }
+    if(unique.length>1)return '対象店舗 '+unique.length+'件：'+unique.slice(0,3).map(x=>x.name.trim()).join(' ／ ')+(unique.length>3?' ほか':'');
+    const name=String(item.store_name||'').trim();
+    const pref=String(item.prefecture||'').trim();
+    return name ? name+(pref?'（'+pref+'）':'') : '店舗未確認';
+  }
+
   function lotteryTrackSort(a,b) {
     const priority = r => r.status==='won' ? 0 : lotteryOnsiteSummary(r.event_url).state==='required' && !r.onsite_done ? 1 : r.status==='applied' ? 2 : r.status==='not_applied' ? 3 : r.status==='received' ? 4 : 5;
     if(priority(a)!==priority(b))return priority(a)-priority(b);
@@ -5134,6 +5154,7 @@
           ? `<p>自分の現地対応：${x.onsite_done?'完了':'未完了'}</p>`:'';
         return `<div class="lp-track-row"><div>
           <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
+          <p class="lp-track-store-label">📍 店舗：${escape(lotteryTrackStoreLabel(x.event_url))}</p>
           ${onsite}
           <p class="lp-track-quantity-summary">🎟️ 応募 ${x.application_count}口 ／ 🎉 当選 ${x.won_count}口 ／ 📪 落選 ${x.lost_count}口</p>
           ${x.status==='won'?lotteryPickupDetailsHtml(x):''}
