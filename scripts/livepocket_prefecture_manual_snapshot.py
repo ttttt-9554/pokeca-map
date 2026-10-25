@@ -4,6 +4,7 @@
 Requires a private GitHub Actions secret; never prints keys, rows or URLs.
 """
 import json
+import urllib.error
 import os
 import sys
 import urllib.parse
@@ -14,7 +15,13 @@ from pathlib import Path
 def fetch_manual_urls(base_url, service_key, opener=urllib.request.urlopen):
     if not base_url.startswith("https://") or not service_key:
         raise ValueError("Secure Supabase URL and service key are required")
-    base = base_url.rstrip("/")
+    parsed = urllib.parse.urlsplit(base_url.strip())
+    if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password or parsed.path not in ("", "/"):
+        raise ValueError("Invalid Supabase project URL")
+    base = base_url.strip().rstrip("/")
+    print("Supabase host matches expected project:", parsed.hostname == "aypcmtlaaygmiexboypk.supabase.co")
+    print("Supabase key format:", "legacy JWT" if service_key.startswith("eyJ") else "secret key" if service_key.startswith("sb_secret_") else "unexpected")
+
     urls = set()
     offset = 0
     while True:
@@ -32,10 +39,16 @@ def fetch_manual_urls(base_url, service_key, opener=urllib.request.urlopen):
                 "Accept": "application/json",
             },
         )
-        with opener(req, timeout=20) as response:
-            if response.status != 200:
-                raise RuntimeError("Supabase manual-override request failed")
-            rows = json.load(response)
+        try:
+            with opener(req, timeout=20) as response:
+                if response.status != 200:
+                    raise RuntimeError("Supabase manual-override request failed")
+                rows = json.load(response)
+        except urllib.error.HTTPError as exc:
+            print("Supabase HTTP status:", exc.code)
+            print("Supabase response content type:", exc.headers.get("Content-Type", "unknown"))
+            print("Supabase request rejected; response body intentionally hidden")
+            raise RuntimeError("Supabase authentication or access policy rejected request") from None
         if not isinstance(rows, list):
             raise ValueError("Unexpected Supabase response")
         for row in rows:
