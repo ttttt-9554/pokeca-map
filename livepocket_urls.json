@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-25T02:30:55.877607+00:00",
+  "collected_at": "2026-10-25T03:00:57.209331+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 551,
+  "unique_livepocket_urls": 552,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14741,34 +14741,56 @@
       "event_title": "【抽選販売】再販ポケモンカードゲームMEGA 拡張パック 30th CELEBRATION、プレミアムデッキセット",
       "application_end_at": "2026-10-26T22:00:00+09:00",
       "application_start_at": "2026-10-25T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/o66rd",
+      "discord_message_id": "1563749017945505937",
+      "discord_posted_at": "2026-10-25T03:00:18.930000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍埼玉県\nTSUTAYA籠原店\n受付終了: 10/25 21:30（残り9時間29分）\nhttps://livepocket.jp/e/i5bkt\n\n📍埼玉県\n対象者限定\n受付終了: 10/28 20:05（残り3日8時間）\nhttps://livepocket.jp/e/bsu96\n\n📍埼玉県\nトレカエース春日部店\n受付終了: 10/25 23:00（残り10時間59分）\nhttps://livepocket.jp/e/87rvn\n\n📍埼玉県\n1１月再販：ポケモンカードゲー...\n受付終了: 10/28 20:05（残り3日8時間）\nhttps://livepocket.jp/e/uvvca\n\n📍埼玉県\nSPデッキセット「メガオーダイ...\n受付終了: 10/28 20:05（残り3日8時間）\nhttps://livepocket.jp/e/e8_r2\n\n📍埼玉県\nポケモンカードゲームMEGA ...\n受付終了: 10/28 20:05（残り3日8時間）\nhttps://livepocket.jp/e/o66rd\n\n📍宮城県\nTSUTAYA仙台荒井店\n受付終了: 10/26 22:00（残り1日9時間）\nhttps://livepocket.jp/e/c8g_7",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
+      "application_end_at": "2026-10-28T20:05:00+09:00",
+      "application_start_at": "2026-10-25T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 394,
+    "parsed": 395,
     "no_structured_details": 157
   },
   "field_counts": {
     "store_name": 373,
-    "prefecture": 310,
-    "event_title": 238,
+    "prefecture": 311,
+    "event_title": 239,
     "event_date": 1,
-    "product_name": 81,
+    "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 516,
-    "application_start_at": 516,
+    "application_end_at": 517,
+    "application_start_at": 517,
     "stores_events": 381
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563741415538819183"
+      "1551580466266644552": "1563749017945505937"
     },
     "last_run": {
-      "checked_at": "2026-10-25T02:30:55.877607+00:00",
-      "new_urls": 3,
-      "original_urls": 548,
+      "checked_at": "2026-10-25T03:00:57.209331+00:00",
+      "new_urls": 1,
+      "original_urls": 551,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -14916,7 +14938,8 @@
         "1563658357292666891": "2026-10-24T21:00:56.628335+00:00",
         "1563696110151794839": "2026-10-24T23:35:57.114080+00:00",
         "1563711220022780024": "2026-10-25T00:30:58.226232+00:00",
-        "1563741415538819183": "2026-10-25T02:30:56.651634+00:00"
+        "1563741415538819183": "2026-10-25T02:30:56.651634+00:00",
+        "1563749017945505937": "2026-10-25T03:00:58.003897+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17188,8 +17211,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/i5bkt": {
-          "checked_at": "2026-10-24T21:01:24.751698+00:00",
-          "status": "checked_title",
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/bsu96": {
@@ -17215,6 +17238,11 @@
         "https://livepocket.jp/e/c8g_7": {
           "checked_at": "2026-10-25T02:31:26.606606+00:00",
           "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/o66rd": {
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "status": "checked_title_product_deadline",
           "http_status": null
         }
       }
@@ -18364,8 +18392,8 @@
         },
         "https://livepocket.jp/e/i5bkt": {
           "detected_at": "2026-10-24T21:00:57.567755+00:00",
-          "status": "checked_title",
-          "checked_at": "2026-10-24T21:01:24.751698+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bsu96": {
@@ -18396,6 +18424,12 @@
           "detected_at": "2026-10-25T02:30:57.573054+00:00",
           "status": "checked_title_product_deadline",
           "checked_at": "2026-10-25T02:31:26.606606+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/o66rd": {
+          "detected_at": "2026-10-25T03:00:58.978242+00:00",
+          "status": "checked_title_product_deadline",
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
           "http_status": null
         }
       },
@@ -19361,6 +19395,11 @@
         "https://livepocket.jp/e/nc71x": {
           "attempts": 2,
           "last_attempt_at": "2026-10-25T01:21:27.506490+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/i5bkt": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-25T03:01:29.645220+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -23695,7 +23734,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-24T21:01:24.751698+00:00",
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
           "title_observed": "10月31日発売『ONE PIECEカード EXブースター ヒロインズエディション Vol.2 』抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -23754,6 +23793,17 @@
           "title_observed": "【抽選販売】再販ポケモンカードゲームMEGA 拡張パック 30th CELEBRATION、プレミアムデッキセット",
           "genre": "pokemon",
           "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/o66rd": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "title_observed": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
+          "genre": "pokemon",
+          "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
         }
@@ -27073,7 +27123,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/i5bkt": {
-          "checked_at": "2026-10-24T21:01:24.751698+00:00",
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -27139,6 +27189,19 @@
         },
         "https://livepocket.jp/e/c8g_7": {
           "checked_at": "2026-10-25T02:31:26.606606+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/o66rd": {
+          "checked_at": "2026-10-25T03:01:29.645220+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

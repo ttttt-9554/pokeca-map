@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-25T02:51:01Z",
-  "total": 3,
+  "as_of": "2026-10-25T03:01:41Z",
+  "total": 4,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -32,6 +32,21 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-25T02:31:26.606606+00:00",
       "next_retry_at": "2026-10-26T02:31:26.606606+00:00",
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/o66rd",
+      "event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
+      "store_name": "",
+      "prefecture": "埼玉県",
+      "application_end_at": "2026-10-28T20:05:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-25T03:01:29.645220+00:00",
+      "next_retry_at": "2026-10-26T03:01:29.645220+00:00",
       "queue": "retry_wait"
     },
     {
