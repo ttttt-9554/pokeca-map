@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-25T03:00:57.209331+00:00",
+  "collected_at": "2026-10-25T03:30:56.569716+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 552,
+  "unique_livepocket_urls": 553,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14763,34 +14763,64 @@
       "event_title": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」購入権抽選",
       "application_end_at": "2026-10-28T20:05:00+09:00",
       "application_start_at": "2026-10-25T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/efl_e",
+      "discord_message_id": "1563756503335313458",
+      "discord_posted_at": "2026-10-25T03:30:03.586000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちトップブックスフォレオ菖蒲店\n受付終了: 10/25 22:00（残り9時間29分）\nhttps://livepocket.jp/e/efl_e",
+      "store_name": "ふるいちトップブックスフォレオ菖蒲店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックスフォレオ菖蒲店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックスフォレオ菖蒲店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック30th CELEBRATION 1BOX）",
+      "application_end_at": "2026-10-25T22:00:00+09:00",
+      "application_start_at": "2026-10-24T08:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 395,
+    "parsed": 396,
     "no_structured_details": 157
   },
   "field_counts": {
-    "store_name": 373,
-    "prefecture": 311,
-    "event_title": 239,
+    "store_name": 374,
+    "prefecture": 312,
+    "event_title": 240,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 517,
-    "application_start_at": 517,
-    "stores_events": 381
+    "application_end_at": 518,
+    "application_start_at": 518,
+    "stores_events": 382
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1563749017945505937"
+      "1551580466266644552": "1563756503335313458"
     },
     "last_run": {
-      "checked_at": "2026-10-25T03:00:57.209331+00:00",
+      "checked_at": "2026-10-25T03:30:56.569716+00:00",
       "new_urls": 1,
-      "original_urls": 551,
+      "original_urls": 552,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -14939,7 +14969,8 @@
         "1563696110151794839": "2026-10-24T23:35:57.114080+00:00",
         "1563711220022780024": "2026-10-25T00:30:58.226232+00:00",
         "1563741415538819183": "2026-10-25T02:30:56.651634+00:00",
-        "1563749017945505937": "2026-10-25T03:00:58.003897+00:00"
+        "1563749017945505937": "2026-10-25T03:00:58.003897+00:00",
+        "1563756503335313458": "2026-10-25T03:30:57.309262+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17244,6 +17275,11 @@
           "checked_at": "2026-10-25T03:01:29.645220+00:00",
           "status": "checked_title_product_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/efl_e": {
+          "checked_at": "2026-10-25T03:31:28.751642+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -18430,6 +18466,12 @@
           "detected_at": "2026-10-25T03:00:58.978242+00:00",
           "status": "checked_title_product_deadline",
           "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/efl_e": {
+          "detected_at": "2026-10-25T03:30:58.211006+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-25T03:31:28.751642+00:00",
           "http_status": null
         }
       },
@@ -23806,6 +23848,17 @@
           "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/efl_e": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-25T03:31:28.751642+00:00",
+          "title_observed": "【ふるいちトップブックスフォレオ菖蒲店】ポケカ抽選販売（ポケモンカードゲーム MEGA 拡張パック30th CELEBRATION 1BOX）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -27202,6 +27255,19 @@
         },
         "https://livepocket.jp/e/o66rd": {
           "checked_at": "2026-10-25T03:01:29.645220+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/efl_e": {
+          "checked_at": "2026-10-25T03:31:28.751642+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
