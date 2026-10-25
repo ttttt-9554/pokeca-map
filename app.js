@@ -3095,27 +3095,76 @@
       $('lpCardStoresFold').open=true;
       lpCardSetStatus('店舗を1件追加しました。店舗名と都道府県を入力後、「変更を保存」を押してください。');
     });
-    $('lpCardAddYellowSubmarine').addEventListener('click',()=>{
+    const storePresetKey='toreca-radar-store-presets-v1';
+    function readStorePresets(){
+      try{
+        const data=JSON.parse(localStorage.getItem(storePresetKey)||'{}');
+        if(!data||typeof data!=='object'||Array.isArray(data))return {};
+        return Object.fromEntries(Object.entries(data).filter(([name,rows])=>
+          name.length<=80 && Array.isArray(rows) && rows.length>=2 && rows.length<=LP_CARD_MAX_STORES
+        ).slice(0,30));
+      }catch(error){return {};}
+    }
+    function refreshStorePresetOptions(){
+      const select=$('lpCardStorePreset');
+      if(!select)return;
+      const chosen=select.value;
+      select.innerHTML='<option value="">チェーンを選択</option>'+
+        '<option value="yellow-submarine">イエローサブマリン（22店舗）</option>'+
+        Object.entries(readStorePresets()).map(([name,rows])=>
+          '<option value="'+escape('custom:'+name)+'">'+escape(name)+'（'+rows.length+'店舗・この端末）</option>').join('');
+      if([...select.options].some(x=>x.value===chosen))select.value=chosen;
+    }
+    $('lpCardApplyStorePreset').addEventListener('click',()=>{
       if(!isDeveloper() || !lpCardEditing)return;
+      const chosen=$('lpCardStorePreset').value;
+      const preset=chosen==='yellow-submarine' ? LP_YELLOW_SUBMARINE_STORES
+        : chosen.startsWith('custom:') ? readStorePresets()[chosen.slice(7)] : null;
+      if(!Array.isArray(preset)||!preset.length){
+        lpCardSetStatus('追加する店舗チェーンを選択してください。');
+        return;
+      }
       const current=lpCardStoreRead(false);
       const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();
       const existing=new Set(current.filter(x=>x.name.trim()).map(key));
-      const additions=LP_YELLOW_SUBMARINE_STORES.filter(x=>!existing.has(key(x)));
+      const additions=preset.filter(x=>x&&typeof x.name==='string'&&x.name.trim()&&!existing.has(key(x)));
       if(current.length+additions.length>LP_CARD_MAX_STORES){
-        lpCardSetStatus('⚠ 最大100店舗を超えるため追加できません。不要な店舗を整理してください。');
+        lpCardSetStatus('⚠ 最大100店舗を超えるため追加できません。');
         return;
       }
       if(!additions.length){
-        lpCardSetStatus('イエローサブマリン22店舗はすでに登録されています。');
+        lpCardSetStatus('選択した店舗はすでに一覧にあります。');
         return;
       }
-      if(!confirm('イエローサブマリンの店舗を'+additions.length+'件追加しますか？\n現在の店舗情報は残ります。')){
-        return;
-      }
+      if(!confirm('選択した店舗を'+additions.length+'件追加しますか？既存店舗は残ります。'))return;
       lpCardStoreRender(current.concat(additions));
       $('lpCardStoresFold').open=true;
-      lpCardSetStatus('イエローサブマリン '+additions.length+'件を入力しました。「変更を保存」で確定してください。');
+      lpCardSetStatus(additions.length+'店舗を追加しました。「変更を保存」で確定してください。');
     });
+    $('lpCardSaveStorePreset').addEventListener('click',()=>{
+      if(!isDeveloper()||!lpCardEditing)return;
+      let rows;
+      try{rows=lpCardStoreRead(true);}catch(error){lpCardSetStatus('⚠ '+error.message);return;}
+      if(rows.length<2){lpCardSetStatus('テンプレート保存には2店舗以上必要です。');return;}
+      const name=prompt('保存するチェーン名を入力してください（この端末のみ）');
+      if(name===null)return;
+      const label=name.trim();
+      if(!label||label.length>80||label==='yellow-submarine'||label.includes(':')){
+        lpCardSetStatus('⚠ チェーン名を確認してください。');return;
+      }
+      const presets=readStorePresets();
+      if(Object.keys(presets).length>=30&&!Object.hasOwn(presets,label)){
+        lpCardSetStatus('⚠ テンプレートは最大30件です。');return;
+      }
+      if(presets[label]&&!confirm('同じ名前のテンプレートを上書きしますか？'))return;
+      presets[label]=rows;
+      try{localStorage.setItem(storePresetKey,JSON.stringify(presets));}
+      catch(error){lpCardSetStatus('⚠ 端末に保存できませんでした。');return;}
+      refreshStorePresetOptions();
+      $('lpCardStorePreset').value='custom:'+label;
+      lpCardSetStatus(label+'（'+rows.length+'店舗）をこの端末に保存しました。');
+    });
+    refreshStorePresetOptions();
     $('lpCardStoreRows').addEventListener('click',event=>{
       const target=event.target.closest('button[data-lp-store-remove]');
       if (!target) return;
