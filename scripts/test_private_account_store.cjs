@@ -18,6 +18,7 @@ const A='11111111-1111-4111-8111-111111111111';
 const ONE='https://livepocket.jp/e/one111';
 const MANY='https://livepocket.jp/e/many22';
 const UNKNOWN='https://livepocket.jp/e/unknown12';
+const APP='app-lottery://private-demo';
 const profile={id:A,label:'自分',is_default:true,is_archived:false};
 const itemOne={url:ONE,stores:[{name:'ふるいち宇都宮店',prefecture:'栃木県'}]};
 const itemMany={url:MANY,stores:[
@@ -34,7 +35,8 @@ const ctx={
    item.store_name?[{name:item.store_name,prefecture:item.prefecture||''}]:[],
  lpPrivateAccountRows:()=>[profile],
  lpPrivateAccountDefault:()=>profile,
- lpPrivateAccounts:new Map([[A,profile]]),escape
+ lpPrivateAccounts:new Map([[A,profile]]),escape,
+ lpAppEventId:url=>url===APP?'mock-app-id':''
 };
 const functions=[
  'lpTrackerAccountInput','lpTrackerCandidateStores','lpTrackerStoreControl',
@@ -78,7 +80,7 @@ html=api.lpTrackerPrivateMarkup({event_url:UNKNOWN,application_count:1,
 assert.match(html,/以前の登録を保持/);
 assert.doesNotMatch(html,/data-lp-account-store/);
 
-function collector(url,selected,previous=null){
+function collector(url,selected,previous=null,manual=null){
  const data=previous||{event_url:url,application_count:1,
   won_count:0,lost_count:0,account_entries:[ticket]};
  const originals=Object.fromEntries(['application_count','won_count','lost_count']
@@ -87,11 +89,13 @@ function collector(url,selected,previous=null){
   const name=sel.match(/data-lp-account-count="([^"]+)"/)?.[1];
   return name?originals[name]:null;
  }};
- const choice={value:A}, outcome={value:'pending'},store={value:selected};
+ const choice={value:A}, outcome={value:'pending',checked:true},store={value:selected};
  const row={
   querySelector(sel){
    if(sel==='[data-lp-account-id]')return choice;
-   if(sel==='[data-lp-account-outcome]')return outcome;
+   if(sel==='[data-lp-account-outcome]:checked')return outcome;
+   if(sel==='[data-lp-manual-store-name]')return {value:manual?.name||''};
+   if(sel==='[data-lp-manual-store-pref]')return {value:manual?.prefecture||''};
    if(sel==='[data-lp-account-store]')return store;
    return null;
   }
@@ -114,7 +118,7 @@ assert.equal(result.account_entries[0].store_name,'大宮店');
 assert.equal(result.account_entries[0].store_prefecture,'埼玉県');
 assert.equal(result.application_count,1);
 assert.deepEqual(Object.keys(result.account_entries[0]).sort(),
- ['account_id','application_count','lost_count','store_name','store_prefecture','won_count'].sort());
+ ['account_id','application_count','lost_count','received_count','store_name','store_prefecture','won_count'].sort());
 result=collector(ONE,'').collect();
 assert.equal(result.account_entries[0].store_name,'ふるいち宇都宮店');
 assert.equal(result.account_entries[0].store_prefecture,'栃木県');
@@ -127,6 +131,15 @@ result=collector(MANY,'previous',{event_url:MANY,account_entries:[{
 }]}).collect();
 assert.equal(result.account_entries[0].store_name,'旧店舗');
 assert.throws(()=>collector(MANY,'44').collect(),/応募店舗を選択/);
+html=api.lpTrackerPrivateMarkup({event_url:APP,application_count:1,
+ won_count:0,lost_count:0,account_entries:[ticket]});
+assert.match(html,/data-lp-manual-store-name/);
+assert.match(html,/data-lp-manual-store-pref/);
+assert.doesNotMatch(html,/data-lp-account-store required/);
+assert.throws(()=>collector(APP,'').collect(),/店舗名と地域/);
+const entered=collector(APP,'',null,{name:'宇都宮店',prefecture:'栃木県'}).collect();
+assert.equal(entered.account_entries[0].store_name,'宇都宮店');
+assert.equal(entered.account_entries[0].store_prefecture,'栃木県');
 assert.match(schema,/store_name/);
 assert.match(schema,/store_prefecture/);
 assert.match(schema,/Invalid application store/);

@@ -19,7 +19,7 @@ function source(name){
 const one='11111111-1111-4111-8111-111111111111';
 const two='22222222-2222-4222-8222-222222222222';
 const context={lpPrivateAccounts:new Map(),escape:x=>String(x),
- lpTrackerCandidateStores:()=>[]};
+ lpTrackerCandidateStores:()=>[],lpAppEventId:()=>''};
 const api=vm.runInNewContext([
  'lpPrivateAccountDefault','lpPrivateAccountRows',
  'lpTrackerAccountInput','lpTrackerStoreControl','lpTrackerAccountRowHtml',
@@ -48,9 +48,10 @@ const saved=api.lpTrackerPrivateMarkup({
  ]
 });
 assert.match(saved,/🎟️ 応募 1口（自動登録）/);
-assert.match(saved,/value="won" selected>当選/);
-assert.match(saved,/value="pending" selected>結果待ち/);
+assert.match(saved,/data-lp-account-outcome value="won" checked/);
+assert.match(saved,/data-lp-account-outcome value="pending" checked/);
 assert.match(saved,/data-lp-account-remove>削除/);
+assert.match(saved,/data-lp-account-outcome value="received"/);
 assert.match(saved,/id="lpTrackUnassigned" hidden/);
 assert.doesNotMatch(saved,/id="lpTrackAccountRows"[\s\S]*?data-lp-account-count="application_count"/,
  'Saved profiles only show outcome selectors, not ticket count inputs');

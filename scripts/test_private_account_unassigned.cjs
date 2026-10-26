@@ -29,11 +29,23 @@ function scenario(legacyCounts){
  };
  const rows=[];
  function makeRow(id,outcome='pending'){
-   const row={id,choice:{value:id},outcome:{value:outcome},
+   let row;
+   const checks=['pending','won','lost','received'].map(value=>({
+    value,checked:value===outcome,
+    matches:s=>s==='[data-lp-account-outcome]',
+    closest:s=>s==='[data-lp-account-row]'?row:null
+   }));
+   row={id,choice:{value:id},checks,
     querySelector(sel){
      if(sel==='[data-lp-account-id]')return this.choice;
-     if(sel==='[data-lp-account-outcome]')return this.outcome;
+     if(sel==='[data-lp-account-outcome]:checked')
+       return this.checks.find(c=>c.checked)||null;
+     if(sel==='[data-lp-account-outcome][value="pending"]')
+       return this.checks[0];
      return null;
+    },
+    querySelectorAll(sel){
+      return sel==='[data-lp-account-outcome]'?this.checks:[];
     },
     remove(){const i=rows.indexOf(this);if(i>=0)rows.splice(i,1);}
    };
@@ -46,7 +58,7 @@ function scenario(legacyCounts){
   },
   insertAdjacentHTML(_,html){
    const ids=[...html.matchAll(/<option value="([^"]+)" selected>/g)];
-   const results=[...html.matchAll(/<option value="(pending|won|lost)" selected>/g)];
+   const results=[...html.matchAll(/<input type="checkbox" data-lp-account-outcome value="(pending|won|lost|received)" checked/g)];
    assert(ids.length,'No selected account');
    rows.push(makeRow(ids[0][1],results[0]?.[1]||'pending'));
   }
@@ -71,7 +83,7 @@ function scenario(legacyCounts){
   lpPrivateAccountDefault:()=>profiles[0],
   lpPrivateAccounts:new Map(profiles.map(x=>[x.id,x])),
   escape:x=>String(x),
-  lpTrackerCandidateStores:()=>[],
+  lpTrackerCandidateStores:()=>[],lpAppEventId:()=>'',
   confirm:()=>{confirmCalls++;return confirmResult}
  };
  const api=vm.runInNewContext([
@@ -95,8 +107,10 @@ function scenario(legacyCounts){
   listeners.click({target:button('[data-lp-account-remove]',row)});
  }
  function change(index,value){
-  rows[index].outcome.value=value;
-  listeners.change({target:{matches:s=>s==='[data-lp-account-outcome]'}});
+  const target=rows[index].checks.find(c=>c.value===value);
+  assert(target,'Outcome option exists');
+  target.checked=true;
+  listeners.change({target});
  }
  return {add,remove,change,ctl,rows,form,legacy,left,
   confirmCount:()=>confirmCalls,confirmEnabled:v=>{confirmResult=v}};
@@ -121,6 +135,10 @@ empty.confirmEnabled(true);empty.remove(1);
 assert.equal(empty.ctl.collect().application_count,1);
 assert.equal(empty.ctl.collect().lost_count,0);
 assert.equal(empty.ctl.collect().won_count,1);
+empty.change(0,'received');
+assert.equal(empty.ctl.collect().won_count,1,
+ 'A received account still counts as one winning ticket');
+assert.equal(empty.ctl.collect().account_entries[0].received_count,1);
 empty.change(0,'pending');
 assert.equal(empty.ctl.collect().won_count,0);
 assert.equal(empty.ctl.collect().account_entries[0].lost_count,0);

@@ -21,7 +21,8 @@ const context={
  escape:x=>String(x),
  lpPrivateAccountRows:()=>profiles,
  lpPrivateAccountDefault:()=>profiles[0],
- lpTrackerCandidateStores:()=>[]
+ lpTrackerCandidateStores:()=>[],
+ lpAppEventId:()=>''
 };
 const api=vm.runInNewContext([
  'lpTrackerAccountInput','lpTrackerStoreControl','lpTrackerAccountRowHtml','lpTrackerPrivateMarkup'
@@ -50,8 +51,8 @@ const both=api.lpTrackerPrivateMarkup({
  ]
 });
 assert.match(both,/id="lpTrackUnassigned" hidden/);
-assert.match(both,/selected>当選/);
-assert.match(both,/selected>落選/);
+assert.match(both,/data-lp-account-outcome value="won" checked/);
+assert.match(both,/data-lp-account-outcome value="lost" checked/);
 const accountRows=both.slice(both.indexOf('id="lpTrackAccountRows"'));
 assert.doesNotMatch(accountRows,/data-lp-account-count=/,
  'Account rows must have only outcome controls; no numeric entry fields');
