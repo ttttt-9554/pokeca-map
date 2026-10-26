@@ -113,7 +113,7 @@ def main():
     if args.write and stats["updated"]:
         path.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n",
                         encoding="utf-8")
-        raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print("Verified periods written to raw and public catalogs")
 
 
