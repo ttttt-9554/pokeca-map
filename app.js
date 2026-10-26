@@ -4263,7 +4263,7 @@
     const inStore=method==='in_store';
     const payload={
       registration_method:method,
-      app_name:inStore?val('store_name'):val('app_name'),event_title:val('event_title'),
+      app_name:inStore?val('store_name').slice(0,100):val('app_name'),event_title:val('event_title'),
       product_name:val('product_name')||null,store_name:val('store_name')||null,
       prefecture:val('prefecture')||null,
       review_category:val('review_category')||'unknown',
