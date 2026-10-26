@@ -7,12 +7,24 @@ overrides. Failures do not create dates. Public JSON is written only when
 """
 import argparse
 import json
+import re
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from livepocket_v11 import parse_datetime
 from livepocket_v11 import iso
 from livepocket_v12 import exact_event_url
 from livepocket_v13 import extract_deadline
+
+def parse_posted_at(value):
+    """Discord publishes timezone-aware fractional-second ISO timestamps."""
+    result = parse_datetime(value)
+    if result or not isinstance(value, str):
+        return result
+    # Strip only fractional seconds immediately before a valid zone suffix.
+    # The established parser still validates the full timestamp.
+    without_fraction = re.sub(
+        r'\.\d{1,9}(?=(?:Z|[+-]\d{2}:\d{2})$)', '', value)
+    return parse_datetime(without_fraction)
 
 
 def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
@@ -34,13 +46,13 @@ def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
                 continue
         # Avoid spending the batch on long-expired historical listings.
         # Unknown publication timestamps remain eligible for manual review.
-        posted = parse_datetime(row.get("discord_posted_at"))
+        posted = parse_posted_at(row.get("discord_posted_at"))
         if posted and posted < now - timedelta(days=14):
             continue
         items.append(url)
     items = list(dict.fromkeys(items))
     # Most recently posted first; deterministic URL tie-breaker.
-    posted_by_url = {row.get('url'): parse_datetime(row.get('discord_posted_at'))
+    posted_by_url = {row.get('url'): parse_posted_at(row.get('discord_posted_at'))
                      for row in public.get('items', [])}
     items.sort(key=lambda url: (-(posted_by_url[url].timestamp()) if posted_by_url.get(url) else float('inf'), url))
     if not items:
