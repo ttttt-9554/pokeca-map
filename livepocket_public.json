@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-26T02:30:55.498123+00:00",
-  "unique_livepocket_urls": 564,
+  "collected_at": "2026-10-26T03:00:55.596553+00:00",
+  "unique_livepocket_urls": 566,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8228,7 +8228,47 @@
         }
       ],
       "first_detected_at": "2026-10-26T02:30:56.922695+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/edf4a",
+      "store_name": "TSUTAYA秩父店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-26T03:00:12.241000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA秩父店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "「30th_CELEBRATIONカードセット」9種セット抽選販売受付",
+      "application_end_at": "2026-10-28T20:00:00+09:00",
+      "application_start_at": "2026-10-26T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_event_title": "「30th_CELEBRATIONカードセット」9種セット抽選販売受付",
+      "first_detected_at": "2026-10-26T03:00:56.949543+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/jxvw7",
+      "store_name": "ふるいちトップブックス龍ケ崎店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-26T03:00:12.241000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス龍ケ崎店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "【ふるいち龍ケ崎店】ポケカ抽選販売（30thセレブレーション）",
+      "application_end_at": "2026-10-29T22:00:00+09:00",
+      "application_start_at": "2026-10-26T09:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち龍ケ崎店】ポケカ抽選販売（30thセレブレーション）",
+      "first_detected_at": "2026-10-26T03:00:56.949543+00:00"
     }
   ],
-  "updated_at": "2026-10-26T02:50:57.455286+00:00"
+  "updated_at": "2026-10-26T03:01:26.549906+00:00"
 }
