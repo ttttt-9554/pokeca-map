@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timedelta, timezone
 from livepocket_detail_period_batch import candidates, run
 
 U="https://livepocket.jp/e/"
@@ -13,6 +14,14 @@ class BatchTests(unittest.TestCase):
                     {"url":U+"c"},{"url":U+"d"}]}
         self.assertEqual(candidates(p,{U+"c"},8),[U+"a",U+"d"])
         self.assertEqual(candidates(p,{U+"c"},1,1),[U+"d"])
+
+    def test_older_discord_listing_is_skipped(self):
+        now=datetime.now(timezone.utc)
+        old=(now-timedelta(days=30)).isoformat()
+        recent=(now-timedelta(days=1)).isoformat()
+        p={"items":[{"url":U+"old","discord_posted_at":old},
+                    {"url":U+"recent","discord_posted_at":recent}]}
+        self.assertEqual(candidates(p,set(),5,now=now),[U+"recent"])
 
     def test_verified_date_written_once(self):
         p={"items":[{"url":U+"a"}]}
