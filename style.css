@@ -2363,3 +2363,8 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 .lp-track-outcome-choice:has(input:checked){border-color:var(--app-accent,#60a5fa);background:var(--app-surface,#1b2b40);outline:1px solid var(--app-accent,#60a5fa)}
 .lp-track-outcome-choice input{width:18px;height:18px;accent-color:var(--app-accent,#3b82f6);flex:none}
 @media(max-width:370px){.lp-track-outcome-checks{grid-template-columns:1fr}}
+
+/* v21.109: Sticky close control in the scrolling lottery editor. */
+#lpTrackerEditor .lp-track-sticky-bar{position:sticky;top:-18px;z-index:50;display:flex;justify-content:flex-end;pointer-events:none;margin:-18px -18px 4px;padding:10px 12px 0;background:linear-gradient(to bottom,var(--app-surface,#182438) 75%,transparent)}
+#lpTrackerEditor #lpTrackStickyClose{pointer-events:auto;display:grid;place-items:center;min-width:44px;min-height:44px;border:1px solid var(--app-border,#617188);border-radius:50%;font-size:28px;line-height:1;color:var(--app-text,#fff);background:var(--app-surface,#182438);cursor:pointer;box-shadow:0 2px 7px #0003}
+#lpTrackerEditor #lpTrackStickyClose:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
