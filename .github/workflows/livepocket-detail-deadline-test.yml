@@ -33,5 +33,7 @@ jobs:
         run: |
           python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
-      - name: Check admin-corrected deadline expiry in PWA
-        run: node scripts/test_app_manual_expiry.cjs
+      - name: Check PWA syntax and admin-corrected deadline expiry
+        run: |
+          node --check app.js
+          node scripts/test_app_manual_expiry.cjs
