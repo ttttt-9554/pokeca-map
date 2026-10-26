@@ -44,7 +44,8 @@ jobs:
             exit 1
           fi
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            OFFSET=$(( (10#$(date -u +%j) - 1) * 5 ))
+            DAY_OF_YEAR=$(date -u +%-j)
+            OFFSET=$(( (DAY_OF_YEAR - 1) * 5 ))
           fi
           PYTHONPATH=scripts python scripts/livepocket_detail_period_batch.py --manual-overrides-json prefecture_manual_overrides.json --limit 5 --offset "$OFFSET" --write
       - name: Publish verified missing dates only
