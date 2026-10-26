@@ -2368,3 +2368,10 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 #lpTrackerEditor .lp-track-sticky-bar{position:sticky;top:-18px;z-index:50;display:flex;justify-content:flex-end;pointer-events:none;margin:-18px -18px 4px;padding:10px 12px 0;background:linear-gradient(to bottom,var(--app-surface,#182438) 75%,transparent)}
 #lpTrackerEditor #lpTrackStickyClose{pointer-events:auto;display:grid;place-items:center;min-width:44px;min-height:44px;border:1px solid var(--app-border,#617188);border-radius:50%;font-size:28px;line-height:1;color:var(--app-text,#fff);background:var(--app-surface,#182438);cursor:pointer;box-shadow:0 2px 7px #0003}
 #lpTrackerEditor #lpTrackStickyClose:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
+
+/* v21.110: Compact four-in-a-row lottery outcome choices */
+#lpTrackerEditor .lp-track-outcome-checks{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important;width:100%;min-width:0}
+#lpTrackerEditor .lp-track-outcome-choice{display:flex!important;flex-direction:column!important;justify-content:center;align-items:center;gap:5px!important;padding:8px 2px!important;min-height:60px!important;min-width:0!important;text-align:center;font-size:clamp(9px,2.5vw,12px)!important;line-height:1.25!important;white-space:normal;overflow-wrap:anywhere}
+#lpTrackerEditor .lp-track-outcome-choice input[type=checkbox]{width:17px!important;height:17px!important;min-width:17px!important;margin:0!important;padding:0!important;flex:none}
+#lpTrackerEditor .lp-track-outcome-choice span{display:block;font-size:inherit!important;line-height:1.25}
+@media(max-width:370px){#lpTrackerEditor .lp-track-outcome-checks{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
