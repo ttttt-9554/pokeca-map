@@ -78,13 +78,16 @@ function scenario(legacyCounts){
   source('lpTrackerAllocateOne'),source('lpTrackerPrivateBind')
  ].join('\n')+'\n({lpTrackerPrivateBind})',context,{timeout:1000});
  const ctl=api.lpTrackerPrivateBind(form,()=>{});
- const button=(sel,row)=>({
-  closest(requested){
-   if(requested===sel)return {};
-   if(requested==='[data-lp-account-row]')return row||null;
-   return null;
-  }
- });
+ const button=(sel,row)=>{
+  const target={
+   closest(requested){
+    if(requested===sel)return target;
+    if(requested==='[data-lp-account-row]')return row||null;
+    return null;
+   }
+  };
+  return target;
+ };
  function add(){listeners.click({target:button('#lpTrackAccountAdd')})}
  function remove(index){
   const row=rows[index];assert(row,'row not present');
@@ -142,6 +145,6 @@ assert.equal(decided.left.won_count.value,'0');
 assert.equal(decided.legacy.hidden,true);
 const error=scenario({application_count:1,won_count:2});
 error.add();
-assert.equal(error.ctl.collect().account_entries.length,0);
+assert.equal(error.rows.length,0,'Invalid legacy outcomes must not be moved');
 assert.throws(()=>error.ctl.collect(),/未割当/);
 console.log('One ticket per added account, results, deletion and legacy transfer validated');
