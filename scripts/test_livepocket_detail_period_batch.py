@@ -1,6 +1,7 @@
 import unittest
 from datetime import datetime, timedelta, timezone
 from livepocket_detail_period_batch import candidates, run
+from livepocket_future_policy import FUTURE_ONLY_SINCE
 
 U="https://livepocket.jp/e/test_"
 TEXT="""詳細
@@ -9,6 +10,40 @@ TEXT="""詳細
 販売受付期間 2099年10月23日15:02～2099年10月26日21:45"""
 
 class BatchTests(unittest.TestCase):
+    def test_forward_only_skips_existing_undated_even_when_recent(self):
+        now=datetime(2026,10,27,2,0,tzinfo=timezone.utc)
+        old="2026-10-24T21:00:03.746000+00:00"
+        fresh="2026-10-26T03:26:00+00:00"
+        rows={"items":[
+            {"url":U+"legacy","discord_posted_at":old},
+            {"url":U+"missing_time"},
+            {"url":U+"fresh","discord_posted_at":fresh},
+            {"url":U+"known_end","discord_posted_at":fresh,
+             "application_end_at":"2026-10-26T12:00:00+09:00"},
+        ]}
+        visited=[]
+        def fetch(url):
+            visited.append(url)
+            return {"status":"browser_timeout"}
+        stats=run(rows,set(),fetch,now=now,since=FUTURE_ONLY_SINCE)
+        self.assertEqual(visited,[U+"fresh"])
+        self.assertEqual(stats["historical_missing_skipped"],2)
+        self.assertEqual(stats["public_recent_missing"],1)
+        self.assertEqual(stats["checked"],1)
+        self.assertEqual(stats["updated"],0)
+
+    def test_forward_only_accepts_cutover_inclusive_and_expires_by_age(self):
+        now=datetime(2026,10,27,2,0,tzinfo=timezone.utc)
+        data={"items":[
+            {"url":U+"boundary", "discord_posted_at":FUTURE_ONLY_SINCE.isoformat()},
+            {"url":U+"before", "discord_posted_at":"2026-10-26T12:24:59+09:00"},
+        ]}
+        self.assertEqual(candidates(data,set(),now=now,since=FUTURE_ONLY_SINCE),
+                         [U+"boundary"])
+        much_later=datetime(2026,11,20,0,0,tzinfo=timezone.utc)
+        self.assertEqual(candidates(data,set(),now=much_later,
+                                    since=FUTURE_ONLY_SINCE),[])
+
     def test_select_only_missing_and_unmodified(self):
         p={"items":[{"url":U+"a"},{"url":U+"b","application_end_at":"known"},
                     {"url":U+"c"},{"url":U+"d"}]}

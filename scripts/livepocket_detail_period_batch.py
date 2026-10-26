@@ -14,6 +14,7 @@ from livepocket_v11 import parse_datetime
 from livepocket_v11 import iso
 from livepocket_v12 import exact_event_url
 from livepocket_v13 import extract_deadline
+from livepocket_future_policy import FUTURE_ONLY_SINCE, after_cutover
 
 def parse_posted_at(value):
     """Discord publishes timezone-aware fractional-second ISO timestamps."""
@@ -27,15 +28,19 @@ def parse_posted_at(value):
     return parse_datetime(without_fraction)
 
 
-def recent_missing_period(row, now):
+def recent_missing_period(row, now, since=None):
     """A public missing date is recent unless its post date is known old."""
     if row.get("application_start_at") or row.get("application_end_at"):
         return False
     posted = parse_posted_at(row.get("discord_posted_at"))
+    # Historic posts and undated imports never enter the prospective-only
+    # browser queue; do not guess whether their lottery has already ended.
+    if since is not None and not after_cutover(posted, since):
+        return False
     return not posted or posted >= now - timedelta(days=14)
 
 
-def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
+def candidates(public, excluded, limit=5, offset=0, now=None, raw=None, since=None):
     if excluded is None:
         raise ValueError("Current manual exclusion snapshot required")
     now = now or datetime.now(timezone.utc)
@@ -69,7 +74,7 @@ def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
                 continue
         # Avoid spending the batch on long-expired historical listings.
         # Unknown publication timestamps remain eligible for manual review.
-        if not recent_missing_period(row, now):
+        if not recent_missing_period(row, now, since=since):
             continue
         items.append(url)
     items = list(dict.fromkeys(items))
@@ -116,18 +121,27 @@ def apply(public, url, body, excluded, now=None, raw=None):
     return True
 
 
-def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
+def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None, since=None):
     # Use one clock for candidate eligibility, deadline verification, and
     # diagnostic counts (especially around an exact deadline boundary).
     now = now or datetime.now(timezone.utc)
-    urls = candidates(public, excluded, limit, offset, raw=raw, now=now)
+    urls = candidates(public, excluded, limit, offset, raw=raw, now=now, since=since)
     # Explain why a large public "missing date" count may produce a small
     # browser batch, without exposing event IDs or reviewing private edits.
     recent_missing = [
         row for row in public.get("items", [])
-        if recent_missing_period(row, now)
+        if recent_missing_period(row, now, since=since)
     ]
+    legacy_skipped = 0
+    if since is not None:
+        legacy_skipped = sum(
+            not row.get("application_start_at") and
+            not row.get("application_end_at") and
+            not after_cutover(parse_posted_at(row.get("discord_posted_at")), since)
+            for row in public.get("items", [])
+        )
     stats = {"public_recent_missing": len(recent_missing),
+             "historical_missing_skipped": legacy_skipped,
              "manual_excluded_recent": sum(
                  row.get("url") in excluded for row in recent_missing),
              "selected": len(urls), "checked": 0, "updated": 0,
@@ -180,10 +194,10 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
             start, end = extract_deadline(body)
             if not end:
                 stats["period_unverified"] += 1
-            elif not start:
-                stats["period_without_start"] += 1
-            elif start > end or end <= now:
+            elif end <= now or (start is not None and start > end):
                 stats["period_expired"] += 1
+            elif start is None:
+                stats["period_without_start"] += 1
             else:
                 stats["period_not_applied"] += 1
     return stats
@@ -195,7 +209,11 @@ def main():
     p.add_argument("--limit", type=int, default=5)
     p.add_argument("--offset", type=int, default=0)
     p.add_argument("--write", action="store_true")
+    p.add_argument("--plan", action="store_true",
+                   help="Report whether a browser is needed without visiting any pages")
     args = p.parse_args()
+    if args.plan and args.write:
+        p.error("--plan and --write are mutually exclusive")
     snapshot = json.loads(args.manual_overrides_json.read_text(encoding="utf-8"))
     if not isinstance(snapshot.get("urls"), list) or not snapshot["urls"]:
         raise ValueError("Missing manual override snapshot")
@@ -203,12 +221,33 @@ def main():
     public = json.loads(path.read_text(encoding="utf-8"))
     raw_path = Path("livepocket_urls.json")
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
-    from livepocket_v21 import browser_fetcher
-    fetch, close = browser_fetcher()
+    excluded = set(snapshot["urls"])
+    now = datetime.now(timezone.utc)
+    due = candidates(public, excluded, args.limit, args.offset, raw=raw,
+                     now=now, since=FUTURE_ONLY_SINCE)
+    if args.plan:
+        print("Prospective deadline check: cutover (JST)", FUTURE_ONLY_SINCE.isoformat(),
+              "eligible", len(due))
+        import os
+        output = os.environ.get("GITHUB_OUTPUT")
+        if output:
+            with open(output, "a", encoding="utf-8") as stream:
+                stream.write("browser_needed=" + ("true" if due else "false") + "\n")
+        return
+    if due:
+        # Install/start Chromium only when newly posted undated lotteries exist.
+        from livepocket_v21 import browser_fetcher
+        fetch, close = browser_fetcher()
+    else:
+        def fetch(_url):
+            raise AssertionError("Historical or completed event was selected for browsing")
+        close = lambda: None
     try:
-        stats = run(public, set(snapshot["urls"]), fetch, args.limit, args.offset, raw=raw)
+        stats = run(public, excluded, fetch, args.limit, args.offset,
+                    raw=raw, now=now, since=FUTURE_ONLY_SINCE)
     finally:
         close()
+    print("Forward-only since:", FUTURE_ONLY_SINCE.isoformat())
     print("Missing period batch:", stats)
     if args.write and stats["updated"]:
         path.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n",
