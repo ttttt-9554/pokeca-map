@@ -5112,7 +5112,8 @@
       <div id="lpTrackCounts" class="lp-track-counts"></div>
       <div class="lp-track-toolbar"><label for="lpTrackFilter">自分の記録を表示</label>
         <select id="lpTrackFilter"><option value="all">すべて</option><option value="applied">応募済み</option><option value="won">当選・受取待ち</option><option value="lost">落選</option><option value="received">受取済み</option><option value="not_applied">未応募</option><option value="onsite">現地対応待ち</option></select>
-        <button type="button" id="lpTrackReload">記録を更新</button></div>
+        <button type="button" id="lpTrackReload">記録を更新</button>
+        <button type="button" id="lpTrackExportExcel">📥 Excel出力</button></div>
       <div id="lpTrackList"></div>`;
     $('lotteryManageView').append(container);
     $('lpTrackFilter').addEventListener('change', e => {
@@ -5128,6 +5129,7 @@
       }
     }, true);
     $('lpTrackReload').addEventListener('click',()=>refreshLotteryTrackerForAccount(true));
+    $('lpTrackExportExcel').addEventListener('click',lotteryTrackerExportExcel);
     const dialog = document.createElement('dialog');
     dialog.id = 'lpTrackerEditor';
     dialog.setAttribute('aria-label','抽選の個別管理');
@@ -5517,6 +5519,114 @@
     $('lpTrackList').innerHTML=filtered.length
       ? sections+(filtered.length>100?'<p class="lp-tracker-intro">最初の100件を表示しています。絞り込みでほかの記録を表示できます。</p>':'')
       : `<p class="lp-tracker-intro">${records.length?'該当する管理記録はありません。':'まだ記録はありません。各抽選の「応募済みにする」から登録できます。'}</p>`;
+  }
+
+
+  // v21.103: private per-user Excel export, matching the supplied 2-row template.
+  // All workbook generation happens locally in the browser; never use shared results.
+  function lpExportExcelLibrary(){
+    if(window.XLSX)return Promise.resolve(window.XLSX);
+    if(window.lpExcelLoader)return window.lpExcelLoader;
+    window.lpExcelLoader=new Promise((resolve,reject)=>{
+      const script=document.createElement('script');
+      script.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+      script.onload=()=>window.XLSX?resolve(window.XLSX):reject(new Error('Excelライブラリを読み込めません'));
+      script.onerror=()=>reject(new Error('Excelライブラリの読み込みに失敗しました'));
+      document.head.append(script);
+    }).catch(e=>{window.lpExcelLoader=null;throw e;});
+    return window.lpExcelLoader;
+  }
+
+  async function lotteryTrackerExportExcel(){
+    const button=$('lpTrackExportExcel');
+    if(!authUser || !supabaseClient){
+      alert('Excel出力にはDiscordログインが必要です。');return;
+    }
+    if(button?.disabled)return;
+    const uid=authUser.id;
+    if(button){button.disabled=true;button.textContent='Excel作成中…';}
+    try{
+      await refreshLotteryTrackerForAccount(true);
+      await lpPrivateAccountsRefresh(true);
+      if(authUser?.id!==uid)throw Error('ログインユーザーが切り替わりました');
+      const XLSX=await lpExportExcelLibrary();
+      if(authUser?.id!==uid)throw Error('ログインユーザーが切り替わりました');
+      const records=[...lotteryTrackRecords.values()]
+        .filter(r=>r&&r.status!=='not_applied').sort(lotteryTrackSort);
+      if(!records.length){alert('出力できる抽選管理記録がありません。');return;}
+      const profiles=lpPrivateAccountRows();
+      const profileIds=profiles.map(p=>p.id);
+      for(const r of records)for(const a of (r.account_entries||[]))
+        if(a.account_id&&!profileIds.includes(a.account_id))profileIds.push(a.account_id);
+      // Account columns are generated dynamically, including archived accounts in past entries.
+      const names=profileIds.map((id,i)=>lpPrivateAccounts.get(id)?.label||'旧アカウント'+(i+1));
+      const headers=['店舗名','地域','抽選受付開始日時','抽選受付終了日時',
+        '抽選結果発表時','受け取り開始日時','受け取り終了日時','備考',
+        ...(names.length?names:['応募アカウント'])];
+      const rows=[new Array(headers.length).fill(''),headers];
+      rows[0][8]='当選状況';
+      const clean=v=>String(v??'').replace(/^[=+\-@\t\r]/,'＇  function lotteryTrackerActionsHtml(item) {');
+      const date=v=>v?lotteryJapaneseDate(v)||String(v):'';
+      for(const r of records){
+        const item=lotteryItems.find(x=>x.url===r.event_url)||
+          lotteryBaseItems.find(x=>x.url===r.event_url)||{};
+        const assigned=Array.isArray(r.account_entries)?r.account_entries:[];
+        const choices=lpTrackerCandidateStores(r.event_url);
+        let stores=[...new Map(assigned.filter(a=>a.store_name)
+          .map(a=>[(a.store_name||'')+'|'+(a.store_prefecture||''),{
+            name:a.store_name,prefecture:a.store_prefecture||''}])).values()];
+        if(!stores.length)stores=choices.length?choices:[{
+          name:item.store_name||lotteryTrackStoreLabel(r.event_url),
+          prefecture:item.prefecture||''}];
+        for(const store of stores){
+          const relevant=assigned.filter(a=>!a.store_name||
+            (a.store_name===store.name&&(a.store_prefecture||'')===(store.prefecture||'')));
+          const namesRow=profileIds.map(id=>{
+            const group=relevant.filter(a=>a.account_id===id);
+            if(!group.length)return '';
+            const won=group.reduce((n,a)=>n+Number(a.won_count||0),0);
+            const lost=group.reduce((n,a)=>n+Number(a.lost_count||0),0);
+            const total=group.reduce((n,a)=>n+Number(a.application_count||0),0);
+            if(won && lost)return '当選'+won+'口／落選'+lost+'口';
+            if(won)return r.status==='received'?'受取済':'当選';
+            if(lost)return '落選';
+            return total?'応募済み':'';
+          });
+          const notes=[lotteryTrackItemName(r.event_url),r.note||'',
+            assigned.length?'':'応募 '+r.application_count+'口／当選 '+r.won_count+'口／落選 '+r.lost_count+'口']
+            .filter(Boolean).join(' ／ ');
+          rows.push([
+            clean(store.name||''),clean(store.prefecture||item.prefecture||''),
+            date(item.application_start_at),date(item.application_end_at),
+            date(item.result_announcement_at||item.result_at||item.announcement_at),
+            date(r.pickup_start||item.pickup_start),date(r.pickup_end||item.pickup_end),
+            clean(notes),...(namesRow.length?namesRow:[''])
+          ]);
+        }
+      }
+      const ws=XLSX.utils.aoa_to_sheet(rows);
+      const last=XLSX.utils.encode_col(headers.length-1);
+      ws['!merges']=[{s:{r:0,c:8},e:{r:0,c:headers.length-1}}];
+      ws['!cols']=headers.map((_,i)=>({wch:i===0?31:i===1?13:i===7?52:i>=8?19:23}));
+      ws['!rows']=[{hpt:24},{hpt:32}];
+      ws['!autofilter']={ref:'A2:'+last+rows.length};
+      for(let i=2;i<rows.length;i++){
+        for(let j=0;j<headers.length;j++){
+          const cell=ws[XLSX.utils.encode_cell({r:i,c:j})];
+          if(cell&&typeof cell.v==='string'&&cell.v.length>32767)cell.v=cell.v.slice(0,32767);
+        }
+      }
+      const wb=XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb,ws,'自分の抽選管理');
+      const day=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',
+        year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+      XLSX.writeFile(wb,'トレカレーダー_抽選管理_'+day+'.xlsx',{compression:true});
+    }catch(error){
+      console.error('Private tracker Excel export failed',error);
+      alert('Excel出力に失敗しました：'+(error?.message||'不明なエラー'));
+    }finally{
+      if(button){button.disabled=false;button.textContent='📥 Excel出力';}
+    }
   }
 
   function lotteryTrackerActionsHtml(item) {
