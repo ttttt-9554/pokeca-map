@@ -7,6 +7,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_app_manual_expiry.cjs
       - scripts/test_app_manual_location.cjs
       - scripts/livepocket_v13.py
+      - scripts/livepocket_v21.py
       - scripts/test_livepocket_detail_priority.py
       - scripts/livepocket_detail_period_batch.py
       - scripts/test_livepocket_detail_period_batch.py
