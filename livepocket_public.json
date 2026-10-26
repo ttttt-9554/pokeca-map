@@ -8191,6 +8191,7 @@
           "prefecture": "茨城県"
         }
       ],
+      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     },
     {
@@ -8211,6 +8212,8 @@
       "pokemon_map_match": "スタートデッキ100 バトルコレクション",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     },
     {
@@ -8317,5 +8320,5 @@
       "first_detected_at": "2026-10-26T04:30:56.326407+00:00"
     }
   ],
-  "updated_at": "2026-10-26T07:30:58.844782+00:00"
+  "updated_at": "2026-10-26T07:41:20.578868+00:00"
 }
