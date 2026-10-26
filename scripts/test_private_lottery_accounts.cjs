@@ -79,4 +79,95 @@ assert.match(app,/lpPrivateAccountManage/);
 assert.match(app,/未割当を既定アカウントへ移動/);
 assert.doesNotMatch(app.slice(app.indexOf('function lpResultsRender()'),
   app.indexOf('async function lpResultsRefresh')),/lpPrivateAccounts|account_entries/);
+
+// Exercise the same allocation collector used by the real modal, with tiny
+// DOM stand-ins. No credentials or network are involved in this test.
+function cells(values){
+  const data=Object.fromEntries(Object.entries(values)
+    .map(([key,value])=>[key,{value:String(value)}]));
+  return {
+    data,
+    querySelector(selector){
+      const m=selector.match(/data-lp-account-count="([^"]+)"/);
+      return m?data[m[1]]:null;
+    }
+  };
+}
+function accountRow(id,values){
+  const row=cells(values),select={value:id};
+  return {
+    select,
+    cells:row.data,
+    querySelector(sel){return sel==='[data-lp-account-id]'?select:row.querySelector(sel);}
+  };
+}
+context.lpPrivateAccounts.get(id1).is_archived=false;
+context.lpPrivateAccounts.get(id2).is_archived=false;
+const privateHost={listeners:{},addEventListener(type,fn){this.listeners[type]=fn;}};
+const legacy=cells({application_count:1,won_count:0,lost_count:1});
+const savedRow=accountRow(id1,{application_count:2,won_count:1,lost_count:0});
+const activeRows=[savedRow];
+const holder={
+  querySelectorAll(selector){
+    assert.equal(selector,'[data-lp-account-row]');return activeRows;
+  },
+  insertAdjacentHTML(){throw Error('Unexpected add-row in this test');}
+};
+const fieldElements={
+  application_count:{value:'3',readOnly:false},
+  won_count:{value:'1',readOnly:false},
+  lost_count:{value:'1',readOnly:false}
+};
+const fakeForm={
+  elements:fieldElements,
+  querySelector(selector){return selector==='#lpTrackPrivateAccounts'?privateHost:null;}
+};
+const fakeItems={
+  lpTrackPrivateAccounts:privateHost,
+  lpTrackAccountRows:holder,
+  lpTrackUnassigned:legacy,
+  lpTrackEditorMessage:{textContent:''}
+};
+context.$=key=>fakeItems[key]||null;
+const bindTest=vm.runInNewContext(
+  extract('lpTrackerPrivateBind')+'\n({lpTrackerPrivateBind})',
+  {...context,
+    lpPrivateAccountRows:api.lpPrivateAccountRows,
+    lpPrivateAccountDefault:api.lpPrivateAccountDefault},
+  {timeout:1000}
+);
+const controls=bindTest.lpTrackerPrivateBind(fakeForm,()=>{});
+assert.equal(fieldElements.application_count.readOnly,true);
+assert.equal(fieldElements.application_count.value,'3');
+assert.equal(fieldElements.won_count.value,'1');
+assert.equal(fieldElements.lost_count.value,'1');
+let saved=controls.collect();
+assert.equal(saved.application_count,3);
+assert.equal(saved.won_count,1);
+assert.equal(saved.lost_count,1);
+assert.equal(saved.account_entries.length,1);
+assert.equal(saved.account_entries[0].account_id,id1);
+assert.equal(saved.account_entries[0].application_count,2);
+
+// An incorrect outcome count must never be saved.
+savedRow.cells.won_count.value='3';
+assert.throws(()=>controls.collect(),/口数が不正/);
+savedRow.cells.won_count.value='1';
+const conflicting=accountRow(id1,{application_count:1,won_count:0,lost_count:0});
+activeRows.push(conflicting);
+assert.throws(()=>controls.collect(),/重複/);
+activeRows.pop();
+// Unapplying resets all per-account and legacy quantities consistently.
+controls.adjustStatus('not_applied');
+saved=controls.collect();
+assert.equal(saved.application_count,0);
+assert.equal(saved.account_entries.length,0);
+assert.equal(fieldElements.won_count.value,'0');
+// Selecting "applied" again uses the saved default instead of guessing the
+// account behind previously unallocated historical tickets.
+controls.adjustStatus('applied');
+saved=controls.collect();
+assert.equal(saved.application_count,1);
+assert.equal(saved.account_entries[0].account_id,id1);
+
 console.log('Private account allocation and owner isolation source tests passed');
