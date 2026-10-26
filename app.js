@@ -2497,13 +2497,23 @@
     return Number.isFinite(time) ? time : NaN;
   }
 
-  // v21.50: An application that already ended is historical, not a
-  // manual-error/recheck task. Prefer the latest public deadline, falling
-  // back to the diagnostic CSV for older events. Unknown dates stay eligible.
+  // A finished application is historical, not a manual-review task.
+  // The public catalog deliberately preserves administrator overrides in
+  // Supabase; some published deadlines are blank even though an administrator
+  // already verified and corrected them. Use the effective deadline first.
   function lpApplicationExpired(url, diagnosticEnd='', now=Date.now()) {
+    const corrected=lpCardOverrides.get(url);
+    if(Array.isArray(corrected?.edited_fields) &&
+       corrected.edited_fields.includes('application_end_at')){
+      // An explicitly cleared deadline is unknown: never resurrect an older
+      // public or diagnostic date in a developer's manual-review queue.
+      const manualEnd=lotteryDate(corrected.application_end_at);
+      return Number.isFinite(manualEnd)&&manualEnd<=now;
+    }
+    const effective=lotteryItems.find(item=>item.url===url);
     const publicItem=lotteryBaseItems.find(item=>item.url===url);
-    const publishedEnd=lotteryDate(publicItem?.application_end_at);
-    const end=Number.isFinite(publishedEnd)?publishedEnd:lotteryDate(diagnosticEnd);
+    const correctedEnd=lotteryDate(effective?.application_end_at ?? publicItem?.application_end_at);
+    const end=Number.isFinite(correctedEnd)?correctedEnd:lotteryDate(diagnosticEnd);
     return Number.isFinite(end)&&end<=now;
   }
 
