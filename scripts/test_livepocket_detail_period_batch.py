@@ -95,6 +95,23 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(run(public,set(),fetch,raw=raw)["updated"],0)
         self.assertNotIn("application_end_at",public["items"][0])
 
+    def test_failure_counts_are_distinct_without_exposing_urls(self):
+        p={"items":[{"url":U+"blocked"},{"url":U+"redirect"},{"url":U+"no_date"}]}
+        def fetch(url):
+            if url.endswith("blocked"):
+                return {"status":"browser_blocked"}
+            if url.endswith("redirect"):
+                return {"status":"ok","final_url":U+"other","text":TEXT}
+            return {"status":"ok","final_url":url,"text":"No verified application period"}
+        stats=run(p,set(),fetch)
+        self.assertEqual(stats["checked"],3)
+        self.assertEqual(stats["unavailable"],2)
+        self.assertEqual(stats["fetch_failed"],1)
+        self.assertEqual(stats["wrong_event"],1)
+        self.assertEqual(stats["no_verified_period"],1)
+        self.assertEqual(stats["updated"],0)
+        self.assertNotIn(U, str(stats))
+
     def test_failed_page_never_updates(self):
         p={"items":[{"url":U+"a"}]}
         self.assertEqual(run(p,set(),lambda u:{"status":"browser_blocked"})["updated"],0)
