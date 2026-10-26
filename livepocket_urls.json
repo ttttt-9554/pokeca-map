@@ -15009,9 +15009,13 @@
       "field_sources": {
         "store_name": "v21_23_discord_exact_url_adjacent_store",
         "stores": "v21_23_discord_exact_url_adjacent_store",
-        "event_title": "v14_livepocket_page_title"
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
       },
-      "event_title": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」"
+      "event_title": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
+      "application_end_at": "2026-10-26T21:45:00+09:00",
+      "application_start_at": "2026-10-24T13:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/a1d-8",
@@ -15118,8 +15122,8 @@
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 527,
-    "application_start_at": 527,
+    "application_end_at": 528,
+    "application_start_at": 528,
     "stores_events": 392
   },
   "collector_state": {
@@ -17629,8 +17633,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/qg3as": {
-          "checked_at": "2026-10-25T19:36:23.222552+00:00",
-          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-26T01:41:37.205836+00:00",
+          "status": "checked_retry_application_end_at",
           "http_status": null
         },
         "https://livepocket.jp/e/a1d-8": {
@@ -18879,8 +18883,8 @@
         },
         "https://livepocket.jp/e/qg3as": {
           "detected_at": "2026-10-25T13:30:58.333064+00:00",
-          "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-25T19:36:23.222552+00:00",
+          "status": "checked_retry_application_end_at",
+          "checked_at": "2026-10-26T01:41:37.205836+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/a1d-8": {
@@ -19922,9 +19926,9 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/qg3as": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-25T19:36:23.222552+00:00",
-          "last_status": "checked_retry_no_new_details"
+          "attempts": 2,
+          "last_attempt_at": "2026-10-26T01:41:37.205836+00:00",
+          "last_status": "checked_retry_application_end_at"
         }
       }
     },
@@ -24412,7 +24416,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-25T19:36:23.222552+00:00",
+          "checked_at": "2026-10-26T01:41:37.205836+00:00",
           "title_observed": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
           "genre": "onepiece",
           "product_origin": "",
@@ -27950,7 +27954,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/qg3as": {
-          "checked_at": "2026-10-25T19:36:23.222552+00:00",
+          "checked_at": "2026-10-26T01:41:37.205836+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

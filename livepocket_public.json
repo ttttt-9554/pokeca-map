@@ -8146,12 +8146,16 @@
       "event_title": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
       "discord_posted_at": "2026-10-25T13:30:05.939000+00:00",
       "review_category": "onepiece",
+      "application_end_at": "2026-10-26T21:45:00+09:00",
+      "application_start_at": "2026-10-24T13:00:00+09:00",
       "stores": [
         {
           "name": "TSUTAYA六高台店",
           "prefecture": "千葉県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム エクストラブースター 「Heroines Edition vol.2 」",
       "first_detected_at": "2026-10-25T13:30:58.333064+00:00"
     },
     {
@@ -8178,42 +8182,39 @@
       "url": "https://livepocket.jp/e/ro44k",
       "store_name": "トレカエース新取手店",
       "prefecture": "茨城県",
+      "event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-26T01:30:03.808000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "トレカエース新取手店",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-26T10:00:00+09:00",
-      "review_category": "onepiece",
-      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     },
     {
       "url": "https://livepocket.jp/e/dlvff",
       "store_name": "トレカエース新取手店",
       "prefecture": "茨城県",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-26T01:30:03.808000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカエース新取手店",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-26T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "スタートデッキ100 バトルコレクション",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     }
   ],
-  "updated_at": "2026-10-26T01:34:45.996056+00:00"
+  "updated_at": "2026-10-26T01:41:37.205836+00:00"
 }
