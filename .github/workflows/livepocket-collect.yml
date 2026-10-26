@@ -37,12 +37,13 @@ jobs:
       LIVEPOCKET_V14_SNAPSHOT: '.livepocket_v14_before.json'
       LIVEPOCKET_DEVELOPER_RECHECK: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && 'true' || 'false' }}
       LIVEPOCKET_V14_NEW_PER_RUN: '15'
-      # 定時実行は従来の抽選を再確認せず、今後の新規抽選だけ取得する。
-      # 開発者が手動起動した場合は従来の再確認機能を残す。
-      LIVEPOCKET_AUTO_FUTURE_ONLY: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
-      LIVEPOCKET_V14_BACKGROUND_PER_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && '12' || github.event_name == 'workflow_dispatch' && '8' || '0' }}
+      # 定期実行は schedule だけでなく外部からの workflow_dispatch でも起動する。
+      # デフォルトの workflow_dispatch(8件/backfill=false)も新規抽選限定。
+      # 開発者が12件の再確認または履歴補充を明示した場合のみ旧履歴を確認する。
+      LIVEPOCKET_AUTO_FUTURE_ONLY: ${{ github.event_name == 'workflow_dispatch' && (inputs.review_batch == '12' || inputs.backfill == 'true') && 'false' || 'true' }}
+      LIVEPOCKET_V14_BACKGROUND_PER_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && '12' || github.event_name == 'workflow_dispatch' && inputs.backfill == 'true' && '8' || '0' }}
       LIVEPOCKET_V16_RETRY_PER_RUN: '3'
-      LIVEPOCKET_V14_RUN_BACKGROUND: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
+      LIVEPOCKET_V14_RUN_BACKGROUND: ${{ github.event_name == 'workflow_dispatch' && (inputs.review_batch == '12' || inputs.backfill == 'true') && 'true' || 'false' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -138,5 +138,9 @@ class ForwardOnlyPolicyTests(TestCase):
         root = Path(__file__).resolve().parent.parent
         workflow = (root / ".github/workflows/livepocket-collect.yml").read_text()
         self.assertNotIn("23 1,13 * * *", workflow)
+        # Default workflow_dispatch (also used by automation) must NOT
+        # trigger historical browser work: only explicit 12/backfill does.
         self.assertIn("LIVEPOCKET_AUTO_FUTURE_ONLY:", workflow)
+        self.assertIn("inputs.review_batch == '12' || inputs.backfill == 'true'", workflow)
         self.assertIn("LIVEPOCKET_V14_RUN_BACKGROUND:", workflow)
+        self.assertNotIn("github.event_name == 'workflow_dispatch' && 'true' || 'false'", workflow)
