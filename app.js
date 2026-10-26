@@ -5725,8 +5725,15 @@
     };
   }
 
-  function lotteryTrackerOpenEditor(url) {
+  async function lotteryTrackerOpenEditor(url) {
     if(!authUser || !safeLotteryUrl(url))return;
+    if(!lpPrivateAccountReady||lpPrivateAccountUser!==authUser.id){
+      try{if(!await lpPrivateAccountsRefresh(true))return;}
+      catch(error){
+        alert('応募アカウント情報を確認できませんでした：'+String(error?.message||error));
+        return;
+      }
+    }
     const data=lotteryTrackerDefaults(url);
     const dlg=$('lpTrackerEditor');
     if(!dlg)return;
@@ -5744,6 +5751,7 @@
         </div>
         <p class="lp-tracker-intro" id="lpTrackQuantityInfo" role="status" aria-live="polite"></p>
       </fieldset>
+      ${lpTrackerPrivateMarkup(data)}
       <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
       <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
       <label>受け取り開始日（わかる場合）<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
@@ -5766,8 +5774,15 @@
     };
     for(const name of ['application_count','won_count','lost_count'])
       form.elements[name].addEventListener('input',updateQuantityHint);
+    const privateEditor=lpTrackerPrivateBind(form,updateQuantityHint);
+    form.querySelector('#lpTrackOpenPrivateAccounts')?.addEventListener('click',()=>{
+      // Close the original dialog before opening the account setup dialog on iOS.
+      dlg.close();
+      lpPrivateAccountOpen();
+    });
     form.elements.status.addEventListener('change',()=>{
       const status=form.elements.status.value;
+      if(privateEditor){privateEditor.adjustStatus(status);return;}
       let applications=Number(form.elements.application_count.value)||0;
       let won=Number(form.elements.won_count.value)||0;
       let lost=Number(form.elements.lost_count.value)||0;
@@ -5794,8 +5809,16 @@
       const form=e.currentTarget,fd=new FormData(form);
       const status=String(fd.get('status')||'not_applied');
       const completed=fd.get('onsite_done')==='on';
+      let accountValues=null;
+      if(privateEditor){
+        try{accountValues=privateEditor.collect();}
+        catch(error){
+          $('lpTrackEditorMessage').textContent=String(error?.message||error);
+          return;
+        }
+      }
       const counts=['application_count','won_count','lost_count']
-        .map(name=>Number(String(fd.get(name)||'')));
+        .map(name=>accountValues?accountValues[name]:Number(String(fd.get(name)||'')));
       const [applications,won,lost]=counts;
       if(counts.some(n=>!Number.isInteger(n)||n<0||n>9999)||won+lost>applications){
         $('lpTrackEditorMessage').textContent='口数は0〜9999の整数で、当選口数＋落選口数は応募口数以下にしてください。';
@@ -5806,6 +5829,7 @@
         won>0?'won':lost===applications?'lost':'applied';
       const data={status:normalizedStatus,onsite_required:completed,onsite_done:completed,
         application_count:applications,won_count:won,lost_count:lost,
+        ...(accountValues?{account_entries:accountValues.account_entries}:{}),
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
       if(data.pickup_start&&data.pickup_end&&data.pickup_start>data.pickup_end){
