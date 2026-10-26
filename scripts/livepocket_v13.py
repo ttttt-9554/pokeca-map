@@ -48,7 +48,7 @@ def detail_signup_period(text: str):
     # Stop at the next distinct section heading, not just ticket information.
     tail = text[section.end():]
     next_section = re.search(
-        r'(?m)^[ \\t]*(?:受付[・･]チケット情報|概要|お問い合わせ|注意事項)[ \\t]*' + chr(36),
+        r'(?m)^[ \t]*(?:受付[・･]チケット情報|概要|お問い合わせ|注意事項)[ \t]*' + chr(36),
         tail)
     if next_section:
         tail = tail[:next_section.start()]
