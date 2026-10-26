@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-26T04:00:54.850339+00:00",
-  "unique_livepocket_urls": 567,
+  "collected_at": "2026-10-26T04:30:54.818172+00:00",
+  "unique_livepocket_urls": 569,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8282,7 +8282,43 @@
         }
       ],
       "first_detected_at": "2026-10-26T04:00:56.436355+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/9ymbe",
+      "store_name": "TSUTAYA西五反田店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-26T04:30:07.496000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA西五反田店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】10月31日(土)発売商品 予約抽選",
+      "application_end_at": "2026-10-27T23:59:00+09:00",
+      "application_start_at": "2026-10-26T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】10月31日(土)発売商品 予約抽選",
+      "first_detected_at": "2026-10-26T04:30:56.326407+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/vb-gh",
+      "store_name": "川崎ルフロン店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-26T04:30:07.496000+00:00",
+      "stores": [
+        {
+          "name": "川崎ルフロン店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "川崎ルフロン店 ボンボンドロップちいかわminiセット 購入券",
+      "application_end_at": "2026-10-28T23:59:00+09:00",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "official_event_title": "川崎ルフロン店 ボンボンドロップちいかわminiセット 購入券",
+      "first_detected_at": "2026-10-26T04:30:56.326407+00:00"
     }
   ],
-  "updated_at": "2026-10-26T04:20:58.953241+00:00"
+  "updated_at": "2026-10-26T04:31:24.978426+00:00"
 }
