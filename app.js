@@ -5565,7 +5565,7 @@
         ...(names.length?names:['応募アカウント'])];
       const rows=[new Array(headers.length).fill(''),headers];
       rows[0][9]='当選状況';
-      const clean=v=>String(v??'').replace(/^[=+\\-@\\t\\r]/,'＇'+String(v??'').charAt(0));
+      const clean=v=>{const t=String(v??'');return /^[=+@\t\r-]/.test(t)?'＇'+t:t;};
       const date=v=>v?lotteryJapaneseDate(v)||String(v):'';
       for(const r of records){
         const item=lotteryItems.find(x=>x.url===r.event_url)||
