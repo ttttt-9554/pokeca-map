@@ -2375,3 +2375,7 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 #lpTrackerEditor .lp-track-outcome-choice input[type=checkbox]{width:17px!important;height:17px!important;min-width:17px!important;margin:0!important;padding:0!important;flex:none}
 #lpTrackerEditor .lp-track-outcome-choice span{display:block;font-size:inherit!important;line-height:1.25}
 @media(max-width:370px){#lpTrackerEditor .lp-track-outcome-checks{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+
+/* v21.111: Smaller fixed close button; keep touch target usable. */
+#lpTrackerEditor .lp-track-sticky-bar{padding:6px 9px 0!important}
+#lpTrackerEditor #lpTrackStickyClose{min-width:36px!important;min-height:36px!important;width:36px!important;height:36px!important;font-size:21px!important;line-height:1!important;border-radius:50%!important}
