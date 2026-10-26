@@ -104,6 +104,7 @@ def main():
     p.add_argument("--manual-overrides-json", type=Path, required=True)
     p.add_argument("--limit", type=int, default=5)
     p.add_argument("--offset", type=int, default=0)
+    p.add_argument("--rotation", type=int, default=None, help="Daily rotation step, independent of candidate URL sorting")
     p.add_argument("--write", action="store_true")
     args = p.parse_args()
     snapshot = json.loads(args.manual_overrides_json.read_text(encoding="utf-8"))
@@ -113,6 +114,8 @@ def main():
     public = json.loads(path.read_text(encoding="utf-8"))
     raw_path = Path("livepocket_urls.json")
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    if args.rotation is not None:
+        args.offset = max(0, args.rotation) * min(max(0, args.limit), 8)
     from livepocket_v21 import browser_fetcher
     fetch, close = browser_fetcher()
     try:
