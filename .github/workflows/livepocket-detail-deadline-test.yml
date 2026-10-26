@@ -5,6 +5,8 @@ name: LivePocket Detail Deadline Regression
     paths:
       - scripts/livepocket_v13.py
       - scripts/test_livepocket_detail_priority.py
+      - scripts/livepocket_detail_period_batch.py
+      - scripts/test_livepocket_detail_period_batch.py
       - .github/workflows/livepocket-detail-deadline-test.yml
   workflow_dispatch:
 permissions:
@@ -19,5 +21,5 @@ jobs:
           python-version: '3.12'
       - name: Compile and run detail-priority regression
         run: |
-          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/test_livepocket_detail_priority.py
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py
+          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/test_livepocket_detail_priority.py scripts/livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_batch.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py
