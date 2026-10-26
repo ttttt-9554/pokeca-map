@@ -161,6 +161,47 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(stats["blocked"],0)
         self.assertEqual(stats["deferred"],0)
 
+    def test_end_only_is_diagnosed_but_not_published(self):
+        p={"items":[{"url":U+"deadline"}]}
+        message="応募締切 2099年10月26日21:45"
+        fetch=lambda u:{"status":"ok","final_url":u,"text":message}
+        stats=run(p,set(),fetch,now=datetime(2099,10,20,tzinfo=timezone.utc))
+        self.assertEqual(stats["checked"],1)
+        self.assertEqual(stats["no_verified_period"],1)
+        self.assertEqual(stats["period_without_start"],1)
+        self.assertEqual(stats["updated"],0)
+        self.assertNotIn("application_end_at",p["items"][0])
+
+    def test_expired_explicit_pair_is_diagnosed(self):
+        p={"items":[{"url":U+"expired"}]}
+        fetch=lambda u:{"status":"ok","final_url":u,"text":TEXT}
+        stats=run(p,set(),fetch,now=datetime(2099,10,27,tzinfo=timezone.utc))
+        self.assertEqual(stats["no_verified_period"],1)
+        self.assertEqual(stats["period_expired"],1)
+        self.assertEqual(stats["updated"],0)
+        self.assertNotIn("application_end_at",p["items"][0])
+
+    def test_conflicting_periods_remain_unverified(self):
+        p={"items":[{"url":U+"conflict"}]}
+        message="""詳細
+応募期間 2099年10月24日13:00～2099年10月26日21:45
+申込期間 2099年10月24日13:00～2099年10月27日21:45
+受付・チケット情報
+販売受付期間 2099年10月23日15:02～2099年10月26日21:45"""
+        fetch=lambda u:{"status":"ok","final_url":u,"text":message}
+        stats=run(p,set(),fetch,now=datetime(2099,10,20,tzinfo=timezone.utc))
+        self.assertEqual(stats["period_unverified"],1)
+        self.assertEqual(stats["no_verified_period"],1)
+        self.assertEqual(stats["updated"],0)
+
+    def test_new_counts_do_not_expose_private_page_content(self):
+        p={"items":[{"url":U+"unverified"}]}
+        body="このイベント本文には個別の店名があるが応募期間は書かれていない"
+        stats=run(p,set(),lambda u:{"status":"ok","final_url":u,"text":body})
+        self.assertEqual(stats["period_unverified"],1)
+        self.assertNotIn(body,str(stats))
+        self.assertNotIn(U,str(stats))
+
     def test_failed_page_never_updates(self):
         p={"items":[{"url":U+"a"}]}
         self.assertEqual(run(p,set(),lambda u:{"status":"browser_blocked"})["updated"],0)
