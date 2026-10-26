@@ -5159,6 +5159,7 @@
         !confirm('変更内容が保存されていません。保存せずに閉じますか？'))return;
       dialog.close();
     };
+    dialog._captureTrackSnapshot=()=>{lpTrackInitialSnapshot=lpTrackSnapshot();};
     $('lpTrackStickyClose').addEventListener('click',lpTrackCloseRequested);
     dialog.addEventListener('cancel',event=>{event.preventDefault();lpTrackCloseRequested();});
     dialog.addEventListener('close',()=>{lpTrackInitialSnapshot='';});
@@ -6158,7 +6159,7 @@
       }
       await lotteryTrackerSave(url,data,true);
     });
-    lpTrackInitialSnapshot=lpTrackSnapshot();
+    dlg._captureTrackSnapshot?.();
     if (!showLotteryEditorDialog(dlg)) {
       alert('このブラウザでは管理画面を開けません。');
     }
