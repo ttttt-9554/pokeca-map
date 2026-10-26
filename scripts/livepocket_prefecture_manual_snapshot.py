@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Fetch public-event IDs with any administrator edit from Supabase.
+"""Fetch administrator exclusions for safe LivePocket deadline checks.
 
-Protect card, store/location, and page-status corrections. Every source must
-be readable; otherwise refuse the backfill rather than guessing. The snapshot
-is private to GitHub Actions and private URLs are never logged.
+Only exclude manually changed dates, explicitly reviewed events, and missing
+pages. Store, location, and title fixes do not edit deadlines and should not
+silently prevent otherwise-valid application-period retrieval. All three
+sources must remain readable; any unrecognized card edit fails closed.
+The snapshot is private to GitHub Actions; no event URLs are logged.
 """
 import json
 import os
@@ -20,6 +22,47 @@ MANUAL_TABLES = (
     "livepocket_event_overrides",
 )
 EVENT_PATH = re.compile(r"/e/[A-Za-z0-9_-]{4,64}/?\Z")
+
+
+
+MANUAL_SELECTS = {
+    "lottery_card_overrides": (
+        "event_url,edited_fields,review_complete,review_deadline_unpublished,"
+        "application_start_at,application_end_at"
+    ),
+    # Read the location source to fail closed if it is unavailable. Location
+    # correction alone cannot conflict with deadline-only catalog updates.
+    "livepocket_location_overrides": "event_url",
+    "livepocket_event_overrides": "event_url,resolution",
+}
+SAFE_CARD_FIELDS = frozenset((
+    "event_title", "product_name", "store_name", "prefecture",
+    "review_category", "product_type", "stores", "stores_override"
+))
+
+
+def needs_exclusion(table, row):
+    """Exclude completed reviews, missing pages, dates, and unknown edits."""
+    if table == "livepocket_location_overrides":
+        return False
+    if table == "livepocket_event_overrides":
+        # A title correction cannot conflict with deadline-only publication.
+        # Unavailable/active/unknown resolutions stay conservatively excluded.
+        return row.get("resolution") != "title"
+    if table != "lottery_card_overrides":
+        raise ValueError("Unrecognized administrator source")
+    fields = row.get("edited_fields")
+    if not isinstance(fields, list) or any(not isinstance(x, str) for x in fields):
+        return True
+    # False and NULL represent incomplete review, but malformed unexpected
+    # values remain excluded (never assume completion is false).
+    if row.get("review_complete") not in (False, None):
+        return True
+    if row.get("review_deadline_unpublished") not in (False, None):
+        return True
+    if row.get("application_start_at") or row.get("application_end_at"):
+        return True
+    return bool(set(fields) - SAFE_CARD_FIELDS)
 
 
 def canonical_event_url(value):
@@ -54,7 +97,7 @@ def fetch_manual_urls(base_url, service_key, opener=urllib.request.urlopen):
         offset = 0
         while True:
             query = urllib.parse.urlencode({
-                "select": "event_url",
+                "select": MANUAL_SELECTS[table],
                 "limit": "1000",
                 "offset": str(offset),
                 "order": "event_url.asc",
@@ -74,7 +117,7 @@ def fetch_manual_urls(base_url, service_key, opener=urllib.request.urlopen):
                 raise ValueError("Unexpected Supabase exclusion response")
             for row in rows:
                 canonical = canonical_event_url(row.get("event_url"))
-                if canonical:
+                if canonical and needs_exclusion(table, row):
                     urls.add(canonical)
             if len(rows) < 1000:
                 break
@@ -95,7 +138,7 @@ def main():
     output = Path("prefecture_manual_overrides.json")
     output.write_text(json.dumps({"urls": urls}, ensure_ascii=False), encoding="utf-8")
     output.chmod(0o600)
-    print("Administrator exclusions fetched from all three sources; URLs hidden")
+    print("Deadline administrator exclusions fetched from all three sources; URLs hidden")
 
 
 if __name__ == "__main__":
