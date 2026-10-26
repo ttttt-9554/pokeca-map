@@ -44,10 +44,14 @@ def detail_signup_period(text: str):
     section = re.search(r'(?m)^[ \t]*(?:イベント)?詳細[ \t]*' + chr(36), text)
     if not section:
         return None
+    # Ticket tab may appear before the details tab in browser text.
+    # Stop at the next distinct section heading, not just ticket information.
     tail = text[section.end():]
-    ticket = re.search(r'(?m)^[ \t]*受付[・･]チケット情報[ \t]*' + chr(36), tail)
-    if ticket:
-        tail = tail[:ticket.start()]
+    next_section = re.search(
+        r'(?m)^[ \\t]*(?:受付[・･]チケット情報|概要|お問い合わせ|注意事項)[ \\t]*' + chr(36),
+        tail)
+    if next_section:
+        tail = tail[:next_section.start()]
     labels = re.compile(r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間')
     flat = re.sub(r'\s+', ' ', tail[:12000])
     found = []
