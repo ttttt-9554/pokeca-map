@@ -20,10 +20,11 @@ const profiles=[
 const context={
  escape:x=>String(x),
  lpPrivateAccountRows:()=>profiles,
- lpPrivateAccountDefault:()=>profiles[0]
+ lpPrivateAccountDefault:()=>profiles[0],
+ lpTrackerCandidateStores:()=>[]
 };
 const api=vm.runInNewContext([
- 'lpTrackerAccountInput','lpTrackerAccountRowHtml','lpTrackerPrivateMarkup'
+ 'lpTrackerAccountInput','lpTrackerStoreControl','lpTrackerAccountRowHtml','lpTrackerPrivateMarkup'
 ].map(extract).join('\n')+'\n({lpTrackerPrivateMarkup})',context,{timeout:1000});
 const historical=api.lpTrackerPrivateMarkup({
  application_count:2,won_count:0,lost_count:0,account_entries:[]

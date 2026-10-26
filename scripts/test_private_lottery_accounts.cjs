@@ -18,10 +18,11 @@ function source(name){
 }
 const one='11111111-1111-4111-8111-111111111111';
 const two='22222222-2222-4222-8222-222222222222';
-const context={lpPrivateAccounts:new Map(),escape:x=>String(x)};
+const context={lpPrivateAccounts:new Map(),escape:x=>String(x),
+ lpTrackerCandidateStores:()=>[]};
 const api=vm.runInNewContext([
  'lpPrivateAccountDefault','lpPrivateAccountRows',
- 'lpTrackerAccountInput','lpTrackerAccountRowHtml',
+ 'lpTrackerAccountInput','lpTrackerStoreControl','lpTrackerAccountRowHtml',
  'lpTrackerPrivateMarkup','lpTrackerAllocateOne'
 ].map(source).join('\n')+
  '\n({lpPrivateAccountDefault,lpPrivateAccountRows,lpTrackerPrivateMarkup,lpTrackerAllocateOne})',

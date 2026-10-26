@@ -71,10 +71,11 @@ function scenario(legacyCounts){
   lpPrivateAccountDefault:()=>profiles[0],
   lpPrivateAccounts:new Map(profiles.map(x=>[x.id,x])),
   escape:x=>String(x),
+  lpTrackerCandidateStores:()=>[],
   confirm:()=>{confirmCalls++;return confirmResult}
  };
  const api=vm.runInNewContext([
-  source('lpTrackerAccountInput'),source('lpTrackerAccountRowHtml'),
+  source('lpTrackerAccountInput'),source('lpTrackerStoreControl'),source('lpTrackerAccountRowHtml'),
   source('lpTrackerAllocateOne'),source('lpTrackerPrivateBind')
  ].join('\n')+'\n({lpTrackerPrivateBind})',context,{timeout:1000});
  const ctl=api.lpTrackerPrivateBind(form,()=>{});
