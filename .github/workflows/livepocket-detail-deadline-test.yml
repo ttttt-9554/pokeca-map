@@ -7,6 +7,9 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_livepocket_detail_priority.py
       - scripts/livepocket_detail_period_batch.py
       - scripts/test_livepocket_detail_period_batch.py
+      - scripts/livepocket_detail_period_publish_latest.py
+      - scripts/test_livepocket_detail_period_publish_latest.py
+      - scripts/test_livepocket_detail_period_git_integration.py
       - scripts/livepocket_detail_period_revalidate.py
       - scripts/test_livepocket_detail_period_revalidate.py
       - scripts/livepocket_prefecture_manual_snapshot.py
