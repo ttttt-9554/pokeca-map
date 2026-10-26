@@ -27,6 +27,11 @@ def changed_urls(before, after):
     return result
 
 
+def matching_date_changes(changes_by_file, values_by_file):
+    return (len(changes_by_file) == 2 and changes_by_file[0] == changes_by_file[1]
+            and values_by_file[0] == values_by_file[1])
+
+
 def main():
     snapshot = json.loads(Path("prefecture_manual_overrides.json").read_text(encoding="utf-8"))
     urls = snapshot.get("urls")
@@ -45,8 +50,7 @@ def main():
                                       index[url]["application_end_at"])
                                for url in file_changes})
         changed.update(file_changes)
-    if (len(changes_by_file) != 2 or changes_by_file[0] != changes_by_file[1]
-            or values_by_file[0] != values_by_file[1]):
+    if not matching_date_changes(changes_by_file, values_by_file):
         raise RuntimeError('Raw and public catalogs must have identical date updates')
     if len(changed) > 5:
         raise RuntimeError('Batch update exceeded five events')
