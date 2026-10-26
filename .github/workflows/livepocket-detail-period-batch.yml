@@ -1,5 +1,10 @@
 name: LivePocket Missing Period Batch
 'on':
+  # One-time production-path verification on this workflow change.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/livepocket-detail-period-batch.yml
   schedule:
     - cron: '19 3 * * *'
   workflow_dispatch:
