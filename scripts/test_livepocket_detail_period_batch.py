@@ -34,6 +34,22 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(candidates(public,set(),3,now=now),
                          [U+"zeta",U+"alpha",U+"unknown"])
 
+    def test_duplicate_identifiers_do_not_consume_browser_checks(self):
+        public={"items":[{"url":U+"dup"},{"url":U+"dup"},{"url":U+"ok"}]}
+        raw={"items":[{"url":U+"dup"},{"url":U+"ok"}]}
+        visited=[]
+        def fetch(url):
+            visited.append(url)
+            return {"status":"browser_blocked"}
+        result=run(public,set(),fetch,raw=raw)
+        self.assertEqual(visited,[U+"ok"])
+        self.assertEqual(result["checked"],1)
+
+    def test_duplicate_raw_identifiers_are_excluded(self):
+        public={"items":[{"url":U+"dup"},{"url":U+"ok"}]}
+        raw={"items":[{"url":U+"dup"},{"url":U+"dup"},{"url":U+"ok"}]}
+        self.assertEqual(candidates(public,set(),raw=raw),[U+"ok"])
+
     def test_raw_known_period_skipped_before_fetch(self):
         public={"items":[{"url":U+"a"},{"url":U+"b"}]}
         raw={"items":[{"url":U+"a","application_end_at":"2099-10-26T21:45:00+09:00"},
