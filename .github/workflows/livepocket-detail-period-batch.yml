@@ -11,7 +11,9 @@ name: LivePocket Missing Period Batch
 permissions:
   contents: write
 concurrency:
-  group: livepocket-collect
+  # Separate from the five-minute collector so its frequent runs cannot
+  # replace this daily job while it is queued.
+  group: livepocket-detail-period-batch
   cancel-in-progress: false
 jobs:
   publish:
