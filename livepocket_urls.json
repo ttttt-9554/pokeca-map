@@ -17890,12 +17890,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/vb-gh": {
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/9ymbe": {
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19184,13 +19184,13 @@
         "https://livepocket.jp/e/9ymbe": {
           "detected_at": "2026-10-26T04:30:56.326407+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/vb-gh": {
           "detected_at": "2026-10-26T04:30:56.326407+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/2c701": {
@@ -20260,13 +20260,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vb-gh": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-26T10:41:23.892810+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-26T17:05:05.989798+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9ymbe": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-26T10:41:23.892810+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-26T17:05:05.989798+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -24843,7 +24843,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "title_observed": "川崎ルフロン店 ボンボンドロップちいかわminiセット 購入券",
           "genre": "",
           "product_origin": "",
@@ -24854,7 +24854,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "title_observed": "ワンピースカードゲーム エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】10月31日(土)発売商品 予約抽選",
           "genre": "onepiece",
           "product_origin": "",
@@ -28474,7 +28474,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vb-gh": {
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -28487,7 +28487,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9ymbe": {
-          "checked_at": "2026-10-26T10:41:23.892810+00:00",
+          "checked_at": "2026-10-26T17:05:05.989798+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
