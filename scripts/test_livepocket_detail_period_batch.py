@@ -15,6 +15,25 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(candidates(p,{U+"c"},8),[U+"a",U+"d"])
         self.assertEqual(candidates(p,{U+"c"},1,1),[U+"d"])
 
+    def test_aggregate_missing_dates_respects_manual_exclusions(self):
+        now=datetime(2026,10,26,3,0,tzinfo=timezone.utc)
+        recent=(now-timedelta(days=2)).isoformat()
+        old=(now-timedelta(days=20)).isoformat()
+        p={"items":[
+            {"url":U+"safe","discord_posted_at":recent},
+            {"url":U+"manual","discord_posted_at":recent},
+            {"url":U+"history","discord_posted_at":old},
+            {"url":U+"known","discord_posted_at":recent,
+             "application_end_at":"2026-10-29T21:00:00+09:00"},
+        ]}
+        stats=run(p,{U+"manual"},fetch=lambda _:{"status":"browser_timeout"},
+                  now=now)
+        self.assertEqual(stats["public_recent_missing"],2)
+        self.assertEqual(stats["manual_excluded_recent"],1)
+        self.assertEqual(stats["selected"],1)
+        self.assertEqual(stats["checked"],1)
+        self.assertEqual(stats["updated"],0)
+
     def test_older_discord_listing_is_skipped(self):
         now=datetime.now(timezone.utc)
         old=(now-timedelta(days=30)).isoformat()
