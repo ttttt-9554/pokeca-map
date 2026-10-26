@@ -6569,9 +6569,12 @@
     btn.textContent='読込中…';
     status.textContent='🔄 失敗候補と現在の承認済み修正を取得しています…';
     try {
-      // Pull current public deadlines so a stale diagnostic row never forces
-      // the developer to correct an already expired application.
+      // Pull effective published AND administrator-corrected deadlines.
+      // Never put an already fixed/expired event back into the manual queue
+      // just because the browser has a stale public JSON or Supabase cache.
       await loadLotteryEvents();
+      if(!await lpCardRefresh(true))
+        throw Error('管理者の応募締切修正を確認できません：'+lpCardError);
       const suffix='?v='+Date.now();
       const [failed,approved] = await Promise.all([
         fetch('./livepocket_content_checks.csv'+suffix,{cache:'no-store'}),
@@ -7204,7 +7207,10 @@
     button.disabled=true;button.textContent='読込中…';
     status.textContent='🔄 抽選情報と店舗・地域の修正記録を取得しています…';
     try{
-      await Promise.all([loadLotteryEvents(true),lpLocationRefresh(true),lpCloudRefresh(true)]);
+      const [, , ,cardReady]=await Promise.all([
+        loadLotteryEvents(true),lpLocationRefresh(true),lpCloudRefresh(true),lpCardRefresh(true)
+      ]);
+      if(!cardReady)throw Error('管理者の応募締切修正を確認できません：'+lpCardError);
       if(!lotteryBaseItems.length)throw Error('公開抽選一覧がまだ取得できていません');
       if(!lpLocationReady)throw Error(lpLocationError||'修正データの接続を確認できません');
       if(!lpCloudReady)throw Error(lpCloudError||'ページ状態の保存先に接続できません');
