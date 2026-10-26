@@ -1,5 +1,5 @@
 import unittest
-from livepocket_v13 import extract_deadline
+from livepocket_v13 import extract_deadline, detail_signup_period
 
 
 class DetailPriorityTests(unittest.TestCase):
@@ -37,6 +37,7 @@ class DetailPriorityTests(unittest.TestCase):
         start,end=extract_deadline(body)
         # Other sections cannot masquerade as details. The full-page
         # fallback remains conservative when multiple starts conflict.
+        self.assertIsNone(detail_signup_period(body))
         self.assertIsNone(start)
         self.assertIsNone(end)
 
