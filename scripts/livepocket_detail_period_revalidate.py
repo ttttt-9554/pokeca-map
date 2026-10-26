@@ -33,10 +33,15 @@ def main():
     if not isinstance(urls, list) or not urls:
         raise ValueError("Current manual exclusions are unavailable")
     changed = set()
+    changes_by_file = []
     for filename in ("livepocket_public.json", "livepocket_urls.json"):
         before = json.loads(subprocess.check_output(["git", "show", "HEAD:" + filename]))
         after = json.loads(Path(filename).read_text(encoding="utf-8"))
-        changed.update(changed_urls(before, after))
+        file_changes = changed_urls(before, after)
+        changes_by_file.append(file_changes)
+        changed.update(file_changes)
+    if len(changes_by_file) != 2 or changes_by_file[0] != changes_by_file[1]:
+        raise RuntimeError('Raw and public catalogs must have identical date updates')
     blocked = changed.intersection(urls)
     if blocked:
         raise RuntimeError("A manually edited event changed during verification; aborting publication")
