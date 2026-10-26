@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261026-pickup-time-v21-105">
+  <link rel="stylesheet" href="style.css?v=20261026-result-alert-v21-106">
 
   <style>
     [hidden] { display: none !important; }
@@ -1574,7 +1574,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261026-pickup-time-v21-105';
+      ? token : '20261026-result-alert-v21-106';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
