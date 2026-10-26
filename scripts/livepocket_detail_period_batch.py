@@ -36,7 +36,7 @@ def candidates(public, excluded, limit=5, offset=0, now=None):
     # Most recently posted first; deterministic URL tie-breaker.
     posted_by_url = {row.get('url'): parse_datetime(row.get('discord_posted_at'))
                      for row in public.get('items', [])}
-    items.sort(key=lambda url: (posted_by_url.get(url) or datetime.min.replace(tzinfo=timezone.utc), url), reverse=True)
+    items.sort(key=lambda url: (-(posted_by_url[url].timestamp()) if posted_by_url.get(url) else float('inf'), url))
     if not items:
         return []
     start = max(0, offset) % len(items)
