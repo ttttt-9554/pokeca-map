@@ -1,7 +1,7 @@
 import unittest
 from livepocket_detail_period_revalidate import changed_urls, matching_date_changes
 
-U="https://livepocket.jp/e/a"
+U="https://livepocket.jp/e/test_event"
 
 class RevalidationTests(unittest.TestCase):
     def test_raw_public_must_have_same_dates(self):

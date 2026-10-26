@@ -2,7 +2,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from livepocket_detail_period_batch import candidates, run
 
-U="https://livepocket.jp/e/"
+U="https://livepocket.jp/e/test_"
 TEXT="""詳細
 応募期間 2099年10月24日13:00～2099年10月26日21:45
 受付・チケット情報
