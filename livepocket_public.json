@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-26T01:00:57.692775+00:00",
-  "unique_livepocket_urls": 561,
+  "collected_at": "2026-10-26T01:30:55.588096+00:00",
+  "unique_livepocket_urls": 563,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8173,7 +8173,47 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-26T01:00:59.538521+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ro44k",
+      "store_name": "トレカエース新取手店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-26T01:30:03.808000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース新取手店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
+      "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/dlvff",
+      "store_name": "トレカエース新取手店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-26T01:30:03.808000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース新取手店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "スタートデッキ100 バトルコレクション",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
+      "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     }
   ],
-  "updated_at": "2026-10-26T01:20:59.148441+00:00"
+  "updated_at": "2026-10-26T01:34:45.996056+00:00"
 }
