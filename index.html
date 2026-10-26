@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261026-centered-close-v21-112">
+  <link rel="stylesheet" href="style.css?v=20261026-manual-lottery-v21-113">
 
   <style>
     [hidden] { display: none !important; }
@@ -737,7 +737,7 @@ nav[aria-label="メインメニュー"] {
               <option value="all" selected>すべてのサイト</option>
               <option value="livepocket">LivePocket</option>
               <option value="external">その他のサイト（X除外）</option>
-              <option value="app">アプリ抽選</option>
+              <option value="app">手動登録（アプリ・店頭）</option>
             </select>
           </label>
           <label for="lpSort">並び順
@@ -798,15 +798,15 @@ nav[aria-label="メインメニュー"] {
     <section id="appLotteryView" class="view" aria-labelledby="lpAppHeading">
       <div class="lp-heading">
         <div>
-          <h2 id="lpAppHeading">📱 アプリ抽選の登録・編集</h2>
-          <p class="hint">このタブは自分の登録情報を追加・修正する場所です。抽選カードや応募状況の管理は「🎟️ 抽選」「✅ 抽選管理」で行います。</p>
+          <h2 id="lpAppHeading">📝 手動抽選登録</h2>
+          <p class="hint">アプリからの応募・店頭で直接応募する抽選を手動登録・編集します。抽選カードは「🎟️ 抽選」、自分の応募・当落は「✅ 抽選管理」で管理します。</p>
         </div>
         <button type="button" id="lpAppReload" class="lp-refresh">↻ 更新</button>
       </div>
       <p id="lpAppAccountHint" class="hint" aria-live="polite"></p>
-      <button type="button" class="primary lp-app-add" id="lpAppNew" aria-haspopup="dialog" aria-controls="lpAppDialog">➕ アプリ抽選を登録</button>
-      <section class="lp-app-search" aria-label="自分のアプリ抽選登録を検索">
-        <label for="lpAppSearch">自分の登録を検索（アプリ名・抽選名・商品名・店舗名）</label>
+      <button type="button" class="primary lp-app-add" id="lpAppNew" aria-haspopup="dialog" aria-controls="lpAppDialog">➕ 抽選を手動登録</button>
+      <section class="lp-app-search" aria-label="自分の手動抽選登録を検索">
+        <label for="lpAppSearch">自分の登録を検索（店舗名・アプリ名・抽選名・商品名）</label>
         <input type="search" id="lpAppSearch" maxlength="120" placeholder="自分の登録を検索" autocomplete="off">
         <label for="lpAppFilter">登録の公開状態</label>
         <select id="lpAppFilter">
@@ -820,7 +820,7 @@ nav[aria-label="メインメニュー"] {
       <details id="lpAppArchived" class="lp-app-archived" hidden>
         <summary>📁 非表示の登録</summary>
       </details>
-      <p class="hint">応募や当落の記録は「抽選管理」で行います。公式情報の変更はこの画面から再編集し、実際の応募条件は公式アプリで確認してください。</p>
+      <p class="hint">応募や当落の記録は「抽選管理」で行います。受付時間・本人確認・応募条件などは公式アプリまたは応募店舗で必ず確認してください。</p>
     </section>
 
     <!-- ======================================
@@ -1303,9 +1303,16 @@ nav[aria-label="メインメニュー"] {
   <!-- v21.73: the single form always lives in a modal for new and existing entries. -->
   <dialog id="lpAppDialog" aria-labelledby="lpAppFormHeading" aria-modal="true">
     <section id="lpAppFormFold" class="lp-app-form-fold" hidden>
-            <h3 id="lpAppFormHeading" tabindex="-1" autofocus>アプリ抽選を新しく登録</h3>
+            <h3 id="lpAppFormHeading" tabindex="-1" autofocus>抽選を新しく手動登録</h3>
             <form id="lpAppForm" autocomplete="off">
-              <label>アプリ名（必須）
+              <label>応募方式（必須）
+                <select id="lpAppMethod" name="registration_method" required>
+                  <option value="app" selected>📱 公式アプリで応募</option>
+                  <option value="in_store">🏬 店頭で直接応募</option>
+                </select>
+              </label>
+              <p id="lpAppMethodHint" class="hint">公式アプリから応募する抽選です。</p>
+              <label id="lpAppAppNameField">アプリ名（必須）
                 <input type="text" name="app_name" maxlength="100" minlength="2" required placeholder="例：○○ショップ公式アプリ">
               </label>
               <label>抽選名（必須）
@@ -1314,10 +1321,10 @@ nav[aria-label="メインメニュー"] {
               <label>商品名（任意）
                 <input type="text" name="product_name" maxlength="200" placeholder="例：ポケモンカード新商品">
               </label>
-              <label>店舗名（任意）
-                <input type="text" name="store_name" maxlength="200" placeholder="店舗限定の場合は入力">
+              <label><span id="lpAppStoreNameTitle">店舗名（任意）</span>
+                <input type="text" name="store_name" maxlength="200" placeholder="例：宇都宮店（店頭応募では必須）">
               </label>
-              <label>対象地域（任意）
+              <label><span id="lpAppPrefectureTitle">対象地域（任意）</span>
                 <select name="prefecture" id="lpAppPrefecture"><option value="">未確認</option></select>
               </label>
               <div class="lp-app-form-grid">
@@ -1348,7 +1355,7 @@ nav[aria-label="メインメニュー"] {
                 <input type="url" name="source_url" maxlength="2000" inputmode="url" placeholder="https://...（リンクがない場合は空欄）">
               </label>
               <label>抽選に関する共有メモ（任意・600文字以内）
-                <textarea name="details" maxlength="600" rows="3" placeholder="応募方法や対象店舗など、公式アプリで確認した内容"></textarea>
+                <textarea name="details" maxlength="600" rows="3" placeholder="応募方法や対象店舗など、公式案内で確認した内容"></textarea>
               </label>
               <p class="hint">登録した情報は「🎟️ 抽選」タブのカードとして全ユーザーに表示されます。応募済み・当選・落選・受取期限と個人メモは「✅ 抽選管理」で非公開のまま扱えます。自分の登録はポップアップから再編集・非表示・再公開・削除できます。</p>
               <div class="lp-app-form-actions">
@@ -1518,9 +1525,9 @@ nav[aria-label="メインメニュー"] {
       <span>抽選</span>
     </button>
 
-    <button type="button" data-tab="appLottery" aria-label="アプリ抽選を開く">
-      📱
-      <span>アプリ抽選</span>
+    <button type="button" data-tab="appLottery" aria-label="手動抽選登録を開く">
+      📝
+      <span>手動抽選<br>登録</span>
     </button>
 
     <button type="button" data-tab="lotteryManage" aria-label="自分の抽選管理を開く">
@@ -1574,7 +1581,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261026-centered-close-v21-112';
+      ? token : '20261026-manual-lottery-v21-113';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

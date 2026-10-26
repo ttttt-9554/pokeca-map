@@ -2399,3 +2399,9 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 #lpTrackerEditor .lp-track-outcome-choice span{display:block;font-size:inherit!important;line-height:1.25}
 @media(max-width:370px){#lpTrackerEditor .lp-track-outcome-checks{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 
+
+/* v21.113 — unified manual registration: app and in-store lottery. */
+nav[aria-label="メインメニュー"]>button[data-tab="appLottery"] span{white-space:normal!important;line-height:1.1;font-size:9px}
+#lpAppMethodHint{margin:-3px 0 4px;font-size:12px;line-height:1.65;color:var(--app-muted,#64748b)}
+#lpAppForm #lpAppMethod{font-weight:750}
+#lpAppAppNameField[hidden]{display:none!important}
