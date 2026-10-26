@@ -5131,11 +5131,12 @@
     const dialog = document.createElement('dialog');
     dialog.id = 'lpTrackerEditor';
     dialog.setAttribute('aria-label','抽選の個別管理');
+    // Only the explicit Close button, successful Save, or Delete may
+    // dismiss this editor. Never discard in-progress counts on a backdrop tap.
+    // Browsers supporting closedby also disable light-dismiss explicitly.
+    dialog.setAttribute('closedby','closerequest');
     dialog.innerHTML = '<div id="lpTrackerEditorBody"></div>';
     document.body.append(dialog);
-    dialog.addEventListener('click', e => {
-      if (e.target === dialog) dialog.close();
-    });
     const accountDialog=document.createElement('dialog');
     accountDialog.id='lpPrivateAccountDialog';
     accountDialog.setAttribute('aria-label','自分専用の応募アカウント');
