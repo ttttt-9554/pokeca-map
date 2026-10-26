@@ -5202,7 +5202,10 @@
         row.account_entries.filter(x=>x&&typeof x.account_id==='string')
           .map(x=>({account_id:x.account_id,
             application_count:Number(x.application_count)||0,
-            won_count:Number(x.won_count)||0,lost_count:Number(x.lost_count)||0})):[],
+            won_count:Number(x.won_count)||0,lost_count:Number(x.lost_count)||0,
+            store_name:typeof x.store_name==='string'?x.store_name.slice(0,200):'',
+            store_prefecture:typeof x.store_prefecture==='string'?
+              x.store_prefecture.slice(0,80):''})):[],
       onsite_required:row.onsite_required === true,
       onsite_done:row.onsite_done === true,
       pickup_start:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_start||'')?row.pickup_start:'',
@@ -5371,7 +5374,10 @@
         const profile=lpPrivateAccounts.get(row.account_id);
         const name=profile?.label||'登録済みアカウント';
         const quantity=Number(row.application_count)||0;
-        return '<span>'+escape(name)+'：'+quantity+'口</span>';
+        const store=String(row.store_name||'').trim();
+        const pref=String(row.store_prefecture||'').trim();
+        return '<span>'+escape(name)+'：'+quantity+'口'+
+          (store?'／'+escape(store+(pref?'（'+pref+'）':'')):'')+'</span>';
       });
     const used=assigned.reduce((n,row)=>n+(Number(row.application_count)||0),0);
     const unassigned=Math.max(0,Number(record.application_count||0)-used);
@@ -5577,7 +5583,48 @@
 
   // One application ticket per selected personal account.
   // Previously entered aggregate tickets remain in "未割当" until assigned.
-  function lpTrackerAccountRowHtml(entry,usedIds=[]){
+  // Exact store candidates from this lottery's effective catalog entry.
+  // A one-store event needs no user choice; for multiple stores a deliberate
+  // selection is required for every account. Store choices remain private.
+  function lpTrackerCandidateStores(url){
+    if(!url)return [];
+    const item=lotteryItems.find(x=>x?.url===url)||
+      lotteryBaseItems.find(x=>x?.url===url);
+    if(!item)return [];
+    const stores=lotteryStoreEntries(item);
+    return [...new Map(stores.filter(x=>String(x?.name||'').trim())
+      .map(x=>{
+        const name=String(x.name).trim().slice(0,200);
+        const prefecture=String(x.prefecture||'').trim().slice(0,80);
+        return [name+'\\u001f'+prefecture,{name,prefecture}];
+      })).values()];
+  }
+
+  function lpTrackerStoreControl(entry,stores=[]){
+    const savedName=String(entry?.store_name||'').trim();
+    const savedPref=String(entry?.store_prefecture||'').trim();
+    const label=store=>store.name+(store.prefecture?'（'+store.prefecture+'）':'');
+    if(stores.length===1)
+      return '<p class="lp-track-store-choice lp-track-store-fixed">🏬 応募店舗：'+
+        escape(label(stores[0]))+'（自動設定）</p>';
+    if(stores.length===0)
+      return '<p class="lp-track-store-choice">🏬 応募店舗：'+
+        (savedName?escape(label({name:savedName,prefecture:savedPref}))+
+          '（以前の登録を保持）':'店舗情報未確認')+'</p>';
+    const match=stores.findIndex(x=>x.name===savedName&&x.prefecture===savedPref);
+    const savedMissing=!!savedName&&match<0;
+    const options='<option value=""'+(!savedName?' selected':'')+'>店舗を選択してください</option>'+
+      stores.map((store,i)=>
+        '<option value="'+i+'"'+(i===match?' selected':'')+'>'+
+          escape(label(store))+'</option>').join('')+
+      (savedMissing?'<option value="previous" selected>'+
+        escape(label({name:savedName,prefecture:savedPref}))+
+        '（以前の選択・最新店舗一覧にはなし）</option>':'');
+    return '<label class="lp-track-account-store">🏬 応募店舗'+
+      '<select data-lp-account-store required>'+options+'</select></label>';
+  }
+
+  function lpTrackerAccountRowHtml(entry,usedIds=[],stores=[]){
     const current=String(entry?.account_id||'');
     const options=lpPrivateAccountRows().filter(profile=>
       (!profile.is_archived&&!usedIds.includes(profile.id))||profile.id===current)
@@ -5592,6 +5639,7 @@
       '<select data-lp-account-id required>'+options+'</select></label>'+
       '<button type="button" data-lp-account-remove>削除</button></div>'+
       '<p class="lp-track-one-ticket">🎟️ 応募 1口（自動登録）</p>'+
+      lpTrackerStoreControl(entry,stores)+
       '<label class="lp-track-account-result">抽選結果'+
       '<select data-lp-account-outcome>'+
       '<option value="pending"'+(outcome==='pending'?' selected':'')+'>結果待ち</option>'+
@@ -5608,6 +5656,7 @@
     const assigned=Array.isArray(data.account_entries)?data.account_entries:
       [];
     const active=assigned.filter(entry=>Number(entry?.application_count)>0);
+    const stores=lpTrackerCandidateStores(data.event_url);
     const sum=key=>active.reduce((total,row)=>total+Number(row[key]||0),0);
     const remaining={
       application_count:Math.max(0,Number(data.application_count||0)-sum('application_count')),
@@ -5628,7 +5677,7 @@
         lpTrackerAccountInput(key,remaining[key])).join('')+'</div></div>'+
       '<div id="lpTrackAccountRows">'+active.map(row=>
         lpTrackerAccountRowHtml(row,active.filter(x=>x.account_id!==row.account_id)
-          .map(x=>x.account_id))).join('')+'</div>'+
+          .map(x=>x.account_id),stores)).join('')+'</div>'+
       '<div class="lp-track-account-buttons">'+
       '<button type="button" id="lpTrackAccountAdd">➕ 応募アカウントを追加（1口）</button>'+
       '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを管理</button>'+
@@ -5659,12 +5708,15 @@
     return {remaining:result,outcome:'lost'};
   }
 
-  function lpTrackerPrivateBind(form,updateQuantityHint){
+  function lpTrackerPrivateBind(form,updateQuantityHint,url,data){
     const root=$('lpTrackPrivateAccounts');
     if(!root)return null;
     const keys=['application_count','won_count','lost_count'];
     for(const key of keys)form.elements[key].readOnly=true;
     const holder=$('lpTrackAccountRows'),unassigned=$('lpTrackUnassigned');
+    const stores=lpTrackerCandidateStores(url);
+    const previousByAccount=new Map((data?.account_entries||[])
+      .map(entry=>[entry.account_id,entry]));
     const getLegacy=key=>Number(unassigned.querySelector(
       '[data-lp-account-count="'+key+'"]')?.value||0);
     const setLegacy=(key,value)=>{
@@ -5700,7 +5752,7 @@
       const entry={account_id:profile.id,application_count:1,
         won_count:Number(transfer.outcome==='won'),
         lost_count:Number(transfer.outcome==='lost')};
-      const html=lpTrackerAccountRowHtml(entry,selectedIds);
+      const html=lpTrackerAccountRowHtml(entry,selectedIds,stores);
       if(!html)return false;
       holder.insertAdjacentHTML('beforeend',html);
       for(const key of keys)setLegacy(key,transfer.remaining[key]);
@@ -5760,8 +5812,31 @@
           const outcome=rowOutcome(row);
           if(!['pending','won','lost'].includes(outcome))
             throw Error('抽選結果を確認してください。');
-          entries.push({account_id:id,application_count:1,
-            won_count:Number(outcome==='won'),lost_count:Number(outcome==='lost')});
+          const entry={account_id:id,application_count:1,
+            won_count:Number(outcome==='won'),lost_count:Number(outcome==='lost')};
+          let chosen=null;
+          if(stores.length===1){
+            chosen=stores[0];
+          }else if(stores.length>1){
+            const selection=row.querySelector('[data-lp-account-store]')?.value||'';
+            if(selection==='previous'){
+              const previous=previousByAccount.get(id);
+              if(previous?.store_name)chosen={
+                name:previous.store_name,prefecture:previous.store_prefecture||''};
+            }else if(/^\d+$/.test(selection)){
+              chosen=stores[Number(selection)]||null;
+            }
+            if(!chosen)throw Error('各応募アカウントの応募店舗を選択してください。');
+          }else{
+            const previous=previousByAccount.get(id);
+            if(previous?.store_name)chosen={
+              name:previous.store_name,prefecture:previous.store_prefecture||''};
+          }
+          if(chosen?.name){
+            entry.store_name=String(chosen.name).trim().slice(0,200);
+            entry.store_prefecture=String(chosen.prefecture||'').trim().slice(0,80);
+          }
+          entries.push(entry);
         }
         const total={
           application_count:legacy.application_count+entries.length,
@@ -5825,7 +5900,7 @@
     };
     for(const name of ['application_count','won_count','lost_count'])
       form.elements[name].addEventListener('input',updateQuantityHint);
-    const privateEditor=lpTrackerPrivateBind(form,updateQuantityHint);
+    const privateEditor=lpTrackerPrivateBind(form,updateQuantityHint,url,data);
     form.querySelector('#lpTrackOpenPrivateAccounts')?.addEventListener('click',()=>{
       // Close the original dialog before opening the account setup dialog on iOS.
       dlg.close();
@@ -5937,9 +6012,20 @@
           }
         }
         const chosen=lpPrivateAccountDefault();
+        const availableStores=lpTrackerCandidateStores(url);
+        if(chosen&&availableStores.length>1){
+          // A multi-store event must not silently assign a random store.
+          // Open the per-event editor so the user can choose explicitly.
+          lotteryTrackerOpenEditor(url);
+          return;
+        }
         if(chosen)payload.account_entries=[{
           account_id:chosen.id,application_count:applications,
-          won_count:won,lost_count:lost
+          won_count:won,lost_count:lost,
+          ...(availableStores.length===1?{
+            store_name:availableStores[0].name,
+            store_prefecture:availableStores[0].prefecture
+          }:{})
         }];
       }
     }
