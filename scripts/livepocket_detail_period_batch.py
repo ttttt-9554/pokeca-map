@@ -39,11 +39,12 @@ def candidates(public, excluded, limit=5, offset=0, now=None):
     return (items[start:] + items[:start])[:max(0, min(limit, 8))]
 
 
-def apply(public, url, body, excluded):
+def apply(public, url, body, excluded, now=None):
     if excluded is None or url in excluded:
         return False
+    now = now or datetime.now(timezone.utc)
     start, end = extract_deadline(body)
-    if not start or not end or start > end:
+    if not start or not end or start > end or end <= now:
         return False
     matches = [x for x in public.get("items", []) if x.get("url") == url]
     if len(matches) != 1:
