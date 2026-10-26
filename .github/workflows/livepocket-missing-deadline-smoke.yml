@@ -1,0 +1,40 @@
+name: LivePocket Missing Deadline Live Smoke
+'on':
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/livepocket-missing-deadline-smoke.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate batch and publication tests
+        run: |
+          python -m py_compile scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_publish_latest.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py
+      - name: Install public browser
+        run: |
+          python -m pip install 'playwright>=1.55,<2'
+          python -m playwright install --with-deps chromium
+      - name: Fetch private manual correction exclusions
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_prefecture_manual_snapshot.py
+      - name: Verify two missing dates from real pages without writing
+        run: |
+          PYTHONPATH=scripts python scripts/livepocket_detail_period_batch.py \
+            --manual-overrides-json prefecture_manual_overrides.json --limit 2
+      - name: Remove exclusions
+        if: always()
+        run: rm -f prefecture_manual_overrides.json
