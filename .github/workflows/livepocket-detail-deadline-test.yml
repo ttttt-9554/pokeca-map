@@ -9,6 +9,10 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_app_manual_location.cjs
       - scripts/livepocket_v13.py
       - scripts/livepocket_v21.py
+      - scripts/livepocket_v16.py
+      - scripts/livepocket_v18.py
+      - scripts/livepocket_future_policy.py
+      - scripts/test_livepocket_future_policy.py
       - scripts/test_livepocket_detail_priority.py
       - scripts/livepocket_detail_period_batch.py
       - scripts/test_livepocket_detail_period_batch.py
@@ -20,6 +24,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/livepocket_prefecture_manual_snapshot.py
       - scripts/test_livepocket_prefecture_manual_snapshot.py
       - .github/workflows/livepocket-detail-period-batch.yml
+      - .github/workflows/livepocket-collect.yml
       - .github/workflows/livepocket-detail-deadline-test.yml
   workflow_dispatch:
 permissions:
@@ -34,8 +39,8 @@ jobs:
           python-version: '3.12'
       - name: Compile and run all deadline safety regressions
         run: |
-          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
+          python -m py_compile scripts/livepocket_future_policy.py scripts/livepocket_v16.py scripts/livepocket_v18.py scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_future_policy.py scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
       - name: Check PWA syntax and admin-corrected deadline expiry
         run: |
           node --check app.js

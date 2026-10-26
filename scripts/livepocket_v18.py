@@ -24,6 +24,7 @@ import livepocket_v14 as v14
 import livepocket_v15 as v15
 import livepocket_v16 as v16
 import livepocket_v17 as v17
+from livepocket_future_policy import scheduled_future_only, after_cutover
 
 HISTORICAL_WAIT_DAYS = 7
 COLUMNS = v17.RETRY_COLUMNS + ('historical_state', 'historical_next_check_at')
@@ -79,8 +80,15 @@ def select(raw, public, now, *, new_limit=15, background_limit=0, retry_days=7):
     state = raw.setdefault('collector_state', {}).setdefault('v14', {})
     if v14._cooldown_active(state, now):
         return [], [], True
+    # v14 records first detection for each pending event. At scheduled
+    # collection time only post-cutover arrivals may trigger page checks.
+    history = state.get('new_url_checks', {})
+    forward_only = scheduled_future_only()
     pending = [url for url in state.get('pending_new_urls', [])
-               if url in rindex and not application_closed(pindex[url], now)]
+               if url in rindex and not application_closed(pindex[url], now)
+               and (not forward_only or after_cutover(
+                   history.get(url, {}).get('detected_at')
+                   if isinstance(history.get(url), dict) else None))]
     pending.sort(key=lambda u: (rindex[u].get('discord_posted_at') or '', u), reverse=True)
     urgent = pending[:max(0, new_limit)]
     if background_limit <= 0:

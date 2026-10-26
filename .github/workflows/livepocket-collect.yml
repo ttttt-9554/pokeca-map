@@ -20,8 +20,7 @@ name: LivePocket Discord URL Collector
     # 新しいDiscord投稿を約5分おきに確認。GitHubのschedule実行は遅延・欠落の可能性あり。
     # 毎時00分の集中を避けて02分から開始。
     - cron: '2,7,12,17,22,27,32,37,42,47,52,57 * * * *'
-    # 過去URLの未確認チェックは1日2回（UTC）
-    - cron: '23 1,13 * * *'
+    # 過去抽選の定時スキャンは停止。今後の新着と直近の再試行のみ。
 
 permissions:
   contents: write
@@ -38,9 +37,12 @@ jobs:
       LIVEPOCKET_V14_SNAPSHOT: '.livepocket_v14_before.json'
       LIVEPOCKET_DEVELOPER_RECHECK: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && 'true' || 'false' }}
       LIVEPOCKET_V14_NEW_PER_RUN: '15'
-      LIVEPOCKET_V14_BACKGROUND_PER_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && '12' || '8' }}
+      # 定時実行は従来の抽選を再確認せず、今後の新規抽選だけ取得する。
+      # 開発者が手動起動した場合は従来の再確認機能を残す。
+      LIVEPOCKET_AUTO_FUTURE_ONLY: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
+      LIVEPOCKET_V14_BACKGROUND_PER_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && '12' || github.event_name == 'workflow_dispatch' && '8' || '0' }}
       LIVEPOCKET_V16_RETRY_PER_RUN: '3'
-      LIVEPOCKET_V14_RUN_BACKGROUND: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 1,13 * * *') && 'true' || 'false' }}
+      LIVEPOCKET_V14_RUN_BACKGROUND: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -23,6 +23,7 @@ import livepocket_v11 as v11
 import livepocket_v12 as v12
 import livepocket_v14 as v14
 import livepocket_v15 as v15
+from livepocket_future_policy import scheduled_future_only, after_cutover
 
 RAW_PATH = v14.RAW_PATH
 PUBLIC_PATH = v14.PUBLIC_PATH
@@ -59,6 +60,10 @@ def due_retries(raw, public, now=None, *, limit=3):
         checked = v11.parse_datetime(first.get('checked_at'))
         detected = v11.parse_datetime(first.get('detected_at'))
         if not checked or not detected:
+            continue
+        # Scheduled collectors never reopen pre-cutover lotteries with
+        # unknown deadlines; manual developer runs retain the old option.
+        if scheduled_future_only() and not after_cutover(first.get('detected_at')):
             continue
         age = now - detected.astimezone(now.tzinfo)
         if age < timedelta(0) or age > timedelta(days=RETRY_MAX_AGE_DAYS):
