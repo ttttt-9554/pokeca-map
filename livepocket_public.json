@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-26T01:30:55.588096+00:00",
-  "unique_livepocket_urls": 563,
+  "collected_at": "2026-10-26T02:30:55.498123+00:00",
+  "unique_livepocket_urls": 564,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8212,7 +8212,24 @@
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nt4hl",
+      "store_name": "ヤマシロヤ １階売場",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-26T02:30:07.223000+00:00",
+      "stores": [
+        {
+          "name": "ヤマシロヤ １階売場",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ヤマシロヤ「ちいかわ 映画ちいかわ GPSBOX セイレーンだらけフィギュア(BOX)」抽選販売",
+      "application_end_at": "2026-10-28T23:59:00+09:00",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "official_event_title": "ヤマシロヤ「ちいかわ 映画ちいかわ GPSBOX セイレーンだらけフィギュア(BOX)」抽選販売",
+      "first_detected_at": "2026-10-26T02:30:56.922695+00:00"
     }
   ],
-  "updated_at": "2026-10-26T02:20:58.086426+00:00"
+  "updated_at": "2026-10-26T02:31:55.371074+00:00"
 }
