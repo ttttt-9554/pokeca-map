@@ -1625,6 +1625,18 @@ html[data-theme="dark"] #lpCardStoreRows .lp-card-store-empty{
 .lp-results-counts,.lp-results-card-summary{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
 .lp-results-counts span,.lp-results-card-summary span{font-size:12px;line-height:1.5;padding:6px 8px;
  border:1px solid var(--app-border,#cbd5e1);border-radius:9px;background:var(--app-surface2,#f8fafc)}
+/* Observed ticket win rate: understated, theme-aware result line. */
+#lotteryResultsView .lp-results-win-rate{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 9px;
+  margin:7px 0 10px;line-height:1.55;
+  font-size:13px;color:var(--app-text,#172033);
+}
+#lotteryResultsView .lp-results-win-rate strong{
+  font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;
+}
+#lotteryResultsView .lp-results-win-rate small{
+  color:var(--app-muted,#64748b);font-size:12px;
+}
 .lp-results-list{display:grid;gap:12px}
 .lp-results-card{border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);
  border-radius:15px;padding:13px;min-width:0;overflow-wrap:anywhere}
