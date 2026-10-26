@@ -2355,3 +2355,11 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-account-store select{
 html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
   color:#d1dff0!important;
 }
+
+/* v21.108: Exclusive checkbox-style account outcomes */
+.lp-track-outcome-checks{border:0;padding:0;margin:10px 0 0;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.lp-track-outcome-checks legend{font-size:13px;font-weight:700;padding:0 0 7px;color:var(--app-text,#e6edf8)}
+.lp-track-outcome-choice{display:flex;align-items:center;gap:8px;cursor:pointer;min-width:0;padding:12px 10px;border:1px solid var(--app-border,#536782);border-radius:9px;background:var(--app-surface2,#24354b);font-size:13px;font-weight:650;color:var(--app-text,#e6edf8)}
+.lp-track-outcome-choice:has(input:checked){border-color:var(--app-accent,#60a5fa);background:var(--app-surface,#1b2b40);outline:1px solid var(--app-accent,#60a5fa)}
+.lp-track-outcome-choice input{width:18px;height:18px;accent-color:var(--app-accent,#3b82f6);flex:none}
+@media(max-width:370px){.lp-track-outcome-checks{grid-template-columns:1fr}}
