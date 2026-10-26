@@ -4,9 +4,9 @@ from livepocket_detail_period_batch import candidates, run
 
 U="https://livepocket.jp/e/"
 TEXT="""詳細
-応募期間 2026年10月24日13:00～2026年10月26日21:45
+応募期間 2099年10月24日13:00～2099年10月26日21:45
 受付・チケット情報
-販売受付期間 2026年10月23日15:02～2026年10月26日21:45"""
+販売受付期間 2099年10月23日15:02～2099年10月26日21:45"""
 
 class BatchTests(unittest.TestCase):
     def test_select_only_missing_and_unmodified(self):
@@ -29,18 +29,16 @@ class BatchTests(unittest.TestCase):
             return {"status":"ok","final_url":url,"text":TEXT}
         self.assertEqual(run(p,set(),fetch)["updated"],1)
         self.assertEqual(p["items"][0]["application_start_at"],
-                         "2026-10-24T13:00:00+09:00")
+                         "2099-10-24T13:00:00+09:00")
         self.assertEqual(run(p,set(),fetch)["updated"],0)
 
     def test_expired_deadline_not_published(self):
         p={"items":[{"url":U+"a"}]}
-        result=run(p,set(),lambda u:{"status":"ok","final_url":u,"text":TEXT})
-        # This fixture's deadline is October 26, 2026; ensure the explicit
-        # expiration guard also works independent of wall-clock time.
+        # Use a simulated time after the fixture's deadline.
         from livepocket_detail_period_batch import apply
         q={"items":[{"url":U+"a"}]}
         self.assertFalse(apply(q,U+"a",TEXT,set(),
-                               now=datetime(2026,10,27,tzinfo=timezone.utc)))
+                               now=datetime(2099,10,27,tzinfo=timezone.utc)))
         self.assertNotIn("application_end_at",q["items"][0])
 
     def test_failed_page_never_updates(self):
