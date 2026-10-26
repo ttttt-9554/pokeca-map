@@ -50,7 +50,7 @@ assert.doesNotMatch(initial,/アカウント不明/);
 
 const privateAccountSummary=vm.runInNewContext(
   extract('lotteryTrackPrivateAccountSummary')+
-  '\\n({lotteryTrackPrivateAccountSummary})',
+  '\n({lotteryTrackPrivateAccountSummary})',
   {authUser:{id:'test-user'},lpPrivateAccountReady:true,
    lpPrivateAccounts:new Map(profiles.map(row=>[row.id,row])),
    escape:htmlEscape},{timeout:1000}
@@ -65,7 +65,7 @@ assert.match(privateText,/本人のみ/);
 assert.doesNotMatch(privateAccountSummary({
   application_count:2,account_entries:[{account_id:B,application_count:2}]
 }),/未割当/);
-assert.match(app,/\\$\\{lotteryTrackPrivateAccountSummary\\(x\\)\\}/);
+assert.match(app,/\$\{lotteryTrackPrivateAccountSummary\(x\)\}/);
 const privateSection=app.slice(app.indexOf('  const LP_RESULTS_COUNT_RPC='),
   app.indexOf('  const LP_PRIVATE_ACCOUNT_TABLE='));
 assert(!/lottery_private_accounts|account_entries|account_id/.test(privateSection),
