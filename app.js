@@ -5541,6 +5541,190 @@
     return true;
   }
 
+  function lpTrackerAccountInput(name,value){
+    return '<label>'+({application_count:'応募口数',won_count:'当選口数',lost_count:'落選口数'}[name]||'口数')+
+      '<input type="number" data-lp-account-count="'+name+'" min="0" max="9999" '+
+      'step="1" inputmode="numeric" required value="'+Number(value||0)+'"></label>';
+  }
+
+  function lpTrackerAccountRowHtml(entry,usedIds=[]){
+    const current=String(entry?.account_id||'');
+    const options=lpPrivateAccountRows().filter(profile=>
+      (!profile.is_archived&&!usedIds.includes(profile.id))||profile.id===current)
+      .map(profile=>'<option value="'+escape(profile.id)+'" '+
+        (profile.id===current?'selected':'')+'>'+
+        escape(profile.label+(profile.is_archived?'（非表示）':''))+'</option>').join('');
+    if(!options)return '';
+    return '<div class="lp-track-account-row" data-lp-account-row>'+
+      '<div class="lp-track-account-top"><label>応募アカウント'+
+      '<select data-lp-account-id required>'+options+'</select></label>'+
+      '<button type="button" data-lp-account-remove>割当解除</button></div>'+
+      '<div class="lp-track-account-grid">'+
+      ['application_count','won_count','lost_count'].map(key=>
+        lpTrackerAccountInput(key,entry?.[key]||0)).join('')+
+      '</div></div>';
+  }
+
+  function lpTrackerPrivateMarkup(data){
+    if(!lpPrivateAccountRows().length)
+      return '<div class="lp-track-account-intro">'+
+        '🔒 アカウント別に管理するには、最初に応募アカウントを登録してください。'+
+        '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを登録</button></div>';
+    const assigned=Array.isArray(data.account_entries)?data.account_entries:[];
+    const sum=key=>assigned.reduce((total,row)=>total+Number(row[key]||0),0);
+    const old={
+      application_count:Math.max(0,data.application_count-sum('application_count')),
+      won_count:Math.max(0,data.won_count-sum('won_count')),
+      lost_count:Math.max(0,data.lost_count-sum('lost_count'))
+    };
+    const initial=assigned.length?assigned:
+      (lpPrivateAccountDefault()?[{account_id:lpPrivateAccountDefault().id,
+        application_count:0,won_count:0,lost_count:0}]:[]);
+    return '<fieldset class="lp-track-account-block" id="lpTrackPrivateAccounts">'+
+      '<legend>🔒 アカウント別の応募口数（本人のみ）</legend>'+
+      '<p class="lp-tracker-intro">上の合計は内訳から自動計算します。'+
+      '以前の口数は未割当のまま保持し、勝手に割り当てません。</p>'+
+      '<div class="lp-track-unassigned" id="lpTrackUnassigned"><strong>未割当（以前の記録）</strong>'+
+      '<div class="lp-track-account-grid">'+
+      ['application_count','won_count','lost_count'].map(key=>
+        lpTrackerAccountInput(key,old[key])).join('')+'</div></div>'+
+      '<div id="lpTrackAccountRows">'+initial.map(row=>
+        lpTrackerAccountRowHtml(row,initial.filter(x=>x.account_id!==row.account_id)
+          .map(x=>x.account_id))).join('')+'</div>'+
+      '<div class="lp-track-account-buttons">'+
+      '<button type="button" id="lpTrackAccountAdd">➕ アカウントを割り当て</button>'+
+      '<button type="button" id="lpTrackAssignLegacy">未割当を既定アカウントへ移動</button>'+
+      '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを管理</button>'+
+      '</div><p class="lp-tracker-intro">識別名は他のユーザー・抽選結果画面に公開されません。</p>'+
+      '</fieldset>';
+  }
+
+  function lpTrackerPrivateBind(form,updateQuantityHint){
+    const root=$('lpTrackPrivateAccounts');
+    if(!root)return null;
+    const totals=['application_count','won_count','lost_count'];
+    totals.forEach(k=>form.elements[k].readOnly=true);
+    const holder=$('lpTrackAccountRows'),unassigned=$('lpTrackUnassigned');
+    const count=(row,key)=>Number(row.querySelector('[data-lp-account-count="'+key+'"]')?.value||0);
+    const rows=()=>[...holder.querySelectorAll('[data-lp-account-row]')];
+    const summarize=()=>{
+      const all=[unassigned,...rows()];
+      totals.forEach(k=>{
+        form.elements[k].value=String(all.reduce((sum,row)=>sum+count(row,k),0));
+      });
+      updateQuantityHint();
+    };
+    const activeProfile=()=>lpPrivateAccountDefault();
+    const addRow=(id)=>{
+      const used=rows().map(row=>row.querySelector('[data-lp-account-id]').value);
+      const selected=id||lpPrivateAccountRows()
+        .filter(x=>!x.is_archived&&!used.includes(x.id))
+        .sort((a,b)=>Number(b.is_default)-Number(a.is_default))[0]?.id;
+      if(!selected||used.includes(selected))return false;
+      const html=lpTrackerAccountRowHtml({account_id:selected,
+        application_count:0,won_count:0,lost_count:0},used);
+      if(!html)return false;
+      holder.insertAdjacentHTML('beforeend',html);
+      summarize();return true;
+    };
+    root.addEventListener('input',e=>{
+      if(e.target.matches('[data-lp-account-count]'))summarize();
+    });
+    root.addEventListener('change',e=>{
+      if(e.target.matches('[data-lp-account-id]'))summarize();
+    });
+    root.addEventListener('click',e=>{
+      const remove=e.target.closest('[data-lp-account-remove]');
+      if(remove){
+        const row=remove.closest('[data-lp-account-row]');
+        if(!row)return;
+        // Removing an allocation returns its quantities to "未割当".
+        for(const key of totals){
+          unassigned.querySelector('[data-lp-account-count="'+key+'"]').value=
+            String(count(unassigned,key)+count(row,key));
+        }
+        row.remove();summarize();return;
+      }
+      if(e.target.closest('#lpTrackAccountAdd')){
+        if(!addRow())$('lpTrackEditorMessage').textContent=
+          '割り当てられる新しいアカウントがありません。アカウント管理で追加してください。';
+      }
+      if(e.target.closest('#lpTrackAssignLegacy')){
+        const preferred=activeProfile();
+        if(!preferred){
+          $('lpTrackEditorMessage').textContent='まず既定のアカウントを登録してください。';return;
+        }
+        let row=rows().find(row=>row.querySelector('[data-lp-account-id]').value===preferred.id);
+        if(!row){addRow(preferred.id);row=rows().find(row=>row.querySelector('[data-lp-account-id]').value===preferred.id);}
+        if(!row)return;
+        for(const key of totals){
+          row.querySelector('[data-lp-account-count="'+key+'"]').value=
+            String(count(row,key)+count(unassigned,key));
+          unassigned.querySelector('[data-lp-account-count="'+key+'"]').value='0';
+        }
+        summarize();
+      }
+    });
+    summarize();
+    return {
+      adjustStatus(status){
+        if(status==='not_applied'){
+          for(const row of [unassigned,...rows()])
+            for(const key of totals)
+              row.querySelector('[data-lp-account-count="'+key+'"]').value='0';
+          summarize();return;
+        }
+        let target=rows().find(row=>
+          row.querySelector('[data-lp-account-id]').value===activeProfile()?.id)||rows()[0];
+        if(!target)target=unassigned;
+        const selected=rows().concat([unassigned]);
+        const total=k=>selected.reduce((sum,row)=>sum+count(row,k),0);
+        if(total('application_count')===0)
+          target.querySelector('[data-lp-account-count="application_count"]').value='1';
+        if((status==='won'||status==='received')&&total('won_count')===0){
+          target.querySelector('[data-lp-account-count="won_count"]').value='1';
+        }
+        if(status==='lost'&&total('lost_count')===0)
+          target.querySelector('[data-lp-account-count="lost_count"]').value='1';
+        const wanted=total('won_count')+total('lost_count');
+        if(total('application_count')<wanted){
+          const app=target.querySelector('[data-lp-account-count="application_count"]');
+          app.value=String(count(target,'application_count')+wanted-total('application_count'));
+        }
+        summarize();
+      },
+      collect(){
+        const entries=[],seen=new Set();
+        const totalsByAccount={};
+        for(const key of totals)totalsByAccount[key]=count(unassigned,key);
+        for(const row of rows()){
+          const id=row.querySelector('[data-lp-account-id]')?.value;
+          if(!id||seen.has(id)||!lpPrivateAccounts.has(id))
+            throw Error('応募アカウントの重複または不正な選択があります。');
+          seen.add(id);
+          const entry={account_id:id};
+          for(const key of totals)entry[key]=count(row,key);
+          if(totals.some(key=>!Number.isInteger(entry[key])||entry[key]<0||entry[key]>9999)
+             ||entry.won_count+entry.lost_count>entry.application_count)
+            throw Error('アカウント別の口数が不正です。');
+          for(const key of totals)totalsByAccount[key]+=entry[key];
+          if(entry.application_count>0)entries.push(entry);
+        }
+        const u={};
+        for(const key of totals)u[key]=count(unassigned,key);
+        if(totals.some(k=>!Number.isInteger(u[k])||u[k]<0||u[k]>9999)
+            ||u.won_count+u.lost_count>u.application_count)
+          throw Error('未割当の口数が不正です。');
+        if(totals.some(k=>!Number.isSafeInteger(totalsByAccount[k])
+              ||totalsByAccount[k]>9999)||
+           totalsByAccount.won_count+totalsByAccount.lost_count>
+             totalsByAccount.application_count)
+          throw Error('応募口数の合計が不正です。');
+        return {account_entries:entries,...totalsByAccount};
+      }
+    };
+  }
+
   function lotteryTrackerOpenEditor(url) {
     if(!authUser || !safeLotteryUrl(url))return;
     const data=lotteryTrackerDefaults(url);
