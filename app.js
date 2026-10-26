@@ -5604,6 +5604,39 @@
       '</fieldset>';
   }
 
+  // Choose a ticket with an unresolved result before adding a fresh
+  // application. This avoids putting a win on a profile with zero entries.
+  // Legacy unallocated tickets remain unallocated; no guessed owner.
+  function lpTrackerApplyOutcome(buckets,status){
+    const values=buckets.map(row=>({
+      ...row,
+      application_count:Number(row.application_count)||0,
+      won_count:Number(row.won_count)||0,
+      lost_count:Number(row.lost_count)||0
+    }));
+    if(!values.length)return values;
+    const total=key=>values.reduce((sum,row)=>sum+row[key],0);
+    if(status==='not_applied'){
+      return values.map(row=>({...row,application_count:0,won_count:0,lost_count:0}));
+    }
+    const preferred=values.findIndex(row=>row.is_default===true);
+    const fallback=preferred>=0?preferred:0;
+    if(total('application_count')===0)values[fallback].application_count=1;
+    const setOutcome=key=>{
+      if(total(key)>0)return;
+      let index=values.findIndex(row=>
+        row.application_count>row.won_count+row.lost_count);
+      if(index<0){
+        index=fallback;
+        values[index].application_count++;
+      }
+      values[index][key]++;
+    };
+    if(status==='won'||status==='received')setOutcome('won_count');
+    if(status==='lost')setOutcome('lost_count');
+    return values;
+  }
+
   function lpTrackerPrivateBind(form,updateQuantityHint){
     const root=$('lpTrackPrivateAccounts');
     if(!root)return null;
@@ -5673,29 +5706,21 @@
     summarize();
     return {
       adjustStatus(status){
-        if(status==='not_applied'){
-          for(const row of [unassigned,...rows()])
-            for(const key of totals)
-              row.querySelector('[data-lp-account-count="'+key+'"]').value='0';
-          summarize();return;
-        }
-        let target=rows().find(row=>
-          row.querySelector('[data-lp-account-id]').value===activeProfile()?.id)||rows()[0];
-        if(!target)target=unassigned;
-        const selected=rows().concat([unassigned]);
-        const total=k=>selected.reduce((sum,row)=>sum+count(row,k),0);
-        if(total('application_count')===0)
-          target.querySelector('[data-lp-account-count="application_count"]').value='1';
-        if((status==='won'||status==='received')&&total('won_count')===0){
-          target.querySelector('[data-lp-account-count="won_count"]').value='1';
-        }
-        if(status==='lost'&&total('lost_count')===0)
-          target.querySelector('[data-lp-account-count="lost_count"]').value='1';
-        const wanted=total('won_count')+total('lost_count');
-        if(total('application_count')<wanted){
-          const app=target.querySelector('[data-lp-account-count="application_count"]');
-          app.value=String(count(target,'application_count')+wanted-total('application_count'));
-        }
+        const active=rows().concat([unassigned]);
+        const defaultId=activeProfile()?.id;
+        const before=active.map(row=>({
+          is_default:!!defaultId&&row!==unassigned&&
+            row.querySelector('[data-lp-account-id]')?.value===defaultId,
+          application_count:count(row,'application_count'),
+          won_count:count(row,'won_count'),
+          lost_count:count(row,'lost_count')
+        }));
+        const after=lpTrackerApplyOutcome(before,status);
+        after.forEach((counts,i)=>{
+          for(const key of totals)
+            active[i].querySelector('[data-lp-account-count="'+key+'"]').value=
+              String(counts[key]);
+        });
         summarize();
       },
       collect(){

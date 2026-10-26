@@ -170,4 +170,43 @@ saved=controls.collect();
 assert.equal(saved.application_count,1);
 assert.equal(saved.account_entries[0].account_id,id1);
 
+
+function pureFunction(name){
+  const from=app.indexOf('  function '+name+'(');
+  const until=app.indexOf('\\n  }\\n',from);
+  assert(from>=0&&until>from,'Expected '+name);
+  return app.slice(from,until+5);
+}
+const accounting=vm.runInNewContext(pureFunction('lpTrackerApplyOutcome')+
+  '\\n(lpTrackerApplyOutcome)',{},{timeout:1000});
+const outcome=(bucket,status)=>{
+  const v=accounting(bucket,status);
+  return [...v].map(({application_count,won_count,lost_count})=>
+    ({application_count,won_count,lost_count}));
+};
+const known=(app,won,lost,is_default=false)=>({
+  application_count:app,won_count:won,lost_count:lost,is_default
+});
+assert.deepEqual(outcome([known(0,0,0,true),known(2,0,0)],'won'),
+  [ {application_count:0,won_count:0,lost_count:0},
+    {application_count:2,won_count:1,lost_count:0} ],
+  'A historical pending ticket receives its own win, not an invented default owner');
+assert.deepEqual(outcome([known(0,0,0,true),known(0,0,0)],'won'),
+  [ {application_count:1,won_count:1,lost_count:0},
+    {application_count:0,won_count:0,lost_count:0} ],
+  'New first application can use the default account');
+assert.deepEqual(outcome([known(1,0,1,true),known(0,0,0)],'won'),
+  [ {application_count:2,won_count:1,lost_count:1},
+    {application_count:0,won_count:0,lost_count:0} ],
+  'A new win with no pending ticket adds an application and keeps per-account validity');
+assert.deepEqual(outcome([known(1,0,0,true),known(1,0,0)],'lost'),
+  [ {application_count:1,won_count:0,lost_count:1},
+    {application_count:1,won_count:0,lost_count:0} ]);
+assert.deepEqual(outcome([known(3,1,1,true),known(1,0,1)],'not_applied'),
+  [ {application_count:0,won_count:0,lost_count:0},
+    {application_count:0,won_count:0,lost_count:0} ]);
+assert.deepEqual(outcome([known(3,1,1,true),known(1,0,1)],'won'),
+  [ {application_count:3,won_count:1,lost_count:1},
+    {application_count:1,won_count:0,lost_count:1} ],
+  'Do not duplicate results when a saved won ticket already exists');
 console.log('Private account allocation and owner isolation source tests passed');
