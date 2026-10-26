@@ -32,10 +32,25 @@ def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
         raise ValueError("Current manual exclusion snapshot required")
     now = now or datetime.now(timezone.utc)
     raw_index = {x.get("url"): x for x in raw.get("items", [])} if raw is not None else None
+    # Never spend scarce browser checks on duplicated event identifiers.
+    # apply() refuses duplicates, so exclude them before fetching.
+    public_counts = {}
+    raw_counts = {}
+    for entry in public.get("items", []):
+        u = entry.get("url")
+        if isinstance(u, str):
+            public_counts[u] = public_counts.get(u, 0) + 1
+    if raw is not None:
+        for entry in raw.get("items", []):
+            u = entry.get("url")
+            if isinstance(u, str):
+                raw_counts[u] = raw_counts.get(u, 0) + 1
     items = []
     for row in public.get("items", []):
         url = row.get("url")
         if (not isinstance(url, str) or exact_event_url(url) != url
+                or public_counts.get(url) != 1
+                or (raw is not None and raw_counts.get(url) != 1)
                 or url in excluded or row.get("application_start_at")
                 or row.get("application_end_at")):
             continue
