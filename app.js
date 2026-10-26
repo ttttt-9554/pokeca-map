@@ -4703,6 +4703,131 @@
     lpResultsRender();
   }
 
+  // The labels below are private to the authenticated Discord user.
+  // Never put account names in the public result-count RPC or event catalog.
+  const LP_PRIVATE_ACCOUNT_TABLE='lottery_private_accounts';
+  let lpPrivateAccounts=new Map(),lpPrivateAccountUser='',lpPrivateAccountReady=false;
+  let lpPrivateAccountBusy=false,lpPrivateAccountError='';
+
+  function lpPrivateAccountDefault(){
+    const active=[...lpPrivateAccounts.values()].filter(x=>!x.is_archived);
+    return active.find(x=>x.is_default)||active[0]||null;
+  }
+  function lpPrivateAccountRows(){
+    return [...lpPrivateAccounts.values()].sort((a,b)=>
+      Number(b.is_default)-Number(a.is_default)||
+      Number(a.is_archived)-Number(b.is_archived)||
+      String(a.created_at||'').localeCompare(String(b.created_at||'')));
+  }
+
+  async function lpPrivateAccountsRefresh(force=false){
+    const uid=authUser?.id||'';
+    if(!uid||!supabaseClient){
+      lpPrivateAccounts.clear();lpPrivateAccountUser='';
+      lpPrivateAccountReady=false;lpPrivateAccountError='';
+      lpPrivateAccountRender();return false;
+    }
+    if(!force&&lpPrivateAccountReady&&lpPrivateAccountUser===uid)return true;
+    const {data,error}=await supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
+      .select('id,label,is_default,is_archived,created_at').eq('user_id',uid)
+      .order('created_at',{ascending:true}).limit(200);
+    if(error)throw error;
+    if(authUser?.id!==uid)return false;
+    lpPrivateAccounts=new Map((data||[]).filter(x=>x?.id&&x?.label)
+      .map(row=>[row.id,row]));
+    lpPrivateAccountUser=uid;lpPrivateAccountReady=true;
+    lpPrivateAccountError='';lpPrivateAccountRender();
+    return true;
+  }
+
+  function lpPrivateAccountRender(){
+    const list=$('lpPrivateAccountList'),status=$('lpPrivateAccountStatus');
+    if(!list||!status)return;
+    const rows=lpPrivateAccountRows();
+    status.textContent=lpPrivateAccountError||
+      '名前は自分だけに表示されます。パスワードや認証コードは登録しないでください。';
+    list.innerHTML=rows.length?rows.map(row=>
+      '<div class="lp-private-account-row" data-account-id="'+escape(row.id)+'">'+
+      '<strong>'+escape(row.label)+'</strong>'+
+      (row.is_default?'<span class="lp-private-default">既定</span>':'')+
+      (row.is_archived?'<span class="lp-private-archived">非表示</span>':'')+
+      '<div class="lp-private-actions">'+
+      (!row.is_default&&!row.is_archived?'<button type="button" data-private-act="default">既定にする</button>':'')+
+      '<button type="button" data-private-act="rename">名前変更</button>'+
+      '<button type="button" data-private-act="archive">'+(row.is_archived?'再表示':'非表示')+'</button>'+
+      '</div></div>').join(''):
+      '<p class="lp-tracker-intro">アカウントを追加すると、抽選ごとに口数を割り当てられます。</p>';
+  }
+
+  async function lpPrivateAccountAction(action,id,label=''){
+    if(lpPrivateAccountBusy||!authUser||!supabaseClient)return false;
+    const uid=authUser.id,row=lpPrivateAccounts.get(id);
+    if(action!=='add'&&!row)return false;
+    lpPrivateAccountBusy=true;lpPrivateAccountError='';
+    try{
+      if(action==='add'||action==='rename'){
+        const name=String(label||'').trim();
+        if(!name||name.length>80||/[\x00-\x1f\x7f]/.test(name))
+          throw Error('識別名は1～80文字で入力してください。');
+        if(action==='add'){
+          const {error}=await supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
+            .insert({user_id:uid,label:name});
+          if(error)throw error;
+        }else{
+          const {error}=await supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
+            .update({label:name,updated_at:new Date().toISOString()})
+            .eq('user_id',uid).eq('id',id);
+          if(error)throw error;
+        }
+      }else if(action==='default'){
+        const {error}=await supabaseClient.rpc(
+          'lottery_set_default_private_account',{p_account_id:id});
+        if(error)throw error;
+      }else if(action==='archive'){
+        // Archive rather than delete. Existing lottery allocations keep labels.
+        const {error}=await supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
+          .update({is_archived:!row.is_archived,is_default:false,
+                   updated_at:new Date().toISOString()})
+          .eq('user_id',uid).eq('id',id);
+        if(error)throw error;
+      }else return false;
+      if(authUser?.id!==uid)return false;
+      await lpPrivateAccountsRefresh(true);
+      if(!lpPrivateAccountRows().some(x=>x.is_default)){
+        const next=lpPrivateAccountDefault();
+        if(next){
+          const {error}=await supabaseClient.rpc(
+            'lottery_set_default_private_account',{p_account_id:next.id});
+          if(error)throw error;
+          await lpPrivateAccountsRefresh(true);
+        }
+      }
+      return true;
+    }catch(error){
+      if(authUser?.id===uid){
+        lpPrivateAccountError='操作に失敗しました：'+String(error?.message||error);
+        lpPrivateAccountRender();
+      }
+      return false;
+    }finally{lpPrivateAccountBusy=false;}
+  }
+
+  async function lpPrivateAccountOpen(){
+    if(!authUser||!supabaseClient){
+      alert('応募アカウントの管理にはDiscordログインが必要です。');return;
+    }
+    const dialog=$('lpPrivateAccountDialog');
+    if(!dialog)return;
+    if(!lpPrivateAccountReady||lpPrivateAccountUser!==authUser.id){
+      try{await lpPrivateAccountsRefresh(true);}
+      catch(error){
+        lpPrivateAccountError='アカウントの読み込みに失敗しました：'+String(error?.message||error);
+      }
+    }
+    lpPrivateAccountRender();
+    showLotteryEditorDialog(dialog);
+  }
+
   const LP_TRACK_TABLE = 'lottery_user_entries';
   const LP_EXT_TRACK_TABLE = 'lottery_external_user_entries';
   function lotteryTrackTableFor(url){
