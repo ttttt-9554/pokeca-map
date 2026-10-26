@@ -782,15 +782,15 @@ nav[aria-label="メインメニュー"] {
         <label>表示する結果
           <select id="lpResultsFilter">
             <option value="all">すべての抽選</option>
-            <option value="applied">応募済み</option>
-            <option value="won">当選</option>
-            <option value="lost">落選</option>
+            <option value="applied">応募口数あり</option>
+            <option value="won">当選口数あり</option>
+            <option value="lost">落選口数あり</option>
           </select>
         </label>
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite" aria-atomic="true">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
-      <p class="hint">応募記録のある抽選だけを表示します。応募人数に加えて、応募・当選・落選の口数を匿名集計します（受取済みも当選に含む）。複数店舗の抽選は対象店舗一覧を表示しますが、応募者ごとの店舗は判別できません。名前・ユーザーID・個人メモは公開しません。少人数では結果から個人を推測できる場合があります。</p>
+      <p class="hint">応募記録のある抽選だけを表示します。応募・当選・落選・結果待ちをすべて口数で匿名集計します（受取済みも当選口数に含みます）。複数店舗の抽選は対象店舗一覧を表示しますが、店舗ごとの口数は判別できません。名前・ユーザーID・個人メモは公開しません。記録が少ない場合、結果から個人を推測できる可能性があります。</p>
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
 

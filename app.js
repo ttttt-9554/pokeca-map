@@ -4423,7 +4423,7 @@
   // v21.84: Anonymous counts are available from the first recorded applicant.
   // Per-user identities, metadata and private notes are never sent to clients.
   const LP_RESULTS_COUNT_RPC='lottery_result_counts_v21_89';
-  const LP_RESULTS_PUBLIC_MIN=1;
+  const LP_RESULTS_MIN_APPLICATION_ENTRIES=1;
   let lpResultsCounts=new Map(),lpResultsReady=false,lpResultsError='';
   let lpResultsUserId='',lpResultsFetchSeq=0,lpResultsLastFetch=0,lpResultsLoading=null;
   // A manual refresh has persistent user-visible progress and a completion time.
@@ -4437,25 +4437,20 @@
       '匿名集計を表示しています。誰が応募・当選したかは公開されません。';
   }
 
-  // Zero is a valid status count for lotteries with records. Missing
-  // aggregate rows indicate no known non-'not_applied' entries.
-  function lpResultsCountDisplay(value){
-    return Number.isSafeInteger(value)&&value>=0
-      ? value+'人' : '未確認';
-  }
-
+  // Lottery-result cards show application, win and loss quantities only.
+  // Participant counts remain private aggregation metadata, never UI figures.
   function lpResultsKnownEvents(){
     const entries=new Map();
     const hiddenUrls=new Set(lotteryItems.filter(item=>item?.app_lottery_hidden).map(item=>item.url));
     for(const item of lotteryItems){
       if(!item||item.app_lottery_hidden||!safeLotteryUrl(item.url)||
-         !(Number(lpResultsCounts.get(item.url)?.total_count)>0))continue;
+         !(Number(lpResultsCounts.get(item.url)?.application_entries)>=LP_RESULTS_MIN_APPLICATION_ENTRIES))continue;
       entries.set(item.url,item);
     }
-    // Keep only lotteries with a positive aggregate count, including historic
-    // events, while preserving intentionally hidden app lottery visibility.
+    // Use submitted ticket quantities, not the number of applicants.
+    // Preserve intentionally hidden app lottery visibility.
     for(const [url,counts] of lpResultsCounts){
-      if(hiddenUrls.has(url)||!(Number(counts?.total_count)>0))continue;
+      if(hiddenUrls.has(url)||!(Number(counts?.application_entries)>=LP_RESULTS_MIN_APPLICATION_ENTRIES))continue;
       if(!entries.has(url)&&safeLotteryUrl(url))entries.set(url,{url});
     }
     return [...entries.values()];
@@ -4491,7 +4486,7 @@
         '<ul>'+names+'</ul>'+
         (stores.length>100?'<p>最初の100店舗を表示しています。</p>':'')+
         '</details>'+
-        '<p class="lp-results-store-caution">※集計人数はイベント全体の合計であり、店舗別ではありません。</p>'+
+        '<p class="lp-results-store-caution">※集計口数はイベント全体の合計であり、店舗別ではありません。</p>'+
         '</div>';
     }
     return '<div class="lp-results-store lp-results-store-unknown">'+
@@ -4510,14 +4505,16 @@
     const searchInput=$('lpResultsSearch'),clearButton=$('lpResultsSearchClear');
     if(searchInput&&clearButton)clearButton.hidden=!searchInput.value;
     const events=lpResultsKnownEvents();
+    const applicationsTotal=events.reduce((sum,item)=>
+      sum+Number(lpResultsCounts.get(item.url)?.application_entries||0),0);
     summary.innerHTML='<span>🎟️ 応募記録あり '+events.length+'件</span>'+
-      '<span>👥 1人から表示</span>';
+      '<span>📊 応募合計 '+applicationsTotal+'口</span>';
     if(!authUser||!supabaseClient){
       status.textContent='応募状況の匿名集計を表示するにはDiscordログインが必要です。';
       list.innerHTML='<p class="hint">「共有」タブからログインすると、対象の抽選結果を確認できます。</p>';
       return;
     }
-    const explanation='既存の抽選管理を1人から匿名集計します。';
+    const explanation='抽選管理の応募・当選・落選を口数で匿名集計しています。';
     status.textContent=lpResultsManualBusy
       ? '🔄 更新中…応募・当選情報と対象店舗を再取得しています。'
       : lpResultsError
@@ -4531,8 +4528,9 @@
     const filter=$('lpResultsFilter')?.value||'all';
     const matches=events.filter(item=>{
       const counts=lpResultsCounts.get(item.url);
-      if(!counts||!(Number(counts.total_count)>0))return false;
-      if(filter!=='all'&&!(Number(counts[filter+'_count'])>=LP_RESULTS_PUBLIC_MIN))return false;
+      if(!counts||!(Number(counts.application_entries)>=LP_RESULTS_MIN_APPLICATION_ENTRIES))return false;
+      const ticketField={applied:'application_entries',won:'won_entries',lost:'lost_entries'}[filter];
+      if(filter!=='all'&&(!ticketField||!(Number(counts[ticketField])>=LP_RESULTS_MIN_APPLICATION_ENTRIES)))return false;
       if(!query)return true;
       const haystack=[
         lotteryTrackItemName(item.url),
@@ -4550,20 +4548,17 @@
       const record=lpResultsCounts.get(item.url);
       const title=lotteryTrackItemName(item.url);
       const storeHtml=lpResultsStoreHtml(item);
-      // Accurate group counts are provided by the authenticated-only RPC.
-      // Never infer participant details from an aggregate row.
-      const header='👥 応募者 '+Number(record.total_count)+'人';
+      // Four counts are ticket quantities summed across saved entries.
+      // Do not show per-person applicant/winner/loser counts.
       const statusHtml='<div class="lp-results-card-summary">'+
         '<span>🎟️ 応募 '+Number(record.application_entries)+'口</span>'+
         '<span>🎉 当選 '+Number(record.won_entries)+'口</span>'+
         '<span>📪 落選 '+Number(record.lost_entries)+'口</span>'+
         '<span>⏳ 結果待ち '+Number(record.pending_entries)+'口</span>'+
-        '</div><p class="lp-results-people-caption">当選者 '+lpResultsCountDisplay(record.won_count)+
-        '／落選者 '+lpResultsCountDisplay(record.lost_count)+'（匿名）</p>';
+        '</div>';
       return '<article class="lp-results-card">'+
         '<h3>'+escape(title)+'</h3>'+
         storeHtml+
-        '<p class="lp-results-anonymous-total">'+escape(header)+'</p>'+
         statusHtml+
         '<div class="lp-results-card-footer"><a href="'+escape(item.url)+
         '" target="_blank" rel="noopener noreferrer">抽選の詳細を開く ↗</a></div>'+
@@ -4594,13 +4589,9 @@
         if(seq!==lpResultsFetchSeq||authUser?.id!==uid)return false;
         const rows=Array.isArray(data)?data:[];
         lpResultsCounts=new Map(rows.filter(row=>
-          row&&safeLotteryUrl(row.event_url)&&Number(row.total_count)>=LP_RESULTS_PUBLIC_MIN
+          row&&safeLotteryUrl(row.event_url)&&
+          Number(row.application_entries)>=LP_RESULTS_MIN_APPLICATION_ENTRIES
         ).map(row=>[row.event_url,{
-          applied_count:row.applied_count==null?null:Number(row.applied_count),
-          won_count:row.won_count==null?null:Number(row.won_count),
-          lost_count:row.lost_count==null?null:Number(row.lost_count),
-          received_count:row.received_count==null?null:Number(row.received_count),
-          total_count:Number(row.total_count),
           application_entries:Number(row.application_entries||0),
           won_entries:Number(row.won_entries||0),
           lost_entries:Number(row.lost_entries||0),
