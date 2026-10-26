@@ -5106,6 +5106,7 @@
     container.setAttribute('aria-label','自分の抽選管理');
     container.innerHTML = `<h3>✅ 自分の抽選管理</h3>
       <p class="lp-tracker-intro">応募、当選、受け取り期間と「自分の現地対応完了」を非公開で管理します。現地対応が必要かどうか・対応内容は別枠で全ユーザーに共有します。</p>
+      <section id="lpResultAlerts" class="lp-pickup-alerts" aria-label="抽選結果発表のお知らせ" hidden></section>
       <section id="lpPickupAlerts" class="lp-pickup-alerts" aria-label="当選商品の受取期限のお知らせ" hidden></section>
       <p id="lpTrackStatus" role="status" aria-live="polite"></p>
       <button type="button" id="lpPrivateAccountManage" class="lp-private-account-manage">🔒 応募アカウントを管理（自分だけ）</button>
@@ -5123,6 +5124,7 @@
       renderLotteryTrackerSummary();
     });
     // Preserve the fold state when Supabase refreshes or a record is edited.
+    $('lpResultAlerts').addEventListener('click',lotteryTrackerHandleClick);
     $('lpTrackList').addEventListener('toggle', event => {
       if (event.target?.matches?.('details.lp-track-lost-fold')) {
         lotteryLostGroupExpanded = event.target.open;
@@ -5214,6 +5216,7 @@
       pickup_start_time:/^\d{2}:\d{2}/.test(row.pickup_start_time||'')?row.pickup_start_time.slice(0,5):'',
       pickup_end:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_end||'')?row.pickup_end:'',
       pickup_end_time:/^\d{2}:\d{2}/.test(row.pickup_end_time||'')?row.pickup_end_time.slice(0,5):'',
+      result_announcement_at:typeof row.result_announcement_at==='string'?row.result_announcement_at.replace(' ','T').slice(0,16):'',
       note:typeof row.note==='string'?row.note.slice(0,500):'',
       updated_at:row.updated_at||''
     };
@@ -5252,7 +5255,7 @@
         const fetched=await Promise.all([
           ...[LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
             supabaseClient.from(table)
-              .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,note,updated_at')
+              .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,result_announcement_at,note,updated_at')
               .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)),
           supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
             .select('id,label,is_default,is_archived,created_at').eq('user_id',user)
@@ -5426,6 +5429,33 @@
       .sort((a,b) => a.record.pickup_end.localeCompare(b.record.pickup_end));
   }
 
+  // Private in-app announcement for results whose scheduled publication time has arrived.
+  // Keep shown until the user sets an outcome; no false push-notification claim.
+  function renderLotteryResultAlerts(records){
+    const root=$('lpResultAlerts');
+    if(!root)return;
+    if(!authUser||!supabaseClient){root.hidden=true;root.replaceChildren();return;}
+    const now=new Date();
+    const date=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',
+      year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
+    const clock=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',
+      hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+    const current=date+'T'+clock;
+    const due=records.filter(r=>r.status==='applied' &&
+      /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}$/.test(r.result_announcement_at||'') &&
+      r.result_announcement_at<=current)
+      .sort((a,b)=>a.result_announcement_at.localeCompare(b.result_announcement_at));
+    root.hidden=!due.length;
+    if(!due.length){root.replaceChildren();return;}
+    root.innerHTML='<div class="lp-pickup-alert-head"><h4>🔔 抽選結果発表のお知らせ</h4>'+
+      '<span class="lp-pickup-alert-count">'+due.length+'件</span></div>'+
+      due.slice(0,20).map(r=>'<div class="lp-pickup-alert-row urgent"><div>'+
+        '<strong>'+escape(lotteryTrackItemName(r.event_url))+'</strong>'+
+        '<p>結果発表予定：'+escape(r.result_announcement_at.replace('T',' '))+
+        ' ／ 当落を確認してください</p></div>'+
+        '<button type="button" data-lp-track="edit" data-url="'+escape(r.event_url)+'">結果を記録</button></div>').join('');
+  }
+
   function renderLotteryPickupAlerts(records) {
     const root=$('lpPickupAlerts');
     if(!root)return;
@@ -5468,11 +5498,13 @@
       status.textContent='Discordログインすると、自分専用の応募・当選記録を保存できます。「共有」タブからログインしてください。';
       $('lpTrackCounts').replaceChildren();
       $('lpTrackList').innerHTML='';
+      renderLotteryResultAlerts([]);
       renderLotteryPickupAlerts([]);
       return;
     }
     status.textContent=lotteryTrackError || '🔒 自分のDiscordアカウントに非公開で保存します。';
     const records=[...lotteryTrackRecords.values()];
+    renderLotteryResultAlerts(records);
     renderLotteryPickupAlerts(records);
     const counts=[
       ['応募済み',records.filter(x=>x.status==='applied').length],
@@ -5600,7 +5632,7 @@
           rows.push([
             clean(lotteryTrackItemName(r.event_url)),clean(store.name||''),clean(store.prefecture||item.prefecture||''),
             date(item.application_start_at),date(item.application_end_at),
-            date(item.result_announcement_at||item.result_at||item.announcement_at),
+            date(r.result_announcement_at||item.result_announcement_at||item.result_at||item.announcement_at),
             (date(r.pickup_start||item.pickup_start)+(r.pickup_start_time?' '+r.pickup_start_time:'')),
             (date(r.pickup_end||item.pickup_end)+(r.pickup_end_time?' '+r.pickup_end_time:'')),
             clean(notes),...(namesRow.length?namesRow:[''])
@@ -5672,7 +5704,7 @@
     return lotteryTrackRecord(url) || {
       event_url:url,status:'not_applied',onsite_required:false,onsite_done:false,
       application_count:0,won_count:0,lost_count:0,
-      pickup_start:'',pickup_end:'',pickup_start_time:'',pickup_end_time:'',note:'',updated_at:''
+      pickup_start:'',pickup_end:'',pickup_start_time:'',pickup_end_time:'',result_announcement_at:'',note:'',updated_at:''
     };
   }
 
@@ -5993,6 +6025,7 @@
       ${lpTrackerPrivateMarkup(data)}
       <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
       <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
+      <label>抽選結果発表日時（わかる場合）<input type="datetime-local" name="result_announcement_at" value="${escape(data.result_announcement_at||'')}"></label>
       <label>受け取り開始日（わかる場合）<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
       <label>受け取り開始時刻（任意）<input type="time" name="pickup_start_time" value="${escape(data.pickup_start_time||'')}"></label>
       <label>受け取り期限日（わかる場合）<input type="date" name="pickup_end" value="${escape(data.pickup_end)}"></label>
@@ -6073,6 +6106,7 @@
         ...(accountValues?{account_entries:accountValues.account_entries}:{}),
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
         pickup_start_time:String(fd.get('pickup_start_time')||''),pickup_end_time:String(fd.get('pickup_end_time')||''),
+        result_announcement_at:String(fd.get('result_announcement_at')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
       if(data.pickup_start&&data.pickup_end&&(data.pickup_start>data.pickup_end || (data.pickup_start===data.pickup_end&&data.pickup_start_time&&data.pickup_end_time&&data.pickup_start_time>data.pickup_end_time))){
         $('lpTrackEditorMessage').textContent='受取開始日は受取期限日より前にしてください。';return;
@@ -6109,6 +6143,7 @@
       pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
       pickup_start_time:values.pickup_start?values.pickup_start_time||null:null,
       pickup_end_time:values.pickup_end?values.pickup_end_time||null:null,
+      result_announcement_at:values.result_announcement_at||null,
       note:String(values.note||'').slice(0,500)};
     if(payload.pickup_start&&payload.pickup_end&&(payload.pickup_start>payload.pickup_end || (payload.pickup_start===payload.pickup_end&&payload.pickup_start_time&&payload.pickup_end_time&&payload.pickup_start_time>payload.pickup_end_time)))return;
     if(Array.isArray(values.account_entries)){
@@ -6153,7 +6188,7 @@
     if(message)message.textContent='保存中…';
     try{
       const {data,error}=await supabaseClient.from(lotteryTrackTableFor(url)).upsert(payload,{onConflict:'user_id,event_url'})
-        .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,note,updated_at').single();
+        .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,result_announcement_at,note,updated_at').single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
       const parsed=lotteryTrackClean(data);
