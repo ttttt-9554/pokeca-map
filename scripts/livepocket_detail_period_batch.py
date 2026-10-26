@@ -108,16 +108,21 @@ def apply(public, url, body, excluded, now=None, raw=None):
 def run(public, excluded, fetch, limit=5, offset=0, raw=None):
     urls = candidates(public, excluded, limit, offset, raw=raw)
     stats = {"selected": len(urls), "checked": 0, "updated": 0,
-             "unavailable": 0, "no_verified_period": 0}
+             "unavailable": 0, "no_verified_period": 0,
+             "fetch_failed": 0, "wrong_event": 0}
     for url in urls:
         try:
             result = fetch(url)
         except Exception:
             result = {"status": "fetch_error"}
         stats["checked"] += 1
-        if (not isinstance(result, dict) or result.get("status") != "ok"
-                or exact_event_url(result.get("final_url")) != url):
+        if not isinstance(result, dict) or result.get("status") != "ok":
             stats["unavailable"] += 1
+            stats["fetch_failed"] += 1
+            continue
+        if exact_event_url(result.get("final_url")) != url:
+            stats["unavailable"] += 1
+            stats["wrong_event"] += 1
             continue
         if apply(public, url, result.get("text") or "", excluded, raw=raw):
             stats["updated"] += 1
