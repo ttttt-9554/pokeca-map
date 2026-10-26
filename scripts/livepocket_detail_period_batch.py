@@ -39,7 +39,7 @@ def candidates(public, excluded, limit=5, offset=0, now=None):
     return (items[start:] + items[:start])[:max(0, min(limit, 8))]
 
 
-def apply(public, url, body, excluded, now=None):
+def apply(public, url, body, excluded, now=None, raw=None):
     if excluded is None or url in excluded:
         return False
     now = now or datetime.now(timezone.utc)
@@ -52,12 +52,23 @@ def apply(public, url, body, excluded, now=None):
     row = matches[0]
     if row.get("application_start_at") or row.get("application_end_at"):
         return False
+    raw_row = None
+    if raw is not None:
+        matches_raw = [x for x in raw.get("items", []) if x.get("url") == url]
+        if len(matches_raw) != 1:
+            return False
+        raw_row = matches_raw[0]
+        if raw_row.get("application_start_at") or raw_row.get("application_end_at"):
+            return False
     row["application_start_at"] = iso(start)
     row["application_end_at"] = iso(end)
+    if raw_row is not None:
+        raw_row["application_start_at"] = iso(start)
+        raw_row["application_end_at"] = iso(end)
     return True
 
 
-def run(public, excluded, fetch, limit=5, offset=0):
+def run(public, excluded, fetch, limit=5, offset=0, raw=None):
     urls = candidates(public, excluded, limit, offset)
     stats = {"selected": len(urls), "checked": 0, "updated": 0,
              "unavailable": 0, "no_verified_period": 0}
@@ -71,7 +82,7 @@ def run(public, excluded, fetch, limit=5, offset=0):
                 or exact_event_url(result.get("final_url")) != url):
             stats["unavailable"] += 1
             continue
-        if apply(public, url, result.get("text") or "", excluded):
+        if apply(public, url, result.get("text") or "", excluded, raw=raw):
             stats["updated"] += 1
         else:
             stats["no_verified_period"] += 1
@@ -90,17 +101,20 @@ def main():
         raise ValueError("Missing manual override snapshot")
     path = Path("livepocket_public.json")
     public = json.loads(path.read_text(encoding="utf-8"))
+    raw_path = Path("livepocket_urls.json")
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
     from livepocket_v21 import browser_fetcher
     fetch, close = browser_fetcher()
     try:
-        stats = run(public, set(snapshot["urls"]), fetch, args.limit, args.offset)
+        stats = run(public, set(snapshot["urls"]), fetch, args.limit, args.offset, raw=raw)
     finally:
         close()
     print("Missing period batch:", stats)
     if args.write and stats["updated"]:
         path.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n",
                         encoding="utf-8")
-        print("Verified periods written to public catalog")
+        raw_path.write_text(json.dumps(raw, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        print("Verified periods written to raw and public catalogs")
 
 
 if __name__ == "__main__":
