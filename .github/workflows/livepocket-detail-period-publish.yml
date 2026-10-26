@@ -1,0 +1,54 @@
+name: Publish Verified LivePocket Detail Period
+'on':
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: livepocket-collect
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test safe date publishing
+        run: |
+          python -m py_compile scripts/livepocket_detail_period_publish.py scripts/livepocket_v13.py scripts/livepocket_v21.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_publish.py
+      - name: Install browser
+        run: |
+          python -m pip install 'playwright>=1.55,<2'
+          python -m playwright install --with-deps chromium
+      - name: Fetch current manual exclusions
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_prefecture_manual_snapshot.py
+      - name: Recheck exact event and write only missing date fields
+        run: |
+          PYTHONPATH=scripts python scripts/livepocket_detail_period_publish.py --url https://livepocket.jp/e/qg3as --manual-overrides-json prefecture_manual_overrides.json --write
+      - name: Commit verified date fields
+        shell: bash
+        run: |
+          git add livepocket_public.json
+          if git diff --cached --quiet; then
+            echo "No eligible date changes."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Record verified detail application period for qg3as'
+          git fetch origin main
+          if ! git rebase origin/main; then
+            git rebase --abort || true
+            echo "Concurrent changes: publication aborted."
+            exit 1
+          fi
+          git push origin HEAD:main
+      - name: Remove private exclusions
+        if: always()
+        run: rm -f prefecture_manual_overrides.json
