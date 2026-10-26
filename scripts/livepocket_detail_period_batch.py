@@ -8,20 +8,28 @@ overrides. Failures do not create dates. Public JSON is written only when
 import argparse
 import json
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
+from livepocket_v11 import parse_datetime
 from livepocket_v11 import iso
 from livepocket_v12 import exact_event_url
 from livepocket_v13 import extract_deadline
 
 
-def candidates(public, excluded, limit=5, offset=0):
+def candidates(public, excluded, limit=5, offset=0, now=None):
     if excluded is None:
         raise ValueError("Current manual exclusion snapshot required")
+    now = now or datetime.now(timezone.utc)
     items = []
     for row in public.get("items", []):
         url = row.get("url")
         if (not isinstance(url, str) or exact_event_url(url) != url
                 or url in excluded or row.get("application_start_at")
                 or row.get("application_end_at")):
+            continue
+        # Avoid spending the batch on long-expired historical listings.
+        # Unknown publication timestamps remain eligible for manual review.
+        posted = parse_datetime(row.get("discord_posted_at"))
+        if posted and posted < now - timedelta(days=14):
             continue
         items.append(url)
     items = sorted(set(items))
