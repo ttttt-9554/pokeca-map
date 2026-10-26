@@ -24,8 +24,8 @@ jobs:
           python-version: '3.12'
       - name: Test parser and safe batch
         run: |
-          python -m py_compile scripts/livepocket_detail_period_batch.py scripts/livepocket_v13.py scripts/livepocket_v21.py
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py
+          python -m py_compile scripts/livepocket_detail_period_batch.py scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_revalidate.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py
       - name: Install browser
         run: |
           python -m pip install 'playwright>=1.55,<2'
