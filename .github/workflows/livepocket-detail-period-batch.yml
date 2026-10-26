@@ -48,11 +48,6 @@ jobs:
             OFFSET=$(( (DAY_OF_YEAR - 1) * 5 ))
           fi
           PYTHONPATH=scripts python scripts/livepocket_detail_period_batch.py --manual-overrides-json prefecture_manual_overrides.json --limit 5 --offset "$OFFSET" --write
-      - name: Refresh manual exclusions before publication
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python scripts/livepocket_prefecture_manual_snapshot.py
       - name: Publish verified missing dates only
         shell: bash
         run: |
