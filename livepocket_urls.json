@@ -13243,7 +13243,8 @@
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop"
+        "store_name": "v22_official_title_shop",
+        "stores": "v19_user_verified_store_csv"
       },
       "event_title": "【古本市場京都太秦店】ポケカ抽選販売（ストームエメラルダ）",
       "application_end_at": "2026-10-26T22:00:00+09:00",
@@ -13252,7 +13253,7 @@
       "stores": [
         {
           "name": "古本市場京都太秦店",
-          "prefecture": ""
+          "prefecture": "京都府"
         }
       ]
     },
@@ -14294,7 +14295,8 @@
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop"
+        "store_name": "v22_official_title_shop",
+        "stores": "v19_user_verified_store_csv"
       },
       "event_title": "【ふるいちイオンモール神戸北店】ポケカ抽選販売30thカード9種セット",
       "application_end_at": "2026-10-26T21:01:00+09:00",
@@ -14303,7 +14305,7 @@
       "stores": [
         {
           "name": "ふるいちイオンモール神戸北店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ]
     },
