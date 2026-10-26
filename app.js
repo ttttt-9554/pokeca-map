@@ -5139,8 +5139,29 @@
     // dismiss this editor. Never discard in-progress counts on a backdrop tap.
     // Browsers supporting closedby also disable light-dismiss explicitly.
     dialog.setAttribute('closedby','closerequest');
-    dialog.innerHTML = '<div id="lpTrackerEditorBody"></div>';
+    dialog.innerHTML = '<div class="lp-track-sticky-bar"><button type="button" id="lpTrackStickyClose" aria-label="個別管理を閉じる" title="閉じる">×</button></div><div id="lpTrackerEditorBody"></div>';
     document.body.append(dialog);
+    // Compare the live form and account rows, including additions/removals.
+    // This prevents accidental loss of edits when closing with ×, Close, or Escape.
+    let lpTrackInitialSnapshot='';
+    const lpTrackSnapshot=()=>{
+      const form=$('lpTrackerForm');
+      if(!form)return '';
+      return JSON.stringify([...form.querySelectorAll('input,select,textarea')].map(el=>[
+        el.name||el.getAttribute('data-lp-account-id')||el.getAttribute('data-lp-account-outcome')||
+        [...el.attributes].find(a=>a.name.startsWith('data-lp-'))?.name||'',
+        el.type==='checkbox'||el.type==='radio'?el.checked:el.value
+      ]));
+    };
+    const lpTrackCloseRequested=()=>{
+      if(!dialog.open||lotteryTrackSaving)return;
+      if(lpTrackSnapshot()!==lpTrackInitialSnapshot &&
+        !confirm('変更内容が保存されていません。保存せずに閉じますか？'))return;
+      dialog.close();
+    };
+    $('lpTrackStickyClose').addEventListener('click',lpTrackCloseRequested);
+    dialog.addEventListener('cancel',event=>{event.preventDefault();lpTrackCloseRequested();});
+    dialog.addEventListener('close',()=>{lpTrackInitialSnapshot='';});
     const accountDialog=document.createElement('dialog');
     accountDialog.id='lpPrivateAccountDialog';
     accountDialog.setAttribute('aria-label','自分専用の応募アカウント');
@@ -6097,7 +6118,7 @@
       updateQuantityHint();
     });
     updateQuantityHint();
-    $('lpTrackEditorClose').addEventListener('click',()=>dlg.close());
+    $('lpTrackEditorClose').addEventListener('click',()=>$('lpTrackStickyClose').click());
     $('lpTrackEditorDelete')?.addEventListener('click',async()=>{
       if(!confirm('この抽選の個人管理記録を削除しますか？'))return;
       await lotteryTrackerDelete(url);
@@ -6137,6 +6158,7 @@
       }
       await lotteryTrackerSave(url,data,true);
     });
+    lpTrackInitialSnapshot=lpTrackSnapshot();
     if (!showLotteryEditorDialog(dlg)) {
       alert('このブラウザでは管理画面を開けません。');
     }
