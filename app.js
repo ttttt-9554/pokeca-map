@@ -5745,7 +5745,11 @@
       })).values()];
   }
 
-  function lpTrackerStoreControl(entry,stores=[]){
+  function lpTrackerStoreControl(entry,stores=[],manualStore=false){
+    if(manualStore)return '<div class="lp-track-account-store lp-track-manual-store">'+
+      '<label>🏬 応募店舗名<input type="text" data-lp-manual-store-name maxlength="200" required placeholder="例：宇都宮店" value="'+escape(String(entry?.store_name||''))+'"></label>'+
+      '<label>📍 地域（都道府県）<input type="text" data-lp-manual-store-pref maxlength="80" required placeholder="例：栃木県" value="'+escape(String(entry?.store_prefecture||''))+'"></label></div>';
+
     const savedName=String(entry?.store_name||'').trim();
     const savedPref=String(entry?.store_prefecture||'').trim();
     const label=store=>store.name+(store.prefecture?'（'+store.prefecture+'）':'');
@@ -5769,7 +5773,7 @@
       '<select data-lp-account-store required>'+options+'</select></label>';
   }
 
-  function lpTrackerAccountRowHtml(entry,usedIds=[],stores=[]){
+  function lpTrackerAccountRowHtml(entry,usedIds=[],stores=[],manualStore=false){
     const current=String(entry?.account_id||'');
     const options=lpPrivateAccountRows().filter(profile=>
       (!profile.is_archived&&!usedIds.includes(profile.id))||profile.id===current)
@@ -5784,7 +5788,7 @@
       '<select data-lp-account-id required>'+options+'</select></label>'+
       '<button type="button" data-lp-account-remove>削除</button></div>'+
       '<p class="lp-track-one-ticket">🎟️ 応募 1口（自動登録）</p>'+
-      lpTrackerStoreControl(entry,stores)+
+      lpTrackerStoreControl(entry,stores,manualStore)+
       '<label class="lp-track-account-result">抽選結果'+
       '<select data-lp-account-outcome>'+
       '<option value="pending"'+(outcome==='pending'?' selected':'')+'>結果待ち</option>'+
@@ -5802,6 +5806,7 @@
       [];
     const active=assigned.filter(entry=>Number(entry?.application_count)>0);
     const stores=lpTrackerCandidateStores(data.event_url);
+    const manualStore=!!lpAppEventId(data.event_url);
     const sum=key=>active.reduce((total,row)=>total+Number(row[key]||0),0);
     const remaining={
       application_count:Math.max(0,Number(data.application_count||0)-sum('application_count')),
@@ -5822,7 +5827,7 @@
         lpTrackerAccountInput(key,remaining[key])).join('')+'</div></div>'+
       '<div id="lpTrackAccountRows">'+active.map(row=>
         lpTrackerAccountRowHtml(row,active.filter(x=>x.account_id!==row.account_id)
-          .map(x=>x.account_id),stores)).join('')+'</div>'+
+           .map(x=>x.account_id),stores,manualStore)).join('')+'</div>'+
       '<div class="lp-track-account-buttons">'+
       '<button type="button" id="lpTrackAccountAdd">➕ 応募アカウントを追加（1口）</button>'+
       '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを管理</button>'+
@@ -5860,6 +5865,7 @@
     for(const key of keys)form.elements[key].readOnly=true;
     const holder=$('lpTrackAccountRows'),unassigned=$('lpTrackUnassigned');
     const stores=lpTrackerCandidateStores(url);
+    const manualStore=!!lpAppEventId(url);
     const previousByAccount=new Map((data?.account_entries||[])
       .map(entry=>[entry.account_id,entry]));
     const getLegacy=key=>Number(unassigned.querySelector(
@@ -5897,7 +5903,7 @@
       const entry={account_id:profile.id,application_count:1,
         won_count:Number(transfer.outcome==='won'),
         lost_count:Number(transfer.outcome==='lost')};
-      const html=lpTrackerAccountRowHtml(entry,selectedIds,stores);
+      const html=lpTrackerAccountRowHtml(entry,selectedIds,stores,manualStore);
       if(!html)return false;
       holder.insertAdjacentHTML('beforeend',html);
       for(const key of keys)setLegacy(key,transfer.remaining[key]);
@@ -5960,7 +5966,12 @@
           const entry={account_id:id,application_count:1,
             won_count:Number(outcome==='won'),lost_count:Number(outcome==='lost')};
           let chosen=null;
-          if(stores.length===1){
+          if(manualStore){
+            const name=row.querySelector('[data-lp-manual-store-name]')?.value.trim()||'';
+            const prefecture=row.querySelector('[data-lp-manual-store-pref]')?.value.trim()||'';
+            if(!name||!prefecture)throw Error('アプリ抽選は店舗名と地域を両方入力してください。');
+            chosen={name,prefecture};
+          }else if(stores.length===1){
             chosen=stores[0];
           }else if(stores.length>1){
             const selection=row.querySelector('[data-lp-account-store]')?.value||'';
