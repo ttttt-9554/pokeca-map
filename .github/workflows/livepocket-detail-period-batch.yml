@@ -27,7 +27,7 @@ jobs:
       - name: Test parser and safe batch
         run: |
           python -m py_compile scripts/livepocket_detail_period_batch.py scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_prefecture_manual_snapshot.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
       - name: Install browser
         run: |
           python -m pip install 'playwright>=1.55,<2'
