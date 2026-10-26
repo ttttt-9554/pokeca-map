@@ -124,7 +124,7 @@ class ForwardOnlyPolicyTests(TestCase):
     def test_cli_plan_skips_old_lotteries_without_starting_browser(self):
         stdout, output=self._sample_cli(OLD_DETECTED,plan=True)
         self.assertIn('eligible 0',stdout)
-        self.assertEqual(output,'browser_needed=false\\n')
+        self.assertEqual(output.splitlines(),['browser_needed=false'])
         stdout,_=self._sample_cli(OLD_DETECTED,plan=False)
         self.assertIn("'historical_missing_skipped': 1",stdout)
         self.assertIn("'checked': 0",stdout)
@@ -132,7 +132,7 @@ class ForwardOnlyPolicyTests(TestCase):
     def test_cli_plan_requests_browser_only_for_future_notice(self):
         stdout, output=self._sample_cli(NEW_DETECTED,plan=True)
         self.assertIn('eligible 1',stdout)
-        self.assertEqual(output,'browser_needed=true\\n')
+        self.assertEqual(output.splitlines(),['browser_needed=true'])
 
     def test_scheduled_collector_keeps_only_five_minute_new_scans(self):
         root = Path(__file__).resolve().parent.parent
