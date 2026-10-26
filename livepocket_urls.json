@@ -17822,8 +17822,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/a1d-8": {
-          "checked_at": "2026-10-26T01:01:32.982690+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-26T07:11:36.199951+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/ro44k": {
@@ -19103,8 +19103,8 @@
         },
         "https://livepocket.jp/e/a1d-8": {
           "detected_at": "2026-10-26T01:00:59.538521+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-26T01:01:32.982690+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-26T07:11:36.199951+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/dlvff": {
@@ -20179,6 +20179,11 @@
           "attempts": 2,
           "last_attempt_at": "2026-10-26T01:41:37.205836+00:00",
           "last_status": "checked_retry_application_end_at"
+        },
+        "https://livepocket.jp/e/a1d-8": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-26T07:11:36.199951+00:00",
+          "last_status": "checked_retry_no_new_details"
         }
       }
     },
@@ -24677,7 +24682,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-26T01:01:32.982690+00:00",
+          "checked_at": "2026-10-26T07:11:36.199951+00:00",
           "title_observed": "再販分抽選 拡張パック「30th CELEBRATION」 ポケモンカードゲーム",
           "genre": "pokemon",
           "product_origin": "",
@@ -28283,7 +28288,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/a1d-8": {
-          "checked_at": "2026-10-26T01:01:32.982690+00:00",
+          "checked_at": "2026-10-26T07:11:36.199951+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
