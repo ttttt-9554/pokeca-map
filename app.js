@@ -5575,6 +5575,8 @@
       'step="1" inputmode="numeric" required value="'+Number(value||0)+'"></label>';
   }
 
+  // One application ticket per selected personal account.
+  // Previously entered aggregate tickets remain in "未割当" until assigned.
   function lpTrackerAccountRowHtml(entry,usedIds=[]){
     const current=String(entry?.account_id||'');
     const options=lpPrivateAccountRows().filter(profile=>
@@ -5583,14 +5585,19 @@
         (profile.id===current?'selected':'')+'>'+
         escape(profile.label+(profile.is_archived?'（非表示）':''))+'</option>').join('');
     if(!options)return '';
+    const outcome=Number(entry?.won_count)>0?'won':
+      Number(entry?.lost_count)>0?'lost':'pending';
     return '<div class="lp-track-account-row" data-lp-account-row>'+
       '<div class="lp-track-account-top"><label>応募アカウント'+
       '<select data-lp-account-id required>'+options+'</select></label>'+
-      '<button type="button" data-lp-account-remove>割当解除</button></div>'+
-      '<div class="lp-track-account-grid">'+
-      ['application_count','won_count','lost_count'].map(key=>
-        lpTrackerAccountInput(key,entry?.[key]||0)).join('')+
-      '</div></div>';
+      '<button type="button" data-lp-account-remove>削除</button></div>'+
+      '<p class="lp-track-one-ticket">🎟️ 応募 1口（自動登録）</p>'+
+      '<label class="lp-track-account-result">抽選結果'+
+      '<select data-lp-account-outcome>'+
+      '<option value="pending"'+(outcome==='pending'?' selected':'')+'>結果待ち</option>'+
+      '<option value="won"'+(outcome==='won'?' selected':'')+'>当選</option>'+
+      '<option value="lost"'+(outcome==='lost'?' selected':'')+'>落選</option>'+
+      '</select></label></div>';
   }
 
   function lpTrackerPrivateMarkup(data){
@@ -5598,230 +5605,173 @@
       return '<div class="lp-track-account-intro">'+
         '🔒 アカウント別に管理するには、最初に応募アカウントを登録してください。'+
         '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを登録</button></div>';
-    const assigned=Array.isArray(data.account_entries)?data.account_entries:[];
-    const sum=key=>assigned.reduce((total,row)=>total+Number(row[key]||0),0);
-    const old={
-      application_count:Math.max(0,data.application_count-sum('application_count')),
-      won_count:Math.max(0,data.won_count-sum('won_count')),
-      lost_count:Math.max(0,data.lost_count-sum('lost_count'))
+    const assigned=Array.isArray(data.account_entries)?data.account_entries:
+      [];
+    const active=assigned.filter(entry=>Number(entry?.application_count)>0);
+    const sum=key=>active.reduce((total,row)=>total+Number(row[key]||0),0);
+    const remaining={
+      application_count:Math.max(0,Number(data.application_count||0)-sum('application_count')),
+      won_count:Math.max(0,Number(data.won_count||0)-sum('won_count')),
+      lost_count:Math.max(0,Number(data.lost_count||0)-sum('lost_count'))
     };
-    const initial=assigned.length?assigned:
-      (lpPrivateAccountDefault()?[{account_id:lpPrivateAccountDefault().id,
-        application_count:0,won_count:0,lost_count:0}]:[]);
     const unassignedEmpty=['application_count','won_count','lost_count']
-      .every(key=>old[key]===0);
+      .every(key=>remaining[key]===0);
     return '<fieldset class="lp-track-account-block" id="lpTrackPrivateAccounts">'+
       '<legend>🔒 アカウント別の応募口数（本人のみ）</legend>'+
-      '<p class="lp-tracker-intro">上の合計は内訳から自動計算します。'+
-      '以前の口数は未割当のまま保持し、割当先に移した分だけ減ります。</p>'+
+      '<p class="lp-tracker-intro">1アカウントにつき応募1口。'+
+      'アカウント追加で口数を自動計算し、結果待ち・当選・落選だけを管理します。'+
+      '過去の未割当口数は、追加した分だけ自動で減ります。</p>'+
       '<div class="lp-track-unassigned" id="lpTrackUnassigned"'+
       (unassignedEmpty?' hidden':'')+'><strong>未割当（以前の記録）</strong>'+
       '<div class="lp-track-account-grid">'+
       ['application_count','won_count','lost_count'].map(key=>
-        lpTrackerAccountInput(key,old[key])).join('')+'</div></div>'+
-      '<div id="lpTrackAccountRows">'+initial.map(row=>
-        lpTrackerAccountRowHtml(row,initial.filter(x=>x.account_id!==row.account_id)
+        lpTrackerAccountInput(key,remaining[key])).join('')+'</div></div>'+
+      '<div id="lpTrackAccountRows">'+active.map(row=>
+        lpTrackerAccountRowHtml(row,active.filter(x=>x.account_id!==row.account_id)
           .map(x=>x.account_id))).join('')+'</div>'+
       '<div class="lp-track-account-buttons">'+
-      '<button type="button" id="lpTrackAccountAdd">➕ アカウントを割り当て</button>'+
-      '<button type="button" id="lpTrackAssignLegacy"'+
-      (unassignedEmpty?' hidden':'')+'>未割当を既定アカウントへ移動</button>'+
+      '<button type="button" id="lpTrackAccountAdd">➕ 応募アカウントを追加（1口）</button>'+
       '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを管理</button>'+
-      '</div><p class="lp-tracker-intro">識別名は他のユーザー・抽選結果画面に公開されません。</p>'+
+      '</div><p class="lp-tracker-intro">誤って登録した場合は各アカウントの「削除」で'+
+      'その1口を取り消します。識別名は他ユーザーに公開しません。</p>'+
       '</fieldset>';
   }
 
-  // Choose a ticket with an unresolved result before adding a fresh
-  // application. This avoids putting a win on a profile with zero entries.
-  // Legacy unallocated tickets remain unallocated; no guessed owner.
-  function lpTrackerApplyOutcome(buckets,status){
-    const values=buckets.map(row=>({
-      ...row,
-      application_count:Number(row.application_count)||0,
-      won_count:Number(row.won_count)||0,
-      lost_count:Number(row.lost_count)||0
-    }));
-    if(!values.length)return values;
-    const total=key=>values.reduce((sum,row)=>sum+row[key],0);
-    if(status==='not_applied'){
-      return values.map(row=>({...row,application_count:0,won_count:0,lost_count:0}));
+  // An account is always a single ticket. Prefer moving a pending legacy
+  // ticket; if only a decided ticket remains, its result travels with it.
+  // Never fabricate additional results or change a different profile.
+  function lpTrackerAllocateOne(legacy){
+    const result={...legacy};
+    const applications=Number(result.application_count);
+    const won=Number(result.won_count);
+    const lost=Number(result.lost_count);
+    if(![applications,won,lost].every(Number.isSafeInteger)||
+       applications<0||won<0||lost<0||won+lost>applications)
+      return null;
+    if(!applications)return {remaining:result,outcome:'pending'};
+    result.application_count=applications-1;
+    if(applications>won+lost)
+      return {remaining:result,outcome:'pending'};
+    if(won>0){result.won_count=won-1;
+      return {remaining:result,outcome:'won'};
     }
-    const preferred=values.findIndex(row=>row.is_default===true);
-    const fallback=preferred>=0?preferred:0;
-    if(total('application_count')===0)values[fallback].application_count=1;
-    const setOutcome=key=>{
-      if(total(key)>0)return;
-      let index=values.findIndex(row=>
-        row.application_count>row.won_count+row.lost_count);
-      if(index<0){
-        index=fallback;
-        values[index].application_count++;
-      }
-      values[index][key]++;
-    };
-    if(status==='won'||status==='received')setOutcome('won_count');
-    if(status==='lost')setOutcome('lost_count');
-    return values;
-  }
-
-  // Reclassify previously unassigned tickets into the edited account.
-  // The account increase first consumes legacy tickets; any excess counts
-  // as a new application. Reversing the edit returns tickets to unassigned.
-  function lpTrackerUnassignedAfterEdit(previousLegacy,previousAccount,nextAccount){
-    const numbers=[previousLegacy,previousAccount,nextAccount];
-    if(!numbers.every(Number.isSafeInteger)||
-       numbers.some(n=>n<0||n>9999))return null;
-    const updated=Math.max(0,previousLegacy-(nextAccount-previousAccount));
-    return updated<=9999?updated:null;
+    result.lost_count=lost-1;
+    return {remaining:result,outcome:'lost'};
   }
 
   function lpTrackerPrivateBind(form,updateQuantityHint){
     const root=$('lpTrackPrivateAccounts');
     if(!root)return null;
-    const totals=['application_count','won_count','lost_count'];
-    totals.forEach(k=>form.elements[k].readOnly=true);
+    const keys=['application_count','won_count','lost_count'];
+    for(const key of keys)form.elements[key].readOnly=true;
     const holder=$('lpTrackAccountRows'),unassigned=$('lpTrackUnassigned');
-    const count=(row,key)=>Number(row.querySelector('[data-lp-account-count="'+key+'"]')?.value||0);
+    const getLegacy=key=>Number(unassigned.querySelector(
+      '[data-lp-account-count="'+key+'"]')?.value||0);
+    const setLegacy=(key,value)=>{
+      unassigned.querySelector('[data-lp-account-count="'+key+'"]').value=String(value);
+    };
     const rows=()=>[...holder.querySelectorAll('[data-lp-account-row]')];
-    const previousInputValues=new WeakMap();
-    const summarize=()=>{
-      const all=[unassigned,...rows()];
-      totals.forEach(k=>{
-        form.elements[k].value=String(all.reduce((sum,row)=>sum+count(row,k),0));
-      });
-      const hasUnassigned=totals.some(key=>count(unassigned,key)!==0);
+    const rowOutcome=row=>row.querySelector('[data-lp-account-outcome]')?.value||'pending';
+    const summarise=()=>{
+      const records=rows(),won=records.filter(r=>rowOutcome(r)==='won').length;
+      const lost=records.filter(r=>rowOutcome(r)==='lost').length;
+      form.elements.application_count.value=String(getLegacy('application_count')+records.length);
+      form.elements.won_count.value=String(getLegacy('won_count')+won);
+      form.elements.lost_count.value=String(getLegacy('lost_count')+lost);
+      const hasUnassigned=keys.some(key=>getLegacy(key)!==0);
       unassigned.hidden=!hasUnassigned;
-      const moveButton=root.querySelector?.('#lpTrackAssignLegacy');
-      if(moveButton)moveButton.hidden=!hasUnassigned;
-      // Keep the last valid input count so each keystroke transfers only
-      // the difference, not the whole entered quantity again.
-      for(const row of rows()){
-        for(const key of totals){
-          const input=row.querySelector('[data-lp-account-count="'+key+'"]');
-          if(input)previousInputValues.set(input,count(row,key));
-        }
+      const status=form.elements.status;
+      if(status&&!(status.value==='received'&&Number(form.elements.won_count.value)>0)){
+        const total=Number(form.elements.application_count.value);
+        const w=Number(form.elements.won_count.value);
+        const l=Number(form.elements.lost_count.value);
+        status.value=total===0?'not_applied':w>0?'won':l===total?'lost':'applied';
       }
       updateQuantityHint();
     };
-    const activeProfile=()=>lpPrivateAccountDefault();
-    const addRow=(id)=>{
-      const used=rows().map(row=>row.querySelector('[data-lp-account-id]').value);
-      const selected=id||lpPrivateAccountRows()
-        .filter(x=>!x.is_archived&&!used.includes(x.id))
-        .sort((a,b)=>Number(b.is_default)-Number(a.is_default))[0]?.id;
-      if(!selected||used.includes(selected))return false;
-      const html=lpTrackerAccountRowHtml({account_id:selected,
-        application_count:0,won_count:0,lost_count:0},used);
+    const addOne=()=>{
+      const selectedIds=rows().map(row=>row.querySelector('[data-lp-account-id]').value);
+      const profile=lpPrivateAccountRows().filter(x=>!x.is_archived&&!selectedIds.includes(x.id))
+        .sort((a,b)=>Number(b.is_default)-Number(a.is_default))[0];
+      if(!profile)return false;
+      const old=Object.fromEntries(keys.map(key=>[key,getLegacy(key)]));
+      const transfer=lpTrackerAllocateOne(old);
+      if(!transfer)return false;
+      const entry={account_id:profile.id,application_count:1,
+        won_count:Number(transfer.outcome==='won'),
+        lost_count:Number(transfer.outcome==='lost')};
+      const html=lpTrackerAccountRowHtml(entry,selectedIds);
       if(!html)return false;
       holder.insertAdjacentHTML('beforeend',html);
-      summarize();return true;
+      for(const key of keys)setLegacy(key,transfer.remaining[key]);
+      summarise();
+      return true;
     };
     root.addEventListener('input',e=>{
-      const target=e.target;
-      if(!target.matches('[data-lp-account-count]'))return;
-      const row=target.closest('[data-lp-account-row]');
-      if(row){
-        const key=target.getAttribute('data-lp-account-count');
-        if(!totals.includes(key))return;
-        const previous=previousInputValues.get(target)??0;
-        const current=Number(target.value||0);
-        const oldCell=unassigned.querySelector('[data-lp-account-count="'+key+'"]');
-        const remaining=lpTrackerUnassignedAfterEdit(
-          Number(oldCell.value||0),previous,current);
-        if(remaining===null){
-          target.value=String(previous);
-          $('lpTrackEditorMessage').textContent='口数は0～9999の整数で入力してください。';
-        }else{
-          oldCell.value=String(remaining);
-          $('lpTrackEditorMessage').textContent='';
-        }
-      }
-      // Editing the unassigned row directly is still supported.
-      summarize();
+      if(e.target.closest('#lpTrackUnassigned')&&
+         e.target.matches('[data-lp-account-count]'))summarise();
     });
     root.addEventListener('change',e=>{
-      if(e.target.matches('[data-lp-account-id]'))summarize();
+      if(e.target.matches('[data-lp-account-outcome]')||
+         e.target.matches('[data-lp-account-id]'))summarise();
     });
     root.addEventListener('click',e=>{
       const remove=e.target.closest('[data-lp-account-remove]');
       if(remove){
         const row=remove.closest('[data-lp-account-row]');
         if(!row)return;
-        // Removing an allocation returns its quantities to "未割当".
-        for(const key of totals){
-          unassigned.querySelector('[data-lp-account-count="'+key+'"]').value=
-            String(count(unassigned,key)+count(row,key));
-        }
-        row.remove();summarize();return;
+        if(!confirm('この抽選の応募アカウントを削除し、応募1口とその結果を取り消しますか？'))return;
+        // Misregistered application: remove the ticket; don't return it
+        // to historical "未割当".
+        row.remove();summarise();return;
       }
       if(e.target.closest('#lpTrackAccountAdd')){
-        if(!addRow())$('lpTrackEditorMessage').textContent=
-          '割り当てられる新しいアカウントがありません。アカウント管理で追加してください。';
-      }
-      if(e.target.closest('#lpTrackAssignLegacy')){
-        const preferred=activeProfile();
-        if(!preferred){
-          $('lpTrackEditorMessage').textContent='まず既定のアカウントを登録してください。';return;
-        }
-        let row=rows().find(row=>row.querySelector('[data-lp-account-id]').value===preferred.id);
-        if(!row){addRow(preferred.id);row=rows().find(row=>row.querySelector('[data-lp-account-id]').value===preferred.id);}
-        if(!row)return;
-        for(const key of totals){
-          row.querySelector('[data-lp-account-count="'+key+'"]').value=
-            String(count(row,key)+count(unassigned,key));
-          unassigned.querySelector('[data-lp-account-count="'+key+'"]').value='0';
-        }
-        summarize();
+        if(!addOne())$('lpTrackEditorMessage').textContent=
+          '未使用の応募アカウントがありません。先にアカウントを登録してください。';
+        else $('lpTrackEditorMessage').textContent='';
       }
     });
-    summarize();
+    summarise();
     return {
       adjustStatus(status){
-        const active=rows().concat([unassigned]);
-        const defaultId=activeProfile()?.id;
-        const before=active.map(row=>({
-          is_default:!!defaultId&&row!==unassigned&&
-            row.querySelector('[data-lp-account-id]')?.value===defaultId,
-          application_count:count(row,'application_count'),
-          won_count:count(row,'won_count'),
-          lost_count:count(row,'lost_count')
-        }));
-        const after=lpTrackerApplyOutcome(before,status);
-        after.forEach((counts,i)=>{
-          for(const key of totals)
-            active[i].querySelector('[data-lp-account-count="'+key+'"]').value=
-              String(counts[key]);
-        });
-        summarize();
+        // Global status is a summary, not a second route to change counts.
+        // Marking a won entry "received" is the only independent action.
+        if(status==='received'&&Number(form.elements.won_count.value)>0)return;
+        summarise();
+        if(status==='won'||status==='lost')
+          $('lpTrackEditorMessage').textContent=
+            '当選・落選は各応募アカウントの抽選結果から選択してください。';
+        else if(status==='not_applied'&&Number(form.elements.application_count.value)>0)
+          $('lpTrackEditorMessage').textContent=
+            '応募を取り消す場合は各アカウントの「削除」を使用してください。';
       },
       collect(){
-        const entries=[],seen=new Set();
-        const totalsByAccount={};
-        for(const key of totals)totalsByAccount[key]=count(unassigned,key);
+        const legacy=Object.fromEntries(keys.map(key=>[key,getLegacy(key)]));
+        if(!keys.every(key=>Number.isSafeInteger(legacy[key])&&
+            legacy[key]>=0&&legacy[key]<=9999)||
+           legacy.won_count+legacy.lost_count>legacy.application_count)
+          throw Error('未割当の口数が不正です。');
+        const seen=new Set(),entries=[];
         for(const row of rows()){
           const id=row.querySelector('[data-lp-account-id]')?.value;
           if(!id||seen.has(id)||!lpPrivateAccounts.has(id))
             throw Error('応募アカウントの重複または不正な選択があります。');
           seen.add(id);
-          const entry={account_id:id};
-          for(const key of totals)entry[key]=count(row,key);
-          if(totals.some(key=>!Number.isInteger(entry[key])||entry[key]<0||entry[key]>9999)
-             ||entry.won_count+entry.lost_count>entry.application_count)
-            throw Error('アカウント別の口数が不正です。');
-          for(const key of totals)totalsByAccount[key]+=entry[key];
-          if(entry.application_count>0)entries.push(entry);
+          const outcome=rowOutcome(row);
+          if(!['pending','won','lost'].includes(outcome))
+            throw Error('抽選結果を確認してください。');
+          entries.push({account_id:id,application_count:1,
+            won_count:Number(outcome==='won'),lost_count:Number(outcome==='lost')});
         }
-        const u={};
-        for(const key of totals)u[key]=count(unassigned,key);
-        if(totals.some(k=>!Number.isInteger(u[k])||u[k]<0||u[k]>9999)
-            ||u.won_count+u.lost_count>u.application_count)
-          throw Error('未割当の口数が不正です。');
-        if(totals.some(k=>!Number.isSafeInteger(totalsByAccount[k])
-              ||totalsByAccount[k]>9999)||
-           totalsByAccount.won_count+totalsByAccount.lost_count>
-             totalsByAccount.application_count)
+        const total={
+          application_count:legacy.application_count+entries.length,
+          won_count:legacy.won_count+entries.filter(x=>x.won_count===1).length,
+          lost_count:legacy.lost_count+entries.filter(x=>x.lost_count===1).length
+        };
+        if(!keys.every(key=>total[key]<=9999)||
+           total.won_count+total.lost_count>total.application_count)
           throw Error('応募口数の合計が不正です。');
-        return {account_entries:entries,...totalsByAccount};
+        return {account_entries:entries,...total};
       }
     };
   }
