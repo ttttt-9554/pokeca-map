@@ -34,13 +34,19 @@ def main():
         raise ValueError("Current manual exclusions are unavailable")
     changed = set()
     changes_by_file = []
+    values_by_file = []
     for filename in ("livepocket_public.json", "livepocket_urls.json"):
         before = json.loads(subprocess.check_output(["git", "show", "HEAD:" + filename]))
         after = json.loads(Path(filename).read_text(encoding="utf-8"))
         file_changes = changed_urls(before, after)
         changes_by_file.append(file_changes)
+        index = {x["url"]: x for x in after.get("items", [])}
+        values_by_file.append({url: (index[url]["application_start_at"],
+                                      index[url]["application_end_at"])
+                               for url in file_changes})
         changed.update(file_changes)
-    if len(changes_by_file) != 2 or changes_by_file[0] != changes_by_file[1]:
+    if (len(changes_by_file) != 2 or changes_by_file[0] != changes_by_file[1]
+            or values_by_file[0] != values_by_file[1]):
         raise RuntimeError('Raw and public catalogs must have identical date updates')
     if len(changed) > 5:
         raise RuntimeError('Batch update exceeded five events')
