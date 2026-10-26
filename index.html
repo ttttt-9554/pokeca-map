@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261026-small-close-v21-111">
+  <link rel="stylesheet" href="style.css?v=20261026-centered-close-v21-112">
 
   <style>
     [hidden] { display: none !important; }
@@ -1574,7 +1574,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261026-small-close-v21-111';
+      ? token : '20261026-centered-close-v21-112';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

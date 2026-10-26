@@ -2364,9 +2364,32 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 .lp-track-outcome-choice input{width:18px;height:18px;accent-color:var(--app-accent,#3b82f6);flex:none}
 @media(max-width:370px){.lp-track-outcome-checks{grid-template-columns:1fr}}
 
-/* v21.109: Sticky close control in the scrolling lottery editor. */
-#lpTrackerEditor .lp-track-sticky-bar{position:sticky;top:-18px;z-index:50;display:flex;justify-content:flex-end;pointer-events:none;margin:-18px -18px 4px;padding:10px 12px 0;background:linear-gradient(to bottom,var(--app-surface,#182438) 75%,transparent)}
-#lpTrackerEditor #lpTrackStickyClose{pointer-events:auto;display:grid;place-items:center;min-width:44px;min-height:44px;border:1px solid var(--app-border,#617188);border-radius:50%;font-size:28px;line-height:1;color:var(--app-text,#fff);background:var(--app-surface,#182438);cursor:pointer;box-shadow:0 2px 7px #0003}
+/* v21.112: Sticky close header with a mathematically centered cross.
+   Two CSS strokes avoid platform-dependent font glyph baselines. */
+#lpTrackerEditor .lp-track-sticky-bar{
+  position:sticky;top:0;z-index:50;box-sizing:border-box;
+  display:flex;justify-content:flex-end;align-items:center;
+  pointer-events:none;
+  margin:-18px -18px 12px;padding:8px 12px 8px;
+  background:var(--app-surface,#182438);
+}
+#lpTrackerEditor #lpTrackStickyClose{
+  box-sizing:border-box;position:relative;pointer-events:auto;
+  display:grid;place-items:center;width:36px;height:36px;min-width:36px;min-height:36px;
+  padding:0;margin:0;flex:0 0 36px;
+  border:1px solid var(--app-border,#617188);border-radius:50%;
+  font-size:0!important;line-height:0!important;
+  color:var(--app-text,#fff);background:var(--app-surface,#182438);
+  cursor:pointer;box-shadow:0 2px 7px #0003;
+}
+#lpTrackerEditor #lpTrackStickyClose::before,
+#lpTrackerEditor #lpTrackStickyClose::after{
+  content:"";position:absolute;top:50%;left:50%;
+  width:16px;height:2px;border-radius:2px;background:currentColor;
+  pointer-events:none;
+}
+#lpTrackerEditor #lpTrackStickyClose::before{transform:translate(-50%,-50%) rotate(45deg)}
+#lpTrackerEditor #lpTrackStickyClose::after{transform:translate(-50%,-50%) rotate(-45deg)}
 #lpTrackerEditor #lpTrackStickyClose:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
 
 /* v21.110: Compact four-in-a-row lottery outcome choices */
@@ -2376,6 +2399,3 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 #lpTrackerEditor .lp-track-outcome-choice span{display:block;font-size:inherit!important;line-height:1.25}
 @media(max-width:370px){#lpTrackerEditor .lp-track-outcome-checks{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 
-/* v21.111: Smaller fixed close button; keep touch target usable. */
-#lpTrackerEditor .lp-track-sticky-bar{padding:6px 9px 0!important}
-#lpTrackerEditor #lpTrackStickyClose{min-width:36px!important;min-height:36px!important;width:36px!important;height:36px!important;font-size:21px!important;line-height:1!important;border-radius:50%!important}
