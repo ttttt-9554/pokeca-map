@@ -5207,6 +5207,7 @@
           .map(x=>({account_id:x.account_id,
             application_count:Number(x.application_count)||0,
             won_count:Number(x.won_count)||0,lost_count:Number(x.lost_count)||0,
+            received_count:Number(x.received_count)>0?1:0,
             store_name:typeof x.store_name==='string'?x.store_name.slice(0,200):'',
             store_prefecture:typeof x.store_prefecture==='string'?
               x.store_prefecture.slice(0,80):''})):[],
@@ -5621,8 +5622,9 @@
             const won=group.reduce((n,a)=>n+Number(a.won_count||0),0);
             const lost=group.reduce((n,a)=>n+Number(a.lost_count||0),0);
             const total=group.reduce((n,a)=>n+Number(a.application_count||0),0);
-            if(won && lost)return '当選'+won+'口／落選'+lost+'口';
-            if(won)return r.status==='received'?'受取済':'当選';
+            const received=group.reduce((n,a)=>n+Number(a.received_count||0),0);
+            if(won && lost)return '当選'+won+'口（受取済'+received+'口）／落選'+lost+'口';
+            if(won)return received===won?'受取済':received?'当選'+won+'口（受取済'+received+'口）':'当選';
             if(lost)return '落選';
             return total?'応募済み':'';
           });
@@ -5781,7 +5783,8 @@
         (profile.id===current?'selected':'')+'>'+
         escape(profile.label+(profile.is_archived?'（非表示）':''))+'</option>').join('');
     if(!options)return '';
-    const outcome=Number(entry?.won_count)>0?'won':
+    const outcome=Number(entry?.received_count)>0?'received':
+      Number(entry?.won_count)>0?'won':
       Number(entry?.lost_count)>0?'lost':'pending';
     return '<div class="lp-track-account-row" data-lp-account-row>'+
       '<div class="lp-track-account-top"><label>応募アカウント'+
@@ -5789,12 +5792,11 @@
       '<button type="button" data-lp-account-remove>削除</button></div>'+
       '<p class="lp-track-one-ticket">🎟️ 応募 1口（自動登録）</p>'+
       lpTrackerStoreControl(entry,stores,manualStore)+
-      '<label class="lp-track-account-result">抽選結果'+
-      '<select data-lp-account-outcome>'+
-      '<option value="pending"'+(outcome==='pending'?' selected':'')+'>結果待ち</option>'+
-      '<option value="won"'+(outcome==='won'?' selected':'')+'>当選</option>'+
-      '<option value="lost"'+(outcome==='lost'?' selected':'')+'>落選</option>'+
-      '</select></label></div>';
+      '<fieldset class="lp-track-account-result lp-track-outcome-checks"><legend>抽選結果</legend>'+
+      [['pending','結果待ち'],['won','当選'],['lost','落選'],['received','受け取り済み']].map(([key,label])=>
+        '<label class="lp-track-outcome-choice"><input type="checkbox" data-lp-account-outcome value="'+key+'"'+
+        (outcome===key?' checked':'')+'><span>'+label+'</span></label>').join('')+
+      '</fieldset></div>';
   }
 
   function lpTrackerPrivateMarkup(data){
@@ -5874,9 +5876,9 @@
       unassigned.querySelector('[data-lp-account-count="'+key+'"]').value=String(value);
     };
     const rows=()=>[...holder.querySelectorAll('[data-lp-account-row]')];
-    const rowOutcome=row=>row.querySelector('[data-lp-account-outcome]')?.value||'pending';
+    const rowOutcome=row=>row.querySelector('[data-lp-account-outcome]:checked')?.value||'pending';
     const summarise=()=>{
-      const records=rows(),won=records.filter(r=>rowOutcome(r)==='won').length;
+      const records=rows(),won=records.filter(r=>['won','received'].includes(rowOutcome(r))).length;
       const lost=records.filter(r=>rowOutcome(r)==='lost').length;
       form.elements.application_count.value=String(getLegacy('application_count')+records.length);
       form.elements.won_count.value=String(getLegacy('won_count')+won);
@@ -5884,11 +5886,12 @@
       const hasUnassigned=keys.some(key=>getLegacy(key)!==0);
       unassigned.hidden=!hasUnassigned;
       const status=form.elements.status;
-      if(status&&!(status.value==='received'&&Number(form.elements.won_count.value)>0)){
+      if(status){
         const total=Number(form.elements.application_count.value);
         const w=Number(form.elements.won_count.value);
         const l=Number(form.elements.lost_count.value);
-        status.value=total===0?'not_applied':w>0?'won':l===total?'lost':'applied';
+        const allWonReceived=w>0&&records.filter(r=>['won','received'].includes(rowOutcome(r))).every(r=>rowOutcome(r)==='received');
+        status.value=total===0?'not_applied':allWonReceived?'received':w>0?'won':l===total?'lost':'applied';
       }
       updateQuantityHint();
     };
@@ -5901,7 +5904,7 @@
       const transfer=lpTrackerAllocateOne(old);
       if(!transfer)return false;
       const entry={account_id:profile.id,application_count:1,
-        won_count:Number(transfer.outcome==='won'),
+        won_count:Number(transfer.outcome==='won'),received_count:0,
         lost_count:Number(transfer.outcome==='lost')};
       const html=lpTrackerAccountRowHtml(entry,selectedIds,stores,manualStore);
       if(!html)return false;
@@ -5915,8 +5918,17 @@
          e.target.matches('[data-lp-account-count]'))summarise();
     });
     root.addEventListener('change',e=>{
-      if(e.target.matches('[data-lp-account-outcome]')||
-         e.target.matches('[data-lp-account-id]'))summarise();
+      if(e.target.matches('[data-lp-account-outcome]')){
+        if(e.target.checked){
+          e.target.closest('[data-lp-account-row]').querySelectorAll('[data-lp-account-outcome]').forEach(input=>{
+            if(input!==e.target)input.checked=false;
+          });
+        }else{
+          const pending=e.target.closest('[data-lp-account-row]').querySelector('[data-lp-account-outcome][value="pending"]');
+          if(pending)pending.checked=true;
+        }
+        summarise();
+      }else if(e.target.matches('[data-lp-account-id]'))summarise();
     });
     root.addEventListener('click',e=>{
       const remove=e.target.closest('[data-lp-account-remove]');
@@ -5961,10 +5973,11 @@
             throw Error('応募アカウントの重複または不正な選択があります。');
           seen.add(id);
           const outcome=rowOutcome(row);
-          if(!['pending','won','lost'].includes(outcome))
+          if(!['pending','won','lost','received'].includes(outcome))
             throw Error('抽選結果を確認してください。');
           const entry={account_id:id,application_count:1,
-            won_count:Number(outcome==='won'),lost_count:Number(outcome==='lost')};
+            won_count:Number(outcome==='won'||outcome==='received'),
+            lost_count:Number(outcome==='lost'),received_count:Number(outcome==='received')};
           let chosen=null;
           if(manualStore){
             const name=row.querySelector('[data-lp-manual-store-name]')?.value.trim()||'';
