@@ -17,6 +17,12 @@ def changed_urls(before, after):
         previous = old.get(url)
         if previous and any(item.get(k) != previous.get(k)
                             for k in ("application_start_at", "application_end_at")):
+            # This workflow may only fill two previously absent date fields.
+            if (previous.get("application_start_at")
+                    or previous.get("application_end_at")
+                    or not item.get("application_start_at")
+                    or not item.get("application_end_at")):
+                raise RuntimeError("Unsafe date modification detected")
             result.add(url)
     return result
 
