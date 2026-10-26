@@ -5560,12 +5560,12 @@
         if(a.account_id&&!profileIds.includes(a.account_id))profileIds.push(a.account_id);
       // Account columns are generated dynamically, including archived accounts in past entries.
       const names=profileIds.map((id,i)=>lpPrivateAccounts.get(id)?.label||'旧アカウント'+(i+1));
-      const headers=['店舗名','地域','抽選受付開始日時','抽選受付終了日時',
-        '抽選結果発表時','受け取り開始日時','受け取り終了日時','備考',
+      const headers=['抽選名','店舗名','地域','抽選受付開始日時','抽選受付終了日時',
+        '抽選結果発表時','受け取り開始日時','受け取り終了日時','備考(メモ)',
         ...(names.length?names:['応募アカウント'])];
       const rows=[new Array(headers.length).fill(''),headers];
-      rows[0][8]='当選状況';
-      const clean=v=>String(v??'').replace(/^[=+\-@\t\r]/,'＇  function lotteryTrackerActionsHtml(item) {');
+      rows[0][9]='当選状況';
+      const clean=v=>String(v??'').replace(/^[=+\\-@\\t\\r]/,'＇'+String(v??'').charAt(0));
       const date=v=>v?lotteryJapaneseDate(v)||String(v):'';
       for(const r of records){
         const item=lotteryItems.find(x=>x.url===r.event_url)||
@@ -5592,11 +5592,11 @@
             if(lost)return '落選';
             return total?'応募済み':'';
           });
-          const notes=[lotteryTrackItemName(r.event_url),r.note||'',
+          const notes=[r.note||'',
             assigned.length?'':'応募 '+r.application_count+'口／当選 '+r.won_count+'口／落選 '+r.lost_count+'口']
             .filter(Boolean).join(' ／ ');
           rows.push([
-            clean(store.name||''),clean(store.prefecture||item.prefecture||''),
+            clean(lotteryTrackItemName(r.event_url)),clean(store.name||''),clean(store.prefecture||item.prefecture||''),
             date(item.application_start_at),date(item.application_end_at),
             date(item.result_announcement_at||item.result_at||item.announcement_at),
             date(r.pickup_start||item.pickup_start),date(r.pickup_end||item.pickup_end),
@@ -5606,8 +5606,8 @@
       }
       const ws=XLSX.utils.aoa_to_sheet(rows);
       const last=XLSX.utils.encode_col(headers.length-1);
-      ws['!merges']=[{s:{r:0,c:8},e:{r:0,c:headers.length-1}}];
-      ws['!cols']=headers.map((_,i)=>({wch:i===0?31:i===1?13:i===7?52:i>=8?19:23}));
+      ws['!merges']=[{s:{r:0,c:9},e:{r:0,c:headers.length-1}}];
+      ws['!cols']=headers.map((_,i)=>({wch:i===0?40:i===1?31:i===2?13:i===8?52:i>=9?19:23}));
       ws['!rows']=[{hpt:24},{hpt:32}];
       ws['!autofilter']={ref:'A2:'+last+rows.length};
       for(let i=2;i<rows.length;i++){
