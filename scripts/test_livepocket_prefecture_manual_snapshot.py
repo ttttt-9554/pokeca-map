@@ -38,7 +38,7 @@ class SnapshotTests(unittest.TestCase):
             }
             return Response(json.dumps(records[table]).encode())
         self.assertEqual(fetch_manual_urls(BASE, "secret", opener),
-                         [URL, "https://livepocket.jp/e/abcd2"])
+                         ["https://livepocket.jp/e/abcd2", URL])
         self.assertEqual(tuple(read_tables), MANUAL_TABLES)
 
     def test_canonical_url_validation(self):
