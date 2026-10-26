@@ -42,6 +42,8 @@ def main():
         changed.update(file_changes)
     if len(changes_by_file) != 2 or changes_by_file[0] != changes_by_file[1]:
         raise RuntimeError('Raw and public catalogs must have identical date updates')
+    if len(changed) > 5:
+        raise RuntimeError('Batch update exceeded five events')
     blocked = changed.intersection(urls)
     if blocked:
         raise RuntimeError("A manually edited event changed during verification; aborting publication")
