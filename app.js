@@ -5360,6 +5360,27 @@
     return name ? name+(pref?'（'+pref+'）':'') : '店舗未確認';
   }
 
+  // Names and account allocation details appear ONLY in the signed-in
+  // owner's personal tracker, never in the shared result or public cards.
+  function lotteryTrackPrivateAccountSummary(record){
+    if(!authUser||!lpPrivateAccountReady||!record)return '';
+    const assigned=Array.isArray(record.account_entries)?record.account_entries:[];
+    const items=assigned.filter(row=>Number(row.application_count)>0)
+      .map(row=>{
+        const profile=lpPrivateAccounts.get(row.account_id);
+        const name=profile?.label||'登録済みアカウント';
+        const quantity=Number(row.application_count)||0;
+        return '<span>'+escape(name)+'：'+quantity+'口</span>';
+      });
+    const used=assigned.reduce((n,row)=>n+(Number(row.application_count)||0),0);
+    const unassigned=Math.max(0,Number(record.application_count||0)-used);
+    if(unassigned>0)items.push('<span>未割当：'+unassigned+'口</span>');
+    return items.length
+      ? '<p class="lp-track-private-accounts">🔒 応募アカウント（本人のみ）'+
+          items.join(' ／ ')+'</p>'
+      : '';
+  }
+
   function lotteryTrackSort(a,b) {
     const priority = r => r.status==='won' ? 0 : lotteryOnsiteSummary(r.event_url).state==='required' && !r.onsite_done ? 1 : r.status==='applied' ? 2 : r.status==='not_applied' ? 3 : r.status==='received' ? 4 : 5;
     if(priority(a)!==priority(b))return priority(a)-priority(b);
@@ -5469,6 +5490,7 @@
           <p class="lp-track-store-label">📍 店舗：${escape(lotteryTrackStoreLabel(x.event_url))}</p>
           ${onsite}
           <p class="lp-track-quantity-summary">🎟️ 応募 ${x.application_count}口 ／ 🎉 当選 ${x.won_count}口 ／ 📪 落選 ${x.lost_count}口</p>
+          ${lotteryTrackPrivateAccountSummary(x)}
           ${x.status==='won'?lotteryPickupDetailsHtml(x):''}
           ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
           ${lpAppEventId(x.event_url) ? (lotteryItems.find(y=>y.url===x.event_url)?.app_lottery_source_url?'<a href="'+escape(lotteryItems.find(y=>y.url===x.event_url).app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">アプリ公式案内 ↗</a>':'<p>📱 アプリ内で確認</p>') : '<a href="'+escape(x.event_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>'}

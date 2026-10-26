@@ -47,6 +47,25 @@ const initial=api.lpTrackerPrivateMarkup({
   application_count:0,won_count:0,lost_count:0,account_entries:[]});
 assert.match(initial,/メイン/);
 assert.doesNotMatch(initial,/アカウント不明/);
+
+const privateAccountSummary=vm.runInNewContext(
+  extract('lotteryTrackPrivateAccountSummary')+
+  '\\n({lotteryTrackPrivateAccountSummary})',
+  {authUser:{id:'test-user'},lpPrivateAccountReady:true,
+   lpPrivateAccounts:new Map(profiles.map(row=>[row.id,row])),
+   escape:htmlEscape},{timeout:1000}
+).lotteryTrackPrivateAccountSummary;
+let privateText=privateAccountSummary({
+  application_count:3,won_count:1,lost_count:0,
+  account_entries:[{account_id:A,application_count:2,won_count:1,lost_count:0}]
+});
+assert.match(privateText,/メイン：2口/);
+assert.match(privateText,/未割当：1口/);
+assert.match(privateText,/本人のみ/);
+assert.doesNotMatch(privateAccountSummary({
+  application_count:2,account_entries:[{account_id:B,application_count:2}]
+}),/未割当/);
+assert.match(app,/\\$\\{lotteryTrackPrivateAccountSummary\\(x\\)\\}/);
 const privateSection=app.slice(app.indexOf('  const LP_RESULTS_COUNT_RPC='),
   app.indexOf('  const LP_PRIVATE_ACCOUNT_TABLE='));
 assert(!/lottery_private_accounts|account_entries|account_id/.test(privateSection),

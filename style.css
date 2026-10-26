@@ -2299,3 +2299,12 @@ html[data-theme="dark"] #lpTrackPrivateAccounts input,
 html[data-theme="dark"] #lpTrackPrivateAccounts select{
   background:#263a55;color:#edf4ff;border-color:#7085a2
 }
+
+/* Private application account breakdown inside personal management only. */
+#lpTrackerPanel .lp-track-private-accounts {
+  margin:7px 0;line-height:1.6;font-size:12px;
+  color:var(--app-muted,#64748b);overflow-wrap:anywhere;
+}
+html[data-theme="dark"] #lpTrackerPanel .lp-track-private-accounts{
+  color:#c9d7eb!important;
+}
