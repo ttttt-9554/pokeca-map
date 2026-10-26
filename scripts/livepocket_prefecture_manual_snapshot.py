@@ -1,74 +1,86 @@
 #!/usr/bin/env python3
-"""Fetch URL-only manual override exclusion snapshot from Supabase (fail closed).
+"""Fetch public-event IDs with any administrator edit from Supabase.
 
-Requires a private GitHub Actions secret; never prints keys, rows or URLs.
+Protect card, store/location, and page-status corrections. Every source must
+be readable; otherwise refuse the backfill rather than guessing. The snapshot
+is private to GitHub Actions and private URLs are never logged.
 """
 import json
-import urllib.error
 import os
-import sys
+import re
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
+PROJECT_HOST = "aypcmtlaaygmiexboypk.supabase.co"
+MANUAL_TABLES = (
+    "lottery_card_overrides",
+    "livepocket_location_overrides",
+    "livepocket_event_overrides",
+)
+EVENT_PATH = re.compile(r"/e/[A-Za-z0-9_-]{4,64}/?\Z")
+
+
+def canonical_event_url(value):
+    """Normalize edited official URLs to the canonical catalog identifier."""
+    if not isinstance(value, str) or any(c.isspace() or ord(c) < 32 for c in value):
+        return None
+    try:
+        parts = urllib.parse.urlsplit(value)
+    except ValueError:
+        return None
+    if (parts.scheme != "https"
+            or parts.netloc not in ("livepocket.jp", "www.livepocket.jp")
+            or not EVENT_PATH.fullmatch(parts.path)):
+        return None
+    return "https://livepocket.jp" + parts.path.rstrip("/")
+
 
 def fetch_manual_urls(base_url, service_key, opener=urllib.request.urlopen):
-    if not base_url.startswith("https://") or not service_key:
+    if not isinstance(base_url, str) or not service_key:
         raise ValueError("Secure Supabase URL and service key are required")
     parsed = urllib.parse.urlsplit(base_url.strip())
-    if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password or parsed.path not in ("", "/"):
-        raise ValueError("Invalid Supabase project URL")
-    base = base_url.strip().rstrip("/")
-    print("Supabase host matches expected project:", parsed.hostname == "aypcmtlaaygmiexboypk.supabase.co")
-    print("Supabase key format:", "legacy JWT" if service_key.startswith("eyJ") else "secret key" if service_key.startswith("sb_secret_") else "unexpected")
-
+    if (parsed.scheme != "https" or parsed.netloc != PROJECT_HOST
+            or parsed.path not in ("", "/") or parsed.query or parsed.fragment):
+        raise ValueError("Unexpected Supabase project URL")
+    base = "https://" + PROJECT_HOST
+    headers = {"apikey": service_key, "Accept": "application/json"}
+    # New sb_secret_ keys are opaque, not JWTs. Do not send them as bearer JWTs.
+    if service_key.startswith("eyJ"):
+        headers["Authorization"] = "Bearer " + service_key
     urls = set()
-    offset = 0
-    while True:
-        query = urllib.parse.urlencode({
-            "select": "event_url",
-            "limit": "1000",
-            "offset": str(offset),
-            "order": "event_url.asc",
-        })
-        req = urllib.request.Request(
-            base + "/rest/v1/lottery_card_overrides?" + query,
-            headers={
-                "apikey": service_key,
-                "Authorization": "Bearer " + service_key,
-                "Accept": "application/json",
-            },
-        )
-        try:
-            with opener(req, timeout=20) as response:
-                if response.status != 200:
-                    raise RuntimeError("Supabase manual-override request failed")
-                rows = json.load(response)
-        except urllib.error.HTTPError as exc:
-            print("Supabase HTTP status:", exc.code)
-            print("Supabase response content type:", exc.headers.get("Content-Type", "unknown"))
-            # Only emit an allowlisted diagnostic code, never response body or credentials.
+    for table in MANUAL_TABLES:
+        offset = 0
+        while True:
+            query = urllib.parse.urlencode({
+                "select": "event_url",
+                "limit": "1000",
+                "offset": str(offset),
+                "order": "event_url.asc",
+            })
+            req = urllib.request.Request(
+                base + "/rest/v1/" + table + "?" + query, headers=headers)
             try:
-                payload = json.loads(exc.read(4096).decode("utf-8", "replace"))
-                code = payload.get("code") if isinstance(payload, dict) else None
-                allowed = {"42501", "PGRST301", "PGRST302", "PGRST303", "PGRST116", "invalid_api_key", "bad_jwt"}
-                print("Supabase safe error code:", code if code in allowed else "unclassified")
-            except (ValueError, UnicodeError):
-                print("Supabase safe error code: unavailable")
-            print("Supabase request rejected; response body intentionally hidden")
-            raise RuntimeError("Supabase authentication or access policy rejected request") from None
-        if not isinstance(rows, list):
-            raise ValueError("Unexpected Supabase response")
-        for row in rows:
-            url = row.get("event_url") if isinstance(row, dict) else None
-            if not isinstance(url, str) or not url.startswith("https://livepocket.jp/e/"):
-                continue
-            urls.add(url)
-        if len(rows) < 1000:
-            break
-        offset += 1000
-        if offset > 100000:
-            raise RuntimeError("Supabase manual-override pagination limit exceeded")
+                with opener(req, timeout=20) as response:
+                    if response.status != 200:
+                        raise RuntimeError("Supabase exclusion request failed")
+                    rows = json.load(response)
+            except urllib.error.HTTPError as exc:
+                # Never display the body, identifiers, or secret in CI logs.
+                print("Supabase exclusion HTTP status:", exc.code)
+                raise RuntimeError("Supabase exclusion request rejected") from None
+            if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+                raise ValueError("Unexpected Supabase exclusion response")
+            for row in rows:
+                canonical = canonical_event_url(row.get("event_url"))
+                if canonical:
+                    urls.add(canonical)
+            if len(rows) < 1000:
+                break
+            offset += 1000
+            if offset > 100000:
+                raise RuntimeError("Supabase exclusion pagination limit exceeded")
     return sorted(urls)
 
 
@@ -76,14 +88,14 @@ def main():
     key = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
     base = os.getenv("SUPABASE_URL", "")
     if not key or not base:
-        raise SystemExit("Missing Supabase secret: review-only backfill is disabled")
+        raise SystemExit("Missing Supabase secret; backfill disabled")
     urls = fetch_manual_urls(base, key)
     if not urls:
-        raise SystemExit("No manual override records returned; refusing unsafe backfill")
+        raise SystemExit("No manual override records; refusing unsafe backfill")
     output = Path("prefecture_manual_overrides.json")
     output.write_text(json.dumps({"urls": urls}, ensure_ascii=False), encoding="utf-8")
     output.chmod(0o600)
-    print("Manual override exclusion snapshot created; URL list is not logged")
+    print("Administrator exclusions fetched from all three sources; URLs hidden")
 
 
 if __name__ == "__main__":

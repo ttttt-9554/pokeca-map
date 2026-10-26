@@ -31,5 +31,39 @@ class RevalidationTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             changed_urls(before,after)
 
+    def test_reject_changed_non_date_fields(self):
+        before={"items":[{"url":U,"store_name":"Original"}]}
+        after={"items":[{"url":U,"store_name":"Unexpected",
+                         "application_start_at":"2099-10-24T13:00:00+09:00",
+                         "application_end_at":"2099-10-26T21:45:00+09:00"}]}
+        with self.assertRaises(RuntimeError):
+            changed_urls(before,after)
+
+    def test_reject_removed_or_duplicate_event(self):
+        before={"items":[{"url":U}]}
+        with self.assertRaises(RuntimeError):
+            changed_urls(before,{"items":[]})
+        with self.assertRaises(RuntimeError):
+            changed_urls(before,{"items":[{"url":U},{"url":U}]})
+
+    def test_reject_invalid_or_expired_deadline(self):
+        from datetime import datetime, timezone
+        before={"items":[{"url":U}]}
+        after={"items":[{"url":U,
+            "application_start_at":"2026-10-20T12:00:00+09:00",
+            "application_end_at":"2026-10-22T15:00:00+09:00"}]}
+        with self.assertRaises(RuntimeError):
+            changed_urls(before,after,now=datetime(2026,10,26,tzinfo=timezone.utc))
+        after["items"][0]["application_start_at"]="not-a-date"
+        after["items"][0]["application_end_at"]="2099-10-26T21:45:00+09:00"
+        with self.assertRaises(RuntimeError):
+            changed_urls(before,after)
+
+    def test_reject_top_level_metadata_changes(self):
+        before={"items":[{"url":U}],"schema_version":7}
+        after={"items":[{"url":U}],"schema_version":8}
+        with self.assertRaises(RuntimeError):
+            changed_urls(before,after)
+
 if __name__=="__main__":
     unittest.main()

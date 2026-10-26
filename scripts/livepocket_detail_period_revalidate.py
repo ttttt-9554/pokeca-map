@@ -1,30 +1,56 @@
 #!/usr/bin/env python3
-"""Fail closed if any newly written deadline gained a manual override.
+"""Refuse unsafe LivePocket application-period JSON changes before publishing.
 
-Compare working files to HEAD before publishing, using a freshly fetched
-Supabase exclusion snapshot. Never print the private URL list.
+A fresh Supabase administrator-exclusion snapshot is required. Compare the two
+working catalogs to HEAD; never allow unrelated changes or stale deadlines.
 """
 import json
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
+from livepocket_v11 import parse_datetime
+
+DATE_KEYS = ("application_start_at", "application_end_at")
 
 
-def changed_urls(before, after):
-    old = {x["url"]: x for x in before.get("items", [])}
-    result = set()
-    for item in after.get("items", []):
-        url = item.get("url")
-        previous = old.get(url)
-        if previous and any(item.get(k) != previous.get(k)
-                            for k in ("application_start_at", "application_end_at")):
-            # This workflow may only fill two previously absent date fields.
-            if (previous.get("application_start_at")
-                    or previous.get("application_end_at")
-                    or not item.get("application_start_at")
-                    or not item.get("application_end_at")):
-                raise RuntimeError("Unsafe date modification detected")
-            result.add(url)
-    return result
+def _index(data):
+    if not isinstance(data, dict) or not isinstance(data.get("items"), list):
+        raise RuntimeError("Malformed event catalog")
+    by_url = {}
+    for row in data["items"]:
+        if not isinstance(row, dict) or not isinstance(row.get("url"), str):
+            raise RuntimeError("Malformed event row")
+        if row["url"] in by_url:
+            raise RuntimeError("Duplicate event URL")
+        by_url[row["url"]] = row
+    return by_url
+
+
+def changed_urls(before, after, now=None):
+    """Only two newly populated, future, coherent deadline fields may change."""
+    old, current = _index(before), _index(after)
+    if old.keys() != current.keys():
+        raise RuntimeError("Event URLs unexpectedly changed")
+    if ({k:v for k,v in before.items() if k != "items"}
+            != {k:v for k,v in after.items() if k != "items"}):
+        raise RuntimeError("Catalog metadata unexpectedly changed")
+    now = now or datetime.now(timezone.utc)
+    changed = set()
+    for url, previous in old.items():
+        row = current[url]
+        if ({k:v for k,v in previous.items() if k not in DATE_KEYS}
+                != {k:v for k,v in row.items() if k not in DATE_KEYS}):
+            raise RuntimeError("Non-date fields unexpectedly changed")
+        if any(row.get(k) != previous.get(k) for k in DATE_KEYS):
+            if (any(previous.get(k) for k in DATE_KEYS)
+                    or not all(isinstance(row.get(k), str) and row.get(k)
+                               for k in DATE_KEYS)):
+                raise RuntimeError("Date overwrite or partial write")
+            start, end = (parse_datetime(row[key]) for key in DATE_KEYS)
+            if not start or not end or start > end or end <= now:
+                raise RuntimeError("Invalid or expired deadline")
+            changed.add(url)
+    return changed
 
 
 def matching_date_changes(changes_by_file, values_by_file):
@@ -35,29 +61,29 @@ def matching_date_changes(changes_by_file, values_by_file):
 def main():
     snapshot = json.loads(Path("prefecture_manual_overrides.json").read_text(encoding="utf-8"))
     urls = snapshot.get("urls")
-    if not isinstance(urls, list) or not urls:
-        raise ValueError("Current manual exclusions are unavailable")
+    if (not isinstance(urls, list) or not urls
+            or any(not isinstance(url, str) for url in urls)):
+        raise ValueError("Current administrator exclusions unavailable")
     changed = set()
-    changes_by_file = []
-    values_by_file = []
+    changes_by_file, values_by_file = [], []
     for filename in ("livepocket_public.json", "livepocket_urls.json"):
         before = json.loads(subprocess.check_output(["git", "show", "HEAD:" + filename]))
         after = json.loads(Path(filename).read_text(encoding="utf-8"))
         file_changes = changed_urls(before, after)
         changes_by_file.append(file_changes)
-        index = {x["url"]: x for x in after.get("items", [])}
-        values_by_file.append({url: (index[url]["application_start_at"],
-                                      index[url]["application_end_at"])
-                               for url in file_changes})
+        index = _index(after)
+        values_by_file.append({
+            url: (index[url]["application_start_at"], index[url]["application_end_at"])
+            for url in file_changes
+        })
         changed.update(file_changes)
     if not matching_date_changes(changes_by_file, values_by_file):
-        raise RuntimeError('Raw and public catalogs must have identical date updates')
+        raise RuntimeError("Raw and public date updates differ")
     if len(changed) > 5:
-        raise RuntimeError('Batch update exceeded five events')
-    blocked = changed.intersection(urls)
-    if blocked:
-        raise RuntimeError("A manually edited event changed during verification; aborting publication")
-    print("Fresh override exclusion check passed; changed event count:", len(changed))
+        raise RuntimeError("Batch exceeded five updated events")
+    if changed.intersection(urls):
+        raise RuntimeError("Administrator edit conflicts with an event update")
+    print("Fresh administrator exclusions passed; changed events:", len(changed))
 
 
 if __name__ == "__main__":
