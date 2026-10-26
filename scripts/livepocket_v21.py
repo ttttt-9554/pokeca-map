@@ -2162,11 +2162,13 @@ def browser_fetcher():
                     break
                 if attempt < 6:
                     page.wait_for_timeout(800)
-            if (v14.v13.BLOCK_WORDS.search(body) or ROBOT_VERIFICATION.search(body)
-                    or len(body.strip()) < 40):
+            is_robot_gate = bool(ROBOT_VERIFICATION.search(body))
+            is_access_gate = bool(v14.v13.BLOCK_WORDS.search(body))
+            if is_robot_gate or is_access_gate or len(body.strip()) < 40:
                 return {'status': 'browser_blocked_or_empty',
-                        'gate_reason': 'robot_verification_page' if ROBOT_VERIFICATION.search(body)
-                        else 'blocked_or_empty'}
+                        'gate_reason': ('robot_verification_page' if is_robot_gate
+                                        else 'access_gate' if is_access_gate
+                                        else 'blocked_or_empty')}
             titles, title_sources = [], []
             def add_title(value, source):
                 if isinstance(value, str) and value.strip() and len(titles) < 12:
