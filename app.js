@@ -4498,6 +4498,24 @@
       '</div>';
   }
 
+  // Historical observed win rate, not a guarantee for future lotteries.
+  // Pending tickets are excluded instead of being treated as losing tickets.
+  function lpResultsWinRate(record){
+    const applications=Number(record?.application_entries);
+    const won=Number(record?.won_entries);
+    const lost=Number(record?.lost_entries);
+    const pending=Number(record?.pending_entries);
+    const decided=won+lost;
+    if(![applications,won,lost,pending].every(Number.isSafeInteger)||
+       applications<1||won<0||lost<0||pending<0||
+       decided>applications||pending!==applications-decided)return null;
+    return {
+      percentage:decided>0?(won/decided*100).toFixed(1)+'%':null,
+      decided,
+      provisional:pending>0
+    };
+  }
+
   function lpResultsRender(){
     const status=$('lpResultsStatus'),summary=$('lpResultsCounts'),list=$('lpResultsList');
     if(!status||!summary||!list)return;
@@ -4556,10 +4574,18 @@
         '<span>📪 落選 '+Number(record.lost_entries)+'口</span>'+
         '<span>⏳ 結果待ち '+Number(record.pending_entries)+'口</span>'+
         '</div>';
+      const rate=lpResultsWinRate(record);
+      const rateText=!rate?'算出不可':rate.percentage||'集計待ち';
+      const rateNote=!rate?'登録データの確認が必要':
+        '結果判明'+rate.decided+'口'+(rate.provisional?'・暫定':'');
+      const rateHtml='<p class="lp-results-win-rate">'+
+        '<span>🎯 当選率</span><strong>'+rateText+'</strong>'+
+        '<small>（'+rateNote+'）</small></p>';
       return '<article class="lp-results-card">'+
         '<h3>'+escape(title)+'</h3>'+
         storeHtml+
         statusHtml+
+        rateHtml+
         '<div class="lp-results-card-footer"><a href="'+escape(item.url)+
         '" target="_blank" rel="noopener noreferrer">抽選の詳細を開く ↗</a></div>'+
         '</article>';
