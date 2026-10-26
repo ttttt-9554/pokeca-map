@@ -3,6 +3,8 @@ name: LivePocket Detail Deadline Regression
   push:
     branches: [main]
     paths:
+      - app.js
+      - scripts/test_app_manual_expiry.cjs
       - scripts/livepocket_v13.py
       - scripts/test_livepocket_detail_priority.py
       - scripts/livepocket_detail_period_batch.py
@@ -27,7 +29,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile and run detail-priority regression
+      - name: Compile and run all deadline safety regressions
         run: |
-          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/test_livepocket_detail_priority.py scripts/livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_prefecture_manual_snapshot.py
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_prefecture_manual_snapshot.py
+          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
+      - name: Check admin-corrected deadline expiry in PWA
+        run: node scripts/test_app_manual_expiry.cjs
