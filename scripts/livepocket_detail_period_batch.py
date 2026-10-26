@@ -109,16 +109,34 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None):
     urls = candidates(public, excluded, limit, offset, raw=raw)
     stats = {"selected": len(urls), "checked": 0, "updated": 0,
              "unavailable": 0, "no_verified_period": 0,
-             "fetch_failed": 0, "wrong_event": 0}
+             "fetch_failed": 0, "wrong_event": 0,
+             "blocked": 0, "deferred": 0}
     for url in urls:
         try:
             result = fetch(url)
         except Exception:
             result = {"status": "fetch_error"}
         stats["checked"] += 1
-        if not isinstance(result, dict) or result.get("status") != "ok":
+        if not isinstance(result, dict):
+            result = {"status": "fetch_error"}
+        status = result.get("status")
+        # v21 reports redirects before returning an otherwise OK result.
+        # Keep these separate from networking/browser failures.
+        if status == "browser_redirected":
+            stats["unavailable"] += 1
+            stats["wrong_event"] += 1
+            continue
+        if status != "ok":
             stats["unavailable"] += 1
             stats["fetch_failed"] += 1
+            # A site-wide gate/rate-limit should not trigger four more visits.
+            # Other missing pages/empty bodies can be event-specific.
+            if (status == "browser_blocked" or
+                    (status == "browser_blocked_or_empty" and
+                     result.get("gate_reason") == "robot_verification_page")):
+                stats["blocked"] += 1
+                stats["deferred"] = len(urls) - stats["checked"]
+                break
             continue
         if exact_event_url(result.get("final_url")) != url:
             stats["unavailable"] += 1
