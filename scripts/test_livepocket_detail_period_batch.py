@@ -96,10 +96,10 @@ class BatchTests(unittest.TestCase):
         self.assertNotIn("application_end_at",public["items"][0])
 
     def test_failure_counts_are_distinct_without_exposing_urls(self):
-        p={"items":[{"url":U+"blocked"},{"url":U+"redirect"},{"url":U+"no_date"}]}
+        p={"items":[{"url":U+"timeout"},{"url":U+"redirect"},{"url":U+"no_date"}]}
         def fetch(url):
-            if url.endswith("blocked"):
-                return {"status":"browser_blocked"}
+            if url.endswith("timeout"):
+                return {"status":"browser_timeout"}
             if url.endswith("redirect"):
                 return {"status":"ok","final_url":U+"other","text":TEXT}
             return {"status":"ok","final_url":url,"text":"No verified application period"}
