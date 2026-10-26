@@ -2133,3 +2133,114 @@ html[data-theme="light"] .lp-card.lp-urgent-card,
 @media (prefers-color-scheme: dark) {
   .lp-card .lp-urgent-deadline { color: #ffb17d; }
 }
+
+
+/* v21.100: Private per-user lottery application account editor. */
+#lpTrackerPanel .lp-private-account-manage{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:42px;max-width:100%;margin:5px 0 12px;
+  padding:9px 13px;border-radius:10px;border:1px solid var(--app-border,#b7c8dc);
+  background:var(--app-surface2,#edf4fa);color:var(--app-text,#172033);
+  font-weight:750;font-size:13px;
+}
+#lpTrackerEditor .lp-track-account-intro,
+#lpTrackerEditor .lp-track-account-block{
+  min-width:0;box-sizing:border-box;margin:7px 0;
+  padding:12px;border:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface2,#edf4fa);color:var(--app-text,#172033);
+  border-radius:12px;
+}
+#lpTrackerEditor .lp-track-account-intro button{display:block;margin-top:10px;min-height:42px}
+#lpTrackerEditor .lp-track-account-block legend{font-size:14px;font-weight:800;padding:0 5px}
+#lpTrackerEditor .lp-track-account-block .lp-tracker-intro{
+  margin:6px 0 12px;font-size:12px;line-height:1.65
+}
+#lpTrackerEditor .lp-track-unassigned,
+#lpTrackerEditor .lp-track-account-row{
+  margin:10px 0;padding:10px;
+  border:1px solid var(--app-border,#cbd5e1);border-radius:10px;
+  background:var(--app-surface,#fff);min-width:0;
+}
+#lpTrackerEditor .lp-track-unassigned strong{display:block;margin-bottom:7px;font-size:13px}
+#lpTrackerEditor .lp-track-account-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0;
+}
+#lpTrackerEditor .lp-track-account-grid label{
+  display:flex;flex-direction:column;gap:5px;min-width:0;font-size:11px;
+}
+#lpTrackerEditor .lp-track-account-grid input,
+#lpTrackerEditor .lp-track-account-top select{
+  display:block;box-sizing:border-box;width:100%;min-width:0;
+  min-height:44px;padding:8px 9px;font-size:16px;border-radius:9px;
+  border:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+}
+#lpTrackerEditor .lp-track-account-top{
+  display:flex;align-items:flex-end;gap:9px;margin-bottom:10px;min-width:0;
+}
+#lpTrackerEditor .lp-track-account-top label{flex:1;min-width:0}
+#lpTrackerEditor .lp-track-account-top button{
+  flex-shrink:0;min-height:42px;font-size:12px
+}
+#lpTrackerEditor .lp-track-account-buttons{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:12px
+}
+#lpTrackerEditor .lp-track-account-buttons button{min-height:42px;font-size:12px}
+#lpTrackerEditor input[readonly]{
+  opacity:1;cursor:default;background:var(--app-surface2,#eef3f8)!important;
+}
+#lpPrivateAccountDialog{
+  box-sizing:border-box;width:min(95vw,540px);max-height:90dvh;overflow-y:auto;
+  padding:17px;border-radius:16px;
+  border:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);
+}
+#lpPrivateAccountDialog::backdrop{background:rgba(5,14,30,.78)}
+#lpPrivateAccountDialog h3{font-size:17px;margin:0 0 11px}
+#lpPrivateAccountDialog #lpPrivateAccountForm{
+  display:flex;align-items:flex-end;flex-wrap:wrap;gap:8px;margin:10px 0 14px;
+  padding:0;border:0;box-shadow:none;background:transparent!important;
+}
+#lpPrivateAccountDialog #lpPrivateAccountForm label{flex:1 1 160px;min-width:0;font-size:12px}
+#lpPrivateAccountDialog #lpPrivateAccountForm input{
+  display:block;min-width:0;box-sizing:border-box;width:100%;
+  min-height:44px;font-size:16px;margin-top:6px;
+  border:1px solid var(--app-border,#cbd5e1);border-radius:9px;
+  padding:8px;background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033)
+}
+#lpPrivateAccountDialog button{min-height:40px;font-size:12px}
+#lpPrivateAccountDialog .lp-private-account-row{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  padding:10px 0;border-top:1px solid var(--app-border,#cbd5e1)
+}
+#lpPrivateAccountDialog .lp-private-account-row strong{font-size:13px;overflow-wrap:anywhere;min-width:0}
+#lpPrivateAccountDialog .lp-private-actions{width:100%;display:flex;gap:7px;flex-wrap:wrap}
+#lpPrivateAccountDialog .lp-private-default,
+#lpPrivateAccountDialog .lp-private-archived{
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:8px;padding:2px 7px;font-size:11px;
+  color:var(--app-muted,#64748b)
+}
+#lpPrivateAccountDialog #lpPrivateAccountStatus{
+  font-size:12px;line-height:1.6;color:var(--app-muted,#64748b)
+}
+html[data-theme="dark"] #lpPrivateAccountDialog,
+html[data-theme="dark"] #lpTrackerEditor .lp-track-unassigned,
+html[data-theme="dark"] #lpTrackerEditor .lp-track-account-row{
+  background:#172337!important;color:#edf4ff!important;border-color:#59718d!important;
+}
+html[data-theme="dark"] #lpTrackerEditor .lp-track-account-block,
+html[data-theme="dark"] #lpTrackerEditor .lp-track-account-intro{
+  background:#203149!important;color:#edf4ff!important;border-color:#59718d!important;
+}
+html[data-theme="dark"] #lpTrackerEditor .lp-track-account-grid input,
+html[data-theme="dark"] #lpTrackerEditor .lp-track-account-top select,
+html[data-theme="dark"] #lpPrivateAccountDialog #lpPrivateAccountForm input{
+  background:#25354b!important;color:#edf4ff!important;
+  -webkit-text-fill-color:#edf4ff;border-color:#667d9b!important;
+}
+@media(max-width:380px){
+  #lpTrackerEditor .lp-track-account-grid{gap:5px}
+  #lpTrackerEditor .lp-track-account-grid label{font-size:10px}
+  #lpTrackerEditor .lp-track-account-grid input{padding:7px 5px}
+}
