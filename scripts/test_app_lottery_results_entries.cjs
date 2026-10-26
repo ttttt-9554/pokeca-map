@@ -51,8 +51,8 @@ const context={
   escape:value=>String(value)
 };
 const api=vm.runInNewContext(
-  [extract('lpResultsKnownEvents'),extract('lpResultsRender')].join('\n')+
-  '\n({lpResultsKnownEvents,lpResultsRender})',context,{timeout:1000}
+  [extract('lpResultsKnownEvents'),extract('lpResultsWinRate'),extract('lpResultsRender')].join('\n')+
+  '\n({lpResultsKnownEvents,lpResultsWinRate,lpResultsRender})',context,{timeout:1000}
 );
 assert.equal(api.lpResultsKnownEvents().length,2,
   'Zero-ticket events are excluded regardless of registered user count');
@@ -63,6 +63,33 @@ assert.match(elements.lpResultsList.innerHTML,/応募 5口/);
 assert.match(elements.lpResultsList.innerHTML,/当選 2口/);
 assert.match(elements.lpResultsList.innerHTML,/落選 1口/);
 assert.match(elements.lpResultsList.innerHTML,/結果待ち 2口/);
+assert.match(elements.lpResultsList.innerHTML,/当選率<\/span><strong>66\.7%<\/strong>/,
+  '2 wins from 3 decided tickets must show 66.7 percent');
+assert.match(elements.lpResultsList.innerHTML,/結果判明3口・暫定/,
+  'Remaining pending tickets make the rate provisional');
+assert.match(elements.lpResultsList.innerHTML,/当選率<\/span><strong>集計待ち<\/strong>/,
+  'All pending tickets must not display an incorrect zero percent');
+const sample=(applications,won,lost,pending)=>({
+  application_entries:applications,won_entries:won,
+  lost_entries:lost,pending_entries:pending
+});
+assert.equal(api.lpResultsWinRate(sample(1,0,1,0)).percentage,'0.0%',
+  'A decided loss produces zero percent');
+assert.equal(api.lpResultsWinRate(sample(1,1,0,0)).percentage,'100.0%',
+  'A decided win produces 100 percent');
+assert.equal(api.lpResultsWinRate(sample(8,2,2,4)).percentage,'50.0%',
+  'Pending entries must not count as losses');
+assert.equal(api.lpResultsWinRate(sample(4,0,0,4)).percentage,null,
+  'Unknown results have no numerical win rate');
+assert.equal(api.lpResultsWinRate(sample(8,2,2,4)).provisional,true);
+assert.equal(api.lpResultsWinRate(sample(1,1,0,0)).provisional,false);
+assert.equal(api.lpResultsWinRate(sample(3,2,2,-1)),null,
+  'Invalid aggregate totals must not be displayed as valid');
+assert.equal(api.lpResultsWinRate(sample(3,2,1,1)),null,
+  'Inconsistent pending totals must fail closed');
+assert.equal(api.lpResultsWinRate(sample(0,0,0,0)),null,
+  'No submitted tickets means no denominator');
+
 assert.doesNotMatch(elements.lpResultsList.innerHTML,/応募者|当選者|落選者|[0-9]+人/);
 assert.doesNotMatch(elements.lpResultsCounts.innerHTML,/人から表示|応募者/);
 assert.match(elements.lpResultsList.innerHTML,/抽選の詳細を開く/);
@@ -82,6 +109,8 @@ assert.match(elements.lpResultsList.innerHTML,/抽選A/);
 assert.match(elements.lpResultsList.innerHTML,/抽選B/);
 assert.match(page,/応募・当選・落選・結果待ちをすべて口数で匿名集計/);
 assert.doesNotMatch(page,/応募人数に加えて/);
+assert.match(page,/当選口数÷（当選口数＋落選口数）×100/);
+assert.match(page,/実際の抽選の当選確率を保証しません/);
 assert.match(app,/<label>当選口数<input name="won_count"/);
 assert.match(app,/<label>落選口数<input name="lost_count"/);
 assert.doesNotMatch(app,/当選数|落選数/);
