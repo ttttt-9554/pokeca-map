@@ -27,6 +27,19 @@ class DetailPriorityTests(unittest.TestCase):
         self.assertEqual(start.strftime("%Y-%m-%d %H:%M"),"2026-10-24 13:00")
         self.assertEqual(end.strftime("%Y-%m-%d %H:%M"),"2026-10-26 21:45")
 
+    def test_detail_without_period_does_not_consume_other_section(self):
+        body = """詳細
+商品の説明のみ
+注意事項
+応募期間 2026年10月24日13:00～2026年10月26日21:45
+受付・チケット情報
+抽選受付期間 2026年10月23日15:02～2026年10月26日21:45"""
+        start,end=extract_deadline(body)
+        # Other sections cannot masquerade as details. The full-page
+        # fallback remains conservative when multiple starts conflict.
+        self.assertIsNone(start)
+        self.assertIsNone(end)
+
     def test_fallback_ticket_when_no_detail_signup(self):
         body="""詳細
 商品の案内です。
