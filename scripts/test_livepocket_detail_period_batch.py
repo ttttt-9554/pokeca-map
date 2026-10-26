@@ -112,6 +112,53 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(stats["updated"],0)
         self.assertNotIn(U, str(stats))
 
+    def test_browser_redirect_status_is_counted_as_wrong_event(self):
+        p={"items":[{"url":U+"redirect"}]}
+        stats=run(p,set(),lambda url:{"status":"browser_redirected"})
+        self.assertEqual(stats["checked"],1)
+        self.assertEqual(stats["wrong_event"],1)
+        self.assertEqual(stats["fetch_failed"],0)
+        self.assertEqual(stats["unavailable"],1)
+
+    def test_explicit_access_block_stops_remaining_checks(self):
+        p={"items":[{"url":U+"a"},{"url":U+"b"},{"url":U+"c"}]}
+        seen=[]
+        def fetch(url):
+            seen.append(url)
+            return {"status":"browser_blocked","http_status":429}
+        stats=run(p,set(),fetch)
+        self.assertEqual(seen,[U+"a"])
+        self.assertEqual(stats["selected"],3)
+        self.assertEqual(stats["checked"],1)
+        self.assertEqual(stats["blocked"],1)
+        self.assertEqual(stats["deferred"],2)
+        self.assertEqual(stats["fetch_failed"],1)
+
+    def test_robot_verification_stops_checks(self):
+        p={"items":[{"url":U+"a"},{"url":U+"b"}]}
+        stats=run(p,set(),lambda url:{
+            "status":"browser_blocked_or_empty",
+            "gate_reason":"robot_verification_page"})
+        self.assertEqual(stats["checked"],1)
+        self.assertEqual(stats["blocked"],1)
+        self.assertEqual(stats["deferred"],1)
+
+    def test_missing_page_and_empty_body_do_not_block_other_events(self):
+        p={"items":[{"url":U+"a"},{"url":U+"b"},{"url":U+"c"}]}
+        def fetch(url):
+            if url.endswith("a"):
+                return {"status":"browser_http_error","http_status":404}
+            if url.endswith("b"):
+                return {"status":"browser_blocked_or_empty",
+                        "gate_reason":"blocked_or_empty"}
+            return {"status":"ok","final_url":url,"text":TEXT}
+        stats=run(p,set(),fetch)
+        self.assertEqual(stats["checked"],3)
+        self.assertEqual(stats["fetch_failed"],2)
+        self.assertEqual(stats["updated"],1)
+        self.assertEqual(stats["blocked"],0)
+        self.assertEqual(stats["deferred"],0)
+
     def test_failed_page_never_updates(self):
         p={"items":[{"url":U+"a"}]}
         self.assertEqual(run(p,set(),lambda u:{"status":"browser_blocked"})["updated"],0)
