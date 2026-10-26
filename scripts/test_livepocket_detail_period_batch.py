@@ -41,6 +41,22 @@ class BatchTests(unittest.TestCase):
                                now=datetime(2099,10,27,tzinfo=timezone.utc)))
         self.assertNotIn("application_end_at",q["items"][0])
 
+    def test_raw_and_public_are_updated_together(self):
+        public={"items":[{"url":U+"a"}]}
+        raw={"items":[{"url":U+"a"}]}
+        fetch=lambda u:{"status":"ok","final_url":u,"text":TEXT}
+        self.assertEqual(run(public,set(),fetch,raw=raw)["updated"],1)
+        self.assertEqual(raw["items"][0]["application_end_at"],
+                         public["items"][0]["application_end_at"])
+        self.assertEqual(run(public,set(),fetch,raw=raw)["updated"],0)
+
+    def test_raw_existing_date_prevents_partial_write(self):
+        public={"items":[{"url":U+"a"}]}
+        raw={"items":[{"url":U+"a","application_end_at":"2099-10-26T21:45:00+09:00"}]}
+        fetch=lambda u:{"status":"ok","final_url":u,"text":TEXT}
+        self.assertEqual(run(public,set(),fetch,raw=raw)["updated"],0)
+        self.assertNotIn("application_end_at",public["items"][0])
+
     def test_failed_page_never_updates(self):
         p={"items":[{"url":U+"a"}]}
         self.assertEqual(run(p,set(),lambda u:{"status":"browser_blocked"})["updated"],0)
