@@ -27,6 +27,14 @@ def parse_posted_at(value):
     return parse_datetime(without_fraction)
 
 
+def recent_missing_period(row, now):
+    """A public missing date is recent unless its post date is known old."""
+    if row.get("application_start_at") or row.get("application_end_at"):
+        return False
+    posted = parse_posted_at(row.get("discord_posted_at"))
+    return not posted or posted >= now - timedelta(days=14)
+
+
 def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
     if excluded is None:
         raise ValueError("Current manual exclusion snapshot required")
@@ -61,8 +69,7 @@ def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
                 continue
         # Avoid spending the batch on long-expired historical listings.
         # Unknown publication timestamps remain eligible for manual review.
-        posted = parse_posted_at(row.get("discord_posted_at"))
-        if posted and posted < now - timedelta(days=14):
+        if not recent_missing_period(row, now):
             continue
         items.append(url)
     items = list(dict.fromkeys(items))
@@ -114,9 +121,7 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
     # browser batch, without exposing event IDs or reviewing private edits.
     recent_missing = [
         row for row in public.get("items", [])
-        if not row.get("application_start_at") and not row.get("application_end_at")
-        and (not parse_posted_at(row.get("discord_posted_at"))
-             or parse_posted_at(row.get("discord_posted_at")) >= now - timedelta(days=14))
+        if recent_missing_period(row, now)
     ]
     stats = {"public_recent_missing": len(recent_missing),
              "manual_excluded_recent": sum(
