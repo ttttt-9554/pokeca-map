@@ -39,6 +39,7 @@ jobs:
         env:
           OFFSET: ${{ inputs.offset }}
         run: |
+          if [ -z "$OFFSET" ]; then OFFSET=0; fi
           if ! [[ "$OFFSET" =~ ^[0-9]{1,5}$ ]]; then
             echo "Invalid offset"
             exit 1
