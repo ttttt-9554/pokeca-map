@@ -15,10 +15,11 @@ from livepocket_v12 import exact_event_url
 from livepocket_v13 import extract_deadline
 
 
-def candidates(public, excluded, limit=5, offset=0, now=None):
+def candidates(public, excluded, limit=5, offset=0, now=None, raw=None):
     if excluded is None:
         raise ValueError("Current manual exclusion snapshot required")
     now = now or datetime.now(timezone.utc)
+    raw_index = {x.get("url"): x for x in raw.get("items", [])} if raw is not None else None
     items = []
     for row in public.get("items", []):
         url = row.get("url")
@@ -26,6 +27,11 @@ def candidates(public, excluded, limit=5, offset=0, now=None):
                 or url in excluded or row.get("application_start_at")
                 or row.get("application_end_at")):
             continue
+        if raw_index is not None:
+            source = raw_index.get(url)
+            if (not source or source.get("application_start_at")
+                    or source.get("application_end_at")):
+                continue
         # Avoid spending the batch on long-expired historical listings.
         # Unknown publication timestamps remain eligible for manual review.
         posted = parse_datetime(row.get("discord_posted_at"))
@@ -73,7 +79,7 @@ def apply(public, url, body, excluded, now=None, raw=None):
 
 
 def run(public, excluded, fetch, limit=5, offset=0, raw=None):
-    urls = candidates(public, excluded, limit, offset)
+    urls = candidates(public, excluded, limit, offset, raw=raw)
     stats = {"selected": len(urls), "checked": 0, "updated": 0,
              "unavailable": 0, "no_verified_period": 0}
     for url in urls:
