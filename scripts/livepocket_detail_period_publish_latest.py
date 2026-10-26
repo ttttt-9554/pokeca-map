@@ -121,7 +121,7 @@ def _read(filename):
 
 
 def _git_before(filename):
-    return json.loads(subprocess.check_output(['git', 'show', 'HEAD:' + filename]))
+    return json.loads(subprocess.check_output(['git', 'show', 'HEAD:' + str(filename)]))
 
 
 def main():
