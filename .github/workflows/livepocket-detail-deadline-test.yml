@@ -5,6 +5,7 @@ name: LivePocket Detail Deadline Regression
     paths:
       - app.js
       - scripts/test_app_manual_expiry.cjs
+      - scripts/test_app_end_only_deadline.cjs
       - scripts/test_app_manual_location.cjs
       - scripts/livepocket_v13.py
       - scripts/livepocket_v21.py
@@ -39,4 +40,5 @@ jobs:
         run: |
           node --check app.js
           node scripts/test_app_manual_expiry.cjs
+          node scripts/test_app_end_only_deadline.cjs
           node scripts/test_app_manual_location.cjs
