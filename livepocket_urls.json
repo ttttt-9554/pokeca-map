@@ -17870,7 +17870,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/nt4hl": {
-          "checked_at": "2026-10-26T08:41:23.666366+00:00",
+          "checked_at": "2026-10-26T14:54:39.526381+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19160,7 +19160,7 @@
         "https://livepocket.jp/e/nt4hl": {
           "detected_at": "2026-10-26T02:30:56.922695+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-26T08:41:23.666366+00:00",
+          "checked_at": "2026-10-26T14:54:39.526381+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/edf4a": {
@@ -20240,8 +20240,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nt4hl": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-26T08:41:23.666366+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-26T14:54:39.526381+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/jxvw7": {
@@ -24799,7 +24799,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-26T08:41:23.666366+00:00",
+          "checked_at": "2026-10-26T14:54:39.526381+00:00",
           "title_observed": "ヤマシロヤ「ちいかわ 映画ちいかわ GPSBOX セイレーンだらけフィギュア(BOX)」抽選販売",
           "genre": "",
           "product_origin": "",
@@ -28422,7 +28422,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nt4hl": {
-          "checked_at": "2026-10-26T08:41:23.666366+00:00",
+          "checked_at": "2026-10-26T14:54:39.526381+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
