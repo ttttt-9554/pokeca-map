@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "40245480410",
-    "run_number": "1262",
-    "completed_process_at": "2026-10-25T23:35:59Z",
+    "run_id": "40252099543",
+    "run_number": "1271",
+    "completed_process_at": "2026-10-26T01:01:38Z",
     "mode": "automatic",
     "stats": {
-      "new_attempted": 0,
-      "new_titles_added": 0,
+      "new_attempted": 1,
+      "new_titles_added": 1,
       "new_products_added": 0,
       "new_stores_added": 0,
       "retry_attempted": 0,
       "retry_new_fields": 0,
       "retry_blocked": 0,
       "historical_attempted": 0,
-      "registered_urls": 560,
-      "deadlines_known": 524,
+      "registered_urls": 561,
+      "deadlines_known": 525,
       "store_lists_added": 0,
       "multi_store_urls": 20,
       "stores_from_pages": 0,
@@ -24,7 +24,7 @@
       "verified_products_added": 0,
       "verified_prefectures_added": 0,
       "deadline_missing": 36,
-      "map_matches": 142,
+      "map_matches": 143,
       "map_conflicts_skipped": 77,
       "title_recheck_attempted": 0,
       "title_recheck_titles_added": 0,
@@ -35,21 +35,21 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 0,
+      "official_genres_confirmed": 1,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
       "manual_verified_title_conflicts": 0
     },
     "updates": {
-      "title_updated": 0,
+      "title_updated": 1,
       "product_updated": 0,
-      "deadline_updated": 0,
-      "store_updated": 389,
-      "genre_updated": 12,
+      "deadline_updated": 1,
+      "store_updated": 390,
+      "genre_updated": 13,
       "new_urls": 0
     },
-    "page_check_attempts": 0,
+    "page_check_attempts": 1,
     "manual_page_check_attempts": 0
   },
   "last_manual": {
@@ -142,23 +142,23 @@
   },
   "daily_additions": {
     "date_jst": "2026-10-26",
-    "today": 0,
+    "today": 1,
     "yesterday": 15,
-    "last_7_days": 160,
-    "registered_total": 560,
+    "last_7_days": 161,
+    "registered_total": 561,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-25T23:35:59Z",
+    "as_of": "2026-10-26T01:01:38Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 1,
     "retry_wait": 1,
-    "completed": 71,
+    "completed": 72,
     "expired": 482,
     "removed": 2,
     "new_pending": 0,
     "quarantined": 3,
-    "total": 560,
+    "total": 561,
     "unresolved": 2,
     "missing_title": 0,
     "missing_store": 0,
@@ -168,6 +168,6 @@
     "next_batch_size": 1,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-25T23:36:00Z"
+    "as_of": "2026-10-26T01:01:39Z"
   }
 }

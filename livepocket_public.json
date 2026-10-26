@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-25T15:00:55.864282+00:00",
-  "unique_livepocket_urls": 560,
+  "collected_at": "2026-10-26T01:00:57.692775+00:00",
+  "unique_livepocket_urls": 561,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8153,7 +8153,29 @@
         }
       ],
       "first_detected_at": "2026-10-25T13:30:58.333064+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/a1d-8",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-26T01:00:02.190000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "再販分抽選 拡張パック「30th CELEBRATION」 ポケモンカードゲーム",
+      "application_end_at": "2026-10-28T22:00:00+09:00",
+      "application_start_at": "2026-10-26T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再販分抽選 拡張パック「30th CELEBRATION」 ポケモンカードゲーム",
+      "first_detected_at": "2026-10-26T01:00:59.538521+00:00"
     }
   ],
-  "updated_at": "2026-10-26T00:50:58.416115+00:00"
+  "updated_at": "2026-10-26T01:01:32.982690+00:00"
 }
