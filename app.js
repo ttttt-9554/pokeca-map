@@ -5214,6 +5214,8 @@
   async function refreshLotteryTrackerForAccount(force = false) {
     const user = authUser?.id || '';
     if (!user || !supabaseClient) {
+      $('lpTrackerEditor')?.close();
+      $('lpPrivateAccountDialog')?.close();
       ++lotteryTrackSequence;
       lotteryTrackUserId = '';
       lotteryTrackRecords.clear();
@@ -5229,6 +5231,9 @@
     if (lotteryTrackFetching && user === lotteryTrackUserId) return lotteryTrackFetching;
     const seq = ++lotteryTrackSequence;
     if (lotteryTrackUserId !== user) {
+      // Do not leave a previous user's private labels visible in an open modal.
+      $('lpTrackerEditor')?.close();
+      $('lpPrivateAccountDialog')?.close();
       lotteryTrackRecords.clear();
       lpPrivateAccounts.clear();lpPrivateAccountUser='';lpPrivateAccountReady=false;
       lotteryTrackLastLoad = 0;
