@@ -69,11 +69,14 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Backfill verified missing LivePocket application periods'
+          # The five-minute collector may have published new catalog data
+          # during this browser run. Never rebase an old full-JSON snapshot
+          # over newer data; retry safely on the next scheduled run instead.
+          BASE=$(git rev-parse HEAD^)
           git fetch origin main
-          if ! git rebase origin/main; then
-            git rebase --abort || true
-            echo "Concurrent catalog change; fail closed."
-            exit 1
+          if [ "$(git rev-parse origin/main)" != "$BASE" ]; then
+            echo "Catalog changed during verification; skipping stale publication."
+            exit 0
           fi
           git push origin HEAD:main
       - name: Remove private exclusions
