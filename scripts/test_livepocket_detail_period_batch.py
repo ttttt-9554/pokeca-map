@@ -23,6 +23,28 @@ class BatchTests(unittest.TestCase):
                     {"url":U+"recent","discord_posted_at":recent}]}
         self.assertEqual(candidates(p,set(),5,now=now),[U+"recent"])
 
+    def test_newest_posted_event_is_first(self):
+        now=datetime.now(timezone.utc)
+        earlier=(now-timedelta(days=3)).isoformat()
+        later=(now-timedelta(hours=1)).isoformat()
+        public={"items":[
+            {"url":U+"alpha","discord_posted_at":earlier},
+            {"url":U+"zeta","discord_posted_at":later},
+            {"url":U+"unknown"}]}
+        self.assertEqual(candidates(public,set(),3,now=now),
+                         [U+"zeta",U+"alpha",U+"unknown"])
+
+    def test_raw_known_period_skipped_before_fetch(self):
+        public={"items":[{"url":U+"a"},{"url":U+"b"}]}
+        raw={"items":[{"url":U+"a","application_end_at":"2099-10-26T21:45:00+09:00"},
+                      {"url":U+"b"}]}
+        seen=[]
+        def fetch(url):
+            seen.append(url)
+            return {"status":"browser_blocked"}
+        run(public,set(),fetch,raw=raw)
+        self.assertEqual(seen,[U+"b"])
+
     def test_verified_date_written_once(self):
         p={"items":[{"url":U+"a"}]}
         def fetch(url):
