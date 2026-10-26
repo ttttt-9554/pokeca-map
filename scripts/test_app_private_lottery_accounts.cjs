@@ -75,4 +75,16 @@ assert.match(app,/payload\.account_entries=values\.account_entries/);
 assert.match(sql,/alter table public\.lottery_private_accounts enable row level security/i);
 assert.match(sql,/auth\.uid\(\)/);
 assert.match(sql,/new\.user_id and a\.id=v_account/);
+// A tap on the backdrop must never close the per-lottery editing dialog.
+// Other dialogs may keep their own dismissal behavior.
+const editorSetup=app.slice(
+  app.indexOf("    dialog.id = 'lpTrackerEditor';"),
+  app.indexOf("    const accountDialog=document.createElement('dialog');")
+);
+assert.match(editorSetup,/setAttribute\('closedby','closerequest'\)/);
+assert.doesNotMatch(editorSetup,/dialog\.addEventListener\('click'/);
+assert.doesNotMatch(editorSetup,/dialog\.close\(\)/);
+assert.match(app,/\$\('lpTrackEditorClose'\)\.addEventListener\('click',\(\)=>dlg\.close\(\)\)/);
+assert.match(app,/if\(closeOnSuccess&&\$\('lpTrackerEditor'\)\?\.open\)\$\('lpTrackerEditor'\)\.close\(\)/);
+
 console.log('Private account profiles, legacy totals, public-result isolation and RLS guards verified');
