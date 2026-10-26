@@ -5346,8 +5346,8 @@
       <fieldset class="lp-track-quantities"><legend>🎟️ 抽選の口数</legend>
         <div class="lp-track-quantity-grid">
           <label>応募口数<input name="application_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.application_count}"></label>
-          <label>当選数<input name="won_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.won_count}"></label>
-          <label>落選数<input name="lost_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.lost_count}"></label>
+          <label>当選口数<input name="won_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.won_count}"></label>
+          <label>落選口数<input name="lost_count" type="number" min="0" max="9999" step="1" inputmode="numeric" required value="${data.lost_count}"></label>
         </div>
         <p class="lp-tracker-intro" id="lpTrackQuantityInfo" role="status" aria-live="polite"></p>
       </fieldset>
@@ -5368,8 +5368,8 @@
       const lost=Number(form.elements.lost_count.value);
       const remaining=applications-won-lost;
       $('lpTrackQuantityInfo').textContent=Number.isInteger(remaining)&&remaining>=0
-        ?'結果待ち：'+remaining+'口（当選数＋落選数は応募口数以下）'
-        :'⚠ 当選数と落選数の合計が応募口数を超えています。';
+        ?'結果待ち：'+remaining+'口（当選口数＋落選口数は応募口数以下）'
+        :'⚠ 当選口数と落選口数の合計が応募口数を超えています。';
     };
     for(const name of ['application_count','won_count','lost_count'])
       form.elements[name].addEventListener('input',updateQuantityHint);
@@ -5405,7 +5405,7 @@
         .map(name=>Number(String(fd.get(name)||'')));
       const [applications,won,lost]=counts;
       if(counts.some(n=>!Number.isInteger(n)||n<0||n>9999)||won+lost>applications){
-        $('lpTrackEditorMessage').textContent='口数は0〜9999の整数で、当選数＋落選数は応募口数以下にしてください。';
+        $('lpTrackEditorMessage').textContent='口数は0〜9999の整数で、当選口数＋落選口数は応募口数以下にしてください。';
         return;
       }
       const normalizedStatus=applications===0?'not_applied':
@@ -5436,7 +5436,7 @@
     const won=Number(values.won_count??(status==='won'||status==='received'?1:0));
     const lost=Number(values.lost_count??(status==='lost'?1:0));
     if(![applications,won,lost].every(n=>Number.isInteger(n)&&n>=0&&n<=9999)||won+lost>applications){
-      const message='応募口数と当選数・落選数を確認してください。';
+      const message='応募口数と当選口数・落選口数を確認してください。';
       if($('lpTrackEditorMessage'))$('lpTrackEditorMessage').textContent=message;
       else alert(message);
       return;

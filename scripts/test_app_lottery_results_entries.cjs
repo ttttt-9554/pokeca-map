@@ -82,4 +82,7 @@ assert.match(elements.lpResultsList.innerHTML,/抽選A/);
 assert.match(elements.lpResultsList.innerHTML,/抽選B/);
 assert.match(page,/応募・当選・落選・結果待ちをすべて口数で匿名集計/);
 assert.doesNotMatch(page,/応募人数に加えて/);
+assert.match(app,/<label>当選口数<input name="won_count"/);
+assert.match(app,/<label>落選口数<input name="lost_count"/);
+assert.doesNotMatch(app,/当選数|落選数/);
 console.log('Lottery results use ticket entries only: UI and filter checks passed');
