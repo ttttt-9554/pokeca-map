@@ -5867,6 +5867,32 @@
       pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
       note:String(values.note||'').slice(0,500)};
     if(payload.pickup_start&&payload.pickup_end&&payload.pickup_start>payload.pickup_end)return;
+    if(Array.isArray(values.account_entries)){
+      // The account editor recalculates summary totals from private entries.
+      payload.account_entries=values.account_entries;
+    }else{
+      // Quick "応募済みにする": use the person's default account only
+      // for a brand-new application. Never guess which account owned
+      // a historical application record.
+      const existing=lotteryTrackRecord(url);
+      if(existing?.account_entries?.length){
+        payload.account_entries=existing.account_entries;
+      }else if(applications>0&&(!existing||existing.application_count===0)){
+        if(!lpPrivateAccountReady||lpPrivateAccountUser!==uid){
+          try{if(!await lpPrivateAccountsRefresh(true))return;}
+          catch(error){
+            alert('応募アカウントの確認に失敗しました：'+String(error?.message||error));
+            return;
+          }
+        }
+        const chosen=lpPrivateAccountDefault();
+        if(chosen)payload.account_entries=[{
+          account_id:chosen.id,application_count:applications,
+          won_count:won,lost_count:lost
+        }];
+      }
+    }
+    if(authUser?.id!==uid)return;
     lotteryTrackSaving=true;
     const message=$('lpTrackEditorMessage');
     if(message)message.textContent='保存中…';
