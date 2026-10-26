@@ -62,7 +62,8 @@ def _changes(original, updated, now):
             raise ValueError('Unrelated event fields unexpectedly changed')
         previous_dates = tuple(before.get(key) for key in DATE_FIELDS)
         new_dates = tuple(after.get(key) for key in DATE_FIELDS)
-        if previous_dates != new_dates:
+        if (previous_dates != new_dates or
+                any((key in before) != (key in after) for key in DATE_FIELDS)):
             if any(previous_dates):
                 raise ValueError('Existing application period overwritten')
             changes[url] = _period(*new_dates, now)

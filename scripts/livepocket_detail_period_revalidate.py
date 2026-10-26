@@ -41,7 +41,10 @@ def changed_urls(before, after, now=None):
         if ({k:v for k,v in previous.items() if k not in DATE_KEYS}
                 != {k:v for k,v in row.items() if k not in DATE_KEYS}):
             raise RuntimeError("Non-date fields unexpectedly changed")
-        if any(row.get(k) != previous.get(k) for k in DATE_KEYS):
+        # An explicit null is a change when the old field was absent.
+        # It must not silently pass as a no-op during validation.
+        if any(row.get(k) != previous.get(k) or (k in row) != (k in previous)
+               for k in DATE_KEYS):
             if any(previous.get(k) for k in DATE_KEYS):
                 raise RuntimeError("Existing date would be overwritten")
             # An explicit deadline needs no inferred start, but a start

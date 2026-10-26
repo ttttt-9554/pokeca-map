@@ -39,6 +39,14 @@ class ManifestTests(unittest.TestCase):
         self.assertNotIn('application_start_at',pub['items'][0])
         self.assertEqual(apply_manifest(raw,pub,manifest,set(),N),0)
 
+    def test_capture_rejects_null_only_insertions(self):
+        for field in ('application_start_at', 'application_end_at'):
+            with self.subTest(field=field):
+                updated=self.original()
+                updated['items'][0][field]=None
+                with self.assertRaises(ValueError):
+                    capture(self.original(),self.original(),updated,updated,N)
+
     def test_capture_rejects_start_only(self):
         updated=self.original()
         updated['items'][0]['application_start_at']=A
