@@ -1,0 +1,70 @@
+name: LivePocket Serial Ticket Real Page Check
+'on':
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/livepocket_v13.py
+      - scripts/livepocket_v21.py
+      - scripts/test_livepocket_detail_priority.py
+      - .github/workflows/livepocket-serial-ticket-smoke.yml
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check parser regression
+        run: |
+          python -m py_compile scripts/livepocket_v13.py scripts/livepocket_v21.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_detail_priority.py
+      - name: Install browser
+        run: |
+          python -m pip install 'playwright>=1.55,<2'
+          python -m playwright install --with-deps chromium
+      - name: Check public serial-code ticket page without publishing
+        run: |
+          PYTHONPATH=scripts python - <<'PY'
+          import json
+          from pathlib import Path
+          from livepocket_v21 import browser_fetcher
+          from livepocket_v13 import extract_deadline, detail_signup_period
+          url = 'https://livepocket.jp/e/qg3as'
+          fetch, close = browser_fetcher()
+          try:
+              result = fetch(url)
+          finally:
+              close()
+          status = result.get('status')
+          body = result.get('text') or ''
+          detail = detail_signup_period(body)
+          start, end = extract_deadline(body)
+          summary = {
+              'url': url, 'fetch_status': status,
+              'detail_period_found': bool(detail and detail[1]),
+              'start': start.isoformat() if start else None,
+              'end': end.isoformat() if end else None,
+              'page_text_available': bool(body),
+          }
+          Path('serial_ticket_smoke.json').write_text(
+              json.dumps(summary, ensure_ascii=False, indent=2)+'\n',
+              encoding='utf-8')
+          print(json.dumps(summary, ensure_ascii=False))
+          if status != 'ok':
+              raise SystemExit('Real page could not be verified: '+str(status))
+          if not end:
+              raise SystemExit('No explicit deadline extracted from real page')
+          PY
+      - name: Upload non-sensitive summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: serial-ticket-smoke-summary
+          path: serial_ticket_smoke.json
+          if-no-files-found: ignore
+          retention-days: 7
