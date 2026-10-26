@@ -5197,6 +5197,11 @@
       status,
       application_count:applications,won_count:Math.min(won,applications),
       lost_count:Math.min(lost,applications-Math.min(won,applications)),
+      account_entries:Array.isArray(row.account_entries)?
+        row.account_entries.filter(x=>x&&typeof x.account_id==='string')
+          .map(x=>({account_id:x.account_id,
+            application_count:Number(x.application_count)||0,
+            won_count:Number(x.won_count)||0,lost_count:Number(x.lost_count)||0})):[],
       onsite_required:row.onsite_required === true,
       onsite_done:row.onsite_done === true,
       pickup_start:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_start||'')?row.pickup_start:'',
@@ -5212,6 +5217,8 @@
       ++lotteryTrackSequence;
       lotteryTrackUserId = '';
       lotteryTrackRecords.clear();
+      lpPrivateAccounts.clear();lpPrivateAccountUser='';lpPrivateAccountReady=false;
+      lpPrivateAccountError='';lpPrivateAccountRender();
       lotteryTrackError = '';
       lotteryTrackLastLoad = 0;
       renderLotteryTrackerSummary();
@@ -5223,19 +5230,29 @@
     const seq = ++lotteryTrackSequence;
     if (lotteryTrackUserId !== user) {
       lotteryTrackRecords.clear();
+      lpPrivateAccounts.clear();lpPrivateAccountUser='';lpPrivateAccountReady=false;
       lotteryTrackLastLoad = 0;
     }
     lotteryTrackUserId = user;
     const run = (async() => {
       try {
-        const fetched=await Promise.all([LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
-          supabaseClient.from(table)
-            .select('event_url,status,application_count,won_count,lost_count,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
-            .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)));
+        const fetched=await Promise.all([
+          ...[LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
+            supabaseClient.from(table)
+              .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
+              .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)),
+          supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
+            .select('id,label,is_default,is_archived,created_at').eq('user_id',user)
+            .order('created_at',{ascending:true}).limit(200)
+        ]);
         for(const response of fetched)if(response.error)throw response.error;
         if (seq !== lotteryTrackSequence || authUser?.id !== user) return;
-        lotteryTrackRecords = new Map(fetched.flatMap(x=>x.data||[])
+        lotteryTrackRecords = new Map(fetched.slice(0,2).flatMap(x=>x.data||[])
           .map(lotteryTrackClean).filter(Boolean).map(x=>[x.event_url,x]));
+        lpPrivateAccounts=new Map((fetched[2].data||[]).filter(x=>x?.id&&x?.label)
+          .map(x=>[x.id,x]));
+        lpPrivateAccountUser=user;lpPrivateAccountReady=true;lpPrivateAccountError='';
+        lpPrivateAccountRender();
         lotteryTrackError='';
         lotteryTrackLastLoad=Date.now();
       } catch(e) {
@@ -5647,7 +5664,7 @@
     if(message)message.textContent='保存中…';
     try{
       const {data,error}=await supabaseClient.from(lotteryTrackTableFor(url)).upsert(payload,{onConflict:'user_id,event_url'})
-        .select('event_url,status,application_count,won_count,lost_count,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
+        .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
       const parsed=lotteryTrackClean(data);
