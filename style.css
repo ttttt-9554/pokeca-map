@@ -2308,3 +2308,26 @@ html[data-theme="dark"] #lpTrackPrivateAccounts select{
 html[data-theme="dark"] #lpTrackerPanel .lp-track-private-accounts{
   color:#c9d7eb!important;
 }
+
+/* v21.101: 1 private account = 1 application ticket, with one result choice. */
+#lpTrackerEditor .lp-track-one-ticket{
+ margin:0 0 9px;display:block;font-weight:750;font-size:13px;
+ color:var(--app-text,#172033);
+}
+#lpTrackerEditor .lp-track-account-result{
+ display:flex;flex-direction:column;gap:6px;min-width:0;
+ font-size:13px;font-weight:750;color:var(--app-text,#172033);
+}
+#lpTrackerEditor .lp-track-account-result select{
+ box-sizing:border-box;display:block;width:100%;min-height:46px;
+ border:1px solid var(--app-border,#cbd5e1);border-radius:9px;
+ padding:8px 10px;font-size:16px;
+ background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+}
+#lpTrackerEditor .lp-track-account-top [data-lp-account-remove]{
+ color:var(--app-text,#172033);min-width:75px;
+}
+html[data-theme="dark"] #lpTrackerEditor .lp-track-account-result select{
+ background:#25354b!important;color:#edf4ff!important;
+ -webkit-text-fill-color:#edf4ff;border-color:#667d9b!important;
+}

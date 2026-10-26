@@ -10,6 +10,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_private_lottery_accounts.cjs
       - scripts/test_private_account_unassigned.cjs
       - supabase/lottery_private_application_accounts_v21_100.sql
+      - supabase/lottery_private_account_one_ticket_v21_101.sql
       - scripts/test_app_private_lottery_accounts.cjs
       - supabase/lottery_private_application_accounts_v21_100.sql
       - index.html
