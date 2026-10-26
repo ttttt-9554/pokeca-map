@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-26T12:50:55.748702+00:00",
-  "unique_livepocket_urls": 569,
+  "collected_at": "2026-10-26T14:05:58.051665+00:00",
+  "unique_livepocket_urls": 570,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8191,7 +8191,6 @@
           "prefecture": "茨城県"
         }
       ],
-      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士/神の島の冒険/ヒロインズエディション/ヒロインズエディションVol.2",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     },
     {
@@ -8212,8 +8211,6 @@
       "pokemon_map_match": "スタートデッキ100 バトルコレクション",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ/メガブレイブ/メガシンフォニア/スタートデッキ100 バトルコレクション",
       "first_detected_at": "2026-10-26T01:30:57.127074+00:00"
     },
     {
@@ -8318,7 +8315,29 @@
         }
       ],
       "first_detected_at": "2026-10-26T04:30:56.326407+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2c701",
+      "store_name": "トレカパーク朝霞店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-10-26T14:00:06.894000+00:00",
+      "stores": [
+        {
+          "name": "トレカパーク朝霞店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【トレカパーク朝霞店】ポケカ抽選販売（30th CELEBRATION カードセット）",
+      "application_end_at": "2026-10-28T22:05:00+09:00",
+      "application_start_at": "2026-10-26T15:28:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク朝霞店】ポケカ抽選販売（30th CELEBRATION カードセット）",
+      "first_detected_at": "2026-10-26T14:05:59.422556+00:00"
     }
   ],
-  "updated_at": "2026-10-26T14:03:23.982838+00:00"
+  "updated_at": "2026-10-26T14:06:30.040382+00:00"
 }
