@@ -32,6 +32,17 @@ class BatchTests(unittest.TestCase):
                          "2026-10-24T13:00:00+09:00")
         self.assertEqual(run(p,set(),fetch)["updated"],0)
 
+    def test_expired_deadline_not_published(self):
+        p={"items":[{"url":U+"a"}]}
+        result=run(p,set(),lambda u:{"status":"ok","final_url":u,"text":TEXT})
+        # This fixture's deadline is October 26, 2026; ensure the explicit
+        # expiration guard also works independent of wall-clock time.
+        from livepocket_detail_period_batch import apply
+        q={"items":[{"url":U+"a"}]}
+        self.assertFalse(apply(q,U+"a",TEXT,set(),
+                               now=datetime(2026,10,27,tzinfo=timezone.utc)))
+        self.assertNotIn("application_end_at",q["items"][0])
+
     def test_failed_page_never_updates(self):
         p={"items":[{"url":U+"a"}]}
         self.assertEqual(run(p,set(),lambda u:{"status":"browser_blocked"})["updated"],0)
