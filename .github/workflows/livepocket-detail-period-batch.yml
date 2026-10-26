@@ -45,7 +45,7 @@ jobs:
       - name: Publish verified missing dates only
         shell: bash
         run: |
-          git add livepocket_public.json
+          git add livepocket_public.json livepocket_urls.json
           if git diff --cached --quiet; then
             echo "No verified missing dates to publish."
             exit 0
