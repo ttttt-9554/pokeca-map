@@ -5211,7 +5211,9 @@
       onsite_required:row.onsite_required === true,
       onsite_done:row.onsite_done === true,
       pickup_start:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_start||'')?row.pickup_start:'',
+      pickup_start_time:/^\d{2}:\d{2}/.test(row.pickup_start_time||'')?row.pickup_start_time.slice(0,5):'',
       pickup_end:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_end||'')?row.pickup_end:'',
+      pickup_end_time:/^\d{2}:\d{2}/.test(row.pickup_end_time||'')?row.pickup_end_time.slice(0,5):'',
       note:typeof row.note==='string'?row.note.slice(0,500):'',
       updated_at:row.updated_at||''
     };
@@ -5250,7 +5252,7 @@
         const fetched=await Promise.all([
           ...[LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
             supabaseClient.from(table)
-              .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at')
+              .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,note,updated_at')
               .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)),
           supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
             .select('id,label,is_default,is_archived,created_at').eq('user_id',user)
@@ -5286,8 +5288,8 @@
     const tokyo = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
     const start = record.pickup_start || '';
     const end = record.pickup_end || '';
-    if (end && tokyo > end) return '⚠ 受取期限を過ぎています：'+end;
-    if (end && tokyo === end) return '⚠ 今日が受取期限：'+end;
+    if (end && (tokyo>end||(tokyo===end&&record.pickup_end_time&&Date.now()>Date.parse(end+'T'+record.pickup_end_time+':00+09:00')))) return '⚠ 受取期限を過ぎています：'+end+(record.pickup_end_time?' '+record.pickup_end_time:'');
+    if (end && tokyo === end) return '⚠ 今日が受取期限：'+end+(record.pickup_end_time?' '+record.pickup_end_time:'');
     if (start && tokyo < start) return '受取開始：'+start+(end?' ／ 期限：'+end:'');
     if (start && end) return '受取期間：'+start+' ～ '+end;
     if (end) return '受取期限：'+end;
@@ -5306,16 +5308,16 @@
       String(parts[2]).padStart(2,'0')+'（'+weekday+'）';
   }
 
-  function lotteryPickupRemaining(end, now=Date.now()) {
+  function lotteryPickupRemaining(end, now=Date.now(), endTime='') {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(end || '')) {
       return {text:'⚠ 受取期限未登録',style:'unregistered'};
     }
     const today=new Intl.DateTimeFormat('sv-SE',{
       timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'
     }).format(new Date(now));
-    if (today>end) return {text:'⚠ 受取期限日を過ぎています',style:'overdue'};
+    if (today>end || (today===end && endTime && Date.parse(end+'T'+endTime+':00+09:00')<now)) return {text:'⚠ 受取期限を過ぎています',style:'overdue'};
     if (today===end) return {text:'⚠ 今日が受取期限日',style:'today'};
-    const deadlineDateStart=Date.parse(end+'T00:00:00+09:00');
+    const deadlineDateStart=Date.parse(end+'T'+(endTime||'00:00')+':00+09:00');
     if (!Number.isFinite(deadlineDateStart)) return {text:'⚠ 期限日を確認してください',style:'unregistered'};
     const remaining=Math.max(0,deadlineDateStart-now);
     const days=Math.floor(remaining/86400000);
@@ -5326,15 +5328,15 @@
 
   function lotteryPickupDetailsHtml(record) {
     if (!record || record.status!=='won') return '';
-    const remaining=lotteryPickupRemaining(record.pickup_end);
+    const remaining=lotteryPickupRemaining(record.pickup_end,Date.now(),record.pickup_end_time);
     const help=record.pickup_end
-      ? '※残り時間は期限日の午前0時までの目安です。実際の受取終了時刻は未登録のため、必ず公式案内で確認してください。'
+      ? (record.pickup_end_time?'※登録した受取終了時刻（日本時間）を基準に表示します。':'※終了時刻が未登録のため、期限日午前0時までの目安です。公式案内で確認してください。')
       : '管理ボタンから受取期限を登録できます。実際の終了時刻は公式案内で確認してください。';
     return '<div class="lp-pickup-details" aria-label="受け取り期間と期限日の案内">'+
       '<div class="lp-pickup-date-line"><span>受取開始</span><strong>'+
-        escape(lotteryPickupDateText(record.pickup_start))+'</strong></div>'+
+        escape(lotteryPickupDateText(record.pickup_start)+(record.pickup_start_time?' '+record.pickup_start_time:''))+'</strong></div>'+
       '<div class="lp-pickup-date-line"><span>受取期限</span><strong>'+
-        escape(lotteryPickupDateText(record.pickup_end))+'</strong></div>'+
+        escape(lotteryPickupDateText(record.pickup_end)+(record.pickup_end_time?' '+record.pickup_end_time:''))+'</strong></div>'+
       '<p class="lp-pickup-remaining '+remaining.style+'">'+escape(remaining.text)+'</p>'+
       '<p class="lp-pickup-help">'+escape(help)+'</p></div>';
   }
@@ -5448,7 +5450,7 @@
         return '<div class="lp-pickup-alert-row '+
           (level==='soon'?'':'urgent')+'"><div>'+
           '<strong>'+escape(lotteryTrackItemName(record.event_url))+'</strong>'+
-          '<p>'+escape(label+'：'+lotteryPickupDateText(record.pickup_end))+'</p>'+
+          '<p>'+escape(label+'：'+lotteryPickupDateText(record.pickup_end)+(record.pickup_end_time?' '+record.pickup_end_time:''))+'</p>'+
           '</div><button type="button" data-lp-track="edit" data-url="'+
           escape(record.event_url)+'">管理</button></div>';
       }).join('')+
@@ -5599,7 +5601,8 @@
             clean(lotteryTrackItemName(r.event_url)),clean(store.name||''),clean(store.prefecture||item.prefecture||''),
             date(item.application_start_at),date(item.application_end_at),
             date(item.result_announcement_at||item.result_at||item.announcement_at),
-            date(r.pickup_start||item.pickup_start),date(r.pickup_end||item.pickup_end),
+            (date(r.pickup_start||item.pickup_start)+(r.pickup_start_time?' '+r.pickup_start_time:'')),
+            (date(r.pickup_end||item.pickup_end)+(r.pickup_end_time?' '+r.pickup_end_time:'')),
             clean(notes),...(namesRow.length?namesRow:[''])
           ]);
         }
@@ -5669,7 +5672,7 @@
     return lotteryTrackRecord(url) || {
       event_url:url,status:'not_applied',onsite_required:false,onsite_done:false,
       application_count:0,won_count:0,lost_count:0,
-      pickup_start:'',pickup_end:'',note:'',updated_at:''
+      pickup_start:'',pickup_end:'',pickup_start_time:'',pickup_end_time:'',note:'',updated_at:''
     };
   }
 
@@ -5991,7 +5994,9 @@
       <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
       <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
       <label>受け取り開始日（わかる場合）<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
+      <label>受け取り開始時刻（任意）<input type="time" name="pickup_start_time" value="${escape(data.pickup_start_time||'')}"></label>
       <label>受け取り期限日（わかる場合）<input type="date" name="pickup_end" value="${escape(data.pickup_end)}"></label>
+      <label>受け取り終了時刻（任意）<input type="time" name="pickup_end_time" value="${escape(data.pickup_end_time||'')}"></label>
       <p class="lp-tracker-intro">当選したら「当選・受取待ち」を選び、公式案内の受取期間を入力してください。アプリ内で期限が確認できます。公式条件は自動確定しません。</p>
       <label>自分用メモ（500文字まで）<textarea name="note" maxlength="500" rows="3" placeholder="例：店頭で本人確認が必要／受取時に身分証を持参">${escape(data.note)}</textarea></label>
       <div class="lp-track-modal-actions"><button type="submit" class="primary">保存</button><button type="button" id="lpTrackEditorClose">閉じる</button>
@@ -6067,6 +6072,7 @@
         application_count:applications,won_count:won,lost_count:lost,
         ...(accountValues?{account_entries:accountValues.account_entries}:{}),
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
+        pickup_start_time:String(fd.get('pickup_start_time')||''),pickup_end_time:String(fd.get('pickup_end_time')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
       if(data.pickup_start&&data.pickup_end&&data.pickup_start>data.pickup_end){
         $('lpTrackEditorMessage').textContent='受取開始日は受取期限日より前にしてください。';return;
@@ -6101,6 +6107,8 @@
     const payload={user_id:uid,event_url:url,status:canonicalStatus,onsite_required:completed,
       onsite_done:completed,application_count:applications,won_count:won,lost_count:lost,
       pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
+      pickup_start_time:values.pickup_start?values.pickup_start_time||null:null,
+      pickup_end_time:values.pickup_end?values.pickup_end_time||null:null,
       note:String(values.note||'').slice(0,500)};
     if(payload.pickup_start&&payload.pickup_end&&payload.pickup_start>payload.pickup_end)return;
     if(Array.isArray(values.account_entries)){
@@ -6145,7 +6153,7 @@
     if(message)message.textContent='保存中…';
     try{
       const {data,error}=await supabaseClient.from(lotteryTrackTableFor(url)).upsert(payload,{onConflict:'user_id,event_url'})
-        .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,note,updated_at').single();
+        .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,note,updated_at').single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
       const parsed=lotteryTrackClean(data);
