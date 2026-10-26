@@ -105,12 +105,17 @@ def apply(public, url, body, excluded, now=None, raw=None):
     return True
 
 
-def run(public, excluded, fetch, limit=5, offset=0, raw=None):
-    urls = candidates(public, excluded, limit, offset, raw=raw)
+def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
+    # Use one clock for candidate eligibility, deadline verification, and
+    # diagnostic counts (especially around an exact deadline boundary).
+    now = now or datetime.now(timezone.utc)
+    urls = candidates(public, excluded, limit, offset, raw=raw, now=now)
     stats = {"selected": len(urls), "checked": 0, "updated": 0,
              "unavailable": 0, "no_verified_period": 0,
              "fetch_failed": 0, "wrong_event": 0,
-             "blocked": 0, "deferred": 0}
+             "blocked": 0, "deferred": 0,
+             "period_not_found": 0, "period_without_start": 0,
+             "period_expired": 0, "period_not_applied": 0}
     for url in urls:
         try:
             result = fetch(url)
@@ -142,10 +147,22 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None):
             stats["unavailable"] += 1
             stats["wrong_event"] += 1
             continue
-        if apply(public, url, result.get("text") or "", excluded, raw=raw):
+        body = result.get("text") or ""
+        if apply(public, url, body, excluded, now=now, raw=raw):
             stats["updated"] += 1
         else:
             stats["no_verified_period"] += 1
+            # Diagnose why no new date was published without logging URLs
+            # or the event's page text. Never use partial/expired periods.
+            start, end = extract_deadline(body)
+            if not end:
+                stats["period_not_found"] += 1
+            elif not start:
+                stats["period_without_start"] += 1
+            elif start > end or end <= now:
+                stats["period_expired"] += 1
+            else:
+                stats["period_not_applied"] += 1
     return stats
 
 
