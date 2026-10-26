@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-26T03:00:55.596553+00:00",
+  "collected_at": "2026-10-26T04:00:54.850339+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 566,
+  "unique_livepocket_urls": 567,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15196,34 +15196,64 @@
       "event_title": "【ふるいち龍ケ崎店】ポケカ抽選販売（30thセレブレーション）",
       "application_end_at": "2026-10-29T22:00:00+09:00",
       "application_start_at": "2026-10-26T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ivpoy",
+      "discord_message_id": "1564126453291814963",
+      "discord_posted_at": "2026-10-26T04:00:06.529000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍福島県\nトレカエース植田店\n受付終了: 10/26 21:00（残り7時間59分）\nhttps://livepocket.jp/e/ivpoy",
+      "store_name": "トレカエース植田店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカエース植田店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売受付",
+      "application_end_at": "2026-10-26T21:00:00+09:00",
+      "application_start_at": "2026-10-24T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 409,
+    "parsed": 410,
     "no_structured_details": 157
   },
   "field_counts": {
-    "store_name": 387,
-    "prefecture": 325,
-    "event_title": 253,
+    "store_name": 388,
+    "prefecture": 326,
+    "event_title": 254,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 531,
-    "application_start_at": 531,
-    "stores_events": 395
+    "application_end_at": 532,
+    "application_start_at": 532,
+    "stores_events": 396
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1564111377755406356"
+      "1551580466266644552": "1564126453291814963"
     },
     "last_run": {
-      "checked_at": "2026-10-26T03:00:55.596553+00:00",
-      "new_urls": 2,
-      "original_urls": 564,
+      "checked_at": "2026-10-26T04:00:54.850339+00:00",
+      "new_urls": 1,
+      "original_urls": 566,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -15383,7 +15413,8 @@
         "1564081136609529967": "2026-10-26T01:00:58.525092+00:00",
         "1564088693143375973": "2026-10-26T01:30:56.264261+00:00",
         "1564103806961188995": "2026-10-26T02:30:56.093981+00:00",
-        "1564111377755406356": "2026-10-26T03:00:56.198214+00:00"
+        "1564111377755406356": "2026-10-26T03:00:56.198214+00:00",
+        "1564126453291814963": "2026-10-26T04:00:55.549935+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17758,6 +17789,11 @@
           "checked_at": "2026-10-26T03:01:26.549906+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/ivpoy": {
+          "checked_at": "2026-10-26T04:01:27.235570+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19028,6 +19064,12 @@
           "detected_at": "2026-10-26T03:00:56.949543+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-26T03:01:26.549906+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ivpoy": {
+          "detected_at": "2026-10-26T04:00:56.436355+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-26T04:01:27.235570+00:00",
           "http_status": null
         }
       },
@@ -24613,6 +24655,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/ivpoy": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-26T04:01:27.235570+00:00",
+          "title_observed": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -28191,6 +28244,19 @@
         },
         "https://livepocket.jp/e/edf4a": {
           "checked_at": "2026-10-26T03:01:26.549906+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ivpoy": {
+          "checked_at": "2026-10-26T04:01:27.235570+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-26T03:00:55.596553+00:00",
-  "unique_livepocket_urls": 566,
+  "collected_at": "2026-10-26T04:00:54.850339+00:00",
+  "unique_livepocket_urls": 567,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8265,7 +8265,26 @@
         }
       ],
       "first_detected_at": "2026-10-26T03:00:56.949543+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ivpoy",
+      "store_name": "トレカエース植田店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-26T04:00:06.529000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース植田店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売受付",
+      "application_end_at": "2026-10-26T21:00:00+09:00",
+      "application_start_at": "2026-10-24T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売受付",
+      "first_detected_at": "2026-10-26T04:00:56.436355+00:00"
     }
   ],
-  "updated_at": "2026-10-26T03:50:57.883426+00:00"
+  "updated_at": "2026-10-26T04:01:27.235570+00:00"
 }
