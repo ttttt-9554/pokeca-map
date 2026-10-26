@@ -1,0 +1,40 @@
+name: LivePocket Manual Exclusion Smoke
+'on':
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/livepocket-manual-exclusion-smoke.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  read-only-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate manual exclusion parser without network
+        run: |
+          python -m py_compile scripts/livepocket_prefecture_manual_snapshot.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_prefecture_manual_snapshot.py
+      - name: Verify real Supabase manual edits are readable
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python scripts/livepocket_prefecture_manual_snapshot.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from scripts.livepocket_prefecture_manual_snapshot import canonical_event_url
+          urls = json.loads(Path("prefecture_manual_overrides.json").read_text(encoding="utf-8"))["urls"]
+          if not urls or urls != sorted(set(urls)) or any(canonical_event_url(u) != u for u in urls):
+              raise SystemExit("Unusable manual exclusion snapshot")
+          print("Current administrator event exclusions:", len(urls))
+          PY
+      - name: Erase temporary administrator exclusions
+        if: always()
+        run: rm -f prefecture_manual_overrides.json
