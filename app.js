@@ -5316,7 +5316,7 @@
       timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'
     }).format(new Date(now));
     if (today>end || (today===end && endTime && Date.parse(end+'T'+endTime+':00+09:00')<now)) return {text:'⚠ 受取期限を過ぎています',style:'overdue'};
-    if (today===end) return {text:'⚠ 今日が受取期限日',style:'today'};
+    if (today===end && !endTime) return {text:'⚠ 今日が受取期限日',style:'today'};
     const deadlineDateStart=Date.parse(end+'T'+(endTime||'00:00')+':00+09:00');
     if (!Number.isFinite(deadlineDateStart)) return {text:'⚠ 期限日を確認してください',style:'unregistered'};
     const remaining=Math.max(0,deadlineDateStart-now);
@@ -6074,7 +6074,7 @@
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
         pickup_start_time:String(fd.get('pickup_start_time')||''),pickup_end_time:String(fd.get('pickup_end_time')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
-      if(data.pickup_start&&data.pickup_end&&data.pickup_start>data.pickup_end){
+      if(data.pickup_start&&data.pickup_end&&(data.pickup_start>data.pickup_end || (data.pickup_start===data.pickup_end&&data.pickup_start_time&&data.pickup_end_time&&data.pickup_start_time>data.pickup_end_time))){
         $('lpTrackEditorMessage').textContent='受取開始日は受取期限日より前にしてください。';return;
       }
       await lotteryTrackerSave(url,data,true);
@@ -6110,7 +6110,7 @@
       pickup_start_time:values.pickup_start?values.pickup_start_time||null:null,
       pickup_end_time:values.pickup_end?values.pickup_end_time||null:null,
       note:String(values.note||'').slice(0,500)};
-    if(payload.pickup_start&&payload.pickup_end&&payload.pickup_start>payload.pickup_end)return;
+    if(payload.pickup_start&&payload.pickup_end&&(payload.pickup_start>payload.pickup_end || (payload.pickup_start===payload.pickup_end&&payload.pickup_start_time&&payload.pickup_end_time&&payload.pickup_start_time>payload.pickup_end_time)))return;
     if(Array.isArray(values.account_entries)){
       // The account editor recalculates summary totals from private entries.
       payload.account_entries=values.account_entries;
