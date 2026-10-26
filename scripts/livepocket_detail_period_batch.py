@@ -110,7 +110,18 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
     # diagnostic counts (especially around an exact deadline boundary).
     now = now or datetime.now(timezone.utc)
     urls = candidates(public, excluded, limit, offset, raw=raw, now=now)
-    stats = {"selected": len(urls), "checked": 0, "updated": 0,
+    # Explain why a large public "missing date" count may produce a small
+    # browser batch, without exposing event IDs or reviewing private edits.
+    recent_missing = [
+        row for row in public.get("items", [])
+        if not row.get("application_start_at") and not row.get("application_end_at")
+        and (not parse_posted_at(row.get("discord_posted_at"))
+             or parse_posted_at(row.get("discord_posted_at")) >= now - timedelta(days=14))
+    ]
+    stats = {"public_recent_missing": len(recent_missing),
+             "manual_excluded_recent": sum(
+                 row.get("url") in excluded for row in recent_missing),
+             "selected": len(urls), "checked": 0, "updated": 0,
              "unavailable": 0, "no_verified_period": 0,
              "fetch_failed": 0, "wrong_event": 0,
              "blocked": 0, "deferred": 0,
