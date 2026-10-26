@@ -8158,24 +8158,22 @@
       "url": "https://livepocket.jp/e/a1d-8",
       "store_name": "ブックエース上荒川店",
       "prefecture": "福島県",
+      "event_title": "再販分抽選 拡張パック「30th CELEBRATION」 ポケモンカードゲーム",
+      "application_start_at": "2026-10-26T09:00:00+09:00",
+      "application_end_at": "2026-10-28T22:00:00+09:00",
       "discord_posted_at": "2026-10-26T01:00:02.190000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ブックエース上荒川店",
           "prefecture": "福島県"
         }
       ],
-      "event_title": "再販分抽選 拡張パック「30th CELEBRATION」 ポケモンカードゲーム",
-      "application_end_at": "2026-10-28T22:00:00+09:00",
-      "application_start_at": "2026-10-26T09:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "再販分抽選 拡張パック「30th CELEBRATION」 ポケモンカードゲーム",
       "first_detected_at": "2026-10-26T01:00:59.538521+00:00"
     }
   ],
-  "updated_at": "2026-10-26T01:01:32.982690+00:00"
+  "updated_at": "2026-10-26T01:10:59.304296+00:00"
 }
