@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-26T06:00:57.049653+00:00",
+  "collected_at": "2026-10-26T12:50:55.748702+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -15310,10 +15310,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1564156677996023888"
+      "1551580466266644552": "1564259823242051648"
     },
     "last_run": {
-      "checked_at": "2026-10-26T06:00:57.049653+00:00",
+      "checked_at": "2026-10-26T12:50:55.748702+00:00",
       "new_urls": 0,
       "original_urls": 569,
       "suspect_legacy_store_names": 0,
