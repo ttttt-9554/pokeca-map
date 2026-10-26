@@ -10,9 +10,9 @@ const app=fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
 const page=fs.readFileSync(path.join(__dirname,'..','index.html'),'utf8');
 function extract(name){
   const start=app.indexOf('  function '+name+'(');
-  const end=app.indexOf('\\n  }\\n',start);
+  const end=app.indexOf('\n  }\n',start);
   assert(start>=0&&end>start,'Missing app helper '+name);
-  return app.slice(start,end+'\\n  }'.length);
+  return app.slice(start,end+'\n  }'.length);
 }
 
 const eventA={url:'https://livepocket.jp/e/test123',event_title:'抽選A'};
@@ -51,8 +51,8 @@ const context={
   escape:value=>String(value)
 };
 const api=vm.runInNewContext(
-  [extract('lpResultsKnownEvents'),extract('lpResultsRender')].join('\\n')+
-  '\\n({lpResultsKnownEvents,lpResultsRender})',context,{timeout:1000}
+  [extract('lpResultsKnownEvents'),extract('lpResultsRender')].join('\n')+
+  '\n({lpResultsKnownEvents,lpResultsRender})',context,{timeout:1000}
 );
 assert.equal(api.lpResultsKnownEvents().length,2,
   'Zero-ticket events are excluded regardless of registered user count');
