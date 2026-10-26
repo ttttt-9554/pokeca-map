@@ -7072,14 +7072,27 @@
   // an unknown region, recorded in the existing event status override table.
   let lpLocationListLoaded=false, lpLocationPageEditing='';
 
+  // Keep the original catalog row for audit/edit history, but judge whether
+  // a location is still unresolved from the effective user-visible card.
+  // Administrator corrections in Supabase are not written back to public JSON.
+  function lpLocationEffective(base){
+    return lotteryItems.find(item=>item.url===base.url)||base;
+  }
+
   function lpLocationBaseList(){
-    return lotteryBaseItems.filter(item=>item&&isLivePocketEventUrl(item.url)&&
-      (!Array.isArray(item.stores)||item.stores.length<=1));
+    return lotteryBaseItems.filter(base=>base&&isLivePocketEventUrl(base.url)&&
+      (!Array.isArray(base.stores)||base.stores.length<=1)&&
+      (!Array.isArray(lpLocationEffective(base).stores)||
+       lpLocationEffective(base).stores.length<=1));
+  }
+
+  function lpLocationNeedsManualReview(base){
+    const current=lpLocationEffective(base);
+    return !lotteryStoreEntries(current).length||!lotteryPrefectures(current).length;
   }
 
   function lpLocationPageMissing(base){
-    const shown=lotteryItems.find(item=>item.url===base.url)||base;
-    return shown.manual_page_unavailable===true;
+    return lpLocationEffective(base).manual_page_unavailable===true;
   }
 
   function lpLocationInitUI(){
@@ -7237,8 +7250,7 @@
     const now=Date.now();
     const active=bases.filter(base=>!lpApplicationExpired(base.url,base.application_end_at,now));
     const incomplete=active.filter(base=>
-      (!lotteryStoreEntries(base).length||!lotteryPrefectures(base).length) &&
-      !lpLocationPageMissing(base));
+      lpLocationNeedsManualReview(base)&&!lpLocationPageMissing(base));
     // A confirmed removed page resolves an unknown region; keep it accessible
     // in the folded handled list, including after the application deadline.
     const pageResolved=bases.filter(base=>
@@ -7254,17 +7266,20 @@
         ...lotteryStoreEntries(base).map(s=>s.name)].filter(Boolean)
         .join(' ').toLocaleLowerCase('ja-JP').includes(lpLocationSearch);
     };
-    const kind=base=>lpLocationFilter==='all'||
-      (lpLocationFilter==='store'&&!lotteryStoreEntries(base).length)||
-      (lpLocationFilter==='area'&&!lotteryPrefectures(base).length);
+    const kind=base=>{
+      const current=lpLocationEffective(base);
+      return lpLocationFilter==='all'||
+        (lpLocationFilter==='store'&&!lotteryStoreEntries(current).length)||
+        (lpLocationFilter==='area'&&!lotteryPrefectures(current).length);
+    };
     const visible=missing.filter(base=>search(base)&&kind(base));
     const unsafe=lotteryBaseItems.filter(item=>
       !lpApplicationExpired(item.url,item.application_end_at,now) &&
       Array.isArray(item.stores)&&item.stores.length>1 &&
       (!lotteryStoreEntries(item).length||!lotteryPrefectures(item).length)).length;
     $('lpLocationStatus').textContent='未対応 '+missing.length+'件 ／ 店舗名未確認 '+
-      missing.filter(x=>!lotteryStoreEntries(x).length).length+
-      '件 ／ 都道府県未確認 '+missing.filter(x=>!lotteryPrefectures(x).length).length+
+      missing.filter(x=>!lotteryStoreEntries(lpLocationEffective(x)).length).length+
+      '件 ／ 都道府県未確認 '+missing.filter(x=>!lotteryPrefectures(lpLocationEffective(x)).length).length+
       '件 ／ 対応済み '+stored.length+'件（ページなし '+stored.filter(lpLocationPageMissing).length+'件）'+
       (unsafe?' ／ 複数店舗・地域未確認（編集対象外） '+unsafe+'件':'');
     function card(base,done){
