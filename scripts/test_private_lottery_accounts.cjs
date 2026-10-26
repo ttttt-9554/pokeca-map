@@ -174,12 +174,12 @@ assert.equal(saved.account_entries[0].account_id,id1);
 
 function pureFunction(name){
   const from=app.indexOf('  function '+name+'(');
-  const until=app.indexOf('\\n  }\\n',from);
+  const until=app.indexOf('\n  }\n',from);
   assert(from>=0&&until>from,'Expected '+name);
   return app.slice(from,until+5);
 }
 const accounting=vm.runInNewContext(pureFunction('lpTrackerApplyOutcome')+
-  '\\n(lpTrackerApplyOutcome)',{},{timeout:1000});
+  '\n(lpTrackerApplyOutcome)',{},{timeout:1000});
 const outcome=(bucket,status)=>{
   const v=accounting(bucket,status);
   return [...v].map(({application_count,won_count,lost_count})=>
