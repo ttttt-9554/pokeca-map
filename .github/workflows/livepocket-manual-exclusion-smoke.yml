@@ -20,7 +20,7 @@ jobs:
         run: |
           python -m py_compile scripts/livepocket_prefecture_manual_snapshot.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_prefecture_manual_snapshot.py
-      - name: Verify real Supabase manual edits are readable
+      - name: Verify URL-column grants for all manual edit tables
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
