@@ -5607,11 +5607,14 @@
     const initial=assigned.length?assigned:
       (lpPrivateAccountDefault()?[{account_id:lpPrivateAccountDefault().id,
         application_count:0,won_count:0,lost_count:0}]:[]);
+    const unassignedEmpty=['application_count','won_count','lost_count']
+      .every(key=>old[key]===0);
     return '<fieldset class="lp-track-account-block" id="lpTrackPrivateAccounts">'+
       '<legend>🔒 アカウント別の応募口数（本人のみ）</legend>'+
       '<p class="lp-tracker-intro">上の合計は内訳から自動計算します。'+
-      '以前の口数は未割当のまま保持し、勝手に割り当てません。</p>'+
-      '<div class="lp-track-unassigned" id="lpTrackUnassigned"><strong>未割当（以前の記録）</strong>'+
+      '以前の口数は未割当のまま保持し、割当先に移した分だけ減ります。</p>'+
+      '<div class="lp-track-unassigned" id="lpTrackUnassigned"'+
+      (unassignedEmpty?' hidden':'')+'><strong>未割当（以前の記録）</strong>'+
       '<div class="lp-track-account-grid">'+
       ['application_count','won_count','lost_count'].map(key=>
         lpTrackerAccountInput(key,old[key])).join('')+'</div></div>'+
@@ -5620,7 +5623,8 @@
           .map(x=>x.account_id))).join('')+'</div>'+
       '<div class="lp-track-account-buttons">'+
       '<button type="button" id="lpTrackAccountAdd">➕ アカウントを割り当て</button>'+
-      '<button type="button" id="lpTrackAssignLegacy">未割当を既定アカウントへ移動</button>'+
+      '<button type="button" id="lpTrackAssignLegacy"'+
+      (unassignedEmpty?' hidden':'')+'>未割当を既定アカウントへ移動</button>'+
       '<button type="button" id="lpTrackOpenPrivateAccounts">アカウントを管理</button>'+
       '</div><p class="lp-tracker-intro">識別名は他のユーザー・抽選結果画面に公開されません。</p>'+
       '</fieldset>';
@@ -5659,6 +5663,17 @@
     return values;
   }
 
+  // Reclassify previously unassigned tickets into the edited account.
+  // The account increase first consumes legacy tickets; any excess counts
+  // as a new application. Reversing the edit returns tickets to unassigned.
+  function lpTrackerUnassignedAfterEdit(previousLegacy,previousAccount,nextAccount){
+    const numbers=[previousLegacy,previousAccount,nextAccount];
+    if(!numbers.every(Number.isSafeInteger)||
+       numbers.some(n=>n<0||n>9999))return null;
+    const updated=Math.max(0,previousLegacy-(nextAccount-previousAccount));
+    return updated<=9999?updated:null;
+  }
+
   function lpTrackerPrivateBind(form,updateQuantityHint){
     const root=$('lpTrackPrivateAccounts');
     if(!root)return null;
@@ -5667,11 +5682,24 @@
     const holder=$('lpTrackAccountRows'),unassigned=$('lpTrackUnassigned');
     const count=(row,key)=>Number(row.querySelector('[data-lp-account-count="'+key+'"]')?.value||0);
     const rows=()=>[...holder.querySelectorAll('[data-lp-account-row]')];
+    const previousInputValues=new WeakMap();
     const summarize=()=>{
       const all=[unassigned,...rows()];
       totals.forEach(k=>{
         form.elements[k].value=String(all.reduce((sum,row)=>sum+count(row,k),0));
       });
+      const hasUnassigned=totals.some(key=>count(unassigned,key)!==0);
+      unassigned.hidden=!hasUnassigned;
+      const moveButton=root.querySelector?.('#lpTrackAssignLegacy');
+      if(moveButton)moveButton.hidden=!hasUnassigned;
+      // Keep the last valid input count so each keystroke transfers only
+      // the difference, not the whole entered quantity again.
+      for(const row of rows()){
+        for(const key of totals){
+          const input=row.querySelector('[data-lp-account-count="'+key+'"]');
+          if(input)previousInputValues.set(input,count(row,key));
+        }
+      }
       updateQuantityHint();
     };
     const activeProfile=()=>lpPrivateAccountDefault();
@@ -5688,7 +5716,27 @@
       summarize();return true;
     };
     root.addEventListener('input',e=>{
-      if(e.target.matches('[data-lp-account-count]'))summarize();
+      const target=e.target;
+      if(!target.matches('[data-lp-account-count]'))return;
+      const row=target.closest('[data-lp-account-row]');
+      if(row){
+        const key=target.getAttribute('data-lp-account-count');
+        if(!totals.includes(key))return;
+        const previous=previousInputValues.get(target)??0;
+        const current=Number(target.value||0);
+        const oldCell=unassigned.querySelector('[data-lp-account-count="'+key+'"]');
+        const remaining=lpTrackerUnassignedAfterEdit(
+          Number(oldCell.value||0),previous,current);
+        if(remaining===null){
+          target.value=String(previous);
+          $('lpTrackEditorMessage').textContent='口数は0～9999の整数で入力してください。';
+        }else{
+          oldCell.value=String(remaining);
+          $('lpTrackEditorMessage').textContent='';
+        }
+      }
+      // Editing the unassigned row directly is still supported.
+      summarize();
     });
     root.addEventListener('change',e=>{
       if(e.target.matches('[data-lp-account-id]'))summarize();
