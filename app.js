@@ -5108,6 +5108,7 @@
       <p class="lp-tracker-intro">応募、当選、受け取り期間と「自分の現地対応完了」を非公開で管理します。現地対応が必要かどうか・対応内容は別枠で全ユーザーに共有します。</p>
       <section id="lpPickupAlerts" class="lp-pickup-alerts" aria-label="当選商品の受取期限のお知らせ" hidden></section>
       <p id="lpTrackStatus" role="status" aria-live="polite"></p>
+      <button type="button" id="lpPrivateAccountManage" class="lp-private-account-manage">🔒 応募アカウントを管理（自分だけ）</button>
       <div id="lpTrackCounts" class="lp-track-counts"></div>
       <div class="lp-track-toolbar"><label for="lpTrackFilter">自分の記録を表示</label>
         <select id="lpTrackFilter"><option value="all">すべて</option><option value="applied">応募済み</option><option value="won">当選・受取待ち</option><option value="lost">落選</option><option value="received">受取済み</option><option value="not_applied">未応募</option><option value="onsite">現地対応待ち</option></select>
@@ -5135,6 +5136,46 @@
     dialog.addEventListener('click', e => {
       if (e.target === dialog) dialog.close();
     });
+    const accountDialog=document.createElement('dialog');
+    accountDialog.id='lpPrivateAccountDialog';
+    accountDialog.setAttribute('aria-label','自分専用の応募アカウント');
+    accountDialog.innerHTML='<h3 tabindex="-1" autofocus data-dialog-title-focus>🔒 応募アカウント管理</h3>'+
+      '<p class="lp-tracker-intro">アカウントの識別名を登録できます。既定のアカウントは各抽選で最初に選択されます。本人以外には非公開です。</p>'+
+      '<form id="lpPrivateAccountForm"><label>識別名（パスワードは入力しない）'+
+      '<input type="text" name="label" maxlength="80" required placeholder="例：メイン／サブ1" autocomplete="off"></label>'+
+      '<button type="submit">➕ 追加</button></form>'+
+      '<div id="lpPrivateAccountList"></div>'+
+      '<p id="lpPrivateAccountStatus" role="status" aria-live="polite"></p>'+
+      '<button type="button" id="lpPrivateAccountClose">閉じる</button>';
+    document.body.append(accountDialog);
+    $('lpPrivateAccountManage').addEventListener('click',lpPrivateAccountOpen);
+    $('lpPrivateAccountClose').addEventListener('click',()=>accountDialog.close());
+    accountDialog.addEventListener('click',e=>{
+      if(e.target===accountDialog)accountDialog.close();
+    });
+    $('lpPrivateAccountForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const form=e.currentTarget;
+      const name=String(form.elements.namedItem('label')?.value||'');
+      if(await lpPrivateAccountAction('add','',name))form.reset();
+    });
+    $('lpPrivateAccountList').addEventListener('click',async e=>{
+      const button=e.target.closest('button[data-private-act]');
+      if(!button)return;
+      const id=button.closest('[data-account-id]')?.dataset.accountId||'';
+      const account=lpPrivateAccounts.get(id);
+      if(!account)return;
+      const action=button.dataset.privateAct;
+      if(action==='rename'){
+        const name=prompt('新しい識別名（パスワードは入力しない）',account.label);
+        if(name!==null)await lpPrivateAccountAction('rename',id,name);
+      }else if(action==='archive'){
+        if(confirm(account.is_archived?'このアカウントを再表示しますか？':
+          '一覧から非表示にしますか？過去の応募内訳は残ります。'))
+          await lpPrivateAccountAction(action,id);
+      }else if(action==='default')await lpPrivateAccountAction(action,id);
+    });
+    lpPrivateAccountRender();
     renderLotteryTrackerSummary();
   }
 
