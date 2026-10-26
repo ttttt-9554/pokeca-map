@@ -63,7 +63,9 @@ def due_retries(raw, public, now=None, *, limit=3):
             continue
         # Scheduled collectors never reopen pre-cutover lotteries with
         # unknown deadlines; manual developer runs retain the old option.
-        if scheduled_future_only() and not after_cutover(first.get('detected_at')):
+        if scheduled_future_only() and not (
+                after_cutover(first.get('detected_at')) and
+                after_cutover(rindex[url].get('discord_posted_at'))):
             continue
         age = now - detected.astimezone(now.tzinfo)
         if age < timedelta(0) or age > timedelta(days=RETRY_MAX_AGE_DAYS):

@@ -1,5 +1,9 @@
 """End-to-end planning tests: old lotteries never consume scheduled page calls."""
+import json
 import os
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
 from unittest import TestCase
 from unittest.mock import patch
@@ -27,7 +31,8 @@ def fixture(pending=True):
               "status": "checked_no_new_details"},
     }
     return {
-        "items": [{"url": OLD}, {"url": NEW}],
+        "items": [{"url": OLD, "discord_posted_at": OLD_DETECTED},
+                  {"url": NEW, "discord_posted_at": NEW_DETECTED}],
         "collector_state": {
             "v14": {"pending_new_urls": [OLD, NEW] if pending else [],
                     "new_url_checks": history},
@@ -66,6 +71,19 @@ class ForwardOnlyPolicyTests(TestCase):
         with patch.dict(os.environ, {"LIVEPOCKET_AUTO_FUTURE_ONLY": "false"}):
             self.assertCountEqual(v16.due_retries(fixture(False), PUBLIC, NOW, limit=5), [OLD, NEW])
 
+    def test_late_backfill_does_not_reopen_a_legacy_lottery(self):
+        # The collector may first notice an old Discord message today.
+        # Its detection timestamp is new but its actual posting is old.
+        raw=fixture()
+        raw['items'][1]['discord_posted_at']=OLD_DETECTED
+        with patch.dict(os.environ, {"LIVEPOCKET_AUTO_FUTURE_ONLY": "true"}):
+            self.assertEqual(v18.select(raw, PUBLIC, NOW, new_limit=5,
+                                         background_limit=0)[0], [])
+            raw['collector_state']['v14']['pending_new_urls']=[]
+            self.assertEqual(v16.due_retries(raw, PUBLIC, NOW, limit=5), [])
+        with patch.dict(os.environ, {"LIVEPOCKET_AUTO_FUTURE_ONLY": "false"}):
+            self.assertIn(NEW, v16.due_retries(raw, PUBLIC, NOW, limit=5))
+
     def test_scheduled_retry_skips_expired_verified_deadlines(self):
         public = {"items": [
             {"url": OLD}, {"url": NEW,
@@ -73,6 +91,48 @@ class ForwardOnlyPolicyTests(TestCase):
         ]}
         with patch.dict(os.environ, {"LIVEPOCKET_AUTO_FUTURE_ONLY": "true"}):
             self.assertEqual(v16.due_retries(fixture(False), public, NOW, limit=5), [])
+
+
+    def _sample_cli(self, posted_at, *, plan):
+        root=Path(__file__).resolve().parent.parent
+        path=root / 'scripts/livepocket_detail_period_batch.py'
+        with tempfile.TemporaryDirectory() as directory:
+            target=Path(directory)
+            data={"items":[{"url": OLD, "discord_posted_at": posted_at}]}
+            raw_path=target/'livepocket_urls.json'
+            pub_path=target/'livepocket_public.json'
+            for file in (raw_path,pub_path):
+                file.write_text(json.dumps(data),encoding='utf-8')
+            excluded=target/'manual.json'
+            excluded.write_text(json.dumps({"urls": [NEW]}),encoding='utf-8')
+            gh=target/'output.txt'
+            env=dict(os.environ, PYTHONPATH=str(root/'scripts'),
+                     GITHUB_OUTPUT=str(gh))
+            argv=[sys.executable,str(path),'--manual-overrides-json',
+                  str(excluded),'--limit','5']
+            if plan:
+                argv.append('--plan')
+            else:
+                argv.append('--write')
+            result=subprocess.run(argv,cwd=target,env=env,check=True,
+                                  text=True,capture_output=True,timeout=20)
+            self.assertNotIn(OLD,result.stdout)
+            self.assertEqual(json.loads(raw_path.read_text()),data)
+            self.assertEqual(json.loads(pub_path.read_text()),data)
+            return result.stdout, gh.read_text() if gh.exists() else ''
+
+    def test_cli_plan_skips_old_lotteries_without_starting_browser(self):
+        stdout, output=self._sample_cli(OLD_DETECTED,plan=True)
+        self.assertIn('eligible 0',stdout)
+        self.assertEqual(output,'browser_needed=false\\n')
+        stdout,_=self._sample_cli(OLD_DETECTED,plan=False)
+        self.assertIn("'historical_missing_skipped': 1",stdout)
+        self.assertIn("'checked': 0",stdout)
+
+    def test_cli_plan_requests_browser_only_for_future_notice(self):
+        stdout, output=self._sample_cli(NEW_DETECTED,plan=True)
+        self.assertIn('eligible 1',stdout)
+        self.assertEqual(output,'browser_needed=true\\n')
 
     def test_scheduled_collector_keeps_only_five_minute_new_scans(self):
         root = Path(__file__).resolve().parent.parent

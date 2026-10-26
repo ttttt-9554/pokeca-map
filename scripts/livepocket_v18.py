@@ -86,9 +86,11 @@ def select(raw, public, now, *, new_limit=15, background_limit=0, retry_days=7):
     forward_only = scheduled_future_only()
     pending = [url for url in state.get('pending_new_urls', [])
                if url in rindex and not application_closed(pindex[url], now)
-               and (not forward_only or after_cutover(
-                   history.get(url, {}).get('detected_at')
-                   if isinstance(history.get(url), dict) else None))]
+               and (not forward_only or (
+                   after_cutover(rindex[url].get('discord_posted_at')) and
+                   after_cutover(
+                       history.get(url, {}).get('detected_at')
+                       if isinstance(history.get(url), dict) else None)))]
     pending.sort(key=lambda u: (rindex[u].get('discord_posted_at') or '', u), reverse=True)
     urgent = pending[:max(0, new_limit)]
     if background_limit <= 0:
