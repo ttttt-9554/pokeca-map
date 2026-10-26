@@ -134,14 +134,16 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(stats["deferred"],2)
         self.assertEqual(stats["fetch_failed"],1)
 
-    def test_robot_verification_stops_checks(self):
+    def test_challenge_pages_stop_checks(self):
         p={"items":[{"url":U+"a"},{"url":U+"b"}]}
-        stats=run(p,set(),lambda url:{
-            "status":"browser_blocked_or_empty",
-            "gate_reason":"robot_verification_page"})
-        self.assertEqual(stats["checked"],1)
-        self.assertEqual(stats["blocked"],1)
-        self.assertEqual(stats["deferred"],1)
+        for reason in ("robot_verification_page", "access_gate"):
+            with self.subTest(gate_reason=reason):
+                stats=run(p,set(),lambda url:{
+                    "status":"browser_blocked_or_empty",
+                    "gate_reason":reason})
+                self.assertEqual(stats["checked"],1)
+                self.assertEqual(stats["blocked"],1)
+                self.assertEqual(stats["deferred"],1)
 
     def test_missing_page_and_empty_body_do_not_block_other_events(self):
         p={"items":[{"url":U+"a"},{"url":U+"b"},{"url":U+"c"}]}
