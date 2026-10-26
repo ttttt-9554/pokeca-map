@@ -133,7 +133,7 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None):
             # Other missing pages/empty bodies can be event-specific.
             if (status == "browser_blocked" or
                     (status == "browser_blocked_or_empty" and
-                     result.get("gate_reason") == "robot_verification_page")):
+                     result.get("gate_reason") in ("robot_verification_page", "access_gate"))):
                 stats["blocked"] += 1
                 stats["deferred"] = len(urls) - stats["checked"]
                 break
