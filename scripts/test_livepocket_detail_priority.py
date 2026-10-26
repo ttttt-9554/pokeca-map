@@ -41,6 +41,33 @@ class DetailPriorityTests(unittest.TestCase):
         self.assertIsNone(start)
         self.assertIsNone(end)
 
+    def test_reception_period_in_details_precedes_ticket_sale(self):
+        body="""概要
+詳細
+応募受付期間 2026年10月24日13:00～2026年10月26日21:45
+受付・チケット情報
+販売受付期間 2026年10月23日15:02～2026年10月26日21:45"""
+        start,end=extract_deadline(body)
+        self.assertEqual(start.strftime("%Y-%m-%d %H:%M"),"2026-10-24 13:00")
+        self.assertEqual(end.strftime("%Y-%m-%d %H:%M"),"2026-10-26 21:45")
+
+    def test_fullwidth_space_headings_protect_detail_priority(self):
+        body="""　詳細　
+申込受付期間 2026年10月24日13:00～2026年10月26日21:45
+　受付・チケット情報　
+販売受付期間 2026年10月23日15:02～2026年10月26日21:45"""
+        start,end=extract_deadline(body)
+        self.assertEqual(start.strftime("%Y-%m-%d %H:%M"),"2026-10-24 13:00")
+        self.assertEqual(end.strftime("%Y-%m-%d %H:%M"),"2026-10-26 21:45")
+
+    def test_conflicting_reception_periods_in_details_are_rejected(self):
+        body="""詳細
+応募受付期間 2026年10月24日13:00～2026年10月26日21:45
+申込受付期間 2026年10月24日13:00～2026年10月27日21:45
+受付・チケット情報
+販売受付期間 2026年10月23日15:02～2026年10月26日21:45"""
+        self.assertEqual(extract_deadline(body),(None,None))
+
     def test_fallback_ticket_when_no_detail_signup(self):
         body="""詳細
 商品の案内です。
