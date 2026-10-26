@@ -130,6 +130,7 @@ const fakeItems={
 };
 context.$=key=>fakeItems[key]||null;
 const bindTest=vm.runInNewContext(
+  extract('lpTrackerApplyOutcome')+'\n'+
   extract('lpTrackerPrivateBind')+'\n({lpTrackerPrivateBind})',
   {...context,
     lpPrivateAccountRows:api.lpPrivateAccountRows,
