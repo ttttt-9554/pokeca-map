@@ -48,6 +48,23 @@ class GitIntegration(unittest.TestCase):
     def tearDown(self):
         self.directory.cleanup()
 
+    def test_end_only_survives_capture_and_apply_without_made_up_start(self):
+        for name in ('livepocket_urls.json', 'livepocket_public.json'):
+            catalog=self.read(name)
+            catalog['items'][0]['application_end_at']=DATES[1]
+            self.write(name,catalog)
+        self.shell('python','livepocket_detail_period_publish_latest.py',
+                   'capture','--manifest','manifest.json')
+        self.assertIsNone(self.read('manifest.json')['changes'][0]['application_start_at'])
+        self.shell('git','restore','livepocket_urls.json','livepocket_public.json')
+        self.shell('python','livepocket_detail_period_publish_latest.py',
+                   'apply','--manifest','manifest.json',
+                   '--manual-overrides-json','exclusions.json')
+        for name in ('livepocket_urls.json', 'livepocket_public.json'):
+            row=self.read(name)['items'][0]
+            self.assertEqual(row['application_end_at'],DATES[1])
+            self.assertNotIn('application_start_at',row)
+
     def test_capture_apply_preserves_concurrent_catalog_changes(self):
         for name in ('livepocket_urls.json', 'livepocket_public.json'):
             catalog = self.read(name)

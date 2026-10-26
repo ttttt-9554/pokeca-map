@@ -25,11 +25,22 @@ class RevalidationTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             changed_urls(before,after)
 
-    def test_reject_partial_date(self):
+    def test_accept_future_end_only(self):
         before={"items":[{"url":U}]}
         after={"items":[{"url":U,"application_end_at":"2099-10-26T21:45:00+09:00"}]}
+        self.assertEqual(changed_urls(before,after),{U})
+
+    def test_reject_start_without_deadline(self):
+        before={"items":[{"url":U}]}
+        after={"items":[{"url":U,"application_start_at":"2099-10-24T13:00:00+09:00"}]}
         with self.assertRaises(RuntimeError):
             changed_urls(before,after)
+
+    def test_reject_malformed_end_only(self):
+        before={"items":[{"url":U}]}
+        for end in ("", "not-a-date", "2099-10-26T21:45:00", None):
+            with self.subTest(end=end), self.assertRaises(RuntimeError):
+                changed_urls(before,{"items":[{"url":U,"application_end_at":end}]})
 
     def test_reject_changed_non_date_fields(self):
         before={"items":[{"url":U,"store_name":"Original"}]}

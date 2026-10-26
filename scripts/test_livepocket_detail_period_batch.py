@@ -180,15 +180,25 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(stats["blocked"],0)
         self.assertEqual(stats["deferred"],0)
 
-    def test_end_only_is_diagnosed_but_not_published(self):
+    def test_explicit_future_end_only_is_published_without_guessing_start(self):
         p={"items":[{"url":U+"deadline"}]}
         message="応募締切 2099年10月26日21:45"
         fetch=lambda u:{"status":"ok","final_url":u,"text":message}
         stats=run(p,set(),fetch,now=datetime(2099,10,20,tzinfo=timezone.utc))
         self.assertEqual(stats["checked"],1)
-        self.assertEqual(stats["no_verified_period"],1)
-        self.assertEqual(stats["period_without_start"],1)
+        self.assertEqual(stats["no_verified_period"],0)
+        self.assertEqual(stats["end_only_added"],1)
+        self.assertEqual(stats["updated"],1)
+        self.assertEqual(p["items"][0]["application_end_at"],"2099-10-26T21:45:00+09:00")
+        self.assertNotIn("application_start_at",p["items"][0])
+
+    def test_explicit_expired_end_only_is_never_published(self):
+        p={"items":[{"url":U+"deadline"}]}
+        message="応募締切 2099年10月26日21:45"
+        stats=run(p,set(),lambda u:{"status":"ok","final_url":u,"text":message},
+                  now=datetime(2099,10,27,tzinfo=timezone.utc))
         self.assertEqual(stats["updated"],0)
+        self.assertEqual(stats["no_verified_period"],1)
         self.assertNotIn("application_end_at",p["items"][0])
 
     def test_expired_explicit_pair_is_diagnosed(self):

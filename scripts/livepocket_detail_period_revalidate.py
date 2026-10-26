@@ -27,7 +27,7 @@ def _index(data):
 
 
 def changed_urls(before, after, now=None):
-    """Only two newly populated, future, coherent deadline fields may change."""
+    """Only a new verified end and optional verified start may change."""
     old, current = _index(before), _index(after)
     if old.keys() != current.keys():
         raise RuntimeError("Event URLs unexpectedly changed")
@@ -42,12 +42,19 @@ def changed_urls(before, after, now=None):
                 != {k:v for k,v in row.items() if k not in DATE_KEYS}):
             raise RuntimeError("Non-date fields unexpectedly changed")
         if any(row.get(k) != previous.get(k) for k in DATE_KEYS):
-            if (any(previous.get(k) for k in DATE_KEYS)
-                    or not all(isinstance(row.get(k), str) and row.get(k)
-                               for k in DATE_KEYS)):
-                raise RuntimeError("Date overwrite or partial write")
-            start, end = (parse_datetime(row[key]) for key in DATE_KEYS)
-            if not start or not end or start > end or end <= now:
+            if any(previous.get(k) for k in DATE_KEYS):
+                raise RuntimeError("Existing date would be overwritten")
+            # An explicit deadline needs no inferred start, but a start
+            # without a verified deadline is never safe to publish.
+            start_text = row.get("application_start_at")
+            end_text = row.get("application_end_at")
+            if (not isinstance(end_text, str) or not end_text
+                    or (start_text is not None and
+                        (not isinstance(start_text, str) or not start_text))):
+                raise RuntimeError("Missing or malformed application deadline")
+            start = parse_datetime(start_text) if start_text else None
+            end = parse_datetime(end_text)
+            if not end or (start_text and not start) or (start and start > end) or end <= now:
                 raise RuntimeError("Invalid or expired deadline")
             changed.add(url)
     return changed
@@ -73,7 +80,7 @@ def main():
         changes_by_file.append(file_changes)
         index = _index(after)
         values_by_file.append({
-            url: (index[url]["application_start_at"], index[url]["application_end_at"])
+            url: (index[url].get("application_start_at"), index[url]["application_end_at"])
             for url in file_changes
         })
         changed.update(file_changes)

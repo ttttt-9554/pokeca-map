@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish only previously verified date pairs against the CURRENT main catalog.
+"""Publish verified application deadlines against the CURRENT main catalog.
 
 This tool never scrapes a webpage, guesses a date, or overwrites corrections.
 Capture a minimal manifest from the original checkout; after fetching the
@@ -32,15 +32,18 @@ def _index(catalog):
 
 
 def _period(start, end, now):
-    if not isinstance(start, str) or not isinstance(end, str):
-        raise ValueError('Date fields must be strings')
+    """Verify a real cutoff time; start may be None, never inferred."""
+    if (not isinstance(end, str) or not end
+            or (start is not None and (not isinstance(start, str) or not start))):
+        raise ValueError('Expected a verified end and optional verified start')
     try:
-        begin = datetime.fromisoformat(start.replace('Z', '+00:00'))
+        begin = datetime.fromisoformat(start.replace('Z', '+00:00')) if start else None
         finish = datetime.fromisoformat(end.replace('Z', '+00:00'))
     except ValueError as exc:
         raise ValueError('Invalid date format') from exc
-    if begin.tzinfo is None or finish.tzinfo is None or begin > finish or finish <= now:
-        raise ValueError('Incoherent or expired application period')
+    if (finish.tzinfo is None or (begin is not None and begin.tzinfo is None)
+            or (begin is not None and begin > finish) or finish <= now):
+        raise ValueError('Incoherent or expired application deadline')
     return start, end
 
 
@@ -110,8 +113,10 @@ def apply_manifest(raw, public, manifest, excluded_urls, now=None):
         if any(source.get(key) or published.get(key) for key in DATE_FIELDS):
             continue
         for row in (source, published):
-            for key in DATE_FIELDS:
-                row[key] = entry[key]
+            # Preserve an unknown start as unknown (no fabricated timestamp).
+            if entry['application_start_at'] is not None:
+                row['application_start_at'] = entry['application_start_at']
+            row['application_end_at'] = entry['application_end_at']
         updates += 1
     return updates
 

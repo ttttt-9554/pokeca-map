@@ -88,7 +88,7 @@ def apply(public, url, body, excluded, now=None, raw=None):
         return False
     now = now or datetime.now(timezone.utc)
     start, end = extract_deadline(body)
-    if not start or not end or start > end or end <= now:
+    if not end or (start is not None and start > end) or end <= now:
         return False
     matches = [x for x in public.get("items", []) if x.get("url") == url]
     if len(matches) != 1:
@@ -104,10 +104,14 @@ def apply(public, url, body, excluded, now=None, raw=None):
         raw_row = matches_raw[0]
         if raw_row.get("application_start_at") or raw_row.get("application_end_at"):
             return False
-    row["application_start_at"] = iso(start)
+    # Never invent a start date. An explicitly labelled end-only cutoff is
+    # still useful and is supported by the app's existing date display.
+    if start is not None:
+        row["application_start_at"] = iso(start)
     row["application_end_at"] = iso(end)
     if raw_row is not None:
-        raw_row["application_start_at"] = iso(start)
+        if start is not None:
+            raw_row["application_start_at"] = iso(start)
         raw_row["application_end_at"] = iso(end)
     return True
 
@@ -131,7 +135,8 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
              "fetch_failed": 0, "wrong_event": 0,
              "blocked": 0, "deferred": 0,
              "period_unverified": 0, "period_without_start": 0,
-             "period_expired": 0, "period_not_applied": 0}
+             "period_expired": 0, "period_not_applied": 0,
+             "end_only_added": 0}
     for url in urls:
         try:
             result = fetch(url)
@@ -166,6 +171,8 @@ def run(public, excluded, fetch, limit=5, offset=0, raw=None, now=None):
         body = result.get("text") or ""
         if apply(public, url, body, excluded, now=now, raw=raw):
             stats["updated"] += 1
+            if extract_deadline(body)[0] is None:
+                stats["end_only_added"] += 1
         else:
             stats["no_verified_period"] += 1
             # Diagnose why no new date was published without logging URLs

@@ -18,6 +18,33 @@ class ManifestTests(unittest.TestCase):
     def manifest(self):
         return capture(self.original(), self.original(), self.verified(), self.verified(),N)
 
+    def test_capture_future_end_only(self):
+        updated=self.original()
+        updated['items'][0]['application_end_at']=B
+        manifest=capture(self.original(),self.original(),updated,updated,N)
+        self.assertEqual(len(manifest['changes']),1)
+        self.assertIsNone(manifest['changes'][0]['application_start_at'])
+        self.assertEqual(manifest['changes'][0]['application_end_at'],B)
+
+    def test_apply_end_only_preserves_unknown_start(self):
+        raw=self.original()
+        pub=self.original()
+        updated=self.original()
+        updated['items'][0]['application_end_at']=B
+        manifest=capture(self.original(),self.original(),updated,updated,N)
+        self.assertEqual(apply_manifest(raw,pub,manifest,set(),N),1)
+        self.assertEqual(raw['items'][0]['application_end_at'],B)
+        self.assertEqual(pub['items'][0]['application_end_at'],B)
+        self.assertNotIn('application_start_at',raw['items'][0])
+        self.assertNotIn('application_start_at',pub['items'][0])
+        self.assertEqual(apply_manifest(raw,pub,manifest,set(),N),0)
+
+    def test_capture_rejects_start_only(self):
+        updated=self.original()
+        updated['items'][0]['application_start_at']=A
+        with self.assertRaises(ValueError):
+            capture(self.original(),self.original(),updated,updated,N)
+
     def test_capture_dates(self):
         data=self.manifest()
         self.assertEqual(len(data['changes']),1)
