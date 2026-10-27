@@ -648,11 +648,23 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://aeonretail.com/Page/k-lottery_pokemon_com.aspx",
+      "source_site": "aeonretail.com",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-10-27T03:41:10.230000+00:00",
+      "first_detected_at": "2026-10-27T03:45:57.299637+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1564473762563235930"
+    "1551580466266644552": "1564484075174105190"
   },
-  "collected_at": "2026-10-27T03:05:56.206584+00:00",
+  "collected_at": "2026-10-27T03:45:57.299681+00:00",
   "messages_scanned": 100
 }
