@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-27T03:45:56.889252+00:00",
-  "unique_livepocket_urls": 573,
+  "collected_at": "2026-10-27T05:35:56.055367+00:00",
+  "unique_livepocket_urls": 574,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8368,7 +8368,29 @@
       "discord_posted_at": "2026-10-27T01:06:51.681000+00:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-10-27T01:15:59.864131+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/qq5yy",
+      "store_name": "トレカエース TSUTAYAデイズタウンつくば",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-27T05:30:07.640000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース TSUTAYAデイズタウンつくば",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム 拡張パック「30th CELEBRATION」",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 拡張パック「30th CELEBRATION」",
+      "first_detected_at": "2026-10-27T05:35:57.600927+00:00"
     }
   ],
-  "updated_at": "2026-10-27T05:25:59.343086+00:00"
+  "updated_at": "2026-10-27T05:43:55.551554+00:00"
 }
