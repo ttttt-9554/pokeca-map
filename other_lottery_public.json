@@ -660,11 +660,23 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://shoplottery.e-starbox.com/lottery/entry?code=bglYeKQGN9",
+      "source_site": "shoplottery.e-starbox.com",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-10-27T09:20:27.730000+00:00",
+      "first_detected_at": "2026-10-27T09:25:56.942158+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1564564340554858536"
+    "1551580466266644552": "1564569460717785098"
   },
-  "collected_at": "2026-10-27T09:05:56.540706+00:00",
+  "collected_at": "2026-10-27T09:25:56.942199+00:00",
   "messages_scanned": 100
 }
