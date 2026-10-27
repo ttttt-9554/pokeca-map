@@ -8373,24 +8373,22 @@
       "url": "https://livepocket.jp/e/qq5yy",
       "store_name": "トレカエース TSUTAYAデイズタウンつくば",
       "prefecture": "茨城県",
+      "event_title": "ポケモンカードゲーム 拡張パック「30th CELEBRATION」",
+      "application_start_at": "2026-10-26T10:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-27T05:30:07.640000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカエース TSUTAYAデイズタウンつくば",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "ポケモンカードゲーム 拡張パック「30th CELEBRATION」",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-26T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 拡張パック「30th CELEBRATION」",
       "first_detected_at": "2026-10-27T05:35:57.600927+00:00"
     }
   ],
-  "updated_at": "2026-10-27T05:43:55.551554+00:00"
+  "updated_at": "2026-10-27T05:45:57.096930+00:00"
 }
