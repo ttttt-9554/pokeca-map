@@ -18057,8 +18057,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/qq5yy": {
-          "checked_at": "2026-10-27T05:43:55.551554+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-27T11:51:26.503582+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/bovnn": {
@@ -19381,8 +19381,8 @@
         },
         "https://livepocket.jp/e/qq5yy": {
           "detected_at": "2026-10-27T05:35:57.600927+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-27T05:43:55.551554+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-27T11:51:26.503582+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bovnn": {
@@ -20479,6 +20479,11 @@
         "https://livepocket.jp/e/ukxef": {
           "attempts": 1,
           "last_attempt_at": "2026-10-27T07:26:24.631424+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/qq5yy": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-27T11:51:26.503582+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -25121,7 +25126,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-27T05:43:55.551554+00:00",
+          "checked_at": "2026-10-27T11:51:26.503582+00:00",
           "title_observed": "ポケモンカードゲーム 拡張パック「30th CELEBRATION」",
           "genre": "pokemon",
           "product_origin": "",
@@ -28819,7 +28824,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/qq5yy": {
-          "checked_at": "2026-10-27T05:43:55.551554+00:00",
+          "checked_at": "2026-10-27T11:51:26.503582+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
