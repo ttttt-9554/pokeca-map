@@ -17975,7 +17975,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/2c701": {
-          "checked_at": "2026-10-26T20:21:51.599103+00:00",
+          "checked_at": "2026-10-27T02:26:23.575184+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19286,7 +19286,7 @@
         "https://livepocket.jp/e/2c701": {
           "detected_at": "2026-10-26T14:05:59.422556+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-26T20:21:51.599103+00:00",
+          "checked_at": "2026-10-27T02:26:23.575184+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ol959": {
@@ -20378,8 +20378,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/2c701": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-26T20:21:51.599103+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-27T02:26:23.575184+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -24978,7 +24978,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-26T20:21:51.599103+00:00",
+          "checked_at": "2026-10-27T02:26:23.575184+00:00",
           "title_observed": "【トレカパーク朝霞店】ポケカ抽選販売（30th CELEBRATION カードセット）",
           "genre": "pokemon",
           "product_origin": "",
@@ -28646,7 +28646,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/2c701": {
-          "checked_at": "2026-10-26T20:21:51.599103+00:00",
+          "checked_at": "2026-10-27T02:26:23.575184+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
