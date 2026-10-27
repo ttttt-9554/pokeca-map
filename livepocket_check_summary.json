@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "40421378937",
-    "run_number": "1409",
-    "completed_process_at": "2026-10-26T23:48:45Z",
+    "run_id": "40427929308",
+    "run_number": "1415",
+    "completed_process_at": "2026-10-27T00:50:51Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 1,
@@ -14,8 +14,8 @@
       "retry_new_fields": 0,
       "retry_blocked": 0,
       "historical_attempted": 0,
-      "registered_urls": 571,
-      "deadlines_known": 536,
+      "registered_urls": 572,
+      "deadlines_known": 537,
       "store_lists_added": 0,
       "multi_store_urls": 20,
       "stores_from_pages": 0,
@@ -35,7 +35,7 @@
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
       "official_products_added": 0,
-      "official_genres_confirmed": 1,
+      "official_genres_confirmed": 0,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
@@ -45,8 +45,8 @@
       "title_updated": 1,
       "product_updated": 0,
       "deadline_updated": 1,
-      "store_updated": 399,
-      "genre_updated": 14,
+      "store_updated": 400,
+      "genre_updated": 13,
       "new_urls": 0
     },
     "page_check_attempts": 1,
@@ -142,23 +142,23 @@
   },
   "daily_additions": {
     "date_jst": "2026-10-27",
-    "today": 1,
+    "today": 2,
     "yesterday": 10,
-    "last_7_days": 158,
-    "registered_total": 571,
+    "last_7_days": 159,
+    "registered_total": 572,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-26T23:48:45Z",
+    "as_of": "2026-10-27T00:50:51Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 1,
     "retry_wait": 1,
-    "completed": 53,
+    "completed": 54,
     "expired": 511,
     "removed": 2,
     "new_pending": 0,
     "quarantined": 3,
-    "total": 571,
+    "total": 572,
     "unresolved": 2,
     "missing_title": 0,
     "missing_store": 1,
@@ -168,6 +168,6 @@
     "next_batch_size": 1,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-26T23:48:48Z"
+    "as_of": "2026-10-27T00:50:53Z"
   }
 }

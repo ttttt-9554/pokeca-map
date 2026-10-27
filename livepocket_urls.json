@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-26T23:40:56.710565+00:00",
+  "collected_at": "2026-10-27T00:40:57.395660+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 571,
+  "unique_livepocket_urls": 572,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15340,34 +15340,64 @@
       "event_title": "ワンピースカードゲーム Heroines Edition vol.2【EB-05】 抽選販売受付",
       "application_end_at": "2026-10-27T23:59:00+09:00",
       "application_start_at": "2026-10-26T19:33:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/83tom",
+      "discord_message_id": "1564436713416167547",
+      "discord_posted_at": "2026-10-27T00:32:58.307000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍群馬県\n晴れる屋 高崎店\n受付終了: 11/05 23:59（残り9日14時間）\nhttps://livepocket.jp/e/83tom",
+      "store_name": "晴れる屋 高崎店",
+      "prefecture": "群馬県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "晴れる屋 高崎店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【晴れる屋 高崎店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-10-16T17:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 413,
+    "parsed": 414,
     "no_structured_details": 158
   },
   "field_counts": {
-    "store_name": 391,
-    "prefecture": 329,
-    "event_title": 258,
+    "store_name": 392,
+    "prefecture": 330,
+    "event_title": 259,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 536,
-    "application_start_at": 536,
-    "stores_events": 399
+    "application_end_at": 537,
+    "application_start_at": 537,
+    "stores_events": 400
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1564420217763922030"
+      "1551580466266644552": "1564436713416167547"
     },
     "last_run": {
-      "checked_at": "2026-10-26T23:40:56.710565+00:00",
+      "checked_at": "2026-10-27T00:40:57.395660+00:00",
       "new_urls": 1,
-      "original_urls": 570,
+      "original_urls": 571,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -15531,7 +15561,8 @@
         "1564126453291814963": "2026-10-26T04:00:55.549935+00:00",
         "1564134007095034006": "2026-10-26T04:30:55.456381+00:00",
         "1564277449766731866": "2026-10-26T14:05:58.663554+00:00",
-        "1564420217763922030": "2026-10-26T23:40:57.639079+00:00"
+        "1564420217763922030": "2026-10-26T23:40:57.639079+00:00",
+        "1564436713416167547": "2026-10-27T00:40:58.089954+00:00"
       },
       "checked_search_urls": {}
     },
@@ -17931,6 +17962,11 @@
           "checked_at": "2026-10-26T23:48:39.455606+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/83tom": {
+          "checked_at": "2026-10-27T00:50:46.225282+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19231,6 +19267,12 @@
           "detected_at": "2026-10-26T23:40:58.587499+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-26T23:48:39.455606+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/83tom": {
+          "detected_at": "2026-10-27T00:40:59.070714+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-27T00:50:46.225282+00:00",
           "http_status": null
         }
       },
@@ -24921,6 +24963,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/83tom": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-27T00:50:46.225282+00:00",
+          "title_observed": "【晴れる屋 高崎店】『マジック：ザ・ギャザリング | スター・トレック』 予約申し込み受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -28564,6 +28617,19 @@
         },
         "https://livepocket.jp/e/ol959": {
           "checked_at": "2026-10-26T23:48:39.455606+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/83tom": {
+          "checked_at": "2026-10-27T00:50:46.225282+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
