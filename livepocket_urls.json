@@ -18062,7 +18062,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/bovnn": {
-          "checked_at": "2026-10-27T16:22:51.268990+00:00",
+          "checked_at": "2026-10-27T22:26:27.585703+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         }
@@ -19388,7 +19388,7 @@
         "https://livepocket.jp/e/bovnn": {
           "detected_at": "2026-10-27T10:05:57.379024+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-27T16:22:51.268990+00:00",
+          "checked_at": "2026-10-27T22:26:27.585703+00:00",
           "http_status": null
         }
       },
@@ -20487,8 +20487,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bovnn": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-27T16:22:51.268990+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-27T22:26:27.585703+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -25142,7 +25142,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-27T16:22:51.268990+00:00",
+          "checked_at": "2026-10-27T22:26:27.585703+00:00",
           "title_observed": "【再販③】ポケモンカードゲーム MEGA 拡張パック 『メガブレイブ/メガシンフォニア』抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -28842,7 +28842,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/bovnn": {
-          "checked_at": "2026-10-27T16:22:51.268990+00:00",
+          "checked_at": "2026-10-27T22:26:27.585703+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
