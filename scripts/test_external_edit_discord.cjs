@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
+const assert=require('node:assert/strict');
+const root=path.join(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'supabase/functions/discord-notify/index.ts'),'utf8');
+const sql=fs.readFileSync(path.join(root,'supabase/lottery_external_edit_discord_v21_115.sql'),'utf8');
+const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
+assert.match(sql,/AFTER INSERT OR UPDATE ON public\.lottery_external_event_overrides/);
+assert.match(sql,/NEW\.state <> 'active'/);
+assert.match(sql,/OLD\.state <> 'active'/);
+assert.match(sql,/IS NOT DISTINCT FROM/);
+assert.match(sql,/pg_catalog\.gen_random_uuid\(\)::text/);
+assert.match(sql,/source,event_key,payload/);
+assert.match(sql,/lottery_discord_queue_source_check/);
+assert.match(sql,/SECURITY DEFINER/);
+assert.match(source,/job\.source === "external_edit"/);
+assert.match(source,/lottery_external_event_overrides/);
+assert.match(source,/entry\.state !== "active"/);
+assert.match(source,/LOTTERY_DISCORD_WEBHOOK_URL/);
+assert.match(source,/allowed_mentions: \{ parse: \[\] \}/);
+assert.match(source,/外部抽選の編集情報が更新されました/);
+assert.match(app,/lpExtWrite\('save'\)/);
+assert.match(app,/\.upsert\(payload,\{onConflict:'event_url'\}\)/);
+assert.doesNotMatch(app,/LOTTERY_DISCORD_WEBHOOK_URL|NOTIFY_SECRET/);
+console.log('External lottery edit alerts: queue, security, delivery and no-op guards OK');

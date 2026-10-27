@@ -90,7 +90,7 @@ async function buildMessage(supabase: ReturnType<typeof createClient>, report: R
 
 
 type LotteryJob = {
-  source: "livepocket" | "app";
+  source: "livepocket" | "app" | "external_edit";
   event_key: string;
   attempts: number;
   payload: Record<string, unknown>;
@@ -108,6 +108,34 @@ function lotteryDate(value: unknown): string {
 
 function buildLotteryMessage(job: LotteryJob) {
   const p = job.payload || {};
+  // An administrator-verified external URL update is a separate notice,
+  // not a fabricated LivePocket or app registration.
+  if (job.source === "external_edit") {
+    const rawUrl = typeof p.event_url === "string" ? p.event_url : "";
+    const originalUrl = /^https?:\/\/[^\s<>"]+$/.test(rawUrl) ? rawUrl : APP_URL;
+    const changed = Array.isArray(p.changed_fields)
+      ? p.changed_fields.filter((v): v is string => typeof v === "string")
+          .slice(0, 8).map(v => clean(v, 70)).join("・")
+      : "手動確認";
+    return {
+      username: "トレカレーダー",
+      allowed_mentions: { parse: [] },
+      embeds: [{
+        title: "🛠️ 外部抽選の編集情報が更新されました",
+        description: clean(p.event_title || p.store_name || "名称未確認の抽選", 220),
+        color: 3447003,
+        url: originalUrl,
+        fields: [
+          { name: "📝 更新内容", value: changed || "手動確認", inline: false },
+          { name: "🏪 対象店舗", value: clean(p.store_name, 200), inline: false },
+          { name: "📍 地域", value: clean(p.prefecture, 40), inline: true },
+          { name: "🕒 応募開始", value: lotteryDate(p.application_start_at), inline: true },
+          { name: "⌛ 応募締切", value: lotteryDate(p.application_end_at), inline: true }
+        ],
+        footer: { text: "確認済みの内容はトレカレーダーに反映。応募条件は公式ページでご確認ください。" }
+      }]
+    };
+  }
   const isApp = job.source === "app";
   const id = isApp ? job.event_key : "";
   const url = isApp
@@ -204,6 +232,25 @@ async function drainLotteryNotifications(
         } else {
           await sendDiscord(webhookUrl, buildLotteryMessage(job));
           sent++;
+        }
+      } else if (job.source === "external_edit") {
+        // A later exclusion or reset cancels an undelivered edit alert.
+        const url = typeof job.payload.event_url === "string"
+          ? job.payload.event_url : "";
+        if (!url) {
+          skipped++;
+        } else {
+          const {data: entry, error: entryError} = await supabase
+            .from("lottery_external_event_overrides")
+            .select("event_url,state")
+            .eq("event_url", url).maybeSingle();
+          if (entryError) throw Error(entryError.message);
+          if (!entry || entry.state !== "active") {
+            skipped++;
+          } else {
+            await sendDiscord(webhookUrl, buildLotteryMessage(job));
+            sent++;
+          }
         }
       } else {
         await sendDiscord(webhookUrl, buildLotteryMessage(job));
