@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-27T10:05:55.823662+00:00",
+  "collected_at": "2026-10-27T12:00:56.621315+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -15472,12 +15472,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1564579438602096640"
+      "1551580466266644552": "1564609645434372106"
     },
     "last_run": {
-      "checked_at": "2026-10-27T10:05:55.823662+00:00",
-      "new_urls": 1,
-      "original_urls": 574,
+      "checked_at": "2026-10-27T12:00:56.621315+00:00",
+      "new_urls": 0,
+      "original_urls": 575,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -18042,7 +18042,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ol959": {
-          "checked_at": "2026-10-27T05:56:25.143681+00:00",
+          "checked_at": "2026-10-27T12:01:29.798483+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19364,7 +19364,7 @@
         "https://livepocket.jp/e/ol959": {
           "detected_at": "2026-10-26T23:40:58.587499+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-27T05:56:25.143681+00:00",
+          "checked_at": "2026-10-27T12:01:29.798483+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/83tom": {
@@ -20467,8 +20467,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ol959": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-27T05:56:25.143681+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-27T12:01:29.798483+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/83tom": {
@@ -25093,7 +25093,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-27T05:56:25.143681+00:00",
+          "checked_at": "2026-10-27T12:01:29.798483+00:00",
           "title_observed": "ワンピースカードゲーム Heroines Edition vol.2【EB-05】 抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -28785,7 +28785,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ol959": {
-          "checked_at": "2026-10-27T05:56:25.143681+00:00",
+          "checked_at": "2026-10-27T12:01:29.798483+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
