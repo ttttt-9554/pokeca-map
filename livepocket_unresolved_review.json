@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-27T01:06:00Z",
-  "total": 2,
+  "as_of": "2026-10-27T01:20:09Z",
+  "total": 3,
   "items": [
     {
       "url": "https://livepocket.jp/e/1rf7i",
@@ -32,6 +32,21 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-26T23:48:39.455606+00:00",
       "next_retry_at": "2026-10-27T23:48:39.455606+00:00",
+      "queue": "retry_wait"
+    },
+    {
+      "url": "https://livepocket.jp/e/ukxef",
+      "event_title": "【抽選】ワンピースカードゲーム エクストラブースターHeroines Edition vol.2",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-10-27T23:59:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-27T01:20:02.327439+00:00",
+      "next_retry_at": "2026-10-28T01:20:02.327439+00:00",
       "queue": "retry_wait"
     }
   ]
