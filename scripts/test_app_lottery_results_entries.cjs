@@ -151,6 +151,17 @@ const highAt=confirmedHtml.indexOf('<h3>高当選率</h3>');
 assert(lowAt>=0 && middleAt>lowAt && highAt>middleAt,
  'Finalized draws must sort by numeric ascending winning rate: 0%, 50%, 75%');
 assert.match(confirmedHtml,/当選率：低い順（昇順）<\/option>/);
+context.lpResultsConfirmedSort='rate_desc';
+api.lpResultsRender();
+const descendingHtml=elements.lpResultsList.innerHTML.split('data-lp-results-stage="confirmed"')[1];
+assert(descendingHtml,'Finalized stage must remain present when descending');
+const descHigh=descendingHtml.indexOf('<h3>高当選率</h3>');
+const descMiddle=descendingHtml.indexOf('<h3>抽選D</h3>');
+const descLow=descendingHtml.indexOf('<h3>低当選率</h3>');
+assert(descHigh>=0&&descMiddle>descHigh&&descLow>descMiddle,
+ 'Finalized draws must sort by numeric descending winning rate: 75%, 50%, 0%');
+assert.match(descendingHtml,/value="rate_desc" selected/);
+assert.match(descendingHtml,/当選率：高い順（降順）<\/option>/);
 assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting"/);
 assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="provisional"/);
 assert.match(elements.lpResultsCounts.innerHTML,/応募合計 3口/,

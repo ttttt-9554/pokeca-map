@@ -4668,10 +4668,12 @@
     ];
     const groupHtml=groups.map(([key,icon,label])=>{
       const items=matches.filter(item=>lpResultsStage(lpResultsCounts.get(item.url))===key);
-      if(key==='confirmed'&&lpResultsConfirmedSort==='rate_asc'){
+      if(key==='confirmed'&&lpResultsConfirmedSort!=='newest'){
         // Sort only finalized draws; equal rates retain the original newest order.
-        items.sort((a,b)=>lpResultsConfirmedRate(lpResultsCounts.get(a.url))-
-          lpResultsConfirmedRate(lpResultsCounts.get(b.url)));
+        const direction=lpResultsConfirmedSort==='rate_desc'?-1:1;
+        items.sort((a,b)=>direction*(
+          lpResultsConfirmedRate(lpResultsCounts.get(a.url))-
+          lpResultsConfirmedRate(lpResultsCounts.get(b.url))));
       }
       const limited=items.slice(0,100);
       const content=items.length
@@ -4690,6 +4692,7 @@
             '<select id="lpResultsConfirmedSort" data-lp-results-sort aria-label="確定した抽選の並び順">'+
               '<option value="newest"'+(lpResultsConfirmedSort==='newest'?' selected':'')+'>新着順</option>'+
               '<option value="rate_asc"'+(lpResultsConfirmedSort==='rate_asc'?' selected':'')+'>当選率：低い順（昇順）</option>'+
+              '<option value="rate_desc"'+(lpResultsConfirmedSort==='rate_desc'?' selected':'')+'>当選率：高い順（降順）</option>'+
             '</select></div>'
           :'')+
         '<div class="lp-results-stage-cards">'+content+'</div></details>';
@@ -4807,7 +4810,7 @@
     $('lpResultsList').addEventListener('change',event=>{
       const select=event.target;
       if(!select?.matches?.('select[data-lp-results-sort]'))return;
-      if(select.value!=='newest'&&select.value!=='rate_asc')return;
+      if(!['newest','rate_asc','rate_desc'].includes(select.value))return;
       lpResultsConfirmedSort=select.value;
       lpResultsStageOpen.confirmed=true;
       lpResultsRender();

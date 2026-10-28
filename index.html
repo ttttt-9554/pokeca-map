@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261028-confirmed-rate-sort-v21-117">
+  <link rel="stylesheet" href="style.css?v=20261028-confirmed-rate-both-v21-118">
 
   <style>
     [hidden] { display: none !important; }
@@ -1582,7 +1582,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261028-confirmed-rate-sort-v21-117';
+      ? token : '20261028-confirmed-rate-both-v21-118';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
