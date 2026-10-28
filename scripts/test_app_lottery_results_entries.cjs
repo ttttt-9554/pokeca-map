@@ -49,7 +49,7 @@ const context={
   $:id=>elements[id],
   lpResultsAccount:()=>{},
   safeLotteryUrl:url=>typeof url==='string'&&url.startsWith('https://livepocket.jp/e/'),
-  lotteryTrackItemName:url=>[eventA,eventB,eventFinal].find(item=>item.url===url)?.event_title||'未確認',
+  lotteryTrackItemName:url=>context.lotteryItems.find(item=>item.url===url)?.event_title||'未確認',
   lpResultsStoreHtml:()=>'<div class="lp-results-store">対象店舗</div>',
   lotteryStoreEntries:()=>[],
   lotteryFirstSeenTime:()=>0,
