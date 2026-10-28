@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "40702587318",
-    "run_number": "1643",
-    "completed_process_at": "2026-10-28T14:05:59Z",
+    "run_id": "40712475131",
+    "run_number": "1649",
+    "completed_process_at": "2026-10-28T15:06:02Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 0,
@@ -141,33 +141,33 @@
     "manual_page_check_attempts": 4
   },
   "daily_additions": {
-    "date_jst": "2026-10-28",
-    "today": 1,
-    "yesterday": 5,
-    "last_7_days": 152,
+    "date_jst": "2026-10-29",
+    "today": 0,
+    "yesterday": 1,
+    "last_7_days": 145,
     "registered_total": 576,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-28T14:05:59Z",
+    "as_of": "2026-10-28T15:06:02Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
-    "ready": 1,
+    "ready": 0,
     "retry_wait": 0,
-    "completed": 46,
-    "expired": 524,
-    "removed": 2,
+    "completed": 43,
+    "expired": 527,
+    "removed": 3,
     "new_pending": 0,
     "quarantined": 3,
     "total": 576,
-    "unresolved": 1,
+    "unresolved": 0,
     "missing_title": 0,
     "missing_store": 0,
-    "missing_deadline": 1,
+    "missing_deadline": 0,
     "next_retry_at": null,
     "access_cooldown": false,
-    "next_batch_size": 1,
+    "next_batch_size": 0,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-28T14:06:01Z"
+    "as_of": "2026-10-28T15:06:05Z"
   }
 }
