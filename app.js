@@ -4155,6 +4155,25 @@
   }
 
 
+  // v21.119: Store current input states to protect edits from accidental closing.
+  let lpAppInitialSnapshot=null;
+  function lpAppFormSnapshot(){
+    const form=$('lpAppForm');
+    if(!form)return '';
+    return JSON.stringify([...form.querySelectorAll('input,select,textarea')]
+      .filter(el=>!!el.name)
+      .map(el=>[el.name,
+        el.type==='checkbox'||el.type==='radio'?el.checked:el.value]));
+  }
+  function lpAppRequestClose(){
+    const dialog=$('lpAppDialog');
+    if(!dialog?.open||lpAppBusy)return false;
+    if(lpAppInitialSnapshot!==null && lpAppFormSnapshot()!==lpAppInitialSnapshot &&
+      !confirm('保存していない変更があります。保存せずに閉じますか？'))return false;
+    lpAppCloseEditor();
+    return true;
+  }
+
   // v21.73: New registration and editing share one always-modal form.
   // Keep the form in the dialog at all times; never render it under the new button.
   function lpAppRestoreForm(){
@@ -4165,6 +4184,7 @@
   function lpAppCloseEditor(force=false){
     if(lpAppBusy&&force!==true)return;
     lpAppEditing='';
+    lpAppInitialSnapshot=null;
     const form=$('lpAppForm');
     if(form)form.reset();
     lpAppFormMessage('');
@@ -4229,7 +4249,7 @@
     $('lpAppDelete').hidden=!row;
     $('lpAppFormHeading').textContent=row?'手動抽選登録を編集':'抽選を新しく手動登録';
     lpAppFormMessage('応募方式を選び、公式案内または店頭で確認した情報を入力してください。URLは任意です。');
-    lpAppShowEditor(!!row);
+    if(lpAppShowEditor(!!row))lpAppInitialSnapshot=lpAppFormSnapshot();
   }
   // Keep the app-specific field for existing entries; the same public table
   // also stores face-to-face lotteries without inventing an app name.
@@ -4424,24 +4444,28 @@
     $('lpAppSearch').addEventListener('input',lpAppRender);
     $('lpAppFilter').addEventListener('change',lpAppRender);
     $('lpAppReload').addEventListener('click',()=>lpAppRefresh(true));
-    $('lpAppCancel').addEventListener('click',lpAppCloseEditor);
+    $('lpAppCancel').addEventListener('click',lpAppRequestClose);
+    $('lpAppCloseX').addEventListener('click',lpAppRequestClose);
     $('lpAppToggle').addEventListener('click',lpAppToggleVisibility);
     $('lpAppDelete').addEventListener('click',lpAppDelete);
     $('lpAppDialog').addEventListener('cancel',event=>{
-      // Keep the popup open while its in-flight save or delete is processing.
-      if(lpAppBusy)event.preventDefault();
+      // Escape uses the same confirmation, and cannot close during saving.
+      event.preventDefault();
+      lpAppRequestClose();
     });
     $('lpAppDialog').addEventListener('close',()=>{
-      // Escape/backdrop close must restore the form to the registration tab.
+      // Cleanup if the browser closes a dialog for any external reason.
       if(!lpAppBusy){
         $('lpAppForm')?.reset();
         lpAppEditing='';
+        lpAppInitialSnapshot=null;
         lpAppFormMessage('');
-        lpAppRestoreForm();
+        $('lpAppFormFold').hidden=true;
       }
     });
+    // Clicking or tapping the outside backdrop does not dismiss this modal.
     $('lpAppDialog').addEventListener('click',event=>{
-      if(event.target===$('lpAppDialog')&&!lpAppBusy)$('lpAppDialog').close();
+      if(event.target===event.currentTarget)event.preventDefault();
     });
     form.addEventListener('submit',lpAppSubmit);
     $('appLotteryView').addEventListener('click',event=>{

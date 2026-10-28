@@ -2473,3 +2473,39 @@ html[data-theme="dark"] #lotteryResultsView .lp-results-confirmed-toolbar select
   #lotteryResultsView .lp-results-confirmed-toolbar{justify-content:stretch}
   #lotteryResultsView .lp-results-confirmed-toolbar select{flex:1 1 auto;min-width:0}
 }
+
+/* v21.119 — manual lottery dialog: centered sticky ×, no light-dismiss. */
+#lpAppDialog .lp-app-dialog-top{
+  position:sticky;top:0;z-index:40;
+  display:flex;justify-content:flex-end;align-items:center;
+  box-sizing:border-box;min-height:52px;
+  margin:-16px -15px 12px;padding:8px 12px;
+  background:var(--app-surface,#fff);
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#lpAppDialog #lpAppCloseX{
+  position:relative;flex:0 0 36px;
+  box-sizing:border-box;width:36px;height:36px;min-width:36px;min-height:36px;
+  display:grid;place-items:center;margin:0;padding:0;
+  border:1px solid var(--app-border,#7b8ea6);border-radius:50%;
+  background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+  cursor:pointer;font-size:0;line-height:0;touch-action:manipulation;
+}
+#lpAppDialog #lpAppCloseX::before,#lpAppDialog #lpAppCloseX::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:15px;height:2px;border-radius:2px;background:currentColor;
+  pointer-events:none;
+}
+#lpAppDialog #lpAppCloseX::before{transform:translate(-50%,-50%) rotate(45deg)}
+#lpAppDialog #lpAppCloseX::after{transform:translate(-50%,-50%) rotate(-45deg)}
+#lpAppDialog #lpAppCloseX:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
+html[data-theme="dark"] #lpAppDialog .lp-app-dialog-top{
+  background:var(--app-surface,#19263a);border-bottom-color:var(--app-border,#566980);
+}
+html[data-theme="dark"] #lpAppDialog #lpAppCloseX{
+  background:var(--app-surface2,#263850);border-color:var(--app-border,#5d7087);
+  color:var(--app-text,#edf4ff);
+}
+@media(max-width:440px){
+  #lpAppDialog .lp-app-dialog-top{margin:-15px -12px 12px;padding:8px 10px}
+}

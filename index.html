@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261028-confirmed-rate-both-v21-118">
+  <link rel="stylesheet" href="style.css?v=20261028-manual-popup-safe-close-v21-119">
 
   <style>
     [hidden] { display: none !important; }
@@ -1302,7 +1302,10 @@ nav[aria-label="メインメニュー"] {
 
 
   <!-- v21.73: the single form always lives in a modal for new and existing entries. -->
-  <dialog id="lpAppDialog" aria-labelledby="lpAppFormHeading" aria-modal="true">
+  <dialog id="lpAppDialog" aria-labelledby="lpAppFormHeading" aria-modal="true" closedby="closerequest">
+    <div class="lp-app-dialog-top">
+      <button type="button" id="lpAppCloseX" aria-label="手動抽選登録を閉じる" title="閉じる"></button>
+    </div>
     <section id="lpAppFormFold" class="lp-app-form-fold" hidden>
             <h3 id="lpAppFormHeading" tabindex="-1" autofocus>抽選を新しく手動登録</h3>
             <form id="lpAppForm" autocomplete="off">
@@ -1582,7 +1585,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261028-confirmed-rate-both-v21-118';
+      ? token : '20261028-manual-popup-safe-close-v21-119';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
