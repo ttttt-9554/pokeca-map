@@ -18,13 +18,16 @@ function extract(name){
 const eventA={url:'https://livepocket.jp/e/test123',event_title:'抽選A'};
 const eventB={url:'https://livepocket.jp/e/test456',event_title:'抽選B'};
 const eventZero={url:'https://livepocket.jp/e/test789',event_title:'抽選C'};
+const eventFinal={url:'https://livepocket.jp/e/testfinal',event_title:'抽選D'};
 const counts=new Map([
   [eventA.url,{total_count:1,application_entries:5,won_entries:2,
                lost_entries:1,pending_entries:2,won_count:1,lost_count:1}],
   [eventB.url,{total_count:9,application_entries:3,won_entries:0,
                lost_entries:0,pending_entries:3,won_count:9,lost_count:9}],
   [eventZero.url,{total_count:1,application_entries:0,won_entries:0,
-                  lost_entries:0,pending_entries:0,won_count:1,lost_count:1}]
+                  lost_entries:0,pending_entries:0,won_count:1,lost_count:1}],
+  [eventFinal.url,{total_count:2,application_entries:2,won_entries:1,
+                  lost_entries:1,pending_entries:0,won_count:1,lost_count:1}]
 ]);
 const elements={
   lpResultsStatus:{textContent:''},
@@ -36,7 +39,8 @@ const elements={
 };
 const context={
   lpResultsCounts:counts,
-  lotteryItems:[eventA,eventB,eventZero],
+  lotteryItems:[eventA,eventB,eventZero,eventFinal],
+  lpResultsStageOpen:{waiting:true,provisional:false,confirmed:false},
   authUser:{id:'test-user'}, supabaseClient:{},
   lpResultsReady:true, lpResultsError:'', lpResultsManualBusy:false,
   lpResultsManualError:'', lpResultsManualSuccessAt:'',
@@ -51,14 +55,25 @@ const context={
   escape:value=>String(value)
 };
 const api=vm.runInNewContext(
-  [extract('lpResultsKnownEvents'),extract('lpResultsWinRate'),extract('lpResultsRender')].join('\n')+
-  '\n({lpResultsKnownEvents,lpResultsWinRate,lpResultsRender})',context,{timeout:1000}
+  [extract('lpResultsKnownEvents'),extract('lpResultsWinRate'),
+   extract('lpResultsStage'),extract('lpResultsRender')].join('\n')+
+  '\n({lpResultsKnownEvents,lpResultsWinRate,lpResultsStage,lpResultsRender})',context,{timeout:1000}
 );
-assert.equal(api.lpResultsKnownEvents().length,2,
+assert.equal(api.lpResultsKnownEvents().length,3,
   'Zero-ticket events are excluded regardless of registered user count');
 api.lpResultsRender();
-assert.match(elements.lpResultsCounts.innerHTML,/応募合計 8口/,
-  'Total entry count sums across all visible events');
+assert.match(elements.lpResultsCounts.innerHTML,/応募記録あり 1件/);
+assert.match(elements.lpResultsCounts.innerHTML,/応募合計 3口/,
+  'Top total excludes draws once any win OR loss is recorded');
+assert.equal(api.lpResultsStage(counts.get(eventA.url)),'provisional');
+assert.equal(api.lpResultsStage(counts.get(eventB.url)),'waiting');
+assert.equal(api.lpResultsStage(counts.get(eventFinal.url)),'confirmed');
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting" open/);
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="provisional"/);
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="confirmed"/);
+assert.match(elements.lpResultsList.innerHTML,/集計待ち<\/span><span class="lp-results-stage-count">1件/);
+assert.match(elements.lpResultsList.innerHTML,/暫定<\/span><span class="lp-results-stage-count">1件/);
+assert.match(elements.lpResultsList.innerHTML,/確定<\/span><span class="lp-results-stage-count">1件/);
 assert.match(elements.lpResultsList.innerHTML,/応募 5口/);
 assert.match(elements.lpResultsList.innerHTML,/当選 2口/);
 assert.match(elements.lpResultsList.innerHTML,/落選 1口/);
@@ -99,14 +114,18 @@ api.lpResultsRender();
 assert.match(elements.lpResultsList.innerHTML,/抽選A/);
 assert.doesNotMatch(elements.lpResultsList.innerHTML,/抽選B/,
   'Even a high people-count cannot pass when won ticket count is zero');
+assert.match(elements.lpResultsList.innerHTML,/抽選D/);
 elements.lpResultsFilter.value='lost';
 api.lpResultsRender();
 assert.match(elements.lpResultsList.innerHTML,/抽選A/);
+assert.match(elements.lpResultsList.innerHTML,/抽選D/);
 assert.doesNotMatch(elements.lpResultsList.innerHTML,/抽選B/);
 elements.lpResultsFilter.value='applied';
 api.lpResultsRender();
 assert.match(elements.lpResultsList.innerHTML,/抽選A/);
 assert.match(elements.lpResultsList.innerHTML,/抽選B/);
+assert.match(elements.lpResultsList.innerHTML,/抽選D/);
+assert.match(page,/上の「応募記録あり」「応募合計」/);
 assert.match(page,/応募・当選・落選・結果待ちをすべて口数で匿名集計/);
 assert.doesNotMatch(page,/応募人数に加えて/);
 assert.match(page,/当選口数÷（当選口数＋落選口数）×100/);

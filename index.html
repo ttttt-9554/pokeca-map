@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261026-manual-lottery-v21-114">
+  <link rel="stylesheet" href="style.css?v=20261028-results-status-folds-v21-116">
 
   <style>
     [hidden] { display: none !important; }
@@ -790,6 +790,7 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite" aria-atomic="true">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
+      <p class="hint lp-results-summary-hint">※上の「応募記録あり」「応募合計」は、当選・落選がまだ1口も記録されていない抽選のみの集計です。結果が1口でも記録された抽選は上の集計から除外しますが、下の「暫定」「確定」には引き続き表示されます。</p>
       <p class="hint">応募記録のある抽選だけを表示します。応募・当選・落選・結果待ちをすべて口数で匿名集計します（受取済みも当選口数に含みます）。当選率＝当選口数÷（当選口数＋落選口数）×100で、結果待ちは計算から除外します。結果待ちが残る場合は暫定値です。これは登録された口数に基づく実績であり、実際の抽選の当選確率を保証しません。複数店舗の抽選は対象店舗一覧を表示しますが、店舗ごとの口数は判別できません。名前・ユーザーID・個人メモは公開しません。記録が少ない場合、結果から個人を推測できる可能性があります。</p>
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
@@ -1581,7 +1582,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261026-manual-lottery-v21-114';
+      ? token : '20261028-results-status-folds-v21-116';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

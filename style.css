@@ -2405,3 +2405,49 @@ nav[aria-label="メインメニュー"]>button[data-tab="appLottery"] span{white
 #lpAppMethodHint{margin:-3px 0 4px;font-size:12px;line-height:1.65;color:var(--app-muted,#64748b)}
 #lpAppForm #lpAppMethod{font-weight:750}
 #lpAppAppNameField[hidden]{display:none!important}
+
+/* v21.116: Three collapsible anonymous-result stages with counts. */
+#lotteryResultsView .lp-results-summary-hint{
+  margin:4px 0 12px;font-size:12px;line-height:1.65;
+  color:var(--app-muted,#64748b);
+}
+#lotteryResultsView .lp-results-stage{
+  min-width:0;margin:0;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:14px;overflow:hidden;background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);
+}
+#lotteryResultsView .lp-results-stage>summary{
+  list-style:none;display:flex;align-items:center;gap:10px;
+  min-height:50px;box-sizing:border-box;cursor:pointer;
+  padding:11px 13px;font-size:14px;font-weight:800;
+  user-select:none;-webkit-user-select:none;
+}
+#lotteryResultsView .lp-results-stage>summary::-webkit-details-marker{display:none}
+#lotteryResultsView .lp-results-stage>summary::marker{content:""}
+#lotteryResultsView .lp-results-stage-title{flex:1 1 auto;min-width:0}
+#lotteryResultsView .lp-results-stage-count{
+  flex:0 0 auto;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:9px;padding:4px 9px;font-size:12px;font-weight:750;
+  background:var(--app-surface2,#f8fafc);
+  font-variant-numeric:tabular-nums;
+}
+#lotteryResultsView .lp-results-stage-chevron{
+  font-size:22px;font-weight:600;line-height:1;
+  color:var(--app-muted,#64748b);transition:transform .15s ease;
+}
+#lotteryResultsView .lp-results-stage[open] .lp-results-stage-chevron{transform:rotate(180deg)}
+#lotteryResultsView .lp-results-stage[open]>summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#lotteryResultsView .lp-results-stage-cards{
+  display:grid;gap:12px;padding:12px;min-width:0;
+}
+#lotteryResultsView .lp-results-stage-cards>.hint{margin:4px 0}
+html[data-theme="dark"] #lotteryResultsView .lp-results-stage{
+  background:var(--app-surface,#172337);border-color:var(--app-border,#536782);
+  color:var(--app-text,#edf4ff);
+}
+html[data-theme="dark"] #lotteryResultsView .lp-results-stage-count{
+  background:var(--app-surface2,#25354b);border-color:var(--app-border,#536782);
+  color:var(--app-text,#edf4ff);
+}

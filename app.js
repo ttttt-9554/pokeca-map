@@ -4562,6 +4562,15 @@
     };
   }
 
+  // Preserve group openness when the server refreshes or filters change.
+  let lpResultsStageOpen={waiting:true,provisional:false,confirmed:false};
+
+  function lpResultsStage(record){
+    const rate=lpResultsWinRate(record);
+    if(!rate||rate.decided===0)return 'waiting';
+    return rate.provisional?'provisional':'confirmed';
+  }
+
   function lpResultsRender(){
     const status=$('lpResultsStatus'),summary=$('lpResultsCounts'),list=$('lpResultsList');
     if(!status||!summary||!list)return;
@@ -4569,9 +4578,14 @@
     const searchInput=$('lpResultsSearch'),clearButton=$('lpResultsSearchClear');
     if(searchInput&&clearButton)clearButton.hidden=!searchInput.value;
     const events=lpResultsKnownEvents();
-    const applicationsTotal=events.reduce((sum,item)=>
+    // Upper summary counts ONLY events without any decided wins or losses.
+    const pendingOnlyEvents=events.filter(item=>{
+      const count=lpResultsCounts.get(item.url);
+      return Number(count?.won_entries||0)===0&&Number(count?.lost_entries||0)===0;
+    });
+    const applicationsTotal=pendingOnlyEvents.reduce((sum,item)=>
       sum+Number(lpResultsCounts.get(item.url)?.application_entries||0),0);
-    summary.innerHTML='<span>🎟️ 応募記録あり '+events.length+'件</span>'+
+    summary.innerHTML='<span>🎟️ 応募記録あり '+pendingOnlyEvents.length+'件</span>'+
       '<span>📊 応募合計 '+applicationsTotal+'口</span>';
     if(!authUser||!supabaseClient){
       status.textContent='応募状況の匿名集計を表示するにはDiscordログインが必要です。';
@@ -4608,7 +4622,8 @@
       if(aHas!==bHas)return aHas?-1:1;
       return lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a);
     });
-    list.innerHTML=matches.length?matches.slice(0,100).map(item=>{
+
+    const renderCard=item=>{
       const record=lpResultsCounts.get(item.url);
       const title=lotteryTrackItemName(item.url);
       const storeHtml=lpResultsStoreHtml(item);
@@ -4635,11 +4650,31 @@
         '<div class="lp-results-card-footer"><a href="'+escape(item.url)+
         '" target="_blank" rel="noopener noreferrer">抽選の詳細を開く ↗</a></div>'+
         '</article>';
-    }).join('')+(matches.length>100
-       ?'<p class="hint">最初の100件を表示しています。検索で絞り込んでください。</p>':''):
-      '<p class="hint">応募記録のある抽選が見つかりません。検索や表示条件を変更してください。</p>';
-  }
 
+    };
+    const groups=[
+      ['waiting','⏳','集計待ち'],
+      ['provisional','📊','暫定'],
+      ['confirmed','✅','確定']
+    ];
+    const groupHtml=groups.map(([key,icon,label])=>{
+      const items=matches.filter(item=>lpResultsStage(lpResultsCounts.get(item.url))===key);
+      const limited=items.slice(0,100);
+      const content=items.length
+        ?limited.map(renderCard).join('')+
+          (items.length>limited.length
+            ?'<p class="hint">この分類は最初の100件を表示しています。検索で絞り込んでください。</p>':'')
+        :'<p class="hint">この分類に該当する抽選はありません。</p>';
+      return '<details class="lp-results-stage" data-lp-results-stage="'+key+'"'+
+        (lpResultsStageOpen[key]?' open':'')+'>'+
+        '<summary class="lp-results-stage-header"><span class="lp-results-stage-title">'+
+        icon+' '+label+'</span><span class="lp-results-stage-count">'+items.length+
+        '件</span><span class="lp-results-stage-chevron" aria-hidden="true">⌄</span></summary>'+
+        '<div class="lp-results-stage-cards">'+content+'</div></details>';
+    }).join('');
+    list.innerHTML=(matches.length?'':'<p class="hint">検索・表示条件に一致する抽選はありません。</p>')+groupHtml;
+
+  }
   async function lpResultsRefresh(force=false){
     const uid=authUser?.id||'';
     lpResultsAccount();
@@ -4746,6 +4781,13 @@
       lpResultsRender();
     });
     $('lpResultsFilter').addEventListener('change',lpResultsRender);
+    $('lpResultsList').addEventListener('toggle',event=>{
+      const fold=event.target;
+      if(!fold?.matches?.('details[data-lp-results-stage]'))return;
+      const key=fold.dataset.lpResultsStage;
+      if(Object.prototype.hasOwnProperty.call(lpResultsStageOpen,key))
+        lpResultsStageOpen[key]=fold.open;
+    },true);
     lpResultsRender();
   }
 
