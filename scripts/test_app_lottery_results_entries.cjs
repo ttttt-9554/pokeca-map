@@ -41,6 +41,7 @@ const context={
   lpResultsCounts:counts,
   lotteryItems:[eventA,eventB,eventZero,eventFinal],
   lpResultsStageOpen:{waiting:true,provisional:false,confirmed:false},
+  lpResultsConfirmedSort:'newest',
   authUser:{id:'test-user'}, supabaseClient:{},
   lpResultsReady:true, lpResultsError:'', lpResultsManualBusy:false,
   lpResultsManualError:'', lpResultsManualSuccessAt:'',
@@ -56,8 +57,8 @@ const context={
 };
 const api=vm.runInNewContext(
   [extract('lpResultsKnownEvents'),extract('lpResultsWinRate'),
-   extract('lpResultsStage'),extract('lpResultsRender')].join('\n')+
-  '\n({lpResultsKnownEvents,lpResultsWinRate,lpResultsStage,lpResultsRender})',context,{timeout:1000}
+   extract('lpResultsConfirmedRate'),extract('lpResultsStage'),extract('lpResultsRender')].join('\n')+
+  '\n({lpResultsKnownEvents,lpResultsWinRate,lpResultsConfirmedRate,lpResultsStage,lpResultsRender})',context,{timeout:1000}
 );
 assert.equal(api.lpResultsKnownEvents().length,3,
   'Zero-ticket events are excluded regardless of registered user count');
@@ -133,4 +134,32 @@ assert.match(page,/実際の抽選の当選確率を保証しません/);
 assert.match(app,/<label>当選口数<input name="won_count"/);
 assert.match(app,/<label>落選口数<input name="lost_count"/);
 assert.doesNotMatch(app,/当選数|落選数/);
+
+const eventLow={url:'https://livepocket.jp/e/testlow',event_title:'低当選率'};
+const eventHigh={url:'https://livepocket.jp/e/testhigh',event_title:'高当選率'};
+context.lotteryItems.push(eventHigh,eventLow);
+counts.set(eventLow.url,sample(4,0,4,0));
+counts.set(eventHigh.url,sample(4,3,1,0));
+context.lpResultsConfirmedSort='rate_asc';
+elements.lpResultsFilter.value='all';
+api.lpResultsRender();
+const confirmedHtml=elements.lpResultsList.innerHTML.split('data-lp-results-stage="confirmed"')[1];
+assert(confirmedHtml,'Finalized stage should render');
+const lowAt=confirmedHtml.indexOf('<h3>低当選率</h3>');
+const middleAt=confirmedHtml.indexOf('<h3>抽選D</h3>');
+const highAt=confirmedHtml.indexOf('<h3>高当選率</h3>');
+assert(lowAt>=0 && middleAt>lowAt && highAt>middleAt,
+ 'Finalized draws must sort by numeric ascending winning rate: 0%, 50%, 75%');
+assert.match(confirmedHtml,/当選率：低い順（昇順）<\/option>/);
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting"/);
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="provisional"/);
+assert.match(elements.lpResultsCounts.innerHTML,/応募合計 3口/,
+ 'Confirmed sorting must not change the pending-only counters');
+context.lpResultsConfirmedSort='newest';
+api.lpResultsRender();
+assert.match(elements.lpResultsList.innerHTML,/value="newest" selected/,
+ 'The sort selector must restore its current value after rendering');
+assert.equal(api.lpResultsConfirmedRate(sample(4,0,4,0)),0);
+assert.equal(api.lpResultsConfirmedRate(sample(4,3,1,0)),0.75);
+
 console.log('Lottery results use ticket entries only: UI and filter checks passed');

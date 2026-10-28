@@ -2451,3 +2451,25 @@ html[data-theme="dark"] #lotteryResultsView .lp-results-stage-count{
   background:var(--app-surface2,#25354b);border-color:var(--app-border,#536782);
   color:var(--app-text,#edf4ff);
 }
+
+/* v21.117: Win-rate ascending sort inside finalized lottery results only. */
+#lotteryResultsView .lp-results-confirmed-toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;
+  gap:8px;min-width:0;padding:10px 12px 0;
+}
+#lotteryResultsView .lp-results-confirmed-toolbar label{
+  font-size:12px;font-weight:750;color:var(--app-muted,#64748b);
+}
+#lotteryResultsView .lp-results-confirmed-toolbar select{
+  width:auto;max-width:100%;min-width:185px;min-height:39px;
+  box-sizing:border-box;padding:7px 28px 7px 10px;border-radius:9px;
+  font-size:13px;font-weight:700;border:1px solid var(--app-border,#cbd5e1);
+  background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+}
+html[data-theme="dark"] #lotteryResultsView .lp-results-confirmed-toolbar select{
+  background:#25354b;color:#edf4ff;border-color:#667d9b;
+}
+@media(max-width:380px){
+  #lotteryResultsView .lp-results-confirmed-toolbar{justify-content:stretch}
+  #lotteryResultsView .lp-results-confirmed-toolbar select{flex:1 1 auto;min-width:0}
+}
