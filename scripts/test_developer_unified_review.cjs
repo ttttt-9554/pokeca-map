@@ -7,6 +7,11 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const script=fs.readFileSync(path.join(root,'dev_unified_review_v21_124.js'),'utf8');
 assert.match(html,/id="lpDevUnifiedPanel"/);
 assert.match(html,/id="lpDevUnifiedList"/);
+const unifiedStart=html.indexOf('<section id="lpDevUnifiedPanel"');
+const unifiedEnd=html.indexOf('</section>',unifiedStart);
+const archive=html.indexOf('id="lpCardHiddenPanel"',unifiedStart);
+assert(archive>unifiedStart&&archive<unifiedEnd,
+  'The recovery panel is nested inside the developer review accordion');
 assert.match(html,/dev_unified_review_v21_124\.js/);
 assert.match(app,/TorecaUnifiedReview\?\.render/);
 assert.match(app,/TorecaUnifiedReview\?\.fieldsFor/);

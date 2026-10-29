@@ -2704,3 +2704,17 @@ html[data-theme="dark"] #lpCardDialog #lpCardRestore{background:#123b30;color:#b
 html[data-theme="dark"] #lpCardHiddenPanel .lp-card-hidden-row{background:#203149;border-color:#526681;color:#eef4ff}
 html[data-theme="dark"] #lpCardHiddenPanel .lp-card-hidden-row a{color:#93c5fd}
 html[data-theme="dark"] #lpCardHiddenPanel .lp-card-hidden-actions button{background:#263a55;color:#edf4ff;border-color:#7085a2}
+
+/* v21.131: nest the LivePocket archive under the unified review accordion. */
+#devView #lpCardHiddenPanel>.hint{
+  margin:10px 12px;
+  font-size:12px;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+}
+#devView #lpCardHiddenPanel>.lp-card-hidden-list{
+  padding:0 12px 12px;
+}
+#devView #lpCardHiddenPanel>.lp-card-hidden-list>.hint{
+  padding:4px 0;
+}

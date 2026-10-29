@@ -3347,7 +3347,9 @@
       else if(button.dataset.lpCardHiddenEdit)
         lpCardOpen(button.dataset.lpCardHiddenEdit);
     });
-    $('lpCardHiddenPanel')?.closest('details.dev-accordion')?.addEventListener('toggle',event=>{
+    // The archive is a nested fold inside the unified review panel.
+    // Listen on that fold itself, rather than its parent developer accordion.
+    $('lpCardHiddenPanel')?.addEventListener('toggle',event=>{
       if(event.currentTarget.open&&isDeveloper())lpCardRefresh(true);
     });
     $('lpCardCancel').addEventListener('click',()=>dialog.close());

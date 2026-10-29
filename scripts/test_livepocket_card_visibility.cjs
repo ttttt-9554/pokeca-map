@@ -35,6 +35,19 @@ assert.match(html,/id="lpCardHide"/);
 assert.match(html,/id="lpCardRestore"/);
 assert.match(html,/id="lpCardHiddenPanel"/);
 assert.match(html,/id="lpCardHiddenList"/);
+const parentAt=html.indexOf('<section id="lpDevUnifiedPanel"');
+const parentEnd=html.indexOf('</section>',parentAt);
+const nestedAt=html.indexOf('<details id="lpCardHiddenPanel"',parentAt);
+assert(parentAt>=0&&nestedAt>parentAt&&nestedAt<parentEnd,
+  'The hidden LivePocket archive must live inside the unified review group');
+assert.match(html.slice(parentAt,parentEnd),
+  /<details id="lpCardHiddenPanel" class="lp-dev-unified-group">/,
+  'Restore controls must start as an inner, collapsed group');
+assert.equal((html.match(/id="lpCardHiddenPanel"/g)||[]).length,1,
+  'No extra standalone hidden section may remain');
+assert.match(app,/\$\('lpCardHiddenPanel'\)\?\.addEventListener\('toggle'/,
+  'Open handler must be attached to the nested archive itself');
+assert.doesNotMatch(app,/\$\('lpCardHiddenPanel'\)\?\.closest\('details\.dev-accordion'\)/);
 assert.match(sql,/ADD COLUMN IF NOT EXISTS is_hidden boolean NOT NULL DEFAULT false/);
 assert.match(sql,/GRANT SELECT \(is_hidden\)/);
 assert.doesNotMatch(sql,/DROP TABLE|DELETE FROM|TRUNCATE/i);

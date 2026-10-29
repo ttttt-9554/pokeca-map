@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-results-folded-default-v21-130">
+  <link rel="stylesheet" href="style.css?v=20261029-dev-review-hidden-nested-v21-131">
 
   <style>
     [hidden] { display: none !important; }
@@ -1181,16 +1181,15 @@ nav[aria-label="メインメニュー"] {
           <summary>✅ 修正済み・確認完了 <span id="lpDevUnifiedDoneCount">確認中</span></summary>
           <div id="lpDevUnifiedCompletedList" class="lp-dev-unified-list"></div>
         </details>
+        <details id="lpCardHiddenPanel" class="lp-dev-unified-group">
+          <summary>🗃️ 非表示のLivePocket抽選 <span id="lpCardHiddenCount">確認中</span></summary>
+          <p class="hint">一覧から削除（非表示）にした抽選を確認・復元できます。元の抽選データや個人の応募履歴は保持しています。</p>
+          <p id="lpCardHiddenFeedback" class="hint" role="status" aria-live="polite"></p>
+          <div id="lpCardHiddenList" class="lp-card-hidden-list">開くと非表示の抽選を表示します。</div>
+        </details>
       </section>
 
-      <section id="lpCardHiddenPanel" class="store-tools lp-card-hidden-panel">
-        <h3>🗃️ 非表示のLivePocket抽選</h3>
-        <p class="hint">一覧から削除（非表示）にした抽選を確認・復元できます。元の抽選データや個人の応募履歴は保持しています。</p>
-        <p class="hint">非表示の登録：<strong id="lpCardHiddenCount">確認中</strong></p>
-        <p id="lpCardHiddenFeedback" class="hint" role="status" aria-live="polite"></p>
-        <div id="lpCardHiddenList" class="lp-card-hidden-list">開くと非表示の抽選を表示します。</div>
-      </section>
-      
+
       <section id="lpStoreMasterPanel" class="store-tools lp-store-master-panel">
         <h3>🏬 店舗マスター（自動照合）</h3>
         <p class="hint">個別管理で登録された店舗名・都道府県を自動でマスター化します。正式名称と既知の略称を照合し、似ているだけの店舗は管理者確認に回します。個人のアカウント名・応募履歴は表示しません。</p>
@@ -1674,7 +1673,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-results-folded-default-v21-130';
+      ? token : '20261029-dev-review-hidden-nested-v21-131';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
