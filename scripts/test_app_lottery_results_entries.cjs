@@ -173,4 +173,26 @@ assert.match(elements.lpResultsList.innerHTML,/value="newest" selected/,
 assert.equal(api.lpResultsConfirmedRate(sample(4,0,4,0)),0);
 assert.equal(api.lpResultsConfirmedRate(sample(4,3,1,0)),0.75);
 
+
+const resultsStart=page.indexOf('<section id="lotteryResultsView"');
+const resultsEnd=page.indexOf('</section>',resultsStart);
+assert(resultsStart>=0&&resultsEnd>resultsStart,'Lottery results section is present');
+const resultsMarkup=page.slice(resultsStart,resultsEnd);
+const detailsStart=resultsMarkup.indexOf('<details id="lpResultsExplanation"');
+const detailsEnd=resultsMarkup.indexOf('</details>',detailsStart);
+const cardsAt=resultsMarkup.indexOf('id="lpResultsList"');
+const analyticsAt=resultsMarkup.indexOf('id="lpStoreAnalytics"');
+assert(detailsStart>=0&&detailsEnd>detailsStart,'Explanations are wrapped in details');
+assert.doesNotMatch(resultsMarkup.slice(detailsStart,detailsEnd),/^<details[^>]+ open>/,
+ 'Explanations must be collapsed on initial load');
+assert.match(resultsMarkup.slice(detailsStart,detailsEnd),/集計方法・注意事項/);
+assert.match(resultsMarkup.slice(detailsStart,detailsEnd),/応募記録あり/);
+assert.match(resultsMarkup.slice(detailsStart,detailsEnd),/当選口数÷（当選口数＋落選口数）×100/);
+assert(detailsEnd<cardsAt&&cardsAt<analyticsAt,
+ 'Results follow the folded explanation; store statistics follows the result cards');
+assert(resultsMarkup.lastIndexOf('</details>')>cardsAt,
+ 'Store statistics stay last within the lottery results view');
+assert.equal((resultsMarkup.match(/id="lpStoreAnalytics"/g)||[]).length,1,
+ 'Store analytics DOM id must not be duplicated');
+
 console.log('Lottery results use ticket entries only: UI and filter checks passed');

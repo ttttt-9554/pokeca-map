@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-store-master-analytics-v21-121">
+  <link rel="stylesheet" href="style.css?v=20261029-results-explanation-fold-v21-122">
 
   <style>
     [hidden] { display: none !important; }
@@ -766,7 +766,6 @@ nav[aria-label="メインメニュー"] {
       <div class="lp-heading">
         <div>
           <h2 id="lpResultsHeading">🏆 抽選結果（匿名）</h2>
-          <p class="hint">抽選管理の応募・当選・落選を匿名集計します。対象店舗や地域も確認できます。ユーザー名・メモ・受取情報は公開しません。</p>
         </div>
         <button type="button" id="lpResultsReload" class="lp-refresh">↻ 更新</button>
       </div>
@@ -790,6 +789,17 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite" aria-atomic="true">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
+      <details id="lpResultsExplanation" class="lp-results-explanation">
+        <summary>ℹ️ 集計方法・注意事項</summary>
+        <div class="lp-results-explanation-body">
+          <p class="hint">抽選管理の応募・当選・落選を匿名集計します。対象店舗や地域も確認できます。ユーザー名・メモ・受取情報は公開しません。</p>
+          <p class="hint lp-results-summary-hint">※上の「応募記録あり」「応募合計」は、当選・落選がまだ1口も記録されていない抽選のみの集計です。結果が1口でも記録された抽選は上の集計から除外しますが、下の「暫定」「確定」には引き続き表示されます。</p>
+          <p class="hint">応募記録のある抽選だけを表示します。応募・当選・落選・結果待ちをすべて口数で匿名集計します（受取済みも当選口数に含みます）。当選率＝当選口数÷（当選口数＋落選口数）×100で、結果待ちは計算から除外します。結果待ちが残る場合は暫定値です。これは登録された口数に基づく実績であり、実際の抽選の当選確率を保証しません。複数店舗の抽選は対象店舗一覧を表示しますが、店舗ごとの口数は判別できません。名前・ユーザーID・個人メモは公開しません。記録が少ない場合、結果から個人を推測できる可能性があります。</p>
+        </div>
+      </details>
+
+      <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
+
       <details id="lpStoreAnalytics" class="lp-store-analytics" open>
         <summary>📊 店舗別当選統計 <span id="lpStoreAnalyticsCount">確認中</span></summary>
         <p class="hint">過去の登録結果から匿名集計します。商品や抽選時期の違いを含む参考値です。異なる登録者5人以上、当落判明20口以上の店舗のみ公開します。</p>
@@ -805,10 +815,6 @@ nav[aria-label="メインメニュー"] {
         <p class="hint" id="lpStoreAnalyticsStatus" role="status" aria-live="polite"></p>
         <div class="lp-store-analytics-list" id="lpStoreAnalyticsList"></div>
       </details>
-
-      <p class="hint lp-results-summary-hint">※上の「応募記録あり」「応募合計」は、当選・落選がまだ1口も記録されていない抽選のみの集計です。結果が1口でも記録された抽選は上の集計から除外しますが、下の「暫定」「確定」には引き続き表示されます。</p>
-      <p class="hint">応募記録のある抽選だけを表示します。応募・当選・落選・結果待ちをすべて口数で匿名集計します（受取済みも当選口数に含みます）。当選率＝当選口数÷（当選口数＋落選口数）×100で、結果待ちは計算から除外します。結果待ちが残る場合は暫定値です。これは登録された口数に基づく実績であり、実際の抽選の当選確率を保証しません。複数店舗の抽選は対象店舗一覧を表示しますが、店舗ごとの口数は判別できません。名前・ユーザーID・個人メモは公開しません。記録が少ない場合、結果から個人を推測できる可能性があります。</p>
-      <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
     </section>
 
     <!-- v21.70: User-registered lottery events that live inside mobile apps. -->
@@ -1627,7 +1633,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-store-master-analytics-v21-121';
+      ? token : '20261029-results-explanation-fold-v21-122';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

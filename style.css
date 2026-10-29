@@ -2598,3 +2598,45 @@ html[data-theme="dark"] #devView .lp-store-master-item{
 
 /* v21.121: undo store name merge without revealing application identities. */
 #devView .lp-store-master-item button[data-store-unmerge]{margin-left:auto;min-height:36px;padding:6px 9px;font-size:12px}
+
+/* v21.122: Collapsible explanation; store statistics follows all result stages. */
+#lotteryResultsView .lp-results-explanation{
+  margin:10px 0 14px;padding:0;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:13px;background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);overflow:hidden;
+}
+#lotteryResultsView .lp-results-explanation>summary{
+  display:flex;align-items:center;gap:8px;
+  min-height:46px;box-sizing:border-box;padding:11px 13px;
+  cursor:pointer;font-size:13px;font-weight:800;
+  color:var(--app-text,#172033);
+  list-style:none;user-select:none;
+}
+#lotteryResultsView .lp-results-explanation>summary::-webkit-details-marker{display:none}
+#lotteryResultsView .lp-results-explanation>summary::marker{content:""}
+#lotteryResultsView .lp-results-explanation>summary::after{
+  content:"⌄";margin-left:auto;font-size:21px;line-height:1;
+  color:var(--app-muted,#64748b);transition:transform .15s ease;
+}
+#lotteryResultsView .lp-results-explanation[open]>summary::after{transform:rotate(180deg)}
+#lotteryResultsView .lp-results-explanation[open]>summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#lotteryResultsView .lp-results-explanation-body{
+  padding:9px 13px 12px;font-size:12px;line-height:1.7;
+}
+#lotteryResultsView .lp-results-explanation-body p{
+  margin:8px 0;color:var(--app-muted,#64748b);overflow-wrap:anywhere;
+}
+html[data-theme="dark"] #lotteryResultsView .lp-results-explanation{
+  background:var(--app-surface,#172337);
+  border-color:var(--app-border,#526681);
+  color:var(--app-text,#edf4ff);
+}
+html[data-theme="dark"] #lotteryResultsView .lp-results-explanation>summary{
+  color:var(--app-text,#edf4ff);
+}
+html[data-theme="dark"] #lotteryResultsView .lp-results-explanation-body p{
+  color:var(--app-muted,#c5d7ee);
+}
