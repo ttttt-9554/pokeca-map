@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-29T12:05:56.751934+00:00",
+  "collected_at": "2026-10-29T12:35:57.817494+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 579,
+  "unique_livepocket_urls": 581,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15570,33 +15570,93 @@
       "event_title": "ポケモンカード『30th CELEBRATION』3次抽選",
       "application_end_at": "2026-11-01T20:00:00+09:00",
       "application_start_at": "2026-10-29T18:02:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ncviu",
+      "discord_message_id": "1565341978529366116",
+      "discord_posted_at": "2026-10-29T12:30:10.329000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA佐野店\n受付終了: 11/01 23:00（残り3日1時間）\nhttps://livepocket.jp/e/ncviu\n\n📍栃木県\nTSUTAYA宇都宮竹林店\n受付終了: 11/01 22:00（残り3日0時間）\nhttps://livepocket.jp/e/insyw",
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "application_end_at": "2026-11-01T23:00:00+09:00",
+      "application_start_at": "2026-10-28T19:50:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/insyw",
+      "discord_message_id": "1565341978529366116",
+      "discord_posted_at": "2026-10-29T12:30:10.329000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA佐野店\n受付終了: 11/01 23:00（残り3日1時間）\nhttps://livepocket.jp/e/ncviu\n\n📍栃木県\nTSUTAYA宇都宮竹林店\n受付終了: 11/01 22:00（残り3日0時間）\nhttps://livepocket.jp/e/insyw",
+      "store_name": "TSUTAYA宇都宮竹林店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮竹林店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ワンピースカードゲーム ONE PIECE HEROINES PRECIOUS BOX",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-29T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 420,
+    "parsed": 422,
     "no_structured_details": 159
   },
   "field_counts": {
-    "store_name": 398,
-    "prefecture": 336,
-    "event_title": 266,
+    "store_name": 400,
+    "prefecture": 338,
+    "event_title": 268,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 544,
-    "application_start_at": 543,
-    "stores_events": 406
+    "application_end_at": 546,
+    "application_start_at": 545,
+    "stores_events": 408
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565334440991785081"
+      "1551580466266644552": "1565341978529366116"
     },
     "last_run": {
-      "checked_at": "2026-10-29T12:05:56.751934+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-29T12:35:57.817494+00:00",
+      "new_urls": 2,
       "original_urls": 579,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -15769,7 +15829,8 @@
         "1564964489789575211": "2026-10-28T11:30:59.206675+00:00",
         "1565206100251385877": "2026-10-29T03:35:56.644030+00:00",
         "1565289138587050077": "2026-10-29T09:05:58.944075+00:00",
-        "1565326879345344572": "2026-10-29T11:35:56.997559+00:00"
+        "1565326879345344572": "2026-10-29T11:35:56.997559+00:00",
+        "1565341978529366116": "2026-10-29T12:35:58.520849+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18209,6 +18270,16 @@
           "checked_at": "2026-10-29T11:36:22.820509+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/ncviu": {
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/insyw": {
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19557,6 +19628,18 @@
           "detected_at": "2026-10-29T11:35:57.960242+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-29T11:36:22.820509+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/insyw": {
+          "detected_at": "2026-10-29T12:35:59.384218+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ncviu": {
+          "detected_at": "2026-10-29T12:35:59.384218+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
           "http_status": null
         }
       },
@@ -25370,6 +25453,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/ncviu": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
+          "title_observed": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/insyw": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
+          "title_observed": "ワンピースカードゲーム ONE PIECE HEROINES PRECIOUS BOX",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -29117,6 +29222,32 @@
         },
         "https://livepocket.jp/e/dof-w": {
           "checked_at": "2026-10-29T11:36:22.820509+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ncviu": {
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/insyw": {
+          "checked_at": "2026-10-29T12:36:32.842280+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

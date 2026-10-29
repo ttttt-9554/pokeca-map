@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-29T12:05:56.751934+00:00",
-  "unique_livepocket_urls": 579,
+  "collected_at": "2026-10-29T12:35:57.817494+00:00",
+  "unique_livepocket_urls": 581,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8478,7 +8478,43 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-29T11:35:57.960242+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ncviu",
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-29T12:30:10.329000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "application_end_at": "2026-11-01T23:00:00+09:00",
+      "application_start_at": "2026-10-28T19:50:00+09:00",
+      "official_event_title": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "first_detected_at": "2026-10-29T12:35:59.384218+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/insyw",
+      "store_name": "TSUTAYA宇都宮竹林店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-29T12:30:10.329000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮竹林店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム ONE PIECE HEROINES PRECIOUS BOX",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-29T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ONE PIECE HEROINES PRECIOUS BOX",
+      "first_detected_at": "2026-10-29T12:35:59.384218+00:00"
     }
   ],
-  "updated_at": "2026-10-29T12:25:58.004761+00:00"
+  "updated_at": "2026-10-29T12:36:32.842280+00:00"
 }
