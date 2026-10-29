@@ -41,8 +41,9 @@ Deno.serve(async(req:Request)=>{
 
   const url=Deno.env.get("SUPABASE_URL")||"";
   const serviceKey=getSecretKey();
-  const guildId=Deno.env.get("DISCORD_GUILD_ID")||"";
-  const allowedRoles=allowedRoleIds(Deno.env.get("DISCORD_ALLOWED_ROLE_IDS")||"");
+  // The owner-provided ID is a public Discord snowflake, not a secret.
+  const guildId=Deno.env.get("DISCORD_GUILD_ID")||"1551557658618896444";
+  const allowedRoles=allowedRoleIds(Deno.env.get("DISCORD_ALLOWED_ROLE_IDS")||"1565321684603637890");
   const botToken=Deno.env.get("DISCORD_BOT_TOKEN")||"";
   // No role ID or token? Deny. Never silently allow all Discord accounts.
   if(!url||!serviceKey||!snowflake(guildId)||!allowedRoles.length||!botToken)

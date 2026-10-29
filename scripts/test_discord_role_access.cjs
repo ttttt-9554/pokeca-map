@@ -30,6 +30,9 @@ const helpers=pathToFileURL(path.join(root,'supabase/functions/discord-role-acce
  assert.match(edge,/hasAccess\(member,allowedRoles\)/);
  assert.match(edge,/DISCORD_ALLOWED_ROLE_IDS/);
  assert.match(edge,/DISCORD_BOT_TOKEN/);
+ assert.match(edge,/1551557658618896444/);
+ assert.match(edge,/1565321684603637890/);
+ assert.deepEqual(allowedRoleIds('1565321684603637890'),['1565321684603637890']);
  assert.match(edge,/if\(!url\|\|!serviceKey\|\|!snowflake\(guildId\)\|\|!allowedRoles\.length\|\|!botToken\)/);
  assert.match(edge,/response\.status===404/);
  assert.match(edge,/\.delete\(\)\.eq\("user_id",userId\)/);
