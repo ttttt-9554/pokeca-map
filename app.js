@@ -5610,9 +5610,38 @@
       .lp-track-overdue{font-weight:800;color:#c2410c!important}
       .lp-track-today{font-weight:800;color:#be123c!important}
       #lpTrackStatus{font-size:12px;line-height:1.55;color:var(--app-muted,#64748b)}
-      #lpTrackerEditor{width:min(95vw,560px);max-height:90dvh;overflow:auto;border-radius:17px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);color:var(--app-text,#172033);padding:18px}
+      /* v21.139: stable iPhone-safe fixed header + internal scrolling. */
+      #lpTrackerEditor{
+        position:fixed;inset:0;margin:auto;box-sizing:border-box;
+        width:min(560px,calc(100vw - 24px));max-width:calc(100vw - 24px);
+        height:min(88dvh,calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+        max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+        overflow:hidden;padding:0;min-width:0;border-radius:20px;
+        border:1px solid var(--app-border,#cbd5e1);
+        background:var(--app-surface,#fff);color:var(--app-text,#172033);
+      }
+      #lpTrackerEditor[open]{display:flex;flex-direction:column}
       #lpTrackerEditor::backdrop{background:#0009}
-      #lpTrackerForm{display:grid;gap:13px;padding:0}
+      #lpTrackerEditorBody{
+        flex:1 1 auto;min-height:0;min-width:0;max-width:100%;
+        box-sizing:border-box;overflow-y:auto;overflow-x:hidden;
+        overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+        padding:12px 17px max(24px,env(safe-area-inset-bottom));
+      }
+      #lpTrackerEditorBody>*{min-width:0;max-width:100%;overflow-wrap:anywhere}
+      #lpTrackerForm{display:grid;gap:13px;padding:0;min-width:0;max-width:100%;width:100%}
+      #lpTrackerForm>*,#lpTrackerForm label:not(.lp-check-line){
+        min-width:0;max-width:100%;box-sizing:border-box;
+      }
+      #lpTrackerForm input:not([type=checkbox]):not([type=radio]),
+      #lpTrackerForm select,#lpTrackerForm textarea{
+        box-sizing:border-box;display:block;width:100%;max-width:100%;min-width:0;
+      }
+      #lpTrackerForm textarea[name=note]{
+        min-height:110px;height:auto;max-height:none;
+        resize:none;overflow-x:hidden;overflow-y:hidden;
+        white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;
+      }
       /* v21.28: Suppress global form background (#fff) inside both dialogs. */
       #lpTrackerEditor form#lpTrackerForm,#lpOnsiteEditor form#lpOnsiteForm{
         background:transparent!important;color:inherit!important;box-shadow:none!important;
@@ -5623,7 +5652,7 @@
         accent-color:#3b82f6;background:transparent;min-width:20px;flex-shrink:0}
       #lpTrackerForm label:not(.lp-check-line){display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700}
       #lpTrackerForm select,#lpTrackerForm input[type=date],#lpTrackerForm textarea{width:100%;min-width:0;min-height:40px;border-radius:8px;padding:7px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface2,#fff);color:var(--app-text,#172033)}
-      #lpTrackerForm textarea{min-height:74px;resize:vertical}
+      #lpTrackerForm textarea:not([name=note]){min-height:74px;resize:vertical}
       #lpTrackerForm .lp-check-line{display:flex;align-items:center;gap:9px;font-size:13px}
       #lpTrackerForm .lp-check-line input{width:20px;height:20px}
       .lp-track-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -5766,7 +5795,11 @@
     // dismiss this editor. Never discard in-progress counts on a backdrop tap.
     // Browsers supporting closedby also disable light-dismiss explicitly.
     dialog.setAttribute('closedby','closerequest');
-    dialog.innerHTML = '<div class="lp-track-sticky-bar"><button type="button" id="lpTrackStickyClose" aria-label="個別管理を閉じる" title="閉じる">×</button></div><div id="lpTrackerEditorBody"></div>';
+    dialog.setAttribute('aria-labelledby','lpTrackDialogTitle');
+    dialog.innerHTML = '<div class="lp-track-sticky-bar">'+
+      '<h3 id="lpTrackDialogTitle" class="lp-track-modal-title" tabindex="-1" autofocus data-dialog-title-focus>✅ 抽選の個別管理</h3>'+
+      '<button type="button" id="lpTrackStickyClose" aria-label="個別管理を閉じる" title="閉じる">×</button>'+
+      '</div><div id="lpTrackerEditorBody"></div>';
     document.body.append(dialog);
     // Compare the live form and account rows, including additions/removals.
     // This prevents accidental loss of edits when closing with ×, Close, or Escape.
@@ -6673,6 +6706,16 @@
     };
   }
 
+  // Resize saved and newly typed notes to reveal the entire text, including
+  // wrapped lines on small iPhones, without a second textarea scrollbar.
+  function lpTrackerExpandMemo(memo){
+    if(!memo)return;
+    memo.style.height='auto';
+    const contentHeight=Number(memo.scrollHeight);
+    if(Number.isFinite(contentHeight)&&contentHeight>0)
+      memo.style.height=Math.ceil(contentHeight+2)+'px';
+  }
+
   async function lotteryTrackerOpenEditor(url) {
     if(!authUser || !safeLotteryUrl(url))return;
     if(!lpPrivateAccountReady||lpPrivateAccountUser!==authUser.id){
@@ -6685,8 +6728,7 @@
     const data=lotteryTrackerDefaults(url);
     const dlg=$('lpTrackerEditor');
     if(!dlg)return;
-    $('lpTrackerEditorBody').innerHTML=`<h3 tabindex="-1" autofocus data-dialog-title-focus>抽選の個別管理</h3>
-      <p class="lp-tracker-intro">${escape(lotteryTrackItemName(url))}</p>
+    $('lpTrackerEditorBody').innerHTML=`<p class="lp-tracker-intro">${escape(lotteryTrackItemName(url))}</p>
       <form id="lpTrackerForm">
       <label>応募・当選状況
         <select name="status">${LP_TRACK_STATUSES.map(k=>`<option value="${k}" ${data.status===k?'selected':''}>${escape(LP_TRACK_LABELS[k])}</option>`).join('')}</select>
@@ -6714,6 +6756,15 @@
       <p id="lpTrackEditorMessage" role="status" aria-live="polite"></p>
       </form>`;
     const form=$('lpTrackerForm');
+    const memo=form.elements.note;
+    const resizeMemo=()=>lpTrackerExpandMemo(memo);
+    memo.addEventListener('input',resizeMemo);
+    // Reflow the note when the iPhone rotates or the visual viewport changes.
+    const onTrackerResize=()=>{if(dlg.open)resizeMemo();};
+    window.addEventListener('resize',onTrackerResize);
+    dlg.addEventListener('close',()=>{
+      window.removeEventListener('resize',onTrackerResize);
+    },{once:true});
     const updateQuantityHint=()=>{
       const applications=Number(form.elements.application_count.value);
       const won=Number(form.elements.won_count.value);
@@ -6791,7 +6842,21 @@
       await lotteryTrackerSave(url,data,true);
     });
     dlg._captureTrackSnapshot?.();
-    if (!showLotteryEditorDialog(dlg)) {
+    if (showLotteryEditorDialog(dlg)) {
+      const content=$('lpTrackerEditorBody');
+      // A newly opened record must start from its title, not from the last
+      // record's scroll position. The close button remains fully visible.
+      content.scrollTop=0;
+      dlg.scrollTop=0;
+      resizeMemo();
+      requestAnimationFrame(()=>{
+        if(!dlg.open)return;
+        resizeMemo();
+        content.scrollTop=0;
+        dlg.scrollTop=0;
+      });
+    }else{
+      window.removeEventListener('resize',onTrackerResize);
       alert('このブラウザでは管理画面を開けません。');
     }
   }
