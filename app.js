@@ -310,11 +310,13 @@
       line.append(text); account.append(line);
       status.textContent = 'Discordログイン中：登録時に「みんなに共有する」を選べます。';
     } else {
-      account.textContent = discordRoleAuthError
-        ? '⛔ ログイン不可：指定されたDiscordロールを確認できませんでした。'
-        : '未ログイン：Discordでログインすると共有投稿できます。';
+      account.textContent = discordRoleAuthError==='role_required'
+        ? '⛔ ログイン拒否：指定されたDiscordロールがありません。'
+        : discordRoleAuthError
+          ? '⚠ Discordログインを完了できませんでした。'
+          : '未ログイン：Discordでログインすると共有投稿できます。';
       status.textContent = discordRoleAuthError
-        ? 'ロール認証に通らなかったためログアウトしました。権限が付与されたら再度ログインできます。'
+        ? discordRoleResultMessage(discordRoleAuthError)
         : '未ログイン：端末内への保存は引き続き利用できます。';
     }
     $('discordLogin').hidden = !supabaseClient || !!authUser || discordRoleAuthPending;
@@ -375,7 +377,31 @@
       '<p class="hint">'+(authUser?'共有した投稿はありません。':'Discordでログインすると自分の共有投稿が表示されます。')+'</p>';
   }
 
+  function consumeDiscordHookRedirectError(){
+    // A failed Supabase Auth token hook returns to OAuth redirectTo without
+    // a session. Display a fixed, safe message instead of raw URL text.
+    try{
+      const url=new URL(window.location.href);
+      const query=url.searchParams;
+      const fragment=new URLSearchParams(url.hash.replace(/^#/,''));
+      const code=query.get('error')||fragment.get('error');
+      if(!code)return;
+      const description=(query.get('error_description')||
+        fragment.get('error_description')||'').replace(/\\+/g,' ');
+      discordRoleAuthError=/Discord role required/i.test(description)
+        ? 'role_required' : 'role_check_unavailable';
+      for(const key of ['error','error_code','error_description']){
+        query.delete(key);
+        fragment.delete(key);
+      }
+      // The OAuth error fragment is not needed after showing the message.
+      url.hash='';
+      window.history.replaceState(window.history.state,'',url.href);
+    }catch{}
+  }
+
   async function initShared() {
+    consumeDiscordHookRedirectError();
     if (!window.supabase?.createClient) { displayAuth(); return; }
     supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
       auth: {detectSessionInUrl:true, persistSession:true, autoRefreshToken:true}
