@@ -11,6 +11,11 @@
   const SHARED_TABLE = 'shared_reports';
   let supabaseClient = null;
   let authUser = null;
+  // Discord OAuth alone is not an approved application login. A verified
+  // Discord server role is also required before authUser becomes available.
+  let discordRoleAuthPending=false,discordRoleAuthError='';
+  let discordRoleAuthGeneration=0,discordRoleVerifiedToken='',discordRoleVerifiedUntil=0;
+  let discordRoleVerification=null;
   // Manual app refresh can restore any ordinary tab immediately.
   // The developer tab must wait until Discord authentication confirms access.
   let restoreDeveloperTabPending = false;
@@ -287,6 +292,9 @@
     if (!supabaseClient) {
       const msg = '共有機能の読み込みに失敗しました。通信環境を確認してください。';
       account.textContent = msg; status.textContent = msg;
+    } else if (discordRoleAuthPending) {
+      account.textContent='🔄 Discordの指定ロールを確認しています…';
+      status.textContent='ロール確認が完了するまでログイン機能は使えません。';
     } else if (authUser) {
       const profile = authUser.user_metadata || {};
       // Discordの表示名（global_name）を優先。未取得なら従来のユーザー名にフォールバック。
@@ -302,15 +310,26 @@
       line.append(text); account.append(line);
       status.textContent = 'Discordログイン中：登録時に「みんなに共有する」を選べます。';
     } else {
-      account.textContent = '未ログイン：Discordでログインすると共有投稿できます。';
-      status.textContent = '未ログイン：端末内への保存は引き続き利用できます。';
+      account.textContent = discordRoleAuthError
+        ? '⛔ ログイン不可：指定されたDiscordロールを確認できませんでした。'
+        : '未ログイン：Discordでログインすると共有投稿できます。';
+      status.textContent = discordRoleAuthError
+        ? 'ロール認証に通らなかったためログアウトしました。権限が付与されたら再度ログインできます。'
+        : '未ログイン：端末内への保存は引き続き利用できます。';
     }
-    $('discordLogin').hidden = !supabaseClient || !!authUser;
+    $('discordLogin').hidden = !supabaseClient || !!authUser || discordRoleAuthPending;
     $('discordLogout').hidden = !authUser;
     const roleCheck=$('discordRoleCheck');
-    if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!authUser||!supabaseClient;
-    if(!authUser&&$('discordRoleStatus'))
-      $('discordRoleStatus').textContent='Discordログイン後に確認できます。';
+    if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!authUser||!supabaseClient||discordRoleAuthPending;
+    if($('discordRoleStatus')){
+      $('discordRoleStatus').textContent=discordRoleAuthPending
+        ? '🔄 Discordロールを自動確認しています…'
+        : discordRoleAuthError
+          ? discordRoleResultMessage(discordRoleAuthError)
+          : authUser
+            ? '✅ 指定ロール認証済み。ログインを許可しています。'
+            : 'Discordログイン後に自動確認します。';
+    }
     $('publishReport').disabled = !authUser;
     if (!authUser) $('publishReport').checked = false;
     $('publishHint').textContent = authUser
@@ -360,15 +379,25 @@
     supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
       auth: {detectSessionInUrl:true, persistSession:true, autoRefreshToken:true}
     });
-    supabaseClient.auth.onAuthStateChange((_event,session) => {
-      authUser = session?.user || null;
-      displayAuth();
-      lpAppRefresh(true).catch(error=>console.warn('アプリ抽選のログイン更新に失敗:',error));
+    supabaseClient.auth.onAuthStateChange((event,session) => {
+      if(event==='SIGNED_OUT'){
+        // Also invalidates any late response from a previous role check.
+        ++discordRoleAuthGeneration;
+        discordRoleVerification=null;
+        discordRoleVerifiedToken='';
+        discordRoleVerifiedUntil=0;
+        discordRoleAuthPending=false;
+        authUser=null;
+        displayAuth();
+      }else if(['INITIAL_SESSION','SIGNED_IN','TOKEN_REFRESHED'].includes(event)){
+        // Never await Supabase requests from inside the auth callback.
+        setTimeout(()=>{void requireDiscordRole(session);},0);
+      }
     });
     const {data,error} = await supabaseClient.auth.getSession();
     if (error) $('sharedStatus').textContent = 'ログイン状態の確認に失敗: ' + error.message;
-    authUser = data?.session?.user || null;
-    displayAuth();
+    if(data?.session) await requireDiscordRole(data.session);
+    else { authUser=null;displayAuth(); }
     await loadSharedReports();
     await loadCloudData();
     await lpCloudRefresh(true);
@@ -383,7 +412,18 @@
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
-    window.addEventListener('focus',()=>{ loadCloudData(); lpCloudRefresh(true); lpLocationRefresh(true); lpExtRefresh(true); lpCardRefresh(true); lpAppRefresh(true); refreshWishlistForAccount(); refreshLotteryTrackerForAccount(true); lpResultsRefresh(true); refreshLotteryOnsiteReports(true); refreshLotteryOnsiteArchive(true); });
+    window.addEventListener('focus',()=>{
+      loadCloudData();lpCloudRefresh(true);lpLocationRefresh(true);lpExtRefresh(true);
+      lpCardRefresh(true);lpAppRefresh(true);refreshWishlistForAccount();
+      refreshLotteryTrackerForAccount(true);lpResultsRefresh(true);
+      refreshLotteryOnsiteReports(true);refreshLotteryOnsiteArchive(true);
+      if(authUser)void renewDiscordRole();
+    });
+    // A removed Discord role also revokes an already open login. The server
+    // checks role membership again; no decision is cached in localStorage.
+    setInterval(()=>{
+      if(authUser&&document.visibilityState!=='hidden')void renewDiscordRole();
+    },90000);
     supabaseClient.channel('pokeca-lottery-card-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
       .subscribe();
@@ -402,37 +442,25 @@
   let discordRoleCheckBusy=false;
 
   function discordRoleResultMessage(code,allowed=false){
-    if(allowed)return '✅ 指定ロールを確認できました。これは認証テストであり、サイトの非公開化はまだ完了していません。';
+    if(allowed)return '✅ 指定ロール認証済み。ログインを許可しています。';
     const messages={
-      not_configured:'⚠ 認証用Botのサーバー設定が未完了です。SupabaseのCustom secretsに DISCORD_BOT_TOKEN を登録してください。',
-      login_required:'⚠ Discordログインが必要です。ログインし直してから確認してください。',
-      discord_login_required:'⚠ DiscordアカウントがSupabase認証に紐付いていません。Discordで再ログインしてください。',
-      role_required:'⛔ 対象サーバーへの参加、または指定ロールが確認できませんでした。管理者にロールの付与を確認してください。',
-      role_check_unavailable:'⚠ Discord側への照合に失敗しました。認証用Botが対象サーバーに追加済みか確認してください。',
-      identity_unavailable:'⚠ ログインIDの確認に失敗しました。ログインし直して再試行してください。',
-      access_store_unavailable:'⚠ 認証結果を保存できませんでした。Supabaseの設定を確認してください。',
+      not_configured:'⚠ 認証用Botの設定が未完了です。管理者に連絡してください。',
+      login_required:'⚠ Discordログインが必要です。',
+      discord_login_required:'⚠ Discord認証に問題があります。もう一度ログインしてください。',
+      role_required:'⛔ 指定ロールがないためログインできません。サーバー管理者に確認してください。',
+      role_check_unavailable:'⚠ Discordのロールを確認できませんでした。時間をおいて再度ログインしてください。',
+      identity_unavailable:'⚠ ログイン情報を確認できませんでした。もう一度ログインしてください。',
+      access_store_unavailable:'⚠ 認証結果を保存できませんでした。管理者に連絡してください。',
     };
-    return messages[code]||'⚠ ロール認証を完了できませんでした。接続やサーバー設定を確認して再試行してください。';
+    return messages[code]||'⚠ ロール認証を完了できませんでした。再度ログインしてください。';
   }
 
-  async function checkDiscordRoleAccess(){
-    const button=$('discordRoleCheck'),status=$('discordRoleStatus');
-    if(!button||!status||discordRoleCheckBusy)return;
-    if(!supabaseClient||!authUser){
-      status.textContent=discordRoleResultMessage('login_required');return;
-    }
-    const originalUserId=authUser.id;
-    discordRoleCheckBusy=true;button.disabled=true;
-    status.textContent='🔄 Discordのサーバー所属と指定ロールを確認しています…';
-    let timeout=null;
-    try {
-      const {data,error}=await supabaseClient.auth.getSession();
-      const accessToken=data?.session?.access_token;
-      if(error||!accessToken){
-        status.textContent=discordRoleResultMessage('login_required');return;
-      }
-      const controller=new AbortController();
-      timeout=setTimeout(()=>controller.abort(),15000);
+  async function discordRoleVerifyToken(accessToken){
+    if(typeof accessToken!=='string'||!accessToken)
+      return {allowed:false,error:'login_required'};
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),15000);
+    try{
       const response=await fetch(SUPABASE_URL+'/functions/v1/discord-role-access',{
         method:'POST',cache:'no-store',signal:controller.signal,
         headers:{
@@ -443,16 +471,99 @@
         body:'{}'
       });
       const result=await response.json().catch(()=>({}));
-      if(authUser?.id!==originalUserId)return;
-      status.textContent=discordRoleResultMessage(result?.error||'unexpected',
-        response.ok&&result?.allowed===true);
-    }catch {
-      if(authUser?.id===originalUserId)
-        status.textContent='⚠ 通信できませんでした。ネットワーク接続と認証用Botの設定を確認してください。';
-    }finally {
-      if(timeout!==null)clearTimeout(timeout);
+      return {
+        allowed:response.ok&&result?.allowed===true,
+        error:typeof result?.error==='string'?result.error:
+          response.status===403?'role_required':'role_check_unavailable'
+      };
+    }catch{
+      return {allowed:false,error:'role_check_unavailable'};
+    }finally{
+      clearTimeout(timeout);
+    }
+  }
+
+  async function requireDiscordRole(session,force=false){
+    const token=session?.access_token,user=session?.user;
+    if(!token||!user?.id){
+      authUser=null;
+      displayAuth();
+      return false;
+    }
+    if(!force&&authUser?.id===user.id&&
+       discordRoleVerifiedToken===token&&Date.now()<discordRoleVerifiedUntil)
+      return true;
+    if(discordRoleVerification?.token===token)
+      return discordRoleVerification.promise;
+
+    const generation=++discordRoleAuthGeneration;
+    authUser=null;
+    discordRoleAuthPending=true;
+    discordRoleAuthError='';
+    displayAuth();
+    const verification=(async()=>{
+      const result=await discordRoleVerifyToken(token);
+      if(generation!==discordRoleAuthGeneration)return false;
+      discordRoleAuthPending=false;
+      if(result.allowed){
+        discordRoleVerifiedToken=token;
+        discordRoleVerifiedUntil=Date.now()+90000;
+        discordRoleAuthError='';
+        authUser=user;
+        displayAuth();
+        return true;
+      }
+      // Do not leave an unauthorized OAuth session usable by app features.
+      discordRoleVerifiedToken='';
+      discordRoleVerifiedUntil=0;
+      discordRoleAuthError=result.error||'role_required';
+      authUser=null;
+      displayAuth();
+      try{
+        await supabaseClient.auth.signOut();
+      }catch{}
+      if(!authUser&&discordRoleAuthError){
+        displayAuth();
+        switchTab('group');
+      }
+      return false;
+    })();
+    discordRoleVerification={token,promise:verification};
+    try{return await verification;}
+    finally{
+      if(discordRoleVerification?.promise===verification)
+        discordRoleVerification=null;
+    }
+  }
+
+  async function renewDiscordRole(){
+    if(!supabaseClient||!authUser||discordRoleAuthPending)return;
+    const {data,error}=await supabaseClient.auth.getSession();
+    if(error||!data?.session){
+      ++discordRoleAuthGeneration;
+      authUser=null;discordRoleVerifiedToken='';discordRoleVerifiedUntil=0;
+      displayAuth();return;
+    }
+    return requireDiscordRole(data.session,true);
+  }
+
+  async function checkDiscordRoleAccess(){
+    const button=$('discordRoleCheck'),status=$('discordRoleStatus');
+    if(!button||!status||discordRoleCheckBusy)return;
+    if(!supabaseClient||!authUser){
+      status.textContent=discordRoleResultMessage('login_required');return;
+    }
+    discordRoleCheckBusy=true;
+    button.disabled=true;
+    try{
+      const {data,error}=await supabaseClient.auth.getSession();
+      if(error||!data?.session){
+        status.textContent=discordRoleResultMessage('login_required');return;
+      }
+      await requireDiscordRole(data.session,true);
+    }finally{
       discordRoleCheckBusy=false;
-      button.disabled=!authUser||!supabaseClient;
+      button.disabled=!authUser||!supabaseClient||discordRoleAuthPending;
     }
   }
 
@@ -467,6 +578,9 @@
 
   async function discordLogout() {
     if (!supabaseClient) return;
+    discordRoleAuthError='';
+    ++discordRoleAuthGeneration;
+    discordRoleVerifiedToken='';discordRoleVerifiedUntil=0;
     const {error} = await supabaseClient.auth.signOut();
     if (error) return alert('ログアウトに失敗しました: ' + error.message);
     authUser = null; displayAuth(); render();

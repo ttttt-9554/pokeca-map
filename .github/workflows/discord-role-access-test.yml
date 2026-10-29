@@ -6,6 +6,7 @@ name: Discord Role Access Verification (staged)
       - 'supabase/discord_role_access_stage_v1.sql'
       - 'scripts/test_discord_role_access.cjs'
       - 'scripts/test_discord_role_access_ui.cjs'
+      - 'scripts/test_discord_login_gate.cjs'
       - 'index.html'
       - 'app.js'
       - 'style.css'
@@ -28,3 +29,4 @@ jobs:
           node --check scripts/test_discord_role_access.cjs
           node scripts/test_discord_role_access.cjs
           node scripts/test_discord_role_access_ui.cjs
+          node scripts/test_discord_login_gate.cjs
