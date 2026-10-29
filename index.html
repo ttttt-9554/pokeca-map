@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-lottery-tabs-login-only-v21-136">
+  <link rel="stylesheet" href="style.css?v=20261030-discord-remembered-session-v21-138">
 
   <style>
     [hidden] { display: none !important; }
@@ -1120,7 +1120,7 @@ nav[aria-label="メインメニュー"] {
         <p id="sharedStatus" class="hint" aria-live="polite"></p>
         <div class="discord-role-check-panel" aria-label="Discordログイン権限">
           <h4>🔐 Discordロール認証</h4>
-          <p class="hint">Discordログイン時に指定サーバーの許可ロールを自動確認します。ロールを持たないアカウントはログイン状態を維持できません。ログイン済みの場合も定期的に再確認します。</p>
+          <p class="hint">指定ロールを確認したログインは、この端末に保存されます。アプリを閉じても保持され、14日間は追加のDiscordロール確認を行いません。期限後はトークン更新時に再確認します。ロールがない場合はログインできません。</p>
           <button type="button" id="discordRoleCheck" disabled>ログイン権限を再確認</button>
           <p id="discordRoleStatus" class="hint" role="status" aria-live="polite">Discordログイン後に自動確認します。</p>
         </div>
@@ -1729,7 +1729,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-lottery-tabs-login-only-v21-136';
+      ? token : '20261030-discord-remembered-session-v21-138';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
