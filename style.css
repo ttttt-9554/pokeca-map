@@ -2509,3 +2509,89 @@ html[data-theme="dark"] #lpAppDialog #lpAppCloseX{
 @media(max-width:440px){
   #lpAppDialog .lp-app-dialog-top{margin:-15px -12px 12px;padding:8px 10px}
 }
+
+/* v21.120 — privacy-gated store analytics and administrator master. */
+#lotteryResultsView .lp-store-analytics{
+  margin:12px 0;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:14px;background:var(--app-surface,#fff);overflow:hidden;
+}
+#lotteryResultsView .lp-store-analytics>summary{
+  min-height:48px;padding:12px 14px;cursor:pointer;font-weight:800;
+  color:var(--app-text,#172033);
+}
+#lotteryResultsView .lp-store-analytics>summary span{
+  font-size:12px;margin-left:7px;color:var(--app-muted,#64748b);
+}
+#lotteryResultsView .lp-store-analytics>p{margin:9px 12px;font-size:12px}
+#lotteryResultsView .lp-store-analytics-controls{
+  display:flex;flex-wrap:wrap;gap:7px;padding:6px 12px;
+}
+#lotteryResultsView .lp-store-analytics-controls input{
+  flex:1 1 155px;min-width:0;
+}
+#lotteryResultsView .lp-store-analytics-controls select{
+  flex:1 1 145px;min-width:0;
+}
+#lotteryResultsView .lp-store-analytics-controls button{
+  min-height:40px;padding:7px 12px;
+}
+#lotteryResultsView .lp-store-analytics-list{display:grid;gap:9px;padding:10px 12px}
+#lotteryResultsView .lp-store-analytics-row{
+  padding:11px;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:10px;background:var(--app-surface2,#f8fafc);
+}
+#lotteryResultsView .lp-store-analytics-head{
+  display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+}
+#lotteryResultsView .lp-store-analytics-rate{
+  font-size:19px;font-variant-numeric:tabular-nums;
+}
+#lotteryResultsView .lp-store-analytics-row p{font-size:12px;margin:5px 0}
+#lotteryView .lp-store-card-badge,#lotteryView .lp-store-high-badge,
+#lotteryResultsView .lp-store-high-badge{
+  display:inline-block;padding:4px 7px;border:1px solid #75a48d;
+  border-radius:8px;background:rgba(45,145,91,.1);color:var(--app-text,#172033);
+  font-size:11px;font-weight:750;line-height:1.5;
+}
+#lotteryView .lp-store-high-badge{margin:4px 0 0 8px}
+#devView .lp-store-master-panel h4{margin:12px 0 8px}
+#devView .lp-store-master-toolbar{display:flex;gap:8px;flex-wrap:wrap}
+#devView .lp-store-master-toolbar button{min-height:41px}
+#devView .lp-store-master-toolbar input{min-width:0;flex:1 1 165px}
+#devView .lp-store-master-candidates,#devView .lp-store-master-list{
+  display:grid;gap:8px;margin:10px 0;
+}
+#devView .lp-store-master-pair,#devView .lp-store-master-item{
+  padding:10px;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:10px;background:var(--app-surface2,#f8fafc);
+  color:var(--app-text,#172033);overflow-wrap:anywhere;
+}
+#devView .lp-store-master-pair label,#devView .lp-store-master-manual label{
+  display:grid;gap:6px;font-size:12px;font-weight:700;margin:8px 0;
+}
+#devView .lp-store-master-pair select,#devView .lp-store-master-manual select{
+  width:100%;min-height:42px;min-width:0;box-sizing:border-box;
+}
+#devView .lp-store-master-buttons{display:flex;flex-wrap:wrap;gap:7px}
+#devView .lp-store-master-buttons button,#devView #lpStoreMasterMerge{
+  min-height:39px;font-size:12px;padding:7px 10px;
+}
+#devView .lp-store-master-all,#devView .lp-store-master-manual{
+  border:1px solid var(--app-border,#cbd5e1);border-radius:10px;
+  padding:10px;margin:10px 0;
+}
+#devView .lp-store-master-all>summary,#devView .lp-store-master-manual>summary{
+  cursor:pointer;font-weight:750;
+}
+#devView .lp-store-master-manual-body{padding:7px 0}
+#devView .lp-store-master-item{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+#devView .lp-store-master-item span{font-size:12px;color:var(--app-muted,#64748b)}
+html[data-theme="dark"] #lotteryResultsView .lp-store-analytics,
+html[data-theme="dark"] #devView .lp-store-master-panel{
+  color:var(--app-text,#edf4ff);border-color:var(--app-border,#526681);
+}
+html[data-theme="dark"] #lotteryResultsView .lp-store-analytics-row,
+html[data-theme="dark"] #devView .lp-store-master-pair,
+html[data-theme="dark"] #devView .lp-store-master-item{
+  background:var(--app-surface2,#25354b);border-color:var(--app-border,#526681);
+}

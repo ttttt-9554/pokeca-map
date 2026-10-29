@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261028-manual-popup-safe-close-v21-119">
+  <link rel="stylesheet" href="style.css?v=20261029-store-master-analytics-v21-120">
 
   <style>
     [hidden] { display: none !important; }
@@ -790,6 +790,22 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpResultsStatus" class="hint" role="status" aria-live="polite" aria-atomic="true">匿名集計を確認しています…</p>
       <div id="lpResultsCounts" class="lp-results-counts"></div>
+      <details id="lpStoreAnalytics" class="lp-store-analytics" open>
+        <summary>📊 店舗別当選統計 <span id="lpStoreAnalyticsCount">確認中</span></summary>
+        <p class="hint">過去の登録結果から匿名集計します。商品や抽選時期の違いを含む参考値です。異なる登録者5人以上、当落判明20口以上の店舗のみ公開します。</p>
+        <div class="lp-store-analytics-controls">
+          <input type="search" id="lpStoreAnalyticsSearch" maxlength="90" placeholder="店舗名・地域を検索" aria-label="店舗別当選統計の検索">
+          <select id="lpStoreAnalyticsSort" aria-label="店舗別当選率の並び順">
+            <option value="high">当選率が高い順</option>
+            <option value="low">当選率が低い順</option>
+            <option value="samples">集計口数が多い順</option>
+          </select>
+          <button id="lpStoreAnalyticsReload" type="button">更新</button>
+        </div>
+        <p class="hint" id="lpStoreAnalyticsStatus" role="status" aria-live="polite"></p>
+        <div class="lp-store-analytics-list" id="lpStoreAnalyticsList"></div>
+      </details>
+
       <p class="hint lp-results-summary-hint">※上の「応募記録あり」「応募合計」は、当選・落選がまだ1口も記録されていない抽選のみの集計です。結果が1口でも記録された抽選は上の集計から除外しますが、下の「暫定」「確定」には引き続き表示されます。</p>
       <p class="hint">応募記録のある抽選だけを表示します。応募・当選・落選・結果待ちをすべて口数で匿名集計します（受取済みも当選口数に含みます）。当選率＝当選口数÷（当選口数＋落選口数）×100で、結果待ちは計算から除外します。結果待ちが残る場合は暫定値です。これは登録された口数に基づく実績であり、実際の抽選の当選確率を保証しません。複数店舗の抽選は対象店舗一覧を表示しますが、店舗ごとの口数は判別できません。名前・ユーザーID・個人メモは公開しません。記録が少ない場合、結果から個人を推測できる可能性があります。</p>
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
@@ -1131,6 +1147,32 @@ nav[aria-label="メインメニュー"] {
       </h2>
       <p class="hint">管理項目は折りたたんであります。必要な項目をタップすると開きます。</p>
       <button type="button" id="devFoldAll">すべて閉じる</button>
+
+
+      <section id="lpStoreMasterPanel" class="store-tools lp-store-master-panel">
+        <h3>🏬 店舗マスター（自動照合）</h3>
+        <p class="hint">個別管理で登録された店舗名・都道府県を自動でマスター化します。正式名称と既知の略称を照合し、似ているだけの店舗は管理者確認に回します。個人のアカウント名・応募履歴は表示しません。</p>
+        <div class="lp-store-master-toolbar">
+          <button id="lpStoreMasterReload" type="button">更新・照合</button>
+          <input id="lpStoreMasterSearch" type="search" maxlength="90" placeholder="店舗名・地域で絞り込み" aria-label="店舗マスター検索">
+        </div>
+        <p id="lpStoreMasterStatus" class="hint" role="status" aria-live="polite">開くと照合候補を読み込みます。</p>
+        <h4>🔍 同一店舗かもしれない候補</h4>
+        <div id="lpStoreMasterCandidates" class="lp-store-master-candidates"></div>
+        <details class="lp-store-master-manual">
+          <summary>手動で既存店舗を統合</summary>
+          <div class="lp-store-master-manual-body">
+            <label>統合する店舗<select id="lpStoreMergeSource"><option value="">店舗を選択</option></select></label>
+            <label>統合先の正式店舗<select id="lpStoreMergeTarget"><option value="">店舗を選択</option></select></label>
+            <button type="button" id="lpStoreMasterMerge">選択した店舗を統合</button>
+            <p class="hint">別の都道府県の店舗は統合できません。誤統合防止のため確認してから操作してください。</p>
+          </div>
+        </details>
+        <details class="lp-store-master-all">
+          <summary>店舗マスター一覧 <span id="lpStoreMasterCount">未取得</span></summary>
+          <div id="lpStoreMasterList" class="lp-store-master-list"></div>
+        </details>
+      </section>
 
       <!-- Developer-only moderation for collected non-LivePocket URLs -->
       <section id="lpExtManage" class="store-tools lp-ext-manage" hidden aria-label="外部サイト抽選の手動編集">
@@ -1585,12 +1627,13 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261028-manual-popup-safe-close-v21-119';
+      ? token : '20261029-store-master-analytics-v21-120';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
+  <script src="store_analytics_v21_120.js?v=20261029-v21_120"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */

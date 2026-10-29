@@ -324,6 +324,7 @@
     refreshWishlistForAccount();
     refreshLotteryTrackerForAccount();
     lpResultsRefresh(true);
+    window.TorecaStoreUI?.refresh?.(true);
     refreshLotteryOnsiteReports(true);
     refreshLotteryOnsiteArchive(true);
     queueMicrotask(() => friendPresenceAuthChanged());
@@ -3766,7 +3767,7 @@
     const list = stores.length ? `
       <details class="lp-store-details">
         <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
-        <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small></li>`).join('')}</ul>
+        <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small>${window.TorecaStoreUI?.storeBadge?.(x)||''}</li>`).join('')}</ul>
       </details>` : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
     return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}${urgent ? ' lp-urgent-card' : ''}">
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
@@ -3774,6 +3775,7 @@
         <span class="lp-tag">${escape(lotteryCategoryText(genre))}</span>
         <span class="lp-tag">${escape(lotterySite(item))}</span>
         ${kind ? `<span class="lp-tag">${kind}</span>` : ''}
+        ${window.TorecaStoreUI?.cardBadge?.(stores)||''}
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
       ${lpCardOverrides.get(item.url)?.edited_fields?.includes('product_name') && item.product_name && item.product_name !== label ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
@@ -6392,6 +6394,7 @@
       if(parsed)lotteryTrackRecords.set(url,parsed);
       lotteryTrackError='';
       renderLotteryTrackerSummary();renderLottery();
+      window.TorecaStoreUI?.refresh?.(true);
       if(closeOnSuccess&&$('lpTrackerEditor')?.open)$('lpTrackerEditor').close();
     }catch(error){
       if(authUser?.id===uid){
@@ -6413,6 +6416,7 @@
       lotteryTrackRecords.delete(url);
       $('lpTrackerEditor')?.close();
       renderLotteryTrackerSummary();renderLottery();
+      window.TorecaStoreUI?.refresh?.(true);
     }catch(error){
       const msg=$('lpTrackEditorMessage');
       if(msg)msg.textContent='削除できませんでした：'+(error.message||error);
@@ -8500,6 +8504,8 @@
       lpResultsInit();
       bindEvents();
       initDevAccordions();
+      window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
+        renderCards:renderLottery,escape});
 
       get('foundAt').value = nowLocal();
       get('cancelEdit').hidden = true;
