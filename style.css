@@ -2367,11 +2367,45 @@ html[data-theme="dark"] #lpTrackerEditor .lp-track-store-choice{
 /* v21.112: Sticky close header with a mathematically centered cross.
    Two CSS strokes avoid platform-dependent font glyph baselines. */
 #lpTrackerEditor .lp-track-sticky-bar{
-  position:sticky;top:0;z-index:50;box-sizing:border-box;
-  display:flex;justify-content:flex-end;align-items:center;
-  pointer-events:none;
-  margin:-18px -18px 12px;padding:8px 12px 8px;
+  /* v21.139: a real, non-scrolling header prevents iPhone text bleed. */
+  position:relative;top:auto;z-index:50;box-sizing:border-box;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  flex:0 0 auto;min-width:0;min-height:66px;pointer-events:auto;
+  margin:0;padding:12px 15px;
   background:var(--app-surface,#182438);
+  border-bottom:1px solid var(--app-border,#617188);
+}
+#lpTrackerEditor .lp-track-modal-title{
+  margin:0;padding:0;min-width:0;max-width:100%;
+  font-size:17px;line-height:1.4;font-weight:800;
+  color:var(--app-text,#172033);overflow-wrap:anywhere;
+}
+#lpTrackerEditor .lp-track-modal-title:focus{outline:none}
+#lpTrackerEditor .lp-track-modal-title:focus-visible{
+  outline:2px solid #60a5fa;outline-offset:3px;border-radius:3px;
+}
+#lpTrackerEditor #lpTrackerEditorBody .lp-tracker-intro{
+  max-width:100%;overflow-wrap:anywhere;
+}
+#lpTrackerEditor #lpTrackerForm :is(input,textarea,select){
+  box-sizing:border-box;max-width:100%;min-width:0;
+}
+#lpTrackerEditor #lpTrackerForm input[type="datetime-local"],
+#lpTrackerEditor #lpTrackerForm input[type="date"],
+#lpTrackerEditor #lpTrackerForm input[type="time"]{
+  display:block;max-width:100%;width:100%;min-width:0;
+  font-size:16px;overflow:hidden;
+}
+#lpTrackerEditor #lpTrackerForm textarea[name="note"]{
+  overflow:hidden;resize:none;max-height:none;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+html[data-theme="dark"] #lpTrackerEditor .lp-track-modal-title{
+  color:var(--app-text,#eaf1ff);
+}
+@media(max-width:440px){
+  #lpTrackerEditor .lp-track-sticky-bar{padding:10px 13px;min-height:64px}
+  #lpTrackerEditor #lpTrackerEditorBody{padding:12px 13px 24px}
 }
 #lpTrackerEditor #lpTrackStickyClose{
   box-sizing:border-box;position:relative;pointer-events:auto;
