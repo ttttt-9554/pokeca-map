@@ -6,6 +6,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {pathToFileURL}=require('node:url');
 const root=path.join(__dirname,'..');
 const edge=fs.readFileSync(path.join(root,'supabase/functions/discord-custom-access-token/index.ts'),'utf8');
+const sql=fs.readFileSync(path.join(root,'supabase/discord_remembered_sessions_v21_138.sql'),'utf8');
 (async()=>{
  const p=await import(pathToFileURL(path.join(root,'supabase/functions/discord-custom-access-token/policy.mjs')).href);
  const uid='88888888-8888-4888-8888-888888888888';
@@ -28,10 +29,37 @@ const edge=fs.readFileSync(path.join(root,'supabase/functions/discord-custom-acc
  assert.match(edge,/auth\.admin\.getUserById\(event\.user_id\)/);
  assert.match(edge,/discordId\(response\.data\.user\.identities\)/);
  assert.match(edge,/permitted\(member,allowed\)/);
- assert.match(edge,/return json\(\{claims:event\.claims\}\)/);
+ assert.match(edge,/return json\(\{claims:authorizedClaims\(event\.claims,authorizedUntil\)\}\)/);
+ assert.match(edge,/return json\(\{claims:authorizedClaims\(event\.claims,cached\.authorized_until\)\}\)/);
+ assert.match(edge,/if\(event\.authentication_method==='token_refresh'\)/);
+ assert.match(edge,/session_id:sessionId,user_id:event\.user_id/);
+ assert.match(edge,/\.eq\('session_id',sessionId\)\.maybeSingle\(\)/);
+ assert.match(sql,/ENABLE ROW LEVEL SECURITY/);
+ assert.match(sql,/REVOKE ALL ON TABLE public\.discord_remembered_sessions_v1/);
+ assert.match(sql,/GRANT SELECT, INSERT, UPDATE, DELETE .*public\.discord_remembered_sessions_v1/s);
  assert.match(edge,/Discord role required/);
  assert.doesNotMatch(edge,/event\.claims\.user_metadata|user\.user_metadata|identity_data\s*=\s*event/);
  assert.doesNotMatch(edge,/console\.(log|warn|error)/);
  assert.doesNotMatch(edge,/verify_jwt\s*:\s*true/);
- console.log('Pre-session Discord token hook role validation and signature checks passed');
+ // Grants are bound to an individual Supabase session and expire in 14 days.
+ assert.equal(p.REMEMBER_DAYS,14);
+ const now=Date.parse('2026-10-30T00:00:00Z');
+ const sessionId='11111111-1111-4111-8111-111111111111';
+ const refresh={...event,authentication_method:'token_refresh',
+   claims:{...event.claims,session_id:sessionId}};
+ const row={session_id:sessionId,user_id:uid,
+   authorized_until:new Date(now+8*24*60*60*1000).toISOString()};
+ assert(p.rememberedSessionAllowed(refresh,row,now));
+ assert(!p.rememberedSessionAllowed({...refresh,authentication_method:'oauth'},row,now));
+ assert(!p.rememberedSessionAllowed(refresh,{...row,user_id:'other'},now));
+ assert(!p.rememberedSessionAllowed(refresh,{...row,session_id:'other'},now));
+ assert(!p.rememberedSessionAllowed(refresh,{...row,authorized_until:new Date(now).toISOString()},now));
+ assert(!p.rememberedSessionAllowed(refresh,{
+   ...row,authorized_until:new Date(now+p.REMEMBER_MS+60000).toISOString()},now));
+ assert(!p.rememberedSessionAllowed(refresh,null,now));
+ const claims=p.authorizedClaims(refresh.claims,row.authorized_until);
+ assert.equal(claims.sub,uid);
+ assert.equal(claims.toreca_discord_role_until,Math.floor(Date.parse(row.authorized_until)/1000));
+ assert.equal(refresh.claims.toreca_discord_role_until,undefined);
+ console.log('Pre-session Discord hook: role verification, signed claims and 14-day session persistence passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
