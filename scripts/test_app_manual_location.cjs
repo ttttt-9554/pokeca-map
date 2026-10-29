@@ -29,6 +29,7 @@ const visibleItems = [];
 const context = {
   lotteryBaseItems: baseItems,
   lotteryItems: visibleItems,
+  lpCardOverrides: new Map(),
   isLivePocketEventUrl: value => typeof value === 'string' &&
     value.startsWith('https://livepocket.jp/e/')
 };
@@ -68,4 +69,14 @@ baseItems[0]={url: URL, stores:[
 assert.equal(app.lpLocationBaseList().length,0,
   'Original multi-store records remain excluded from single-store editor');
 
-console.log('8 app manual-location regression checks passed');
+// Administrator-hidden cards are never queued for location correction;
+// un-hiding restores the original behavior without deleting the base event.
+baseItems[0]={url:URL,store_name:'店名未確認'};
+context.lpCardOverrides.set(URL,{event_url:URL,is_hidden:true});
+assert.equal(app.lpLocationBaseList().length,0,
+  'Hidden LivePocket cards must be excluded from the location review queue');
+context.lpCardOverrides.set(URL,{event_url:URL,is_hidden:false});
+assert.equal(app.lpLocationBaseList().length,1,
+  'Restored cards return to the location review queue');
+
+console.log('10 app manual-location regression checks passed');
