@@ -26,7 +26,7 @@ export const REMEMBER_DAYS=14;
 export const REMEMBER_MS=REMEMBER_DAYS*24*60*60*1000;
 export function uuid(value){
   return typeof value==='string'&&
-    /^[a-f\\d]{8}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{12}$/i.test(value);
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
 }
 export function rememberedSessionAllowed(event,row,now=Date.now()){
   if(!event||event.authentication_method!=='token_refresh'||!row||
