@@ -4,6 +4,8 @@ name: Discord Pre-Session Auth Hook Checks
     paths:
       - 'supabase/functions/discord-custom-access-token/**'
       - 'scripts/test_discord_custom_access_token.cjs'
+      - 'scripts/test_discord_hook_runtime.cjs'
+      - 'supabase/discord_remembered_sessions_v21_138.sql'
       - 'DISCORD_PRESESSION_HOOK_SETUP.md'
       - '.github/workflows/discord-custom-access-token-test.yml'
   workflow_dispatch:
@@ -23,3 +25,5 @@ jobs:
           node --check supabase/functions/discord-custom-access-token/policy.mjs
           node --check scripts/test_discord_custom_access_token.cjs
           node scripts/test_discord_custom_access_token.cjs
+          node --check scripts/test_discord_hook_runtime.cjs
+          node scripts/test_discord_hook_runtime.cjs
