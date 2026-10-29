@@ -2595,3 +2595,6 @@ html[data-theme="dark"] #devView .lp-store-master-pair,
 html[data-theme="dark"] #devView .lp-store-master-item{
   background:var(--app-surface2,#25354b);border-color:var(--app-border,#526681);
 }
+
+/* v21.121: undo store name merge without revealing application identities. */
+#devView .lp-store-master-item button[data-store-unmerge]{margin-left:auto;min-height:36px;padding:6px 9px;font-size:12px}

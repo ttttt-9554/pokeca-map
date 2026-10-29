@@ -45,6 +45,8 @@ ui.init({getClient:()=>client,isDev:()=>false,renderCards:()=>renderCount++,
  assert.match(html,/id="lpStoreAnalytics"/);
  assert.match(app,/TorecaStoreUI\?\.cardBadge/);
  assert.match(app,/TorecaStoreUI\?\.storeBadge/);
+ assert.match(code,/lottery_store_unmerge_v1/);
+ assert.match(code,/data-store-unmerge/);
  assert.match(sql,/s\.contributors>=5 AND s\.decided>=20/);
  assert.match(sql,/e\.decided>=30/);
  assert.doesNotMatch(sql,/jsonb_build_object\([^;]*'user_id'/);

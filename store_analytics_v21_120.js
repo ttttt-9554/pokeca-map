@@ -115,7 +115,9 @@
     list.innerHTML=visible.length?visible.slice(0,300).map(row=>
       '<div class="lp-store-master-item"><strong>'+escape(row.name)+
       '</strong><span>📍 '+escape(row.prefecture)+
-      (row.merged_into?'（別名として統合済み）':'')+'</span></div>').join(''):
+      (row.merged_into?'（別名として統合済み）':'')+'</span>'+
+      (row.merged_into?'<button type="button" data-store-unmerge="'+escape(row.id)+'">統合解除</button>':'')+
+      '</div>').join(''):
       '<p class="hint">一致する店舗はありません。</p>';
     const choices=live.slice().sort((a,b)=>
       clean(a.prefecture).localeCompare(clean(b.prefecture),'ja')||
@@ -163,6 +165,24 @@
     if(action==='merge')await refresh(true);
     return true;
   }
+  async function unmerge(id){
+    if(!isDev()||!getClient()||!id||masterBusy)return false;
+    if(!confirm('この店舗の統合を解除し、別店舗として再集計しますか？'))return false;
+    try{
+      const {data,error:remote}=await getClient().rpc('lottery_store_unmerge_v1',{
+        p_source:id
+      });
+      if(remote)throw remote;
+      if(data!==true)throw Error('解除結果が確認できませんでした');
+      await refreshMaster();
+      await refresh(true);
+      return true;
+    }catch(error){
+      alert('統合解除に失敗しました：'+String(error?.message||error));
+      return false;
+    }
+  }
+
   function onCandidateClick(event){
     const button=event.target.closest('button[data-store-review]');
     if(!button)return;
@@ -182,6 +202,10 @@
     $('lpStoreMasterReload')?.addEventListener('click',refreshMaster);
     $('lpStoreMasterSearch')?.addEventListener('input',renderMaster);
     $('lpStoreMasterCandidates')?.addEventListener('click',onCandidateClick);
+    $('lpStoreMasterList')?.addEventListener('click',event=>{
+      const target=event.target.closest('button[data-store-unmerge]');
+      if(target)unmerge(target.dataset.storeUnmerge);
+    });
     $('lpStoreMasterMerge')?.addEventListener('click',()=>{
       const source=$('lpStoreMergeSource')?.value;
       const target=$('lpStoreMergeTarget')?.value;
