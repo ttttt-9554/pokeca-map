@@ -8477,6 +8477,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『30th CELEBRATION』3次抽選",
       "first_detected_at": "2026-10-29T11:35:57.960242+00:00"
     },
     {
@@ -8513,5 +8515,5 @@
       "first_detected_at": "2026-10-29T12:35:59.384218+00:00"
     }
   ],
-  "updated_at": "2026-10-29T17:30:59.923996+00:00"
+  "updated_at": "2026-10-29T17:41:16.200764+00:00"
 }
