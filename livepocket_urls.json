@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-29T06:05:56.263953+00:00",
+  "collected_at": "2026-10-29T09:05:58.270350+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 577,
+  "unique_livepocket_urls": 578,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15510,33 +15510,63 @@
       "event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売受付",
       "application_end_at": "2026-11-02T21:00:00+09:00",
       "application_start_at": "2026-10-29T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/grixw",
+      "discord_message_id": "1565289138587050077",
+      "discord_posted_at": "2026-10-29T09:00:12.305000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\nアゾンレーベルショップ池袋\n受付終了: 10/31 23:59（残り2日5時間）\nhttps://livepocket.jp/e/grixw\n\n🔁 再通知\n📍福島県\nトレカエース植田店\n受付終了: 11/02 21:00（残り4日2時間）\nhttps://livepocket.jp/e/fv1r4",
+      "store_name": "アゾンレーベルショップ池袋",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "アゾンレーベルショップ池袋",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【アゾン池袋】えっくす☆きゅーとふぁみりー『Chisa（ちさ）・Nina（ニナ）／Sweet Memory ギムナジウムの冬じたく』抽選予約販売受付",
+      "application_end_at": "2026-10-31T23:59:00+09:00",
+      "application_start_at": "2026-10-29T00:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 418,
+    "parsed": 419,
     "no_structured_details": 159
   },
   "field_counts": {
-    "store_name": 396,
-    "prefecture": 334,
-    "event_title": 264,
+    "store_name": 397,
+    "prefecture": 335,
+    "event_title": 265,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 542,
-    "application_start_at": 541,
-    "stores_events": 404
+    "application_end_at": 543,
+    "application_start_at": 542,
+    "stores_events": 405
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565243840208699492"
+      "1551580466266644552": "1565289138587050077"
     },
     "last_run": {
-      "checked_at": "2026-10-29T06:05:56.263953+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-29T09:05:58.270350+00:00",
+      "new_urls": 1,
       "original_urls": 577,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -15707,7 +15737,8 @@
         "1564511495058882570": "2026-10-27T05:35:56.734209+00:00",
         "1564579438602096640": "2026-10-27T10:05:56.534119+00:00",
         "1564964489789575211": "2026-10-28T11:30:59.206675+00:00",
-        "1565206100251385877": "2026-10-29T03:35:56.644030+00:00"
+        "1565206100251385877": "2026-10-29T03:35:56.644030+00:00",
+        "1565289138587050077": "2026-10-29T09:05:58.944075+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18137,6 +18168,11 @@
           "checked_at": "2026-10-29T03:36:22.407772+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/grixw": {
+          "checked_at": "2026-10-29T09:06:40.868366+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19473,6 +19509,12 @@
           "detected_at": "2026-10-29T03:35:57.565863+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-29T03:36:22.407772+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/grixw": {
+          "detected_at": "2026-10-29T09:05:59.928138+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-29T09:06:40.868366+00:00",
           "http_status": null
         }
       },
@@ -25259,6 +25301,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/grixw": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-29T09:06:40.868366+00:00",
+          "title_observed": "【アゾン池袋】えっくす☆きゅーとふぁみりー『Chisa（ちさ）・Nina（ニナ）／Sweet Memory ギムナジウムの冬じたく』抽選予約販売受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -28980,6 +29033,19 @@
         },
         "https://livepocket.jp/e/fv1r4": {
           "checked_at": "2026-10-29T03:36:22.407772+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/grixw": {
+          "checked_at": "2026-10-29T09:06:40.868366+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
