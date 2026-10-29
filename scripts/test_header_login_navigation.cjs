@@ -51,10 +51,12 @@ const document={
 };
 let renders=0,devRuns=0;
 const runtime=vm.runInNewContext([
+ "const LOTTERY_LOGIN_TABS=['lottery','lotteryManage','lotteryResults','appLottery'];",
  extract('appNavigationButtons'),extract('switchTab'),extract('bindAppNavigation'),
  '\n({switchTab,bindAppNavigation})'
  ].join('\n'),{
    document,$:id=>id==='appScrollArea'?scroll:null,
+   authUser:null,discordRoleAuthPending:false,
    isDeveloper:()=>false,setMapFilterOpen:()=>{},
    render:()=>renders++,refreshMap:()=>{},
    loadLotteryDevResults:()=>devRuns++
