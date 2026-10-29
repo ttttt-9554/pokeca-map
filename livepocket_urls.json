@@ -18262,7 +18262,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/grixw": {
-          "checked_at": "2026-10-29T15:21:23.731312+00:00",
+          "checked_at": "2026-10-29T21:31:22.445863+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19621,7 +19621,7 @@
         "https://livepocket.jp/e/grixw": {
           "detected_at": "2026-10-29T09:05:59.928138+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-29T15:21:23.731312+00:00",
+          "checked_at": "2026-10-29T21:31:22.445863+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/dof-w": {
@@ -20753,8 +20753,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/grixw": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-29T15:21:23.731312+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-29T21:31:22.445863+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/dof-w": {
@@ -25456,7 +25456,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-29T15:21:23.731312+00:00",
+          "checked_at": "2026-10-29T21:31:22.445863+00:00",
           "title_observed": "【アゾン池袋】えっくす☆きゅーとふぁみりー『Chisa（ちさ）・Nina（ニナ）／Sweet Memory ギムナジウムの冬じたく』抽選予約販売受付",
           "genre": "",
           "product_origin": "",
@@ -29228,7 +29228,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/grixw": {
-          "checked_at": "2026-10-29T15:21:23.731312+00:00",
+          "checked_at": "2026-10-29T21:31:22.445863+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
