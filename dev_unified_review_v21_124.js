@@ -53,7 +53,7 @@
       if(!base?.url||base.app_lottery||!api.validUrl(base.url))continue;
       const item=effective.get(base.url);
       // No hidden, excluded, removed or expired lotteries are review tasks.
-      if(!item||item.app_lottery_hidden||item.manual_page_unavailable||
+      if(!item||item.app_lottery_hidden||item.manual_card_hidden||item.manual_page_unavailable||
          api.expired(base.url,base.application_end_at,now))continue;
       const missing=fieldsFor(base,item,diagnostic.get(base.url),state);
       const card=state.card.get(base.url);

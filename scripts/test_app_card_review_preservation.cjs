@@ -14,6 +14,7 @@ const {lpCardShouldDelete:del,lpCardVerifiedStores:valid}=vm.runInNewContext(
 assert.equal(del(false,0,false,{review_complete:true,edited_fields:['stores']}),false);
 assert.equal(del(false,0,false,{review_complete:true,edited_fields:[]}),false);
 assert.equal(del(false,0,false,{review_complete:false}),true);
+assert.equal(del(false,0,false,{review_complete:false,is_hidden:true}),false);
 assert.equal(del(false,2,false,{review_complete:false}),false);
 assert.equal(del(false,0,true,null),false);
 assert.equal(del(true,0,false,{review_complete:true}),true);

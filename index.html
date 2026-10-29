@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-store-stats-any-participants-v21-128">
+  <link rel="stylesheet" href="style.css?v=20261029-livepocket-card-visibility-v21-129">
 
   <style>
     [hidden] { display: none !important; }
@@ -1183,6 +1183,14 @@ nav[aria-label="メインメニュー"] {
         </details>
       </section>
 
+      <section id="lpCardHiddenPanel" class="store-tools lp-card-hidden-panel">
+        <h3>🗃️ 非表示のLivePocket抽選</h3>
+        <p class="hint">一覧から削除（非表示）にした抽選を確認・復元できます。元の抽選データや個人の応募履歴は保持しています。</p>
+        <p class="hint">非表示の登録：<strong id="lpCardHiddenCount">確認中</strong></p>
+        <p id="lpCardHiddenFeedback" class="hint" role="status" aria-live="polite"></p>
+        <div id="lpCardHiddenList" class="lp-card-hidden-list">開くと非表示の抽選を表示します。</div>
+      </section>
+      
       <section id="lpStoreMasterPanel" class="store-tools lp-store-master-panel">
         <h3>🏬 店舗マスター（自動照合）</h3>
         <p class="hint">個別管理で登録された店舗名・都道府県を自動でマスター化します。正式名称と既知の略称を照合し、似ているだけの店舗は管理者確認に回します。個人のアカウント名・応募履歴は表示しません。</p>
@@ -1454,6 +1462,11 @@ nav[aria-label="メインメニュー"] {
     <div class="lp-card-editor">
       <h3 id="lpCardDialogTitle" tabindex="-1" autofocus>🛠 抽選カードを編集</h3>
       <a id="lpCardSourceLink" href="#" target="_blank" rel="noopener noreferrer">元の抽選ページ ↗</a>
+      <div class="lp-card-visibility-controls">
+        <button id="lpCardHide" type="button">🗑️ 一覧から削除（復元可）</button>
+        <button id="lpCardRestore" type="button" hidden>↩️ 一覧に復元</button>
+        <p id="lpCardVisibilityState" class="hint" role="status" aria-live="polite"></p>
+      </div>
       <form id="lpCardForm" autocomplete="off">
         <label>イベント名
           <input type="text" name="event_title" maxlength="200" autocomplete="off" placeholder="公式イベント名">
@@ -1661,14 +1674,14 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-store-stats-any-participants-v21-128';
+      ? token : '20261029-livepocket-card-visibility-v21-129';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
-  <script src="store_analytics_v21_120.js?v=20261029-v21_128"></script>
-  <script src="dev_unified_review_v21_124.js?v=20261029-v21_127"></script>
+  <script src="store_analytics_v21_120.js?v=20261029-v21_129"></script>
+  <script src="dev_unified_review_v21_124.js?v=20261029-v21_129"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */

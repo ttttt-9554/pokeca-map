@@ -2544,7 +2544,8 @@
   function lotteryState(item, now = Date.now()) {
     // Manual-confirmed unavailable pages are never labelled "受付中".
     // Keep them in the "すべて" list and preserve saved lottery history.
-    if (item.manual_page_unavailable === true || item.app_lottery_hidden === true) return 'unavailable';
+    if (item.manual_page_unavailable === true || item.app_lottery_hidden === true ||
+      item.manual_card_hidden === true) return 'unavailable';
     const end = lotteryDate(item.application_end_at);
     const start = lotteryDate(item.application_start_at);
     if (Number.isFinite(end) && now > end) return 'closed';
@@ -2617,7 +2618,8 @@
 
   function renderLotteryPrefectures() {
     const selected = $('lpPrefecture').value;
-    const actual = new Set(lotteryItems.flatMap(lotteryPrefectures));
+    const actual = new Set(lotteryItems.filter(item=>
+      !item.manual_card_hidden&&!item.app_lottery_hidden).flatMap(lotteryPrefectures));
     // Nationwide events must be reachable even if that prefecture has
     // no local-only events yet (otherwise its filter option disappears).
     const hasNationwide = actual.has(LP_NATIONWIDE);
@@ -2722,8 +2724,11 @@
   function lpCardOverlay(base) {
     if (!base) return null;
     const row = lpCardOverrides.get(base.url);
-    if (!row || !Array.isArray(row.edited_fields) || !row.edited_fields.length) return base;
-    const item = {...base}, fields = new Set(row.edited_fields);
+    // The flag applies even when the card has no field corrections.
+    if (!row || ((!Array.isArray(row.edited_fields)||!row.edited_fields.length) &&
+      row.is_hidden!==true)) return base;
+    const item = {...base}, fields = new Set(row.edited_fields||[]);
+    if(row.is_hidden===true)item.manual_card_hidden=true;
     if (fields.has('event_title')) {
       item.event_title = row.event_title || '';
       item.official_event_title = item.event_title;
@@ -2773,7 +2778,7 @@
     lpCardLoading = (async () => {
       try {
         const {data,error} = await supabaseClient.from(LP_CARD_TABLE)
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,is_hidden,updated_at')
           .limit(5000);
         if (error) throw error;
         lpCardOverrides = new Map((data || []).filter(x=>safeLotteryUrl(x.event_url))
@@ -2920,7 +2925,9 @@
     const link = $('lpCardSourceLink');
     link.href = url;
     link.textContent = '🔗 元の抽選ページ ↗';
-    $('lpCardReset').hidden = !lpCardOverrides.has(url);
+    $('lpCardReset').hidden = !lpCardOverrides.has(url) ||
+      lpCardOverrides.get(url)?.is_hidden===true;
+    lpCardVisibilityControls(url);
     $('lpCardHistoryFold').open = false;
     $('lpCardHistory').textContent = '履歴を開くと直近の編集履歴を読み込みます。';
     lpCardSetStatus('変更した項目のみ上書きします。元の手動修正は保持されます。');
@@ -2966,15 +2973,20 @@
           || (!!before.edited_fields?.includes(k) !== !!after.edited_fields?.includes(k));
       });
       const when = lotteryJapaneseDate(row.edited_at) || String(row.edited_at || '');
+      const visibility=before.is_hidden!==after.is_hidden?
+        (after.is_hidden?'一覧から非表示':'一覧に復元'):'';
       return '<li><strong>'+escape(when)+'</strong> ／ '+
-        escape(row.action === 'DELETE' ? 'カード修正を解除' : row.action === 'INSERT' ? '新規修正' : '修正更新')+
-        '<div>'+escape(changes.map(x=>labels[x]).join('・') || '修正内容の整理')+'</div></li>';
+        escape(visibility||(row.action==='DELETE'?'カード修正を解除':
+          row.action==='INSERT'?'新規修正':'修正更新'))+
+        '<div>'+escape(changes.map(x=>labels[x]).join('・')||
+          (visibility?'公開状態の変更':'修正内容の整理'))+'</div></li>';
     }).join('')+'</ol>';
   }
 
   // Ordinary Save must not erase a previously verified official record.
   function lpCardShouldDelete(reset,editedCount,inReview,saved){
-    return !!reset||(editedCount===0&&!inReview&&!saved?.review_complete);
+    return !!reset||(editedCount===0&&!inReview&&!saved?.review_complete&&
+      !saved?.is_hidden);
   }
   // All stores and prefectures must be genuine, not unresolved placeholders.
   function lpCardVerifiedStores(stores){
@@ -2984,6 +2996,92 @@
       (area=>LP_MANUAL_AREAS.includes(area));
     return Array.isArray(stores)&&stores.length>0&&
       stores.every(row=>goodName(row?.name)&&goodArea(row?.prefecture));
+  }
+
+  // v21.129: hide or restore LivePocket cards, never delete original data.
+  function lpCardVisibilityControls(url){
+    const hidden=lpCardOverrides.get(url)?.is_hidden===true;
+    const hide=$('lpCardHide'),restore=$('lpCardRestore');
+    if(hide)hide.hidden=hidden;
+    if(restore)restore.hidden=!hidden;
+    const status=$('lpCardVisibilityState');
+    if(status)status.textContent=hidden?
+      '🚫 この抽選は全ユーザーの抽選一覧で非表示です。復元できます。':
+      '抽選一覧からのみ非表示にできます。応募記録と編集履歴は残ります。';
+  }
+
+  function lpCardHiddenRender(){
+    const host=$('lpCardHiddenList'),count=$('lpCardHiddenCount');
+    if(!host||!count||!isDeveloper())return;
+    if(!lpCardReady){
+      count.textContent='読み込み中';
+      host.innerHTML='<p class="hint">カード修正情報を取得しています。</p>';
+      return;
+    }
+    const rows=[...lpCardOverrides.values()].filter(row=>
+      row?.is_hidden===true&&isLivePocketEventUrl(row.event_url));
+    count.textContent=rows.length+'件';
+    host.innerHTML=rows.length?rows.slice(0,250).map(row=>{
+      const base=lotteryBaseItems.find(item=>item.url===row.event_url);
+      const title=base?.event_title||row.event_title||row.event_url;
+      const url=escape(row.event_url);
+      return '<article class="lp-card-hidden-row">'+
+        '<strong>'+escape(title)+'</strong>'+
+        '<a href="'+url+'" target="_blank" rel="noopener noreferrer">🔗 元の抽選ページ</a>'+
+        '<div class="lp-card-hidden-actions">'+
+        (base?'<button type="button" data-lp-card-hidden-edit="'+url+'">✏️ 編集</button>':'')+
+        '<button type="button" data-lp-card-hidden-restore="'+url+'">↩️ 一覧に復元</button>'+
+        '</div></article>';
+    }).join(''):'<p class="hint">非表示にしているLivePocket抽選はありません。</p>';
+  }
+
+  async function lpCardVisibilityChange(url,hidden,fromDialog=false){
+    if(!isDeveloper()||!authUser?.id||!supabaseClient||!lpCardReady||
+       lpCardBusy||!safeLotteryUrl(url)||!isLivePocketEventUrl(url))return false;
+    const saved=lpCardOverrides.get(url);
+    if((saved?.is_hidden===true)===hidden)return true;
+    if(!hidden&&!saved)return false;
+    const message=hidden
+      ? 'この抽選を全ユーザーの抽選一覧から削除（非表示）しますか？\n'+
+        '元データ・カード修正履歴・個人の応募記録は消えません。\n'+
+        '未保存の編集内容は保存されません。あとで開発タブから復元できます。'
+      : 'この抽選を全ユーザーの抽選一覧に復元しますか？';
+    if(!confirm(message))return false;
+    lpCardBusy=true;
+    const controls=[$('lpCardHide'),$('lpCardRestore')].filter(Boolean);
+    controls.forEach(button=>button.disabled=true);
+    const feedback=fromDialog?$('lpCardVisibilityState'):$('lpCardHiddenFeedback');
+    if(feedback)feedback.textContent='🔄 保存しています…';
+    try{
+      const payload={is_hidden:hidden,updated_by:authUser.id,updated_at:new Date().toISOString()};
+      let response;
+      if(saved){
+        // Update ONLY visibility, so title, stores, dates and verification survive.
+        response=await supabaseClient.from(LP_CARD_TABLE)
+          .update(payload).eq('event_url',url).select('event_url,is_hidden').single();
+      }else{
+        if(!hidden)throw Error('復元対象が見つかりません。');
+        // Let database defaults supply the empty correction list.
+        response=await supabaseClient.from(LP_CARD_TABLE)
+          .insert({event_url:url,...payload}).select('event_url,is_hidden').single();
+      }
+      if(response.error)throw response.error;
+      if(response.data?.event_url!==url||response.data?.is_hidden!==hidden)
+        throw Error('保存結果を確認できませんでした。');
+      lpCardLastFetch=0;
+      if(!await lpCardRefresh(true))
+        throw Error('保存されましたが再取得できません：'+lpCardError);
+      if(fromDialog&&$('lpCardDialog')?.open)$('lpCardDialog').close();
+      if(!fromDialog&&feedback)
+        feedback.textContent=hidden?'✅ 非表示にしました。':'✅ 一覧に復元しました。';
+      return true;
+    }catch(error){
+      if(feedback)feedback.textContent='⚠ '+String(error?.message||error);
+      return false;
+    }finally{
+      lpCardBusy=false;
+      controls.forEach(button=>button.disabled=false);
+    }
   }
 
   async function lpCardWrite(reset = false) {
@@ -3007,6 +3105,7 @@
     try {
       if (reset) {
         if (!saved) return;
+        if(saved.is_hidden===true)throw Error('非表示の抽選は先に一覧に復元してください。');
         if (!confirm('カードからの手動修正を解除し、従来の修正内容に戻しますか？ 編集履歴は残ります。')) return;
       } else {
         for (const field of LP_CARD_FORM_FIELDS) {
@@ -3107,7 +3206,7 @@
       } else {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .upsert(payload,{onConflict:'event_url'})
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,updated_at')
+          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,is_hidden,updated_at')
           .single();
         if (error) throw error;
         if (data?.event_url !== url || !Array.isArray(data.edited_fields)) throw Error('保存結果を確認できませんでした');
@@ -3238,6 +3337,19 @@
     });
     form.addEventListener('submit', event=>{event.preventDefault();lpCardWrite(false);});
     $('lpCardReset').addEventListener('click',()=>lpCardWrite(true));
+    $('lpCardHide').addEventListener('click',()=>lpCardVisibilityChange(lpCardEditing,true,true));
+    $('lpCardRestore').addEventListener('click',()=>lpCardVisibilityChange(lpCardEditing,false,true));
+    $('lpCardHiddenList')?.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-lp-card-hidden-restore],button[data-lp-card-hidden-edit]');
+      if(!button||!isDeveloper())return;
+      if(button.dataset.lpCardHiddenRestore)
+        lpCardVisibilityChange(button.dataset.lpCardHiddenRestore,false);
+      else if(button.dataset.lpCardHiddenEdit)
+        lpCardOpen(button.dataset.lpCardHiddenEdit);
+    });
+    $('lpCardHiddenPanel')?.closest('details.dev-accordion')?.addEventListener('toggle',event=>{
+      if(event.currentTarget.open&&isDeveloper())lpCardRefresh(true);
+    });
     $('lpCardCancel').addEventListener('click',()=>dialog.close());
     $('lpCardHistoryFold').addEventListener('toggle',lpCardHistoryLoad);
   }
@@ -3248,6 +3360,7 @@
     if($('lotteryView')?.classList.contains('active'))renderLottery();
     if($('lotteryResultsView')?.classList.contains('active'))lpResultsRender();
     lpExtRenderAdmin();
+    lpCardHiddenRender();
     window.TorecaUnifiedReview?.render?.();
   }
 
@@ -3886,7 +3999,7 @@
     const site = $('lpSite').value;
     const wishlistOnly = $('lpWishlistOnly').checked;
     const visible = lotteryItems.filter(item => {
-      if(item.app_lottery_hidden)return false;
+      if(item.app_lottery_hidden||item.manual_card_hidden)return false;
       if(site==='app'&&!item.app_lottery)return false;
       if(site==='external'&&(isLivePocketEventUrl(item.url)||item.app_lottery))return false;
       if(site==='livepocket'&&!isLivePocketEventUrl(item.url))return false;
@@ -3908,7 +4021,7 @@
       return true;
     });
     lotterySortCards(visible, $('lpSort').value, now);
-    const publicItems=lotteryItems.filter(x=>!x.app_lottery_hidden);
+    const publicItems=lotteryItems.filter(x=>!x.app_lottery_hidden&&!x.manual_card_hidden);
     const pokemonCount = publicItems.filter(x => lotteryGenre(x) === 'pokemon').length;
     const knownCount = publicItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
     const openCount = publicItems.filter(x => lotteryState(x,now) === 'open').length;
@@ -4559,9 +4672,10 @@
   // Participant counts remain private aggregation metadata, never UI figures.
   function lpResultsKnownEvents(){
     const entries=new Map();
-    const hiddenUrls=new Set(lotteryItems.filter(item=>item?.app_lottery_hidden).map(item=>item.url));
+    const hiddenUrls=new Set(lotteryItems.filter(item=>
+      item?.app_lottery_hidden||item?.manual_card_hidden).map(item=>item.url));
     for(const item of lotteryItems){
-      if(!item||item.app_lottery_hidden||!safeLotteryUrl(item.url)||
+      if(!item||item.app_lottery_hidden||item.manual_card_hidden||!safeLotteryUrl(item.url)||
          !(Number(lpResultsCounts.get(item.url)?.application_entries)>=LP_RESULTS_MIN_APPLICATION_ENTRIES))continue;
       entries.set(item.url,item);
     }
@@ -6905,7 +7019,8 @@
         {url:row.url},item,row,lpDevUnifiedSnapshot());
       return {...row,missing:Array.isArray(liveMissing)?
         row.missing.filter(kind=>liveMissing.includes(kind)):row.missing};
-    }).filter(row=>row.missing.length&&!lpCardOverrides.get(row.url)?.review_complete);
+    }).filter(row=>row.missing.length&&!lpCardOverrides.get(row.url)?.review_complete&&
+      !lpCardOverrides.get(row.url)?.is_hidden);
     const filtered=rows.filter(row=>!search||
       [row.url,row.event_title,row.store_name].join(' ').toLocaleLowerCase('ja-JP').includes(search));
     const resolved=lpDevReviewRows.length-rows.length;
@@ -8099,6 +8214,7 @@
 
   function lpLocationBaseList(){
     return lotteryBaseItems.filter(base=>base&&isLivePocketEventUrl(base.url)&&
+      lpCardOverrides.get(base.url)?.is_hidden!==true&&
       (!Array.isArray(base.stores)||base.stores.length<=1)&&
       (!Array.isArray(lpLocationEffective(base).stores)||
        lpLocationEffective(base).stores.length<=1));
