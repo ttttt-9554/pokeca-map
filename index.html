@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-swap-results-manual-tabs-v21-123">
+  <link rel="stylesheet" href="style.css?v=20261029-unified-issue-review-v21-124">
 
   <style>
     [hidden] { display: none !important; }
@@ -1155,6 +1155,34 @@ nav[aria-label="メインメニュー"] {
       <button type="button" id="devFoldAll">すべて閉じる</button>
 
 
+      <section id="lpDevUnifiedPanel" class="store-tools lp-dev-unified">
+        <h3>🔎 抽選の未確認事項（一括管理）</h3>
+        <p class="hint">抽選名・店舗・都道府県・応募開始・応募締切をまとめて管理します。カード編集や従来の手動修正を保存すると、解消された未確認項目を自動反映します。</p>
+        <div class="lp-dev-unified-toolbar">
+          <input id="lpDevUnifiedSearch" type="search" maxlength="120" placeholder="抽選名・店舗名・URLで検索" aria-label="未確認抽選を検索">
+          <select id="lpDevUnifiedFilter" aria-label="未確認項目の種類">
+            <option value="all">すべての未確認事項</option>
+            <option value="title">抽選名が未確認</option>
+            <option value="store">店舗が未確認</option>
+            <option value="area">都道府県が未確認</option>
+            <option value="start">応募開始が未確認</option>
+            <option value="deadline">応募締切が未確認</option>
+          </select>
+          <button id="lpDevUnifiedRefresh" type="button">最新情報を再取得</button>
+        </div>
+        <p id="lpDevUnifiedStatus" class="hint" role="status" aria-live="polite">データを照合しています…</p>
+        <div id="lpDevUnifiedCounts" class="lp-dev-unified-counts"></div>
+        <details id="lpDevUnifiedPending" class="lp-dev-unified-group" open>
+          <summary>⚠ 未確認・要修正 <span id="lpDevUnifiedPendingCount">確認中</span></summary>
+          <div id="lpDevUnifiedList" class="lp-dev-unified-list"></div>
+          <button id="lpDevUnifiedMore" type="button" hidden>さらに表示</button>
+        </details>
+        <details id="lpDevUnifiedCompleted" class="lp-dev-unified-group">
+          <summary>✅ 修正済み・確認完了 <span id="lpDevUnifiedDoneCount">確認中</span></summary>
+          <div id="lpDevUnifiedCompletedList" class="lp-dev-unified-list"></div>
+        </details>
+      </section>
+
       <section id="lpStoreMasterPanel" class="store-tools lp-store-master-panel">
         <h3>🏬 店舗マスター（自動照合）</h3>
         <p class="hint">個別管理で登録された店舗名・都道府県を自動でマスター化します。正式名称と既知の略称を照合し、似ているだけの店舗は管理者確認に回します。個人のアカウント名・応募履歴は表示しません。</p>
@@ -1633,13 +1661,14 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-swap-results-manual-tabs-v21-123';
+      ? token : '20261029-unified-issue-review-v21-124';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
   <script src="store_analytics_v21_120.js?v=20261029-v21_121"></script>
+  <script src="dev_unified_review_v21_124.js?v=20261029-v21_124"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */

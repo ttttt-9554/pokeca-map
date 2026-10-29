@@ -2923,6 +2923,17 @@
     $('lpCardHistoryFold').open = false;
     $('lpCardHistory').textContent = '履歴を開くと直近の編集履歴を読み込みます。';
     lpCardSetStatus('変更した項目のみ上書きします。元の手動修正は保持されます。');
+    const queueRow=lpDevReviewRows.find(row=>row.url===url);
+    const unresolved=window.TorecaUnifiedReview?.fieldsFor?.(
+      base,item,queueRow,lpDevUnifiedSnapshot())||[];
+    if(isLivePocketEventUrl(url)&&unresolved.length){
+      lpCardReviewUrl=url;
+      $('lpCardReviewConfirm').hidden=false;
+      const labels={title:'抽選名',store:'対象店舗',area:'地域',start:'応募開始',deadline:'応募締切'};
+      $('lpCardReviewMissing').textContent='未確認項目：'+
+        unresolved.map(key=>labels[key]||key).join('・')+
+        '。カード保存で項目の未確認状態が自動更新されます。公式ページの確認完了も記録する場合は下の確認欄を使ってください。';
+    }
     dialog.showModal();
     // Prevent an iPhone keyboard popup by focusing a non-editable heading.
     $('lpCardDialogTitle')?.focus({preventScroll:true});
@@ -3017,29 +3028,45 @@
           throw Error('応募開始日時は締切より前にしてください。');
         payload.edited_fields=edited;
         if(lpCardReviewUrl===url){
-          const review=lpDevReviewRows.find(x=>x.url===url);
           const confirmed=form.elements.namedItem('review_confirmed').checked;
           const evidence=form.elements.namedItem('review_evidence').value;
           const unpublished=form.elements.namedItem('review_deadline_unpublished').checked;
           const title=String(form.elements.namedItem('event_title').value||'').trim();
-          if(!review||!confirmed||!['official_page_viewed','official_screenshot_viewed'].includes(evidence))
-            throw Error('公式ページの確認・証拠の種類・確認チェックが必要です。');
-          if(review.missing.includes('title')&&!lpManualValidTitle(title))
-            throw Error('公式の正式イベント名を入力してください。');
-          if(review.missing.includes('store')&&!desiredStores.some(x=>x.name.trim()))
-            throw Error('対象店舗を追加・修正してください。');
-          if(unpublished&&end)throw Error('締切の日時と「記載なし」は同時に指定できません。');
-          if(review.missing.includes('deadline')&&!end&&!unpublished)
-            throw Error('応募締切の日時を入力するか「公式に記載なし」を選択してください。');
-          payload.review_complete=true;
-          payload.review_evidence=evidence;
-          payload.review_completed_at=new Date().toISOString();
-          payload.review_deadline_unpublished=unpublished&&!end;
-          payload.review_note=unpublished?'公式ページに応募締切の記載なし':null;
+          if(confirmed){
+            const needs=window.TorecaUnifiedReview?.fieldsFor?.(
+              base,lpCardOverlay(legacy),lpDevReviewRows.find(x=>x.url===url),
+              lpDevUnifiedSnapshot())||[];
+            if(!['official_page_viewed','official_screenshot_viewed'].includes(evidence))
+              throw Error('公式情報の確認完了には確認方法を選択してください。');
+            if(needs.includes('title')&&!lpManualValidTitle(title))
+              throw Error('公式の正式イベント名を入力してください。');
+            if(needs.includes('store')&&!desiredStores.some(x=>x.name.trim()))
+              throw Error('対象店舗を追加・修正してください。');
+            if(needs.includes('area')&&desiredStores.some(x=>!x.prefecture))
+              throw Error('対象店舗の都道府県も入力してください。');
+            if(unpublished&&end)throw Error('締切日時と「公式に記載なし」は同時指定できません。');
+            if(needs.includes('deadline')&&!end&&!unpublished)
+              throw Error('応募締切を入力するか、公式に記載なしを確認してください。');
+            payload.review_complete=true;
+            payload.review_evidence=evidence;
+            payload.review_completed_at=new Date().toISOString();
+            payload.review_deadline_unpublished=unpublished&&!end;
+            payload.review_note=unpublished?'公式ページに応募締切の記載なし':null;
+          }
         }
-        if (!edited.length && lpCardReviewUrl!==url) {
-          // Manual verification is an independent durable record: do not
-          // clear a review-only override on an unchanged ordinary card save.
+        if(saved?.review_complete&&payload.review_complete){
+          // A previously confirmed record cannot hide newly cleared fields.
+          const title=String(form.elements.namedItem('event_title').value||'').trim();
+          if(!lpManualValidTitle(title)||!desiredStores.some(x=>x.name.trim())||
+             (!end&&!payload.review_deadline_unpublished)){
+            payload.review_complete=false;payload.review_evidence=null;
+            payload.review_completed_at=null;payload.review_deadline_unpublished=false;
+            payload.review_note=null;
+          }
+        }
+        if (!edited.length && !form.elements.namedItem('review_confirmed').checked &&
+            !saved?.edited_fields?.length) {
+          // Never reset a confirmed review on an unchanged ordinary edit.
           if(saved?.review_complete){
             lpCardSetStatus('変更された項目はありません。確認完了の記録は維持しています。');
             return;
@@ -3077,7 +3104,9 @@
       lpCloudApply();
       if(lpCardReviewUrl===url&&lpDevReviewLoaded){
         lpDevReviewRender();
-        $('lpDevReviewStatus').textContent='✅ 修正を保存して確認完了にしました。次回の自動集計でも完了扱いになります。';
+        $('lpDevReviewStatus').textContent=lpCardOverrides.get(url)?.review_complete?
+          '✅ 公式情報の確認完了を保存しました。':
+          '✅ 修正済みの項目を未確認一覧へ反映しました。';
         lpCardReviewUrl='';
       }
     } catch(error) {
@@ -3203,6 +3232,7 @@
     if($('lotteryView')?.classList.contains('active'))renderLottery();
     if($('lotteryResultsView')?.classList.contains('active'))lpResultsRender();
     lpExtRenderAdmin();
+    window.TorecaUnifiedReview?.render?.();
   }
 
   async function lpCloudRefresh(force=false){
@@ -6773,6 +6803,27 @@
     // Intentionally omit the open attribute: default is compact/closed.
   }
 
+  // v21.124: Effective public catalog and manual corrections (no private accounts).
+  function lpDevUnifiedSnapshot(){
+    return {base:lotteryBaseItems,items:lotteryItems,
+      card:lpCardOverrides,location:lpLocationOverrides,
+      cloud:lpCloudOverrides,external:lpExtOverrides,diagnostics:lpDevReviewRows};
+  }
+  async function lpDevUnifiedOpenEditor(url){
+    if(!isDeveloper()||!safeLotteryUrl(url))throw Error('開発者ログインが必要です。');
+    if(!lotteryBaseItems.some(item=>item.url===url))await loadLotteryEvents(true);
+    if(!lotteryBaseItems.some(item=>item.url===url))throw Error('登録済みの抽選が見つかりません。');
+    if(isLivePocketEventUrl(url)){
+      if(!lpCardReady&&!await lpCardRefresh(true))throw Error('カード修正情報を取得できません。');
+      lpCardOpen(url);
+      if(!$('lpCardDialog')?.open)throw Error('編集画面を開けませんでした。');
+    }else{
+      if(!lpExtReady&&!await lpExtRefresh(true))throw Error('外部抽選の修正情報を取得できません。');
+      lpExtOpen(url);
+      if(!$('lpExtDialog')?.open)throw Error('外部抽選の編集画面を開けませんでした。');
+    }
+  }
+
   function initDevAccordions(){
     const view=$('devView');
     if(!view)return;
@@ -6782,8 +6833,23 @@
     // The page-unavailable controls live inside the title-correction panel;
     // keep their own second-level fold rather than expanding all at once.
     devWrapPanel($('lpMissingPanel'));
+    // Keep older editor controls reachable in a single advanced fold.
+    // Move original nodes, not clones: input state and handlers are preserved.
+    if(!$('lpDevAdvancedTools')){
+      const advanced=document.createElement('details');
+      advanced.id='lpDevAdvancedTools';advanced.className='lp-dev-advanced-tools';
+      const summary=document.createElement('summary');
+      summary.textContent='🧰 従来の個別修正・再確認ツール';
+      advanced.appendChild(summary);
+      for(const id of ['lpExtManage','lpManualPanel','lpLocationPanel','lpDevRecheckPanel']){
+        const panel=$(id),fold=panel?.closest('details.dev-accordion');
+        if(fold)advanced.appendChild(fold);
+      }
+      view.appendChild(advanced);
+    }
     $('devFoldAll')?.addEventListener('click',()=>{
       for(const fold of view.querySelectorAll('details.dev-accordion')) fold.open=false;
+      if($('lpDevAdvancedTools'))$('lpDevAdvancedTools').open=false;
     });
   }
 
@@ -6817,13 +6883,19 @@
     const list=$('lpDevReviewList'),status=$('lpDevReviewStatus');
     if(!isDeveloper()||!list||!lpDevReviewLoaded)return;
     const search=String($('lpDevReviewSearch')?.value||'').trim().toLocaleLowerCase('ja-JP');
-    const rows=lpDevReviewRows.filter(row=>!lpCardOverrides.get(row.url)?.review_complete);
+    const rows=lpDevReviewRows.map(row=>{
+      const item=lotteryItems.find(x=>x.url===row.url);
+      const liveMissing=item&&window.TorecaUnifiedReview?.fieldsFor?.(
+        {url:row.url},item,row,lpDevUnifiedSnapshot());
+      return {...row,missing:Array.isArray(liveMissing)?
+        row.missing.filter(kind=>liveMissing.includes(kind)):row.missing};
+    }).filter(row=>row.missing.length&&!lpCardOverrides.get(row.url)?.review_complete);
     const filtered=rows.filter(row=>!search||
       [row.url,row.event_title,row.store_name].join(' ').toLocaleLowerCase('ja-JP').includes(search));
     const resolved=lpDevReviewRows.length-rows.length;
     $('lpDevReviewCount').textContent=rows.length+'件';
-    status.textContent='未解決 '+rows.length+'件 ／ この一覧で手動確認完了 '+resolved+
-      '件。保存結果は次回GitHub Actionsの集計にも反映されます。';
+    status.textContent='未解決 '+rows.length+'件 ／ 修正済み・公式確認済み '+resolved+
+      '件。カード修正も項目ごとに自動反映しています。';
     list.innerHTML=filtered.length?filtered.map(row=>{
       const missing=row.missing.map(x=>LP_DEV_MISSING_LABELS[x]).filter(Boolean);
       const http=Number(row.last_http_status);
@@ -6871,6 +6943,7 @@
       lpDevReviewRows=body.items;
       lpDevReviewLoaded=true;
       lpDevReviewRender();
+      window.TorecaUnifiedReview?.render?.();
     }catch(error){status.textContent='⚠ '+String(error?.message||error);}
     finally{
       lpDevReviewLoading=false;
@@ -7591,7 +7664,11 @@
     for(const row of byUrl.values()){
       const override=lpCloudOverrides.get(row.url);
       const onHold=lpMissingDrafts[row.url]?.reason==='pending';
-      if(override||doneTitles.has(row.url)||doneMissing.has(row.url))finished.push(row);
+      const card=lpCardOverrides.get(row.url);
+      const manuallyFixed=card?.edited_fields?.includes('event_title')&&
+        lpManualValidTitle(lotteryItems.find(x=>x.url===row.url)?.event_title);
+      if(override||card?.review_complete||manuallyFixed||
+         doneTitles.has(row.url)||doneMissing.has(row.url))finished.push(row);
       else if(lpApplicationExpired(row.url,row.application_end_at,now))excludedClosed++;
       else if(onHold)pending.push(row);
       else unresolved.push(row);
@@ -8180,11 +8257,21 @@
     // in the folded handled list, including after the application deadline.
     const pageResolved=bases.filter(base=>
       !lotteryPrefectures(base).length&&lpLocationPageMissing(base));
+    const cardStoresEdited=url=>{
+      const edited=lpCardOverrides.get(url)?.edited_fields||[];
+      return edited.includes('stores')||edited.includes('store_name')||
+        edited.includes('prefecture');
+    };
     const byUrl=new Map([...incomplete,...pageResolved,
-      ...bases.filter(x=>lpLocationOverrides.has(x.url))].map(x=>[x.url,x]));
+      ...bases.filter(x=>lpLocationOverrides.has(x.url)||cardStoresEdited(x.url))]
+      .map(x=>[x.url,x]));
     const all=[...byUrl.values()];
-    const stored=all.filter(base=>lpLocationOverrides.has(base.url)||lpLocationPageMissing(base));
-    const missing=all.filter(base=>!lpLocationOverrides.has(base.url)&&!lpLocationPageMissing(base));
+    const stored=all.filter(base=>lpLocationPageMissing(base)||
+      (!lpLocationNeedsManualReview(base)&&
+       (lpLocationOverrides.has(base.url)||cardStoresEdited(base.url))));
+    const missing=all.filter(base=>lpLocationNeedsManualReview(base)&&
+      !lpLocationPageMissing(base)&&
+      !lpApplicationExpired(base.url,base.application_end_at,now));
     const search=base=>{
       if(!lpLocationSearch)return true;
       return [base.url,base.event_title,base.product_name,base.store_name,
@@ -8506,6 +8593,20 @@
       initDevAccordions();
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
         renderCards:renderLottery,escape});
+      window.TorecaUnifiedReview?.init?.({
+        isDeveloper,snapshot:lpDevUnifiedSnapshot,
+        validUrl:safeLotteryUrl,isLivePocket:isLivePocketEventUrl,
+        stores:lotteryStoreEntries,areas:lotteryPrefectures,
+        validTitle:lpManualValidTitle,expired:lpApplicationExpired,escape,
+        openEditor:lpDevUnifiedOpenEditor,
+        refreshSources:async()=>{
+          await loadLotteryEvents(true);
+          await Promise.all([lpCloudRefresh(true),lpLocationRefresh(true),
+            lpExtRefresh(true),lpCardRefresh(true)]);
+          await lpDevReviewLoad();
+          lpCloudApply();
+        }
+      });
 
       get('foundAt').value = nowLocal();
       get('cancelEdit').hidden = true;
