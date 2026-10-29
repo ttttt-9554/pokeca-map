@@ -1,0 +1,24 @@
+name: Discord Role Access Verification (staged)
+'on':
+  push:
+    paths:
+      - 'supabase/functions/discord-role-access/**'
+      - 'supabase/discord_role_access_stage_v1.sql'
+      - 'scripts/test_discord_role_access.cjs'
+      - '.github/workflows/discord-role-access-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node --check supabase/functions/discord-role-access/access-utils.mjs
+          node --check scripts/test_discord_role_access.cjs
+          node scripts/test_discord_role_access.cjs

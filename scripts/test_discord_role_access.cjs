@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),path=require('node:path');
+const {pathToFileURL}=require('node:url');
+const root=path.join(__dirname,'..');
+const edge=fs.readFileSync(path.join(root,'supabase/functions/discord-role-access/index.ts'),'utf8');
+const sql=fs.readFileSync(path.join(root,'supabase/discord_role_access_stage_v1.sql'),'utf8');
+const helpers=pathToFileURL(path.join(root,'supabase/functions/discord-role-access/access-utils.mjs')).href;
+(async()=>{
+ const {snowflake,allowedRoleIds,discordIdentityId,hasAccess}=await import(helpers);
+ const guild='123456789012345678',role='223456789012345679',wrong='323456789012345680';
+ assert(snowflake(guild));
+ assert(!snowflake('1'));
+ assert(!snowflake('NotARole'));
+ assert.deepEqual(allowedRoleIds(`${role}, ${role} ${wrong}`),[role,wrong]);
+ assert.deepEqual(allowedRoleIds('not-a-role,1'),[]);
+ assert.equal(discordIdentityId([{provider:'discord',identity_data:{provider_id:'not-id',sub:guild}}]),null,
+  'Use the canonical identity id when present; invalid identity fails closed');
+ assert.equal(discordIdentityId([{provider:'discord',identity_data:{provider_id:guild}}]),guild);
+ assert.equal(discordIdentityId([{provider:'google',identity_data:{provider_id:guild}}]),null);
+ assert(hasAccess({roles:[role],pending:false},[role]));
+ assert(!hasAccess({roles:[wrong]},[role]));
+ assert(!hasAccess({roles:[role],pending:true},[role]));
+ assert(!hasAccess({roles:[role]},[]));
+ assert(!hasAccess({roles:'fake'},[role]));
+ assert.match(edge,/admin\.auth\.getUser\(match\[1\]\)/);
+ assert.match(edge,/auth\.admin\.getUserById\(userId\)/);
+ assert.match(edge,/discordIdentityId\(lookup\.data\.user\.identities\)/);
+ assert.match(edge,/hasAccess\(member,allowedRoles\)/);
+ assert.match(edge,/DISCORD_ALLOWED_ROLE_IDS/);
+ assert.match(edge,/DISCORD_BOT_TOKEN/);
+ assert.match(edge,/if\(!url\|\|!serviceKey\|\|!snowflake\(guildId\)\|\|!allowedRoles\.length\|\|!botToken\)/);
+ assert.match(edge,/response\.status===404/);
+ assert.match(edge,/\.delete\(\)\.eq\("user_id",userId\)/);
+ assert.match(edge,/valid_for_seconds:ACCESS_SECONDS/);
+ assert.match(sql,/ENABLE ROW LEVEL SECURITY/);
+ assert.match(sql,/REVOKE ALL ON TABLE public\.discord_role_access_v1 FROM PUBLIC, anon, authenticated/);
+ assert.match(sql,/valid_until>now\(\)/);
+ assert.doesNotMatch(sql,/DROP POLICY|ALTER POLICY|CREATE POLICY/i,'No automatic gating before configuration');
+ assert.doesNotMatch(edge,/console\.(log|warn|error)/,'Do not log tokens or user identity');
+ console.log('Discord role verifier: identity, role, deny, RLS staging checks passed');
+})().catch(e=>{console.error(e);process.exitCode=1});
