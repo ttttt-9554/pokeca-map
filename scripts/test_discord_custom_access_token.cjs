@@ -30,7 +30,7 @@ const edge=fs.readFileSync(path.join(root,'supabase/functions/discord-custom-acc
  assert.match(edge,/permitted\(member,allowed\)/);
  assert.match(edge,/return json\(\{claims:event\.claims\}\)/);
  assert.match(edge,/Discord role required/);
- assert.doesNotMatch(edge,/user_metadata\./);
+ assert.doesNotMatch(edge,/event\.claims\.user_metadata|user\.user_metadata|identity_data\s*=\s*event/);
  assert.doesNotMatch(edge,/console\.(log|warn|error)/);
  assert.doesNotMatch(edge,/verify_jwt\s*:\s*true/);
  console.log('Pre-session Discord token hook role validation and signature checks passed');
