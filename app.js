@@ -2928,6 +2928,9 @@
     $('lpCardReset').hidden = !lpCardOverrides.has(url) ||
       lpCardOverrides.get(url)?.is_hidden===true;
     lpCardVisibilityControls(url);
+    lpCardSelectTab('edit');
+    const modalFeedback=$('lpCardHiddenModalFeedback');
+    if(modalFeedback)modalFeedback.textContent='';
     $('lpCardHistoryFold').open = false;
     $('lpCardHistory').textContent = '履歴を開くと直近の編集履歴を読み込みます。';
     lpCardSetStatus('変更した項目のみ上書きします。元の手動修正は保持されます。');
@@ -2998,6 +3001,26 @@
       stores.every(row=>goodName(row?.name)&&goodArea(row?.prefecture));
   }
 
+  // v21.132: dedicated edit/visibility tabs. Switching tabs never resets
+  // the form, so an unfinished correction remains intact when returning.
+  function lpCardSelectTab(tab){
+    if(!isDeveloper()||!['edit','hidden'].includes(tab))return false;
+    const editing=tab==='edit';
+    const editPane=$('lpCardForm'),hiddenPane=$('lpCardHiddenPane');
+    const editButton=$('lpCardEditTab'),hiddenButton=$('lpCardHiddenTab');
+    if(!editPane||!hiddenPane||!editButton||!hiddenButton)return false;
+    editPane.hidden=!editing;
+    hiddenPane.hidden=editing;
+    for(const [button,selected] of [[editButton,editing],[hiddenButton,!editing]]){
+      button.setAttribute('aria-selected',selected?'true':'false');
+      button.tabIndex=selected?0:-1;
+    }
+    if(!editing)lpCardHiddenRender();
+    const dialog=$('lpCardDialog');
+    if(dialog)dialog.scrollTop=0;
+    return true;
+  }
+
   // v21.129: hide or restore LivePocket cards, never delete original data.
   function lpCardVisibilityControls(url){
     const hidden=lpCardOverrides.get(url)?.is_hidden===true;
@@ -3011,17 +3034,22 @@
   }
 
   function lpCardHiddenRender(){
-    const host=$('lpCardHiddenList'),count=$('lpCardHiddenCount');
-    if(!host||!count||!isDeveloper())return;
+    if(!isDeveloper())return;
+    const devList=$('lpCardHiddenList'),devCount=$('lpCardHiddenCount');
+    const modalList=$('lpCardHiddenModalList'),modalCount=$('lpCardHiddenModalCount');
+    const tabCount=$('lpCardHiddenTabCount');
     if(!lpCardReady){
-      count.textContent='読み込み中';
-      host.innerHTML='<p class="hint">カード修正情報を取得しています。</p>';
+      for(const count of [devCount,modalCount,tabCount])
+        if(count)count.textContent='確認中';
+      for(const host of [devList,modalList])
+        if(host)host.innerHTML='<p class="hint">非表示の抽選情報を取得しています。</p>';
       return;
     }
     const rows=[...lpCardOverrides.values()].filter(row=>
       row?.is_hidden===true&&isLivePocketEventUrl(row.event_url));
-    count.textContent=rows.length+'件';
-    host.innerHTML=rows.length?rows.slice(0,250).map(row=>{
+    for(const count of [devCount,modalCount,tabCount])
+      if(count)count.textContent=rows.length+'件';
+    function rowHtml(row,inModal){
       const base=lotteryBaseItems.find(item=>item.url===row.event_url);
       const title=base?.event_title||row.event_title||row.event_url;
       const url=escape(row.event_url);
@@ -3029,10 +3057,15 @@
         '<strong>'+escape(title)+'</strong>'+
         '<a href="'+url+'" target="_blank" rel="noopener noreferrer">🔗 元の抽選ページ</a>'+
         '<div class="lp-card-hidden-actions">'+
-        (base?'<button type="button" data-lp-card-hidden-edit="'+url+'">✏️ 編集</button>':'')+
+        (!inModal&&base?'<button type="button" data-lp-card-hidden-edit="'+url+'">✏️ 編集</button>':'')+
         '<button type="button" data-lp-card-hidden-restore="'+url+'">↩️ 一覧に復元</button>'+
         '</div></article>';
-    }).join(''):'<p class="hint">非表示にしているLivePocket抽選はありません。</p>';
+    }
+    const empty='<p class="hint">非表示にしているLivePocket抽選はありません。</p>';
+    if(devList)devList.innerHTML=rows.length?
+      rows.slice(0,250).map(row=>rowHtml(row,false)).join(''):empty;
+    if(modalList)modalList.innerHTML=rows.length?
+      rows.slice(0,250).map(row=>rowHtml(row,true)).join(''):empty;
   }
 
   async function lpCardVisibilityChange(url,hidden,fromDialog=false){
@@ -3050,7 +3083,7 @@
     lpCardBusy=true;
     const controls=[$('lpCardHide'),$('lpCardRestore')].filter(Boolean);
     controls.forEach(button=>button.disabled=true);
-    const feedback=fromDialog?$('lpCardVisibilityState'):$('lpCardHiddenFeedback');
+    const feedback=fromDialog?$('lpCardHiddenModalFeedback'):$('lpCardHiddenFeedback');
     if(feedback)feedback.textContent='🔄 保存しています…';
     try{
       const payload={is_hidden:hidden,updated_by:authUser.id,updated_at:new Date().toISOString()};
@@ -3071,9 +3104,8 @@
       lpCardLastFetch=0;
       if(!await lpCardRefresh(true))
         throw Error('保存されましたが再取得できません：'+lpCardError);
-      if(fromDialog&&$('lpCardDialog')?.open)$('lpCardDialog').close();
-      if(!fromDialog&&feedback)
-        feedback.textContent=hidden?'✅ 非表示にしました。':'✅ 一覧に復元しました。';
+      if(fromDialog)lpCardVisibilityControls(lpCardEditing);
+      if(feedback)feedback.textContent=hidden?'✅ 非表示にしました。':'✅ 一覧に復元しました。';
       return true;
     }catch(error){
       if(feedback)feedback.textContent='⚠ '+String(error?.message||error);
@@ -3339,6 +3371,23 @@
     $('lpCardReset').addEventListener('click',()=>lpCardWrite(true));
     $('lpCardHide').addEventListener('click',()=>lpCardVisibilityChange(lpCardEditing,true,true));
     $('lpCardRestore').addEventListener('click',()=>lpCardVisibilityChange(lpCardEditing,false,true));
+    $('lpCardEditorTabs').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-lp-card-editor-tab]');
+      if(button)lpCardSelectTab(button.dataset.lpCardEditorTab);
+    });
+    // Keyboard navigation across the two tab choices.
+    $('lpCardEditorTabs').addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();
+      const tab=event.key==='Home'||event.key==='ArrowLeft'?'edit':'hidden';
+      if(lpCardSelectTab(tab))$(tab==='edit'?'lpCardEditTab':'lpCardHiddenTab').focus();
+    });
+    $('lpCardHiddenTabClose').addEventListener('click',()=>dialog.close());
+    $('lpCardHiddenModalList').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-lp-card-hidden-restore]');
+      if(button&&isDeveloper())
+        lpCardVisibilityChange(button.dataset.lpCardHiddenRestore,false,true);
+    });
     $('lpCardHiddenList')?.addEventListener('click',event=>{
       const button=event.target.closest('button[data-lp-card-hidden-restore],button[data-lp-card-hidden-edit]');
       if(!button||!isDeveloper())return;

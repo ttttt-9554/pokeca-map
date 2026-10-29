@@ -2718,3 +2718,65 @@ html[data-theme="dark"] #lpCardHiddenPanel .lp-card-hidden-actions button{backgr
 #devView #lpCardHiddenPanel>.lp-card-hidden-list>.hint{
   padding:4px 0;
 }
+
+/* v21.132: edit and hidden-card management inside the same dialog. */
+#lpCardDialog .lp-card-editor-tabs{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;margin:0 0 14px;
+}
+#lpCardDialog .lp-card-editor-tabs button{
+  min-width:0;min-height:46px;box-sizing:border-box;
+  border:1px solid var(--app-border,#94a3b8);border-radius:11px;
+  background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033);
+  padding:9px 8px;font-weight:800;font-size:14px;cursor:pointer;
+}
+#lpCardDialog .lp-card-editor-tabs button[aria-selected="true"]{
+  background:#2563eb;color:#fff;border-color:#2563eb;
+}
+#lpCardDialog .lp-card-editor-tabs button:focus-visible{
+  outline:3px solid #f59e0b;outline-offset:2px;
+}
+#lpCardDialog .lp-card-editor-tabs button span{font-size:12px;font-weight:650}
+#lpCardDialog #lpCardForm[hidden],#lpCardDialog #lpCardHiddenPane[hidden]{display:none!important}
+#lpCardDialog #lpCardHiddenPane h4{
+  margin:16px 0 8px;font-size:15px;font-weight:800;
+  color:var(--app-text,#172033);
+}
+#lpCardDialog #lpCardHiddenPane>.hint{
+  font-size:13px;line-height:1.6;color:var(--app-muted,#475569);
+}
+#lpCardDialog #lpCardHiddenModalList{
+  display:grid;gap:8px;max-height:36dvh;overflow-y:auto;
+  overscroll-behavior:contain;padding:4px 1px 10px;
+}
+#lpCardDialog #lpCardHiddenModalList .lp-card-hidden-row{
+  display:flex;flex-direction:column;gap:8px;padding:12px;
+  border:1px solid var(--app-border,#94a3b8);border-radius:10px;
+  background:var(--app-surface2,#f8fafc);overflow-wrap:anywhere;
+}
+#lpCardDialog #lpCardHiddenModalList a{
+  font-size:13px;color:var(--app-link,#2563eb);text-decoration:underline;
+}
+#lpCardDialog #lpCardHiddenModalList .lp-card-hidden-actions button,
+#lpCardDialog #lpCardHiddenTabClose{
+  min-height:42px;padding:9px 12px;border-radius:9px;
+  border:1px solid var(--app-border,#94a3b8);
+  background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+  font-size:14px;font-weight:750;
+}
+#lpCardDialog #lpCardHiddenModalFeedback{font-size:13px;min-height:20px}
+#lpCardDialog #lpCardHiddenTabClose{margin-top:12px}
+html[data-theme="dark"] #lpCardDialog .lp-card-editor-tabs button[aria-selected="false"]{
+  background:#263a55;color:#edf4ff;border-color:#7085a2;
+}
+html[data-theme="dark"] #lpCardDialog .lp-card-editor-tabs button[aria-selected="true"]{
+  background:#2563eb;color:#fff;border-color:#93c5fd;
+}
+html[data-theme="dark"] #lpCardDialog #lpCardHiddenModalList .lp-card-hidden-row{
+  background:#203149;color:#edf4ff;border-color:#526681;
+}
+html[data-theme="dark"] #lpCardDialog #lpCardHiddenModalList a{color:#93c5fd}
+html[data-theme="dark"] #lpCardDialog #lpCardHiddenModalList button,
+html[data-theme="dark"] #lpCardDialog #lpCardHiddenTabClose{
+  background:#263a55;color:#edf4ff;border-color:#7085a2;
+}

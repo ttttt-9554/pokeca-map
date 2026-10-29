@@ -10,6 +10,7 @@ name: LivePocket Card Visibility Regression
       - 'scripts/test_app_manual_location.cjs'
       - 'scripts/test_app_manual_expiry.cjs'
       - 'scripts/test_livepocket_card_visibility.cjs'
+      - 'scripts/test_card_editor_hidden_tab.cjs'
       - 'supabase/lottery_card_livepocket_visibility_v21_129.sql'
       - '.github/workflows/livepocket-card-visibility.yml'
   workflow_dispatch:
@@ -29,9 +30,11 @@ jobs:
           node --check app.js
           node --check dev_unified_review_v21_124.js
           node --check scripts/test_livepocket_card_visibility.cjs
+          node --check scripts/test_card_editor_hidden_tab.cjs
       - name: Run regression tests
         run: |
           node scripts/test_livepocket_card_visibility.cjs
+          node scripts/test_card_editor_hidden_tab.cjs
           node scripts/test_app_card_review_preservation.cjs
           node scripts/test_developer_unified_review.cjs
           node scripts/test_app_manual_location.cjs

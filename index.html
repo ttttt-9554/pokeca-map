@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-dev-review-hidden-nested-v21-131">
+  <link rel="stylesheet" href="style.css?v=20261029-card-editor-hidden-tab-v21-132">
 
   <style>
     [hidden] { display: none !important; }
@@ -1461,12 +1461,13 @@ nav[aria-label="メインメニュー"] {
     <div class="lp-card-editor">
       <h3 id="lpCardDialogTitle" tabindex="-1" autofocus>🛠 抽選カードを編集</h3>
       <a id="lpCardSourceLink" href="#" target="_blank" rel="noopener noreferrer">元の抽選ページ ↗</a>
-      <div class="lp-card-visibility-controls">
-        <button id="lpCardHide" type="button">🗑️ 一覧から削除（復元可）</button>
-        <button id="lpCardRestore" type="button" hidden>↩️ 一覧に復元</button>
-        <p id="lpCardVisibilityState" class="hint" role="status" aria-live="polite"></p>
+      <div id="lpCardEditorTabs" class="lp-card-editor-tabs" role="tablist" aria-label="抽選カードの管理">
+        <button type="button" id="lpCardEditTab" role="tab" aria-selected="true"
+          aria-controls="lpCardForm" tabindex="0" data-lp-card-editor-tab="edit">✏️ 編集</button>
+        <button type="button" id="lpCardHiddenTab" role="tab" aria-selected="false"
+          aria-controls="lpCardHiddenPane" tabindex="-1" data-lp-card-editor-tab="hidden">🗃️ 非表示 <span id="lpCardHiddenTabCount">0件</span></button>
       </div>
-      <form id="lpCardForm" autocomplete="off">
+      <form id="lpCardForm" autocomplete="off" role="tabpanel" aria-labelledby="lpCardEditTab">
         <label>イベント名
           <input type="text" name="event_title" maxlength="200" autocomplete="off" placeholder="公式イベント名">
         </label>
@@ -1534,6 +1535,20 @@ nav[aria-label="メインメニュー"] {
           <div id="lpCardHistory" class="lp-card-history">履歴を開くと表示されます。</div>
         </details>
       </form>
+      <section id="lpCardHiddenPane" class="lp-card-hidden-pane" role="tabpanel"
+        aria-labelledby="lpCardHiddenTab" hidden>
+        <h4>この抽選の表示設定</h4>
+        <p class="hint">全ユーザーの抽選一覧から非表示にできます。収集元の情報・応募記録・カード編集履歴は削除しません。</p>
+        <div class="lp-card-visibility-controls">
+          <button id="lpCardHide" type="button">🗑️ 一覧から削除（復元可）</button>
+          <button id="lpCardRestore" type="button" hidden>↩️ 一覧に復元</button>
+          <p id="lpCardVisibilityState" class="hint" role="status" aria-live="polite"></p>
+        </div>
+        <h4>非表示中の抽選一覧 <span id="lpCardHiddenModalCount">0件</span></h4>
+        <div id="lpCardHiddenModalList" class="lp-card-hidden-list" aria-label="非表示にしたLivePocket抽選"></div>
+        <p id="lpCardHiddenModalFeedback" class="hint" role="status" aria-live="polite"></p>
+        <button id="lpCardHiddenTabClose" type="button" class="lp-card-hidden-close">閉じる</button>
+      </section>
     </div>
   </dialog>
 
@@ -1673,7 +1688,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-dev-review-hidden-nested-v21-131';
+      ? token : '20261029-card-editor-hidden-tab-v21-132';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
