@@ -18,7 +18,10 @@ assert.match(app,/data\?\.session\?\.access_token!==session\.access_token/);
 assert.match(app,/await requireDiscordRole\(data\.session\)/);
 assert.match(app,/if\(event==='SIGNED_OUT'\)/);
 assert.doesNotMatch(app,/authUser = session\?\.user \|\| null/);
-assert.match(app,/if\(authUser&&document\.visibilityState!=='hidden'\)void renewDiscordRole\(\)/);
+assert.doesNotMatch(app,/void renewDiscordRole\(\)/);
+assert.doesNotMatch(app,/discordRoleVerifiedUntil/);
+assert.doesNotMatch(app,/setInterval\(\(\)=>\{\s*if\(authUser/);
+assert.match(app,/if\(!force&&authUser\?\.id===user\.id&&discordRoleVerifiedToken\)/);
 assert.match(app,/await supabaseClient\.auth\.signOut\(\)/);
 assert.match(html,/Discordロール認証/);
 assert.doesNotMatch(html,/アクセス権限の確認（テスト）/);
@@ -27,9 +30,8 @@ const source=[
 extract('discordRoleResultMessage'),
 extract('discordRoleVerifyToken',true),
 extract('requireDiscordRole',true),
-extract('renewDiscordRole',true),
 extract('checkDiscordRoleAccess',true),
-'({discordRoleResultMessage,discordRoleVerifyToken,requireDiscordRole,renewDiscordRole,checkDiscordRoleAccess})'
+'({discordRoleResultMessage,discordRoleVerifyToken,requireDiscordRole,checkDiscordRoleAccess})'
 ].join('\n');
 function harness(){
  let answer={ok:true,status:200,body:{allowed:true}};
@@ -87,11 +89,11 @@ const session={user:{id:'u1'},access_token:'token1'};
  assert.equal(check.context.authUser,null,'Rechecking a revoked role rejects the active login');
  assert.equal(check.stats().signouts,1);
 
- const revalidate=harness();
- assert.equal(await revalidate.api.requireDiscordRole(session),true);
- revalidate.setAnswer({ok:false,status:404,body:{allowed:false,error:'role_required'}});
- await revalidate.api.renewDiscordRole();
- assert.equal(revalidate.context.authUser,null);
- assert.equal(revalidate.stats().signouts,1);
- console.log('Discord-only login denied; valid role allowed; revocation and failure closed');
+ const tokenRefresh=harness();
+ assert.equal(await tokenRefresh.api.requireDiscordRole(session),true);
+ assert.equal(await tokenRefresh.api.requireDiscordRole({
+   user:{id:'u1'},access_token:'token2'
+ }),true,'Token rotation for an approved login is not a new Discord check');
+ assert.equal(tokenRefresh.stats().calls,1,'No additional role lookup on token rotation');
+ console.log('Discord login accepted/denied, manual revocation, outage and no polling verified');
 })().catch(e=>{console.error(e);process.exitCode=1});

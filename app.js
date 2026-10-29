@@ -14,7 +14,7 @@
   // Discord OAuth alone is not an approved application login. A verified
   // Discord server role is also required before authUser becomes available.
   let discordRoleAuthPending=false,discordRoleAuthError='';
-  let discordRoleAuthGeneration=0,discordRoleVerifiedToken='',discordRoleVerifiedUntil=0;
+  let discordRoleAuthGeneration=0,discordRoleVerifiedToken='';
   let discordRoleVerification=null;
   // Manual app refresh can restore any ordinary tab immediately.
   // The developer tab must wait until Discord authentication confirms access.
@@ -319,6 +319,7 @@
     }
     $('discordLogin').hidden = !supabaseClient || !!authUser || discordRoleAuthPending;
     $('discordLogout').hidden = !authUser;
+    updateLotteryVisibility();
     const roleCheck=$('discordRoleCheck');
     if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!authUser||!supabaseClient||discordRoleAuthPending;
     if($('discordRoleStatus')){
@@ -385,7 +386,6 @@
         ++discordRoleAuthGeneration;
         discordRoleVerification=null;
         discordRoleVerifiedToken='';
-        discordRoleVerifiedUntil=0;
         discordRoleAuthPending=false;
         authUser=null;
         displayAuth();
@@ -428,13 +428,7 @@
       lpCardRefresh(true);lpAppRefresh(true);refreshWishlistForAccount();
       refreshLotteryTrackerForAccount(true);lpResultsRefresh(true);
       refreshLotteryOnsiteReports(true);refreshLotteryOnsiteArchive(true);
-      if(authUser)void renewDiscordRole();
     });
-    // A removed Discord role also revokes an already open login. The server
-    // checks role membership again; no decision is cached in localStorage.
-    setInterval(()=>{
-      if(authUser&&document.visibilityState!=='hidden')void renewDiscordRole();
-    },90000);
     supabaseClient.channel('pokeca-lottery-card-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
       .subscribe();
@@ -501,9 +495,12 @@
       displayAuth();
       return false;
     }
-    if(!force&&authUser?.id===user.id&&
-       discordRoleVerifiedToken===token&&Date.now()<discordRoleVerifiedUntil)
+    // Once verified, a token refresh for this same login session does not
+    // force another Discord API request. Next login or reload checks again.
+    if(!force&&authUser?.id===user.id&&discordRoleVerifiedToken){
+      discordRoleVerifiedToken=token;
       return true;
+    }
     if(discordRoleVerification?.token===token)
       return discordRoleVerification.promise;
 
@@ -518,7 +515,6 @@
       discordRoleAuthPending=false;
       if(result.allowed){
         discordRoleVerifiedToken=token;
-        discordRoleVerifiedUntil=Date.now()+90000;
         discordRoleAuthError='';
         authUser=user;
         displayAuth();
@@ -526,7 +522,6 @@
       }
       // Do not leave an unauthorized OAuth session usable by app features.
       discordRoleVerifiedToken='';
-      discordRoleVerifiedUntil=0;
       discordRoleAuthError=result.error||'role_required';
       authUser=null;
       displayAuth();
@@ -545,17 +540,6 @@
       if(discordRoleVerification?.promise===verification)
         discordRoleVerification=null;
     }
-  }
-
-  async function renewDiscordRole(){
-    if(!supabaseClient||!authUser||discordRoleAuthPending)return;
-    const {data,error}=await supabaseClient.auth.getSession();
-    if(error||!data?.session){
-      ++discordRoleAuthGeneration;
-      authUser=null;discordRoleVerifiedToken='';discordRoleVerifiedUntil=0;
-      displayAuth();return;
-    }
-    return requireDiscordRole(data.session,true);
   }
 
   async function checkDiscordRoleAccess(){
@@ -591,7 +575,7 @@
     if (!supabaseClient) return;
     discordRoleAuthError='';
     ++discordRoleAuthGeneration;
-    discordRoleVerifiedToken='';discordRoleVerifiedUntil=0;
+    discordRoleVerifiedToken='';
     const {error} = await supabaseClient.auth.signOut();
     if (error) return alert('ログアウトに失敗しました: ' + error.message);
     authUser = null; displayAuth(); render();
@@ -695,10 +679,31 @@
     return document.querySelectorAll('nav button[data-tab], #appLoginOpen[data-tab]');
   }
 
+  // v21.136: Lottery pages are only shown inside an approved Discord login.
+  // This is a view/navigation rule, NOT protection for public JSON endpoints.
+  const LOTTERY_LOGIN_TABS=['lottery','lotteryManage','lotteryResults','appLottery'];
+
+  function updateLotteryVisibility(){
+    const signedIn=!!authUser&&!discordRoleAuthPending;
+    for(const tab of LOTTERY_LOGIN_TABS){
+      const button=document.querySelector('nav button[data-tab="'+tab+'"]');
+      if(button)button.hidden=!signedIn;
+      const view=$(tab+'View');
+      if(view)view.hidden=!signedIn;
+    }
+    if(!signedIn&&LOTTERY_LOGIN_TABS.some(tab=>
+        document.getElementById(tab+'View')?.classList.contains('active'))){
+      switchTab('group');
+    }
+  }
+
   function switchTab(tab) {
     // Legacy History deep links open the folded section inside Registration.
     const historyRequested=tab==='history';
     if(historyRequested)tab='add';
+    // Direct links, stale active tabs and programmatic navigation also require login.
+    if(LOTTERY_LOGIN_TABS.includes(tab)&&(!authUser||discordRoleAuthPending))
+      tab='group';
     if ($('mapFilterDrawer') && !$('mapFilterDrawer').hidden && tab !== 'map') setMapFilterOpen(false);
     if (tab === 'dev' && !isDeveloper()) tab = 'map';
     const changedTab = !document.getElementById(tab+'View')?.classList.contains('active');
@@ -8973,6 +8978,8 @@
       initLottery();
       lpResultsInit();
       bindEvents();
+      // Hide lottery navigation before the asynchronous Discord login starts.
+      updateLotteryVisibility();
       initDevAccordions();
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
         renderCards:renderLottery,escape});

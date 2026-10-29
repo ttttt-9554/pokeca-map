@@ -7,6 +7,7 @@ name: Discord Role Access Verification (staged)
       - 'scripts/test_discord_role_access.cjs'
       - 'scripts/test_discord_role_access_ui.cjs'
       - 'scripts/test_discord_login_gate.cjs'
+      - 'scripts/test_lottery_tab_login_visibility.cjs'
       - 'index.html'
       - 'app.js'
       - 'style.css'
@@ -30,3 +31,4 @@ jobs:
           node scripts/test_discord_role_access.cjs
           node scripts/test_discord_role_access_ui.cjs
           node scripts/test_discord_login_gate.cjs
+          node scripts/test_lottery_tab_login_visibility.cjs
