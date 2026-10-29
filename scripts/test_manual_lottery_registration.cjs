@@ -62,4 +62,19 @@ assert.match(html,/手動抽選<br>登録/);
 assert.match(html,/value="in_store"/);
 assert.match(app,/storeName\.required=inStore/);
 assert.match(app,/manual_registration_method==='in_store'/);
+
+const navStart=html.indexOf('<nav aria-label="メインメニュー">');
+const navEnd=html.indexOf('</nav>',navStart);
+assert(navStart>=0&&navEnd>navStart,'Bottom navigation is present');
+const navMarkup=html.slice(navStart,navEnd);
+const navOrder=[...navMarkup.matchAll(/data-tab="([^"]+)"/g)].map(x=>x[1]);
+assert.equal(navOrder.join(','),'map,add,lottery,lotteryResults,lotteryManage,appLottery,group,dev',
+ 'Results and manual registration trade bottom menu positions without changing their tab IDs');
+assert.match(navMarkup,/data-tab="lotteryResults"[^>]*>\s*🏆\s*<span>抽選結果<\/span>/);
+assert.match(navMarkup,/data-tab="appLottery"[^>]*>\s*📝\s*<span>手動抽選<br>登録<\/span>/);
+assert.equal((navMarkup.match(/data-tab="lotteryResults"/g)||[]).length,1);
+assert.equal((navMarkup.match(/data-tab="appLottery"/g)||[]).length,1);
+assert.match(html,/<section id="lotteryResultsView"/);
+assert.match(html,/<section id="appLotteryView"/);
+
 console.log('Manual lottery registration: app legacy, store entry, required inputs, public labels OK');

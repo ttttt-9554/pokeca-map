@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-results-explanation-fold-v21-122">
+  <link rel="stylesheet" href="style.css?v=20261029-swap-results-manual-tabs-v21-123">
 
   <style>
     [hidden] { display: none !important; }
@@ -1577,9 +1577,9 @@ nav[aria-label="メインメニュー"] {
       <span>抽選</span>
     </button>
 
-    <button type="button" data-tab="appLottery" aria-label="手動抽選登録を開く">
-      📝
-      <span>手動抽選<br>登録</span>
+    <button type="button" data-tab="lotteryResults" aria-label="みんなの抽選結果を開く">
+      🏆
+      <span>抽選結果</span>
     </button>
 
     <button type="button" data-tab="lotteryManage" aria-label="自分の抽選管理を開く">
@@ -1587,9 +1587,9 @@ nav[aria-label="メインメニュー"] {
       <span>抽選管理</span>
     </button>
 
-    <button type="button" data-tab="lotteryResults" aria-label="みんなの抽選結果を開く">
-      🏆
-      <span>抽選結果</span>
+    <button type="button" data-tab="appLottery" aria-label="手動抽選登録を開く">
+      📝
+      <span>手動抽選<br>登録</span>
     </button>
 
     <button
@@ -1633,7 +1633,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-results-explanation-fold-v21-122';
+      ? token : '20261029-swap-results-manual-tabs-v21-123';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
