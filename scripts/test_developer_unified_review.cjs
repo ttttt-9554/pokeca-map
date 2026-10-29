@@ -13,6 +13,8 @@ assert.match(app,/TorecaUnifiedReview\?\.fieldsFor/);
 assert.match(app,/lpDevAdvancedTools/);
 assert.match(app,/cardStoresEdited\(x\.url\)/);
 assert.match(app,/if\(confirmed\)\{/);
+assert.match(app,/lpCardShouldDelete\(reset,edited.length,lpCardReviewUrl===url,saved\)/);
+assert.match(app,/lpCardVerifiedStores\(desiredStores\)/);
 assert.doesNotMatch(app,/if\(!review\|\|!confirmed\|\|/);
 const nodes=new Map();
 for(const id of ['lpDevUnifiedPanel','lpDevUnifiedSearch','lpDevUnifiedFilter',
@@ -47,6 +49,10 @@ let rows=ui.collect();
 assert.equal(rows.length,1);
 for(const kind of ['title','store','area','deadline'])assert(rows[0].missing.includes(kind),kind);
 assert(!rows[0].missing.includes('start'));
+assert.equal(ui.validArea('未確認県'),false);
+assert.equal(ui.validArea('栃木県'),true);
+assert.equal(ui.validArea('全国'),true);
+assert.equal(ui.validStore('店舗未確認'),false);
 assert.match(nodes.get('lpDevUnifiedCounts').innerHTML,/未対応 1件/);
 
 // Supplied placeholder labels must never be treated as verified shop/location.
@@ -66,6 +72,14 @@ state.items=[{...state.items[0],store_name:'確認済み宇都宮店',
 rows=ui.collect();
 assert(!rows[0].missing.includes('store')&&!rows[0].missing.includes('area'),
  'Real store and prefecture resolve these two fields without waiting for diagnostic JSON');
+// Source diagnostics may lag behind the effective corrected card.
+state.diagnostics=earlierDiagnostics;
+rows=ui.collect();
+assert(!rows[0].missing.includes('store')&&!rows[0].missing.includes('area'));
+state.items=[{...state.items[0],prefecture:'未確認県'}];
+assert(ui.collect()[0].missing.includes('area'),'Reject fake prefecture');
+state.items=[{...state.items[0],prefecture:'全国'}];
+assert(!ui.collect()[0].missing.includes('area'),'Accept nationwide');
 state.items=earlierItems;state.diagnostics=earlierDiagnostics;
 state.card.set(url,{edited_fields:['event_title','stores','application_end_at']});
 state.items=[{...base,event_title:'修正完了イベント名',event_title_provisional:false,

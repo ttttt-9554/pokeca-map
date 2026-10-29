@@ -1,0 +1,30 @@
+name: Unified Lottery Review Regression
+'on':
+  push:
+    paths:
+      - app.js
+      - index.html
+      - dev_unified_review_v21_124.js
+      - scripts/test_developer_unified_review.cjs
+      - scripts/test_app_card_review_preservation.cjs
+      - .github/workflows/unified-review-regression.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript
+        run: |
+          node --check app.js
+          node --check dev_unified_review_v21_124.js
+      - name: Run unified review regressions
+        run: |
+          node scripts/test_developer_unified_review.cjs
+          node scripts/test_app_card_review_preservation.cjs

@@ -2927,13 +2927,15 @@
     const queueRow=lpDevReviewRows.find(row=>row.url===url);
     const unresolved=window.TorecaUnifiedReview?.fieldsFor?.(
       base,item,queueRow,lpDevUnifiedSnapshot())||[];
-    if(isLivePocketEventUrl(url)&&unresolved.length){
+    if(isLivePocketEventUrl(url)&&
+       (unresolved.length||!lpCardOverrides.get(url)?.review_complete)){
       lpCardReviewUrl=url;
       $('lpCardReviewConfirm').hidden=false;
       const labels={title:'抽選名',store:'対象店舗',area:'地域',start:'応募開始',deadline:'応募締切'};
-      $('lpCardReviewMissing').textContent='未確認項目：'+
-        unresolved.map(key=>labels[key]||key).join('・')+
-        '。カード保存で項目の未確認状態が自動更新されます。公式ページの確認完了も記録する場合は下の確認欄を使ってください。';
+      $('lpCardReviewMissing').textContent=unresolved.length?
+        '未確認項目：'+unresolved.map(key=>labels[key]||key).join('・')+
+        '。修正項目は保存後に未確認一覧へ反映します。公式確認も記録する場合は下の欄を使ってください。':
+        '未確認項目はありません。公式ページとの照合を記録する場合のみ確認欄を利用してください。';
     }
     dialog.showModal();
     // Prevent an iPhone keyboard popup by focusing a non-editable heading.
@@ -2968,6 +2970,20 @@
         escape(row.action === 'DELETE' ? 'カード修正を解除' : row.action === 'INSERT' ? '新規修正' : '修正更新')+
         '<div>'+escape(changes.map(x=>labels[x]).join('・') || '修正内容の整理')+'</div></li>';
     }).join('')+'</ol>';
+  }
+
+  // Ordinary Save must not erase a previously verified official record.
+  function lpCardShouldDelete(reset,editedCount,inReview,saved){
+    return !!reset||(editedCount===0&&!inReview&&!saved?.review_complete);
+  }
+  // All stores and prefectures must be genuine, not unresolved placeholders.
+  function lpCardVerifiedStores(stores){
+    const goodName=window.TorecaUnifiedReview?.validStore||
+      (name=>!!String(name||'').trim()&&!/^(未確認|不明|店舗未確認)$/.test(String(name||'').trim()));
+    const goodArea=window.TorecaUnifiedReview?.validArea||
+      (area=>LP_MANUAL_AREAS.includes(area));
+    return Array.isArray(stores)&&stores.length>0&&
+      stores.every(row=>goodName(row?.name)&&goodArea(row?.prefecture));
   }
 
   async function lpCardWrite(reset = false) {
@@ -3041,10 +3057,9 @@
               throw Error('公式情報の確認完了には確認方法を選択してください。');
             if(needs.includes('title')&&!lpManualValidTitle(title))
               throw Error('公式の正式イベント名を入力してください。');
-            if(needs.includes('store')&&!desiredStores.some(x=>x.name.trim()))
-              throw Error('対象店舗を追加・修正してください。');
-            if(needs.includes('area')&&desiredStores.some(x=>!x.prefecture))
-              throw Error('対象店舗の都道府県も入力してください。');
+            if((needs.includes('store')||needs.includes('area'))&&
+               !lpCardVerifiedStores(desiredStores))
+              throw Error('対象店舗名と都道府県を正しく入力してください。');
             if(unpublished&&end)throw Error('締切日時と「公式に記載なし」は同時指定できません。');
             if(needs.includes('deadline')&&!end&&!unpublished)
               throw Error('応募締切を入力するか、公式に記載なしを確認してください。');
@@ -3058,7 +3073,7 @@
         if(saved?.review_complete&&payload.review_complete){
           // A previously confirmed record cannot hide newly cleared fields.
           const title=String(form.elements.namedItem('event_title').value||'').trim();
-          if(!lpManualValidTitle(title)||!desiredStores.some(x=>x.name.trim())||
+          if(!lpManualValidTitle(title)||!lpCardVerifiedStores(desiredStores)||
              (!end&&!payload.review_deadline_unpublished)){
             payload.review_complete=false;payload.review_evidence=null;
             payload.review_completed_at=null;payload.review_deadline_unpublished=false;
@@ -3083,7 +3098,7 @@
     buttons.forEach(x=>x.disabled=true);
     lpCardSetStatus('Supabaseへ保存しています…');
     try {
-      if (reset || (!edited.length && lpCardReviewUrl!==url)) {
+      if (lpCardShouldDelete(reset,edited.length,lpCardReviewUrl===url,saved)) {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .delete().eq('event_url',url).select('event_url');
         if (error) throw error;

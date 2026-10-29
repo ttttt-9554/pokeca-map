@@ -1,4 +1,4 @@
-// v21.124: unified developer manual-review queue.
+// v21.127: unified developer review with effective-card field synchronization.
 // Uses only effective public lottery metadata and existing administrator edits.
 // No user-specific lottery accounts or personal notes are requested.
 (() => {
@@ -13,36 +13,33 @@
   // Placeholder texts are not actual stores or prefectures.
   const known=name=>!!text(name)&&
     !/^(未確認|不明|店名未確認|店舗未確認|店舗名未確認|店舗名不明|店名不明|対象店舗|対象店舗未確認|情報未登録|未取得|店舗情報なし|店舗情報未確認|未設定|なし)$/i.test(text(name));
-  const knownArea=area=>{
-    const name=text(area);
-    return name==='全国'||/^(北海道|東京都|京都府|大阪府|[^\s\d]{2,4}県)$/.test(name);
-  };
+  // Only the 47 real prefectures and the supported nationwide area are valid.
+  const KNOWN_AREAS=new Set(('北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 '+
+    '栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 '+
+    '山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 '+
+    '奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 '+
+    '高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県 全国').split(' '));
+  const knownArea=area=>KNOWN_AREAS.has(text(area));
 
-  function fieldsFor(base,item,diag,state){
+  function fieldsFor(base,item,_diagnostic,state){
     const url=base.url,saved=state.card.get(url),modified=new Set(saved?.edited_fields||[]);
-    const loc=state.location.get(url),cloud=state.cloud.get(url);
+    const manualTitle=modified.has('event_title')||
+      state.cloud.get(url)?.resolution==='title'||state.external.get(url)?.event_title;
+    const title=text(item?.event_title);
+    const titleValid=api.validTitle(title)&&(!item.event_title_provisional||manualTitle)&&
+      !/^(?:未確認|不明|抽選名未確認|イベント名未確認|イベントタイトル未確認|仮イベント名)$/.test(title);
     const rawStores=api.stores(item);
     const stores=rawStores.filter(store=>known(store.name));
-    const places=api.areas(item).filter(knownArea);
-    const missing=[];
-    const title=text(item?.event_title);
-    const manualTitle=modified.has('event_title')||
-      cloud?.resolution==='title'||state.external.get(url)?.event_title;
-    const titleValid=api.validTitle(title)&&(!item.event_title_provisional||manualTitle);
-    if(!titleValid || (diag?.missing?.includes('title')&&!manualTitle&&!saved?.review_complete))
-      missing.push('title');
-    if(!stores.length||rawStores.some(store=>!known(store.name)) ||
-      (diag?.missing?.includes('store')&&
-      !modified.has('stores')&&!modified.has('store_name')&&!loc?.store_name &&
-      !saved?.review_complete))
-      missing.push('store');
+    const places=api.areas(item).filter(knownArea),missing=[];
+    // Judge the latest merged card, not a stale GitHub extraction report.
+    // A corrected field is resolved; unrelated missing fields stay pending.
+    if(!titleValid)missing.push('title');
+    if(!stores.length||rawStores.some(store=>!known(store.name)))missing.push('store');
     if(!places.length||stores.some(store=>!knownArea(store.prefecture)))missing.push('area');
-    const start=Number.isFinite(Date.parse(item?.application_start_at||''));
-    const deadline=Number.isFinite(Date.parse(item?.application_end_at||''));
-    if(!start)missing.push('start');
-    const noDeadline=saved?.review_complete===true &&
-      saved.review_deadline_unpublished===true;
-    if(!deadline&&!noDeadline)missing.push('deadline');
+    if(!Number.isFinite(Date.parse(item?.application_start_at||'')))missing.push('start');
+    const noDeadline=saved?.review_complete===true&&saved.review_deadline_unpublished===true;
+    if(!Number.isFinite(Date.parse(item?.application_end_at||''))&&!noDeadline)
+      missing.push('deadline');
     return missing;
   }
 
@@ -110,6 +107,9 @@
           row.missing.map(k=>'<span>⚠ '+FIELD_LABELS[k]+'未確認</span>').join('')+
           '</div>':'<p class="lp-dev-unified-done">✅ '+(row.official?
             '公式情報の確認完了':'手動修正済み・未確認事項なし')+'</p>')+
+        (row.missing.length&&row.touched?'<p class="lp-dev-unified-done">✅ 現在入力済み：'+
+          Object.keys(FIELD_LABELS).filter(k=>!row.missing.includes(k))
+            .map(k=>FIELD_LABELS[k]).join('・')+'</p>':'')+
         '<div class="lp-dev-unified-card-actions">'+
           '<a href="'+api.escape(row.url)+
           '" target="_blank" rel="noopener noreferrer">元ページを開く ↗</a>'+
@@ -191,6 +191,6 @@
 
   window.TorecaUnifiedReview={
     init,onAuthChanged,render,refresh,collect,fieldsFor,
-    fieldLabels:FIELD_LABELS
+    fieldLabels:FIELD_LABELS,validStore:known,validArea:knownArea
   };
 })();

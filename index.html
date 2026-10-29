@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-unified-review-placeholders-v21-126">
+  <link rel="stylesheet" href="style.css?v=20261029-unified-review-save-sync-v21-127">
 
   <style>
     [hidden] { display: none !important; }
@@ -1498,7 +1498,7 @@ nav[aria-label="メインメニュー"] {
         </label>
         <p class="hint">変更した項目だけ全ユーザーの表示に反映します。空欄にすると該当項目を未確認に戻せます。元の自動取得情報や従来の手動修正は削除されません。</p>
         <fieldset id="lpCardReviewConfirm" class="lp-dev-review-confirm" hidden>
-          <legend>🔎 未解決項目の確認完了</legend>
+          <legend>🔎 公式情報の照合・確認完了</legend>
           <p id="lpCardReviewMissing" class="hint"></p>
           <label class="lp-dev-review-check"><input type="checkbox" name="review_deadline_unpublished">公式ページに応募締切の記載がないことを確認した（日付は推測しない）</label>
           <label>証拠の種類
@@ -1661,14 +1661,14 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-unified-review-placeholders-v21-126';
+      ? token : '20261029-unified-review-save-sync-v21-127';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
   <script src="store_analytics_v21_120.js?v=20261029-v21_121"></script>
-  <script src="dev_unified_review_v21_124.js?v=20261029-v21_126"></script>
+  <script src="dev_unified_review_v21_124.js?v=20261029-v21_127"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
