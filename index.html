@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-card-editor-hidden-tab-v21-132">
+  <link rel="stylesheet" href="style.css?v=20261029-header-login-nav-v21-133">
 
   <style>
     [hidden] { display: none !important; }
@@ -477,6 +477,7 @@ body:not(.map-filter-locked) {
   align-items: center;
   gap: 7px;
 }
+#appFixedHeader .app-login-button,
 #appFixedHeader .app-update-button,
 #appFixedHeader .app-settings-button {
   position: static !important;
@@ -493,8 +494,49 @@ body:not(.map-filter-locked) {
 @media (max-width: 360px) {
   #appFixedHeader { gap: 5px; padding-left: 8px; padding-right: 8px; }
   #appFixedHeader .app-header-actions { gap: 4px; }
-  #appFixedHeader .app-update-button,
+  #appFixedHeader .app-login-button,
+#appFixedHeader .app-update-button,
   #appFixedHeader .app-settings-button { padding: 8px 6px; font-size: 12px; }
+}
+/* v21.133: login is a fixed-header action rather than a bottom tab. */
+#appFixedHeader .app-login-button {
+  background: var(--app-surface2, #eff6ff);
+  color: var(--app-text, #172033);
+  border: 1px solid var(--app-border, #b4c6df);
+  font-weight: 800;
+}
+#appFixedHeader .app-login-button.active {
+  background: var(--app-accent, #2563eb);
+  color: #fff;
+  border-color: var(--app-accent, #2563eb);
+}
+#appFixedHeader .app-login-button:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+/* Keep all three top buttons legible on narrow iPhone viewports. */
+@media (max-width: 520px) {
+  #appFixedHeader { flex-wrap: wrap; row-gap: 7px; }
+  #appFixedHeader .app-header-brand { flex: 1 1 100%; }
+  #appFixedHeader .app-header-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex: 1 1 100%;
+    width: 100%;
+    gap: 7px;
+  }
+  #appFixedHeader .app-header-actions button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 360px) {
+  #appFixedHeader .app-header-actions { gap: 4px; }
+  #appFixedHeader .app-header-actions button { font-size: 12px; }
 }
 #appScrollArea {
   position: relative;
@@ -573,6 +615,7 @@ nav[aria-label="メインメニュー"] {
   
   </div>
   <div class="app-header-actions">
+    <button id="appLoginOpen" class="app-login-button" type="button" data-tab="group" aria-controls="groupView" aria-label="ログイン・共有画面を開く">👤 ログイン</button>
     <button id="appUpdateNow" class="app-update-button" type="button" aria-label="最新版に更新">↻ 更新</button>
     <button id="appSettingsOpen" class="app-settings-button" type="button" aria-haspopup="dialog">⚙ 設定</button>
   </div>
@@ -1065,7 +1108,7 @@ nav[aria-label="メインメニュー"] {
     <section id="groupView" class="view">
 
       <h2>
-        グループ共有
+        ログイン・共有
       </h2>
 
       <div class="share-panel">
@@ -1649,14 +1692,6 @@ nav[aria-label="メインメニュー"] {
 
     <button
       type="button"
-      data-tab="group"
-    >
-      👥
-      <span>共有</span>
-    </button>
-
-    <button
-      type="button"
       data-tab="dev"
       hidden
     >
@@ -1688,7 +1723,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-card-editor-hidden-tab-v21-132';
+      ? token : '20261029-header-login-nav-v21-133';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

@@ -311,7 +311,7 @@
     if (!authUser) $('publishReport').checked = false;
     $('publishHint').textContent = authUser
       ? 'チェックを入れると共有データベースに投稿します。外すと端末内にだけ保存します。'
-      : '共有するには「共有」タブからDiscordでログインしてください。';
+      : '共有するには画面上部の「ログイン」ボタンからDiscordでログインしてください。';
     renderMyShared();
     updateDeveloperTab();
     window.TorecaUnifiedReview?.onAuthChanged?.();
@@ -504,6 +504,11 @@
     setTimeout(() => map.invalidateSize(), 100);
   }
 
+  function appNavigationButtons() {
+    // Login/Share moved to the header, while other tabs remain below.
+    return document.querySelectorAll('nav button[data-tab], #appLoginOpen[data-tab]');
+  }
+
   function switchTab(tab) {
     // Legacy History deep links open the folded section inside Registration.
     const historyRequested=tab==='history';
@@ -517,10 +522,13 @@
       );
     });
 
-    document.querySelectorAll('nav button').forEach(button => {
-      button.classList.toggle(
-        'active', button.dataset.tab === tab
-      );
+    appNavigationButtons().forEach(button => {
+      const active=button.dataset.tab===tab;
+      button.classList.toggle('active',active);
+      if(button.id==='appLoginOpen'){
+        if(active)button.setAttribute('aria-current','page');
+        else button.removeAttribute('aria-current');
+      }
     });
 
     // The content shares one scroll container across tabs. Retaining the prior
@@ -2187,8 +2195,8 @@
   // イベント登録
   // ========================================
 
-  function bindEvents() {
-    document.querySelectorAll('nav button').forEach(button => {
+  function bindAppNavigation() {
+    appNavigationButtons().forEach(button => {
       button.addEventListener('click', () => {
         switchTab(button.dataset.tab);
         // Showing developer diagnostics must not dispatch an expensive browser
@@ -2198,6 +2206,10 @@
         }
       });
     });
+  }
+
+  function bindEvents() {
+    bindAppNavigation();
 
     get('period').addEventListener('change', renderAndFitMap);
 
@@ -4321,7 +4333,7 @@
     const matched=shownPublished.length+shownHidden.length;
     $('lpAppAccountHint').textContent=uid
       ? 'この画面では自分の登録だけを編集できます。抽選カード・応募・当選・落選は「🎟️ 抽選」「✅ 抽選管理」で扱います。'
-      : '登録・再編集にはDiscordログインが必要です。「共有」タブからログインしてください。抽選カードは「🎟️ 抽選」で閲覧できます。';
+      : '登録・再編集にはDiscordログインが必要です。画面上部の「ログイン」ボタンからログインしてください。抽選カードは「🎟️ 抽選」で閲覧できます。';
     status.textContent=(lpAppError?'⚠ '+lpAppError+' ／ ':'')+
       (uid?'自分の登録 '+mine.length+'件 ／ 公開中 '+published.length+
         '件 ／ 非表示 '+hidden.length+'件 ／ 検索結果 '+matched+'件':
@@ -4421,7 +4433,7 @@
   async function lpAppPrepare(id=''){
     if(lpAppBusy)return;
     if(!authUser||!supabaseClient){
-      alert('手動抽選登録にはDiscordログインが必要です。「共有」タブからログインしてください。');
+      alert('手動抽選登録にはDiscordログインが必要です。画面上部の「ログイン」ボタンからログインしてください。');
       switchTab('group');return;
     }
     const user=authUser.id;
@@ -4715,7 +4727,7 @@
     const text=$('lpResultsAccount');
     if(!text)return;
     text.textContent=!supabaseClient?'共有サーバーに接続できません。':
-      !authUser?'匿名集計の閲覧にはDiscordログインが必要です。「共有」タブからログインしてください。':
+      !authUser?'匿名集計の閲覧にはDiscordログインが必要です。画面上部の「ログイン」ボタンからログインしてください。':
       '匿名集計を表示しています。誰が応募・当選したかは公開されません。';
   }
 
@@ -4836,7 +4848,7 @@
       '<span>📊 応募合計 '+applicationsTotal+'口</span>';
     if(!authUser||!supabaseClient){
       status.textContent='応募状況の匿名集計を表示するにはDiscordログインが必要です。';
-      list.innerHTML='<p class="hint">「共有」タブからログインすると、対象の抽選結果を確認できます。</p>';
+      list.innerHTML='<p class="hint">画面上部の「ログイン」ボタンからログインすると、対象の抽選結果を確認できます。</p>';
       return;
     }
     const explanation='抽選管理の応募・当選・落選を口数で匿名集計しています。';
@@ -5878,7 +5890,7 @@
     if(!host)return;
     const status=$('lpTrackStatus');
     if(!supabaseClient || !authUser){
-      status.textContent='Discordログインすると、自分専用の応募・当選記録を保存できます。「共有」タブからログインしてください。';
+      status.textContent='Discordログインすると、自分専用の応募・当選記録を保存できます。画面上部の「ログイン」ボタンからログインしてください。';
       $('lpTrackCounts').replaceChildren();
       $('lpTrackList').innerHTML='';
       renderLotteryResultAlerts([]);
@@ -6073,7 +6085,7 @@
     const url=button.dataset.url;
     if(!safeLotteryUrl(url))return;
     if(!authUser||!supabaseClient){
-      alert('抽選の個人管理にはDiscordログインが必要です。「共有」タブでログインしてください。');
+      alert('抽選の個人管理にはDiscordログインが必要です。画面上部の「ログイン」ボタンでログインしてください。');
       switchTab('group');return;
     }
     if(button.dataset.lpTrack==='apply'){
@@ -7522,7 +7534,7 @@
       : 'ログインを検証し、確認処理を起動しています…';
     try {
       const {data, error} = await supabaseClient.auth.getSession();
-      if (error || !data?.session?.access_token) throw new Error('ログイン情報が期限切れです。共有タブでログインし直してください。');
+      if (error || !data?.session?.access_token) throw new Error('ログイン情報が期限切れです。画面上部の「ログイン」ボタンでログインし直してください。');
       if (data.session.user?.id !== DEVELOPER_USER_ID) throw new Error('開発者権限を確認できません。');
       const response = await fetch(LP_DEV_RECHECK_API, {
         method: 'POST',
