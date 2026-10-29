@@ -40,7 +40,7 @@ const elements={
 const context={
   lpResultsCounts:counts,
   lotteryItems:[eventA,eventB,eventZero,eventFinal],
-  lpResultsStageOpen:{waiting:true,provisional:false,confirmed:false},
+  lpResultsStageOpen:{waiting:false,provisional:false,confirmed:false},
   lpResultsConfirmedSort:'newest',
   authUser:{id:'test-user'}, supabaseClient:{},
   lpResultsReady:true, lpResultsError:'', lpResultsManualBusy:false,
@@ -69,9 +69,22 @@ assert.match(elements.lpResultsCounts.innerHTML,/応募合計 3口/,
 assert.equal(api.lpResultsStage(counts.get(eventA.url)),'provisional');
 assert.equal(api.lpResultsStage(counts.get(eventB.url)),'waiting');
 assert.equal(api.lpResultsStage(counts.get(eventFinal.url)),'confirmed');
-assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting" open/);
-assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="provisional"/);
-assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="confirmed"/);
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting"><summary/,
+  'Waiting results must start collapsed');
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="provisional"><summary/,
+  'Provisional results must start collapsed');
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="confirmed"><summary/,
+  'Confirmed results must start collapsed');
+// Opening a group manually persists across a refresh; the new default
+// must not force the user-selected fold closed on every render.
+context.lpResultsStageOpen.waiting=true;
+api.lpResultsRender();
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting" open/,
+  'A manually expanded waiting group remains expanded during rendering');
+context.lpResultsStageOpen.waiting=false;
+api.lpResultsRender();
+assert.match(elements.lpResultsList.innerHTML,/data-lp-results-stage="waiting"><summary/,
+  'The waiting group can be folded again');
 assert.match(elements.lpResultsList.innerHTML,/集計待ち<\/span><span class="lp-results-stage-count">1件/);
 assert.match(elements.lpResultsList.innerHTML,/暫定<\/span><span class="lp-results-stage-count">1件/);
 assert.match(elements.lpResultsList.innerHTML,/確定<\/span><span class="lp-results-stage-count">1件/);
@@ -194,5 +207,9 @@ assert(resultsMarkup.lastIndexOf('</details>')>cardsAt,
  'Store statistics stay last within the lottery results view');
 assert.equal((resultsMarkup.match(/id="lpStoreAnalytics"/g)||[]).length,1,
  'Store analytics DOM id must not be duplicated');
+assert.match(resultsMarkup,/<details id="lpStoreAnalytics" class="lp-store-analytics">/,
+ 'Store analytics must start collapsed');
+assert.match(app,/let lpResultsStageOpen=\{waiting:false,provisional:false,confirmed:false\}/,
+ 'All three result groups must start collapsed');
 
 console.log('Lottery results use ticket entries only: UI and filter checks passed');

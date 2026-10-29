@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-livepocket-card-visibility-v21-129">
+  <link rel="stylesheet" href="style.css?v=20261029-results-folded-default-v21-130">
 
   <style>
     [hidden] { display: none !important; }
@@ -800,7 +800,7 @@ nav[aria-label="メインメニュー"] {
 
       <div id="lpResultsList" class="lp-results-list" aria-live="polite"></div>
 
-      <details id="lpStoreAnalytics" class="lp-store-analytics" open>
+      <details id="lpStoreAnalytics" class="lp-store-analytics">
         <summary>📊 店舗別当選統計 <span id="lpStoreAnalyticsCount">確認中</span></summary>
         <p class="hint">登録人数に関係なく、当落が1口以上判明した店舗を匿名集計します。商品・抽選時期による違いがあり、特に20口未満は少数データの参考値です。今回の当選率を予測するものではなく、少数の結果から個人を推測できる可能性にも注意してください。</p>
         <div class="lp-store-analytics-controls">
@@ -1674,7 +1674,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-livepocket-card-visibility-v21-129';
+      ? token : '20261029-results-folded-default-v21-130';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

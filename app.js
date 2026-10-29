@@ -4748,8 +4748,9 @@
     };
   }
 
-  // Preserve group openness and confirmed sort while refreshing and filtering.
-  let lpResultsStageOpen={waiting:true,provisional:false,confirmed:false};
+  // Every result group starts folded. Preserve manual open/closed selections
+  // while refreshing, searching, sorting or switching tabs in this session.
+  let lpResultsStageOpen={waiting:false,provisional:false,confirmed:false};
   let lpResultsConfirmedSort='newest';
 
   // Numeric observed winning rate; do not compare displayed rounded percentages.
