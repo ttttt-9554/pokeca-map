@@ -23,10 +23,16 @@ assert.doesNotMatch(app,/discordRoleVerifiedUntil/);
 assert.doesNotMatch(app,/setInterval\(\(\)=>\{\s*if\(authUser/);
 assert.match(app,/if\(!force&&authUser\?\.id===user\.id&&discordRoleVerifiedToken\)/);
 assert.match(app,/await supabaseClient\.auth\.signOut\(\)/);
+assert.match(app,/async function trustedDiscordRoleFromToken\(session\)/);
+assert.match(app,/auth\.getClaims\(session\.access_token\)/);
+assert.match(app,/toreca_discord_role_until/);
+assert.match(app,/const remembered=!force&&await trustedDiscordRoleFromToken\(session\)/);
+assert.match(app,/if\(\['role_required','discord_login_required','login_required'\]/);
 assert.match(html,/Discordロール認証/);
 assert.doesNotMatch(html,/アクセス権限の確認（テスト）/);
 
 const source=[
+extract('trustedDiscordRoleFromToken',true),
 extract('discordRoleResultMessage'),
 extract('discordRoleVerifyToken',true),
 extract('requireDiscordRole',true),
@@ -80,7 +86,9 @@ const session={user:{id:'u1'},access_token:'token1'};
  fail.setAnswer({ok:false,status:503,body:{allowed:false,error:'role_check_unavailable'}});
  assert.equal(await fail.api.requireDiscordRole(session),false);
  assert.equal(fail.context.authUser,null,'Network/backend outage fails closed');
- assert.equal(fail.stats().signouts,1);
+ assert.equal(fail.stats().signouts,0,
+   'Temporary failure must retain the saved session for retry');
+ assert.equal(fail.context.discordRoleAuthError,'role_check_unavailable');
 
  const check=harness();
  assert.equal(await check.api.requireDiscordRole(session),true);
@@ -89,11 +97,44 @@ const session={user:{id:'u1'},access_token:'token1'};
  assert.equal(check.context.authUser,null,'Rechecking a revoked role rejects the active login');
  assert.equal(check.stats().signouts,1);
 
+ // A re-opened PWA with a properly signed, still-valid role claim needs
+ // neither a Discord OAuth redirect nor an additional Bot API request.
+ const restored=harness();
+ let checkedToken='';
+ restored.context.supabaseClient.auth.getClaims=async token=>{
+   checkedToken=token;
+   return {data:{claims:{sub:'u1',role:'authenticated',is_anonymous:false,
+     toreca_discord_role_until:Math.floor(Date.now()/1000)+3600}},error:null};
+ };
+ assert.equal(await restored.api.requireDiscordRole(session),true);
+ assert.equal(checkedToken,'token1');
+ assert.equal(restored.context.authUser.id,'u1');
+ assert.equal(restored.stats().calls,0,
+   'A valid signed JWT restores login without a Discord round-trip');
+
+ const expired=harness();
+ expired.context.supabaseClient.auth.getClaims=async()=>({
+   data:{claims:{sub:'u1',role:'authenticated',is_anonymous:false,
+     toreca_discord_role_until:Math.floor(Date.now()/1000)-60}},error:null
+ });
+ assert.equal(await expired.api.requireDiscordRole(session),true);
+ assert.equal(expired.stats().calls,1,
+   'Expired remembered role proof must not bypass verification');
+
+ const networkRetry=harness();
+ networkRetry.setAnswer({ok:false,status:503,body:{error:'role_check_unavailable'}});
+ assert.equal(await networkRetry.api.requireDiscordRole(session),false);
+ assert.equal(networkRetry.stats().signouts,0);
+ networkRetry.setAnswer({ok:true,status:200,body:{allowed:true}});
+ await networkRetry.api.checkDiscordRoleAccess();
+ assert.equal(networkRetry.context.authUser.id,'u1');
+ assert.equal(networkRetry.stats().calls,2,'Manual retry recovers stored credentials');
+
  const tokenRefresh=harness();
  assert.equal(await tokenRefresh.api.requireDiscordRole(session),true);
  assert.equal(await tokenRefresh.api.requireDiscordRole({
    user:{id:'u1'},access_token:'token2'
  }),true,'Token rotation for an approved login is not a new Discord check');
  assert.equal(tokenRefresh.stats().calls,1,'No additional role lookup on token rotation');
- console.log('Discord login accepted/denied, manual revocation, outage and no polling verified');
+ console.log('Discord login: 14-day restore, rejection, transient retry, JWT refresh and no polling passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
