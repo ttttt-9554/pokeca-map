@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-29T03:05:55.222183+00:00",
-  "unique_livepocket_urls": 576,
+  "collected_at": "2026-10-29T03:35:55.992889+00:00",
+  "unique_livepocket_urls": 577,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8425,7 +8425,25 @@
         }
       ],
       "first_detected_at": "2026-10-28T11:31:00.160881+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/fv1r4",
+      "store_name": "トレカエース植田店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-29T03:30:14.423000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース植田店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売受付",
+      "application_end_at": "2026-11-02T21:00:00+09:00",
+      "application_start_at": "2026-10-29T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売受付",
+      "first_detected_at": "2026-10-29T03:35:57.565863+00:00"
     }
   ],
-  "updated_at": "2026-10-29T03:26:01.096348+00:00"
+  "updated_at": "2026-10-29T03:36:22.407772+00:00"
 }
