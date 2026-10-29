@@ -18257,7 +18257,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/fv1r4": {
-          "checked_at": "2026-10-29T09:46:24.348246+00:00",
+          "checked_at": "2026-10-29T15:51:14.411359+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19615,7 +19615,7 @@
         "https://livepocket.jp/e/fv1r4": {
           "detected_at": "2026-10-29T03:35:57.565863+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-29T09:46:24.348246+00:00",
+          "checked_at": "2026-10-29T15:51:14.411359+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/grixw": {
@@ -20748,8 +20748,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fv1r4": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-29T09:46:24.348246+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-29T15:51:14.411359+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/grixw": {
@@ -25430,7 +25430,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-29T09:46:24.348246+00:00",
+          "checked_at": "2026-10-29T15:51:14.411359+00:00",
           "title_observed": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -29200,7 +29200,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fv1r4": {
-          "checked_at": "2026-10-29T09:46:24.348246+00:00",
+          "checked_at": "2026-10-29T15:51:14.411359+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
