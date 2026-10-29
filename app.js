@@ -323,7 +323,12 @@
     $('discordLogout').hidden = !authUser;
     updateLotteryVisibility();
     const roleCheck=$('discordRoleCheck');
-    if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!authUser||!supabaseClient||discordRoleAuthPending;
+    // A transient outage must preserve the saved Supabase session and allow a
+    // manual retry. A real role rejection still requires a fresh Discord login.
+    const retryable=discordRoleAuthError&&
+      !['role_required','login_required','discord_login_required'].includes(discordRoleAuthError);
+    if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!supabaseClient||
+      discordRoleAuthPending||(!authUser&&!retryable);
     if($('discordRoleStatus')){
       $('discordRoleStatus').textContent=discordRoleAuthPending
         ? '🔄 Discordロールを自動確認しています…'
@@ -514,6 +519,24 @@
     }
   }
 
+  // Supabase Auth's signed JWT now carries a server-issued 14-day role proof.
+  // A verified saved session can resume after closing the PWA without asking
+  // Discord again. This is distinct from the user's editable profile metadata.
+  async function trustedDiscordRoleFromToken(session){
+    if(!session?.access_token||!session?.user?.id||
+       typeof supabaseClient?.auth?.getClaims!=='function')return false;
+    try{
+      const {data,error}=await supabaseClient.auth.getClaims(session.access_token);
+      if(error||!data?.claims)return false;
+      const claims=data.claims;
+      const now=Math.floor(Date.now()/1000);
+      const until=Number(claims.toreca_discord_role_until);
+      return claims.sub===session.user.id&&claims.role==='authenticated'&&
+        claims.is_anonymous===false&&Number.isSafeInteger(until)&&
+        until>now&&until<=now+14*24*60*60;
+    }catch{return false;}
+  }
+
   async function requireDiscordRole(session,force=false){
     const token=session?.access_token,user=session?.user;
     if(!token||!user?.id){
@@ -536,6 +559,18 @@
     discordRoleAuthError='';
     displayAuth();
     const verification=(async()=>{
+      // The Auth Hook has already checked Discord when this JWT was issued.
+      // Rechecking via a second API call on each app launch is unnecessary.
+      const remembered=!force&&await trustedDiscordRoleFromToken(session);
+      if(generation!==discordRoleAuthGeneration)return false;
+      if(remembered){
+        discordRoleAuthPending=false;
+        discordRoleVerifiedToken=token;
+        discordRoleAuthError='';
+        authUser=user;
+        displayAuth();
+        return true;
+      }
       const result=await discordRoleVerifyToken(token);
       if(generation!==discordRoleAuthGeneration)return false;
       discordRoleAuthPending=false;
@@ -546,14 +581,16 @@
         displayAuth();
         return true;
       }
-      // Do not leave an unauthorized OAuth session usable by app features.
+      // Reject actual missing roles. Temporary network errors must NOT erase
+      // the persisted refresh token: the user can retry after reconnecting.
       discordRoleVerifiedToken='';
-      discordRoleAuthError=result.error||'role_required';
+      discordRoleAuthError=result.error||'role_check_unavailable';
       authUser=null;
       displayAuth();
-      try{
-        await supabaseClient.auth.signOut();
-      }catch{}
+      if(['role_required','discord_login_required','login_required']
+          .includes(discordRoleAuthError)){
+        try{await supabaseClient.auth.signOut()}catch{}
+      }
       if(!authUser&&discordRoleAuthError){
         displayAuth();
         switchTab('group');
@@ -571,7 +608,7 @@
   async function checkDiscordRoleAccess(){
     const button=$('discordRoleCheck'),status=$('discordRoleStatus');
     if(!button||!status||discordRoleCheckBusy)return;
-    if(!supabaseClient||!authUser){
+    if(!supabaseClient){
       status.textContent=discordRoleResultMessage('login_required');return;
     }
     discordRoleCheckBusy=true;
@@ -584,7 +621,7 @@
       await requireDiscordRole(data.session,true);
     }finally{
       discordRoleCheckBusy=false;
-      button.disabled=!authUser||!supabaseClient||discordRoleAuthPending;
+      displayAuth();
     }
   }
 
