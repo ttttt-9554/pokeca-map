@@ -1,4 +1,4 @@
-// v21.120 — Store matching statistics UI.
+// v21.128 — Store results shown independent of user count; small samples flagged.
 // No private account, user identifier or raw entry data is requested by this module.
 (() => {
   'use strict';
@@ -20,11 +20,14 @@
   }
   function storeBadge(store){
     const row=lookup(store);
-    if(!row?.badge)return '';
+    if(!row?.badge||row.decided<30)return '';
     return '<span class="lp-store-high-badge" title="過去の全商品・全抽選の登録実績を基にした参考情報です。今回の当選を保証しません。">📈 過去実績高め</span>';
   }
   function cardBadge(stores){
-    const eligible=(stores||[]).filter(store=>lookup(store)?.badge);
+    const eligible=(stores||[]).filter(store=>{
+      const row=lookup(store);
+      return row?.badge===true&&row.decided>=30;
+    });
     if(!eligible.length)return '';
     return '<span class="lp-store-card-badge" title="匿名統計から算出した過去実績です。今回の当選確率ではありません。">'+
       (stores.length===1?'📈 過去実績高め':'📈 実績高め店舗あり')+'</span>';
@@ -42,16 +45,17 @@
     else rows.sort((a,b)=>b.rate-a.rate||b.decided-a.decided);
     $('lpStoreAnalyticsCount').textContent=stats.length+'店舗';
     status.textContent=error?'⚠ 店舗統計を取得できません：'+error:
-      '公開可能な店舗 '+stats.length+'件（当落判明20口以上・異なる登録者5人以上）';
+      '集計対象 '+stats.length+'店舗（人数制限なし・当落判明1口から表示）';
     list.innerHTML=rows.length?rows.slice(0,120).map(row=>
       '<article class="lp-store-analytics-row"><div class="lp-store-analytics-head">'+
       '<strong>'+escape(row.store_name)+'</strong>'+
       '<strong class="lp-store-analytics-rate">'+Number(row.rate).toFixed(1)+'%</strong></div>'+
       '<p class="hint">📍 '+escape(row.prefecture)+' ／ 当選 '+row.won+'口・落選 '+
-      row.lost+'口 ／ 当落判明 '+row.decided+'口</p>'+
-      (row.badge?'<span class="lp-store-high-badge">📈 過去実績高め</span>':'')+
+      row.lost+'口 ／ 当落判明 '+row.decided+'口'+
+      (row.decided<20?' ／ ※少数データ・参考値':'')+'</p>'+
+      (row.badge&&row.decided>=30?'<span class="lp-store-high-badge">📈 過去実績高め</span>':'')+
       '</article>').join(''):
-      '<p class="hint">公開条件を満たす店舗がまだありません。店舗別の応募・当落データが増えると自動的に表示されます。</p>';
+      '<p class="hint">当落が確定した応募記録のある店舗はまだありません。当選・落選の記録が増えると表示されます。</p>';
   }
 
   async function refresh(force=false){
@@ -65,7 +69,7 @@
         if(remote)throw remote;
         const raw=Array.isArray(data)?data:[];
         stats=raw.filter(x=>x&&typeof x.store_name==='string'&&
-          Number.isFinite(Number(x.rate))&&Number(x.decided)>=20)
+          Number.isFinite(Number(x.rate))&&Number(x.decided)>=1)
           .map(x=>({...x,rate:Number(x.rate),decided:Number(x.decided),
             won:Number(x.won),lost:Number(x.lost),badge:x.badge===true}));
         byKey=new Map();

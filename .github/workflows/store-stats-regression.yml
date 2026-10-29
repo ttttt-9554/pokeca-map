@@ -1,0 +1,27 @@
+name: Store Lottery Statistics Regression
+'on':
+  push:
+    paths:
+      - 'store_analytics_v21_120.js'
+      - 'index.html'
+      - 'scripts/test_store_analytics.cjs'
+      - 'supabase/lottery_store_stats_all_results_v21_128.sql'
+      - '.github/workflows/store-stats-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax checks
+        run: |
+          node --check store_analytics_v21_120.js
+          node --check scripts/test_store_analytics.cjs
+      - name: Store statistics regression
+        run: node scripts/test_store_analytics.cjs

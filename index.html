@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-unified-review-save-sync-v21-127">
+  <link rel="stylesheet" href="style.css?v=20261029-store-stats-any-participants-v21-128">
 
   <style>
     [hidden] { display: none !important; }
@@ -802,7 +802,7 @@ nav[aria-label="メインメニュー"] {
 
       <details id="lpStoreAnalytics" class="lp-store-analytics" open>
         <summary>📊 店舗別当選統計 <span id="lpStoreAnalyticsCount">確認中</span></summary>
-        <p class="hint">過去の登録結果から匿名集計します。商品や抽選時期の違いを含む参考値です。異なる登録者5人以上、当落判明20口以上の店舗のみ公開します。</p>
+        <p class="hint">登録人数に関係なく、当落が1口以上判明した店舗を匿名集計します。商品・抽選時期による違いがあり、特に20口未満は少数データの参考値です。今回の当選率を予測するものではなく、少数の結果から個人を推測できる可能性にも注意してください。</p>
         <div class="lp-store-analytics-controls">
           <input type="search" id="lpStoreAnalyticsSearch" maxlength="90" placeholder="店舗名・地域を検索" aria-label="店舗別当選統計の検索">
           <select id="lpStoreAnalyticsSort" aria-label="店舗別当選率の並び順">
@@ -1661,13 +1661,13 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-unified-review-save-sync-v21-127';
+      ? token : '20261029-store-stats-any-participants-v21-128';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
-  <script src="store_analytics_v21_120.js?v=20261029-v21_121"></script>
+  <script src="store_analytics_v21_120.js?v=20261029-v21_128"></script>
   <script src="dev_unified_review_v21_124.js?v=20261029-v21_127"></script>
 
 <script>
