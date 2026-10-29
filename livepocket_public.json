@@ -8463,24 +8463,22 @@
       "url": "https://livepocket.jp/e/dof-w",
       "store_name": "TSUTAYA Trading Card平塚店",
       "prefecture": "神奈川県",
+      "event_title": "ポケモンカード『30th CELEBRATION』3次抽選",
+      "application_start_at": "2026-10-29T18:02:00+09:00",
+      "application_end_at": "2026-11-01T20:00:00+09:00",
       "discord_posted_at": "2026-10-29T11:30:10.403000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA Trading Card平塚店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "ポケモンカード『30th CELEBRATION』3次抽選",
-      "application_end_at": "2026-11-01T20:00:00+09:00",
-      "application_start_at": "2026-10-29T18:02:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカード『30th CELEBRATION』3次抽選",
       "first_detected_at": "2026-10-29T11:35:57.960242+00:00"
     }
   ],
-  "updated_at": "2026-10-29T11:36:22.820509+00:00"
+  "updated_at": "2026-10-29T11:46:03.232209+00:00"
 }
