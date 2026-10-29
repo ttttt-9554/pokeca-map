@@ -5,6 +5,11 @@ name: Discord Role Access Verification (staged)
       - 'supabase/functions/discord-role-access/**'
       - 'supabase/discord_role_access_stage_v1.sql'
       - 'scripts/test_discord_role_access.cjs'
+      - 'scripts/test_discord_role_access_ui.cjs'
+      - 'index.html'
+      - 'app.js'
+      - 'style.css'
+      - 'DISCORD_ROLE_ACCESS_SETUP.md'
       - '.github/workflows/discord-role-access-test.yml'
   workflow_dispatch:
 permissions:
@@ -22,3 +27,4 @@ jobs:
           node --check supabase/functions/discord-role-access/access-utils.mjs
           node --check scripts/test_discord_role_access.cjs
           node scripts/test_discord_role_access.cjs
+          node scripts/test_discord_role_access_ui.cjs

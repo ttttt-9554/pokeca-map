@@ -307,6 +307,10 @@
     }
     $('discordLogin').hidden = !supabaseClient || !!authUser;
     $('discordLogout').hidden = !authUser;
+    const roleCheck=$('discordRoleCheck');
+    if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!authUser||!supabaseClient;
+    if(!authUser&&$('discordRoleStatus'))
+      $('discordRoleStatus').textContent='Discordログイン後に確認できます。';
     $('publishReport').disabled = !authUser;
     if (!authUser) $('publishReport').checked = false;
     $('publishHint').textContent = authUser
@@ -393,6 +397,63 @@
     sharedChannel = supabaseClient.channel('pokeca-shared-report-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:SHARED_TABLE},() => loadSharedReports())
       .subscribe();
+  }
+
+  let discordRoleCheckBusy=false;
+
+  function discordRoleResultMessage(code,allowed=false){
+    if(allowed)return '✅ 指定ロールを確認できました。これは認証テストであり、サイトの非公開化はまだ完了していません。';
+    const messages={
+      not_configured:'⚠ 認証用Botのサーバー設定が未完了です。SupabaseのCustom secretsに DISCORD_BOT_TOKEN を登録してください。',
+      login_required:'⚠ Discordログインが必要です。ログインし直してから確認してください。',
+      discord_login_required:'⚠ DiscordアカウントがSupabase認証に紐付いていません。Discordで再ログインしてください。',
+      role_required:'⛔ 対象サーバーへの参加、または指定ロールが確認できませんでした。管理者にロールの付与を確認してください。',
+      role_check_unavailable:'⚠ Discord側への照合に失敗しました。認証用Botが対象サーバーに追加済みか確認してください。',
+      identity_unavailable:'⚠ ログインIDの確認に失敗しました。ログインし直して再試行してください。',
+      access_store_unavailable:'⚠ 認証結果を保存できませんでした。Supabaseの設定を確認してください。',
+    };
+    return messages[code]||'⚠ ロール認証を完了できませんでした。接続やサーバー設定を確認して再試行してください。';
+  }
+
+  async function checkDiscordRoleAccess(){
+    const button=$('discordRoleCheck'),status=$('discordRoleStatus');
+    if(!button||!status||discordRoleCheckBusy)return;
+    if(!supabaseClient||!authUser){
+      status.textContent=discordRoleResultMessage('login_required');return;
+    }
+    const originalUserId=authUser.id;
+    discordRoleCheckBusy=true;button.disabled=true;
+    status.textContent='🔄 Discordのサーバー所属と指定ロールを確認しています…';
+    let timeout=null;
+    try {
+      const {data,error}=await supabaseClient.auth.getSession();
+      const accessToken=data?.session?.access_token;
+      if(error||!accessToken){
+        status.textContent=discordRoleResultMessage('login_required');return;
+      }
+      const controller=new AbortController();
+      timeout=setTimeout(()=>controller.abort(),15000);
+      const response=await fetch(SUPABASE_URL+'/functions/v1/discord-role-access',{
+        method:'POST',cache:'no-store',signal:controller.signal,
+        headers:{
+          'Authorization':'Bearer '+accessToken,
+          'apikey':SUPABASE_KEY,
+          'Content-Type':'application/json'
+        },
+        body:'{}'
+      });
+      const result=await response.json().catch(()=>({}));
+      if(authUser?.id!==originalUserId)return;
+      status.textContent=discordRoleResultMessage(result?.error||'unexpected',
+        response.ok&&result?.allowed===true);
+    }catch {
+      if(authUser?.id===originalUserId)
+        status.textContent='⚠ 通信できませんでした。ネットワーク接続と認証用Botの設定を確認してください。';
+    }finally {
+      if(timeout!==null)clearTimeout(timeout);
+      discordRoleCheckBusy=false;
+      button.disabled=!authUser||!supabaseClient;
+    }
   }
 
   async function discordLogin() {
@@ -2264,6 +2325,7 @@
     );
     get('discordLogin').addEventListener('click',discordLogin);
     get('discordLogout').addEventListener('click',discordLogout);
+    get('discordRoleCheck').addEventListener('click',checkDiscordRoleAccess);
     get('sharedRefresh').addEventListener('click',loadSharedReports);
     get('historySharedRefresh').addEventListener('click',loadSharedReports);
     get('mySharedList').addEventListener('click',handleCard);

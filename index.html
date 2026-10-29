@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-header-login-nav-v21-133">
+  <link rel="stylesheet" href="style.css?v=20261029-discord-role-verification-v21-134">
 
   <style>
     [hidden] { display: none !important; }
@@ -1118,6 +1118,12 @@ nav[aria-label="メインメニュー"] {
         <button type="button" id="discordLogout" hidden>ログアウト</button>
         <button type="button" id="sharedRefresh">共有情報を更新</button>
         <p id="sharedStatus" class="hint" aria-live="polite"></p>
+        <div class="discord-role-check-panel" aria-label="Discordロール認証の接続テスト">
+          <h4>🔐 アクセス権限の確認（テスト）</h4>
+          <p class="hint">現在のDiscordアカウントが指定ロールを持っているか確認します。まだ閲覧制限は有効になっていないため、確認に成功しても公開サイトは非公開になりません。</p>
+          <button type="button" id="discordRoleCheck" disabled>Discordロールを確認</button>
+          <p id="discordRoleStatus" class="hint" role="status" aria-live="polite">Discordログイン後に確認できます。</p>
+        </div>
         <p class="hint">公開した情報は、アプリを利用するほかのユーザーにも表示されます。端末内の過去の記録は自動公開されません。</p>
       </div>
       <section class="friend-presence-panel" aria-label="招待した友達のログイン状況">
@@ -1723,7 +1729,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-header-login-nav-v21-133';
+      ? token : '20261029-discord-role-verification-v21-134';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
