@@ -7,6 +7,8 @@ name: LivePocket Card Visibility Regression
       - 'style.css'
       - 'dev_unified_review_v21_124.js'
       - 'scripts/test_app_card_review_preservation.cjs'
+      - 'scripts/test_app_manual_location.cjs'
+      - 'scripts/test_app_manual_expiry.cjs'
       - 'scripts/test_livepocket_card_visibility.cjs'
       - 'supabase/lottery_card_livepocket_visibility_v21_129.sql'
       - '.github/workflows/livepocket-card-visibility.yml'
