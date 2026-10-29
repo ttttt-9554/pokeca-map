@@ -18,6 +18,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_app_private_lottery_accounts.cjs
       - scripts/test_manual_lottery_registration.cjs
       - scripts/test_manual_lottery_dialog.cjs
+      - scripts/test_lottery_tracker_modal_layout.cjs
       - scripts/test_store_analytics.cjs
       - store_analytics_v21_120.js
       - scripts/test_developer_unified_review.cjs
@@ -76,6 +77,7 @@ jobs:
           node scripts/test_app_private_lottery_accounts.cjs
           node scripts/test_manual_lottery_registration.cjs
           node scripts/test_manual_lottery_dialog.cjs
+          node scripts/test_lottery_tracker_modal_layout.cjs
           node --check store_analytics_v21_120.js
           node scripts/test_store_analytics.cjs
           node --check dev_unified_review_v21_124.js
