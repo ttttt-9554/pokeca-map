@@ -484,9 +484,9 @@
       login_required:'⚠ Discordログインが必要です。',
       discord_login_required:'⚠ Discord認証に問題があります。もう一度ログインしてください。',
       role_required:'⛔ 指定ロールがないためログインできません。サーバー管理者に確認してください。',
-      role_check_unavailable:'⚠ Discordのロールを確認できませんでした。時間をおいて再度ログインしてください。',
-      identity_unavailable:'⚠ ログイン情報を確認できませんでした。もう一度ログインしてください。',
-      access_store_unavailable:'⚠ 認証結果を保存できませんでした。管理者に連絡してください。',
+      role_check_unavailable:'⚠ 通信エラーでロールを確認できませんでした。ログイン情報は保持しています。「ログイン権限を再確認」から再試行してください。',
+      identity_unavailable:'⚠ 認証情報を確認できませんでした。保存されたログイン情報は保持しています。再確認してください。',
+      access_store_unavailable:'⚠ 認証結果を保存できませんでした。ログイン情報は保持しています。再確認してください。',
     };
     return messages[code]||'⚠ ロール認証を完了できませんでした。再度ログインしてください。';
   }
