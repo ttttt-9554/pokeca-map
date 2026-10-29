@@ -13,7 +13,9 @@ function extract(name,asyncFn=false){
 }
 assert.match(app,/onAuthStateChange\(\(event,session\)\s*=>\s*\{/);
 assert.match(app,/await requireDiscordRole\(data\.session\)/);
-assert.match(app,/setTimeout\(\(\)=>\{void requireDiscordRole\(session\);\},0\)/);
+assert.match(app,/setTimeout\(async\(\)=>\{/);
+assert.match(app,/data\?\.session\?\.access_token!==session\.access_token/);
+assert.match(app,/await requireDiscordRole\(data\.session\)/);
 assert.match(app,/if\(event==='SIGNED_OUT'\)/);
 assert.doesNotMatch(app,/authUser = session\?\.user \|\| null/);
 assert.match(app,/if\(authUser&&document\.visibilityState!=='hidden'\)void renewDiscordRole\(\)/);
