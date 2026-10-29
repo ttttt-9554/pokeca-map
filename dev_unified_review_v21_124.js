@@ -8,7 +8,7 @@
     title:'抽選名',store:'対象店舗',area:'都道府県',
     start:'応募開始',deadline:'応募締切'
   };
-  let api=null,limit=80,refreshing=false,lastRows=[];
+  let api=null,limit=80,refreshing=false,lastRows=[],bound=false;
   const text=value=>String(value??'').trim();
   const known=name=>!!name && !/^(未確認|不明|店舗未確認|対象店舗|店舗名未確認|情報未登録|未取得)$/i.test(text(name));
 
@@ -153,9 +153,19 @@
     }finally{button.disabled=false;}
   }
 
+  function onAuthChanged(){
+    if(!api?.isDeveloper())return;
+    const container=$('lpDevUnifiedPanel')?.closest('details.dev-accordion');
+    if(container&&!container.open)container.open=true;
+    render();
+    if(!(api.snapshot().base||[]).length)refresh();
+  }
+
   function init(options){
     api=options;
-    if(!api.isDeveloper())return;
+    if(bound){onAuthChanged();return;}
+    bound=true;
+    // Bind once even before Discord login; authorization is checked per action.
     $('lpDevUnifiedSearch')?.addEventListener('input',()=>{limit=80;render();});
     $('lpDevUnifiedFilter')?.addEventListener('change',()=>{limit=80;render();});
     $('lpDevUnifiedRefresh')?.addEventListener('click',refresh);
@@ -164,17 +174,15 @@
     $('lpDevUnifiedCompletedList')?.addEventListener('click',onEdit);
     const container=$('lpDevUnifiedPanel')?.closest('details.dev-accordion');
     if(container){
-      container.open=true;
       container.addEventListener('toggle',()=>{
-        if(container.open&&!lastRows.length)refresh();
+        if(container.open&&api.isDeveloper()&&!lastRows.length)refresh();
       });
     }
-    render();
-    if(!(options.snapshot().base||[]).length)refresh();
+    onAuthChanged();
   }
 
   window.TorecaUnifiedReview={
-    init,render,refresh,collect,fieldsFor,
+    init,onAuthChanged,render,refresh,collect,fieldsFor,
     fieldLabels:FIELD_LABELS
   };
 })();

@@ -19,7 +19,8 @@ for(const id of ['lpDevUnifiedPanel','lpDevUnifiedSearch','lpDevUnifiedFilter',
  'lpDevUnifiedCounts','lpDevUnifiedStatus','lpDevUnifiedList','lpDevUnifiedCompletedList',
  'lpDevUnifiedRefresh','lpDevUnifiedMore','lpDevUnifiedPendingCount','lpDevUnifiedDoneCount']){
  nodes.set(id,{value:id==='lpDevUnifiedFilter'?'all':'',textContent:'',innerHTML:'',
-  hidden:false,disabled:false,addEventListener(){},closest(){return null}});
+  hidden:false,disabled:false,events:{},
+  addEventListener(name,fn){this.events[name]=fn;},closest(){return null}});
 }
 const window={},document={getElementById:id=>nodes.get(id)};
 vm.runInNewContext(script,{window,document},{timeout:1000});
@@ -30,13 +31,18 @@ const base={url,event_title:'仮イベント名',event_title_provisional:true,
 const state={base:[base],items:[{...base}],card:new Map(),
  location:new Map(),cloud:new Map(),external:new Map(),
  diagnostics:[{url,missing:['title','store','deadline']}]};
-const opts={isDeveloper:()=>true,snapshot:()=>state,validUrl:x=>x.startsWith('https://'),
+let authorized=false;
+const opts={isDeveloper:()=>authorized,snapshot:()=>state,validUrl:x=>x.startsWith('https://'),
  isLivePocket:()=>true,stores:item=>Array.isArray(item.stores)?item.stores:
    item.store_name?[{name:item.store_name,prefecture:item.prefecture}]:[],
  areas:item=>item.prefecture?[item.prefecture]:item.stores?.map(s=>s.prefecture).filter(Boolean)||[],
  validTitle:x=>String(x||'').trim().length>=5,
  expired:()=>false,escape:x=>String(x),openEditor:async()=>{},refreshSources:async()=>{}};
 ui.init(opts);
+assert.equal(typeof nodes.get('lpDevUnifiedRefresh').events.click,'function',
+ 'Controls must be bound even before Discord authentication');
+assert.equal(ui.collect().length,0,'No developer login means no review data');
+authorized=true;ui.onAuthChanged();
 let rows=ui.collect();
 assert.equal(rows.length,1);
 for(const kind of ['title','store','area','deadline'])assert(rows[0].missing.includes(kind),kind);

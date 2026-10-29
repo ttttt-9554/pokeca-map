@@ -314,6 +314,7 @@
       : '共有するには「共有」タブからDiscordでログインしてください。';
     renderMyShared();
     updateDeveloperTab();
+    window.TorecaUnifiedReview?.onAuthChanged?.();
     if (restoreDeveloperTabPending && isDeveloper()) {
       restoreDeveloperTabPending = false;
       switchTab('dev');

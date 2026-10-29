@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261029-unified-issue-review-v21-124">
+  <link rel="stylesheet" href="style.css?v=20261029-unified-review-auth-v21-125">
 
   <style>
     [hidden] { display: none !important; }
@@ -1661,14 +1661,14 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261029-unified-issue-review-v21-124';
+      ? token : '20261029-unified-review-auth-v21-125';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="onsite_comment_alert_v21_55.js?v=20261021-v21_58-external-onsite"></script>
   <script src="store_analytics_v21_120.js?v=20261029-v21_121"></script>
-  <script src="dev_unified_review_v21_124.js?v=20261029-v21_124"></script>
+  <script src="dev_unified_review_v21_124.js?v=20261029-v21_125"></script>
 
 <script>
 /* v21.31: iPhone/PWA用の手動更新。保存データを削除せずHTMLを再取得する。 */
