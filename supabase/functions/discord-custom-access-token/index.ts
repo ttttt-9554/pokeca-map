@@ -68,16 +68,18 @@ Deno.serve(async req=>{
    return deny('Discord OAuth is required',403);
 
  const table='discord_remembered_sessions_v1';
- let cached=null;
- try{
-   const {data,error}=await bounded(admin.from(table)
-     .select('session_id,user_id,authorized_until')
-     .eq('session_id',sessionId).maybeSingle(),1000);
-   if(error)return deny('Session authorization unavailable',503);
-   cached=data;
- }catch{return deny('Session authorization unavailable',503)}
- if(rememberedSessionAllowed(event,cached)){
-   return json({claims:authorizedClaims(event.claims,cached.authorized_until)});
+ if(event.authentication_method==='token_refresh'){
+   let cached=null;
+   try{
+     const {data,error}=await bounded(admin.from(table)
+       .select('session_id,user_id,authorized_until')
+       .eq('session_id',sessionId).maybeSingle(),1000);
+     if(error)return deny('Session authorization unavailable',503);
+     cached=data;
+   }catch{return deny('Session authorization unavailable',503)}
+   if(rememberedSessionAllowed(event,cached)){
+     return json({claims:authorizedClaims(event.claims,cached.authorized_until)});
+   }
  }
 
  // Identity comes from trusted Supabase Auth admin data, not user_metadata.
