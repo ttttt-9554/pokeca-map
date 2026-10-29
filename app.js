@@ -391,7 +391,18 @@
         displayAuth();
       }else if(['INITIAL_SESSION','SIGNED_IN','TOKEN_REFRESHED'].includes(event)){
         // Never await Supabase requests from inside the auth callback.
-        setTimeout(()=>{void requireDiscordRole(session);},0);
+        setTimeout(async()=>{
+          // Ignore stale auth notifications queued before logout or account
+          // switching, so a signed-out user cannot be reauthorized.
+          if(!session?.access_token||!supabaseClient)return;
+          try{
+            const {data}=await supabaseClient.auth.getSession();
+            if(data?.session?.access_token!==session.access_token)return;
+            await requireDiscordRole(data.session);
+          }catch{
+            // An unavailable session must never grant access.
+          }
+        },0);
       }
     });
     const {data,error} = await supabaseClient.auth.getSession();
