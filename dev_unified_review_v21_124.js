@@ -10,13 +10,20 @@
   };
   let api=null,limit=80,refreshing=false,lastRows=[],bound=false;
   const text=value=>String(value??'').trim();
-  const known=name=>!!name && !/^(未確認|不明|店舗未確認|対象店舗|店舗名未確認|情報未登録|未取得)$/i.test(text(name));
+  // Placeholder texts are not actual stores or prefectures.
+  const known=name=>!!text(name)&&
+    !/^(未確認|不明|店名未確認|店舗未確認|店舗名未確認|店舗名不明|店名不明|対象店舗|対象店舗未確認|情報未登録|未取得|店舗情報なし|店舗情報未確認|未設定|なし)$/i.test(text(name));
+  const knownArea=area=>{
+    const name=text(area);
+    return name==='全国'||/^(北海道|東京都|京都府|大阪府|[^\s\d]{2,4}県)$/.test(name);
+  };
 
   function fieldsFor(base,item,diag,state){
     const url=base.url,saved=state.card.get(url),modified=new Set(saved?.edited_fields||[]);
     const loc=state.location.get(url),cloud=state.cloud.get(url);
-    const stores=api.stores(item).filter(store=>known(store.name));
-    const places=api.areas(item).filter(Boolean);
+    const rawStores=api.stores(item);
+    const stores=rawStores.filter(store=>known(store.name));
+    const places=api.areas(item).filter(knownArea);
     const missing=[];
     const title=text(item?.event_title);
     const manualTitle=modified.has('event_title')||
@@ -24,11 +31,12 @@
     const titleValid=api.validTitle(title)&&(!item.event_title_provisional||manualTitle);
     if(!titleValid || (diag?.missing?.includes('title')&&!manualTitle&&!saved?.review_complete))
       missing.push('title');
-    if(!stores.length || (diag?.missing?.includes('store')&&
+    if(!stores.length||rawStores.some(store=>!known(store.name)) ||
+      (diag?.missing?.includes('store')&&
       !modified.has('stores')&&!modified.has('store_name')&&!loc?.store_name &&
       !saved?.review_complete))
       missing.push('store');
-    if(!places.length||stores.some(store=>!text(store.prefecture)))missing.push('area');
+    if(!places.length||stores.some(store=>!knownArea(store.prefecture)))missing.push('area');
     const start=Number.isFinite(Date.parse(item?.application_start_at||''));
     const deadline=Number.isFinite(Date.parse(item?.application_end_at||''));
     if(!start)missing.push('start');

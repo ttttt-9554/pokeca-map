@@ -48,6 +48,25 @@ assert.equal(rows.length,1);
 for(const kind of ['title','store','area','deadline'])assert(rows[0].missing.includes(kind),kind);
 assert(!rows[0].missing.includes('start'));
 assert.match(nodes.get('lpDevUnifiedCounts').innerHTML,/未対応 1件/);
+
+// Supplied placeholder labels must never be treated as verified shop/location.
+// Published diagnostics may lag behind a corrected card, so test the effective
+// values independently with no diagnostic hints.
+const earlierItems=state.items,earlierDiagnostics=state.diagnostics;
+state.diagnostics=[];
+state.items=[{...base,event_title:'正式な抽選の名前',event_title_provisional:false,
+ store_name:'店名未確認',prefecture:'都道府県未確認'}];
+rows=ui.collect();
+assert(rows[0].missing.includes('store'),
+ 'Store-name placeholder must remain unresolved');
+assert(rows[0].missing.includes('area'),
+ 'Prefecture placeholder must remain unresolved');
+state.items=[{...state.items[0],store_name:'確認済み宇都宮店',
+ prefecture:'栃木県'}];
+rows=ui.collect();
+assert(!rows[0].missing.includes('store')&&!rows[0].missing.includes('area'),
+ 'Real store and prefecture resolve these two fields without waiting for diagnostic JSON');
+state.items=earlierItems;state.diagnostics=earlierDiagnostics;
 state.card.set(url,{edited_fields:['event_title','stores','application_end_at']});
 state.items=[{...base,event_title:'修正完了イベント名',event_title_provisional:false,
  stores:[{name:'確認済み店舗',prefecture:'栃木県'}],prefecture:'栃木県',
