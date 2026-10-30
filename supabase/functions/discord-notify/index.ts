@@ -117,6 +117,15 @@ function buildLotteryMessage(job: LotteryJob) {
       ? p.changed_fields.filter((v): v is string => typeof v === "string")
           .slice(0, 8).map(v => clean(v, 70)).join("・")
       : "手動確認";
+    const stores = Array.isArray(p.stores)
+      ? p.stores.filter((x): x is {name: string; prefecture?: string} =>
+          !!x && typeof x === "object" && typeof x.name === "string" && !!x.name.trim())
+      : [];
+    const listedStores = stores.length
+      ? stores.slice(0,18).map(x => x.name +
+          (x.prefecture ? "（" + x.prefecture + "）" : "")).join("\n") +
+          (stores.length > 18 ? "\nほか" + (stores.length - 18) + "店舗" : "")
+      : p.store_name;
     return {
       username: "トレカレーダー",
       allowed_mentions: { parse: [] },
@@ -127,7 +136,8 @@ function buildLotteryMessage(job: LotteryJob) {
         url: originalUrl,
         fields: [
           { name: "📝 更新内容", value: changed || "手動確認", inline: false },
-          { name: "🏪 対象店舗", value: clean(p.store_name, 200), inline: false },
+          { name: stores.length ? "🏪 対象店舗（" + stores.length + "件）" : "🏪 対象店舗",
+            value: clean(listedStores, 1000), inline: false },
           { name: "📍 地域", value: clean(p.prefecture, 40), inline: true },
           { name: "🕒 応募開始", value: lotteryDate(p.application_start_at), inline: true },
           { name: "⌛ 応募締切", value: lotteryDate(p.application_end_at), inline: true }
