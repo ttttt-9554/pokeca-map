@@ -2948,9 +2948,16 @@
           item.official_event_title=row.event_title;
           item.event_title_provisional=false;
         }
-        item.store_name=row.store_name||'';
-        item.prefecture=row.prefecture||'';
-        delete item.stores;
+        const stores=lpExtNormalizeStores(row.stores);
+        if(stores.length){
+          item.stores=stores;
+          item.store_name=stores[0].name;
+          item.prefecture=stores[0].prefecture||'';
+        }else{
+          item.store_name=row.store_name||'';
+          item.prefecture=row.prefecture||'';
+          delete item.stores;
+        }
         item.review_category=row.review_category||'unknown';
         item.pokemon_map_type=row.product_type||'unknown';
         item.application_start_at=row.application_start_at||null;
@@ -3900,7 +3907,7 @@
     lpExtLoading=(async()=>{
       try{
         const {data,error}=await supabaseClient.from(LP_EXT_OVERRIDE_TABLE)
-          .select('event_url,state,event_title,store_name,prefecture,review_category,product_type,application_start_at,application_end_at,exclusion_reason,updated_at')
+          .select('event_url,state,event_title,store_name,prefecture,stores,review_category,product_type,application_start_at,application_end_at,exclusion_reason,updated_at')
           .limit(5000);
         if(error)throw error;
         lpExtOverrides=new Map((data||[]).filter(x=>safeLotteryUrl(x.event_url)&&
@@ -4027,24 +4034,114 @@
     return date.toISOString();
   }
 
+
+  // v21.141: Multiple external stores are represented by name and prefecture.
+  // The legacy scalar columns remain synchronized for older app versions.
+  const LP_EXT_MAX_STORES=100;
+  function lpExtNormalizeStores(raw){
+    if(!Array.isArray(raw))return [];
+    return raw.slice(0,LP_EXT_MAX_STORES).filter(x=>x&&typeof x==='object')
+      .map(x=>({name:String(x.name||'').trim().slice(0,200),
+        prefecture:String(x.prefecture||'').trim()}))
+      .filter(x=>x.name);
+  }
+  function lpExtStoredStores(row,base){
+    if(row){
+      if(Array.isArray(row.stores)){
+        const stores=lpExtNormalizeStores(row.stores);
+        if(stores.length)return stores;
+        if(!row.store_name&&!row.prefecture)return [];
+      }
+      return row.store_name||row.prefecture
+        ?[{name:String(row.store_name||''),prefecture:String(row.prefecture||'')}]:[];
+    }
+    return lotteryStoreEntries(base||{});
+  }
+  function lpExtStoreRowHtml(row={}){
+    const name=String(row?.name||'').slice(0,200);
+    const area=String(row?.prefecture||'');
+    return '<div class="lp-ext-store-row" data-lp-ext-store-row>'+
+      '<div class="lp-ext-store-grid">'+
+       '<label>店舗名<input data-lp-ext-store-name maxlength="200" autocomplete="off" '+
+       'placeholder="店舗名（未確認なら空欄）" value="'+escape(name)+'"></label>'+
+       '<label>都道府県<select data-lp-ext-store-pref>'+
+        '<option value="">未確認</option>'+
+        LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'"'+
+        (area===x?' selected':'')+'>'+escape(x)+'</option>').join('')+
+       '</select></label></div>'+
+       '<button type="button" class="lp-ext-store-remove" data-lp-ext-store-remove>この店舗を削除</button>'+
+      '</div>';
+  }
+  function lpExtStoreUpdateControls(){
+    const rows=[...$('lpExtStores').querySelectorAll('[data-lp-ext-store-row]')];
+    rows.forEach((row,index)=>{
+      const button=row.querySelector('[data-lp-ext-store-remove]');
+      if(button){
+        button.disabled=rows.length<=1;
+        button.setAttribute('aria-label',(index+1)+'件目の店舗を削除');
+      }
+    });
+    $('lpExtStoreCount').textContent=rows.length+'件';
+    $('lpExtStoreAdd').disabled=rows.length>=LP_EXT_MAX_STORES;
+  }
+  function lpExtStoreRender(rows){
+    const stores=lpExtNormalizeStores(rows);
+    const initial=stores.length?stores:
+      (Array.isArray(rows)&&rows.length&&rows[0]?.prefecture
+       ?[{name:'',prefecture:String(rows[0].prefecture)}]
+       :[{name:'',prefecture:''}]);
+    $('lpExtStores').innerHTML=initial.map(lpExtStoreRowHtml).join('');
+    lpExtStoreUpdateControls();
+  }
+  function lpExtValidatedStores(rows){
+    if(!Array.isArray(rows)||rows.length<1||rows.length>LP_EXT_MAX_STORES)
+      throw Error('対象店舗は1〜100件の範囲で登録してください。');
+    const stores=[],seen=new Set();
+    let fallbackArea='';
+    for(const raw of rows){
+      const name=String(raw?.name||'').trim();
+      const area=String(raw?.prefecture||'').trim();
+      if(name.length>200)throw Error('店舗名は200文字以内で入力してください。');
+      if(area&&!LP_MANUAL_AREAS.includes(area))
+        throw Error('対象店舗の都道府県を確認してください。');
+      if(!name){
+        if(area&&rows.length!==1)
+          throw Error('都道府県を入力した店舗は店舗名も入力してください。');
+        if(area)fallbackArea=area;
+        continue;
+      }
+      const key=name.normalize('NFKC').toLocaleLowerCase('ja-JP')+'|'+area;
+      if(seen.has(key))throw Error('同じ店舗と都道府県が重複しています。');
+      seen.add(key);
+      stores.push({name,prefecture:area});
+    }
+    return {stores,store_name:stores[0]?.name||null,
+      prefecture:stores[0]?.prefecture||fallbackArea||null};
+  }
+
   function lpExtFormRow(){
     const form=$('lpExtForm'),url=lpExtEditing;
     if(!form||!url||!safeLotteryUrl(url)||isLivePocketEventUrl(url))
       throw Error('外部抽選URLが不正です。');
     const val=name=>String(form.elements.namedItem(name)?.value||'').trim();
-    const title=val('event_title'),store=val('store_name'),area=val('prefecture'),
-      category=val('review_category'),type=val('product_type'),reason=val('exclusion_reason');
-    if(title.length>200||store.length>200||reason.length>300)
+    const title=val('event_title'),category=val('review_category'),
+      type=val('product_type'),reason=val('exclusion_reason');
+    if(title.length>200||reason.length>300)
       throw Error('入力した文字数が上限を超えています。');
-    if(area&&!LP_MANUAL_AREAS.includes(area))throw Error('都道府県を確認してください。');
+    const storeData=lpExtValidatedStores(
+      [...form.querySelectorAll('[data-lp-ext-store-row]')].map(row=>({
+        name:row.querySelector('[data-lp-ext-store-name]')?.value||'',
+        prefecture:row.querySelector('[data-lp-ext-store-pref]')?.value||''
+      }))
+    );
     if(!['pokemon','onepiece','yugioh','unknown'].includes(category)||
        !['unknown','pack','deck'].includes(type))throw Error('ジャンル・商品区分が不正です。');
     const start=lpExtDateSave(val('application_start_at')),
       end=lpExtDateSave(val('application_end_at'));
     if(start&&end&&Date.parse(start)>Date.parse(end))
       throw Error('応募開始日時は締切日時より前にしてください。');
-    return {event_url:url,event_title:title||null,store_name:store||null,
-      prefecture:area||null,review_category:category,product_type:type,
+    return {event_url:url,event_title:title||null,...storeData,
+      review_category:category,product_type:type,
       application_start_at:start,application_end_at:end,exclusion_reason:reason||null};
   }
 
@@ -4068,7 +4165,8 @@
       if(!input)return true;
       const row=lpExtOverrides.get(item.url);
       return [item.url,item.event_title,item.store_name,item.source_site,
-        row?.event_title,row?.store_name,row?.prefecture,row?.exclusion_reason]
+        row?.event_title,row?.store_name,row?.prefecture,row?.exclusion_reason,
+        ...(Array.isArray(row?.stores)?row.stores.flatMap(x=>[x?.name,x?.prefecture]):[])]
         .filter(Boolean).join(' ').toLocaleLowerCase('ja-JP').includes(input);
     }).sort((a,b)=>(lotteryFirstSeenTime(b)||0)-(lotteryFirstSeenTime(a)||0));
     const pending=matched.filter(item=>!lpExtOverrides.has(item.url));
@@ -4143,8 +4241,7 @@
     sourceLink.textContent='🔗 元の抽選ページを開く ↗\n'+url;
     const set=(name,value)=>{form.elements.namedItem(name).value=value||'';};
     set('event_title',row?row.event_title:(base?.event_title_provisional?'':base?.event_title));
-    set('store_name',row?row.store_name:base?.store_name);
-    set('prefecture',row?row.prefecture:base?.prefecture);
+    lpExtStoreRender(lpExtStoredStores(row,base));
     set('review_category',row?.review_category||base?.review_category||'unknown');
     set('product_type',row?.product_type||base?.pokemon_map_type||'unknown');
     set('application_start_at',lpExtDateInput(row?row.application_start_at:base?.application_start_at));
@@ -4194,7 +4291,7 @@
           ?payload.exclusion_reason||old?.exclusion_reason||null:null;
         const {data,error}=await supabaseClient.from(LP_EXT_OVERRIDE_TABLE)
           .upsert(payload,{onConflict:'event_url'})
-          .select('event_url,state,event_title,store_name,prefecture,review_category,product_type,application_start_at,application_end_at,exclusion_reason,updated_at').single();
+          .select('event_url,state,event_title,store_name,prefecture,stores,review_category,product_type,application_start_at,application_end_at,exclusion_reason,updated_at').single();
         if(error)throw error;
         if(!data||data.event_url!==url||data.state!==payload.state)
           throw Error('保存結果が確認できませんでした');
@@ -4215,8 +4312,18 @@
   function lpExtInitUI(){
     const root=$('lpExtManage'),dialog=$('lpExtDialog');
     if(!root||!dialog)return;
-    $('lpExtPrefecture').innerHTML='<option value="">未確認</option>'+
-      LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
+    $('lpExtStoreAdd').addEventListener('click',()=>{
+      const root=$('lpExtStores');
+      if(root.querySelectorAll('[data-lp-ext-store-row]').length>=LP_EXT_MAX_STORES)return;
+      root.insertAdjacentHTML('beforeend',lpExtStoreRowHtml());
+      lpExtStoreUpdateControls();
+    });
+    $('lpExtStores').addEventListener('click',event=>{
+      const remove=event.target.closest('[data-lp-ext-store-remove]');
+      if(!remove||$('lpExtStores').querySelectorAll('[data-lp-ext-store-row]').length<=1)return;
+      remove.closest('[data-lp-ext-store-row]')?.remove();
+      lpExtStoreUpdateControls();
+    });
     $('lpExtSearch').addEventListener('input',()=>{lpExtListLimit=80;lpExtRenderAdmin();});
     $('lpExtMore').addEventListener('click',()=>{lpExtListLimit+=80;lpExtRenderAdmin();});
     $('lpExtRefresh').addEventListener('click',lpExtRefreshPublished);

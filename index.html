@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261030-refresh-tab-after-discord-auth-v21-140">
+  <link rel="stylesheet" href="style.css?v=20261030-external-multi-stores-v21-141">
 
   <style>
     [hidden] { display: none !important; }
@@ -209,6 +209,48 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
     font-weight:650;text-decoration:underline;text-underline-offset:3px;
   }
   #lpExtDialog .lp-ext-url:focus-visible{outline:3px solid var(--app-accent,#2563eb);outline-offset:3px}
+
+  /* v21.141: external edit store rows, independent of other dialogs. */
+  #lpExtDialog #lpExtStoresField{
+    box-sizing:border-box;width:100%;min-width:0;margin:6px 0;
+    padding:12px;border:1px solid var(--app-border,#94a3b8);
+    border-radius:12px;background:var(--app-surface2,#f8fafc);
+  }
+  #lpExtDialog #lpExtStoresField legend{
+    padding:0 6px;font-size:14px;font-weight:800;color:var(--app-text,#172033);
+  }
+  #lpExtDialog #lpExtStoreCount{font-size:12px;color:var(--app-muted,#64748b)}
+  #lpExtDialog .lp-ext-stores-list{display:grid;gap:10px;min-width:0;margin:10px 0}
+  #lpExtDialog .lp-ext-store-row{
+    min-width:0;box-sizing:border-box;padding:11px;border-radius:10px;
+    border:1px solid var(--app-border,#94a3b8);background:var(--app-surface,#fff);
+  }
+  #lpExtDialog .lp-ext-store-grid{
+    min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(135px,.7fr);
+    gap:8px;align-items:end;
+  }
+  #lpExtDialog .lp-ext-store-grid label{
+    display:block;min-width:0;font-size:12px;font-weight:750;line-height:1.6;
+    color:var(--app-text,#172033);
+  }
+  #lpExtDialog .lp-ext-store-grid input,#lpExtDialog .lp-ext-store-grid select{
+    box-sizing:border-box;display:block;width:100%;max-width:100%;min-width:0;
+    padding:9px;min-height:44px;font-size:16px;
+  }
+  #lpExtDialog .lp-ext-store-add,#lpExtDialog .lp-ext-store-remove{
+    min-height:42px;border-radius:9px;font-size:13px;font-weight:750;
+    border:1px solid var(--app-border,#94a3b8);
+    background:var(--app-surface2,#f8fafc);color:var(--app-text,#172033);
+  }
+  #lpExtDialog .lp-ext-store-add{width:100%;max-width:100%;padding:9px}
+  #lpExtDialog .lp-ext-store-remove{display:block;margin:10px 0 0 auto;padding:8px 12px}
+  #lpExtDialog :is(.lp-ext-store-add,.lp-ext-store-remove):disabled{opacity:.45;cursor:not-allowed}
+  @media(max-width:520px){
+    #lpExtDialog .lp-ext-store-grid{grid-template-columns:minmax(0,1fr)}
+    #lpExtDialog #lpExtStoresField{padding:10px}
+  }
+  html[data-theme="dark"] #lpExtDialog #lpExtStoresField{background:#203149;border-color:#526681}
+  html[data-theme="dark"] #lpExtDialog .lp-ext-store-row{background:#172337;border-color:#526681}
   #lpExtManage[hidden],#lpExtDelete[hidden],#lpExtRestore[hidden],#lpExtReset[hidden]{display:none!important}
 </style>
 <style id="dark-contrast-fix">
@@ -1610,12 +1652,12 @@ nav[aria-label="メインメニュー"] {
         <label>イベント名・商品名
           <input name="event_title" maxlength="200" autocomplete="off" placeholder="公式ページで確認した名称">
         </label>
-        <label>対象店舗
-          <input name="store_name" maxlength="200" autocomplete="off" placeholder="店舗名（未確認なら空欄）">
-        </label>
-        <label>都道府県
-          <select id="lpExtPrefecture" name="prefecture"><option value="">未確認</option></select>
-        </label>
+        <fieldset id="lpExtStoresField" class="lp-ext-stores-field">
+          <legend>🏬 対象店舗 <span id="lpExtStoreCount">1件</span></legend>
+          <p class="hint">店舗ごとに店舗名と都道府県を登録できます（最大100件）。</p>
+          <div id="lpExtStores" class="lp-ext-stores-list" aria-label="対象店舗一覧"></div>
+          <button id="lpExtStoreAdd" type="button" class="lp-ext-store-add">➕ 店舗を追加</button>
+        </fieldset>
         <label>ジャンル
           <select name="review_category">
             <option value="unknown">未分類</option>
@@ -1729,7 +1771,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261030-refresh-tab-after-discord-auth-v21-140';
+      ? token : '20261030-external-multi-stores-v21-141';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
