@@ -684,11 +684,23 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://p-bandai.jp/item/item-1000260602/",
+      "source_site": "p-bandai.jp",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-10-30T09:39:09.704000+00:00",
+      "first_detected_at": "2026-10-30T09:40:56.893607+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1565651571394740314"
+    "1551580466266644552": "1565661330214621285"
   },
-  "collected_at": "2026-10-30T09:01:01.541300+00:00",
+  "collected_at": "2026-10-30T09:40:56.893680+00:00",
   "messages_scanned": 100
 }
