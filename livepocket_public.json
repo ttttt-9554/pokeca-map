@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T05:00:55.593211+00:00",
-  "unique_livepocket_urls": 586,
+  "collected_at": "2026-10-30T06:00:55.293556+00:00",
+  "unique_livepocket_urls": 587,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8627,7 +8627,29 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-30T05:00:57.540458+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/f89lt",
+      "store_name": "ブックエース茨大前店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-30T06:00:21.495000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース茨大前店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム スタートデッキ100 バトルコレクション 抽選販売",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-29T19:29:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "スタートデッキ100 バトルコレクション",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム スタートデッキ100 バトルコレクション 抽選販売",
+      "first_detected_at": "2026-10-30T06:00:56.775240+00:00"
     }
   ],
-  "updated_at": "2026-10-30T05:50:58.488972+00:00"
+  "updated_at": "2026-10-30T06:01:16.259734+00:00"
 }

@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-30T05:00:55.593211+00:00",
+  "collected_at": "2026-10-30T06:00:55.293556+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 586,
+  "unique_livepocket_urls": 587,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15805,34 +15805,64 @@
       "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
       "application_end_at": "2026-11-01T22:00:00+09:00",
       "application_start_at": "2026-10-30T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/f89lt",
+      "discord_message_id": "1565606266515230782",
+      "discord_posted_at": "2026-10-30T06:00:21.495000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 15時まとめ】\n\n🔁 再通知\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 10/30 21:01（残り6時間0分）\nhttps://livepocket.jp/e/r0ckk\n\n📍茨城県\nトレカエース茨大前店\n受付終了: 11/01 22:00（残り2日6時間）\nhttps://livepocket.jp/e/m_dnk\n\n📍茨城県\nブックエース茨大前店\n受付終了: 11/01 22:00（残り2日6時間）\nhttps://livepocket.jp/e/f89lt\n\n🔁 再通知\n📍福島県\nブックエース上荒川店\n受付終了: 11/01 22:00（残り2日6時間）\nhttps://livepocket.jp/e/eno-n\n\n🔁 再通知\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/01 23:59（残り2日8時間）\nhttps://livepocket.jp/e/y3ccfn268p\n\n🔁 再通知\n📍全国チェーン\nイトーヨーカドー\nhttps://livepocket.jp/e/s2q8j",
+      "store_name": "ブックエース茨大前店",
+      "prefecture": "茨城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース茨大前店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲーム スタートデッキ100 バトルコレクション 抽選販売",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-29T19:29:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 427,
+    "parsed": 428,
     "no_structured_details": 159
   },
   "field_counts": {
-    "store_name": 404,
-    "prefecture": 341,
-    "event_title": 273,
+    "store_name": 405,
+    "prefecture": 342,
+    "event_title": 274,
     "event_date": 1,
     "product_name": 83,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 550,
-    "application_start_at": 549,
-    "stores_events": 413
+    "application_end_at": 551,
+    "application_start_at": 550,
+    "stores_events": 414
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565591110628155513"
+      "1551580466266644552": "1565606271556784129"
     },
     "last_run": {
-      "checked_at": "2026-10-30T05:00:55.593211+00:00",
+      "checked_at": "2026-10-30T06:00:55.293556+00:00",
       "new_urls": 1,
-      "original_urls": 585,
+      "original_urls": 586,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -16008,7 +16038,8 @@
         "1565341978529366116": "2026-10-29T12:35:58.520849+00:00",
         "1565523168511135794": "2026-10-30T00:30:56.319791+00:00",
         "1565530714730926162": "2026-10-30T01:00:56.966370+00:00",
-        "1565591110628155513": "2026-10-30T05:00:56.777496+00:00"
+        "1565591110628155513": "2026-10-30T05:00:56.777496+00:00",
+        "1565606266515230782": "2026-10-30T06:00:55.944884+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18483,6 +18514,11 @@
           "checked_at": "2026-10-30T05:01:17.144289+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/f89lt": {
+          "checked_at": "2026-10-30T06:01:16.259734+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19873,6 +19909,12 @@
           "detected_at": "2026-10-30T05:00:57.540458+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-30T05:01:17.144289+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/f89lt": {
+          "detected_at": "2026-10-30T06:00:56.775240+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T06:01:16.259734+00:00",
           "http_status": null
         }
       },
@@ -25783,6 +25825,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/f89lt": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-30T06:01:16.259734+00:00",
+          "title_observed": "ポケモンカードゲーム スタートデッキ100 バトルコレクション 抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -29621,6 +29674,19 @@
         },
         "https://livepocket.jp/e/m_dnk": {
           "checked_at": "2026-10-30T05:01:17.144289+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/f89lt": {
+          "checked_at": "2026-10-30T06:01:16.259734+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
