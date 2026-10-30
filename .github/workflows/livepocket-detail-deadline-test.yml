@@ -8,6 +8,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_app_end_only_deadline.cjs
       - scripts/test_app_lottery_results_entries.cjs
       - scripts/test_header_login_navigation.cjs
+      - scripts/test_refresh_tab_auth_restore.cjs
       - guide.html
       - scripts/test_private_lottery_accounts.cjs
       - scripts/test_private_account_unassigned.cjs
@@ -71,6 +72,7 @@ jobs:
           node scripts/test_app_end_only_deadline.cjs
           node scripts/test_app_lottery_results_entries.cjs
           node scripts/test_header_login_navigation.cjs
+          node scripts/test_refresh_tab_auth_restore.cjs
           node scripts/test_private_lottery_accounts.cjs
           node scripts/test_private_account_unassigned.cjs
           node scripts/test_private_account_store.cjs
