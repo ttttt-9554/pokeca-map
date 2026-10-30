@@ -8527,6 +8527,8 @@
           "prefecture": "神奈川県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
       "first_detected_at": "2026-10-30T00:30:57.267842+00:00"
     },
     {
@@ -8544,6 +8546,7 @@
           "prefecture": "福島県"
         }
       ],
+      "official_event_title": "抽選販売 ONE PIECE HEROINES PRECIOUS BOX",
       "first_detected_at": "2026-10-30T00:30:57.267842+00:00"
     },
     {
@@ -8649,5 +8652,5 @@
       "first_detected_at": "2026-10-30T06:00:56.775240+00:00"
     }
   ],
-  "updated_at": "2026-10-30T06:30:59.361564+00:00"
+  "updated_at": "2026-10-30T06:41:36.764478+00:00"
 }
