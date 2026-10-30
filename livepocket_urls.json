@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-30T08:30:55.504487+00:00",
+  "collected_at": "2026-10-30T09:01:01.205455+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 589,
+  "unique_livepocket_urls": 590,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15886,34 +15886,65 @@
       "event_title": "30thセレブレーション 1BOX",
       "application_end_at": "2026-11-01T23:00:00+09:00",
       "application_start_at": "2026-10-28T20:42:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ii5p_",
+      "discord_message_id": "1565651566491471933",
+      "discord_posted_at": "2026-10-30T09:00:21.851000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\nキデイランド 吉祥寺店\n受付終了: 11/04 23:59（残り5日5時間）\nhttps://livepocket.jp/e/ii5p_\n\n📍東京都\nカードショップ オリオンベース\n受付終了: 11/01 21:00（残り2日2時間）\nhttps://livepocket.jp/e/2ahm8\n\n🔁 再通知\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 10/30 21:01（残り3時間0分）\nhttps://livepocket.jp/e/r0ckk\n\n🔁 再通知\n📍茨城県\nトレカエース茨大前店\n受付終了: 11/01 22:00（残り2日3時間）\nhttps://livepocket.jp/e/m_dnk\n\n🔁 再通知\n📍茨城県\nブックエース茨大前店\n受付終了: 11/01 22:00（残り2日3時間）\nhttps://livepocket.jp/e/f89lt\n\n🔁 再通知\n📍福島県\nブックエース上荒川店\n受付終了: 11/01 22:00（残り2日3時間）\nhttps://livepocket.jp/e/eno-n\n\n🔁 再通知\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/01 23:59（残り2日5時間）\nhttps://livepocket.jp/e/y3ccfn268p\n\n🔁 再通知\n📍全国チェーン\nイトーヨーカドー\nhttps://livepocket.jp/e/s2q8j",
+      "store_name": "キデイランド 吉祥寺店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": "ホロビートカードゲーム 「スタートデッキ」（2種）",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド 吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v19_livepocket_explicit_store_list",
+        "event_title": "v14_livepocket_page_title",
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "キデイランド 吉祥寺店 ホロビートカードゲーム スタートデッキ 2種 購入券 抽選",
+      "application_end_at": "2026-11-04T23:59:00+09:00",
+      "application_start_at": "2026-11-02T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 429,
+    "parsed": 430,
     "no_structured_details": 160
   },
   "field_counts": {
-    "store_name": 406,
-    "prefecture": 343,
-    "event_title": 276,
+    "store_name": 407,
+    "prefecture": 344,
+    "event_title": 277,
     "event_date": 1,
-    "product_name": 84,
+    "product_name": 85,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 553,
-    "application_start_at": 551,
-    "stores_events": 415
+    "application_end_at": 554,
+    "application_start_at": 552,
+    "stores_events": 416
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565642094289096726"
+      "1551580466266644552": "1565651571394740314"
     },
     "last_run": {
-      "checked_at": "2026-10-30T08:30:55.504487+00:00",
+      "checked_at": "2026-10-30T09:01:01.205455+00:00",
       "new_urls": 1,
-      "original_urls": 588,
+      "original_urls": 589,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -16092,7 +16123,8 @@
         "1565591110628155513": "2026-10-30T05:00:56.777496+00:00",
         "1565606266515230782": "2026-10-30T06:00:55.944884+00:00",
         "1565628864758022164": "2026-10-30T07:30:56.653488+00:00",
-        "1565642094289096726": "2026-10-30T08:30:56.182546+00:00"
+        "1565642094289096726": "2026-10-30T08:30:56.182546+00:00",
+        "1565651566491471933": "2026-10-30T09:01:01.811231+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18582,6 +18614,11 @@
           "checked_at": "2026-10-30T08:31:19.383415+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/ii5p_": {
+          "checked_at": "2026-10-30T09:01:35.508339+00:00",
+          "status": "checked_title_product_deadline",
+          "http_status": null
         }
       }
     },
@@ -19990,6 +20027,12 @@
           "detected_at": "2026-10-30T08:30:56.993976+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-30T08:31:19.383415+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ii5p_": {
+          "detected_at": "2026-10-30T09:01:02.814867+00:00",
+          "status": "checked_title_product_deadline",
+          "checked_at": "2026-10-30T09:01:35.508339+00:00",
           "http_status": null
         }
       },
@@ -25953,6 +25996,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/ii5p_": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-30T09:01:35.508339+00:00",
+          "title_observed": "キデイランド 吉祥寺店 ホロビートカードゲーム スタートデッキ 2種 購入券 抽選",
+          "genre": "",
+          "product_origin": "v14_livepocket_explicit_product_label",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -29830,6 +29884,19 @@
         },
         "https://livepocket.jp/e/s13z1": {
           "checked_at": "2026-10-30T08:31:19.383415+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ii5p_": {
+          "checked_at": "2026-10-30T09:01:35.508339+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

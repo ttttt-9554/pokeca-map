@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T08:30:55.504487+00:00",
-  "unique_livepocket_urls": 589,
+  "collected_at": "2026-10-30T09:01:01.205455+00:00",
+  "unique_livepocket_urls": 590,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8675,7 +8675,25 @@
       "application_end_at": "2026-11-01T23:00:00+09:00",
       "discord_posted_at": "2026-10-30T08:22:43.502000+00:00",
       "first_detected_at": "2026-10-30T08:30:56.993976+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ii5p_",
+      "store_name": "キデイランド 吉祥寺店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-30T09:00:21.851000+00:00",
+      "stores": [
+        {
+          "name": "キデイランド 吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "キデイランド 吉祥寺店 ホロビートカードゲーム スタートデッキ 2種 購入券 抽選",
+      "product_name": "ホロビートカードゲーム 「スタートデッキ」（2種）",
+      "application_end_at": "2026-11-04T23:59:00+09:00",
+      "application_start_at": "2026-11-02T10:00:00+09:00",
+      "official_event_title": "キデイランド 吉祥寺店 ホロビートカードゲーム スタートデッキ 2種 購入券 抽選",
+      "first_detected_at": "2026-10-30T09:01:02.814867+00:00"
     }
   ],
-  "updated_at": "2026-10-30T08:50:58.648924+00:00"
+  "updated_at": "2026-10-30T09:01:35.508339+00:00"
 }
