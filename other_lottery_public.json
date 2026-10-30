@@ -672,11 +672,23 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://customform.jp/form/input/258452?key=1d4d0d24",
+      "source_site": "customform.jp",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-10-30T06:24:43.124000+00:00",
+      "first_detected_at": "2026-10-30T06:30:56.447528+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1565606271556784129"
+    "1551580466266644552": "1565612397031456828"
   },
-  "collected_at": "2026-10-30T06:00:55.727203+00:00",
+  "collected_at": "2026-10-30T06:30:56.447573+00:00",
   "messages_scanned": 100
 }
