@@ -8697,44 +8697,43 @@
       "url": "https://livepocket.jp/e/b8ut2",
       "store_name": "ふるいちイオンモール多摩平の森店",
       "prefecture": "東京都",
+      "event_title": "【ふるいちイオンモール多摩平の森店】ポケカ抽選販売（30thセレブレーション）",
+      "application_start_at": "2026-10-30T10:15:00+09:00",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
       "discord_posted_at": "2026-10-30T12:30:08.549000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール多摩平の森店",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "【ふるいちイオンモール多摩平の森店】ポケカ抽選販売（30thセレブレーション）",
-      "application_end_at": "2026-11-01T21:00:00+09:00",
-      "application_start_at": "2026-10-30T10:15:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモール多摩平の森店】ポケカ抽選販売（30thセレブレーション）",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
       "url": "https://livepocket.jp/e/nxng3",
       "store_name": "TSUTAYA TRADING CARD錦糸町",
       "prefecture": "東京都",
+      "event_title": "ワンピースカード 再入荷分『世界最強の戦士』 抽選販売受付",
+      "application_start_at": "2026-10-31T10:30:00+09:00",
+      "application_end_at": "2026-11-02T21:00:00+09:00",
       "discord_posted_at": "2026-10-30T12:30:08.549000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "ワンピースカード 再入荷分『世界最強の戦士』 抽選販売受付",
-      "application_end_at": "2026-11-02T21:00:00+09:00",
-      "application_start_at": "2026-10-31T10:30:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード 再入荷分『世界最強の戦士』 抽選販売受付",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
       "url": "https://livepocket.jp/e/t09nc",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
+      "event_title": "（再入荷分）ポケモン『30thCELEBRATION』抽選販売",
+      "application_start_at": "2026-10-30T20:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-30T12:30:08.549000+00:00",
       "stores": [
         {
@@ -8742,37 +8741,32 @@
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "（再入荷分）ポケモン『30thCELEBRATION』抽選販売",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-30T20:00:00+09:00",
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "（再入荷分）ポケモン『30thCELEBRATION』抽選販売",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
       "url": "https://livepocket.jp/e/9v7t7",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
+      "event_title": "（再入荷分）ポケモン『メガシンフォニア』抽選販売",
+      "application_start_at": "2026-10-30T20:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-30T12:30:08.549000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "（再入荷分）ポケモン『メガシンフォニア』抽選販売",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-30T20:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "（再入荷分）ポケモン『メガシンフォニア』抽選販売",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     }
   ],
-  "updated_at": "2026-10-30T12:31:20.816595+00:00"
+  "updated_at": "2026-10-30T12:41:02.214249+00:00"
 }
