@@ -1,7 +1,23 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-30T00:51:28Z",
-  "total": 0,
-  "items": []
+  "as_of": "2026-10-30T01:01:43Z",
+  "total": 1,
+  "items": [
+    {
+      "url": "https://livepocket.jp/e/s2q8j",
+      "event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
+      "store_name": "イトーヨーカドー",
+      "prefecture": "",
+      "application_end_at": "",
+      "missing": [
+        "deadline"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-30T01:01:30.455256+00:00",
+      "next_retry_at": "2026-10-31T01:01:30.455256+00:00",
+      "queue": "retry_wait"
+    }
+  ]
 }
