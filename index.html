@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261030-lottery-tracker-modal-fix-v21-139">
+  <link rel="stylesheet" href="style.css?v=20261030-refresh-tab-after-discord-auth-v21-140">
 
   <style>
     [hidden] { display: none !important; }
@@ -1729,7 +1729,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261030-lottery-tracker-modal-fix-v21-139';
+      ? token : '20261030-refresh-tab-after-discord-auth-v21-140';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
@@ -1790,9 +1790,17 @@ nav[aria-label="メインメニュー"] {
       var next=new URL('./index.html',location.href);
       var token=String(Date.now());
       next.searchParams.set('app_refresh',token);
-      // Preserve the visible tab across the full-page refresh.
-      var selected = document.querySelector('nav[aria-label="メインメニュー"] button.active[data-tab]');
-      var currentTab = selected ? selected.dataset.tab : '';
+      // Preserve the actual visible screen, including the Login page whose
+      // button now lives in the fixed header rather than the bottom nav.
+      var activeView = document.querySelector('#appScrollArea main > .view.active[id$="View"]');
+      var currentTab = activeView && activeView.id.endsWith('View')
+        ? activeView.id.slice(0,-4) : '';
+      if(!currentTab){
+        var selected = document.querySelector(
+          'nav[aria-label="メインメニュー"] button.active[data-tab], #appLoginOpen.active[data-tab]'
+        );
+        currentTab = selected ? selected.dataset.tab : '';
+      }
       if (/^(map|add|history|lottery|appLottery|lotteryManage|lotteryResults|group|dev)$/.test(currentTab)) {
         next.searchParams.set('app_tab',currentTab);
       }
