@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-29T15:06:00.591305+00:00",
-  "unique_livepocket_urls": 581,
+  "collected_at": "2026-10-30T00:30:55.609268+00:00",
+  "unique_livepocket_urls": 583,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8511,7 +8511,44 @@
         }
       ],
       "first_detected_at": "2026-10-29T12:35:59.384218+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/r0ckk",
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-10-30T00:30:09.387000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+      "application_end_at": "2026-10-30T21:01:00+09:00",
+      "application_start_at": "2026-10-30T09:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+      "first_detected_at": "2026-10-30T00:30:57.267842+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/eno-n",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-30T00:30:09.387000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "抽選販売 ONE PIECE HEROINES PRECIOUS BOX",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "抽選販売 ONE PIECE HEROINES PRECIOUS BOX",
+      "first_detected_at": "2026-10-30T00:30:57.267842+00:00"
     }
   ],
-  "updated_at": "2026-10-30T00:21:00.097908+00:00"
+  "updated_at": "2026-10-30T00:31:21.702433+00:00"
 }

@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-29T15:06:00.591305+00:00",
+  "collected_at": "2026-10-30T00:30:55.609268+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 581,
+  "unique_livepocket_urls": 583,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15630,33 +15630,93 @@
       "event_title": "ワンピースカードゲーム ONE PIECE HEROINES PRECIOUS BOX",
       "application_end_at": "2026-11-01T22:00:00+09:00",
       "application_start_at": "2026-10-29T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/r0ckk",
+      "discord_message_id": "1565523168511135794",
+      "discord_posted_at": "2026-10-30T00:30:09.387000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 10/30 21:01（残り11時間30分）\nhttps://livepocket.jp/e/r0ckk\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/01 22:00（残り2日12時間）\nhttps://livepocket.jp/e/eno-n",
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+      "application_end_at": "2026-10-30T21:01:00+09:00",
+      "application_start_at": "2026-10-30T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/eno-n",
+      "discord_message_id": "1565523168511135794",
+      "discord_posted_at": "2026-10-30T00:30:09.387000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 10/30 21:01（残り11時間30分）\nhttps://livepocket.jp/e/r0ckk\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/01 22:00（残り2日12時間）\nhttps://livepocket.jp/e/eno-n",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "抽選販売 ONE PIECE HEROINES PRECIOUS BOX",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 422,
+    "parsed": 424,
     "no_structured_details": 159
   },
   "field_counts": {
-    "store_name": 400,
-    "prefecture": 338,
-    "event_title": 268,
+    "store_name": 402,
+    "prefecture": 340,
+    "event_title": 270,
     "event_date": 1,
     "product_name": 82,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 546,
-    "application_start_at": 545,
-    "stores_events": 408
+    "application_end_at": 548,
+    "application_start_at": 547,
+    "stores_events": 410
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565379751344873553"
+      "1551580466266644552": "1565523168511135794"
     },
     "last_run": {
-      "checked_at": "2026-10-29T15:06:00.591305+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-30T00:30:55.609268+00:00",
+      "new_urls": 2,
       "original_urls": 581,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -15830,7 +15890,8 @@
         "1565206100251385877": "2026-10-29T03:35:56.644030+00:00",
         "1565289138587050077": "2026-10-29T09:05:58.944075+00:00",
         "1565326879345344572": "2026-10-29T11:35:56.997559+00:00",
-        "1565341978529366116": "2026-10-29T12:35:58.520849+00:00"
+        "1565341978529366116": "2026-10-29T12:35:58.520849+00:00",
+        "1565523168511135794": "2026-10-30T00:30:56.319791+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18280,6 +18341,16 @@
           "checked_at": "2026-10-29T18:41:23.348653+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/r0ckk": {
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/eno-n": {
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19640,6 +19711,18 @@
           "detected_at": "2026-10-29T12:35:59.384218+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-10-29T18:41:23.348653+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/eno-n": {
+          "detected_at": "2026-10-30T00:30:57.267842+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/r0ckk": {
+          "detected_at": "2026-10-30T00:30:57.267842+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
           "http_status": null
         }
       },
@@ -25495,6 +25578,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/r0ckk": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
+          "title_observed": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/eno-n": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
+          "title_observed": "抽選販売 ONE PIECE HEROINES PRECIOUS BOX",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -29268,6 +29373,32 @@
         },
         "https://livepocket.jp/e/insyw": {
           "checked_at": "2026-10-29T18:41:23.348653+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/r0ckk": {
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/eno-n": {
+          "checked_at": "2026-10-30T00:31:21.702433+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
