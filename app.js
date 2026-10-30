@@ -16,9 +16,10 @@
   let discordRoleAuthPending=false,discordRoleAuthError='';
   let discordRoleAuthGeneration=0,discordRoleVerifiedToken='';
   let discordRoleVerification=null;
-  // Manual app refresh can restore any ordinary tab immediately.
-  // The developer tab must wait until Discord authentication confirms access.
-  let restoreDeveloperTabPending = false;
+  // When "↻ 更新" reloads a protected tab, defer restoring it until the
+  // saved Discord session is approved. Never bounce the user to Login just
+  // because authentication is still initializing on a fast iPhone reload.
+  let restoreTabAfterAuth = '';
 
   // Supabase > Authentication > Users に表示される自分の User UID を設定
   // 指定したUIDでログインしたときだけ開発タブを表示します。
@@ -346,10 +347,7 @@
     renderMyShared();
     updateDeveloperTab();
     window.TorecaUnifiedReview?.onAuthChanged?.();
-    if (restoreDeveloperTabPending && isDeveloper()) {
-      restoreDeveloperTabPending = false;
-      switchTab('dev');
-    }
+    restoreProtectedTabAfterAuth();
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
     lpExtRenderAdmin();
     if ($('lpCards')) renderLottery();
@@ -439,7 +437,13 @@
     const {data,error} = await supabaseClient.auth.getSession();
     if (error) $('sharedStatus').textContent = 'ログイン状態の確認に失敗: ' + error.message;
     if(data?.session) await requireDiscordRole(data.session);
-    else { authUser=null;displayAuth(); }
+    else {
+      authUser=null;
+      displayAuth();
+      // An expired/manual signed-out session must not open private tabs.
+      // Keep the pending tab so a subsequent authorized login can resume it.
+      if(restoreTabAfterAuth)switchTab('group');
+    }
     await loadSharedReports();
     await loadCloudData();
     await lpCloudRefresh(true);
@@ -745,6 +749,25 @@
   // v21.136: Lottery pages are only shown inside an approved Discord login.
   // This is a view/navigation rule, NOT protection for public JSON endpoints.
   const LOTTERY_LOGIN_TABS=['lottery','lotteryManage','lotteryResults','appLottery'];
+
+  // v21.140: A tab captured by manual refresh may need authentication.
+  // Do not navigate there until Supabase has restored and approved the user.
+  function deferProtectedTabUntilAuth(tab){
+    if(LOTTERY_LOGIN_TABS.includes(tab)||tab==='dev'){
+      restoreTabAfterAuth=tab;
+      return 'map';  // Neutral loading view while the session is checked.
+    }
+    return tab;
+  }
+
+  function restoreProtectedTabAfterAuth(){
+    if(!authUser||discordRoleAuthPending||!restoreTabAfterAuth)return false;
+    const tab=restoreTabAfterAuth;
+    restoreTabAfterAuth='';
+    if(tab==='dev'&&!isDeveloper())return false;
+    switchTab(tab);
+    return true;
+  }
 
   function updateLotteryVisibility(){
     const signedIn=!!authUser&&!discordRoleAuthPending;
@@ -2452,6 +2475,8 @@
   function bindAppNavigation() {
     appNavigationButtons().forEach(button => {
       button.addEventListener('click', () => {
+        // A deliberate tap overrides any tab waiting for session recovery.
+        restoreTabAfterAuth='';
         switchTab(button.dataset.tab);
         // Showing developer diagnostics must not dispatch an expensive browser
         // recheck on its own. Only the explicit "再確認" button starts Actions.
@@ -9139,10 +9164,8 @@
         const requestedTab = currentUrl.searchParams.has('app_refresh')
           ? currentUrl.searchParams.get('app_tab') : null;
         const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','lotteryResults','group','dev'];
-        if (allowedTabs.includes(requestedTab)) {
-          if (requestedTab === 'dev') restoreDeveloperTabPending = true;
-          else initialTab = requestedTab;
-        }
+        if(allowedTabs.includes(requestedTab))
+          initialTab=deferProtectedTabUntilAuth(requestedTab);
         if (currentUrl.searchParams.has('app_tab')) {
           currentUrl.searchParams.delete('app_tab');
           window.history.replaceState(window.history.state, '', currentUrl.href);
@@ -9154,7 +9177,7 @@
         const linkedId=new URL(window.location.href).searchParams.get('app_lottery')||'';
         if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(linkedId)){
           lpAppDeepLinkId=linkedId;
-          initialTab='lottery';
+          initialTab=deferProtectedTabUntilAuth('lottery');
           $('lpSite').value='app';
           $('lpStatus').value='all';
           $('lpGenre').value='all';
