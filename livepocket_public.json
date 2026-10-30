@@ -8652,24 +8652,22 @@
       "url": "https://livepocket.jp/e/2ahm8",
       "store_name": "カードショップ オリオンベース",
       "prefecture": "東京都",
+      "product_name": "拡張パック 30th CELEBRATION",
+      "event_title": "ポケモンカードゲーム MEGA『拡張パック 30th CELEBRATION』抽選販売",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
       "discord_posted_at": "2026-10-30T07:30:09.336000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "カードショップ オリオンベース",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "ポケモンカードゲーム MEGA『拡張パック 30th CELEBRATION』抽選販売",
-      "application_end_at": "2026-11-01T21:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "product_name": "拡張パック 30th CELEBRATION",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA『拡張パック 30th CELEBRATION』抽選販売",
+      "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-10-30T07:30:57.775473+00:00"
     }
   ],
-  "updated_at": "2026-10-30T07:31:29.583137+00:00"
+  "updated_at": "2026-10-30T07:41:00.400439+00:00"
 }
