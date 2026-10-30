@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T03:00:57.499732+00:00",
-  "unique_livepocket_urls": 585,
+  "collected_at": "2026-10-30T05:00:55.593211+00:00",
+  "unique_livepocket_urls": 586,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8607,7 +8607,29 @@
         }
       ],
       "first_detected_at": "2026-10-30T01:00:57.940457+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/m_dnk",
+      "store_name": "トレカエース茨大前店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-30T05:00:08.050000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース茨大前店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "first_detected_at": "2026-10-30T05:00:57.540458+00:00"
     }
   ],
-  "updated_at": "2026-10-30T04:51:00.595779+00:00"
+  "updated_at": "2026-10-30T05:01:17.144289+00:00"
 }
