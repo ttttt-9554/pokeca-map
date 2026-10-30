@@ -18763,7 +18763,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/s13z1": {
-          "checked_at": "2026-10-30T14:41:19.950756+00:00",
+          "checked_at": "2026-10-30T20:51:14.633958+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -20203,7 +20203,7 @@
         "https://livepocket.jp/e/s13z1": {
           "detected_at": "2026-10-30T08:30:56.993976+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-30T14:41:19.950756+00:00",
+          "checked_at": "2026-10-30T20:51:14.633958+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ii5p_": {
@@ -21403,8 +21403,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/s13z1": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-30T14:41:19.950756+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-30T20:51:14.633958+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/t09nc": {
@@ -26232,7 +26232,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-30T14:41:19.950756+00:00",
+          "checked_at": "2026-10-30T20:51:14.633958+00:00",
           "title_observed": "30thセレブレーション 1BOX",
           "genre": "",
           "product_origin": "",
@@ -30180,7 +30180,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/s13z1": {
-          "checked_at": "2026-10-30T14:41:19.950756+00:00",
+          "checked_at": "2026-10-30T20:51:14.633958+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
