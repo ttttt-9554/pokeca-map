@@ -18596,8 +18596,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/m_dnk": {
-          "checked_at": "2026-10-30T05:01:17.144289+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T11:11:22.432460+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/f89lt": {
@@ -20007,8 +20007,8 @@
         },
         "https://livepocket.jp/e/m_dnk": {
           "detected_at": "2026-10-30T05:00:57.540458+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-30T05:01:17.144289+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-30T11:11:22.432460+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/f89lt": {
@@ -21183,6 +21183,11 @@
         "https://livepocket.jp/e/s2q8j": {
           "attempts": 1,
           "last_attempt_at": "2026-10-30T07:11:21.864674+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/m_dnk": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-30T11:11:22.432460+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -25957,7 +25962,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-30T05:01:17.144289+00:00",
+          "checked_at": "2026-10-30T11:11:22.432460+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
           "genre": "pokemon",
           "product_origin": "",
@@ -29844,7 +29849,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/m_dnk": {
-          "checked_at": "2026-10-30T05:01:17.144289+00:00",
+          "checked_at": "2026-10-30T11:11:22.432460+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
