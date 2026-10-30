@@ -18793,8 +18793,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/mkpvg": {
-          "checked_at": "2026-10-30T15:01:25.525961+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T21:11:23.153459+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -20238,8 +20238,8 @@
         },
         "https://livepocket.jp/e/mkpvg": {
           "detected_at": "2026-10-30T15:00:59.759422+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-30T15:01:25.525961+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-30T21:11:23.153459+00:00",
           "http_status": null
         }
       },
@@ -21425,6 +21425,11 @@
         "https://livepocket.jp/e/9v7t7": {
           "attempts": 1,
           "last_attempt_at": "2026-10-30T18:46:17.129161+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/mkpvg": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-30T21:11:23.153459+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -26298,7 +26303,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-30T15:01:25.525961+00:00",
+          "checked_at": "2026-10-30T21:11:23.153459+00:00",
           "title_observed": "キデイランド二子玉川店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
           "genre": "pokemon",
           "product_origin": "",
@@ -30258,7 +30263,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/mkpvg": {
-          "checked_at": "2026-10-30T15:01:25.525961+00:00",
+          "checked_at": "2026-10-30T21:11:23.153459+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
