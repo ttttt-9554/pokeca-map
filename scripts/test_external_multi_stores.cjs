@@ -79,6 +79,7 @@ const rendered=vm.runInNewContext([
  '({lotteryStoreEntries,lotteryPrefectures,lpLegacyApply})'
 ].join('\n'),{
  lpExtReady:true,
+ LP_EXT_MAX_STORES:100,
  lpExtOverrides:new Map([[
    'https://customform.jp/form/input/258452',
    {...multiple,event_url:'https://customform.jp/form/input/258452',state:'active'}
