@@ -18773,18 +18773,18 @@
           "http_status": null
         },
         "https://livepocket.jp/e/t09nc": {
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/nxng3": {
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/b8ut2": {
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/9v7t7": {
@@ -20220,20 +20220,20 @@
         },
         "https://livepocket.jp/e/b8ut2": {
           "detected_at": "2026-10-30T12:30:57.432106+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nxng3": {
           "detected_at": "2026-10-30T12:30:57.432106+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/t09nc": {
           "detected_at": "2026-10-30T12:30:57.432106+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/mkpvg": {
@@ -21405,6 +21405,21 @@
         "https://livepocket.jp/e/s13z1": {
           "attempts": 1,
           "last_attempt_at": "2026-10-30T14:41:19.950756+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/t09nc": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-30T18:36:26.401158+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/nxng3": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-30T18:36:26.401158+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/b8ut2": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-30T18:36:26.401158+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -26234,7 +26249,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "title_observed": "（再入荷分）ポケモン『30thCELEBRATION』抽選販売",
           "genre": "",
           "product_origin": "",
@@ -26245,7 +26260,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "title_observed": "ワンピースカード 再入荷分『世界最強の戦士』 抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -26256,7 +26271,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "title_observed": "【ふるいちイオンモール多摩平の森店】ポケカ抽選販売（30thセレブレーション）",
           "genre": "pokemon",
           "product_origin": "",
@@ -30186,7 +30201,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/t09nc": {
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -30199,7 +30214,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nxng3": {
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -30212,7 +30227,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/b8ut2": {
-          "checked_at": "2026-10-30T12:31:20.816595+00:00",
+          "checked_at": "2026-10-30T18:36:26.401158+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
