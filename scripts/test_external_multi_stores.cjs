@@ -71,6 +71,31 @@ const multiple=save([
  {name:'札幌店',prefecture:'北海道'}
 ]);
 assert.equal(multiple.stores.length,3);
+// Render the edited stores through the SAME overlay and filter helpers used
+// by the real lottery card, not just the form's validation code.
+const rendered=vm.runInNewContext([
+ fn('lpExtNormalizeStores'),fn('lotteryStoreEntries'),
+ fn('lotteryPrefectures'),fn('lpLegacyApply'),
+ '({lotteryStoreEntries,lotteryPrefectures,lpLegacyApply})'
+].join('\n'),{
+ lpExtReady:true,
+ lpExtOverrides:new Map([[
+   'https://customform.jp/form/input/258452',
+   {...multiple,event_url:'https://customform.jp/form/input/258452',state:'active'}
+ ]]),
+ isLivePocketEventUrl:()=>false,
+ LP_MANUAL_AREAS:['東京都','大阪府','北海道','全国']
+},{timeout:1000});
+const externalCard=rendered.lpLegacyApply({
+ url:'https://customform.jp/form/input/258452',
+ event_title:'元のタイトル',store_name:'旧店舗',prefecture:'東京都'
+});
+assert.equal(externalCard.stores.length,3);
+assert.deepEqual(plain(rendered.lotteryStoreEntries(externalCard)),multiple.stores);
+assert.deepEqual(plain(rendered.lotteryPrefectures(externalCard)),
+ ['東京都','大阪府','北海道'],
+ 'Every added prefecture must be available to the existing regional filter');
+
 assert.equal(multiple.store_name,'アニメイト池袋',
  'Legacy store_name continues to represent the first store');
 assert.deepEqual(multiple.stores.map(x=>x.prefecture),['東京都','大阪府','北海道']);
