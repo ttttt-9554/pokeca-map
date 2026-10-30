@@ -8548,10 +8548,11 @@
     },
     {
       "url": "https://livepocket.jp/e/y3ccfn268p",
-      "discord_posted_at": "2026-10-30T01:00:08.546000+00:00",
+      "product_name": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
       "event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
-      "application_end_at": "2026-11-01T23:59:00+09:00",
       "application_start_at": "2026-10-19T18:02:00+09:00",
+      "application_end_at": "2026-11-01T23:59:00+09:00",
+      "discord_posted_at": "2026-10-30T01:00:08.546000+00:00",
       "review_category": "onepiece",
       "stores": [
         {
@@ -8591,16 +8592,13 @@
           "prefecture": ""
         }
       ],
-      "product_name": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
-      "official_genre": "onepiece",
-      "official_event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
       "first_detected_at": "2026-10-30T01:00:57.940457+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s2q8j",
       "store_name": "イトーヨーカドー",
-      "discord_posted_at": "2026-10-30T01:00:08.546000+00:00",
       "event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
+      "discord_posted_at": "2026-10-30T01:00:08.546000+00:00",
       "review_category": "onepiece",
       "stores": [
         {
@@ -8608,10 +8606,8 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
       "first_detected_at": "2026-10-30T01:00:57.940457+00:00"
     }
   ],
-  "updated_at": "2026-10-30T01:01:30.455256+00:00"
+  "updated_at": "2026-10-30T01:10:58.443001+00:00"
 }
