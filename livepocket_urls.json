@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-30T07:30:55.979793+00:00",
+  "collected_at": "2026-10-30T08:30:55.504487+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 588,
+  "unique_livepocket_urls": 589,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15864,34 +15864,56 @@
       },
       "event_title": "ポケモンカードゲーム MEGA『拡張パック 30th CELEBRATION』抽選販売",
       "application_end_at": "2026-11-01T21:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/s13z1",
+      "discord_message_id": "1565642094289096726",
+      "discord_posted_at": "2026-10-30T08:22:43.502000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/s13z1",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "30thセレブレーション 1BOX",
+      "application_end_at": "2026-11-01T23:00:00+09:00",
+      "application_start_at": "2026-10-28T20:42:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 429,
-    "no_structured_details": 159
+    "no_structured_details": 160
   },
   "field_counts": {
     "store_name": 406,
     "prefecture": 343,
-    "event_title": 275,
+    "event_title": 276,
     "event_date": 1,
     "product_name": 84,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 552,
-    "application_start_at": 550,
+    "application_end_at": 553,
+    "application_start_at": 551,
     "stores_events": 415
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565628864758022164"
+      "1551580466266644552": "1565642094289096726"
     },
     "last_run": {
-      "checked_at": "2026-10-30T07:30:55.979793+00:00",
+      "checked_at": "2026-10-30T08:30:55.504487+00:00",
       "new_urls": 1,
-      "original_urls": 587,
+      "original_urls": 588,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -16069,7 +16091,8 @@
         "1565530714730926162": "2026-10-30T01:00:56.966370+00:00",
         "1565591110628155513": "2026-10-30T05:00:56.777496+00:00",
         "1565606266515230782": "2026-10-30T06:00:55.944884+00:00",
-        "1565628864758022164": "2026-10-30T07:30:56.653488+00:00"
+        "1565628864758022164": "2026-10-30T07:30:56.653488+00:00",
+        "1565642094289096726": "2026-10-30T08:30:56.182546+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18554,6 +18577,11 @@
           "checked_at": "2026-10-30T07:31:29.583137+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/s13z1": {
+          "checked_at": "2026-10-30T08:31:19.383415+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -19956,6 +19984,12 @@
           "detected_at": "2026-10-30T07:30:57.775473+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-30T07:31:29.583137+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/s13z1": {
+          "detected_at": "2026-10-30T08:30:56.993976+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-30T08:31:19.383415+00:00",
           "http_status": null
         }
       },
@@ -25908,6 +25942,17 @@
           "product_origin": "v21_9_official_title_quoted_tcg_product",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/s13z1": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-30T08:31:19.383415+00:00",
+          "title_observed": "30thセレブレーション 1BOX",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -29772,6 +29817,19 @@
         },
         "https://livepocket.jp/e/2ahm8": {
           "checked_at": "2026-10-30T07:31:29.583137+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/s13z1": {
+          "checked_at": "2026-10-30T08:31:19.383415+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

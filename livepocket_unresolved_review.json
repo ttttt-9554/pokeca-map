@@ -1,9 +1,24 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-30T08:21:02Z",
-  "total": 1,
+  "as_of": "2026-10-30T08:31:27Z",
+  "total": 2,
   "items": [
+    {
+      "url": "https://livepocket.jp/e/s13z1",
+      "event_title": "30thセレブレーション 1BOX",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-11-01T23:00:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-10-30T08:31:19.383415+00:00",
+      "next_retry_at": "2026-10-31T08:31:19.383415+00:00",
+      "queue": "retry_wait"
+    },
     {
       "url": "https://livepocket.jp/e/s2q8j",
       "event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",

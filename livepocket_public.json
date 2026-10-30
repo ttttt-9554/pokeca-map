@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T07:30:55.979793+00:00",
-  "unique_livepocket_urls": 588,
+  "collected_at": "2026-10-30T08:30:55.504487+00:00",
+  "unique_livepocket_urls": 589,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8667,7 +8667,16 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-10-30T07:30:57.775473+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/s13z1",
+      "discord_posted_at": "2026-10-30T08:22:43.502000+00:00",
+      "event_title": "30thセレブレーション 1BOX",
+      "application_end_at": "2026-11-01T23:00:00+09:00",
+      "application_start_at": "2026-10-28T20:42:00+09:00",
+      "official_event_title": "30thセレブレーション 1BOX",
+      "first_detected_at": "2026-10-30T08:30:56.993976+00:00"
     }
   ],
-  "updated_at": "2026-10-30T08:20:59.753611+00:00"
+  "updated_at": "2026-10-30T08:31:19.383415+00:00"
 }
