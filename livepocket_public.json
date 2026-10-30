@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T06:30:56.129154+00:00",
-  "unique_livepocket_urls": 587,
+  "collected_at": "2026-10-30T07:30:55.979793+00:00",
+  "unique_livepocket_urls": 588,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8647,7 +8647,29 @@
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-30T06:00:56.775240+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2ahm8",
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-30T07:30:09.336000+00:00",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム MEGA『拡張パック 30th CELEBRATION』抽選販売",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "product_name": "拡張パック 30th CELEBRATION",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA『拡張パック 30th CELEBRATION』抽選販売",
+      "first_detected_at": "2026-10-30T07:30:57.775473+00:00"
     }
   ],
-  "updated_at": "2026-10-30T07:21:00.749699+00:00"
+  "updated_at": "2026-10-30T07:31:29.583137+00:00"
 }
