@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T12:30:55.806423+00:00",
-  "unique_livepocket_urls": 594,
+  "collected_at": "2026-10-30T15:00:57.790068+00:00",
+  "unique_livepocket_urls": 595,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8766,7 +8766,26 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mkpvg",
+      "store_name": "キデイランド二子玉川店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-10-30T15:00:25.184000+00:00",
+      "stores": [
+        {
+          "name": "キデイランド二子玉川店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "キデイランド二子玉川店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
+      "application_end_at": "2026-11-04T23:59:00+09:00",
+      "application_start_at": "2026-11-02T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "キデイランド二子玉川店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
+      "first_detected_at": "2026-10-30T15:00:59.759422+00:00"
     }
   ],
-  "updated_at": "2026-10-30T14:51:01.274429+00:00"
+  "updated_at": "2026-10-30T15:01:25.525961+00:00"
 }
