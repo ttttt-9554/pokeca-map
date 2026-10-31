@@ -307,4 +307,88 @@ class MonitorTests(unittest.TestCase):
         ):
             self.assertEqual(m.notification_product_kind(title,'biccamera'),'')
 
+
+    def test_biccamera_actual_style_soldout_variant_does_not_misreport(self):
+        # Compact fixture modeled on publicly visible Bic Camera page labels.
+        url='https://www.biccamera.com/bc/item/13536984/'
+        html=('<main><h1>ポケモンカードゲーム スタートデッキGenerations</h1>'
+              '<div>バリエーション 別商品 在庫あり 販売休止中です</div>'
+              '<p>閉じる</p><strong>販売休止中です</strong>'
+              '<p>お届け先を変更する</p><button>カートに入れる</button>'
+              '<p>この商品は在庫がなくなりました。この商品はご購入できません。</p>'
+              '<p>商品について</p><p>商品コード 13536984</p>'
+              '<div>選択いただいた商品の在庫がありません</div></main>')
+        self.assertEqual(m.parse_detail(html,'biccamera',url)['status'],'unavailable')
+
+    def test_biccamera_actual_style_shipping_without_instock_word(self):
+        url='https://www.biccamera.com/bc/item/14656332/'
+        html=('<main><h1>遊戯王OCG DUELIST BOX</h1>'
+              '<div>バリエーション 別商品 販売休止中です</div>'
+              '<p>閉じる</p>'
+              '<p>送料無料、あと18時間21分以内のご注文で '
+              '8月12日（水）お届け</p>'
+              '<p>お届け先を変更する</p><label>数量</label>'
+              '<button>カートに入れる</button>'
+              '<p>商品について</p><p>商品コード 14656332</p>'
+              '<aside>選択いただいた商品の在庫がありません</aside></main>')
+        self.assertEqual(m.parse_detail(html,'biccamera',url)['status'],'available')
+        no_quantity=html.replace('<label>数量</label>','')
+        self.assertEqual(m.parse_detail(no_quantity,'biccamera',url)['status'],'available')
+        no_checkout=html.replace('ご注文で','')
+        no_checkout=no_checkout.replace('<label>数量</label>','')
+        self.assertEqual(m.parse_detail(no_checkout,'biccamera',url)['status'],'unknown')
+        disabled=html.replace('<button>','<button disabled>')
+        self.assertEqual(m.parse_detail(disabled,'biccamera',url)['status'],'unknown')
+
+    def test_biccamera_related_product_code_cannot_confirm_identity(self):
+        url='https://www.biccamera.com/bc/item/14656332/'
+        html=('<main><h1>遊戯王OCG BOX</h1>在庫あり'
+              '<button>カートに入れる</button>'
+              '<p>商品コード 14656332</p>'
+              '<div>関連商品 商品コード 13536984</div></main>')
+        got=m.parse_detail(html,'biccamera',url)
+        self.assertEqual(got['status'],'unknown')
+        self.assertEqual(got['reason'],'multiple_product_identifiers')
+
+
+    def test_biccamera_live_smoke_is_read_only_bounded_and_fail_closed(self):
+        import guerrilla_sale_probe as probe
+
+        class FakeClient:
+            halted={}
+            last_http={'http_status':200}
+            def __init__(self,blocked=False):
+                self.blocked=blocked
+                self.calls=[]
+                self.halted={}
+            def get(self,url,site):
+                self.calls.append((url,site))
+                if self.blocked:
+                    self.halted[site]='robots_denied'
+                    raise m.CheckError('robots_denied')
+                item_id=url.split('/bc/item/')[1].strip('/')
+                return ('<main><h1>遊戯王OCG BOX</h1>'
+                        '<p>商品コード '+item_id+'</p>'
+                        '<p>在庫あり</p><button>カートに入れる</button></main>')
+
+        client=FakeClient()
+        result=probe.probe_biccamera_sample_pages(client)
+        self.assertFalse(result['monitor_enabled'])
+        self.assertEqual(result['requests_max'],2)
+        self.assertEqual(len(client.calls),2)
+        self.assertTrue(all(site=='biccamera' for _,site in client.calls))
+        self.assertEqual([row['status'] for row in result['observations']],
+                         ['available','available'])
+        self.assertTrue(all(row['sealed_tcg'] for row in result['observations']))
+        for row in result['observations']:
+            self.assertNotIn('product',row)
+            self.assertNotIn('html',row)
+            self.assertNotIn('url',row)
+
+        blocked=FakeClient(blocked=True)
+        result=probe.probe_biccamera_sample_pages(blocked)
+        self.assertEqual(len(blocked.calls),1)
+        self.assertEqual(result['observations'][0]['reason'],'robots_denied')
+        self.assertFalse(result['monitor_enabled'])
+
 if __name__=='__main__':unittest.main()

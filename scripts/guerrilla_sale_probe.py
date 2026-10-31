@@ -99,10 +99,52 @@ def probe_biccamera_robots(client=None):
         return {'site':site,'status':'unverified','reason':type(exc).__name__,'monitor_enabled':False}
 
 
+def probe_biccamera_sample_pages(client=None):
+    """At most two official item GETs, respecting robots, throttling and blocks.
+
+    This is a read-only GitHub smoke check. No catalog pagination, authentication,
+    shopping-cart action, status insertion, alert or persistent product snapshot.
+    A fetched page can only provide diagnostic observations.
+    """
+    site='biccamera'
+    client=client or monitor.StoreClient()
+    sample_ids=('13536984','14656332')
+    observations=[]
+    for item_id in sample_ids:
+        url='https://www.biccamera.com/bc/item/'+item_id+'/'
+        row={'item_id':item_id,'status':'unverified'}
+        try:
+            page=client.get(url,site)
+            result=monitor.parse_detail(page,site,url)
+            row['status']=result.get('status','unknown')
+            row['reason']=result.get('reason','')
+            row['sealed_tcg']=bool(monitor.notification_product_kind(
+                result.get('product',''),site))
+            row['http_status']=client.last_http.get('http_status')
+        except monitor.CheckError as exc:
+            row['reason']=exc.code
+            row['http_status']=client.last_http.get('http_status')
+            observations.append(row)
+            # On a store-wide block, refuse all further network requests.
+            if site in client.halted or exc.code in ('waiting','blocked'):
+                break
+            continue
+        except Exception as exc:
+            row['reason']=type(exc).__name__
+            observations.append(row)
+            break
+        observations.append(row)
+    return {'site':site,'status':'diagnostic_only','monitor_enabled':False,
+            'requests_max':len(sample_ids),'observations':observations,
+            'notice':'No stock alerts; observed labels may change at any time'}
+
+
 def main():
-    # Robots only; no Bic Camera item or catalog requests on smoke runs.
+    # Two bounded, read-only item checks plus the established robots probe.
+    # The live monitor remains disabled; these observations create no alerts.
     results = [probe(site) for site in ('pokemon', 'amenity')]
     results.append(probe_biccamera_robots())
+    results.append(probe_biccamera_sample_pages())
     print('GUERRILLA_SALE_PROBE_BEGIN')
     print(json.dumps(results, ensure_ascii=False, indent=2))
     print('GUERRILLA_SALE_PROBE_END')

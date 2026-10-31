@@ -287,9 +287,9 @@ def parse_catalog(html,site,url):
 def parse_biccamera_detail(html,url):
     """Conservative Bic Camera item check: never trust static cart wording.
 
-    In particular some officially unavailable item pages still include
-    template text "カートに入れる". Refuse positive status without both an
-    explicit in-stock indication and an active purchase control.
+    Official pages include an inert cart template even when sold out, and
+    an in-stock variant may appear beside a sold-out target item. Accept only
+    an item-specific stock or delivery indicator with an enabled cart control.
     """
     doc=Document(html);page_guard(doc)
     expected=urlsplit(url).path.strip('/').split('/')[-1]
@@ -310,8 +310,8 @@ def parse_biccamera_detail(html,url):
         return {'url':url,'product':title,'status':'unknown',
                 'reason':'product_scope_unverified'}
     visible=tidy(scope.text())
-    # Filters can be rendered in the same <main> as an item. These labels
-    # describe what to search for, NOT stock or the item's sale state.
+    # Storefront options and unrelated variants can share <main> with this
+    # product. They must not be confused with the selected item.
     visible=re.sub(
         r'在庫あり商品のみ|在庫あり商品を表示|在庫あり商品だけ|'
         r'販売終了商品を含める|販売終了商品|予約商品のみ|'
@@ -323,16 +323,33 @@ def parse_biccamera_detail(html,url):
                 'reason':'product_identity_unverified'}
     if expected not in codes:
         raise CheckError('product_identity_mismatch')
-    if re.search(r'抽選販売|抽選に応募|抽選受付',visible):
+    if len(set(codes)) != 1:
+        # Multiple item identifiers in the same content root can belong to
+        # unrelated recommendations. Refuse all sale claims for that page.
+        return {'url':url,'product':title,'status':'unknown',
+                'reason':'multiple_product_identifiers'}
+
+    sale_text=visible
+    # On the real storefront the purchase panel starts after the delivery
+    # overlay and its close control. Variant tiles before that control may
+    # show different stock states. Read only the target's checkout context.
+    # Without the known panel boundary we retain conservative legacy checks.
+    if 'お届け先を変更する' in visible:
+        before,after=visible.split('お届け先を変更する',1)
+        before=before.rsplit('閉じる',1)[-1][-180:]
+        after=after.split('商品について',1)[0][:350]
+        sale_text=tidy(before+' お届け先を変更する '+after)
+
+    if re.search(r'抽選販売|抽選に応募|抽選受付',sale_text):
         return {'url':url,'product':title,'status':'lottery'}
     if re.search(r'販売休止中|予定数の販売を終了|予約受付(?:を|は)?終了|'
-                 r'予約受付を終了|予約受付は終了|販売を終了|'
-                 r'販売終了(?:しました|です|となりました)|在庫なし|在庫切れ|'
-                 r'品切れ|完売|お取り扱い終了|'
-                 r'この商品はご購入できません|ご購入いただけません',visible):
+                 r'販売を終了|販売終了(?:しました|です|となりました)|'
+                 r'在庫なし|在庫切れ|品切れ|完売|お取り扱い終了|'
+                 r'この商品は在庫がなくなりました|'
+                 r'この商品はご購入できません|ご購入いただけません',sale_text):
         return {'url':url,'product':title,'status':'unavailable'}
     if re.search(r'予約受付中|予約商品|予約する|発売日以降のお届け|'
-                 r'発売予定(?!日)',visible):
+                 r'発売予定(?!日)',sale_text):
         return {'url':url,'product':title,'status':'unknown',
                 'reason':'reservation_not_sale'}
     active=False
@@ -342,7 +359,15 @@ def parse_biccamera_detail(html,url):
             'disabled' in n.attrs.get('class','').split()):continue
         label=tidy(n.text()+' '+n.attrs.get('value','')+' '+n.attrs.get('aria-label',''))
         if 'カートに入れる' in label:active=True
-    if active and re.search(r'在庫あり|在庫有り|在庫ございます',visible):
+    # Live Bic Camera pages can say "deliver on [date]" without showing
+    # any literal "在庫あり" label. Only a checkout-specific delivery estimate
+    # together with an enabled purchase control can establish availability.
+    explicit_stock=bool(re.search(r'在庫あり|在庫有り|在庫ございます',sale_text))
+    delivery=bool(re.search(r'\d{1,2}月\d{1,2}日(?:[（(][^）)]{1,8}[）)])?'
+                            r'\s*お届け',sale_text))
+    checkout_context=('お届け先を変更する' in sale_text and
+                      ('数量' in sale_text or 'ご注文で' in sale_text))
+    if active and (explicit_stock or (delivery and checkout_context)):
         return {'url':url,'product':title,'status':'available'}
     return {'url':url,'product':title,'status':'unknown',
             'reason':'purchase_evidence_unverified'}
