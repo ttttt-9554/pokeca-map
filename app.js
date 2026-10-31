@@ -7410,7 +7410,7 @@
       }
     }
     const heading=primary
-      ? primary+(primaryCount<names.length?' ほか':'')
+      ? primary
       : '複数店舗';
     return '<h4>'+escape(heading)+'</h4>'+
       '<details class="lp-onsite-archive-stores">'+
