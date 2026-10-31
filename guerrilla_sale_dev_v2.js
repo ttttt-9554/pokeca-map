@@ -86,14 +86,16 @@
       const card=node('section',undefined,'sale-beta-card');card.append(node('h3',site.name));
       const all=targets.find(x=>x.site_key===key&&x.mode==='all');
       const selected=targets.filter(x=>x.site_key===key&&x.mode==='selected');
-      card.append(toggle('全商品監視（順次巡回）',!!all?.enabled,value=>mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(all?.id||site.id),'PATCH',{enabled:value,updated_at:new Date().toISOString()})));
+      card.append(toggle('対象商品を自動監視',!!all?.enabled,value=>mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(all?.id||site.id),'PATCH',{enabled:value,updated_at:new Date().toISOString()})));
       const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.length>0&&selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
       selectToggle.querySelector('input').disabled=!selected.length;
       selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
       card.append(selectToggle);
       const s=snapshot.sites?.[key]||{};
+      const scopeText=key==='pokemon'?'通知対象：ポケモンカードの未開封パック／BOX／スターター・構築済みデッキのみ':'通知対象：未開封TCGのパック／BOX／スターター・構築済みデッキのみ';
+      card.append(node('p',scopeText,'hint'));
       card.append(node('p','発見済み '+(counts[key]||0)+'件 / 最終処理 '+date(s.last_run_at),'hint'));
-      card.append(node('p','全商品：'+(s.front_baseline_ready?'新着監視の基準取得済み':'新着監視の基準取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
+      card.append(node('p','自動監視：'+(s.front_baseline_ready?'新着監視の基準取得済み':'新着監視の基準取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
       if(s.catalog_total)card.append(node('p','一覧表示の総件数 '+s.catalog_total+'件（未確認商品も含みます）','hint'));
       if(s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
       if(s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
