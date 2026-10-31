@@ -68,6 +68,18 @@ class MonitorTests(unittest.TestCase):
         client=type('Client',(),{'halted':{},'get':lambda *x:self.fail('network must not run')})()
         state=m.sweep_site('pokemon',[{'site_key':'pokemon','mode':'all','enabled':False}],{},client)
         self.assertEqual(state['status'],'paused')
+    def test_front_page_baseline_then_new_products_are_eligible(self):
+        html=card(AM)+'<p>50件</p>'
+        client=type('Client',(),{'halted':{},'get':lambda *x:html})()
+        targets=[{'site_key':'amenity','mode':'all','enabled':True}]
+        with patch.object(m,'observe') as obs,patch.object(m,'db',return_value=[]):
+            first=m.sweep_site('amenity',targets,{},client)
+            self.assertTrue(first['front_baseline_ready'])
+            self.assertFalse(obs.call_args_list[0].args[3])
+            obs.reset_mock()
+            second=m.sweep_site('amenity',targets,first,client)
+            self.assertTrue(obs.call_args_list[0].args[3])
+
     def test_duplicate_page_does_not_finish_sweep(self):
         html=card(AM)+'<p>500件</p>'
         client=type('Client',(),{'halted':{},'get':lambda *x:html})()
