@@ -21,7 +21,7 @@ from urllib.request import Request, build_opener, HTTPRedirectHandler
 from urllib.robotparser import RobotFileParser
 
 SITES = {
-    'pokemon': {'host': 'www.pokemoncenter-online.com', 'name': 'ポケモンセンターオンライン', 'catalog': '/search/'},
+    'pokemon': {'host': 'www.pokemoncenter-online.com', 'name': 'ポケモンセンターオンライン', 'catalog': '/pokemon-card-game/'},
     'amenity': {'host': 'www.amenitydream.com', 'name': 'アメニティードリーム', 'catalog': '/product-list'},
 }
 UA = 'TorecaRadarSaleMonitor/2.0'
