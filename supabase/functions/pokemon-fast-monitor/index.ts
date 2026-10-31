@@ -30,8 +30,9 @@ const clean=(x:unknown)=>String(x??"").replace(/\s+/g," ").trim();
 
 function productKind(label:string):"pack"|"deck"|""{
   if(!label||!POKECARD.test(label)||EXCLUDE.test(label))return "";
-  if(PACK.test(label))return "pack";
+  // Deck sets may include "BOX" in their title; prefer the specific deck identity.
   if(DECK.test(label))return "deck";
+  if(PACK.test(label))return "pack";
   return "";
 }
 function productUrl(input:string,base:string):string {
