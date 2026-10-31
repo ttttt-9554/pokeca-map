@@ -176,6 +176,46 @@ def collect(channels, token, loader=fetch_discord, now=None):
     ]
 
 
+def summarize_public(reports, now=None):
+    """Output only anonymous aggregate evidence; no raw or hashed identities.
+
+    Published signals cannot claim verified stock. The privileged backend
+    independently validates time, retailer URL, vote count and deduplication.
+    """
+    now = now or datetime.now(timezone.utc)
+    by_url = {}
+    for row in reports:
+        try:
+            posted = datetime.fromisoformat(str(row["posted_at"]).replace("Z", "+00:00"))
+        except (KeyError, ValueError, TypeError):
+            continue
+        if (posted.tzinfo is None or posted < now - timedelta(minutes=15)
+                or posted > now + timedelta(seconds=90)):
+            continue
+        url = official_url(row.get("url"))
+        if not url or row.get("report_kind") not in ("pack", "deck"):
+            continue
+        target = by_url.setdefault(url, [])
+        target.append((posted, row))
+
+    result = []
+    for url, evidences in by_url.items():
+        authors = {row["author_hash"] for _, row in evidences}
+        statements = {row["statement_hash"] for _, row in evidences}
+        kinds = {row["report_kind"] for _, row in evidences}
+        if len(authors) < 2 or len(statements) < 2 or len(kinds) != 1:
+            continue
+        result.append({
+            "url": url,
+            "report_kind": next(iter(kinds)),
+            "independent_reporters": min(len(authors), 20),
+            "independent_statements": min(len(statements), 20),
+            "independent_channels": min(len({row["channel_hash"] for _, row in evidences}), 20),
+            "latest_at": max(posted for posted, _ in evidences).isoformat(),
+        })
+    return sorted(result, key=lambda r: r["latest_at"], reverse=True)[:30]
+
+
 def send(reports, service_key, base="https://" + PROJECT_HOST,
          opener=urllib.request.urlopen):
     if not reports:
