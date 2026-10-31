@@ -543,6 +543,57 @@ Deno.serve(async (req: Request) => {
       return new Response("Sale Push unavailable", { status: 503 });
     }
   }
+  if (payload.type === "PUSH_TEST") {
+    try {
+      const {data: configRows, error: configError} = await supabase.rpc("guerrilla_push_server_config");
+      if (configError) throw Error(configError.message);
+      const config = configRows?.[0];
+      if (!config?.public_key || !config?.private_key || !config?.subject) {
+        throw Error("Push VAPID configuration missing");
+      }
+      webpush.setVapidDetails(config.subject, config.public_key, config.private_key);
+      const {data: subs, error: subError} = await supabase
+        .from("guerrilla_push_subscriptions")
+        .select("id,endpoint,p256dh,auth")
+        .eq("enabled",true)
+        .order("updated_at",{ascending:false})
+        .limit(5);
+      if (subError) throw Error(subError.message);
+      let sent=0,expired=0;
+      for (const sub of subs || []) {
+        try {
+          await webpush.sendNotification(
+            {endpoint:sub.endpoint,keys:{p256dh:sub.p256dh,auth:sub.auth}},
+            JSON.stringify({
+              title:"✅ Toreca Radar Pushテスト",
+              body:"iPhoneへの販売Push通知は正常に受信できます。",
+              icon:APP_URL+"icon-192.png?v=20261024-toreca-radar-icon",
+              badge:APP_URL+"icon-192.png?v=20261024-toreca-radar-icon",
+              url:APP_URL,
+              tag:"toreca-sale-push-test"
+            }),
+            {TTL:60,urgency:"high",topic:"toreca-sale-push-test"}
+          );
+          sent++;
+        } catch (pushError) {
+          const code=Number((pushError as {statusCode?:number})?.statusCode||0);
+          if(code===404||code===410){
+            await supabase.from("guerrilla_push_subscriptions")
+              .update({enabled:false,updated_at:new Date().toISOString()})
+              .eq("id",sub.id);
+            expired++;
+          } else throw pushError;
+        }
+      }
+      return new Response(JSON.stringify({sent,expired}),{
+        status:200,headers:{"Content-Type":"application/json"}
+      });
+    } catch(error) {
+      console.error("Push test failed:",String(error));
+      return new Response("Push test failed",{status:502});
+    }
+  }
+
   if (payload.type === "LOTTERY_SCAN") {
     try {
       const summary = await scanLivePocket(supabase);
