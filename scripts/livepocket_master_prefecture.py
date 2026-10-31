@@ -28,6 +28,18 @@ SOURCE_NAME = "store_master_unique_exact_name_v21_146"
 NORMALIZE_RE = re.compile(r"[\s　・･._－（）()【】「」-]+")
 # A bare shop label such as "豊橋店" or "池袋店" may refer to many chains.
 MIN_SPECIFIC_NAME_LENGTH = 6
+GENERIC_STORE_NAMES = frozenset((
+    "tsutaya", "ゲオ", "イオン", "イトーヨーカドー",
+    "ワンダーグー", "wondergoo", "古本市場", "ブックオフ",
+    "ヨドバシカメラ", "ビックカメラ", "ポケモンセンター",
+    "ポケモンセンターオンライン", "イエローサブマリン店",
+))
+
+
+def is_specific(name):
+    return (isinstance(name, str)
+            and len(name) >= MIN_SPECIFIC_NAME_LENGTH
+            and name not in GENERIC_STORE_NAMES)
 
 
 def normalize(name):
@@ -94,7 +106,8 @@ def fetch_regions(base, key, opener=urllib.request.urlopen):
         if name in names and names[name] != pref:
             conflicts.add(name)
         names[name] = pref
-    return {name: pref for name, pref in names.items() if name not in conflicts}
+    return {name: pref for name, pref in names.items()
+            if name not in conflicts and is_specific(name)}
 
 
 MANUAL_SELECTS = {
@@ -184,7 +197,7 @@ def apply_one(raw_row, public_row, region_by_name):
     )
     counts = 0
     for key in sorted(event_names):
-        pref = region_by_name.get(key) if len(key) >= MIN_SPECIFIC_NAME_LENGTH else None
+        pref = region_by_name.get(key) if is_specific(key) else None
         if pref not in PREFECTURES:
             continue
         # This name may have been verified for a different prefecture in one
