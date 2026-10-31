@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import webpush from "npm:web-push@3.6.7";
 
 // v21.49: Every shared report is delivered to Discord as its own embed.
 // DB trigger enqueues (atomically with INSERT); Supabase Cron calls DRAIN each
@@ -88,6 +89,104 @@ async function buildMessage(supabase: ReturnType<typeof createClient>, report: R
   };
 }
 
+
+type PushJob = {
+  event_id: string;
+  subscription_id: string;
+  attempts: number;
+};
+
+async function drainSalePushNotifications(
+  supabase: ReturnType<typeof createClient>
+) {
+  const {data: configRows, error: configError} = await supabase.rpc("guerrilla_push_server_config");
+  if (configError) throw Error("Push config failed: " + configError.message);
+  const config = configRows?.[0];
+  if (!config?.public_key || !config?.private_key || !config?.subject) {
+    throw Error("Push VAPID configuration missing");
+  }
+  webpush.setVapidDetails(config.subject, config.public_key, config.private_key);
+
+  const {data, error} = await supabase.rpc("guerrilla_sale_claim_push_notifications", {
+    p_limit: 10
+  });
+  if (error) throw Error("Push claim failed: " + error.message);
+  const jobs = (data || []) as PushJob[];
+  let sent = 0, retried = 0, expired = 0;
+
+  for (const job of jobs) {
+    let errorMessage: string | null = null;
+    try {
+      const [{data: event, error: eventError}, {data: sub, error: subError}] = await Promise.all([
+        supabase.from("guerrilla_sale_events")
+          .select("id,site_key,url,product,kind,detected_at")
+          .eq("id",job.event_id).maybeSingle(),
+        supabase.from("guerrilla_push_subscriptions")
+          .select("id,endpoint,p256dh,auth,enabled")
+          .eq("id",job.subscription_id).maybeSingle()
+      ]);
+      if (eventError) throw Error(eventError.message);
+      if (subError) throw Error(subError.message);
+      if (!event || !sub || !sub.enabled) {
+        expired++;
+      } else {
+        const site = event.site_key === "pokemon"
+          ? "ポケモンセンターオンライン"
+          : event.site_key === "amenity"
+            ? "アメニティードリーム"
+            : "販売サイト";
+        const state = event.kind === "restock" ? "販売再開" : "新規販売";
+        const payload = JSON.stringify({
+          title: "⚡ " + state + "を検知",
+          body: String(event.product || "トレカ商品").slice(0,220),
+          icon: APP_URL + "icon-192.png?v=20261024-toreca-radar-icon",
+          badge: APP_URL + "icon-192.png?v=20261024-toreca-radar-icon",
+          url: event.url || APP_URL,
+          tag: "sale-" + event.id,
+          site,
+          state,
+          detected_at: event.detected_at
+        });
+        try {
+          await webpush.sendNotification(
+            {endpoint: sub.endpoint, keys: {p256dh: sub.p256dh, auth: sub.auth}},
+            payload,
+            {TTL: 90, urgency: "high", topic: "sale-" + String(event.id).slice(0,24)}
+          );
+          sent++;
+        } catch (pushError) {
+          const code = Number((pushError as {statusCode?:number})?.statusCode || 0);
+          if (code === 404 || code === 410) {
+            await supabase.from("guerrilla_push_subscriptions")
+              .update({enabled:false,updated_at:new Date().toISOString()})
+              .eq("id",sub.id);
+            expired++;
+          } else {
+            throw pushError;
+          }
+        }
+      }
+    } catch (err) {
+      errorMessage = String(err).slice(0,400);
+      retried++;
+      console.error("Sale push delivery failed:",errorMessage);
+    }
+
+    const {error: settleError} = await supabase.rpc(
+      "guerrilla_sale_settle_push_notification",
+      {
+        p_event_id: job.event_id,
+        p_subscription_id: job.subscription_id,
+        p_attempts: job.attempts,
+        p_sent: errorMessage === null,
+        p_error: errorMessage,
+        p_retry_seconds: Math.min(3600, Math.max(60, 60 * (2 ** Math.min(job.attempts - 1, 6))))
+      }
+    );
+    if (settleError) console.error("Push settle failed:",settleError.message);
+  }
+  return {claimed:jobs.length,sent,retried,expired};
+}
 
 type SaleJob = {
   event_id: string;
@@ -484,6 +583,13 @@ Deno.serve(async (req: Request) => {
     // Respect the Discord webhook rate limit; never fire 10 at once.
     await sleep(SPACING_MS);
   }
+  let pushResult: Record<string,number> = {claimed:0,sent:0,retried:0,expired:0};
+  try {
+    pushResult = await drainSalePushNotifications(supabase);
+  } catch (error) {
+    console.error("Sale Web Push queue failed:", String(error));
+  }
+
   let saleResult: Record<string,number> = {claimed:0,sent:0,retried:0,skipped:0};
   try {
     const saleWebhook = Deno.env.get("GUERRILLA_DISCORD_WEBHOOK_URL");
@@ -505,8 +611,8 @@ Deno.serve(async (req: Request) => {
     console.error("Lottery notification queue failed:", String(error));
     return new Response("Lottery notification queue unavailable", { status: 503 });
   }
-  console.log("Discord queued notifications:", { claimed: jobs.length, sent, retry, lotteryResult, saleResult });
-  return new Response(JSON.stringify({ claimed: jobs.length, sent, retry, lottery: lotteryResult, sale: saleResult }), {
+  console.log("Notification queues:", { claimed: jobs.length, sent, retry, lotteryResult, saleResult, pushResult });
+  return new Response(JSON.stringify({ claimed: jobs.length, sent, retry, lottery: lotteryResult, sale: saleResult, push: pushResult }), {
     status: 200, headers: { "Content-Type": "application/json" }
   });
 });
