@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-31T10:00:56.345643+00:00",
+  "collected_at": "2026-10-31T10:30:56.179014+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 605,
+  "unique_livepocket_urls": 607,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16408,34 +16408,94 @@
       "event_title": "【ふるいちイオンモール土浦店】ポケカ抽選販売（拡張パック30th CELEBRATION）",
       "application_end_at": "2026-11-01T21:01:00+09:00",
       "application_start_at": "2026-10-31T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/7c2e-",
+      "discord_message_id": "1566036542848241676",
+      "discord_posted_at": "2026-10-31T10:30:07.367000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日2時間）\nhttps://livepocket.jp/e/7c2e-\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日2時間）\nhttps://livepocket.jp/e/85r2b",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "（再入荷分）ポケモン『ストームエメラルダ』抽選販売",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T20:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/85r2b",
+      "discord_message_id": "1566036542848241676",
+      "discord_posted_at": "2026-10-31T10:30:07.367000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日2時間）\nhttps://livepocket.jp/e/7c2e-\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日2時間）\nhttps://livepocket.jp/e/85r2b",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "（再入荷分）ポケモン『メガブレイブ』抽選販売",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T20:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 445,
+    "parsed": 447,
     "no_structured_details": 160
   },
   "field_counts": {
-    "store_name": 422,
-    "prefecture": 379,
-    "event_title": 292,
+    "store_name": 424,
+    "prefecture": 381,
+    "event_title": 294,
     "event_date": 1,
     "product_name": 86,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 569,
-    "application_start_at": 567,
-    "stores_events": 431
+    "application_end_at": 571,
+    "application_start_at": 569,
+    "stores_events": 433
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566028985777913987"
+      "1551580466266644552": "1566036542848241676"
     },
     "last_run": {
-      "checked_at": "2026-10-31T10:00:56.345643+00:00",
-      "new_urls": 1,
-      "original_urls": 604,
+      "checked_at": "2026-10-31T10:30:56.179014+00:00",
+      "new_urls": 2,
+      "original_urls": 605,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -16623,7 +16683,8 @@
         "1565998792468205599": "2026-10-31T08:00:55.587644+00:00",
         "1566006327573221438": "2026-10-31T08:30:55.612955+00:00",
         "1566016097482842193": "2026-10-31T09:10:56.966535+00:00",
-        "1566028985777913987": "2026-10-31T10:00:57.180195+00:00"
+        "1566028985777913987": "2026-10-31T10:00:57.180195+00:00",
+        "1566036542848241676": "2026-10-31T10:30:56.945927+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19193,6 +19254,16 @@
           "checked_at": "2026-10-31T10:01:23.220663+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/85r2b": {
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/7c2e-": {
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -20697,6 +20768,18 @@
           "detected_at": "2026-10-31T10:00:58.177610+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-31T10:01:23.220663+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/7c2e-": {
+          "detected_at": "2026-10-31T10:30:57.930973+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/85r2b": {
+          "detected_at": "2026-10-31T10:30:57.930973+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
           "http_status": null
         }
       },
@@ -26901,6 +26984,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/85r2b": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "title_observed": "（再入荷分）ポケモン『メガブレイブ』抽選販売",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/7c2e-": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "title_observed": "（再入荷分）ポケモン『ストームエメラルダ』抽選販売",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -30986,6 +31091,32 @@
         },
         "https://livepocket.jp/e/fiwby": {
           "checked_at": "2026-10-31T10:01:23.220663+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/85r2b": {
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/7c2e-": {
+          "checked_at": "2026-10-31T10:31:23.820310+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
