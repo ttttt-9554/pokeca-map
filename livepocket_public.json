@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-31T03:00:56.094761+00:00",
-  "unique_livepocket_urls": 598,
+  "collected_at": "2026-10-31T03:30:54.995779+00:00",
+  "unique_livepocket_urls": 601,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8782,8 +8782,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "キデイランド二子玉川店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
       "first_detected_at": "2026-10-30T15:00:59.759422+00:00"
     },
     {
@@ -8842,7 +8840,65 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/6q223",
+      "store_name": "ブックエース坂東店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-31T03:30:04.810000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース坂東店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売",
+      "application_end_at": "2026-10-31T21:00:00+09:00",
+      "application_start_at": "2026-10-31T10:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売",
+      "first_detected_at": "2026-10-31T03:30:56.485968+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/otsly",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-31T03:30:04.810000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-31T10:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+      "first_detected_at": "2026-10-31T03:30:56.485968+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/6bmt7",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-10-31T03:30:04.810000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム 公認店限定『ONE PIECE HEROINES PRECIOUS BOX』抽選販売受付",
+      "application_end_at": "2026-11-03T20:00:00+09:00",
+      "application_start_at": "2026-10-31T08:00:00+09:00",
+      "review_category": "onepiece",
+      "product_name": "ONE PIECE HEROINES PRECIOUS BOX",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム 公認店限定『ONE PIECE HEROINES PRECIOUS BOX』抽選販売受付",
+      "first_detected_at": "2026-10-31T03:30:56.485968+00:00"
     }
   ],
-  "updated_at": "2026-10-31T03:21:22.577550+00:00"
+  "updated_at": "2026-10-31T03:31:17.090406+00:00"
 }
