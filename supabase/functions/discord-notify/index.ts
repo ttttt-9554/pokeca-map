@@ -532,6 +532,17 @@ Deno.serve(async (req: Request) => {
       return new Response("Discord notification failed", { status: 502 });
     }
   }
+  if (payload.type === "SALE_PUSH_DRAIN") {
+    try {
+      const result = await drainSalePushNotifications(supabase);
+      return new Response(JSON.stringify(result), {
+        status: 200, headers: { "Content-Type": "application/json" }
+      });
+    } catch (error) {
+      console.error("Immediate sale Push drain failed:", String(error));
+      return new Response("Sale Push unavailable", { status: 503 });
+    }
+  }
   if (payload.type === "LOTTERY_SCAN") {
     try {
       const summary = await scanLivePocket(supabase);
