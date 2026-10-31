@@ -9,6 +9,44 @@ def card(url,label='在庫数 3点',title='対象商品'):
     return '<li><a href="'+url+'">'+title+'</a><span>'+label+'</span></li>'
 
 class MonitorTests(unittest.TestCase):
+    def test_pokemon_probe_url_exact_allowlist_and_user_agent(self):
+        url=('https://www.pokemoncenter-online.com/pokemon-card-game/'
+             'booster-packs/?inStock=1&srule=top-new-product')
+        self.assertTrue(m.allowed_read(url,'pokemon'))
+        self.assertFalse(m.allowed_read(url+'&extra=1','pokemon'))
+        self.assertFalse(m.allowed_read(url.replace('/booster-packs/','/admin/'),'pokemon'))
+        self.assertFalse(m.allowed_read(url,'amenity'))
+        bot=m.StoreClient(user_agent='TorecaRadarFastMonitor/1.0',
+                          accept='text/html')
+        self.assertEqual(bot.user_agent,'TorecaRadarFastMonitor/1.0')
+        self.assertEqual(bot.accept,'text/html')
+
+    def test_queue_diagnostic_does_not_log_sensitive_redirect_or_cookie(self):
+        from email.message import Message
+        from urllib.error import HTTPError
+        url=('https://www.pokemoncenter-online.com/pokemon-card-game/'
+             'booster-packs/?inStock=1&srule=top-new-product')
+        headers=Message()
+        headers.add_header('Location','https://wr.pokemoncenter-online.com/?token=DO_NOT_LOG')
+        headers.add_header('Set-Cookie','sensitive=DO_NOT_LOG; Path=/; Secure')
+        client=m.StoreClient(user_agent='TorecaRadarFastMonitor/1.0',
+                             accept='text/html')
+        with patch.object(m.socket,'getaddrinfo',return_value=[
+                (None,None,None,'',('8.8.8.8',443))]), \
+             patch.object(client.opener,'open',side_effect=HTTPError(
+                url,302,'Found',headers,None)) as opening:
+            with self.assertRaisesRegex(m.CheckError,'waiting'):
+                client.raw(url,'pokemon')
+            request=opening.call_args.args[0]
+            self.assertEqual(request.get_header('User-agent'),
+                             'TorecaRadarFastMonitor/1.0')
+            self.assertEqual(request.get_header('Accept'),'text/html')
+        self.assertEqual(client.last_http['http_status'],302)
+        self.assertEqual(client.last_http['redirect_to'],'official_waiting_room')
+        self.assertEqual(client.last_http['cookie_headers'],1)
+        self.assertFalse(client.last_http['cookie_sent'])
+        self.assertNotIn('DO_NOT_LOG',str(client.last_http))
+
     def test_canonical_product_identity(self):
         self.assertEqual(m.product_url(PC+'?utm_source=x#top','pokemon'),PC)
         self.assertEqual(m.product_id('pokemon',PC),m.product_id('pokemon',m.product_url(PC+'?ref=x','pokemon')))
