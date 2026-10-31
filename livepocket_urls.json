@@ -19294,8 +19294,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/2tebz": {
-          "checked_at": "2026-10-31T08:01:22.348852+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T14:11:25.493028+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/lv5m0": {
@@ -20811,8 +20811,8 @@
         },
         "https://livepocket.jp/e/2tebz": {
           "detected_at": "2026-10-31T08:00:56.653881+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-31T08:01:22.348852+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-31T14:11:25.493028+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/lv5m0": {
@@ -22064,6 +22064,11 @@
         "https://livepocket.jp/e/6q223": {
           "attempts": 1,
           "last_attempt_at": "2026-10-31T09:41:23.889337+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/2tebz": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-31T14:11:25.493028+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -27014,7 +27019,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-31T08:01:22.348852+00:00",
+          "checked_at": "2026-10-31T14:11:25.493028+00:00",
           "title_observed": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -31131,7 +31136,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/2tebz": {
-          "checked_at": "2026-10-31T08:01:22.348852+00:00",
+          "checked_at": "2026-10-31T14:11:25.493028+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
