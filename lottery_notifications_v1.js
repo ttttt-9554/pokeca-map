@@ -12,6 +12,8 @@
   const BASE = 'toreca-lottery-notifications-v1:';
   let userId = '';
   let records = [];
+  // Only anonymous per-lottery totals; no other user's identity or outcome details.
+  let peerCounts = new Map();
   let notices = [];
   let readMap = {};
   let toastedMap = {};
@@ -88,6 +90,23 @@
     for (const r of rows) {
       if (!r || typeof r.event_url !== 'string' || !r.event_url) continue;
       const status = String(r.status || '');
+      // The existing aggregate RPC deduplicates users. Subtract this user's
+      // decided tickets to avoid notifying someone about their own record.
+      const aggregate = status === 'applied' ? peerCounts.get(r.event_url) : null;
+      const mineDecided = Math.max(0, Number(r.won_count) || 0) +
+        Math.max(0, Number(r.lost_count) || 0);
+      const totalDecided = aggregate ?
+        Math.max(0, Number(aggregate.won_entries) || 0) +
+        Math.max(0, Number(aggregate.lost_entries) || 0) : 0;
+      const otherUserProcessed = status === 'applied' &&
+        Number(r.application_count) > mineDecided && totalDecided > mineDecided;
+      if (otherUserProcessed) {
+        // One reminder per lottery; fresh outcome saves do not spam the user.
+        output.push(makeNotice(r, 'peer_result', 'processed', 1, 'other-user',
+          '🔔 他のユーザーが当落処理済みです',
+          '同じ抽選で他のユーザーが結果を登録しました。' +
+          '公式サイトで当選結果を確認して、ご自身の当落も記録してください。'));
+      }
       if (status === 'applied') {
         const resultAt = parseJstDateTime(r.result_announcement_at);
         if (Number.isFinite(resultAt)) {
@@ -97,7 +116,8 @@
               '📣 抽選結果の発表が近づいています',
               '発表予定：' + String(r.result_announcement_at).replace('T', ' ') +
               '（日本時間）／ 24時間以内です'));
-          } else if (hours <= 0 && hours >= -24 * MAX_PAST_RESULT_DAYS) {
+          } else if (!otherUserProcessed &&
+              hours <= 0 && hours >= -24 * MAX_PAST_RESULT_DAYS) {
             output.push(makeNotice(r, 'result', 'due', 1, resultAt,
               '📣 抽選結果の発表予定時刻になりました',
               '発表予定：' + String(r.result_announcement_at).replace('T', ' ') +
@@ -297,6 +317,7 @@
     }
     if (userId !== payload.userId) {
       userId = payload.userId;
+      peerCounts.clear();
       readMap = readStored('read');
       toastedMap = readStored('toast');
       dismissToast();
@@ -306,9 +327,24 @@
     update();
   }
 
+  function syncPeerResults(payload) {
+    // Reject stale results returned after a logout or Discord account switch.
+    if (!userId || !payload || payload.userId !== userId) return;
+    const rows = Array.isArray(payload.counts) ? payload.counts : [];
+    peerCounts = new Map(rows.filter(r =>
+      r && typeof r.event_url === 'string' && r.event_url.length <= 2000 &&
+      /^https:\/\//.test(r.event_url)
+    ).slice(0, 3000).map(r => [r.event_url, {
+      won_entries: Math.max(0, Number(r.won_entries) || 0),
+      lost_entries: Math.max(0, Number(r.lost_entries) || 0)
+    }]));
+    update();
+  }
+
   function clear() {
     userId = '';
     records = [];
+    peerCounts.clear();
     notices = [];
     readMap = {};
     toastedMap = {};
@@ -446,7 +482,7 @@
     draw();
   }
 
-  window.TorecaLotteryNotify = { sync, clear };
+  window.TorecaLotteryNotify = { sync, syncPeerResults, clear };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', mount, { once: true });
   } else {
