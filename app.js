@@ -323,6 +323,8 @@
     $('discordLogin').hidden = !supabaseClient || !!authUser || discordRoleAuthPending;
     $('discordLogout').hidden = !authUser;
     updateLotteryVisibility();
+    // Never display another account's private reminders after sign-out or role recheck.
+    if(!authUser)window.TorecaLotteryNotify?.clear?.();
     const roleCheck=$('discordRoleCheck');
     // A transient outage must preserve the saved Supabase session and allow a
     // manual retry. A real role rejection still requires a fresh Discord login.
@@ -4512,6 +4514,17 @@
   function initLottery() {
     ensureLotteryNewBadgeStyle();
     ensureLotteryTrackerUI();
+    // The reminder center may only open a record belonging to this verified user.
+    window.addEventListener('toreca:open-private-lottery', event => {
+      const url=event?.detail?.event_url;
+      if(!authUser||discordRoleAuthPending||typeof url!=='string'||
+          !lotteryTrackRecords.has(url))return;
+      switchTab('lotteryManage');
+      lotteryTrackerOpenEditor(url);
+    });
+    window.addEventListener('toreca:notification-refresh-request',()=>{
+      if(authUser&&!discordRoleAuthPending)refreshLotteryTrackerForAccount(true);
+    });
     lpExtInitUI();
     lpCardInitUI();
     lpAppInitUI();
@@ -4593,6 +4606,8 @@
     }, 60000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
+      // Resume checks the saved private dates, without rechecking Discord roles.
+      if(authUser&&!discordRoleAuthPending)refreshLotteryTrackerForAccount();
       if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();lpLocationRefresh(true);}
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('appLotteryView')?.classList.contains('active')) lpAppRefresh(true);
@@ -6315,12 +6330,25 @@
       $('lpTrackList').innerHTML='';
       renderLotteryResultAlerts([]);
       renderLotteryPickupAlerts([]);
+      window.TorecaLotteryNotify?.clear?.();
       return;
     }
     status.textContent=lotteryTrackError || '🔒 自分のDiscordアカウントに非公開で保存します。';
     const records=[...lotteryTrackRecords.values()];
     renderLotteryResultAlerts(records);
     renderLotteryPickupAlerts(records);
+    // Pass only personal reminder fields; never expose account names or notes.
+    window.TorecaLotteryNotify?.sync?.({
+      userId:authUser.id,
+      records:records.map(r=>({
+        event_url:r.event_url,
+        title:lotteryTrackItemName(r.event_url),
+        status:r.status,
+        result_announcement_at:r.result_announcement_at,
+        pickup_end:r.pickup_end,
+        pickup_end_time:r.pickup_end_time
+      }))
+    });
     const counts=[
       ['応募済み',records.filter(x=>x.status==='applied').length],
       ['当選・受取待ち',records.filter(x=>x.status==='won').length],
