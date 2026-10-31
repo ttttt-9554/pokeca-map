@@ -7347,6 +7347,78 @@
     return lotteryOnsiteArchiveFetching;
   }
 
+  // The archive stores joined shop names as a single "・"-separated string.
+  // Keep every original name accessible, but don't let a chain-wide draw fill
+  // the entire screen before the user asks to see its branches.
+  function lotteryArchiveStoresHtml(value){
+    const raw=String(value||'').trim();
+    if(!raw)return '<h4>店舗名未確認</h4>';
+    const names=raw.split(/\s*・\s*/).map(name=>name.trim()).filter(Boolean);
+    if(names.length<2)return '<h4>'+escape(raw)+'</h4>';
+
+    // Recognize chain names without mistaking an unrelated participating
+    // shop for another branch of the same chain.
+    const knownChains=[
+      ['イエローサブマリン',['イエローサブマリン']],
+      ['WonderGOO',['wondergoo','ワンダーグー']],
+      ['TSUTAYA',['tsutaya','蔦屋書店']],
+      ['古本市場',['古本市場','ふるいち']],
+      ['ゲオ',['ゲオ','geo']],
+      ['カードラボ',['カードラボ']],
+      ['ホビーステーション',['ホビーステーション','ホビステ']],
+      ['ドラゴンスター',['ドラゴンスター']],
+      ['ブックオフ',['bookoff','ブックオフ']],
+      ['駿河屋',['駿河屋']],
+      ['ポケモンセンター',['ポケモンセンター']],
+      ['ヨドバシカメラ',['ヨドバシカメラ']],
+      ['ビックカメラ',['ビックカメラ']],
+      ['ヤマダデンキ',['ヤマダデンキ']],
+      ['トイザらス',['トイザらス']]
+    ];
+    const normalized=names.map(name=>
+      name.normalize('NFKC').replace(/[\s　]+/g,'').toLowerCase());
+    let primary='',primaryCount=0,tied=false;
+    for(const [chain,prefixes] of knownChains){
+      const count=normalized.filter(name=>prefixes.some(prefix=>name.startsWith(prefix))).length;
+      if(count>primaryCount){
+        primary=chain;
+        primaryCount=count;
+        tied=false;
+      }else if(count>0&&count===primaryCount){
+        tied=true;
+      }
+    }
+    if(tied||primaryCount<2||primaryCount*2<names.length){
+      primary='';
+      primaryCount=0;
+    }
+    if(!primary){
+      // For an unlisted chain, use a genuinely shared shop-name prefix,
+      // not generic terms such as "カードショップ".
+      let prefix=names[0];
+      for(const name of names.slice(1)){
+        let i=0;
+        while(i<prefix.length&&i<name.length&&prefix[i]===name[i])i++;
+        prefix=prefix.slice(0,i);
+        if(!prefix)break;
+      }
+      prefix=prefix.trim().replace(/[\s　・･._－ー\-]+$/,'');
+      if(prefix.length>=4&&prefix.length<=30&&
+         !/^(?:カードショップ|トレカショップ|ホビーショップ|ゲームショップ|ショップ|トレカ)$/.test(prefix)){
+        primary=prefix;
+        primaryCount=names.length;
+      }
+    }
+    const heading=primary
+      ? primary+(primaryCount<names.length?' ほか':'')
+      : '複数店舗';
+    return '<h4>'+escape(heading)+'</h4>'+
+      '<details class="lp-onsite-archive-stores">'+
+        '<summary>🏬 店舗一覧（'+names.length+'件）</summary>'+
+        '<ul>'+names.map(name=>'<li>'+escape(name)+'</li>').join('')+'</ul>'+
+      '</details>';
+  }
+
   function renderLotteryOnsiteArchive(){
     const root=$('lpOnsiteArchive'),list=$('lpOnsiteArchiveList'),
       status=$('lpOnsiteArchiveStatus');
@@ -7369,7 +7441,7 @@
       const notes=Array.isArray(row.required_details)?row.required_details
         .filter(x=>typeof x==='string'&&x.trim()).slice(0,40):[];
       return '<article class="lp-onsite-archive-card">'+
-        '<h4>'+escape(row.store_name||'店舗名未確認')+'</h4>'+
+        lotteryArchiveStoresHtml(row.store_name)+
         '<p>地域：'+escape(row.prefecture||'未確認')+'</p>'+
         '<p>抽選：'+escape(row.event_title||'イベント名未確認')+'</p>'+
         '<p>応募終了：'+escape(lotteryJapaneseDate(row.application_end_at)||'未確認')+'</p>'+
