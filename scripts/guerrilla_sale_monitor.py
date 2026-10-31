@@ -426,6 +426,13 @@ def iso():return datetime.now(timezone.utc).isoformat(timespec='seconds')
 
 def sweep_site(site,targets,state,client):
     state=dict(state or {})
+    if site == 'pokemon':
+        # The official retailer forbids automated stock retrieval and crawling.
+        # Keep historical diagnostics only; do not make any site requests even
+        # if a stale database target happens to be enabled.
+        return {**state,'status':'paused','errors':[],
+                'catalog_enabled':False,'selected_count':0,
+                'reason':'official_terms_automated_access_not_permitted'}
     active=[x for x in targets if x.get('site_key')==site and x.get('enabled') is True]
     if not active:return {**state,'status':'paused','selected_count':0,'catalog_enabled':False}
     until=state.get('retry_after')
