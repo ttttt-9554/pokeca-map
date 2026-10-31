@@ -21,11 +21,11 @@ from livepocket_prefecture_manual_snapshot import (
     PROJECT_HOST, canonical_event_url
 )
 from livepocket_venue_prefecture import PREFECTURES
+from livepocket_store_name_normalize import normalize
 
 RPC_NAME = "lottery_store_unique_regions_v1"
 STORE_COLUMNS = {"store_name", "prefecture", "stores", "stores_override"}
 SOURCE_NAME = "store_master_unique_exact_name_v21_146"
-NORMALIZE_RE = re.compile(r"[\s　・･._－（）()【】「」-]+")
 # A bare shop label such as "豊橋店" or "池袋店" may refer to many chains.
 MIN_SPECIFIC_NAME_LENGTH = 6
 GENERIC_STORE_NAMES = frozenset((
@@ -40,17 +40,6 @@ def is_specific(name):
     return (isinstance(name, str)
             and len(name) >= MIN_SPECIFIC_NAME_LENGTH
             and name not in GENERIC_STORE_NAMES)
-
-
-def normalize(name):
-    if not isinstance(name, str):
-        return ""
-    key = NORMALIZE_RE.sub("", name.strip().lower())
-    key = re.sub(r"様$", "", key)
-    key = re.sub(r"^イエサブ", "イエローサブマリン", key)
-    if key.startswith("イエローサブマリン") and not key.endswith("店"):
-        key += "店"
-    return key
 
 
 def check_base(base):
