@@ -126,6 +126,25 @@
         if(waiting)card.append(node('p','公式サイトの待合室が解除されるまで新規販売は検出できません。自動再試行します。','sale-beta-warning'));
         else if(blocked)card.append(node('p','取得エラー：'+(ERRORS[fast.last_error]||ERRORS[fast.last_status]||fast.last_status||'詳細不明'),'sale-beta-warning'));
         if(fast.last_product_count>0)card.append(node('p','高速監視の直近確認商品：'+fast.last_product_count+'件','hint'));
+        if(key==='pokemon'&&Array.isArray(fast.response_diagnostics)&&fast.response_diagnostics.length){
+          const latest=fast.response_diagnostics[fast.response_diagnostics.length-1];
+          const where=latest.phase==='catalog'?'公式商品一覧':
+            latest.phase==='detail'?'公式商品詳細':
+            latest.phase==='robots'?'巡回ルール':'接続前';
+          const redirect=latest.redirect_to==='official_waiting_room'?'公式待合室':
+            latest.redirect_to==='store_same_host'?'サイト内の別ページ':
+            latest.redirect_to==='third_party'?'外部ドメイン':
+            latest.redirect_to==='none'?'転送なし':'その他・未確認';
+          card.append(node('p','🔎 最新のHTTP診断：'+date(latest.at)+
+            ' ／ 取得先 '+where+
+            ' ／ HTTP '+(latest.http_status??'未取得')+
+            ' ／ 転送 '+redirect,'hint'));
+          if(latest.redirect_to==='official_waiting_room'){
+            card.append(node('p','BOTが公式待合室に転送されたことを確認。Cookie送信：なし'+
+              ' ／ Set-Cookieヘッダー：'+(latest.set_cookie_seen?'検出':'未検出')+
+              '。IPによる制限か、混雑・セッション条件かはこの結果だけでは断定できません。','sale-beta-warning'));
+          }
+        }
       }
       card.append(node('p','📄 補助巡回：発見済み '+(counts[key]||0)+'件 / 最終全商品処理 '+date(s.last_run_at),'hint'));
       // GitHub's scheduled sweep can be delayed or stopped independently of
