@@ -119,7 +119,16 @@ def catalog_url(site, page=1):
 def allowed_read(url,site):
     if not valid_host(url,site):
         return False
-    return bool(product_url(url,site)) or urlsplit(url).path in (SITES[site]['catalog'],'/robots.txt')
+    parts=urlsplit(url)
+    # Diagnostic reads only: two exact official first-category pages, with
+    # no arbitrary query parameters. All original monitor targets remain
+    # unchanged. Respect robots.txt and never follow waiting-room redirects.
+    if site=='pokemon' and parts.path in (
+        '/pokemon-card-game/booster-packs/',
+        '/pokemon-card-game/battle-decks/'
+    ) and parts.query=='inStock=1&srule=top-new-product':
+        return True
+    return bool(product_url(url,site)) or parts.path in (SITES[site]['catalog'],'/robots.txt')
 
 def product_links(node,site,base):
     result = {}
@@ -293,9 +302,11 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 class StoreClient:
-    def __init__(self):
+    def __init__(self,user_agent=UA):
         self.opener=build_opener(NoRedirect())
         self.robots={};self.last={};self.delays={};self.halted={}
+        self.user_agent=user_agent
+        self.last_http={}
         self.deadline=time.monotonic()+300
     def raw(self,url,site):
         if not allowed_read(url,site):
@@ -314,18 +325,28 @@ class StoreClient:
             raise CheckError('dns_failed') from None
         self.last[site]=time.monotonic()
         try:
-            with self.opener.open(Request(url,headers={'User-Agent':UA,'Accept':'text/html,text/plain'}),timeout=12) as res:
+            with self.opener.open(Request(url,headers={'User-Agent':self.user_agent,'Accept':'text/html,text/plain'}),timeout=12) as res:
+                self.last_http={'http_status':res.status,'redirect_to':'none',
+                    'cookie_headers':min(len(res.headers.get_all('Set-Cookie',[])),20),
+                    'cookie_sent':False}
                 if not allowed_read(res.geturl(),site):raise CheckError('redirect_blocked')
                 data=res.read(MAX_BYTES+1)
                 if len(data)>MAX_BYTES:raise CheckError('response_too_large')
                 return data.decode(res.headers.get_content_charset() or 'utf-8',errors='replace')
         except HTTPError as e:
+            dest=urljoin(url,e.headers.get('Location','')) if 300<=e.code<400 else ''
+            reason=redirect_reason(dest,site) if dest else ''
+            self.last_http={
+                'http_status':e.code,
+                'redirect_to':'official_waiting_room' if reason=='waiting' else
+                  'other_redirect' if 300<=e.code<400 else 'none',
+                'cookie_headers':min(len(e.headers.get_all('Set-Cookie',[])),20),
+                'cookie_sent':False
+            }
             if 300<=e.code<400:
-                dest=urljoin(url,e.headers.get('Location',''))
-                # Never follow the queue. Recognize the retailer's official
-                # waiting-room host so diagnostics distinguish it from an
-                # unexpected redirect.
-                raise CheckError(redirect_reason(dest, site)) from None
+                # Never follow the queue. Do not log redirect URLs or
+                # received cookie contents; these can contain session tokens.
+                raise CheckError(reason) from None
             raise CheckError('http_'+str(e.code)) from None
         except (OSError,TimeoutError):
             raise CheckError('network_error') from None
@@ -341,9 +362,9 @@ class StoreClient:
                 if 'user-agent:' not in text.casefold():raise CheckError('robots_unverified')
                 rp=RobotFileParser();rp.parse(text.splitlines())
                 self.robots[site]=(rp,text)
-                self.delays[site]=max(3,rp.crawl_delay(UA) or rp.crawl_delay('*') or 0)
+                self.delays[site]=max(3,rp.crawl_delay(self.user_agent) or rp.crawl_delay('*') or 0)
             rp,text=self.robots[site]
-            if not rp.can_fetch(UA,url):raise CheckError('robots_denied')
+            if not rp.can_fetch(self.user_agent,url):raise CheckError('robots_denied')
             # robotparser does not implement every wildcard dialect. Conservatively
             # honor wildcard disallows, even when written for a different crawler.
             path=urlsplit(url).path+('?' + urlsplit(url).query if urlsplit(url).query else '')
