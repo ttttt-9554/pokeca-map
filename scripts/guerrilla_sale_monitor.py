@@ -23,6 +23,7 @@ from urllib.robotparser import RobotFileParser
 SITES = {
     'pokemon': {'host': 'www.pokemoncenter-online.com', 'name': 'ポケモンセンターオンライン', 'catalog': '/pokemon-card-game/'},
     'amenity': {'host': 'www.amenitydream.com', 'name': 'アメニティードリーム', 'catalog': '/product-list'},
+    'biccamera': {'host': 'www.biccamera.com', 'name': 'ビックカメラ.com', 'catalog': '/bc/category/001/220/070/'},
 }
 UA = 'TorecaRadarSaleMonitor/2.0'
 MAX_BYTES = 2_000_000
@@ -99,19 +100,32 @@ def product_url(url, site):
     if not valid_host(url,site):
         return ''
     u = urlsplit(url)
+    path=u.path.rstrip('/')
+    if site == 'biccamera':
+        # Bic Camera official product pages have a trailing slash. Query
+        # parameters other than known non-product analytics may select variants.
+        if not re.fullmatch(r'/bc/item/[0-9]{5,12}',path):
+            return ''
+        if u.query and any(not k.lower().startswith('utm_') for k in parse_qs(u.query)):
+            return ''
+        return 'https://' + SITES[site]['host'] + path + '/'
     pattern = r'/[0-9]{6,20}(?:-[A-Za-z0-9_-]+)?\.html' if site == 'pokemon' else r'/product/[0-9]+'
-    if not re.fullmatch(pattern,u.path.rstrip('/')):
+    if not re.fullmatch(pattern,path):
         return ''
     # Variant parameters can affect availability; do not silently monitor a different variant.
     if any(k.startswith('dwvar_') for k in parse_qs(u.query)):
         return ''
-    return 'https://' + SITES[site]['host'] + u.path.rstrip('/')
+    return 'https://' + SITES[site]['host'] + path
 
 def product_id(site,url):
     return hashlib.sha256((site+'|'+url).encode()).hexdigest()
 
 def catalog_url(site, page=1):
     base = 'https://' + SITES[site]['host'] + SITES[site]['catalog']
+    if site == 'biccamera':
+        # Pagination on this storefront has not been verified. Never guess it.
+        if page != 1: raise CheckError('pagination_unverified')
+        return base
     if page == 1:
         return base
     return base + '?' + urlencode({'start':(page-1)*40,'sz':40} if site=='pokemon' else {'page':page})
@@ -128,6 +142,9 @@ def allowed_read(url,site):
         '/pokemon-card-game/battle-decks/'
     ) and parts.query=='inStock=1&srule=top-new-product':
         return True
+    if site=='biccamera' and parts.path in (SITES[site]['catalog'],'/robots.txt'):
+        return not parts.query and not parts.fragment
+    # Keep existing retailer pagination/query paths unchanged.
     return bool(product_url(url,site)) or parts.path in (SITES[site]['catalog'],'/robots.txt')
 
 def product_links(node,site,base):
@@ -234,6 +251,10 @@ def parse_catalog(html,site,url):
     if not links:
         raise CheckError('catalog_markup_unverified')
     items={u:{'url':u,'product':name[:500],'status':'unobserved'} for u,name in links.items()}
+    if site=='biccamera':
+        # Listing cards can contain stale or noninteractive "add to cart" text.
+        # Discover identities only; detail pages must supply strong evidence.
+        return list(items.values()),0,[]
     for a in doc.root.walk():
         if a.tag!='a':
             continue
@@ -263,7 +284,62 @@ def parse_catalog(html,site,url):
                 next_links.append(dest)
     return list(items.values()),total,next_links
 
+def parse_biccamera_detail(html,url):
+    """Conservative Bic Camera item check: never trust static cart wording.
+
+    In particular some officially unavailable item pages still include
+    template text "カートに入れる". Refuse positive status without both an
+    explicit in-stock indication and an active purchase control.
+    """
+    doc=Document(html);page_guard(doc)
+    expected=urlsplit(url).path.strip('/').split('/')[-1]
+    h1=next((n for n in doc.root.walk() if n.tag=='h1' and not n.hidden()),None)
+    if not h1:raise CheckError('product_markup_unverified')
+    for n in doc.root.walk():
+        if n.tag=='link' and n.attrs.get('rel')=='canonical':
+            canonical=product_url(urljoin(url,n.attrs.get('href','')),'biccamera')
+            if canonical and canonical!=url:
+                raise CheckError('product_identity_mismatch')
+    title=tidy(h1.text())[:500]
+    scope=next((n for n in doc.root.walk()
+        if n.tag=='main' and h1 in list(n.walk()) and not n.hidden()),None)
+    if scope is None:
+        scope=next((n for n in doc.root.walk()
+            if n.tag=='article' and h1 in list(n.walk()) and not n.hidden()),None)
+    if scope is None:
+        return {'url':url,'product':title,'status':'unknown',
+                'reason':'product_scope_unverified'}
+    visible=tidy(scope.text())
+    codes=re.findall(r'商品コード\s*[:：]?\s*([0-9]{5,12})',visible)
+    if not codes:
+        return {'url':url,'product':title,'status':'unknown',
+                'reason':'product_identity_unverified'}
+    if expected not in codes:
+        raise CheckError('product_identity_mismatch')
+    if re.search(r'抽選販売|抽選に応募|抽選受付',visible):
+        return {'url':url,'product':title,'status':'lottery'}
+    if re.search(r'販売休止中|予定数の販売を終了|予約受付を終了|販売を終了|'
+                 r'販売終了|在庫なし|在庫切れ|品切れ|完売|'
+                 r'この商品はご購入できません|ご購入いただけません',visible):
+        return {'url':url,'product':title,'status':'unavailable'}
+    if re.search(r'予約受付中|予約商品|予約する|発売予定',visible):
+        return {'url':url,'product':title,'status':'unknown',
+                'reason':'reservation_not_sale'}
+    active=False
+    for n in scope.walk():
+        if n.tag not in ('button','input') or n.hidden():continue
+        if ('disabled' in n.attrs or n.attrs.get('aria-disabled')=='true' or
+            'disabled' in n.attrs.get('class','').split()):continue
+        label=tidy(n.text()+' '+n.attrs.get('value','')+' '+n.attrs.get('aria-label',''))
+        if 'カートに入れる' in label:active=True
+    if active and re.search(r'在庫あり|在庫有り|在庫ございます',visible):
+        return {'url':url,'product':title,'status':'available'}
+    return {'url':url,'product':title,'status':'unknown',
+            'reason':'purchase_evidence_unverified'}
+
 def parse_detail(html,site,url):
+    if site=='biccamera':
+        return parse_biccamera_detail(html,url)
     doc=Document(html); page_guard(doc)
     h1=next((n for n in doc.root.walk() if n.tag=='h1' and not n.hidden()),None)
     if not h1:
@@ -358,7 +434,7 @@ class StoreClient:
                 try:
                     text=self.raw('https://'+SITES[site]['host']+'/robots.txt',site)
                 except CheckError as e:
-                    if e.code=='http_404':text='User-agent: *\nAllow: /'
+                    if e.code=='http_404' and site!='biccamera':text='User-agent: *\nAllow: /'
                     else:raise CheckError('robots_unavailable') from None
                 if 'user-agent:' not in text.casefold():raise CheckError('robots_unverified')
                 rp=RobotFileParser();rp.parse(text.splitlines())
@@ -461,7 +537,7 @@ def sweep_site(site,targets,state,client):
     state['selected_cursor']=(start+len(ordered))%max(1,len(selected))
     if state['catalog_enabled'] and site not in client.halted:
         cursor=max(1,int(state.get('next_page',1)))
-        for page in sorted({1,cursor}):
+        for page in ([1] if site=='biccamera' else sorted({1,cursor})):
             if site in client.halted:break
             try:
                 url=catalog_url(site,page)
@@ -482,7 +558,13 @@ def sweep_site(site,targets,state,client):
                     state['front_baseline_at']=iso()
                 state['catalog_total']=total or state.get('catalog_total',0)
                 state['last_catalog_at']=iso()
-                if page==cursor:
+                if site=='biccamera':
+                    # Only the verified category landing URL is scanned.
+                    # No guessed page parameters and no claims of a full sweep.
+                    state['next_page']=1
+                    state['last_page']=1
+                    state['last_cycle_at']=iso()
+                elif page==cursor:
                     size=40 if site=='pokemon' else 50
                     next_exists=bool(links) or (total>page*size)
                     terminal=total>0 and page*size>=total

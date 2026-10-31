@@ -7,10 +7,12 @@
   const DEVELOPER='0ba965da-445b-4055-8d8d-ead585fa0d09';
   const SITES={
     pokemon:{name:'ポケモンセンターオンライン',host:'www.pokemoncenter-online.com',id:'pokemon-center-online'},
-    amenity:{name:'アメニティードリーム',host:'www.amenitydream.com',id:'amenity-dream-online'}
+    amenity:{name:'アメニティードリーム',host:'www.amenitydream.com',id:'amenity-dream-online'},
+    biccamera:{name:'ビックカメラ.com',host:'www.biccamera.com',id:'biccamera-online'}
   };
   SITES.pokemon.catalog='https://www.pokemoncenter-online.com/pokemon-card-game/';
   SITES.amenity.catalog='https://www.amenitydream.com/product-list';
+  SITES.biccamera.catalog='https://www.biccamera.com/bc/category/001/220/070/';
   const $=id=>document.getElementById(id);
   let root,targets=[],snapshot={},events=[],products=[],counts={},fastHealth={},fastHealthError='',busy=false,editing=null,epoch=0;
   const shown=()=>!!$('devView')&&!$('devView').hidden;
@@ -21,10 +23,13 @@
   function date(value){const n=Date.parse(value||'');return Number.isFinite(n)?new Date(n).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'未実行';}
   function canonical(value,site){
     const u=new URL(value.trim());
-    const pattern=site==='pokemon'?/^\/[0-9]{6,20}(?:-[A-Za-z0-9_-]+)?\.html$/:/^\/product\/[0-9]+$/;
+    const pattern=site==='pokemon'?/^\/[0-9]{6,20}(?:-[A-Za-z0-9_-]+)?\.html$/:
+      site==='biccamera'?/^\/bc\/item\/[0-9]{5,12}\/?$/:/^\/product\/[0-9]+$/;
     if(!SITES[site]||u.protocol!=='https:'||u.hostname!==SITES[site].host||u.port||u.username||u.password||!pattern.test(u.pathname.replace(/\/$/,'')))throw new Error('選択した店舗の具体的な商品ページURLを入力してください。');
-    if([...u.searchParams.keys()].some(k=>k.startsWith('dwvar_')))throw new Error('サイズ・色指定のURLは未対応です。商品固有のURLを確認してください。');
-    return 'https://'+u.hostname+u.pathname.replace(/\/$/,'');
+    if([...u.searchParams.keys()].some(k=>k.startsWith('dwvar_')||
+      (site==='biccamera'&&!k.toLowerCase().startsWith('utm_'))))
+      throw new Error('商品バリエーション・検索条件のあるURLは登録できません。商品固有のURLを指定してください。');
+    return 'https://'+u.hostname+u.pathname.replace(/\/$/,'')+(site==='biccamera'?'/':'');
   }
   function link(url){const a=node('a','公式ページ ↗');try{const u=new URL(url);if(u.protocol!=='https:'||!Object.values(SITES).some(s=>s.host===u.hostname))return node('span','URL未確認');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';}catch(_){return node('span','URL未確認');}return a;}
   async function api(path,t,options={}){
@@ -93,6 +98,7 @@
       const all=targets.find(x=>x.site_key===key&&x.mode==='all');
       const selected=targets.filter(x=>x.site_key===key&&x.mode==='selected');
       const fast=fastHealth[key];
+      const s=snapshot.sites?.[key]||{};
       const successAgo=Date.now()-Date.parse(fast?.last_success_at||'');
       const successful=fast?.baseline_ready===true&&fast?.last_status==='ok'&&
         Number.isFinite(successAgo)&&successAgo>=0&&successAgo<=20*60000;
@@ -100,6 +106,13 @@
       const blocked=fast?.last_status==='blocked'||
         fast?.last_status==='error'||String(fast?.last_status||'').startsWith('http_');
       const autoMessage=key==='pokemon'?'⏸ 公式規約により自動在庫監視を停止中':
+        key==='biccamera'?
+          !(all?.enabled||selected.some(x=>x.enabled))?'⏸ ビックカメラ監視は停止中':
+          s.status==='ok'?'✅ 補助巡回の前回実行成功（高速監視は未対応）':
+          s.status==='blocked'?'⚠ ビックカメラの取得が制限されました':
+          s.status==='partial'?'⚠ ビックカメラの確認が一部未完了':
+          s.status==='checking'?'⌛ ビックカメラの確認中':
+          '⌛ ビックカメラの初回確認待ち':
         !all?.enabled?'⏸ 自動監視停止中':
         fastHealthError||!fast?'⚠ 監視の実行状態を確認できません':
         waiting?'⚠ 公式待合室のため取得待ち':
@@ -117,12 +130,25 @@
         terms.target='_blank';terms.rel='noopener noreferrer';
         card.append(terms);
       }
+      if(key==='biccamera'){
+        card.append(node('p','監視はデフォルトOFF。公式の巡回許可を確認できない場合、アクセスせず停止します。販売可否が曖昧なら通知しません。全商品ではなく、トレカカテゴリの先頭ページのみを確認します。高速監視には未対応です。','hint'));
+        const terms=node('a','ビックカメラ.comの利用規約');terms.href='https://www.biccamera.com/bc/c/info/regulation/index.jsp';terms.target='_blank';terms.rel='noopener noreferrer';card.append(terms);
+        card.append(toggle('トレカ一覧の先頭ページを確認（'+(all?.enabled?'ON':'OFF')+'）',
+          !!all?.enabled,async value=>{
+            const body={enabled:value,updated_at:new Date().toISOString()};
+            if(all)await mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(all.id),'PATCH',body);
+            else await mutate('guerrilla_sale_monitor_targets','POST',{
+              id:'biccamera-catalog',site_key:key,mode:'all',shop:site.name,
+              product:'TCG一覧（先頭ページのみ）',url:site.catalog,...body,
+              available_text:[],unavailable_text:[],required_text:[]
+            });
+          }));
+      }
       if(selected.length&&key!=='pokemon'){
         const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
         selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
         card.append(selectToggle);
       }
-      const s=snapshot.sites?.[key]||{};
       const scopeText=key==='pokemon'?'通知対象：ポケモンカードの未開封パック／BOX／スターター・構築済みデッキのみ':'通知対象：未開封TCGのパック／BOX／スターター・構築済みデッキのみ';
       card.append(node('p',scopeText,'hint'));
       if(fast){
@@ -233,14 +259,14 @@
       <div id="saleBetaSites"></div><p class="hint">全商品は一覧を少しずつ巡回します。全商品を毎回確認する方式ではありません。指定商品は優先枠で順番に確認します。</p>
       <details open><summary>指定商品の登録一覧</summary><div id="saleBetaTargets"></div></details>
       <details id="saleBetaEditor"><summary>指定商品を追加・編集</summary><form id="saleBetaForm">
-      <label>店舗<select id="saleBetaSite"><option value="pokemon">ポケモンセンターオンライン</option><option value="amenity">アメニティードリーム</option></select></label>
+      <label>店舗<select id="saleBetaSite"><option value="pokemon">ポケモンセンターオンライン</option><option value="amenity">アメニティードリーム</option><option value="biccamera">ビックカメラ.com</option></select></label>
       <label>商品名<input id="saleBetaName" required maxlength="120" autocomplete="off"></label>
       <label>商品ページURL<input id="saleBetaUrl" type="url" required maxlength="1500" placeholder="https://..." autocomplete="off"></label>
       <label class="sale-beta-toggle"><input id="saleBetaEnabled" type="checkbox"><span>保存後に監視する（未選択なら設定だけ保存）</span></label>
       <div class="sale-beta-actions"><button type="submit">保存</button><button type="button" id="saleBetaCancel">入力をクリア</button></div></form></details>
       <details><summary>検知履歴（最新20件）</summary><div id="saleBetaEvents"></div></details>
       <details><summary>商品ごとの確認結果（最新20件）</summary><div id="saleBetaProducts"></div></details>
-      <p class="hint">ポケセンオンラインの自動在庫確認は公式規約に従い停止中です。公式に許可された商品・在庫データの連携ができた場合のみ、販売通知機能を再開します。アメニティードリームの監視は別系統で継続します。</p>
+      <p class="hint">ポケセンオンラインの自動在庫確認は公式規約に従い停止中です。公式に許可された商品・在庫データの連携ができた場合のみ、販売通知機能を再開します。アメニティードリームの監視は別系統で継続します。ビックカメラ.comは指定商品とトレカ一覧の先頭ページに対応します。初期設定はOFFで、robots.txt等の巡回制限を尊重します。</p>
       <p class="hint">初回は先頭ページを基準として記録し、それ以降に先頭へ新しく現れた販売中商品を新規販売として記録します。既存商品の再販は指定商品を優先確認します。待合室・抽選・エラーは販売開始と区別します。</p>`;
     const authStatus=node('p','開発者権限を確認しています…','hint');authStatus.id='saleBetaAuthStatus';authStatus.setAttribute('role','status');panel.append(authStatus,root);
     const style=node('style');style.textContent=`

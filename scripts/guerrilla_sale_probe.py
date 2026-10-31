@@ -62,7 +62,10 @@ def probe(site):
 
 
 def main():
+    # Never make a Bic Camera site request from a push-triggered smoke test.
     results = [probe(site) for site in ('pokemon', 'amenity')]
+    results.append({'site':'biccamera','status':'not_probed',
+                    'reason':'new_storefront_requires_live_policy_verification'})
     print('GUERRILLA_SALE_PROBE_BEGIN')
     print(json.dumps(results, ensure_ascii=False, indent=2))
     print('GUERRILLA_SALE_PROBE_END')

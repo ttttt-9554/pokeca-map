@@ -45,6 +45,7 @@ jobs:
           PYTHONPATH=scripts python -m unittest scripts/test_guerrilla_sale_discord_signals.py -v
           PYTHONPATH=scripts python -m unittest scripts/test_collect_other_sale_signals.py -v
           node --check guerrilla_sale_dev_v2.js
+          node scripts/test_guerrilla_biccamera_ui.cjs
           node --check sale_push_v1.js
           node --check sw.js
           node --check onsite_comment_alert_v21_55.js

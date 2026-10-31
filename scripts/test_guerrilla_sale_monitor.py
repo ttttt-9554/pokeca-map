@@ -180,4 +180,68 @@ class MonitorTests(unittest.TestCase):
             self.assertFalse(a['notify_new'])
             self.assertEqual(database.call_args_list[0].args[0],'rpc/guerrilla_sale_observe')
 
+    def test_biccamera_product_url_and_catalog_allowlist(self):
+        product='https://www.biccamera.com/bc/item/15607965/'
+        self.assertEqual(m.product_url(product+'?utm_source=toreca#details','biccamera'),product)
+        self.assertEqual(m.product_url(product.rstrip('/'),'biccamera'),product)
+        for u in ('http://www.biccamera.com/bc/item/15607965/',
+                  'https://www.biccamera.com.evil.com/bc/item/15607965/',
+                  'https://www.biccamera.com/bc/item/15607965/?variation=2',
+                  'https://www.biccamera.com/bc/cart/',
+                  'https://www.biccamera.com/bc/item/abc/'):
+            self.assertEqual(m.product_url(u,'biccamera'),'')
+        self.assertEqual(m.catalog_url('biccamera'),
+                         'https://www.biccamera.com/bc/category/001/220/070/')
+        with self.assertRaisesRegex(m.CheckError,'pagination_unverified'):
+            m.catalog_url('biccamera',2)
+        self.assertFalse(m.allowed_read('https://www.biccamera.com/bc/category/001/220/070/?q=pokemon','biccamera'))
+        self.assertTrue(m.allowed_read(product,'biccamera'))
+
+    def test_biccamera_unavailable_cart_template_is_not_sale(self):
+        url='https://www.biccamera.com/bc/item/15607965/'
+        base='<main><h1>【BOX】ポケモンカードゲーム MEGA 拡張パック</h1><p>商品コード 15607965</p>'
+        for note in ('予約受付を終了しました','販売休止中です',
+                     '予定数の販売を終了しました','この商品はご購入できません',
+                     '在庫なし'):
+            html=base+'<div>'+note+'</div><button>カートに入れる</button></main>'
+            self.assertEqual(m.parse_detail(html,'biccamera',url)['status'],'unavailable',note)
+        self.assertEqual(m.parse_detail(base+'抽選販売中<button>カートに入れる</button></main>',
+                                        'biccamera',url)['status'],'lottery')
+
+    def test_biccamera_positive_requires_stock_and_active_button(self):
+        url='https://www.biccamera.com/bc/item/15607965/'
+        base='<main><h1>【BOX】ポケモンカードゲーム</h1><p>商品コード: 15607965</p>'
+        for html in (
+            base+'<button>カートに入れる</button></main>',
+            base+'在庫あり<button disabled>カートに入れる</button></main>',
+            base+'在庫あり<div hidden><button>カートに入れる</button></div></main>',
+            '<main><h1>ポケモンカード</h1>在庫あり<button>カートに入れる</button></main>',
+            base+'予約受付中 在庫あり<button>カートに入れる</button></main>',
+        ):
+            self.assertNotEqual(m.parse_detail(html,'biccamera',url)['status'],'available')
+        yes=base+'在庫あり<button>カートに入れる</button></main>'
+        self.assertEqual(m.parse_detail(yes,'biccamera',url)['status'],'available')
+        with self.assertRaisesRegex(m.CheckError,'product_identity_mismatch'):
+            m.parse_detail(yes.replace('15607965</p>','15607966</p>'),'biccamera',url)
+
+    def test_biccamera_catalog_only_discovers_and_never_assumes_stock(self):
+        url='https://www.biccamera.com/bc/item/15607965/'
+        html='<main><article><a href="/bc/item/15607965/">【BOX】ポケモンカードゲーム</a><button>カートに入れる</button></article></main>'
+        rows,total,_=m.parse_catalog(html,'biccamera',m.catalog_url('biccamera'))
+        self.assertEqual(rows[0]['url'],url)
+        self.assertEqual(rows[0]['status'],'unobserved')
+        self.assertEqual(total,0)
+
+    def test_biccamera_site_scope_and_no_requests_when_disabled(self):
+        bad=type('Client',(),{'halted':{},'get':lambda *args:self.fail('network must remain off')})()
+        state=m.sweep_site('biccamera',[{'site_key':'biccamera','mode':'all','enabled':False}],{},bad)
+        self.assertEqual(state['status'],'paused')
+        self.assertFalse(state['catalog_enabled'])
+        client=m.StoreClient()
+        client.robots['biccamera']=(type('Robots',(),{'can_fetch':lambda *a:False})(),
+                                   'User-agent: *\\nDisallow: /bc/')
+        with patch.object(client,'raw',side_effect=AssertionError('must not fetch disallowed page')):
+            with self.assertRaisesRegex(m.CheckError,'robots_denied'):
+                client.get('https://www.biccamera.com/bc/item/15607965/','biccamera')
+
 if __name__=='__main__':unittest.main()
