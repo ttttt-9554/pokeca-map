@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-31T12:01:00.037799+00:00",
-  "unique_livepocket_urls": 607,
+  "collected_at": "2026-10-31T12:30:56.662914+00:00",
+  "unique_livepocket_urls": 608,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9029,7 +9029,52 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-31T10:30:57.930973+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/x425p",
+      "discord_posted_at": "2026-10-31T12:24:55.658000+00:00",
+      "event_title": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
+      "application_end_at": "2026-11-01T23:59:00+09:00",
+      "application_start_at": "2026-10-30T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ仙台駅前店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ福岡天神店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ札幌駅前店",
+          "prefecture": ""
+        }
+      ],
+      "official_genre": "pokemon",
+      "official_event_title": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
+      "first_detected_at": "2026-10-31T12:30:58.146085+00:00"
     }
   ],
-  "updated_at": "2026-10-31T12:21:00.041057+00:00"
+  "updated_at": "2026-10-31T12:31:17.568424+00:00"
 }

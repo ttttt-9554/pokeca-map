@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-31T12:01:00.037799+00:00",
+  "collected_at": "2026-10-31T12:30:56.662914+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 607,
+  "unique_livepocket_urls": 608,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16468,33 +16468,90 @@
       "event_title": "（再入荷分）ポケモン『メガブレイブ』抽選販売",
       "application_end_at": "2026-11-01T22:00:00+09:00",
       "application_start_at": "2026-10-30T20:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/x425p",
+      "discord_message_id": "1566065434434736280",
+      "discord_posted_at": "2026-10-31T12:24:55.658000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/x425p",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "event_title": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
+      "application_end_at": "2026-11-01T23:59:00+09:00",
+      "application_start_at": "2026-10-30T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "フルコンプ八王子本店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ立川南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ町田店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ吉祥寺店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ新宿南口店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ仙台駅前店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ福岡天神店",
+          "prefecture": ""
+        },
+        {
+          "name": "フルコンプ札幌駅前店",
+          "prefecture": ""
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 447,
-    "no_structured_details": 160
+    "no_structured_details": 161
   },
   "field_counts": {
     "store_name": 424,
     "prefecture": 381,
-    "event_title": 294,
+    "event_title": 295,
     "event_date": 1,
     "product_name": 86,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 571,
-    "application_start_at": 569,
-    "stores_events": 433
+    "application_end_at": 572,
+    "application_start_at": 570,
+    "stores_events": 434
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566059255646130408"
+      "1551580466266644552": "1566065434434736280"
     },
     "last_run": {
-      "checked_at": "2026-10-31T12:01:00.037799+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-10-31T12:30:56.662914+00:00",
+      "new_urls": 1,
       "original_urls": 607,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -16684,7 +16741,8 @@
         "1566006327573221438": "2026-10-31T08:30:55.612955+00:00",
         "1566016097482842193": "2026-10-31T09:10:56.966535+00:00",
         "1566028985777913987": "2026-10-31T10:00:57.180195+00:00",
-        "1566036542848241676": "2026-10-31T10:30:56.945927+00:00"
+        "1566036542848241676": "2026-10-31T10:30:56.945927+00:00",
+        "1566065434434736280": "2026-10-31T12:30:57.272189+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19264,6 +19322,11 @@
           "checked_at": "2026-10-31T10:31:23.820310+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/x425p": {
+          "checked_at": "2026-10-31T12:31:17.568424+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -20780,6 +20843,12 @@
           "detected_at": "2026-10-31T10:30:57.930973+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/x425p": {
+          "detected_at": "2026-10-31T12:30:58.146085+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T12:31:17.568424+00:00",
           "http_status": null
         }
       },
@@ -27006,6 +27075,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/x425p": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T12:31:17.568424+00:00",
+          "title_observed": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -31117,6 +31197,19 @@
         },
         "https://livepocket.jp/e/7c2e-": {
           "checked_at": "2026-10-31T10:31:23.820310+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/x425p": {
+          "checked_at": "2026-10-31T12:31:17.568424+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
