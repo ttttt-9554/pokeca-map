@@ -156,7 +156,16 @@
     }
     const es=$('saleBetaEvents');es.replaceChildren();
     if(!events.length)es.append(node('p','検知記録はまだありません。初回の在庫確認では通知しません。','hint'));
-    for(const e of events){const c=node('article',undefined,'sale-beta-card');c.append(node('strong',(e.kind==='new_product'?'新規掲載・販売表示':'販売再開の表示')+'：'+e.product),node('small',(SITES[e.site_key]?.name||'')+' / '+date(e.detected_at)),link(e.url));es.append(c);}
+    for(const e of events){
+      const c=node('article',undefined,'sale-beta-card');
+      const unconfirmed=e.kind==='reported_unconfirmed';
+      const heading=unconfirmed?'⚠️ 販売報告（未確認）':
+        e.kind==='new_product'?'✅ 公式販売確認・新規掲載':'✅ 公式販売確認・再開';
+      c.append(node('strong',heading+'：'+e.product),
+        node('small',(SITES[e.site_key]?.name||'')+' / '+date(e.detected_at)),link(e.url));
+      if(unconfirmed)c.append(node('small','複数の独立した販売報告を照合しました。公式サイトの在庫は未確認です。'));
+      es.append(c);
+    }
     const ps=$('saleBetaProducts');ps.replaceChildren();
     if(!products.length)ps.append(node('p','まだ商品を確認していません。','hint'));
     for(const p of products){const c=node('article',undefined,'sale-beta-card');c.append(node('strong',p.product||'商品名未確認'),node('small',(LABELS[p.status]||p.status)+' / '+date(p.checked_at)),link(p.url));if(p.reason)c.append(node('small',ERRORS[p.reason]||p.reason));ps.append(c);}
@@ -183,6 +192,7 @@
       <div class="sale-beta-actions"><button type="submit">保存</button><button type="button" id="saleBetaCancel">入力をクリア</button></div></form></details>
       <details><summary>検知履歴（最新20件）</summary><div id="saleBetaEvents"></div></details>
       <details><summary>商品ごとの確認結果（最新20件）</summary><div id="saleBetaProducts"></div></details>
+      <p class="hint">新規販売・再販は公式ページで購入可能と確認できたときだけ確定通知します。公式待機室でも、既存のDiscord収集チャンネルに同じ公式商品リンクについて独立した複数の販売報告が届いた場合は「⚠️ 未確認速報」を別表示します。報告だけでは在庫確定になりません。</p>
       <p class="hint">初回は先頭ページを基準として記録し、それ以降に先頭へ新しく現れた販売中商品を新規販売として記録します。既存商品の再販は指定商品を優先確認します。待合室・抽選・エラーは販売開始と区別します。</p>`;
     const authStatus=node('p','開発者権限を確認しています…','hint');authStatus.id='saleBetaAuthStatus';authStatus.setAttribute('role','status');panel.append(authStatus,root);
     const style=node('style');style.textContent=`
