@@ -3143,6 +3143,13 @@
     ['イエローサブマリン広島店','広島県']
   ].map(([name,prefecture])=>({name,prefecture}));
 
+  function lpIsBareYellowChain(name){
+    const plain=String(name||'').trim()
+      .replace(/[\s　・･._－（）()【】「」-]+/g,'').toLowerCase();
+    return ['イエローサブマリン','イエローサブマリン店',
+      'イエサブ','イエサブ店'].includes(plain);
+  }
+
   function lpCardStoreRender(stores) {
     const root=$('lpCardStoreRows'),summary=$('lpCardStoresSummary');
     if(!root||!summary)return;
@@ -3221,6 +3228,13 @@
     }
     const currentStores=lotteryStoreEntries(item);
     lpCardStoreRender(currentStores);
+    // The chain list is a suggestion, never proof that this draw includes
+    // every branch. Requiring a confirmation preserves verified store scope.
+    if($('lpCardStorePreset')){
+      $('lpCardStorePreset').value=currentStores.length===1&&
+        lpIsBareYellowChain(currentStores[0].name)
+          ? 'yellow-submarine' : '';
+    }
     // Automatically expose multi-store controls; single-store stays folded.
     $('lpCardStoresFold').open=currentStores.length>1;
     const link = $('lpCardSourceLink');
@@ -4375,6 +4389,15 @@
     const urgent = state === 'open' && Number.isFinite(deadlineRemainingMs) && deadlineRemainingMs > 0 && deadlineRemainingMs < 86400000;
     const placeText = places.length ? places.join('・') : '都道府県未確認';
     const genre = lotteryGenre(item);
+    const chainReference = stores.length===1 && lpIsBareYellowChain(stores[0].name)
+      ? '<details class="lp-store-details lp-chain-reference">'+
+          '<summary>🏬 イエローサブマリン 登録済み22店舗（候補）</summary>'+
+          '<p class="lp-store-muted">チェーンの登録店舗一覧です。'+
+          'この抽選の対象店舗が22店すべてとは限りません。'+
+          '応募店舗は公式案内で確認してください。</p>'+
+          '<ul>'+LP_YELLOW_SUBMARINE_STORES.map(row=>'<li>'+
+            escape(row.name)+' <small>（'+escape(row.prefecture)+'）</small></li>').join('')+
+          '</ul></details>' : '';
     const list = stores.length ? `
       <details class="lp-store-details">
         <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
@@ -4401,6 +4424,7 @@
       ${urgent ? '<p class="lp-urgent-alert">⚠️ 応募締切まで24時間以内！</p>' : ''}
       <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
+      ${chainReference}
       ${lotteryOnsiteSharedHtml(item.url)}
       ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">'+(item.manual_registration_method==='in_store'?'店頭応募の案内を確認 ↗':'アプリ公式案内を確認 ↗')+'</a>'
           :(item.manual_registration_method==='in_store'
