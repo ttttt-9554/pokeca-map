@@ -111,7 +111,7 @@ jobs:
           python -m py_compile scripts/livepocket_v21.py scripts/livepocket_manual_completed.py scripts/livepocket_check_summary.py scripts/livepocket_venue_prefecture.py
           PYTHONPATH=scripts python -m unittest scripts/test_livepocket_detail_priority.py
           python scripts/test_livepocket_manual_review.py
-          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_master_prefecture.py
 
       - name: Plan new, due retries and ticket products and verified store locations (v21)
         id: v21plan
@@ -132,6 +132,17 @@ jobs:
           set -o pipefail
           cp livepocket_public.json "$RUNNER_TEMP/livepocket-public-before-process.json"
           python scripts/livepocket_v21.py process | tee "$RUNNER_TEMP/livepocket-v21-process.log"
+
+      # v21.146: Add missing prefectures from uniquely identified store-master
+      # labels, after official-page and manual-verified location extraction.
+      # No fuzzy matches or overwrite of confirmed/admin-edited prefectures.
+      # A temporary backend outage must not interrupt collecting new draws.
+      - name: Fill missing LivePocket regions from verified store master
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_master_prefecture.py --write
 
       # 公開しても安全な集計数字のみ出力（URL・Discord本文・トークン等は含めない）。
       # Daily new-URL totals are refreshed on every collection run when changed;
