@@ -64,6 +64,11 @@ class LivePocketMasterPrefectureTests(unittest.TestCase):
                              ["愛知県", "埼玉県"])
             self.assertEqual(event["prefecture"], "")
 
+    def test_generic_chain_label_is_not_a_specific_store(self):
+        raw, public = catalogs([{"name": "TSUTAYA", "prefecture": ""}],
+                               legacy="TSUTAYA")
+        self.assertEqual(apply_master(raw, public, {"tsutaya": "東京都"})["stores"], 0)
+
     def test_missing_or_ambiguous_store_does_not_guess(self):
         raw, public = catalogs([{"name": "未知の店舗新町店", "prefecture": ""}])
         self.assertEqual(apply_master(raw, public, MASTER)["stores"], 0)
