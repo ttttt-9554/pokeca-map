@@ -589,7 +589,12 @@ Deno.serve(async (req: Request) => {
         status:200,headers:{"Content-Type":"application/json"}
       });
     } catch(error) {
-      console.error("Push test failed:",String(error));
+      const e=error as {statusCode?:number,body?:string,headers?:Record<string,string>,message?:string};
+      console.error("Push test failed:",JSON.stringify({
+        statusCode:e?.statusCode||null,
+        body:String(e?.body||"").slice(0,500),
+        message:String(e?.message||error).slice(0,500)
+      }));
       return new Response("Push test failed",{status:502});
     }
   }
