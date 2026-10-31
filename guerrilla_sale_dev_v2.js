@@ -127,6 +127,16 @@
         if(fast.last_product_count>0)card.append(node('p','高速監視の直近確認商品：'+fast.last_product_count+'件','hint'));
       }
       card.append(node('p','📄 補助巡回：発見済み '+(counts[key]||0)+'件 / 最終全商品処理 '+date(s.last_run_at),'hint'));
+      // GitHub's scheduled sweep can be delayed or stopped independently of
+      // the Supabase fast scan. Never present its stale data as current.
+      const sweepAt=Date.parse(s.last_run_at||'');
+      const sweepAge=Date.now()-sweepAt;
+      if(all?.enabled && (!Number.isFinite(sweepAge) || sweepAge>30*60000)){
+        const reason=s.status==='paused'?'以前の最終記録は「停止」でした。':
+          '最終処理の記録が30分以上更新されていません。';
+        card.append(node('p','⚠ 補助巡回：'+reason+
+          '高速監視とは別の処理です。GitHub Actionsの実行状況を確認してください。','sale-beta-warning'));
+      }
       card.append(node('p','補助巡回の基準：'+(s.front_baseline_ready?'取得済み':'取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
       if(s.catalog_total)card.append(node('p','一覧表示の総件数 '+s.catalog_total+'件（未確認商品も含みます）','hint'));
       if(s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
