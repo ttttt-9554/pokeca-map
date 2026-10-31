@@ -144,6 +144,18 @@
               ' ／ Set-Cookieヘッダー：'+(latest.set_cookie_seen?'検出':'未検出')+
               '。IPによる制限か、混雑・セッション条件かはこの結果だけでは断定できません。','sale-beta-warning'));
           }
+          if(typeof latest.cookie_header_readable==='boolean'){
+            const details=latest.cookie_header_readable
+              ? '受信Cookie：'+(latest.cookie_header_count??0)+'件'+
+                ' ／ 発行元ホスト専用：'+(latest.cookie_host_only_count??0)+'件'+
+                ' ／ 親ドメイン共通：'+(latest.cookie_parent_domain_count??0)+'件'+
+                ' ／ 転送先のドメイン・パスにも適用可能：'+
+                (latest.cookie_redirect_scope_match_count??0)+'件'
+              : 'Cookie属性は取得できませんでした（存在自体は別途確認済み）。';
+            card.append(node('p','🍪 Cookie属性診断：'+details,'hint'));
+            card.append(node('p','Cookieの値は保存せず、再送信もしていません。'+
+              '適用可能なCookieがあっても、待機室を通過できるとは限りません。','hint'));
+          }
         }
       }
       card.append(node('p','📄 補助巡回：発見済み '+(counts[key]||0)+'件 / 最終全商品処理 '+date(s.last_run_at),'hint'));
