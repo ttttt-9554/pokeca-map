@@ -5,7 +5,7 @@
   const KEY='sb_publishable_C0YESv-nDjR7PvAoMPscQg_uznt6foN';
   const SESSION='sb-aypcmtlaaygmiexboypk-auth-token';
   const DEVELOPER='0ba965da-445b-4055-8d8d-ead585fa0d09';
-  const VAPID='BL4SQCgfGlUeni8yk-S2jjjE_h8m1ZHgHxuX-rT6EjPoVkN4gAxc57CgNCveTs4AZeINm5wRAOUbxSnWgJU2Jwk';
+  const VAPID='BPyhg9rRbF_WQbW3O-_FiPlZh0SYVbrkP1KDNeOK8UF1SfU6WXQcMaXCdsGmeoMsM4vL0pCPw2IZ40mEyNXzk7w';
   let busy=false;
 
   const token=()=>{try{const v=JSON.parse(localStorage.getItem(SESSION)||'null');return v?.access_token||v?.currentSession?.access_token||'';}catch(_){return '';}};
