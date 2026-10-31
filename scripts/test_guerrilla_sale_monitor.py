@@ -102,6 +102,13 @@ class MonitorTests(unittest.TestCase):
             self.assertEqual(a['selected_cursor'],8)
             obs.reset_mock();b=m.sweep_site('amenity',targets,a,client)
             self.assertEqual(b['selected_cursor'],6)
+    def test_pokemon_retailer_terms_pause_even_if_target_enabled(self):
+        client=type('Client',(),{'halted':{},'get':lambda *args:self.fail('Forbidden retailer request')})()
+        targets=[{'site_key':'pokemon','mode':'all','enabled':True}]
+        state=m.sweep_site('pokemon',targets,{},client)
+        self.assertEqual(state['status'],'paused')
+        self.assertFalse(state['catalog_enabled'])
+
     def test_disabled_never_fetches(self):
         client=type('Client',(),{'halted':{},'get':lambda *x:self.fail('network must not run')})()
         state=m.sweep_site('pokemon',[{'site_key':'pokemon','mode':'all','enabled':False}],{},client)
