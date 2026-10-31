@@ -19274,7 +19274,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ilbaf": {
-          "checked_at": "2026-10-31T09:11:22.343336+00:00",
+          "checked_at": "2026-10-31T15:26:39.497295+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -20776,7 +20776,7 @@
         "https://livepocket.jp/e/ilbaf": {
           "detected_at": "2026-10-31T03:00:57.903604+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-31T09:11:22.343336+00:00",
+          "checked_at": "2026-10-31T15:26:39.497295+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ju-uo": {
@@ -22052,8 +22052,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ilbaf": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-31T09:11:22.343336+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-31T15:26:39.497295+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/otsly": {
@@ -26985,7 +26985,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-31T09:11:22.343336+00:00",
+          "checked_at": "2026-10-31T15:26:39.497295+00:00",
           "title_observed": "再販「メガブレイブ」ポケモンカード抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -31094,7 +31094,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ilbaf": {
-          "checked_at": "2026-10-31T09:11:22.343336+00:00",
+          "checked_at": "2026-10-31T15:26:39.497295+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
