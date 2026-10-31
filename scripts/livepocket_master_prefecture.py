@@ -199,26 +199,29 @@ def apply_one(raw_row, public_row, region_by_name):
 
         changed = False
         for row in (raw_row, public_row):
+            stores_changed = parent_changed = False
             for store in valid_store_rows(row):
                 if normalize(store.get("name")) != key or store.get("prefecture"):
                     continue
                 store["prefecture"] = pref
-                changed = True
-            if not is_multistore and (not row.get("prefecture")):
+                stores_changed = True
+            if not is_multistore and not row.get("prefecture"):
                 legacy_name = normalize(row.get("store_name"))
                 if not legacy_name or legacy_name == key:
                     row["prefecture"] = pref
-                    changed = True
-        if changed:
-            counts += 1
-            for row in (raw_row, public_row):
-                # Always label inferred data as a fallback, not an official
-                # verification or an administrator-confirmed correction.
+                    parent_changed = True
+            if stores_changed or parent_changed:
+                changed = True
+                # Mark ONLY fields filled by this fallback, not previously
+                # confirmed prefectures or unchanged manual observations.
                 sources = row.setdefault("field_sources", {})
                 if isinstance(sources, dict):
-                    sources.setdefault("stores_prefectures", SOURCE_NAME)
-                    if not is_multistore and row.get("prefecture") == pref:
+                    if stores_changed:
+                        sources.setdefault("stores_prefectures", SOURCE_NAME)
+                    if parent_changed:
                         sources.setdefault("prefecture", SOURCE_NAME)
+        if changed:
+            counts += 1
     return counts
 
 
