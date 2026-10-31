@@ -127,7 +127,7 @@
     // preview with the independently versioned, authenticated controls.
     const legacy=panel.querySelector('.guerrilla-sale-body');if(legacy)legacy.hidden=true;
     root=node('div',undefined,'sale-beta-body');root.id='saleBetaV2';root.hidden=true;
-    root.innerHTML=`<p class="hint">開発者限定のテスト機能です。2つの監視方式を併用できます。通知はこの画面内だけに記録し、Discordには送信しません。</p>
+    root.innerHTML=`<p class="hint">開発者限定のテスト機能です。通知対象はカードゲームの未開封パック／BOX／構築済み・スターター系デッキのみです。シングルカード・サプライ・予約商品は除外します。通知はこの画面内だけに記録し、Discordには送信しません。</p>
       <p id="saleBetaStatus" role="status" aria-live="polite"></p><button type="button" id="saleBetaRefresh">設定・保存済み結果を再読込</button>
       <div id="saleBetaSites"></div><p class="hint">全商品は一覧を少しずつ巡回します。全商品を毎回確認する方式ではありません。指定商品は優先枠で順番に確認します。</p>
       <details open><summary>指定商品の登録一覧</summary><div id="saleBetaTargets"></div></details>
