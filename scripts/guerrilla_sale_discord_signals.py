@@ -93,8 +93,12 @@ def evidence_blocks(message):
 def explicit_sale(block):
     if not isinstance(block, str) or len(block) > 16000:
         return None
-    if not (POSITIVE.search(block) and not NEGATIVE.search(block)
-            and POKEMON.search(block) and not SUPPLIES.search(block)):
+    # Ignore questions and hearsay, even if they contain the words
+    # "販売開始". Strip official links first so query parameters are safe.
+    text_only = PRODUCT_URL_RE.sub("", block)
+    if (not POSITIVE.search(text_only) or NEGATIVE.search(text_only)
+            or re.search(r"[?？]|らしい|かも|噂|確認中", text_only)
+            or not POKEMON.search(text_only) or SUPPLIES.search(text_only)):
         return None
     product_kind = ("pack" if PACK.search(block) and not DECK.search(block)
                     else "deck" if DECK.search(block) and not PACK.search(block)
