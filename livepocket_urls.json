@@ -19309,7 +19309,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/fiwby": {
-          "checked_at": "2026-10-31T16:06:33.271589+00:00",
+          "checked_at": "2026-10-31T22:16:26.702744+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -20830,7 +20830,7 @@
         "https://livepocket.jp/e/fiwby": {
           "detected_at": "2026-10-31T10:00:58.177610+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-31T16:06:33.271589+00:00",
+          "checked_at": "2026-10-31T22:16:26.702744+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/7c2e-": {
@@ -22082,8 +22082,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fiwby": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-31T16:06:33.271589+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-31T22:16:26.702744+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/85r2b": {
@@ -27082,7 +27082,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-31T16:06:33.271589+00:00",
+          "checked_at": "2026-10-31T22:16:26.702744+00:00",
           "title_observed": "【ふるいちイオンモール土浦店】ポケカ抽選販売（拡張パック30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -31205,7 +31205,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/fiwby": {
-          "checked_at": "2026-10-31T16:06:33.271589+00:00",
+          "checked_at": "2026-10-31T22:16:26.702744+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
