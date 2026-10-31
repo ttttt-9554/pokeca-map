@@ -12,7 +12,7 @@
   SITES.pokemon.catalog='https://www.pokemoncenter-online.com/search/';
   SITES.amenity.catalog='https://www.amenitydream.com/product-list';
   const $=id=>document.getElementById(id);
-  let root,targets=[],snapshot={},events=[],products=[],counts={},busy=false,editing=null,epoch=0;
+  let root,targets=[],snapshot={},events=[],products=[],counts={},fastHealth={},fastHealthError='',busy=false,editing=null,epoch=0;
   const shown=()=>!!$('devView')&&!$('devView').hidden;
   function token(){try{const value=JSON.parse(localStorage.getItem(SESSION)||'null');return value?.access_token||value?.currentSession?.access_token||'';}catch(_){return '';}}
   function node(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
@@ -47,7 +47,7 @@
       result.push(...(data||[]));if(!data||data.length<500)return result;
     }
   }
-  function clear(){epoch++;targets=[];events=[];products=[];snapshot={};counts={};editing=null;if(root){root.hidden=true;$('saleBetaSites')?.replaceChildren();$('saleBetaTargets')?.replaceChildren();$('saleBetaEvents')?.replaceChildren();$('saleBetaProducts')?.replaceChildren();$('saleBetaForm')?.reset();}}
+  function clear(){epoch++;targets=[];events=[];products=[];snapshot={};counts={};fastHealth={};fastHealthError='';editing=null;if(root){root.hidden=true;$('saleBetaSites')?.replaceChildren();$('saleBetaTargets')?.replaceChildren();$('saleBetaEvents')?.replaceChildren();$('saleBetaProducts')?.replaceChildren();$('saleBetaForm')?.reset();}}
   async function refresh(){
     if(busy||!shown())return;
     busy=true;const generation=epoch;
@@ -58,11 +58,17 @@
         api('/rest/v1/guerrilla_sale_monitor_snapshot?select=payload,updated_at&id=eq.current',t),
         api('/rest/v1/guerrilla_sale_events?select=*&order=detected_at.desc&limit=20',t),
         api('/rest/v1/guerrilla_sale_products?select=*&order=checked_at.desc.nullslast&limit=20',t),
-        ...Object.keys(SITES).map(site=>api('/rest/v1/guerrilla_sale_products?select=id&site_key=eq.'+site+'&limit=1',t,{prefer:'count=exact'}))
+        ...Object.keys(SITES).map(site=>api('/rest/v1/guerrilla_sale_products?select=id&site_key=eq.'+site+'&limit=1',t,{prefer:'count=exact'})),
+        api('/rest/v1/rpc/guerrilla_fast_admin_health_v1',t,{method:'POST',body:{}})
+          .catch(e=>({data:null,healthError:String(e.message||e)}))
       ]);
       if(generation!==epoch||!shown()||token()!==t)return;
       targets=data[0];snapshot=data[1].data?.[0]?.payload||{};events=data[2].data||[];products=data[3].data||[];
       Object.keys(SITES).forEach((site,i)=>{counts[site]=Number.isFinite(data[4+i].count)?data[4+i].count:0;});
+      const healthData=data[4+Object.keys(SITES).length];
+      fastHealthError=healthData.healthError||'';
+      fastHealth=Object.fromEntries((Array.isArray(healthData.data)?healthData.data:[])
+        .filter(row=>row&&SITES[row.site_key]).map(row=>[row.site_key,row]));
       root.hidden=false;render();
       status(data[1].data?.length?'設定と保存済み結果を読み込みました。最終実行：'+date(data[1].data[0].updated_at):'設定は保存できますが、監視処理はまだ実行確認できていません。ONは実行成功を意味しません。');
     }catch(e){status(e.message);}finally{busy=false;}
@@ -86,7 +92,22 @@
       const card=node('section',undefined,'sale-beta-card');card.append(node('h3',site.name));
       const all=targets.find(x=>x.site_key===key&&x.mode==='all');
       const selected=targets.filter(x=>x.site_key===key&&x.mode==='selected');
-      const autoState=node('p',all?.enabled?'✅ 自動監視中':'⏸ 自動監視停止中',all?.enabled?'sale-beta-monitor-state':'sale-beta-warning');card.append(autoState);
+      const fast=fastHealth[key];
+      const successAgo=Date.now()-Date.parse(fast?.last_success_at||'');
+      const successful=fast?.baseline_ready===true&&
+        Number.isFinite(successAgo)&&successAgo>=0&&successAgo<=20*60000;
+      const waiting=fast?.last_status==='waiting';
+      const blocked=fast?.last_status==='blocked'||
+        fast?.last_status==='error'||String(fast?.last_status||'').startsWith('http_');
+      const autoMessage=!all?.enabled?'⏸ 自動監視停止中':
+        fastHealthError||!fast?'⚠ 監視の実行状態を確認できません':
+        waiting?'⚠ 公式待合室のため取得待ち':
+        blocked?'⚠ サイトの取得に失敗・再試行待ち':
+        !fast.baseline_ready?'⌛ 高速監視の初回基準を取得待ち':
+        successful?'✅ 高速監視で取得成功を確認':
+        '⚠ 高速監視の取得成功が最近ありません';
+      card.append(node('p',autoMessage,
+        all?.enabled&&successful&&!waiting&&!blocked?'sale-beta-monitor-state':'sale-beta-warning'));
       if(selected.length){
         const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
         selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
@@ -95,8 +116,18 @@
       const s=snapshot.sites?.[key]||{};
       const scopeText=key==='pokemon'?'通知対象：ポケモンカードの未開封パック／BOX／スターター・構築済みデッキのみ':'通知対象：未開封TCGのパック／BOX／スターター・構築済みデッキのみ';
       card.append(node('p',scopeText,'hint'));
-      card.append(node('p','発見済み '+(counts[key]||0)+'件 / 最終処理 '+date(s.last_run_at),'hint'));
-      card.append(node('p','自動監視：'+(s.front_baseline_ready?'新着監視の基準取得済み':'新着監視の基準取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
+      if(fast){
+        card.append(node('p','⚡ 高速監視：最終試行 '+date(fast.last_run_at)+
+          ' ／ 最終取得成功 '+(fast.last_success_at?date(fast.last_success_at):'未取得')+
+          ' ／ 基準データ '+(fast.baseline_ready?'取得済み':'未取得'),'hint'));
+        if(fast.cooldown_until&&Date.parse(fast.cooldown_until)>Date.now())
+          card.append(node('p','次の取得再試行：'+date(fast.cooldown_until)+' 以降','sale-beta-warning'));
+        if(waiting)card.append(node('p','公式サイトの待合室が解除されるまで新規販売は検出できません。自動再試行します。','sale-beta-warning'));
+        else if(blocked)card.append(node('p','取得エラー：'+(ERRORS[fast.last_error]||ERRORS[fast.last_status]||fast.last_status||'詳細不明'),'sale-beta-warning'));
+        if(fast.last_product_count>0)card.append(node('p','高速監視の直近確認商品：'+fast.last_product_count+'件','hint'));
+      }
+      card.append(node('p','📄 補助巡回：発見済み '+(counts[key]||0)+'件 / 最終全商品処理 '+date(s.last_run_at),'hint'));
+      card.append(node('p','補助巡回の基準：'+(s.front_baseline_ready?'取得済み':'取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
       if(s.catalog_total)card.append(node('p','一覧表示の総件数 '+s.catalog_total+'件（未確認商品も含みます）','hint'));
       if(s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
       if(s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
