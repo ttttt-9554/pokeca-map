@@ -104,10 +104,12 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(m.notification_product_kind('【ポケモンカードゲーム】拡張パック テスト BOX 在庫数 12点'),'pack')
         self.assertEqual(m.notification_product_kind('【ONE PIECEカードゲーム】ブースターパック 新時代 BOX'),'pack')
         self.assertEqual(m.notification_product_kind('【ガンダムカードゲーム】スタートデッキ ST01'),'deck')
+        self.assertEqual(m.notification_product_kind('【遊戯王OCG】デュエルモンスターズ BOX'),'pack')
         self.assertEqual(m.notification_product_kind('【R】熱気 バサラ [ UNA_スタートデッキ ] 380円 在庫数 3枚'),'')
         self.assertEqual(m.notification_product_kind('【アルティメットガード社製：デッキケース】Deck Case 100+'),'')
         self.assertEqual(m.notification_product_kind('(予約)【UNION ARENA】ブースターパック BOX'),'')
         self.assertEqual(m.notification_product_kind('勝利の女神 14枚セット ブースターパック関連'),'')
+        self.assertEqual(m.notification_product_kind('【プラコロ】たんけんボックス 01 BOX'),'')
     def test_observe_marks_nonsealed_as_notification_ineligible(self):
         with patch.object(m,'db') as database:
             m.observe('amenity',[{'url':AM,'product':'【SR】カード 1枚','status':'available'}],'all',True)
