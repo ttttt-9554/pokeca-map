@@ -8994,6 +8994,9 @@
       "url": "https://livepocket.jp/e/7c2e-",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
+      "event_title": "（再入荷分）ポケモン『ストームエメラルダ』抽選販売",
+      "application_start_at": "2026-10-30T20:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-31T10:30:07.367000+00:00",
       "stores": [
         {
@@ -9001,37 +9004,32 @@
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "（再入荷分）ポケモン『ストームエメラルダ』抽選販売",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-30T20:00:00+09:00",
       "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "（再入荷分）ポケモン『ストームエメラルダ』抽選販売",
       "first_detected_at": "2026-10-31T10:30:57.930973+00:00"
     },
     {
       "url": "https://livepocket.jp/e/85r2b",
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
+      "event_title": "（再入荷分）ポケモン『メガブレイブ』抽選販売",
+      "application_start_at": "2026-10-30T20:00:00+09:00",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
       "discord_posted_at": "2026-10-31T10:30:07.367000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "（再入荷分）ポケモン『メガブレイブ』抽選販売",
-      "application_end_at": "2026-11-01T22:00:00+09:00",
-      "application_start_at": "2026-10-30T20:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "メガブレイブ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "（再入荷分）ポケモン『メガブレイブ』抽選販売",
       "first_detected_at": "2026-10-31T10:30:57.930973+00:00"
     }
   ],
-  "updated_at": "2026-10-31T10:31:23.820310+00:00"
+  "updated_at": "2026-10-31T10:41:00.979757+00:00"
 }
