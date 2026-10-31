@@ -9,7 +9,7 @@
     pokemon:{name:'ポケモンセンターオンライン',host:'www.pokemoncenter-online.com',id:'pokemon-center-online'},
     amenity:{name:'アメニティードリーム',host:'www.amenitydream.com',id:'amenity-dream-online'}
   };
-  SITES.pokemon.catalog='https://www.pokemoncenter-online.com/search/';
+  SITES.pokemon.catalog='https://www.pokemoncenter-online.com/pokemon-card-game/';
   SITES.amenity.catalog='https://www.amenitydream.com/product-list';
   const $=id=>document.getElementById(id);
   let root,targets=[],snapshot={},events=[],products=[],counts={},fastHealth={},fastHealthError='',busy=false,editing=null,epoch=0;
@@ -152,7 +152,7 @@
     for(const p of products){const c=node('article',undefined,'sale-beta-card');c.append(node('strong',p.product||'商品名未確認'),node('small',(LABELS[p.status]||p.status)+' / '+date(p.checked_at)),link(p.url));if(p.reason)c.append(node('small',ERRORS[p.reason]||p.reason));ps.append(c);}
   }
   const LABELS={available:'販売表示あり',unavailable:'在庫なし',unobserved:'発見済み・未確認',unknown:'判定不能',waiting:'待合室',blocked:'取得制限',lottery:'抽選販売'};
-  const ERRORS={robots_denied:'サイトの巡回ルールで取得停止',robots_unavailable:'巡回ルールを取得できず停止',robots_unverified:'巡回ルールを確認できず停止',http_403:'アクセス制限',http_429:'アクセス頻度制限',http_500:'サイト側エラー（500）',http_502:'サイト側エラー（502）',http_503:'サイト側メンテナンス・混雑（503）',http_504:'サイト側タイムアウト（504）',waiting:'公式仮想待合室のため停止',redirect_blocked:'転送先を確認できず停止',catalog_markup_unverified:'商品一覧の構造を確認できません',product_markup_unverified:'商品ページの構造を確認できません',pagination_not_advancing:'ページ送りを確認できず停止',pagination_unverified:'一覧の続き・終端を確認できません',network_error:'通信エラー',dns_failed:'接続先を確認できません',run_budget_exceeded:'今回の実行上限。次回に継続'};
+  const ERRORS={robots_denied:'サイトの巡回ルールで取得停止',robots_unavailable:'巡回ルールを取得できず停止',robots_unverified:'巡回ルールを確認できず停止',http_403:'アクセス制限',http_429:'アクセス頻度制限',http_500:'サイト側エラー（500）',http_502:'サイト側エラー（502）',http_503:'サイト側メンテナンス・混雑（503）',http_504:'サイト側タイムアウト（504）',waiting:'公式仮想待合室のため停止',redirect_blocked:'転送先を確認できず停止',catalog_markup_unverified:'商品一覧の構造を確認できません',catalog_no_verified_products:'商品一覧を取得しましたが、在庫を判定できる商品が見つかりません。監視対象URL・商品一覧構造を確認してください',product_markup_unverified:'商品ページの構造を確認できません',pagination_not_advancing:'ページ送りを確認できず停止',pagination_unverified:'一覧の続き・終端を確認できません',network_error:'通信エラー',dns_failed:'接続先を確認できません',run_budget_exceeded:'今回の実行上限。次回に継続'};
   function edit(item){editing=item.id;$('saleBetaSite').value=item.site_key;$('saleBetaName').value=item.product;$('saleBetaUrl').value=item.url;$('saleBetaEnabled').checked=item.enabled;$('saleBetaEditor').open=true;$('saleBetaName').focus();}
   function reset(){editing=null;$('saleBetaForm').reset();}
   function mount(){
