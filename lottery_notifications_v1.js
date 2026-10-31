@@ -143,12 +143,28 @@
   function showToast(fresh) {
     if (!toast || !fresh.length || document.visibilityState === 'hidden') return;
     dismissToast();
+    placeNoticeSurfaces();
     const label = fresh.length === 1 ? fresh[0].headline :
       '🔔 抽選に関する新しいお知らせが' + fresh.length + '件あります';
     const title = toast.querySelector('.trn-toast-label');
     if (title) title.textContent = label;
     toast.hidden = false;
     toastTimer = setTimeout(dismissToast, 8500);
+  }
+
+  function placeNoticeSurfaces() {
+    const header = document.getElementById('appFixedHeader');
+    if (!header) return;
+    const headerBottom = Math.max(0, Math.ceil(header.getBoundingClientRect().bottom));
+    const top = headerBottom + 8;
+    const nav = document.querySelector('nav[aria-label="メインメニュー"]');
+    const navHeight = nav ? Math.ceil(nav.getBoundingClientRect().height) : 0;
+    const availableHeight = Math.max(140, Math.floor(window.innerHeight - top - navHeight - 12));
+    if (panel) {
+      panel.style.top = top + 'px';
+      panel.style.maxHeight = availableHeight + 'px';
+    }
+    if (toast) toast.style.top = top + 'px';
   }
 
   function setPanelOpen(open) {
@@ -158,6 +174,7 @@
     bell.setAttribute('aria-expanded', String(panelOpen));
     if (panelOpen) {
       dismissToast();
+      placeNoticeSurfaces();
       drawList();
       const close = document.getElementById('trnClose');
       if (close) close.focus();
@@ -243,6 +260,9 @@
     if (!bell || !badge || !panel) return;
     const signedIn = !!userId;
     bell.hidden = !signedIn;
+    // Use four equal header buttons only while Discord access is approved.
+    document.querySelector('#appFixedHeader .app-header-actions')
+      ?.classList.toggle('trn-with-bell', signedIn);
     if (!signedIn) {
       panel.hidden = true;
       panelOpen = false;
@@ -301,15 +321,20 @@
     const style = document.createElement('style');
     style.id = 'trnStyles';
     style.textContent = [
-      '#trnBell{position:fixed;right:14px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:7200;width:56px;height:56px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:25px;cursor:pointer;border:1px solid var(--app-border,#cad6e7);background:var(--app-surface,#fff);color:var(--app-text,#172033);box-shadow:0 7px 25px #0004}',
+      '#appFixedHeader #trnBell{position:relative!important;inset:auto!important;z-index:auto;min-height:42px;width:auto;min-width:0;max-width:100%;margin:0;padding:8px 10px;border-radius:12px;display:inline-flex;justify-content:center;align-items:center;gap:3px;cursor:pointer;border:1px solid var(--app-border,#cad6e7);background:var(--app-surface2,#eff6ff);color:var(--app-text,#172033);box-shadow:none;font-size:13px;line-height:1.2;white-space:nowrap;overflow:visible;box-sizing:border-box}',
+      '#appFixedHeader #trnBell .trn-bell-icon{font-size:17px;line-height:1}',
+      '#appFixedHeader #trnBell .trn-bell-label{font-size:13px;font-weight:800;line-height:1}',
+      '@media(max-width:520px){#appFixedHeader .app-header-actions.trn-with-bell{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}#appFixedHeader .app-header-actions.trn-with-bell>button{min-width:0;width:100%;padding:8px 2px;font-size:clamp(11px,3.1vw,13px);letter-spacing:-.025em}#appFixedHeader #trnBell .trn-bell-label{font-size:clamp(11px,3.1vw,13px)}}',
+      '@media(max-width:360px){#appFixedHeader .app-header-actions.trn-with-bell{gap:3px}#appFixedHeader .app-header-actions.trn-with-bell>button{padding:8px 1px}#appFixedHeader #trnBell .trn-bell-icon{font-size:15px}}',
       '#trnBell[hidden],#trnPanel[hidden],#trnToast[hidden],#trnBadge[hidden]{display:none!important}',
       '#trnBell:focus-visible,#trnPanel button:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}',
-      '#trnBadge{position:absolute;top:-6px;right:-5px;min-width:21px;height:21px;padding:0 4px;box-sizing:border-box;border-radius:20px;background:#dc2626;color:white;font-size:11px;font-weight:800;line-height:21px;text-align:center;border:1px solid white}',
-      '#trnPanel{position:fixed;right:12px;bottom:calc(156px + env(safe-area-inset-bottom));z-index:7201;width:min(430px,calc(100vw - 24px));max-height:min(68dvh,650px);box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--app-border,#cbd5e1);border-radius:16px;background:var(--app-surface,#fff);color:var(--app-text,#172033);box-shadow:0 16px 45px #0006}',
-      '.trn-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px;border-bottom:1px solid var(--app-border,#cbd5e1)}',
-      '.trn-head h3{margin:0;font-size:17px;color:inherit}.trn-head button{font-size:14px;min-height:36px}',
-      '#trnList{padding:0 14px;overflow:auto;overscroll-behavior:contain;min-height:0;flex:1}',
-      '.trn-item{border-bottom:1px solid var(--app-border,#cbd5e1);padding:13px 0;color:var(--app-text,#172033)}',
+      '#trnBadge{position:absolute;top:-7px;right:-4px;min-width:18px;height:18px;padding:0 3px;box-sizing:border-box;border-radius:20px;background:#dc2626;color:white;font-size:10px;font-weight:800;line-height:18px;text-align:center;border:1px solid white}',
+      '#trnPanel{position:fixed;right:8px;top:95px;bottom:auto;left:auto;z-index:7201;width:430px;max-width:calc(100vw - 16px);min-width:0;max-height:calc(100dvh - 130px);box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;overflow-x:hidden;border:1px solid var(--app-border,#cbd5e1);border-radius:16px;background:var(--app-surface,#fff);color:var(--app-text,#172033);box-shadow:0 16px 45px #0006}',
+      '.trn-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;min-width:0;max-width:100%;flex-wrap:wrap;border-bottom:1px solid var(--app-border,#cbd5e1)}',
+      '.trn-head>div{display:flex;align-items:center;gap:5px;min-width:0;flex-wrap:wrap}',
+      '.trn-head h3{margin:0;font-size:16px;color:inherit;overflow-wrap:anywhere}.trn-head button{font-size:12px;min-height:36px;white-space:nowrap}',
+      '#trnList{padding:0 12px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;min-height:0;min-width:0;max-width:100%;flex:1}',
+      '.trn-item{border-bottom:1px solid var(--app-border,#cbd5e1);padding:13px 0;min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word;white-space:normal;color:var(--app-text,#172033)}',
       '.trn-item.is-urgent>strong{color:#dc2626}html[data-theme="dark"] .trn-item.is-urgent>strong{color:#fda4af}',
       '.trn-item.is-read{opacity:.7}.trn-item strong{font-size:13px;line-height:1.5;display:block;overflow-wrap:anywhere}',
       '.trn-item-title{font-weight:700;font-size:13px!important;line-height:1.5;margin:6px 0!important;color:inherit!important;overflow-wrap:anywhere}',
@@ -318,10 +343,10 @@
       '.trn-actions button.trn-secondary{background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033)!important;border-color:var(--app-border,#cbd5e1)}',
       '.trn-empty{padding:15px 0;font-size:13px!important;color:var(--app-muted,#64748b)!important}',
       '.trn-foot{margin:0;padding:10px 14px;border-top:1px solid var(--app-border,#cbd5e1);font-size:11px!important;line-height:1.5;color:var(--app-muted,#64748b)!important}',
-      '#trnToast{position:fixed;top:calc(75px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:7202;width:min(430px,calc(100vw - 24px));box-sizing:border-box;border-radius:12px;background:var(--app-surface,#fff);color:var(--app-text,#172033);border:2px solid #60a5fa;box-shadow:0 12px 32px #0005;padding:12px;display:flex;align-items:center;gap:8px}',
-      '#trnToast .trn-toast-label{flex:1;font-size:13px;font-weight:700;line-height:1.5}',
+      '#trnToast{position:fixed;top:95px;left:8px;right:8px;transform:none;margin-inline:auto;z-index:7202;width:430px;max-width:calc(100vw - 16px);min-width:0;box-sizing:border-box;border-radius:12px;background:var(--app-surface,#fff);color:var(--app-text,#172033);border:2px solid #60a5fa;box-shadow:0 12px 32px #0005;padding:12px;display:flex;align-items:center;gap:8px}',
+      '#trnToast .trn-toast-label{flex:1;min-width:0;overflow-wrap:anywhere;word-break:break-word;font-size:13px;font-weight:700;line-height:1.5}',
       '#trnToast button{white-space:nowrap;background:#2563eb;color:white;border:0;border-radius:8px;padding:9px;font-size:12px;cursor:pointer}',
-      '@media(max-height:580px){#trnPanel{max-height:calc(100dvh - 175px)}}'
+      '@media(max-width:360px){.trn-head h3{flex:1 1 100%;font-size:15px}.trn-actions button{font-size:11px}}'
     ].join('\n');
     document.head.append(style);
 
@@ -332,7 +357,13 @@
     bell.setAttribute('aria-expanded', 'false');
     bell.setAttribute('aria-controls', 'trnPanel');
     bell.setAttribute('aria-label', '抽選通知');
-    bell.textContent = '🔔';
+    const bellIcon = document.createElement('span');
+    bellIcon.className = 'trn-bell-icon';
+    bellIcon.textContent = '🔔';
+    const bellLabel = document.createElement('span');
+    bellLabel.className = 'trn-bell-label';
+    bellLabel.textContent = '通知';
+    bell.append(bellIcon, bellLabel);
     badge = document.createElement('span');
     badge.id = 'trnBadge';
     badge.hidden = true;
@@ -365,7 +396,21 @@
     toastButton.textContent = '通知を見る';
     toastButton.addEventListener('click', () => setPanelOpen(true));
     toast.append(toastText, toastButton);
-    document.body.append(bell, panel, toast);
+    // Insert beside login / update / settings; no floating icon over app content.
+    const headerActions = document.querySelector('#appFixedHeader .app-header-actions');
+    const updateAction = document.getElementById('appUpdateNow');
+    if (headerActions) {
+      if (updateAction && headerActions.contains(updateAction)) {
+        headerActions.insertBefore(bell, updateAction);
+      } else {
+        headerActions.append(bell);
+      }
+    } else {
+      // Defensive fallback for older app layouts.
+      document.body.append(bell);
+    }
+    document.body.append(panel, toast);
+    placeNoticeSurfaces();
 
     bell.addEventListener('click', () => {
       setPanelOpen(!panelOpen);
@@ -387,6 +432,14 @@
       if (document.visibilityState === 'visible') update();
     });
     window.addEventListener('focus', () => { if (userId) update(); });
+    window.addEventListener('resize', () => {
+      if (userId) placeNoticeSurfaces();
+    });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        if (userId) placeNoticeSurfaces();
+      });
+    }
     setInterval(() => {
       if (userId && document.visibilityState === 'visible') update();
     }, 60000);
