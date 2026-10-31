@@ -8,7 +8,6 @@ No fuzzy matching; no personal accounts, identities or results are accessed.
 from __future__ import annotations
 
 import argparse
-import copy
 from datetime import datetime, timezone
 import json
 import os
@@ -129,11 +128,11 @@ def fetch_manual_locations(base, key, opener=urllib.request.urlopen):
                 if table == "livepocket_location_overrides":
                     protected.add(url)
                 elif table == "lottery_card_overrides":
-                    fields = row.get("edited_fields")
-                    if (not isinstance(fields, list)
-                            or any(not isinstance(x, str) for x in fields)
+                    edited_fields = row.get("edited_fields")
+                    if (not isinstance(edited_fields, list)
+                            or any(not isinstance(x, str) for x in edited_fields)
                             or row.get("review_complete") is True
-                            or bool(STORE_COLUMNS.intersection(fields))):
+                            or bool(STORE_COLUMNS.intersection(edited_fields))):
                         protected.add(url)
                 elif row.get("resolution") != "title":
                     protected.add(url)
@@ -264,8 +263,6 @@ def main():
     manual_urls = fetch_manual_locations(base, secret)
     raw = json.loads(args.raw.read_text(encoding="utf-8"))
     public = json.loads(args.public.read_text(encoding="utf-8"))
-    original_raw = copy.deepcopy(raw)
-    original_public = copy.deepcopy(public)
     stats = apply_master(raw, public, regions, manual_urls)
     print("Master-backed regions:", len(regions),
           "protected events:", len(manual_urls),
