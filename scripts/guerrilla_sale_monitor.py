@@ -302,10 +302,11 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 class StoreClient:
-    def __init__(self,user_agent=UA):
+    def __init__(self,user_agent=UA,accept='text/html,text/plain'):
         self.opener=build_opener(NoRedirect())
         self.robots={};self.last={};self.delays={};self.halted={}
         self.user_agent=user_agent
+        self.accept=accept
         self.last_http={}
         self.deadline=time.monotonic()+300
     def raw(self,url,site):
@@ -325,7 +326,7 @@ class StoreClient:
             raise CheckError('dns_failed') from None
         self.last[site]=time.monotonic()
         try:
-            with self.opener.open(Request(url,headers={'User-Agent':self.user_agent,'Accept':'text/html,text/plain'}),timeout=12) as res:
+            with self.opener.open(Request(url,headers={'User-Agent':self.user_agent,'Accept':self.accept}),timeout=12) as res:
                 self.last_http={'http_status':res.status,'redirect_to':'none',
                     'cookie_headers':min(len(res.headers.get_all('Set-Cookie',[])),20),
                     'cookie_sent':False}
