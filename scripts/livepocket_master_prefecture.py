@@ -22,6 +22,7 @@ from livepocket_prefecture_manual_snapshot import (
 )
 from livepocket_venue_prefecture import PREFECTURES
 from livepocket_store_name_normalize import normalize
+from livepocket_yellow_submarine import apply_chain, load_preset
 
 RPC_NAME = "lottery_store_unique_regions_v1"
 STORE_COLUMNS = {"store_name", "prefecture", "stores", "stores_override"}
@@ -268,12 +269,20 @@ def main():
     manual_urls = fetch_manual_locations(base, secret)
     raw = json.loads(args.raw.read_text(encoding="utf-8"))
     public = json.loads(args.public.read_text(encoding="utf-8"))
+    preset = load_preset(Path(__file__).resolve().parent.parent /
+                         "yellow_submarine_stores.json")
+    # Interpret only official verified branch names or explicit chain-wide scope.
+    # A generic "イエローサブマリン" name alone is NOT 22 confirmed stores.
+    chain_stats = apply_chain(raw, public, preset, manual_urls)
     stats = apply_master(raw, public, regions, manual_urls)
+    if chain_stats["events"] and not stats["events"]:
+        public["updated_at"] = datetime.now(timezone.utc).isoformat()
     print("Master-backed regions:", len(regions),
           "protected events:", len(manual_urls),
           "safe region additions:", stats["stores"],
-          "events:", stats["events"])
-    if args.write and stats["events"]:
+          "events:", stats["events"],
+          "verified chain expansions:", chain_stats["events"])
+    if args.write and (stats["events"] or chain_stats["events"]):
         from livepocket_v11 import write_json
         write_json(args.raw, raw)
         write_json(args.public, public)
