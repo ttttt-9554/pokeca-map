@@ -1,0 +1,94 @@
+{
+  "chain": "イエローサブマリン",
+  "source": "Existing 22-store administrator preset in app.js",
+  "stores": [
+    {
+      "name": "イエローサブマリン札幌GAMESHOP",
+      "prefecture": "北海道"
+    },
+    {
+      "name": "イエローサブマリン横浜店",
+      "prefecture": "神奈川県"
+    },
+    {
+      "name": "イエローサブマリン新宿店",
+      "prefecture": "東京都"
+    },
+    {
+      "name": "イエローサブマリン池袋GAMESHOP",
+      "prefecture": "東京都"
+    },
+    {
+      "name": "イエローサブマリン町田GAMESHOP",
+      "prefecture": "東京都"
+    },
+    {
+      "name": "イエローサブマリン横浜西口店",
+      "prefecture": "神奈川県"
+    },
+    {
+      "name": "イエローサブマリン川越カードショップ",
+      "prefecture": "埼玉県"
+    },
+    {
+      "name": "イエローサブマリン大宮本店・プレイソフト",
+      "prefecture": "埼玉県"
+    },
+    {
+      "name": "イエローサブマリン千葉ゲームショップ",
+      "prefecture": "千葉県"
+    },
+    {
+      "name": "イエローサブマリン宇都宮店",
+      "prefecture": "栃木県"
+    },
+    {
+      "name": "イエローサブマリン溝口店",
+      "prefecture": "神奈川県"
+    },
+    {
+      "name": "イエローサブマリン川崎店",
+      "prefecture": "神奈川県"
+    },
+    {
+      "name": "イエローサブマリン立川店",
+      "prefecture": "東京都"
+    },
+    {
+      "name": "イエローサブマリン柏店",
+      "prefecture": "千葉県"
+    },
+    {
+      "name": "イエローサブマリン秋葉原本店★ミント",
+      "prefecture": "東京都"
+    },
+    {
+      "name": "イエローサブマリン京都店",
+      "prefecture": "京都府"
+    },
+    {
+      "name": "イエローサブマリン名古屋GAMESHOP",
+      "prefecture": "愛知県"
+    },
+    {
+      "name": "イエローサブマリンなんば本店",
+      "prefecture": "大阪府"
+    },
+    {
+      "name": "イエローサブマリン三宮店",
+      "prefecture": "兵庫県"
+    },
+    {
+      "name": "イエローサブマリン姫路店",
+      "prefecture": "兵庫県"
+    },
+    {
+      "name": "イエローサブマリンマジッカーズ福岡店",
+      "prefecture": "福岡県"
+    },
+    {
+      "name": "イエローサブマリン広島店",
+      "prefecture": "広島県"
+    }
+  ]
+}
