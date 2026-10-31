@@ -93,7 +93,7 @@
       card.append(selectToggle);
       const s=snapshot.sites?.[key]||{};
       card.append(node('p','発見済み '+(counts[key]||0)+'件 / 最終処理 '+date(s.last_run_at),'hint'));
-      card.append(node('p','全商品：'+(s.completed_cycles?'巡回 '+s.completed_cycles+'周完了':'初回巡回は未完了')+' / 次の一覧 '+(s.next_page||1)+'ページ','hint'));
+      card.append(node('p','全商品：'+(s.front_baseline_ready?'新着監視の基準取得済み':'新着監視の基準取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
       if(s.catalog_total)card.append(node('p','一覧表示の総件数 '+s.catalog_total+'件（未確認商品も含みます）','hint'));
       if(s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
       if(s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
@@ -139,7 +139,7 @@
       <div class="sale-beta-actions"><button type="submit">保存</button><button type="button" id="saleBetaCancel">入力をクリア</button></div></form></details>
       <details><summary>検知履歴（最新20件）</summary><div id="saleBetaEvents"></div></details>
       <details><summary>商品ごとの確認結果（最新20件）</summary><div id="saleBetaProducts"></div></details>
-      <p class="hint">初回は基準の在庫状態を記録します。全商品一覧の初回巡回が完了するまでは、新規掲載だけで通知しません。待合室・抽選・エラーは販売開始と区別します。</p>`;
+      <p class="hint">初回は先頭ページを基準として記録し、それ以降に先頭へ新しく現れた販売中商品を新規販売として記録します。既存商品の再販は指定商品を優先確認します。待合室・抽選・エラーは販売開始と区別します。</p>`;
     const authStatus=node('p','開発者権限を確認しています…','hint');authStatus.id='saleBetaAuthStatus';authStatus.setAttribute('role','status');panel.append(authStatus,root);
     const style=node('style');style.textContent=`
       #saleBetaV2{padding:0 14px 14px;color:var(--app-text)}#saleBetaV2[hidden]{display:none!important}
