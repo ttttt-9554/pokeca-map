@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-30T15:00:57.790068+00:00",
+  "collected_at": "2026-10-31T03:00:56.094761+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 595,
+  "unique_livepocket_urls": 598,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16067,34 +16067,124 @@
       "event_title": "キデイランド二子玉川店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
       "application_end_at": "2026-11-04T23:59:00+09:00",
       "application_start_at": "2026-11-02T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ju-uo",
+      "discord_message_id": "1565923337069269096",
+      "discord_posted_at": "2026-10-31T03:00:17.006000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日9時間）\nhttps://livepocket.jp/e/ju-uo\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/03 22:00（残り3日9時間）\nhttps://livepocket.jp/e/n_1x1\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/03 22:00（残り3日9時間）\nhttps://livepocket.jp/e/ilbaf",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "（再入荷分）ワンピース『世界最強の戦士』(0P-17）",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T20:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/n_1x1",
+      "discord_message_id": "1565923337069269096",
+      "discord_posted_at": "2026-10-31T03:00:17.006000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日9時間）\nhttps://livepocket.jp/e/ju-uo\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/03 22:00（残り3日9時間）\nhttps://livepocket.jp/e/n_1x1\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/03 22:00（残り3日9時間）\nhttps://livepocket.jp/e/ilbaf",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "再販「メガシンフォニア」ポケモンカード抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-10-31T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ilbaf",
+      "discord_message_id": "1565923337069269096",
+      "discord_posted_at": "2026-10-31T03:00:17.006000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/01 22:00（残り1日9時間）\nhttps://livepocket.jp/e/ju-uo\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/03 22:00（残り3日9時間）\nhttps://livepocket.jp/e/n_1x1\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/03 22:00（残り3日9時間）\nhttps://livepocket.jp/e/ilbaf",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "再販「メガブレイブ」ポケモンカード抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-10-31T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 435,
+    "parsed": 438,
     "no_structured_details": 160
   },
   "field_counts": {
-    "store_name": 412,
-    "prefecture": 349,
-    "event_title": 282,
+    "store_name": 415,
+    "prefecture": 352,
+    "event_title": 285,
     "event_date": 1,
     "product_name": 85,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 559,
-    "application_start_at": 557,
-    "stores_events": 421
+    "application_end_at": 562,
+    "application_start_at": 560,
+    "stores_events": 424
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565742177437483081"
+      "1551580466266644552": "1565923337069269096"
     },
     "last_run": {
-      "checked_at": "2026-10-30T15:00:57.790068+00:00",
-      "new_urls": 1,
-      "original_urls": 594,
+      "checked_at": "2026-10-31T03:00:56.094761+00:00",
+      "new_urls": 3,
+      "original_urls": 595,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -16276,7 +16366,8 @@
         "1565642094289096726": "2026-10-30T08:30:56.182546+00:00",
         "1565651566491471933": "2026-10-30T09:01:01.811231+00:00",
         "1565704358929109102": "2026-10-30T12:30:56.517320+00:00",
-        "1565742177437483081": "2026-10-30T15:00:58.621519+00:00"
+        "1565742177437483081": "2026-10-30T15:00:58.621519+00:00",
+        "1565923337069269096": "2026-10-31T03:00:56.818792+00:00"
       },
       "checked_search_urls": {}
     },
@@ -18796,6 +18887,21 @@
           "checked_at": "2026-10-30T21:11:23.153459+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/n_1x1": {
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ju-uo": {
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ilbaf": {
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -20240,6 +20346,24 @@
           "detected_at": "2026-10-30T15:00:59.759422+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-10-30T21:11:23.153459+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ilbaf": {
+          "detected_at": "2026-10-31T03:00:57.903604+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ju-uo": {
+          "detected_at": "2026-10-31T03:00:57.903604+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/n_1x1": {
+          "detected_at": "2026-10-31T03:00:57.903604+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
           "http_status": null
         }
       },
@@ -26309,6 +26433,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/n_1x1": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "title_observed": "再販「メガシンフォニア」ポケモンカード抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ju-uo": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "title_observed": "（再入荷分）ワンピース『世界最強の戦士』(0P-17）",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/ilbaf": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "title_observed": "再販「メガブレイブ」ポケモンカード抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -30264,6 +30421,45 @@
         },
         "https://livepocket.jp/e/mkpvg": {
           "checked_at": "2026-10-30T21:11:23.153459+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/n_1x1": {
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ju-uo": {
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ilbaf": {
+          "checked_at": "2026-10-31T03:01:22.639896+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

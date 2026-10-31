@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-30T15:00:57.790068+00:00",
-  "unique_livepocket_urls": 595,
+  "collected_at": "2026-10-31T03:00:56.094761+00:00",
+  "unique_livepocket_urls": 598,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8783,7 +8783,69 @@
         }
       ],
       "first_detected_at": "2026-10-30T15:00:59.759422+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ju-uo",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-10-31T03:00:17.006000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "（再入荷分）ワンピース『世界最強の戦士』(0P-17）",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T20:00:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "（再入荷分）ワンピース『世界最強の戦士』(0P-17）",
+      "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/n_1x1",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-31T03:00:17.006000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "再販「メガシンフォニア」ポケモンカード抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-10-31T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "メガシンフォニア",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再販「メガシンフォニア」ポケモンカード抽選販売",
+      "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ilbaf",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "discord_posted_at": "2026-10-31T03:00:17.006000+00:00",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "event_title": "再販「メガブレイブ」ポケモンカード抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-10-31T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "メガブレイブ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再販「メガブレイブ」ポケモンカード抽選販売",
+      "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
     }
   ],
-  "updated_at": "2026-10-31T02:50:59.206054+00:00"
+  "updated_at": "2026-10-31T03:01:22.639896+00:00"
 }
