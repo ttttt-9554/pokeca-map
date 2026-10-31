@@ -89,7 +89,7 @@
       method:'POST',prefer:'resolution=merge-duplicates,return=representation',
       body:{user_id:DEVELOPER,endpoint:json.endpoint,p256dh:json.keys.p256dh,auth:json.keys.auth,enabled:true,user_agent:navigator.userAgent.slice(0,500),updated_at:new Date().toISOString()}
     });
-    try{if(typeof navigator.setAppBadge==='function')await navigator.clearAppBadge();}catch(_){}
+    try{if(typeof navigator.clearAppBadge==='function')await navigator.clearAppBadge();}catch(_){}
   }
   async function disable(){
     const t=await authorize();
