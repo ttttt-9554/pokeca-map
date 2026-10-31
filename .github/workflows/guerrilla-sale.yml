@@ -8,6 +8,8 @@ name: Guerrilla Sale Status Monitor
       - 'scripts/guerrilla_sale_probe.py'
       - 'scripts/test_guerrilla_sale_monitor.py'
       - 'guerrilla_sale_dev_v2.js'
+      - 'sale_push_v1.js'
+      - 'sw.js'
       - 'onsite_comment_alert_v21_55.js'
       - '.github/workflows/guerrilla-sale.yml'
   schedule:
@@ -37,6 +39,8 @@ jobs:
           python -m py_compile scripts/guerrilla_sale_monitor.py
           python -m unittest discover -s scripts -p 'test_guerrilla_sale_monitor.py' -v
           node --check guerrilla_sale_dev_v2.js
+          node --check sale_push_v1.js
+          node --check sw.js
           node --check onsite_comment_alert_v21_55.js
 
       - name: Read-only retailer smoke probe
