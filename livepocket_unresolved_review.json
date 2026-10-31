@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-10-31T13:21:10Z",
+  "as_of": "2026-10-31T13:31:04Z",
   "total": 1,
   "items": [
     {
@@ -17,7 +17,7 @@
       "last_http_status": null,
       "last_checked_at": "2026-10-30T13:21:24.456958+00:00",
       "next_retry_at": "2026-10-31T13:21:24.456958+00:00",
-      "queue": "retry_wait"
+      "queue": "ready"
     }
   ]
 }
