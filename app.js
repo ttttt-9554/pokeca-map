@@ -4456,10 +4456,10 @@
           '<ul>'+LP_YELLOW_SUBMARINE_STORES.map(row=>'<li>'+
             escape(row.name)+' <small>（'+escape(row.prefecture)+'）</small></li>').join('')+
           '</ul></details>' : '';
+    const chainName = stores.length>1 ? lotteryCardChainName(stores) : '';
     const storeSummary = stores.length>1
-      ? (lotteryCardChainName(stores)
-          ? '🏬 '+escape(lotteryCardChainName(stores))+
-            ' <small>（対象店舗'+stores.length+'件）</small>'
+      ? (chainName
+          ? '🏬 '+escape(chainName)+' <small>（対象店舗'+stores.length+'件）</small>'
           : '対象店舗 '+stores.length+'件（複数店舗）')
       : '対象店舗 '+stores.length+'件（'+escape(placeText)+'）';
     const list = stores.length ? `
