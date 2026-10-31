@@ -143,6 +143,15 @@ def page_guard(doc):
     if any(s in title for s in ('access denied','just a moment','captcha','アクセス制限')):
         raise CheckError('blocked')
 
+CARD_CONTEXT = re.compile(
+    r'(?:カードゲーム|TCG|OCG|ポケモンカード|ポケカ|ONE\\s*PIECE|ワンピース|'
+    r'遊戯王|デュエル[・\\s-]*マスターズ|UNION\\s*ARENA|ユニオンアリーナ|'
+    r'ガンダムカード|ヴァンガード|hololive\\s*OFFICIAL\\s*CARD\\s*GAME|'
+    r'ホロライブ|Xross\\s*Stars|マジック[：:・\\s-]*ザ[・\\s-]*ギャザリング|'
+    r'\\bMTG\\b|Flesh\\s*and\\s*Blood|Lycee|ヴァイスシュヴァルツ|Reバース|'
+    r'ドラゴンボール|バトルスピリッツ|Disney\\s*Lorcana|ロルカナ)',
+    re.I,
+)
 SEALED_PACK = re.compile(
     r'(?:強化拡張パック|拡張パック|ハイクラスパック|ブースターパック|エクストラブースター|'
     r'コレクターブースター|ブースターBOX|ブースターボックス|\\bBOX\\b|ボックス)',
@@ -169,6 +178,8 @@ def notification_product_kind(product):
     """Return pack/deck only for sealed TCG products worth alerting."""
     text=tidy(product or '')
     if not text or SEALED_EXCLUDE.search(text) or SINGLE_RARITY.search(text):
+        return ''
+    if not CARD_CONTEXT.search(text):
         return ''
     # A per-card stock unit is strong evidence of a single, even when its
     # set/code happens to contain words like "スタートデッキ".
