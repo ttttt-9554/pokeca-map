@@ -2,6 +2,12 @@ name: Guerrilla Sale Status Monitor
 
 'on':
   workflow_dispatch:
+    inputs:
+      biccamera_sample_read:
+        description: 'Run two read-only Bic Camera item checks after reviewing HTTP 403 (default OFF)'
+        required: false
+        type: boolean
+        default: false
   push:
     paths:
       - 'scripts/guerrilla_sale_monitor.py'
@@ -52,6 +58,10 @@ jobs:
 
       - name: Read-only retailer smoke probe
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          # Never retry a 403 on push. Only explicit manual opt-in can
+          # request the two approved diagnostic item URLs.
+          BICCAMERA_SAMPLE_READS: ${{ github.event_name == 'workflow_dispatch' && inputs.biccamera_sample_read && 'true' || 'false' }}
         run: python scripts/guerrilla_sale_probe.py
 
   monitor:

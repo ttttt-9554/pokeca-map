@@ -28,6 +28,10 @@ for(const url of [
   assert.throws(()=>canonical(url,'biccamera'));
 }
 assert.match(js,/value="biccamera">ビックカメラ\.com/);
-assert.match(js,/id:'biccamera-catalog'/);
-assert.match(js,/公式の巡回許可を確認できない場合/);
-console.log('Bic Camera developer controls: canonical URL, site isolation and default OFF passed');
+assert.match(js,/site==='biccamera'&&body\.enabled/);
+assert.match(js,/function syncEditorPause\(\)/);
+assert.match(js,/enabled\.disabled=paused/);
+assert.match(js,/HTTP 403/);
+assert.match(js,/if\(selected\.length&&key!=='pokemon'&&key!=='biccamera'\)/);
+assert.doesNotMatch(js,/card\.append\(toggle\('トレカ一覧/);
+console.log('Bic Camera developer controls: canonical URL, site isolation and blocked-access pause passed');

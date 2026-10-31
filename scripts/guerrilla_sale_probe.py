@@ -7,6 +7,7 @@ use credentials, or increase the number of first-page requests.
 """
 from __future__ import annotations
 import json
+import os
 import sys
 from collections import Counter
 from pathlib import Path
@@ -140,11 +141,17 @@ def probe_biccamera_sample_pages(client=None):
 
 
 def main():
-    # Two bounded, read-only item checks plus the established robots probe.
-    # The live monitor remains disabled; these observations create no alerts.
+    # No more automatic Bic Camera detail fetches after the HTTP 403.
+    # An explicit workflow_dispatch opt-in is required for another read-only
+    # sample. Default push and scheduled runs never request item pages.
     results = [probe(site) for site in ('pokemon', 'amenity')]
     results.append(probe_biccamera_robots())
-    results.append(probe_biccamera_sample_pages())
+    if os.environ.get('BICCAMERA_SAMPLE_READS') == 'true':
+        results.append(probe_biccamera_sample_pages())
+    else:
+        results.append({'site':'biccamera','status':'paused',
+                        'reason':'product_http_403_no_automatic_retry',
+                        'monitor_enabled':False})
     print('GUERRILLA_SALE_PROBE_BEGIN')
     print(json.dumps(results, ensure_ascii=False, indent=2))
     print('GUERRILLA_SALE_PROBE_END')

@@ -544,6 +544,14 @@ def sweep_site(site,targets,state,client):
         return {**state,'status':'paused','errors':[],
                 'catalog_enabled':False,'selected_count':0,
                 'reason':'official_terms_automated_access_not_permitted'}
+    if site == 'biccamera':
+        # Read-only GitHub sample: robots.txt was readable but a product URL
+        # returned HTTP 403. Do not retry via cookies, proxies or other UAs.
+        # Ignore stale enabled targets until authorized access is verified.
+        return {**state,'status':'paused','errors':[],
+                'catalog_enabled':False,'selected_count':0,
+                'retry_after':None,
+                'reason':'official_product_http_403_manual_review_required'}
     active=[x for x in targets if x.get('site_key')==site and x.get('enabled') is True]
     if not active:return {**state,'status':'paused','selected_count':0,'catalog_enabled':False}
     until=state.get('retry_after')

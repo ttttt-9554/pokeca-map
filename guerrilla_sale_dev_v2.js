@@ -106,13 +106,7 @@
       const blocked=fast?.last_status==='blocked'||
         fast?.last_status==='error'||String(fast?.last_status||'').startsWith('http_');
       const autoMessage=key==='pokemon'?'⏸ 公式規約により自動在庫監視を停止中':
-        key==='biccamera'?
-          !(all?.enabled||selected.some(x=>x.enabled))?'⏸ ビックカメラ監視は停止中':
-          s.status==='ok'?'✅ 補助巡回の前回実行成功（高速監視は未対応）':
-          s.status==='blocked'?'⚠ ビックカメラの取得が制限されました':
-          s.status==='partial'?'⚠ ビックカメラの確認が一部未完了':
-          s.status==='checking'?'⌛ ビックカメラの確認中':
-          '⌛ ビックカメラの初回確認待ち':
+        key==='biccamera'?'⏸ 商品ページHTTP 403を確認したため自動監視を安全停止中':
         !all?.enabled?'⏸ 自動監視停止中':
         fastHealthError||!fast?'⚠ 監視の実行状態を確認できません':
         waiting?'⚠ 公式待合室のため取得待ち':
@@ -131,20 +125,11 @@
         card.append(terms);
       }
       if(key==='biccamera'){
-        card.append(node('p','監視はデフォルトOFF。公式の巡回許可を確認できない場合、アクセスせず停止します。販売可否が曖昧なら通知しません。全商品ではなく、トレカカテゴリの先頭ページのみを確認します。高速監視には未対応です。','hint'));
+        card.append(node('p','2026/11/1の読み取り専用テストで商品ページがHTTP 403を返しました。原因は未特定ですが、監視対象がONでもバックエンドから自動取得しません。許可されたデータ提供や正常な接続を確認するまで販売通知は停止します。','sale-beta-warning'));
+        card.append(node('p','商品URLは監視OFFの状態で控えることができます。トレカ一覧や商品ページの自動チェックは現在実施しません。robots.txtの許可は利用規約上の取得許可を意味しません。','hint'));
         const terms=node('a','ビックカメラ.comの利用規約');terms.href='https://www.biccamera.com/bc/c/info/regulation/index.jsp';terms.target='_blank';terms.rel='noopener noreferrer';card.append(terms);
-        card.append(toggle('トレカ一覧の先頭ページを確認（'+(all?.enabled?'ON':'OFF')+'）',
-          !!all?.enabled,async value=>{
-            const body={enabled:value,updated_at:new Date().toISOString()};
-            if(all)await mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(all.id),'PATCH',body);
-            else await mutate('guerrilla_sale_monitor_targets','POST',{
-              id:'biccamera-catalog',site_key:key,mode:'all',shop:site.name,
-              product:'TCG一覧（先頭ページのみ）',url:site.catalog,...body,
-              available_text:[],unavailable_text:[],required_text:[]
-            });
-          }));
       }
-      if(selected.length&&key!=='pokemon'){
+      if(selected.length&&key!=='pokemon'&&key!=='biccamera'){
         const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
         selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
         card.append(selectToggle);
@@ -219,10 +204,12 @@
     for(const item of selected){
       const card=node('article',undefined,'sale-beta-card');card.append(node('strong',item.product),node('small',(SITES[item.site_key]?.name||item.shop)+' / 設定：'+(item.enabled?'ON':'OFF')),link(item.url));
       const actions=node('div',undefined,'sale-beta-actions');
-      if(item.site_key!=='pokemon'){
+      if(item.site_key!=='pokemon'&&item.site_key!=='biccamera'){
         actions.append(button(item.enabled?'停止':'開始',()=>mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(item.id),'PATCH',{enabled:!item.enabled,updated_at:new Date().toISOString()}).catch(()=>{})));
       }else{
-        card.append(node('small','公式規約により自動在庫確認は停止中。URLを控える目的の登録だけ可能です。'));
+        card.append(node('small',item.site_key==='pokemon'
+          ?'公式規約により自動在庫確認は停止中。URLの保存だけ可能です。'
+          :'実ページでHTTP 403を確認したため、自動在庫確認は一時停止中。URLの保存だけ可能です。'));
       }
       actions.append(button('編集',()=>edit(item)));
       actions.append(button('削除',()=>{if(confirm('この指定商品を監視設定から削除しますか？過去の検知記録は残ります。'))mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(item.id),'DELETE').catch(()=>{});}));
@@ -246,8 +233,15 @@
   }
   const LABELS={available:'販売表示あり',unavailable:'在庫なし',unobserved:'発見済み・未確認',unknown:'判定不能',waiting:'待合室',blocked:'取得制限',lottery:'抽選販売'};
   const ERRORS={robots_denied:'サイトの巡回ルールで取得停止',robots_unavailable:'巡回ルールを取得できず停止',robots_unverified:'巡回ルールを確認できず停止',http_403:'アクセス制限',http_429:'アクセス頻度制限',http_500:'サイト側エラー（500）',http_502:'サイト側エラー（502）',http_503:'サイト側メンテナンス・混雑（503）',http_504:'サイト側タイムアウト（504）',waiting:'公式仮想待合室のため停止',redirect_blocked:'転送先を確認できず停止',catalog_markup_unverified:'商品一覧の構造を確認できません',catalog_no_verified_products:'商品一覧を取得しましたが、在庫を判定できる商品が見つかりません。監視対象URL・商品一覧構造を確認してください',product_markup_unverified:'商品ページの構造を確認できません',pagination_not_advancing:'ページ送りを確認できず停止',pagination_unverified:'一覧の続き・終端を確認できません',network_error:'通信エラー',dns_failed:'接続先を確認できません',run_budget_exceeded:'今回の実行上限。次回に継続'};
-  function edit(item){editing=item.id;$('saleBetaSite').value=item.site_key;$('saleBetaName').value=item.product;$('saleBetaUrl').value=item.url;$('saleBetaEnabled').checked=item.enabled;$('saleBetaEditor').open=true;$('saleBetaName').focus();}
-  function reset(){editing=null;$('saleBetaForm').reset();}
+  function syncEditorPause(){
+    const site=$('saleBetaSite')?.value,enabled=$('saleBetaEnabled');
+    if(!enabled)return;
+    const paused=site==='pokemon'||site==='biccamera';
+    if(paused)enabled.checked=false;
+    enabled.disabled=paused;
+  }
+  function edit(item){editing=item.id;$('saleBetaSite').value=item.site_key;$('saleBetaName').value=item.product;$('saleBetaUrl').value=item.url;$('saleBetaEnabled').checked=item.enabled;syncEditorPause();$('saleBetaEditor').open=true;$('saleBetaName').focus();}
+  function reset(){editing=null;$('saleBetaForm').reset();syncEditorPause();}
   function mount(){
     const panel=$('guerrillaSalePanel');if(!panel||$('saleBetaV2'))return;
     // Keep legacy nodes in the DOM for app.js listeners, but replace the visible
@@ -266,7 +260,7 @@
       <div class="sale-beta-actions"><button type="submit">保存</button><button type="button" id="saleBetaCancel">入力をクリア</button></div></form></details>
       <details><summary>検知履歴（最新20件）</summary><div id="saleBetaEvents"></div></details>
       <details><summary>商品ごとの確認結果（最新20件）</summary><div id="saleBetaProducts"></div></details>
-      <p class="hint">ポケセンオンラインの自動在庫確認は公式規約に従い停止中です。公式に許可された商品・在庫データの連携ができた場合のみ、販売通知機能を再開します。アメニティードリームの監視は別系統で継続します。ビックカメラ.comは指定商品とトレカ一覧の先頭ページに対応します。初期設定はOFFで、robots.txt等の巡回制限を尊重します。</p>
+      <p class="hint">ポケセンオンラインの自動在庫確認は公式規約に従い停止中です。公式に許可された商品・在庫データの連携ができた場合のみ、販売通知機能を再開します。アメニティードリームの監視は別系統で継続します。ビックカメラ.comは商品URL登録のみ対応中。実商品ページでHTTP 403が確認されたため、トレカ一覧・指定商品の自動在庫取得と販売通知は安全停止中です。</p>
       <p class="hint">初回は先頭ページを基準として記録し、それ以降に先頭へ新しく現れた販売中商品を新規販売として記録します。既存商品の再販は指定商品を優先確認します。待合室・抽選・エラーは販売開始と区別します。</p>`;
     const authStatus=node('p','開発者権限を確認しています…','hint');authStatus.id='saleBetaAuthStatus';authStatus.setAttribute('role','status');panel.append(authStatus,root);
     const style=node('style');style.textContent=`
@@ -283,6 +277,8 @@
       #saleBetaV2 .sale-beta-warning{font-size:12px;font-weight:700;color:var(--app-text)}#saleBetaV2 .sale-beta-monitor-state{margin:2px 0;font-size:14px;font-weight:800;color:var(--app-text)}
     `;document.head.append(style);
     $('saleBetaRefresh').addEventListener('click',refresh);$('saleBetaCancel').addEventListener('click',reset);
+    $('saleBetaSite').addEventListener('change',syncEditorPause);
+    syncEditorPause();
     $('saleBetaForm').addEventListener('submit',async e=>{
       e.preventDefault();if(busy)return;
       const site=$('saleBetaSite').value;
@@ -293,6 +289,7 @@
         const body={site_key:site,mode:'selected',shop:SITES[site].name,product:$('saleBetaName').value.trim(),url,enabled:$('saleBetaEnabled').checked,updated_at:new Date().toISOString()};
         if(!body.product)throw new Error('商品名を入力してください。');
         if(site==='pokemon'&&body.enabled)throw new Error('公式規約によりポケセンの自動在庫取得は停止しています。設定だけ保存する場合は「監視する」のチェックを外してください。');
+        if(site==='biccamera'&&body.enabled)throw new Error('ビックカメラの公式商品ページでHTTP 403を確認したため自動監視は一時停止中です。「監視する」を外してURLだけ保存してください。');
         if(editing)await mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(editing),'PATCH',body);
         else await mutate('guerrilla_sale_monitor_targets','POST',{...body,id:crypto.randomUUID(),available_text:[],unavailable_text:[],required_text:[]});
         reset();

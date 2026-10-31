@@ -391,4 +391,35 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(result['observations'][0]['reason'],'robots_denied')
         self.assertFalse(result['monitor_enabled'])
 
+
+    def test_biccamera_http403_pause_ignores_even_enabled_legacy_targets(self):
+        client=type('Client',(),{
+            'halted':{},'get':lambda *args:self.fail('Bic Camera must not be queried')
+        })()
+        rows=[
+            {'site_key':'biccamera','mode':'all','enabled':True,'id':'all'},
+            {'site_key':'biccamera','mode':'selected','enabled':True,
+             'id':'selected','url':'https://www.biccamera.com/bc/item/13536984/'}
+        ]
+        state=m.sweep_site('biccamera',rows,{'status':'ok'},client)
+        self.assertEqual(state['status'],'paused')
+        self.assertFalse(state['catalog_enabled'])
+        self.assertEqual(state['selected_count'],0)
+        self.assertEqual(state['reason'],'official_product_http_403_manual_review_required')
+
+    def test_biccamera_sample_pages_require_explicit_opt_in(self):
+        import guerrilla_sale_probe as probe
+        import os, io, contextlib, json
+        with patch.dict(os.environ,{'BICCAMERA_SAMPLE_READS':'false'}), \
+             patch.object(probe,'probe',return_value={'site':'amenity','status':'ok'}), \
+             patch.object(probe,'probe_biccamera_robots',return_value={'site':'biccamera','status':'robots_read'}), \
+             patch.object(probe,'probe_biccamera_sample_pages',
+                          side_effect=AssertionError('unexpected item request')):
+            with contextlib.redirect_stdout(io.StringIO()) as buf:
+                self.assertEqual(probe.main(),0)
+        encoded=buf.getvalue().split('GUERRILLA_SALE_PROBE_BEGIN')[1].split('GUERRILLA_SALE_PROBE_END')[0]
+        results=json.loads(encoded)
+        self.assertEqual(results[-1]['reason'],'product_http_403_no_automatic_retry')
+        self.assertFalse(results[-1]['monitor_enabled'])
+
 if __name__=='__main__':unittest.main()
