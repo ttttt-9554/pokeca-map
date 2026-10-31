@@ -143,6 +143,41 @@ function redirectStatus(location:string,base:string):string {
   catch{return "redirect_blocked";}
 }
 
+// Non-sensitive diagnostics of the SAME scheduled requests. No extra HTTP
+// requests, queue bypass, cookie values, destination path, query or IP logs.
+function safeHttpDiagnostic(response:Response,phase:"robots"|"catalog"|"detail",
+  category:string,base:string){
+  const target=response.headers.get("location")||"";
+  let destination="none";
+  if(target){
+    try {
+      const host=new URL(target,base).hostname.toLowerCase();
+      destination=host===WAITING_HOST?"official_waiting_room":
+        host===HOST?"store_same_host":
+        host.endsWith(".pokemoncenter-online.com")?"store_other_host":"third_party";
+    } catch {destination="invalid_redirect";}
+  }
+  const mime=(response.headers.get("content-type")||"").split(";")[0].toLowerCase();
+  return {
+    phase,category,
+    http_status:response.status,
+    redirect_to:destination,
+    set_cookie_seen:response.headers.has("set-cookie"),
+    cookie_sent:false,
+    www_authenticate_seen:response.headers.has("www-authenticate"),
+    cf_challenge_seen:response.headers.has("cf-mitigated"),
+    retry_after_seen:response.headers.has("retry-after"),
+    mime_class:mime==="text/html"?"html":mime==="text/plain"?"text":
+      mime==="application/json"?"json":"other"
+  };
+}
+function recordDiagnostics(state:any,observation:any,result:string){
+  const previous=Array.isArray(state.response_diagnostics)?state.response_diagnostics:[];
+  const safe={at:new Date().toISOString(),result,
+    ...(observation||{phase:"before_http",http_status:null})};
+  return [...previous.slice(-7),safe];
+}
+
 Deno.serve(async(req:Request)=>{
   if(req.method!=="POST")return new Response("Method Not Allowed",{status:405});
   const secret=Deno.env.get("NOTIFY_SECRET");
@@ -164,11 +199,13 @@ Deno.serve(async(req:Request)=>{
 
   const category=CATEGORIES[Math.floor(Date.now()/60000)%CATEGORIES.length];
   let fetchedCategory=false;
+  let inspected:any=null;
   let robotsText=String(state.robots_text||"");
   try {
     const robotAge=state.robots_checked_at?Date.now()-Date.parse(state.robots_checked_at):Infinity;
     if(!robotsText||robotAge>6*3600_000){
       const rr=await fetch(ROBOTS,{headers:{"User-Agent":UA,"Accept":"text/plain"},redirect:"manual"});
+      inspected=safeHttpDiagnostic(rr,"robots",category.key,ROBOTS);
       if(rr.status!==200&&rr.status!==404)throw new Error("robots_http_"+rr.status);
       robotsText=rr.status===404?"User-agent: *\nAllow: /":await readLimited(rr);
       const {error:saveRobotsError}=await sb.from("guerrilla_fast_state").upsert({
@@ -181,6 +218,7 @@ Deno.serve(async(req:Request)=>{
     const headers={"User-Agent":UA,"Accept":"text/html"};
     // No conditional ETag shared across unrelated category URLs.
     const page=await fetch(category.url,{headers,redirect:"manual"});
+    inspected=safeHttpDiagnostic(page,"catalog",category.key,category.url);
     if(page.status>=300&&page.status<400)
       throw new Error(redirectStatus(page.headers.get("location")||"",category.url));
     if([403,429,500,502,503,504].includes(page.status))
@@ -223,6 +261,7 @@ Deno.serve(async(req:Request)=>{
       if(!robotsAllows(robotsText,new URL(candidate.url).pathname))
         throw new Error("robots_denied_detail");
       const res=await fetch(candidate.url,{headers,redirect:"manual"});
+      inspected=safeHttpDiagnostic(res,"detail",category.key,candidate.url);
       if(res.status>=300&&res.status<400)
         throw new Error(redirectStatus(res.headers.get("location")||"",candidate.url));
       if([403,429,500,502,503,504].includes(res.status))
@@ -260,6 +299,8 @@ Deno.serve(async(req:Request)=>{
       ...(verifiedCount>0?{last_success_at:timestamp}:{}),
       last_product_count:verifiedCount,
       last_error:null,
+      response_diagnostics:recordDiagnostics(state,inspected,
+        verifiedCount>0?"verified_ok":"catalog_only"),
       etag:null,last_modified:null
     });
     if(saveError)throw new Error("state_save_error");
@@ -281,6 +322,9 @@ Deno.serve(async(req:Request)=>{
     await sb.from("guerrilla_fast_state").update({
       last_status:waiting?"waiting":"error",
       last_run_at:now,last_error:msg,
+      response_diagnostics:recordDiagnostics(state,inspected,
+        waiting?(inspected?.http_status===200?"waiting_html":"waiting_redirect"):
+          hard?"restricted_or_server_error":"other_error"),
       cooldown_until:cooldown(waiting?15:hard?30:5)
     }).eq("site_key",SITE);
     return Response.json({status:waiting?"waiting":"error",
