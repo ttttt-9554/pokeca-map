@@ -159,10 +159,14 @@ def apply_chain(raw, public, preset, protected_urls=()):
                 row["store_name"] = selected[0]["name"]
                 if not row.get("prefecture"):
                     row["prefecture"] = selected[0]["prefecture"]
-            row.setdefault("field_sources", {})["stores"] = SOURCE
+            sources = row.get("field_sources")
+            if not isinstance(sources, dict):
+                sources = {}
+                row["field_sources"] = sources
+            sources["stores"] = SOURCE
             if len(selected) == 1:
-                row["field_sources"].setdefault("store_name", SOURCE)
-                row["field_sources"].setdefault("prefecture", SOURCE)
+                sources.setdefault("store_name", SOURCE)
+                sources.setdefault("prefecture", SOURCE)
         result["events"] += 1
         result["stores"] += len(selected)
         result["single" if len(selected) == 1 else "chainwide"] += 1
