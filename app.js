@@ -6377,6 +6377,16 @@
         pickup_end_time:r.pickup_end_time
       }))
     });
+    // Aggregate data can finish loading before private application records.
+    // In that case, replay the latest same-user totals immediately.
+    if(lpResultsReady&&lpResultsUserId===authUser.id){
+      window.TorecaLotteryNotify?.syncPeerResults?.({
+        userId:authUser.id,
+        counts:[...lpResultsCounts].map(([event_url,c])=>({
+          event_url,won_entries:c.won_entries,lost_entries:c.lost_entries
+        }))
+      });
+    }
     const counts=[
       ['応募済み',records.filter(x=>x.status==='applied').length],
       ['当選・受取待ち',records.filter(x=>x.status==='won').length],
