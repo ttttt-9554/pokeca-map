@@ -86,11 +86,12 @@
       const card=node('section',undefined,'sale-beta-card');card.append(node('h3',site.name));
       const all=targets.find(x=>x.site_key===key&&x.mode==='all');
       const selected=targets.filter(x=>x.site_key===key&&x.mode==='selected');
-      card.append(toggle('対象商品を自動監視',!!all?.enabled,value=>mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(all?.id||site.id),'PATCH',{enabled:value,updated_at:new Date().toISOString()})));
-      const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.length>0&&selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
-      selectToggle.querySelector('input').disabled=!selected.length;
-      selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
-      card.append(selectToggle);
+      const autoState=node('p',all?.enabled?'✅ 自動監視中':'⏸ 自動監視停止中',all?.enabled?'sale-beta-monitor-state':'sale-beta-warning');card.append(autoState);
+      if(selected.length){
+        const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
+        selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
+        card.append(selectToggle);
+      }
       const s=snapshot.sites?.[key]||{};
       const scopeText=key==='pokemon'?'通知対象：ポケモンカードの未開封パック／BOX／スターター・構築済みデッキのみ':'通知対象：未開封TCGのパック／BOX／スターター・構築済みデッキのみ';
       card.append(node('p',scopeText,'hint'));
@@ -154,7 +155,7 @@
       #saleBetaV2 form label{display:grid;gap:7px;font-size:14px}#saleBetaV2 form .sale-beta-toggle{display:flex}
       #saleBetaV2 input,#saleBetaV2 select{box-sizing:border-box;max-width:100%;font-size:16px;background:var(--app-surface2);color:var(--app-text);border:1px solid var(--app-border)}
       #saleBetaV2 .sale-beta-card p{margin:2px 0}#saleBetaV2 a{color:var(--app-accent,currentColor);font-weight:700}#saleBetaV2 button{min-height:42px;border:1px solid var(--app-border);border-radius:9px;background:var(--app-surface);color:var(--app-text)}#saleBetaV2 .sale-beta-actions{display:flex;gap:8px;flex-wrap:wrap}#saleBetaStatus{font-size:13px;line-height:1.6}
-      #saleBetaV2 .sale-beta-warning{font-size:12px;font-weight:700;color:var(--app-text)}
+      #saleBetaV2 .sale-beta-warning{font-size:12px;font-weight:700;color:var(--app-text)}#saleBetaV2 .sale-beta-monitor-state{margin:2px 0;font-size:14px;font-weight:800;color:var(--app-text)}
     `;document.head.append(style);
     $('saleBetaRefresh').addEventListener('click',refresh);$('saleBetaCancel').addEventListener('click',reset);
     $('saleBetaForm').addEventListener('submit',async e=>{
