@@ -143,6 +143,43 @@ def page_guard(doc):
     if any(s in title for s in ('access denied','just a moment','captcha','アクセス制限')):
         raise CheckError('blocked')
 
+SEALED_PACK = re.compile(
+    r'(?:強化拡張パック|拡張パック|ハイクラスパック|ブースターパック|エクストラブースター|'
+    r'コレクターブースター|ブースターBOX|ブースターボックス|\\bBOX\\b|ボックス)',
+    re.I,
+)
+SEALED_DECK = re.compile(
+    r'(?:スターターデッキ|スタートデッキ|構築済みデッキ|構築デッキ|'
+    r'スペシャルデッキセット|プレミアムデッキセット|アルティメットデッキ)',
+    re.I,
+)
+SEALED_EXCLUDE = re.compile(
+    r'(?:\\(予約\\)|（予約）|予約商品|予約受付|デッキケース|カードケース|スリーブ|'
+    r'プレイマット|ストレージ|ローダー|サプライ|シングルカード|オリパ|福袋|'
+    r'\\d+枚セット|枚セット\\b)',
+    re.I,
+)
+SINGLE_RARITY = re.compile(
+    r'^\\s*[（(]?[^】\\]]*[）)]?\\s*【(?:C|U|R|RR|RRR|SR|UR|HR|AR|SAR|SEC|PR|P|'
+    r'☆パラレル|パラレル|ミラー)】',
+    re.I,
+)
+
+def notification_product_kind(product):
+    """Return pack/deck only for sealed TCG products worth alerting."""
+    text=tidy(product or '')
+    if not text or SEALED_EXCLUDE.search(text) or SINGLE_RARITY.search(text):
+        return ''
+    # A per-card stock unit is strong evidence of a single, even when its
+    # set/code happens to contain words like "スタートデッキ".
+    if re.search(r'在庫数\\s*\\d+\\s*枚',text) and not SEALED_PACK.search(text):
+        return ''
+    if SEALED_PACK.search(text):
+        return 'pack'
+    if SEALED_DECK.search(text):
+        return 'deck'
+    return ''
+
 def evidence(scope):
     text = tidy(scope.text()).casefold()
     if '抽選販売' in text or '抽選に応募' in text:
@@ -335,8 +372,13 @@ def observe(site,rows,scope,notify_new=False,cooldown=60):
     for row in rows:
         url=product_url(row.get('url',''),site)
         if not url:continue
+        product=row.get('product','')
+        kind=notification_product_kind(product)
         clean.append({**row,'url':url,'id':product_id(site,url),'site_key':site,'scopes':[scope],
-                      'notify_new':notify_new,'cooldown_minutes':cooldown})
+                      'notify_new':notify_new and bool(kind),
+                      'notification_eligible':bool(kind),
+                      'notification_kind':kind,
+                      'cooldown_minutes':cooldown})
     for start in range(0,len(clean),100):
         db('rpc/guerrilla_sale_observe','POST',{'p_rows':clean[start:start+100]})
 
