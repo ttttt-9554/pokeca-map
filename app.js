@@ -4371,6 +4371,54 @@
     lpExtRenderAdmin();
   }
 
+  function lotteryCardChainName(stores){
+    const names=(stores||[]).map(store=>String(store?.name||'').trim()).filter(Boolean);
+    if(names.length<2)return '';
+    const normalize=name=>String(name).normalize('NFKC')
+      .toLocaleLowerCase('ja-JP').replace(/[\s　・･._－（）()【】「」-]+/g,'')
+      .replace(/^イエサブ/,'イエローサブマリン');
+    const normalized=names.map(normalize);
+    const chains=[
+      ['イエローサブマリン',['イエローサブマリン']],
+      ['WonderGOO',['wondergoo','ワンダーグー']],
+      ['TSUTAYA',['tsutaya','蔦屋書店']],
+      ['古本市場',['古本市場','ふるいち']],
+      ['ゲオ',['ゲオ','geo']],
+      ['カードラボ',['カードラボ']],
+      ['ホビーステーション',['ホビーステーション','ホビステ']],
+      ['ドラゴンスター',['ドラゴンスター']],
+      ['ブックオフ',['bookoff','ブックオフ']],
+      ['駿河屋',['駿河屋']],
+      ['ポケモンセンター',['ポケモンセンター']],
+      ['ヨドバシカメラ',['ヨドバシカメラ']],
+      ['ビックカメラ',['ビックカメラ']],
+      ['ヤマダデンキ',['ヤマダデンキ']],
+      ['トイザらス',['トイザらス']],
+      ['フルコンプ',['フルコンプ']],
+      ['カードボックス',['cardbox','カードボックス']],
+      ['バトロコ',['バトロコ']],
+      ['お宝創庫',['お宝創庫']]
+    ];
+    for(const [chain,aliases] of chains){
+      if(normalized.every(name=>aliases.some(alias=>name.startsWith(normalize(alias)))))
+        return chain;
+    }
+    // Unknown brands: show a shared name only when it is distinctive enough.
+    // Otherwise avoid inventing a chain for unrelated participating stores.
+    let common=names[0].normalize('NFKC');
+    for(const name of names.slice(1)){
+      const other=name.normalize('NFKC');
+      let i=0;
+      while(i<common.length&&i<other.length&&common[i]===other[i])i++;
+      common=common.slice(0,i);
+      if(!common)break;
+    }
+    common=common.trim().replace(/[\s　・･._－（）()【】「」-]+$/g,'');
+    if(common.length<4||common.length>35||
+       /^(?:カードショップ|トレカショップ|ホビーショップ|ゲームショップ|ショップ|トレカ|GAMESHOP|トレーディングカード|カード|ブックセンター)$/i.test(common))return '';
+    return common;
+  }
+
   function lotteryCard(item, state) {
     const stores = lotteryStoreEntries(item);
     const places = lotteryPrefectures(item);
@@ -4408,9 +4456,15 @@
           '<ul>'+LP_YELLOW_SUBMARINE_STORES.map(row=>'<li>'+
             escape(row.name)+' <small>（'+escape(row.prefecture)+'）</small></li>').join('')+
           '</ul></details>' : '';
+    const storeSummary = stores.length>1
+      ? (lotteryCardChainName(stores)
+          ? '🏬 '+escape(lotteryCardChainName(stores))+
+            ' <small>（対象店舗'+stores.length+'件）</small>'
+          : '対象店舗 '+stores.length+'件（複数店舗）')
+      : '対象店舗 '+stores.length+'件（'+escape(placeText)+'）';
     const list = stores.length ? `
       <details class="lp-store-details">
-        <summary>対象店舗 ${stores.length}件（${escape(placeText)}）</summary>
+        <summary>${storeSummary}</summary>
         <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small>${window.TorecaStoreUI?.storeBadge?.(x)||''}</li>`).join('')}</ul>
       </details>` : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
     return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}${urgent ? ' lp-urgent-card' : ''}">
