@@ -11,7 +11,7 @@
   load('onsite_comment_alert_core_v21_55.js?v=20261024-core','onsite-alert-core-loader');
   function init(){
     const view=document.getElementById('devView');if(!view)return;
-    const check=()=>{if(!view.hidden&&view.classList.contains('active'))load('guerrilla_sale_dev_v2.js?v=20261024-dual-private','sale-beta-v2-loader');};
+    const check=()=>{if(!view.hidden&&view.classList.contains('active'))load('guerrilla_sale_dev_v2.js?v=20261031-front-baseline','sale-beta-v2-loader');};
     new MutationObserver(check).observe(view,{attributes:true,attributeFilter:['hidden','class']});
     check();
   }
