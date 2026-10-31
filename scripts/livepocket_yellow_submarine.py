@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 
 from livepocket_prefecture_manual_snapshot import canonical_event_url
-from livepocket_master_prefecture import normalize
+from livepocket_store_name_normalize import normalize
 
 SOURCE = "yellow_submarine_verified_chain_scope_v21_147"
 BARE = frozenset(("イエローサブマリン店",))
