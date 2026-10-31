@@ -99,7 +99,8 @@
       const waiting=fast?.last_status==='waiting';
       const blocked=fast?.last_status==='blocked'||
         fast?.last_status==='error'||String(fast?.last_status||'').startsWith('http_');
-      const autoMessage=!all?.enabled?'⏸ 自動監視停止中':
+      const autoMessage=key==='pokemon'?'⏸ 公式規約により自動在庫監視を停止中':
+        !all?.enabled?'⏸ 自動監視停止中':
         fastHealthError||!fast?'⚠ 監視の実行状態を確認できません':
         waiting?'⚠ 公式待合室のため取得待ち':
         fast?.last_status==='catalog_only'?'⌛ 商品一覧は取得済み・購入可能は未確認':
@@ -108,8 +109,15 @@
         successful?'✅ 高速監視で取得成功を確認':
         '⚠ 高速監視の取得成功が最近ありません';
       card.append(node('p',autoMessage,
-        all?.enabled&&successful&&!waiting&&!blocked?'sale-beta-monitor-state':'sale-beta-warning'));
-      if(selected.length){
+        key!=='pokemon'&&all?.enabled&&successful&&!waiting&&!blocked?'sale-beta-monitor-state':'sale-beta-warning'));
+      if(key==='pokemon'){
+        card.append(node('p','公式の利用規約ではBOTによる在庫取得・クローリングが禁止されています。正規のデータ提供許可が得られるまで自動取得は行いません。以前のHTTP診断結果は過去の記録です。','sale-beta-warning'));
+        const terms=node('a','公式利用規約を確認');
+        terms.href='https://www.pokemoncenter-online.com/terms.html';
+        terms.target='_blank';terms.rel='noopener noreferrer';
+        card.append(terms);
+      }
+      if(selected.length&&key!=='pokemon'){
         const selectToggle=toggle('指定商品監視をまとめて切替（'+selected.filter(x=>x.enabled).length+'/'+selected.length+'件ON）',selected.every(x=>x.enabled),value=>mutate('guerrilla_sale_monitor_targets?site_key=eq.'+key+'&mode=eq.selected','PATCH',{enabled:value,updated_at:new Date().toISOString()}));
         selectToggle.querySelector('input').indeterminate=selected.some(x=>x.enabled)&&!selected.every(x=>x.enabled);
         card.append(selectToggle);
@@ -121,9 +129,9 @@
         card.append(node('p','⚡ 高速監視：最終試行 '+date(fast.last_run_at)+
           ' ／ 最終取得成功 '+(fast.last_success_at?date(fast.last_success_at):'未取得')+
           ' ／ 基準データ '+(fast.baseline_ready?'取得済み':'未取得'),'hint'));
-        if(fast.cooldown_until&&Date.parse(fast.cooldown_until)>Date.now())
+        if(key!=='pokemon'&&fast.cooldown_until&&Date.parse(fast.cooldown_until)>Date.now())
           card.append(node('p','次の取得再試行：'+date(fast.cooldown_until)+' 以降','sale-beta-warning'));
-        if(waiting)card.append(node('p','公式サイトの待合室が解除されるまで新規販売は検出できません。自動再試行します。','sale-beta-warning'));
+        if(key!=='pokemon'&&waiting)card.append(node('p','公式サイトの待合室が解除されるまで新規販売は検出できません。自動再試行します。','sale-beta-warning'));
         else if(blocked)card.append(node('p','取得エラー：'+(ERRORS[fast.last_error]||ERRORS[fast.last_status]||fast.last_status||'詳細不明'),'sale-beta-warning'));
         if(fast.last_product_count>0)card.append(node('p','高速監視の直近確認商品：'+fast.last_product_count+'件','hint'));
         if(key==='pokemon'&&Array.isArray(fast.response_diagnostics)&&fast.response_diagnostics.length){
@@ -171,8 +179,8 @@
       }
       card.append(node('p','補助巡回の基準：'+(s.front_baseline_ready?'取得済み':'取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
       if(s.catalog_total)card.append(node('p','一覧表示の総件数 '+s.catalog_total+'件（未確認商品も含みます）','hint'));
-      if(s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
-      if(s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
+      if(key!=='pokemon'&&s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
+      if(key!=='pokemon'&&s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
       sites.append(card);
     }
     const list=$('saleBetaTargets');list.replaceChildren();
@@ -181,7 +189,11 @@
     for(const item of selected){
       const card=node('article',undefined,'sale-beta-card');card.append(node('strong',item.product),node('small',(SITES[item.site_key]?.name||item.shop)+' / 設定：'+(item.enabled?'ON':'OFF')),link(item.url));
       const actions=node('div',undefined,'sale-beta-actions');
-      actions.append(button(item.enabled?'停止':'開始',()=>mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(item.id),'PATCH',{enabled:!item.enabled,updated_at:new Date().toISOString()}).catch(()=>{})));
+      if(item.site_key!=='pokemon'){
+        actions.append(button(item.enabled?'停止':'開始',()=>mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(item.id),'PATCH',{enabled:!item.enabled,updated_at:new Date().toISOString()}).catch(()=>{})));
+      }else{
+        card.append(node('small','公式規約により自動在庫確認は停止中。URLを控える目的の登録だけ可能です。'));
+      }
       actions.append(button('編集',()=>edit(item)));
       actions.append(button('削除',()=>{if(confirm('この指定商品を監視設定から削除しますか？過去の検知記録は残ります。'))mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(item.id),'DELETE').catch(()=>{});}));
       card.append(actions);list.append(card);
@@ -224,7 +236,7 @@
       <div class="sale-beta-actions"><button type="submit">保存</button><button type="button" id="saleBetaCancel">入力をクリア</button></div></form></details>
       <details><summary>検知履歴（最新20件）</summary><div id="saleBetaEvents"></div></details>
       <details><summary>商品ごとの確認結果（最新20件）</summary><div id="saleBetaProducts"></div></details>
-      <p class="hint">ポケセンの拡張パック・構築デッキの公式在庫あり一覧を交互に確認し、商品の購入ボタンを公式商品ページで確認できた場合だけ販売通知します。「在庫あり」一覧に予約・抽選が含まれるため、一覧への掲載だけでは通知しません。投稿依存の未確認速報は停止しています。公式待合室中は販売開始を確認できません。</p>
+      <p class="hint">ポケセンオンラインの自動在庫確認は公式規約に従い停止中です。公式に許可された商品・在庫データの連携ができた場合のみ、販売通知機能を再開します。アメニティードリームの監視は別系統で継続します。</p>
       <p class="hint">初回は先頭ページを基準として記録し、それ以降に先頭へ新しく現れた販売中商品を新規販売として記録します。既存商品の再販は指定商品を優先確認します。待合室・抽選・エラーは販売開始と区別します。</p>`;
     const authStatus=node('p','開発者権限を確認しています…','hint');authStatus.id='saleBetaAuthStatus';authStatus.setAttribute('role','status');panel.append(authStatus,root);
     const style=node('style');style.textContent=`
@@ -250,6 +262,7 @@
         if(other)throw new Error('この商品は登録済みです。一覧の「編集」を使ってください。');
         const body={site_key:site,mode:'selected',shop:SITES[site].name,product:$('saleBetaName').value.trim(),url,enabled:$('saleBetaEnabled').checked,updated_at:new Date().toISOString()};
         if(!body.product)throw new Error('商品名を入力してください。');
+        if(site==='pokemon'&&body.enabled)throw new Error('公式規約によりポケセンの自動在庫取得は停止しています。設定だけ保存する場合は「監視する」のチェックを外してください。');
         if(editing)await mutate('guerrilla_sale_monitor_targets?id=eq.'+encodeURIComponent(editing),'PATCH',body);
         else await mutate('guerrilla_sale_monitor_targets','POST',{...body,id:crypto.randomUUID(),available_text:[],unavailable_text:[],required_text:[]});
         reset();
