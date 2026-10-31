@@ -89,6 +89,83 @@ async function buildMessage(supabase: ReturnType<typeof createClient>, report: R
 }
 
 
+type SaleJob = {
+  event_id: string;
+  attempts: number;
+};
+
+function buildSaleMessage(event: Record<string, unknown>) {
+  const rawUrl = typeof event.url === "string" ? event.url : "";
+  const url = /^https:\/\/[^\s<>"]+$/.test(rawUrl) ? rawUrl : APP_URL;
+  const site = event.site_key === "pokemon"
+    ? "ポケモンセンターオンライン"
+    : event.site_key === "amenity"
+      ? "アメニティードリーム"
+      : "販売サイト";
+  const kind = event.kind === "restock" ? "販売再開" : "新規販売";
+  return {
+    username: "トレカレーダー",
+    allowed_mentions: { parse: [] },
+    embeds: [{
+      title: "⚡ " + kind + "を検知",
+      description: clean(event.product, 300),
+      color: 15158332,
+      url,
+      fields: [
+        { name: "🏪 サイト", value: site, inline: false },
+        { name: "📢 状態", value: kind, inline: true },
+        { name: "🕒 検知", value: lotteryDate(event.detected_at), inline: true }
+      ],
+      footer: { text: "未開封TCGパック・BOX・構築済みデッキのみ / 開発者テスト" }
+    }]
+  };
+}
+
+async function drainSaleNotifications(
+  supabase: ReturnType<typeof createClient>,
+  webhookUrl: string
+) {
+  const {data, error} = await supabase.rpc("guerrilla_sale_claim_discord_notifications", {
+    p_limit: 5
+  });
+  if (error) throw Error("Sale claim failed: " + error.message);
+  const jobs = (data || []) as SaleJob[];
+  let sent = 0, retried = 0, skipped = 0;
+  for (const job of jobs) {
+    let errorMessage: string | null = null;
+    try {
+      const {data: event, error: eventError} = await supabase
+        .from("guerrilla_sale_events")
+        .select("id,site_key,url,product,kind,detected_at")
+        .eq("id", job.event_id).maybeSingle();
+      if (eventError) throw Error(eventError.message);
+      if (!event) {
+        skipped++;
+      } else {
+        await sendDiscord(webhookUrl, buildSaleMessage(event));
+        sent++;
+      }
+    } catch (err) {
+      errorMessage = String(err).slice(0, 400);
+      retried++;
+      console.error("Sale notification delivery failed:", errorMessage);
+    }
+    const {error: settleError} = await supabase.rpc(
+      "guerrilla_sale_settle_discord_notification",
+      {
+        p_event_id: job.event_id,
+        p_attempts: job.attempts,
+        p_sent: errorMessage === null,
+        p_error: errorMessage,
+        p_retry_seconds: Math.min(3600, Math.max(60, 60 * (2 ** Math.min(job.attempts - 1, 6))))
+      }
+    );
+    if (settleError) console.error("Sale settle failed:", settleError.message);
+    await sleep(SPACING_MS);
+  }
+  return {claimed: jobs.length, sent, retried, skipped};
+}
+
 type LotteryJob = {
   source: "livepocket" | "app" | "external_edit";
   event_key: string;
@@ -407,6 +484,16 @@ Deno.serve(async (req: Request) => {
     // Respect the Discord webhook rate limit; never fire 10 at once.
     await sleep(SPACING_MS);
   }
+  let saleResult: Record<string,number> = {claimed:0,sent:0,retried:0,skipped:0};
+  try {
+    const saleWebhook = Deno.env.get("GUERRILLA_DISCORD_WEBHOOK_URL");
+    if (saleWebhook) {
+      saleResult = await drainSaleNotifications(supabase, saleWebhook);
+    }
+  } catch (error) {
+    console.error("Sale notification queue failed:", String(error));
+  }
+
   let lotteryResult: Record<string,number>;
   try {
     // Lottery alerts MUST use the dedicated webhook, never the sales channel.
@@ -418,8 +505,8 @@ Deno.serve(async (req: Request) => {
     console.error("Lottery notification queue failed:", String(error));
     return new Response("Lottery notification queue unavailable", { status: 503 });
   }
-  console.log("Discord queued notifications:", { claimed: jobs.length, sent, retry, lotteryResult });
-  return new Response(JSON.stringify({ claimed: jobs.length, sent, retry, lottery: lotteryResult }), {
+  console.log("Discord queued notifications:", { claimed: jobs.length, sent, retry, lotteryResult, saleResult });
+  return new Response(JSON.stringify({ claimed: jobs.length, sent, retry, lottery: lotteryResult, sale: saleResult }), {
     status: 200, headers: { "Content-Type": "application/json" }
   });
 });
