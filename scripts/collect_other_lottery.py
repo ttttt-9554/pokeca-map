@@ -115,6 +115,8 @@ def run(data, channels, token, backfill=False, loader=fetch):
     records = {x["url"]:x for x in data.get("items",[]) if valid(x.get("url"))}
     seen = dict(data.get("last_seen_message_ids") or {})
     count = 0
+    sale_evidence = []
+    sale_now = datetime.now(timezone.utc)
     for channel in channels:
         last = int(seen.get(channel) or 0)
         highest = last
@@ -124,6 +126,17 @@ def run(data, channels, token, backfill=False, loader=fetch):
         for _ in range(max_pages):
             messages = loader(token,channel,before)
             count += len(messages)
+            if before is None and isinstance(messages,list):
+                # Same Discord fetch; only the initial recent message batch
+                # is considered for independent sale-report corroboration.
+                # No message bodies, IDs or identity hashes are published.
+                try:
+                    from guerrilla_sale_discord_signals import reports_for_message
+                    for msg in messages[:100]:
+                        sale_evidence.extend(reports_for_message(msg,channel,sale_now))
+                except Exception:
+                    # Sale intelligence is optional; never stop lottery imports.
+                    sale_evidence=[]
             if not messages:
                 complete = True
                 break
@@ -146,10 +159,16 @@ def run(data, channels, token, backfill=False, loader=fetch):
         if not complete and last and not backfill:
             raise RuntimeError("Large backlog: checkpoint not advanced")
         seen[channel] = str(highest)
+    try:
+        from guerrilla_sale_discord_signals import summarize_public
+        signals=summarize_public(sale_evidence,sale_now)
+    except Exception:
+        signals=[]
     return {"schema_version":1,"items":list(records.values()),
             "last_seen_message_ids":seen,
             "collected_at":datetime.now(timezone.utc).isoformat(),
-            "messages_scanned":count}
+            "messages_scanned":count,
+            "sale_report_signals":signals}
 
 
 def main():
@@ -162,7 +181,8 @@ def main():
     backfill = os.getenv("BACKFILL","false").lower() in ("true","1","yes")
     result=run(data,channels,token,backfill=backfill)
     if (result["items"] != data.get("items") or
-        result["last_seen_message_ids"] != data.get("last_seen_message_ids")):
+        result["last_seen_message_ids"] != data.get("last_seen_message_ids") or
+        result["sale_report_signals"] != data.get("sale_report_signals",[])):
         temp = DEST.with_suffix(".tmp")
         temp.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         temp.replace(DEST)
