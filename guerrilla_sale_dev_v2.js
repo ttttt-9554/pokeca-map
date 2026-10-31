@@ -94,7 +94,7 @@
       const selected=targets.filter(x=>x.site_key===key&&x.mode==='selected');
       const fast=fastHealth[key];
       const successAgo=Date.now()-Date.parse(fast?.last_success_at||'');
-      const successful=fast?.baseline_ready===true&&
+      const successful=fast?.baseline_ready===true&&fast?.last_status==='ok'&&
         Number.isFinite(successAgo)&&successAgo>=0&&successAgo<=20*60000;
       const waiting=fast?.last_status==='waiting';
       const blocked=fast?.last_status==='blocked'||
@@ -102,6 +102,7 @@
       const autoMessage=!all?.enabled?'⏸ 自動監視停止中':
         fastHealthError||!fast?'⚠ 監視の実行状態を確認できません':
         waiting?'⚠ 公式待合室のため取得待ち':
+        fast?.last_status==='catalog_only'?'⌛ 商品一覧は取得済み・購入可能は未確認':
         blocked?'⚠ サイトの取得に失敗・再試行待ち':
         !fast.baseline_ready?'⌛ 高速監視の初回基準を取得待ち':
         successful?'✅ 高速監視で取得成功を確認':
@@ -192,7 +193,7 @@
       <div class="sale-beta-actions"><button type="submit">保存</button><button type="button" id="saleBetaCancel">入力をクリア</button></div></form></details>
       <details><summary>検知履歴（最新20件）</summary><div id="saleBetaEvents"></div></details>
       <details><summary>商品ごとの確認結果（最新20件）</summary><div id="saleBetaProducts"></div></details>
-      <p class="hint">新規販売・再販は公式ページで購入可能と確認できたときだけ確定通知します。公式待機室でも、既存のDiscord収集チャンネルに同じ公式商品リンクについて独立した複数の販売報告が届いた場合は「⚠️ 未確認速報」を別表示します。報告だけでは在庫確定になりません。</p>
+      <p class="hint">ポケセンの拡張パック・構築デッキの公式在庫あり一覧を交互に確認し、商品の購入ボタンを公式商品ページで確認できた場合だけ販売通知します。「在庫あり」一覧に予約・抽選が含まれるため、一覧への掲載だけでは通知しません。投稿依存の未確認速報は停止しています。公式待合室中は販売開始を確認できません。</p>
       <p class="hint">初回は先頭ページを基準として記録し、それ以降に先頭へ新しく現れた販売中商品を新規販売として記録します。既存商品の再販は指定商品を優先確認します。待合室・抽選・エラーは販売開始と区別します。</p>`;
     const authStatus=node('p','開発者権限を確認しています…','hint');authStatus.id='saleBetaAuthStatus';authStatus.setAttribute('role','status');panel.append(authStatus,root);
     const style=node('style');style.textContent=`
