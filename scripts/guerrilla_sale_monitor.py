@@ -310,6 +310,13 @@ def parse_biccamera_detail(html,url):
         return {'url':url,'product':title,'status':'unknown',
                 'reason':'product_scope_unverified'}
     visible=tidy(scope.text())
+    # Filters can be rendered in the same <main> as an item. These labels
+    # describe what to search for, NOT stock or the item's sale state.
+    visible=re.sub(
+        r'在庫あり商品のみ|在庫あり商品を表示|在庫あり商品だけ|'
+        r'販売終了商品を含める|販売終了商品|予約商品のみ|'
+        r'予約商品を表示|在庫がある商品|予約・新商品で絞り込む',
+        ' ',visible)
     codes=re.findall(r'商品コード\s*[:：]?\s*([0-9]{5,12})',visible)
     if not codes:
         return {'url':url,'product':title,'status':'unknown',
@@ -318,11 +325,14 @@ def parse_biccamera_detail(html,url):
         raise CheckError('product_identity_mismatch')
     if re.search(r'抽選販売|抽選に応募|抽選受付',visible):
         return {'url':url,'product':title,'status':'lottery'}
-    if re.search(r'販売休止中|予定数の販売を終了|予約受付を終了|販売を終了|'
-                 r'販売終了|在庫なし|在庫切れ|品切れ|完売|'
+    if re.search(r'販売休止中|予定数の販売を終了|予約受付(?:を|は)?終了|'
+                 r'予約受付を終了|予約受付は終了|販売を終了|'
+                 r'販売終了(?:しました|です|となりました)|在庫なし|在庫切れ|'
+                 r'品切れ|完売|お取り扱い終了|'
                  r'この商品はご購入できません|ご購入いただけません',visible):
         return {'url':url,'product':title,'status':'unavailable'}
-    if re.search(r'予約受付中|予約商品|予約する|発売予定',visible):
+    if re.search(r'予約受付中|予約商品|予約する|発売日以降のお届け|'
+                 r'発売予定(?!日)',visible):
         return {'url':url,'product':title,'status':'unknown',
                 'reason':'reservation_not_sale'}
     active=False

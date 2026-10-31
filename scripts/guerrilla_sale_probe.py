@@ -10,6 +10,9 @@ import json
 import sys
 from collections import Counter
 from pathlib import Path
+import re
+from urllib.robotparser import RobotFileParser
+from urllib.parse import urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import guerrilla_sale_monitor as monitor
@@ -61,11 +64,45 @@ def probe(site):
         }
 
 
+def probe_biccamera_robots(client=None):
+    """One robots.txt read. No product or catalog requests, no login."""
+    site='biccamera'
+    client=client or monitor.StoreClient()
+    try:
+        source=client.raw('https://www.biccamera.com/robots.txt',site)
+        if not isinstance(source,str) or 'user-agent:' not in source.casefold():
+            return {'site':site,'status':'unverified','reason':'robots_unverified','monitor_enabled':False}
+        rules=RobotFileParser()
+        rules.parse(source.splitlines())
+        def allows(target):
+            if not rules.can_fetch(client.user_agent,target):
+                return False
+            path=urlsplit(target).path
+            for pattern in re.findall(r'^\s*Disallow:\s*(\S+)',source,re.I|re.M):
+                if '*' not in pattern:
+                    continue
+                rx='^'+re.escape(pattern.rstrip('$')).replace(r'\*','.*')
+                if pattern.endswith('$'):
+                    rx+='$'
+                if re.search(rx,path):
+                    return False
+            return True
+        return {'site':site,'status':'robots_read',
+                'http_status':client.last_http.get('http_status'),
+                'category_allowed_by_robots':allows(monitor.catalog_url(site)),
+                'item_allowed_by_robots':allows('https://www.biccamera.com/bc/item/15607965/'),
+                'monitor_enabled':False,
+                'notice':'robots rules do not authorize automated inventory monitoring'}
+    except monitor.CheckError as exc:
+        return {'site':site,'status':'unverified','reason':exc.code,'monitor_enabled':False}
+    except Exception as exc:
+        return {'site':site,'status':'unverified','reason':type(exc).__name__,'monitor_enabled':False}
+
+
 def main():
-    # Never make a Bic Camera site request from a push-triggered smoke test.
+    # Robots only; no Bic Camera item or catalog requests on smoke runs.
     results = [probe(site) for site in ('pokemon', 'amenity')]
-    results.append({'site':'biccamera','status':'not_probed',
-                    'reason':'new_storefront_requires_live_policy_verification'})
+    results.append(probe_biccamera_robots())
     print('GUERRILLA_SALE_PROBE_BEGIN')
     print(json.dumps(results, ensure_ascii=False, indent=2))
     print('GUERRILLA_SALE_PROBE_END')

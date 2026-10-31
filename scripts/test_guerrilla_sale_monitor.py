@@ -244,4 +244,67 @@ class MonitorTests(unittest.TestCase):
             with self.assertRaisesRegex(m.CheckError,'robots_denied'):
                 client.get('https://www.biccamera.com/bc/item/15607965/','biccamera')
 
+    def test_biccamera_filters_cannot_fake_stock_or_sale(self):
+        url='https://www.biccamera.com/bc/item/15607965/'
+        base='<main><h1>ポケモンカードゲーム 拡張パック BOX</h1><p>商品コード: 15607965</p>'
+        controls='<button>カートに入れる</button></main>'
+        # An "in stock only" filter is not the product's stock.
+        self.assertEqual(m.parse_detail(base+'在庫あり商品のみ'+controls,'biccamera',url)['status'],'unknown')
+        # "Include ended sales" is an ordinary sidebar filter, not a stockout.
+        self.assertEqual(m.parse_detail(
+            base+'販売終了商品を含める 在庫あり'+controls,'biccamera',url)['status'],'available')
+        # Launch dates on a past release remain visible even during a restock.
+        self.assertEqual(m.parse_detail(
+            base+'メーカー発売予定日：2026年9月 在庫あり'+controls,
+            'biccamera',url)['status'],'available')
+        # Reservation status is not an immediately purchasable item.
+        self.assertNotEqual(m.parse_detail(
+            base+'予約受付中 在庫あり'+controls,'biccamera',url)['status'],'available')
+        self.assertEqual(m.parse_detail(
+            base+'予約受付は終了しました 在庫あり'+controls,
+            'biccamera',url)['status'],'unavailable')
+
+    def test_biccamera_robots_diagnostic_is_single_non_product_read(self):
+        import guerrilla_sale_probe as probe
+        class FakeClient:
+            user_agent=m.UA
+            last_http={'http_status':200}
+            def __init__(self,body=None,issue=None):
+                self.body=body;self.issue=issue;self.calls=[]
+            def raw(self,url,site):
+                self.calls.append((url,site))
+                if self.issue:raise m.CheckError(self.issue)
+                return self.body
+        allowed=FakeClient('User-agent: *\nDisallow: /bc/cart/\n')
+        answer=probe.probe_biccamera_robots(allowed)
+        self.assertEqual(answer['status'],'robots_read')
+        self.assertTrue(answer['category_allowed_by_robots'])
+        self.assertTrue(answer['item_allowed_by_robots'])
+        self.assertFalse(answer['monitor_enabled'])
+        self.assertEqual(allowed.calls,[('https://www.biccamera.com/robots.txt','biccamera')])
+
+        restricted=FakeClient('User-agent: *\nDisallow: /bc/item/\n')
+        answer=probe.probe_biccamera_robots(restricted)
+        self.assertTrue(answer['category_allowed_by_robots'])
+        self.assertFalse(answer['item_allowed_by_robots'])
+        self.assertEqual(len(restricted.calls),1)
+
+        unavailable=FakeClient(issue='http_403')
+        answer=probe.probe_biccamera_robots(unavailable)
+        self.assertEqual(answer['status'],'unverified')
+        self.assertEqual(answer['reason'],'http_403')
+        self.assertFalse(answer['monitor_enabled'])
+        self.assertEqual(len(unavailable.calls),1)
+
+    def test_biccamera_only_sealed_tcg_alerts(self):
+        self.assertEqual(m.notification_product_kind('ポケモンカードゲーム 拡張パック BOX','biccamera'),'pack')
+        self.assertEqual(m.notification_product_kind('遊戯王OCG スターターデッキ','biccamera'),'deck')
+        for title in (
+            'ポケモンカードゲーム デッキシールド スリーブ BOX',
+            '遊戯王OCG デッキケース BOX',
+            'ポケモンカードゲーム シングルカード SR 拡張パック',
+            'カメラアクセサリー ボックス',
+        ):
+            self.assertEqual(m.notification_product_kind(title,'biccamera'),'')
+
 if __name__=='__main__':unittest.main()
