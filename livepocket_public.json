@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-31T09:00:55.776902+00:00",
-  "unique_livepocket_urls": 603,
+  "collected_at": "2026-10-31T09:10:55.929435+00:00",
+  "unique_livepocket_urls": 604,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8819,6 +8819,7 @@
           "prefecture": "千葉県"
         }
       ],
+      "official_event_title": "（再入荷分）ワンピース『世界最強の戦士』(0P-17）",
       "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
     },
     {
@@ -8839,6 +8840,8 @@
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再販「メガシンフォニア」ポケモンカード抽選販売",
       "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
     },
     {
@@ -8859,6 +8862,8 @@
       "pokemon_map_match": "メガブレイブ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "再販「メガブレイブ」ポケモンカード抽選販売",
       "first_detected_at": "2026-10-31T03:00:57.903604+00:00"
     },
     {
@@ -8949,7 +8954,29 @@
         }
       ],
       "first_detected_at": "2026-10-31T08:30:56.319987+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ui17v",
+      "store_name": "ふるいちトップブックス佐久平店",
+      "discord_posted_at": "2026-10-31T09:08:52.812000+00:00",
+      "event_title": "【ふるいちトップブックス佐久平店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_end_at": "2026-11-01T22:00:00+09:00",
+      "application_start_at": "2026-10-30T09:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス佐久平店",
+          "prefecture": "長野県"
+        }
+      ],
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちトップブックス佐久平店】ポケカ抽選販売（30th CELEBRATION）",
+      "prefecture": "長野県",
+      "first_detected_at": "2026-10-31T09:10:58.113196+00:00"
     }
   ],
-  "updated_at": "2026-10-31T09:00:59.703937+00:00"
+  "updated_at": "2026-10-31T09:11:22.343336+00:00"
 }
