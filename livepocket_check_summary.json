@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "41205890852",
-    "run_number": "2079",
-    "completed_process_at": "2026-10-31T13:31:02Z",
+    "run_id": "41213194404",
+    "run_number": "2089",
+    "completed_process_at": "2026-10-31T15:06:02Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 0,
@@ -141,20 +141,20 @@
     "manual_page_check_attempts": 4
   },
   "daily_additions": {
-    "date_jst": "2026-10-31",
-    "today": 14,
-    "yesterday": 13,
-    "last_7_days": 63,
+    "date_jst": "2026-11-01",
+    "today": 0,
+    "yesterday": 14,
+    "last_7_days": 48,
     "registered_total": 608,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-10-31T13:31:02Z",
+    "as_of": "2026-10-31T15:06:02Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 1,
     "retry_wait": 0,
-    "completed": 70,
-    "expired": 531,
+    "completed": 69,
+    "expired": 532,
     "removed": 3,
     "new_pending": 0,
     "quarantined": 3,
@@ -168,6 +168,6 @@
     "next_batch_size": 1,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-10-31T13:31:04Z"
+    "as_of": "2026-10-31T15:06:04Z"
   }
 }
