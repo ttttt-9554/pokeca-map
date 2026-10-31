@@ -3628,10 +3628,15 @@
         return;
       }
       const current=lpCardStoreRead(false);
+      // A bare chain label is a placeholder, not a 23rd participating store.
+      // Replace it only after the developer explicitly verifies chain-wide scope.
+      const replacePlaceholder=chosen==='yellow-submarine'&&current.length===1&&
+        lpIsBareYellowChain(current[0].name)&&!current[0].prefecture;
+      const retained=replacePlaceholder?[]:current;
       const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();
-      const existing=new Set(current.filter(x=>x.name.trim()).map(key));
+      const existing=new Set(retained.filter(x=>x.name.trim()).map(key));
       const additions=preset.filter(x=>x&&typeof x.name==='string'&&x.name.trim()&&!existing.has(key(x)));
-      if(current.length+additions.length>LP_CARD_MAX_STORES){
+      if(retained.length+additions.length>LP_CARD_MAX_STORES){
         lpCardSetStatus('⚠ 最大100店舗を超えるため追加できません。');
         return;
       }
@@ -3639,8 +3644,13 @@
         lpCardSetStatus('選択した店舗はすでに一覧にあります。');
         return;
       }
-      if(!confirm('選択した店舗を'+additions.length+'件追加しますか？既存店舗は残ります。'))return;
-      lpCardStoreRender(current.concat(additions));
+      const confirmation=chosen==='yellow-submarine'
+        ? '公式の抽選案内で対象店舗を確認しましたか？\nこの操作を保存すると、'+
+          'イエローサブマリン全22店舗を今回の抽選対象として登録します。'+
+          (replacePlaceholder?'チェーン名のみの仮登録は置き換えます。':'')
+        : '選択した店舗を'+additions.length+'件追加しますか？既存店舗は残ります。';
+      if(!confirm(confirmation))return;
+      lpCardStoreRender(retained.concat(additions));
       $('lpCardStoresFold').open=true;
       lpCardSetStatus(additions.length+'店舗を追加しました。「変更を保存」で確定してください。');
     });
