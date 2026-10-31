@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-31T08:00:54.906393+00:00",
+  "collected_at": "2026-10-31T08:30:54.625957+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 602,
+  "unique_livepocket_urls": 603,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16318,34 +16318,64 @@
       "event_title": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
       "application_end_at": "2026-11-01T20:59:00+09:00",
       "application_start_at": "2026-10-31T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/lv5m0",
+      "discord_message_id": "1566006327573221438",
+      "discord_posted_at": "2026-10-31T08:30:03.484000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nカードキングダム秋葉原駅前店4階\n受付終了: 11/03 21:00（残り3日3時間）\nhttps://livepocket.jp/e/lv5m0",
+      "store_name": "カードキングダム秋葉原駅前店4階",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "カードキングダム秋葉原駅前店4階",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "カードキングダム秋葉原駅前店 ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売",
+      "application_end_at": "2026-11-03T21:00:00+09:00",
+      "application_start_at": "2026-10-31T12:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 442,
+    "parsed": 443,
     "no_structured_details": 160
   },
   "field_counts": {
-    "store_name": 419,
-    "prefecture": 376,
-    "event_title": 289,
+    "store_name": 420,
+    "prefecture": 377,
+    "event_title": 290,
     "event_date": 1,
     "product_name": 86,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 566,
-    "application_start_at": 564,
-    "stores_events": 428
+    "application_end_at": 567,
+    "application_start_at": 565,
+    "stores_events": 429
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1565998792468205599"
+      "1551580466266644552": "1566006327573221438"
     },
     "last_run": {
-      "checked_at": "2026-10-31T08:00:54.906393+00:00",
+      "checked_at": "2026-10-31T08:30:54.625957+00:00",
       "new_urls": 1,
-      "original_urls": 601,
+      "original_urls": 602,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -16530,7 +16560,8 @@
         "1565742177437483081": "2026-10-30T15:00:58.621519+00:00",
         "1565923337069269096": "2026-10-31T03:00:56.818792+00:00",
         "1565930835662864454": "2026-10-31T03:30:55.665906+00:00",
-        "1565998792468205599": "2026-10-31T08:00:55.587644+00:00"
+        "1565998792468205599": "2026-10-31T08:00:55.587644+00:00",
+        "1566006327573221438": "2026-10-31T08:30:55.612955+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19085,6 +19116,11 @@
           "checked_at": "2026-10-31T08:01:22.348852+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/lv5m0": {
+          "checked_at": "2026-10-31T08:31:15.436289+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -20571,6 +20607,12 @@
           "detected_at": "2026-10-31T08:00:56.653881+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-10-31T08:01:22.348852+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/lv5m0": {
+          "detected_at": "2026-10-31T08:30:56.319987+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T08:31:15.436289+00:00",
           "http_status": null
         }
       },
@@ -26717,6 +26759,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/lv5m0": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-10-31T08:31:15.436289+00:00",
+          "title_observed": "カードキングダム秋葉原駅前店 ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -30763,6 +30816,19 @@
         },
         "https://livepocket.jp/e/2tebz": {
           "checked_at": "2026-10-31T08:01:22.348852+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/lv5m0": {
+          "checked_at": "2026-10-31T08:31:15.436289+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
