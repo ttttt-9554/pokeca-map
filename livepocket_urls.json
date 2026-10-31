@@ -19304,7 +19304,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ui17v": {
-          "checked_at": "2026-10-31T15:16:15.384298+00:00",
+          "checked_at": "2026-10-31T21:21:35.866961+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -20824,7 +20824,7 @@
         "https://livepocket.jp/e/ui17v": {
           "detected_at": "2026-10-31T09:10:58.113196+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-10-31T15:16:15.384298+00:00",
+          "checked_at": "2026-10-31T21:21:35.866961+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/fiwby": {
@@ -22077,8 +22077,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ui17v": {
-          "attempts": 1,
-          "last_attempt_at": "2026-10-31T15:16:15.384298+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-10-31T21:21:35.866961+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/fiwby": {
@@ -27071,7 +27071,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-31T15:16:15.384298+00:00",
+          "checked_at": "2026-10-31T21:21:35.866961+00:00",
           "title_observed": "【ふるいちトップブックス佐久平店】ポケカ抽選販売（30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -31192,7 +31192,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ui17v": {
-          "checked_at": "2026-10-31T15:16:15.384298+00:00",
+          "checked_at": "2026-10-31T21:21:35.866961+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
