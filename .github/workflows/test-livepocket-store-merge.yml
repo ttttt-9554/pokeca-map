@@ -9,6 +9,8 @@ name: Verified LivePocket Store Merge Tests
       - scripts/livepocket_prefecture_manual_snapshot.py
       - scripts/test_livepocket_prefecture_backfill.py
       - scripts/test_livepocket_prefecture_manual_snapshot.py
+      - scripts/livepocket_master_prefecture.py
+      - scripts/test_livepocket_master_prefecture.py
       - scripts/livepocket_prefecture_publish.py
       - scripts/test_livepocket_prefecture_publish.py
       - .github/workflows/test-livepocket-store-merge.yml
@@ -24,6 +26,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify syntax
-        run: python -m py_compile scripts/livepocket_v19.py scripts/test_livepocket_verified_store_merge.py scripts/livepocket_prefecture_backfill.py scripts/livepocket_prefecture_manual_snapshot.py scripts/livepocket_prefecture_publish.py
+        run: python -m py_compile scripts/livepocket_v19.py scripts/test_livepocket_verified_store_merge.py scripts/livepocket_prefecture_backfill.py scripts/livepocket_prefecture_manual_snapshot.py scripts/livepocket_prefecture_publish.py scripts/livepocket_master_prefecture.py scripts/test_livepocket_master_prefecture.py
       - name: Test verified prefecture merge
-        run: PYTHONPATH=scripts python -m unittest scripts/test_livepocket_verified_store_merge.py scripts/test_livepocket_prefecture_backfill.py scripts/test_livepocket_prefecture_manual_snapshot.py scripts/test_livepocket_prefecture_publish.py
+        run: PYTHONPATH=scripts python -m unittest scripts/test_livepocket_verified_store_merge.py scripts/test_livepocket_prefecture_backfill.py scripts/test_livepocket_prefecture_manual_snapshot.py scripts/test_livepocket_prefecture_publish.py scripts/test_livepocket_master_prefecture.py
