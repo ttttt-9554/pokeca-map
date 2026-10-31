@@ -247,6 +247,10 @@ Deno.serve(async(req:Request)=>{
   const secret=Deno.env.get("NOTIFY_SECRET");
   if(!secret||req.headers.get("x-notify-secret")!==secret)
     return new Response("Unauthorized",{status:401});
+  // Official Pokemon Center Online terms prohibit bot-based stock access and
+  // crawling. Hard stop, independent of dashboard toggles or cron state.
+  // Re-enable only after explicit authorized data access is secured.
+  return Response.json({status:"paused",reason:"official_terms_automated_access_not_permitted"});
   const url=Deno.env.get("SUPABASE_URL"),key=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if(!url||!key)return new Response("Server config missing",{status:500});
   const sb=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});
