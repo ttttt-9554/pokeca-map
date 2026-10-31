@@ -7,6 +7,8 @@ name: Guerrilla Sale Status Monitor
       - 'scripts/guerrilla_sale_monitor.py'
       - 'scripts/guerrilla_sale_probe.py'
       - 'scripts/test_guerrilla_sale_monitor.py'
+      - 'scripts/guerrilla_sale_discord_signals.py'
+      - 'scripts/test_guerrilla_sale_discord_signals.py'
       - 'guerrilla_sale_dev_v2.js'
       - 'sale_push_v1.js'
       - 'sw.js'
@@ -38,6 +40,7 @@ jobs:
         run: |
           python -m py_compile scripts/guerrilla_sale_monitor.py
           python -m unittest discover -s scripts -p 'test_guerrilla_sale_monitor.py' -v
+          PYTHONPATH=scripts python -m unittest scripts/test_guerrilla_sale_discord_signals.py -v
           node --check guerrilla_sale_dev_v2.js
           node --check sale_push_v1.js
           node --check sw.js
