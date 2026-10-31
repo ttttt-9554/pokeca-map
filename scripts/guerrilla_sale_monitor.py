@@ -381,9 +381,16 @@ def sweep_site(site,targets,state,client):
                 if page>1 and fingerprint==state.get('first_page_fingerprint'):
                     raise CheckError('pagination_not_advancing')
                 if page==1:state['first_page_fingerprint']=fingerprint
-                # One product cannot create two events across both modes; SQL locks
-                # its canonical identity and updates state/event in one transaction.
-                observe(site,[r for r in rows if r['url'] not in checked],'all',bool(state.get('completed_cycles',0)))
+                # Front-page baseline: the first successful page-1 read records
+                # the current catalog without emitting a flood of "new product"
+                # events. After that baseline, a genuinely new available product
+                # appearing on page 1 is eligible for a developer-only event.
+                front_ready=bool(state.get('front_baseline_ready'))
+                notify_new = page == 1 and front_ready
+                observe(site,[r for r in rows if r['url'] not in checked],'all',notify_new)
+                if page == 1 and not front_ready:
+                    state['front_baseline_ready']=True
+                    state['front_baseline_at']=iso()
                 state['catalog_total']=total or state.get('catalog_total',0)
                 state['last_catalog_at']=iso()
                 if page==cursor:
