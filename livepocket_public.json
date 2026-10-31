@@ -8708,6 +8708,8 @@
           "prefecture": "東京都"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール多摩平の森店】ポケカ抽選販売（30thセレブレーション）",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
@@ -8725,6 +8727,8 @@
           "prefecture": "東京都"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカード 再入荷分『世界最強の戦士』 抽選販売受付",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
@@ -8745,6 +8749,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_event_title": "（再入荷分）ポケモン『30thCELEBRATION』抽選販売",
       "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
@@ -8785,5 +8790,5 @@
       "first_detected_at": "2026-10-30T15:00:59.759422+00:00"
     }
   ],
-  "updated_at": "2026-10-31T00:35:59.048486+00:00"
+  "updated_at": "2026-10-31T00:46:21.577005+00:00"
 }
