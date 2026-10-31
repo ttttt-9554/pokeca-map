@@ -22,6 +22,11 @@ POKEMON_UA = 'TorecaRadarFastMonitor/1.0'
 
 
 def probe(site):
+    if site == 'pokemon':
+        # Official retailer explicitly prohibits automated stock retrieval and
+        # crawling; no network probe to this domain without authorization.
+        return {'site': site,'status': 'paused',
+                'reason': 'official_terms_automated_access_not_permitted'}
     # The same HTTP request method / header values as the Supabase monitor.
     # Both environments independently honor robots.txt and refuse redirects.
     client = (monitor.StoreClient(user_agent=POKEMON_UA, accept='text/html')
