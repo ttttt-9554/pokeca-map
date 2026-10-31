@@ -48,6 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: main
           persist-credentials: true
 
       - name: Python setup
