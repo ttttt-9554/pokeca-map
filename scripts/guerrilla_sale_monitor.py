@@ -143,6 +143,10 @@ def page_guard(doc):
     if any(s in title for s in ('access denied','just a moment','captcha','アクセス制限')):
         raise CheckError('blocked')
 
+POKEMON_CARD_CONTEXT = re.compile(
+    r'(?:ポケモンカードゲーム|ポケモンカード|ポケカ)',
+    re.I,
+)
 CARD_CONTEXT = re.compile(
     r'(?:カードゲーム|TCG|OCG|ポケモンカード|ポケカ|ONE\\s*PIECE|ワンピース|'
     r'遊戯王|デュエル[・\\s-]*マスターズ|UNION\\s*ARENA|ユニオンアリーナ|'
@@ -174,12 +178,15 @@ SINGLE_RARITY = re.compile(
     re.I,
 )
 
-def notification_product_kind(product):
+def notification_product_kind(product, site=None):
     """Return pack/deck only for sealed TCG products worth alerting."""
     text=tidy(product or '')
     if not text or SEALED_EXCLUDE.search(text) or SINGLE_RARITY.search(text):
         return ''
-    if not CARD_CONTEXT.search(text):
+    if site == 'pokemon':
+        if not POKEMON_CARD_CONTEXT.search(text):
+            return ''
+    elif not CARD_CONTEXT.search(text):
         return ''
     # A per-card stock unit is strong evidence of a single, even when its
     # set/code happens to contain words like "スタートデッキ".
@@ -384,7 +391,7 @@ def observe(site,rows,scope,notify_new=False,cooldown=60):
         url=product_url(row.get('url',''),site)
         if not url:continue
         product=row.get('product','')
-        kind=notification_product_kind(product)
+        kind=notification_product_kind(product,site)
         clean.append({**row,'url':url,'id':product_id(site,url),'site_key':site,'scopes':[scope],
                       'notify_new':notify_new and bool(kind),
                       'notification_eligible':bool(kind),
