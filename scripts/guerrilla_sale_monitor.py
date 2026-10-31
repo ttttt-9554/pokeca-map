@@ -154,7 +154,7 @@ CARD_CONTEXT = re.compile(
 )
 SEALED_PACK = re.compile(
     r'(?:強化拡張パック|拡張パック|ハイクラスパック|ブースターパック|エクストラブースター|'
-    r'コレクターブースター|ブースターBOX|ブースターボックス|\\bBOX\\b|ボックス)',
+    r'コレクターブースター|ブースターBOX|ブースターボックス|BOX|ボックス)',
     re.I,
 )
 SEALED_DECK = re.compile(
