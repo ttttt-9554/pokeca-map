@@ -1283,7 +1283,7 @@ nav[aria-label="メインメニュー"] {
 
       <section id="lpStoreMasterPanel" class="store-tools lp-store-master-panel">
         <h3>🏬 店舗マスター（自動照合）</h3>
-        <p class="hint">個別管理で登録された店舗名・都道府県を自動でマスター化します。正式名称と既知の略称を照合し、似ているだけの店舗は管理者確認に回します。個人のアカウント名・応募履歴は表示しません。</p>
+        <p class="hint">抽選カードに登場した店舗を、LivePocket・外部抽選・アプリ登録・個別管理から自動的にマスター化します。複数店舗は全店対象で、公開データも約15分ごとに反映します。終了・非表示になった抽選の店舗履歴も残します。正式名称や略称は自動照合し、似ている店舗は管理者確認へ。個人のアカウント名・応募履歴は表示しません。</p>
         <div class="lp-store-master-toolbar">
           <button id="lpStoreMasterReload" type="button">更新・照合</button>
           <input id="lpStoreMasterSearch" type="search" maxlength="90" placeholder="店舗名・地域で絞り込み" aria-label="店舗マスター検索">
@@ -1771,7 +1771,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261031-peer-lottery-outcome-alert-v21-144';
+      ? token : '20261031-store-master-all-sources-v21-145';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
