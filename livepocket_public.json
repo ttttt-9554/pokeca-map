@@ -9032,10 +9032,10 @@
     },
     {
       "url": "https://livepocket.jp/e/x425p",
-      "discord_posted_at": "2026-10-31T12:24:55.658000+00:00",
       "event_title": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
-      "application_end_at": "2026-11-01T23:59:00+09:00",
       "application_start_at": "2026-10-30T10:00:00+09:00",
+      "application_end_at": "2026-11-01T23:59:00+09:00",
+      "discord_posted_at": "2026-10-31T12:24:55.658000+00:00",
       "review_category": "pokemon",
       "stores": [
         {
@@ -9071,10 +9071,8 @@
           "prefecture": ""
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
       "first_detected_at": "2026-10-31T12:30:58.146085+00:00"
     }
   ],
-  "updated_at": "2026-10-31T12:31:17.568424+00:00"
+  "updated_at": "2026-10-31T12:40:58.875603+00:00"
 }
