@@ -19324,8 +19324,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/x425p": {
-          "checked_at": "2026-10-31T12:31:17.568424+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-10-31T18:36:25.023545+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -20847,8 +20847,8 @@
         },
         "https://livepocket.jp/e/x425p": {
           "detected_at": "2026-10-31T12:30:58.146085+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-10-31T12:31:17.568424+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-10-31T18:36:25.023545+00:00",
           "http_status": null
         }
       },
@@ -22094,6 +22094,11 @@
         "https://livepocket.jp/e/7c2e-": {
           "attempts": 1,
           "last_attempt_at": "2026-10-31T16:36:24.482035+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/x425p": {
+          "attempts": 1,
+          "last_attempt_at": "2026-10-31T18:36:25.023545+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -27110,7 +27115,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-10-31T12:31:17.568424+00:00",
+          "checked_at": "2026-10-31T18:36:25.023545+00:00",
           "title_observed": "【フルコンプ】11/5販売開始 ポケモンカード再販【抽選受付】",
           "genre": "pokemon",
           "product_origin": "",
@@ -31239,7 +31244,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/x425p": {
-          "checked_at": "2026-10-31T12:31:17.568424+00:00",
+          "checked_at": "2026-10-31T18:36:25.023545+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
