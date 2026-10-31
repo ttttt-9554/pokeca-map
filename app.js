@@ -4457,16 +4457,22 @@
             escape(row.name)+' <small>（'+escape(row.prefecture)+'）</small></li>').join('')+
           '</ul></details>' : '';
     const chainName = stores.length>1 ? lotteryCardChainName(stores) : '';
-    const storeSummary = stores.length>1
-      ? (chainName
-          ? '🏬 '+escape(chainName)+' <small>（対象店舗'+stores.length+'件）</small>'
-          : '対象店舗 '+stores.length+'件（複数店舗）')
-      : '対象店舗 '+stores.length+'件（'+escape(placeText)+'）';
-    const list = stores.length ? `
+    const storeSummary = chainName
+      ? '🏬 '+escape(chainName)+' <small>（対象店舗'+stores.length+'件）</small>'
+      : '対象店舗 '+stores.length+'件（複数店舗）';
+    // Show a single participating store directly, not behind an expand button.
+    // The existing multi-store disclosure retains its full per-branch list.
+    const list = stores.length>1 ? `
       <details class="lp-store-details">
         <summary>${storeSummary}</summary>
         <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small>${window.TorecaStoreUI?.storeBadge?.(x)||''}</li>`).join('')}</ul>
-      </details>` : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
+      </details>`
+      : stores.length===1 ? `<div class="lp-store-details lp-single-store">
+          <strong>🏬 対象店舗：${escape(stores[0].name)}</strong>
+          <small>（${escape(stores[0].prefecture || '都道府県未確認')}）</small>
+          ${window.TorecaStoreUI?.storeBadge?.(stores[0])||''}
+        </div>`
+      : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
     return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}${urgent ? ' lp-urgent-card' : ''}">
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
         ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
