@@ -2843,3 +2843,23 @@ html[data-theme="dark"] #groupView .discord-role-check-panel {
 }
 html[data-theme="dark"] #groupView .discord-role-check-panel h4{color:#edf4ff}
 html[data-theme="dark"] #groupView .discord-role-check-panel .hint{color:#c9d7eb}
+
+
+/* Archive: show a compact chain heading; keep branch names accessible on tap. */
+.lp-onsite-archive-card .lp-onsite-archive-stores{
+  margin:8px 0 12px;padding:9px 12px;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:10px;background:var(--app-surface2,#f1f5f9);
+  color:var(--app-text,#172033);
+}
+.lp-onsite-archive-card .lp-onsite-archive-stores summary{
+  cursor:pointer;font-size:14px;font-weight:700;
+  line-height:1.6;color:var(--app-muted,#475569);
+}
+.lp-onsite-archive-card .lp-onsite-archive-stores ul{
+  list-style:none;padding:4px 0 0;margin:8px 0 0;
+}
+.lp-onsite-archive-card .lp-onsite-archive-stores li{
+  padding:7px 0;border-top:1px solid var(--app-border,#cbd5e1);
+  line-height:1.55;font-size:14px;overflow-wrap:anywhere;
+}
