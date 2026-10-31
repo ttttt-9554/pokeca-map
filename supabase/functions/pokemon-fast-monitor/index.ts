@@ -206,6 +206,8 @@ Deno.serve(async(req:Request)=>{
     if(!robotsText||robotAge>6*3600_000){
       const rr=await fetch(ROBOTS,{headers:{"User-Agent":UA,"Accept":"text/plain"},redirect:"manual"});
       inspected=safeHttpDiagnostic(rr,"robots",category.key,ROBOTS);
+      if(rr.status>=300&&rr.status<400)
+        throw new Error(redirectStatus(rr.headers.get("location")||"",ROBOTS));
       if(rr.status!==200&&rr.status!==404)throw new Error("robots_http_"+rr.status);
       robotsText=rr.status===404?"User-agent: *\nAllow: /":await readLimited(rr);
       const {error:saveRobotsError}=await sb.from("guerrilla_fast_state").upsert({
