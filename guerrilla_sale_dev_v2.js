@@ -166,6 +166,9 @@
           }
         }
       }
+      if(key==='pokemon'){
+        card.append(node('p','📄 補助巡回も停止中。保存された過去の診断結果は新しい在庫情報ではありません。','hint'));
+      }else{
       card.append(node('p','📄 補助巡回：発見済み '+(counts[key]||0)+'件 / 最終全商品処理 '+date(s.last_run_at),'hint'));
       // GitHub's scheduled sweep can be delayed or stopped independently of
       // the Supabase fast scan. Never present its stale data as current.
@@ -180,7 +183,8 @@
       card.append(node('p','補助巡回の基準：'+(s.front_baseline_ready?'取得済み':'取得待ち')+' / 補助巡回の次ページ '+(s.next_page||1),'hint'));
       if(s.catalog_total)card.append(node('p','一覧表示の総件数 '+s.catalog_total+'件（未確認商品も含みます）','hint'));
       if(key!=='pokemon'&&s.errors?.length)card.append(node('p','確認上の問題：'+s.errors.map(x=>ERRORS[x]||x).join(' / '),'sale-beta-warning'));
-      if(key!=='pokemon'&&s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
+      if(s.retry_after)card.append(node('p','次の再試行は '+date(s.retry_after)+' 以降','hint'));
+      }
       sites.append(card);
     }
     const list=$('saleBetaTargets');list.replaceChildren();
