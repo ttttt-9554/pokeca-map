@@ -261,11 +261,13 @@
     notices = evaluate(records, Date.now());
     draw();
     const fresh = notices.filter(n => !toastedMap[n.id] && !readMap[n.id]);
-    if (fresh.length) {
+    // Do not consume an alert while the app is in the background.
+    // Show it when the user returns to the foreground instead.
+    if (fresh.length && document.visibilityState !== 'hidden') {
       const at = Date.now();
       fresh.forEach(n => { toastedMap[n.id] = at; });
       saveStored('toast', toastedMap);
-      showToast(fresh);
+      if (!panelOpen) showToast(fresh);
     }
   }
 
