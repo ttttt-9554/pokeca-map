@@ -133,7 +133,7 @@ assert.match(html,/id="lpExtStoreAdd"/);
 assert.match(html,/lp-ext-store-grid/);
 // Cache-busting version changes on every UI release. Validate that the
 // stylesheet is linked with a nonempty version token, not one old release ID.
-assert.match(html,/<link\\s+rel="stylesheet"\\s+href="style\\.css\\?v=[^"]+"\\s*>/);
+assert.match(html,/<link\s+rel="stylesheet"\s+href="style\.css\?v=[^"]+"\s*>/);
 assert.doesNotMatch(html,/id="lpExtPrefecture"/);
 assert.match(app,/item\.stores=stores;/);
 assert.match(app,/const stores=lpExtNormalizeStores\(row\.stores\)/);
