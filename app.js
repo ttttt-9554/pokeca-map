@@ -4583,6 +4583,13 @@
     }, LP_REFRESH_MS);
     lotteryCountdownTimer = setInterval(() => {
       if (document.visibilityState !== 'visible') return;
+      // Only poll anonymous outcome totals while this account still has
+      // undecided applications. This is NOT a Discord role recheck.
+      if(authUser&&!discordRoleAuthPending&&
+         [...lotteryTrackRecords.values()].some(r=>
+           r.status==='applied'&&r.application_count>0)) {
+        lpResultsRefresh();
+      }
       if ($('lotteryView').classList.contains('active')) renderLottery();
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('lotteryResultsView')?.classList.contains('active')) lpResultsRefresh();
@@ -4607,7 +4614,11 @@
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
       // Resume checks the saved private dates, without rechecking Discord roles.
-      if(authUser&&!discordRoleAuthPending)refreshLotteryTrackerForAccount();
+      if(authUser&&!discordRoleAuthPending) {
+        refreshLotteryTrackerForAccount();
+        if([...lotteryTrackRecords.values()].some(r=>
+           r.status==='applied'&&r.application_count>0)) lpResultsRefresh();
+      }
       if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();lpLocationRefresh(true);}
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('appLotteryView')?.classList.contains('active')) lpAppRefresh(true);
@@ -5382,6 +5393,14 @@
           pending_entries:Number(row.pending_entries||0)
         }]));
         lpResultsError='';lpResultsReady=true;lpResultsLastFetch=Date.now();
+        // Reuse the already-authorized anonymous aggregate. No identity,
+        // private account, or individual outcome is shared with other users.
+        window.TorecaLotteryNotify?.syncPeerResults?.({
+          userId:uid,
+          counts:[...lpResultsCounts].map(([event_url,c])=>({
+            event_url,won_entries:c.won_entries,lost_entries:c.lost_entries
+          }))
+        });
         lpResultsRender();return true;
       }catch(error){
         if(seq!==lpResultsFetchSeq||authUser?.id!==uid)return false;
@@ -6108,6 +6127,12 @@
         if (seq === lotteryTrackSequence) {
           renderLotteryTrackerSummary();
           if ($('lpCards')) renderLottery();
+          // When private rows first arrive, check already-recorded results.
+          if(!lotteryTrackError&&authUser?.id===user&&
+             [...lotteryTrackRecords.values()].some(r=>
+               r.status==='applied'&&r.application_count>0)){
+            void lpResultsRefresh();
+          }
         }
       }
     })();
@@ -6344,6 +6369,9 @@
         event_url:r.event_url,
         title:lotteryTrackItemName(r.event_url),
         status:r.status,
+        application_count:r.application_count,
+        won_count:r.won_count,
+        lost_count:r.lost_count,
         result_announcement_at:r.result_announcement_at,
         pickup_end:r.pickup_end,
         pickup_end_time:r.pickup_end_time
@@ -7098,6 +7126,8 @@
       if(parsed)lotteryTrackRecords.set(url,parsed);
       lotteryTrackError='';
       renderLotteryTrackerSummary();renderLottery();
+      // Recompute peer reminders promptly after saving our own outcome.
+      void lpResultsRefresh(true);
       window.TorecaStoreUI?.refresh?.(true);
       if(closeOnSuccess&&$('lpTrackerEditor')?.open)$('lpTrackerEditor').close();
     }catch(error){
@@ -7120,6 +7150,7 @@
       lotteryTrackRecords.delete(url);
       $('lpTrackerEditor')?.close();
       renderLotteryTrackerSummary();renderLottery();
+      void lpResultsRefresh(true);
       window.TorecaStoreUI?.refresh?.(true);
     }catch(error){
       const msg=$('lpTrackEditorMessage');
