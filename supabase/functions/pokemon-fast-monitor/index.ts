@@ -143,6 +143,69 @@ function redirectStatus(location:string,base:string):string {
   catch{return "redirect_blocked";}
 }
 
+// Summarize ONLY standard Cookie attributes; NEVER record names or values.
+// A host-only Cookie from "www" cannot automatically follow a redirect to
+// the different "wr" subdomain. A parent-domain Cookie might be eligible,
+// but eligibility is NOT evidence that the waiting-room session is admitted.
+function cookieAttributeSummary(response:Response,source:string,target:string){
+  const readable=typeof response.headers.getSetCookie==="function";
+  const entries=readable?response.headers.getSetCookie().slice(0,16):[];
+  const origin=new URL(source);
+  let destination:URL|null=null;
+  try{if(target)destination=new URL(target,source);}catch{}
+  let hostOnly=0,sharedDomain=0,specificDomain=0,otherDomain=0;
+  let secure=0,httpOnly=0,redirectEligible=0,scopeUnknown=0;
+  for(const raw of entries){
+    // Skip the first name=value segment entirely.
+    const attributes=new Map<string,string>();
+    for(const attr of raw.split(";").slice(1)){
+      const i=attr.indexOf("=");
+      const key=(i<0?attr:attr.slice(0,i)).trim().toLowerCase();
+      const val=i<0?"":attr.slice(i+1).trim().toLowerCase();
+      if(key)attributes.set(key,val);
+    }
+    const onlyHost=!attributes.has("domain");
+    const scope=onlyHost?origin.hostname:
+      (attributes.get("domain")||"").replace(/^\./,"");
+    if(onlyHost)hostOnly++;
+    else if(scope==="pokemoncenter-online.com")sharedDomain++;
+    else if(scope===origin.hostname)specificDomain++;
+    else otherDomain++;
+    if(attributes.has("secure"))secure++;
+    if(attributes.has("httponly"))httpOnly++;
+    if(!destination)continue;
+    if(scope!=="pokemoncenter-online.com"&&scope!==origin.hostname){
+      scopeUnknown++;continue;
+    }
+    const domainMatches=onlyHost?destination.hostname===origin.hostname:
+      (destination.hostname===scope||destination.hostname.endsWith("."+scope));
+    const requestPath=origin.pathname;
+    const defaultPath=requestPath.slice(0,requestPath.lastIndexOf("/"))||"/";
+    const path=(attributes.get("path")||"").startsWith("/")?
+      attributes.get("path")!:defaultPath;
+    const targetPath=destination.pathname;
+    const pathMatches=targetPath===path||
+      (targetPath.startsWith(path)&&
+       (path.endsWith("/")||targetPath.charAt(path.length)==="/"));
+    if(domainMatches&&pathMatches&&
+       (!attributes.has("secure")||destination.protocol==="https:")){
+      redirectEligible++;
+    }
+  }
+  return {
+    cookie_header_readable:readable,
+    cookie_header_count:entries.length,
+    cookie_host_only_count:hostOnly,
+    cookie_parent_domain_count:sharedDomain,
+    cookie_same_host_domain_count:specificDomain,
+    cookie_other_domain_count:otherDomain,
+    cookie_secure_count:secure,
+    cookie_httponly_count:httpOnly,
+    cookie_redirect_scope_match_count:redirectEligible,
+    cookie_redirect_scope_unknown_count:scopeUnknown
+  };
+}
+
 // Non-sensitive diagnostics of the SAME scheduled requests. No extra HTTP
 // requests, queue bypass, cookie values, destination path, query or IP logs.
 function safeHttpDiagnostic(response:Response,phase:"robots"|"catalog"|"detail",
@@ -163,6 +226,7 @@ function safeHttpDiagnostic(response:Response,phase:"robots"|"catalog"|"detail",
     http_status:response.status,
     redirect_to:destination,
     set_cookie_seen:response.headers.has("set-cookie"),
+    ...cookieAttributeSummary(response,base,target),
     cookie_sent:false,
     www_authenticate_seen:response.headers.has("www-authenticate"),
     cf_challenge_seen:response.headers.has("cf-mitigated"),
