@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-31T09:10:55.929435+00:00",
-  "unique_livepocket_urls": 604,
+  "collected_at": "2026-10-31T10:00:56.345643+00:00",
+  "unique_livepocket_urls": 605,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8969,7 +8969,29 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-10-31T09:10:58.113196+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/fiwby",
+      "store_name": "ふるいちイオンモール土浦店",
+      "prefecture": "茨城県",
+      "discord_posted_at": "2026-10-31T10:00:05.621000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール土浦店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "event_title": "【ふるいちイオンモール土浦店】ポケカ抽選販売（拡張パック30th CELEBRATION）",
+      "application_end_at": "2026-11-01T21:01:00+09:00",
+      "application_start_at": "2026-10-31T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモール土浦店】ポケカ抽選販売（拡張パック30th CELEBRATION）",
+      "first_detected_at": "2026-10-31T10:00:58.177610+00:00"
     }
   ],
-  "updated_at": "2026-10-31T09:50:58.315971+00:00"
+  "updated_at": "2026-10-31T10:01:23.220663+00:00"
 }
