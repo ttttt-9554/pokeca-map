@@ -23,11 +23,13 @@
     }).format(new Date(n));
   };
   let options=null,sessionId='',lastFetch=0,requestSeq=0;
-  let rowsByKey=new Map(),loading=null;
+  let rowsByKey=new Map(),loading=null,lastError='';
+  function changed(){options?.onDataChanged?.();}
 
   function userId(){return String(options?.getUserId?.()||'');}
   function getClient(){return options?.getClient?.()||null;}
-  function canRead(){return !!userId()&&!!getClient();}
+  // Public reference contains display fields only; admin editing remains separate.
+  function canRead(){return !!getClient();}
   function rerender(){
     if(document.getElementById('lotteryView')?.classList.contains('active'))
       options?.renderCards?.();
@@ -36,15 +38,18 @@
     ++requestSeq;
     rowsByKey=new Map();
     lastFetch=0;
+    lastError='';
     loading=null;
     rerender();
+    changed();
   }
   function onAuthChanged(){
     const id=userId();
     if(id===sessionId)return;
     sessionId=id;
     clear();
-    if(id&&document.getElementById('lotteryView')?.classList.contains('active'))
+    if(document.getElementById('lotteryView')?.classList.contains('active')||
+       document.getElementById('infoPlazaView')?.classList.contains('active'))
       refresh(true);
   }
   async function refresh(force=false){
@@ -87,7 +92,9 @@
         }
         rowsByKey=index;
         lastFetch=Date.now();
+        lastError='';
         rerender();
+        changed();
         return true;
       }catch(error){
         if(seq===requestSeq&&userId()===id){
@@ -95,14 +102,17 @@
           // A failed request must not display an arbitrarily stale record.
           rowsByKey=new Map();
           lastFetch=0;
+          lastError='販売形態を取得できませんでした。';
           rerender();
+          changed();
         }
         return false;
       }finally{
-        if(loading===work)loading=null;
+        if(loading===work){loading=null;changed();}
       }
     })();
     loading=work;
+    changed();
     return work;
   }
 
@@ -158,9 +168,23 @@
         note+'</div></details>';
   }
 
+  function list(){
+    return [...rowsByKey.values()].map(row=>({
+      store_name:row.store_name,
+      prefecture:row.prefecture,
+      genre:row.genre,
+      shrink_state:row.shrink_state,
+      peri_state:row.peri_state,
+      tape_cut_state:row.tape_cut_state,
+      updated_at:row.updated_at
+    }));
+  }
+  function status(){
+    return {loaded:!!lastFetch,loading:!!loading,error:lastError,count:rowsByKey.size};
+  }
   function init(config){
     options=config;
     onAuthChanged();
   }
-  window.TorecaSalesReference={init,refresh,onAuthChanged,render};
+  window.TorecaSalesReference={init,refresh,onAuthChanged,render,list,status};
 })();
