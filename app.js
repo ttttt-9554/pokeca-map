@@ -350,6 +350,7 @@
     updateDeveloperTab();
     window.TorecaInfoPlaza?.onAuthChanged?.();
     window.TorecaSalesReference?.onAuthChanged?.();
+    window.TorecaStoreMaps?.onAuthChanged?.();
     window.TorecaUnifiedReview?.onAuthChanged?.();
     restoreProtectedTabAfterAuth();
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
@@ -835,6 +836,7 @@
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
     window.TorecaInfoPlaza?.onTabChanged?.(tab);
+    window.TorecaStoreMaps?.onTabChanged?.(tab);
     render();
   }
 
@@ -4499,12 +4501,13 @@
     const list = stores.length>1 ? `
       <details class="lp-store-details">
         <summary>${storeSummary}</summary>
-        <ul>${stores.map(x => `<li>${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small>${window.TorecaStoreUI?.storeBadge?.(x)||''}</li>`).join('')}</ul>
+        <ul>${stores.map(x => `<li><span class="lp-store-map-name">${escape(x.name)} <small>（${escape(x.prefecture || '都道府県未確認')}）</small></span>${window.TorecaStoreUI?.storeBadge?.(x)||''}${window.TorecaStoreMaps?.render?.(x)||''}</li>`).join('')}</ul>
       </details>`
       : stores.length===1 ? `<div class="lp-store-details lp-single-store">
           <strong>🏬 対象店舗：${escape(stores[0].name)}</strong>
           <small>（${escape(stores[0].prefecture || '都道府県未確認')}）</small>
           ${window.TorecaStoreUI?.storeBadge?.(stores[0])||''}
+          ${window.TorecaStoreMaps?.render?.(stores[0],item.prefecture)||''}
         </div>`
       : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
     // Shared link + private actions are rendered in a single card action row.
@@ -4720,7 +4723,7 @@
         renderLottery();
       });
     }
-    $('lpRefresh').addEventListener('click',() => {loadLotteryEvents(true);window.TorecaSalesReference?.refresh?.(true);});
+    $('lpRefresh').addEventListener('click',() => {loadLotteryEvents(true);window.TorecaSalesReference?.refresh?.(true);window.TorecaStoreMaps?.refresh?.(true);});
     $('lpMore').addEventListener('click',() => {lotteryVisibleLimit += LP_PAGE_SIZE;renderLottery();});
     $('lpClearFilters').addEventListener('click',() => {
       $('lpQuery').value = '';
@@ -9685,6 +9688,11 @@
       initDevAccordions();
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
         renderCards:renderLottery,escape});
+      window.TorecaStoreMaps?.init?.({
+        getClient:()=>supabaseClient,
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        renderCards:renderLottery
+      });
       window.TorecaInfoPlaza?.init?.({
         getClient:()=>supabaseClient,isDev:isDeveloper,
         getUserId:()=>authUser?.id||''
