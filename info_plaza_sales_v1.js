@@ -43,7 +43,7 @@
     container.innerHTML=
       '<section id="infoSalesAdmin" class="info-sales-admin" hidden>'+
         '<h3>🏬 店舗別販売形態 <small>開発者専用</small></h3>'+
-        '<p class="info-sales-description">店舗ごとの販売時の状態を記録します。ポケカはシュリンク・ペリ、ワンピースはテプカ（テープカット）。「未確認」は「なし」と区別します。</p>'+
+        '<p class="info-sales-description">店舗ごとの販売時の状態を記録します。ポケカはシュリンク・ペリ、ワンピースはテプカ（テープカット）。「未確認」は「なし」と区別します。販売形態が登録された店舗は抽選カードに参考表示されます。補足メモは開発者専用のままです。</p>'+
         '<form id="infoSalesForm" autocomplete="off">'+
           '<h4 id="infoSalesFormHeading">新規登録</h4>'+
           '<label for="infoSalesStore">店舗名</label>'+
