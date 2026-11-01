@@ -19994,7 +19994,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/bb5zr": {
-          "checked_at": "2026-11-01T15:26:23.754118+00:00",
+          "checked_at": "2026-11-01T21:36:23.858737+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -21623,7 +21623,7 @@
         "https://livepocket.jp/e/bb5zr": {
           "detected_at": "2026-11-01T09:15:59.141523+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-01T15:26:23.754118+00:00",
+          "checked_at": "2026-11-01T21:36:23.858737+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/emrbh": {
@@ -22955,8 +22955,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bb5zr": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-01T15:26:23.754118+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-01T21:36:23.858737+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/y2ltb": {
@@ -28143,7 +28143,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T15:26:23.754118+00:00",
+          "checked_at": "2026-11-01T21:36:23.858737+00:00",
           "title_observed": "ポケモンカードゲーム 「30th CELEBRATION」追加入荷分抽選受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -32500,7 +32500,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/bb5zr": {
-          "checked_at": "2026-11-01T15:26:23.754118+00:00",
+          "checked_at": "2026-11-01T21:36:23.858737+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
