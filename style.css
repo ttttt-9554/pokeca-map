@@ -2990,3 +2990,23 @@ html[data-theme="dark"] #lotteryView .lp-onsite-history-caution button{
 
 /* Keep the onsite archive visible below the fixed iPhone header. */
 #lpOnsiteArchive{scroll-margin-top:calc(140px + env(safe-area-inset-top));}
+
+/* Information Plaza: a clean, intentionally empty panel for future features. */
+#infoPlazaView{color:var(--app-text,#172033);padding-bottom:30px}
+#infoPlazaTitle{margin:4px 0 14px;line-height:1.45}
+#infoPlazaContent{
+  box-sizing:border-box;
+  width:100%;
+  min-height:clamp(220px,36vh,380px);
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:14px;
+  background:var(--app-surface,#fff);
+}
+/* Seven normal tabs / eight developer tabs: keep labels readable on iPhone. */
+nav[aria-label="メインメニュー"]:has(>button[data-tab="infoPlaza"])>button{
+  flex:1 1 43px;
+  min-width:43px;
+}
+nav[aria-label="メインメニュー"]>button[data-tab="infoPlaza"] span{
+  white-space:nowrap;
+}
