@@ -9164,8 +9164,6 @@
           "prefecture": "東京都"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【PAO/竜星のPAO】ONE PIECEカードゲーム商品関連 抽選受付【11/21(土)発売予定】",
       "first_detected_at": "2026-11-01T02:35:56.711817+00:00"
     },
     {
@@ -9381,24 +9379,22 @@
       "url": "https://livepocket.jp/e/bb5zr",
       "store_name": "TSUTAYA加須店",
       "prefecture": "埼玉県",
+      "event_title": "ポケモンカードゲーム 「30th CELEBRATION」追加入荷分抽選受付",
+      "application_start_at": "2026-11-01T10:00:00+09:00",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
       "discord_posted_at": "2026-11-01T09:00:15.473000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "ポケモンカードゲーム 「30th CELEBRATION」追加入荷分抽選受付",
-      "application_end_at": "2026-11-03T22:00:00+09:00",
-      "application_start_at": "2026-11-01T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION」追加入荷分抽選受付",
       "first_detected_at": "2026-11-01T09:15:59.141523+00:00"
     }
   ],
-  "updated_at": "2026-11-01T09:16:25.537198+00:00"
+  "updated_at": "2026-11-01T09:26:00.371211+00:00"
 }
