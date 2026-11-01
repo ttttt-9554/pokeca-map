@@ -524,10 +524,7 @@
           "name": "フルコンプ大阪日本橋店",
           "prefecture": "大阪府"
         }
-      ],
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/4a-uj",
@@ -775,10 +772,7 @@
           "name": "フルコンプ札幌駅前店",
           "prefecture": "北海道"
         }
-      ],
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/8ft5n",
@@ -3903,10 +3897,7 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/i44fhaaluv",
@@ -9173,11 +9164,8 @@
           "prefecture": "東京都"
         }
       ],
-      "first_detected_at": "2026-11-01T02:35:56.711817+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-01T02:35:56.711817+00:00"
     }
   ],
-  "updated_at": "2026-11-01T02:46:02.402303+00:00"
+  "updated_at": "2026-11-01T02:55:59.896894+00:00"
 }
