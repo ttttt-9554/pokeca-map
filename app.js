@@ -7473,7 +7473,7 @@
 
   function lotteryOnsiteHistoryKey(value){
     return String(value||'').normalize('NFKC').toLocaleLowerCase('ja-JP')
-      .replace(/[\\s　・･._－（）()【】「」-]+/g,'');
+      .replace(/[\s　・･._－（）()【】「」-]+/g,'');
   }
 
   function lotteryOnsiteChainForName(name){
