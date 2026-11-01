@@ -7449,23 +7449,26 @@
       ['ヤマダデンキ',['ヤマダデンキ']],
       ['トイザらス',['トイザらス']]
     ];
-    const normalized=names.map(name=>
-      name.normalize('NFKC').replace(/[\s　]+/g,'').toLowerCase());
-    let primary='',primaryCount=0,tied=false;
-    for(const [chain,prefixes] of knownChains){
-      const count=normalized.filter(name=>prefixes.some(prefix=>name.startsWith(prefix))).length;
-      if(count>primaryCount){
-        primary=chain;
-        primaryCount=count;
-        tied=false;
-      }else if(count>0&&count===primaryCount){
-        tied=true;
-      }
-    }
-    if(tied||primaryCount!==names.length){
-      primary='';
-      primaryCount=0;
-    }
+    const canonical=name=>String(name).normalize('NFKC')
+      .replace(/[\s　]+/g,'').toLocaleLowerCase('ja-JP');
+    const normalized=names.map(canonical);
+    // Normalize aliases too, including mixed-case Latin store names.
+    const matches=knownChains.map(([chain,prefixes])=>({
+      chain,
+      count:normalized.filter(name=>prefixes.some(prefix=>
+        name.startsWith(canonical(prefix)))).length
+    })).filter(x=>x.count>0).sort((a,b)=>b.count-a.count);
+    const best=matches[0];
+    const competing=matches.some(x=>x!==best&&x.count>0);
+    const count=best?.count||0;
+    // Multi-shop lottery: tolerate up to 2 unmatched store names when
+    // >=90% belong to a single recognized chain and no known chain conflicts.
+    const confident=best && (!matches[1]||matches[1].count<count) && (
+      count===names.length ||
+      (names.length>=5 && count>=Math.ceil(names.length*0.9) &&
+        names.length-count<=2 && !competing)
+    );
+    let primary=confident?best.chain:'';
     if(!primary){
       // For an unlisted chain, use a genuinely shared shop-name prefix,
       // not generic terms such as "カードショップ".
@@ -7483,7 +7486,7 @@
         primaryCount=names.length;
       }
     }
-    const heading=primary||'複数店舗';
+    const heading=primary||names[0]+' ほか'+(names.length-1)+'店舗';
     // Mixed chains are distinct groups keyed by their full, sorted store set.
     // Never treat an event-wide report as proven for each individual branch.
     const key=primary
@@ -7559,7 +7562,7 @@
     const openEvents=new Set(Array.from(list.querySelectorAll(
       'details.lp-onsite-archive-event[open]'),node=>node.getAttribute('data-event-key')));
     list.innerHTML=shownGroups.length?shownGroups.map(group=>{
-      const groupOpen=group.rows.length===1||Boolean(search)||openGroups.has(group.key);
+      const groupOpen=openGroups.has(group.key);
       const entries=group.rows.length===1
         ? '<article class="lp-onsite-archive-card">'+
           '<h4>'+escape(group.rows[0].event_title||'イベント名未確認')+'</h4>'+
