@@ -3012,7 +3012,7 @@ nav[aria-label="メインメニュー"]>button[data-tab="infoPlaza"] span{
 }
 
 
-/* Information Plaza / Developer-only per-store sales formats */
+/* Information Plaza / shared per-store sales formats for signed-in members */
 #infoPlazaContent:has(.info-sales-admin:not([hidden])){
   padding:12px;min-height:250px;
 }
@@ -3179,6 +3179,10 @@ html[data-theme="dark"] #infoSalesAdmin .info-sales-message[data-error="true"]{c
   background:var(--app-surface,#fff);color:var(--app-text,#172033);
 }
 #lotteryView .lp-sales-ref-value strong{color:inherit}
+#lotteryView .lp-sales-ref-memo{
+  font-size:12px;line-height:1.65;white-space:pre-wrap;
+  overflow-wrap:anywhere;color:var(--app-text,#172033);margin:8px 0;
+}
 #lotteryView .lp-sales-ref-note{
   color:var(--app-muted,#64748b);font-size:11px;line-height:1.65;
   margin:8px 0 0;overflow-wrap:anywhere;
