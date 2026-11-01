@@ -4579,11 +4579,14 @@
     const counts={open:0,today:0,yesterday:0,pokemon:0,onepiece:0,unknown:0};
     for(const item of items){
       const genre=lotteryGenre(item);
-      if(genre==='pokemon')counts.pokemon++;
-      else if(genre==='onepiece')counts.onepiece++;
-      else if(genre==='unknown')counts.unknown++;
-      // Other classified games, including Yu-Gi-Oh!, are not "unknown".
-      if(lotteryState(item,now)==='open')counts.open++;
+      const open=lotteryState(item,now)==='open';
+      if(open){
+        counts.open++;
+        if(genre==='pokemon')counts.pokemon++;
+        else if(genre==='onepiece')counts.onepiece++;
+        else if(genre==='unknown')counts.unknown++;
+        // Other classified games remain included in the overall open count.
+      }
       const first=lotteryDate(item.first_detected_at);
       if(!Number.isFinite(first)||first>now)continue;
       const day=lotteryTokyoDay(first);
@@ -4658,13 +4661,13 @@
       <div class="lp-summary-cell lp-summary-yesterday" title="日本時間の昨日0時から24時までに初回登録">
         <strong>${count.yesterday}</strong><small>昨日の新着</small>
       </div>
-      <div class="lp-summary-cell" title="ポケモンカードの抽選">
+      <div class="lp-summary-cell" title="現在受付中のポケモンカード抽選">
         <strong>${count.pokemon}</strong><small>ポケカ</small>
       </div>
-      <div class="lp-summary-cell" title="ワンピースカードの抽選">
+      <div class="lp-summary-cell" title="現在受付中のワンピースカード抽選">
         <strong>${count.onepiece}</strong><small>ワンピース</small>
       </div>
-      <div class="lp-summary-cell" title="ジャンルが未分類の抽選">
+      <div class="lp-summary-cell" title="現在受付中でジャンルが未分類の抽選">
         <strong>${count.unknown}</strong><small>未分類</small>
       </div>`;
     $('lpResultCount').textContent = `検索結果：${visible.length}件` +

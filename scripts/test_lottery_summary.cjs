@@ -21,16 +21,19 @@ const events=[
   {review_category:'pokemon',status:'open',first_detected_at:'2026-11-02T00:00:00+09:00'},
   {review_category:'onepiece',status:'closed',first_detected_at:'2026-11-01T15:29:00Z'},
   {review_category:'unknown',status:'open',first_detected_at:'2026-11-01T00:00:00+09:00'},
-  {review_category:'yugioh',status:'closed',first_detected_at:'2026-10-31T15:00:00Z'},
+  {review_category:'yugioh',status:'open',first_detected_at:'2026-10-31T15:00:00Z'},
   {review_category:'unknown',status:'closed',first_detected_at:'2026-10-31T23:59:59+09:00'},
   {review_category:'unknown',status:'closed',first_detected_at:'2026-11-02T00:31:00+09:00'},
-  {review_category:'unknown',status:'closed'}
+  {review_category:'unknown',status:'closed'},
+  {review_category:'onepiece',status:'open',first_detected_at:'2026-10-30T12:00:00+09:00'},
+  {review_category:'pokemon',status:'upcoming'},
+  {review_category:'unknown',status:'open'}
 ];
 assert.deepEqual(JSON.parse(JSON.stringify(api.lotterySummaryCounts(events,now))),
-  {open:2,today:2,yesterday:2,pokemon:1,onepiece:1,unknown:4});
+  {open:5,today:2,yesterday:2,pokemon:1,onepiece:1,unknown:2});
 assert.match(app,/const publicItems=lotteryItems\.filter\(x=>!x\.app_lottery_hidden&&!x\.manual_card_hidden\)/);
 assert.match(app,/lotterySummaryCounts\(publicItems,now\)/);
 const order=[...app.matchAll(/<small>(受付中|今日の新着|昨日の新着|ポケカ|ワンピース|未分類)<\/small>/g)]
   .slice(0,6).map(x=>x[1]);
 assert.equal(order.join(','),'受付中,今日の新着,昨日の新着,ポケカ,ワンピース,未分類');
-console.log('JST daily new arrivals, verified open and genre summary counts passed');
+console.log('JST daily new arrivals, open-only genre counts and total active lotteries passed');
