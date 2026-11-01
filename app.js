@@ -7421,14 +7421,14 @@
     return lotteryOnsiteArchiveFetching;
   }
 
-  // The archive stores joined shop names as a single "・"-separated string.
-  // Keep every original name accessible, but don't let a chain-wide draw fill
-  // the entire screen before the user asks to see its branches.
-  function lotteryArchiveStoresHtml(value){
+  // Archived reports are grouped by the exact store name, or by a verified
+  // common chain for a multi-store lottery. An archive event stays one record,
+  // because its user reports do not identify separate requirements per branch.
+  function lotteryArchiveStoreInfo(value){
     const raw=String(value||'').trim();
-    if(!raw)return '<h4>店舗名未確認</h4>';
+    if(!raw)return {title:'店舗名未確認',key:'unknown',names:[]};
     const names=raw.split(/\s*・\s*/).map(name=>name.trim()).filter(Boolean);
-    if(names.length<2)return '<h4>'+escape(raw)+'</h4>';
+    if(names.length<2)return {title:raw,key:'store:'+raw.normalize('NFKC').replace(/[\s　]+/g,'').toLocaleLowerCase('ja-JP'),names};
 
     // Recognize chain names without mistaking an unrelated participating
     // shop for another branch of the same chain.
@@ -7462,7 +7462,7 @@
         tied=true;
       }
     }
-    if(tied||primaryCount<2||primaryCount*2<names.length){
+    if(tied||primaryCount!==names.length){
       primary='';
       primaryCount=0;
     }
@@ -7483,14 +7483,43 @@
         primaryCount=names.length;
       }
     }
-    const heading=primary
-      ? primary
-      : '複数店舗';
-    return '<h4>'+escape(heading)+'</h4>'+
-      '<details class="lp-onsite-archive-stores">'+
-        '<summary>🏬 店舗一覧（'+names.length+'件）</summary>'+
-        '<ul>'+names.map(name=>'<li>'+escape(name)+'</li>').join('')+'</ul>'+
+    const heading=primary||'複数店舗';
+    // Mixed chains are distinct groups keyed by their full, sorted store set.
+    // Never treat an event-wide report as proven for each individual branch.
+    const key=primary
+      ? 'chain:'+primary.normalize('NFKC').replace(/[\s　]+/g,'').toLocaleLowerCase('ja-JP')
+      : 'mixed:'+normalized.slice().sort().join('|');
+    return {title:heading,key,names};
+  }
+
+  function lotteryArchiveStoresHtml(value){
+    const names=lotteryArchiveStoreInfo(value).names;
+    if(names.length<2)return '';
+    return '<details class="lp-onsite-archive-stores">'+
+      '<summary>🏬 対象店舗一覧（'+names.length+'件）</summary>'+
+      '<ul>'+names.map(name=>'<li>'+escape(name)+'</li>').join('')+'</ul>'+
       '</details>';
+  }
+
+  function lotteryArchiveEventHtml(row){
+    const notes=Array.isArray(row.required_details)?row.required_details
+      .filter(x=>typeof x==='string'&&x.trim()).slice(0,40):[];
+    const stores=lotteryArchiveStoresHtml(row.store_name);
+    return '<div class="lp-onsite-archive-event-body">'+
+      stores+
+      (stores?'<p class="lp-onsite-archive-scope">※複数店舗が対象の抽選です。利用者報告は店舗別に分かれていないため、各店の応募条件は公式情報でご確認ください。</p>':'')+
+      '<p>地域：'+escape(row.prefecture||'未確認')+'</p>'+
+      '<p>抽選：'+escape(row.event_title||'イベント名未確認')+'</p>'+
+      '<p>応募終了：'+escape(lotteryJapaneseDate(row.application_end_at)||'未確認')+'</p>'+
+      '<p>現地対応が必要 '+Number(row.required_count||0)+'件'+
+        (Number(row.not_required_count)>0?' ／ 不要 '+Number(row.not_required_count)+'件':'')+'</p>'+
+      (notes.length?'<strong>当時報告された対応内容</strong><ul>'+
+        notes.map(note=>'<li>'+escape(note)+'</li>').join('')+'</ul>':
+        '<p>具体的な対応内容の記載はありません。</p>')+
+      '<p>※過去の利用者報告です。現在の条件は公式情報を確認してください。</p>'+
+      '<a href="'+escape(row.event_url)+
+        '" target="_blank" rel="noopener noreferrer">当時の抽選URL ↗</a>'+
+      '</div>';
   }
 
   function renderLotteryOnsiteArchive(){
@@ -7499,42 +7528,67 @@
     if(!root||!list||!status)return;
     $('lpOnsiteArchiveCount').textContent=lotteryOnsiteArchiveRows.length+'件';
     const search=String($('lpOnsiteArchiveSearch')?.value||'')
-      .trim().toLocaleLowerCase('ja-JP');
-    const matching=lotteryOnsiteArchiveRows.filter(row=>{
-      if(!search)return true;
-      return [row.store_name,row.prefecture,row.event_title,row.event_url,
-        ...(Array.isArray(row.required_details)?row.required_details:[])]
-        .filter(v=>typeof v==='string').join(' ')
-        .toLocaleLowerCase('ja-JP').includes(search);
-    });
+      .trim().normalize('NFKC').toLocaleLowerCase('ja-JP');
+    const norm=value=>String(value||'').normalize('NFKC').toLocaleLowerCase('ja-JP');
+    // Build groups from archived rows only. No back-end records are changed.
+    const groups=new Map();
+    for(const row of lotteryOnsiteArchiveRows){
+      const info=lotteryArchiveStoreInfo(row.store_name);
+      const key=info.key==='unknown'?'unknown:'+row.event_url:info.key;
+      if(!groups.has(key))groups.set(key,{key,title:info.title,rows:[]});
+      groups.get(key).rows.push(row);
+    }
+    const visible=[];
+    for(const group of groups.values()){
+      const groupNameMatches=search&&norm(group.title).includes(search);
+      const rows=!search||groupNameMatches?group.rows:group.rows.filter(row=>
+        [row.store_name,row.prefecture,row.event_title,row.event_url,
+          ...(Array.isArray(row.required_details)?row.required_details:[])]
+        .filter(value=>typeof value==='string').some(value=>norm(value).includes(search)));
+      if(rows.length)visible.push({...group,rows});
+    }
+    const matchingRows=visible.reduce((total,group)=>total+group.rows.length,0);
+    const shownGroups=visible.slice(0,lotteryOnsiteArchiveLimit);
     status.textContent=lotteryOnsiteArchiveError||
-      ('保存済み '+lotteryOnsiteArchiveRows.length+'件 ／ 表示 '+
-      Math.min(lotteryOnsiteArchiveLimit,matching.length)+'件'+
-      (search?'（検索結果 '+matching.length+'件）':''));
-    list.innerHTML=matching.length?matching.slice(0,lotteryOnsiteArchiveLimit).map(row=>{
-      const notes=Array.isArray(row.required_details)?row.required_details
-        .filter(x=>typeof x==='string'&&x.trim()).slice(0,40):[];
-      return '<article class="lp-onsite-archive-card">'+
-        lotteryArchiveStoresHtml(row.store_name)+
-        '<p>地域：'+escape(row.prefecture||'未確認')+'</p>'+
-        '<p>抽選：'+escape(row.event_title||'イベント名未確認')+'</p>'+
-        '<p>応募終了：'+escape(lotteryJapaneseDate(row.application_end_at)||'未確認')+'</p>'+
-        '<p>現地対応が必要 '+Number(row.required_count||0)+'件'+
-          (Number(row.not_required_count)>0?' ／ 不要 '+Number(row.not_required_count)+'件':'')+'</p>'+
-        (notes.length?'<strong>当時報告された対応内容</strong><ul>'+
-          notes.map(note=>'<li>'+escape(note)+'</li>').join('')+'</ul>':
-          '<p>具体的な対応内容の記載はありません。</p>')+
-        '<p>※過去の利用者報告です。現在の条件は公式情報を確認してください。</p>'+
-        '<a href="'+escape(row.event_url)+
-          '" target="_blank" rel="noopener noreferrer">当時の抽選URL ↗</a>'+
-        '</article>';
+      ('保存済み '+lotteryOnsiteArchiveRows.length+'件 ／ 店舗別 '+
+        groups.size+'グループ ／ 表示 '+shownGroups.length+'グループ'+
+        (search?'（検索結果 '+visible.length+'グループ・'+matchingRows+'件）':''));
+    // Keep manually opened groups/events expanded when data re-renders.
+    const openGroups=new Set(Array.from(list.querySelectorAll(
+      'details.lp-onsite-archive-group[open]'),node=>node.getAttribute('data-group-key')));
+    const openEvents=new Set(Array.from(list.querySelectorAll(
+      'details.lp-onsite-archive-event[open]'),node=>node.getAttribute('data-event-key')));
+    list.innerHTML=shownGroups.length?shownGroups.map(group=>{
+      const groupOpen=group.rows.length===1||Boolean(search)||openGroups.has(group.key);
+      const entries=group.rows.length===1
+        ? '<article class="lp-onsite-archive-card">'+
+          '<h4>'+escape(group.rows[0].event_title||'イベント名未確認')+'</h4>'+
+          lotteryArchiveEventHtml(group.rows[0])+'</article>'
+        : group.rows.map(row=>{
+            const eventKey=group.key+'|'+row.event_url;
+            const expanded=Boolean(search)||openEvents.has(eventKey);
+            return '<details class="lp-onsite-archive-event" data-event-key="'+
+              escape(eventKey)+'"'+(expanded?' open':'')+'>'+
+              '<summary><span class="lp-onsite-archive-event-title">'+
+                escape(row.event_title||'イベント名未確認')+'</span>'+
+                '<span class="lp-onsite-archive-event-meta">'+
+                  escape(lotteryJapaneseDate(row.application_end_at)||'終了日未確認')+
+                  ' ／ 必要 '+Number(row.required_count||0)+'件</span></summary>'+
+              lotteryArchiveEventHtml(row)+'</details>';
+          }).join('');
+      return '<details class="lp-onsite-archive-group" data-group-key="'+
+        escape(group.key)+'"'+(groupOpen?' open':'')+'>'+
+        '<summary><strong>🏬 '+escape(group.title)+'</strong>'+
+          '<span>'+group.rows.length+'件の履歴</span></summary>'+
+        '<div class="lp-onsite-archive-group-body">'+entries+'</div>'+
+        '</details>';
     }).join(''):
       '<p class="hint">'+(search?'検索に一致する記録はありません。':
         'まだアーカイブはありません。締切日時が確認できた現地対応必須の報告が、応募終了後に自動保存されます。')+'</p>';
     const more=$('lpOnsiteArchiveMore');
-    more.hidden=matching.length<=lotteryOnsiteArchiveLimit;
-    more.textContent='さらに表示（残り'+
-      Math.max(0,matching.length-lotteryOnsiteArchiveLimit)+'件）';
+    more.hidden=visible.length<=lotteryOnsiteArchiveLimit;
+    more.textContent='さらに店舗を表示（残り'+
+      Math.max(0,visible.length-lotteryOnsiteArchiveLimit)+'グループ）';
   }
 
   function lotteryOnsiteHandleClick(event) {
