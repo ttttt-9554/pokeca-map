@@ -348,6 +348,7 @@
       : '共有するには画面上部の「ログイン」ボタンからDiscordでログインしてください。';
     renderMyShared();
     updateDeveloperTab();
+    window.TorecaInfoPlaza?.onAuthChanged?.();
     window.TorecaUnifiedReview?.onAuthChanged?.();
     restoreProtectedTabAfterAuth();
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
@@ -830,6 +831,7 @@
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
+    window.TorecaInfoPlaza?.onTabChanged?.(tab);
     render();
   }
 
@@ -9649,6 +9651,10 @@
       initDevAccordions();
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
         renderCards:renderLottery,escape});
+      window.TorecaInfoPlaza?.init?.({
+        getClient:()=>supabaseClient,isDev:isDeveloper,
+        getUserId:()=>authUser?.id||''
+      });
       window.TorecaUnifiedReview?.init?.({
         isDeveloper,snapshot:lpDevUnifiedSnapshot,
         validUrl:safeLotteryUrl,isLivePocket:isLivePocketEventUrl,
