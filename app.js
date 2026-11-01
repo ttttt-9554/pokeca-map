@@ -349,6 +349,7 @@
     renderMyShared();
     updateDeveloperTab();
     window.TorecaInfoPlaza?.onAuthChanged?.();
+    window.TorecaSalesReference?.onAuthChanged?.();
     window.TorecaUnifiedReview?.onAuthChanged?.();
     restoreProtectedTabAfterAuth();
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
@@ -466,6 +467,8 @@
       lpCardRefresh(true);lpAppRefresh(true);refreshWishlistForAccount();
       refreshLotteryTrackerForAccount(true);lpResultsRefresh(true);
       refreshLotteryOnsiteReports(true);refreshLotteryOnsiteArchive(true);
+      if($('lotteryView')?.classList.contains('active'))
+        window.TorecaSalesReference?.refresh?.(true);
     });
     supabaseClient.channel('pokeca-lottery-card-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
@@ -826,7 +829,7 @@
       }
     }
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); }
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); window.TorecaSalesReference?.refresh?.(); }
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
@@ -4542,6 +4545,7 @@
       <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
       ${chainReference}
+      ${window.TorecaSalesReference?.render?.(item,stores,genre)||''}
       ${lotteryOnsiteHistoryAlertHtml(item, stores)}
       ${lotteryOnsiteSharedHtml(item.url)}
       ${officialNotice}
@@ -4716,7 +4720,7 @@
         renderLottery();
       });
     }
-    $('lpRefresh').addEventListener('click',() => loadLotteryEvents(true));
+    $('lpRefresh').addEventListener('click',() => {loadLotteryEvents(true);window.TorecaSalesReference?.refresh?.(true);});
     $('lpMore').addEventListener('click',() => {lotteryVisibleLimit += LP_PAGE_SIZE;renderLottery();});
     $('lpClearFilters').addEventListener('click',() => {
       $('lpQuery').value = '';
@@ -9684,6 +9688,11 @@
       window.TorecaInfoPlaza?.init?.({
         getClient:()=>supabaseClient,isDev:isDeveloper,
         getUserId:()=>authUser?.id||''
+      });
+      window.TorecaSalesReference?.init?.({
+        getClient:()=>supabaseClient,
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        renderCards:renderLottery
       });
       window.TorecaUnifiedReview?.init?.({
         isDeveloper,snapshot:lpDevUnifiedSnapshot,
