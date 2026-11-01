@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-01T06:05:55.908470+00:00",
+  "collected_at": "2026-11-01T08:05:55.172949+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 621,
+  "unique_livepocket_urls": 622,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16962,33 +16962,63 @@
       "event_title": "【ふるいち浦和美園店】ポケカ抽選販売(ストームエメラルダ)",
       "application_end_at": "2026-11-01T21:00:00+09:00",
       "application_start_at": "2026-10-31T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3tqn7",
+      "discord_message_id": "1566361184733757453",
+      "discord_posted_at": "2026-11-01T08:00:08.024000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場草加店\n受付終了: 11/02 21:59（残り1日4時間）\nhttps://livepocket.jp/e/3tqn7",
+      "store_name": "古本市場草加店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場草加店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場草加店】ポケカ抽選販売 30THセレブレーション",
+      "application_end_at": "2026-11-02T21:59:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 459,
+    "parsed": 460,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 436,
-    "prefecture": 393,
-    "event_title": 308,
+    "store_name": 437,
+    "prefecture": 394,
+    "event_title": 309,
     "event_date": 1,
     "product_name": 88,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 585,
-    "application_start_at": 582,
-    "stores_events": 447
+    "application_end_at": 586,
+    "application_start_at": 583,
+    "stores_events": 448
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566330993822933133"
+      "1551580466266644552": "1566361184733757453"
     },
     "last_run": {
-      "checked_at": "2026-11-01T06:05:55.908470+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-01T08:05:55.172949+00:00",
+      "new_urls": 1,
       "original_urls": 621,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -17184,7 +17214,8 @@
         "1566277893825368174": "2026-11-01T02:35:55.963973+00:00",
         "1566293233930346646": "2026-11-01T03:35:56.674209+00:00",
         "1566300767709560852": "2026-11-01T04:05:58.018636+00:00",
-        "1566323441617866844": "2026-11-01T05:35:58.013385+00:00"
+        "1566323441617866844": "2026-11-01T05:35:58.013385+00:00",
+        "1566361184733757453": "2026-11-01T08:05:55.765008+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19834,6 +19865,11 @@
           "checked_at": "2026-11-01T05:36:24.420337+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/3tqn7": {
+          "checked_at": "2026-11-01T08:06:23.526737+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -21434,6 +21470,12 @@
           "detected_at": "2026-11-01T05:35:59.035438+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-01T05:36:24.420337+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3tqn7": {
+          "detected_at": "2026-11-01T08:05:56.492131+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T08:06:23.526737+00:00",
           "http_status": null
         }
       },
@@ -27854,6 +27896,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/3tqn7": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T08:06:23.526737+00:00",
+          "title_observed": "【古本市場草加店】ポケカ抽選販売 30THセレブレーション",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -32147,6 +32200,19 @@
         },
         "https://livepocket.jp/e/3qq4u": {
           "checked_at": "2026-11-01T05:36:24.420337+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/3tqn7": {
+          "checked_at": "2026-11-01T08:06:23.526737+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

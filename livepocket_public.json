@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-01T06:05:55.908470+00:00",
-  "unique_livepocket_urls": 621,
+  "collected_at": "2026-11-01T08:05:55.172949+00:00",
+  "unique_livepocket_urls": 622,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9357,7 +9357,26 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3tqn7",
+      "store_name": "古本市場草加店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-01T08:00:08.024000+00:00",
+      "stores": [
+        {
+          "name": "古本市場草加店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場草加店】ポケカ抽選販売 30THセレブレーション",
+      "application_end_at": "2026-11-02T21:59:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場草加店】ポケカ抽選販売 30THセレブレーション",
+      "first_detected_at": "2026-11-01T08:05:56.492131+00:00"
     }
   ],
-  "updated_at": "2026-11-01T07:55:58.811609+00:00"
+  "updated_at": "2026-11-01T08:06:23.526737+00:00"
 }
