@@ -3010,3 +3010,77 @@ nav[aria-label="メインメニュー"]:has(>button[data-tab="infoPlaza"])>butto
 nav[aria-label="メインメニュー"]>button[data-tab="infoPlaza"] span{
   white-space:nowrap;
 }
+
+
+/* Information Plaza / Developer-only per-store sales formats */
+#infoPlazaContent:has(.info-sales-admin:not([hidden])){
+  padding:12px;min-height:250px;
+}
+#infoSalesAdmin{color:var(--app-text,#172033);line-height:1.5}
+#infoSalesAdmin h3{display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  margin:3px 0 10px;font-size:17px;color:inherit}
+#infoSalesAdmin h3 small{border-radius:999px;padding:3px 9px;
+  background:var(--app-surface2,#e9eff7);border:1px solid var(--app-border,#d1deef);
+  font-size:11px;font-weight:700}
+#infoSalesAdmin h4{margin:5px 0 12px;font-size:15px;color:inherit}
+#infoSalesAdmin .info-sales-description{margin:0 0 14px;font-size:12px;
+  color:var(--app-muted,#64748b);line-height:1.7}
+#infoSalesForm{display:flex;flex-direction:column;gap:8px;margin:0 0 12px;
+  padding:14px;border:1px solid var(--app-border,#cbd5e1);border-radius:12px;
+  background:var(--app-surface2,#f8fafc);color:inherit}
+#infoSalesAdmin label{display:block;font-size:13px;font-weight:700;
+  line-height:1.5;color:inherit}
+#infoSalesAdmin input[type="search"],#infoSalesAdmin select,
+#infoSalesAdmin textarea{
+  display:block;box-sizing:border-box;width:100%;min-height:42px;
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:9px;padding:9px 11px;font:inherit;font-size:14px;
+}
+#infoSalesAdmin textarea{min-height:88px;resize:vertical}
+#infoSalesAdmin input:focus-visible,#infoSalesAdmin select:focus-visible,
+#infoSalesAdmin textarea:focus-visible{outline:2px solid #2563eb;outline-offset:1px}
+#infoSalesAdmin .info-sales-hint{font-size:11px;line-height:1.6;
+  color:var(--app-muted,#64748b);margin:2px 0 5px}
+#infoSalesAdmin .info-sales-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#infoSalesAdmin .info-sales-form-grid>label{min-width:0}
+#infoSalesAdmin .info-sales-status-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:6px 0}
+#infoSalesAdmin .info-sales-status-group[hidden]{display:none!important}
+#infoSalesAdmin .info-sales-form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+#infoSalesAdmin button{min-height:42px;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:9px;padding:8px 12px;font-size:13px;font-weight:750;
+  background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033);
+  cursor:pointer;touch-action:manipulation}
+#infoSalesAdmin button:disabled{opacity:.6;cursor:wait}
+#infoSalesAdmin button.info-sales-save{background:#245dbb;color:#fff;
+  border-color:#245dbb}
+#infoSalesAdmin .info-sales-message{font-size:12px;line-height:1.6;min-height:18px;
+  color:var(--app-muted,#475569);margin:9px 0}
+#infoSalesAdmin .info-sales-message[data-error="true"]{color:#d97706;font-weight:700}
+#infoSalesAdmin .info-sales-list-heading{display:flex;align-items:center;
+  justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:14px}
+#infoSalesAdmin .info-sales-list-heading h4{margin:0}
+#infoSalesAdmin #infoSalesCount{font-size:12px;color:var(--app-muted,#64748b)}
+#infoSalesAdmin .info-sales-filters{display:grid;grid-template-columns:minmax(0,2fr) minmax(115px,1fr);
+  gap:8px;margin:10px 0}
+#infoSalesAdmin .info-sales-list{display:flex;flex-direction:column;gap:10px}
+#infoSalesAdmin .info-sales-entry{border:1px solid var(--app-border,#cbd5e1);
+  border-radius:12px;background:var(--app-surface2,#f8fafc);padding:12px;min-width:0}
+#infoSalesAdmin .info-sales-entry-heading{display:flex;flex-direction:column;gap:3px}
+#infoSalesAdmin .info-sales-entry-heading strong{overflow-wrap:anywhere;font-size:14px;color:inherit}
+#infoSalesAdmin .info-sales-entry-heading small{color:var(--app-muted,#64748b);font-size:12px}
+#infoSalesAdmin .info-sales-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+#infoSalesAdmin .info-sales-tags span{display:inline-block;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:999px;background:var(--app-surface,#fff);padding:4px 9px;font-size:12px}
+#infoSalesAdmin .info-sales-entry-note{font-size:12px;color:var(--app-muted,#64748b);
+  white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}
+#infoSalesAdmin .info-sales-entry-actions{display:flex;gap:8px;margin-top:10px}
+#infoSalesAdmin .info-sales-entry-actions button{min-height:38px}
+#infoSalesAdmin .info-sales-no-results{font-size:12px;
+  color:var(--app-muted,#64748b);line-height:1.65}
+html[data-theme="dark"] #infoSalesAdmin .info-sales-message[data-error="true"]{color:#fbbf24}
+@media(max-width:370px){
+  #infoSalesAdmin .info-sales-form-grid,
+  #infoSalesAdmin .info-sales-status-group{grid-template-columns:1fr}
+  #infoSalesAdmin .info-sales-filters{grid-template-columns:1fr}
+}
