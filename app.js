@@ -9676,7 +9676,7 @@
         const currentUrl = new URL(window.location.href);
         const requestedTab = currentUrl.searchParams.has('app_refresh')
           ? currentUrl.searchParams.get('app_tab') : null;
-        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','lotteryResults','group','dev'];
+        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','lotteryResults','infoPlaza','group','dev'];
         if(allowedTabs.includes(requestedTab))
           initialTab=deferProtectedTabUntilAuth(requestedTab);
         if (currentUrl.searchParams.has('app_tab')) {
