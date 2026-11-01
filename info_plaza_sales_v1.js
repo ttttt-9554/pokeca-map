@@ -461,12 +461,29 @@
     saveBusy=true;button.disabled=true;button.textContent='保存中…';
     message('保存しています…');
     try{
-      const query=editingId
-        ? client().from(TABLE).update(payload).eq('id',editingId)
-        : client().from(TABLE).upsert(payload,{onConflict:'store_key,prefecture,genre'});
-      const {data,error}=await query.select('id').single();
-      if(error)throw error;
-      if(!data?.id||!canAccess()||options.getUserId()!==user)throw Error('保存結果を確認できませんでした');
+      // A PostgREST upsert needs broader table-wide SELECT privileges.
+      // Preserve restricted user-ID visibility and use INSERT / UPDATE instead.
+      const findExisting=async()=>{
+        const {data,error}=await client().from(TABLE).select('id')
+          .eq('store_key',payload.store_key)
+          .eq('prefecture',payload.prefecture)
+          .eq('genre',payload.genre).maybeSingle();
+        if(error)throw error;
+        return data?.id||'';
+      };
+      let targetId=editingId||await findExisting();
+      const write=async id=>id
+        ? client().from(TABLE).update(payload).eq('id',id).select('id').single()
+        : client().from(TABLE).insert(payload).select('id').single();
+      let result=await write(targetId);
+      // Another member may have created the same entry after our lookup.
+      if(!targetId&&result.error?.code==='23505'){
+        targetId=await findExisting();
+        if(targetId)result=await write(targetId);
+      }
+      if(result.error)throw result.error;
+      if(!result.data?.id||!canAccess()||options.getUserId()!==user)
+        throw Error('保存結果を確認できませんでした');
       loaded=false;
       await refresh(true);
       resetForm();
