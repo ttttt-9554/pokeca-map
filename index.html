@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-supabase-usage-v1">
+  <link rel="stylesheet" href="style.css?v=20261102-manual-multistore-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1530,12 +1530,24 @@ nav[aria-label="メインメニュー"] {
               <label>商品名（任意）
                 <input type="text" name="product_name" maxlength="200" placeholder="例：ポケモンカード新商品">
               </label>
-              <label><span id="lpAppStoreNameTitle">店舗名（任意）</span>
-                <input type="text" name="store_name" maxlength="200" placeholder="例：宇都宮店（店頭応募では必須）">
-              </label>
-              <label><span id="lpAppPrefectureTitle">対象地域（任意）</span>
-                <select name="prefecture" id="lpAppPrefecture"><option value="">未確認</option></select>
-              </label>
+              <div id="lpAppStoresField" class="lp-app-stores-field">
+                <h4>🏬 対象店舗（複数登録可）</h4>
+                <div class="lp-app-store-row lp-app-store-first">
+                  <div class="lp-app-store-head"><strong>店舗 1</strong></div>
+                  <label><span id="lpAppStoreNameTitle">店舗名（任意）</span>
+                    <input type="text" name="store_name" maxlength="200" placeholder="例：宇都宮店（店頭応募では必須）">
+                  </label>
+                  <label><span id="lpAppPrefectureTitle">対象地域（任意）</span>
+                    <select name="prefecture" id="lpAppPrefecture"><option value="">未確認</option></select>
+                  </label>
+                </div>
+                <div id="lpAppExtraStores" class="lp-app-extra-stores"></div>
+                <div class="lp-app-store-actions">
+                  <button type="button" id="lpAppAddStore">＋ 店舗を追加</button>
+                  <small id="lpAppStoreCount" aria-live="polite">入力欄 1 / 100件</small>
+                </div>
+                <p class="hint">同じ抽選の対象店舗を店舗ごとに名前と都道府県で登録できます。店頭応募ではすべての店舗の地域が必須です。</p>
+              </div>
               <div class="lp-app-form-grid">
                 <label>ジャンル
                   <select name="review_category">
@@ -1817,7 +1829,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-supabase-usage-v1';
+      ? token : '20261102-manual-multistore-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

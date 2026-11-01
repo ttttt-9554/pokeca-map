@@ -4821,7 +4821,7 @@
   // but application results and pickup notes stay in the existing private RLS tables.
   const LP_APP_TABLE='lottery_app_events';
   const LP_APP_URL_PREFIX='https://ttttt-9554.github.io/pokeca-map/?app_lottery=';
-  const LP_APP_SELECT='id,created_by,registration_method,app_name,event_title,product_name,store_name,prefecture,review_category,product_type,application_start_at,application_end_at,source_url,details,is_hidden,created_at,updated_at';
+  const LP_APP_SELECT='id,created_by,registration_method,app_name,event_title,product_name,store_name,prefecture,stores,review_category,product_type,application_start_at,application_end_at,source_url,details,is_hidden,created_at,updated_at';
   let lpAppRows=new Map(),lpAppReady=false,lpAppError='',lpAppFetch=null,lpAppLastFetch=0;
   let lpAppSeq=0,lpAppUser='',lpAppBusy=false,lpAppEditing='';
   function lpAppUrl(id){
@@ -4832,8 +4832,70 @@
     const id=url.slice(LP_APP_URL_PREFIX.length);
     return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)?id:'';
   }
+
+  // v21.166: Per-store locations with backwards compatibility for old rows.
+  function lpAppStoredStores(row){
+    const raw=Array.isArray(row?.stores)?row.stores:[];
+    const stores=raw.filter(x=>x&&typeof x.name==='string'&&x.name.trim())
+      .slice(0,100).map(x=>({
+        name:String(x.name).trim(),prefecture:String(x.prefecture||'').trim()
+      }));
+    if(stores.length)return stores;
+    const previous=String(row?.store_name||'').trim();
+    return previous?[{name:previous,prefecture:String(row?.prefecture||'').trim()}]:[];
+  }
+  function lpAppExtraStoreRows(){
+    return [...($('lpAppExtraStores')?.querySelectorAll('[data-lp-app-extra-store]')||[])];
+  }
+  function lpAppStoreDraft(){
+    const form=$('lpAppForm');
+    if(!form)return [];
+    const val=name=>String(form.elements.namedItem(name)?.value||'').trim();
+    return [
+      {name:val('store_name'),prefecture:val('prefecture')},
+      ...lpAppExtraStoreRows().map(el=>({
+        name:String(el.querySelector('[data-lp-app-store-name]')?.value||'').trim(),
+        prefecture:String(el.querySelector('[data-lp-app-store-prefecture]')?.value||'').trim()
+      }))
+    ];
+  }
+  function lpAppUpdateStoreCount(){
+    const rows=lpAppExtraStoreRows(),total=1+rows.length;
+    const counter=$('lpAppStoreCount'),button=$('lpAppAddStore');
+    if(counter)counter.textContent='入力欄 '+total+' / 100件';
+    if(button)button.disabled=total>=100;
+    rows.forEach((row,i)=>{
+      const label=row.querySelector('[data-lp-app-store-number]');
+      if(label)label.textContent='店舗 '+(i+2);
+    });
+  }
+  function lpAppAppendStore(record={name:'',prefecture:''}){
+    const root=$('lpAppExtraStores');
+    if(!root||lpAppExtraStoreRows().length>=99)return false;
+    const name=String(record?.name||'').trim();
+    const region=String(record?.prefecture||'').trim();
+    const options='<option value="">未確認・指定なし</option>'+
+      LP_MANUAL_AREAS.map(pref=>
+        '<option value="'+escape(pref)+'"'+(pref===region?' selected':'')+'>'+
+        escape(pref)+'</option>').join('');
+    root.insertAdjacentHTML('beforeend',
+      '<div class="lp-app-store-row lp-app-extra-store" data-lp-app-extra-store>'+
+        '<div class="lp-app-store-head"><strong data-lp-app-store-number>店舗</strong>'+
+          '<button type="button" data-lp-app-remove-store aria-label="この店舗を削除">削除</button></div>'+
+        '<label>店舗名<input type="text" name="extra_store_name" data-lp-app-store-name'+
+          ' required maxlength="200" autocomplete="off" value="'+escape(name)+'"'+
+          ' placeholder="例：インターパーク店"></label>'+
+        '<label>都道府県<select name="extra_store_prefecture" data-lp-app-store-prefecture>'+
+          options+'</select></label>'+
+      '</div>');
+    lpAppUpdateStoreCount();
+    lpAppSyncMethod();
+    return true;
+  }
+
   function lpAppItem(row){
     const method=row.registration_method==='in_store'?'in_store':'app';
+    const stores=lpAppStoredStores(row);
     return {
       url:lpAppUrl(row.id),app_lottery:true,app_lottery_id:row.id,
       manual_registration_method:method,
@@ -4842,8 +4904,9 @@
       app_lottery_source_url:safeLotteryUrl(row.source_url)?row.source_url:'',
       source_site:(method==='in_store' ? (row.store_name||row.app_name)+'（店頭応募）' : row.app_name+'（アプリ抽選）'),event_title:row.event_title,
       official_event_title:row.event_title,event_title_provisional:false,
-      product_name:row.product_name||'',store_name:row.store_name||'',
-      prefecture:row.prefecture||'',review_category:row.review_category||'unknown',
+      product_name:row.product_name||'',stores,
+      store_name:stores[0]?.name||row.store_name||'',
+      prefecture:stores[0]?.prefecture||row.prefecture||'',review_category:row.review_category||'unknown',
       manual_card_genre:true,pokemon_map_type:row.product_type||'unknown',
       application_start_at:row.application_start_at||null,
       application_end_at:row.application_end_at||null,
@@ -4925,7 +4988,8 @@
     const mode=$('lpAppFilter')?.value||'all';
     const matches=item=>!q||productNorm([
       item.app_lottery_name,item.event_title,item.product_name,
-      item.store_name,item.prefecture,item.app_lottery_details
+      item.store_name,item.prefecture,item.app_lottery_details,
+      ...lotteryStoreEntries(item).map(store=>store.name+' '+store.prefecture)
     ].filter(Boolean).join(' ')).includes(q);
     const shownPublished=(mode==='hidden'?[]:published.filter(matches))
       .sort((a,b)=>lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
@@ -4943,7 +5007,8 @@
       const id=escape(item.app_lottery_id);
       const info=[item.manual_registration_method==='in_store'?'🏬 店頭応募':'📱 アプリ抽選',
         item.manual_registration_method==='in_store'?'':item.app_lottery_name,
-        item.product_name,item.store_name,item.prefecture]
+        item.product_name,item.store_name,item.prefecture,
+        item.stores?.length>1?'対象店舗 '+item.stores.length+'件':'']
         .filter(Boolean).join(' ／ ');
       const deadline=lotteryJapaneseDate(item.application_end_at)||'未確認';
       return '<div class="lp-app-edit-row">'+
@@ -5012,6 +5077,8 @@
     lpAppInitialSnapshot=null;
     const form=$('lpAppForm');
     if(form)form.reset();
+    $('lpAppExtraStores')?.replaceChildren();
+    lpAppUpdateStoreCount();
     lpAppFormMessage('');
     lpAppRestoreForm();
   }
@@ -5053,14 +5120,19 @@
     lpAppEditing=row?.id||'';
     const form=$('lpAppForm');
     form.reset();
+    $('lpAppExtraStores')?.replaceChildren();
     const set=(name,value)=>{
       const el=form.elements.namedItem(name);
       if(el)el.value=value||'';
     };
     if(row){
       set('registration_method',row.registration_method==='in_store'?'in_store':'app');
-      for(const field of ['app_name','event_title','product_name','store_name',
-        'prefecture','review_category','product_type','source_url','details'])set(field,row[field]);
+      for(const field of ['app_name','event_title','product_name',
+        'review_category','product_type','source_url','details'])set(field,row[field]);
+      const stores=lpAppStoredStores(row);
+      set('store_name',stores[0]?.name||row.store_name);
+      set('prefecture',stores[0]?.prefecture||row.prefecture);
+      for(const store of stores.slice(1))lpAppAppendStore(store);
       set('application_start_at',lpExtDateInput(row.application_start_at));
       set('application_end_at',lpExtDateInput(row.application_end_at));
     }else{
@@ -5068,6 +5140,7 @@
       set('review_category','pokemon');set('product_type','unknown');
     }
     lpAppSyncMethod();
+    lpAppUpdateStoreCount();
     const toggle=$('lpAppToggle');
     toggle.hidden=!row;
     toggle.textContent=row?.is_hidden?'一覧へ再公開':'登録を非表示（履歴保持）';
@@ -5089,11 +5162,17 @@
     if(appName){appName.required=!inStore;appName.disabled=inStore;}
     if(storeName)storeName.required=inStore;
     if(prefecture)prefecture.required=inStore;
+    for(const row of lpAppExtraStoreRows()){
+      const name=row.querySelector('[data-lp-app-store-name]');
+      const region=row.querySelector('[data-lp-app-store-prefecture]');
+      if(name)name.required=true;
+      if(region)region.required=inStore;
+    }
     if($('lpAppStoreNameTitle'))$('lpAppStoreNameTitle').textContent=inStore?'応募店舗名（必須）':'店舗名（任意）';
     if($('lpAppPrefectureTitle'))$('lpAppPrefectureTitle').textContent=inStore?'応募店舗の地域（必須）':'対象地域（任意）';
     if($('lpAppMethodHint'))$('lpAppMethodHint').textContent=inStore
-      ?'🏬 店頭で申込用紙を提出するなど、店舗で直接応募する抽選です。応募店舗名・地域を指定し、店頭で確認した受付条件を共有メモに入力してください。'
-      :'📱 公式アプリから応募する抽選です。アプリ名と抽選名を入力してください。応募店舗は個人管理から登録できます。';
+      ?'🏬 店頭で直接応募する抽選です。店舗ごとに店舗名と都道府県を登録してください。応募アカウント別の店舗選択もできます。'
+      :'📱 公式アプリから応募する抽選です。対象店舗が複数ある場合は「＋ 店舗を追加」から入力してください。';
     const details=form.elements.namedItem('details');
     if(details)details.placeholder=inStore
       ?'例：店頭レジで応募用紙を記入、本人確認書類が必要、受付時間など'
@@ -5106,11 +5185,38 @@
     const method=val('registration_method')||'app';
     if(!['app','in_store'].includes(method))throw Error('応募方式を選択してください。');
     const inStore=method==='in_store';
+    const drafts=lpAppStoreDraft();
+    if(drafts.length>100)throw Error('対象店舗は最大100件です。');
+    const stores=[],seen=new Set();
+    for(let i=0;i<drafts.length;i++){
+      const {name,prefecture}=drafts[i];
+      if(!name){
+        // Legacy app registrations may specify a region without a store.
+        if(i===0&&!inStore&&drafts.length===1)continue;
+        throw Error('店舗 '+(i+1)+' の店舗名を入力してください。');
+      }
+      if(name.length<2||name.length>200)
+        throw Error('店舗 '+(i+1)+' の店舗名は2〜200文字で入力してください。');
+      if(prefecture&&!LP_MANUAL_AREAS.includes(prefecture))
+        throw Error('店舗 '+(i+1)+' の都道府県を選択してください。');
+      if(inStore&&!prefecture)
+        throw Error('店頭応募の場合は店舗 '+(i+1)+' の都道府県を選択してください。');
+      const identity=name.normalize('NFKC').toLocaleLowerCase('ja-JP')
+        .replace(/[\s　・･._－（）()【】「」-]+/g,'')+'|'+prefecture;
+      if(seen.has(identity))
+        throw Error('同じ店舗が重複しています。店舗名と都道府県を確認してください。');
+      seen.add(identity);
+      stores.push({name,prefecture});
+    }
+    if(inStore&&!stores.length)
+      throw Error('店頭応募の場合は応募店舗名と都道府県を入力してください。');
+    const first=stores[0];
     const payload={
       registration_method:method,
-      app_name:inStore?val('store_name').slice(0,100):val('app_name'),event_title:val('event_title'),
-      product_name:val('product_name')||null,store_name:val('store_name')||null,
-      prefecture:val('prefecture')||null,
+      app_name:inStore?first.name.slice(0,100):val('app_name'),event_title:val('event_title'),
+      product_name:val('product_name')||null,stores,
+      store_name:first?.name||null,
+      prefecture:first?(first.prefecture||null):(val('prefecture')||null),
       review_category:val('review_category')||'unknown',
       product_type:val('product_type')||'unknown',
       application_start_at:lpExtDateSave(val('application_start_at')),
@@ -5120,8 +5226,6 @@
     if(payload.app_name.length<2||payload.app_name.length>100 ||
        payload.event_title.length<2||payload.event_title.length>200)
       throw Error((inStore?'店舗名':'アプリ名')+'・抽選名は2文字以上で入力してください。');
-    if(inStore&&(!payload.store_name||!payload.prefecture))
-      throw Error('店頭応募の場合は応募店舗名と都道府県を入力してください。');
     if(payload.product_name?.length>200||payload.store_name?.length>200||
        payload.details?.length>600)throw Error('文字数制限を確認してください。');
     if(payload.prefecture&&!LP_MANUAL_AREAS.includes(payload.prefecture))
@@ -5148,6 +5252,8 @@
           productNorm(row.app_name)===productNorm(payload.app_name)&&
           productNorm(row.event_title)===productNorm(payload.event_title)&&
           productNorm(row.store_name||'')===productNorm(payload.store_name||'')&&
+          JSON.stringify(lpAppStoredStores(row))===JSON.stringify(payload.stores)&&
+          (payload.stores.length||String(row.prefecture||'')===String(payload.prefecture||''))&&
           lpExtDateInput(row.application_end_at)===lpExtDateInput(payload.application_end_at));
         if(same)throw Error('同じ応募方式・抽選名・店舗・締切の登録があります。既存のカードを確認してください。');
       }
@@ -5264,7 +5370,19 @@
     $('lpAppPrefecture').innerHTML='<option value="">未確認・指定なし</option>'+
       LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
     $('lpAppMethod').addEventListener('change',lpAppSyncMethod);
+    $('lpAppAddStore')?.addEventListener('click',()=>{
+      if(!lpAppBusy&&lpAppAppendStore())
+        lpAppExtraStoreRows().at(-1)?.querySelector('[data-lp-app-store-name]')?.focus();
+    });
+    $('lpAppExtraStores')?.addEventListener('click',event=>{
+      const remove=event.target.closest('button[data-lp-app-remove-store]');
+      if(remove&&!lpAppBusy){
+        remove.closest('[data-lp-app-extra-store]')?.remove();
+        lpAppUpdateStoreCount();
+      }
+    });
     lpAppSyncMethod();
+    lpAppUpdateStoreCount();
     $('lpAppNew').addEventListener('click',()=>lpAppPrepare());
     $('lpAppSearch').addEventListener('input',lpAppRender);
     $('lpAppFilter').addEventListener('change',lpAppRender);
@@ -5282,6 +5400,8 @@
       // Cleanup if the browser closes a dialog for any external reason.
       if(!lpAppBusy){
         $('lpAppForm')?.reset();
+        $('lpAppExtraStores')?.replaceChildren();
+        lpAppUpdateStoreCount();
         lpAppEditing='';
         lpAppInitialSnapshot=null;
         lpAppFormMessage('');

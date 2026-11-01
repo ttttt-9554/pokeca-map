@@ -30,7 +30,8 @@ const nodes={lpAppForm:form,lpAppAppNameField:controls.appNameField,
 const context={$:id=>nodes[id],safeLotteryUrl:u=>/^https?:\/\//.test(u),
  LP_MANUAL_AREAS:['東京都','栃木県','全国'],lpExtDateSave:v=>v||null,
  lpAppUrl:id=>'https://example.com/?app_lottery='+id};
-const api=vm.runInNewContext(['lpAppSyncMethod','lpAppPayload','lpAppItem']
+const api=vm.runInNewContext(['lpAppStoredStores','lpAppExtraStoreRows','lpAppStoreDraft',
+ 'lpAppSyncMethod','lpAppPayload','lpAppItem']
  .map(extract).join('\n')+'\n({lpAppSyncMethod,lpAppPayload,lpAppItem})',context,{timeout:1000});
 api.lpAppSyncMethod();
 assert.equal(controls.appNameField.hidden,false);
@@ -50,6 +51,8 @@ values.prefecture='栃木県';
 payload=api.lpAppPayload();
 assert.equal(payload.app_name,values.store_name);
 assert.equal(payload.registration_method,'in_store');
+assert.equal(payload.stores.length,1);
+assert.equal(payload.stores[0].name,values.store_name);
 const store=api.lpAppItem({id:'mock',registration_method:'in_store',
  app_name:payload.app_name,store_name:values.store_name,prefecture:'栃木県',
  event_title:values.event_title,created_at:'2026-10-26'});
