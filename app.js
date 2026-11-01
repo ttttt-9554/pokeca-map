@@ -830,13 +830,14 @@
       }
     }
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); window.TorecaSalesReference?.refresh?.(); }
+    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); globalThis.window?.TorecaSalesReference?.refresh?.(); }
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
-    window.TorecaInfoPlaza?.onTabChanged?.(tab);
-    window.TorecaStoreMaps?.onTabChanged?.(tab);
+    // Browser integrations are optional in isolated regression-test contexts.
+    globalThis.window?.TorecaInfoPlaza?.onTabChanged?.(tab);
+    globalThis.window?.TorecaStoreMaps?.onTabChanged?.(tab);
     render();
   }
 

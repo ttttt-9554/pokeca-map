@@ -10,10 +10,12 @@ name: Discord Role Access Verification (staged)
       - 'scripts/test_lottery_tab_login_visibility.cjs'
       - 'index.html'
       - 'app.js'
-      - 'style.css'
       - 'DISCORD_ROLE_ACCESS_SETUP.md'
       - '.github/workflows/discord-role-access-test.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

@@ -21,12 +21,8 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_manual_lottery_dialog.cjs
       - scripts/test_lottery_tracker_modal_layout.cjs
       - scripts/test_store_analytics.cjs
-      - store_analytics_v21_120.js
       - scripts/test_developer_unified_review.cjs
-      - dev_unified_review_v21_124.js
       - supabase/lottery_private_application_accounts_v21_100.sql
-      - index.html
-      - style.css
       - scripts/test_app_manual_location.cjs
       - scripts/test_external_edit_discord.cjs
       - scripts/test_external_multi_stores.cjs
@@ -53,6 +49,9 @@ name: LivePocket Detail Deadline Regression
       - .github/workflows/livepocket-collect.yml
       - .github/workflows/livepocket-detail-deadline-test.yml
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
