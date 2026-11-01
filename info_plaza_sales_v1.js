@@ -439,8 +439,14 @@
     }
   }
   function onTabChanged(tab){
+    const wasActive=active;
     active=tab==='infoPlaza';
-    if(active)onAuthChanged();
+    if(active){
+      onAuthChanged();
+      // A shop imported from another tab/device must become selectable
+      // when revisiting Information Plaza; do not keep the old candidate list.
+      if(!wasActive&&authorized)refreshMaster(true);
+    }
   }
   function init(config){
     if(initialized)return;
