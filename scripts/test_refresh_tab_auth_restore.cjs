@@ -86,8 +86,8 @@ assert.match(app,/initialTab=deferProtectedTabUntilAuth\(requestedTab\)/,
  'Startup must defer protected pages until Discord Auth completes');
 assert.match(app,/initialTab=deferProtectedTabUntilAuth\('lottery'\)/,
  'Deep-linked lottery must also wait for login');
-assert.match(app,/updateDeveloperTab\(\);[\s\S]{0,150}restoreProtectedTabAfterAuth\(\);/,
- 'Only after displaying authenticated identity can a protected tab return');
+assert.match(app,/updateDeveloperTab\(\);[\s\S]{0,500}restoreProtectedTabAfterAuth\(\);/,
+ 'After displaying authenticated identity and notifying auxiliary views, the original tab can return');
 assert.match(app,/restoreTabAfterAuth='';\s*switchTab\(button\.dataset\.tab\)/,
  'Explicit user navigation must cancel a pending automatic restore');
 assert.match(app,/LOTTERY_LOGIN_TABS\.includes\(tab\)\&\&\(!authUser\|\|discordRoleAuthPending\)/,
