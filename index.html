@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261101-archive-store-group-v2">
+  <link rel="stylesheet" href="style.css?v=20261101-onsite-history-alert-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1771,7 +1771,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261101-archive-chain-majority-fold-v1';
+      ? token : '20261101-onsite-history-alert-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
