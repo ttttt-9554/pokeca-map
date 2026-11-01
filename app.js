@@ -9692,7 +9692,8 @@
       window.TorecaSalesReference?.init?.({
         getClient:()=>supabaseClient,
         getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
-        renderCards:renderLottery
+        renderCards:renderLottery,
+        onDataChanged:()=>window.TorecaInfoPlaza?.onPublicDataChanged?.()
       });
       window.TorecaUnifiedReview?.init?.({
         isDeveloper,snapshot:lpDevUnifiedSnapshot,
