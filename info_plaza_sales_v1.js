@@ -25,7 +25,7 @@
   let masterBusy=false,masterLoaded=false,masterChoices=new Map();
   let matchingMasterChoices=[],masterSuggestionIndex=-1,masterSuggestionsOpen=false;
   let storeNameComposing=false;
-  let generation=0;
+  let generation=0,publicVisibleLimit=60;
 
   function client(){return options?.getClient?.()||null;}
   function canAccess(){return !!options?.isDev?.()&&!!options?.getUserId?.()&&!!client();}
@@ -41,6 +41,23 @@
     if(!container||initialized)return;
     initialized=true;
     container.innerHTML=
+      '<section id="infoSalesPublic" class="info-sales-public">'+
+        '<div class="info-sales-public-head">'+
+          '<div><h3>🏬 店舗別販売形態</h3>'+
+            '<p>各店舗の登録済み販売形態を確認できます。販売条件は変更される場合があります。</p></div>'+
+          '<button type="button" id="infoSalesPublicRefresh">↻ 更新</button>'+
+        '</div>'+
+        '<div class="info-sales-public-filters">'+
+          '<input type="search" id="infoSalesPublicSearch" aria-label="店舗名・都道府県を検索" placeholder="店舗名・都道府県で検索">'+
+          '<select id="infoSalesPublicGenre" aria-label="カードの種類で絞り込み">'+
+            '<option value="all">すべて</option><option value="pokemon">ポケカ</option>'+
+            '<option value="onepiece">ワンピース</option></select>'+
+        '</div>'+
+        '<p id="infoSalesPublicStatus" class="info-sales-public-status" role="status" aria-live="polite">販売形態の情報を確認しています…</p>'+
+        '<div id="infoSalesPublicList" class="info-sales-public-list"></div>'+
+        '<button type="button" id="infoSalesPublicMore" class="info-sales-public-more" hidden>さらに表示</button>'+
+        '<p class="info-sales-public-disclaimer">※登録された販売形態の参考情報です。今回の抽選や販売時の条件を保証するものではありません。公式情報をご確認ください。</p>'+
+      '</section>'+
       '<section id="infoSalesAdmin" class="info-sales-admin" hidden>'+
         '<h3>🏬 店舗別販売形態 <small>開発者専用</small></h3>'+
         '<p class="info-sales-description">店舗ごとの販売時の状態を記録します。ポケカはシュリンク・ペリ、ワンピースはテプカ（テープカット）。「未確認」は「なし」と区別します。販売形態が登録された店舗は抽選カードに参考表示されます。補足メモは開発者専用のままです。</p>'+
@@ -99,6 +116,16 @@
         '<p id="infoSalesListStatus" class="info-sales-hint" role="status" aria-live="polite"></p>'+
         '<div id="infoSalesList" class="info-sales-list"></div>'+
       '</section>';
+    $('infoSalesPublicSearch').addEventListener('input',()=>{
+      publicVisibleLimit=60;renderPublic();
+    });
+    $('infoSalesPublicGenre').addEventListener('change',()=>{
+      publicVisibleLimit=60;renderPublic();
+    });
+    $('infoSalesPublicRefresh').addEventListener('click',()=>loadPublic(true));
+    $('infoSalesPublicMore').addEventListener('click',()=>{
+      publicVisibleLimit+=60;renderPublic();
+    });
     $('infoSalesGenre').addEventListener('change',updateGenre);
     const storeInput=$('infoSalesStore');
     storeInput.addEventListener('focus',()=>renderStoreSuggestions(true));
@@ -215,6 +242,85 @@
     }
   }
 
+
+  function publicDate(value){
+    const date=Date.parse(String(value||''));
+    if(!Number.isFinite(date))return '';
+    return new Intl.DateTimeFormat('ja-JP',{
+      timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'
+    }).format(new Date(date));
+  }
+  function renderPublic(){
+    const container=$('infoSalesPublicList'),status=$('infoSalesPublicStatus');
+    if(!container||!status||!active||authorized)return;
+    const reference=window.TorecaSalesReference;
+    const state=reference?.status?.()||{loaded:false,loading:false,error:''};
+    const data=reference?.list?.()||[];
+    const genre=$('infoSalesPublicGenre')?.value||'all';
+    const query=normalize($('infoSalesPublicSearch')?.value);
+    const filtered=data.filter(row=>
+      (genre==='all'||row.genre===genre)&&
+      (!query||normalize(row.store_name+' '+row.prefecture).includes(query)));
+    const grouped=new Map();
+    for(const row of filtered){
+      const storeKey=row.prefecture+'|'+normalize(row.store_name);
+      if(!grouped.has(storeKey))grouped.set(storeKey,{
+        name:row.store_name,prefecture:row.prefecture,genres:[]
+      });
+      grouped.get(storeKey).genres.push(row);
+    }
+    const groups=[...grouped.values()].sort((a,b)=>
+      a.prefecture.localeCompare(b.prefecture,'ja')||
+      a.name.localeCompare(b.name,'ja'));
+    const shown=groups.slice(0,publicVisibleLimit);
+    const more=$('infoSalesPublicMore');
+    if(more){
+      more.hidden=groups.length<=publicVisibleLimit;
+      more.textContent='さらに表示（残り'+Math.max(0,groups.length-publicVisibleLimit)+'店舗）';
+    }
+    if(state.loading&&!state.loaded)status.textContent='販売形態の参考情報を読み込み中…';
+    else if(state.error)status.textContent='⚠ '+state.error+' 「更新」で再取得できます。';
+    else if(!state.loaded)status.textContent='販売形態の情報を確認しています…';
+    else status.textContent='登録店舗 '+groups.length+'件 ／ 表示 '+shown.length+'件'+
+      (query||genre!=='all'?'（絞り込み中）':'');
+    if(!shown.length){
+      container.innerHTML='<p class="info-sales-public-empty">'+
+        (state.loading&&!state.loaded?'読み込み中…':
+         !state.loaded?'情報を取得できていません。':
+         data.length?'検索条件に一致する店舗はありません。':
+         '販売形態が登録された店舗はまだありません。')+'</p>';
+      return;
+    }
+    container.innerHTML=shown.map(group=>
+      '<article class="info-sales-public-card">'+
+        '<div class="info-sales-public-shop"><strong>'+escape(group.name)+
+          '</strong><span>'+escape(group.prefecture)+'</span></div>'+
+        group.genres.sort((a,b)=>a.genre.localeCompare(b.genre)).map(row=>{
+          const pokemon=row.genre==='pokemon';
+          const tags=pokemon
+            ?[['シュリンク',row.shrink_state],['ペリ',row.peri_state]]
+            :[['テプカ',row.tape_cut_state]];
+          return '<div class="info-sales-public-genre">'+
+            '<strong class="info-sales-public-genre-name">'+
+              (pokemon?'ポケカ':'ワンピース')+'</strong>'+
+            '<div class="info-sales-public-values">'+tags.map(([name,value])=>
+              '<span>'+escape(name)+'：<strong>'+escape(formatValue(value))+
+              '</strong></span>').join('')+'</div>'+
+            (publicDate(row.updated_at)?'<small>情報更新：'+
+              escape(publicDate(row.updated_at))+'</small>':'')+
+          '</div>';
+        }).join('')+
+      '</article>'
+    ).join('');
+  }
+  function loadPublic(force=false){
+    if(!active||authorized)return;
+    renderPublic();
+    if(!client())return;
+    const reference=window.TorecaSalesReference;
+    if(reference?.refresh)reference.refresh(force);
+  }
+  function onPublicDataChanged(){renderPublic();}
   function updateGenre(){
     const isPokemon=$('infoSalesGenre')?.value!=='onepiece';
     if($('infoSalesPokemon'))$('infoSalesPokemon').hidden=!isPokemon;
@@ -422,6 +528,8 @@
     const panel=$('infoSalesAdmin');
     if(!panel)return;
     panel.hidden=!permitted;
+    const publicPanel=$('infoSalesPublic');
+    if(publicPanel)publicPanel.hidden=permitted;
     if(permitted!==authorized){
       ++generation;
       authorized=permitted;
@@ -435,9 +543,13 @@
         $('infoSalesListStatus').textContent='';
       }
     }
-    if(permitted&&active){
-      refresh();
-      refreshMaster();
+    if(active){
+      if(permitted){
+        refresh();
+        refreshMaster();
+      }else{
+        loadPublic();
+      }
     }
   }
   function onTabChanged(tab){
@@ -448,6 +560,7 @@
       // A shop imported from another tab/device must become selectable
       // when revisiting Information Plaza; do not keep the old candidate list.
       if(!wasActive&&authorized)refreshMaster(true);
+      if(!authorized)loadPublic();
     }
   }
   function init(config){
@@ -456,5 +569,5 @@
     mount();
     onAuthChanged();
   }
-  window.TorecaInfoPlaza={init,onTabChanged,onAuthChanged};
+  window.TorecaInfoPlaza={init,onTabChanged,onAuthChanged,onPublicDataChanged};
 })();
