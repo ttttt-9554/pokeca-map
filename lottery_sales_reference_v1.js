@@ -81,9 +81,10 @@
           if(!storeName||!pref||!normalize(storeName))continue;
           if(!isState(row.shrink_state)||!isState(row.peri_state)||
              !isState(row.tape_cut_state))continue;
-          const selected=row.genre==='pokemon'
+          const selected=(row.genre==='pokemon'
             ?row.shrink_state!=='unknown'||row.peri_state!=='unknown'
-            :row.tape_cut_state!=='unknown';
+            :row.tape_cut_state!=='unknown')||
+            (typeof row.notes==='string'&&row.notes.trim().length>0);
           if(!selected)continue;
           // Index only rows whose normalized key agrees with their name.
           // Never let malformed or stale aliases match unrelated branches.
@@ -146,6 +147,7 @@
         '<span class="lp-sales-ref-value lp-sales-ref-'+value+'">'+
         escape(label)+'：<strong>'+escape(stateLabel(value))+'</strong></span>'
       ).join('')+'</div>'+
+      (row.notes?'<p class="lp-sales-ref-memo"><strong>補足メモ：</strong>'+escape(row.notes)+'</p>':'')+
       (dateLabel(row.updated_at)?'<small class="lp-sales-ref-date">情報更新：'+
         escape(dateLabel(row.updated_at))+'</small>':'')+
       '</div>';
@@ -176,6 +178,7 @@
       shrink_state:row.shrink_state,
       peri_state:row.peri_state,
       tape_cut_state:row.tape_cut_state,
+      notes:row.notes||'',
       updated_at:row.updated_at
     }));
   }
