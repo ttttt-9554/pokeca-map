@@ -4473,6 +4473,22 @@
           ${window.TorecaStoreUI?.storeBadge?.(stores[0])||''}
         </div>`
       : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
+    // Shared link + private actions are rendered in a single card action row.
+    const officialUrl = item.app_lottery ? item.app_lottery_source_url : item.url;
+    const officialLabel = item.app_lottery
+      ? (item.manual_registration_method==='in_store'?'店頭応募の案内を確認':'アプリ公式案内を確認')
+      : (external?'抽選URLを開いて確認':'公式ページで確認');
+    const officialShort = item.app_lottery ? '↗ 案内' : (external?'↗ 抽選':'↗ 公式');
+    const officialAction = officialUrl
+      ? '<a class="lp-official" href="'+escape(officialUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="'+escape(officialLabel)+'（新しいタブで開く）">'+
+        '<span class="lp-action-full">'+escape(officialLabel)+' ↗</span>'+
+        '<span class="lp-action-short" aria-hidden="true">'+escape(officialShort)+'</span></a>'
+      : '';
+    const officialNotice = item.app_lottery && !officialUrl
+      ? (item.manual_registration_method==='in_store'
+        ? '<p class="lp-store-muted">🏬 応募は対象店舗の店頭で行ってください。受付時間や必要書類は店舗でご確認ください。</p>'
+        : '<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>')
+      : '';
     return `<article data-lp-event-url="${escape(item.url)}" class="lp-card ${state === 'closed' || state === 'unavailable' ? 'lp-closed' : ''}${urgent ? ' lp-urgent-card' : ''}">
       <div class="lp-badges"><span class="lp-status lp-${state}">${lotteryStatusText(state,item)}</span>
         ${lotteryIsNew(item) ? '<span class="lp-new-badge" aria-label="新着：初回登録から24時間以内">NEW</span>' : ''}
@@ -4496,11 +4512,8 @@
       ${list}
       ${chainReference}
       ${lotteryOnsiteSharedHtml(item.url)}
-      ${item.app_lottery ? (item.app_lottery_source_url ? '<a class="lp-official" href="'+escape(item.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer">'+(item.manual_registration_method==='in_store'?'店頭応募の案内を確認 ↗':'アプリ公式案内を確認 ↗')+'</a>'
-          :(item.manual_registration_method==='in_store'
-            ?'<p class="lp-store-muted">🏬 応募は対象店舗の店頭で行ってください。受付時間や必要書類は店舗でご確認ください。</p>'
-            :'<p class="lp-store-muted">📱 応募は対象の公式アプリで行ってください。</p>')) : '<a class="lp-official" href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+(external?'抽選URLを開いて確認 ↗':'公式ページで確認 ↗')+'</a>'}
-      ${lotteryTrackerActionsHtml(item)}
+      ${officialNotice}
+      ${lotteryTrackerActionsHtml(item, officialAction)}
       ${item.app_lottery&&isDeveloper()&&item.app_lottery_owner!==authUser.id?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">🛠 管理者編集</button></div>':''}
       ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
@@ -6642,7 +6655,7 @@
     }
   }
 
-  function lotteryTrackerActionsHtml(item) {
+  function lotteryTrackerActionsHtml(item, officialAction = '') {
     const record=lotteryTrackRecord(item.url);
     const applied=record && record.status!=='not_applied';
     const show=record?LP_TRACK_LABELS[record.status]:'未応募';
@@ -6651,10 +6664,11 @@
     const css=warning.startsWith('⚠')?'lp-track-overdue':'';
     return `<div class="lp-track-actions" aria-label="自分の応募管理">
       ${record?`<div class="lp-track-state"><span class="lp-track-pill">${escape(show)}${onsite?' ／ '+escape(onsite):''}</span></div>`:''}
-      <div class="lp-track-action-buttons">
-        <button type="button" data-lp-track="apply" data-url="${escape(item.url)}">${applied?'✅ 応募状況を確認':'☐ 応募済みにする'}</button>
-        <button type="button" data-lp-track="edit" data-url="${escape(item.url)}">⚙ 個別管理</button>
-        <button type="button" data-lp-results-show="${escape(item.url)}" aria-label="この抽選の匿名集計を見る">🏆 匿名集計を見る</button>
+      <div class="lp-track-action-buttons${officialAction?' lp-has-official':''}">
+        ${officialAction}
+        <button type="button" data-lp-track="apply" data-url="${escape(item.url)}" aria-label="${applied?'応募状況を確認':'応募済みにする'}"><span class="lp-action-full">${applied?'✅ 応募状況を確認':'☐ 応募済みにする'}</span><span class="lp-action-short" aria-hidden="true">${applied?'✅ 応募確認':'☐ 応募済'}</span></button>
+        <button type="button" data-lp-track="edit" data-url="${escape(item.url)}" aria-label="個別管理"><span class="lp-action-full">⚙ 個別管理</span><span class="lp-action-short" aria-hidden="true">⚙ 個別管理</span></button>
+        <button type="button" data-lp-results-show="${escape(item.url)}" aria-label="この抽選の匿名集計を見る"><span class="lp-action-full">🏆 匿名集計を見る</span><span class="lp-action-short" aria-hidden="true">🏆 匿名集計</span></button>
       </div>
     </div>${warning?`<p class="lp-track-note ${css}">${escape(warning)}</p>`:''}`;
   }
