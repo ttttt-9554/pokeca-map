@@ -5,7 +5,7 @@
   const $=id=>document.getElementById(id);
   let getClient=()=>null, isDev=()=>false, renderCards=()=>{}, escape=s=>String(s);
   let stats=[],byKey=new Map(),fetching=null,lastFetch=0,error='';
-  let masters=[],pairs=[],masterBusy=false;
+  let masters=[],pairs=[],masterBusy=false,addressSaving=false;
   const clean=s=>String(s??'').trim();
 
   function normalize(name){
@@ -94,11 +94,12 @@
     const query=clean($('lpStoreMasterSearch')?.value).toLocaleLowerCase('ja-JP');
     const matches=text=>clean(text).toLocaleLowerCase('ja-JP').includes(query);
     const live=masters.filter(x=>!x.merged_into);
+    const withAddress=live.filter(x=>clean(x.address)).length;
     const activePairs=pairs.filter(x=>!query||
       matches(x.left_name)||matches(x.right_name)||matches(x.prefecture));
     $('lpStoreMasterCount').textContent=live.length+'店舗';
     $('lpStoreMasterStatus').textContent='自動登録 '+live.length+'店舗 ／ 別名統合済み '+
-      (masters.length-live.length)+'件 ／ 要確認 '+pairs.length+'組';
+      (masters.length-live.length)+'件 ／ 要確認 '+pairs.length+'組 ／ 住所登録 '+withAddress+'件 ／ 未登録 '+(live.length-withAddress)+'件';
     pending.innerHTML=activePairs.length?activePairs.slice(0,100).map(row=>
       '<div class="lp-store-master-pair" data-store-left="'+escape(row.left_id)+
       '" data-store-right="'+escape(row.right_id)+'">'+
@@ -115,12 +116,22 @@
       '</div></div>').join(''):
       '<p class="hint">確認が必要な類似店舗はありません。完全一致と既知の略称は自動で統一されます。</p>';
     const visible=masters.filter(row=>!query||
-      matches(row.name)||matches(row.prefecture));
-    list.innerHTML=visible.length?visible.slice(0,300).map(row=>
-      '<div class="lp-store-master-item"><strong>'+escape(row.name)+
+      matches(row.name)||matches(row.prefecture)||matches(row.address));
+    list.innerHTML=visible.length?visible.slice(0,500).map(row=>
+      '<div class="lp-store-master-item" data-store-master-id="'+escape(row.id)+'">'+
+      '<div class="lp-store-master-meta"><strong>'+escape(row.name)+
       '</strong><span>📍 '+escape(row.prefecture)+
       (row.merged_into?'（別名として統合済み）':'')+'</span>'+
-      (row.merged_into?'<button type="button" data-store-unmerge="'+escape(row.id)+'">統合解除</button>':'')+
+      '<span class="lp-store-master-address">🏠 '+(row.address?escape(row.address):'住所未登録')+'</span>'+
+      (row.address_source==='legacy_csv_unverified'
+        ?'<small>既存CSV照合・現住所は未確認</small>':
+         row.address_source==='developer_entry'
+        ?'<small>開発者入力</small>':'')+
+      '</div>'+
+      (row.merged_into
+        ?'<button type="button" data-store-unmerge="'+escape(row.id)+'">統合解除</button>'
+        :'<button type="button" data-store-address-edit="'+escape(row.id)+'">'+
+          (row.address?'住所を編集':'住所を登録')+'</button>')+
       '</div>').join(''):
       '<p class="hint">一致する店舗はありません。</p>';
     const choices=live.slice().sort((a,b)=>
@@ -187,6 +198,76 @@
     }
   }
 
+
+  function openAddressEditor(id,button){
+    if(!isDev()||!getClient()||addressSaving)return;
+    const row=masters.find(x=>x.id===id&&!x.merged_into);
+    const holder=button.closest('.lp-store-master-item');
+    if(!row||!holder)return;
+    $('lpStoreMasterList')?.querySelectorAll('.lp-store-address-editor')
+      .forEach(node=>node.remove());
+    const form=document.createElement('form');
+    form.className='lp-store-address-editor';
+    const label=document.createElement('label');
+    label.textContent=row.name+'（'+row.prefecture+'）の住所';
+    const input=document.createElement('input');
+    input.type='text';
+    input.required=false;
+    input.maxLength=250;
+    input.autocomplete='street-address';
+    input.placeholder=row.prefecture+'○○市○○町1-2-3';
+    input.value=clean(row.address);
+    label.append(input);
+    const help=document.createElement('p');
+    help.className='hint';
+    help.textContent='都道府県から始まる住所を入力してください。空欄で保存すると住所を削除します。店舗の住所は他の支店へコピーしません。';
+    const status=document.createElement('p');
+    status.className='hint';
+    status.setAttribute('role','status');
+    const actions=document.createElement('div');
+    actions.className='lp-store-address-actions';
+    const save=document.createElement('button');
+    save.type='submit';
+    save.textContent='住所を保存';
+    const cancel=document.createElement('button');
+    cancel.type='button';
+    cancel.textContent='キャンセル';
+    cancel.addEventListener('click',()=>form.remove());
+    actions.append(save,cancel);
+    form.append(label,help,actions,status);
+    holder.append(form);
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();
+      if(addressSaving||!isDev()||!getClient())return;
+      const address=clean(input.value);
+      if(address&&!address.startsWith(row.prefecture)){
+        status.textContent='⚠ 住所は「'+row.prefecture+'」から入力してください。';
+        return;
+      }
+      if(!address&&row.address&&!confirm('この店舗の登録住所を削除しますか？'))return;
+      addressSaving=true;
+      save.disabled=true;
+      status.textContent='住所を保存しています…';
+      try{
+        const {data,error:remote}=await getClient().rpc('lottery_store_address_update_v1',{
+          p_store_id:row.id,p_address:address
+        });
+        if(remote)throw remote;
+        if(data?.success!==true)throw Error('保存結果を確認できませんでした');
+        addressSaving=false;
+        await refreshMaster();
+        const mainStatus=$('lpStoreMasterStatus');
+        if(mainStatus)mainStatus.textContent+=' ／ ✅ 住所を保存しました';
+      }catch(error){
+        status.textContent='⚠ 住所を保存できませんでした：'+String(error?.message||error);
+      }finally{
+        addressSaving=false;
+        if(form.isConnected)save.disabled=false;
+      }
+    });
+    input.focus();
+  }
+
   function onCandidateClick(event){
     const button=event.target.closest('button[data-store-review]');
     if(!button)return;
@@ -207,8 +288,10 @@
     $('lpStoreMasterSearch')?.addEventListener('input',renderMaster);
     $('lpStoreMasterCandidates')?.addEventListener('click',onCandidateClick);
     $('lpStoreMasterList')?.addEventListener('click',event=>{
-      const target=event.target.closest('button[data-store-unmerge]');
-      if(target)unmerge(target.dataset.storeUnmerge);
+      const target=event.target.closest('button[data-store-unmerge],button[data-store-address-edit]');
+      if(!target)return;
+      if(target.dataset.storeUnmerge)unmerge(target.dataset.storeUnmerge);
+      else if(target.dataset.storeAddressEdit)openAddressEditor(target.dataset.storeAddressEdit,target);
     });
     $('lpStoreMasterMerge')?.addEventListener('click',()=>{
       const source=$('lpStoreMergeSource')?.value;
