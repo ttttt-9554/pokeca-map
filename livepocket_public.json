@@ -9282,90 +9282,82 @@
       "url": "https://livepocket.jp/e/3qq4u",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION）",
+      "application_start_at": "2026-11-01T09:05:00+09:00",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
       "discord_posted_at": "2026-11-01T05:30:09.364000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION）",
-      "application_end_at": "2026-11-01T21:00:00+09:00",
-      "application_start_at": "2026-11-01T09:05:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
       "url": "https://livepocket.jp/e/kdg4f",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー）",
+      "application_start_at": "2026-11-01T09:21:00+09:00",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
       "discord_posted_at": "2026-11-01T05:30:09.364000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー）",
-      "application_end_at": "2026-11-01T21:00:00+09:00",
-      "application_start_at": "2026-11-01T09:21:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー）",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ezavr",
       "store_name": "トレカパーク横浜西口店",
       "prefecture": "神奈川県",
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ストームエメラルダ）",
+      "application_start_at": "2026-11-01T08:56:00+09:00",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
       "discord_posted_at": "2026-11-01T05:30:09.364000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ストームエメラルダ）",
-      "application_end_at": "2026-11-01T21:00:00+09:00",
-      "application_start_at": "2026-11-01T08:56:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
       "url": "https://livepocket.jp/e/d6y1u",
       "store_name": "ふるいちイオンモール浦和美園店",
       "prefecture": "埼玉県",
+      "event_title": "【ふるいち浦和美園店】ポケカ抽選販売(ストームエメラルダ)",
+      "application_start_at": "2026-10-31T10:00:00+09:00",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
       "discord_posted_at": "2026-11-01T05:30:09.364000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ふるいちイオンモール浦和美園店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【ふるいち浦和美園店】ポケカ抽選販売(ストームエメラルダ)",
-      "application_end_at": "2026-11-01T21:00:00+09:00",
-      "application_start_at": "2026-10-31T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいち浦和美園店】ポケカ抽選販売(ストームエメラルダ)",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     }
   ],
-  "updated_at": "2026-11-01T05:36:24.420337+00:00"
+  "updated_at": "2026-11-01T05:46:00.729050+00:00"
 }
