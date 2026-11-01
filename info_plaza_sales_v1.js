@@ -23,6 +23,8 @@
   let options=null,initialized=false,active=false,authorized=false;
   let rows=[],loaded=false,loading=false,saveBusy=false,editingId='';
   let masterBusy=false,masterLoaded=false,masterChoices=new Map();
+  let matchingMasterChoices=[],masterSuggestionIndex=-1,masterSuggestionsOpen=false;
+  let storeNameComposing=false;
   let generation=0;
 
   function client(){return options?.getClient?.()||null;}
@@ -45,8 +47,13 @@
         '<form id="infoSalesForm" autocomplete="off">'+
           '<h4 id="infoSalesFormHeading">新規登録</h4>'+
           '<label for="infoSalesStore">店舗名</label>'+
-          '<input type="search" id="infoSalesStore" list="infoSalesStoreOptions" maxlength="180" required placeholder="店舗名を入力・候補から選択">'+
-          '<datalist id="infoSalesStoreOptions"></datalist>'+
+          '<div id="infoSalesStorePicker" class="info-sales-store-picker">'+
+            '<div class="info-sales-store-row">'+
+              '<input type="search" id="infoSalesStore" maxlength="160" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="店舗名で検索・候補を選択" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="infoSalesStoreSuggestions">'+
+              '<button type="button" id="infoSalesStoreToggle" class="info-sales-store-toggle" aria-label="店舗の候補一覧を表示" aria-controls="infoSalesStoreSuggestions" aria-expanded="false">⌄</button>'+
+            '</div>'+
+            '<div id="infoSalesStoreSuggestions" class="info-sales-store-suggestions" role="listbox" aria-label="店舗マスターの候補" hidden></div>'+
+          '</div>'+
           '<p id="infoSalesMasterHint" class="info-sales-hint">店舗マスターを読み込みます。候補にない店舗も直接入力できます。</p>'+
           '<div class="info-sales-form-grid">'+
             '<label>都道府県<select id="infoSalesPrefecture" required><option value="">選択してください</option>'+
@@ -92,7 +99,24 @@
         '<div id="infoSalesList" class="info-sales-list"></div>'+
       '</section>';
     $('infoSalesGenre').addEventListener('change',updateGenre);
-    $('infoSalesStore').addEventListener('input',selectMasterIfExact);
+    const storeInput=$('infoSalesStore');
+    storeInput.addEventListener('focus',()=>renderStoreSuggestions(true));
+    storeInput.addEventListener('input',()=>{if(!storeNameComposing)renderStoreSuggestions(true);});
+    storeInput.addEventListener('compositionstart',()=>{storeNameComposing=true;});
+    storeInput.addEventListener('compositionend',()=>{storeNameComposing=false;renderStoreSuggestions(true);});
+    storeInput.addEventListener('keydown',handleStoreSuggestionKeydown);
+    $('infoSalesStoreToggle').addEventListener('click',()=>{
+      if(masterSuggestionsOpen)hideStoreSuggestions();
+      else renderStoreSuggestions(true);
+    });
+    $('infoSalesStoreSuggestions').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-info-master-index]');
+      if(!button||!event.currentTarget.contains(button))return;
+      chooseMasterSuggestion(Number(button.dataset.infoMasterIndex));
+    });
+    document.addEventListener('pointerdown',event=>{
+      if(!event.target.closest('#infoSalesStorePicker'))hideStoreSuggestions();
+    });
     $('infoSalesForm').addEventListener('submit',save);
     $('infoSalesReset').addEventListener('click',()=>{resetForm();message('');});
     $('infoSalesSearch').addEventListener('input',renderList);
@@ -103,6 +127,79 @@
     $('infoSalesList').addEventListener('click',onListClick);
     updateGenre();
   }
+  function hideStoreSuggestions(){
+    masterSuggestionsOpen=false;
+    masterSuggestionIndex=-1;
+    const dropdown=$('infoSalesStoreSuggestions'),input=$('infoSalesStore'),toggle=$('infoSalesStoreToggle');
+    if(dropdown)dropdown.hidden=true;
+    if(input)input.setAttribute('aria-expanded','false');
+    if(toggle)toggle.setAttribute('aria-expanded','false');
+  }
+  function renderStoreSuggestions(open=false){
+    const dropdown=$('infoSalesStoreSuggestions'),input=$('infoSalesStore'),toggle=$('infoSalesStoreToggle');
+    if(!dropdown||!input||!authorized||!canAccess()){hideStoreSuggestions();return;}
+    if(!open&&!masterSuggestionsOpen)return;
+    const term=normalize(input.value);
+    const all=[...masterChoices.entries()].filter(([label,row])=>
+      !term||normalize(label+' '+row.name+' '+row.prefecture).includes(term));
+    // Prefer a matching store name to a prefecture-only match.
+    if(term)all.sort((a,b)=>{
+      const rank=([,row])=>normalize(row.name).startsWith(term)?0:
+        normalize(row.name).includes(term)?1:2;
+      return rank(a)-rank(b)||a[0].localeCompare(b[0],'ja');
+    });
+    matchingMasterChoices=all.slice(0,40);
+    masterSuggestionIndex=-1;
+    const count=all.length;
+    const buttons=matchingMasterChoices.map(([label,row],index)=>
+      '<button type="button" class="info-sales-suggestion" role="option" aria-selected="false" data-info-master-index="'+index+'">'+
+        '<span class="info-sales-suggestion-name">'+escape(row.name)+'</span>'+
+        '<span class="info-sales-suggestion-pref">'+escape(row.prefecture)+'</span>'+
+      '</button>').join('');
+    dropdown.innerHTML='<div class="info-sales-suggestion-count">'+
+      (masterLoaded?count+'件の候補'+(count>40?'（先頭40件）':''):
+        masterBusy?'店舗マスターを読み込み中…':'店舗マスターを取得できませんでした')+
+      '</div>'+
+      (buttons||'<p class="info-sales-suggestion-empty">'+
+        (masterLoaded?'一致する店舗はありません。直接入力して登録できます。':'店舗名を直接入力できます。')+
+      '</p>');
+    dropdown.hidden=false;
+    masterSuggestionsOpen=true;
+    input.setAttribute('aria-expanded','true');
+    if(toggle)toggle.setAttribute('aria-expanded','true');
+  }
+  function selectMasterSuggestion(index){
+    const pair=matchingMasterChoices[index];
+    if(!pair)return;
+    const [,row]=pair;
+    $('infoSalesStore').value=row.name;
+    $('infoSalesPrefecture').value=PREFECTURES.includes(row.prefecture)?row.prefecture:'';
+    $('infoSalesMasterHint').textContent='店舗マスターから「'+row.name+'（'+row.prefecture+'）」を選択しました。';
+    hideStoreSuggestions();
+    $('infoSalesStore').blur();
+  }
+  function chooseMasterSuggestion(index){selectMasterSuggestion(index);}
+  function handleStoreSuggestionKeydown(event){
+    if(!masterSuggestionsOpen||storeNameComposing||event.isComposing||event.keyCode===229)return;
+    if(event.key==='Escape'){event.preventDefault();hideStoreSuggestions();return;}
+    if(!matchingMasterChoices.length)return;
+    if(event.key==='ArrowDown'||event.key==='ArrowUp'){
+      event.preventDefault();
+      const step=event.key==='ArrowDown'?1:-1;
+      masterSuggestionIndex=(masterSuggestionIndex+step+matchingMasterChoices.length)%matchingMasterChoices.length;
+      const buttons=$('infoSalesStoreSuggestions').querySelectorAll('button[data-info-master-index]');
+      buttons.forEach((button,index)=>{
+        const selected=index===masterSuggestionIndex;
+        button.setAttribute('aria-selected',String(selected));
+        button.classList.toggle('is-active',selected);
+        if(selected)button.scrollIntoView({block:'nearest'});
+      });
+    }else if(event.key==='Enter'){
+      event.preventDefault();
+      selectMasterSuggestion(masterSuggestionIndex<0?0:masterSuggestionIndex);
+    }
+  }
+
   function updateGenre(){
     const isPokemon=$('infoSalesGenre')?.value!=='onepiece';
     if($('infoSalesPokemon'))$('infoSalesPokemon').hidden=!isPokemon;
@@ -121,6 +218,7 @@
     $('infoSalesFormHeading').textContent='新規登録';
     $('infoSalesSave').textContent='保存する';
     editingId='';
+    hideStoreSuggestions();
     updateGenre();
   }
   function renderList(){
@@ -199,10 +297,8 @@
         choices.set(label,{name:String(row.name),prefecture:String(row.prefecture)});
       }
       masterChoices=choices;
-      const optionHtml=[...choices.keys()].sort((a,b)=>a.localeCompare(b,'ja'))
-        .map(name=>'<option value="'+escape(name)+'"></option>').join('');
-      $('infoSalesStoreOptions').innerHTML=optionHtml;
       masterLoaded=true;
+      if(masterSuggestionsOpen)renderStoreSuggestions(true);
       if(hint)hint.textContent='店舗マスター '+choices.size+'件から候補選択できます。候補にない店舗も登録可能です。';
       return true;
     }catch(error){
@@ -310,7 +406,8 @@
       ++generation;
       authorized=permitted;
       rows=[];loaded=false;masterLoaded=false;masterChoices=new Map();
-      if($('infoSalesStoreOptions'))$('infoSalesStoreOptions').innerHTML='';
+      hideStoreSuggestions();
+      if($('infoSalesStoreSuggestions'))$('infoSalesStoreSuggestions').replaceChildren();
       resetForm();message('');
       if(!permitted){
         $('infoSalesList').replaceChildren();
