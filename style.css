@@ -3133,3 +3133,14 @@ html[data-theme="dark"] #infoSalesAdmin .info-sales-message[data-error="true"]{c
   #infoSalesAdmin select,
   #infoSalesAdmin textarea{font-size:16px!important}
 }
+
+
+/* One-tap store-name clear control, separate from the dropdown toggle. */
+#infoSalesAdmin .info-sales-store-clear{
+  flex:0 0 42px;min-width:42px;min-height:46px;
+  padding:5px;font-size:23px;line-height:1;
+  font-weight:500;
+}
+#infoSalesAdmin .info-sales-store-clear:disabled{
+  opacity:.36;cursor:default;
+}
