@@ -2987,3 +2987,6 @@ html[data-theme="dark"] #lotteryView .lp-onsite-history-caution{
 html[data-theme="dark"] #lotteryView .lp-onsite-history-caution button{
   border-color:#e29b42;background:#57391d;color:#ffead0;
 }
+
+/* Keep the onsite archive visible below the fixed iPhone header. */
+#lpOnsiteArchive{scroll-margin-top:calc(140px + env(safe-area-inset-top));}
