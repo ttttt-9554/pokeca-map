@@ -9077,41 +9077,37 @@
       "url": "https://livepocket.jp/e/3381u",
       "store_name": "文教堂書店浦安西友店",
       "prefecture": "千葉県",
+      "event_title": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+      "application_start_at": "2026-11-01T10:00:00+09:00",
+      "application_end_at": "2026-11-03T20:30:00+09:00",
       "discord_posted_at": "2026-11-01T01:30:08.733000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "文教堂書店浦安西友店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
-      "application_end_at": "2026-11-03T20:30:00+09:00",
-      "application_start_at": "2026-11-01T10:00:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
       "first_detected_at": "2026-11-01T01:35:58.446759+00:00"
     },
     {
       "url": "https://livepocket.jp/e/9ndqc",
       "store_name": "TSUTAYA17号北浦和店",
       "prefecture": "埼玉県",
+      "product_name": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "event_title": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
+      "application_start_at": "2026-11-01T10:00:00+09:00",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
       "discord_posted_at": "2026-11-01T01:30:08.733000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA17号北浦和店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
-      "application_end_at": "2026-11-03T22:00:00+09:00",
-      "application_start_at": "2026-11-01T10:00:00+09:00",
-      "review_category": "pokemon",
-      "product_name": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
       "first_detected_at": "2026-11-01T01:35:58.446759+00:00"
     }
   ],
-  "updated_at": "2026-11-01T01:37:18.869287+00:00"
+  "updated_at": "2026-11-01T01:45:58.887642+00:00"
 }
