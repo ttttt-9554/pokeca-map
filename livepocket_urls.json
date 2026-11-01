@@ -19873,8 +19873,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/wy8hv": {
-          "checked_at": "2026-11-01T04:06:24.712847+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T10:16:21.488752+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/kdg4f": {
@@ -21480,8 +21480,8 @@
         },
         "https://livepocket.jp/e/wy8hv": {
           "detected_at": "2026-11-01T04:05:59.099365+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-01T04:06:24.712847+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-01T10:16:21.488752+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/3qq4u": {
@@ -22798,6 +22798,11 @@
         "https://livepocket.jp/e/48gq7": {
           "attempts": 1,
           "last_attempt_at": "2026-11-01T09:56:21.383349+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/wy8hv": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-01T10:16:21.488752+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -27913,7 +27918,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T04:06:24.712847+00:00",
+          "checked_at": "2026-11-01T10:16:21.488752+00:00",
           "title_observed": "OP「ONE PIECE HEROINES PRECIOUS BOX」1点抽選受付",
           "genre": "",
           "product_origin": "",
@@ -32225,7 +32230,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/wy8hv": {
-          "checked_at": "2026-11-01T04:06:24.712847+00:00",
+          "checked_at": "2026-11-01T10:16:21.488752+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
