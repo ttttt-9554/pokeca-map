@@ -9202,6 +9202,8 @@
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガシンフォニア 抽選販売",
       "first_detected_at": "2026-11-01T03:35:57.402800+00:00"
     },
     {
@@ -9242,6 +9244,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」(再販分)抽選販売",
       "first_detected_at": "2026-11-01T03:35:57.402800+00:00"
     },
     {
@@ -9259,6 +9263,7 @@
           "prefecture": "福島県"
         }
       ],
+      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17(再販分) 抽選販売",
       "first_detected_at": "2026-11-01T03:35:57.402800+00:00"
     },
     {
@@ -9450,5 +9455,5 @@
       "first_detected_at": "2026-11-01T11:35:58.354185+00:00"
     }
   ],
-  "updated_at": "2026-11-01T15:46:00.179981+00:00"
+  "updated_at": "2026-11-01T15:56:17.196496+00:00"
 }

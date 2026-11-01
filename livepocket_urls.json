@@ -19939,12 +19939,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/hrgpp": {
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/elopw": {
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -19954,7 +19954,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/6zkg_": {
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -21563,7 +21563,7 @@
         "https://livepocket.jp/e/6zkg_": {
           "detected_at": "2026-11-01T03:35:57.402800+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/9lmsl": {
@@ -21575,13 +21575,13 @@
         "https://livepocket.jp/e/elopw": {
           "detected_at": "2026-11-01T03:35:57.402800+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/hrgpp": {
           "detected_at": "2026-11-01T03:35:57.402800+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/wy8hv": {
@@ -22905,18 +22905,18 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/hrgpp": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-01T09:46:26.367932+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-01T15:56:17.196496+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/elopw": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-01T09:46:26.367932+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-01T15:56:17.196496+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/6zkg_": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-01T09:46:26.367932+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-01T15:56:17.196496+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/48gq7": {
@@ -28017,7 +28017,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」(再販分)抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -28028,7 +28028,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "title_observed": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガシンフォニア 抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -28050,7 +28050,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "title_observed": "ONE PIECE ブースターパック 世界最強の戦士 OP17(再販分) 抽選販売",
           "genre": "",
           "product_origin": "",
@@ -32352,7 +32352,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/hrgpp": {
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -32365,7 +32365,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/elopw": {
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -32391,7 +32391,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/6zkg_": {
-          "checked_at": "2026-11-01T09:46:26.367932+00:00",
+          "checked_at": "2026-11-01T15:56:17.196496+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
