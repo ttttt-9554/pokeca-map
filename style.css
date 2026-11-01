@@ -3084,3 +3084,52 @@ html[data-theme="dark"] #infoSalesAdmin .info-sales-message[data-error="true"]{c
   #infoSalesAdmin .info-sales-status-group{grid-template-columns:1fr}
   #infoSalesAdmin .info-sales-filters{grid-template-columns:1fr}
 }
+
+
+/* iPhone-safe in-page search dropdown instead of native <datalist>. */
+#infoSalesAdmin .info-sales-store-picker{position:relative;min-width:0}
+#infoSalesAdmin .info-sales-store-row{display:flex;gap:7px;align-items:stretch;min-width:0}
+#infoSalesAdmin .info-sales-store-row #infoSalesStore{flex:1;min-width:0;width:100%;font-size:16px}
+#infoSalesAdmin .info-sales-store-toggle{
+  flex:0 0 44px;min-width:44px;min-height:46px;
+  font-size:20px;line-height:1;padding:6px;
+}
+#infoSalesAdmin .info-sales-store-suggestions{
+  position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:100;
+  max-height:min(280px,35dvh);overflow-y:auto;
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:11px;background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);box-shadow:0 10px 28px #0004;
+}
+#infoSalesAdmin .info-sales-store-suggestions[hidden]{display:none!important}
+#infoSalesAdmin .info-sales-suggestion-count{
+  padding:9px 12px;font-size:12px;color:var(--app-muted,#64748b);
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#infoSalesAdmin .info-sales-store-suggestions .info-sales-suggestion{
+  display:flex;width:100%;min-height:47px;align-items:center;
+  justify-content:space-between;gap:9px;
+  padding:10px 12px;text-align:left;font-size:14px;font-weight:600;
+  border:0;border-radius:0;background:var(--app-surface,#fff);
+  color:var(--app-text,#172033);
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#infoSalesAdmin .info-sales-store-suggestions .info-sales-suggestion:active,
+#infoSalesAdmin .info-sales-store-suggestions .info-sales-suggestion.is-active{
+  background:var(--app-surface2,#edf3fc);
+}
+#infoSalesAdmin .info-sales-suggestion-name{flex:1;min-width:0;overflow-wrap:anywhere}
+#infoSalesAdmin .info-sales-suggestion-pref{
+  flex:0 0 auto;font-size:12px;color:var(--app-muted,#64748b);
+}
+#infoSalesAdmin .info-sales-suggestion-empty{
+  margin:0;padding:12px;font-size:13px;line-height:1.6;
+  color:var(--app-muted,#64748b);
+}
+@media(max-width:600px){
+  /* Safari zooms the entire page when a form control uses <16px text. */
+  #infoSalesAdmin input[type="search"],
+  #infoSalesAdmin select,
+  #infoSalesAdmin textarea{font-size:16px!important}
+}
