@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261101-public-info-plaza-v1">
+  <link rel="stylesheet" href="style.css?v=20261101-shared-sales-v2">
 
   <style>
     [hidden] { display: none !important; }
@@ -1776,10 +1776,10 @@ nav[aria-label="メインメニュー"] {
 
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <!-- Information Plaza: public references and private developer editor -->
-  <script src="info_plaza_sales_v1.js?v=20261101-public-info-plaza-v1"></script>
+  <!-- Information Plaza: shared sales editor for logged-in users -->
+  <script src="info_plaza_sales_v1.js?v=20261101-shared-sales-v2"></script>
   <!-- Lottery cards: read-only store sales reference -->
-  <script src="lottery_sales_reference_v1.js?v=20261101-public-info-plaza-v1"></script>
+  <script src="lottery_sales_reference_v1.js?v=20261101-shared-sales-v2"></script>
 
   <!-- アプリ本体 -->
   <script>
@@ -1788,7 +1788,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261101-public-info-plaza-v1';
+      ? token : '20261101-shared-sales-v2';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
