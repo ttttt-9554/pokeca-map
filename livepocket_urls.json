@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-01T03:35:56.097689+00:00",
+  "collected_at": "2026-11-01T04:05:57.199195+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 616,
+  "unique_livepocket_urls": 617,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16812,34 +16812,64 @@
       "event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17(再販分) 抽選販売",
       "application_end_at": "2026-11-03T22:00:00+09:00",
       "application_start_at": "2026-11-01T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/wy8hv",
+      "discord_message_id": "1566300767709560852",
+      "discord_posted_at": "2026-11-01T04:00:03.483000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA鴻巣吹上店\n受付終了: 11/01 21:00（残り7時間59分）\nhttps://livepocket.jp/e/wy8hv",
+      "store_name": "TSUTAYA鴻巣吹上店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA鴻巣吹上店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "OP「ONE PIECE HEROINES PRECIOUS BOX」1点抽選受付",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
+      "application_start_at": "2026-11-01T08:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 454,
+    "parsed": 455,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 431,
-    "prefecture": 388,
-    "event_title": 303,
+    "store_name": 432,
+    "prefecture": 389,
+    "event_title": 304,
     "event_date": 1,
     "product_name": 88,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 580,
-    "application_start_at": 577,
-    "stores_events": 442
+    "application_end_at": 581,
+    "application_start_at": 578,
+    "stores_events": 443
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566293233930346646"
+      "1551580466266644552": "1566300767709560852"
     },
     "last_run": {
-      "checked_at": "2026-11-01T03:35:56.097689+00:00",
-      "new_urls": 5,
-      "original_urls": 611,
+      "checked_at": "2026-11-01T04:05:57.199195+00:00",
+      "new_urls": 1,
+      "original_urls": 616,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -17032,7 +17062,8 @@
         "1566065434434736280": "2026-10-31T12:30:57.272189+00:00",
         "1566263040993927236": "2026-11-01T01:35:57.488533+00:00",
         "1566277893825368174": "2026-11-01T02:35:55.963973+00:00",
-        "1566293233930346646": "2026-11-01T03:35:56.674209+00:00"
+        "1566293233930346646": "2026-11-01T03:35:56.674209+00:00",
+        "1566300767709560852": "2026-11-01T04:05:58.018636+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19657,6 +19688,11 @@
           "checked_at": "2026-11-01T03:36:15.098039+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/wy8hv": {
+          "checked_at": "2026-11-01T04:06:24.712847+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -21227,6 +21263,12 @@
           "detected_at": "2026-11-01T03:35:57.402800+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/wy8hv": {
+          "detected_at": "2026-11-01T04:05:59.099365+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T04:06:24.712847+00:00",
           "http_status": null
         }
       },
@@ -27587,6 +27629,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/wy8hv": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T04:06:24.712847+00:00",
+          "title_observed": "OP「ONE PIECE HEROINES PRECIOUS BOX」1点抽選受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -31815,6 +31868,19 @@
         },
         "https://livepocket.jp/e/48gq7": {
           "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/wy8hv": {
+          "checked_at": "2026-11-01T04:06:24.712847+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
