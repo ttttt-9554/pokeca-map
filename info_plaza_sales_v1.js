@@ -365,6 +365,7 @@
       await refresh(true);
       resetForm();
       message('✅ 店舗別の販売形態を保存しました。');
+      window.TorecaSalesReference?.refresh?.(true);
     }catch(error){
       if(canAccess())message('保存できませんでした：'+String(error.message||error),true);
     }finally{
@@ -410,6 +411,7 @@
       loaded=false;
       await refresh(true);
       message('✅ 登録を削除しました。');
+      window.TorecaSalesReference?.refresh?.(true);
     }catch(error){
       if(canAccess())message('削除できませんでした：'+String(error.message||error),true);
     }finally{saveBusy=false;}
