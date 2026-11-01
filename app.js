@@ -3832,6 +3832,12 @@
     const base=lotteryBaseItems.find(x=>x.url===row.event_url);
     if(!base||(Array.isArray(base.stores)&&base.stores.length>1))
       throw Error('複数店舗イベントは一括上書きできません');
+    // Region-only corrections intentionally keep store_name NULL so the
+    // collector's source name is not frozen by an unrelated prefecture edit.
+    // Capture the already-identified single shop before saving the correction.
+    const effective=lpLocationEffective(base);
+    const shops=lotteryStoreEntries(effective);
+    const verifiedSingleName=shops.length===1?String(shops[0].name||'').trim():'';
     const {data,error}=await supabaseClient.from(LP_LOCATION_TABLE)
       .upsert(row,{onConflict:'event_url'})
       .select('event_url,store_name,prefecture,evidence,updated_at').single();
@@ -3839,6 +3845,29 @@
     if(!data||data.event_url!==row.event_url)throw Error('保存を確認できませんでした');
     lpLocationOverrides.set(data.event_url,data);lpLocationLastFetch=0;
     lpCloudApply();lpLocationRender();
+    let masterMessage='';
+    // The DB trigger only sees fields stored in the override, not the
+    // public JSON. Register the verified pair through a developer-only RPC.
+    // Never replace or invent a missing store name in the user-facing edit.
+    if(!row.store_name&&LP_PREFECTURES.includes(row.prefecture)&&verifiedSingleName){
+      try{
+        const {data:registered,error:masterError}=await supabaseClient.rpc(
+          'lottery_store_register_verified_region_v1',{
+            p_event_url:data.event_url,
+            p_store_name:verifiedSingleName,
+            p_prefecture:data.prefecture
+          }
+        );
+        if(masterError)throw masterError;
+        masterMessage=registered===true
+          ?' 🏬 店舗マスターにも反映しました。'
+          :' ℹ 店舗マスターは未登録です（店舗名または地域を再確認してください）。';
+      }catch(masterError){
+        console.warn('Region-only store master sync not confirmed:',masterError);
+        masterMessage=' ⚠ 店舗マスターへの反映は確認できませんでした。';
+      }
+    }
+    return {masterMessage};
   }
   async function lpLocationRemove(url){
     if(!isDeveloper()||!supabaseClient||!lpLocationReady)
@@ -9521,10 +9550,11 @@
     button.disabled=true;button.textContent='保存中…';
     message.textContent='🔄 Supabaseへ保存しています…';
     try{
-      await lpLocationSave({event_url:lpLocationEditing,store_name:name||null,
+      const result=await lpLocationSave({event_url:lpLocationEditing,store_name:name||null,
         prefecture:area||null,evidence});
       $('lpLocationDialog').close();
-      $('lpLocationFeedback').textContent='✅ 店舗・地域の修正を保存しました。全ユーザーの抽選一覧に反映されます。';
+      $('lpLocationFeedback').textContent='✅ 店舗・地域の修正を保存しました。全ユーザーの抽選一覧に反映されます。'+
+        (result?.masterMessage||'');
     }catch(error){
       message.textContent='⚠ 保存できませんでした：'+(error?.message||error)+
         '。入力内容は保持しています。';
