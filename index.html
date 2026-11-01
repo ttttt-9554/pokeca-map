@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-master-address-v1">
+  <link rel="stylesheet" href="style.css?v=20261102-store-maps-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1780,6 +1780,8 @@ nav[aria-label="メインメニュー"] {
   <script src="info_plaza_sales_v1.js?v=20261101-shared-sales-savefix-v3"></script>
   <!-- Lottery cards: read-only store sales reference -->
   <script src="lottery_sales_reference_v1.js?v=20261101-shared-sales-savefix-v3"></script>
+  <!-- Per-branch Google Maps links with read-only store-master addresses -->
+  <script src="store_map_links_v1.js?v=20261102-store-maps-v1"></script>
 
   <!-- アプリ本体 -->
   <script>
@@ -1788,7 +1790,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-master-address-v1';
+      ? token : '20261102-store-maps-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
