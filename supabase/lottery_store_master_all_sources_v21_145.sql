@@ -1,19 +1,36 @@
--- v21.145: Retain every validated store ever included in a lottery card.
+-- v21.145/v21.156: Retain every validated store ever included in a lottery card.
 -- Preserve the existing private master, aliases, user records and win/loss stats.
 -- Changes are additive and idempotent.
 
 -- All event sources: single-store and stores[] entries.
+
+-- v21.156: App editor stores the authoritative list in stores_override.
+-- Prefer that list over legacy store_name/stores, avoiding stale branches.
 CREATE OR REPLACE FUNCTION private.lottery_store_event_sync_v1()
 RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path='' AS $$
 DECLARE
-  event jsonb := pg_catalog.to_jsonb(NEW);
+  event_data jsonb := pg_catalog.to_jsonb(NEW);
+  effective_stores jsonb;
   shop jsonb;
 BEGIN
-  PERFORM private.lottery_store_add_v1(event->>'store_name',event->>'prefecture');
-  IF pg_catalog.jsonb_typeof(event->'stores')='array' THEN
-    FOR shop IN SELECT value FROM pg_catalog.jsonb_array_elements(event->'stores') LOOP
+  IF pg_catalog.jsonb_typeof(event_data->'stores_override')='array' THEN
+    effective_stores := event_data->'stores_override';
+  ELSE
+    PERFORM private.lottery_store_add_v1(
+      event_data->>'store_name',event_data->>'prefecture'
+    );
+    IF pg_catalog.jsonb_typeof(event_data->'stores')='array' THEN
+      effective_stores := event_data->'stores';
+    END IF;
+  END IF;
+  IF effective_stores IS NOT NULL THEN
+    FOR shop IN
+      SELECT value FROM pg_catalog.jsonb_array_elements(effective_stores)
+    LOOP
       IF pg_catalog.jsonb_typeof(shop)='object' THEN
-        PERFORM private.lottery_store_add_v1(shop->>'name',shop->>'prefecture');
+        PERFORM private.lottery_store_add_v1(
+          shop->>'name',shop->>'prefecture'
+        );
       END IF;
     END LOOP;
   END IF;
@@ -23,10 +40,10 @@ $$;
 REVOKE ALL ON FUNCTION private.lottery_store_event_sync_v1()
   FROM PUBLIC,anon,authenticated;
 
--- The full stores[] list is checked on INSERT as well as every edit.
+-- Check both legacy stores[] and the newer stores_override[] on edits.
 DROP TRIGGER IF EXISTS lottery_store_sync_event_v1 ON public.lottery_card_overrides;
 CREATE TRIGGER lottery_store_sync_event_v1
- AFTER INSERT OR UPDATE OF store_name,prefecture,stores
+ AFTER INSERT OR UPDATE OF store_name,prefecture,stores,stores_override
  ON public.lottery_card_overrides FOR EACH ROW
  EXECUTE FUNCTION private.lottery_store_event_sync_v1();
 
@@ -84,13 +101,17 @@ SELECT private.lottery_store_add_v1(name,prefecture)
 FROM (
   SELECT store_name AS name,prefecture FROM public.lottery_app_events
   UNION ALL SELECT store_name,prefecture FROM public.lottery_card_overrides
+    WHERE pg_catalog.jsonb_typeof(stores_override) IS DISTINCT FROM 'array'
   UNION ALL SELECT store_name,prefecture FROM public.lottery_external_event_overrides
   UNION ALL SELECT store_name,prefecture FROM public.livepocket_location_overrides
 ) AS existing;
 
 SELECT private.lottery_store_add_v1(shop->>'name',shop->>'prefecture')
 FROM (
-  SELECT stores FROM public.lottery_card_overrides
+  SELECT CASE
+    WHEN pg_catalog.jsonb_typeof(stores_override)='array' THEN stores_override
+    ELSE stores END AS stores
+  FROM public.lottery_card_overrides
   UNION ALL SELECT stores FROM public.lottery_external_event_overrides
 ) AS events
 CROSS JOIN LATERAL pg_catalog.jsonb_array_elements(
