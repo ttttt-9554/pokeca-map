@@ -598,7 +598,7 @@ nav button.active {
 .lp-heading h2{margin:0 0 8px}
 .lp-heading p{margin:0}
 .lp-refresh{flex-shrink:0;min-height:42px}
-/* v21.93: compact unified scoreboard, six columns on one row. */
+/* v21.164: six global summary metrics (open, JST new arrivals, genres). */
 #lotteryView .lp-summary{
  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
  gap:0;margin:10px 0 13px;
@@ -623,7 +623,8 @@ nav button.active {
  font-weight:700;line-height:1.25;letter-spacing:-.1px;
  white-space:nowrap;color:var(--app-muted,#64748b);
 }
-#lotteryView .lp-summary-cell.lp-summary-deadline strong{color:#a16207}
+#lotteryView .lp-summary-cell.lp-summary-today strong{color:#1d4ed8}
+#lotteryView .lp-summary-cell.lp-summary-yesterday strong{color:#475569}
 #lotteryView .lp-summary-cell.lp-summary-open strong{color:#047857}
 .lp-filter{border:1px solid var(--app-border,#dbe3ed);background:var(--app-surface,#fff);border-radius:15px;padding:14px;display:flex;flex-direction:column;gap:12px}
 .lp-filter>label:not(.lp-wishlist),.lp-filter-grid label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}
@@ -664,7 +665,8 @@ html[data-theme="dark"] #lotteryView .lp-summary{background:var(--app-surface,#1
 html[data-theme="dark"] #lotteryView .lp-summary-cell{border-color:var(--app-border,#536782)!important}
 html[data-theme="dark"] #lotteryView .lp-summary-cell strong{color:var(--app-text,#edf4ff)!important}
 html[data-theme="dark"] #lotteryView .lp-summary-cell small{color:var(--app-muted,#b9cce4)!important}
-html[data-theme="dark"] #lotteryView .lp-summary-cell.lp-summary-deadline strong{color:#fbbf24!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell.lp-summary-today strong{color:#93c5fd!important}
+html[data-theme="dark"] #lotteryView .lp-summary-cell.lp-summary-yesterday strong{color:#cbd5e1!important}
 html[data-theme="dark"] #lotteryView .lp-summary-cell.lp-summary-open strong{color:#34d399!important}
 html[data-theme="dark"] .lp-card.lp-closed{background:#1d293c!important;opacity:.65}
 html[data-theme="dark"] .lp-tag{background:var(--app-surface2)!important}

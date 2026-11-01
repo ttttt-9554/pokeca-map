@@ -4568,6 +4568,31 @@
     return Number.isFinite(posted) ? posted : 0;
   }
 
+
+  // JST calendar days based on first registration, never a Discord repost.
+  function lotteryTokyoDay(time){
+    if(!Number.isFinite(time))return '';
+    return new Date(time+9*60*60*1000).toISOString().slice(0,10);
+  }
+  function lotterySummaryCounts(items,now=Date.now()){
+    const today=lotteryTokyoDay(now),yesterday=lotteryTokyoDay(now-86400000);
+    const counts={open:0,today:0,yesterday:0,pokemon:0,onepiece:0,unknown:0};
+    for(const item of items){
+      const genre=lotteryGenre(item);
+      if(genre==='pokemon')counts.pokemon++;
+      else if(genre==='onepiece')counts.onepiece++;
+      else if(genre==='unknown')counts.unknown++;
+      // Other classified games, including Yu-Gi-Oh!, are not "unknown".
+      if(lotteryState(item,now)==='open')counts.open++;
+      const first=lotteryDate(item.first_detected_at);
+      if(!Number.isFinite(first)||first>now)continue;
+      const day=lotteryTokyoDay(first);
+      if(day===today)counts.today++;
+      else if(day===yesterday)counts.yesterday++;
+    }
+    return counts;
+  }
+
   function lotterySortCards(cards, order = 'newest', now = Date.now()) {
     const priority = {open:0,upcoming:1,unknown:2,closed:3,unavailable:4};
     cards.sort((a,b) => {
@@ -4621,31 +4646,26 @@
     });
     lotterySortCards(visible, $('lpSort').value, now);
     const publicItems=lotteryItems.filter(x=>!x.app_lottery_hidden&&!x.manual_card_hidden);
-    const pokemonCount = publicItems.filter(x => lotteryGenre(x) === 'pokemon').length;
-    const knownCount = publicItems.filter(x => Number.isFinite(lotteryDate(x.application_end_at))).length;
-    const openCount = publicItems.filter(x => lotteryState(x,now) === 'open').length;
-    const externalCount=publicItems.filter(x=>!isLivePocketEventUrl(x.url)&&!x.app_lottery).length;
-    const appCount=publicItems.filter(x=>x.app_lottery).length;
-    // v21.93: Preserve all six global counts in one low-height, six-column
-    // strip. Compact label text fits on a phone; titles retain full meanings.
+    const count=lotterySummaryCounts(publicItems,now);
+    // Always global totals, independent of active lottery filters.
     $('lpSummary').innerHTML = `
-      <div class="lp-summary-cell">
-        <strong>${publicItems.length}</strong><small>全イベント</small>
+      <div class="lp-summary-cell lp-summary-open" title="開始・終了日時を確認済みの受付中">
+        <strong>${count.open}</strong><small>受付中</small>
       </div>
-      <div class="lp-summary-cell">
-        <strong>${externalCount}</strong><small>外部URL</small>
+      <div class="lp-summary-cell lp-summary-today" title="日本時間の今日0時以降に初回登録">
+        <strong>${count.today}</strong><small>今日の新着</small>
       </div>
-      <div class="lp-summary-cell">
-        <strong>${appCount}</strong><small>手動登録</small>
+      <div class="lp-summary-cell lp-summary-yesterday" title="日本時間の昨日0時から24時までに初回登録">
+        <strong>${count.yesterday}</strong><small>昨日の新着</small>
       </div>
-      <div class="lp-summary-cell">
-        <strong>${pokemonCount}</strong><small>ポケカ</small>
+      <div class="lp-summary-cell" title="ポケモンカードの抽選">
+        <strong>${count.pokemon}</strong><small>ポケカ</small>
       </div>
-      <div class="lp-summary-cell lp-summary-deadline" title="締切確認済み" aria-label="締切確認済み ${knownCount}件">
-        <strong>${knownCount}</strong><small>締切確認</small>
+      <div class="lp-summary-cell" title="ワンピースカードの抽選">
+        <strong>${count.onepiece}</strong><small>ワンピース</small>
       </div>
-      <div class="lp-summary-cell lp-summary-open" title="受付中（確認済み）" aria-label="受付中（確認済み） ${openCount}件">
-        <strong>${openCount}</strong><small>受付中</small>
+      <div class="lp-summary-cell" title="ジャンルが未分類の抽選">
+        <strong>${count.unknown}</strong><small>未分類</small>
       </div>`;
     $('lpResultCount').textContent = `検索結果：${visible.length}件` +
       (visible.length > lotteryVisibleLimit ? `（${lotteryVisibleLimit}件まで表示中）` : '');
