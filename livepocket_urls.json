@@ -19868,8 +19868,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/48gq7": {
-          "checked_at": "2026-11-01T03:36:15.098039+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T09:56:21.383349+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/wy8hv": {
@@ -21450,8 +21450,8 @@
         },
         "https://livepocket.jp/e/48gq7": {
           "detected_at": "2026-11-01T03:35:57.402800+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-01T09:56:21.383349+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/6zkg_": {
@@ -22793,6 +22793,11 @@
         "https://livepocket.jp/e/6zkg_": {
           "attempts": 1,
           "last_attempt_at": "2026-11-01T09:46:26.367932+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/48gq7": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-01T09:56:21.383349+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -27897,7 +27902,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "checked_at": "2026-11-01T09:56:21.383349+00:00",
           "title_observed": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガブレイブ 抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -32207,7 +32212,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/48gq7": {
-          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "checked_at": "2026-11-01T09:56:21.383349+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
