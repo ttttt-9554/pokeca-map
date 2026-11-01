@@ -19989,8 +19989,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/3tqn7": {
-          "checked_at": "2026-11-01T08:06:23.526737+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T14:09:06.970399+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/bb5zr": {
@@ -21616,8 +21616,8 @@
         },
         "https://livepocket.jp/e/3tqn7": {
           "detected_at": "2026-11-01T08:05:56.492131+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-01T08:06:23.526737+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-01T14:09:06.970399+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bb5zr": {
@@ -22947,6 +22947,11 @@
         "https://livepocket.jp/e/3qq4u": {
           "attempts": 1,
           "last_attempt_at": "2026-11-01T11:56:20.544895+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/3tqn7": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-01T14:09:06.970399+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28117,7 +28122,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T08:06:23.526737+00:00",
+          "checked_at": "2026-11-01T14:09:06.970399+00:00",
           "title_observed": "【古本市場草加店】ポケカ抽選販売 30THセレブレーション",
           "genre": "pokemon",
           "product_origin": "",
@@ -32472,7 +32477,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/3tqn7": {
-          "checked_at": "2026-11-01T08:06:23.526737+00:00",
+          "checked_at": "2026-11-01T14:09:06.970399+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
