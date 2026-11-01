@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-01T09:15:57.210131+00:00",
+  "collected_at": "2026-11-01T11:35:56.504058+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 623,
+  "unique_livepocket_urls": 626,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -17022,34 +17022,124 @@
       "event_title": "ポケモンカードゲーム 「30th CELEBRATION」追加入荷分抽選受付",
       "application_end_at": "2026-11-03T22:00:00+09:00",
       "application_start_at": "2026-11-01T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/y2ltb",
+      "discord_message_id": "1566414024164376706",
+      "discord_posted_at": "2026-11-01T11:30:05.926000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA流山店\n受付終了: 11/03 21:45（残り2日1時間）\nhttps://livepocket.jp/e/y2ltb\n\n📍埼玉県\nふるいちイオンモール上尾店\n受付終了: 11/01 21:01（残り30分）\nhttps://livepocket.jp/e/emrbh\n\n📍埼玉県\nふるいちイオンモール浦和美園店\n受付終了: 11/01 21:00（残り29分）\nhttps://livepocket.jp/e/zpkzs",
+      "store_name": "TSUTAYA流山店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA流山店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA 抽選受付",
+      "application_end_at": "2026-11-03T21:45:00+09:00",
+      "application_start_at": "2026-11-01T09:30:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/emrbh",
+      "discord_message_id": "1566414024164376706",
+      "discord_posted_at": "2026-11-01T11:30:05.926000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA流山店\n受付終了: 11/03 21:45（残り2日1時間）\nhttps://livepocket.jp/e/y2ltb\n\n📍埼玉県\nふるいちイオンモール上尾店\n受付終了: 11/01 21:01（残り30分）\nhttps://livepocket.jp/e/emrbh\n\n📍埼玉県\nふるいちイオンモール浦和美園店\n受付終了: 11/01 21:00（残り29分）\nhttps://livepocket.jp/e/zpkzs",
+      "store_name": "ふるいちイオンモール上尾店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール上尾店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちイオンモール上尾店】ポケカ抽選販売 拡張パック(30thセレブレーション)",
+      "application_end_at": "2026-11-01T21:01:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/zpkzs",
+      "discord_message_id": "1566414024164376706",
+      "discord_posted_at": "2026-11-01T11:30:05.926000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA流山店\n受付終了: 11/03 21:45（残り2日1時間）\nhttps://livepocket.jp/e/y2ltb\n\n📍埼玉県\nふるいちイオンモール上尾店\n受付終了: 11/01 21:01（残り30分）\nhttps://livepocket.jp/e/emrbh\n\n📍埼玉県\nふるいちイオンモール浦和美園店\n受付終了: 11/01 21:00（残り29分）\nhttps://livepocket.jp/e/zpkzs",
+      "store_name": "ふるいちイオンモール浦和美園店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール浦和美園店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいち浦和美園店】ポケカ抽選販売(30thセレブレーション)",
+      "application_end_at": "2026-11-01T21:00:00+09:00",
+      "application_start_at": "2026-10-31T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 461,
+    "parsed": 464,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 438,
-    "prefecture": 395,
-    "event_title": 310,
+    "store_name": 441,
+    "prefecture": 398,
+    "event_title": 313,
     "event_date": 1,
     "product_name": 88,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 587,
-    "application_start_at": 584,
-    "stores_events": 449
+    "application_end_at": 590,
+    "application_start_at": 587,
+    "stores_events": 452
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566376315471269928"
+      "1551580466266644552": "1566414024164376706"
     },
     "last_run": {
-      "checked_at": "2026-11-01T09:15:57.210131+00:00",
-      "new_urls": 1,
-      "original_urls": 622,
+      "checked_at": "2026-11-01T11:35:56.504058+00:00",
+      "new_urls": 3,
+      "original_urls": 623,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -17246,7 +17336,8 @@
         "1566300767709560852": "2026-11-01T04:05:58.018636+00:00",
         "1566323441617866844": "2026-11-01T05:35:58.013385+00:00",
         "1566361184733757453": "2026-11-01T08:05:55.765008+00:00",
-        "1566376315471269928": "2026-11-01T09:15:58.137886+00:00"
+        "1566376315471269928": "2026-11-01T09:15:58.137886+00:00",
+        "1566414024164376706": "2026-11-01T11:35:57.286392+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19906,6 +19997,21 @@
           "checked_at": "2026-11-01T09:16:25.537198+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/zpkzs": {
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/y2ltb": {
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/emrbh": {
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -21518,6 +21624,24 @@
           "detected_at": "2026-11-01T09:15:59.141523+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-01T09:16:25.537198+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/emrbh": {
+          "detected_at": "2026-11-01T11:35:58.354185+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/y2ltb": {
+          "detected_at": "2026-11-01T11:35:58.354185+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/zpkzs": {
+          "detected_at": "2026-11-01T11:35:58.354185+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
           "http_status": null
         }
       },
@@ -27990,6 +28114,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/zpkzs": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "title_observed": "【ふるいち浦和美園店】ポケカ抽選販売(30thセレブレーション)",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/y2ltb": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "title_observed": "ポケモンカードゲーム スペシャルデッキセットMEGA 抽選受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/emrbh": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "title_observed": "【ふるいちイオンモール上尾店】ポケカ抽選販売 拡張パック(30thセレブレーション)",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -32309,6 +32466,45 @@
         },
         "https://livepocket.jp/e/bb5zr": {
           "checked_at": "2026-11-01T09:16:25.537198+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/zpkzs": {
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/y2ltb": {
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/emrbh": {
+          "checked_at": "2026-11-01T11:36:21.139325+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
