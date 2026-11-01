@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-01T03:05:55.276690+00:00",
+  "collected_at": "2026-11-01T03:35:56.097689+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 611,
+  "unique_livepocket_urls": 616,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16661,33 +16661,184 @@
           "prefecture": "東京都"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/9lmsl",
+      "discord_message_id": "1566293233930346646",
+      "discord_posted_at": "2026-11-01T03:30:07.290000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA400号西那須野店\n受付終了: 11/02 22:00（残り1日9時間）\nhttps://livepocket.jp/e/9lmsl\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/elopw\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/48gq7\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/hrgpp\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/6zkg_",
+      "store_name": "TSUTAYA400号西那須野店",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": "ONE PIECE Heroines Edition PRECIOUS BOX",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA400号西那須野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product"
+      },
+      "event_title": "ワンピースカードゲーム 『ONE PIECE Heroines Edition PRECIOUS BOX』抽選予約受付",
+      "application_end_at": "2026-11-02T22:00:00+09:00",
+      "application_start_at": "2026-10-31T15:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/elopw",
+      "discord_message_id": "1566293233930346646",
+      "discord_posted_at": "2026-11-01T03:30:07.290000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA400号西那須野店\n受付終了: 11/02 22:00（残り1日9時間）\nhttps://livepocket.jp/e/9lmsl\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/elopw\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/48gq7\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/hrgpp\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/6zkg_",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガシンフォニア 抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-11-01T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/48gq7",
+      "discord_message_id": "1566293233930346646",
+      "discord_posted_at": "2026-11-01T03:30:07.290000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA400号西那須野店\n受付終了: 11/02 22:00（残り1日9時間）\nhttps://livepocket.jp/e/9lmsl\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/elopw\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/48gq7\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/hrgpp\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/6zkg_",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガブレイブ 抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-11-01T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/hrgpp",
+      "discord_message_id": "1566293233930346646",
+      "discord_posted_at": "2026-11-01T03:30:07.290000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA400号西那須野店\n受付終了: 11/02 22:00（残り1日9時間）\nhttps://livepocket.jp/e/9lmsl\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/elopw\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/48gq7\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/hrgpp\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/6zkg_",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」(再販分)抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-11-01T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/6zkg_",
+      "discord_message_id": "1566293233930346646",
+      "discord_posted_at": "2026-11-01T03:30:07.290000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA400号西那須野店\n受付終了: 11/02 22:00（残り1日9時間）\nhttps://livepocket.jp/e/9lmsl\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/elopw\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/48gq7\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/hrgpp\n\n📍福島県\nブックエース小名浜住吉店\n受付終了: 11/03 22:00（残り2日9時間）\nhttps://livepocket.jp/e/6zkg_",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17(再販分) 抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-11-01T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 449,
+    "parsed": 454,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 426,
-    "prefecture": 383,
-    "event_title": 298,
+    "store_name": 431,
+    "prefecture": 388,
+    "event_title": 303,
     "event_date": 1,
     "product_name": 87,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 575,
-    "application_start_at": 572,
-    "stores_events": 437
+    "application_end_at": 580,
+    "application_start_at": 577,
+    "stores_events": 442
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566285676427747511"
+      "1551580466266644552": "1566293233930346646"
     },
     "last_run": {
-      "checked_at": "2026-11-01T03:05:55.276690+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-01T03:35:56.097689+00:00",
+      "new_urls": 5,
       "original_urls": 611,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -16880,7 +17031,8 @@
         "1566036542848241676": "2026-10-31T10:30:56.945927+00:00",
         "1566065434434736280": "2026-10-31T12:30:57.272189+00:00",
         "1566263040993927236": "2026-11-01T01:35:57.488533+00:00",
-        "1566277893825368174": "2026-11-01T02:35:55.963973+00:00"
+        "1566277893825368174": "2026-11-01T02:35:55.963973+00:00",
+        "1566293233930346646": "2026-11-01T03:35:56.674209+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19480,6 +19632,31 @@
           "checked_at": "2026-11-01T02:36:15.164462+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/hrgpp": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/elopw": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/9lmsl": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/6zkg_": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/48gq7": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -21020,6 +21197,36 @@
           "detected_at": "2026-11-01T02:35:56.711817+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-01T02:36:15.164462+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/48gq7": {
+          "detected_at": "2026-11-01T03:35:57.402800+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/6zkg_": {
+          "detected_at": "2026-11-01T03:35:57.402800+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/9lmsl": {
+          "detected_at": "2026-11-01T03:35:57.402800+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/elopw": {
+          "detected_at": "2026-11-01T03:35:57.402800+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/hrgpp": {
+          "detected_at": "2026-11-01T03:35:57.402800+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
           "http_status": null
         }
       },
@@ -27325,6 +27532,61 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/hrgpp": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "title_observed": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」(再販分)抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/elopw": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "title_observed": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガシンフォニア 抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/9lmsl": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "title_observed": "ワンピースカードゲーム 『ONE PIECE Heroines Edition PRECIOUS BOX』抽選予約受付",
+          "genre": "onepiece",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/6zkg_": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "title_observed": "ONE PIECE ブースターパック 世界最強の戦士 OP17(再販分) 抽選販売",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/48gq7": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "title_observed": "【再販分】ポケモンカードゲーム MEGA 拡張パック メガブレイブ 抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -31488,6 +31750,71 @@
         },
         "https://livepocket.jp/e/6t8b2y": {
           "checked_at": "2026-11-01T02:36:15.164462+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/hrgpp": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/elopw": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/9lmsl": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/6zkg_": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/48gq7": {
+          "checked_at": "2026-11-01T03:36:15.098039+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
