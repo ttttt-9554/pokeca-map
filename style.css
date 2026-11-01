@@ -2863,3 +2863,35 @@ html[data-theme="dark"] #groupView .discord-role-check-panel .hint{color:#c9d7eb
   padding:7px 0;border-top:1px solid var(--app-border,#cbd5e1);
   line-height:1.55;font-size:14px;overflow-wrap:anywhere;
 }
+
+/* 2026-11-01: Keep official link / application / private management /
+   anonymous results on a single, equal-width row. Admin edit stays below. */
+#lotteryView .lp-track-action-buttons{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:stretch;gap:6px;overflow:visible;
+}
+#lotteryView .lp-track-action-buttons.lp-has-official{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+#lotteryView .lp-track-action-buttons :is(a,button){
+  display:flex;justify-content:center;align-items:center;
+  box-sizing:border-box;min-width:0;width:100%;min-height:42px;
+  margin:0;padding:8px 4px;border-radius:10px;
+  text-align:center;font-size:12px;font-weight:700;line-height:1.25;
+  white-space:normal;touch-action:manipulation;
+}
+#lotteryView .lp-track-action-buttons button{flex:auto}
+#lotteryView .lp-track-action-buttons .lp-action-short{display:none}
+@media(max-width:600px){
+  #lotteryView .lp-track-action-buttons{gap:5px}
+  #lotteryView .lp-track-action-buttons :is(a,button){
+    padding:8px 2px;font-size:clamp(10px,2.9vw,12px);
+  }
+  #lotteryView .lp-track-action-buttons .lp-action-full{display:none}
+  #lotteryView .lp-track-action-buttons .lp-action-short{
+    display:inline;white-space:nowrap;
+  }
+}
+@media(max-width:340px){
+  #lotteryView .lp-track-action-buttons :is(a,button){font-size:10px}
+}
