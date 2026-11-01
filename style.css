@@ -2895,3 +2895,48 @@ html[data-theme="dark"] #groupView .discord-role-check-panel .hint{color:#c9d7eb
 @media(max-width:340px){
   #lotteryView .lp-track-action-buttons :is(a,button){font-size:10px}
 }
+
+/* 2026-11-01: Onsite archive grouped by shop/chain, event histories folded. */
+#lpOnsiteArchiveList{display:flex;flex-direction:column;gap:10px}
+#lpOnsiteArchiveList .lp-onsite-archive-group{
+  border:1px solid var(--app-border,#cbd5e1);border-radius:12px;
+  background:var(--app-surface2,#f1f5f9);overflow:hidden;color:var(--app-text,#172033);
+}
+#lpOnsiteArchiveList .lp-onsite-archive-group>summary{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:6px 12px;padding:13px;cursor:pointer;line-height:1.5;
+  overflow-wrap:anywhere;
+}
+#lpOnsiteArchiveList .lp-onsite-archive-group>summary strong{font-size:15px;flex:1 1 180px;min-width:0}
+#lpOnsiteArchiveList .lp-onsite-archive-group>summary span{
+  color:var(--app-muted,#64748b);font-size:12px;font-weight:700;
+}
+#lpOnsiteArchiveList .lp-onsite-archive-group[open]>summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#lpOnsiteArchiveList .lp-onsite-archive-group-body{padding:8px 10px 10px}
+#lpOnsiteArchiveList .lp-onsite-archive-group-body>.lp-onsite-archive-card{margin:0}
+#lpOnsiteArchiveList .lp-onsite-archive-event{
+  margin:7px 0;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:10px;background:var(--app-surface,#fff);color:var(--app-text,#172033);
+}
+#lpOnsiteArchiveList .lp-onsite-archive-event>summary{
+  cursor:pointer;padding:11px;display:flex;flex-direction:column;
+  align-items:flex-start;gap:4px;overflow-wrap:anywhere;line-height:1.5;
+}
+#lpOnsiteArchiveList .lp-onsite-archive-event-title{font-size:14px;font-weight:700}
+#lpOnsiteArchiveList .lp-onsite-archive-event-meta{font-size:12px;color:var(--app-muted,#64748b)}
+#lpOnsiteArchiveList .lp-onsite-archive-event[open]>summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body{padding:8px 11px 12px;overflow-wrap:anywhere}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body p{
+  margin:6px 0;color:var(--app-muted,#64748b);font-size:13px;line-height:1.55;
+}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body strong{font-size:13px}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body ul{padding-left:20px}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body li{margin:6px 0;line-height:1.55}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body a{display:inline-block;margin-top:8px}
+#lpOnsiteArchiveList .lp-onsite-archive-event-body .lp-onsite-archive-scope{
+  font-size:12px;line-height:1.55;
+}
