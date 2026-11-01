@@ -3144,3 +3144,66 @@ html[data-theme="dark"] #infoSalesAdmin .info-sales-message[data-error="true"]{c
 #infoSalesAdmin .info-sales-store-clear:disabled{
   opacity:.36;cursor:default;
 }
+
+
+/* Store-specific sales-format reference under the lottery's target store.
+   Read-only, informational; never a claim about today's lottery terms. */
+#lotteryView .lp-sales-ref-block{
+  display:block;box-sizing:border-box;max-width:100%;margin:12px 0;
+  padding:12px;border-radius:12px;
+  border:1px solid var(--app-border,#94a3b8);
+  background:var(--app-surface2,#f8fafc);
+  color:var(--app-text,#172033);overflow-wrap:anywhere;
+}
+#lotteryView .lp-sales-ref-title{
+  display:block;font-size:14px;font-weight:800;margin:0 0 9px;
+  color:var(--app-text,#172033);line-height:1.5;
+}
+#lotteryView .lp-sales-ref-entry{
+  padding:9px 0;border-top:1px solid var(--app-border,#cbd5e1);
+}
+#lotteryView .lp-sales-ref-shop{
+  display:flex;flex-wrap:wrap;gap:4px;align-items:baseline;
+  font-size:13px;line-height:1.5;
+}
+#lotteryView .lp-sales-ref-shop strong{font-size:13px;overflow-wrap:anywhere}
+#lotteryView .lp-sales-ref-shop small,
+#lotteryView .lp-sales-ref-date{font-size:11px;color:var(--app-muted,#64748b)}
+#lotteryView .lp-sales-ref-values{
+  display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 3px;
+}
+#lotteryView .lp-sales-ref-value{
+  display:inline-flex;align-items:center;gap:3px;min-width:0;
+  border:1px solid var(--app-border,#cbd5e1);
+  border-radius:8px;padding:5px 8px;font-size:12px;line-height:1.4;
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);
+}
+#lotteryView .lp-sales-ref-value strong{color:inherit}
+#lotteryView .lp-sales-ref-note{
+  color:var(--app-muted,#64748b);font-size:11px;line-height:1.65;
+  margin:8px 0 0;overflow-wrap:anywhere;
+}
+#lotteryView details.lp-sales-ref-block{
+  padding:0;overflow:hidden;
+}
+#lotteryView .lp-sales-ref-fold>summary{
+  cursor:pointer;padding:12px;font-size:14px;font-weight:750;
+  line-height:1.55;color:var(--app-text,#172033);
+}
+#lotteryView .lp-sales-ref-fold>summary span{
+  display:inline-block;font-size:12px;font-weight:650;
+  color:var(--app-muted,#64748b);margin-left:3px;
+}
+#lotteryView .lp-sales-ref-fold[open]>summary{
+  border-bottom:1px solid var(--app-border,#cbd5e1);
+}
+#lotteryView .lp-sales-ref-details{padding:4px 12px 12px}
+html[data-theme="dark"] #lotteryView .lp-sales-ref-block{
+  background:var(--app-surface2,#22334b);
+  border-color:var(--app-border,#556e8b);
+  color:var(--app-text,#eff5ff);
+}
+html[data-theme="dark"] #lotteryView .lp-sales-ref-value{
+  background:var(--app-surface,#172337);
+  color:var(--app-text,#eff5ff);
+}
