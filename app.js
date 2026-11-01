@@ -349,6 +349,7 @@
     renderMyShared();
     updateDeveloperTab();
     window.TorecaInfoPlaza?.onAuthChanged?.();
+    window.TorecaSupabaseUsage?.onAuthChanged?.();
     window.TorecaSalesReference?.onAuthChanged?.();
     window.TorecaStoreMaps?.onAuthChanged?.();
     window.TorecaUnifiedReview?.onAuthChanged?.();
@@ -9710,6 +9711,11 @@
       // Hide lottery navigation before the asynchronous Discord login starts.
       updateLotteryVisibility();
       initDevAccordions();
+      window.TorecaSupabaseUsage?.init?.({
+        getClient:()=>supabaseClient,
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        isDev:isDeveloper
+      });
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
         renderCards:renderLottery,escape});
       window.TorecaStoreMaps?.init?.({

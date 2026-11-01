@@ -1,0 +1,27 @@
+name: Supabase Developer Usage Regression
+'on':
+  push:
+    paths:
+      - 'supabase_usage_v1.js'
+      - 'scripts/test_supabase_usage.cjs'
+      - 'supabase/toreca_developer_usage_v1.sql'
+      - '.github/workflows/supabase-usage-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test developer-only usage display
+        run: |
+          node --check supabase_usage_v1.js
+          node scripts/test_supabase_usage.cjs

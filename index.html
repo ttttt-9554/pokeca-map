@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-lottery-summary-v1">
+  <link rel="stylesheet" href="style.css?v=20261102-supabase-usage-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1252,6 +1252,30 @@ nav[aria-label="メインメニュー"] {
       <p class="hint">管理項目は折りたたんであります。必要な項目をタップすると開きます。</p>
       <button type="button" id="devFoldAll">すべて閉じる</button>
 
+      <section id="sbUsagePanel" class="store-tools sb-usage-panel">
+        <h3>📊 Supabase使用状況</h3>
+        <p class="hint">開発者専用。データベース・Storage容量、登録ユーザー、接続数、定期処理を表示します。</p>
+        <div class="sb-usage-toolbar">
+          <span>Freeプランの参考上限（課金確定値とは別）</span>
+          <button id="sbUsageReload" type="button">↻ 最新の使用状況</button>
+        </div>
+        <p id="sbUsageStatus" class="hint sb-usage-status" role="status" aria-live="polite">開くと使用状況を読み込みます。</p>
+        <div id="sbUsageContent" hidden>
+          <div id="sbUsageCapacity" class="sb-usage-capacity"></div>
+          <div id="sbUsageStats" class="sb-usage-stats"></div>
+          <details class="sb-usage-tables">
+            <summary>📊 データ容量が大きいテーブル（上位8件）</summary>
+            <div id="sbUsageTables"></div>
+            <p class="hint">テーブル容量はインデックス込み、行数はPostgreSQL統計による推定値です。</p>
+          </details>
+        </div>
+        <p class="hint">※DBサイズはPostgreSQLの実測値です。ディスク全体（WAL等）とは異なります。転送量・Edge Functionsの実行回数・課金MAUは下記の公式使用量ページでご確認ください。</p>
+        <div class="sb-usage-links">
+          <a href="https://supabase.com/dashboard/org/rzdhnagsrxntmaplfczk/usage" target="_blank" rel="noopener noreferrer">↗ Supabase公式使用量</a>
+          <a href="https://supabase.com/dashboard/project/aypcmtlaaygmiexboypk/observability/database" target="_blank" rel="noopener noreferrer">↗ DBレポート</a>
+        </div>
+      </section>
+
 
       <section id="lpDevUnifiedPanel" class="store-tools lp-dev-unified">
         <h3>🔎 抽選の未確認事項（一括管理）</h3>
@@ -1783,6 +1807,9 @@ nav[aria-label="メインメニュー"] {
   <!-- Per-branch Google Maps links with read-only store-master addresses -->
   <script src="store_map_links_v1.js?v=20261102-store-maps-v1"></script>
 
+  <!-- Developer-only Supabase usage metrics -->
+  <script src="supabase_usage_v1.js?v=20261102-supabase-usage-v1"></script>
+
   <!-- アプリ本体 -->
   <script>
   // Load the app script with the refresh token when the user explicitly
@@ -1790,7 +1817,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-lottery-summary-v1';
+      ? token : '20261102-supabase-usage-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
