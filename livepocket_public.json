@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-10-31T15:05:55.915855+00:00",
-  "unique_livepocket_urls": 608,
+  "collected_at": "2026-11-01T01:35:56.773712+00:00",
+  "unique_livepocket_urls": 610,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9072,7 +9072,46 @@
         }
       ],
       "first_detected_at": "2026-10-31T12:30:58.146085+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3381u",
+      "store_name": "文教堂書店浦安西友店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-11-01T01:30:08.733000+00:00",
+      "stores": [
+        {
+          "name": "文教堂書店浦安西友店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+      "application_end_at": "2026-11-03T20:30:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+      "first_detected_at": "2026-11-01T01:35:58.446759+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/9ndqc",
+      "store_name": "TSUTAYA17号北浦和店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-01T01:30:08.733000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA17号北浦和店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00",
+      "review_category": "pokemon",
+      "product_name": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
+      "first_detected_at": "2026-11-01T01:35:58.446759+00:00"
     }
   ],
-  "updated_at": "2026-11-01T01:25:59.889046+00:00"
+  "updated_at": "2026-11-01T01:37:18.869287+00:00"
 }

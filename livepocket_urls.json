@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-10-31T15:05:55.915855+00:00",
+  "collected_at": "2026-11-01T01:35:56.773712+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 608,
+  "unique_livepocket_urls": 610,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16525,33 +16525,94 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/3381u",
+      "discord_message_id": "1566263040993927236",
+      "discord_posted_at": "2026-11-01T01:30:08.733000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 11/03 20:30（残り2日9時間）\nhttps://livepocket.jp/e/3381u\n\n📍埼玉県\nTSUTAYA17号北浦和店\n受付終了: 11/03 22:00（残り2日11時間）\nhttps://livepocket.jp/e/9ndqc",
+      "store_name": "文教堂書店浦安西友店",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "文教堂書店浦安西友店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+      "application_end_at": "2026-11-03T20:30:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/9ndqc",
+      "discord_message_id": "1566263040993927236",
+      "discord_posted_at": "2026-11-01T01:30:08.733000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 11/03 20:30（残り2日9時間）\nhttps://livepocket.jp/e/3381u\n\n📍埼玉県\nTSUTAYA17号北浦和店\n受付終了: 11/03 22:00（残り2日11時間）\nhttps://livepocket.jp/e/9ndqc",
+      "store_name": "TSUTAYA17号北浦和店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": "スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA17号北浦和店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product"
+      },
+      "event_title": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
+      "application_end_at": "2026-11-03T22:00:00+09:00",
+      "application_start_at": "2026-11-01T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 447,
+    "parsed": 449,
     "no_structured_details": 161
   },
   "field_counts": {
-    "store_name": 424,
-    "prefecture": 381,
-    "event_title": 295,
+    "store_name": 426,
+    "prefecture": 383,
+    "event_title": 297,
     "event_date": 1,
     "product_name": 86,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 572,
-    "application_start_at": 570,
-    "stores_events": 434
+    "application_end_at": 574,
+    "application_start_at": 572,
+    "stores_events": 436
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566104526241534014"
+      "1551580466266644552": "1566263040993927236"
     },
     "last_run": {
-      "checked_at": "2026-10-31T15:05:55.915855+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-01T01:35:56.773712+00:00",
+      "new_urls": 2,
       "original_urls": 608,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -16742,7 +16803,8 @@
         "1566016097482842193": "2026-10-31T09:10:56.966535+00:00",
         "1566028985777913987": "2026-10-31T10:00:57.180195+00:00",
         "1566036542848241676": "2026-10-31T10:30:56.945927+00:00",
-        "1566065434434736280": "2026-10-31T12:30:57.272189+00:00"
+        "1566065434434736280": "2026-10-31T12:30:57.272189+00:00",
+        "1566263040993927236": "2026-11-01T01:35:57.488533+00:00"
       },
       "checked_search_urls": {}
     },
@@ -19327,6 +19389,16 @@
           "checked_at": "2026-11-01T00:47:01.595674+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/9ndqc": {
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3381u": {
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -20849,6 +20921,18 @@
           "detected_at": "2026-10-31T12:30:58.146085+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-01T00:47:01.595674+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3381u": {
+          "detected_at": "2026-11-01T01:35:58.446759+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/9ndqc": {
+          "detected_at": "2026-11-01T01:35:58.446759+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
           "http_status": null
         }
       },
@@ -27121,6 +27205,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/9ndqc": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
+          "title_observed": "ポケモンカード「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」抽選販売",
+          "genre": "pokemon",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/3381u": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
+          "title_observed": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -31245,6 +31351,32 @@
         },
         "https://livepocket.jp/e/x425p": {
           "checked_at": "2026-11-01T00:47:01.595674+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/9ndqc": {
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/3381u": {
+          "checked_at": "2026-11-01T01:37:18.869287+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
