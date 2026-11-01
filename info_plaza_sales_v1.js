@@ -50,6 +50,7 @@
           '<div id="infoSalesStorePicker" class="info-sales-store-picker">'+
             '<div class="info-sales-store-row">'+
               '<input type="search" id="infoSalesStore" maxlength="160" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="店舗名で検索・候補を選択" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="infoSalesStoreSuggestions">'+
+              '<button type="button" id="infoSalesStoreClear" class="info-sales-store-clear" aria-label="店舗名を一括消去" title="店舗名を一括消去" disabled>×</button>'+
               '<button type="button" id="infoSalesStoreToggle" class="info-sales-store-toggle" aria-label="店舗の候補一覧を表示" aria-controls="infoSalesStoreSuggestions" aria-expanded="false">⌄</button>'+
             '</div>'+
             '<div id="infoSalesStoreSuggestions" class="info-sales-store-suggestions" role="listbox" aria-label="店舗マスターの候補" hidden></div>'+
@@ -101,10 +102,19 @@
     $('infoSalesGenre').addEventListener('change',updateGenre);
     const storeInput=$('infoSalesStore');
     storeInput.addEventListener('focus',()=>renderStoreSuggestions(true));
-    storeInput.addEventListener('input',()=>{if(!storeNameComposing)renderStoreSuggestions(true);});
+    storeInput.addEventListener('input',()=>{
+      updateStoreClearButton();
+      if(!storeNameComposing)renderStoreSuggestions(true);
+    });
     storeInput.addEventListener('compositionstart',()=>{storeNameComposing=true;});
     storeInput.addEventListener('compositionend',()=>{storeNameComposing=false;renderStoreSuggestions(true);});
     storeInput.addEventListener('keydown',handleStoreSuggestionKeydown);
+    $('infoSalesStoreClear').addEventListener('click',()=>{
+      storeInput.value='';
+      updateStoreClearButton();
+      hideStoreSuggestions();
+      $('infoSalesMasterHint').textContent='店舗名をクリアしました。新しい店舗を入力・選択できます。';
+    });
     $('infoSalesStoreToggle').addEventListener('click',()=>{
       if(masterSuggestionsOpen)hideStoreSuggestions();
       else renderStoreSuggestions(true);
@@ -126,6 +136,10 @@
     });
     $('infoSalesList').addEventListener('click',onListClick);
     updateGenre();
+  }
+  function updateStoreClearButton(){
+    const clear=$('infoSalesStoreClear');
+    if(clear)clear.disabled=!String($('infoSalesStore')?.value||'').trim();
   }
   function hideStoreSuggestions(){
     masterSuggestionsOpen=false;
@@ -173,6 +187,7 @@
     if(!pair)return;
     const [,row]=pair;
     $('infoSalesStore').value=row.name;
+    updateStoreClearButton();
     $('infoSalesPrefecture').value=PREFECTURES.includes(row.prefecture)?row.prefecture:'';
     $('infoSalesMasterHint').textContent='店舗マスターから「'+row.name+'（'+row.prefecture+'）」を選択しました。';
     hideStoreSuggestions();
@@ -210,6 +225,7 @@
     const row=masterChoices.get(input.value.trim());
     if(!row)return;
     input.value=row.name;
+    updateStoreClearButton();
     $('infoSalesPrefecture').value=PREFECTURES.includes(row.prefecture)?row.prefecture:'';
     $('infoSalesMasterHint').textContent='店舗マスターから「'+row.name+'」を選択しました。';
   }
@@ -219,6 +235,7 @@
     $('infoSalesSave').textContent='保存する';
     editingId='';
     hideStoreSuggestions();
+    updateStoreClearButton();
     updateGenre();
   }
   function renderList(){
@@ -365,6 +382,7 @@
     if(remove){deleteRecord(record);return;}
     editingId=record.id;
     $('infoSalesStore').value=record.store_name;
+    updateStoreClearButton();
     $('infoSalesPrefecture').value=record.prefecture;
     $('infoSalesGenre').value=record.genre;
     $('infoSalesShrink').value=record.shrink_state;
