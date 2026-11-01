@@ -1,4 +1,4 @@
-/* Toreca Radar - Information Plaza / private store sales formats v1 */
+/* Toreca Radar - Information Plaza / shared store sales formats v2 */
 (function(){
   'use strict';
   const TABLE='info_plaza_store_sales';
@@ -25,10 +25,10 @@
   let masterBusy=false,masterLoaded=false,masterChoices=new Map();
   let matchingMasterChoices=[],masterSuggestionIndex=-1,masterSuggestionsOpen=false;
   let storeNameComposing=false;
-  let generation=0,publicVisibleLimit=60;
+  let generation=0,publicVisibleLimit=60,authorizedUserId='';
 
   function client(){return options?.getClient?.()||null;}
-  function canAccess(){return !!options?.isDev?.()&&!!options?.getUserId?.()&&!!client();}
+  function canAccess(){return !!options?.getUserId?.()&&!!client();}
   function message(value,isError=false){
     const node=$('infoSalesMessage');
     if(node){
@@ -59,8 +59,8 @@
         '<p class="info-sales-public-disclaimer">※登録された販売形態の参考情報です。今回の抽選や販売時の条件を保証するものではありません。公式情報をご確認ください。</p>'+
       '</section>'+
       '<section id="infoSalesAdmin" class="info-sales-admin" hidden>'+
-        '<h3>🏬 店舗別販売形態 <small>開発者専用</small></h3>'+
-        '<p class="info-sales-description">店舗ごとの販売時の状態を記録します。ポケカはシュリンク・ペリ、ワンピースはテプカ（テープカット）。「未確認」は「なし」と区別します。販売形態が登録された店舗は抽選カードに参考表示されます。補足メモは開発者専用のままです。</p>'+
+        '<h3>🏬 店舗別販売形態 <small>ログインユーザー共有</small></h3>'+
+        '<p class="info-sales-description">店舗ごとの販売形態をみんなで登録・更新できます。ログインユーザーなら誰でも新規登録・編集・削除が可能です。ポケカはシュリンク・ペリ、ワンピースはテプカ（テープカット）。「未確認」は「なし」と区別します。登録内容と補足メモは他のログインユーザーにも共有され、抽選カードにも参考表示されます。</p>'+
         '<form id="infoSalesForm" autocomplete="off">'+
           '<h4 id="infoSalesFormHeading">新規登録</h4>'+
           '<label for="infoSalesStore">店舗名</label>'+
@@ -94,8 +94,8 @@
               '<option value="unknown">未確認</option><option value="yes">あり</option><option value="no">なし</option>'+
             '</select></label>'+
           '</div>'+
-          '<label for="infoSalesNotes">補足メモ（任意・500文字以内）</label>'+
-          '<textarea id="infoSalesNotes" rows="3" maxlength="500" placeholder="購入時の取扱いなど"></textarea>'+
+          '<label for="infoSalesNotes">補足メモ（全ログインユーザーに共有・500文字以内）</label>'+
+          '<textarea id="infoSalesNotes" rows="3" maxlength="500" placeholder="購入時の取扱いなど（個人情報は入力しないでください）"></textarea>'+
           '<div class="info-sales-form-actions">'+
             '<button type="submit" class="info-sales-save" id="infoSalesSave">保存する</button>'+
             '<button type="button" id="infoSalesReset">入力をクリア</button>'+
@@ -410,7 +410,7 @@
     const hint=$('infoSalesMasterHint');
     if(hint)hint.textContent='店舗マスターを読み込み中…';
     try{
-      const {data,error}=await client().rpc('lottery_store_admin_v1');
+      const {data,error}=await client().rpc('lottery_store_master_choices_v1');
       if(error)throw error;
       if(current!==generation||!canAccess())return false;
       const choices=new Map();
@@ -525,14 +525,16 @@
   function onAuthChanged(){
     if(!initialized)mount();
     const permitted=canAccess();
+    const userId=permitted?options.getUserId():'';
     const panel=$('infoSalesAdmin');
     if(!panel)return;
     panel.hidden=!permitted;
     const publicPanel=$('infoSalesPublic');
     if(publicPanel)publicPanel.hidden=permitted;
-    if(permitted!==authorized){
+    if(permitted!==authorized||userId!==authorizedUserId){
       ++generation;
       authorized=permitted;
+      authorizedUserId=userId;
       rows=[];loaded=false;masterLoaded=false;masterChoices=new Map();
       hideStoreSuggestions();
       if($('infoSalesStoreSuggestions'))$('infoSalesStoreSuggestions').replaceChildren();
@@ -559,7 +561,10 @@
       onAuthChanged();
       // A shop imported from another tab/device must become selectable
       // when revisiting Information Plaza; do not keep the old candidate list.
-      if(!wasActive&&authorized)refreshMaster(true);
+      if(!wasActive&&authorized){
+        refresh(true);
+        refreshMaster(true);
+      }
       if(!authorized)loadPublic();
     }
   }
