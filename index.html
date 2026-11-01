@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261101-onsite-history-alert-v2">
+  <link rel="stylesheet" href="style.css?v=20261101-information-plaza-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1143,6 +1143,13 @@ nav[aria-label="メインメニュー"] {
     </section>
 
 
+    <!-- Information Plaza: intentionally empty until its features are defined. -->
+    <section id="infoPlazaView" class="view" aria-labelledby="infoPlazaTitle">
+      <h2 id="infoPlazaTitle">💬 情報広場</h2>
+      <div id="infoPlazaContent" class="info-plaza-empty" aria-label="情報広場の表示領域"></div>
+    </section>
+
+
     <!-- ======================================
          グループ共有
          ====================================== -->
@@ -1738,6 +1745,11 @@ nav[aria-label="メインメニュー"] {
       <span>手動抽選<br>登録</span>
     </button>
 
+    <button type="button" data-tab="infoPlaza" aria-label="情報広場を開く">
+      💬
+      <span>情報広場</span>
+    </button>
+
     <button
       type="button"
       data-tab="dev"
@@ -1771,7 +1783,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261101-onsite-individual-store-v1';
+      ? token : '20261101-information-plaza-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
@@ -1844,7 +1856,7 @@ nav[aria-label="メインメニュー"] {
         );
         currentTab = selected ? selected.dataset.tab : '';
       }
-      if (/^(map|add|history|lottery|appLottery|lotteryManage|lotteryResults|group|dev)$/.test(currentTab)) {
+      if (/^(map|add|history|lottery|appLottery|lotteryManage|lotteryResults|infoPlaza|group|dev)$/.test(currentTab)) {
         next.searchParams.set('app_tab',currentTab);
       }
       if(controller)timeout=setTimeout(function(){controller.abort();},12000);
