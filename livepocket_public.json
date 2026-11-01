@@ -502,29 +502,32 @@
       "stores": [
         {
           "name": "フルコンプ八王子本店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ立川南口店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ町田店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ吉祥寺店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ新宿南口店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ大阪日本橋店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
-      ]
+      ],
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/4a-uj",
@@ -742,37 +745,40 @@
       "stores": [
         {
           "name": "フルコンプ八王子本店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ立川南口店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ町田店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ吉祥寺店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ新宿南口店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "フルコンプ仙台駅前店",
-          "prefecture": ""
+          "prefecture": "宮城県"
         },
         {
           "name": "フルコンプ福岡天神店",
-          "prefecture": ""
+          "prefecture": "福岡県"
         },
         {
           "name": "フルコンプ札幌駅前店",
-          "prefecture": ""
+          "prefecture": "北海道"
         }
-      ]
+      ],
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/8ft5n",
@@ -3820,39 +3826,39 @@
       "stores": [
         {
           "name": "イトーヨーカドー武蔵境店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー多摩センター店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー和光店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー三島店",
-          "prefecture": ""
+          "prefecture": "静岡県"
         },
         {
           "name": "イトーヨーカドー赤羽店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ葛西店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー甲府昭和店",
-          "prefecture": ""
+          "prefecture": "山梨県"
         },
         {
           "name": "イトーヨーカドー木場店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー湘南台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー立場店",
@@ -3860,44 +3866,47 @@
         },
         {
           "name": "イトーヨーカドー大宮宮原店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー国領店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー大森店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ川口店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドーアリオ八尾店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         },
         {
           "name": "イトーヨーカドーアリオ鳳店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         },
         {
           "name": "イトーヨーカドー武蔵小金井店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ市原店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドーアリオ柏店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/i44fhaaluv",
@@ -9110,64 +9119,65 @@
     },
     {
       "url": "https://livepocket.jp/e/6t8b2y",
-      "discord_posted_at": "2026-11-01T02:29:09.924000+00:00",
       "event_title": "【PAO/竜星のPAO】ONE PIECEカードゲーム商品関連 抽選受付【11/21(土)発売予定】",
       "application_end_at": "2026-11-01T23:59:00+09:00",
+      "discord_posted_at": "2026-11-01T02:29:09.924000+00:00",
       "review_category": "onepiece",
       "stores": [
         {
           "name": "PAO青梅店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "PAO堀之内店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO八王子店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO立川店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO町田店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO中野店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO大宮店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "竜星のPAO千葉中央店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "竜星のPAO横浜店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "竜星のPAO多摩境店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO池袋店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "竜星のPAO秋葉原ロケット無線店",
-          "prefecture": ""
+          "prefecture": "東京都"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【PAO/竜星のPAO】ONE PIECEカードゲーム商品関連 抽選受付【11/21(土)発売予定】",
-      "first_detected_at": "2026-11-01T02:35:56.711817+00:00"
+      "first_detected_at": "2026-11-01T02:35:56.711817+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
-  "updated_at": "2026-11-01T02:36:15.164462+00:00"
+  "updated_at": "2026-11-01T02:46:02.402303+00:00"
 }
