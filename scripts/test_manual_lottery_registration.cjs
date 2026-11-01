@@ -68,8 +68,8 @@ const navEnd=html.indexOf('</nav>',navStart);
 assert(navStart>=0&&navEnd>navStart,'Bottom navigation is present');
 const navMarkup=html.slice(navStart,navEnd);
 const navOrder=[...navMarkup.matchAll(/data-tab="([^"]+)"/g)].map(x=>x[1]);
-assert.equal(navOrder.join(','),'map,add,lottery,lotteryResults,lotteryManage,appLottery,dev',
- 'The bottom menu keeps its tab order and the login/share tab is moved to the header');
+assert.equal(navOrder.join(','),'map,add,lottery,lotteryResults,lotteryManage,appLottery,infoPlaza,dev',
+ 'The bottom menu includes Information Plaza and keeps Login in the header');
 assert.doesNotMatch(navMarkup,/data-tab="group"/);
 const headerStart=html.indexOf('<header id="appFixedHeader">');
 const headerEnd=html.indexOf('</header>',headerStart);
