@@ -19929,7 +19929,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/3381u": {
-          "checked_at": "2026-11-01T07:46:31.464270+00:00",
+          "checked_at": "2026-11-01T13:56:20.871462+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -21539,7 +21539,7 @@
         "https://livepocket.jp/e/3381u": {
           "detected_at": "2026-11-01T01:35:58.446759+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-01T07:46:31.464270+00:00",
+          "checked_at": "2026-11-01T13:56:20.871462+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/9ndqc": {
@@ -22895,8 +22895,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3381u": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-01T07:46:31.464270+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-01T13:56:20.871462+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/6t8b2y": {
@@ -27985,7 +27985,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T07:46:31.464270+00:00",
+          "checked_at": "2026-11-01T13:56:20.871462+00:00",
           "title_observed": "ポケモンカードゲームMEGA スペシャルデッキセット メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -32316,7 +32316,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/3381u": {
-          "checked_at": "2026-11-01T07:46:31.464270+00:00",
+          "checked_at": "2026-11-01T13:56:20.871462+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
