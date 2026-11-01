@@ -4511,6 +4511,7 @@
       <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
       ${chainReference}
+      ${lotteryOnsiteHistoryAlertHtml(item, stores)}
       ${lotteryOnsiteSharedHtml(item.url)}
       ${officialNotice}
       ${lotteryTrackerActionsHtml(item, officialAction)}
@@ -4643,6 +4644,23 @@
     });
     $('lpOnsiteArchiveRefresh')?.addEventListener('click',()=>refreshLotteryOnsiteArchive(true));
     renderLotteryOnsiteArchive();
+    $('lotteryView').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-lp-onsite-history]');
+      if(!button||!event.currentTarget.contains(button))return;
+      const archive=$('lpOnsiteArchive'),input=$('lpOnsiteArchiveSearch');
+      if(!archive||!input)return;
+      const search=button.dataset.lpOnsiteHistory||'';
+      input.value=search;
+      lotteryOnsiteArchiveLimit=40;
+      archive.open=true;
+      renderLotteryOnsiteArchive();
+      // This user action opens the matching evidence, while normal
+      // browsing continues to start with collapsed store groups.
+      const groups=$('lpOnsiteArchiveList')?.querySelectorAll(
+        'details.lp-onsite-archive-group')||[];
+      for(const group of groups)group.open=true;
+      try{archive.scrollIntoView({behavior:'smooth',block:'start'});}catch(_){}
+    });
     $('lotteryView').addEventListener('click', lotteryTrackerHandleClick);
     $('lotteryView').addEventListener('click', event=>{
       const button=event.target.closest('button[data-lp-results-show]');
@@ -7290,6 +7308,7 @@
     return isLivePocketEventUrl(url)?LP_ONSITE_TABLE:LP_EXT_ONSITE_TABLE;
   }
   let lotteryOnsiteArchiveRows=[],lotteryOnsiteArchiveLastFetch=0;
+  let lotteryOnsiteHistoryExact=new Map(),lotteryOnsiteHistoryChains=new Map();
   let lotteryOnsiteArchiveFetching=null,lotteryOnsiteArchiveError='';
   let lotteryOnsiteArchiveLimit=40;
   let lotteryOnsiteReports = new Map();
@@ -7408,6 +7427,9 @@
         }
         lotteryOnsiteArchiveRows=rows.filter(x=>safeLotteryUrl(x.event_url))
           .sort((a,b)=>Date.parse(b.application_end_at)-Date.parse(a.application_end_at));
+        const history=lotteryBuildOnsiteHistoryIndex(lotteryOnsiteArchiveRows);
+        lotteryOnsiteHistoryExact=history.exact;
+        lotteryOnsiteHistoryChains=history.chains;
         lotteryOnsiteArchiveLastFetch=Date.now();
         lotteryOnsiteArchiveError='';
       }catch(error){
@@ -7416,6 +7438,8 @@
       }finally{
         lotteryOnsiteArchiveFetching=null;
         renderLotteryOnsiteArchive();
+        // The past-report alert must appear once the async archive loads.
+        if($('lotteryView')?.classList.contains('active'))renderLottery();
       }
     })();
     return lotteryOnsiteArchiveFetching;
@@ -7424,6 +7448,120 @@
   // Archived reports are grouped by the exact store name, or by a verified
   // common chain for a multi-store lottery. An archive event stays one record,
   // because its user reports do not identify separate requirements per branch.
+  // Shared chain dictionary for archive headings and historical notices.
+  const LP_ONSITE_ARCHIVE_CHAINS=[
+    ['イエローサブマリン',['イエローサブマリン','イエサブ']],
+    ['WonderGOO',['wondergoo','ワンダーグー']],
+    ['TSUTAYA',['tsutaya','蔦屋書店']],
+    ['古本市場',['古本市場','ふるいち']],
+    ['ゲオ',['ゲオ','geo']],
+    ['カードラボ',['カードラボ']],
+    ['ホビーステーション',['ホビーステーション','ホビステ']],
+    ['ドラゴンスター',['ドラゴンスター']],
+    ['ブックオフ',['bookoff','ブックオフ']],
+    ['駿河屋',['駿河屋']],
+    ['ポケモンセンター',['ポケモンセンター']],
+    ['ヨドバシカメラ',['ヨドバシカメラ']],
+    ['ビックカメラ',['ビックカメラ']],
+    ['ヤマダデンキ',['ヤマダデンキ']],
+    ['トイザらス',['トイザらス']],
+    ['フルコンプ',['フルコンプ']],
+    ['カードボックス',['cardbox','カードボックス']],
+    ['バトロコ',['バトロコ']],
+    ['お宝創庫',['お宝創庫']]
+  ];
+
+  function lotteryOnsiteHistoryKey(value){
+    return String(value||'').normalize('NFKC').toLocaleLowerCase('ja-JP')
+      .replace(/[\\s　・･._－（）()【】「」-]+/g,'');
+  }
+
+  function lotteryOnsiteChainForName(name){
+    const key=lotteryOnsiteHistoryKey(name);
+    // Online shops are not evidence of a past in-store requirement.
+    if(!key||/オンライン|online/.test(key))return '';
+    for(const [chain,aliases] of LP_ONSITE_ARCHIVE_CHAINS){
+      if(aliases.some(alias=>key.startsWith(lotteryOnsiteHistoryKey(alias))))return chain;
+    }
+    return '';
+  }
+
+  // Read-only evidence index: multi-store report => chain-level only.
+  // Never assign a chain-wide user report to a specific participating branch.
+  function lotteryBuildOnsiteHistoryIndex(rows){
+    const exact=new Map(),chains=new Map();
+    function add(map,key,evidence){
+      if(!key)return;
+      if(!map.has(key))map.set(key,[]);
+      if(!map.get(key).some(x=>x.url===evidence.url))map.get(key).push(evidence);
+    }
+    for(const row of rows){
+      if(!row||!safeLotteryUrl(row.event_url)||Number(row.required_count||0)<=0)continue;
+      const info=lotteryArchiveStoreInfo(row.store_name);
+      const evidence={url:row.event_url,search:info.title,
+        ended:lotteryDate(row.application_end_at)};
+      if(info.names.length===1){
+        const name=info.names[0],key=lotteryOnsiteHistoryKey(name);
+        if(key.length>=5)add(exact,key,evidence);
+        const chain=lotteryOnsiteChainForName(name);
+        if(chain)add(chains,lotteryOnsiteHistoryKey(chain),evidence);
+      }else if(info.names.length>1&&info.key.startsWith('chain:')){
+        // A report about a multi-shop lottery is not branch-specific.
+        add(chains,lotteryOnsiteHistoryKey(info.title),evidence);
+      }
+    }
+    return {exact,chains};
+  }
+
+  function lotteryOnsiteHistoryForCard(item,stores){
+    if(!stores.length)return null;
+    const begin=lotteryDate(item.application_start_at);
+    const detected=lotteryDate(item.first_detected_at);
+    const cutoff=Number.isFinite(begin)?begin:
+      Number.isFinite(detected)?detected:Date.now();
+    const past=records=>(records||[]).find(x=>
+      x.url!==item.url&&Number.isFinite(x.ended)&&x.ended<cutoff);
+    // Prefer verified single-store history over general brand history.
+    for(const store of stores){
+      const name=String(store.name||'').trim();
+      const evidence=past(lotteryOnsiteHistoryExact.get(lotteryOnsiteHistoryKey(name)));
+      if(evidence)return {scope:'store',name,evidence};
+    }
+    for(const store of stores){
+      const chain=lotteryOnsiteChainForName(store.name);
+      const evidence=chain&&past(lotteryOnsiteHistoryChains.get(lotteryOnsiteHistoryKey(chain)));
+      if(evidence)return {scope:'chain',name:chain,evidence};
+    }
+    // For previously unseen chain names, match only a verified
+    // shared-prefix chain (at least 5 normalized characters).
+    for(const store of stores){
+      const key=lotteryOnsiteHistoryKey(store.name);
+      for(const [chainKey,records] of lotteryOnsiteHistoryChains){
+        if(chainKey.length<5||!key.startsWith(chainKey))continue;
+        const evidence=past(records);
+        if(evidence)return {scope:'chain',name:chainKey,evidence};
+      }
+    }
+    return null;
+  }
+
+  function lotteryOnsiteHistoryAlertHtml(item,stores){
+    const match=lotteryOnsiteHistoryForCard(item,stores);
+    if(!match)return '';
+    const target=match.scope==='store'?'同じ店舗':'同じチェーン';
+    const scope=match.scope==='store'&&stores.length>1
+      ? '対象店舗の一部に関する過去の報告です。'
+      : match.scope==='chain'?'同じチェーンの全店舗に当てはまるとは限りません。':'';
+    return '<section class="lp-onsite-history-caution" role="note" aria-label="過去の現地対応報告">'+
+      '<strong>⚠️ 過去に現地対応が必要との報告あり</strong>'+
+      '<p>'+escape(target+'「'+match.name+'」の別の抽選で、'+
+        '利用者から現地対応が必要との報告がありました。')+'</p>'+
+      (scope?'<p>'+escape(scope)+'</p>':'')+
+      '<p>※今回の応募条件を示すものではありません。必ず公式案内をご確認ください。</p>'+
+      '<button type="button" data-lp-onsite-history="'+escape(match.evidence.search)+'">'+
+      '📚 過去の報告を見る</button></section>';
+  }
+
   function lotteryArchiveStoreInfo(value){
     const raw=String(value||'').trim();
     if(!raw)return {title:'店舗名未確認',key:'unknown',names:[]};
@@ -7432,23 +7570,7 @@
 
     // Recognize chain names without mistaking an unrelated participating
     // shop for another branch of the same chain.
-    const knownChains=[
-      ['イエローサブマリン',['イエローサブマリン']],
-      ['WonderGOO',['wondergoo','ワンダーグー']],
-      ['TSUTAYA',['tsutaya','蔦屋書店']],
-      ['古本市場',['古本市場','ふるいち']],
-      ['ゲオ',['ゲオ','geo']],
-      ['カードラボ',['カードラボ']],
-      ['ホビーステーション',['ホビーステーション','ホビステ']],
-      ['ドラゴンスター',['ドラゴンスター']],
-      ['ブックオフ',['bookoff','ブックオフ']],
-      ['駿河屋',['駿河屋']],
-      ['ポケモンセンター',['ポケモンセンター']],
-      ['ヨドバシカメラ',['ヨドバシカメラ']],
-      ['ビックカメラ',['ビックカメラ']],
-      ['ヤマダデンキ',['ヤマダデンキ']],
-      ['トイザらス',['トイザらス']]
-    ];
+    const knownChains=LP_ONSITE_ARCHIVE_CHAINS;
     const canonical=name=>String(name).normalize('NFKC')
       .replace(/[\s　]+/g,'').toLocaleLowerCase('ja-JP');
     const normalized=names.map(canonical);
