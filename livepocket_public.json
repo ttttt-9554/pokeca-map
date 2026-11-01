@@ -9296,6 +9296,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
@@ -9316,8 +9318,6 @@
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー）",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
@@ -9338,8 +9338,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ストームエメラルダ）",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
@@ -9360,8 +9358,6 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいち浦和美園店】ポケカ抽選販売(ストームエメラルダ)",
       "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
@@ -9456,5 +9452,5 @@
       "first_detected_at": "2026-11-01T11:35:58.354185+00:00"
     }
   ],
-  "updated_at": "2026-11-01T11:46:19.191366+00:00"
+  "updated_at": "2026-11-01T11:56:20.544895+00:00"
 }
