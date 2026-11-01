@@ -20004,7 +20004,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/y2ltb": {
-          "checked_at": "2026-11-01T17:46:23.184061+00:00",
+          "checked_at": "2026-11-01T23:51:23.488820+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -21635,7 +21635,7 @@
         "https://livepocket.jp/e/y2ltb": {
           "detected_at": "2026-11-01T11:35:58.354185+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-01T17:46:23.184061+00:00",
+          "checked_at": "2026-11-01T23:51:23.488820+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/zpkzs": {
@@ -22960,8 +22960,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/y2ltb": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-01T17:46:23.184061+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-01T23:51:23.488820+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28165,7 +28165,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-01T17:46:23.184061+00:00",
+          "checked_at": "2026-11-01T23:51:23.488820+00:00",
           "title_observed": "ポケモンカードゲーム スペシャルデッキセットMEGA 抽選受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -32526,7 +32526,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/y2ltb": {
-          "checked_at": "2026-11-01T17:46:23.184061+00:00",
+          "checked_at": "2026-11-01T23:51:23.488820+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
