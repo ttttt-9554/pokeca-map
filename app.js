@@ -7308,7 +7308,7 @@
     return isLivePocketEventUrl(url)?LP_ONSITE_TABLE:LP_EXT_ONSITE_TABLE;
   }
   let lotteryOnsiteArchiveRows=[],lotteryOnsiteArchiveLastFetch=0;
-  let lotteryOnsiteHistoryExact=new Map(),lotteryOnsiteHistoryChains=new Map();
+  let lotteryOnsiteHistoryExact=new Map();
   let lotteryOnsiteArchiveFetching=null,lotteryOnsiteArchiveError='';
   let lotteryOnsiteArchiveLimit=40;
   let lotteryOnsiteReports = new Map();
@@ -7427,9 +7427,7 @@
         }
         lotteryOnsiteArchiveRows=rows.filter(x=>safeLotteryUrl(x.event_url))
           .sort((a,b)=>Date.parse(b.application_end_at)-Date.parse(a.application_end_at));
-        const history=lotteryBuildOnsiteHistoryIndex(lotteryOnsiteArchiveRows);
-        lotteryOnsiteHistoryExact=history.exact;
-        lotteryOnsiteHistoryChains=history.chains;
+        lotteryOnsiteHistoryExact=lotteryBuildOnsiteHistoryIndex(lotteryOnsiteArchiveRows);
         lotteryOnsiteArchiveLastFetch=Date.now();
         lotteryOnsiteArchiveError='';
       }catch(error){
@@ -7476,71 +7474,51 @@
       .replace(/[\s　・･._－（）()【】「」-]+/g,'');
   }
 
-  function lotteryOnsiteChainForName(name){
+  // Only an identified shop can establish a historical match. A chain label
+  // alone must not cause a warning for all its branches.
+  function lotteryOnsiteSpecificStore(name){
     const key=lotteryOnsiteHistoryKey(name);
-    // Online shops are not evidence of a past in-store requirement.
-    if(!key||/オンライン|online/.test(key))return '';
-    for(const [chain,aliases] of LP_ONSITE_ARCHIVE_CHAINS){
-      if(aliases.some(alias=>key.startsWith(lotteryOnsiteHistoryKey(alias))))return chain;
-    }
-    return '';
+    if(key.length<5||/^(?:未確認|対象店舗|複数店舗|全国)$/.test(key))return false;
+    return !LP_ONSITE_ARCHIVE_CHAINS.some(([,aliases])=>
+      aliases.some(alias=>lotteryOnsiteHistoryKey(alias)===key));
   }
 
-  // Read-only evidence index: multi-store report => chain-level only.
-  // Never assign a chain-wide user report to a specific participating branch.
+  // Multi-shop archive reports are indexed for each listed shop, but
+  // evidence keeps its event-wide scope: it cannot prove each shop needed it.
   function lotteryBuildOnsiteHistoryIndex(rows){
-    const exact=new Map(),chains=new Map();
-    function add(map,key,evidence){
-      if(!key)return;
-      if(!map.has(key))map.set(key,[]);
-      if(!map.get(key).some(x=>x.url===evidence.url))map.get(key).push(evidence);
-    }
+    const exact=new Map();
     for(const row of rows){
       if(!row||!safeLotteryUrl(row.event_url)||Number(row.required_count||0)<=0)continue;
       const info=lotteryArchiveStoreInfo(row.store_name);
-      const evidence={url:row.event_url,search:info.title,
-        ended:lotteryDate(row.application_end_at)};
-      if(info.names.length===1){
-        const name=info.names[0],key=lotteryOnsiteHistoryKey(name);
-        if(key.length>=5)add(exact,key,evidence);
-        const chain=lotteryOnsiteChainForName(name);
-        if(chain)add(chains,lotteryOnsiteHistoryKey(chain),evidence);
-      }else if(info.names.length>1&&info.key.startsWith('chain:')){
-        // A report about a multi-shop lottery is not branch-specific.
-        add(chains,lotteryOnsiteHistoryKey(info.title),evidence);
+      for(const name of new Set(info.names)){
+        if(!lotteryOnsiteSpecificStore(name))continue;
+        const key=lotteryOnsiteHistoryKey(name);
+        if(!exact.has(key))exact.set(key,[]);
+        const records=exact.get(key);
+        if(records.some(x=>x.url===row.event_url))continue;
+        records.push({
+          url:row.event_url,
+          storeName:name,
+          multiStoreReport:info.names.length>1,
+          search:name,
+          ended:lotteryDate(row.application_end_at)
+        });
       }
     }
-    return {exact,chains};
+    return exact;
   }
 
   function lotteryOnsiteHistoryForCard(item,stores){
     if(!stores.length)return null;
-    const begin=lotteryDate(item.application_start_at);
-    const detected=lotteryDate(item.first_detected_at);
-    const cutoff=Number.isFinite(begin)?begin:
-      Number.isFinite(detected)?detected:Date.now();
-    const past=records=>(records||[]).find(x=>
-      x.url!==item.url&&Number.isFinite(x.ended)&&x.ended<cutoff);
-    // Prefer verified single-store history over general brand history.
-    for(const store of stores){
-      const name=String(store.name||'').trim();
-      const evidence=past(lotteryOnsiteHistoryExact.get(lotteryOnsiteHistoryKey(name)));
-      if(evidence)return {scope:'store',name,evidence};
-    }
-    for(const store of stores){
-      const chain=lotteryOnsiteChainForName(store.name);
-      const evidence=chain&&past(lotteryOnsiteHistoryChains.get(lotteryOnsiteHistoryKey(chain)));
-      if(evidence)return {scope:'chain',name:chain,evidence};
-    }
-    // For previously unseen chain names, match only a verified
-    // shared-prefix chain (at least 5 normalized characters).
-    for(const store of stores){
-      const key=lotteryOnsiteHistoryKey(store.name);
-      for(const [chainKey,records] of lotteryOnsiteHistoryChains){
-        if(chainKey.length<5||!key.startsWith(chainKey))continue;
-        const evidence=past(records);
-        if(evidence)return {scope:'chain',name:chainKey,evidence};
-      }
+    const now=Date.now();
+    const names=[...new Set(stores.flatMap(store=>
+      String(store?.name||'').split(/\s*・\s*/).map(name=>name.trim()).filter(Boolean)))];
+    for(const name of names){
+      if(!lotteryOnsiteSpecificStore(name))continue;
+      const matches=lotteryOnsiteHistoryExact.get(lotteryOnsiteHistoryKey(name))||[];
+      const evidence=matches.find(row=>
+        row.url!==item.url&&Number.isFinite(row.ended)&&row.ended<now);
+      if(evidence)return {name,evidence,multipleCurrentStores:names.length>1};
     }
     return null;
   }
@@ -7548,17 +7526,17 @@
   function lotteryOnsiteHistoryAlertHtml(item,stores){
     const match=lotteryOnsiteHistoryForCard(item,stores);
     if(!match)return '';
-    const target=match.scope==='store'?'同じ店舗':'同じチェーン';
-    const scope=match.scope==='store'&&stores.length>1
-      ? '対象店舗の一部に関する過去の報告です。'
-      : match.scope==='chain'?'同じチェーンの全店舗に当てはまるとは限りません。':'';
+    const {name,evidence,multipleCurrentStores}=match;
+    const historical=evidence.multiStoreReport
+      ? '過去にこの店舗を対象に含む複数店舗抽選で、現地対応が必要との利用者報告がありました。店舗ごとの要否は未確認です。'
+      : 'この店舗で行われた過去の抽選で、現地対応が必要との利用者報告がありました。';
     return '<section class="lp-onsite-history-caution" role="note" aria-label="過去の現地対応報告">'+
       '<strong>⚠️ 過去に現地対応が必要との報告あり</strong>'+
-      '<p>'+escape(target+'「'+match.name+'」の別の抽選で、'+
-        '利用者から現地対応が必要との報告がありました。')+'</p>'+
-      (scope?'<p>'+escape(scope)+'</p>':'')+
+      '<p>一致した店舗：<strong>'+escape(name)+'</strong></p>'+
+      '<p>'+escape(historical)+'</p>'+
+      (multipleCurrentStores?'<p>※今回の対象店舗のうち、少なくとも1店舗に過去の履歴があります。</p>':'')+
       '<p>※今回の応募条件を示すものではありません。必ず公式案内をご確認ください。</p>'+
-      '<button type="button" data-lp-onsite-history="'+escape(match.evidence.search)+'">'+
+      '<button type="button" data-lp-onsite-history="'+escape(evidence.search)+'">'+
       '📚 過去の報告を見る</button></section>';
   }
 
