@@ -2957,3 +2957,33 @@ html[data-theme="dark"] #groupView .discord-role-check-panel .hint{color:#c9d7eb
   padding:7px 0;border-top:1px solid var(--app-border,#cbd5e1);
   font-size:13px;overflow-wrap:anywhere;
 }
+
+
+/* Historical in-person requirements: caution, not a current requirement. */
+#lotteryView .lp-onsite-history-caution{
+  margin:12px 0;padding:12px 13px;border:1px solid #d97706;
+  border-radius:12px;background:#fff7e6;color:#78350f;
+  overflow-wrap:anywhere;
+}
+#lotteryView .lp-onsite-history-caution strong{
+  display:block;margin:0 0 7px;font-size:14px;line-height:1.5;
+  color:inherit;
+}
+#lotteryView .lp-onsite-history-caution p{
+  margin:5px 0;font-size:12px;line-height:1.6;color:inherit;
+}
+#lotteryView .lp-onsite-history-caution button{
+  margin:9px 0 0;min-height:42px;padding:8px 12px;
+  border:1px solid #b45309;border-radius:9px;
+  background:#ffedd5;color:#78350f;font-size:12px;font-weight:750;
+  cursor:pointer;
+}
+#lotteryView .lp-onsite-history-caution button:focus-visible{
+  outline:3px solid #2563eb;outline-offset:2px;
+}
+html[data-theme="dark"] #lotteryView .lp-onsite-history-caution{
+  border-color:#e29b42;background:#392b21;color:#ffead0;
+}
+html[data-theme="dark"] #lotteryView .lp-onsite-history-caution button{
+  border-color:#e29b42;background:#57391d;color:#ffead0;
+}
