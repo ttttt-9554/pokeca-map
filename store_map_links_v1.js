@@ -104,7 +104,7 @@
     if(!address&&genericName(name))return '';
     const query=address?name+', '+address:name+', '+pref;
     const href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(query);
-    const label=address?'📍 Googleマップ':'📍 地図で検索';
+    const label='📍 MAP';
     const explanation=address
       ?name+'の住所でGoogleマップを開く（別画面）'
       :name+'を'+pref+'で検索する（住所未登録・別画面）';
