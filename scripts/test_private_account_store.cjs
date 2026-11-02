@@ -37,7 +37,7 @@ const ctx={
  lpPrivateAccountDefault:()=>profile,
  lpPrivateAccounts:new Map([[A,profile]]),escape,
  lpAppEventId:url=>url===APP?'mock-app-id':'',
- lpSearchCanonicalStore:store=>store
+ lpTrackerCanonicalStore:store=>store
 };
 const functions=[
  'lpTrackerAccountInput','lpTrackerCandidateStores','lpTrackerStoreControl',
@@ -57,13 +57,11 @@ let html=api.lpTrackerPrivateMarkup({event_url:ONE,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
 assert.match(html,/data-lp-manual-store-name[^>]*value="ふるいち宇都宮店"/);
 assert.match(html,/data-lp-manual-store-pref[^>]*value="栃木県"/);
-assert.match(html,/data-search-kind="store"/,'Single-store branches are editable');
+assert.match(html,/<input type="text" data-lp-manual-store-name/,'Single-store branches remain editable');
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
 assert.match(html,/data-lp-manual-store-name[^>]*required/);
-assert.match(html,/data-search-store-options/);
-assert.match(html,/宇都宮店/);
-assert.match(html,/大宮店/);
+assert.doesNotMatch(html,/data-search-|tr-search-/);
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'大宮店',store_prefecture:'埼玉県'
@@ -151,6 +149,13 @@ assert.throws(()=>collector(APP,'').collect(),/店舗名と地域/);
 const entered=collector(APP,'',null,{name:'宇都宮店',prefecture:'栃木県'}).collect();
 assert.equal(entered.account_entries[0].store_name,'宇都宮店');
 assert.equal(entered.account_entries[0].store_prefecture,'栃木県');
+const canonical=vm.runInNewContext(fn('productNorm')+'\n'+fn('lpTrackerCanonicalStore')+
+ '\n(lpTrackerCanonicalStore)',{lotteryItems:[itemOne,itemMany],stores:[],lotteryStoreEntries:ctx.lotteryStoreEntries,
+ cloudStores:[{name:'宇都宮店',prefecture:'東京都'}]});
+assert.equal(canonical({name:'ふるいち宇都宮店',prefecture:'全国'}).prefecture,'栃木県');
+assert.equal(canonical({name:'宇都宮店',prefecture:''}).prefecture,'',
+ 'Repeated store names do not select an arbitrary prefecture');
+assert.equal(canonical({name:'宇都宮店',prefecture:'東京都'}).prefecture,'東京都');
 assert.match(schema,/store_name/);
 assert.match(schema,/store_prefecture/);
 assert.match(schema,/Invalid application store/);

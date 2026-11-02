@@ -4,9 +4,7 @@ name: LivePocket Detail Deadline Regression
     branches: [main]
     paths:
       - app.js
-      - search_inputs_v1.js
       - scripts/test_lottery_product_resolution.cjs
-      - scripts/test_search_suggestions.cjs
       - scripts/test_app_manual_expiry.cjs
       - scripts/test_app_end_only_deadline.cjs
       - scripts/test_app_lottery_results_entries.cjs
@@ -73,9 +71,7 @@ jobs:
       - name: Check PWA syntax and admin-corrected deadline expiry
         run: |
           node --check app.js
-          node --check search_inputs_v1.js
           node scripts/test_lottery_product_resolution.cjs
-          node scripts/test_search_suggestions.cjs
           node scripts/test_app_manual_expiry.cjs
           node scripts/test_app_end_only_deadline.cjs
           node scripts/test_app_lottery_results_entries.cjs

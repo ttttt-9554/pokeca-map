@@ -1,34 +1,4 @@
 
-/* Shared search controls are scoped so existing dropdowns keep their behavior. */
-.tr-search-field{display:block;position:relative;min-width:0;width:100%;flex:1 1 10rem;text-align:left}
-.tr-search-field>.tr-search-input{display:block;width:100%;min-width:0;margin:0}
-.tr-search-field>.tr-search-has-clear{padding-right:44px!important}
-.tr-search-field>.tr-search-has-options{padding-right:82px!important}
-.tr-search-field>.tr-search-input::-webkit-search-cancel-button{display:none}
-.tr-search-field>button.tr-search-clear,.tr-search-field>button.tr-search-toggle{
-  position:absolute;top:4px;bottom:4px;width:36px;min-width:0;min-height:34px;
-  margin:0;padding:0;border:0;border-radius:7px;box-shadow:none;
-  display:flex;align-items:center;justify-content:center;font-size:21px;line-height:1;
-  color:var(--app-text,#334155);background:var(--app-surface2,#eef2f8)}
-.tr-search-field>button.tr-search-clear{right:5px}
-.tr-search-field:has(>.tr-search-toggle)>button.tr-search-clear{right:43px}
-.tr-search-field>button.tr-search-toggle{right:5px;font-size:18px}
-.tr-search-field>button.tr-search-clear:disabled{opacity:.4;cursor:default}
-.tr-search-options{position:absolute;top:calc(100% + 4px);left:0;right:0;
-  z-index:900;max-height:min(260px,36vh);overflow-y:auto;overscroll-behavior:contain;
-  border:1px solid var(--app-border,#a8b6ca);border-radius:10px;
-  background:var(--app-surface,#fff);color:var(--app-text,#172033);
-  box-shadow:0 8px 24px #0003;text-align:left}
-.tr-search-options[hidden]{display:none!important}
-.tr-search-options>button.tr-search-option{display:block;width:100%;min-height:46px;
-  margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--app-border,#e2e8f0);
-  border-radius:0;background:var(--app-surface,#fff);color:var(--app-text,#172033);
-  text-align:left;white-space:normal;overflow-wrap:anywhere;font-size:14px;line-height:1.5}
-.tr-search-option strong{display:block;font-size:14px;font-weight:700}
-.tr-search-option small{display:block;margin-top:3px;font-weight:400;color:var(--app-muted,#64748b);font-size:12px}
-.tr-search-options>button.tr-search-option:hover,.tr-search-options>button.tr-search-option[aria-selected="true"]{
-  background:var(--app-surface2,#e9f1ff);outline:2px solid #609cff;outline-offset:-2px}
-.tr-search-empty{padding:12px;margin:0;font-size:13px;color:var(--app-muted,#64748b)}
 .lp-card-product{font-weight:650;line-height:1.6}
 
 /* ==========================================

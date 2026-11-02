@@ -2152,9 +2152,7 @@
     const query = norm(input.value);
     chainDropdown.replaceChildren();
 
-    const names=[...new Set([...chainNames,...stores.map(store=>store.name),
-      ...cloudStores.map(store=>store.name)].filter(Boolean))];
-    const options = names.filter(name =>
+    const options = chainNames.filter(name =>
       !query ||
       norm(name).includes(query) ||
       (name === 'ファミリーマート' &&
@@ -2163,7 +2161,7 @@
        'seveneleven'.includes(query))
     );
 
-    options.slice(0,60).forEach(name => {
+    options.forEach(name => {
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = name;
@@ -2550,116 +2548,18 @@
       product_name:master.name};
   }
 
-  let lpSearchMasterStores=[],lpSearchMasterUser='',lpSearchMasterAt=0,lpSearchMasterLoading=null;
-  function lpSearchKind(input){
-    if(input.dataset.searchKind)return input.dataset.searchKind;
-    if(input.matches('[name="product_name"],#product,#cloudProductName')||
-       /product|wishlist/i.test(input.id))return 'product';
-    if(input.matches('[name="store_name"],[name="extra_store_name"],[data-lp-store-name],[data-lp-app-store-name],[data-lp-ext-store-name],#shop,#cloudStoreName')||
-       /store|infoSales/i.test(input.id))return 'store';
-    if(input.id==='searchArea')return 'area';
-    return 'event';
-  }
-  function lpSearchStorePool(){
-    const master=lpSearchMasterUser===(authUser?.id||'')?lpSearchMasterStores:[];
-    const raw=[...master,...lotteryItems.flatMap(lotteryStoreEntries),
-      ...cloudStores,...stores];
-    const unique=new Map();
-    for(const row of raw){
-      if(!row?.name)continue;
-      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(row)||row;
-      const name=String(canonical.name||'').trim(),prefecture=String(canonical.prefecture||'').trim();
-      if(!name)continue;
-      const key=productNorm(name)+'|'+prefecture;
-      if(!unique.has(key))unique.set(key,{...row,name,prefecture});
-    }
-    return [...unique.values()];
-  }
-  function lpSearchCanonicalStore(store){
+  function lpTrackerCanonicalStore(store){
     const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(store)||store;
-    const matching=lpSearchStorePool().filter(row=>row.prefecture&&
+    const known=[...lotteryItems.flatMap(lotteryStoreEntries),...cloudStores,...stores]
+      .map(row=>globalThis.window?.TorecaStoreAliases?.resolve?.(row)||row);
+    const matching=known.filter(row=>row.prefecture&&
       productNorm(row.name)===productNorm(canonical.name));
     const exact=matching.find(row=>row.prefecture===canonical.prefecture);
     const unique=new Map(matching.map(row=>[row.prefecture,row]));
     const match=exact||(unique.size===1?unique.values().next().value:null);
     return match?{name:match.name,prefecture:match.prefecture}:canonical;
   }
-  async function lpSearchPrepare(input){
-    if(lpSearchKind(input)!=='store'||!supabaseClient||!authUser||discordRoleAuthPending)return;
-    const user=authUser.id;
-    if(lpSearchMasterUser===user&&Date.now()-lpSearchMasterAt<90000)return;
-    if(lpSearchMasterLoading)return lpSearchMasterLoading;
-    lpSearchMasterLoading=(async()=>{
-      try{
-        const {data,error}=await supabaseClient.rpc('lottery_store_master_choices_v1');
-        if(error)throw error;
-        if(authUser?.id!==user||discordRoleAuthPending)return;
-        lpSearchMasterStores=(Array.isArray(data?.masters)?data.masters:[])
-          .filter(row=>row?.name&&!row.merged_into);
-        lpSearchMasterUser=user;lpSearchMasterAt=Date.now();
-      }catch(error){console.warn('検索用の店舗候補を読み込めませんでした:',error?.message||error);}
-      finally{lpSearchMasterLoading=null;}
-    })();
-    return lpSearchMasterLoading;
-  }
-  function lpSearchSuggestions(input){
-    const kind=lpSearchKind(input);
-    if(kind==='prefecture')return LP_MANUAL_AREAS.map(value=>({value}));
-    if(kind==='area'){
-      const available=[...stores,...cloudStores];
-      const regions=LP_PREFECTURES.filter(pref=>available.some(row=>String(row.address||'').startsWith(pref)));
-      return [...new Set([...available.map(row=>row.city).filter(Boolean),...regions])]
-        .map(value=>({value}));
-    }
-    const products=()=>{
-      const genre=input.form?.elements.namedItem('review_category')?.value;
-      return cloudProducts.filter(p=>!genre||p.genre===genre).map(p=>({
-        value:p.name,detail:lpProductDetailText(p),
-        search:[p.reading,...cloudProductAliases.filter(a=>a.product_id===p.id)
-          .map(a=>a.alias_name)].filter(Boolean).join(' ')
-      }));
-    };
-    if(kind==='product')return products();
-    let targeted=[];
-    try{targeted=JSON.parse(input.closest('[data-search-store-options]')?.dataset.searchStoreOptions||'[]');}
-    catch(_){}
-    const storeChoices=[...targeted,...lpSearchStorePool()].map(row=>({
-      value:row.name,prefecture:row.prefecture||'',
-      detail:[row.prefecture,row.city,row.address].filter(Boolean).join(' · '),
-      search:[row.name,row.prefecture,row.city,row.address].filter(Boolean).join(' ')
-    }));
-    if(kind==='store')return storeChoices;
-    const events=lotteryItems.filter(item=>!item.event_title_provisional&&item.event_title)
-      .map(item=>({value:item.event_title,detail:lotteryStoreEntries(item)
-        .map(row=>row.name).join('・')}));
-    return [...products(),...storeChoices,...events];
-  }
-  function lpSearchPrefectureInput(input){
-    if(lpSearchKind(input)!=='store')return null;
-    const row=input.closest('.lp-track-account-store,.lp-card-store-row,.lp-ext-store-row,.lp-app-store-row');
-    if(row)return row.querySelector('[data-lp-manual-store-pref],[data-lp-store-prefecture],[data-lp-ext-store-pref],[data-lp-app-store-prefecture],[name="extra_store_prefecture"]');
-    return input.name==='store_name'?input.form?.elements.namedItem('prefecture'):null;
-  }
-  function lpSearchSelect(input,choice){
-    if(input.id==='searchArea')searchStores();
-    const area=lpSearchPrefectureInput(input);
-    if(area&&choice.prefecture){
-      if(area.tagName!=='SELECT'||[...area.options].some(option=>option.value===choice.prefecture)){
-        area.value=choice.prefecture;
-        area.dispatchEvent(new Event('input',{bubbles:true}));
-        area.dispatchEvent(new Event('change',{bubbles:true}));
-      }
-    }
-  }
-  function initSearchInputs(){
-    globalThis.window?.TorecaSearchInputs?.init?.({
-      normalize:productNorm,suggestions:lpSearchSuggestions,prepare:lpSearchPrepare,
-      select:lpSearchSelect,
-      clear(input){
-        if(input.id==='storeQuery'||input.id==='searchArea')searchStores();
-      }
-    });
-  }
+
   function fillCatalogProductInputs(){
     for(const [formId,listId] of [
       ['lpAppForm','lpAppCatalogProducts'],
@@ -7744,11 +7644,11 @@
       ?{name:saved,prefecture:String(entry?.store_prefecture||'').trim()}
       :!manualStore&&stores.length===1?stores[0]:{name:'',prefecture:''};
     const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(original)||original;
-    return '<div class="lp-track-account-store lp-track-manual-store" data-search-store-options="'+escape(JSON.stringify(stores))+'">'+
-      '<label>🏬 応募店舗名<input type="search" data-lp-manual-store-name data-search-kind="store" maxlength="200"'+
-        (manualStore||stores.length?' required':'')+' autocomplete="off" placeholder="店舗名を検索・直接入力" value="'+escape(canonical.name)+'"></label>'+
-      '<label>📍 地域（都道府県）<input type="search" data-lp-manual-store-pref data-search-kind="prefecture" maxlength="80"'+
-        (manualStore?' required':'')+' autocomplete="off" placeholder="都道府県を選択・入力" value="'+escape(canonical.prefecture)+'"></label></div>';
+    return '<div class="lp-track-account-store lp-track-manual-store">'+
+      '<label>🏬 応募店舗名<input type="text" data-lp-manual-store-name maxlength="200"'+
+        (manualStore||stores.length?' required':'')+' autocomplete="off" placeholder="店舗名を入力" value="'+escape(canonical.name)+'"></label>'+
+      '<label>📍 地域（都道府県）<input type="text" data-lp-manual-store-pref maxlength="80"'+
+        (manualStore?' required':'')+' autocomplete="off" placeholder="例：栃木県" value="'+escape(canonical.prefecture)+'"></label></div>';
   }
 
   function lpTrackerAccountRowHtml(entry,usedIds=[],stores=[],manualStore=false){
@@ -7887,7 +7787,6 @@
       const html=lpTrackerAccountRowHtml(entry,selectedIds,stores,manualStore);
       if(!html)return false;
       holder.insertAdjacentHTML('beforeend',html);
-      globalThis.window?.TorecaSearchInputs?.refresh?.(holder);
       for(const key of keys)setLegacy(key,transfer.remaining[key]);
       summarise();
       return true;
@@ -7965,7 +7864,7 @@
             if(manualStore&&(!name||!prefecture))
               throw Error('アプリ抽選は店舗名と地域を両方入力してください。');
             if(stores.length&&!name)throw Error('各応募アカウントの応募店舗を選択・入力してください。');
-            if(name)chosen=lpSearchCanonicalStore({name,prefecture});
+            if(name)chosen=lpTrackerCanonicalStore({name,prefecture});
           }else if(stores.length===1){
             chosen=stores[0];
           }else if(stores.length>1){
@@ -8052,7 +7951,6 @@
       <p id="lpTrackEditorMessage" role="status" aria-live="polite"></p>
       </form>`;
     const form=$('lpTrackerForm');
-    globalThis.window?.TorecaSearchInputs?.refresh?.(form);
     const memo=form.elements.note;
     const resizeMemo=()=>lpTrackerExpandMemo(memo);
     memo.addEventListener('input',resizeMemo);
@@ -10618,7 +10516,6 @@
       initLottery();
       lpResultsInit();
       bindEvents();
-      initSearchInputs();
       // Hide lottery navigation before the asynchronous Discord login starts.
       updateLotteryVisibility();
       initDevAccordions();

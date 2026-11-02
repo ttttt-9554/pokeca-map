@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-search-store-product-v3">
+  <link rel="stylesheet" href="style.css?v=20261102-search-controls-revert-v4">
 
   <style>
     [hidden] { display: none !important; }
@@ -1876,14 +1876,13 @@ nav[aria-label="メインメニュー"] {
   <script src="supabase_usage_v1.js?v=20261102-supabase-usage-v1"></script>
 
   <!-- アプリ本体 -->
-  <script src="search_inputs_v1.js?v=20261102-search-store-product-v3"></script>
   <script>
   // Load the app script with the refresh token when the user explicitly
   // requests an update, preventing a stale app.js response in iOS/Chrome.
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-search-store-product-v3';
+      ? token : '20261102-search-controls-revert-v4';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
