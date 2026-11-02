@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261103-product-editor-layout-v1">
+  <link rel="stylesheet" href="style.css?v=20261103-admin-login-users-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1170,6 +1170,7 @@ nav[aria-label="メインメニュー"] {
         <div class="discord-role-check-panel" aria-label="Discordログイン権限">
           <h4>🔐 Discordロール認証</h4>
           <p class="hint">指定ロールを確認したログインは、この端末に保存されます。アプリを閉じても保持され、14日間は追加のDiscordロール確認を行いません。期限後はトークン更新時に再確認します。ロールがない場合はログインできません。</p>
+          <p class="hint">ログイン状態のDiscord表示名は管理者に表示されます。</p>
           <button type="button" id="discordRoleCheck" disabled>ログイン権限を再確認</button>
           <p id="discordRoleStatus" class="hint" role="status" aria-live="polite">Discordログイン後に自動確認します。</p>
         </div>
@@ -1251,6 +1252,17 @@ nav[aria-label="メインメニュー"] {
       </h2>
       <p class="hint">管理項目は折りたたんであります。必要な項目をタップすると開きます。</p>
       <button type="button" id="devFoldAll">すべて閉じる</button>
+
+      <section id="adminLoginUsersPanel" class="store-tools admin-login-users-panel">
+        <h3>👥 ログイン中のユーザー</h3>
+        <p class="hint">有効なログイン状態があるアカウントのDiscord表示名です。アプリを開いているかどうかは分かりません。</p>
+        <div class="admin-login-users-toolbar">
+          <strong id="adminLoginUsersCount"></strong>
+          <button id="adminLoginUsersReload" type="button">↻ 更新</button>
+        </div>
+        <p id="adminLoginUsersStatus" class="hint" role="status" aria-live="polite">開くとログイン中のユーザーを確認します。</p>
+        <ul id="adminLoginUsersList" aria-label="ログイン中のDiscord表示名"></ul>
+      </section>
 
       <section id="sbUsagePanel" class="store-tools sb-usage-panel">
         <h3>📊 Supabase使用状況</h3>
@@ -1874,6 +1886,7 @@ nav[aria-label="メインメニュー"] {
 
   <!-- Developer-only Supabase usage metrics -->
   <script src="supabase_usage_v1.js?v=20261102-supabase-usage-v1"></script>
+  <script src="admin_login_users_v1.js?v=20261103-admin-login-users-v1"></script>
 
   <!-- アプリ本体 -->
   <script src="search_inputs_v1.js?v=20261102-multi-store-choice-v6"></script>
@@ -1883,7 +1896,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-multi-store-choice-v6';
+      ? token : '20261103-admin-login-users-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

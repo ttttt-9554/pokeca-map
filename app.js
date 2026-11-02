@@ -353,6 +353,7 @@
     window.TorecaInfoPlaza?.onAuthChanged?.();
     window.TorecaStoreAliases?.onAuthChanged?.();
     window.TorecaSupabaseUsage?.onAuthChanged?.();
+    window.TorecaAdminLoginUsers?.onAuthChanged?.();
     window.TorecaSalesReference?.onAuthChanged?.();
     window.TorecaStoreMaps?.onAuthChanged?.();
     window.TorecaUnifiedReview?.onAuthChanged?.();
@@ -844,6 +845,7 @@
     globalThis.window?.TorecaInfoPlaza?.onTabChanged?.(tab);
     globalThis.window?.TorecaStoreAliases?.onTabChanged?.(tab);
     globalThis.window?.TorecaStoreMaps?.onTabChanged?.(tab);
+    globalThis.window?.TorecaAdminLoginUsers?.onTabChanged?.(tab);
     render();
   }
 
@@ -10612,6 +10614,11 @@
       updateLotteryVisibility();
       initDevAccordions();
       window.TorecaSupabaseUsage?.init?.({
+        getClient:()=>supabaseClient,
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        isDev:isDeveloper
+      });
+      window.TorecaAdminLoginUsers?.init?.({
         getClient:()=>supabaseClient,
         getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
         isDev:isDeveloper

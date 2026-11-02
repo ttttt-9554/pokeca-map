@@ -1495,6 +1495,11 @@ html[data-theme="dark"] #lpAppDelete{color:#fca5a5!important;border-color:#f8717
   background:var(--app-surface2,#f8fafc);
 }
 #devView .dev-accordion-original-heading{display:none!important}
+#devView .admin-login-users-panel{min-width:0}
+#devView .admin-login-users-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#devView .admin-login-users-toolbar button{min-height:44px;padding:8px 14px}
+#devView #adminLoginUsersList{list-style:none;padding:0;margin:10px 0 0}
+#devView #adminLoginUsersList li{padding:11px 4px;border-top:1px solid var(--app-border,#cbd5e1);overflow-wrap:anywhere}
 #devView .dev-accordion > .dev-accordion-body{
   margin:0!important;
   padding:14px!important;

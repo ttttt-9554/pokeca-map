@@ -6,6 +6,9 @@ name: LivePocket Detail Deadline Regression
       - app.js
       - search_inputs_v1.js
       - info_plaza_sales_v1.js
+      - admin_login_users_v1.js
+      - scripts/test_admin_login_users.cjs
+      - supabase/toreca_admin_logged_in_users_v1.sql
       - scripts/test_search_suggestions.cjs
       - scripts/test_lottery_product_resolution.cjs
       - scripts/test_app_manual_expiry.cjs
@@ -76,6 +79,8 @@ jobs:
           node --check app.js
           node --check search_inputs_v1.js
           node --check info_plaza_sales_v1.js
+          node --check admin_login_users_v1.js
+          node scripts/test_admin_login_users.cjs
           node scripts/test_search_suggestions.cjs
           node scripts/test_lottery_product_resolution.cjs
           node scripts/test_app_manual_expiry.cjs
