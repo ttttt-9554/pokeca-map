@@ -1,4 +1,6 @@
 import unittest
+from datetime import datetime, timedelta, timezone
+from urllib.parse import parse_qs, urlsplit
 from unittest.mock import patch
 import guerrilla_sale_monitor as m
 
@@ -155,6 +157,74 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(m.notification_product_kind('(予約)【UNION ARENA】ブースターパック BOX'),'')
         self.assertEqual(m.notification_product_kind('勝利の女神 14枚セット ブースターパック関連'),'')
         self.assertEqual(m.notification_product_kind('【プラコロ】たんけんボックス 01 BOX'),'')
+
+    def test_sealed_classification_handles_real_spelling_and_excludes_single_units(self):
+        for title in (
+            'ONE PIECE ブースターパック BOX 在庫数 5点',
+            'UNION ARENA ブースターパック BOX',
+            'MTG コレクターブースターBOX',
+            'デュエル マスターズ ボックス',
+        ):
+            with self.subTest(title=title):
+                self.assertEqual(m.notification_product_kind(title,'amenity'),'pack')
+        self.assertEqual(m.notification_product_kind('ポケカ スターターセット','amenity'),'deck')
+        for title in (
+            '(予約) ポケカ 拡張パック BOX',
+            'ポケカ 14枚セット 拡張パック BOX',
+            'ワンピースカードゲーム ブースターパック BOX 在庫数：1,200枚',
+        ):
+            with self.subTest(title=title):
+                self.assertEqual(m.notification_product_kind(title,'amenity'),'')
+
+    def test_stock_unit_outside_product_link_prevents_single_card_notification(self):
+        title='ONE PIECE ブースターパック BOX'
+        html=card(AM,'在庫数 3枚',title)
+        rows,_,_=m.parse_catalog(html,'amenity',m.catalog_url('amenity'))
+        self.assertTrue(rows[0]['single_item'])
+        with patch.object(m,'db') as database:
+            m.observe('amenity',rows,'all',True)
+            posted=database.call_args.args[2]['p_rows'][0]
+            self.assertFalse(posted['notification_eligible'])
+            self.assertFalse(posted['notify_new'])
+        detail=m.parse_detail('<article><h1>'+title+'</h1>在庫数 3枚</article>','amenity',AM)
+        self.assertTrue(detail['single_item'])
+
+    def test_bounded_detail_checks_prioritize_eligible_products(self):
+        candidates=[
+            {'url':'https://www.amenitydream.com/product/1','product':'ポケカ 5枚セット 拡張パック'},
+            {'url':'https://www.amenitydream.com/product/2','product':'ONE PIECE ブースターパック BOX'},
+            {'url':'https://www.amenitydream.com/product/3','product':'ポケカ スターターセット'},
+        ]
+        with patch.object(m,'db',return_value=candidates) as database:
+            state={}
+            selected=m.due_detail_rows('amenity',{'https://www.amenitydream.com/product/3'},state)
+        self.assertEqual([r['url'] for r in selected],['https://www.amenitydream.com/product/2'])
+        query=parse_qs(urlsplit(database.call_args.args[0]).query)
+        self.assertEqual(query['site_key'],['eq.amenity'])
+        self.assertEqual(query['limit'],[str(m.DETAIL_CANDIDATE_BATCH)])
+        self.assertIn('product.ilike.*BOX*',query['or'][0])
+
+    def test_detail_candidate_search_moves_past_old_single_cards(self):
+        singles=[{'url':f'https://www.amenitydream.com/product/{i}',
+                  'product':'ポケカ 10枚セット 拡張パック'} for i in range(m.DETAIL_CANDIDATE_BATCH)]
+        sealed={'url':'https://www.amenitydream.com/product/999',
+                'product':'ポケカ 拡張パック BOX'}
+        state={}
+        with patch.object(m,'db',side_effect=[singles,[sealed]]) as database:
+            self.assertEqual(m.due_detail_rows('amenity',set(),state),[])
+            self.assertEqual(state['detail_search_offset'],m.DETAIL_CANDIDATE_BATCH)
+            self.assertEqual(m.due_detail_rows('amenity',set(),state),[sealed])
+            self.assertEqual(state['detail_search_offset'],0)
+        self.assertEqual(parse_qs(urlsplit(database.call_args.args[0]).query)['offset'],
+                         [str(m.DETAIL_CANDIDATE_BATCH)])
+
+    def test_duplicate_sweep_guard_only_skips_a_recent_valid_snapshot(self):
+        now=datetime(2026,11,3,0,0,tzinfo=timezone.utc)
+        self.assertTrue(m.recent_snapshot((now-timedelta(seconds=60)).isoformat(),240,now))
+        self.assertFalse(m.recent_snapshot((now-timedelta(seconds=241)).isoformat(),240,now))
+        self.assertFalse(m.recent_snapshot((now+timedelta(seconds=60)).isoformat(),240,now))
+        self.assertFalse(m.recent_snapshot('invalid',240,now))
+        self.assertFalse(m.recent_snapshot(now.isoformat(),0,now))
     def test_pokemon_center_alerts_require_pokemon_card_context(self):
         self.assertEqual(m.notification_product_kind('ポケモンカードゲーム 拡張パック テスト BOX','pokemon'),'pack')
         self.assertEqual(m.notification_product_kind('ポケモンカードゲーム スターターデッキ テスト','pokemon'),'deck')
@@ -196,6 +266,54 @@ class MonitorTests(unittest.TestCase):
             m.catalog_url('biccamera',2)
         self.assertFalse(m.allowed_read('https://www.biccamera.com/bc/category/001/220/070/?q=pokemon','biccamera'))
         self.assertTrue(m.allowed_read(product,'biccamera'))
+
+    def test_yodobashi_urls_are_fixed_and_monitor_stays_paused(self):
+        url='https://www.yodobashi.com/product/100000001009191424/'
+        self.assertEqual(m.product_url(url+'?utm_source=app','yodobashi'),url)
+        self.assertEqual(m.product_url(url.rstrip('/'),'yodobashi'),url)
+        for bad in (url+'?variant=2',
+                    'http://www.yodobashi.com/product/100000001009191424/',
+                    'https://www.yodobashi.com.evil.com/product/100000001009191424/',
+                    'https://www.yodobashi.com/cart/'):
+            self.assertEqual(m.product_url(bad,'yodobashi'),'')
+        self.assertFalse(m.allowed_read(m.catalog_url('yodobashi')+'?anything=1','yodobashi'))
+        with self.assertRaisesRegex(m.CheckError,'pagination_unverified'):
+            m.catalog_url('yodobashi',2)
+        client=type('Client',(),{'halted':{},'get':lambda *a:self.fail('unexpected request')})()
+        state=m.sweep_site('yodobashi',[{'site_key':'yodobashi','mode':'all','enabled':True}],{},client)
+        self.assertEqual(state['status'],'paused')
+        self.assertFalse(state['catalog_enabled'])
+
+    def test_yodobashi_probe_stops_after_a_block(self):
+        import guerrilla_sale_probe as probe
+        class Blocked:
+            last_http={'http_status':403}
+            def __init__(self):self.calls=[]
+            def get(self,url,site):
+                self.calls.append((url,site))
+                raise m.CheckError('http_403')
+        client=Blocked()
+        result=probe.probe_yodobashi(client)
+        self.assertEqual(result['status'],'blocked_or_unverified')
+        self.assertEqual(result['reason'],'http_403')
+        self.assertEqual(len(client.calls),1)
+
+    def test_yodobashi_probe_is_diagnostic_only(self):
+        import guerrilla_sale_probe as probe
+        class Example:
+            last_http={'http_status':200}
+            def __init__(self):self.calls=[]
+            def get(self,url,site):
+                self.calls.append((url,site))
+                if '/category/' in url:
+                    return '<a href="/product/100000001009191424/">商品</a>'
+                return '<h1>ポケカ 拡張パック</h1><p>販売休止中</p>'
+        client=Example()
+        result=probe.probe_yodobashi(client)
+        self.assertEqual(result['status'],'diagnostic_only')
+        self.assertTrue(result['soldout_label'])
+        self.assertFalse(result['monitor_enabled'])
+        self.assertEqual(len(client.calls),2)
 
     def test_biccamera_unavailable_cart_template_is_not_sale(self):
         url='https://www.biccamera.com/bc/item/15607965/'
@@ -413,6 +531,7 @@ class MonitorTests(unittest.TestCase):
         with patch.dict(os.environ,{'BICCAMERA_SAMPLE_READS':'false'}), \
              patch.object(probe,'probe',return_value={'site':'amenity','status':'ok'}), \
              patch.object(probe,'probe_biccamera_robots',return_value={'site':'biccamera','status':'robots_read'}), \
+             patch.object(probe,'probe_yodobashi',return_value={'site':'yodobashi','status':'unverified'}), \
              patch.object(probe,'probe_biccamera_sample_pages',
                           side_effect=AssertionError('unexpected item request')):
             with contextlib.redirect_stdout(io.StringIO()) as buf:

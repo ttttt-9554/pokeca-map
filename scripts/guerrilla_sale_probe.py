@@ -140,12 +140,52 @@ def probe_biccamera_sample_pages(client=None):
             'notice':'No stock alerts; observed labels may change at any time'}
 
 
+def probe_yodobashi(client=None):
+    """One bounded diagnosis: robots, then at most one category and one item.
+
+    A block, redirect or unverified robots response stops all further reads.
+    Observations are diagnostic only and never write stock data or alerts.
+    """
+    site='yodobashi'
+    client=client or monitor.StoreClient()
+    category=monitor.catalog_url(site)
+    item='https://www.yodobashi.com/product/100000001009191424/'
+    result={'site':site,'monitor_enabled':False,'category':'unverified',
+            'item':'unverified'}
+    try:
+        html=client.get(category,site)
+        doc=monitor.Document(html);monitor.page_guard(doc)
+        links=monitor.product_links(doc.root,site,category)
+        if not links:raise monitor.CheckError('catalog_markup_unverified')
+        result.update(category='read',category_products=len(links),
+                      category_http=client.last_http.get('http_status'))
+        html=client.get(item,site)
+        doc=monitor.Document(html);monitor.page_guard(doc)
+        title=next((n for n in doc.root.walk()
+                    if n.tag=='h1' and not n.hidden()),None)
+        visible=monitor.tidy(doc.root.text())
+        result.update(item='read',item_http=client.last_http.get('http_status'),
+                      item_heading=bool(title),
+                      soldout_label=bool(re.search(
+                        r'販売休止中|予定数の販売を終了|販売終了|在庫なし',visible)))
+    except monitor.CheckError as exc:
+        result.update(status='blocked_or_unverified',reason=exc.code,
+                      http_status=client.last_http.get('http_status'))
+        return result
+    except Exception as exc:
+        result.update(status='probe_error',reason=type(exc).__name__)
+        return result
+    result['status']='diagnostic_only'
+    return result
+
+
 def main():
     # No more automatic Bic Camera detail fetches after the HTTP 403.
     # An explicit workflow_dispatch opt-in is required for another read-only
     # sample. Default push and scheduled runs never request item pages.
     results = [probe(site) for site in ('pokemon', 'amenity')]
     results.append(probe_biccamera_robots())
+    results.append(probe_yodobashi())
     if os.environ.get('BICCAMERA_SAMPLE_READS') == 'true':
         results.append(probe_biccamera_sample_pages())
     else:

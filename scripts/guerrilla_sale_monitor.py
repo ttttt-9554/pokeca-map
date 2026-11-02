@@ -24,11 +24,13 @@ SITES = {
     'pokemon': {'host': 'www.pokemoncenter-online.com', 'name': 'ポケモンセンターオンライン', 'catalog': '/pokemon-card-game/'},
     'amenity': {'host': 'www.amenitydream.com', 'name': 'アメニティードリーム', 'catalog': '/product-list'},
     'biccamera': {'host': 'www.biccamera.com', 'name': 'ビックカメラ.com', 'catalog': '/bc/category/001/220/070/'},
+    'yodobashi': {'host': 'www.yodobashi.com', 'name': 'ヨドバシ.com', 'catalog': '/category/141001/141651/141662/141663/'},
 }
 UA = 'TorecaRadarSaleMonitor/2.0'
 MAX_BYTES = 2_000_000
 SELECTED_BATCH = 8
 DETAIL_BATCH = 4
+DETAIL_CANDIDATE_BATCH = 120
 KNOWN = ('available', 'unavailable')
 VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
 
@@ -101,6 +103,12 @@ def product_url(url, site):
         return ''
     u = urlsplit(url)
     path=u.path.rstrip('/')
+    if site == 'yodobashi':
+        if not re.fullmatch(r'/product/[0-9]{18}',path):
+            return ''
+        if u.query and any(not k.lower().startswith('utm_') for k in parse_qs(u.query)):
+            return ''
+        return 'https://' + SITES[site]['host'] + path + '/'
     if site == 'biccamera':
         # Bic Camera official product pages have a trailing slash. Query
         # parameters other than known non-product analytics may select variants.
@@ -122,7 +130,7 @@ def product_id(site,url):
 
 def catalog_url(site, page=1):
     base = 'https://' + SITES[site]['host'] + SITES[site]['catalog']
-    if site == 'biccamera':
+    if site in ('biccamera','yodobashi'):
         # Pagination on this storefront has not been verified. Never guess it.
         if page != 1: raise CheckError('pagination_unverified')
         return base
@@ -142,7 +150,7 @@ def allowed_read(url,site):
         '/pokemon-card-game/battle-decks/'
     ) and parts.query=='inStock=1&srule=top-new-product':
         return True
-    if site=='biccamera' and parts.path in (SITES[site]['catalog'],'/robots.txt'):
+    if site in ('biccamera','yodobashi') and parts.path in (SITES[site]['catalog'],'/robots.txt'):
         return not parts.query and not parts.fragment
     # Keep existing retailer pagination/query paths unchanged.
     return bool(product_url(url,site)) or parts.path in (SITES[site]['catalog'],'/robots.txt')
@@ -174,12 +182,12 @@ POKEMON_CARD_CONTEXT = re.compile(
     re.I,
 )
 CARD_CONTEXT = re.compile(
-    r'(?:カードゲーム|TCG|OCG|ポケモンカード|ポケカ|ONE\\s*PIECE|ワンピース|'
-    r'遊戯王|デュエル[・\\s-]*マスターズ|UNION\\s*ARENA|ユニオンアリーナ|'
-    r'ガンダムカード|ヴァンガード|hololive\\s*OFFICIAL\\s*CARD\\s*GAME|'
-    r'ホロライブ|Xross\\s*Stars|マジック[：:・\\s-]*ザ[・\\s-]*ギャザリング|'
-    r'\\bMTG\\b|Flesh\\s*and\\s*Blood|Lycee|ヴァイスシュヴァルツ|Reバース|'
-    r'ドラゴンボール|バトルスピリッツ|Disney\\s*Lorcana|ロルカナ)',
+    r'(?:カードゲーム|TCG|OCG|ポケモンカード|ポケカ|ONE\s*PIECE|ワンピース|'
+    r'遊戯王|デュエル[・\s-]*マスターズ|UNION\s*ARENA|ユニオンアリーナ|'
+    r'ガンダムカード|ヴァンガード|hololive\s*OFFICIAL\s*CARD\s*GAME|'
+    r'ホロライブ|Xross\s*Stars|マジック[：:・\s-]*ザ[・\s-]*ギャザリング|'
+    r'\bMTG\b|Flesh\s*and\s*Blood|Lycee|ヴァイスシュヴァルツ|Reバース|'
+    r'ドラゴンボール|バトルスピリッツ|Disney\s*Lorcana|ロルカナ)',
     re.I,
 )
 SEALED_PACK = re.compile(
@@ -188,21 +196,22 @@ SEALED_PACK = re.compile(
     re.I,
 )
 SEALED_DECK = re.compile(
-    r'(?:スターターデッキ|スタートデッキ|構築済みデッキ|構築デッキ|'
+    r'(?:スターターデッキ|スタートデッキ|スターターセット|構築済みデッキ|構築デッキ|'
     r'スペシャルデッキセット|プレミアムデッキセット|アルティメットデッキ)',
     re.I,
 )
 SEALED_EXCLUDE = re.compile(
-    r'(?:\\(予約\\)|（予約）|予約商品|予約受付|デッキケース|カードケース|スリーブ|'
+    r'(?:\(予約\)|（予約）|予約商品|予約受付|デッキケース|カードケース|スリーブ|'
     r'プレイマット|ストレージ|ローダー|サプライ|シングルカード|オリパ|福袋|'
-    r'\\d+枚セット|枚セット\\b)',
+    r'\d+枚セット|枚セット)',
     re.I,
 )
 SINGLE_RARITY = re.compile(
-    r'^\\s*[（(]?[^】\\]]*[）)]?\\s*【(?:C|U|R|RR|RRR|SR|UR|HR|AR|SAR|SEC|PR|P|'
+    r'^\s*[（(]?[^】\]]*[）)]?\s*【(?:C|U|R|RR|RRR|SR|UR|HR|AR|SAR|SEC|PR|P|'
     r'☆パラレル|パラレル|ミラー)】',
     re.I,
 )
+SINGLE_STOCK_UNIT = re.compile(r'在庫数\s*[:：]?\s*[\d,]+\s*枚')
 
 def notification_product_kind(product, site=None):
     """Return pack/deck only for sealed TCG products worth alerting."""
@@ -216,7 +225,7 @@ def notification_product_kind(product, site=None):
         return ''
     # A per-card stock unit is strong evidence of a single, even when its
     # set/code happens to contain words like "スタートデッキ".
-    if re.search(r'在庫数\\s*\\d+\\s*枚',text) and not SEALED_PACK.search(text):
+    if SINGLE_STOCK_UNIT.search(text):
         return ''
     if SEALED_PACK.search(text):
         return 'pack'
@@ -269,6 +278,8 @@ def parse_catalog(html,site,url):
                 break
             state=evidence(n)
             if state!='unknown':
+                if SINGLE_STOCK_UNIT.search(tidy(n.text())):
+                    items[u]['single_item']=True
                 previous=items[u]['status']
                 items[u]['status']=state if previous in ('unobserved',state) else 'unknown'
                 break
@@ -391,7 +402,8 @@ def parse_detail(html,site,url):
             break
         state=evidence(n)
         if state!='unknown':
-            return {'url':url,'product':title,'status':state}
+            return {'url':url,'product':title,'status':state,
+                    'single_item':bool(SINGLE_STOCK_UNIT.search(tidy(n.text())))}
         n=n.parent
     return {'url':url,'product':title,'status':'unknown','reason':'在庫表示を商品単位で確定できません'}
 
@@ -469,7 +481,7 @@ class StoreClient:
                 try:
                     text=self.raw('https://'+SITES[site]['host']+'/robots.txt',site)
                 except CheckError as e:
-                    if e.code=='http_404' and site!='biccamera':text='User-agent: *\nAllow: /'
+                    if e.code=='http_404' and site not in ('biccamera','yodobashi'):text='User-agent: *\nAllow: /'
                     else:raise CheckError('robots_unavailable') from None
                 if 'user-agent:' not in text.casefold():raise CheckError('robots_unverified')
                 rp=RobotFileParser();rp.parse(text.splitlines())
@@ -524,7 +536,7 @@ def observe(site,rows,scope,notify_new=False,cooldown=60):
         url=product_url(row.get('url',''),site)
         if not url:continue
         product=row.get('product','')
-        kind=notification_product_kind(product,site)
+        kind='' if row.get('single_item') else notification_product_kind(product,site)
         clean.append({**row,'url':url,'id':product_id(site,url),'site_key':site,'scopes':[scope],
                       'notify_new':notify_new and bool(kind),
                       'notification_eligible':bool(kind),
@@ -534,6 +546,48 @@ def observe(site,rows,scope,notify_new=False,cooldown=60):
         db('rpc/guerrilla_sale_observe','POST',{'p_rows':clean[start:start+100]})
 
 def iso():return datetime.now(timezone.utc).isoformat(timespec='seconds')
+
+def recent_snapshot(updated_at, interval, now=None):
+    if not updated_at or interval <= 0:
+        return False
+    try:
+        stamp=datetime.fromisoformat(updated_at.replace('Z','+00:00'))
+        if stamp.tzinfo is None:
+            return False
+        age=((now or datetime.now(timezone.utc))-stamp).total_seconds()
+        return 0 <= age < interval
+    except (TypeError,ValueError,OverflowError):
+        return False
+
+def due_detail_rows(site,checked,state):
+    """Spend the bounded detail budget on oldest potential sealed products.
+
+    A rotating search offset prevents older single cards whose set names
+    contain "pack" or "deck" from permanently hiding later candidates.
+    """
+    try:
+        offset=max(0,int(state.get('detail_search_offset',0)))
+    except (TypeError,ValueError):
+        offset=0
+    terms=('パック','ブースター','BOX','ボックス','デッキ','スターターセット')
+    query=urlencode({
+        'select':'url,product',
+        'site_key':'eq.'+site,
+        'or':'('+','.join('product.ilike.*'+term+'*' for term in terms)+')',
+        'order':'checked_at.asc.nullsfirst,id',
+        'limit':DETAIL_CANDIDATE_BATCH,
+        'offset':offset,
+    })
+    rows=db('guerrilla_sale_products?'+query) or []
+    chosen=[row for row in rows
+            if row.get('url') not in checked
+            and notification_product_kind(row.get('product',''),site)][:DETAIL_BATCH]
+    if len(rows)==DETAIL_CANDIDATE_BATCH and len(chosen)<DETAIL_BATCH:
+        # Checked records move to the end of the oldest-first order.
+        state['detail_search_offset']=offset+len(rows)-len(chosen)
+    else:
+        state['detail_search_offset']=0
+    return chosen
 
 def sweep_site(site,targets,state,client):
     state=dict(state or {})
@@ -552,6 +606,14 @@ def sweep_site(site,targets,state,client):
                 'catalog_enabled':False,'selected_count':0,
                 'retry_after':None,
                 'reason':'official_product_http_403_manual_review_required'}
+    if site == 'yodobashi':
+        # A single diagnostic is allowed on push, but automatic inventory
+        # monitoring remains disabled until access and page structure are
+        # checked in the actual worker environment.
+        return {**state,'status':'paused','errors':[],
+                'catalog_enabled':False,'selected_count':0,
+                'retry_after':None,
+                'reason':'official_access_and_markup_review_pending'}
     active=[x for x in targets if x.get('site_key')==site and x.get('enabled') is True]
     if not active:return {**state,'status':'paused','selected_count':0,'catalog_enabled':False}
     until=state.get('retry_after')
@@ -624,8 +686,7 @@ def sweep_site(site,targets,state,client):
                 errors.append(e.code)
                 break
         if site not in client.halted:
-            due=db('guerrilla_sale_products?select=url,product&site_key=eq.'+site+'&order=checked_at.asc.nullsfirst,id&limit='+str(DETAIL_BATCH+SELECTED_BATCH)) or []
-            for row in [r for r in due if r['url'] not in checked][:DETAIL_BATCH]:detail(row,'all')
+            for row in due_detail_rows(site,checked,state):detail(row,'all')
     state.update(status='partial' if errors else 'ok',last_run_at=iso(),details_checked=checked_count,errors=list(dict.fromkeys(errors))[:8])
     if site in client.halted:
         state['status']='blocked'
@@ -633,8 +694,15 @@ def sweep_site(site,targets,state,client):
     return state
 
 def main():
+    stored=db('guerrilla_sale_monitor_snapshot?select=payload,updated_at&id=eq.current&limit=1') or []
+    try:
+        interval=max(0,min(3600,int(os.getenv('MIN_SWEEP_INTERVAL_SECONDS','0'))))
+    except ValueError:
+        interval=0
+    if stored and recent_snapshot(stored[0].get('updated_at'),interval):
+        print('A recent sweep already completed; skipping this duplicate trigger.')
+        return
     targets=all_targets()
-    stored=db('guerrilla_sale_monitor_snapshot?select=payload&id=eq.current&limit=1') or []
     old=stored[0].get('payload',{}) if stored else {}
     states=old.get('sites',{})
     client=StoreClient()
