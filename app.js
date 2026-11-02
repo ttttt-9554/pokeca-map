@@ -3487,6 +3487,8 @@
       const el = form.elements.namedItem(field);
       if (el) el.value = lpCardEditableValue(item,field);
     }
+    normalizeCatalogProductInput(form);
+    fillCatalogProductInputs();
     const currentStores=lotteryStoreEntries(item);
     lpCardStoreRender(currentStores);
     // The chain list is a suggestion, never proof that this draw includes
@@ -3829,6 +3831,7 @@
       if (!await lpCardRefresh(true)) throw Error('保存されましたが再取得できません：'+lpCardError);
       $('lpCardDialog').close();
       lpCloudApply();
+      void loadCloudData();
       if(lpCardReviewUrl===url&&lpDevReviewLoaded){
         lpDevReviewRender();
         $('lpDevReviewStatus').textContent=lpCardOverrides.get(url)?.review_complete?
@@ -3847,6 +3850,8 @@
   function lpCardInitUI() {
     const dialog=$('lpCardDialog'), form=$('lpCardForm');
     if (!dialog || !form) return;
+    form.elements.namedItem('review_category')?.addEventListener('change',fillCatalogProductInputs);
+    form.elements.namedItem('product_name')?.addEventListener('change',()=>normalizeCatalogProductInput(form));
     $('lpCardAddStore').addEventListener('click',()=>{
       const rows=lpCardStoreRead(false);
       if (rows.length>=LP_CARD_MAX_STORES) {
@@ -5485,6 +5490,8 @@
       set('review_category','pokemon');set('product_type','unknown');
     }
     lpAppSyncMethod();
+    normalizeCatalogProductInput(form);
+    fillCatalogProductInputs();
     lpAppUpdateStoreCount();
     const toggle=$('lpAppToggle');
     toggle.hidden=!row;
@@ -5561,7 +5568,7 @@
     const payload={
       registration_method:method,
       app_name:inStore?first.name.slice(0,100):val('app_name'),event_title:val('event_title'),
-      product_name:val('product_name')||null,stores,
+      product_name:catalogProductCanonicalName(val('product_name'),val('review_category'))||null,stores,
       store_name:first?.name||null,
       prefecture:first?(first.prefecture||null):(val('prefecture')||null),
       review_category:val('review_category')||'unknown',
@@ -5621,6 +5628,7 @@
       lpAppMerge();
       if(!await lpAppRefresh(true))throw Error('保存後の再取得に失敗しました：'+lpAppError);
       lpAppCloseEditor(true);
+      void loadCloudData();
       $('lpAppStatus').textContent='✅ 登録内容を保存し、共有一覧へ反映しました。';
     }catch(error){
       lpAppFormMessage('⚠ 保存・確認に失敗しました：'+String(error?.message||error));
@@ -5717,6 +5725,8 @@
     $('lpAppPrefecture').innerHTML='<option value="">未確認・指定なし</option>'+
       LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
     $('lpAppMethod').addEventListener('change',lpAppSyncMethod);
+    form.elements.namedItem('review_category')?.addEventListener('change',fillCatalogProductInputs);
+    form.elements.namedItem('product_name')?.addEventListener('change',()=>normalizeCatalogProductInput(form));
     if($('lpAppStorePreset'))
       $('lpAppStorePreset').innerHTML='<option value="">チェーンを選択</option>'+
         lpBuiltinStorePresetOptions();
