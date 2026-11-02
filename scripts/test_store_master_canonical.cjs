@@ -105,7 +105,8 @@ canonical.init({getClient:()=>client,getUserId:()=>auth,onChanged:()=>{changes++
   assert.match(decodeURIComponent(link),/栃木県宇都宮市ゆいの杜4-1-39/);
   const noAddress=maps.render({name:'ヤマダ電機　インターパーク',
     prefecture:'栃木県'});
-  assert.match(noAddress,/地図で検索/);
+  assert.match(noAddress,/📍 MAP/);
+  assert.match(noAddress,/住所未登録/);
 
   // If the developer unmerges a store, the next refresh restores its old name.
   data=[];

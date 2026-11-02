@@ -2152,7 +2152,9 @@
     const query = norm(input.value);
     chainDropdown.replaceChildren();
 
-    const options = chainNames.filter(name =>
+    const names=[...new Set([...chainNames,...stores.map(store=>store.name),
+      ...cloudStores.map(store=>store.name)].filter(Boolean))];
+    const options = names.filter(name =>
       !query ||
       norm(name).includes(query) ||
       (name === 'ファミリーマート' &&
@@ -2161,7 +2163,7 @@
        'seveneleven'.includes(query))
     );
 
-    options.forEach(name => {
+    options.slice(0,60).forEach(name => {
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = name;
@@ -2518,13 +2520,145 @@
     cloudProductById=byId;
   }
   function resolveLotteryProductMaster(item){
-    if(!item?.product_name)return item;
-    const master=catalogProductMatch(item.product_name,lotteryGenre(item));
+    if(!item)return item;
+    const genre=lotteryGenre(item);
+    let master=catalogProductMatch(item.product_name,genre);
+    // New collector entries can have a verified title but no product field.
+    // Only an unambiguous full master name/approved alias is evidence here.
+    // An intentional manual clear and provisional Discord titles stay empty.
+    if(!master&&!String(item.product_name||'').trim()&&!item.manual_card_product&&
+       !item.event_title_provisional){
+      const title=catalogProductKey(item.official_event_title||item.event_title);
+      const matches=new Map();
+      const candidates=[
+        ...cloudProducts.filter(p=>p.genre===genre).map(p=>({name:p.name,product:p})),
+        ...cloudProductAliases.filter(a=>a.genre===genre)
+          .map(a=>({name:a.alias_name,product:cloudProductById.get(a.product_id)}))
+      ];
+      for(const candidate of candidates){
+        const key=catalogProductKey(candidate.name);
+        if(candidate.product&&key.length>=5&&title.includes(key))
+          matches.set(candidate.product.id,candidate.product);
+      }
+      if(matches.size===1)master=matches.values().next().value;
+    }
     if(!master)return item;
     return {...item,
       catalog_product_id:master.id,
-      product_name_original:item.product_name,
+      catalog_product_from_title:item.catalog_product_from_title||!String(item.product_name||'').trim(),
+      product_name_original:item.product_name_original??item.product_name??'',
       product_name:master.name};
+  }
+
+  let lpSearchMasterStores=[],lpSearchMasterUser='',lpSearchMasterAt=0,lpSearchMasterLoading=null;
+  function lpSearchKind(input){
+    if(input.dataset.searchKind)return input.dataset.searchKind;
+    if(input.matches('[name="product_name"],#product,#cloudProductName')||
+       /product|wishlist/i.test(input.id))return 'product';
+    if(input.matches('[name="store_name"],[name="extra_store_name"],[data-lp-store-name],[data-lp-app-store-name],[data-lp-ext-store-name],#shop,#cloudStoreName')||
+       /store|infoSales/i.test(input.id))return 'store';
+    if(input.id==='searchArea')return 'area';
+    return 'event';
+  }
+  function lpSearchStorePool(){
+    const master=lpSearchMasterUser===(authUser?.id||'')?lpSearchMasterStores:[];
+    const raw=[...master,...lotteryItems.flatMap(lotteryStoreEntries),
+      ...cloudStores,...stores];
+    const unique=new Map();
+    for(const row of raw){
+      if(!row?.name)continue;
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(row)||row;
+      const name=String(canonical.name||'').trim(),prefecture=String(canonical.prefecture||'').trim();
+      if(!name)continue;
+      const key=productNorm(name)+'|'+prefecture;
+      if(!unique.has(key))unique.set(key,{...row,name,prefecture});
+    }
+    return [...unique.values()];
+  }
+  function lpSearchCanonicalStore(store){
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(store)||store;
+    const matching=lpSearchStorePool().filter(row=>row.prefecture&&
+      productNorm(row.name)===productNorm(canonical.name));
+    const exact=matching.find(row=>row.prefecture===canonical.prefecture);
+    const unique=new Map(matching.map(row=>[row.prefecture,row]));
+    const match=exact||(unique.size===1?unique.values().next().value:null);
+    return match?{name:match.name,prefecture:match.prefecture}:canonical;
+  }
+  async function lpSearchPrepare(input){
+    if(lpSearchKind(input)!=='store'||!supabaseClient||!authUser||discordRoleAuthPending)return;
+    const user=authUser.id;
+    if(lpSearchMasterUser===user&&Date.now()-lpSearchMasterAt<90000)return;
+    if(lpSearchMasterLoading)return lpSearchMasterLoading;
+    lpSearchMasterLoading=(async()=>{
+      try{
+        const {data,error}=await supabaseClient.rpc('lottery_store_master_choices_v1');
+        if(error)throw error;
+        if(authUser?.id!==user||discordRoleAuthPending)return;
+        lpSearchMasterStores=(Array.isArray(data?.masters)?data.masters:[])
+          .filter(row=>row?.name&&!row.merged_into);
+        lpSearchMasterUser=user;lpSearchMasterAt=Date.now();
+      }catch(error){console.warn('検索用の店舗候補を読み込めませんでした:',error?.message||error);}
+      finally{lpSearchMasterLoading=null;}
+    })();
+    return lpSearchMasterLoading;
+  }
+  function lpSearchSuggestions(input){
+    const kind=lpSearchKind(input);
+    if(kind==='prefecture')return LP_MANUAL_AREAS.map(value=>({value}));
+    if(kind==='area'){
+      const available=[...stores,...cloudStores];
+      const regions=LP_PREFECTURES.filter(pref=>available.some(row=>String(row.address||'').startsWith(pref)));
+      return [...new Set([...available.map(row=>row.city).filter(Boolean),...regions])]
+        .map(value=>({value}));
+    }
+    const products=()=>{
+      const genre=input.form?.elements.namedItem('review_category')?.value;
+      return cloudProducts.filter(p=>!genre||p.genre===genre).map(p=>({
+        value:p.name,detail:lpProductDetailText(p),
+        search:[p.reading,...cloudProductAliases.filter(a=>a.product_id===p.id)
+          .map(a=>a.alias_name)].filter(Boolean).join(' ')
+      }));
+    };
+    if(kind==='product')return products();
+    let targeted=[];
+    try{targeted=JSON.parse(input.closest('[data-search-store-options]')?.dataset.searchStoreOptions||'[]');}
+    catch(_){}
+    const storeChoices=[...targeted,...lpSearchStorePool()].map(row=>({
+      value:row.name,prefecture:row.prefecture||'',
+      detail:[row.prefecture,row.city,row.address].filter(Boolean).join(' · '),
+      search:[row.name,row.prefecture,row.city,row.address].filter(Boolean).join(' ')
+    }));
+    if(kind==='store')return storeChoices;
+    const events=lotteryItems.filter(item=>!item.event_title_provisional&&item.event_title)
+      .map(item=>({value:item.event_title,detail:lotteryStoreEntries(item)
+        .map(row=>row.name).join('・')}));
+    return [...products(),...storeChoices,...events];
+  }
+  function lpSearchPrefectureInput(input){
+    if(lpSearchKind(input)!=='store')return null;
+    const row=input.closest('.lp-track-account-store,.lp-card-store-row,.lp-ext-store-row,.lp-app-store-row');
+    if(row)return row.querySelector('[data-lp-manual-store-pref],[data-lp-store-prefecture],[data-lp-ext-store-pref],[data-lp-app-store-prefecture],[name="extra_store_prefecture"]');
+    return input.name==='store_name'?input.form?.elements.namedItem('prefecture'):null;
+  }
+  function lpSearchSelect(input,choice){
+    if(input.id==='searchArea')searchStores();
+    const area=lpSearchPrefectureInput(input);
+    if(area&&choice.prefecture){
+      if(area.tagName!=='SELECT'||[...area.options].some(option=>option.value===choice.prefecture)){
+        area.value=choice.prefecture;
+        area.dispatchEvent(new Event('input',{bubbles:true}));
+        area.dispatchEvent(new Event('change',{bubbles:true}));
+      }
+    }
+  }
+  function initSearchInputs(){
+    globalThis.window?.TorecaSearchInputs?.init?.({
+      normalize:productNorm,suggestions:lpSearchSuggestions,prepare:lpSearchPrepare,
+      select:lpSearchSelect,
+      clear(input){
+        if(input.id==='storeQuery'||input.id==='searchArea')searchStores();
+      }
+    });
   }
   function fillCatalogProductInputs(){
     for(const [formId,listId] of [
@@ -3493,7 +3627,10 @@
       item.event_title_provisional = false;
       item.manual_card_title = true;
     }
-    if (fields.has('product_name')) item.product_name = row.product_name || '';
+    if (fields.has('product_name')) {
+      item.product_name = row.product_name || '';
+      item.manual_card_product = true;
+    }
     if (fields.has('review_category')) {
       item.review_category = row.review_category || 'unknown';
       item.manual_card_genre = true;
@@ -5038,7 +5175,8 @@
     const officialName = item.official_event_title && item.official_event_title === item.event_title
       ? String(item.event_title).trim() : '';
     const trustedTitle = item.event_title_provisional ? '' : item.event_title;
-    const reliableName = (item.manual_card_title ? (trustedTitle || item.product_name) : (officialName || item.product_name || trustedTitle) || '').trim();
+    const reliableName = (item.manual_card_title ? (trustedTitle || item.product_name) :
+      (officialName || (item.catalog_product_from_title?trustedTitle:item.product_name) || trustedTitle) || '').trim();
     // Discord excerpt is a discovery hint only, not an authoritative heading.
     const external=!isLivePocketEventUrl(item.url)&&!item.app_lottery;
     const label = reliableName || (external?'外部サイト・抽選内容未確認':'商品名・イベント名を確認中');
@@ -5112,7 +5250,7 @@
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
       ${item.catalog_product_id
-        ? `<p class="lp-sub">📦 商品マスター：${escape(item.product_name)}</p>`
+        ? `<p class="lp-sub lp-card-product">📦 商品：${escape(item.product_name)}</p>`
         : item.product_name && item.product_name!==label
           ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
       ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
@@ -7584,8 +7722,8 @@
   // One application ticket per selected personal account.
   // Previously entered aggregate tickets remain in "未割当" until assigned.
   // Exact store candidates from this lottery's effective catalog entry.
-  // A one-store event needs no user choice; for multiple stores a deliberate
-  // selection is required for every account. Store choices remain private.
+  // A one-store event prefills the store; every account may edit its branch.
+  // Store choices remain private, including newly entered store names.
   function lpTrackerCandidateStores(url){
     if(!url)return [];
     const item=lotteryItems.find(x=>x?.url===url)||
@@ -7601,39 +7739,16 @@
   }
 
   function lpTrackerStoreControl(entry,stores=[],manualStore=false){
-    if(manualStore){
-      const original={name:String(entry?.store_name||''),prefecture:String(entry?.store_prefecture||'')};
-      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(original)||original;
-      return '<div class="lp-track-account-store lp-track-manual-store">'+
-        '<label>🏬 応募店舗名<input type="text" data-lp-manual-store-name maxlength="200" required placeholder="例：宇都宮店" value="'+escape(canonical.name)+'"></label>'+
-        '<label>📍 地域（都道府県）<input type="text" data-lp-manual-store-pref maxlength="80" required placeholder="例：栃木県" value="'+escape(canonical.prefecture)+'"></label></div>';
-    }
-
-    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(
-      entry?.store_name,entry?.store_prefecture)||{
-        name:String(entry?.store_name||'').trim(),prefecture:String(entry?.store_prefecture||'').trim()
-      };
-    const savedName=canonical.name;
-    const savedPref=canonical.prefecture;
-    const label=store=>store.name+(store.prefecture?'（'+store.prefecture+'）':'');
-    if(stores.length===1)
-      return '<p class="lp-track-store-choice lp-track-store-fixed">🏬 応募店舗：'+
-        escape(label(stores[0]))+'（自動設定）</p>';
-    if(stores.length===0)
-      return '<p class="lp-track-store-choice">🏬 応募店舗：'+
-        (savedName?escape(label({name:savedName,prefecture:savedPref}))+
-          '（以前の登録を保持）':'店舗情報未確認')+'</p>';
-    const match=stores.findIndex(x=>x.name===savedName&&x.prefecture===savedPref);
-    const savedMissing=!!savedName&&match<0;
-    const options='<option value=""'+(!savedName?' selected':'')+'>店舗を選択してください</option>'+
-      stores.map((store,i)=>
-        '<option value="'+i+'"'+(i===match?' selected':'')+'>'+
-          escape(label(store))+'</option>').join('')+
-      (savedMissing?'<option value="previous" selected>'+
-        escape(label({name:savedName,prefecture:savedPref}))+
-        '（以前の選択・最新店舗一覧にはなし）</option>':'');
-    return '<label class="lp-track-account-store">🏬 応募店舗'+
-      '<select data-lp-account-store required>'+options+'</select></label>';
+    const saved=String(entry?.store_name||'').trim();
+    const original=saved
+      ?{name:saved,prefecture:String(entry?.store_prefecture||'').trim()}
+      :!manualStore&&stores.length===1?stores[0]:{name:'',prefecture:''};
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(original)||original;
+    return '<div class="lp-track-account-store lp-track-manual-store" data-search-store-options="'+escape(JSON.stringify(stores))+'">'+
+      '<label>🏬 応募店舗名<input type="search" data-lp-manual-store-name data-search-kind="store" maxlength="200"'+
+        (manualStore||stores.length?' required':'')+' autocomplete="off" placeholder="店舗名を検索・直接入力" value="'+escape(canonical.name)+'"></label>'+
+      '<label>📍 地域（都道府県）<input type="search" data-lp-manual-store-pref data-search-kind="prefecture" maxlength="80"'+
+        (manualStore?' required':'')+' autocomplete="off" placeholder="都道府県を選択・入力" value="'+escape(canonical.prefecture)+'"></label></div>';
   }
 
   function lpTrackerAccountRowHtml(entry,usedIds=[],stores=[],manualStore=false){
@@ -7772,6 +7887,7 @@
       const html=lpTrackerAccountRowHtml(entry,selectedIds,stores,manualStore);
       if(!html)return false;
       holder.insertAdjacentHTML('beforeend',html);
+      globalThis.window?.TorecaSearchInputs?.refresh?.(holder);
       for(const key of keys)setLegacy(key,transfer.remaining[key]);
       summarise();
       return true;
@@ -7842,11 +7958,14 @@
             won_count:Number(outcome==='won'||outcome==='received'),
             lost_count:Number(outcome==='lost'),received_count:Number(outcome==='received')};
           let chosen=null;
-          if(manualStore){
-            const name=row.querySelector('[data-lp-manual-store-name]')?.value.trim()||'';
+          const nameInput=row.querySelector('[data-lp-manual-store-name]');
+          if(nameInput){
+            const name=nameInput.value.trim();
             const prefecture=row.querySelector('[data-lp-manual-store-pref]')?.value.trim()||'';
-            if(!name||!prefecture)throw Error('アプリ抽選は店舗名と地域を両方入力してください。');
-            chosen={name,prefecture};
+            if(manualStore&&(!name||!prefecture))
+              throw Error('アプリ抽選は店舗名と地域を両方入力してください。');
+            if(stores.length&&!name)throw Error('各応募アカウントの応募店舗を選択・入力してください。');
+            if(name)chosen=lpSearchCanonicalStore({name,prefecture});
           }else if(stores.length===1){
             chosen=stores[0];
           }else if(stores.length>1){
@@ -7933,6 +8052,7 @@
       <p id="lpTrackEditorMessage" role="status" aria-live="polite"></p>
       </form>`;
     const form=$('lpTrackerForm');
+    globalThis.window?.TorecaSearchInputs?.refresh?.(form);
     const memo=form.elements.note;
     const resizeMemo=()=>lpTrackerExpandMemo(memo);
     memo.addEventListener('input',resizeMemo);
@@ -10498,6 +10618,7 @@
       initLottery();
       lpResultsInit();
       bindEvents();
+      initSearchInputs();
       // Hide lottery navigation before the asynchronous Discord login starts.
       updateLotteryVisibility();
       initDevAccordions();

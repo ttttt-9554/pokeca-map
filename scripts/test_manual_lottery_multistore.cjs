@@ -22,6 +22,7 @@ const api=vm.runInNewContext([
  '({lpAppStoredStores,lpAppStoreDraft,lpAppPayload,lpAppItem})'
 ].join('\n'),{$,LP_MANUAL_AREAS:['東京都','栃木県','全国'],
  lpExtDateSave:v=>v||null,safeLotteryUrl:u=>/^https?:\/\//.test(u),
+ normalizeCatalogProductInput:()=>{},catalogProductCanonicalName:name=>name,
  lpAppUrl:id=>'https://example.com/?app_lottery='+id},{timeout:1000});
 assert.equal(api.lpAppPayload().stores.length,0,'Optional app store remains optional');
 values.prefecture='東京都';

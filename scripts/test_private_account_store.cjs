@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-// Offline regression: single store auto-selection, multiple-store choice,
+// Offline regression: single store prefill, editable branches and multiple-store choice,
 // legacy preservation and store metadata never reaching public results.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -36,7 +36,8 @@ const ctx={
  lpPrivateAccountRows:()=>[profile],
  lpPrivateAccountDefault:()=>profile,
  lpPrivateAccounts:new Map([[A,profile]]),escape,
- lpAppEventId:url=>url===APP?'mock-app-id':''
+ lpAppEventId:url=>url===APP?'mock-app-id':'',
+ lpSearchCanonicalStore:store=>store
 };
 const functions=[
  'lpTrackerAccountInput','lpTrackerCandidateStores','lpTrackerStoreControl',
@@ -54,31 +55,31 @@ assert.equal(api.lpTrackerCandidateStores(UNKNOWN).length,0);
 const ticket={account_id:A,application_count:1,won_count:0,lost_count:0};
 let html=api.lpTrackerPrivateMarkup({event_url:ONE,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
-assert.match(html,/応募店舗：ふるいち宇都宮店（栃木県）（自動設定）/);
-assert.doesNotMatch(html,/data-lp-account-store/,'Single store is never editable');
+assert.match(html,/data-lp-manual-store-name[^>]*value="ふるいち宇都宮店"/);
+assert.match(html,/data-lp-manual-store-pref[^>]*value="栃木県"/);
+assert.match(html,/data-search-kind="store"/,'Single-store branches are editable');
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
-assert.match(html,/data-lp-account-store required/);
-assert.match(html,/店舗を選択してください/);
-assert.match(html,/宇都宮店（栃木県）/);
-assert.match(html,/大宮店（埼玉県）/);
+assert.match(html,/data-lp-manual-store-name[^>]*required/);
+assert.match(html,/data-search-store-options/);
+assert.match(html,/宇都宮店/);
+assert.match(html,/大宮店/);
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'大宮店',store_prefecture:'埼玉県'
 }]});
-assert.match(html,/<option value="1" selected>大宮店（埼玉県）<\/option>/);
+assert.match(html,/data-lp-manual-store-name[^>]*value="大宮店"/);
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
 }]});
-assert.match(html,/value="previous" selected/);
-assert.match(html,/過去の店舗（東京都）/);
+assert.match(html,/data-lp-manual-store-name[^>]*value="過去の店舗"/);
+assert.match(html,/data-lp-manual-store-pref[^>]*value="東京都"/);
 html=api.lpTrackerPrivateMarkup({event_url:UNKNOWN,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
 }]});
-assert.match(html,/以前の登録を保持/);
-assert.doesNotMatch(html,/data-lp-account-store/);
+assert.match(html,/data-lp-manual-store-name[^>]*value="過去の店舗"/);
 
 function collector(url,selected,previous=null,manual=null){
  const data=previous||{event_url:url,application_count:1,
@@ -90,12 +91,19 @@ function collector(url,selected,previous=null,manual=null){
   return name?originals[name]:null;
  }};
  const choice={value:A}, outcome={value:'pending',checked:true},store={value:selected};
+ const selectedStore=manual||(selected==='previous'?{
+  name:data.account_entries[0].store_name,prefecture:data.account_entries[0].store_prefecture
+ }:api.lpTrackerCandidateStores(url)[Number(selected===''?NaN:selected)])||
+  (url===ONE?itemOne.stores[0]:{
+   name:data.account_entries[0].store_name||'',
+   prefecture:data.account_entries[0].store_prefecture||''
+  });
  const row={
   querySelector(sel){
    if(sel==='[data-lp-account-id]')return choice;
    if(sel==='[data-lp-account-outcome]:checked')return outcome;
-   if(sel==='[data-lp-manual-store-name]')return {value:manual?.name||''};
-   if(sel==='[data-lp-manual-store-pref]')return {value:manual?.prefecture||''};
+   if(sel==='[data-lp-manual-store-name]')return {value:selectedStore.name||''};
+   if(sel==='[data-lp-manual-store-pref]')return {value:selectedStore.prefecture||''};
    if(sel==='[data-lp-account-store]')return store;
    return null;
   }
@@ -122,6 +130,9 @@ assert.deepEqual(Object.keys(result.account_entries[0]).sort(),
 result=collector(ONE,'').collect();
 assert.equal(result.account_entries[0].store_name,'ふるいち宇都宮店');
 assert.equal(result.account_entries[0].store_prefecture,'栃木県');
+const changedBranch=collector(ONE,'',null,{name:'ビックカメラ宇都宮店',prefecture:'栃木県'}).collect();
+assert.equal(changedBranch.account_entries[0].store_name,'ビックカメラ宇都宮店');
+assert.equal(changedBranch.account_entries[0].store_prefecture,'栃木県');
 result=collector(UNKNOWN,'', {event_url:UNKNOWN,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
 }]}).collect();
@@ -146,4 +157,4 @@ assert.match(schema,/Invalid application store/);
 const results=app.slice(app.indexOf('  const LP_RESULTS_COUNT_RPC='),
  app.indexOf('  const LP_PRIVATE_ACCOUNT_TABLE='));
 assert.doesNotMatch(results,/store_prefecture|account_entries|lpPrivateAccount/);
-console.log('Private store selector: auto single, required multi, saved legacy and privacy OK');
+console.log('Private stores: editable prefill, typed branch, required multi, saved legacy and privacy OK');
