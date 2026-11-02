@@ -315,6 +315,18 @@ class MonitorTests(unittest.TestCase):
         self.assertFalse(result['monitor_enabled'])
         self.assertEqual(len(client.calls),2)
 
+    def test_yodobashi_missing_robots_is_not_an_access_block(self):
+        client=m.StoreClient()
+        def raw(url,site):
+            if url.endswith('/robots.txt'):
+                client.last_http={'http_status':404}
+                raise m.CheckError('http_404')
+            return '<h1>sample</h1>'
+        with patch.object(client,'raw',side_effect=raw) as read:
+            self.assertEqual(client.get(m.catalog_url('yodobashi'),'yodobashi'),'<h1>sample</h1>')
+        self.assertEqual(client.robots_status['yodobashi'],404)
+        self.assertEqual(read.call_count,2)
+
     def test_biccamera_unavailable_cart_template_is_not_sale(self):
         url='https://www.biccamera.com/bc/item/15607965/'
         base='<main><h1>【BOX】ポケモンカードゲーム MEGA 拡張パック</h1><p>商品コード 15607965</p>'

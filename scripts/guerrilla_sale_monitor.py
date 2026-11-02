@@ -427,7 +427,7 @@ class NoRedirect(HTTPRedirectHandler):
 class StoreClient:
     def __init__(self,user_agent=UA,accept='text/html,text/plain'):
         self.opener=build_opener(NoRedirect())
-        self.robots={};self.last={};self.delays={};self.halted={}
+        self.robots={};self.robots_status={};self.last={};self.delays={};self.halted={}
         self.user_agent=user_agent
         self.accept=accept
         self.last_http={}
@@ -480,8 +480,11 @@ class StoreClient:
             if site not in self.robots:
                 try:
                     text=self.raw('https://'+SITES[site]['host']+'/robots.txt',site)
+                    self.robots_status[site]=self.last_http.get('http_status')
                 except CheckError as e:
-                    if e.code=='http_404' and site not in ('biccamera','yodobashi'):text='User-agent: *\nAllow: /'
+                    if e.code=='http_404' and site!='biccamera':
+                        self.robots_status[site]=404
+                        text='User-agent: *\nAllow: /'
                     else:raise CheckError('robots_unavailable') from None
                 if 'user-agent:' not in text.casefold():raise CheckError('robots_unverified')
                 rp=RobotFileParser();rp.parse(text.splitlines())

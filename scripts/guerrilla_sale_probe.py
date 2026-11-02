@@ -158,7 +158,8 @@ def probe_yodobashi(client=None):
         links=monitor.product_links(doc.root,site,category)
         if not links:raise monitor.CheckError('catalog_markup_unverified')
         result.update(category='read',category_products=len(links),
-                      category_http=client.last_http.get('http_status'))
+                      category_http=client.last_http.get('http_status'),
+                      robots_http=getattr(client,'robots_status',{}).get(site))
         html=client.get(item,site)
         doc=monitor.Document(html);monitor.page_guard(doc)
         title=next((n for n in doc.root.walk()
@@ -170,7 +171,8 @@ def probe_yodobashi(client=None):
                         r'販売休止中|予定数の販売を終了|販売終了|在庫なし',visible)))
     except monitor.CheckError as exc:
         result.update(status='blocked_or_unverified',reason=exc.code,
-                      http_status=client.last_http.get('http_status'))
+                      http_status=client.last_http.get('http_status'),
+                      robots_http=getattr(client,'robots_status',{}).get(site))
         return result
     except Exception as exc:
         result.update(status='probe_error',reason=type(exc).__name__)
