@@ -3760,7 +3760,8 @@
         "store_name": "discord_heading:1555858034461511756",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "store_name_original": "エーフィ＆ブラッキー",
       "stores": [
@@ -3770,7 +3771,7 @@
         },
         {
           "name": "キデイランド 浦和美園店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
       "application_end_at": "2026-10-04T23:59:00+09:00",
@@ -3824,7 +3825,8 @@
         "store_name": "discord_heading:1555858034461511756",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "store_name_original": "30th CELEBRATION",
       "stores": [
@@ -3834,7 +3836,7 @@
         },
         {
           "name": "キデイランド浦和美園店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
       "application_end_at": "2026-10-04T23:59:00+09:00",
