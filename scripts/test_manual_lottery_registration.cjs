@@ -29,6 +29,7 @@ const nodes={lpAppForm:form,lpAppAppNameField:controls.appNameField,
  lpAppMethodHint:controls.hint};
 const context={$:id=>nodes[id],safeLotteryUrl:u=>/^https?:\/\//.test(u),
  LP_MANUAL_AREAS:['東京都','栃木県','全国'],lpExtDateSave:v=>v||null,
+ normalizeCatalogProductInput:()=>{},catalogProductCanonicalName:name=>name,
  lpAppUrl:id=>'https://example.com/?app_lottery='+id};
 const api=vm.runInNewContext(['lpAppStoredStores','lpAppExtraStoreRows','lpAppStoreDraft',
  'lpAppSyncMethod','lpAppPayload','lpAppItem']
