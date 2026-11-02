@@ -3806,6 +3806,15 @@
         if (start && end && Date.parse(start)>Date.parse(end))
           throw Error('応募開始日時は締切より前にしてください。');
         payload.edited_fields=edited;
+        // The DB catalog trigger needs the effective genre/type even if the
+        // developer edited only the product name. Do not add those fields to
+        // edited_fields: the lottery card still inherits its original values.
+        if(edited.includes('product_name')){
+          if(!payload.review_category)
+            payload.review_category=String(form.elements.namedItem('review_category')?.value||lotteryGenre(legacy)||'unknown');
+          if(!payload.product_type)
+            payload.product_type=String(form.elements.namedItem('product_type')?.value||lotteryProductType(legacy)||'unknown');
+        }
         if(lpCardReviewUrl===url){
           const confirmed=form.elements.namedItem('review_confirmed').checked;
           const evidence=form.elements.namedItem('review_evidence').value;
