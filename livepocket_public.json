@@ -9473,25 +9473,23 @@
       "url": "https://livepocket.jp/e/nwul2",
       "store_name": "TSUTAYA北習志野駅前店",
       "prefecture": "千葉県",
+      "product_name": "スペシャルデッキセットMEGA",
+      "event_title": "ポケモンカード 「スペシャルデッキセットMEGA」抽選販売受付",
+      "application_start_at": "2026-11-02T10:00:00+09:00",
+      "application_end_at": "2026-11-06T23:59:00+09:00",
       "discord_posted_at": "2026-11-02T04:00:09.518000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA北習志野駅前店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "ポケモンカード 「スペシャルデッキセットMEGA」抽選販売受付",
-      "application_end_at": "2026-11-06T23:59:00+09:00",
-      "application_start_at": "2026-11-02T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "スペシャルデッキセットex フシギバナ・リザードン・カメックス",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "event_title",
-      "product_name": "スペシャルデッキセットMEGA",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカード 「スペシャルデッキセットMEGA」抽選販売受付",
+      "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-02T04:00:58.048198+00:00"
     }
   ],
-  "updated_at": "2026-11-02T04:01:22.987699+00:00"
+  "updated_at": "2026-11-02T04:10:59.789471+00:00"
 }
