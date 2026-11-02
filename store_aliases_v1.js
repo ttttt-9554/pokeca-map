@@ -54,9 +54,13 @@
     if(!canRead())return false;
     const uid=clean(options.getUserId());
     if(uid!==sessionId){
+      const hadAliases=byStore.size>0;
       sessionId=uid;
       ++requestSeq;byStore=new Map();uniqueByName=new Map();
       lastFetch=0;loading=null;version++;
+      // A session may be swapped directly by the Supabase SDK between tabs.
+      // Repaint so former aliases and their target addresses cannot linger.
+      if(hadAliases)options?.onChanged?.();
     }
     // Signed-out map and discovery views may read only this public alias list.
     if(loading){
