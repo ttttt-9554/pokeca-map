@@ -1495,7 +1495,7 @@
     mapSelectedProducts.forEach((p, index) => {
       const chip = document.createElement('span');
       chip.className = 'map-product-chip';
-      chip.append(document.createTextNode(p.name));
+      chip.append(document.createTextNode(catalogProductCanonicalName(p.name,'pokemon')));
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = '×';
@@ -1613,7 +1613,7 @@
     wishlist.forEach((p, index) => {
       const chip = document.createElement('span');
       chip.className = 'map-product-chip';
-      chip.append(document.createTextNode(p.name));
+      chip.append(document.createTextNode(catalogProductCanonicalName(p.name,'pokemon')));
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = '×';
@@ -3017,18 +3017,22 @@
   }
 
   function lotteryMatchedWishlist(item) {
-    const matched = productNorm(item.pokemon_map_match || '');
-    const observed = productNorm(item.product_name || '');
-    const title = productNorm(item.event_title_provisional ? '' : item.event_title || '');
-    return wishlist.some(p => {
-      const target = productNorm(p.name);
-      const knownType = lotteryProductType(item);
-      if (knownType !== 'unknown' && !knownType.split('/').includes(p.category)) return false;
-      if (!target || target.length < 5) return false;
-      if (matched && target === matched) return true;
-      if (observed && observed.includes(target)) return true;
-      if (title && title.includes(target)) return true;
-      return false;
+    const observed=String(item.product_name||'').trim();
+    const master=item.catalog_product_id
+      ? cloudProductById.get(item.catalog_product_id)
+      : catalogProductMatch(observed,lotteryGenre(item));
+    const title=productNorm(item.event_title_provisional?'':item.event_title||'');
+    return wishlist.some(p=>{
+      const knownType=lotteryProductType(item);
+      if(knownType!=='unknown'&&!knownType.split('/').includes(p.category))return false;
+      const selected=catalogProductMatch(p.name,'pokemon');
+      if(master&&selected)return master.id===selected.id;
+      const wanted=catalogProductKey(catalogProductCanonicalName(p.name,'pokemon'));
+      if(!wanted||wanted.length<5)return false;
+      if(observed)return wanted===catalogProductKey(catalogProductCanonicalName(observed,lotteryGenre(item)));
+      // Historical entries with no product_name may still be found by a
+      // title match, but the old pokemon_map_match guess is not authoritative.
+      return !!title&&title.includes(productNorm(p.name));
     });
   }
 
@@ -3042,17 +3046,21 @@
   }
 
   function fillLotteryProductSuggestions() {
-    const root = $('lpProductSuggestions');
-    if (!root) return;
+    const root=$('lpProductSuggestions');
+    if(!root)return;
     root.replaceChildren();
-    const seen = new Set();
-    for (const p of [...packs,...decks]) {
-      if (!p?.name || seen.has(p.name)) continue;
-      seen.add(p.name);
-      const option = document.createElement('option');
-      option.value = p.name;
+    const seen=new Set();
+    const names=[
+      ...cloudProducts.map(p=>p.name),
+      ...cloudProductAliases.map(a=>a.alias_name)
+    ];
+    for(const name of names){
+      if(!name||seen.has(name))continue;
+      seen.add(name);
+      const option=document.createElement('option');
+      option.value=name;
       root.append(option);
-      if (seen.size >= 500) break;
+      if(seen.size>=1200)break;
     }
   }
 
