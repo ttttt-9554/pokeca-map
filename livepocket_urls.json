@@ -20235,7 +20235,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/mr_dw": {
-          "checked_at": "2026-11-02T14:41:36.673819+00:00",
+          "checked_at": "2026-11-02T20:51:26.707278+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -21905,7 +21905,7 @@
         "https://livepocket.jp/e/mr_dw": {
           "detected_at": "2026-11-02T08:30:58.277681+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-02T14:41:36.673819+00:00",
+          "checked_at": "2026-11-02T20:51:26.707278+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/b0pdj": {
@@ -23258,8 +23258,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/mr_dw": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-02T14:41:36.673819+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-02T20:51:26.707278+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/b0pdj": {
@@ -28522,7 +28522,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-02T14:41:36.673819+00:00",
+          "checked_at": "2026-11-02T20:51:26.707278+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【抽選販売】11月21日(土) JUMP SHOP仙台店",
           "genre": "onepiece",
           "product_origin": "",
@@ -32968,7 +32968,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/mr_dw": {
-          "checked_at": "2026-11-02T14:41:36.673819+00:00",
+          "checked_at": "2026-11-02T20:51:26.707278+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
