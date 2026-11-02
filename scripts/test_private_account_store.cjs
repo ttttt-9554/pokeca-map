@@ -60,19 +60,20 @@ assert.match(html,/data-lp-manual-store-pref[^>]*value="栃木県"/);
 assert.match(html,/<input type="text" data-lp-manual-store-name/,'Single-store branches remain editable');
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
-assert.match(html,/data-lp-manual-store-name[^>]*required/);
+assert.match(html,/data-lp-account-store required/);
+assert.doesNotMatch(html,/data-lp-manual-store-name/);
 assert.doesNotMatch(html,/data-search-|tr-search-/);
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'大宮店',store_prefecture:'埼玉県'
 }]});
-assert.match(html,/data-lp-manual-store-name[^>]*value="大宮店"/);
+assert.match(html,/<option value="1" selected>大宮店（埼玉県）<\/option>/);
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
 }]});
-assert.match(html,/data-lp-manual-store-name[^>]*value="過去の店舗"/);
-assert.match(html,/data-lp-manual-store-pref[^>]*value="東京都"/);
+assert.match(html,/以前の応募店舗：過去の店舗/);
+assert.match(html,/<option value="" selected>/);
 html=api.lpTrackerPrivateMarkup({event_url:UNKNOWN,application_count:1,
  won_count:0,lost_count:0,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
@@ -135,10 +136,11 @@ result=collector(UNKNOWN,'', {event_url:UNKNOWN,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
 }]}).collect();
 assert.equal(result.account_entries[0].store_name,'過去の店舗');
-result=collector(MANY,'previous',{event_url:MANY,account_entries:[{
+assert.throws(()=>collector(MANY,'previous',{event_url:MANY,account_entries:[{
  ...ticket,store_name:'旧店舗',store_prefecture:'群馬県'
-}]}).collect();
-assert.equal(result.account_entries[0].store_name,'旧店舗');
+}]}).collect(),/応募店舗を選択/);
+assert.equal(collector(MANY,'1',null,{name:'任意の店舗',prefecture:'東京都'}).collect().account_entries[0].store_name,'大宮店','Registered choices take precedence over typed values');
+assert.doesNotMatch(api.lpTrackerStoreControl(ticket,itemMany.stores,true),/data-lp-manual-store-name/,'Multi-store app lotteries also use registered choices');
 assert.throws(()=>collector(MANY,'44').collect(),/応募店舗を選択/);
 html=api.lpTrackerPrivateMarkup({event_url:APP,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});

@@ -7718,6 +7718,19 @@
   }
 
   function lpTrackerStoreControl(entry,stores=[],manualStore=false){
+    if(stores.length>1){
+      const saved=globalThis.window?.TorecaStoreAliases?.resolve?.(
+        entry?.store_name,entry?.store_prefecture)||{
+          name:entry?.store_name||'',prefecture:entry?.store_prefecture||''};
+      const selected=stores.findIndex(store=>store.name===saved.name&&store.prefecture===saved.prefecture);
+      return '<div class="lp-track-account-store"><label>🏬 応募店舗'+
+        '<select data-lp-account-store required><option value=""'+(selected<0?' selected':'')+'>店舗を選択してください</option>'+
+        stores.map((store,index)=>'<option value="'+index+'"'+(index===selected?' selected':'')+'>'+
+          escape(store.name+(store.prefecture?'（'+store.prefecture+'）':''))+'</option>').join('')+
+        '</select></label><p class="lp-track-store-choice" data-lp-account-store-area>'+
+        escape(selected>=0?'📍 地域：'+(stores[selected].prefecture||'未確認'):
+          saved.name?'以前の応募店舗：'+saved.name+'。登録されている対象店舗から選び直してください。':'この抽選に登録された対象店舗から選択してください。')+'</p></div>';
+    }
     const saved=String(entry?.store_name||'').trim();
     const original=saved
       ?{name:saved,prefecture:String(entry?.store_prefecture||'').trim()}
@@ -7885,6 +7898,11 @@
           if(pending)pending.checked=true;
         }
         summarise();
+      }else if(e.target.matches('[data-lp-account-store]')){
+        const selected=String(e.target.value);
+        const store=/^\d+$/.test(selected)?stores[Number(selected)]:null;
+        const area=e.target.closest('.lp-track-account-store')?.querySelector('[data-lp-account-store-area]');
+        if(area)area.textContent=store?'📍 地域：'+(store.prefecture||'未確認'):'この抽選に登録された対象店舗から選択してください。';
       }else if(e.target.matches('[data-lp-account-id]'))summarise();
     });
     root.addEventListener('click',e=>{
@@ -7937,7 +7955,11 @@
             lost_count:Number(outcome==='lost'),received_count:Number(outcome==='received')};
           let chosen=null;
           const nameInput=row.querySelector('[data-lp-manual-store-name]');
-          if(nameInput){
+          if(stores.length>1){
+            const selection=row.querySelector('[data-lp-account-store]')?.value||'';
+            if(/^\d+$/.test(selection))chosen=stores[Number(selection)]||null;
+            if(!chosen)throw Error('各応募アカウントの応募店舗を選択してください。');
+          }else if(nameInput){
             const name=nameInput.value.trim();
             const prefecture=row.querySelector('[data-lp-manual-store-pref]')?.value.trim()||'';
             if(manualStore&&(!name||!prefecture))
@@ -7946,16 +7968,6 @@
             if(name)chosen=lpTrackerCanonicalStore({name,prefecture});
           }else if(stores.length===1){
             chosen=stores[0];
-          }else if(stores.length>1){
-            const selection=row.querySelector('[data-lp-account-store]')?.value||'';
-            if(selection==='previous'){
-              const previous=previousByAccount.get(id);
-              if(previous?.store_name)chosen={
-                name:previous.store_name,prefecture:previous.store_prefecture||''};
-            }else if(/^\d+$/.test(selection)){
-              chosen=stores[Number(selection)]||null;
-            }
-            if(!chosen)throw Error('各応募アカウントの応募店舗を選択してください。');
           }else{
             const previous=previousByAccount.get(id);
             if(previous?.store_name)chosen={
