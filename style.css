@@ -3620,8 +3620,20 @@ html[data-theme="dark"] #lpAppDialog #lpAppApplyStorePreset{
   border:1px solid var(--app-border,#cbd5e1);border-radius:8px;
 }
 #devView #lpProductMasterPanel .lp-product-edit-grid>.lp-product-editor-wide,
+#devView #lpProductMasterPanel .lp-product-edit-grid>.tr-search-field,
 #devView #lpProductMasterPanel .lp-product-edit-grid>.hint{
   grid-column:1/-1;
+}
+/* Mobile WebKit date controls need a bounded width and room for the date. */
+#devView #lpProductMasterPanel .lp-product-edit-grid>input[type="date"]{
+  display:block;max-width:100%;min-width:0;box-sizing:border-box;
+  -webkit-appearance:none;appearance:none;
+}
+@media(max-width:480px){
+  #devView #lpProductMasterPanel .lp-product-edit-grid>label[for="cloudProductDate"],
+  #devView #lpProductMasterPanel .lp-product-edit-grid>#cloudProductDate{
+    grid-column:1/-1;
+  }
 }
 #devView #lpProductMasterPanel .lp-product-edit-grid>input.lp-product-editor-wide{
   margin-top:-2px;
