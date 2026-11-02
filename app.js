@@ -3172,7 +3172,7 @@
   ].map(([name,prefecture])=>({name,prefecture}));
 
 
-  // Nationwide Yellow Submarine and Tochigi GEO directories are shared by
+  // Yellow Submarine, Tochigi GEO and Tochigi TSUTAYA directories are shared by
   // card editing and manual lottery registration. Applying one is opt-in.
   const LP_GEO_TOCHIGI_STORES = [
     ['GEO足利鹿島店','栃木県'],
@@ -3190,9 +3190,29 @@
     ['GEO間々田店','栃木県']
   ].map(([name,prefecture])=>({name,prefecture}));
 
+  // This 13-store directory is based on the lottery card's listed branches.
+  // It is a selectable candidate preset, not a claim that all branches are
+  // participating in every lottery.
+  const LP_TSUTAYA_TOCHIGI_STORES = [
+    ['ビッグワンTSUTAYAさくら店','栃木県'],
+    ['TSUTAYA 宇都宮テクノ店','栃木県'],
+    ['TSUTAYA 鹿沼店','栃木県'],
+    ['TSUTAYA 自治医大店','栃木県'],
+    ['TSUTAYA 作新学院前店','栃木県'],
+    ['TSUTAYA 真岡店','栃木県'],
+    ['TSUTAYA 400号西那須野店','栃木県'],
+    ['TSUTAYA 竹林店','栃木県'],
+    ['TSUTAYA Trading Card 宇都宮インターパークビレッジ','栃木県'],
+    ['TSUTAYA 栃木城内店','栃木県'],
+    ['TSUTAYA 東簗瀬店','栃木県'],
+    ['TSUTAYA 宇都宮南店','栃木県'],
+    ['TSUTAYA 佐野店','栃木県']
+  ].map(([name,prefecture])=>({name,prefecture}));
+
   const LP_BUILTIN_STORE_PRESETS = {
     'yellow-submarine':{label:'イエローサブマリン',rows:LP_YELLOW_SUBMARINE_STORES},
-    'geo-tochigi':{label:'GEO 栃木',rows:LP_GEO_TOCHIGI_STORES}
+    'geo-tochigi':{label:'GEO 栃木',rows:LP_GEO_TOCHIGI_STORES},
+    'tsutaya-tochigi':{label:'TSUTAYA 栃木',rows:LP_TSUTAYA_TOCHIGI_STORES}
   };
   function lpBuiltinStorePresetOptions(){
     return Object.entries(LP_BUILTIN_STORE_PRESETS).map(([id,preset])=>
@@ -3206,6 +3226,14 @@
     return (['geo栃木','ゲオ栃木','geo栃木県','ゲオ栃木県'].includes(plain)&&
         (!area||area==='栃木県')) ||
       (['geo','ゲオ'].includes(plain)&&area==='栃木県');
+  }
+  function lpIsBareTsutayaTochigiChain(name,prefecture=''){
+    const plain=String(name||'').normalize('NFKC')
+      .replace(/[\s　・･._－（）()【】「」-]+/g,'').toLowerCase();
+    const area=String(prefecture||'').trim();
+    return (['tsutaya栃木','tsutaya栃木県','ツタヤ栃木','ツタヤ栃木県'].includes(plain)&&
+        (!area||area==='栃木県')) ||
+      (['tsutaya','ツタヤ'].includes(plain)&&area==='栃木県');
   }
   function lpPresetStoreKey(store){
     const resolved=lotteryCanonicalStore(store);
@@ -3307,9 +3335,13 @@
     // The chain list is a suggestion, never proof that this draw includes
     // every branch. Requiring a confirmation preserves verified store scope.
     if($('lpCardStorePreset')){
-      $('lpCardStorePreset').value=currentStores.length===1&&
-        lpIsBareYellowChain(currentStores[0].name)
-          ? 'yellow-submarine' : '';
+      const single=currentStores.length===1?currentStores[0]:null;
+      $('lpCardStorePreset').value=single&&lpIsBareYellowChain(single.name)
+        ? 'yellow-submarine'
+        : single&&lpIsBareGeoTochigiChain(single.name,single.prefecture)
+        ? 'geo-tochigi'
+        : single&&lpIsBareTsutayaTochigiChain(single.name,single.prefecture)
+        ? 'tsutaya-tochigi' : '';
     }
     // Automatically expose multi-store controls; single-store stays folded.
     $('lpCardStoresFold').open=currentStores.length>1;
@@ -3711,7 +3743,9 @@
         (chosen==='yellow-submarine'&&
           lpIsBareYellowChain(current[0].name)&&!current[0].prefecture)||
         (chosen==='geo-tochigi'&&
-          lpIsBareGeoTochigiChain(current[0].name,current[0].prefecture))
+          lpIsBareGeoTochigiChain(current[0].name,current[0].prefecture))||
+        (chosen==='tsutaya-tochigi'&&
+          lpIsBareTsutayaTochigiChain(current[0].name,current[0].prefecture))
       );
       const retained=replacePlaceholder?[]:current;
       const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase()+
@@ -4504,6 +4538,11 @@
     if(normalized.every(name=>name.startsWith('geo')||name.startsWith('ゲオ'))&&
       stores.every(store=>String(store?.prefecture||'').trim()==='栃木県'))
       return 'GEO 栃木';
+    // Keep the Big One TSUTAYA Sakura branch in the same Tochigi chain.
+    if(normalized.every(name=>name.startsWith('tsutaya')||
+      name.startsWith('ビッグワンtsutaya'))&&
+      stores.every(store=>String(store?.prefecture||'').trim()==='栃木県'))
+      return 'TSUTAYA 栃木';
     const chains=[
       ['イエローサブマリン',['イエローサブマリン']],
       ['WonderGOO',['wondergoo','ワンダーグー']],
@@ -5003,6 +5042,8 @@
       chosen==='yellow-submarine'&&lpIsBareYellowChain(store.name)&&!store.prefecture
     )&&!(
       chosen==='geo-tochigi'&&lpIsBareGeoTochigiChain(store.name,store.prefecture)
+    )&&!(
+      chosen==='tsutaya-tochigi'&&lpIsBareTsutayaTochigiChain(store.name,store.prefecture)
     ));
     const seen=new Set(retained.map(lpPresetStoreKey));
     const additions=preset.filter(store=>{
