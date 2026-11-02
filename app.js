@@ -2651,61 +2651,303 @@
     if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・登録別名 ${cloudProductAliases.length}件・共有店舗 ${cloudStores.length}件`;
   }
 
-  function renderCloudAdminLists() {
-    if(!isDeveloper()) return;
-    for(const [kind,rows] of [['Product',cloudProducts],['Store',cloudStores]]) {
-      const target=$('cloud'+kind+'List'); if(!target)continue;
-      target.replaceChildren();
-      const productQuery=kind==='Product'?productNorm($('cloudProductSearch')?.value||''):'';
-      const found=kind==='Product'
-        ? rows.filter(item=>!productQuery||productNorm([
-            item.name,item.reading,
-            ...cloudProductAliases.filter(alias=>alias.product_id===item.id).map(alias=>alias.alias_name)
-          ].join(' ')).includes(productQuery))
-        : rows;
-      const visible=kind==='Product'?found.slice(0,150):found;
-      if(kind==='Product'&&$('cloudProductCount'))
-        $('cloudProductCount').textContent=
-          '商品マスター全'+rows.length+'件／検索結果'+found.length+'件'+
-          (found.length>150?'（先頭150件を表示）':'');
-      for(const item of visible) {
-        const div=document.createElement('div');div.className='cloud-admin-item';
-        const label=document.createElement('span');
-        const genreNames={pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'};
-        const kindNames={pack:'パック',deck:'デッキ',unknown:'区分未確認'};
-        const aliases=kind==='Product'?cloudProductAliases.filter(a=>a.product_id===item.id):[];
-        label.textContent=kind==='Product'
-          ? (genreNames[item.genre]||'未分類')+' / '+
-            (kindNames[item.category]||'区分未確認')+'：'+item.name+
-            (aliases.length?'（別名 '+aliases.length+'件）':'')
-          : item.name+'（'+(item.city||'地域未設定')+'）';
-        const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.addEventListener('click',()=>{
-          if(kind==='Product') {
-            for(const [field,value] of Object.entries({Id:item.id,Genre:item.genre||'pokemon',Category:item.category,Name:item.name,Reading:item.reading||'',Date:item.release_date||'',Price:item.price??'',Tax:item.price_tax||''})) $('cloudProduct'+field).value=value;
-          } else {
-            for(const [field,value] of Object.entries({Id:item.id,Name:item.name,Category:item.category,City:item.city||'',Address:item.address||'',Lat:item.lat,Lng:item.lng})) $('cloudStore'+field).value=value;
-          }
-          $('cloud'+kind+'Form').scrollIntoView({behavior:'smooth',block:'start'});
-        });
-        const del=document.createElement('button');del.type='button';del.textContent='削除';del.addEventListener('click',()=>deleteCloudItem(kind,item));
-        if(kind==='Product'){
-          const aliasButton=document.createElement('button');
-          aliasButton.type='button';aliasButton.textContent='別名登録';
-          aliasButton.addEventListener('click',()=>addCloudProductAlias(item));
-          div.append(label,edit,aliasButton);
-          if(aliases.length){
-            const removeAliasButton=document.createElement('button');
-            removeAliasButton.type='button';removeAliasButton.textContent='別名削除';
-            removeAliasButton.addEventListener('click',()=>removeCloudProductAlias(item,aliases));
-            div.append(removeAliasButton);
-          }
-          div.append(del);
-        }else div.append(label,edit,del);
-        target.append(div);
+
+  const LP_PRODUCT_GENRE_LABELS={
+    pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'
+  };
+  const LP_PRODUCT_TYPE_LABELS={pack:'拡張パック',deck:'構築デッキ',unknown:'区分未確認'};
+  let lpProductSimilarCache=[],lpProductSimilarFingerprint='',lpProductSimilarLimit=36;
+
+  function lpProductDisplayLabel(product){
+    const genre=LP_PRODUCT_GENRE_LABELS[product.genre]||'未分類';
+    const type=LP_PRODUCT_TYPE_LABELS[product.category]||'区分未確認';
+    return '【'+genre+' / '+type+'】'+product.name;
+  }
+  function lpProductDetailText(product){
+    const date=product.release_date
+      ? product.release_date.replace(/-/g,'/'):'発売日未登録';
+    const price=product.price!==null&&product.price!==undefined
+      ? Number(product.price).toLocaleString('ja-JP')+'円'+(product.price_tax||'')
+      :'価格未登録';
+    return (LP_PRODUCT_GENRE_LABELS[product.genre]||'未分類')+' ・ '+
+      (LP_PRODUCT_TYPE_LABELS[product.category]||'区分未確認')+
+      ' ・ '+date+' ・ '+price;
+  }
+  function lpProductSortItems(items){
+    const sort=$('lpProductSort')?.value||'release-desc';
+    return [...items].sort((a,b)=>{
+      if(sort==='name-asc'||sort==='name-desc'){
+        const comp=a.name.localeCompare(b.name,'ja-JP');
+        return (sort==='name-desc'?-comp:comp)||a.id.localeCompare(b.id);
+      }
+      const dateA=a.release_date||'',dateB=b.release_date||'';
+      // Undated products remain last for either release-date direction.
+      if(!dateA&&dateB)return 1;
+      if(!dateB&&dateA)return -1;
+      if(dateA!==dateB)return sort==='release-asc'
+        ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
+      return a.name.localeCompare(b.name,'ja-JP');
+    });
+  }
+  function lpProductClearEditor(){
+    const form=$('cloudProductForm');
+    form?.reset();
+    if($('cloudProductId'))$('cloudProductId').value='';
+    if($('lpProductEditorMode'))$('lpProductEditorMode').textContent='';
+    if($('lpProductEditorStatus'))$('lpProductEditorStatus').textContent='';
+  }
+  function lpProductEdit(item){
+    const values={Id:item.id,Genre:item.genre||'pokemon',
+      Category:item.category,Name:item.name,Reading:item.reading||'',
+      Date:item.release_date||'',Price:item.price??'',Tax:item.price_tax||''};
+    for(const [field,value] of Object.entries(values)){
+      const input=$('cloudProduct'+field);
+      if(input)input.value=value;
+    }
+    const fold=$('lpProductEditorFold');
+    if(fold)fold.open=true;
+    if($('lpProductEditorMode'))$('lpProductEditorMode').textContent='（編集：'+item.name+'）';
+    if($('lpProductEditorStatus'))$('lpProductEditorStatus').textContent='登録済みの商品を編集中です。';
+    try{fold?.scrollIntoView({block:'start',behavior:'smooth'});}catch(_){}
+  }
+  function lpProductCanMerge(source,target){
+    if(!source||!target||source.id===target.id)return false;
+    if(source.genre!==target.genre)return false;
+    if(source.category!=='unknown'&&target.category!=='unknown'&&
+       source.category!==target.category)return false;
+    // Historic issues with the same short title are distinct products.
+    if(source.release_date&&target.release_date&&source.release_date!==target.release_date)return false;
+    return true;
+  }
+  async function lpProductMerge(source,target){
+    const status=$('lpProductMergeStatus');
+    if(!lpProductCanMerge(source,target)){
+      if(status)status.textContent='⚠ ジャンル・商品区分・発売日が矛盾する商品は統合できません。';
+      return;
+    }
+    const summary='【統合する旧商品】\n'+source.name+'\n'+lpProductDetailText(source)+
+      '\n\n【残す正式商品】\n'+target.name+'\n'+lpProductDetailText(target)+
+      '\n\n元の商品名は別名として残します。元に戻す操作はありません。統合しますか？';
+    if(!confirm(summary))return;
+    if(status)status.textContent='商品マスターを統合しています…';
+    const {data,error}=await supabaseClient.rpc('catalog_product_merge_v1',
+      {p_source_id:source.id,p_target_id:target.id});
+    if(error||data?.success!==true){
+      if(status)status.textContent='⚠ 統合できませんでした：'+(error?.message||'保存結果を確認できません');
+      return;
+    }
+    if(status)status.textContent='✅ 「'+source.name+'」を「'+target.name+'」に統合しました。';
+    await loadCloudData();
+  }
+  function lpProductCompareName(name){
+    return catalogProductKey(name)
+      .replace(/^(?:ポケモンカードゲーム|ワンピースカードゲーム|onepieceカードゲーム)/,'')
+      .replace(/^mega(?=拡張パック|スペシャルデッキセット)/,'');
+  }
+  function lpProductSimilarity(left,right){
+    if(!lpProductCanMerge(left,right))return 0;
+    const a=lpProductCompareName(left.name),b=lpProductCompareName(right.name);
+    if(a===b)return 1;
+    // The nine different Pokemon card sets must not be suggested as one.
+    const suffixMarker='カードセット';
+    if(a.includes(suffixMarker)&&b.includes(suffixMarker)){
+      const aa=a.split(suffixMarker).pop(),bb=b.split(suffixMarker).pop();
+      if(aa.length>3&&bb.length>3&&
+         !aa.includes(bb)&&!bb.includes(aa)&&aa!==bb)return 0;
+    }
+    if(a.length<6||b.length<6)return 0;
+    const shorter=a.length<=b.length?a:b,longer=a.length>b.length?a:b;
+    const ratio=shorter.length/longer.length;
+    const overlap=longer.includes(shorter)&&shorter.length>=8
+      ? .83+.15*ratio:0;
+    const grams=str=>{
+      const count=new Map();
+      for(let i=0;i<str.length-1;i++){
+        const key=str.slice(i,i+2);
+        count.set(key,(count.get(key)||0)+1);
+      }
+      return count;
+    };
+    const ag=grams(a),bg=grams(b);
+    let shared=0;
+    for(const [key,n] of ag)shared+=Math.min(n,bg.get(key)||0);
+    const dice=2*shared/(Math.max(1,a.length-1)+Math.max(1,b.length-1));
+    // Short names that occur in several unrelated sets remain suggestions
+    // only with very strong overlap. No automatic writes happen here.
+    return Math.max(overlap,dice);
+  }
+  function lpProductSimilarPairs(){
+    const key=cloudProducts.map(p=>[p.id,p.genre,p.category,p.name,p.release_date].join('|')).join('\u001f');
+    if(key===lpProductSimilarFingerprint)return lpProductSimilarCache;
+    const pairs=[];
+    for(let i=0;i<cloudProducts.length;i++){
+      for(let j=i+1;j<cloudProducts.length;j++){
+        const a=cloudProducts[i],b=cloudProducts[j];
+        if(!lpProductCanMerge(a,b))continue;
+        const score=lpProductSimilarity(a,b);
+        if(score>=.79)pairs.push({a,b,score});
       }
     }
+    pairs.sort((x,y)=>y.score-x.score||
+      x.a.name.localeCompare(y.a.name,'ja-JP'));
+    lpProductSimilarCache=pairs;
+    lpProductSimilarFingerprint=key;
+    return pairs;
   }
-
+  function lpProductRenderSimilar(){
+    const root=$('lpProductSimilarList'),count=$('lpProductSimilarCount');
+    if(!root)return;
+    const pairs=lpProductSimilarPairs();
+    if(count)count.textContent='（'+pairs.length+'組）';
+    root.replaceChildren();
+    if(!pairs.length){
+      const p=document.createElement('p');p.className='hint';
+      p.textContent='現在、統合候補はありません。';root.append(p);
+    }
+    for(const item of pairs.slice(0,lpProductSimilarLimit)){
+      const row=document.createElement('div');row.className='lp-product-similar-item';
+      for(const [pos,p] of [[1,item.a],[2,item.b]]){
+        const title=document.createElement('strong');
+        title.textContent=pos+'：'+p.name;
+        const detail=document.createElement('small');
+        detail.textContent=lpProductDetailText(p);
+        row.append(title,detail);
+      }
+      const actions=document.createElement('div');
+      actions.className='lp-product-similar-actions';
+      for(const [label,source,target] of [
+        ['①を残して統合',item.b,item.a],['②を残して統合',item.a,item.b]
+      ]){
+        const btn=document.createElement('button');btn.type='button';
+        btn.textContent=label;
+        btn.addEventListener('click',()=>void lpProductMerge(source,target));
+        actions.append(btn);
+      }
+      row.append(actions);root.append(row);
+    }
+    const more=$('lpProductSimilarMore');
+    if(more){
+      more.hidden=pairs.length<=lpProductSimilarLimit;
+      more.textContent='さらに候補を表示（残り'+Math.max(0,pairs.length-lpProductSimilarLimit)+'組）';
+    }
+  }
+  function lpProductFillMergeSources(){
+    const source=$('lpProductMergeSource'),target=$('lpProductMergeTarget');
+    if(!source||!target)return;
+    const selected=source.value;
+    const search=productNorm($('lpProductMergeSearch')?.value||'');
+    source.replaceChildren();
+    source.add(new Option('統合する商品を選択',''));
+    const items=lpProductSortItems(cloudProducts).filter(p=>
+      !search||productNorm(p.name+' '+p.reading).includes(search));
+    for(const p of items)source.add(new Option(lpProductDisplayLabel(p),p.id));
+    if(items.some(p=>p.id===selected))source.value=selected;
+    lpProductFillMergeTargets();
+  }
+  function lpProductFillMergeTargets(){
+    const source=$('lpProductMergeSource'),target=$('lpProductMergeTarget');
+    if(!source||!target)return;
+    const chosen=target.value;
+    const current=cloudProducts.find(p=>p.id===source.value);
+    target.replaceChildren();
+    target.add(new Option('正式商品を選択',''));
+    if(current){
+      for(const p of lpProductSortItems(cloudProducts)){
+        if(lpProductCanMerge(current,p))
+          target.add(new Option(lpProductDisplayLabel(p),p.id));
+      }
+    }
+    target.disabled=!current;
+    if([...target.options].some(x=>x.value===chosen))target.value=chosen;
+  }
+  function renderCloudAdminLists(){
+    if(!isDeveloper())return;
+    const root=$('cloudProductList');
+    if(root){
+      const genre=$('lpProductGenreFilter')?.value||'all';
+      const query=productNorm($('cloudProductSearch')?.value||'');
+      const aliasesByProduct=new Map();
+      for(const alias of cloudProductAliases){
+        if(!aliasesByProduct.has(alias.product_id))aliasesByProduct.set(alias.product_id,[]);
+        aliasesByProduct.get(alias.product_id).push(alias);
+      }
+      const selected=lpProductSortItems(cloudProducts.filter(p=>
+        (genre==='all'||p.genre===genre) &&
+        (!query||productNorm([
+          p.name,p.reading,
+          ...(aliasesByProduct.get(p.id)||[]).map(x=>x.alias_name)
+        ].join(' ')).includes(query))));
+      const counter=$('cloudProductCount');
+      if(counter)counter.textContent='全'+cloudProducts.length+'商品・表示'+selected.length+
+        '商品'+(genre==='all'?'':'（'+(LP_PRODUCT_GENRE_LABELS[genre]||'未分類')+'）');
+      const status=$('lpProductMasterStatus');
+      if(status)status.textContent='共有商品 '+cloudProducts.length+'件 / 別名 '+
+        cloudProductAliases.length+'件。発売日未登録の商品は発売日順の最後に表示します。';
+      const frag=document.createDocumentFragment();
+      for(const item of selected){
+        const card=document.createElement('article');
+        card.className='cloud-admin-item lp-product-master-card';
+        const title=document.createElement('strong');
+        title.className='lp-product-master-title';title.textContent=item.name;
+        const info=document.createElement('div');
+        info.className='lp-product-master-meta';info.textContent=lpProductDetailText(item);
+        card.append(title,info);
+        const aliases=aliasesByProduct.get(item.id)||[];
+        if(aliases.length){
+          const a=document.createElement('small');
+          a.className='lp-product-alias-count';
+          a.textContent='登録別名 '+aliases.length+'件';
+          card.append(a);
+        }
+        const actions=document.createElement('div');
+        actions.className='lp-product-master-actions';
+        for(const [name,callback] of [
+          ['編集',()=>lpProductEdit(item)],
+          ['別名登録',()=>void addCloudProductAlias(item)],
+          ...(aliases.length?[['別名削除',()=>void removeCloudProductAlias(item,aliases)]]:[]),
+          ['削除',()=>void deleteCloudItem('Product',item)]
+        ]){
+          const button=document.createElement('button');
+          button.type='button';button.textContent=name;
+          button.addEventListener('click',callback);
+          actions.append(button);
+        }
+        card.append(actions);frag.append(card);
+      }
+      if(!selected.length){
+        const empty=document.createElement('p');
+        empty.className='hint';empty.textContent='条件に一致する商品はありません。';
+        frag.append(empty);
+      }
+      root.replaceChildren(frag);
+      if($('lpProductSimilarFold')?.open)lpProductRenderSimilar();
+      if($('lpProductManualMergeFold')?.open)lpProductFillMergeSources();
+    }
+    const storeRoot=$('cloudStoreList');
+    if(storeRoot){
+      const frag=document.createDocumentFragment();
+      for(const item of cloudStores){
+        const row=document.createElement('div');
+        row.className='cloud-admin-item';
+        const title=document.createElement('span');
+        title.textContent=item.name+'（'+(item.city||'地域未設定')+'）';
+        const edit=document.createElement('button');edit.type='button';
+        edit.textContent='編集';
+        edit.addEventListener('click',()=>{
+          const values={Id:item.id,Name:item.name,Category:item.category,
+            City:item.city||'',Address:item.address||'',Lat:item.lat,Lng:item.lng};
+          for(const [field,value] of Object.entries(values))
+            if($('cloudStore'+field))$('cloudStore'+field).value=value;
+          $('cloudStoreForm')?.scrollIntoView({behavior:'smooth',block:'start'});
+        });
+        const remove=document.createElement('button');remove.type='button';
+        remove.textContent='削除';
+        remove.addEventListener('click',()=>void deleteCloudItem('Store',item));
+        row.append(title,edit,remove);frag.append(row);
+      }
+      storeRoot.replaceChildren(frag);
+    }
+  }
 
   async function addCloudProductAlias(item){
     if(!isDeveloper()||!supabaseClient)return;
@@ -2783,16 +3025,42 @@
     const {error}=await query;
     if(error)return alert('保存失敗：'+error.message);
     $('cloud'+kind+'Form').reset();$('cloud'+kind+'Id').value='';
+    if(product)lpProductClearEditor();
     await loadCloudData();
-    alert('全ユーザー共通データに保存しました。');
+    if(product){
+      if($('lpProductEditorFold'))$('lpProductEditorFold').open=false;
+      if($('lpProductMasterStatus'))$('lpProductMasterStatus').textContent=
+        '✅ 商品「'+payload.name+'」を保存しました。';
+    }else alert('全ユーザー共通データに保存しました。');
   }
 
   function initCloudAdmin() {
     for(const kind of ['Product','Store']) {
       $('cloud'+kind+'Form').addEventListener('submit',e=>saveCloudItem(kind,e));
-      $('cloud'+kind+'Cancel').addEventListener('click',()=>{$('cloud'+kind+'Form').reset();$('cloud'+kind+'Id').value='';});
+      $('cloud'+kind+'Cancel').addEventListener('click',()=>{
+        $('cloud'+kind+'Form').reset();$('cloud'+kind+'Id').value='';
+        if(kind==='Product'){lpProductClearEditor();$('lpProductEditorFold').open=false;}
+      });
     }
     $('cloudProductSearch')?.addEventListener('input',renderCloudAdminLists);
+    $('lpProductGenreFilter')?.addEventListener('change',renderCloudAdminLists);
+    $('lpProductSort')?.addEventListener('change',renderCloudAdminLists);
+    $('lpProductSimilarFold')?.addEventListener('toggle',event=>{
+      if(event.currentTarget.open)lpProductRenderSimilar();
+    });
+    $('lpProductSimilarMore')?.addEventListener('click',()=>{
+      lpProductSimilarLimit+=36;lpProductRenderSimilar();
+    });
+    $('lpProductManualMergeFold')?.addEventListener('toggle',event=>{
+      if(event.currentTarget.open)lpProductFillMergeSources();
+    });
+    $('lpProductMergeSearch')?.addEventListener('input',lpProductFillMergeSources);
+    $('lpProductMergeSource')?.addEventListener('change',lpProductFillMergeTargets);
+    $('lpProductMergeExecute')?.addEventListener('click',()=>{
+      const source=cloudProducts.find(p=>p.id===$('lpProductMergeSource')?.value);
+      const target=cloudProducts.find(p=>p.id===$('lpProductMergeTarget')?.value);
+      void lpProductMerge(source,target);
+    });
     $('cloudUseSelectedStore').addEventListener('click',()=>{
       const lat=Number($('lat')?.value),lng=Number($('lng')?.value);
       if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng) return alert('登録画面で店舗を選択してからお試しください。');
