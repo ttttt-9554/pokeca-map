@@ -2652,6 +2652,17 @@
   }
   // Remote collector JSON isn't in Supabase. Sync it when an authorized
   // developer opens the lottery list; manual entries sync via DB triggers.
+  function catalogProductCollectorCandidateValid(name){
+    const clean=String(name||'').trim();
+    if(clean.length<5||clean.length>200||
+       /^(ポケモンカードゲーム|ワンピースカードゲーム|ONE PIECEカードゲーム)$/.test(clean)||
+       /[／/]|抽選|応募|予約|再販|系$/.test(clean)||
+       (clean.includes('「')&&!clean.includes('」'))||
+       (clean.includes('『')&&!clean.includes('』'))||
+       (clean.includes('＆')&&clean.length<12)||
+       (/ex$/i.test(clean)&&clean.length<9))return false;
+    return true;
+  }
   async function syncCollectedCatalogProducts(force=false){
     if(!isDeveloper()||!authUser||!supabaseClient||cloudProductSyncBusy)return false;
     if(!force&&Date.now()-cloudProductSyncAt<20*60*1000)return true;
@@ -2662,7 +2673,7 @@
         lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
       for(const item of sorted){
         const name=String(item?.product_name||'').trim(),genre=lotteryGenre(item);
-        if(!name||name.length>200||
+        if(!catalogProductCollectorCandidateValid(name)||
            !['pokemon','onepiece','yugioh'].includes(genre)||
            item.app_lottery_hidden||item.manual_card_hidden)continue;
         const identity=catalogProductIdentity(name,genre);
