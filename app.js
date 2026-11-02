@@ -48,6 +48,9 @@
   let csvPacks = [];
   let csvDecks = [];
   let cloudProducts = [];
+  let cloudProductAliases = [];
+  let cloudProductIndex = new Map();
+  let cloudProductSyncAt = 0, cloudProductSyncBusy = false;
   let cloudStores = [];
   let mapSelectedProducts = []; // {name, category}
   let editId = null;
@@ -2572,11 +2575,122 @@
   }
 
 
+
+  // Match canonical products by genre and conservative, deterministic spelling.
+  function catalogProductKey(name){
+    return String(name||'').normalize('NFKC').toLocaleLowerCase('ja-JP')
+      .replace(/[\s　・･._－（）()【】「」-]+/g,'');
+  }
+  function catalogProductIdentity(name,genre='pokemon'){
+    return String(genre||'unknown')+'|'+catalogProductKey(name);
+  }
+  function catalogProductMatch(name,genre='pokemon'){
+    if(!catalogProductKey(name))return null;
+    return cloudProductIndex.get(catalogProductIdentity(name,genre))||null;
+  }
+  function catalogProductCanonicalName(name,genre='pokemon'){
+    const clean=String(name||'').trim();
+    return catalogProductMatch(clean,genre)?.name||clean;
+  }
+  function rebuildCatalogProductIndex(){
+    const index=new Map(),byId=new Map();
+    for(const product of cloudProducts){
+      if(!product?.id||!product?.name)continue;
+      byId.set(product.id,product);
+      index.set(catalogProductIdentity(product.name,product.genre||'pokemon'),product);
+    }
+    for(const alias of cloudProductAliases){
+      const target=byId.get(alias.product_id);
+      if(!target||target.genre!==alias.genre)continue;
+      const key=catalogProductIdentity(alias.alias_name,alias.genre);
+      if(!index.has(key))index.set(key,target);
+    }
+    cloudProductIndex=index;
+  }
+  function resolveLotteryProductMaster(item){
+    if(!item?.product_name)return item;
+    const master=catalogProductMatch(item.product_name,lotteryGenre(item));
+    if(!master)return item;
+    return {...item,
+      catalog_product_id:master.id,
+      product_name_original:item.product_name,
+      product_name:master.name};
+  }
+  function fillCatalogProductInputs(){
+    for(const [formId,listId] of [
+      ['lpAppForm','lpAppCatalogProducts'],
+      ['lpCardForm','lpCardCatalogProducts']
+    ]){
+      const form=$(formId),list=$(listId);
+      if(!form||!list)continue;
+      list.replaceChildren();
+      const genre=form.elements.namedItem('review_category')?.value||'pokemon';
+      const seen=new Set(),names=[];
+      for(const product of cloudProducts)
+        if(product.genre===genre&&product.name)names.push(product.name);
+      for(const alias of cloudProductAliases)
+        if(alias.genre===genre&&alias.alias_name)names.push(alias.alias_name);
+      for(const name of names){
+        if(seen.has(name))continue;
+        seen.add(name);
+        const option=document.createElement('option');
+        option.value=name;list.append(option);
+        if(seen.size>=500)break;
+      }
+    }
+  }
+  function normalizeCatalogProductInput(form){
+    const input=form?.elements.namedItem('product_name');
+    const genre=form?.elements.namedItem('review_category')?.value||'pokemon';
+    if(!input?.value)return;
+    const master=catalogProductMatch(input.value,genre);
+    if(!master)return;
+    input.value=master.name;
+    const kind=form.elements.namedItem('product_type');
+    if(kind && kind.value==='unknown' && ['pack','deck'].includes(master.category))
+      kind.value=master.category;
+  }
+  // Remote collector JSON isn't in Supabase. Sync it when an authorized
+  // developer opens the lottery list; manual entries sync via DB triggers.
+  async function syncCollectedCatalogProducts(force=false){
+    if(!isDeveloper()||!authUser||!supabaseClient||cloudProductSyncBusy)return false;
+    if(!force&&Date.now()-cloudProductSyncAt<20*60*1000)return true;
+    cloudProductSyncBusy=true;
+    try{
+      const seen=new Set(),pending=[];
+      const sorted=[...lotteryItems].sort((a,b)=>
+        lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
+      for(const item of sorted){
+        const name=String(item?.product_name||'').trim(),genre=lotteryGenre(item);
+        if(!name||name.length>200||
+           !['pokemon','onepiece','yugioh'].includes(genre)||
+           item.app_lottery_hidden||item.manual_card_hidden)continue;
+        const identity=catalogProductIdentity(name,genre);
+        if(seen.has(identity)||cloudProductIndex.has(identity))continue;
+        seen.add(identity);
+        pending.push({name,genre,category:lotteryProductType(item)});
+        if(pending.length>=300)break;
+      }
+      if(!pending.length){cloudProductSyncAt=Date.now();return true;}
+      for(let offset=0;offset<pending.length;offset+=150){
+        const {error}=await supabaseClient.rpc('catalog_product_sync_batch_v1',
+          {p_items:pending.slice(offset,offset+150)});
+        if(error)throw error;
+      }
+      cloudProductSyncAt=Date.now();
+      await loadCloudData();
+      return true;
+    }catch(error){
+      console.warn('商品マスターへの収集データ同期に失敗しました:',error);
+      return false;
+    }finally{cloudProductSyncBusy=false;}
+  }
+
   // クラウドデータは端末のlocalStorageに混ぜない（削除後に復活させないため）。
   function mergeCloudProducts() {
     const merge = (base, category) => {
       const items = base.map(p=>({...p}));
-      for (const row of cloudProducts.filter(p=>p.category===category)) {
+      for (const row of cloudProducts.filter(p=>p.category===category&&p.genre==='pokemon')) {
         const p = {name:row.name,reading:row.reading||'',date:row.release_date||'',price:row.price==null?'':String(row.price),tax:''};
         const i=items.findIndex(x=>x.name===p.name);
         if(i>=0) items[i]={...items[i],...p}; else items.push(p);
@@ -2588,9 +2702,10 @@
 
   async function loadCloudData() {
     if (!supabaseClient) return;
-    const [p,s] = await Promise.all([
-      supabaseClient.from('catalog_products').select('id,category,name,reading,release_date,price').order('created_at',{ascending:false}).limit(2000),
-      supabaseClient.from('catalog_stores').select('id,name,category,city,address,lat,lng').order('created_at',{ascending:false}).limit(2000)
+    const [p,s,aliases] = await Promise.all([
+      supabaseClient.from('catalog_products').select('id,genre,category,name,name_key,source,reading,release_date,price').order('created_at',{ascending:false}).limit(2000),
+      supabaseClient.from('catalog_stores').select('id,name,category,city,address,lat,lng').order('created_at',{ascending:false}).limit(2000),
+      supabaseClient.from('catalog_product_aliases').select('id,product_id,genre,alias_name,alias_key').limit(3000)
     ]);
     if (p.error || s.error) {
       const target=$('cloudAdminStatus');
@@ -2598,11 +2713,16 @@
       return;
     }
     cloudProducts=p.data||[];
+    if(aliases.error)console.warn('商品マスター別名の取得エラー:',aliases.error);
+    cloudProductAliases=aliases.error?[]:(aliases.data||[]);
+    rebuildCatalogProductIndex();
     cloudStores=(s.data||[]).filter(isStore).map(x=>({...x,lat:Number(x.lat),lng:Number(x.lng)}));
-    mergeCloudProducts(); updateStoreCount(); renderCloudAdminLists(); fillLotteryProductSuggestions();
+    mergeCloudProducts();updateStoreCount();renderCloudAdminLists();
+    fillLotteryProductSuggestions();fillCatalogProductInputs();
+    if(lotteryBaseItems.length)lpCloudApply();
     if (document.activeElement===$('product')) showProductDropdown();
     if (document.activeElement===$('mapProductSearch')) showMapProductDropdown();
-    if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・共有店舗 ${cloudStores.length}件`;
+    if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・登録別名 ${cloudProductAliases.length}件・共有店舗 ${cloudStores.length}件`;
   }
 
   function renderCloudAdminLists() {
@@ -3849,7 +3969,8 @@
   }
 
   function lpCloudApply() {
-    lotteryItems = lotteryBaseItems.map(base=>lpCardOverlay(lpLegacyApply(base))).filter(Boolean);
+    lotteryItems = lotteryBaseItems.map(base=>lpCardOverlay(lpLegacyApply(base)))
+      .filter(Boolean).map(resolveLotteryProductMaster);
     if($('lpPrefecture'))renderLotteryPrefectures();
     if($('lotteryView')?.classList.contains('active'))renderLottery();
     if($('lotteryResultsView')?.classList.contains('active'))lpResultsRender();
@@ -4033,6 +4154,7 @@
         lotteryBaseItems=[...clean,...lpAppMergedItems()];
         if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); await lpAppRefresh(); }
         lpCloudApply();
+        void syncCollectedCatalogProducts();
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
         const update = data.updated_at || data.collected_at;
