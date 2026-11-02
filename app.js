@@ -465,6 +465,7 @@
     refreshLotteryOnsiteArchive(true);
     supabaseClient.channel('pokeca-cloud-catalog-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_products'},()=>loadCloudData())
+      .on('postgres_changes',{event:'*',schema:'public',table:'catalog_product_aliases'},()=>loadCloudData())
       .on('postgres_changes',{event:'*',schema:'public',table:'catalog_stores'},()=>loadCloudData())
       .subscribe();
     window.addEventListener('focus',()=>{
@@ -2655,7 +2656,19 @@
     for(const [kind,rows] of [['Product',cloudProducts],['Store',cloudStores]]) {
       const target=$('cloud'+kind+'List'); if(!target)continue;
       target.replaceChildren();
-      for(const item of rows) {
+      const productQuery=kind==='Product'?productNorm($('cloudProductSearch')?.value||''):'';
+      const found=kind==='Product'
+        ? rows.filter(item=>!productQuery||productNorm([
+            item.name,item.reading,
+            ...cloudProductAliases.filter(alias=>alias.product_id===item.id).map(alias=>alias.alias_name)
+          ].join(' ')).includes(productQuery))
+        : rows;
+      const visible=kind==='Product'?found.slice(0,150):found;
+      if(kind==='Product'&&$('cloudProductCount'))
+        $('cloudProductCount').textContent=
+          '商品マスター全'+rows.length+'件／検索結果'+found.length+'件'+
+          (found.length>150?'（先頭150件を表示）':'');
+      for(const item of visible) {
         const div=document.createElement('div');div.className='cloud-admin-item';
         const label=document.createElement('span');
         const genreNames={pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'};
@@ -2668,7 +2681,7 @@
           : item.name+'（'+(item.city||'地域未設定')+'）';
         const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.addEventListener('click',()=>{
           if(kind==='Product') {
-            for(const [field,value] of Object.entries({Id:item.id,Genre:item.genre||'pokemon',Category:item.category,Name:item.name,Reading:item.reading||'',Date:item.release_date||'',Price:item.price??''})) $('cloudProduct'+field).value=value;
+            for(const [field,value] of Object.entries({Id:item.id,Genre:item.genre||'pokemon',Category:item.category,Name:item.name,Reading:item.reading||'',Date:item.release_date||'',Price:item.price??'',Tax:item.price_tax||''})) $('cloudProduct'+field).value=value;
           } else {
             for(const [field,value] of Object.entries({Id:item.id,Name:item.name,Category:item.category,City:item.city||'',Address:item.address||'',Lat:item.lat,Lng:item.lng})) $('cloudStore'+field).value=value;
           }
@@ -2760,7 +2773,7 @@
     const value=field=>$('cloud'+kind+field).value.trim();
     let payload;
     if(product) {
-      payload={genre:value('Genre'),category:value('Category'),name:value('Name'),reading:value('Reading'),release_date:value('Date')||null,price:value('Price')===''?null:Number(value('Price'))};
+      payload={genre:value('Genre'),category:value('Category'),name:value('Name'),reading:value('Reading'),release_date:value('Date')||null,price:value('Price')===''?null:Number(value('Price')),price_tax:value('Tax')};
     } else {
       payload={name:value('Name'),category:value('Category'),city:value('City'),address:value('Address'),lat:Number(value('Lat')),lng:Number(value('Lng'))};
       if(!isStore(payload))return alert('緯度・経度を確認してください（現在は栃木周辺の範囲に対応）。');
@@ -2779,6 +2792,7 @@
       $('cloud'+kind+'Form').addEventListener('submit',e=>saveCloudItem(kind,e));
       $('cloud'+kind+'Cancel').addEventListener('click',()=>{$('cloud'+kind+'Form').reset();$('cloud'+kind+'Id').value='';});
     }
+    $('cloudProductSearch')?.addEventListener('input',renderCloudAdminLists);
     $('cloudUseSelectedStore').addEventListener('click',()=>{
       const lat=Number($('lat')?.value),lng=Number($('lng')?.value);
       if(!Number.isFinite(lat)||!Number.isFinite(lng)||!lat||!lng) return alert('登録画面で店舗を選択してからお試しください。');
