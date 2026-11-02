@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-02T08:30:56.680886+00:00",
-  "unique_livepocket_urls": 629,
+  "collected_at": "2026-11-02T09:01:10.366506+00:00",
+  "unique_livepocket_urls": 630,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9467,6 +9467,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
       "first_detected_at": "2026-11-02T03:01:05.502918+00:00"
     },
     {
@@ -9505,7 +9507,25 @@
         }
       ],
       "first_detected_at": "2026-11-02T08:30:58.277681+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/b0pdj",
+      "store_name": "JUMP SHOP池袋店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-11-02T09:00:21.723000+00:00",
+      "stores": [
+        {
+          "name": "JUMP SHOP池袋店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【事前入店申込・抽選】11月21日(土)JUMP SHOP池袋店",
+      "application_end_at": "2026-11-07T23:59:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【事前入店申込・抽選】11月21日(土)JUMP SHOP池袋店",
+      "first_detected_at": "2026-11-02T09:01:11.850614+00:00"
     }
   ],
-  "updated_at": "2026-11-02T08:51:08.552928+00:00"
+  "updated_at": "2026-11-02T09:01:55.152763+00:00"
 }

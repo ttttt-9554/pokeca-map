@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-02T08:30:56.680886+00:00",
+  "collected_at": "2026-11-02T09:01:10.366506+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 629,
+  "unique_livepocket_urls": 630,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -17201,34 +17201,62 @@
       },
       "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【抽選販売】11月21日(土) JUMP SHOP仙台店",
       "application_end_at": "2026-11-07T23:59:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/b0pdj",
+      "discord_message_id": "1566738729551536260",
+      "discord_posted_at": "2026-11-02T09:00:21.723000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n🔁 再通知\n📍東京都\n古本市場竹の塚店\n受付終了: 11/04 22:00（残り2日3時間）\nhttps://livepocket.jp/e/ugp5c\n\n📍東京都\nJUMP SHOP池袋店\n受付終了: 11/07 23:59（残り5日5時間）\nhttps://livepocket.jp/e/b0pdj\n\n🔁 再通知\n📍千葉県\nTSUTAYA北習志野駅前店\n受付終了: 11/06 23:59（残り4日5時間）\nhttps://livepocket.jp/e/nwul2\n\n📍宮城県\nJUMP SHOP仙台店\n受付終了: 11/07 23:59（残り5日5時間）\nhttps://livepocket.jp/e/mr_dw",
+      "store_name": "JUMP SHOP池袋店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "JUMP SHOP池袋店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【事前入店申込・抽選】11月21日(土)JUMP SHOP池袋店",
+      "application_end_at": "2026-11-07T23:59:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 467,
+    "parsed": 468,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 444,
-    "prefecture": 401,
-    "event_title": 316,
+    "store_name": 445,
+    "prefecture": 402,
+    "event_title": 317,
     "event_date": 1,
     "product_name": 89,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 593,
+    "application_end_at": 594,
     "application_start_at": 589,
-    "stores_events": 455
+    "stores_events": 456
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566731133838692434"
+      "1551580466266644552": "1566738729551536260"
     },
     "last_run": {
-      "checked_at": "2026-11-02T08:30:56.680886+00:00",
+      "checked_at": "2026-11-02T09:01:10.366506+00:00",
       "new_urls": 1,
-      "original_urls": 628,
+      "original_urls": 629,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -17429,7 +17457,8 @@
         "1566414024164376706": "2026-11-01T11:35:57.286392+00:00",
         "1566648116118036570": "2026-11-02T03:01:04.667373+00:00",
         "1566663180888051862": "2026-11-02T04:00:56.933141+00:00",
-        "1566731133838692434": "2026-11-02T08:30:57.461366+00:00"
+        "1566731133838692434": "2026-11-02T08:30:57.461366+00:00",
+        "1566738729551536260": "2026-11-02T09:01:10.994069+00:00"
       },
       "checked_search_urls": {}
     },
@@ -20106,8 +20135,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ugp5c": {
-          "checked_at": "2026-11-02T03:01:41.348700+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/nwul2": {
@@ -20117,6 +20146,11 @@
         },
         "https://livepocket.jp/e/mr_dw": {
           "checked_at": "2026-11-02T08:31:20.346411+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/b0pdj": {
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
           "status": "checked_title_deadline",
           "http_status": null
         }
@@ -21753,8 +21787,8 @@
         },
         "https://livepocket.jp/e/ugp5c": {
           "detected_at": "2026-11-02T03:01:05.502918+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-02T03:01:41.348700+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nwul2": {
@@ -21767,6 +21801,12 @@
           "detected_at": "2026-11-02T08:30:58.277681+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-02T08:31:20.346411+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/b0pdj": {
+          "detected_at": "2026-11-02T09:01:11.850614+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
           "http_status": null
         }
       },
@@ -23087,6 +23127,11 @@
         "https://livepocket.jp/e/y2ltb": {
           "attempts": 2,
           "last_attempt_at": "2026-11-01T23:51:23.488820+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/ugp5c": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-02T09:01:55.152763+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28312,7 +28357,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-02T03:01:41.348700+00:00",
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
           "title_observed": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
           "genre": "pokemon",
           "product_origin": "",
@@ -28336,6 +28381,17 @@
           "http_status": "",
           "checked_at": "2026-11-02T08:31:20.346411+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【抽選販売】11月21日(土) JUMP SHOP仙台店",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/b0pdj": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
+          "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【事前入店申込・抽選】11月21日(土)JUMP SHOP池袋店",
           "genre": "onepiece",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
@@ -32710,7 +32766,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ugp5c": {
-          "checked_at": "2026-11-02T03:01:41.348700+00:00",
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -32737,6 +32793,19 @@
         },
         "https://livepocket.jp/e/mr_dw": {
           "checked_at": "2026-11-02T08:31:20.346411+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/b0pdj": {
+          "checked_at": "2026-11-02T09:01:55.152763+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
