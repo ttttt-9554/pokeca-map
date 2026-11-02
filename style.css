@@ -1341,7 +1341,11 @@ nav[aria-label="メインメニュー"]>button span{
 .lp-app-form-actions button{min-height:44px;font-weight:700}
 #lpAppFormStatus{font-size:13px;white-space:pre-wrap}
 .lp-app-search{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}
-.lp-app-search label:first-child,.lp-app-search input:first-of-type{grid-column:1/-1}
+/* The search enhancer wraps the input, so place that direct grid child too. */
+.lp-app-search label:first-child,.lp-app-search>input:first-of-type,.lp-app-search>.tr-search-field{grid-column:1/-1}
+@media(max-width:640px){
+  .lp-app-search{grid-template-columns:minmax(0,1fr)}
+}
 #lpAppStatus{font-size:13px;margin:10px 0 13px}
 .lp-app-archived-list{display:grid;gap:10px;margin-top:9px}
 .lp-app-archived-row{display:flex;gap:9px;justify-content:space-between;align-items:center;
