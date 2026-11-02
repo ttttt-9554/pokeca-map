@@ -181,6 +181,7 @@
     if(!dropdown||!input||!authorized||!canAccess()){hideStoreSuggestions();return;}
     if(!open&&!masterSuggestionsOpen)return;
     const term=normalize(input.value);
+    if(!term){hideStoreSuggestions();return;}
     const all=[...masterChoices.entries()].filter(([label,row])=>
       !term||normalize(label+' '+row.name+' '+row.prefecture).includes(term));
     // Prefer a matching store name to a prefecture-only match.
@@ -189,6 +190,7 @@
         normalize(row.name).includes(term)?1:2;
       return rank(a)-rank(b)||a[0].localeCompare(b[0],'ja');
     });
+    if(!all.length){hideStoreSuggestions();return;}
     matchingMasterChoices=all.slice(0,40);
     masterSuggestionIndex=-1;
     const count=all.length;

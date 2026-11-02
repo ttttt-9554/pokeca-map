@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-search-controls-revert-v4">
+  <link rel="stylesheet" href="style.css?v=20261102-matching-search-v5">
 
   <style>
     [hidden] { display: none !important; }
@@ -1866,7 +1866,7 @@ nav[aria-label="メインメニュー"] {
   <!-- Read-only alias mappings: master merges always display the target store. -->
   <script src="store_aliases_v1.js?v=20261102-store-canonical-v1"></script>
   <!-- Information Plaza: shared sales editor for logged-in users -->
-  <script src="info_plaza_sales_v1.js?v=20261102-store-canonical-v1"></script>
+  <script src="info_plaza_sales_v1.js?v=20261102-matching-search-v5"></script>
   <!-- Lottery cards: read-only store sales reference -->
   <script src="lottery_sales_reference_v1.js?v=20261102-store-canonical-v1"></script>
   <!-- Per-branch Google Maps links with read-only store-master addresses -->
@@ -1876,13 +1876,14 @@ nav[aria-label="メインメニュー"] {
   <script src="supabase_usage_v1.js?v=20261102-supabase-usage-v1"></script>
 
   <!-- アプリ本体 -->
+  <script src="search_inputs_v1.js?v=20261102-matching-search-v5"></script>
   <script>
   // Load the app script with the refresh token when the user explicitly
   // requests an update, preventing a stale app.js response in iOS/Chrome.
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-search-controls-revert-v4';
+      ? token : '20261102-matching-search-v5';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

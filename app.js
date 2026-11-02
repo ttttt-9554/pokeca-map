@@ -1446,19 +1446,17 @@
   function showMapProductDropdown() {
     const dropdown = get('mapProductDropdown');
     const query = productNorm(get('mapProductSearch').value);
+    if(!query){closeMapProductDropdown();return;}
     dropdown.replaceChildren();
     const categories = mapCategories();
     const products = [
       ...(categories.includes('pack') ? packs.map(p => ({...p, category:'pack'})) : []),
       ...(categories.includes('deck') ? decks.map(p => ({...p, category:'deck'})) : [])
     ].sort((a,b) => productDateValue(b.date) - productDateValue(a.date));
-    if (!categories.length) {
-      dropdown.textContent = '商品カテゴリを1つ以上選択してください。';
-    } else if (!products.length) {
-      dropdown.textContent = '商品データを読み込み中です。';
-    } else {
+    if(!categories.length||!products.length){closeMapProductDropdown();return;}
+    {
       const matches = products.filter(p => mapProductMatches(p, query));
-      if (!matches.length) dropdown.textContent = '該当する商品がありません。';
+      if(!matches.length){closeMapProductDropdown();return;}
       matches.slice(0, 120).forEach(p => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -1784,37 +1782,14 @@
 
   function showProductDropdown() {
     if (!productDropdown) return;
-
-    const input = get('product');
-    const query = productNorm(input.value);
-    const products = currentProducts();
-
+    const input=get('product'),query=productNorm(input.value);
+    const products=currentProducts();
     productDropdown.replaceChildren();
-
-    if (selectedCategories().length === 0) {
-      productDropdown.textContent =
-        '商品カテゴリを選択してください。';
-      productDropdown.hidden = false;
-      return;
+    if(!query||!selectedCategories().length||!products.length){
+      closeProductDropdown();return;
     }
-
-    if (!products.length) {
-      productDropdown.textContent =
-        '商品データを読み込み中、または取得できません。';
-      productDropdown.hidden = false;
-      return;
-    }
-
-    const matches = products.filter(p=>mapProductMatches(p,query));
-
-    if (!matches.length) {
-      const message = document.createElement('p');
-      message.className = 'hint';
-      message.textContent =
-        '該当する商品がありません。手入力も可能です。';
-      message.style.padding = '12px';
-      productDropdown.append(message);
-    }
+    const matches=products.filter(p=>mapProductMatches(p,query));
+    if(!matches.length){closeProductDropdown();return;}
 
     matches.slice(0, 150).forEach(p => {
       const button = document.createElement('button');
@@ -2151,9 +2126,9 @@
     const input = get('storeQuery');
     const query = norm(input.value);
     chainDropdown.replaceChildren();
-
-    const options = chainNames.filter(name =>
-      !query ||
+    if(!query){closeChainDropdown();return;}
+    const names=[...new Set([...chainNames,...stores.map(row=>row.name),...cloudStores.map(row=>row.name)])];
+    const options = names.filter(name =>
       norm(name).includes(query) ||
       (name === 'ファミリーマート' &&
        norm('ファミマ').includes(query)) ||
@@ -2161,7 +2136,7 @@
        'seveneleven'.includes(query))
     );
 
-    options.forEach(name => {
+    options.slice(0,60).forEach(name => {
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = name;
@@ -2560,6 +2535,109 @@
     return match?{name:match.name,prefecture:match.prefecture}:canonical;
   }
 
+  let lpSearchMasterStores=[],lpSearchMasterUser='',lpSearchMasterAt=0,lpSearchMasterLoading=null;
+  function lpSearchKind(input){
+    if(input.matches('[data-lp-manual-store-pref]'))return 'prefecture';
+    if(input.matches('[data-lp-manual-store-name]'))return 'store';
+    if(input.dataset.searchKind)return input.dataset.searchKind;
+    if(input.matches('[name="product_name"],#product,#cloudProductName')||
+       /product|wishlist/i.test(input.id))return 'product';
+    if(input.matches('[name="store_name"],[name="extra_store_name"],[data-lp-store-name],[data-lp-app-store-name],[data-lp-ext-store-name],#shop,#cloudStoreName')||
+       /store|infoSales/i.test(input.id))return 'store';
+    if(input.id==='searchArea')return 'area';
+    return 'event';
+  }
+  function lpSearchStorePool(){
+    const master=lpSearchMasterUser===(authUser?.id||'')?lpSearchMasterStores:[];
+    const raw=[...master,...lotteryItems.flatMap(lotteryStoreEntries),
+      ...cloudStores,...stores];
+    const unique=new Map();
+    for(const row of raw){
+      if(!row?.name)continue;
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(row)||row;
+      const name=String(canonical.name||'').trim(),prefecture=String(canonical.prefecture||'').trim();
+      if(!name)continue;
+      const key=productNorm(name)+'|'+prefecture;
+      if(!unique.has(key))unique.set(key,{...row,name,prefecture});
+    }
+    return [...unique.values()];
+  }
+  async function lpSearchPrepare(input){
+    if(lpSearchKind(input)!=='store'||!supabaseClient||!authUser||discordRoleAuthPending)return;
+    const user=authUser.id;
+    if(lpSearchMasterUser===user&&Date.now()-lpSearchMasterAt<90000)return;
+    if(lpSearchMasterLoading)return lpSearchMasterLoading;
+    lpSearchMasterLoading=(async()=>{
+      try{
+        const {data,error}=await supabaseClient.rpc('lottery_store_master_choices_v1');
+        if(error)throw error;
+        if(authUser?.id!==user||discordRoleAuthPending)return;
+        lpSearchMasterStores=(Array.isArray(data?.masters)?data.masters:[])
+          .filter(row=>row?.name&&!row.merged_into);
+        lpSearchMasterUser=user;lpSearchMasterAt=Date.now();
+      }catch(error){console.warn('検索用の店舗候補を読み込めませんでした:',error?.message||error);}
+      finally{lpSearchMasterLoading=null;}
+    })();
+    return lpSearchMasterLoading;
+  }
+  function lpSearchSuggestions(input){
+    const kind=lpSearchKind(input);
+    if(kind==='prefecture')return LP_MANUAL_AREAS.map(value=>({value}));
+    if(kind==='area'){
+      const available=[...stores,...cloudStores];
+      const regions=LP_PREFECTURES.filter(pref=>available.some(row=>String(row.address||'').startsWith(pref)));
+      return [...new Set([...available.map(row=>row.city).filter(Boolean),...regions])]
+        .map(value=>({value}));
+    }
+    const products=()=>{
+      const genre=input.form?.elements.namedItem('review_category')?.value;
+      return cloudProducts.filter(p=>!genre||p.genre===genre).map(p=>({
+        value:p.name,detail:lpProductDetailText(p),
+        search:[p.reading,...cloudProductAliases.filter(a=>a.product_id===p.id)
+          .map(a=>a.alias_name)].filter(Boolean).join(' ')
+      }));
+    };
+    if(kind==='product')return products();
+    let targeted=[];
+    try{targeted=JSON.parse(input.closest('[data-search-store-options]')?.dataset.searchStoreOptions||'[]');}
+    catch(_){}
+    const storeChoices=[...targeted,...lpSearchStorePool()].map(row=>({
+      value:row.name,prefecture:row.prefecture||'',
+      detail:[row.prefecture,row.city,row.address].filter(Boolean).join(' · '),
+      search:[row.name,row.prefecture,row.city,row.address].filter(Boolean).join(' ')
+    }));
+    if(kind==='store')return storeChoices;
+    const events=lotteryItems.filter(item=>!item.event_title_provisional&&item.event_title)
+      .map(item=>({value:item.event_title,detail:lotteryStoreEntries(item)
+        .map(row=>row.name).join('・')}));
+    return [...products(),...storeChoices,...events];
+  }
+  function lpSearchPrefectureInput(input){
+    if(lpSearchKind(input)!=='store')return null;
+    const row=input.closest('.lp-track-account-store,.lp-card-store-row,.lp-ext-store-row,.lp-app-store-row');
+    if(row)return row.querySelector('[data-lp-manual-store-pref],[data-lp-store-prefecture],[data-lp-ext-store-pref],[data-lp-app-store-prefecture],[name="extra_store_prefecture"]');
+    return input.name==='store_name'?input.form?.elements.namedItem('prefecture'):null;
+  }
+  function lpSearchSelect(input,choice){
+    if(input.id==='searchArea')searchStores();
+    const area=lpSearchPrefectureInput(input);
+    if(area&&choice.prefecture){
+      if(area.tagName!=='SELECT'||[...area.options].some(option=>option.value===choice.prefecture)){
+        area.value=choice.prefecture;
+        area.dispatchEvent(new Event('input',{bubbles:true}));
+        area.dispatchEvent(new Event('change',{bubbles:true}));
+      }
+    }
+  }
+  function initSearchInputs(){
+    globalThis.window?.TorecaSearchInputs?.init?.({
+      normalize:productNorm,suggestions:lpSearchSuggestions,prepare:lpSearchPrepare,
+      select:lpSearchSelect,
+      clear(input){
+        if(input.id==='storeQuery'||input.id==='searchArea')searchStores();
+      }
+    });
+  }
   function fillCatalogProductInputs(){
     for(const [formId,listId] of [
       ['lpAppForm','lpAppCatalogProducts'],
@@ -2676,6 +2754,7 @@
     cloudStores=(s.data||[]).filter(isStore).map(x=>({...x,lat:Number(x.lat),lng:Number(x.lng)}));
     mergeCloudProducts();updateStoreCount();renderCloudAdminLists();
     fillLotteryProductSuggestions();fillCatalogProductInputs();
+    globalThis.window?.TorecaSearchInputs?.refresh?.();
     if(lotteryBaseItems.length){
       lpCloudApply();
       if(isDeveloper())void syncCollectedCatalogProducts();
@@ -6244,7 +6323,7 @@
     if(!status||!summary||!list)return;
     lpResultsAccount();
     const searchInput=$('lpResultsSearch'),clearButton=$('lpResultsSearchClear');
-    if(searchInput&&clearButton)clearButton.hidden=!searchInput.value;
+    if(searchInput&&clearButton){clearButton.hidden=false;clearButton.disabled=!searchInput.value;}
     const events=lpResultsKnownEvents();
     // Upper summary counts ONLY events without any decided wins or losses.
     const pendingOnlyEvents=events.filter(item=>{
@@ -10516,6 +10595,7 @@
       initLottery();
       lpResultsInit();
       bindEvents();
+      initSearchInputs();
       // Hide lottery navigation before the asynchronous Discord login starts.
       updateLotteryVisibility();
       initDevAccordions();

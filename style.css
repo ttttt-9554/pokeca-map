@@ -1,6 +1,36 @@
 
 .lp-card-product{font-weight:650;line-height:1.6}
 
+/* Search controls follow the Information Plaza store picker. */
+.tr-search-field{display:block;position:relative;width:100%;min-width:0;text-align:left}
+.tr-search-row{display:flex;align-items:stretch;gap:7px;width:100%;min-width:0}
+.tr-search-row>.tr-search-input{display:block;flex:1 1 0;min-width:0;width:100%;min-height:46px;margin:0;align-self:stretch}
+.tr-search-input::-webkit-search-cancel-button{display:none}
+.tr-search-row>button.tr-search-clear,
+#lpTrackerEditor .tr-search-row>button.tr-search-clear,
+#lpResultsSearchClear.tr-search-clear{
+  position:static!important;display:flex;align-items:center;justify-content:center;
+  flex:0 0 42px!important;width:42px!important;min-width:42px!important;min-height:46px;
+  align-self:stretch;margin:0!important;padding:5px!important;border-radius:10px;
+  font-size:23px!important;font-weight:500;line-height:1;box-shadow:none;
+  border:1px solid var(--app-border,#cbd5e1);
+  color:var(--app-text,#334155);background:var(--app-surface2,#fff)}
+.tr-search-row>button.tr-search-clear:disabled{opacity:.36;cursor:default}
+.tr-search-options{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:900;
+  max-height:min(280px,35dvh);overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;border:1px solid var(--app-border,#cbd5e1);
+  border-radius:11px;background:var(--app-surface,#fff);color:var(--app-text,#172033);
+  box-shadow:0 10px 28px #0004;text-align:left}
+.tr-search-options[hidden]{display:none!important}
+.tr-search-options>button.tr-search-option{display:block;width:100%;min-height:47px;margin:0;
+  padding:10px 12px;border:0;border-bottom:1px solid var(--app-border,#e2e8f0);border-radius:0;
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);text-align:left;
+  white-space:normal;overflow-wrap:anywhere;font-size:14px;font-weight:600;line-height:1.5}
+.tr-search-option strong{display:block;font-size:14px}
+.tr-search-option small{display:block;margin-top:3px;font-size:12px;font-weight:400;color:var(--app-muted,#64748b)}
+.tr-search-options>button.tr-search-option:hover,
+.tr-search-options>button.tr-search-option[aria-selected="true"]{background:var(--app-surface2,#edf3fc);outline:2px solid #609cff;outline-offset:-2px}
+
 /* ==========================================
    ポケカ発見マップ
    style.css v17
