@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-product-master-ui-v1">
+  <link rel="stylesheet" href="style.css?v=20261102-product-master-ui-v2">
 
   <style>
     [hidden] { display: none !important; }
@@ -1882,7 +1882,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-product-master-ui-v1';
+      ? token : '20261102-product-master-ui-v2';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
