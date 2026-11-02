@@ -45,11 +45,10 @@
   let stores = [];
   let packs = [];
   let decks = [];
-  let csvPacks = [];
-  let csvDecks = [];
   let cloudProducts = [];
   let cloudProductAliases = [];
   let cloudProductIndex = new Map();
+  let cloudProductById = new Map();
   let cloudProductSyncAt = 0, cloudProductSyncBusy = false;
   let cloudStores = [];
   let mapSelectedProducts = []; // {name, category}
@@ -1380,93 +1379,17 @@
       Number(match[3]);
   }
 
-  function parseProducts(text) {
-    return parseCSV(text)
-      .map(row => ({
-        name: String(row['パック名'] || '').trim(),
-        date: String(row['発売日'] || '').trim(),
-        price: String(
-          row['希望小売価格（円）'] || ''
-        ).trim(),
-        tax: String(row['価格表記'] || '').trim(),
-        reading: String(row['よみがな'] || '').trim()
-      }))
-      .filter(p => p.name)
-      .sort(
-        (a, b) =>
-          productDateValue(b.date) -
-          productDateValue(a.date)
-      );
-  }
-
+  // 旧CSVの発見マップ商品はSupabaseのcatalog_productsへ取り込み済み。
+  // アプリ内ではCSVを再読み込みせず、共有商品マスターだけを参照する。
   async function loadProducts() {
-    const sources = [
-      ['pack', './pokemon_packs.csv'],
-      ['deck', './pokemon_decks.csv']
-    ];
-
-    await Promise.all(
-      sources.map(async ([category, file]) => {
-        try {
-          const response = await fetch(file);
-          if (!response.ok) {
-            throw new Error(`${file}: HTTP ${response.status}`);
-          }
-
-          const products = parseProducts(
-            await response.text()
-          );
-
-          if (category === 'pack') {
-            csvPacks = products;
-          } else {
-            csvDecks = products;
-          }
-
-          mergeCloudProducts();
-          fillLotteryProductSuggestions();
-          console.log(
-            category, '商品数:', products.length
-          );
-
-          if (document.activeElement === get('product')) {
-            showProductDropdown();
-          }
-          if (document.activeElement === get('mapProductSearch')) {
-            showMapProductDropdown();
-          }
-        } catch (error) {
-          console.error('商品CSV読み込みエラー:', error);
-        }
-      })
-    );
+    mergeCloudProducts();
   }
 
   // ========================================
   // 商品検索
   // ========================================
 
-  const productAliases = {
-    'MEGAドリームex': ['メガドリ'],
-    'VSTARユニバース': ['vユニ', 'ブイユニ'],
-    'シャイニートレジャーex': ['シャイトレ'],
-    'シャイニースターV': ['シャイスタ'],
-    'ポケモンカード151': ['151', 'イチゴーイチ'],
-    '黒炎の支配者': ['黒炎'],
-    'ロケット団の栄光': ['ロケ団'],
-    'テラスタルフェスex': ['テラフェス'],
-    '30th CELEBRATION': ['30周年'],
-    '25th ANNIVERSARY COLLECTION': ['25周年'],
-    'バトルパートナーズ': ['バトパ'],
-    '超電ブレイカー': ['超電'],
-    '楽園ドラゴーナ': ['楽ドラ'],
-    '熱風のアリーナ': ['熱風'],
-    'インフェルノX': ['インフェ'],
-    'メガブレイブ': ['メガブレ'],
-    'メガシンフォニア': ['メガシン'],
-    'ホワイトフレア': ['ホワフレ'],
-    'ブラックボルト': ['ブラボル']
-  };
+  // 商品の別名・略称はcatalog_product_aliasesで一元管理する。
 
   function productNorm(value) {
     return String(value || '')
@@ -1500,16 +1423,18 @@
     if (!categories.includes(category)) return false;
     const chosen = mapSelectedProducts.filter(p => categories.includes(p.category));
     if (!chosen.length) return true;
-    return chosen.some(p => p.category === category &&
-      productNorm(p.name) === productNorm(report.product));
+    const reportName=catalogProductCanonicalName(report.product,'pokemon');
+    return chosen.some(p=>p.category===category &&
+      catalogProductKey(catalogProductCanonicalName(p.name,'pokemon'))===
+      catalogProductKey(reportName));
   }
 
   function mapProductMatches(product, query) {
     if (!query) return true;
     if (productNorm(product.name).includes(query) || productNorm(product.reading).includes(query)) return true;
-    return Object.entries(productAliases).some(([name, aliases]) =>
-      productNorm(product.name).includes(productNorm(name)) &&
-      aliases.some(alias => productNorm(alias).includes(query)));
+    return cloudProductAliases.some(alias=>
+      alias.product_id===product.id &&
+      productNorm(alias.alias_name).includes(query));
   }
 
   function closeMapProductDropdown() {
@@ -1879,24 +1804,7 @@
       return;
     }
 
-    const matches = products.filter(p => {
-      if (!query) return true;
-
-      if (productNorm(p.name).includes(query)) {
-        return true;
-      }
-      if (productNorm(p.reading).includes(query)) {
-        return true;
-      }
-
-      return Object.entries(productAliases).some(
-        ([name, aliases]) =>
-          productNorm(p.name).includes(productNorm(name)) &&
-          aliases.some(alias =>
-            productNorm(alias).includes(query)
-          )
-      );
-    });
+    const matches = products.filter(p=>mapProductMatches(p,query));
 
     if (!matches.length) {
       const message = document.createElement('p');
@@ -2606,6 +2514,7 @@
       if(!index.has(key))index.set(key,target);
     }
     cloudProductIndex=index;
+    cloudProductById=byId;
   }
   function resolveLotteryProductMaster(item){
     if(!item?.product_name)return item;
@@ -2698,23 +2607,25 @@
   }
 
   // クラウドデータは端末のlocalStorageに混ぜない（削除後に復活させないため）。
+  // 唯一の参照元はSupabase。旧CSVをunionして重複させない。
   function mergeCloudProducts() {
-    const merge = (base, category) => {
-      const items = base.map(p=>({...p}));
-      for (const row of cloudProducts.filter(p=>p.category===category&&p.genre==='pokemon')) {
-        const p = {name:row.name,reading:row.reading||'',date:row.release_date||'',price:row.price==null?'':String(row.price),tax:''};
-        const i=items.findIndex(x=>x.name===p.name);
-        if(i>=0) items[i]={...items[i],...p}; else items.push(p);
-      }
-      return items.sort((a,b)=>productDateValue(b.date)-productDateValue(a.date));
-    };
-    packs=merge(csvPacks,'pack'); decks=merge(csvDecks,'deck');
+    const products=cloudProducts
+      .filter(x=>x?.genre==='pokemon' && ['pack','deck'].includes(x.category))
+      .map(x=>({
+        id:x.id,name:x.name,category:x.category,reading:x.reading||'',
+        date:x.release_date||'',price:x.price==null?'':String(x.price),
+        tax:x.price_tax||''
+      }));
+    packs=products.filter(x=>x.category==='pack')
+      .sort((x,y)=>productDateValue(y.date)-productDateValue(x.date));
+    decks=products.filter(x=>x.category==='deck')
+      .sort((x,y)=>productDateValue(y.date)-productDateValue(x.date));
   }
 
   async function loadCloudData() {
     if (!supabaseClient) return;
     const [p,s,aliases] = await Promise.all([
-      supabaseClient.from('catalog_products').select('id,genre,category,name,name_key,source,reading,release_date,price').order('created_at',{ascending:false}).limit(2000),
+      supabaseClient.from('catalog_products').select('id,genre,category,name,name_key,source,reading,release_date,price,price_tax').order('created_at',{ascending:false}).limit(2000),
       supabaseClient.from('catalog_stores').select('id,name,category,city,address,lat,lng').order('created_at',{ascending:false}).limit(2000),
       supabaseClient.from('catalog_product_aliases').select('id,product_id,genre,alias_name,alias_key').limit(3000)
     ]);
@@ -3100,7 +3011,9 @@
 
   function lotteryProductType(item) {
     const kind = String(item.pokemon_map_type || '').toLowerCase();
-    return ['pack','deck','pack/deck'].includes(kind) ? kind : 'unknown';
+    if(['pack','deck','pack/deck'].includes(kind))return kind;
+    const master=cloudProductById.get(item?.catalog_product_id);
+    return master&&['pack','deck'].includes(master.category)?master.category:'unknown';
   }
 
   function lotteryMatchedWishlist(item) {
