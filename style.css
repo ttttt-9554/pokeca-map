@@ -3507,3 +3507,14 @@ html[data-theme="dark"] #lpAppDialog #lpAppApplyStorePreset{
   flex:0 0 auto;min-height:36px;padding:7px 10px;
   border-radius:8px;font-size:12px;line-height:1.3;
 }
+
+/* Single shared product master: searchable catalog on narrow phones. */
+#devView .cloud-catalog-search{display:grid;gap:6px;min-width:0;margin:16px 0 6px}
+#devView .cloud-catalog-search label{font-size:13px;font-weight:750}
+#devView #cloudProductSearch{
+  display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;
+  min-height:44px;padding:9px 12px;font-size:16px;line-height:1.35;
+  color:var(--app-text,#172033);background:var(--app-surface2,#f6f8fd);
+  border:1px solid var(--app-border,#94a3b8);border-radius:9px;
+}
+#devView #cloudProductCount{color:var(--app-muted,#64748b);font-size:12px}
