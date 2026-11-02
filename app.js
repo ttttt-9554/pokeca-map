@@ -3770,6 +3770,7 @@
         if(saved.is_hidden===true)throw Error('非表示の抽選は先に一覧に復元してください。');
         if (!confirm('カードからの手動修正を解除し、従来の修正内容に戻しますか？ 編集履歴は残ります。')) return;
       } else {
+        normalizeCatalogProductInput(form);
         for (const field of LP_CARD_FORM_FIELDS) {
           const raw=String(form.elements.namedItem(field)?.value || '').trim();
           const original=lpCardEditableValue(legacy,field);
@@ -5581,7 +5582,9 @@
   }
 
   function lpAppPayload(){
-    const form=$('lpAppForm'),val=name=>
+    const form=$('lpAppForm');
+    normalizeCatalogProductInput(form);
+    const val=name=>
       String(form.elements.namedItem(name)?.value||'').trim();
     const method=val('registration_method')||'app';
     if(!['app','in_store'].includes(method))throw Error('応募方式を選択してください。');
