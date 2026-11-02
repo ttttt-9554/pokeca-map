@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-product-master-link-v1">
+  <link rel="stylesheet" href="style.css?v=20261102-unified-product-master-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1444,29 +1444,8 @@ nav[aria-label="メインメニュー"] {
       </div>
 
 
-      <!-- 商品データ -->
-      <div class="store-tools">
-
-        <strong>
-          商品データ
-        </strong>
-
-        <p class="hint">
-          拡張パック：
-          pokemon_packs.csv
-        </p>
-
-        <p class="hint">
-          構築デッキ：
-          pokemon_decks.csv
-        </p>
-
-        <p class="hint">
-          商品名・発売日・希望小売価格・
-          価格表記・よみがなを読み込みます。
-        </p>
-
-      </div>
+      <!-- 発見マップの商品情報は共有商品マスター（catalog_products）に統一済み。
+           旧CSVは互換用の保管資料であり、アプリ実行時は読み込まない。 -->
 
 
       <div class="store-tools" id="cloudAdminPanel">
@@ -1485,8 +1464,15 @@ nav[aria-label="メインメニュー"] {
           <label for="cloudProductReading">よみがな</label><input id="cloudProductReading" maxlength="120">
           <label for="cloudProductDate">発売日</label><input id="cloudProductDate" type="date">
           <label for="cloudProductPrice">希望小売価格（円）</label><input id="cloudProductPrice" type="number" min="0" max="1000000" step="1">
+          <label for="cloudProductTax">価格表記</label>
+          <select id="cloudProductTax"><option value="">未設定</option><option value="税込">税込</option><option value="税抜">税抜</option><option value="税抜き">税抜き</option></select>
           <div class="cloud-admin-actions"><button type="submit">商品を保存</button><button type="button" id="cloudProductCancel">編集を解除</button></div>
         </form>
+        <div class="cloud-catalog-search">
+          <label for="cloudProductSearch">商品マスターを検索</label>
+          <input id="cloudProductSearch" type="search" placeholder="商品名・略称・よみがなで検索" autocomplete="off">
+          <small id="cloudProductCount" role="status" aria-live="polite"></small>
+        </div>
         <div id="cloudProductList" class="cloud-admin-list"></div>
         <h4>店舗を追加・編集</h4>
         <form id="cloudStoreForm" class="cloud-admin-form">
@@ -1843,7 +1829,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-product-master-link-v3';
+      ? token : '20261102-unified-product-master-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
