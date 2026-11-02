@@ -9526,39 +9526,35 @@
       "url": "https://livepocket.jp/e/h_36i",
       "store_name": "JUMP SHOP東京ドームシティ店",
       "prefecture": "東京都",
+      "event_title": "ONE PIECEカードゲームコーナー 【事前抽選申込・抽選販売】11月21日(土) JUMP SHOP 東京ドームシティ店",
+      "application_end_at": "2026-11-07T23:59:00+09:00",
       "discord_posted_at": "2026-11-02T12:00:17.444000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "JUMP SHOP東京ドームシティ店",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "ONE PIECEカードゲームコーナー 【事前抽選申込・抽選販売】11月21日(土) JUMP SHOP 東京ドームシティ店",
-      "application_end_at": "2026-11-07T23:59:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲームコーナー 【事前抽選申込・抽選販売】11月21日(土) JUMP SHOP 東京ドームシティ店",
       "first_detected_at": "2026-11-02T12:00:59.902428+00:00"
     },
     {
       "url": "https://livepocket.jp/e/88ahs",
       "store_name": "キデイランド 浦和美園店",
       "prefecture": "埼玉県",
+      "event_title": "キデイランド 浦和美園店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
+      "application_start_at": "2026-11-02T10:00:00+09:00",
+      "application_end_at": "2026-11-04T23:59:00+09:00",
       "discord_posted_at": "2026-11-02T12:00:17.444000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "キデイランド 浦和美園店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "キデイランド 浦和美園店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
-      "application_end_at": "2026-11-04T23:59:00+09:00",
-      "application_start_at": "2026-11-02T10:00:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "キデイランド 浦和美園店 ポケモンカード スペシャルデッキセットMEGA（メガオーダイル・メガカイリュー・メガゲンガー） 購入券（抽選）",
       "first_detected_at": "2026-11-02T12:00:59.902428+00:00"
     }
   ],
-  "updated_at": "2026-11-02T12:01:25.618725+00:00"
+  "updated_at": "2026-11-02T12:11:07.871639+00:00"
 }
