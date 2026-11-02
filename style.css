@@ -3492,3 +3492,18 @@ html[data-theme="dark"] #lpAppDialog #lpAppStorePreset,
 html[data-theme="dark"] #lpAppDialog #lpAppApplyStorePreset{
   color:var(--app-text,#edf3ff);border-color:var(--app-border,#60718a);
 }
+
+
+/* v21.168: compact product-master actions, even for long product names on iOS. */
+#devView #cloudProductList .cloud-admin-item{
+  display:flex;flex-wrap:wrap;align-items:center;
+  gap:6px 8px;min-width:0;
+}
+#devView #cloudProductList .cloud-admin-item > span{
+  flex:1 1 100%;min-width:0;line-height:1.55;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+#devView #cloudProductList .cloud-admin-item > button{
+  flex:0 0 auto;min-height:36px;padding:7px 10px;
+  border-radius:8px;font-size:12px;line-height:1.3;
+}
