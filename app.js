@@ -2758,6 +2758,19 @@
     if(a.length<6||b.length<6)return 0;
     const shorter=a.length<=b.length?a:b,longer=a.length>b.length?a:b;
     const ratio=shorter.length/longer.length;
+    // A tiny shared base name is not enough for an edition, special box,
+    // starter set, bundle or element variant to be the same product.
+    if(ratio<.67)return 0;
+    if((/preciousbox|futuristicbox|プレシャスbox/i.test(a))!==
+       (/preciousbox|futuristicbox|プレシャスbox/i.test(b)))return 0;
+    const edition=t=>(t.match(/(?:第[0-9一二三四五六七八九十]+弾|'?[0-9]{2,4}年?発売?)/)||[])[0]||'';
+    if(edition(a)!==edition(b) && (edition(a)||edition(b)))return 0;
+    const deckSeries=t=>(t.match(/^(?:gx|ex|v)(?=スタートデッキ)/i)||[])[0]||'';
+    if(deckSeries(a)!==deckSeries(b)&&(deckSeries(a)||deckSeries(b)))return 0;
+    let common=0;while(common<Math.min(a.length,b.length)&&a[common]===b[common])common++;
+    const suffixA=a.slice(common),suffixB=b.slice(common);
+    if(suffixA&&suffixB&&suffixA!==suffixB&&
+       suffixA.length<=3&&suffixB.length<=3)return 0;
     const overlap=longer.includes(shorter)&&shorter.length>=8
       ? .83+.15*ratio:0;
     const grams=str=>{
