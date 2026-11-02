@@ -3467,3 +3467,28 @@ html[data-theme="dark"] #lpAppDialog .lp-app-store-row{
 html[data-theme="dark"] #lpAppDialog .lp-app-store-head button,
 html[data-theme="dark"] #lpAppDialog #lpAppAddStore{
   background:var(--app-surface,#19283f);color:var(--app-text,#edf3ff)}
+
+/* v21.167: Shared chain preset control in manual lottery registration. */
+#lpAppDialog .lp-app-preset-panel{
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:9px;min-width:0;
+}
+#lpAppDialog .lp-app-preset-panel label{
+  display:grid;gap:6px;flex:1 1 190px;min-width:0;
+  font-size:13px;font-weight:750;color:var(--app-text,#172033);
+}
+#lpAppDialog #lpAppStorePreset{
+  width:100%;min-width:0;max-width:100%;box-sizing:border-box;
+  min-height:42px;padding:7px 9px;border-radius:9px;
+  font-size:16px;color:var(--app-text,#172033);
+  background:var(--app-surface,#fff);border:1px solid var(--app-border,#94a3b8);
+}
+#lpAppDialog #lpAppApplyStorePreset{
+  flex:1 1 130px;min-height:42px;padding:8px 11px;
+  border-radius:9px;border:1px solid var(--app-border,#60718a);
+  font-size:12px;font-weight:750;color:var(--app-text,#172033);
+  background:var(--app-surface2,#f1f5f9);touch-action:manipulation;
+}
+html[data-theme="dark"] #lpAppDialog #lpAppStorePreset,
+html[data-theme="dark"] #lpAppDialog #lpAppApplyStorePreset{
+  color:var(--app-text,#edf3ff);border-color:var(--app-border,#60718a);
+}
