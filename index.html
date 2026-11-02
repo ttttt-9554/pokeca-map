@@ -1471,14 +1471,17 @@ nav[aria-label="メインメニュー"] {
 
       <div class="store-tools" id="cloudAdminPanel">
         <h3>☁️ 全ユーザー共通データ管理</h3>
-        <p class="hint">ここで追加した商品・店舗はSupabaseに保存され、すべての利用者に表示されます。最初に付属のSQLをSupabaseで実行してください。</p>
+        <p class="hint">ここで追加した商品・店舗はSupabaseに保存され、全ユーザーで共有されます。抽選カード編集・手動抽選登録の商品も商品マスターに自動登録されます。</p>
         <p id="cloudAdminStatus" class="cloud-admin-status" role="status">接続待ち</p>
         <h4>商品を追加・編集</h4>
         <form id="cloudProductForm" class="cloud-admin-form">
           <input id="cloudProductId" type="hidden">
-          <label for="cloudProductCategory">カテゴリ</label>
-          <select id="cloudProductCategory"><option value="pack">拡張パック</option><option value="deck">構築デッキ・スターターセット</option></select>
-          <label for="cloudProductName">商品名（必須）</label><input id="cloudProductName" required maxlength="120">
+          <label for="cloudProductGenre">ジャンル</label>
+          <select id="cloudProductGenre"><option value="pokemon">ポケカ</option><option value="onepiece">ワンピース</option><option value="yugioh">遊戯王</option><option value="unknown">未分類</option></select>
+          <label for="cloudProductCategory">商品区分</label>
+          <select id="cloudProductCategory"><option value="pack">拡張パック</option><option value="deck">構築デッキ・スターターセット</option><option value="unknown">未確認・その他</option></select>
+          <label for="cloudProductName">商品名（必須）</label><input id="cloudProductName" required minlength="2" maxlength="200">
+          <p class="hint">商品名の別表記は、下の商品一覧の「別名登録」から同一商品に紐づけられます。</p>
           <label for="cloudProductReading">よみがな</label><input id="cloudProductReading" maxlength="120">
           <label for="cloudProductDate">発売日</label><input id="cloudProductDate" type="date">
           <label for="cloudProductPrice">希望小売価格（円）</label><input id="cloudProductPrice" type="number" min="0" max="1000000" step="1">
@@ -1528,7 +1531,8 @@ nav[aria-label="メインメニュー"] {
                 <input type="text" name="event_title" maxlength="200" minlength="2" required placeholder="公式アプリに表示されている抽選名">
               </label>
               <label>商品名（任意）
-                <input type="text" name="product_name" maxlength="200" placeholder="例：ポケモンカード新商品">
+                <input type="text" name="product_name" maxlength="200" list="lpAppCatalogProducts" placeholder="商品マスターから選択・新規入力">
+                <datalist id="lpAppCatalogProducts"></datalist>
               </label>
               <div id="lpAppStoresField" class="lp-app-stores-field">
                 <h4>🏬 対象店舗（複数登録可）</h4>
@@ -1613,7 +1617,8 @@ nav[aria-label="メインメニュー"] {
           <input type="text" name="event_title" maxlength="200" autocomplete="off" placeholder="公式イベント名">
         </label>
         <label>商品名
-          <input type="text" name="product_name" maxlength="200" autocomplete="off" placeholder="ポケモンカード商品名">
+          <input type="text" name="product_name" maxlength="200" list="lpCardCatalogProducts" autocomplete="off" placeholder="商品マスターから選択・新規入力">
+          <datalist id="lpCardCatalogProducts"></datalist>
         </label>
         <details id="lpCardStoresFold" class="lp-card-stores-fold">
           <summary id="lpCardStoresSummary">🏬 対象店舗・地域を編集（店舗別・追加可能）</summary>
@@ -1838,7 +1843,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-tsutaya-tochigi-preset-v1';
+      ? token : '20261102-product-master-link-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
