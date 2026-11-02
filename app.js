@@ -3171,6 +3171,49 @@
     ['イエローサブマリン広島店','広島県']
   ].map(([name,prefecture])=>({name,prefecture}));
 
+
+  // Nationwide Yellow Submarine and Tochigi GEO directories are shared by
+  // card editing and manual lottery registration. Applying one is opt-in.
+  const LP_GEO_TOCHIGI_STORES = [
+    ['GEO足利鹿島店','栃木県'],
+    ['GEO足利店','栃木県'],
+    ['GEO宇都宮今泉店','栃木県'],
+    ['GEO宇都宮鶴田店','栃木県'],
+    ['GEO大平店','栃木県'],
+    ['GEO鹿沼店','栃木県'],
+    ['GEO佐野高萩店','栃木県'],
+    ['GEO城東店','栃木県'],
+    ['GEO並木店','栃木県'],
+    ['GEO西那須野店','栃木県'],
+    ['GEO羽川店','栃木県'],
+    ['GEO東峰店','栃木県'],
+    ['GEO間々田店','栃木県']
+  ].map(([name,prefecture])=>({name,prefecture}));
+
+  const LP_BUILTIN_STORE_PRESETS = {
+    'yellow-submarine':{label:'イエローサブマリン',rows:LP_YELLOW_SUBMARINE_STORES},
+    'geo-tochigi':{label:'GEO 栃木',rows:LP_GEO_TOCHIGI_STORES}
+  };
+  function lpBuiltinStorePresetOptions(){
+    return Object.entries(LP_BUILTIN_STORE_PRESETS).map(([id,preset])=>
+      '<option value="'+escape(id)+'">'+escape(preset.label)+'（'+
+      lotteryCanonicalStores(preset.rows).length+'店舗）</option>').join('');
+  }
+  function lpIsBareGeoTochigiChain(name,prefecture=''){
+    const plain=String(name||'').normalize('NFKC')
+      .replace(/[\s　・･._－（）()【】「」-]+/g,'').toLowerCase();
+    const area=String(prefecture||'').trim();
+    return (['geo栃木','ゲオ栃木','geo栃木県','ゲオ栃木県'].includes(plain)&&
+        (!area||area==='栃木県')) ||
+      (['geo','ゲオ'].includes(plain)&&area==='栃木県');
+  }
+  function lpPresetStoreKey(store){
+    const resolved=lotteryCanonicalStore(store);
+    return String(resolved.name||'').normalize('NFKC').toLocaleLowerCase('ja-JP')
+      .replace(/[\s　・･._－（）()【】「」-]+/g,'')+
+      '|'+String(resolved.prefecture||'');
+  }
+
   function lpIsBareYellowChain(name){
     const plain=String(name||'').trim()
       .replace(/[\s　・･._－（）()【】「」-]+/g,'').toLowerCase();
@@ -3646,8 +3689,7 @@
       if(!select)return;
       const chosen=select.value;
       select.innerHTML='<option value="">チェーンを選択</option>'+
-        '<option value="yellow-submarine">イエローサブマリン（'+
-          lotteryCanonicalStores(LP_YELLOW_SUBMARINE_STORES).length+'店舗）</option>'+
+        lpBuiltinStorePresetOptions()+
         Object.entries(readStorePresets()).map(([name,rows])=>
           '<option value="'+escape('custom:'+name)+'">'+escape(name)+'（'+rows.length+'店舗・この端末）</option>').join('');
       if([...select.options].some(x=>x.value===chosen))select.value=chosen;
@@ -3655,8 +3697,8 @@
     $('lpCardApplyStorePreset').addEventListener('click',()=>{
       if(!isDeveloper() || !lpCardEditing)return;
       const chosen=$('lpCardStorePreset').value;
-      const rawPreset=chosen==='yellow-submarine' ? LP_YELLOW_SUBMARINE_STORES
-        : chosen.startsWith('custom:') ? readStorePresets()[chosen.slice(7)] : null;
+      const rawPreset=LP_BUILTIN_STORE_PRESETS[chosen]?.rows||
+        (chosen.startsWith('custom:') ? readStorePresets()[chosen.slice(7)] : null);
       const preset=lotteryCanonicalStores(rawPreset);
       if(!Array.isArray(preset)||!preset.length){
         lpCardSetStatus('追加する店舗チェーンを選択してください。');
@@ -3665,8 +3707,12 @@
       const current=lpCardStoreRead(false);
       // A bare chain label is a placeholder, not a 23rd participating store.
       // Replace it only after the developer explicitly verifies chain-wide scope.
-      const replacePlaceholder=chosen==='yellow-submarine'&&current.length===1&&
-        lpIsBareYellowChain(current[0].name)&&!current[0].prefecture;
+      const replacePlaceholder=current.length===1&&(
+        (chosen==='yellow-submarine'&&
+          lpIsBareYellowChain(current[0].name)&&!current[0].prefecture)||
+        (chosen==='geo-tochigi'&&
+          lpIsBareGeoTochigiChain(current[0].name,current[0].prefecture))
+      );
       const retained=replacePlaceholder?[]:current;
       const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase()+
         '|'+String(x.prefecture||'');
@@ -3680,10 +3726,12 @@
         lpCardSetStatus('選択した店舗はすでに一覧にあります。');
         return;
       }
-      const confirmation=chosen==='yellow-submarine'
+      const builtin=LP_BUILTIN_STORE_PRESETS[chosen];
+      const confirmation=builtin
         ? '公式の抽選案内で対象店舗を確認しましたか？\nこの操作を保存すると、'+
-          'イエローサブマリンの登録済み'+preset.length+'店舗を今回の抽選対象として登録します。'+
-          (replacePlaceholder?'チェーン名のみの仮登録は置き換えます。':'')
+          builtin.label+'の候補'+preset.length+'店舗を今回の抽選対象として追加します。'+
+          (replacePlaceholder?'チェーン名のみの仮登録は置き換えます。':'')+
+          '実際の対象外店舗は保存前に削除してください。'
         : '選択した店舗を'+additions.length+'件追加しますか？既存店舗は残ります。';
       if(!confirm(confirmation))return;
       lpCardStoreRender(retained.concat(additions));
@@ -4451,6 +4499,11 @@
       .toLocaleLowerCase('ja-JP').replace(/[\s　・･._－（）()【】「」-]+/g,'')
       .replace(/^イエサブ/,'イエローサブマリン');
     const normalized=names.map(normalize);
+    // GEO's Tochigi-only chain uses a more specific label, while each
+    // participating store stays separately addressable for maps and statistics.
+    if(normalized.every(name=>name.startsWith('geo')||name.startsWith('ゲオ'))&&
+      stores.every(store=>String(store?.prefecture||'').trim()==='栃木県'))
+      return 'GEO 栃木';
     const chains=[
       ['イエローサブマリン',['イエローサブマリン']],
       ['WonderGOO',['wondergoo','ワンダーグー']],
@@ -4930,6 +4983,60 @@
     return true;
   }
 
+
+  // Apply a built-in store directory on the manual-registration form.
+  // Existing named stores are preserved, normalized duplicates are omitted,
+  // and the draft remains unsaved until the user submits the form.
+  function lpAppApplyStorePreset(){
+    if(lpAppBusy)return;
+    const chosen=$('lpAppStorePreset')?.value||'';
+    const builtin=LP_BUILTIN_STORE_PRESETS[chosen];
+    const preset=builtin?lotteryCanonicalStores(builtin.rows):[];
+    if(!builtin||!Array.isArray(preset)||!preset.length){
+      lpAppFormMessage('店舗チェーンを選択してください。');
+      return;
+    }
+    const original=lpAppStoreDraft();
+    // Preserve entered stores. Blank fields and chain-only placeholders are
+    // replaced by the chosen directory, never saved as participating shops.
+    const retained=original.filter(store=>store.name&&!(
+      chosen==='yellow-submarine'&&lpIsBareYellowChain(store.name)&&!store.prefecture
+    )&&!(
+      chosen==='geo-tochigi'&&lpIsBareGeoTochigiChain(store.name,store.prefecture)
+    ));
+    const seen=new Set(retained.map(lpPresetStoreKey));
+    const additions=preset.filter(store=>{
+      if(!store||!store.name)return false;
+      const key=lpPresetStoreKey(store);
+      if(seen.has(key))return false;
+      seen.add(key);
+      return true;
+    });
+    if(!additions.length){
+      lpAppFormMessage('選択したチェーンの店舗はすでに登録欄にあります。');
+      return;
+    }
+    const combined=retained.concat(additions);
+    if(combined.length>100){
+      lpAppFormMessage('⚠ 最大100店舗を超えるため追加できません。');
+      return;
+    }
+    if(!confirm('公式の抽選案内で対象店舗を確認しましたか？\n'+
+      builtin.label+'の候補'+preset.length+'店舗のうち、未登録'+additions.length+
+      '店舗を追加します。実際の対象外店舗は保存前に削除してください。'+
+      'すでに入力した店舗は残し、空欄とチェーン名だけの仮登録は置き換えます。'))return;
+    const form=$('lpAppForm');
+    const first=combined[0];
+    form.elements.namedItem('store_name').value=first.name;
+    form.elements.namedItem('prefecture').value=first.prefecture||'';
+    $('lpAppExtraStores').replaceChildren();
+    for(const store of combined.slice(1))lpAppAppendStore(store);
+    lpAppUpdateStoreCount();
+    lpAppSyncMethod();
+    lpAppFormMessage('✅ '+builtin.label+'から'+additions.length+
+      '店舗を追加しました。確認・調整後「共有一覧に保存」で確定してください。');
+  }
+
   function lpAppItem(row){
     const method=row.registration_method==='in_store'?'in_store':'app';
     const stores=lpAppStoredStores(row);
@@ -5157,6 +5264,7 @@
     lpAppEditing=row?.id||'';
     const form=$('lpAppForm');
     form.reset();
+    if($('lpAppStorePreset'))$('lpAppStorePreset').value='';
     $('lpAppExtraStores')?.replaceChildren();
     const set=(name,value)=>{
       const el=form.elements.namedItem(name);
@@ -5409,6 +5517,10 @@
     $('lpAppPrefecture').innerHTML='<option value="">未確認・指定なし</option>'+
       LP_MANUAL_AREAS.map(x=>'<option value="'+escape(x)+'">'+escape(x)+'</option>').join('');
     $('lpAppMethod').addEventListener('change',lpAppSyncMethod);
+    if($('lpAppStorePreset'))
+      $('lpAppStorePreset').innerHTML='<option value="">チェーンを選択</option>'+
+        lpBuiltinStorePresetOptions();
+    $('lpAppApplyStorePreset')?.addEventListener('click',lpAppApplyStorePreset);
     $('lpAppAddStore')?.addEventListener('click',()=>{
       if(!lpAppBusy&&lpAppAppendStore())
         lpAppExtraStoreRows().at(-1)?.querySelector('[data-lp-app-store-name]')?.focus();
