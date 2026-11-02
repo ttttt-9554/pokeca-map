@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261102-unified-product-master-v1">
+  <link rel="stylesheet" href="style.css?v=20261102-product-master-ui-v1">
 
   <style>
     [hidden] { display: none !important; }
@@ -1337,6 +1337,81 @@ nav[aria-label="メインメニュー"] {
         </details>
       </section>
 
+      <section id="lpProductMasterPanel" class="store-tools lp-product-master-panel" aria-labelledby="lpProductMasterHeading">
+        <h3 id="lpProductMasterHeading">📦 商品マスター</h3>
+        <p class="hint">発見マップ・抽選カード・手動登録の共通マスターです。商品名の表記揺れや重複は、内容を確認してから統合できます。</p>
+        <p id="lpProductMasterStatus" class="hint" role="status" aria-live="polite"></p>
+        <details id="lpProductEditorFold" class="lp-product-editor-fold">
+          <summary>＋ 商品を登録・編集 <span id="lpProductEditorMode"></span></summary>
+        <form id="cloudProductForm" class="cloud-admin-form lp-product-compact-form">
+          <input id="cloudProductId" type="hidden">
+          <div class="lp-product-edit-grid">
+          <label for="cloudProductGenre">ジャンル</label>
+          <select id="cloudProductGenre"><option value="pokemon">ポケカ</option><option value="onepiece">ワンピース</option><option value="yugioh">遊戯王</option><option value="unknown">未分類</option></select>
+          <label for="cloudProductCategory">商品区分</label>
+          <select id="cloudProductCategory"><option value="pack">拡張パック</option><option value="deck">構築デッキ・スターターセット</option><option value="unknown">未確認・その他</option></select>
+          <label class="lp-product-editor-wide" for="cloudProductName">商品名（必須）</label><input class="lp-product-editor-wide" id="cloudProductName" required minlength="2" maxlength="200">
+          <p class="hint">商品名の別表記は、下の商品一覧の「別名登録」から同一商品に紐づけられます。</p>
+          <label for="cloudProductReading">よみがな</label><input id="cloudProductReading" maxlength="120">
+          <label for="cloudProductDate">発売日</label><input id="cloudProductDate" type="date">
+          <label for="cloudProductPrice">希望小売価格（円）</label><input id="cloudProductPrice" type="number" min="0" max="1000000" step="1">
+          <label for="cloudProductTax">価格表記</label>
+          <select id="cloudProductTax"><option value="">未設定</option><option value="税込">税込</option><option value="税抜">税抜</option><option value="税抜き">税抜き</option></select>
+          </div>
+          <div class="cloud-admin-actions"><button type="submit">商品を保存</button><button type="button" id="cloudProductCancel">編集を解除</button></div>
+        </form>
+          <p id="lpProductEditorStatus" class="hint" role="status" aria-live="polite"></p>
+        </details>
+        <div class="lp-product-master-controls">
+          <label>商品名・よみがな・別名で検索
+            <input id="cloudProductSearch" type="search" placeholder="商品名で絞り込み" autocomplete="off">
+          </label>
+          <label>ジャンル
+            <select id="lpProductGenreFilter">
+              <option value="all">すべてのジャンル</option>
+              <option value="pokemon">ポケカ</option>
+              <option value="onepiece">ワンピース</option>
+              <option value="yugioh">遊戯王</option>
+              <option value="unknown">未分類</option>
+            </select>
+          </label>
+          <label>並べ替え
+            <select id="lpProductSort">
+              <option value="release-desc">発売日：新しい順</option>
+              <option value="release-asc">発売日：古い順</option>
+              <option value="name-asc">商品名：昇順</option>
+              <option value="name-desc">商品名：降順</option>
+            </select>
+          </label>
+        </div>
+        <p id="cloudProductCount" class="lp-product-master-count" role="status" aria-live="polite"></p>
+        <details id="lpProductSimilarFold" class="lp-product-similar-fold">
+          <summary>🔍 似ている商品名の統合候補 <span id="lpProductSimilarCount"></span></summary>
+          <p class="hint">同じジャンルを中心に類似名を照合します。候補が出ても自動統合はしません。発売日・価格・商品区分を確認してください。</p>
+          <div id="lpProductSimilarList" class="lp-product-similar-list"></div>
+          <button id="lpProductSimilarMore" type="button" hidden>さらに候補を表示</button>
+        </details>
+        <details id="lpProductManualMergeFold" class="lp-product-manual-merge-fold">
+          <summary>手動で既存商品を統合</summary>
+          <div class="lp-product-manual-merge-body">
+            <label>店舗と同様に商品名で絞り込み
+              <input id="lpProductMergeSearch" type="search" placeholder="統合する商品名を検索">
+            </label>
+            <label>統合する商品（旧表記）
+              <select id="lpProductMergeSource"><option value="">商品を選択</option></select>
+            </label>
+            <label>統合先の正式商品
+              <select id="lpProductMergeTarget"><option value="">統合先を選択</option></select>
+            </label>
+            <button id="lpProductMergeExecute" type="button">選択した商品を統合</button>
+            <p id="lpProductMergeStatus" class="hint" role="status" aria-live="polite"></p>
+          </div>
+        </details>
+        <div id="cloudProductList" class="cloud-admin-list lp-product-master-list"></div>
+      </section>
+
+
+
       <!-- Developer-only moderation for collected non-LivePocket URLs -->
       <section id="lpExtManage" class="store-tools lp-ext-manage" hidden aria-label="外部サイト抽選の手動編集">
         <h3>🛠 外部抽選の手動編集・削除</h3>
@@ -1449,31 +1524,9 @@ nav[aria-label="メインメニュー"] {
 
 
       <div class="store-tools" id="cloudAdminPanel">
-        <h3>☁️ 全ユーザー共通データ管理</h3>
-        <p class="hint">ここで追加した商品・店舗はSupabaseに保存され、全ユーザーで共有されます。抽選カード編集・手動抽選登録の商品も商品マスターに自動登録されます。</p>
+        <h3>🗺️ 発見マップ店舗データ管理</h3>
+        <p class="hint">ここで追加した発見マップ用の店舗情報はSupabaseに保存し、全ユーザーで共有されます。商品は上の「商品マスター」で一括管理します。</p>
         <p id="cloudAdminStatus" class="cloud-admin-status" role="status">接続待ち</p>
-        <h4>商品を追加・編集</h4>
-        <form id="cloudProductForm" class="cloud-admin-form">
-          <input id="cloudProductId" type="hidden">
-          <label for="cloudProductGenre">ジャンル</label>
-          <select id="cloudProductGenre"><option value="pokemon">ポケカ</option><option value="onepiece">ワンピース</option><option value="yugioh">遊戯王</option><option value="unknown">未分類</option></select>
-          <label for="cloudProductCategory">商品区分</label>
-          <select id="cloudProductCategory"><option value="pack">拡張パック</option><option value="deck">構築デッキ・スターターセット</option><option value="unknown">未確認・その他</option></select>
-          <label for="cloudProductName">商品名（必須）</label><input id="cloudProductName" required minlength="2" maxlength="200">
-          <p class="hint">商品名の別表記は、下の商品一覧の「別名登録」から同一商品に紐づけられます。</p>
-          <label for="cloudProductReading">よみがな</label><input id="cloudProductReading" maxlength="120">
-          <label for="cloudProductDate">発売日</label><input id="cloudProductDate" type="date">
-          <label for="cloudProductPrice">希望小売価格（円）</label><input id="cloudProductPrice" type="number" min="0" max="1000000" step="1">
-          <label for="cloudProductTax">価格表記</label>
-          <select id="cloudProductTax"><option value="">未設定</option><option value="税込">税込</option><option value="税抜">税抜</option><option value="税抜き">税抜き</option></select>
-          <div class="cloud-admin-actions"><button type="submit">商品を保存</button><button type="button" id="cloudProductCancel">編集を解除</button></div>
-        </form>
-        <div class="cloud-catalog-search">
-          <label for="cloudProductSearch">商品マスターを検索</label>
-          <input id="cloudProductSearch" type="search" placeholder="商品名・略称・よみがなで検索" autocomplete="off">
-          <small id="cloudProductCount" role="status" aria-live="polite"></small>
-        </div>
-        <div id="cloudProductList" class="cloud-admin-list"></div>
         <h4>店舗を追加・編集</h4>
         <form id="cloudStoreForm" class="cloud-admin-form">
           <input id="cloudStoreId" type="hidden">
@@ -1829,7 +1882,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-unified-product-master-v1';
+      ? token : '20261102-product-master-ui-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
