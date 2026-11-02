@@ -2040,10 +2040,7 @@
       ],
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
-      "pokemon_map_evidence": "product_name",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/v-dww",
@@ -2084,10 +2081,7 @@
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/p158q",
@@ -9562,5 +9556,5 @@
       "first_detected_at": "2026-11-02T12:00:59.902428+00:00"
     }
   ],
-  "updated_at": "2026-11-02T12:21:02.926552+00:00"
+  "updated_at": "2026-11-02T12:31:01.844047+00:00"
 }
