@@ -2772,9 +2772,19 @@
     }
     const previous=catalogProductMatch(alias,item.genre);
     if(previous){
-      alert(previous.id===item.id
-        ? 'すでにこの商品マスターに紐づいています。'
-        : '別の商品マスターとして登録済みです。誤った統合を防ぐため、自動結合はしません。');
+      if(previous.id===item.id){
+        alert('すでにこの商品マスターに紐づいています。');return;
+      }
+      if(!confirm('「'+previous.name+'」は別の商品マスターとして存在します。\n'+
+        'この商品を「'+item.name+'」へ統合しますか？\n'+
+        '旧商品名は別名として残し、重複マスターは1件にまとめます。'+
+        'ジャンルや商品区分が矛盾する場合は統合しません。'))return;
+      const {error}=await supabaseClient.rpc('catalog_product_merge_v1',{
+        p_source_id:previous.id,p_target_id:item.id
+      });
+      if(error){alert('統合失敗：'+error.message);return;}
+      await loadCloudData();
+      alert('「'+previous.name+'」を「'+item.name+'」に統合しました。');
       return;
     }
     const {error}=await supabaseClient.from('catalog_product_aliases')
