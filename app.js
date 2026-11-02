@@ -2732,19 +2732,56 @@
       target.replaceChildren();
       for(const item of rows) {
         const div=document.createElement('div');div.className='cloud-admin-item';
-        const label=document.createElement('span');label.textContent=kind==='Product'?`${item.category==='pack'?'パック':'デッキ'}：${item.name}`:`${item.name}（${item.city||'地域未設定'}）`;
+        const label=document.createElement('span');
+        const genreNames={pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'};
+        const kindNames={pack:'パック',deck:'デッキ',unknown:'区分未確認'};
+        const aliases=kind==='Product'?cloudProductAliases.filter(a=>a.product_id===item.id):[];
+        label.textContent=kind==='Product'
+          ? (genreNames[item.genre]||'未分類')+' / '+
+            (kindNames[item.category]||'区分未確認')+'：'+item.name+
+            (aliases.length?'（別名 '+aliases.length+'件）':'')
+          : item.name+'（'+(item.city||'地域未設定')+'）';
         const edit=document.createElement('button');edit.type='button';edit.textContent='編集';edit.addEventListener('click',()=>{
           if(kind==='Product') {
-            for(const [field,value] of Object.entries({Id:item.id,Category:item.category,Name:item.name,Reading:item.reading||'',Date:item.release_date||'',Price:item.price??''})) $('cloudProduct'+field).value=value;
+            for(const [field,value] of Object.entries({Id:item.id,Genre:item.genre||'pokemon',Category:item.category,Name:item.name,Reading:item.reading||'',Date:item.release_date||'',Price:item.price??''})) $('cloudProduct'+field).value=value;
           } else {
             for(const [field,value] of Object.entries({Id:item.id,Name:item.name,Category:item.category,City:item.city||'',Address:item.address||'',Lat:item.lat,Lng:item.lng})) $('cloudStore'+field).value=value;
           }
           $('cloud'+kind+'Form').scrollIntoView({behavior:'smooth',block:'start'});
         });
         const del=document.createElement('button');del.type='button';del.textContent='削除';del.addEventListener('click',()=>deleteCloudItem(kind,item));
-        div.append(label,edit,del);target.append(div);
+        if(kind==='Product'){
+          const aliasButton=document.createElement('button');
+          aliasButton.type='button';aliasButton.textContent='別名登録';
+          aliasButton.addEventListener('click',()=>addCloudProductAlias(item));
+          div.append(label,edit,aliasButton,del);
+        }else div.append(label,edit,del);
+        target.append(div);
       }
     }
+  }
+
+
+  async function addCloudProductAlias(item){
+    if(!isDeveloper()||!supabaseClient)return;
+    const raw=prompt('「'+item.name+'」に統一する別名を入力してください。');
+    if(raw===null)return;
+    const alias=raw.trim();
+    if(alias.length<2||alias.length>200){
+      alert('別名は2〜200文字で入力してください。');return;
+    }
+    const previous=catalogProductMatch(alias,item.genre);
+    if(previous){
+      alert(previous.id===item.id
+        ? 'すでにこの商品マスターに紐づいています。'
+        : '別の商品マスターとして登録済みです。誤った統合を防ぐため、自動結合はしません。');
+      return;
+    }
+    const {error}=await supabaseClient.from('catalog_product_aliases')
+      .insert({product_id:item.id,genre:item.genre,alias_name:alias});
+    if(error){alert('別名登録失敗：'+error.message);return;}
+    await loadCloudData();
+    alert('別名「'+alias+'」を「'+item.name+'」に紐づけました。');
   }
 
   async function deleteCloudItem(kind,item) {
@@ -2764,7 +2801,7 @@
     const value=field=>$('cloud'+kind+field).value.trim();
     let payload;
     if(product) {
-      payload={category:value('Category'),name:value('Name'),reading:value('Reading'),release_date:value('Date')||null,price:value('Price')===''?null:Number(value('Price'))};
+      payload={genre:value('Genre'),category:value('Category'),name:value('Name'),reading:value('Reading'),release_date:value('Date')||null,price:value('Price')===''?null:Number(value('Price'))};
     } else {
       payload={name:value('Name'),category:value('Category'),city:value('City'),address:value('Address'),lat:Number(value('Lat')),lng:Number(value('Lng'))};
       if(!isStore(payload))return alert('緯度・経度を確認してください（現在は栃木周辺の範囲に対応）。');
