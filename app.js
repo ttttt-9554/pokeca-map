@@ -2768,7 +2768,14 @@
           const aliasButton=document.createElement('button');
           aliasButton.type='button';aliasButton.textContent='別名登録';
           aliasButton.addEventListener('click',()=>addCloudProductAlias(item));
-          div.append(label,edit,aliasButton,del);
+          div.append(label,edit,aliasButton);
+          if(aliases.length){
+            const removeAliasButton=document.createElement('button');
+            removeAliasButton.type='button';removeAliasButton.textContent='別名削除';
+            removeAliasButton.addEventListener('click',()=>removeCloudProductAlias(item,aliases));
+            div.append(removeAliasButton);
+          }
+          div.append(del);
         }else div.append(label,edit,del);
         target.append(div);
       }
@@ -2806,6 +2813,23 @@
     if(error){alert('別名登録失敗：'+error.message);return;}
     await loadCloudData();
     alert('別名「'+alias+'」を「'+item.name+'」に紐づけました。');
+  }
+
+  async function removeCloudProductAlias(item,aliases){
+    if(!isDeveloper()||!supabaseClient||!aliases.length)return;
+    const options=aliases.map((a,i)=>(i+1)+'. '+a.alias_name).join('\n');
+    const choice=prompt('「'+item.name+'」の削除する別名番号を入力してください。\n'+options);
+    if(choice===null)return;
+    const index=Number(choice)-1,alias=aliases[index];
+    if(!Number.isInteger(index)||!alias){alert('番号が正しくありません。');return;}
+    if(!confirm('別名「'+alias.alias_name+'」の紐づけを解除しますか？\n元の商品マスターは残ります。'))return;
+    const {data,error}=await supabaseClient.from('catalog_product_aliases')
+      .delete().eq('id',alias.id).select('id');
+    if(error||!data?.some(x=>x.id===alias.id)){
+      alert('別名を削除できませんでした：'+(error?.message||'更新を確認できません'));
+      return;
+    }
+    await loadCloudData();
   }
 
   async function deleteCloudItem(kind,item) {
@@ -4853,6 +4877,7 @@
         ${window.TorecaStoreUI?.cardBadge?.(stores)||''}
       </div>
       <h3 class="lp-full-title">${escape(label)}</h3>
+      ${item.catalog_product_id && item.product_name_original!==item.product_name && item.product_name!==label && !lpCardOverrides.get(item.url)?.edited_fields?.includes('product_name') ? `<p class="lp-sub">📦 商品マスター：${escape(item.product_name)}</p>` : ''}
       ${lpCardOverrides.get(item.url)?.edited_fields?.includes('product_name') && item.product_name && item.product_name !== label ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
       ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
       ${item.app_lottery?(item.manual_registration_method==='in_store'
@@ -4957,7 +4982,7 @@
       if (type !== 'all' && !(type === 'unknown' ? lotteryProductType(item) === 'unknown' : lotteryProductType(item).split('/').includes(type))) return false;
       if (wishlistOnly && !lotteryMatchedWishlist(item)) return false;
       if (query) {
-        const text = [item.product_name,item.event_title_provisional ? '' : item.event_title,item.source_preview,item.store_name,
+        const text = [item.product_name,item.product_name_original,item.event_title_provisional ? '' : item.event_title,item.source_preview,item.store_name,
           item.pokemon_map_match,...lotteryStoreEntries(item).map(s => s.name)]
           .filter(Boolean).join(' ');
         if (!productNorm(text).includes(query)) return false;
