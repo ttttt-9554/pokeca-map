@@ -1621,7 +1621,7 @@ nav[aria-label="メインメニュー"] {
           <div id="lpCardStoreRows" class="lp-card-store-rows"></div>
           <button id="lpCardAddStore" type="button" class="lp-card-add-store">＋ 店舗を追加</button>
           <label for="lpCardStorePreset">店舗チェーンから一括追加
-            <select id="lpCardStorePreset"><option value="">チェーンを選択</option><option value="yellow-submarine">イエローサブマリン（候補一覧）</option><option value="geo-tochigi">GEO 栃木（13店舗）</option></select>
+            <select id="lpCardStorePreset"><option value="">チェーンを選択</option><option value="yellow-submarine">イエローサブマリン（候補一覧）</option><option value="geo-tochigi">GEO 栃木（13店舗）</option><option value="tsutaya-tochigi">TSUTAYA 栃木（13店舗）</option></select>
           </label>
           <button id="lpCardApplyStorePreset" type="button" class="lp-card-add-store">🏬 選択した店舗一覧を追加</button>
           <button id="lpCardSaveStorePreset" type="button" class="lp-card-add-store">＋ 現在の店舗一覧をテンプレート保存</button>
@@ -1838,7 +1838,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-geo-tochigi-preset-v1';
+      ? token : '20261102-tsutaya-tochigi-preset-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
