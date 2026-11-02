@@ -2748,6 +2748,14 @@
     if(!lpProductCanMerge(left,right))return 0;
     const a=lpProductCompareName(left.name),b=lpProductCompareName(right.name);
     if(a===b)return 1;
+    // Never suggest obviously distinct character, element or edition variants.
+    if((a.endsWith('マスター')&&b.endsWith('マスター'))||
+      (a.includes('ハーフデッキ')&&b.includes('ハーフデッキ'))||
+      (a.includes('ハイクラスデッキ')&&b.includes('ハイクラスデッキ'))||
+      (a.includes('ビルドセット')&&b.includes('ビルドセット')))return 0;
+    const editionName=t=>(t.match(/スターターセット(vmax|v)(?![a-z])/i)||[])[1]||'';
+    if(editionName(a)!==editionName(b)&&(editionName(a)||editionName(b)))return 0;
+    if(a.includes('プラス')!==b.includes('プラス'))return 0;
     // The nine different Pokemon card sets must not be suggested as one.
     const suffixMarker='カードセット';
     if(a.includes(suffixMarker)&&b.includes(suffixMarker)){
@@ -2763,7 +2771,7 @@
     if(ratio<.67)return 0;
     if((/preciousbox|futuristicbox|プレシャスbox/i.test(a))!==
        (/preciousbox|futuristicbox|プレシャスbox/i.test(b)))return 0;
-    const edition=t=>(t.match(/(?:第[0-9一二三四五六七八九十]+弾|'?[0-9]{2,4}年?発売?)/)||[])[0]||'';
+    const edition=t=>(t.match(/(?:第[0-9一二三四五六七八九十]+弾|'?[0-9]{2,4}(?:年発売)?)/)||[])[0]||'';
     if(edition(a)!==edition(b) && (edition(a)||edition(b)))return 0;
     const deckSeries=t=>(t.match(/^(?:gx|ex|v)(?=スタートデッキ)/i)||[])[0]||'';
     if(deckSeries(a)!==deckSeries(b)&&(deckSeries(a)||deckSeries(b)))return 0;
