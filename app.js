@@ -2730,7 +2730,10 @@
     cloudStores=(s.data||[]).filter(isStore).map(x=>({...x,lat:Number(x.lat),lng:Number(x.lng)}));
     mergeCloudProducts();updateStoreCount();renderCloudAdminLists();
     fillLotteryProductSuggestions();fillCatalogProductInputs();
-    if(lotteryBaseItems.length)lpCloudApply();
+    if(lotteryBaseItems.length){
+      lpCloudApply();
+      if(isDeveloper())void syncCollectedCatalogProducts();
+    }
     if (document.activeElement===$('product')) showProductDropdown();
     if (document.activeElement===$('mapProductSearch')) showMapProductDropdown();
     if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・登録別名 ${cloudProductAliases.length}件・共有店舗 ${cloudStores.length}件`;
