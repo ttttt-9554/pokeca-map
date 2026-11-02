@@ -3344,22 +3344,32 @@ html[data-theme="dark"] #infoSalesPublic .info-sales-public-card{
 #devView .lp-store-address-actions{display:flex;gap:8px;flex-wrap:wrap}
 #devView .lp-store-address-actions button{min-height:38px}
 
-/* v21.163: one Google Maps link per exact lottery-card store */
+/* v21.163: compact MAP link pinned to the top-right of each store row. */
 #lotteryView .lp-store-details li,
 #lotteryView .lp-single-store{
-  display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px;min-width:0;
+  position:relative;display:block;box-sizing:border-box;min-width:0;
+}
+#lotteryView .lp-store-details li:has(> .lp-store-map-link){
+  min-height:48px;padding:8px 83px 8px 0;
+}
+#lotteryView .lp-single-store:has(> .lp-store-map-link){
+  min-height:58px;padding-right:94px;
 }
 #lotteryView .lp-store-map-name{
   min-width:0;overflow-wrap:anywhere;
 }
 #lotteryView .lp-store-details .lp-store-map-link{
+  position:absolute;top:7px;right:0;
   display:inline-flex;align-items:center;justify-content:center;
   box-sizing:border-box;max-width:100%;min-height:38px;
-  padding:6px 11px;border:1px solid var(--app-border,#94a3b8);
+  padding:6px 10px;border:1px solid var(--app-border,#94a3b8);
   border-radius:9px;background:var(--app-surface2,#edf3fc);
   color:var(--app-text,#1e3a5f)!important;
   font-size:12px;font-weight:750;line-height:1.4;
   white-space:nowrap;text-decoration:none!important;touch-action:manipulation;
+}
+#lotteryView .lp-single-store .lp-store-map-link{
+  top:10px;right:10px;
 }
 #lotteryView .lp-store-map-link:focus-visible{
   outline:2px solid #2563eb;outline-offset:2px;
