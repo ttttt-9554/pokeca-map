@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-02T06:01:00.475827+00:00",
-  "unique_livepocket_urls": 628,
+  "collected_at": "2026-11-02T08:30:56.680886+00:00",
+  "unique_livepocket_urls": 629,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9489,7 +9489,25 @@
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-02T04:00:58.048198+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mr_dw",
+      "store_name": "JUMP SHOP仙台店",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-11-02T08:30:10.764000+00:00",
+      "stores": [
+        {
+          "name": "JUMP SHOP仙台店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【抽選販売】11月21日(土) JUMP SHOP仙台店",
+      "application_end_at": "2026-11-07T23:59:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【抽選販売】11月21日(土) JUMP SHOP仙台店",
+      "first_detected_at": "2026-11-02T08:30:58.277681+00:00"
     }
   ],
-  "updated_at": "2026-11-02T08:21:16.308650+00:00"
+  "updated_at": "2026-11-02T08:31:20.346411+00:00"
 }
