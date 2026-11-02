@@ -540,16 +540,17 @@ class MonitorTests(unittest.TestCase):
     def test_biccamera_sample_pages_require_explicit_opt_in(self):
         import guerrilla_sale_probe as probe
         import os, io, contextlib, json
-        with patch.dict(os.environ,{'BICCAMERA_SAMPLE_READS':'false'}), \
+        with patch.dict(os.environ,{'BICCAMERA_SAMPLE_READS':'false','YODOBASHI_SAMPLE_READS':'false'}), \
              patch.object(probe,'probe',return_value={'site':'amenity','status':'ok'}), \
              patch.object(probe,'probe_biccamera_robots',return_value={'site':'biccamera','status':'robots_read'}), \
-             patch.object(probe,'probe_yodobashi',return_value={'site':'yodobashi','status':'unverified'}), \
+             patch.object(probe,'probe_yodobashi',side_effect=AssertionError('unexpected Yodobashi request')), \
              patch.object(probe,'probe_biccamera_sample_pages',
                           side_effect=AssertionError('unexpected item request')):
             with contextlib.redirect_stdout(io.StringIO()) as buf:
                 self.assertEqual(probe.main(),0)
         encoded=buf.getvalue().split('GUERRILLA_SALE_PROBE_BEGIN')[1].split('GUERRILLA_SALE_PROBE_END')[0]
         results=json.loads(encoded)
+        self.assertEqual(results[-2]['reason'],'robots_unverified_no_automatic_retry')
         self.assertEqual(results[-1]['reason'],'product_http_403_no_automatic_retry')
         self.assertFalse(results[-1]['monitor_enabled'])
 

@@ -8,6 +8,11 @@ name: Guerrilla Sale Status Monitor
         required: false
         type: boolean
         default: false
+      yodobashi_sample_read:
+        description: 'Run a bounded Yodobashi diagnostic after reviewing robots status (default OFF)'
+        required: false
+        type: boolean
+        default: false
   push:
     paths:
       - 'scripts/guerrilla_sale_monitor.py'
@@ -71,6 +76,7 @@ jobs:
           # Never retry a 403 on push. Only explicit manual opt-in can
           # request the two approved diagnostic item URLs.
           BICCAMERA_SAMPLE_READS: ${{ github.event_name == 'workflow_dispatch' && inputs.biccamera_sample_read && 'true' || 'false' }}
+          YODOBASHI_SAMPLE_READS: ${{ github.event_name == 'workflow_dispatch' && inputs.yodobashi_sample_read && 'true' || 'false' }}
         run: python scripts/guerrilla_sale_probe.py
 
   monitor:

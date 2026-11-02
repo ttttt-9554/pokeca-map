@@ -8,11 +8,13 @@
   const SITES={
     pokemon:{name:'ポケモンセンターオンライン',host:'www.pokemoncenter-online.com',id:'pokemon-center-online'},
     amenity:{name:'アメニティードリーム',host:'www.amenitydream.com',id:'amenity-dream-online'},
-    biccamera:{name:'ビックカメラ.com',host:'www.biccamera.com',id:'biccamera-online'}
+    biccamera:{name:'ビックカメラ.com',host:'www.biccamera.com',id:'biccamera-online'},
+    yodobashi:{name:'ヨドバシ.com',host:'www.yodobashi.com',id:'yodobashi-online'}
   };
   SITES.pokemon.catalog='https://www.pokemoncenter-online.com/pokemon-card-game/';
   SITES.amenity.catalog='https://www.amenitydream.com/product-list';
   SITES.biccamera.catalog='https://www.biccamera.com/bc/category/001/220/070/';
+  SITES.yodobashi.catalog='https://www.yodobashi.com/category/141001/141651/141662/141663/';
   const $=id=>document.getElementById(id);
   let root,targets=[],snapshot={},events=[],products=[],counts={},fastHealth={},fastHealthError='',busy=false,editing=null,epoch=0;
   const shown=()=>!!$('devView')&&!$('devView').hidden;
@@ -24,12 +26,13 @@
   function canonical(value,site){
     const u=new URL(value.trim());
     const pattern=site==='pokemon'?/^\/[0-9]{6,20}(?:-[A-Za-z0-9_-]+)?\.html$/:
-      site==='biccamera'?/^\/bc\/item\/[0-9]{5,12}\/?$/:/^\/product\/[0-9]+$/;
+      site==='biccamera'?/^\/bc\/item\/[0-9]{5,12}\/?$/:
+      site==='yodobashi'?/^\/product\/[0-9]{18}\/?$/:/^\/product\/[0-9]+$/;
     if(!SITES[site]||u.protocol!=='https:'||u.hostname!==SITES[site].host||u.port||u.username||u.password||!pattern.test(u.pathname.replace(/\/$/,'')))throw new Error('選択した店舗の具体的な商品ページURLを入力してください。');
     if([...u.searchParams.keys()].some(k=>k.startsWith('dwvar_')||
-      (site==='biccamera'&&!k.toLowerCase().startsWith('utm_'))))
+      ((site==='biccamera'||site==='yodobashi')&&!k.toLowerCase().startsWith('utm_'))))
       throw new Error('商品バリエーション・検索条件のあるURLは登録できません。商品固有のURLを指定してください。');
-    return 'https://'+u.hostname+u.pathname.replace(/\/$/,'')+(site==='biccamera'?'/':'');
+    return 'https://'+u.hostname+u.pathname.replace(/\/$/,'')+((site==='biccamera'||site==='yodobashi')?'/':'');
   }
   function link(url){const a=node('a','公式ページ ↗');try{const u=new URL(url);if(u.protocol!=='https:'||!Object.values(SITES).some(s=>s.host===u.hostname))return node('span','URL未確認');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';}catch(_){return node('span','URL未確認');}return a;}
   async function api(path,t,options={}){
@@ -95,6 +98,12 @@
     const sites=$('saleBetaSites');sites.replaceChildren();
     for(const [key,site] of Object.entries(SITES)){
       const card=node('section',undefined,'sale-beta-card');card.append(node('h3',site.name));
+      if(key==='yodobashi'){
+        card.append(node('p','⏸ 自動監視・販売通知は停止中','sale-beta-warning'));
+        card.append(node('p','監視サーバーから巡回ルールを確認できませんでした。公式サイトのカード一覧は直接開いて確認できます。','hint'));
+        const catalog=link(site.catalog);catalog.textContent='公式カード一覧を開く ↗';card.append(catalog);
+        sites.append(card);continue;
+      }
       const all=targets.find(x=>x.site_key===key&&x.mode==='all');
       const selected=targets.filter(x=>x.site_key===key&&x.mode==='selected');
       const fast=fastHealth[key];
@@ -248,7 +257,7 @@
     // preview with the independently versioned, authenticated controls.
     const legacy=panel.querySelector('.guerrilla-sale-body');if(legacy)legacy.hidden=true;
     root=node('div',undefined,'sale-beta-body');root.id='saleBetaV2';root.hidden=true;
-    root.innerHTML=`<p class="hint">開発者限定のテスト機能です。通知対象はカードゲームの未開封パック／BOX／構築済み・スターター系デッキのみです。シングルカード・サプライ・予約商品は除外します。通知はこの画面内だけに記録し、Discordには送信しません。</p>
+    root.innerHTML=`<p class="hint">開発者限定のテスト機能です。通知対象はカードゲームの未開封パック／BOX／構築済み・スターター系デッキのみです。シングルカード・サプライ・予約商品は除外します。確定した販売は履歴に記録し、設定済みの場合はDiscord・Pushでも通知します。</p>
       <p id="saleBetaStatus" role="status" aria-live="polite"></p><button type="button" id="saleBetaRefresh">設定・保存済み結果を再読込</button>
       <div id="saleBetaSites"></div><p class="hint">全商品は一覧を少しずつ巡回します。全商品を毎回確認する方式ではありません。指定商品は優先枠で順番に確認します。</p>
       <details open><summary>指定商品の登録一覧</summary><div id="saleBetaTargets"></div></details>

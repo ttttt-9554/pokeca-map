@@ -187,7 +187,12 @@ def main():
     # sample. Default push and scheduled runs never request item pages.
     results = [probe(site) for site in ('pokemon', 'amenity')]
     results.append(probe_biccamera_robots())
-    results.append(probe_yodobashi())
+    if os.environ.get('YODOBASHI_SAMPLE_READS') == 'true':
+        results.append(probe_yodobashi())
+    else:
+        results.append({'site':'yodobashi','status':'paused',
+                        'reason':'robots_unverified_no_automatic_retry',
+                        'monitor_enabled':False})
     if os.environ.get('BICCAMERA_SAMPLE_READS') == 'true':
         results.append(probe_biccamera_sample_pages())
     else:
