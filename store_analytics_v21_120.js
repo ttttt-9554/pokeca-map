@@ -16,7 +16,9 @@
     return n;
   }
   function lookup(store){
-    return byKey.get(clean(store?.prefecture)+'|'+normalize(store?.name))||null;
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(store)||store;
+    return byKey.get(clean(canonical?.prefecture)+'|'+normalize(canonical?.name))||
+      byKey.get(clean(store?.prefecture)+'|'+normalize(store?.name))||null;
   }
   function storeBadge(store){
     const row=lookup(store);
@@ -115,24 +117,31 @@
       '<button type="button" data-store-review="separate">別店舗として確定</button>'+
       '</div></div>').join(''):
       '<p class="hint">確認が必要な類似店舗はありません。完全一致と既知の略称は自動で統一されます。</p>';
-    const visible=masters.filter(row=>!query||
-      matches(row.name)||matches(row.prefecture)||matches(row.address));
-    list.innerHTML=visible.length?visible.slice(0,500).map(row=>
-      '<div class="lp-store-master-item" data-store-master-id="'+escape(row.id)+'">'+
-      '<div class="lp-store-master-meta"><strong>'+escape(row.name)+
-      '</strong><span>📍 '+escape(row.prefecture)+
-      (row.merged_into?'（別名として統合済み）':'')+'</span>'+
-      '<span class="lp-store-master-address">🏠 '+(row.address?escape(row.address):'住所未登録')+'</span>'+
-      (row.address_source==='legacy_csv_unverified'
+    const byId=new Map(masters.map(row=>[row.id,row]));
+    const visible=masters.filter(row=>{
+      const target=row.merged_into?byId.get(row.merged_into):null;
+      return !query||matches(row.name)||matches(row.prefecture)||matches(row.address)||
+        (target&&(matches(target.name)||matches(target.address)));
+    });
+    list.innerHTML=visible.length?visible.slice(0,500).map(row=>{
+      const target=(row.merged_into&&byId.get(row.merged_into))||row;
+      return '<div class="lp-store-master-item" data-store-master-id="'+escape(row.id)+'">'+
+      '<div class="lp-store-master-meta"><strong>'+escape(target.name)+
+      '</strong><span>📍 '+escape(target.prefecture)+
+      (row.merged_into?'（統合済み）':'')+'</span>'+
+      (row.merged_into?'<small>統合元の表記：'+escape(row.name)+'</small>':'')+
+      '<span class="lp-store-master-address">🏠 '+(target.address?escape(target.address):'住所未登録')+'</span>'+
+      (target.address_source==='legacy_csv_unverified'
         ?'<small>既存CSV照合・現住所は未確認</small>':
-         row.address_source==='developer_entry'
+         target.address_source==='developer_entry'
         ?'<small>開発者入力</small>':'')+
       '</div>'+
       (row.merged_into
         ?'<button type="button" data-store-unmerge="'+escape(row.id)+'">統合解除</button>'
         :'<button type="button" data-store-address-edit="'+escape(row.id)+'">'+
           (row.address?'住所を編集':'住所を登録')+'</button>')+
-      '</div>').join(''):
+      '</div>';
+    }).join(''):
       '<p class="hint">一致する店舗はありません。</p>';
     const choices=live.slice().sort((a,b)=>
       clean(a.prefecture).localeCompare(clean(b.prefecture),'ja')||
@@ -177,7 +186,12 @@
     if(remote){alert('保存できませんでした：'+String(remote.message||remote));return false;}
     if(data!==true){alert('変更結果を確認できませんでした。');return false;}
     await refreshMaster();
-    if(action==='merge')await refresh(true);
+    if(action==='merge'){
+      await globalThis.window?.TorecaStoreAliases?.refresh?.(true);
+      await globalThis.window?.TorecaStoreMaps?.refresh?.(true);
+      await globalThis.window?.TorecaSalesReference?.refresh?.(true);
+      await refresh(true);
+    }
     return true;
   }
   async function unmerge(id){
@@ -190,6 +204,9 @@
       if(remote)throw remote;
       if(data!==true)throw Error('解除結果が確認できませんでした');
       await refreshMaster();
+      await globalThis.window?.TorecaStoreAliases?.refresh?.(true);
+      await globalThis.window?.TorecaStoreMaps?.refresh?.(true);
+      await globalThis.window?.TorecaSalesReference?.refresh?.(true);
       await refresh(true);
       return true;
     }catch(error){
@@ -256,6 +273,8 @@
         if(data?.success!==true)throw Error('保存結果を確認できませんでした');
         addressSaving=false;
         await refreshMaster();
+        await globalThis.window?.TorecaStoreAliases?.refresh?.(true);
+        await globalThis.window?.TorecaStoreMaps?.refresh?.(true);
         const mainStatus=$('lpStoreMasterStatus');
         if(mainStatus)mainStatus.textContent+=' ／ ✅ 住所を保存しました';
       }catch(error){

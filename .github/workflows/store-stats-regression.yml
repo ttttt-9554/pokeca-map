@@ -3,6 +3,13 @@ name: Store Lottery Statistics Regression
   push:
     paths:
       - 'store_analytics_v21_120.js'
+      - 'store_aliases_v1.js'
+      - 'store_map_links_v1.js'
+      - 'lottery_sales_reference_v1.js'
+      - 'info_plaza_sales_v1.js'
+      - 'app.js'
+      - 'scripts/test_store_master_canonical.cjs'
+      - 'supabase/lottery_store_canonical_reference_v21_167.sql'
       - 'index.html'
       - 'scripts/test_store_analytics.cjs'
       - 'supabase/lottery_store_stats_all_results_v21_128.sql'
@@ -23,5 +30,12 @@ jobs:
         run: |
           node --check store_analytics_v21_120.js
           node --check scripts/test_store_analytics.cjs
-      - name: Store statistics regression
-        run: node scripts/test_store_analytics.cjs
+          node --check store_aliases_v1.js
+          node --check store_map_links_v1.js
+          node --check lottery_sales_reference_v1.js
+          node --check info_plaza_sales_v1.js
+          node --check scripts/test_store_master_canonical.cjs
+      - name: Store statistics and canonical merges regression
+        run: |
+          node scripts/test_store_analytics.cjs
+          node scripts/test_store_master_canonical.cjs

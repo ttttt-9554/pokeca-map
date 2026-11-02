@@ -321,6 +321,10 @@
     if(reference?.refresh)reference.refresh(force);
   }
   function onPublicDataChanged(){renderPublic();}
+  function onAliasesChanged(){
+    if(authorized)renderList();
+    else renderPublic();
+  }
   function updateGenre(){
     const isPokemon=$('infoSalesGenre')?.value!=='onepiece';
     if($('infoSalesPokemon'))$('infoSalesPokemon').hidden=!isPokemon;
@@ -349,12 +353,29 @@
     if(!list||!authorized)return;
     const search=normalize($('infoSalesSearch')?.value);
     const filter=$('infoSalesFilterGenre')?.value||'all';
-    const found=rows.filter(row=>
+    // A historical alias and the formal name represent one shop/genre.
+    // Keep both records in Supabase; choose the most recently edited for display.
+    const latest=new Map();
+    for(const row of rows){
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({
+        name:row.store_name,prefecture:row.prefecture
+      })||{name:row.store_name,prefecture:row.prefecture};
+      const id=canonical.prefecture+'|'+normalize(canonical.name)+'|'+row.genre;
+      const old=latest.get(id);
+      const date=Date.parse(String(row.updated_at||''))||0;
+      const oldDate=Date.parse(String(old?.updated_at||''))||0;
+      if(!old||date>=oldDate)latest.set(id,{
+        ...row,canonical_name:canonical.name,canonical_prefecture:canonical.prefecture
+      });
+    }
+    const visible=[...latest.values()];
+    const found=visible.filter(row=>
       (filter==='all'||row.genre===filter) &&
-      (!search||normalize([row.store_name,row.prefecture,row.notes].join(' ')).includes(search)));
-    $('infoSalesCount').textContent=rows.length+'件';
+      (!search||normalize([row.canonical_name,row.store_name,
+        row.canonical_prefecture,row.notes].join(' ')).includes(search)));
+    $('infoSalesCount').textContent=visible.length+'件';
     status.textContent=loading?'登録済みの販売形態を取得中…':
-      '保存済み '+rows.length+'件 ／ 表示 '+found.length+'件';
+      '店舗別表示 '+visible.length+'件 ／ 保存記録 '+rows.length+'件 ／ 表示 '+found.length+'件';
     if(!found.length){
       list.innerHTML='<p class="info-sales-no-results">'+
         (rows.length?'検索に一致する店舗がありません。':'まだ登録された店舗はありません。')+'</p>';
@@ -367,8 +388,8 @@
           '<span>ペリ：<strong>'+formatValue(row.peri_state)+'</strong></span>'
         : '<span>テプカ：<strong>'+formatValue(row.tape_cut_state)+'</strong></span>';
       return '<article class="info-sales-entry">'+
-        '<div class="info-sales-entry-heading"><strong>'+escape(row.store_name)+'</strong>'+
-          '<small>'+escape(row.prefecture)+' ／ '+(pokemon?'ポケカ':'ワンピース')+'</small></div>'+
+        '<div class="info-sales-entry-heading"><strong>'+escape(row.canonical_name)+'</strong>'+
+          '<small>'+escape(row.canonical_prefecture)+' ／ '+(pokemon?'ポケカ':'ワンピース')+'</small></div>'+
         '<div class="info-sales-tags">'+tags+'</div>'+
         (row.notes?'<p class="info-sales-entry-note">'+escape(row.notes)+'</p>':'')+
         '<div class="info-sales-entry-actions">'+
@@ -433,8 +454,13 @@
     event.preventDefault();
     if(saveBusy||!canAccess()||!authorized)return;
     selectMasterIfExact();
-    const name=$('infoSalesStore').value.trim();
-    const prefecture=$('infoSalesPrefecture').value;
+    const inputName=$('infoSalesStore').value.trim();
+    const inputPrefecture=$('infoSalesPrefecture').value;
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({
+      name:inputName,prefecture:inputPrefecture
+    })||{name:inputName,prefecture:inputPrefecture};
+    const name=canonical.name;
+    const prefecture=canonical.prefecture;
     const genre=$('infoSalesGenre').value;
     const notes=$('infoSalesNotes').value.trim();
     const shrink=genre==='pokemon'?$('infoSalesShrink').value:'unknown';
@@ -471,7 +497,10 @@
         if(error)throw error;
         return data?.id||'';
       };
-      let targetId=editingId||await findExisting();
+      // If an alias was merged into a shop already having a format record,
+      // update that shop's record rather than violating its unique constraint.
+      const canonicalId=await findExisting();
+      let targetId=canonicalId||editingId;
       const write=async id=>id
         ? client().from(TABLE).update(payload).eq('id',id).select('id').single()
         : client().from(TABLE).insert(payload).select('id').single();
@@ -505,9 +534,12 @@
     if(!record)return;
     if(remove){deleteRecord(record);return;}
     editingId=record.id;
-    $('infoSalesStore').value=record.store_name;
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({
+      name:record.store_name,prefecture:record.prefecture
+    })||{name:record.store_name,prefecture:record.prefecture};
+    $('infoSalesStore').value=canonical.name;
     updateStoreClearButton();
-    $('infoSalesPrefecture').value=record.prefecture;
+    $('infoSalesPrefecture').value=canonical.prefecture;
     $('infoSalesGenre').value=record.genre;
     $('infoSalesShrink').value=record.shrink_state;
     $('infoSalesPeri').value=record.peri_state;
@@ -515,12 +547,15 @@
     $('infoSalesNotes').value=record.notes||'';
     $('infoSalesFormHeading').textContent='登録内容を編集';
     $('infoSalesSave').textContent='変更を保存';
-    updateGenre();message('「'+record.store_name+'」の登録内容を編集中です。');
+    updateGenre();message('「'+canonical.name+'」の登録内容を編集中です。');
     try{$('infoSalesForm').scrollIntoView({behavior:'smooth',block:'start'});}catch(_){}
   }
   async function deleteRecord(record){
     if(saveBusy||!canAccess()||!authorized)return;
-    if(!confirm('「'+record.store_name+'」の'+(record.genre==='pokemon'?'ポケカ':'ワンピース')+
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({
+      name:record.store_name,prefecture:record.prefecture
+    })||{name:record.store_name};
+    if(!confirm('「'+canonical.name+'」の'+(record.genre==='pokemon'?'ポケカ':'ワンピース')+
       '販売形態を削除しますか？'))return;
     const user=options.getUserId();
     saveBusy=true;message('削除しています…');
@@ -591,5 +626,6 @@
     mount();
     onAuthChanged();
   }
-  window.TorecaInfoPlaza={init,onTabChanged,onAuthChanged,onPublicDataChanged};
+  window.TorecaInfoPlaza={init,onTabChanged,onAuthChanged,
+    onPublicDataChanged,onAliasesChanged};
 })();

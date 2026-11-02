@@ -1614,7 +1614,7 @@ nav[aria-label="メインメニュー"] {
           <div id="lpCardStoreRows" class="lp-card-store-rows"></div>
           <button id="lpCardAddStore" type="button" class="lp-card-add-store">＋ 店舗を追加</button>
           <label for="lpCardStorePreset">店舗チェーンから一括追加
-            <select id="lpCardStorePreset"><option value="">チェーンを選択</option><option value="yellow-submarine">イエローサブマリン（22店舗）</option></select>
+            <select id="lpCardStorePreset"><option value="">チェーンを選択</option><option value="yellow-submarine">イエローサブマリン（候補一覧）</option></select>
           </label>
           <button id="lpCardApplyStorePreset" type="button" class="lp-card-add-store">🏬 選択した店舗一覧を追加</button>
           <button id="lpCardSaveStorePreset" type="button" class="lp-card-add-store">＋ 現在の店舗一覧をテンプレート保存</button>
@@ -1812,12 +1812,14 @@ nav[aria-label="メインメニュー"] {
 
   <!-- Supabase JavaScript SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- Read-only alias mappings: master merges always display the target store. -->
+  <script src="store_aliases_v1.js?v=20261102-store-canonical-v1"></script>
   <!-- Information Plaza: shared sales editor for logged-in users -->
-  <script src="info_plaza_sales_v1.js?v=20261101-shared-sales-savefix-v3"></script>
+  <script src="info_plaza_sales_v1.js?v=20261102-store-canonical-v1"></script>
   <!-- Lottery cards: read-only store sales reference -->
-  <script src="lottery_sales_reference_v1.js?v=20261101-shared-sales-savefix-v3"></script>
+  <script src="lottery_sales_reference_v1.js?v=20261102-store-canonical-v1"></script>
   <!-- Per-branch Google Maps links with read-only store-master addresses -->
-  <script src="store_map_links_v1.js?v=20261102-store-maps-v1"></script>
+  <script src="store_map_links_v1.js?v=20261102-store-canonical-v1"></script>
 
   <!-- Developer-only Supabase usage metrics -->
   <script src="supabase_usage_v1.js?v=20261102-supabase-usage-v1"></script>
@@ -1829,14 +1831,14 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261102-manual-multistore-v1';
+      ? token : '20261102-store-canonical-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="lottery_notifications_v1.js?v=20261031-peer-lottery-outcome-alert-v21-144"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261101-biccamera-403-pause-v2"></script>
-  <script src="store_analytics_v21_120.js?v=20261102-master-address-v1"></script>
+  <script src="store_analytics_v21_120.js?v=20261102-store-canonical-v1"></script>
   <script src="dev_unified_review_v21_124.js?v=20261029-v21_129"></script>
 
 <script>

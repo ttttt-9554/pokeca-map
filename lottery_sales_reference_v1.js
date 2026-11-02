@@ -89,7 +89,17 @@
           // Index only rows whose normalized key agrees with their name.
           // Never let malformed or stale aliases match unrelated branches.
           if(normalize(row.store_key)!==normalize(storeName))continue;
-          index.set(key(row.genre,pref,storeName),row);
+          const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({
+            name:storeName,prefecture:pref
+          })||{name:storeName,prefecture:pref};
+          const display={...row,store_name:canonical.name,prefecture:canonical.prefecture};
+          const id=key(row.genre,canonical.prefecture,canonical.name);
+          const existing=index.get(id);
+          // Two historical aliases can point to the same shop/genre.
+          // Display the newest entry instead of duplicating the branch.
+          const nextDate=Date.parse(String(display.updated_at||''))||0;
+          const lastDate=Date.parse(String(existing?.updated_at||''))||0;
+          if(!existing||nextDate>=lastDate)index.set(id,display);
         }
         rowsByKey=index;
         lastFetch=Date.now();
@@ -127,7 +137,10 @@
       const prefecture=String(store?.prefecture||
         (stores.length===1?item?.prefecture:'')||'').trim();
       if(!name||!prefecture)continue;
-      const lookup=key(genre,prefecture,name);
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({
+        name,prefecture
+      })||{name,prefecture};
+      const lookup=key(genre,canonical.prefecture,canonical.name);
       if(seen.has(lookup))continue;
       seen.add(lookup);
       const row=rowsByKey.get(lookup);

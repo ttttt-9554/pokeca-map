@@ -93,10 +93,13 @@
 
   function render(store,singleStorePref=''){
     if(!canRead()||!store)return '';
-    const name=clean(store.name);
-    const pref=clean(store.prefecture||singleStorePref);
+    const original={name:clean(store.name),prefecture:clean(store.prefecture||singleStorePref)};
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(original)||original;
+    const name=clean(canonical.name),pref=clean(canonical.prefecture);
     if(!name||!validPref(pref)||name.length>200)return '';
-    const address=addressByStore.get(key(name,pref))||'';
+    // A merged source always inherits the active master target's address.
+    // Never use the source's old address after a merge or unmerge.
+    const address=clean(canonical.address)||addressByStore.get(key(name,pref))||'';
     // A missing master address cannot identify an unqualified or ambiguous shop.
     if(!address&&genericName(name))return '';
     const query=address?name+', '+address:name+', '+pref;

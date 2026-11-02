@@ -349,6 +349,7 @@
     renderMyShared();
     updateDeveloperTab();
     window.TorecaInfoPlaza?.onAuthChanged?.();
+    window.TorecaStoreAliases?.onAuthChanged?.();
     window.TorecaSupabaseUsage?.onAuthChanged?.();
     window.TorecaSalesReference?.onAuthChanged?.();
     window.TorecaStoreMaps?.onAuthChanged?.();
@@ -838,6 +839,7 @@
     if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
     // Browser integrations are optional in isolated regression-test contexts.
     globalThis.window?.TorecaInfoPlaza?.onTabChanged?.(tab);
+    globalThis.window?.TorecaStoreAliases?.onTabChanged?.(tab);
     globalThis.window?.TorecaStoreMaps?.onTabChanged?.(tab);
     render();
   }
@@ -913,7 +915,7 @@
     const mine = !r.shared || (authUser && r.ownerId === authUser.id);
     return `
       <article class="entry">
-        <h3>${escape(r.shop)} ${r.shared ? '<span class="share-tag">共有</span>' : '<span class="share-tag">端末内</span>'}</h3>
+        <h3>${escape(globalThis.window?.TorecaStoreAliases?.name?.(r.shop)||r.shop)} ${r.shared ? '<span class="share-tag">共有</span>' : '<span class="share-tag">端末内</span>'}</h3>
         <p>
           <strong>${escape(r.product)}</strong>
           · ${escape(r.status || '')}
@@ -957,7 +959,7 @@
       L.marker([Number(r.lat), Number(r.lng)])
         .addTo(markers)
         .bindPopup(`
-          <strong>${escape(r.shop)}</strong>
+          <strong>${escape(globalThis.window?.TorecaStoreAliases?.name?.(r.shop)||r.shop)}</strong>
           <p>${escape(r.product)}</p>
           <small>
             ${escape(r.foundAt.replace('T', ' '))}
@@ -2172,8 +2174,9 @@
     }
     const matches = [...stores.filter(p=>!cloudStores.some(c=>storeKey(c)===storeKey(p))),...cloudStores].filter(p => {
       if (!selected.includes(inferStoreCategory(p))) return false;
-      const name = norm(p.name);
-      const brand = brandNorm(p.name);
+      const shownName=globalThis.window?.TorecaStoreAliases?.name?.(p.name)||p.name;
+      const name = norm(shownName);
+      const brand = brandNorm(shownName);
       const city = norm(p.city);
       const address = norm(p.address);
       return (!query || brand.includes(query) || name.includes(query) || norm(inferStoreCategory(p)).includes(query)) &&
@@ -2195,16 +2198,16 @@
       button.type = 'button';
       button.className = 'store-result';
       const name = document.createElement('strong');
-      name.textContent = p.name;
+      name.textContent = globalThis.window?.TorecaStoreAliases?.name?.(p.name)||p.name;
       const detail = document.createElement('small');
       detail.textContent = [inferStoreCategory(p), p.city, p.address]
         .filter(Boolean).join(' · ');
       button.append(name, detail);
       button.addEventListener('click', () => {
-        get('shop').value = p.name;
+        get('shop').value = globalThis.window?.TorecaStoreAliases?.name?.(p.name)||p.name;
         get('lat').value = p.lat.toFixed(6);
         get('lng').value = p.lng.toFixed(6);
-        output.textContent = `選択済み：${p.name}（${inferStoreCategory(p)}）`;
+        output.textContent = `選択済み：${globalThis.window?.TorecaStoreAliases?.name?.(p.name)||p.name}（${inferStoreCategory(p)}）`;
         if (map) map.setView([p.lat, p.lng], 17);
       });
       output.append(button);
@@ -2775,19 +2778,35 @@
 
   function lotterySite(item) {
     if(item?.app_lottery)return item.manual_registration_method==='in_store'
-      ? String(item.store_name||'店頭応募') : String(item.app_lottery_name||'アプリ抽選');
+      ? lotteryStoreEntries(item)[0]?.name||String(item.store_name||'店頭応募')
+      : String(item.app_lottery_name||'アプリ抽選');
     if(isLivePocketEventUrl(item?.url))return 'LivePocket';
     const site=String(item?.source_site||'').trim();
     if(site)return site;
     try{return new URL(item.url).hostname;}catch(_){return '外部サイト';}
   }
 
+  // Canonical names are computed at read time: never overwrite public sources,
+  // account-entry audit history, or saved edits merely because a master merges.
+  function lotteryCanonicalStore(store,prefecture='') {
+    return globalThis.window?.TorecaStoreAliases?.resolve?.(store,prefecture)||
+      (typeof store==='string'
+        ?{name:String(store).trim(),prefecture:String(prefecture||'').trim()}
+        :{name:String(store?.name||'').trim(),prefecture:String(store?.prefecture||prefecture||'').trim()});
+  }
+  function lotteryCanonicalStores(stores) {
+    return globalThis.window?.TorecaStoreAliases?.canonicalizeStores?.(stores)||stores;
+  }
   function lotteryStoreEntries(item) {
-    const raw = Array.isArray(item.stores) ? item.stores : [];
+    const raw = Array.isArray(item?.stores) ? item.stores : [];
     const entries = raw.filter(x => x && typeof x.name === 'string' && x.name.trim())
       .map(x => ({name:x.name.trim(),prefecture:String(x.prefecture||'').trim()}));
-    if (entries.length) return entries;
-    if (item.store_name) return [{name:String(item.store_name),prefecture:String(item.prefecture||'')}];
+    if(entries.length)
+      return globalThis.window?.TorecaStoreAliases?.canonicalizeStores?.(entries)||entries;
+    if(item?.store_name){
+      const stores=[{name:String(item.store_name),prefecture:String(item.prefecture||'')}];
+      return globalThis.window?.TorecaStoreAliases?.canonicalizeStores?.(stores)||stores;
+    }
     return [];
   }
 
@@ -3167,7 +3186,8 @@
     // "Add store" must explicitly add a new row (no automatic keyboard).
     const shown=entries;
     root.innerHTML=shown.length?shown.map((store,index)=>{
-      const name=String(store?.name||''),area=String(store?.prefecture||'');
+      const canonical=lotteryCanonicalStore(store);
+      const name=String(canonical?.name||''),area=String(canonical?.prefecture||'');
       // Some imported sources have a custom area label. Preserve it as an
       // explicit option rather than quietly changing it when saving a title.
       const customArea=area&&!LP_MANUAL_AREAS.includes(area)
@@ -3188,10 +3208,14 @@
   function lpCardStoreRead(strict=true) {
     const nodes=[...$('lpCardStoreRows').querySelectorAll('.lp-card-store-row')];
     if(nodes.length>LP_CARD_MAX_STORES)throw Error('店舗登録は最大'+LP_CARD_MAX_STORES+'件です。');
-    const rows=nodes.map(node=>({
-      name:String(node.querySelector('[data-lp-store-name]')?.value||'').trim(),
-      prefecture:String(node.querySelector('[data-lp-store-prefecture]')?.value||'').trim()
-    }));
+    const rows=nodes.map(node=>{
+      const store={
+        name:String(node.querySelector('[data-lp-store-name]')?.value||'').trim(),
+        prefecture:String(node.querySelector('[data-lp-store-prefecture]')?.value||'').trim()
+      };
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(store)||store;
+      return {name:canonical.name,prefecture:canonical.prefecture};
+    });
     if(strict){
       const keys=new Set();
       // Keep nonstandard area values already present in legacy or card
@@ -3622,7 +3646,8 @@
       if(!select)return;
       const chosen=select.value;
       select.innerHTML='<option value="">チェーンを選択</option>'+
-        '<option value="yellow-submarine">イエローサブマリン（22店舗）</option>'+
+        '<option value="yellow-submarine">イエローサブマリン（'+
+          lotteryCanonicalStores(LP_YELLOW_SUBMARINE_STORES).length+'店舗）</option>'+
         Object.entries(readStorePresets()).map(([name,rows])=>
           '<option value="'+escape('custom:'+name)+'">'+escape(name)+'（'+rows.length+'店舗・この端末）</option>').join('');
       if([...select.options].some(x=>x.value===chosen))select.value=chosen;
@@ -3630,8 +3655,9 @@
     $('lpCardApplyStorePreset').addEventListener('click',()=>{
       if(!isDeveloper() || !lpCardEditing)return;
       const chosen=$('lpCardStorePreset').value;
-      const preset=chosen==='yellow-submarine' ? LP_YELLOW_SUBMARINE_STORES
+      const rawPreset=chosen==='yellow-submarine' ? LP_YELLOW_SUBMARINE_STORES
         : chosen.startsWith('custom:') ? readStorePresets()[chosen.slice(7)] : null;
+      const preset=lotteryCanonicalStores(rawPreset);
       if(!Array.isArray(preset)||!preset.length){
         lpCardSetStatus('追加する店舗チェーンを選択してください。');
         return;
@@ -3642,7 +3668,8 @@
       const replacePlaceholder=chosen==='yellow-submarine'&&current.length===1&&
         lpIsBareYellowChain(current[0].name)&&!current[0].prefecture;
       const retained=replacePlaceholder?[]:current;
-      const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();
+      const key=x=>String(x.name||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase()+
+        '|'+String(x.prefecture||'');
       const existing=new Set(retained.filter(x=>x.name.trim()).map(key));
       const additions=preset.filter(x=>x&&typeof x.name==='string'&&x.name.trim()&&!existing.has(key(x)));
       if(retained.length+additions.length>LP_CARD_MAX_STORES){
@@ -3655,7 +3682,7 @@
       }
       const confirmation=chosen==='yellow-submarine'
         ? '公式の抽選案内で対象店舗を確認しましたか？\nこの操作を保存すると、'+
-          'イエローサブマリン全22店舗を今回の抽選対象として登録します。'+
+          'イエローサブマリンの登録済み'+preset.length+'店舗を今回の抽選対象として登録します。'+
           (replacePlaceholder?'チェーン名のみの仮登録は置き換えます。':'')
         : '選択した店舗を'+additions.length+'件追加しますか？既存店舗は残ります。';
       if(!confirm(confirmation))return;
@@ -4112,18 +4139,24 @@
   function lpExtStoredStores(row,base){
     if(row){
       if(Array.isArray(row.stores)){
-        const stores=lpExtNormalizeStores(row.stores);
+        const source=lpExtNormalizeStores(row.stores);
+        const stores=globalThis.window?.TorecaStoreAliases?.canonicalizeStores?.(source)||source;
         if(stores.length)return stores;
         if(!row.store_name&&!row.prefecture)return [];
       }
-      return row.store_name||row.prefecture
-        ?[{name:String(row.store_name||''),prefecture:String(row.prefecture||'')}]:[];
+      if(row.store_name||row.prefecture){
+        const original={name:String(row.store_name||''),prefecture:String(row.prefecture||'')};
+        const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(original)||original;
+        return [{name:canonical.name,prefecture:canonical.prefecture}];
+      }
+      return [];
     }
     return lotteryStoreEntries(base||{});
   }
   function lpExtStoreRowHtml(row={}){
-    const name=String(row?.name||'').slice(0,200);
-    const area=String(row?.prefecture||'');
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(row)||row;
+    const name=String(canonical?.name||'').slice(0,200);
+    const area=String(canonical?.prefecture||'');
     return '<div class="lp-ext-store-row" data-lp-ext-store-row>'+
       '<div class="lp-ext-store-grid">'+
        '<label>店舗名<input data-lp-ext-store-name maxlength="200" autocomplete="off" '+
@@ -4174,10 +4207,12 @@
         if(area)fallbackArea=area;
         continue;
       }
-      const key=name.normalize('NFKC').toLocaleLowerCase('ja-JP')+'|'+area;
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.({name,prefecture:area})||
+        {name,prefecture:area};
+      const key=canonical.name.normalize('NFKC').toLocaleLowerCase('ja-JP')+'|'+canonical.prefecture;
       if(seen.has(key))throw Error('同じ店舗と都道府県が重複しています。');
       seen.add(key);
-      stores.push({name,prefecture:area});
+      stores.push({name:canonical.name,prefecture:canonical.prefecture});
     }
     return {stores,store_name:stores[0]?.name||null,
       prefecture:stores[0]?.prefecture||fallbackArea||null};
@@ -4485,13 +4520,14 @@
     const urgent = state === 'open' && Number.isFinite(deadlineRemainingMs) && deadlineRemainingMs > 0 && deadlineRemainingMs < 86400000;
     const placeText = places.length ? places.join('・') : '都道府県未確認';
     const genre = lotteryGenre(item);
+    const yellowCandidates=lotteryCanonicalStores(LP_YELLOW_SUBMARINE_STORES);
     const chainReference = stores.length===1 && lpIsBareYellowChain(stores[0].name)
       ? '<details class="lp-store-details lp-chain-reference">'+
-          '<summary>🏬 イエローサブマリン 登録済み22店舗（候補）</summary>'+
+          '<summary>🏬 イエローサブマリン 登録済み'+yellowCandidates.length+'店舗（候補）</summary>'+
           '<p class="lp-store-muted">チェーンの登録店舗一覧です。'+
-          'この抽選の対象店舗が22店すべてとは限りません。'+
+          'この抽選の対象店舗が'+yellowCandidates.length+'店すべてとは限りません。'+
           '応募店舗は公式案内で確認してください。</p>'+
-          '<ul>'+LP_YELLOW_SUBMARINE_STORES.map(row=>'<li>'+
+          '<ul>'+yellowCandidates.map(row=>'<li>'+
             escape(row.name)+' <small>（'+escape(row.prefecture)+'）</small></li>').join('')+
           '</ul></details>' : '';
     const chainName = stores.length>1 ? lotteryCardChainName(stores) : '';
@@ -4840,9 +4876,10 @@
       .slice(0,100).map(x=>({
         name:String(x.name).trim(),prefecture:String(x.prefecture||'').trim()
       }));
-    if(stores.length)return stores;
+    if(stores.length)return globalThis.window?.TorecaStoreAliases?.canonicalizeStores?.(stores)||stores;
     const previous=String(row?.store_name||'').trim();
-    return previous?[{name:previous,prefecture:String(row?.prefecture||'').trim()}]:[];
+    const legacy=previous?[{name:previous,prefecture:String(row?.prefecture||'').trim()}]:[];
+    return globalThis.window?.TorecaStoreAliases?.canonicalizeStores?.(legacy)||legacy;
   }
   function lpAppExtraStoreRows(){
     return [...($('lpAppExtraStores')?.querySelectorAll('[data-lp-app-extra-store]')||[])];
@@ -4902,7 +4939,7 @@
       app_lottery_owner:row.created_by,app_lottery_hidden:row.is_hidden===true,
       app_lottery_name:row.app_name,app_lottery_details:row.details||'',
       app_lottery_source_url:safeLotteryUrl(row.source_url)?row.source_url:'',
-      source_site:(method==='in_store' ? (row.store_name||row.app_name)+'（店頭応募）' : row.app_name+'（アプリ抽選）'),event_title:row.event_title,
+      source_site:(method==='in_store' ? (stores[0]?.name||row.store_name||row.app_name)+'（店頭応募）' : row.app_name+'（アプリ抽選）'),event_title:row.event_title,
       official_event_title:row.event_title,event_title_provisional:false,
       product_name:row.product_name||'',stores,
       store_name:stores[0]?.name||row.store_name||'',
@@ -5201,12 +5238,14 @@
         throw Error('店舗 '+(i+1)+' の都道府県を選択してください。');
       if(inStore&&!prefecture)
         throw Error('店頭応募の場合は店舗 '+(i+1)+' の都道府県を選択してください。');
-      const identity=name.normalize('NFKC').toLocaleLowerCase('ja-JP')
-        .replace(/[\s　・･._－（）()【】「」-]+/g,'')+'|'+prefecture;
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(name,prefecture)||
+        {name,prefecture};
+      const identity=canonical.name.normalize('NFKC').toLocaleLowerCase('ja-JP')
+        .replace(/[\s　・･._－（）()【】「」-]+/g,'')+'|'+canonical.prefecture;
       if(seen.has(identity))
         throw Error('同じ店舗が重複しています。店舗名と都道府県を確認してください。');
       seen.add(identity);
-      stores.push({name,prefecture});
+      stores.push({name:canonical.name,prefecture:canonical.prefecture});
     }
     if(inStore&&!stores.length)
       throw Error('店頭応募の場合は応募店舗名と都道府県を入力してください。');
@@ -5592,7 +5631,9 @@
       if(!query)return true;
       const haystack=[
         lotteryTrackItemName(item.url),
-        item.product_name,item.event_title,item.store_name,item.prefecture,
+        item.product_name,item.event_title,
+        globalThis.window?.TorecaStoreAliases?.name?.(item.store_name,item.prefecture)||item.store_name,
+        item.prefecture,
         item.url,...lotteryStoreEntries(item).flatMap(store=>[store.name,store.prefecture])
       ].filter(Boolean).join(' ').toLocaleLowerCase();
       return haystack.includes(query);
@@ -6520,18 +6561,16 @@
   function lotteryTrackStoreLabel(url) {
     const item=lotteryItems.find(x=>x.url===url);
     if(!item)return '店舗情報なし（掲載終了・非表示の可能性）';
-    const stores=Array.isArray(item.stores)
-      ? item.stores.filter(x=>x && typeof x.name==='string' && x.name.trim())
-      : [];
+    const stores=lotteryStoreEntries(item);
     const unique=[...new Map(stores.map(x=>[x.name.trim()+'|'+(x.prefecture||''),x])).values()];
     if(unique.length===1){
       const store=unique[0];
       return store.name.trim()+(store.prefecture?'（'+store.prefecture+'）':'');
     }
     if(unique.length>1)return '対象店舗 '+unique.length+'件：'+unique.slice(0,3).map(x=>x.name.trim()).join(' ／ ')+(unique.length>3?' ほか':'');
-    const name=String(item.store_name||'').trim();
-    const pref=String(item.prefecture||'').trim();
-    return name ? name+(pref?'（'+pref+'）':'') : '店舗未確認';
+    const store=globalThis.window?.TorecaStoreAliases?.resolve?.(item.store_name,item.prefecture)||
+      {name:String(item.store_name||'').trim(),prefecture:String(item.prefecture||'').trim()};
+    return store.name ? store.name+(store.prefecture?'（'+store.prefecture+'）':'') : '店舗未確認';
   }
 
   // Names and account allocation details appear ONLY in the signed-in
@@ -6544,10 +6583,11 @@
         const profile=lpPrivateAccounts.get(row.account_id);
         const name=profile?.label||'登録済みアカウント';
         const quantity=Number(row.application_count)||0;
-        const store=String(row.store_name||'').trim();
-        const pref=String(row.store_prefecture||'').trim();
+        const raw={name:String(row.store_name||'').trim(),
+          prefecture:String(row.store_prefecture||'').trim()};
+        const store=globalThis.window?.TorecaStoreAliases?.resolve?.(raw)||raw;
         return '<span>'+escape(name)+'：'+quantity+'口'+
-          (store?'／'+escape(store+(pref?'（'+pref+'）':'')):'')+'</span>';
+          (store.name?'／'+escape(store.name+(store.prefecture?'（'+store.prefecture+'）':'')):'')+'</span>';
       });
     const used=assigned.reduce((n,row)=>n+(Number(row.application_count)||0),0);
     const unassigned=Math.max(0,Number(record.application_count||0)-used);
@@ -6798,14 +6838,25 @@
         const assigned=Array.isArray(r.account_entries)?r.account_entries:[];
         const choices=lpTrackerCandidateStores(r.event_url);
         let stores=[...new Map(assigned.filter(a=>a.store_name)
-          .map(a=>[(a.store_name||'')+'|'+(a.store_prefecture||''),{
-            name:a.store_name,prefecture:a.store_prefecture||''}])).values()];
-        if(!stores.length)stores=choices.length?choices:[{
-          name:item.store_name||lotteryTrackStoreLabel(r.event_url),
-          prefecture:item.prefecture||''}];
+          .map(a=>{
+            const raw={name:a.store_name,prefecture:a.store_prefecture||''};
+            const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(raw)||raw;
+            return [canonical.name+'|'+canonical.prefecture,canonical];
+          })).values()];
+        if(!stores.length){
+          const fallback={name:item.store_name||lotteryTrackStoreLabel(r.event_url),
+            prefecture:item.prefecture||''};
+          stores=choices.length?choices:[
+            globalThis.window?.TorecaStoreAliases?.resolve?.(fallback)||fallback
+          ];
+        }
         for(const store of stores){
-          const relevant=assigned.filter(a=>!a.store_name||
-            (a.store_name===store.name&&(a.store_prefecture||'')===(store.prefecture||'')));
+          const relevant=assigned.filter(a=>{
+            if(!a.store_name)return true;
+            const raw={name:a.store_name,prefecture:a.store_prefecture||''};
+            const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(raw)||raw;
+            return canonical.name===store.name&&canonical.prefecture===(store.prefecture||'');
+          });
           const namesRow=profileIds.map(id=>{
             const group=relevant.filter(a=>a.account_id===id);
             if(!group.length)return '';
@@ -6939,12 +6990,20 @@
   }
 
   function lpTrackerStoreControl(entry,stores=[],manualStore=false){
-    if(manualStore)return '<div class="lp-track-account-store lp-track-manual-store">'+
-      '<label>🏬 応募店舗名<input type="text" data-lp-manual-store-name maxlength="200" required placeholder="例：宇都宮店" value="'+escape(String(entry?.store_name||''))+'"></label>'+
-      '<label>📍 地域（都道府県）<input type="text" data-lp-manual-store-pref maxlength="80" required placeholder="例：栃木県" value="'+escape(String(entry?.store_prefecture||''))+'"></label></div>';
+    if(manualStore){
+      const original={name:String(entry?.store_name||''),prefecture:String(entry?.store_prefecture||'')};
+      const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(original)||original;
+      return '<div class="lp-track-account-store lp-track-manual-store">'+
+        '<label>🏬 応募店舗名<input type="text" data-lp-manual-store-name maxlength="200" required placeholder="例：宇都宮店" value="'+escape(canonical.name)+'"></label>'+
+        '<label>📍 地域（都道府県）<input type="text" data-lp-manual-store-pref maxlength="80" required placeholder="例：栃木県" value="'+escape(canonical.prefecture)+'"></label></div>';
+    }
 
-    const savedName=String(entry?.store_name||'').trim();
-    const savedPref=String(entry?.store_prefecture||'').trim();
+    const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(
+      entry?.store_name,entry?.store_prefecture)||{
+        name:String(entry?.store_name||'').trim(),prefecture:String(entry?.store_prefecture||'').trim()
+      };
+    const savedName=canonical.name;
+    const savedPref=canonical.prefecture;
     const label=store=>store.name+(store.prefecture?'（'+store.prefecture+'）':'');
     if(stores.length===1)
       return '<p class="lp-track-store-choice lp-track-store-fixed">🏬 応募店舗：'+
@@ -9835,6 +9894,20 @@
         getClient:()=>supabaseClient,
         getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
         isDev:isDeveloper
+      });
+      window.TorecaStoreAliases?.init?.({
+        getClient:()=>supabaseClient,
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        onChanged:()=>{
+          // Recompute every visible store-based screen without changing originals.
+          lpCloudApply();
+          lpAppRender();
+          renderLotteryTrackerSummary();
+          window.TorecaSalesReference?.refresh?.(true);
+          window.TorecaStoreMaps?.refresh?.(true);
+          render();
+          window.TorecaInfoPlaza?.onAliasesChanged?.();
+        }
       });
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
         renderCards:renderLottery,escape});
