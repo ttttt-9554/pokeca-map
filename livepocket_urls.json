@@ -20240,7 +20240,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/b0pdj": {
-          "checked_at": "2026-11-02T15:11:23.605232+00:00",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -20255,8 +20255,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/m6j4z": {
-          "checked_at": "2026-11-02T15:01:27.135369+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -21911,7 +21911,7 @@
         "https://livepocket.jp/e/b0pdj": {
           "detected_at": "2026-11-02T09:01:11.850614+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-02T15:11:23.605232+00:00",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/88ahs": {
@@ -21928,8 +21928,8 @@
         },
         "https://livepocket.jp/e/m6j4z": {
           "detected_at": "2026-11-02T15:01:01.933718+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-02T15:01:27.135369+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "http_status": null
         }
       },
@@ -23263,8 +23263,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/b0pdj": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-02T15:11:23.605232+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-02T21:11:24.702981+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/h_36i": {
@@ -23275,6 +23275,11 @@
         "https://livepocket.jp/e/88ahs": {
           "attempts": 1,
           "last_attempt_at": "2026-11-02T18:11:33.290667+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/m6j4z": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-02T21:11:24.702981+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28533,7 +28538,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-02T15:11:23.605232+00:00",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】【事前入店申込・抽選】11月21日(土)JUMP SHOP池袋店",
           "genre": "onepiece",
           "product_origin": "",
@@ -28566,7 +28571,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-02T15:01:27.135369+00:00",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "title_observed": "ONE PIECEカードゲームコーナー 【事前入店申込・抽選】11月21日(土)JUMP SHOP東京駅店",
           "genre": "onepiece",
           "product_origin": "",
@@ -32981,7 +32986,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/b0pdj": {
-          "checked_at": "2026-11-02T15:11:23.605232+00:00",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -33020,7 +33025,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/m6j4z": {
-          "checked_at": "2026-11-02T15:01:27.135369+00:00",
+          "checked_at": "2026-11-02T21:11:24.702981+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
