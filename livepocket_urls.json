@@ -20317,7 +20317,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/m6j4z": {
-          "checked_at": "2026-11-02T21:11:24.702981+00:00",
+          "checked_at": "2026-11-03T03:16:22.158670+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -22001,7 +22001,7 @@
         "https://livepocket.jp/e/m6j4z": {
           "detected_at": "2026-11-02T15:01:01.933718+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-02T21:11:24.702981+00:00",
+          "checked_at": "2026-11-03T03:16:22.158670+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/u8syz": {
@@ -23362,8 +23362,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/m6j4z": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-02T21:11:24.702981+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-03T03:16:22.158670+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28655,7 +28655,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-02T21:11:24.702981+00:00",
+          "checked_at": "2026-11-03T03:16:22.158670+00:00",
           "title_observed": "ONE PIECEカードゲームコーナー 【事前入店申込・抽選】11月21日(土)JUMP SHOP東京駅店",
           "genre": "onepiece",
           "product_origin": "",
@@ -33131,7 +33131,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/m6j4z": {
-          "checked_at": "2026-11-02T21:11:24.702981+00:00",
+          "checked_at": "2026-11-03T03:16:22.158670+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
