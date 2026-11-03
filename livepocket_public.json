@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-03T03:05:57.298253+00:00",
-  "unique_livepocket_urls": 635,
+  "collected_at": "2026-11-03T03:35:55.589526+00:00",
+  "unique_livepocket_urls": 636,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9603,7 +9603,26 @@
         }
       ],
       "first_detected_at": "2026-11-03T01:36:00.908269+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nn0xi",
+      "store_name": "TSUTAYA Trading Card府中駅前",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-11-03T03:30:05.373000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card府中駅前",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "application_end_at": "2026-11-05T21:00:00+09:00",
+      "application_start_at": "2026-11-03T12:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "first_detected_at": "2026-11-03T03:35:56.976745+00:00"
     }
   ],
-  "updated_at": "2026-11-03T03:26:08.018310+00:00"
+  "updated_at": "2026-11-03T03:36:18.036987+00:00"
 }
