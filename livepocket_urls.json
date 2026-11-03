@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-03T00:30:58.772008+00:00",
+  "collected_at": "2026-11-03T01:35:59.073254+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 634,
+  "unique_livepocket_urls": 635,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -17347,34 +17347,64 @@
       "event_title": "【葉鹿店】スペシャルデッキセット 抽選予約",
       "application_end_at": "2026-11-05T21:59:00+09:00",
       "application_start_at": "2026-11-03T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/gvco6",
+      "discord_message_id": "1566987802833588334",
+      "discord_posted_at": "2026-11-03T01:30:05.421000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍宮城県\nヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店\n受付終了: 11/05 23:59（残り2日13時間）\nhttps://livepocket.jp/e/gvco6",
+      "store_name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+      "prefecture": "宮城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【二次抽選】ONE PIECEカード EXブースター Heroines Edition vol.2",
+      "application_end_at": "2026-11-05T23:59:00+09:00",
+      "application_start_at": "2026-11-03T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 472,
+    "parsed": 473,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 449,
-    "prefecture": 406,
-    "event_title": 321,
+    "store_name": 450,
+    "prefecture": 407,
+    "event_title": 322,
     "event_date": 1,
     "product_name": 89,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 598,
-    "application_start_at": 591,
-    "stores_events": 460
+    "application_end_at": 599,
+    "application_start_at": 592,
+    "stores_events": 461
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1566972705646055575"
+      "1551580466266644552": "1566987802833588334"
     },
     "last_run": {
-      "checked_at": "2026-11-03T00:30:58.772008+00:00",
+      "checked_at": "2026-11-03T01:35:59.073254+00:00",
       "new_urls": 1,
-      "original_urls": 633,
+      "original_urls": 634,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -17579,7 +17609,8 @@
         "1566738729551536260": "2026-11-02T09:01:10.994069+00:00",
         "1566784010087043193": "2026-11-02T12:00:58.798884+00:00",
         "1566829301897232505": "2026-11-02T15:01:00.835565+00:00",
-        "1566972705646055575": "2026-11-03T00:30:59.655897+00:00"
+        "1566972705646055575": "2026-11-03T00:30:59.655897+00:00",
+        "1566987802833588334": "2026-11-03T01:35:59.874147+00:00"
       },
       "checked_search_urls": {}
     },
@@ -20294,6 +20325,11 @@
           "checked_at": "2026-11-03T00:31:29.345848+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/gvco6": {
+          "checked_at": "2026-11-03T01:36:42.913477+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -21972,6 +22008,12 @@
           "detected_at": "2026-11-03T00:31:00.713069+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-03T00:31:29.345848+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gvco6": {
+          "detected_at": "2026-11-03T01:36:00.908269+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T01:36:42.913477+00:00",
           "http_status": null
         }
       },
@@ -28630,6 +28672,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/gvco6": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-03T01:36:42.913477+00:00",
+          "title_observed": "【二次抽選】ONE PIECEカード EXブースター Heroines Edition vol.2",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -33092,6 +33145,19 @@
         },
         "https://livepocket.jp/e/u8syz": {
           "checked_at": "2026-11-03T00:31:29.345848+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/gvco6": {
+          "checked_at": "2026-11-03T01:36:42.913477+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
