@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-03T03:35:55.589526+00:00",
+  "collected_at": "2026-11-03T04:35:55.997029+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 636,
+  "unique_livepocket_urls": 637,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -17407,34 +17407,64 @@
       "event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
       "application_end_at": "2026-11-05T21:00:00+09:00",
       "application_start_at": "2026-11-03T12:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/u9xis",
+      "discord_message_id": "1567033097084608548",
+      "discord_posted_at": "2026-11-03T04:30:04.412000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍群馬県\nトレカ丸新井店\n受付終了: 11/05 21:59（残り2日8時間）\nhttps://livepocket.jp/e/u9xis",
+      "store_name": "トレカ丸新井店",
+      "prefecture": "群馬県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸新井店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【新井店】スペシャルデッキセット 抽選予約",
+      "application_end_at": "2026-11-05T21:59:00+09:00",
+      "application_start_at": "2026-11-03T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 474,
+    "parsed": 475,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 451,
-    "prefecture": 408,
-    "event_title": 323,
+    "store_name": 452,
+    "prefecture": 409,
+    "event_title": 324,
     "event_date": 1,
     "product_name": 89,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 600,
-    "application_start_at": 593,
-    "stores_events": 462
+    "application_end_at": 601,
+    "application_start_at": 594,
+    "stores_events": 463
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567018001620799498"
+      "1551580466266644552": "1567033097084608548"
     },
     "last_run": {
-      "checked_at": "2026-11-03T03:35:55.589526+00:00",
+      "checked_at": "2026-11-03T04:35:55.997029+00:00",
       "new_urls": 1,
-      "original_urls": 635,
+      "original_urls": 636,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -17641,7 +17671,8 @@
         "1566829301897232505": "2026-11-02T15:01:00.835565+00:00",
         "1566972705646055575": "2026-11-03T00:30:59.655897+00:00",
         "1566987802833588334": "2026-11-03T01:35:59.874147+00:00",
-        "1567018001620799498": "2026-11-03T03:35:56.268972+00:00"
+        "1567018001620799498": "2026-11-03T03:35:56.268972+00:00",
+        "1567033097084608548": "2026-11-03T04:35:56.682353+00:00"
       },
       "checked_search_urls": {}
     },
@@ -20366,6 +20397,11 @@
           "checked_at": "2026-11-03T03:36:18.036987+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/u9xis": {
+          "checked_at": "2026-11-03T04:36:20.952401+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -22056,6 +22092,12 @@
           "detected_at": "2026-11-03T03:35:56.976745+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-03T03:36:18.036987+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/u9xis": {
+          "detected_at": "2026-11-03T04:35:57.568444+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T04:36:20.952401+00:00",
           "http_status": null
         }
       },
@@ -28736,6 +28778,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/u9xis": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-03T04:36:20.952401+00:00",
+          "title_observed": "【新井店】スペシャルデッキセット 抽選予約",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -33224,6 +33277,19 @@
         },
         "https://livepocket.jp/e/nn0xi": {
           "checked_at": "2026-11-03T03:36:18.036987+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/u9xis": {
+          "checked_at": "2026-11-03T04:36:20.952401+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

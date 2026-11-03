@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-03T03:35:55.589526+00:00",
-  "unique_livepocket_urls": 636,
+  "collected_at": "2026-11-03T04:35:55.997029+00:00",
+  "unique_livepocket_urls": 637,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9620,7 +9620,24 @@
         }
       ],
       "first_detected_at": "2026-11-03T03:35:56.976745+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/u9xis",
+      "store_name": "トレカ丸新井店",
+      "prefecture": "群馬県",
+      "discord_posted_at": "2026-11-03T04:30:04.412000+00:00",
+      "stores": [
+        {
+          "name": "トレカ丸新井店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "event_title": "【新井店】スペシャルデッキセット 抽選予約",
+      "application_end_at": "2026-11-05T21:59:00+09:00",
+      "application_start_at": "2026-11-03T09:00:00+09:00",
+      "official_event_title": "【新井店】スペシャルデッキセット 抽選予約",
+      "first_detected_at": "2026-11-03T04:35:57.568444+00:00"
     }
   ],
-  "updated_at": "2026-11-03T04:25:57.612222+00:00"
+  "updated_at": "2026-11-03T04:36:20.952401+00:00"
 }
