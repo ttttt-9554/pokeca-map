@@ -9760,69 +9760,67 @@
       "url": "https://livepocket.jp/e/a35_-",
       "store_name": "ECサイト上",
       "prefecture": "東京都",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」BOX",
+      "event_title": "【購入権抽選】30th CELEBRATION BOX",
+      "application_start_at": "2026-11-03T23:00:00+09:00",
+      "application_end_at": "2026-11-11T23:59:00+09:00",
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ECサイト上",
           "prefecture": "東京都"
         }
       ],
-      "event_title": "【購入権抽選】30th CELEBRATION BOX",
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」BOX",
-      "application_end_at": "2026-11-11T23:59:00+09:00",
-      "application_start_at": "2026-11-03T23:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_event_title": "【購入権抽選】30th CELEBRATION BOX",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ewhgu",
       "store_name": "TSUTAYA入間仏子店",
       "prefecture": "埼玉県",
+      "event_title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
+      "application_start_at": "2026-11-02T07:00:00+09:00",
+      "application_end_at": "2026-11-08T21:45:00+09:00",
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA入間仏子店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
-      "application_end_at": "2026-11-08T21:45:00+09:00",
-      "application_start_at": "2026-11-02T07:00:00+09:00",
-      "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ghdew",
       "store_name": "ブックエース坂東店",
       "prefecture": "茨城県",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
+      "application_start_at": "2026-11-03T10:00:00+09:00",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "ブックエース坂東店",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
-      "application_end_at": "2026-11-08T21:00:00+09:00",
-      "application_start_at": "2026-11-03T10:00:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s72w6",
       "store_name": "トレカ丸足利助戸店",
       "prefecture": "栃木県",
+      "event_title": "【足利助戸店】スペシャルデッキセット 抽選予約",
+      "application_start_at": "2026-11-03T09:00:00+09:00",
+      "application_end_at": "2026-11-05T21:59:00+09:00",
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
       "stores": [
         {
@@ -9830,16 +9828,15 @@
           "prefecture": "栃木県"
         }
       ],
-      "event_title": "【足利助戸店】スペシャルデッキセット 抽選予約",
-      "application_end_at": "2026-11-05T21:59:00+09:00",
-      "application_start_at": "2026-11-03T09:00:00+09:00",
-      "official_event_title": "【足利助戸店】スペシャルデッキセット 抽選予約",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
     },
     {
       "url": "https://livepocket.jp/e/yv965",
       "store_name": "文真堂書店上原店",
       "prefecture": "群馬県",
+      "event_title": "【上原店】スペシャルデッキセット 抽選予約",
+      "application_start_at": "2026-11-03T09:00:00+09:00",
+      "application_end_at": "2026-11-05T22:59:00+09:00",
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
       "stores": [
         {
@@ -9847,16 +9844,15 @@
           "prefecture": "群馬県"
         }
       ],
-      "event_title": "【上原店】スペシャルデッキセット 抽選予約",
-      "application_end_at": "2026-11-05T22:59:00+09:00",
-      "application_start_at": "2026-11-03T09:00:00+09:00",
-      "official_event_title": "【上原店】スペシャルデッキセット 抽選予約",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
     },
     {
       "url": "https://livepocket.jp/e/k_qo9",
       "store_name": "トレカ丸倉賀野店",
       "prefecture": "群馬県",
+      "event_title": "【倉賀野店】スペシャルデッキセット 抽選予約",
+      "application_start_at": "2026-11-03T09:00:00+09:00",
+      "application_end_at": "2026-11-05T21:59:00+09:00",
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
       "stores": [
         {
@@ -9864,12 +9860,8 @@
           "prefecture": "群馬県"
         }
       ],
-      "event_title": "【倉賀野店】スペシャルデッキセット 抽選予約",
-      "application_end_at": "2026-11-05T21:59:00+09:00",
-      "application_start_at": "2026-11-03T09:00:00+09:00",
-      "official_event_title": "【倉賀野店】スペシャルデッキセット 抽選予約",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
     }
   ],
-  "updated_at": "2026-11-03T15:06:33.651945+00:00"
+  "updated_at": "2026-11-03T15:16:08.968414+00:00"
 }
