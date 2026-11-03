@@ -20487,8 +20487,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/nn0xi": {
-          "checked_at": "2026-11-03T03:36:18.036987+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T09:46:21.951516+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/u9xis": {
@@ -22198,8 +22198,8 @@
         },
         "https://livepocket.jp/e/nn0xi": {
           "detected_at": "2026-11-03T03:35:56.976745+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T03:36:18.036987+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T09:46:21.951516+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/u9xis": {
@@ -23584,6 +23584,11 @@
         "https://livepocket.jp/e/gvco6": {
           "attempts": 1,
           "last_attempt_at": "2026-11-03T07:46:46.327867+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/nn0xi": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T09:46:21.951516+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28908,7 +28913,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T03:36:18.036987+00:00",
+          "checked_at": "2026-11-03T09:46:21.951516+00:00",
           "title_observed": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -33445,7 +33450,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nn0xi": {
-          "checked_at": "2026-11-03T03:36:18.036987+00:00",
+          "checked_at": "2026-11-03T09:46:21.951516+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
