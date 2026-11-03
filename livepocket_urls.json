@@ -20482,8 +20482,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/gvco6": {
-          "checked_at": "2026-11-03T01:36:42.913477+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T07:46:46.327867+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/nn0xi": {
@@ -22192,8 +22192,8 @@
         },
         "https://livepocket.jp/e/gvco6": {
           "detected_at": "2026-11-03T01:36:00.908269+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T01:36:42.913477+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T07:46:46.327867+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nn0xi": {
@@ -23579,6 +23579,11 @@
         "https://livepocket.jp/e/u8syz": {
           "attempts": 1,
           "last_attempt_at": "2026-11-03T06:36:29.666748+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/gvco6": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T07:46:46.327867+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -28892,7 +28897,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T01:36:42.913477+00:00",
+          "checked_at": "2026-11-03T07:46:46.327867+00:00",
           "title_observed": "【二次抽選】ONE PIECEカード EXブースター Heroines Edition vol.2",
           "genre": "",
           "product_origin": "",
@@ -33427,7 +33432,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/gvco6": {
-          "checked_at": "2026-11-03T01:36:42.913477+00:00",
+          "checked_at": "2026-11-03T07:46:46.327867+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
