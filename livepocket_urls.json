@@ -20593,7 +20593,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/u8syz": {
-          "checked_at": "2026-11-03T06:36:29.666748+00:00",
+          "checked_at": "2026-11-03T12:46:15.681333+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -22323,7 +22323,7 @@
         "https://livepocket.jp/e/u8syz": {
           "detected_at": "2026-11-03T00:31:00.713069+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-03T06:36:29.666748+00:00",
+          "checked_at": "2026-11-03T12:46:15.681333+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/gvco6": {
@@ -23737,8 +23737,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/u8syz": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-03T06:36:29.666748+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-03T12:46:15.681333+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/gvco6": {
@@ -29066,7 +29066,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T06:36:29.666748+00:00",
+          "checked_at": "2026-11-03T12:46:15.681333+00:00",
           "title_observed": "【葉鹿店】スペシャルデッキセット 抽選予約",
           "genre": "",
           "product_origin": "",
@@ -33643,7 +33643,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/u8syz": {
-          "checked_at": "2026-11-03T06:36:29.666748+00:00",
+          "checked_at": "2026-11-03T12:46:15.681333+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
