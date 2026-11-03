@@ -20790,7 +20790,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/u9xis": {
-          "checked_at": "2026-11-03T10:46:20.620047+00:00",
+          "checked_at": "2026-11-03T16:56:36.619969+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -22553,7 +22553,7 @@
         "https://livepocket.jp/e/u9xis": {
           "detected_at": "2026-11-03T04:35:57.568444+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-03T10:46:20.620047+00:00",
+          "checked_at": "2026-11-03T16:56:36.619969+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/3pdc4": {
@@ -24000,8 +24000,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/u9xis": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-03T10:46:20.620047+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-03T16:56:36.619969+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/hyejo": {
@@ -29362,7 +29362,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T10:46:20.620047+00:00",
+          "checked_at": "2026-11-03T16:56:36.619969+00:00",
           "title_observed": "【新井店】スペシャルデッキセット 抽選予約",
           "genre": "",
           "product_origin": "",
@@ -34011,7 +34011,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/u9xis": {
-          "checked_at": "2026-11-03T10:46:20.620047+00:00",
+          "checked_at": "2026-11-03T16:56:36.619969+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
