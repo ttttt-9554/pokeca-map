@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-03T10:05:56.766943+00:00",
-  "unique_livepocket_urls": 643,
+  "collected_at": "2026-11-03T11:05:57.803238+00:00",
+  "unique_livepocket_urls": 644,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9738,7 +9738,26 @@
         }
       ],
       "first_detected_at": "2026-11-03T10:05:58.376014+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/4jh8u",
+      "store_name": "トレカエース春日部店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-03T11:00:02.835000+00:00",
+      "stores": [
+        {
+          "name": "トレカエース春日部店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【再販分】ワンピースカードゲーム ブースターパック 『世界最強の戦士【OP17】』抽選販売受付",
+      "application_end_at": "2026-11-03T23:00:00+09:00",
+      "application_start_at": "2026-11-03T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【再販分】ワンピースカードゲーム ブースターパック 『世界最強の戦士【OP17】』抽選販売受付",
+      "first_detected_at": "2026-11-03T11:05:59.498541+00:00"
     }
   ],
-  "updated_at": "2026-11-03T10:56:00.830978+00:00"
+  "updated_at": "2026-11-03T11:06:24.352027+00:00"
 }
