@@ -20618,13 +20618,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/hyejo": {
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/0epyz": {
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/cxg3t": {
@@ -22352,14 +22352,14 @@
         },
         "https://livepocket.jp/e/0epyz": {
           "detected_at": "2026-11-03T06:05:57.483452+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/hyejo": {
           "detected_at": "2026-11-03T06:05:57.483452+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/0-aj_": {
@@ -23754,6 +23754,16 @@
         "https://livepocket.jp/e/u9xis": {
           "attempts": 1,
           "last_attempt_at": "2026-11-03T10:46:20.620047+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/hyejo": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T12:16:29.598751+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/0epyz": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T12:16:29.598751+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -29111,7 +29121,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
           "title_observed": "【渋川中央店】スペシャルデッキセット 抽選予約",
           "genre": "",
           "product_origin": "",
@@ -29122,7 +29132,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
           "title_observed": "ONE PIECEカード 「ONE PIECE HEROINES PRECIOUS BOX 」抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -33698,7 +33708,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/hyejo": {
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -33711,7 +33721,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0epyz": {
-          "checked_at": "2026-11-03T06:06:21.049084+00:00",
+          "checked_at": "2026-11-03T12:16:29.598751+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
