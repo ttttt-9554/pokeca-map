@@ -20810,18 +20810,18 @@
           "http_status": null
         },
         "https://livepocket.jp/e/cxg3t": {
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/926kc": {
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/0-aj_": {
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/4jh8u": {
@@ -22576,20 +22576,20 @@
         },
         "https://livepocket.jp/e/0-aj_": {
           "detected_at": "2026-11-03T10:05:58.376014+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/926kc": {
           "detected_at": "2026-11-03T10:05:58.376014+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/cxg3t": {
           "detected_at": "2026-11-03T10:05:58.376014+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/4jh8u": {
@@ -24012,6 +24012,21 @@
         "https://livepocket.jp/e/0epyz": {
           "attempts": 1,
           "last_attempt_at": "2026-11-03T12:16:29.598751+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/cxg3t": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T16:16:17.845958+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/926kc": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T16:16:17.845958+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/0-aj_": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-03T16:16:17.845958+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -29391,7 +29406,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "title_observed": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】",
           "genre": "onepiece",
           "product_origin": "",
@@ -29402,7 +29417,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "title_observed": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
           "genre": "pokemon",
           "product_origin": "",
@@ -29413,7 +29428,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 30thCELEBRATION カードセット９種",
           "genre": "pokemon",
           "product_origin": "",
@@ -34048,7 +34063,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/cxg3t": {
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -34061,7 +34076,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/926kc": {
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -34074,7 +34089,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0-aj_": {
-          "checked_at": "2026-11-03T10:06:23.629178+00:00",
+          "checked_at": "2026-11-03T16:16:17.845958+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
