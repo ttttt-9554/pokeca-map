@@ -1,0 +1,105 @@
+import unittest
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+from datetime import datetime,timedelta,timezone
+import livepocket_v21 as v21
+import livepocket_individual_fetch as individual
+
+URL='https://livepocket.jp/e/sample123'
+NOW=datetime(2026,11,5,1,tzinfo=timezone.utc)
+BODY='概要\nポケモンカード抽選販売\n詳細\n対象店舗\nテスト渋谷店（東京都）\n応募期間 2026年11月5日10:00～2026年11月7日23:59\n受付・チケット情報\nお問い合わせ'
+def page(url=URL,text=BODY):
+    return {'status':'ok','final_url':url,'titles':['ポケモンカード抽選販売'],
+            'title_sources':['h1'],'text':text}
+def pair(pending=False):
+    return ({'items':[{'url':URL,'discord_posted_at':NOW.isoformat()}],
+        'collector_state':{'v14':{'pending_new_urls':[URL] if pending else [],
+        'new_url_checks':{URL:{'detected_at':NOW.isoformat(),'status':'queued'}} if pending else {}}}},
+        {'items':[{'url':URL}]})
+
+class IndividualFetchTests(unittest.TestCase):
+    def test_extract_exact_event_title_dates_and_store(self):
+        result=individual.extract(v21,URL,page())
+        self.assertEqual(result['status'],'success')
+        self.assertEqual(result['fields']['event_title'],'ポケモンカード抽選販売')
+        self.assertEqual(result['fields']['stores'][0]['name'],'テスト渋谷店')
+        self.assertEqual(result['fields']['stores'][0]['prefecture'],'東京都')
+        self.assertIn('2026-11-07T23:59',result['fields']['application_end_at'])
+    def test_wrong_url_or_robot_never_yields_fields(self):
+        self.assertEqual(individual.extract(v21,URL,page('https://livepocket.jp/e/other123'))['fields'],{})
+        blocked=individual.extract(v21,URL,page(text="Verify that you're not a robot"))
+        self.assertEqual(blocked['status'],'blocked')
+        self.assertEqual(blocked['fields'],{})
+    def test_ambiguous_dates_are_not_selected(self):
+        text=BODY.replace('受付・チケット情報','申込期間 2026年11月5日10:00～2026年11月8日23:59\n受付・チケット情報')
+        fields=individual.extract(v21,URL,page(text=text))['fields']
+        self.assertNotIn('application_end_at',fields)
+    def run_case(self,pending=False,blocked=False,unknown=False):
+        raw,public=pair(pending)
+        if blocked:raw['collector_state']['v14']['blocked_until']=(NOW+timedelta(hours=1)).isoformat()
+        calls=[];result={}
+        def fetch(url):calls.append(url);return page(url)
+        request={'url':'https://livepocket.jp/e/unknown123' if unknown else URL,'request_id':'fake'}
+        out=v21.process(raw,public,fetch,catalog=[],now=NOW,new_limit=1 if pending else 0,
+            background_limit=0,retry_limit=0,title_limit=0,verified={},v19_verified={},
+            verified_titles={},verified_unavailable={},individual_request=request,individual_result=result)
+        return calls,result,out
+    def test_single_requested_event_only_and_does_not_modify_card(self):
+        calls,result,out=self.run_case()
+        self.assertEqual(calls,[URL]);self.assertEqual(result['status'],'success')
+        self.assertNotIn('event_title',out[1]['items'][0])
+        self.assertNotIn('stores',out[1]['items'][0])
+    def test_already_scheduled_page_is_not_fetched_twice(self):
+        calls,result,_=self.run_case(pending=True)
+        self.assertEqual(calls,[URL]);self.assertEqual(result['status'],'success')
+    def test_cooldown_and_unknown_url_do_not_fetch(self):
+        calls,result,_=self.run_case(blocked=True)
+        self.assertEqual(calls,[]);self.assertEqual(result['status'],'blocked')
+        calls,result,_=self.run_case(unknown=True)
+        self.assertEqual(calls,[]);self.assertEqual(result['status'],'unavailable')
+    def test_access_gate_sets_cooldown(self):
+        raw,public=pair();outcome={};calls=[]
+        def fetch(url):calls.append(url);return page(url,"Verify that you're not a robot")
+        out=v21.process(raw,public,fetch,catalog=[],now=NOW,new_limit=0,background_limit=0,
+            retry_limit=0,title_limit=0,verified={},v19_verified={},verified_titles={},verified_unavailable={},
+            individual_request={'url':URL,'request_id':'fake'},individual_result=outcome)
+        self.assertEqual(calls,[URL]);self.assertEqual(outcome['status'],'blocked')
+        self.assertTrue(out[0]['collector_state']['v14']['blocked_until'])
+
+class WorkerQueueTests(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
+        self.req=Path(self.temp.name)/'request.json';self.res=Path(self.temp.name)/'result.json'
+        self.task={'url':URL,'request_id':'00000000-0000-4000-8000-000000000002'}
+        self.calls=[]
+        def rpc(name,data):
+            self.calls.append((name,data))
+            return self.task if name=='livepocket_individual_claim_v1' else True
+        self.patches=[patch.object(individual,'REQUEST_PATH',self.req),patch.object(individual,'RESULT_PATH',self.res),patch.object(individual,'rpc',rpc)]
+        for p in self.patches:p.start();self.addCleanup(p.stop)
+    def test_prepare_known_event_then_finish_private_candidates(self):
+        raw,public=pair()
+        with patch.object(individual.v14,'read_pair',return_value=(raw,public)):
+            individual.prepare()
+        self.assertTrue(self.req.exists())
+        self.res.write_text('{"request_id":"00000000-0000-4000-8000-000000000002","status":"success","fields":{"event_title":"確認名"},"message":"確認"}',encoding='utf-8')
+        individual.complete()
+        self.assertFalse(self.req.exists())
+        self.assertEqual(self.calls[-1][1]['p_fields']['event_title'],'確認名')
+    def test_prepare_unknown_event_never_enqueues_browser(self):
+        raw,public=pair();public['items']=[]
+        with patch.object(individual.v14,'read_pair',return_value=(raw,public)):
+            individual.prepare()
+        self.assertFalse(self.req.exists());self.assertEqual(self.calls[-1][1]['p_status'],'unavailable')
+    def test_prepare_during_cooldown_returns_blocked(self):
+        raw,public=pair();raw['collector_state']['v14']['blocked_until']='2099-01-01T00:00:00+00:00'
+        with patch.object(individual.v14,'read_pair',return_value=(raw,public)):
+            individual.prepare()
+        self.assertFalse(self.req.exists());self.assertEqual(self.calls[-1][1]['p_status'],'blocked')
+    def test_missing_result_finishes_as_error(self):
+        import json
+        self.req.write_text(json.dumps(self.task),encoding='utf-8')
+        individual.complete();self.assertEqual(self.calls[-1][1]['p_status'],'error')
+
+if __name__=='__main__':unittest.main()

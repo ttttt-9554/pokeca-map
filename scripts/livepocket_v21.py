@@ -8,6 +8,7 @@ The catalog is a classifier, NEVER a source of invented ticket product names.
 from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
 import livepocket_period_trial as period_trial
+import livepocket_individual_fetch as individual_fetch
 
 import csv
 import io
@@ -1618,7 +1619,8 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             background_limit=0, retry_limit=3, verified=None, v19_verified=None,
             title_limit=TITLE_RECHECK_DEFAULT_PER_RUN,
             manual_recheck=False, manual_limit=MANUAL_RECHECK_LIMIT,
-            verified_titles=None, verified_unavailable=None):
+            verified_titles=None, verified_unavailable=None,
+            individual_request=None, individual_result=None):
     """v21.13: title-priority checks, URL-scoped results and verified titles."""
     now = v14._utc(now)
     snapshot = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
@@ -2018,6 +2020,28 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
     if any(snapshot.get(i['url']) != json.dumps(i, ensure_ascii=False, sort_keys=True)
            for i in public['items']):
         public['updated_at'] = now.isoformat()
+    # A requested exact event reuses this run's observation where available.
+    # Otherwise use the same normal browser once, subject to its global access
+    # cooldown. Candidate fields go to the private review queue only.
+    if individual_request and isinstance(individual_result,dict):
+        import sys
+        url=individual_request.get('url')
+        try:
+            if url not in ri or url not in pi or v12.exact_event_url(url)!=url:
+                outcome={'status':'unavailable','fields':{},'message':'登録済みの抽選が見つかりませんでした。'}
+            elif url in observations:
+                outcome=individual_fetch.extract(sys.modules[__name__],url,observations[url])
+            elif v14._cooldown_active(state.setdefault('v14',{}),now):
+                outcome={'status':'blocked','fields':{},'message':'アクセス制限中のため取得を停止しています。時間を置いて確認してください。'}
+            else:
+                page=record(url)
+                outcome=individual_fetch.extract(sys.modules[__name__],url,page)
+            if outcome['status']=='blocked':
+                state.setdefault('v14',{})['blocked_until']=(now+timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
+        except Exception:
+            outcome={'status':'error','fields':{},'message':'自動取得を完了できませんでした。時間を置いてお試しください。'}
+        individual_result.update(outcome,request_id=individual_request.get('request_id'))
+        stats['individual_review_status']=outcome['status']
     public['schema_version'] = 21
     return raw, public, review, deadlines, sources, content, stats
 
@@ -2703,6 +2727,10 @@ def main():
         def fetch(_url):
             raise AssertionError('Unexpected browser fetch')
         close = lambda: None
+    individual_request=None
+    individual_result={}
+    if os.getenv('LIVEPOCKET_INDIVIDUAL_ENABLED')=='true' and individual_fetch.REQUEST_PATH.exists():
+        individual_request=json.loads(individual_fetch.REQUEST_PATH.read_text(encoding='utf-8'))
     try:
         data = process(raw, public, fetch, catalog=catalog,
                        new_limit=new_limit, background_limit=background_limit,
@@ -2712,9 +2740,12 @@ def main():
                        manual_recheck=manual_recheck,
                        manual_limit=MANUAL_RECHECK_LIMIT,
                        verified_titles=verified_titles,
-                       verified_unavailable=verified_unavailable)
+                       verified_unavailable=verified_unavailable,
+                       individual_request=individual_request,individual_result=individual_result)
     finally:
         close()
+    if individual_result:
+        individual_fetch.RESULT_PATH.write_text(json.dumps(individual_result,ensure_ascii=False),encoding='utf-8')
     raw, public, review, deadlines, sources, content, stats = data
     for k, value in stats.items():
         print(f'{k}: {value}')

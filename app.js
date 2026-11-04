@@ -8868,6 +8868,13 @@
   async function lpDevFetchOne(url){
     if(!isDeveloper()||!supabaseClient||!lotteryBaseItems.some(item=>item.url===url))
       throw Error('開発者ログインと登録済み抽選が必要です。');
+    if(isLivePocketEventUrl(url)){
+      const canonical=url.replace(/\/$/,'');
+      const {data,error}=await supabaseClient.rpc('livepocket_individual_request_v1',{p_url:canonical});
+      if(error)throw Error(error.message||'ライポケの取得を受け付けられませんでした。');
+      if(!data||!data.request_id)throw Error('ライポケの取得受付を確認できませんでした。');
+      return {...data,livepocket:true};
+    }
     const {data,error}=await supabaseClient.functions.invoke('lottery-individual-fetch',{body:{url}});
     if(error){
       let detail='';
@@ -8877,9 +8884,44 @@
     if(data?.error)throw Error(data.error);
     return data;
   }
+  async function lpDevLivepocketFetches(){
+    if(!isDeveloper()||!supabaseClient)return [];
+    const {data,error}=await supabaseClient.rpc('livepocket_individual_list_v1');
+    if(error)throw Error(error.message||'ライポケの取得状態を確認できませんでした。');
+    return Array.isArray(data)?data:[];
+  }
   async function lpDevOpenFetchedEditor(url,fields){
-    if(isLivePocketEventUrl(url))throw Error('ライポケの候補を編集する操作にはまだ対応していません。');
     await lpDevUnifiedOpenEditor(url);
+    if(isLivePocketEventUrl(url)){
+      const form=$('lpCardForm');
+      for(const name of ['event_title','product_name','application_start_at','application_end_at']){
+        const input=form.elements.namedItem(name),value=fields?.[name];
+        if(input&&!input.value&&typeof value==='string')
+          input.value=name.startsWith('application_')?lpExtDateInput(value):value.slice(0,200);
+      }
+      const found=Array.isArray(fields?.stores)?fields.stores.filter(row=>
+        row&&typeof row.name==='string'&&row.name.trim()&&row.name.length<=200)
+        .slice(0,LP_CARD_MAX_STORES).map(row=>({name:row.name.trim(),
+          prefecture:LP_MANUAL_AREAS.includes(row.prefecture)?row.prefecture:''})):[];
+      const current=lpCardStoreRead(false);
+      if(!current.length&&found.length){
+        lpCardStoreRender(found);
+        $('lpCardStoresFold').open=found.length>1;
+      }else if(current.length&&found.length){
+        // Only fill an absent prefecture when the exact same store has one
+        // unambiguous matching candidate. Never replace existing stores.
+        let changed=false;
+        for(const row of current){
+          const key=lpPresetStoreKey({name:row.name,prefecture:''});
+          const matches=found.filter(item=>lpPresetStoreKey({name:item.name,prefecture:''})===key&&item.prefecture);
+          const areas=[...new Set(matches.map(item=>item.prefecture))];
+          if(!row.prefecture&&areas.length===1){row.prefecture=areas[0];changed=true;}
+        }
+        if(changed)lpCardStoreRender(current);
+      }
+      lpCardSetStatus('取得した候補を空欄に入力しました。内容を確認して保存してください。');
+      return;
+    }
     const form=$('lpExtForm');
     for(const name of ['event_title','application_start_at','application_end_at']){
       const input=form.elements.namedItem(name),value=fields?.[name];
@@ -10716,6 +10758,7 @@
         validTitle:lpManualValidTitle,expired:lpApplicationExpired,escape,
         openEditor:lpDevUnifiedOpenEditor,fetchOne:lpDevFetchOne,
         openFetchedEditor:lpDevOpenFetchedEditor,
+        getLivepocketFetches:lpDevLivepocketFetches,
         refreshSources:async()=>{
           await loadLotteryEvents(true);
           await Promise.all([lpCloudRefresh(true),lpLocationRefresh(true),

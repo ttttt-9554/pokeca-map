@@ -10,6 +10,9 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_famima_lottery_enrich.py
       - scripts/livepocket_period_trial.py
       - scripts/test_livepocket_period_trial.py
+      - scripts/livepocket_individual_fetch.py
+      - scripts/test_livepocket_individual_fetch.py
+      - supabase/livepocket_individual_fetch_v1.sql
       - supabase/famima_lottery_fetch_v1.sql
       - search_inputs_v1.js
       - info_plaza_sales_v1.js
@@ -38,6 +41,8 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_store_analytics.cjs
       - scripts/test_developer_unified_review.cjs
       - scripts/test_individual_fetch_ui.cjs
+      - scripts/test_livepocket_individual_ui.cjs
+      - scripts/test_livepocket_individual_queue_ui.cjs
       - scripts/test_individual_lottery_fetch.mjs
       - supabase/functions/lottery-individual-fetch/**
       - supabase/lottery_private_application_accounts_v21_100.sql
@@ -84,7 +89,7 @@ jobs:
         run: |
           PYTHONPATH=scripts python -m unittest -v scripts/test_sevennet_lottery_enrich.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_famima_lottery_enrich.py
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_period_trial.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_period_trial.py scripts/test_livepocket_individual_fetch.py
           python -m py_compile scripts/livepocket_future_policy.py scripts/livepocket_v16.py scripts/livepocket_v18.py scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_future_policy.py scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
       - name: Check PWA syntax and admin-corrected deadline expiry
@@ -114,7 +119,16 @@ jobs:
           node --check dev_unified_review_v21_124.js
           node scripts/test_developer_unified_review.cjs
           node scripts/test_individual_fetch_ui.cjs
+          node scripts/test_livepocket_individual_ui.cjs
+          node scripts/test_livepocket_individual_queue_ui.cjs
           node scripts/test_individual_lottery_fetch.mjs
           node scripts/test_app_manual_location.cjs
           node scripts/test_external_edit_discord.cjs
           node scripts/test_external_multi_stores.cjs
+      - name: Check individual queue access (read-only)
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          PYTHONPATH=scripts python -c "import livepocket_individual_fetch as q; result=q.rpc('livepocket_individual_peek_v1',{}); assert type(result) is int; print('Individual queue service connection OK')"

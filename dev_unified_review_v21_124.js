@@ -10,6 +10,7 @@
   };
   let api=null,limit=80,refreshing=false,lastRows=[],bound=false;
   const fetchResults=new Map(),fetchBusy=new Set();
+  let liveTimer=null,liveLoading=false;
   const text=value=>String(value??'').trim();
   // Placeholder texts are not actual stores or prefectures.
   const known=name=>!!text(name)&&
@@ -99,12 +100,16 @@
     if(dCount)dCount.textContent=completed.length+'件';
     function card(row){
       const label=text(row.item.event_title)||'抽選名未確認';
-      const result=fetchResults.get(row.url);
-      const labels={event_title:'抽選名',store_name:'店舗名',prefecture:'地域',
+      const result=fetchResults.get(row.url)||fetchResults.get(row.url.replace(/\/$/,''));
+      const pending=result?.livepocket&&['pending','running'].includes(result.status);
+      const labels={event_title:'抽選名',product_name:'商品名',store_name:'店舗名',prefecture:'地域',
         application_start_at:'応募開始',application_end_at:'応募締切'};
       const candidates=result?.fields?Object.entries(result.fields)
         .filter(([k,v])=>labels[k]&&typeof v==='string'&&v.trim())
-        .map(([k,v])=>'<li>'+api.escape(labels[k])+'：'+api.escape(v)+'</li>').join(''):'';
+        .map(([k,v])=>'<li>'+api.escape(labels[k])+'：'+api.escape(v)+'</li>').join('')+
+        (Array.isArray(result.fields.stores)&&result.fields.stores.length?
+          '<li>対象店舗：'+result.fields.stores.map(store=>api.escape(store.name||'')+
+            (store.prefecture?'（'+api.escape(store.prefecture)+'）':'')).join(' ／ ')+'</li>':''):'';
       const output=result?'<div class="lp-dev-unified-fetch-result" role="status"><p>'+api.escape(result.message||'')+'</p>'+
         (candidates?'<ul>'+candidates+'</ul><button type="button" data-lp-dev-unified-use="'+
           api.escape(row.url)+'">取得候補を編集画面へ</button>':'')+'</div>':'';
@@ -126,7 +131,7 @@
           '<button type="button" data-lp-dev-unified-edit="'+
             api.escape(row.url)+'">✏️ 修正・確認</button>'+
           '<button type="button" data-lp-dev-unified-fetch="'+api.escape(row.url)+'"'+
-            (fetchBusy.has(row.url)?' disabled':'')+'>'+ (fetchBusy.has(row.url)?'🔄 取得中…':'🔄 自動取得')+'</button>'+
+            (fetchBusy.has(row.url)||pending?' disabled':'')+'>'+ (fetchBusy.has(row.url)?'🔄 取得中…':pending?'⏳ 取得待ち':'🔄 自動取得')+'</button>'+
         '</div>'+output+'</article>';
     }
     host.innerHTML=filtered.length?filtered.slice(0,limit).map(card).join(''):
@@ -160,22 +165,56 @@
     }
   }
 
+  function liveResult(task){
+    const pending=['pending','running'].includes(task?.status);
+    return {livepocket:true,request_id:task?.request_id,status:task?.status,
+      fields:task?.fields||{},message:pending?
+        '⏳ 次の収集で確認します（通常数分。混雑時は遅れる場合があります）。':
+        task?.message||'取得結果を確認してください。'};
+  }
+  function scheduleLivePoll(){
+    if(liveTimer||typeof setTimeout!=='function'||!api?.isDeveloper())return;
+    if(![...fetchResults.values()].some(x=>x.livepocket&&['pending','running'].includes(x.status)))return;
+    liveTimer=setTimeout(()=>{liveTimer=null;void refreshLiveRequests();},15000);
+  }
+  async function refreshLiveRequests(){
+    if(liveLoading||!api?.isDeveloper()||typeof api.getLivepocketFetches!=='function')return;
+    liveLoading=true;
+    try{
+      const tasks=await api.getLivepocketFetches();
+      if(!api?.isDeveloper())return;
+      for(const task of Array.isArray(tasks)?tasks:[]){
+        if(!task||typeof task.url!=='string'||!api.isLivePocket(task.url))continue;
+        const existing=fetchResults.get(task.url);
+        // An older list response must not replace a newly queued request.
+        if(existing?.livepocket&&['pending','running'].includes(existing.status)&&
+           existing.request_id&&task.request_id!==existing.request_id)continue;
+        fetchResults.set(task.url,liveResult(task));
+      }
+      render();
+    }catch(error){console.warn('ライポケ取得状態を確認できません:',error?.message||error);}
+    finally{liveLoading=false;scheduleLivePoll();}
+  }
+
   async function onFetch(event){
     const button=event.target.closest('button[data-lp-dev-unified-fetch]');
     if(!button||!api?.isDeveloper())return;
     const url=button.dataset.lpDevUnifiedFetch;
     if(!api.validUrl(url)||fetchBusy.has(url)||!lastRows.some(row=>row.url===url))return;
-    fetchBusy.add(url);fetchResults.delete(url);render();
+    const resultKey=api.isLivePocket(url)?url.replace(/\/$/,''):url;
+    fetchBusy.add(url);fetchResults.delete(resultKey);render();
     try{
       const result=await api.fetchOne(url);
-      fetchResults.set(url,{fields:result?.fields||{},message:result?.message||'取得結果を確認してください。'});
-    }catch(error){fetchResults.set(url,{message:'⚠ '+String(error?.message||error)});}
+      fetchResults.set(resultKey,result?.livepocket?liveResult(result):
+        {fields:result?.fields||{},message:result?.message||'取得結果を確認してください。'});
+      if(result?.livepocket)scheduleLivePoll();
+    }catch(error){fetchResults.set(resultKey,{message:'⚠ '+String(error?.message||error)});}
     finally{fetchBusy.delete(url);render();}
   }
   async function onUse(event){
     const button=event.target.closest('button[data-lp-dev-unified-use]');
     if(!button||!api?.isDeveloper())return;
-    const url=button.dataset.lpDevUnifiedUse,result=fetchResults.get(url);
+    const url=button.dataset.lpDevUnifiedUse,result=fetchResults.get(url)||fetchResults.get(url.replace(/\/$/,''));
     if(!result?.fields||!lastRows.some(row=>row.url===url))return;
     button.disabled=true;
     try{await api.openFetchedEditor(url,result.fields);}
@@ -197,7 +236,11 @@
   }
 
   function onAuthChanged(){
-    if(!api?.isDeveloper())return;
+    if(!api?.isDeveloper()){
+      if(liveTimer&&typeof clearTimeout==='function')clearTimeout(liveTimer);
+      liveTimer=null;fetchResults.clear();return;
+    }
+    void refreshLiveRequests();
     const container=$('lpDevUnifiedPanel')?.closest('details.dev-accordion');
     if(container&&!container.open)container.open=true;
     render();
