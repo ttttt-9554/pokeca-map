@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-04T12:00:57.922718+00:00",
-  "unique_livepocket_urls": 657,
+  "collected_at": "2026-11-04T12:31:05.660395+00:00",
+  "unique_livepocket_urls": 658,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9928,6 +9928,7 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_event_title": "【店頭告知要確認】公認店限定「ONE PIECE HEROINES PRECIOUS BOX」抽選販売",
       "first_detected_at": "2026-11-04T06:30:58.256624+00:00"
     },
     {
@@ -10006,7 +10007,26 @@
         }
       ],
       "first_detected_at": "2026-11-04T11:31:04.287367+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/5id4o",
+      "store_name": "蔦屋書店茂原店 トレカコーナー",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-11-04T12:30:07.913000+00:00",
+      "stores": [
+        {
+          "name": "蔦屋書店茂原店 トレカコーナー",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "蔦屋書店茂原店ワンピースカードゲーム 「神の支配【OP-18】」抽選販売",
+      "application_end_at": "2026-11-07T22:00:00+09:00",
+      "application_start_at": "2026-11-04T16:46:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "蔦屋書店茂原店ワンピースカードゲーム 「神の支配【OP-18】」抽選販売",
+      "first_detected_at": "2026-11-04T12:31:08.013949+00:00"
     }
   ],
-  "updated_at": "2026-11-04T12:21:00.647455+00:00"
+  "updated_at": "2026-11-04T12:31:52.194951+00:00"
 }

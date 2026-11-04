@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-04T12:00:57.922718+00:00",
+  "collected_at": "2026-11-04T12:31:05.660395+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 657,
+  "unique_livepocket_urls": 658,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18060,33 +18060,63 @@
           "prefecture": ""
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/5id4o",
+      "discord_message_id": "1567516295589666876",
+      "discord_posted_at": "2026-11-04T12:30:07.913000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n蔦屋書店茂原店 トレカコーナー\n受付終了: 11/07 22:00（残り3日0時間）\nhttps://livepocket.jp/e/5id4o",
+      "store_name": "蔦屋書店茂原店 トレカコーナー",
+      "prefecture": "千葉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "蔦屋書店茂原店 トレカコーナー",
+          "prefecture": "千葉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "蔦屋書店茂原店ワンピースカードゲーム 「神の支配【OP-18】」抽選販売",
+      "application_end_at": "2026-11-07T22:00:00+09:00",
+      "application_start_at": "2026-11-04T16:46:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 494,
+    "parsed": 495,
     "no_structured_details": 163
   },
   "field_counts": {
-    "store_name": 471,
-    "prefecture": 428,
-    "event_title": 344,
+    "store_name": 472,
+    "prefecture": 429,
+    "event_title": 345,
     "event_date": 1,
     "product_name": 91,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 621,
-    "application_start_at": 611,
-    "stores_events": 483
+    "application_end_at": 622,
+    "application_start_at": 612,
+    "stores_events": 484
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567508760560275468"
+      "1551580466266644552": "1567516295589666876"
     },
     "last_run": {
-      "checked_at": "2026-11-04T12:00:57.922718+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-04T12:31:05.660395+00:00",
+      "new_urls": 1,
       "original_urls": 657,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -18306,7 +18336,8 @@
         "1567403061469782158": "2026-11-04T05:00:58.019813+00:00",
         "1567425696232513571": "2026-11-04T06:30:57.241373+00:00",
         "1567478542147788891": "2026-11-04T10:10:57.393016+00:00",
-        "1567499792630939769": "2026-11-04T11:31:03.482159+00:00"
+        "1567499792630939769": "2026-11-04T11:31:03.482159+00:00",
+        "1567516295589666876": "2026-11-04T12:31:07.233245+00:00"
       },
       "checked_search_urls": {}
     },
@@ -21118,8 +21149,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/z_1ke": {
-          "checked_at": "2026-11-04T06:31:24.662152+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/gswrx": {
@@ -21134,6 +21165,11 @@
         },
         "https://livepocket.jp/e/2nyas": {
           "checked_at": "2026-11-04T11:32:02.516905+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/5id4o": {
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
           "status": "checked_title_deadline",
           "http_status": null
         }
@@ -22932,8 +22968,8 @@
         },
         "https://livepocket.jp/e/z_1ke": {
           "detected_at": "2026-11-04T06:30:58.256624+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-04T06:31:24.662152+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/2zkfx": {
@@ -22952,6 +22988,12 @@
           "detected_at": "2026-11-04T11:31:04.287367+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-04T11:32:02.516905+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/5id4o": {
+          "detected_at": "2026-11-04T12:31:08.013949+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
           "http_status": null
         }
       },
@@ -24387,6 +24429,11 @@
         "https://livepocket.jp/e/o17ppsed05": {
           "attempts": 1,
           "last_attempt_at": "2026-11-04T11:11:44.763821+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/z_1ke": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-04T12:31:52.194951+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -29909,7 +29956,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-04T06:31:24.662152+00:00",
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
           "title_observed": "【店頭告知要確認】公認店限定「ONE PIECE HEROINES PRECIOUS BOX」抽選販売",
           "genre": "",
           "product_origin": "",
@@ -29944,6 +29991,17 @@
           "http_status": "",
           "checked_at": "2026-11-04T11:32:02.516905+00:00",
           "title_observed": "【11/21-11/24受取】ONE PIECE カードゲーム 神の支配[OP-18]購入権利",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/5id4o": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
+          "title_observed": "蔦屋書店茂原店ワンピースカードゲーム 「神の支配【OP-18】」抽選販売",
           "genre": "onepiece",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
@@ -34669,7 +34727,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/z_1ke": {
-          "checked_at": "2026-11-04T06:31:24.662152+00:00",
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -34709,6 +34767,19 @@
         },
         "https://livepocket.jp/e/2nyas": {
           "checked_at": "2026-11-04T11:32:02.516905+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/5id4o": {
+          "checked_at": "2026-11-04T12:31:52.194951+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
