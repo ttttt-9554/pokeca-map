@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-04T10:10:56.411793+00:00",
+  "collected_at": "2026-11-04T11:31:02.709546+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 656,
+  "unique_livepocket_urls": 657,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18003,34 +18003,91 @@
       "event_title": "ワンピースカード ブースターパック『神の支配』 抽選販売受付",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-04T17:15:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2nyas",
+      "discord_message_id": "1567499792630939769",
+      "discord_posted_at": "2026-11-04T11:24:33.301000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/2nyas",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "event_title": "【11/21-11/24受取】ONE PIECE カードゲーム 神の支配[OP-18]購入権利",
+      "application_end_at": "2026-11-08T12:00:00+09:00",
+      "application_start_at": "2026-11-04T15:38:00+09:00",
+      "stores": [
+        {
+          "name": "11/21～11/24購入可能・フルコンプ秋葉原店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプラジオ会館店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ渋谷東口店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ池袋店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ横浜店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ川崎店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ本厚木店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ千葉店",
+          "prefecture": ""
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 494,
-    "no_structured_details": 162
+    "no_structured_details": 163
   },
   "field_counts": {
     "store_name": 471,
     "prefecture": 428,
-    "event_title": 343,
+    "event_title": 344,
     "event_date": 1,
     "product_name": 91,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 620,
-    "application_start_at": 610,
-    "stores_events": 482
+    "application_end_at": 621,
+    "application_start_at": 611,
+    "stores_events": 483
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567478542147788891"
+      "1551580466266644552": "1567499792630939769"
     },
     "last_run": {
-      "checked_at": "2026-11-04T10:10:56.411793+00:00",
-      "new_urls": 2,
-      "original_urls": 654,
+      "checked_at": "2026-11-04T11:31:02.709546+00:00",
+      "new_urls": 1,
+      "original_urls": 656,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -18248,7 +18305,8 @@
         "1567387948092100718": "2026-11-04T04:00:57.733825+00:00",
         "1567403061469782158": "2026-11-04T05:00:58.019813+00:00",
         "1567425696232513571": "2026-11-04T06:30:57.241373+00:00",
-        "1567478542147788891": "2026-11-04T10:10:57.393016+00:00"
+        "1567478542147788891": "2026-11-04T10:10:57.393016+00:00",
+        "1567499792630939769": "2026-11-04T11:31:03.482159+00:00"
       },
       "checked_search_urls": {}
     },
@@ -21073,6 +21131,11 @@
           "checked_at": "2026-11-04T10:11:23.418967+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/2nyas": {
+          "checked_at": "2026-11-04T11:32:02.516905+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -22883,6 +22946,12 @@
           "detected_at": "2026-11-04T10:10:58.422252+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-04T10:11:23.418967+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/2nyas": {
+          "detected_at": "2026-11-04T11:31:04.287367+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-04T11:32:02.516905+00:00",
           "http_status": null
         }
       },
@@ -29868,6 +29937,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/2nyas": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-04T11:32:02.516905+00:00",
+          "title_observed": "【11/21-11/24受取】ONE PIECE カードゲーム 神の支配[OP-18]購入権利",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -34616,6 +34696,19 @@
         },
         "https://livepocket.jp/e/2zkfx": {
           "checked_at": "2026-11-04T10:11:23.418967+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/2nyas": {
+          "checked_at": "2026-11-04T11:32:02.516905+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

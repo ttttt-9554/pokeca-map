@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-04T10:10:56.411793+00:00",
-  "unique_livepocket_urls": 656,
+  "collected_at": "2026-11-04T11:31:02.709546+00:00",
+  "unique_livepocket_urls": 657,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9963,7 +9963,52 @@
         }
       ],
       "first_detected_at": "2026-11-04T10:10:58.422252+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2nyas",
+      "discord_posted_at": "2026-11-04T11:24:33.301000+00:00",
+      "event_title": "【11/21-11/24受取】ONE PIECE カードゲーム 神の支配[OP-18]購入権利",
+      "application_end_at": "2026-11-08T12:00:00+09:00",
+      "application_start_at": "2026-11-04T15:38:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "11/21～11/24購入可能・フルコンプ秋葉原店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプラジオ会館店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ渋谷東口店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ池袋店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ横浜店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ川崎店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ本厚木店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/21～11/24購入可能・フルコンプ千葉店",
+          "prefecture": ""
+        }
+      ],
+      "official_genre": "onepiece",
+      "official_event_title": "【11/21-11/24受取】ONE PIECE カードゲーム 神の支配[OP-18]購入権利",
+      "first_detected_at": "2026-11-04T11:31:04.287367+00:00"
     }
   ],
-  "updated_at": "2026-11-04T11:21:02.538579+00:00"
+  "updated_at": "2026-11-04T11:32:02.516905+00:00"
 }
