@@ -21055,8 +21055,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/o17ppsed05": {
-          "checked_at": "2026-11-04T05:01:28.408728+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-04T11:11:44.763821+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/z_1ke": {
@@ -22863,8 +22863,8 @@
         },
         "https://livepocket.jp/e/o17ppsed05": {
           "detected_at": "2026-11-04T05:00:59.015162+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-04T05:01:28.408728+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-04T11:11:44.763821+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/z_1ke": {
@@ -24313,6 +24313,11 @@
         "https://livepocket.jp/e/wp6tg": {
           "attempts": 1,
           "last_attempt_at": "2026-11-04T10:11:23.418967+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/o17ppsed05": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-04T11:11:44.763821+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -29824,7 +29829,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-04T05:01:28.408728+00:00",
+          "checked_at": "2026-11-04T11:11:44.763821+00:00",
           "title_observed": "【古本市場市川鬼高店】ワンピースカードゲーム 「世界最強の戦士」",
           "genre": "onepiece",
           "product_origin": "",
@@ -34571,7 +34576,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/o17ppsed05": {
-          "checked_at": "2026-11-04T05:01:28.408728+00:00",
+          "checked_at": "2026-11-04T11:11:44.763821+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
