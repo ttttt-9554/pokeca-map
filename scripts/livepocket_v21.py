@@ -7,6 +7,7 @@ The catalog is a classifier, NEVER a source of invented ticket product names.
 """
 from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
+import livepocket_period_trial as period_trial
 
 import csv
 import io
@@ -1646,14 +1647,26 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
     seen = set()
     observations = {}
+    # Observe only newly discovered URLs after the trial starts; the normal
+    # collector remains solely responsible for requests and access safeguards.
+    trial_eligible = period_trial.start(raw, now) if not manual_recheck else set()
+    trial_observations = []
+    trial_remaining = max(0, period_trial.LIMIT - len(raw.get('collector_state', {}).get('period_trial_v1', {}).get('results', [])))
 
     def record(url):
         seen.add(url)
-        result = normalize_verification_page(fetch(url))
+        try:
+            result = normalize_verification_page(fetch(url))
+        except Exception:
+            if url in trial_eligible and len(trial_observations) < trial_remaining:
+                trial_observations.append(period_trial.observation(url, {'status':'browser_error'}, now))
+            raise
         result = normalize_event_title_observation(result, url)
         result = quarantine_unconfirmed_event(result, url)
         if isinstance(result, dict):
             observations[url] = result
+        if url in trial_eligible and len(trial_observations) < trial_remaining and period_trial.lottery_or_unavailable(result):
+            trial_observations.append(period_trial.observation(url, result, now))
         return result
 
     with use_manual_background(manual_urls if manual_recheck else []):
@@ -1662,6 +1675,12 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             new_limit=new_limit, background_limit=background_limit,
             retry_limit=0 if manual_recheck else retry_limit,
             verified=verified, v19_verified=v19_verified)
+    if not manual_recheck:
+        rows = period_trial.append(raw, trial_observations)
+        stats['period_trial_count'] = len(rows)
+        for entry in trial_observations:
+            if entry in rows:
+                print('period_trial_observation:', json.dumps(entry, ensure_ascii=False))
     ri, pi = v11.indices(raw, public)
     state = raw.setdefault('collector_state', {})
     log = state.setdefault('v21_3', {}).setdefault('title_rechecks', {})
