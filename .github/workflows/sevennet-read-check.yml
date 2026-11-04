@@ -1,4 +1,4 @@
-name: Famima browser check
+name: Famima collector verification
 on:
   push:
     branches: [codex/sevennet-read-check-20261104]
@@ -8,29 +8,19 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Open the public page in Chrome
+      - uses: actions/checkout@v4
+      - name: Verify Tokyo fetch and extraction
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          if ! command -v google-chrome >/dev/null; then echo 'BROWSER_NOT_AVAILABLE'; exit 0; fi
-          timeout 25 google-chrome --headless --no-sandbox --disable-gpu --dump-dom 'https://famima-online.family.co.jp/item?itemCode=100163657179608640' > /tmp/famima-check.html 2>/dev/null || true
-          python3 - <<'PY'
-          import re
-          from html.parser import HTMLParser
-          class Parser(HTMLParser):
-              def __init__(self): super().__init__(); self.active=None; self.head=[]; self.title=[]; self.text=[]
-              def handle_starttag(self,tag,attrs):
-                  if tag in ('h1','title'): self.active=tag
-              def handle_endtag(self,tag):
-                  if self.active==tag: self.active=None
-              def handle_data(self,s):
-                  self.text.append(s)
-                  if self.active=='h1': self.head.append(s)
-                  if self.active=='title': self.title.append(s)
-          p=Parser()
-          with open('/tmp/famima-check.html',encoding='utf-8',errors='replace') as f: p.feed(f.read(2000000))
-          print('TITLE:', ' '.join(p.title).strip()[:300])
-          print('H1:', ' '.join(p.head).strip()[:300])
-          text=' '.join(p.text)
-          for label in ['予約開始日','予約終了日','お受け取り期間','抽選発表日']:
-              m=re.search(label,text)
-              print('LABEL:',label,'VALUE:',text[m.start():m.start()+110] if m else 'NOT_FOUND')
+          PYTHONPATH=scripts python3 - <<'PY'
+          import os
+          import famima_lottery_enrich as f
+          try:
+              body=f.fetch('100163657179608640',os.environ['SUPABASE_URL'],os.environ['SUPABASE_SERVICE_ROLE_KEY'])
+              row=f.extract(body)
+              print('VERIFIED_RESULT:',row)
+          except Exception as e:
+              print('VERIFICATION_FAILED:',type(e).__name__)
           PY
