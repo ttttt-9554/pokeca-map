@@ -8,35 +8,15 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect public page once
+      - uses: actions/checkout@v4
+      - name: Test the real extractor on the public page
         run: |
-          python3 - <<'PY'
-          import html, re, urllib.request, urllib.error
-          from html.parser import HTMLParser
+          PYTHONPATH=scripts python3 - <<'PY'
+          import sevennet_lottery_enrich as s
           url='https://7net.omni7.jp/detail/2190054281.html'
           try:
-              with urllib.request.urlopen(url, timeout=20) as response:
-                  data=response.read(2000000).decode('utf-8','replace')
-                  print('HTTP:',response.status)
+              result=s.extract(s.fetch(url))
+              print('EXTRACTION:', result)
           except Exception as e:
               print('FETCH_FAILED:',type(e).__name__,str(e)[:200])
-              raise SystemExit(0)
-          class Parser(HTMLParser):
-              def __init__(self):
-                  super().__init__(); self.text=[]; self.headings=[]; self.tag=None; self.title=[]
-              def handle_starttag(self,tag,attrs):
-                  if tag in ('h1','title'): self.tag=tag
-              def handle_endtag(self,tag):
-                  if self.tag==tag: self.tag=None
-              def handle_data(self,data):
-                  self.text.append(data)
-                  if self.tag=='h1': self.headings.append(data)
-                  if self.tag=='title': self.title.append(data)
-          p=Parser(); p.feed(data)
-          print('TITLE:', ' '.join(p.title)[:300])
-          print('H1:', ' '.join(p.headings)[:300])
-          full=html.unescape(' '.join(p.text))
-          for m in list(re.finditer(r'応募期間',full))[:3]:
-              print('PERIOD:',re.sub(r'\\s+',' ',full[m.start():m.start()+180]))
-          print('PERIOD_LABEL_IN_HTML:', '応募期間' in html.unescape(data))
           PY
