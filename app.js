@@ -839,7 +839,7 @@
     if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); globalThis.window?.TorecaSalesReference?.refresh?.(); }
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
-    if (tab === 'lotteryResults') { loadLotteryEvents(); lpResultsRefresh(true); lpResultsRender(); }
+    if (tab === 'lotteryResults') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); lpAppRefresh(); lpResultsRefresh(true); lpResultsRender(); }
     if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
     // Browser integrations are optional in isolated regression-test contexts.
     globalThis.window?.TorecaInfoPlaza?.onTabChanged?.(tab);
@@ -5160,18 +5160,19 @@
     return common;
   }
 
+  // Results and lottery cards use the same effective, edited event title.
+  function lotteryCardHeading(item) {
+    const title=String(item?.event_title_provisional?'':item?.event_title||'').trim();
+    if(title)return title;
+    const external=!isLivePocketEventUrl(item?.url)&&!item?.app_lottery;
+    return external?'外部サイト・抽選内容未確認':'イベント名を確認中';
+  }
+
   function lotteryCard(item, state) {
     const stores = lotteryStoreEntries(item);
     const places = lotteryPrefectures(item);
-    // Once the exact-URL official title is verified, show it as the primary
-    // heading even if an older Discord snippet remains in product_name.
-    const officialName = item.official_event_title && item.official_event_title === item.event_title
-      ? String(item.event_title).trim() : '';
-    const trustedTitle = item.event_title_provisional ? '' : item.event_title;
-    const reliableName = String(trustedTitle || officialName || '').trim();
-    // Discord excerpt is a discovery hint only, not an authoritative heading.
     const external=!isLivePocketEventUrl(item.url)&&!item.app_lottery;
-    const label = reliableName || (external?'外部サイト・抽選内容未確認':'イベント名を確認中');
+    const label = lotteryCardHeading(item);
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
@@ -5437,7 +5438,8 @@
       const button=event.target.closest('button[data-lp-results-show]');
       if(!button)return;
       switchTab('lotteryResults');
-      $('lpResultsSearch').value=lotteryTrackItemName(button.dataset.lpResultsShow);
+      const item=lotteryItems.find(x=>x.url===button.dataset.lpResultsShow);
+      $('lpResultsSearch').value=item?lotteryCardHeading(item):'';
       $('lpResultsFilter').value='all';
       lpResultsRender();
     });
@@ -6370,7 +6372,7 @@
       if(filter!=='all'&&(!ticketField||!(Number(counts[ticketField])>=LP_RESULTS_MIN_APPLICATION_ENTRIES)))return false;
       if(!query)return true;
       const haystack=[
-        lotteryTrackItemName(item.url),
+        lotteryCardHeading(item),
         item.product_name,item.event_title,
         globalThis.window?.TorecaStoreAliases?.name?.(item.store_name,item.prefecture)||item.store_name,
         item.prefecture,
@@ -6386,7 +6388,7 @@
 
     const renderCard=item=>{
       const record=lpResultsCounts.get(item.url);
-      const title=lotteryTrackItemName(item.url);
+      const title=lotteryCardHeading(item);
       const storeHtml=lpResultsStoreHtml(item);
       // Four counts are ticket quantities summed across saved entries.
       // Do not show per-person applicant/winner/loser counts.
