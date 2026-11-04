@@ -1,0 +1,24 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const src=fs.readFileSync('dev_unified_review_v21_124.js','utf8');
+const nodes={};
+for(const id of ['lpDevUnifiedPanel','lpDevUnifiedSearch','lpDevUnifiedFilter','lpDevUnifiedCounts','lpDevUnifiedStatus','lpDevUnifiedList','lpDevUnifiedCompletedList','lpDevUnifiedRefresh','lpDevUnifiedMore','lpDevUnifiedPendingCount','lpDevUnifiedDoneCount'])nodes[id]={value:id==='lpDevUnifiedFilter'?'all':'',innerHTML:'',textContent:'',events:{},addEventListener(k,fn){(this.events[k]??=[]).push(fn)},closest(){return null}};
+const window={},document={getElementById:id=>nodes[id]};vm.runInNewContext(src,{window,document});
+const url='https://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform';
+const item={url,event_title:'抽選応募フォーム',application_start_at:'2026-11-01T10:00:00+09:00',application_end_at:'2026-11-08T10:00:00+09:00'};
+let authorized=true,requests=0,received=null;
+const opts={isDeveloper:()=>authorized,snapshot:()=>({base:[item],items:[item],card:new Map(),location:new Map(),cloud:new Map(),external:new Map(),diagnostics:[]}),validUrl:()=>true,isLivePocket:()=>false,stores:()=>[],areas:()=>[],validTitle:()=>true,expired:()=>false,escape:x=>String(x).replace(/</g,'&lt;'),openEditor:async()=>{},refreshSources:async()=>{},fetchOne:async()=>{requests++;return {fields:{store_name:'ヤマシロヤ <店舗>',prefecture:'全国'},message:'取得しました'}},openFetchedEditor:async(u,f)=>{received={u,f}}};
+window.TorecaUnifiedReview.init(opts);
+assert.match(nodes.lpDevUnifiedList.innerHTML,/自動取得/);
+const event=(selector,data)=>({target:{closest:s=>s===selector?{dataset:data}:null}});
+(async()=>{
+ const handlers=nodes.lpDevUnifiedList.events.click;
+ const clickFetch=event('button[data-lp-dev-unified-fetch]',{lpDevUnifiedFetch:url});
+ await Promise.all(handlers.map(h=>h(clickFetch)));
+ assert.equal(requests,1);assert.match(nodes.lpDevUnifiedList.innerHTML,/ヤマシロヤ &lt;店舗>/);
+ assert.match(nodes.lpDevUnifiedList.innerHTML,/取得候補を編集画面へ/);
+ const clickUse=event('button[data-lp-dev-unified-use]',{lpDevUnifiedUse:url});
+ await Promise.all(handlers.map(h=>h(clickUse)));assert.equal(received.u,url);assert.equal(received.f.prefecture,'全国');
+ authorized=false;await Promise.all(handlers.map(h=>h(clickFetch)));assert.equal(requests,1);
+ console.log('Individual fetch UI: authorization, display and editor handoff passed');
+})().catch(e=>{console.error(e);process.exitCode=1});

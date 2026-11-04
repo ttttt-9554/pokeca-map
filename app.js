@@ -8865,6 +8865,36 @@
     }
   }
 
+  async function lpDevFetchOne(url){
+    if(!isDeveloper()||!supabaseClient||!lotteryBaseItems.some(item=>item.url===url))
+      throw Error('開発者ログインと登録済み抽選が必要です。');
+    const {data,error}=await supabaseClient.functions.invoke('lottery-individual-fetch',{body:{url}});
+    if(error){
+      let detail='';
+      try{detail=(await error.context?.json())?.error||'';}catch(_){}
+      throw Error(detail||'個別取得に失敗しました。');
+    }
+    if(data?.error)throw Error(data.error);
+    return data;
+  }
+  async function lpDevOpenFetchedEditor(url,fields){
+    if(isLivePocketEventUrl(url))throw Error('ライポケの候補を編集する操作にはまだ対応していません。');
+    await lpDevUnifiedOpenEditor(url);
+    const form=$('lpExtForm');
+    for(const name of ['event_title','application_start_at','application_end_at']){
+      const input=form.elements.namedItem(name),value=fields?.[name];
+      if(input&&!input.value&&typeof value==='string')input.value=name==='event_title'?value.slice(0,200):lpExtDateInput(value);
+    }
+    const rows=[...form.querySelectorAll('[data-lp-ext-store-row]')];
+    if(rows.length===1){
+      const name=rows[0].querySelector('[data-lp-ext-store-name]');
+      const pref=rows[0].querySelector('[data-lp-ext-store-pref]');
+      if(name&&!name.value&&typeof fields?.store_name==='string')name.value=fields.store_name.slice(0,200);
+      if(pref&&!pref.value&&LP_MANUAL_AREAS.includes(fields?.prefecture))pref.value=fields.prefecture;
+    }
+    $('lpExtEditorStatus').textContent='取得した候補を空欄に入力しました。内容を確認して保存してください。';
+  }
+
   function initDevAccordions(){
     const view=$('devView');
     if(!view)return;
@@ -10684,7 +10714,8 @@
         validUrl:safeLotteryUrl,isLivePocket:isLivePocketEventUrl,
         stores:lotteryStoreEntries,areas:lotteryPrefectures,
         validTitle:lpManualValidTitle,expired:lpApplicationExpired,escape,
-        openEditor:lpDevUnifiedOpenEditor,
+        openEditor:lpDevUnifiedOpenEditor,fetchOne:lpDevFetchOne,
+        openFetchedEditor:lpDevOpenFetchedEditor,
         refreshSources:async()=>{
           await loadLotteryEvents(true);
           await Promise.all([lpCloudRefresh(true),lpLocationRefresh(true),

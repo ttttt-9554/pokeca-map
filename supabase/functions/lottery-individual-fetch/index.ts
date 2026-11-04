@@ -1,0 +1,36 @@
+import {supportedUrl,extract} from './extract.mjs';
+const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
+const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
+function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
+Deno.serve(async(req:Request)=>{
+ if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors});
+ if(req.method!=='POST')return json({error:'許可されていない操作です。'},405);
+ const auth=req.headers.get('Authorization')||'';
+ if(!/^Bearer [A-Za-z0-9._-]+$/.test(auth))return json({error:'管理者ログインが必要です。'},401);
+ const base=Deno.env.get('SUPABASE_URL')||'', key=Deno.env.get('SUPABASE_ANON_KEY')||'';
+ if(!base||!key)return json({error:'認証サービスを利用できません。'},503);
+ try{
+  const r=await fetch(base+'/auth/v1/user',{headers:{Authorization:auth,apikey:key},signal:AbortSignal.timeout(5000)});
+  if(!r.ok)return json({error:'ログインの確認に失敗しました。'},401);
+  const user=await r.json();
+  if(user.id!==admin)return json({error:'管理者のみ利用できます。'},403);
+ }catch{return json({error:'ログインの確認に失敗しました。'},503);}
+ let input;
+ try{const raw=await req.text();if(raw.length>4096)throw Error();input=JSON.parse(raw);}catch{return json({error:'入力を確認してください。'},400);}
+ if(typeof input?.url!=='string'||input.url.length>1000||!supportedUrl(input.url))
+  return json({error:'このサイトは個別取得に未対応です。元ページを開いて確認してください。'},422);
+ try{
+  const response=await fetch(input.url,{redirect:'manual',headers:{'User-Agent':'TorecaRadar/1.0','Accept':'text/html,application/xhtml+xml'},signal:AbortSignal.timeout(14000)});
+  if(response.status>=300&&response.status<400)return json({error:'別ページへの転送があるため、自動取得できませんでした。'},422);
+  if(!response.ok)return json({error:`取得先が応答しませんでした（HTTP ${response.status}）。`},422);
+  const kind=response.headers.get('content-type')||'';
+  if(!/text\/html|application\/xhtml\+xml/i.test(kind))return json({error:'ページ形式を確認できませんでした。'},422);
+  if(Number(response.headers.get('content-length')||0)>2000000)return json({error:'ページが大きすぎるため取得できませんでした。'},422);
+  const reader=response.body?.getReader(),chunks=[];let size=0;
+  if(!reader)return json({error:'ページが空でした。'},422);
+  while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>2000000){await reader.cancel();return json({error:'ページが大きすぎるため取得できませんでした。'},422);}chunks.push(value);}
+  const buf=new Uint8Array(size);let offset=0;for(const part of chunks){buf.set(part,offset);offset+=part.length;}
+  const result=extract(new TextDecoder().decode(buf),input.url);
+  return json({fields:result,message:Object.keys(result).length?'取得した候補を確認してください。':'読み取れる項目が見つかりませんでした。受付終了や取得先の仕様を確認してください。'});
+ }catch{return json({error:'ページを取得できませんでした。時間を置いて再度お試しください。'},422);}
+});

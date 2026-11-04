@@ -9,6 +9,7 @@
     start:'応募開始',deadline:'応募締切'
   };
   let api=null,limit=80,refreshing=false,lastRows=[],bound=false;
+  const fetchResults=new Map(),fetchBusy=new Set();
   const text=value=>String(value??'').trim();
   // Placeholder texts are not actual stores or prefectures.
   const known=name=>!!text(name)&&
@@ -98,6 +99,15 @@
     if(dCount)dCount.textContent=completed.length+'件';
     function card(row){
       const label=text(row.item.event_title)||'抽選名未確認';
+      const result=fetchResults.get(row.url);
+      const labels={event_title:'抽選名',store_name:'店舗名',prefecture:'地域',
+        application_start_at:'応募開始',application_end_at:'応募締切'};
+      const candidates=result?.fields?Object.entries(result.fields)
+        .filter(([k,v])=>labels[k]&&typeof v==='string'&&v.trim())
+        .map(([k,v])=>'<li>'+api.escape(labels[k])+'：'+api.escape(v)+'</li>').join(''):'';
+      const output=result?'<div class="lp-dev-unified-fetch-result" role="status"><p>'+api.escape(result.message||'')+'</p>'+
+        (candidates?'<ul>'+candidates+'</ul><button type="button" data-lp-dev-unified-use="'+
+          api.escape(row.url)+'">取得候補を編集画面へ</button>':'')+'</div>':'';
       return '<article class="lp-dev-unified-card">'+
         '<strong>'+api.escape(label)+'</strong>'+
         '<p class="hint">'+api.escape(row.provider)+' ／ 店舗：'+
@@ -115,7 +125,9 @@
           '" target="_blank" rel="noopener noreferrer">元ページを開く ↗</a>'+
           '<button type="button" data-lp-dev-unified-edit="'+
             api.escape(row.url)+'">✏️ 修正・確認</button>'+
-        '</div></article>';
+          '<button type="button" data-lp-dev-unified-fetch="'+api.escape(row.url)+'"'+
+            (fetchBusy.has(row.url)?' disabled':'')+'>'+ (fetchBusy.has(row.url)?'🔄 取得中…':'🔄 自動取得')+'</button>'+
+        '</div>'+output+'</article>';
     }
     host.innerHTML=filtered.length?filtered.slice(0,limit).map(card).join(''):
       '<p class="hint">✅ この条件の未確認事項はありません。</p>';
@@ -148,6 +160,29 @@
     }
   }
 
+  async function onFetch(event){
+    const button=event.target.closest('button[data-lp-dev-unified-fetch]');
+    if(!button||!api?.isDeveloper())return;
+    const url=button.dataset.lpDevUnifiedFetch;
+    if(!api.validUrl(url)||fetchBusy.has(url)||!lastRows.some(row=>row.url===url))return;
+    fetchBusy.add(url);fetchResults.delete(url);render();
+    try{
+      const result=await api.fetchOne(url);
+      fetchResults.set(url,{fields:result?.fields||{},message:result?.message||'取得結果を確認してください。'});
+    }catch(error){fetchResults.set(url,{message:'⚠ '+String(error?.message||error)});}
+    finally{fetchBusy.delete(url);render();}
+  }
+  async function onUse(event){
+    const button=event.target.closest('button[data-lp-dev-unified-use]');
+    if(!button||!api?.isDeveloper())return;
+    const url=button.dataset.lpDevUnifiedUse,result=fetchResults.get(url);
+    if(!result?.fields||!lastRows.some(row=>row.url===url))return;
+    button.disabled=true;
+    try{await api.openFetchedEditor(url,result.fields);}
+    catch(error){fetchResults.set(url,{...result,message:'⚠ '+String(error?.message||error)});render();}
+    finally{button.disabled=false;}
+  }
+
   async function onEdit(event){
     const button=event.target.closest('button[data-lp-dev-unified-edit]');
     if(!button||!api?.isDeveloper())return;
@@ -178,8 +213,11 @@
     $('lpDevUnifiedFilter')?.addEventListener('change',()=>{limit=80;render();});
     $('lpDevUnifiedRefresh')?.addEventListener('click',refresh);
     $('lpDevUnifiedMore')?.addEventListener('click',()=>{limit+=80;render();});
-    $('lpDevUnifiedList')?.addEventListener('click',onEdit);
-    $('lpDevUnifiedCompletedList')?.addEventListener('click',onEdit);
+    for(const id of ['lpDevUnifiedList','lpDevUnifiedCompletedList']){
+      $(id)?.addEventListener('click',onEdit);
+      $(id)?.addEventListener('click',onFetch);
+      $(id)?.addEventListener('click',onUse);
+    }
     const container=$('lpDevUnifiedPanel')?.closest('details.dev-accordion');
     if(container){
       container.addEventListener('toggle',()=>{

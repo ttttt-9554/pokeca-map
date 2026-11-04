@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {supportedUrl,extract} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
+const g='https://docs.google.com/forms/d/e/1FAIpQLSd6O9PhrqOHX4xxcRV4APYy_B_0OyCAW_ZkTa-Rp7htUleUjQ/closedform';
+assert(supportedUrl(g));
+for(const url of ['https://docs.google.com.evil.test/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','http://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','https://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform?foo=1','https://e-yamashiroya.com@localhost/a','https://e-yamashiroya.com/a?next=http://localhost'])assert(!supportedUrl(url),url);
+const page='<html><title>【抽選販売】ポケモンカード MEGA ハドウシーカー</title><body>応募期間：2026年11月4日17:00～2026年11月9日23:59</body></html>';
+assert.deepEqual(extract(page,'https://7net.omni7.jp/detail/2190054281.html'),{event_title:'【抽選販売】ポケモンカード MEGA ハドウシーカー',application_start_at:'2026-11-04T17:00:00+09:00',application_end_at:'2026-11-09T23:59:00+09:00',store_name:'セブンイレブン',prefecture:'全国'});
+const form='<title>抽選応募フォーム</title><body>ヤマシロヤ オンラインショップの抽選応募</body>';
+assert.equal(extract(form,g).store_name,'ヤマシロヤ オンラインショップ');
+assert.equal(extract(form,g).prefecture,undefined);
+assert.deepEqual(extract('<title>Verify you are human</title>verify you are human',g),{});
+assert(!extract(page.replace('11月9日23:59','11月99日23:59'),'https://7net.omni7.jp/detail/2190054281.html').application_end_at);
+console.log('Individual lottery extraction, blocked pages and URL restrictions passed');
