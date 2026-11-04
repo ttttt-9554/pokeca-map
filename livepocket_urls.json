@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-04T06:00:57.437934+00:00",
+  "collected_at": "2026-11-04T06:30:56.515071+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 653,
+  "unique_livepocket_urls": 654,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -17913,33 +17913,63 @@
       "event_title": "【古本市場市川鬼高店】ワンピースカードゲーム 「世界最強の戦士」",
       "application_end_at": "2026-11-05T22:00:00+09:00",
       "application_start_at": "2026-11-03T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/z_1ke",
+      "discord_message_id": "1567425696232513571",
+      "discord_posted_at": "2026-11-04T06:30:07.343000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nフタバ図書 TSUTAYA トレーディングカード戸田店\n受付終了: 11/08 21:00（残り4日5時間）\nhttps://livepocket.jp/e/z_1ke",
+      "store_name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【店頭告知要確認】公認店限定「ONE PIECE HEROINES PRECIOUS BOX」抽選販売",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-04T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 491,
+    "parsed": 492,
     "no_structured_details": 162
   },
   "field_counts": {
-    "store_name": 468,
-    "prefecture": 425,
-    "event_title": 340,
+    "store_name": 469,
+    "prefecture": 426,
+    "event_title": 341,
     "event_date": 1,
     "product_name": 91,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 617,
-    "application_start_at": 607,
-    "stores_events": 479
+    "application_end_at": 618,
+    "application_start_at": 608,
+    "stores_events": 480
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567418163459793017"
+      "1551580466266644552": "1567425696232513571"
     },
     "last_run": {
-      "checked_at": "2026-11-04T06:00:57.437934+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-04T06:30:56.515071+00:00",
+      "new_urls": 1,
       "original_urls": 653,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -18156,7 +18186,8 @@
         "1567191686545809469": "2026-11-03T15:05:58.913458+00:00",
         "1567350201725878342": "2026-11-04T01:35:56.495613+00:00",
         "1567387948092100718": "2026-11-04T04:00:57.733825+00:00",
-        "1567403061469782158": "2026-11-04T05:00:58.019813+00:00"
+        "1567403061469782158": "2026-11-04T05:00:58.019813+00:00",
+        "1567425696232513571": "2026-11-04T06:30:57.241373+00:00"
       },
       "checked_search_urls": {}
     },
@@ -20966,6 +20997,11 @@
           "checked_at": "2026-11-04T05:01:28.408728+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/z_1ke": {
+          "checked_at": "2026-11-04T06:31:24.662152+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -22758,6 +22794,12 @@
           "detected_at": "2026-11-04T05:00:59.015162+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-04T05:01:28.408728+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/z_1ke": {
+          "detected_at": "2026-11-04T06:30:58.256624+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-04T06:31:24.662152+00:00",
           "http_status": null
         }
       },
@@ -29695,6 +29737,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/z_1ke": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-04T06:31:24.662152+00:00",
+          "title_observed": "【店頭告知要確認】公認店限定「ONE PIECE HEROINES PRECIOUS BOX」抽選販売",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -34404,6 +34457,19 @@
         },
         "https://livepocket.jp/e/o17ppsed05": {
           "checked_at": "2026-11-04T05:01:28.408728+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/z_1ke": {
+          "checked_at": "2026-11-04T06:31:24.662152+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
