@@ -78,6 +78,12 @@ jobs:
       - name: Read Sevennet lottery titles and application periods
         run: python scripts/sevennet_lottery_enrich.py
 
+      - name: Read Famima lottery titles and reservation periods
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/famima_lottery_enrich.py
+
       - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
