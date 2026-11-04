@@ -5156,11 +5156,10 @@
     const officialName = item.official_event_title && item.official_event_title === item.event_title
       ? String(item.event_title).trim() : '';
     const trustedTitle = item.event_title_provisional ? '' : item.event_title;
-    const reliableName = (item.manual_card_title ? (trustedTitle || item.product_name) :
-      (officialName || (item.catalog_product_from_title?trustedTitle:item.product_name) || trustedTitle) || '').trim();
+    const reliableName = String(trustedTitle || officialName || '').trim();
     // Discord excerpt is a discovery hint only, not an authoritative heading.
     const external=!isLivePocketEventUrl(item.url)&&!item.app_lottery;
-    const label = reliableName || (external?'外部サイト・抽選内容未確認':'商品名・イベント名を確認中');
+    const label = reliableName || (external?'外部サイト・抽選内容未確認':'イベント名を確認中');
     const typ = lotteryProductType(item);
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
@@ -5232,7 +5231,7 @@
       <h3 class="lp-full-title">${escape(label)}</h3>
       ${item.catalog_product_id
         ? `<p class="lp-sub lp-card-product">📦 商品：${escape(item.product_name)}</p>`
-        : item.product_name && item.product_name!==label
+        : item.product_name
           ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
       ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
       ${item.app_lottery?(item.manual_registration_method==='in_store'
@@ -5240,7 +5239,6 @@
         :'<p class="lp-store-muted lp-app-name">📱 アプリ名：<strong>'+escape(String(item.app_lottery_name||'未設定'))+'</strong><span>（アプリ内抽選・公式情報はアプリ内で確認）</span></p>'):''}
       ${item.app_lottery_details?'<p class="lp-store-muted">共有メモ：'+escape(item.app_lottery_details)+'</p>':''}
       ${state === 'unavailable' ? '<p class="lp-missing-notice">'+(item.app_lottery_hidden?'📁 この手動登録は一覧から非表示です。過去の応募履歴は保持しています。':'⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。')+'</p>' : ''}
-      ${!officialName && item.product_name && trustedTitle && item.product_name !== trustedTitle ? `<p class="lp-sub">${escape(trustedTitle)}</p>` : ''}
       ${urgent ? '<p class="lp-urgent-alert">⚠️ 応募締切まで24時間以内！</p>' : ''}
       <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
       ${list}
