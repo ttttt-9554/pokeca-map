@@ -7492,7 +7492,7 @@
       const group=displayed.filter(x=>x.status===key);
       if(!group.length)return '';
       const total=filtered.filter(x=>x.status===key).length;
-      const rows=group.map(x=>{
+      const renderRow=x=>{
         const manualCard=lotteryItems.find(y=>y.url===x.event_url);
         const msg=x.status==='won' ? '' : lotteryTrackPickupMessage(x);
         const warn=msg.startsWith('⚠') ? (msg.includes('今日')?'lp-track-today':'lp-track-overdue'):'';
@@ -7509,7 +7509,20 @@
           ${lpAppEventId(x.event_url) ? (manualCard?.app_lottery_source_url?'<a href="'+escape(manualCard.app_lottery_source_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">'+(manualCard.manual_registration_method==='in_store'?'店頭応募の案内':'アプリ公式案内')+' ↗</a>'
           :manualCard?.manual_registration_method==='in_store'?'<p>🏬 応募店舗で確認</p>':'<p>📱 アプリ内で確認</p>') : '<a href="'+escape(x.event_url)+'" target="_blank" rel="noopener noreferrer" style="font-size:12px">公式ページ ↗</a>'}
         </div><button type="button" data-lp-track="edit" data-url="${escape(x.event_url)}">管理</button></div>`;
-      }).join('');
+      };
+      // Group by the shared product master where available. Unknown products
+      // remain together without treating an event title as a product name.
+      const products=new Map();
+      for(const record of group){
+        const item=lotteryItems.find(y=>y.url===record.event_url);
+        const name=String(item?.product_name||'').trim()||'商品未確認';
+        const id=item?.catalog_product_id ? 'id:'+item.catalog_product_id : 'name:'+name.normalize('NFKC');
+        if(!products.has(id))products.set(id,{name,records:[]});
+        products.get(id).records.push(record);
+      }
+      const rows=[...products.values()].map(product=>
+        `<details class="lp-track-product-group" open><summary><strong>📦 ${escape(product.name)}</strong> <span>（${product.records.length}件）</span></summary>${product.records.map(renderRow).join('')}</details>`
+      ).join('');
       if(key==='lost'){
         return `<details class="lp-track-group lp-track-lost-fold" data-status="lost" aria-label="落選" ${lotteryLostGroupExpanded?'open':''}>
           <summary class="lp-track-group-head"><span>${icon} ${escape(LP_TRACK_LABELS[key])}</span>

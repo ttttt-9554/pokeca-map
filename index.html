@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="style.css?v=20261103-admin-login-users-v1">
 
   <style>
+    #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
+    #lpTrackerPanel .lp-track-product-group > summary { cursor: pointer; overflow-wrap: anywhere; }
     [hidden] { display: none !important; }
     .store-category-group { border: 0; padding: 0; margin: 16px 0 20px; min-width: 0; }
     .store-category-group legend { font-weight: 700; margin-bottom: 12px; }
@@ -1896,7 +1898,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261104-famima-lottery-v1';
+      ? token : '20261105-tracker-product-groups-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
