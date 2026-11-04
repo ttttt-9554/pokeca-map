@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-03T15:05:57.789072+00:00",
-  "unique_livepocket_urls": 650,
+  "collected_at": "2026-11-04T01:35:55.748503+00:00",
+  "unique_livepocket_urls": 651,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -9861,7 +9861,26 @@
         }
       ],
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/0hr74",
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-11-04T01:30:08.050000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "ふるいちイオンモール座間店ワンピースカード抽選販売「世界最強の戦士」",
+      "application_end_at": "2026-11-04T21:01:00+09:00",
+      "application_start_at": "2026-11-04T10:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ふるいちイオンモール座間店ワンピースカード抽選販売「世界最強の戦士」",
+      "first_detected_at": "2026-11-04T01:35:57.387114+00:00"
     }
   ],
-  "updated_at": "2026-11-04T01:25:59.706282+00:00"
+  "updated_at": "2026-11-04T01:36:18.919305+00:00"
 }
