@@ -75,6 +75,9 @@ jobs:
           BACKFILL: ${{ inputs.backfill || 'false' }}
         run: python scripts/collect_other_lottery.py
 
+      - name: Read Sevennet lottery titles and application periods
+        run: python scripts/sevennet_lottery_enrich.py
+
       - name: Enrich product details from Discord (v5)
         run: python scripts/livepocket_discord_enrich.py
 
