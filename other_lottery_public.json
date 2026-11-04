@@ -712,14 +712,19 @@
     {
       "url": "https://famima-online.family.co.jp/item?itemCode=100163657179608640",
       "source_site": "famima-online.family.co.jp",
-      "event_title": "ファミマオンライン",
-      "prefecture": "",
+      "event_title": "【抽選商品】ポケモンカードゲーム MEGA 拡張パック 「ハドウシーカー」",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-04T01:55:10.153000+00:00",
       "first_detected_at": "2026-11-04T01:55:56.540782+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-04T10:00:00+09:00",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "external_url_unverified": false,
+      "official_event_title": "【抽選商品】ポケモンカードゲーム MEGA 拡張パック 「ハドウシーカー」",
+      "event_title_provisional": false,
+      "store_name": "ファミリーマート",
+      "famima_checked_at": "2026-11-04T12:53:54.328Z",
+      "famima_verified_at": "2026-11-04T12:53:54.328Z"
     },
     {
       "url": "https://7net.omni7.jp/detail/2190054281.html",
