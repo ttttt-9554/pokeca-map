@@ -3536,6 +3536,18 @@
         item.pokemon_map_type=row.product_type||'unknown';
         item.application_start_at=row.application_start_at||null;
         item.application_end_at=row.application_end_at||null;
+        if(base.famima_verified_at){
+          // Keep manual corrections, while filling missing values from the
+          // verified page and correcting the known chain-name misspelling.
+          const canonical=name=>name==='ファマリーマート'?base.store_name:name;
+          item.store_name=canonical(item.store_name)||base.store_name;
+          item.prefecture=item.prefecture||base.prefecture;
+          if(Array.isArray(item.stores))item.stores=item.stores.map(store=>({
+            ...store,name:canonical(store.name),prefecture:store.prefecture||base.prefecture
+          }));
+          item.application_start_at=item.application_start_at||base.application_start_at;
+          item.application_end_at=item.application_end_at||base.application_end_at;
+        }
         item.manual_external_edit=true;
         return item;
       }

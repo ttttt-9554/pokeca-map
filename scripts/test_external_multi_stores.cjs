@@ -83,6 +83,9 @@ const rendered=vm.runInNewContext([
  lpExtOverrides:new Map([[
    'https://customform.jp/form/input/258452',
    {...multiple,event_url:'https://customform.jp/form/input/258452',state:'active'}
+ ],[
+   'https://famima-online.family.co.jp/item?itemCode=100163657179608640',
+   {state:'active',stores:[{name:'ファマリーマート',prefecture:'全国'}]}
  ]]),
  isLivePocketEventUrl:()=>false,
  LP_MANUAL_AREAS:['東京都','大阪府','北海道','全国']
@@ -96,6 +99,14 @@ assert.deepEqual(plain(rendered.lotteryStoreEntries(externalCard)),multiple.stor
 assert.deepEqual(plain(rendered.lotteryPrefectures(externalCard)),
  ['東京都','大阪府','北海道'],
  'Every added prefecture must be available to the existing regional filter');
+const famimaCard=rendered.lpLegacyApply({
+ url:'https://famima-online.family.co.jp/item?itemCode=100163657179608640',
+ famima_verified_at:'2026-11-04T00:00:00Z',store_name:'ファミリーマート',prefecture:'全国',
+ application_start_at:'2026-11-04T10:00:00+09:00',application_end_at:'2026-11-09T23:59:00+09:00'
+});
+assert.equal(famimaCard.store_name,'ファミリーマート');
+assert.equal(famimaCard.stores[0].name,'ファミリーマート');
+assert.equal(famimaCard.application_end_at,'2026-11-09T23:59:00+09:00');
 
 assert.equal(multiple.store_name,'アニメイト池袋',
  'Legacy store_name continues to represent the first store');
