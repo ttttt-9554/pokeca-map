@@ -1,4 +1,4 @@
-name: Sevennet read-only check
+name: Famima read-only check
 on:
   push:
     branches: [codex/sevennet-read-check-20261104]
@@ -8,15 +8,35 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Test the real extractor on the public page
+      - name: Inspect public page
         run: |
-          PYTHONPATH=scripts python3 - <<'PY'
-          import sevennet_lottery_enrich as s
-          url='https://7net.omni7.jp/detail/2190054281.html'
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          import urllib.request, re
+          url='https://famima-online.family.co.jp/item?itemCode=100163657179608640'
           try:
-              result=s.extract(s.fetch(url))
-              print('EXTRACTION:', result)
+              with urllib.request.urlopen(url,timeout=20) as r:
+                  body=r.read(2000000).decode('utf-8','replace')
+                  print('HTTP:',r.status,'FINAL_URL:',r.url)
           except Exception as e:
-              print('FETCH_FAILED:',type(e).__name__,str(e)[:200])
+              print('FETCH_FAILED:',type(e).__name__,str(e)[:250])
+              raise SystemExit(0)
+          class Parser(HTMLParser):
+              def __init__(self): super().__init__(); self.active=None; self.head=[]; self.title=[]; self.text=[]
+              def handle_starttag(self,tag,attrs):
+                  if tag in ('h1','title'): self.active=tag
+              def handle_endtag(self,tag):
+                  if self.active==tag: self.active=None
+              def handle_data(self,s):
+                  self.text.append(s)
+                  if self.active=='h1': self.head.append(s)
+                  if self.active=='title': self.title.append(s)
+          p=Parser(); p.feed(body)
+          print('TITLE:', ' '.join(p.title).strip()[:300])
+          print('H1:', ' '.join(p.head).strip()[:300])
+          plain=' '.join(p.text)
+          for label in ['予約開始日','予約終了日','キャンセル可能期限','お受け取り期間','抽選発表日']:
+              positions=list(re.finditer(label,plain))
+              print('LABEL',label,'COUNT',len(positions))
+              for m in positions[:2]: print('VALUE:',re.sub(r'\s+',' ',plain[m.start():m.start()+130])[:130])
           PY
