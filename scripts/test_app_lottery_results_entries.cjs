@@ -49,14 +49,14 @@ const context={
   $:id=>elements[id],
   lpResultsAccount:()=>{},
   safeLotteryUrl:url=>typeof url==='string'&&url.startsWith('https://livepocket.jp/e/'),
-  lotteryTrackItemName:url=>context.lotteryItems.find(item=>item.url===url)?.event_title||'未確認',
+  isLivePocketEventUrl:url=>String(url||'').startsWith('https://livepocket.jp/e/'),
   lpResultsStoreHtml:()=>'<div class="lp-results-store">対象店舗</div>',
   lotteryStoreEntries:()=>[],
   lotteryFirstSeenTime:()=>0,
   escape:value=>String(value)
 };
 const api=vm.runInNewContext(
-  [extract('lpResultsKnownEvents'),extract('lpResultsWinRate'),
+  [extract('lotteryCardHeading'),extract('lpResultsKnownEvents'),extract('lpResultsWinRate'),
    extract('lpResultsConfirmedRate'),extract('lpResultsStage'),extract('lpResultsRender')].join('\n')+
   '\n({lpResultsKnownEvents,lpResultsWinRate,lpResultsConfirmedRate,lpResultsStage,lpResultsRender})',context,{timeout:1000}
 );
@@ -64,6 +64,13 @@ assert.equal(api.lpResultsKnownEvents().length,3,
   'Zero-ticket events are excluded regardless of registered user count');
 api.lpResultsRender();
 assert.match(elements.lpResultsCounts.innerHTML,/応募記録あり 1件/);
+eventA.product_name='編集した商品名';
+eventA.event_title='編集したイベント名';
+api.lpResultsRender();
+assert.match(elements.lpResultsList.innerHTML,/<h3>編集したイベント名<\/h3>/);
+assert.doesNotMatch(elements.lpResultsList.innerHTML,/<h3>編集した商品名<\/h3>/);
+eventA.event_title='抽選A';
+api.lpResultsRender();
 assert.match(elements.lpResultsCounts.innerHTML,/応募合計 3口/,
   'Top total excludes draws once any win OR loss is recorded');
 assert.equal(api.lpResultsStage(counts.get(eventA.url)),'provisional');
