@@ -21613,8 +21613,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/z1m9e": {
-          "checked_at": "2026-11-05T16:36:23.930256+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T22:58:48.920393+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -23502,8 +23502,8 @@
         },
         "https://livepocket.jp/e/z1m9e": {
           "detected_at": "2026-11-05T16:35:58.617543+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-05T16:36:23.930256+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-05T22:58:48.920393+00:00",
           "http_status": null
         }
       },
@@ -25004,6 +25004,11 @@
         "https://livepocket.jp/e/wcs2w": {
           "attempts": 1,
           "last_attempt_at": "2026-11-05T21:37:25.629101+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/z1m9e": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-05T22:58:48.920393+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -30691,7 +30696,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-05T16:36:23.930256+00:00",
+          "checked_at": "2026-11-05T22:58:48.920393+00:00",
           "title_observed": "神の支配 抽選",
           "genre": "",
           "product_origin": "",
@@ -35613,7 +35618,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/z1m9e": {
-          "checked_at": "2026-11-05T16:36:23.930256+00:00",
+          "checked_at": "2026-11-05T22:58:48.920393+00:00",
           "reason": "official_title_detected",
           "candidate_count": 2,
           "valid_candidate_count": 1,
