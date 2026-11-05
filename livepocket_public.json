@@ -10032,6 +10032,7 @@
       "application_start_at": "2026-11-04T13:39:00+09:00",
       "application_end_at": "2026-11-09T20:30:00+09:00",
       "discord_posted_at": "2026-11-04T13:30:07.570000+00:00",
+      "result_announcement_date": "2026-11-12",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10039,7 +10040,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "result_announcement_date": "2026-11-12",
       "first_detected_at": "2026-11-04T13:31:01.213869+00:00"
     },
     {
@@ -10050,6 +10050,9 @@
       "application_start_at": "2026-11-05T10:00:00+09:00",
       "application_end_at": "2026-11-05T22:00:00+09:00",
       "discord_posted_at": "2026-11-05T01:30:06.695000+00:00",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10060,9 +10063,6 @@
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "result_announcement_date": "2026-11-10",
-      "purchase_start_date": "2026-11-13",
-      "purchase_end_date": "2026-11-15",
       "first_detected_at": "2026-11-05T01:35:58.878606+00:00"
     },
     {
@@ -10073,6 +10073,9 @@
       "application_start_at": "2026-11-05T10:00:00+09:00",
       "application_end_at": "2026-11-06T22:00:00+09:00",
       "discord_posted_at": "2026-11-05T03:00:10.973000+00:00",
+      "result_announcement_date": "2026-11-13",
+      "purchase_start_date": "2026-11-17",
+      "purchase_end_date": "2026-11-20",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10083,9 +10086,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "result_announcement_date": "2026-11-13",
-      "purchase_start_date": "2026-11-17",
-      "purchase_end_date": "2026-11-20",
       "first_detected_at": "2026-11-05T03:05:59.646682+00:00"
     },
     {
@@ -10096,6 +10096,9 @@
       "application_start_at": "2026-11-05T13:41:00+09:00",
       "application_end_at": "2026-11-06T23:59:00+09:00",
       "discord_posted_at": "2026-11-05T05:30:05.395000+00:00",
+      "result_announcement_date": "2026-11-12",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-15",
       "review_category": "onepiece",
       "stores": [
         {
@@ -10103,9 +10106,6 @@
           "prefecture": "東京都"
         }
       ],
-      "result_announcement_date": "2026-11-12",
-      "purchase_start_date": "2026-11-14",
-      "purchase_end_date": "2026-11-15",
       "first_detected_at": "2026-11-05T05:35:58.710685+00:00"
     },
     {
@@ -10116,13 +10116,13 @@
       "application_start_at": "2026-11-03T09:00:00+09:00",
       "application_end_at": "2026-11-05T21:59:00+09:00",
       "discord_posted_at": "2026-11-05T05:30:05.395000+00:00",
+      "result_announcement_date": "2026-11-10",
       "stores": [
         {
           "name": "トレカ丸幸手店",
           "prefecture": "埼玉県"
         }
       ],
-      "result_announcement_date": "2026-11-10",
       "first_detected_at": "2026-11-05T05:35:58.710685+00:00"
     },
     {
@@ -10169,5 +10169,5 @@
       "first_detected_at": "2026-11-05T07:16:00.044157+00:00"
     }
   ],
-  "updated_at": "2026-11-05T08:16:02.966758+00:00"
+  "updated_at": "2026-11-05T08:26:01.424138+00:00"
 }
