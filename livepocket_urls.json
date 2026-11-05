@@ -18384,7 +18384,7 @@
     "prefecture": 436,
     "event_title": 353,
     "event_date": 1,
-    "product_name": 91,
+    "product_name": 93,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
@@ -21472,8 +21472,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/t7ka0": {
-          "checked_at": "2026-11-05T03:06:35.453931+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T09:16:23.937571+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/8cmzh": {
@@ -23338,8 +23338,8 @@
         },
         "https://livepocket.jp/e/t7ka0": {
           "detected_at": "2026-11-05T03:05:59.646682+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-05T09:16:23.937571+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/25_es": {
@@ -24840,6 +24840,11 @@
         "https://livepocket.jp/e/ogdt-": {
           "attempts": 1,
           "last_attempt_at": "2026-11-05T07:46:24.792479+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/t7ka0": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-05T09:16:23.937571+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -30439,7 +30444,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "checked_at": "2026-11-05T09:16:23.937571+00:00",
           "title_observed": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
           "genre": "pokemon",
           "product_origin": "",
@@ -35312,7 +35317,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/t7ka0": {
-          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "checked_at": "2026-11-05T09:16:23.937571+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
