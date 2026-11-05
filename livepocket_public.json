@@ -9970,6 +9970,9 @@
       "application_start_at": "2026-11-04T15:38:00+09:00",
       "application_end_at": "2026-11-08T12:00:00+09:00",
       "discord_posted_at": "2026-11-04T11:24:33.301000+00:00",
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-24",
       "review_category": "onepiece",
       "stores": [
         {
@@ -10005,13 +10008,7 @@
           "prefecture": "千葉県"
         }
       ],
-      "first_detected_at": "2026-11-04T11:31:04.287367+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      },
-      "result_announcement_date": "2026-11-14",
-      "purchase_start_date": "2026-11-21",
-      "purchase_end_date": "2026-11-24"
+      "first_detected_at": "2026-11-04T11:31:04.287367+00:00"
     },
     {
       "url": "https://livepocket.jp/e/5id4o",
@@ -10137,6 +10134,9 @@
       "application_start_at": "2026-11-05T14:48:00+09:00",
       "application_end_at": "2026-11-08T12:00:00+09:00",
       "discord_posted_at": "2026-11-05T07:13:45.931000+00:00",
+      "result_announcement_date": "2026-11-13",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-16",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10172,13 +10172,7 @@
           "prefecture": "千葉県"
         }
       ],
-      "first_detected_at": "2026-11-05T07:16:00.044157+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      },
-      "result_announcement_date": "2026-11-13",
-      "purchase_start_date": "2026-11-14",
-      "purchase_end_date": "2026-11-16"
+      "first_detected_at": "2026-11-05T07:16:00.044157+00:00"
     },
     {
       "url": "https://livepocket.jp/e/mda0k",
@@ -10234,5 +10228,5 @@
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00"
     }
   ],
-  "updated_at": "2026-11-05T09:51:53.823940+00:00"
+  "updated_at": "2026-11-05T09:56:27.608717+00:00"
 }
