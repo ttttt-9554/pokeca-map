@@ -78,12 +78,14 @@ jobs:
           INDIVIDUAL_REQUEST_ID: ${{ needs.route.outputs.request_id }}
         run: python scripts/livepocket_individual_fetch.py prepare-one
       - name: Install browser for the requested event
+        timeout-minutes: 2
         if: ${{ steps.claim.outputs.requested == 'true' }}
         continue-on-error: true
         run: |
           python -m pip install 'playwright>=1.55,<2'
-          python -m playwright install --with-deps chromium
+          python -m playwright install chromium
       - name: Check the single event
+        timeout-minutes: 2
         if: ${{ steps.claim.outputs.requested == 'true' }}
         continue-on-error: true
         run: python scripts/livepocket_individual_fetch.py execute
