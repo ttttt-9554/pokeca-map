@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-05T06:05:57.571316+00:00",
+  "collected_at": "2026-11-05T07:15:57.774855+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 663,
+  "unique_livepocket_urls": 664,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18240,33 +18240,90 @@
       "event_title": "【幸手店】スペシャルデッキセット 抽選予約",
       "application_end_at": "2026-11-05T21:59:00+09:00",
       "application_start_at": "2026-11-03T09:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/7r13g",
+      "discord_message_id": "1567799067252359198",
+      "discord_posted_at": "2026-11-05T07:13:45.931000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/7r13g",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "event_title": "【11/14-11/16受取】ポケモンカード再販商品購入権利",
+      "application_end_at": "2026-11-08T12:00:00+09:00",
+      "application_start_at": "2026-11-05T14:48:00+09:00",
+      "stores": [
+        {
+          "name": "11/14～11/16購入可能・フルコンプ秋葉原店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプラジオ会館店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプ渋谷東口店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプ池袋店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプ横浜店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプ川崎店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプ本厚木店",
+          "prefecture": ""
+        },
+        {
+          "name": "11/14～11/16購入可能・フルコンプ千葉店",
+          "prefecture": ""
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 500,
-    "no_structured_details": 163
+    "no_structured_details": 164
   },
   "field_counts": {
     "store_name": 477,
     "prefecture": 434,
-    "event_title": 350,
+    "event_title": 351,
     "event_date": 1,
     "product_name": 91,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 627,
-    "application_start_at": 617,
-    "stores_events": 489
+    "application_end_at": 628,
+    "application_start_at": 618,
+    "stores_events": 490
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567780545381802054"
+      "1551580466266644552": "1567799067252359198"
     },
     "last_run": {
-      "checked_at": "2026-11-05T06:05:57.571316+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-05T07:15:57.774855+00:00",
+      "new_urls": 1,
       "original_urls": 663,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -18491,7 +18548,8 @@
         "1567531393645285446": "2026-11-04T13:31:00.093395+00:00",
         "1567712583908327664": "2026-11-05T01:35:57.638481+00:00",
         "1567735251093164132": "2026-11-05T03:05:58.497214+00:00",
-        "1567772976433074238": "2026-11-05T05:35:57.624715+00:00"
+        "1567772976433074238": "2026-11-05T05:35:57.624715+00:00",
+        "1567799067252359198": "2026-11-05T07:15:58.790815+00:00"
       },
       "checked_search_urls": {}
     },
@@ -21351,6 +21409,11 @@
           "checked_at": "2026-11-05T05:36:30.737884+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/7r13g": {
+          "checked_at": "2026-11-05T07:16:32.153352+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -23203,6 +23266,12 @@
           "detected_at": "2026-11-05T05:35:58.710685+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/7r13g": {
+          "detected_at": "2026-11-05T07:16:00.044157+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T07:16:32.153352+00:00",
           "http_status": null
         }
       },
@@ -30295,6 +30364,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/7r13g": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-05T07:16:32.153352+00:00",
+          "title_observed": "【11/14-11/16受取】ポケモンカード再販商品購入権利",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -35134,6 +35214,19 @@
         },
         "https://livepocket.jp/e/25_es": {
           "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/7r13g": {
+          "checked_at": "2026-11-05T07:16:32.153352+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
