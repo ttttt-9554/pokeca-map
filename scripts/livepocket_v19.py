@@ -48,6 +48,9 @@ GENERIC_STORE = re.compile(r'(?:^全国.*店舗$|^店舗.*一覧$|^各店舗$|^�
 DANGEROUS = re.compile(r'http[s]?://|[<>\ufffd]|\.{3}|…|[\n\r\t]|^[-+=@]')
 DISCORD_URL_RE = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{4,64}')
 RETAIL = re.compile(r'店$|(?:SHOP|STORE|TSUTAYA|HMV|BOOKS|トレカ|古本市場|ふるいち|キデイランド|イトーヨーカドー|晴れる屋|麦わらストア|ジャンプショップ)', re.I)
+TICKET_DATE = r'(?:\d{4}\s*[年/／]\s*)?\d{1,2}\s*[月/／]\s*\d{1,2}\s*日?'
+TICKET_PURCHASE_PREFIX = re.compile(
+    rf'^{TICKET_DATE}\s*(?:[〜～~–—－-]|から)\s*{TICKET_DATE}\s*購入可能\s*[・･:：]\s*')
 
 
 def safe_name(s, *, strict_retail=False):
@@ -55,6 +58,9 @@ def safe_name(s, *, strict_retail=False):
     if not isinstance(s, str) or arrival_policy.unknown_shop(s):
         return None
     s = re.sub(r'[\s\u3000]+', ' ', s).strip(' \u3000「」『』')
+    # A ticket can put a purchase window before the actual branch name.
+    s, removed_window = TICKET_PURCHASE_PREFIX.subn('', s, count=1)
+    strict_retail = strict_retail or bool(removed_window)
     if not (2 <= len(s) <= 100) or DANGEROUS.search(s) or GENERIC_STORE.search(s) or re.search(r"[。！？!?]|(?:できます|ください|可能です|以下の|上記|ご確認|対象となります)", s):
         return None
     if (re.search(r'[、,，;；]', s) or re.search(r'(?:申込期間|応募締切|販売開始|イベント開催|当選者|会員登録|チケット)', s)):
@@ -308,6 +314,10 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
              'stores_from_pages': 0, 'stores_from_discord': 0, 'stores_from_csv': 0}
     for url, r in rindex.items():
         p = pindex[url]
+        for item in (r, p):
+            name = item.get('store_name')
+            if isinstance(name, str) and TICKET_PURCHASE_PREFIX.match(name.strip()):
+                item['store_name'] = safe_name(name)
         result = seen_pages.get(url) or {}
         page = []
         if result.get('status') == 'ok' and v12.exact_event_url(result.get('final_url')) == url:

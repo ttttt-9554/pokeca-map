@@ -52,7 +52,8 @@ def ticket_product_candidates(text):
     result = []
     for i, line in enumerate(lines):
         title = v19.TICKET_SHOP_TITLE.match(line)
-        if not title or not v19.safe_name(title.group(1), strict_retail=True):
+        name = v19.safe_name(title.group(1), strict_retail=True) if title else None
+        if not name:
             continue
         segment = [line.split('】', 1)[1].strip()]
         for line2 in lines[i + 1:i + 11]:
@@ -81,7 +82,7 @@ def ticket_product_candidates(text):
             if value and ITEM_SPECIFIC.search(value):
                 item = value
             break
-        result.append((title.group(1), item))
+        result.append((name, item))
         if len(result) > v19.MAX_STORES:
             return []
     # Products are valid only when at least two *different* shop tickets exist.

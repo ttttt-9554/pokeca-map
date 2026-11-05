@@ -60,7 +60,8 @@ def extract(v21, url, page):
     stores=v21.v19.page_stores(body)
     if not stores:
         name,_=v21.v20.v15.explicit_store(body)
-        if name:stores=[{'name':name,'prefecture':''}]
+        store=v21.v19.store_part(name)
+        if store:stores=[store]
     if stores:
         fields['stores']=[{'name':s['name'],'prefecture':s.get('prefecture','')} for s in stores[:35]]
     return {'status':'success','fields':fields,'message':(
@@ -156,7 +157,17 @@ def complete():
         except (OSError,ValueError):data=None
         if isinstance(data,dict) and data.get('request_id')==item.get('request_id'):
             result=data
-    finish(item,result['status'],result.get('fields',{}),result.get('message',''))
+    fields = result.get('fields', {})
+    stores = fields.get('stores', [])
+    if any(not store.get('prefecture') for store in stores):
+        try:
+            regions = master.fetch_regions(os.getenv('SUPABASE_URL', ''),
+                                           os.getenv('SUPABASE_SERVICE_ROLE_KEY', ''))
+        except (OSError, RuntimeError, ValueError) as err:
+            print('Store master lookup unavailable:', type(err).__name__)
+        else:
+            master.apply_one({'stores': stores}, {}, regions)
+    finish(item,result['status'],fields,result.get('message',''))
     REQUEST_PATH.unlink(missing_ok=True);RESULT_PATH.unlink(missing_ok=True)
     print('Individual recheck result saved:',result['status'])
 

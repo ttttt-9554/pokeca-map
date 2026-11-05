@@ -31,6 +31,17 @@ class EventScheduleTest(unittest.TestCase):
             'result_announcement_date': '2026-11-12', 'result_announcement_time': '18:00',
         })
 
+    def test_purchase_and_pickup_label_on_store_ticket(self):
+        fields = schedule.extract(
+            '結果発表予定日\n2026年11月11日 ～ 11月13日中\n'
+            '＜当選発表期間＞\n2026年11月11日（水）～ 11月13日（金）\n'
+            '＜抽選販売の購入可能期間＞\n2026年11月14日（土）～ 11月16日（月）閉店まで\n'
+            '【購入受け取り期間】2026年 11月14日（土） ～ 11月16日（月）', self.item)
+        self.assertEqual(fields, {
+            'result_announcement_date': '2026-11-13',
+            'purchase_start_date': '2026-11-14', 'purchase_end_date': '2026-11-16',
+        })
+
     def test_same_day_hours_and_year_boundary(self):
         fields = schedule.extract(
             '当選発表：2026/12/29 17:00～1/2 18:00\n購入期間：1/5 10時～20時',

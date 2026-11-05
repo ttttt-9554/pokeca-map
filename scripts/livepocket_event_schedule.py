@@ -15,7 +15,7 @@ LABEL = re.compile(
     r'(?P<result>(?:抽選(?:結果(?:の)?(?:発表)?|発表)|当選(?:結果)?発表|結果発表|当落発表|当選通知)'
     r'(?:予定)?(?:日時|期間|日)?(?:予定)?)'
     r'|(?P<purchase>(?:商品(?:の)?|店頭(?:での)?|当選者様?(?:の)?)?'
-    r'(?:ご)?(?:販売|購入(?:可能)?|お?受け?取り?|引き?取り?)期間)'
+    r'(?:ご)?(?:販売|購入(?:可能|受け?取り?)?|お?受け?取り?|引き?取り?)期間)'
 )
 DATE = re.compile(r'(?:(20\d{2})\s*[年/.-]\s*)?(\d{1,2})\s*[月/.-]\s*(\d{1,2})\s*日?(?!\d)')
 SHORT_END = re.compile(r'(\d{1,2})\s*日?(?![\d:/月年時])')
@@ -74,7 +74,7 @@ def read_clock(tail):
 
 
 def read_period(tail, anchor, *, purchase):
-    first = DATE.match(tail.lstrip(' \t\r\n:】]'))
+    first = DATE.match(tail.lstrip(' \t\r\n:】]>'))
     if not first:
         return None
     tail = first.string[first.end():]

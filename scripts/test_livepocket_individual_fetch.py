@@ -37,6 +37,18 @@ class IndividualFetchTests(unittest.TestCase):
         text=BODY.replace('受付・チケット情報','申込期間 2026年11月5日10:00～2026年11月8日23:59\n受付・チケット情報')
         fields=individual.extract(v21,URL,page(text=text))['fields']
         self.assertNotIn('application_end_at',fields)
+
+    def test_purchase_window_in_shop_ticket_is_removed_from_new_and_saved_stores(self):
+        prefix = '11/14～11/16購入可能・'
+        names = ['フルコンプ秋葉原店', 'フルコンプ千葉店']
+        ticket_text = '\n'.join(f'【{prefix}{name}】抽選販売分購入権利\n販売中\n¥0' for name in names)
+        body = BODY.replace('対象店舗\nテスト渋谷店（東京都）\n', '') + '\n' + ticket_text
+        stores = individual.extract(v21, URL, page(text=body))['fields']['stores']
+        self.assertEqual(stores, [{'name': name, 'prefecture': ''} for name in names])
+        existing = [{'name': prefix + name, 'prefecture': ''} for name in names]
+        self.assertEqual(v21.v19.merge_stores(existing, stores, []), stores)
+        self.assertEqual(v21.v19.safe_name('11/14模型店'), '11/14模型店')
+
     def run_case(self,pending=False,blocked=False,unknown=False):
         raw,public=pair(pending)
         if blocked:raw['collector_state']['v14']['blocked_until']=(NOW+timedelta(hours=1)).isoformat()
@@ -89,6 +101,23 @@ class WorkerQueueTests(unittest.TestCase):
         individual.complete()
         self.assertFalse(self.req.exists())
         self.assertEqual(self.calls[-1][1]['p_fields']['event_title'],'確認名')
+
+    def test_finish_fills_missing_store_regions_by_exact_master_name(self):
+        self.req.write_text(json.dumps(self.task), encoding='utf-8')
+        stores = [
+            {'name': 'フルコンプ秋葉原店', 'prefecture': ''},
+            {'name': 'フルコンプ千葉店', 'prefecture': '千葉県'},
+            {'name': '秋葉原店', 'prefecture': ''},
+        ]
+        self.res.write_text(json.dumps({**self.task, 'status': 'success',
+                                        'fields': {'stores': stores}}), encoding='utf-8')
+        regions = {'フルコンプ秋葉原店': '東京都', 'フルコンプ千葉店': '東京都'}
+        with patch.object(individual.master, 'fetch_regions', return_value=regions) as lookup:
+            individual.complete()
+        lookup.assert_called_once()
+        saved = self.calls[-1][1]['p_fields']['stores']
+        self.assertEqual([store['prefecture'] for store in saved], ['東京都', '千葉県', ''])
+
     def test_prepare_unknown_event_never_enqueues_browser(self):
         raw,public=pair();public['items']=[]
         with patch.object(individual.v14,'read_pair',return_value=(raw,public)):

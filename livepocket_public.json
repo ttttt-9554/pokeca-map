@@ -9973,39 +9973,45 @@
       "review_category": "onepiece",
       "stores": [
         {
-          "name": "11/21～11/24購入可能・フルコンプ秋葉原店",
-          "prefecture": ""
+          "name": "フルコンプ秋葉原店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプラジオ会館店",
-          "prefecture": ""
+          "name": "フルコンプラジオ会館店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプ渋谷東口店",
-          "prefecture": ""
+          "name": "フルコンプ渋谷東口店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプ池袋店",
-          "prefecture": ""
+          "name": "フルコンプ池袋店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプ横浜店",
-          "prefecture": ""
+          "name": "フルコンプ横浜店",
+          "prefecture": "神奈川県"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプ川崎店",
-          "prefecture": ""
+          "name": "フルコンプ川崎店",
+          "prefecture": "神奈川県"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプ本厚木店",
-          "prefecture": ""
+          "name": "フルコンプ本厚木店",
+          "prefecture": "神奈川県"
         },
         {
-          "name": "11/21～11/24購入可能・フルコンプ千葉店",
-          "prefecture": ""
+          "name": "フルコンプ千葉店",
+          "prefecture": "千葉県"
         }
       ],
-      "first_detected_at": "2026-11-04T11:31:04.287367+00:00"
+      "first_detected_at": "2026-11-04T11:31:04.287367+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      },
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-24"
     },
     {
       "url": "https://livepocket.jp/e/5id4o",
@@ -10134,39 +10140,45 @@
       "review_category": "pokemon",
       "stores": [
         {
-          "name": "11/14～11/16購入可能・フルコンプ秋葉原店",
-          "prefecture": ""
+          "name": "フルコンプ秋葉原店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプラジオ会館店",
-          "prefecture": ""
+          "name": "フルコンプラジオ会館店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプ渋谷東口店",
-          "prefecture": ""
+          "name": "フルコンプ渋谷東口店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプ池袋店",
-          "prefecture": ""
+          "name": "フルコンプ池袋店",
+          "prefecture": "東京都"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプ横浜店",
-          "prefecture": ""
+          "name": "フルコンプ横浜店",
+          "prefecture": "神奈川県"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプ川崎店",
-          "prefecture": ""
+          "name": "フルコンプ川崎店",
+          "prefecture": "神奈川県"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプ本厚木店",
-          "prefecture": ""
+          "name": "フルコンプ本厚木店",
+          "prefecture": "神奈川県"
         },
         {
-          "name": "11/14～11/16購入可能・フルコンプ千葉店",
-          "prefecture": ""
+          "name": "フルコンプ千葉店",
+          "prefecture": "千葉県"
         }
       ],
-      "first_detected_at": "2026-11-05T07:16:00.044157+00:00"
+      "first_detected_at": "2026-11-05T07:16:00.044157+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      },
+      "result_announcement_date": "2026-11-13",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-16"
     },
     {
       "url": "https://livepocket.jp/e/mda0k",
@@ -10222,5 +10234,5 @@
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00"
     }
   ],
-  "updated_at": "2026-11-05T09:51:06.810132+00:00"
+  "updated_at": "2026-11-05T09:51:53.823940+00:00"
 }
