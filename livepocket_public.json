@@ -10109,6 +10109,8 @@
           "prefecture": "東京都"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム HEROINES PRECIOUS BOX 抽選販売受付",
       "first_detected_at": "2026-11-05T05:35:58.710685+00:00"
     },
     {
@@ -10126,6 +10128,7 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_event_title": "【幸手店】スペシャルデッキセット 抽選予約",
       "first_detected_at": "2026-11-05T05:35:58.710685+00:00"
     },
     {
@@ -10228,5 +10231,5 @@
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00"
     }
   ],
-  "updated_at": "2026-11-05T11:36:00.541464+00:00"
+  "updated_at": "2026-11-05T11:46:25.454522+00:00"
 }
