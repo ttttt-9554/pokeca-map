@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-05T16:26:09Z",
-  "total": 1,
+  "as_of": "2026-11-05T16:36:35Z",
+  "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
@@ -18,6 +18,21 @@
       "last_checked_at": "2026-10-30T13:21:24.456958+00:00",
       "next_retry_at": "2026-10-31T13:21:24.456958+00:00",
       "queue": "ready"
+    },
+    {
+      "url": "https://livepocket.jp/e/z1m9e",
+      "event_title": "神の支配 抽選",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-11-08T23:00:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-05T16:36:23.930256+00:00",
+      "next_retry_at": "2026-11-06T16:36:23.930256+00:00",
+      "queue": "retry_wait"
     }
   ]
 }
