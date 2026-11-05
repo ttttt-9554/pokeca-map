@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-05T07:15:57.774855+00:00",
-  "unique_livepocket_urls": 664,
+  "collected_at": "2026-11-05T09:05:56.430580+00:00",
+  "unique_livepocket_urls": 666,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10167,7 +10167,49 @@
         }
       ],
       "first_detected_at": "2026-11-05T07:16:00.044157+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mda0k",
+      "store_name": "文教堂書店湘南とうきゅう店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-11-05T09:00:12.343000+00:00",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム 『HEROINES PRECIOUS BOX』抽選販売",
+      "application_end_at": "2026-11-08T20:30:00+09:00",
+      "application_start_at": "2026-11-05T17:26:00+09:00",
+      "review_category": "onepiece",
+      "product_name": "HEROINES PRECIOUS BOX",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム 『HEROINES PRECIOUS BOX』抽選販売",
+      "result_announcement_date": "2026-11-09",
+      "first_detected_at": "2026-11-05T09:05:58.310343+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/e42vd",
+      "store_name": "文教堂書店湘南とうきゅう店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-11-05T09:00:12.343000+00:00",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム『スペシャルデッキセットMEGAメガオーダイル・メガカイリュー・メガゲンガー』抽選販売",
+      "application_end_at": "2026-11-08T20:30:00+09:00",
+      "application_start_at": "2026-11-05T17:27:00+09:00",
+      "review_category": "pokemon",
+      "product_name": "スペシャルデッキセットMEGAメガオーダイル・メガカイリュー・メガゲンガー",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム『スペシャルデッキセットMEGAメガオーダイル・メガカイリュー・メガゲンガー』抽選販売",
+      "result_announcement_date": "2026-11-09",
+      "first_detected_at": "2026-11-05T09:05:58.310343+00:00"
     }
   ],
-  "updated_at": "2026-11-05T08:56:00.293475+00:00"
+  "updated_at": "2026-11-05T09:06:24.957789+00:00"
 }
