@@ -10225,6 +10225,7 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_event_title": "ハレツー通販 拡張パック「ハドウシーカー」購入権",
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00"
     },
     {
@@ -10244,6 +10245,7 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_event_title": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
       "first_detected_at": "2026-11-05T15:36:04.407471+00:00"
     },
     {
@@ -10265,5 +10267,5 @@
       "first_detected_at": "2026-11-05T16:35:58.617543+00:00"
     }
   ],
-  "updated_at": "2026-11-05T21:26:00.927075+00:00"
+  "updated_at": "2026-11-05T21:37:25.629101+00:00"
 }
