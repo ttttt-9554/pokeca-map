@@ -10089,6 +10089,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
       "first_detected_at": "2026-11-05T03:05:59.646682+00:00"
     },
     {
@@ -10225,8 +10227,9 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_event_title": "ハレツー通販 拡張パック「ハドウシーカー」購入権",
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00"
     }
   ],
-  "updated_at": "2026-11-05T15:16:03.774182+00:00"
+  "updated_at": "2026-11-05T15:26:31.763917+00:00"
 }

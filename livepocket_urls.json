@@ -21505,7 +21505,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/t7ka0": {
-          "checked_at": "2026-11-05T09:16:23.937571+00:00",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -21535,8 +21535,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/s191v": {
-          "checked_at": "2026-11-05T09:26:29.690158+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -23377,7 +23377,7 @@
         "https://livepocket.jp/e/t7ka0": {
           "detected_at": "2026-11-05T03:05:59.646682+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-05T09:16:23.937571+00:00",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/25_es": {
@@ -23412,8 +23412,8 @@
         },
         "https://livepocket.jp/e/s191v": {
           "detected_at": "2026-11-05T09:26:00.605592+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-05T09:26:29.690158+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "http_status": null
         }
       },
@@ -24887,8 +24887,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/t7ka0": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-05T09:16:23.937571+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-05T15:26:31.763917+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8cmzh": {
@@ -24904,6 +24904,11 @@
         "https://livepocket.jp/e/7r13g": {
           "attempts": 1,
           "last_attempt_at": "2026-11-05T13:26:25.942690+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/s191v": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-05T15:26:31.763917+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -30503,7 +30508,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-05T09:16:23.937571+00:00",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "title_observed": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
           "genre": "pokemon",
           "product_origin": "",
@@ -30569,7 +30574,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-05T09:26:29.690158+00:00",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "title_observed": "ハレツー通販 拡張パック「ハドウシーカー」購入権",
           "genre": "",
           "product_origin": "",
@@ -35387,7 +35392,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/t7ka0": {
-          "checked_at": "2026-11-05T09:16:23.937571+00:00",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -35465,7 +35470,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/s191v": {
-          "checked_at": "2026-11-05T09:26:29.690158+00:00",
+          "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
