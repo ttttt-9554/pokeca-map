@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-05T15:05:58.051553+00:00",
+  "collected_at": "2026-11-05T15:36:02.380765+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 667,
+  "unique_livepocket_urls": 668,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18404,33 +18404,66 @@
       "purchase_start_date": "2026-11-16",
       "purchase_end_date": "2026-11-20",
       "purchase_end_time": "15:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/wcs2w",
+      "discord_message_id": "1567923982924251138",
+      "discord_posted_at": "2026-11-05T15:30:08.148000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場志木店\n受付終了: 11/10 23:59（残り4日23時間）\nhttps://livepocket.jp/e/wcs2w",
+      "store_name": "古本市場志木店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場志木店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
+      "application_end_at": "2026-11-10T23:59:00+09:00",
+      "application_start_at": "2026-11-05T15:34:00+09:00",
+      "result_announcement_date": "2026-11-11",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-15"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 502,
+    "parsed": 503,
     "no_structured_details": 165
   },
   "field_counts": {
-    "store_name": 479,
-    "prefecture": 436,
-    "event_title": 354,
+    "store_name": 480,
+    "prefecture": 437,
+    "event_title": 355,
     "event_date": 1,
     "product_name": 93,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 631,
-    "application_start_at": 620,
-    "stores_events": 492
+    "application_end_at": 632,
+    "application_start_at": 621,
+    "stores_events": 493
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567916444321325107"
+      "1551580466266644552": "1567923982924251138"
     },
     "last_run": {
-      "checked_at": "2026-11-05T15:05:58.051553+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-05T15:36:02.380765+00:00",
+      "new_urls": 1,
       "original_urls": 667,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -18658,7 +18691,8 @@
         "1567772976433074238": "2026-11-05T05:35:57.624715+00:00",
         "1567799067252359198": "2026-11-05T07:15:58.790815+00:00",
         "1567825853805633628": "2026-11-05T09:05:57.245668+00:00",
-        "1567831668759203971": "2026-11-05T09:25:59.425583+00:00"
+        "1567831668759203971": "2026-11-05T09:25:59.425583+00:00",
+        "1567923982924251138": "2026-11-05T15:36:03.281937+00:00"
       },
       "checked_search_urls": {}
     },
@@ -21538,6 +21572,11 @@
           "checked_at": "2026-11-05T15:26:31.763917+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/wcs2w": {
+          "checked_at": "2026-11-05T15:37:14.663201+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -23414,6 +23453,12 @@
           "detected_at": "2026-11-05T09:26:00.605592+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-05T15:26:31.763917+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/wcs2w": {
+          "detected_at": "2026-11-05T15:36:04.407471+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T15:37:14.663201+00:00",
           "http_status": null
         }
       },
@@ -30580,6 +30625,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/wcs2w": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-05T15:37:14.663201+00:00",
+          "title_observed": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -35471,6 +35527,19 @@
         },
         "https://livepocket.jp/e/s191v": {
           "checked_at": "2026-11-05T15:26:31.763917+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/wcs2w": {
+          "checked_at": "2026-11-05T15:37:14.663201+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

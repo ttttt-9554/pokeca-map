@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-05T15:05:58.051553+00:00",
-  "unique_livepocket_urls": 667,
+  "collected_at": "2026-11-05T15:36:02.380765+00:00",
+  "unique_livepocket_urls": 668,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10089,8 +10089,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
       "first_detected_at": "2026-11-05T03:05:59.646682+00:00"
     },
     {
@@ -10227,9 +10225,28 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "ハレツー通販 拡張パック「ハドウシーカー」購入権",
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/wcs2w",
+      "store_name": "古本市場志木店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-05T15:30:08.148000+00:00",
+      "stores": [
+        {
+          "name": "古本市場志木店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
+      "application_end_at": "2026-11-10T23:59:00+09:00",
+      "application_start_at": "2026-11-05T15:34:00+09:00",
+      "official_event_title": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
+      "result_announcement_date": "2026-11-11",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-05T15:36:04.407471+00:00"
     }
   ],
-  "updated_at": "2026-11-05T15:26:31.763917+00:00"
+  "updated_at": "2026-11-05T15:37:14.663201+00:00"
 }
