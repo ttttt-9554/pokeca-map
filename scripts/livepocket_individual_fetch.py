@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import re
 import sys
+from datetime import timedelta
 import urllib.request
 import urllib.error
 import livepocket_master_prefecture as master
@@ -66,10 +67,33 @@ def extract(v21, url, page):
         '取得した候補を確認してください。' if fields else '読み取れる項目が見つかりませんでした。元ページをご確認ください。')}
 
 
-def prepare():
+def output(**values):
+    if os.getenv('GITHUB_OUTPUT'):
+        with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
+            for key,value in values.items():out.write(key+'='+str(value)+'\n')
+
+
+def route():
+    item=rpc('livepocket_individual_take_dispatch_v1',{})
+    if item is None:
+        output(mode='normal')
+        print('Manual run: standard review')
+        return
+    request_id=str(item.get('request_id','')) if isinstance(item,dict) else ''
+    if not re.fullmatch(r'[0-9a-f-]{36}',request_id):raise ValueError('Invalid route')
+    output(mode='individual',request_id=request_id)
+    print('Manual run: single-event review')
+
+
+def prepare(specific_id=None):
     # Clear only our own run-scoped scratch files; never alter saved events.
     REQUEST_PATH.unlink(missing_ok=True);RESULT_PATH.unlink(missing_ok=True)
-    item=rpc('livepocket_individual_claim_v1',{})
+    if specific_id is not None:
+        if not re.fullmatch(r'[0-9a-f-]{36}',str(specific_id)):
+            raise ValueError('Invalid individual request')
+        item=rpc('livepocket_individual_claim_one_v1',{'p_id':specific_id})
+    else:
+        item=rpc('livepocket_individual_claim_v1',{})
     needed=False
     if item:
         try:
@@ -88,10 +112,39 @@ def prepare():
             try:finish(item,'error',{},'自動取得の準備に失敗しました。後ほどお試しください。')
             except Exception:pass  # stale claims are made eligible again after 30 minutes
             raise
-    if os.getenv('GITHUB_OUTPUT'):
-        with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
-            out.write('requested='+('true' if needed else 'false')+'\n')
+    output(requested=('true' if needed else 'false'))
     print('Individual recheck:', 'scheduled' if needed else 'none')
+
+
+def execute_direct():
+    """One exact URL, through the same normal browser and cooldown policy."""
+    if not REQUEST_PATH.exists():return
+    import livepocket_v21 as v21
+    item=json.loads(REQUEST_PATH.read_text(encoding='utf-8'))
+    url=item.get('url')
+    result={'status':'error','fields':{},'message':'自動取得を完了できませんでした。後ほどお試しください。'}
+    raw,public=v14.read_pair()
+    known={x.get('url') for x in raw.get('items',[]) if isinstance(x,dict)}
+    published={x.get('url') for x in public.get('items',[]) if isinstance(x,dict)}
+    if not isinstance(url,str) or v12.exact_event_url(url)!=url or url not in known or url not in published:
+        result={'status':'unavailable','fields':{},'message':'登録済みの抽選が見つかりませんでした。'}
+    elif v14._cooldown_active(raw.get('collector_state',{}).get('v14',{}),v14._utc()):
+        result={'status':'blocked','fields':{},'message':'アクセス制限中のため取得を停止しています。時間を置いて確認してください。'}
+    else:
+        try:
+            fetch,close=v21.browser_fetcher()
+            try:page=fetch(url)
+            finally:close()
+            result=extract(v21,url,page)
+        except Exception:
+            pass
+        if result['status']=='blocked':
+            raw.setdefault('collector_state',{}).setdefault('v14',{})['blocked_until']=(
+                v14._utc()+timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
+            v21.v11.write_json(v14.RAW_PATH,raw)
+    result['request_id']=item['request_id']
+    RESULT_PATH.write_text(json.dumps(result,ensure_ascii=False),encoding='utf-8')
+    print('Individual exact-event result:',result['status'])
 
 
 def complete():
@@ -109,10 +162,11 @@ def complete():
 
 
 if __name__=='__main__':
-    if len(sys.argv)!=2 or sys.argv[1] not in ('prepare','complete'):
-        raise SystemExit('Usage: livepocket_individual_fetch.py prepare|complete')
+    if len(sys.argv)!=2 or sys.argv[1] not in ('route','prepare','prepare-one','execute','complete'):
+        raise SystemExit('Usage: livepocket_individual_fetch.py route|prepare|prepare-one|execute|complete')
     try:
-        {'prepare':prepare,'complete':complete}[sys.argv[1]]()
+        if sys.argv[1]=='prepare-one':prepare(os.environ.get('INDIVIDUAL_REQUEST_ID',''))
+        else:{'route':route,'prepare':prepare,'execute':execute_direct,'complete':complete}[sys.argv[1]]()
     except Exception as err:
         # Do not print authorization headers, page content, or private responses.
         print('Individual recheck unavailable:',type(err).__name__,file=sys.stderr)

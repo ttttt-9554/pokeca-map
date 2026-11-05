@@ -8873,7 +8873,33 @@
       const {data,error}=await supabaseClient.rpc('livepocket_individual_request_v1',{p_url:canonical});
       if(error)throw Error(error.message||'ライポケの取得を受け付けられませんでした。');
       if(!data||!data.request_id)throw Error('ライポケの取得受付を確認できませんでした。');
-      return {...data,livepocket:true};
+      let dispatch='already';
+      if(data.status==='pending'){
+        // The authenticated existing dispatcher holds the GitHub credential.
+        // A one-use DB marker makes this run target only this event.
+        dispatch='fallback';
+        try{
+          const session=await supabaseClient.auth.getSession();
+          const token=session?.data?.session?.access_token;
+          if(session.error||!token||session.data.session.user?.id!==DEVELOPER_USER_ID)
+            throw Error('session unavailable');
+          const marked=await supabaseClient.rpc('livepocket_individual_mark_dispatch_v1',{p_id:data.request_id});
+          if(marked.error)throw marked.error;
+          if(!marked.data)dispatch='already';
+          else{
+            const controller=new AbortController();
+            const timer=setTimeout(()=>controller.abort(),10000);
+            try{
+              const response=await fetch(LP_DEV_RECHECK_API,{method:'POST',mode:'cors',cache:'no-store',
+                headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+                body:JSON.stringify({batch:12}),signal:controller.signal});
+              if(!response.ok)throw Error('dispatch unavailable');
+              dispatch='started';
+            }finally{clearTimeout(timer);}
+          }
+        }catch(error){console.warn('ライポケ即時起動を依頼できませんでした:',error?.message||error);}
+      }
+      return {...data,livepocket:true,dispatch};
     }
     const {data,error}=await supabaseClient.functions.invoke('lottery-individual-fetch',{body:{url}});
     if(error){

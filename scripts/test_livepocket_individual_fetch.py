@@ -1,5 +1,7 @@
 import unittest
 import tempfile
+import json
+import os
 from pathlib import Path
 from unittest.mock import patch
 from datetime import datetime,timedelta,timezone
@@ -75,7 +77,7 @@ class WorkerQueueTests(unittest.TestCase):
         self.calls=[]
         def rpc(name,data):
             self.calls.append((name,data))
-            return self.task if name=='livepocket_individual_claim_v1' else True
+            return self.task if name in ('livepocket_individual_claim_v1','livepocket_individual_claim_one_v1') else True
         self.patches=[patch.object(individual,'REQUEST_PATH',self.req),patch.object(individual,'RESULT_PATH',self.res),patch.object(individual,'rpc',rpc)]
         for p in self.patches:p.start();self.addCleanup(p.stop)
     def test_prepare_known_event_then_finish_private_candidates(self):
@@ -98,8 +100,54 @@ class WorkerQueueTests(unittest.TestCase):
             individual.prepare()
         self.assertFalse(self.req.exists());self.assertEqual(self.calls[-1][1]['p_status'],'blocked')
     def test_missing_result_finishes_as_error(self):
-        import json
         self.req.write_text(json.dumps(self.task),encoding='utf-8')
         individual.complete();self.assertEqual(self.calls[-1][1]['p_status'],'error')
+    def test_route_returns_only_the_one_marked_request(self):
+        output=Path(self.temp.name)/'output'
+        with patch.dict(os.environ,{'GITHUB_OUTPUT':str(output)}), patch.object(individual,'rpc',return_value={'request_id':self.task['request_id']}):
+            individual.route()
+        self.assertEqual(output.read_text(),f"mode=individual\nrequest_id={self.task['request_id']}\n")
+    def test_route_without_marker_leaves_bulk_recheck_available(self):
+        output=Path(self.temp.name)/'output'
+        with patch.dict(os.environ,{'GITHUB_OUTPUT':str(output)}), patch.object(individual,'rpc',return_value=None):
+            individual.route()
+        self.assertEqual(output.read_text(),'mode=normal\n')
+    def test_specific_claim_does_not_take_another_pending_event(self):
+        raw,public=pair()
+        with patch.object(individual.v14,'read_pair',return_value=(raw,public)):
+            individual.prepare(self.task['request_id'])
+        self.assertTrue(self.req.exists())
+        self.assertEqual(self.calls[0],('livepocket_individual_claim_one_v1',{'p_id':self.task['request_id']}))
+    def test_completed_claim_does_not_launch_browser(self):
+        with patch.object(individual,'rpc',return_value=None):
+            individual.prepare(self.task['request_id'])
+        self.assertFalse(self.req.exists())
+    def test_immediate_run_checks_only_registered_event(self):
+        raw,public=pair();self.req.write_text(json.dumps(self.task),encoding='utf-8')
+        calls=[];closed=[]
+        with patch.object(individual.v14,'read_pair',return_value=(raw,public)), patch.object(v21,'browser_fetcher',return_value=(lambda url:(calls.append(url) or page(url)),lambda:closed.append(True))):
+            individual.execute_direct()
+        result=json.loads(self.res.read_text(encoding='utf-8'))
+        self.assertEqual(calls,[URL]);self.assertEqual(closed,[True])
+        self.assertEqual(result['status'],'success')
+        self.assertEqual(result['fields']['event_title'],'ポケモンカード抽選販売')
+        self.assertNotIn('event_title',public['items'][0])
+    def test_immediate_run_does_not_fetch_unknown_or_blocked_event(self):
+        for reason in ('unknown','cooldown'):
+            raw,public=pair()
+            if reason=='unknown':public['items']=[]
+            else:raw['collector_state']['v14']['blocked_until']='2099-01-01T00:00:00+00:00'
+            self.req.write_text(json.dumps(self.task),encoding='utf-8')
+            with patch.object(individual.v14,'read_pair',return_value=(raw,public)), patch.object(v21,'browser_fetcher') as fetcher:
+                individual.execute_direct()
+            fetcher.assert_not_called()
+            self.assertEqual(json.loads(self.res.read_text())['status'],'unavailable' if reason=='unknown' else 'blocked')
+    def test_immediate_access_gate_sets_cooldown(self):
+        raw,public=pair();self.req.write_text(json.dumps(self.task),encoding='utf-8')
+        with patch.object(individual.v14,'read_pair',return_value=(raw,public)), patch.object(v21,'browser_fetcher',return_value=(lambda url:page(url,"Verify that you're not a robot"),lambda:None)), patch.object(v21.v11,'write_json') as write:
+            individual.execute_direct()
+        result=json.loads(self.res.read_text())
+        self.assertEqual(result['status'],'blocked');self.assertEqual(result['fields'],{})
+        self.assertTrue(raw['collector_state']['v14']['blocked_until']);write.assert_called_once()
 
 if __name__=='__main__':unittest.main()

@@ -28,9 +28,94 @@ permissions:
 concurrency:
   group: livepocket-collect
   cancel-in-progress: false
+  queue: max
 
 jobs:
+  # The existing authenticated dispatcher requests batch 12. Consume a
+  # one-use server-side marker to distinguish an individual tap from a bulk
+  # recheck, even if a scheduled collector already finished that exact URL.
+  route:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      mode: ${{ steps.route.outputs.mode }}
+      request_id: ${{ steps.route.outputs.request_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Identify individual or bulk request
+        id: route
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_individual_fetch.py route
+
+  individual:
+    needs: route
+    if: ${{ needs.route.result == 'success' && needs.route.outputs.mode == 'individual' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Claim the requested event
+        id: claim
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          INDIVIDUAL_REQUEST_ID: ${{ needs.route.outputs.request_id }}
+        run: python scripts/livepocket_individual_fetch.py prepare-one
+      - name: Install browser for the requested event
+        if: ${{ steps.claim.outputs.requested == 'true' }}
+        continue-on-error: true
+        run: |
+          python -m pip install 'playwright>=1.55,<2'
+          python -m playwright install --with-deps chromium
+      - name: Check the single event
+        if: ${{ steps.claim.outputs.requested == 'true' }}
+        continue-on-error: true
+        run: python scripts/livepocket_individual_fetch.py execute
+      - name: Preserve access cooldown if requested page is blocked
+        if: ${{ always() && steps.claim.outputs.requested == 'true' }}
+        continue-on-error: true
+        shell: bash
+        run: |
+          git add livepocket_urls.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Record LivePocket access cooldown'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then git rebase --abort || true; exit 1; fi
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
+      - name: Save individual review result
+        if: ${{ always() && steps.claim.outputs.requested == 'true' }}
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_individual_fetch.py complete
+
   collect:
+    needs: route
+    # No marker means a genuine bulk run. A failed router never falls through
+    # to bulk work. Scheduled/default collection skips the router entirely.
+    if: ${{ always() && !cancelled() && (needs.route.result == 'skipped' || (needs.route.result == 'success' && needs.route.outputs.mode == 'normal')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:

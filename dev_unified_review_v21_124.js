@@ -167,9 +167,14 @@
 
   function liveResult(task){
     const pending=['pending','running'].includes(task?.status);
-    return {livepocket:true,request_id:task?.request_id,status:task?.status,
-      fields:task?.fields||{},message:pending?
-        '⏳ 次の収集で確認します（通常数分。混雑時は遅れる場合があります）。':
+    const waiting=task?.dispatch==='started'?
+      '⏳ すぐに取得の起動を依頼しました。GitHubの準備・混雑状況により時間がかかる場合があります。':
+      task?.dispatch==='fallback'?
+      '⚠ 即時起動できなかったため、次の自動収集で確認します。':
+      task?.status==='running'?'🔄 対象の抽選を確認しています。':
+      '⏳ 取得待ちです。次の収集で確認します。';
+    return {livepocket:true,request_id:task?.request_id,status:task?.status,dispatch:task?.dispatch,
+      fields:task?.fields||{},message:pending?waiting:
         task?.message||'取得結果を確認してください。'};
   }
   function scheduleLivePoll(){
@@ -189,7 +194,7 @@
         // An older list response must not replace a newly queued request.
         if(existing?.livepocket&&['pending','running'].includes(existing.status)&&
            existing.request_id&&task.request_id!==existing.request_id)continue;
-        fetchResults.set(task.url,liveResult(task));
+        fetchResults.set(task.url,liveResult({...task,dispatch:existing?.dispatch}));
       }
       render();
     }catch(error){console.warn('ライポケ取得状態を確認できません:',error?.message||error);}
