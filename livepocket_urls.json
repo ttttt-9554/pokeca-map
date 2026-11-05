@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-05T03:15:57.386180+00:00",
+  "collected_at": "2026-11-05T05:35:56.636950+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 661,
+  "unique_livepocket_urls": 663,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18180,33 +18180,93 @@
       "event_title": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
       "application_end_at": "2026-11-06T22:00:00+09:00",
       "application_start_at": "2026-11-05T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/8cmzh",
+      "discord_message_id": "1567772976433074238",
+      "discord_posted_at": "2026-11-05T05:30:05.395000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nCARD WINGS秋葉原駅前店\n受付終了: 11/06 23:59（残り1日9時間）\nhttps://livepocket.jp/e/8cmzh\n\n📍埼玉県\nトレカ丸幸手店\n受付終了: 11/05 21:59（残り7時間28分）\nhttps://livepocket.jp/e/25_es",
+      "store_name": "CARD WINGS秋葉原駅前店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "CARD WINGS秋葉原駅前店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ワンピースカードゲーム HEROINES PRECIOUS BOX 抽選販売受付",
+      "application_end_at": "2026-11-06T23:59:00+09:00",
+      "application_start_at": "2026-11-05T13:41:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/25_es",
+      "discord_message_id": "1567772976433074238",
+      "discord_posted_at": "2026-11-05T05:30:05.395000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nCARD WINGS秋葉原駅前店\n受付終了: 11/06 23:59（残り1日9時間）\nhttps://livepocket.jp/e/8cmzh\n\n📍埼玉県\nトレカ丸幸手店\n受付終了: 11/05 21:59（残り7時間28分）\nhttps://livepocket.jp/e/25_es",
+      "store_name": "トレカ丸幸手店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "トレカ丸幸手店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【幸手店】スペシャルデッキセット 抽選予約",
+      "application_end_at": "2026-11-05T21:59:00+09:00",
+      "application_start_at": "2026-11-03T09:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 498,
+    "parsed": 500,
     "no_structured_details": 163
   },
   "field_counts": {
-    "store_name": 475,
-    "prefecture": 432,
-    "event_title": 348,
+    "store_name": 477,
+    "prefecture": 434,
+    "event_title": 350,
     "event_date": 1,
     "product_name": 91,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 625,
-    "application_start_at": 615,
-    "stores_events": 487
+    "application_end_at": 627,
+    "application_start_at": 617,
+    "stores_events": 489
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567736932522270851"
+      "1551580466266644552": "1567772976433074238"
     },
     "last_run": {
-      "checked_at": "2026-11-05T03:15:57.386180+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-05T05:35:56.636950+00:00",
+      "new_urls": 2,
       "original_urls": 661,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -18430,7 +18490,8 @@
         "1567516295589666876": "2026-11-04T12:31:07.233245+00:00",
         "1567531393645285446": "2026-11-04T13:31:00.093395+00:00",
         "1567712583908327664": "2026-11-05T01:35:57.638481+00:00",
-        "1567735251093164132": "2026-11-05T03:05:58.497214+00:00"
+        "1567735251093164132": "2026-11-05T03:05:58.497214+00:00",
+        "1567772976433074238": "2026-11-05T05:35:57.624715+00:00"
       },
       "checked_search_urls": {}
     },
@@ -21280,6 +21341,16 @@
           "checked_at": "2026-11-05T03:06:35.453931+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/8cmzh": {
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/25_es": {
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -23120,6 +23191,18 @@
           "detected_at": "2026-11-05T03:05:59.646682+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/25_es": {
+          "detected_at": "2026-11-05T05:35:58.710685+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/8cmzh": {
+          "detected_at": "2026-11-05T05:35:58.710685+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
           "http_status": null
         }
       },
@@ -30190,6 +30273,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/8cmzh": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "title_observed": "ワンピースカードゲーム HEROINES PRECIOUS BOX 抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/25_es": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "title_observed": "【幸手店】スペシャルデッキセット 抽選予約",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -35013,6 +35118,32 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/8cmzh": {
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/25_es": {
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         }
       }
     },
@@ -35045,6 +35176,28 @@
           "result_candidates": [
             "当選発表： 2026年11月7日（土）～ 11月13日（金） 期間中に発表します 販売期間： 2026年11月17日（水）～ 11月20日（木） 計3日間",
             "結果発表予定日 2026年11月7日（土）～11月13日（金） 期間中に発表します 【古本市場小平店】ポケカ抽選販売 拡張パック 30th CELEBRATION"
+          ],
+          "purchase_candidates": []
+        },
+        {
+          "url": "https://livepocket.jp/e/8cmzh",
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "status": "ok",
+          "result_candidates": [
+            "結果発表予定日 11/09～11/12予定"
+          ],
+          "purchase_candidates": [
+            "※購入期間中に必ず当店で購入が出来る方のみでお願い致します。 ※当選した場合、応募したご本人様のみが購入可能です。代理購入は出来ません。",
+            "当選者様ご購入期間：11/14営業開始時刻~11/15営業終了時刻までとなります。 ※当選者(応募した本人のみ)が購入が可能です。 ※本人確認が出来る顔写真付きの身分証明書（学生証除く）をお持ちください。",
+            "※上記、ご購入期間以外でのご購入は出来ません。 ※ご当選された2次元バーコードの表示方法はヘルプページをご確認ください。"
+          ]
+        },
+        {
+          "url": "https://livepocket.jp/e/25_es",
+          "checked_at": "2026-11-05T05:36:30.737884+00:00",
+          "status": "ok",
+          "result_candidates": [
+            "結果発表予定日 11月10日（火） 【幸手店】スペシャルデッキセットMEGA"
           ],
           "purchase_candidates": []
         }
