@@ -21520,8 +21520,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/7r13g": {
-          "checked_at": "2026-11-05T07:16:32.153352+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T13:26:25.942690+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/mda0k": {
@@ -23394,8 +23394,8 @@
         },
         "https://livepocket.jp/e/7r13g": {
           "detected_at": "2026-11-05T07:16:00.044157+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-05T07:16:32.153352+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-05T13:26:25.942690+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/e42vd": {
@@ -24899,6 +24899,11 @@
         "https://livepocket.jp/e/25_es": {
           "attempts": 1,
           "last_attempt_at": "2026-11-05T11:46:25.454522+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/7r13g": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-05T13:26:25.942690+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -30531,7 +30536,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-05T07:16:32.153352+00:00",
+          "checked_at": "2026-11-05T13:26:25.942690+00:00",
           "title_observed": "【11/14-11/16受取】ポケモンカード再販商品購入権利",
           "genre": "pokemon",
           "product_origin": "",
@@ -35421,7 +35426,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/7r13g": {
-          "checked_at": "2026-11-05T07:16:32.153352+00:00",
+          "checked_at": "2026-11-05T13:26:25.942690+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
