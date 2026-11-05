@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-05T01:35:56.771939+00:00",
+  "collected_at": "2026-11-05T03:05:57.491688+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 660,
+  "unique_livepocket_urls": 661,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18150,34 +18150,64 @@
       "event_title": "【ふるいち八潮中央店】ポケカ店頭抽選販売(インフェルノX)",
       "application_end_at": "2026-11-05T22:00:00+09:00",
       "application_start_at": "2026-11-05T10:00:00+09:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/t7ka0",
+      "discord_message_id": "1567735251093164132",
+      "discord_posted_at": "2026-11-05T03:00:10.973000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\n古本市場小平店\n受付終了: 11/06 22:00（残り1日9時間）\nhttps://livepocket.jp/e/t7ka0\n\n📍埼玉県\nふるいち八潮中央店\n受付終了: 11/05 22:00（残り9時間59分）\nhttps://livepocket.jp/e/ogdt-",
+      "store_name": "古本市場小平店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "古本市場小平店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
+      "application_end_at": "2026-11-06T22:00:00+09:00",
+      "application_start_at": "2026-11-05T10:00:00+09:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 497,
+    "parsed": 498,
     "no_structured_details": 163
   },
   "field_counts": {
-    "store_name": 474,
-    "prefecture": 431,
-    "event_title": 347,
+    "store_name": 475,
+    "prefecture": 432,
+    "event_title": 348,
     "event_date": 1,
     "product_name": 91,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 624,
-    "application_start_at": 614,
-    "stores_events": 486
+    "application_end_at": 625,
+    "application_start_at": 615,
+    "stores_events": 487
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1567712583908327664"
+      "1551580466266644552": "1567735251093164132"
     },
     "last_run": {
-      "checked_at": "2026-11-05T01:35:56.771939+00:00",
+      "checked_at": "2026-11-05T03:05:57.491688+00:00",
       "new_urls": 1,
-      "original_urls": 659,
+      "original_urls": 660,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -18399,7 +18429,8 @@
         "1567499792630939769": "2026-11-04T11:31:03.482159+00:00",
         "1567516295589666876": "2026-11-04T12:31:07.233245+00:00",
         "1567531393645285446": "2026-11-04T13:31:00.093395+00:00",
-        "1567712583908327664": "2026-11-05T01:35:57.638481+00:00"
+        "1567712583908327664": "2026-11-05T01:35:57.638481+00:00",
+        "1567735251093164132": "2026-11-05T03:05:58.497214+00:00"
       },
       "checked_search_urls": {}
     },
@@ -21244,6 +21275,11 @@
           "checked_at": "2026-11-05T01:36:26.061500+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/t7ka0": {
+          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -23078,6 +23114,12 @@
           "detected_at": "2026-11-05T01:35:58.878606+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-05T01:36:26.061500+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/t7ka0": {
+          "detected_at": "2026-11-05T03:05:59.646682+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-05T03:06:35.453931+00:00",
           "http_status": null
         }
       },
@@ -30137,6 +30179,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/t7ka0": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "title_observed": "【古本市場小平店】 ポケカ抽選販売 拡張パック 30th CELEBRATION",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -34947,6 +35000,19 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/t7ka0": {
+          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         }
       }
     },
@@ -34969,6 +35035,16 @@
           "result_candidates": [
             "当選発表： 2026年11月6日（金）～ 11月10日（火）期間中に発表します 販売期間： 2026年11月13日（金）～ 11月15日（日） 計3日間",
             "結果発表予定日 2026年11月6日（金）～ 11月10日（火）期間中に発表します 【ふるいち八潮中央店】ポケカ抽選販売(インフェルノX)"
+          ],
+          "purchase_candidates": []
+        },
+        {
+          "url": "https://livepocket.jp/e/t7ka0",
+          "checked_at": "2026-11-05T03:06:35.453931+00:00",
+          "status": "ok",
+          "result_candidates": [
+            "当選発表： 2026年11月7日（土）～ 11月13日（金） 期間中に発表します 販売期間： 2026年11月17日（水）～ 11月20日（木） 計3日間",
+            "結果発表予定日 2026年11月7日（土）～11月13日（金） 期間中に発表します 【古本市場小平店】ポケカ抽選販売 拡張パック 30th CELEBRATION"
           ],
           "purchase_candidates": []
         }
