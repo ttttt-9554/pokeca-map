@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import webpush from "npm:web-push@3.6.7";
+import { scanAndDrainLottery } from "./lottery-scan-flow.mjs";
 
 // v21.49: Every shared report is delivered to Discord as its own embed.
 // DB trigger enqueues (atomically with INSERT); Supabase Cron calls DRAIN each
@@ -8,7 +9,7 @@ import webpush from "npm:web-push@3.6.7";
 const APP_URL = "https://ttttt-9554.github.io/pokeca-map/";
 const MAX_DRAIN = 10;
 const LOTTERY_MAX_DRAIN = 5;
-const LIVEPOCKET_PUBLIC_JSON = "https://raw.githubusercontent.com/ttttt-9554/pokeca-map/main/livepocket_public.json";
+const LIVEPOCKET_PUBLIC_JSON = "https://ttttt-9554.github.io/pokeca-map/livepocket_public.json";
 const SPACING_MS = 1250;
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 type Report = {
@@ -601,7 +602,15 @@ Deno.serve(async (req: Request) => {
 
   if (payload.type === "LOTTERY_SCAN") {
     try {
-      const summary = await scanLivePocket(supabase);
+      const summary = await scanAndDrainLottery(
+        () => scanLivePocket(supabase),
+        async () => {
+          const webhook = Deno.env.get("LOTTERY_DISCORD_WEBHOOK_URL");
+          if (!webhook) throw Error("Dedicated lottery webhook not configured");
+          return await drainLotteryNotifications(supabase, webhook);
+        },
+        (error: unknown) => console.error("Immediate lottery delivery failed:", String(error))
+      );
       console.log("LivePocket catalog scan:", summary);
       return new Response(JSON.stringify(summary), {
         status: 200, headers: { "Content-Type": "application/json" }

@@ -3283,6 +3283,8 @@
   let lpCloudError = '';
   let lotteryLastFetch = 0;
   let lotteryLoading = null;
+  let lotteryPublicRevision = '';
+  let lotteryPublicChecking = false;
   let lotteryVisibleLimit = LP_PAGE_SIZE;
   let lotteryTimer = null;
   let lotteryCountdownTimer = null;
@@ -4572,6 +4574,28 @@
     lpCloudApply();lpLocationRender();
   }
 
+  function lotteryPublicVersion(data) {
+    return typeof data?.updated_at === 'string' && data.updated_at ? data.updated_at :
+      typeof data?.collected_at === 'string' ? data.collected_at : '';
+  }
+
+  // Check the published catalog once per visible minute. Unchanged catalogs
+  // do not cause extra Supabase reads or redraw the user's current screen.
+  async function checkLotteryPublicUpdate() {
+    if (lotteryPublicChecking || lotteryLoading || !lotteryPublicRevision) return;
+    lotteryPublicChecking = true;
+    try {
+      const response = await fetch(LP_JSON_URL + '?refresh=' + Date.now(), {cache:'no-store'});
+      if (!response.ok) return;
+      const data = await response.json();
+      if (!data || !Array.isArray(data.items)) return;
+      const revision = lotteryPublicVersion(data);
+      if (revision && revision !== lotteryPublicRevision) await loadLotteryEvents(true);
+    } catch (_) {
+      // The normal five-minute/manual refresh remains available on failure.
+    } finally { lotteryPublicChecking = false; }
+  }
+
   async function loadLotteryEvents(force = false) {
     if (!force && lotteryItems.length && Date.now() - lotteryLastFetch < LP_REFRESH_MS) {
       renderLottery(); return;
@@ -4609,6 +4633,7 @@
         if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); await lpAppRefresh(); }
         lpCloudApply();
         void syncCollectedCatalogProducts();
+        lotteryPublicRevision = lotteryPublicVersion(data);
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
         const update = data.updated_at || data.collected_at;
@@ -5488,7 +5513,7 @@
            r.status==='applied'&&r.application_count>0)) {
         lpResultsRefresh();
       }
-      if ($('lotteryView').classList.contains('active')) renderLottery();
+      if ($('lotteryView').classList.contains('active')) { renderLottery(); void checkLotteryPublicUpdate(); }
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('lotteryResultsView')?.classList.contains('active')) lpResultsRefresh();
       if ($('lotteryView').classList.contains('active') ||
@@ -5517,7 +5542,7 @@
         if([...lotteryTrackRecords.values()].some(r=>
            r.status==='applied'&&r.application_count>0)) lpResultsRefresh();
       }
-      if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();lpLocationRefresh(true);}
+      if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();void checkLotteryPublicUpdate();lpLocationRefresh(true);}
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('appLotteryView')?.classList.contains('active')) lpAppRefresh(true);
       if ($('lotteryResultsView')?.classList.contains('active')) lpResultsRefresh(true);

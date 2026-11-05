@@ -13,6 +13,10 @@ name: LivePocket Detail Deadline Regression
       - scripts/livepocket_individual_fetch.py
       - scripts/test_livepocket_individual_fetch.py
       - scripts/test_livepocket_immediate_dispatch_ui.cjs
+      - scripts/test_lottery_public_poll.cjs
+      - scripts/test_lottery_notification_scan.cjs
+      - supabase/functions/discord-notify/lottery-scan-flow.mjs
+      - supabase/livepocket_notification_fast_poll_v1.sql
       - supabase/livepocket_individual_fetch_v1.sql
       - supabase/livepocket_individual_dispatch_v1.sql
       - supabase/livepocket_individual_dispatch_v2.sql
@@ -125,6 +129,8 @@ jobs:
           node scripts/test_livepocket_individual_ui.cjs
           node scripts/test_livepocket_individual_queue_ui.cjs
           node scripts/test_livepocket_immediate_dispatch_ui.cjs
+          node scripts/test_lottery_public_poll.cjs
+          node scripts/test_lottery_notification_scan.cjs
           node scripts/test_individual_lottery_fetch.mjs
           node scripts/test_app_manual_location.cjs
           node scripts/test_external_edit_discord.cjs
