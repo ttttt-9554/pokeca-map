@@ -63,6 +63,12 @@ class PeriodTrialTest(unittest.TestCase):
         self.assertTrue(rows[0]['result_candidates'])
         self.assertTrue(rows[0]['purchase_candidates'])
         self.assertNotIn('応募期間', rows[0]['purchase_candidates'][0])
+        for catalog in result[:2]:
+            item = next(item for item in catalog['items'] if item['url'] == url)
+            self.assertEqual(item['result_announcement_date'], '2026-11-08')
+            self.assertEqual(item['purchase_start_date'], '2026-11-09')
+            self.assertEqual(item['purchase_end_date'], '2026-11-15')
+            self.assertNotIn('result_announcement_time', item)
 
 
 if __name__ == '__main__': unittest.main()

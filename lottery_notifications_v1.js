@@ -123,6 +123,14 @@
               '発表予定：' + String(r.result_announcement_at).replace('T', ' ') +
               '（日本時間）／ 公式サイトで当落を確認してください'));
           }
+        } else if (!otherUserProcessed && /^\d{4}-\d{2}-\d{2}$/.test(r.result_announcement_date || '')) {
+          const day = r.result_announcement_date;
+          const daysAgo = (utcDay(currentDay) - utcDay(day)) / 86400000;
+          if (daysAgo >= 0 && daysAgo <= MAX_PAST_RESULT_DAYS) {
+            output.push(makeNotice(r, 'result', 'due', 1, day,
+              '📣 抽選結果の発表予定日です',
+              '発表予定日：' + day.replaceAll('-', '/') + ' ／ 公式サイトで当落を確認してください'));
+          }
         }
       }
       if (status !== 'won' || !/^\d{4}-\d{2}-\d{2}$/.test(r.pickup_end || '')) continue;

@@ -11,6 +11,7 @@ raw file private when the repo/GitHub Pages source is public.
 """
 from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
+from livepocket_event_schedule import FIELDS as SCHEDULE_FIELDS
 
 import copy
 import json
@@ -40,7 +41,7 @@ PUBLIC_FIELDS = (
     'lottery_result_period', 'lottery_result_start_date',
     'lottery_result_end_date', 'ticket_name', 'ticket_price_yen',
     'ticket_application_limit', 'sales_period', 'discord_posted_at',
-)
+) + SCHEDULE_FIELDS
 
 
 def is_shop(value):

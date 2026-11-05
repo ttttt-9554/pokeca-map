@@ -3422,6 +3422,39 @@
     }).format(new Date(time));
   }
 
+  function lotteryScheduleDate(value) {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return '';
+    const day = new Date(value + 'T00:00:00Z');
+    return Number.isFinite(+day) && day.toISOString().slice(0,10) === value ? value : '';
+  }
+
+  function lotteryScheduleTime(value) {
+    return /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?$/.test(value || '')
+      ? value.slice(0,5) : '';
+  }
+
+  function lotteryScheduleText(date, time) {
+    return date ? date.replaceAll('-', '/') + (time ? ' ' + time : '') : '';
+  }
+
+  function lotteryPurchasePeriodText(schedule) {
+    const start = lotteryScheduleText(schedule.pickup_start, schedule.pickup_start_time);
+    const end = lotteryScheduleText(schedule.pickup_end, schedule.pickup_end_time);
+    return start === end ? start : start + '～' + end;
+  }
+
+  function lotteryOfficialSchedule(item) {
+    const resultDate = lotteryScheduleDate(item.result_announcement_date);
+    const start = lotteryScheduleDate(item.purchase_start_date);
+    const end = lotteryScheduleDate(item.purchase_end_date);
+    return {
+      result_announcement_date:resultDate || lotteryScheduleDate(item.lottery_result_end_date),
+      result_announcement_time:resultDate ? lotteryScheduleTime(item.result_announcement_time) : '',
+      pickup_start:start, pickup_start_time:start ? lotteryScheduleTime(item.purchase_start_time) : '',
+      pickup_end:end, pickup_end_time:end ? lotteryScheduleTime(item.purchase_end_time) : ''
+    };
+  }
+
   function lotteryGenre(item) {
     const explicit = String(item.review_category || '').toLowerCase();
     if (item.manual_card_genre) return explicit || 'unknown';
@@ -5193,6 +5226,14 @@
     return external?'外部サイト・抽選内容未確認':'イベント名を確認中';
   }
 
+  function lotteryCardScheduleHtml(item) {
+    if (!isLivePocketEventUrl(item.url)) return '';
+    const schedule = lotteryOfficialSchedule(item);
+    const announcement = lotteryScheduleText(schedule.result_announcement_date, schedule.result_announcement_time);
+    return '<small>抽選発表日：'+escape(announcement)+'</small>'+
+      '<small>購入期間：'+escape(lotteryPurchasePeriodText(schedule))+'</small>';
+  }
+
   function lotteryCard(item, state) {
     const stores = lotteryStoreEntries(item);
     const places = lotteryPrefectures(item);
@@ -5278,7 +5319,7 @@
       ${item.app_lottery_details?'<p class="lp-store-muted">共有メモ：'+escape(item.app_lottery_details)+'</p>':''}
       ${state === 'unavailable' ? '<p class="lp-missing-notice">'+(item.app_lottery_hidden?'📁 この手動登録は一覧から非表示です。過去の応募履歴は保持しています。':'⚠ 公式ページが見つからない・削除済みとの手動確認記録があります。現在の公開状態は再確認してください。イベント履歴は保持しています。')+'</p>' : ''}
       ${urgent ? '<p class="lp-urgent-alert">⚠️ 応募締切まで24時間以内！</p>' : ''}
-      <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}</p>
+      <p class="lp-deadline ${urgent ? 'lp-urgent-deadline' : ''}">${escape(when)}${escape(countdown)}${start ? `<small>応募開始：${escape(start)}</small>` : ''}${lotteryCardScheduleHtml(item)}</p>
       ${list}
       ${chainReference}
       ${window.TorecaSalesReference?.render?.(item,stores,genre)||''}
@@ -6739,6 +6780,9 @@
 
   const LP_TRACK_TABLE = 'lottery_user_entries';
   const LP_EXT_TRACK_TABLE = 'lottery_external_user_entries';
+  const LP_TRACK_SELECT = 'event_url,status,application_count,won_count,lost_count,account_entries,'+
+    'onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,'+
+    'result_announcement_at,result_announcement_date,result_announcement_time,note,updated_at';
   function lotteryTrackTableFor(url){
     return isLivePocketEventUrl(url)?LP_TRACK_TABLE:LP_EXT_TRACK_TABLE;
   }
@@ -7152,6 +7196,17 @@
     return lotteryTrackRecords.get(url) || null;
   }
 
+  function lotteryTrackAnnouncement(row) {
+    const date = lotteryScheduleDate(row.result_announcement_date);
+    const legacy = String(row.result_announcement_at || '');
+    const legacyDate = lotteryScheduleDate(legacy.slice(0,10));
+    return {
+      result_announcement_date:date || legacyDate,
+      result_announcement_time:date ? lotteryScheduleTime(row.result_announcement_time) :
+        legacyDate ? lotteryScheduleTime(legacy.slice(11,16)) : ''
+    };
+  }
+
   function lotteryTrackClean(row) {
     if (!row || !safeLotteryUrl(row.event_url)) return null;
     const status=LP_TRACK_STATUSES.includes(row.status)?row.status:'not_applied';
@@ -7181,7 +7236,7 @@
       pickup_start_time:/^\d{2}:\d{2}/.test(row.pickup_start_time||'')?row.pickup_start_time.slice(0,5):'',
       pickup_end:/^\d{4}-\d{2}-\d{2}$/.test(row.pickup_end||'')?row.pickup_end:'',
       pickup_end_time:/^\d{2}:\d{2}/.test(row.pickup_end_time||'')?row.pickup_end_time.slice(0,5):'',
-      result_announcement_at:typeof row.result_announcement_at==='string'?row.result_announcement_at.replace(' ','T').slice(0,16):'',
+      ...lotteryTrackAnnouncement(row),
       note:typeof row.note==='string'?row.note.slice(0,500):'',
       updated_at:row.updated_at||''
     };
@@ -7220,7 +7275,7 @@
         const fetched=await Promise.all([
           ...[LP_TRACK_TABLE,LP_EXT_TRACK_TABLE].map(table=>
             supabaseClient.from(table)
-              .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,result_announcement_at,note,updated_at')
+              .select(LP_TRACK_SELECT)
               .eq('user_id',user).order('updated_at',{ascending:false}).limit(3000)),
           supabaseClient.from(LP_PRIVATE_ACCOUNT_TABLE)
             .select('id,label,is_default,is_archived,created_at').eq('user_id',user)
@@ -7409,19 +7464,19 @@
     const date=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',
       year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
     const clock=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',
-      hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
-    const current=date+'T'+clock;
-    const due=records.filter(r=>r.status==='applied' &&
-      /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}$/.test(r.result_announcement_at||'') &&
-      r.result_announcement_at<=current)
-      .sort((a,b)=>a.result_announcement_at.localeCompare(b.result_announcement_at));
+      hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(now);
+    const due=records.filter(r=>r.status==='applied' && r.result_announcement_date &&
+      (r.result_announcement_date<date ||
+        (r.result_announcement_date===date && r.result_announcement_time<=clock)))
+      .sort((a,b)=>a.result_announcement_date.localeCompare(b.result_announcement_date) ||
+        a.result_announcement_time.localeCompare(b.result_announcement_time));
     root.hidden=!due.length;
     if(!due.length){root.replaceChildren();return;}
     root.innerHTML='<div class="lp-pickup-alert-head"><h4>🔔 抽選結果発表のお知らせ</h4>'+
       '<span class="lp-pickup-alert-count">'+due.length+'件</span></div>'+
       due.slice(0,20).map(r=>'<div class="lp-pickup-alert-row urgent"><div>'+
         '<strong>'+escape(lotteryTrackItemName(r.event_url))+'</strong>'+
-        '<p>結果発表予定：'+escape(r.result_announcement_at.replace('T',' '))+
+        '<p>結果発表予定：'+escape(lotteryScheduleText(r.result_announcement_date,r.result_announcement_time))+
         ' ／ 当落を確認してください</p></div>'+
         '<button type="button" data-lp-track="edit" data-url="'+escape(r.event_url)+'">結果を記録</button></div>').join('');
   }
@@ -7474,7 +7529,10 @@
       return;
     }
     status.textContent=lotteryTrackError || '🔒 自分のDiscordアカウントに非公開で保存します。';
-    const records=[...lotteryTrackRecords.values()];
+    const itemsByUrl=new Map(lotteryItems.map(item=>[item.url,item]));
+    const records=[...lotteryTrackRecords.values()].map(record=>({
+      ...record,...lotteryTrackerSchedule(record,itemsByUrl.get(record.event_url))
+    }));
     renderLotteryResultAlerts(records);
     renderLotteryPickupAlerts(records);
     // Pass only personal reminder fields; never expose account names or notes.
@@ -7487,7 +7545,9 @@
         application_count:r.application_count,
         won_count:r.won_count,
         lost_count:r.lost_count,
-        result_announcement_at:r.result_announcement_at,
+        result_announcement_date:r.result_announcement_date,
+        result_announcement_at:r.result_announcement_time ?
+          r.result_announcement_date+'T'+r.result_announcement_time : '',
         pickup_end:r.pickup_end,
         pickup_end_time:r.pickup_end_time
       }))
@@ -7520,7 +7580,9 @@
       if(!group.length)return '';
       const total=filtered.filter(x=>x.status===key).length;
       const renderRow=x=>{
-        const manualCard=lotteryItems.find(y=>y.url===x.event_url);
+        const manualCard=itemsByUrl.get(x.event_url);
+        const announcement=lotteryScheduleText(x.result_announcement_date,x.result_announcement_time);
+        const purchase=lotteryPurchasePeriodText(x);
         const msg=x.status==='won' ? '' : lotteryTrackPickupMessage(x);
         const warn=msg.startsWith('⚠') ? (msg.includes('今日')?'lp-track-today':'lp-track-overdue'):'';
         const onsite=lotteryOnsiteSummary(x.event_url).state==='required'
@@ -7530,6 +7592,8 @@
           <p class="lp-track-store-label">📍 店舗：${escape(lotteryTrackStoreLabel(x.event_url))}</p>
           ${onsite}
           <p class="lp-track-quantity-summary">🎟️ 応募 ${x.application_count}口 ／ 🎉 当選 ${x.won_count}口 ／ 📪 落選 ${x.lost_count}口</p>
+          ${announcement?`<p>抽選発表日：${escape(announcement)}</p>`:''}
+          ${purchase&&x.status!=='won'?`<p>購入・受取期間：${escape(purchase)}</p>`:''}
           ${lotteryTrackPrivateAccountSummary(x)}
           ${x.status==='won'?lotteryPickupDetailsHtml(x):''}
           ${msg?`<p class="${warn}">${escape(msg)}</p>`:''}
@@ -7541,7 +7605,7 @@
       // remain together without treating an event title as a product name.
       const products=new Map();
       for(const record of group){
-        const item=lotteryItems.find(y=>y.url===record.event_url);
+        const item=itemsByUrl.get(record.event_url);
         const name=String(item?.product_name||'').trim()||'商品未確認';
         const id=item?.catalog_product_id ? 'id:'+item.catalog_product_id : 'name:'+name.normalize('NFKC');
         if(!products.has(id))products.set(id,{name,records:[]});
@@ -7615,6 +7679,7 @@
       for(const r of records){
         const item=lotteryItems.find(x=>x.url===r.event_url)||
           lotteryBaseItems.find(x=>x.url===r.event_url)||{};
+        const schedule=lotteryTrackerSchedule(r,item);
         const assigned=Array.isArray(r.account_entries)?r.account_entries:[];
         const choices=lpTrackerCandidateStores(r.event_url);
         let stores=[...new Map(assigned.filter(a=>a.store_name)
@@ -7655,9 +7720,10 @@
           rows.push([
             clean(lotteryTrackItemName(r.event_url)),clean(store.name||''),clean(store.prefecture||item.prefecture||''),
             date(item.application_start_at),date(item.application_end_at),
-            date(r.result_announcement_at||item.result_announcement_at||item.result_at||item.announcement_at),
-            (date(r.pickup_start||item.pickup_start)+(r.pickup_start_time?' '+r.pickup_start_time:'')),
-            (date(r.pickup_end||item.pickup_end)+(r.pickup_end_time?' '+r.pickup_end_time:'')),
+            lotteryScheduleText(schedule.result_announcement_date,schedule.result_announcement_time) ||
+              date(item.result_announcement_at||item.result_at||item.announcement_at),
+            lotteryScheduleText(schedule.pickup_start,schedule.pickup_start_time) || date(item.pickup_start),
+            lotteryScheduleText(schedule.pickup_end,schedule.pickup_end_time) || date(item.pickup_end),
             clean(notes),...(namesRow.length?namesRow:[''])
           ]);
         }
@@ -7724,12 +7790,42 @@
     }else if(button.dataset.lpTrack==='edit') lotteryTrackerOpenEditor(url);
   }
 
-  function lotteryTrackerDefaults(url) {
-    return lotteryTrackRecord(url) || {
-      event_url:url,status:'not_applied',onsite_required:false,onsite_done:false,
-      application_count:0,won_count:0,lost_count:0,
-      pickup_start:'',pickup_end:'',pickup_start_time:'',pickup_end_time:'',result_announcement_at:'',note:'',updated_at:''
+  function lotteryPickupPeriodReversed(schedule) {
+    return schedule.pickup_start && schedule.pickup_end &&
+      (schedule.pickup_start>schedule.pickup_end ||
+        (schedule.pickup_start===schedule.pickup_end && schedule.pickup_start_time &&
+          schedule.pickup_end_time && schedule.pickup_start_time>schedule.pickup_end_time));
+  }
+
+  function lotteryTrackerSchedule(record,item) {
+    const saved=lotteryTrackAnnouncement(record);
+    const official=item && isLivePocketEventUrl(item.url) ? lotteryOfficialSchedule(item) : {};
+    const pickup={
+      pickup_start:record.pickup_start||'',pickup_end:record.pickup_end||'',
+      pickup_start_time:record.pickup_start?record.pickup_start_time||'':'',
+      pickup_end_time:record.pickup_end?record.pickup_end_time||'':''
     };
+    const filled={
+      pickup_start:pickup.pickup_start||official.pickup_start||'',
+      pickup_start_time:pickup.pickup_start?pickup.pickup_start_time:official.pickup_start_time||'',
+      pickup_end:pickup.pickup_end||official.pickup_end||'',
+      pickup_end_time:pickup.pickup_end?pickup.pickup_end_time:official.pickup_end_time||''
+    };
+    return {
+      result_announcement_date:saved.result_announcement_date||official.result_announcement_date||'',
+      result_announcement_time:saved.result_announcement_date ?
+        saved.result_announcement_time : official.result_announcement_time||'',
+      ...(lotteryPickupPeriodReversed(filled)?pickup:filled)
+    };
+  }
+
+  function lotteryTrackerDefaults(url) {
+    const record=lotteryTrackRecord(url) || {
+      event_url:url,status:'not_applied',onsite_required:false,onsite_done:false,
+      application_count:0,won_count:0,lost_count:0,note:'',updated_at:''
+    };
+    const item=lotteryItems.find(x=>x.url===url);
+    return {...record,...lotteryTrackerSchedule(record,item)};
   }
 
   // v21.36: Open dialogs with their headings focused, never their first select.
@@ -8082,12 +8178,13 @@
       ${lpTrackerPrivateMarkup(data)}
       <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
       <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
-      <label>抽選結果発表日時（わかる場合）<input type="datetime-local" name="result_announcement_at" value="${escape(data.result_announcement_at||'')}"></label>
-      <label>受け取り開始日（わかる場合）<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
-      <label>受け取り開始時刻（任意）<input type="time" name="pickup_start_time" value="${escape(data.pickup_start_time||'')}"></label>
-      <label>受け取り期限日（わかる場合）<input type="date" name="pickup_end" value="${escape(data.pickup_end)}"></label>
-      <label>受け取り終了時刻（任意）<input type="time" name="pickup_end_time" value="${escape(data.pickup_end_time||'')}"></label>
-      <p class="lp-tracker-intro">当選したら「当選・受取待ち」を選び、公式案内の受取期間を入力してください。アプリ内で期限が確認できます。公式条件は自動確定しません。</p>
+      <label>抽選発表日<input type="date" name="result_announcement_date" value="${escape(data.result_announcement_date)}"></label>
+      <label>発表時刻（任意）<input type="time" name="result_announcement_time" value="${escape(data.result_announcement_time)}"></label>
+      <label>購入・受取開始日<input type="date" name="pickup_start" value="${escape(data.pickup_start)}"></label>
+      <label>購入・受取開始時刻（任意）<input type="time" name="pickup_start_time" value="${escape(data.pickup_start_time||'')}"></label>
+      <label>購入・受取期限日<input type="date" name="pickup_end" value="${escape(data.pickup_end)}"></label>
+      <label>購入・受取終了時刻（任意）<input type="time" name="pickup_end_time" value="${escape(data.pickup_end_time||'')}"></label>
+      <p class="lp-tracker-intro">ライポケから取得できた日付と時刻を自動入力します。自分で保存した日程を優先します。</p>
       <label>自分用メモ（500文字まで）<textarea name="note" maxlength="500" rows="3" placeholder="例：店頭で本人確認が必要／受取時に身分証を持参">${escape(data.note)}</textarea></label>
       <div class="lp-track-modal-actions"><button type="submit" class="primary">保存</button><button type="button" id="lpTrackEditorClose">閉じる</button>
       ${lotteryTrackRecord(url)?'<button type="button" id="lpTrackEditorDelete">記録を削除</button>':''}</div>
@@ -8172,9 +8269,13 @@
         ...(accountValues?{account_entries:accountValues.account_entries}:{}),
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
         pickup_start_time:String(fd.get('pickup_start_time')||''),pickup_end_time:String(fd.get('pickup_end_time')||''),
-        result_announcement_at:String(fd.get('result_announcement_at')||''),
+        result_announcement_date:String(fd.get('result_announcement_date')||''),
+        result_announcement_time:String(fd.get('result_announcement_time')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
-      if(data.pickup_start&&data.pickup_end&&(data.pickup_start>data.pickup_end || (data.pickup_start===data.pickup_end&&data.pickup_start_time&&data.pickup_end_time&&data.pickup_start_time>data.pickup_end_time))){
+      if(data.result_announcement_time&&!data.result_announcement_date){
+        $('lpTrackEditorMessage').textContent='発表時刻を記録する場合は発表日を入力してください。';return;
+      }
+      if(lotteryPickupPeriodReversed(data)){
         $('lpTrackEditorMessage').textContent='受取開始日は受取期限日より前にしてください。';return;
       }
       await lotteryTrackerSave(url,data,true);
@@ -8218,15 +8319,19 @@
     const canonicalStatus=applications===0?'not_applied':
       status==='received'&&won>0?'received':
       won>0?'won':lost===applications?'lost':'applied';
-    // Legacy private column exists only for the v21.27 SQL compatibility constraint.
+    const {result_announcement_date,result_announcement_time}=lotteryTrackAnnouncement(values);
+    // Keep the legacy timestamp in sync for already-open app sessions.
     const payload={user_id:uid,event_url:url,status:canonicalStatus,onsite_required:completed,
       onsite_done:completed,application_count:applications,won_count:won,lost_count:lost,
       pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
       pickup_start_time:values.pickup_start?values.pickup_start_time||null:null,
       pickup_end_time:values.pickup_end?values.pickup_end_time||null:null,
-      result_announcement_at:values.result_announcement_at||null,
+      result_announcement_date:result_announcement_date||null,
+      result_announcement_time:result_announcement_time||null,
+      result_announcement_at:result_announcement_time ?
+        result_announcement_date+'T'+result_announcement_time : null,
       note:String(values.note||'').slice(0,500)};
-    if(payload.pickup_start&&payload.pickup_end&&(payload.pickup_start>payload.pickup_end || (payload.pickup_start===payload.pickup_end&&payload.pickup_start_time&&payload.pickup_end_time&&payload.pickup_start_time>payload.pickup_end_time)))return;
+    if(lotteryPickupPeriodReversed(payload))return;
     if(Array.isArray(values.account_entries)){
       // The account editor recalculates summary totals from private entries.
       payload.account_entries=values.account_entries;
@@ -8269,7 +8374,7 @@
     if(message)message.textContent='保存中…';
     try{
       const {data,error}=await supabaseClient.from(lotteryTrackTableFor(url)).upsert(payload,{onConflict:'user_id,event_url'})
-        .select('event_url,status,application_count,won_count,lost_count,account_entries,onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,result_announcement_at,note,updated_at').single();
+        .select(LP_TRACK_SELECT).single();
       if(error)throw error;
       if(authUser?.id!==uid)return;
       const parsed=lotteryTrackClean(data);

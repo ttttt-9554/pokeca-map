@@ -10,6 +10,11 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_famima_lottery_enrich.py
       - scripts/livepocket_period_trial.py
       - scripts/test_livepocket_period_trial.py
+      - scripts/livepocket_event_schedule.py
+      - scripts/test_livepocket_event_schedule.py
+      - scripts/test_lottery_event_schedule.cjs
+      - lottery_notifications_v1.js
+      - supabase/lottery_result_announcement_parts_v1.sql
       - scripts/livepocket_individual_fetch.py
       - scripts/test_livepocket_individual_fetch.py
       - scripts/test_livepocket_immediate_dispatch_ui.cjs
@@ -97,11 +102,14 @@ jobs:
           PYTHONPATH=scripts python -m unittest -v scripts/test_sevennet_lottery_enrich.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_famima_lottery_enrich.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_period_trial.py scripts/test_livepocket_individual_fetch.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_event_schedule.py
           python -m py_compile scripts/livepocket_future_policy.py scripts/livepocket_v16.py scripts/livepocket_v18.py scripts/livepocket_v13.py scripts/livepocket_v21.py scripts/livepocket_detail_period_batch.py scripts/livepocket_detail_period_revalidate.py scripts/livepocket_detail_period_publish_latest.py scripts/livepocket_prefecture_manual_snapshot.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_future_policy.py scripts/test_livepocket_detail_priority.py scripts/test_livepocket_detail_period_batch.py scripts/test_livepocket_detail_period_revalidate.py scripts/test_livepocket_detail_period_publish_latest.py scripts/test_livepocket_detail_period_git_integration.py scripts/test_livepocket_prefecture_manual_snapshot.py
       - name: Check PWA syntax and admin-corrected deadline expiry
         run: |
           node --check app.js
+          node --check lottery_notifications_v1.js
+          node scripts/test_lottery_event_schedule.cjs
           node --check search_inputs_v1.js
           node --check info_plaza_sales_v1.js
           node --check admin_login_users_v1.js

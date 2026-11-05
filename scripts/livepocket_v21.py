@@ -9,6 +9,7 @@ from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
 import livepocket_period_trial as period_trial
 import livepocket_individual_fetch as individual_fetch
+import livepocket_event_schedule as event_schedule
 
 import csv
 import io
@@ -2000,8 +2001,9 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             stats[metric] = sum(page_supported_change(u, metric, keys)
                                 for u in successful)
     
-    # Only use exact-URL page observations. Never override known locations.
+    # Reuse confirmed exact-URL observations for venues and event schedules.
     venue_added = 0
+    schedules_updated = 0
     raw_index = {item.get('url'): item for item in raw.get('items', [])}
     public_index = {item.get('url'): item for item in public.get('items', [])}
     for venue_url, observation in observations.items():
@@ -2012,7 +2014,14 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
         raw_row, public_row = raw_index.get(venue_url), public_index.get(venue_url)
         if raw_row is not None and public_row is not None:
             venue_added += int(fill_venue_prefecture(raw_row, public_row, observation.get('text')))
+            body = observation.get('text') or ''
+            title = public_row.get('event_title') or ''
+            if observation.get('page_identity') == 'event_confirmed' and re.search(r'抽選|当選|当落', body + title):
+                fields = event_schedule.extract(body, {**raw_row, **public_row})
+                schedules_updated += int(event_schedule.apply(raw_row, public_row, fields))
     stats['exact_venue_prefectures_added'] = venue_added
+    stats['event_schedules_updated'] = schedules_updated
+    stats['event_schedules_seeded'] = event_schedule.seed_trial(raw, raw_index, public_index)
     stats.update(apply_verified_unavailable(raw, public, verified_unavailable or {}))
     stats['first_detection_times_published'] = publish_first_detected_at(
         raw, public, now=now)
