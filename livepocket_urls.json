@@ -18444,8 +18444,8 @@
       "discord_posted_at": "2026-11-05T16:30:07.084000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "https://livepocket.jp/e/z1m9e",
-      "store_name": null,
-      "prefecture": null,
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
       "details_source": null,
       "product_name": null,
       "application_period": null,
@@ -18454,13 +18454,22 @@
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue"
       },
       "event_title": "神の支配 抽選",
       "application_end_at": "2026-11-08T23:00:00+09:00",
       "application_start_at": "2026-11-03T12:42:00+09:00",
       "purchase_start_date": "2026-11-21",
-      "purchase_end_date": "2026-11-22"
+      "purchase_end_date": "2026-11-22",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ]
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
@@ -18479,7 +18488,7 @@
     "lottery_result_period": 1,
     "application_end_at": 633,
     "application_start_at": 622,
-    "stores_events": 493
+    "stores_events": 494
   },
   "collector_state": {
     "last_seen_message_ids": {

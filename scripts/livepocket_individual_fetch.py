@@ -60,7 +60,7 @@ def extract(v21, url, page):
     stores=v21.v19.page_stores(body)
     if not stores:
         name,_=v21.v20.v15.explicit_store(body)
-        store=v21.v19.store_part(name)
+        store=v21.v19.store_part(name) or v21.v19.overview_store(page)
         if store:stores=[store]
     if stores:
         fields['stores']=[{'name':s['name'],'prefecture':s.get('prefecture','')} for s in stores[:35]]

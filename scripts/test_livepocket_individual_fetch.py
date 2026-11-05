@@ -38,6 +38,34 @@ class IndividualFetchTests(unittest.TestCase):
         fields=individual.extract(v21,URL,page(text=text))['fields']
         self.assertNotIn('application_end_at',fields)
 
+    def test_overview_venue_supplies_store_in_individual_and_scheduled_collection(self):
+        body = BODY.replace('対象店舗\nテスト渋谷店（東京都）',
+                            '会場\nTSUTAYA佐野店 (栃木県)\n佐野市田島町51 TSUTAYA佐野店')
+        observation = {**page(text=body), 'overview_venue': 'TSUTAYA佐野店 (栃木県)'}
+        stores = [{'name': 'TSUTAYA佐野店', 'prefecture': '栃木県'}]
+        self.assertEqual(individual.extract(v21, URL, observation)['fields']['stores'], stores)
+        raw, public = pair(pending=True)
+        raw, public, *_ = v21.process(
+            raw, public, lambda _: observation, catalog=[], now=NOW, new_limit=1,
+            background_limit=0, retry_limit=0, title_limit=0, verified={}, v19_verified={},
+            verified_titles={}, verified_unavailable={})
+        for row in (raw['items'][0], public['items'][0]):
+            self.assertEqual(row['stores'], stores)
+            self.assertEqual(row['store_name'], 'TSUTAYA佐野店')
+            self.assertEqual(row['prefecture'], '栃木県')
+
+    def test_overview_venue_defers_to_explicit_stores(self):
+        observation = {**page(), 'overview_venue': 'TSUTAYA佐野店 (栃木県)'}
+        stores = individual.extract(v21, URL, observation)['fields']['stores']
+        self.assertEqual(stores, [{'name': 'テスト渋谷店', 'prefecture': '東京都'}])
+        conflicting = BODY.replace('応募期間', '対象店舗：別店舗（千葉県）\n応募期間')
+        observation['text'] = conflicting
+        # The overview venue must not replace an ambiguous store list.
+        self.assertIsNone(v21.v19.overview_store({**observation, 'page_identity': 'event_confirmed'}))
+        observation['text'] = BODY.replace('対象店舗\nテスト渋谷店（東京都）\n', '')
+        observation['overview_venue'] = 'テスト体育館（栃木県）'
+        self.assertNotIn('stores', individual.extract(v21, URL, observation)['fields'])
+
     def test_purchase_window_in_shop_ticket_is_removed_from_new_and_saved_stores(self):
         prefix = '11/14～11/16購入可能・'
         names = ['フルコンプ秋葉原店', 'フルコンプ千葉店']

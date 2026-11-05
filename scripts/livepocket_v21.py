@@ -2165,6 +2165,22 @@ def ticket_period_from_dom(page):
     return choose_verified_ticket_period(chunks)
 
 
+def overview_venue_from_dom(page):
+    """Read the event's venue value, excluding the nested address and link."""
+    try:
+        venues = page.locator(
+            '.event-detail-info__block > dt:has(.event-detail-info__place) + dd.event-detail-info__data'
+        ).evaluate_all(r"""elements => elements.map(element => [...element.childNodes]
+            .filter(node => node.nodeType === Node.TEXT_NODE)
+            .map(node => node.textContent)
+            .join(' ').replace(/\s+/g, ' ').trim()).filter(Boolean)""")
+    except Exception:
+        return ''
+    # The desktop and mobile summaries can both be present in the DOM.
+    venues = set(venues)
+    return next(iter(venues)) if len(venues) == 1 else ''
+
+
 def browser_fetcher():
     """Preserve v20 same-URL browser behavior; also read structured event titles.
 
@@ -2340,6 +2356,7 @@ def browser_fetcher():
             return {'status': 'ok', 'final_url': page.url,
                     'text': body[:30000], 'titles': titles,
                     'title_sources': title_sources,
+                    'overview_venue': overview_venue_from_dom(page),
                     'dom_title_candidates': dom_title_candidates if isinstance(dom_title_candidates, list) else []}
         except BrowserTimeout:
             return {'status': 'browser_timeout'}

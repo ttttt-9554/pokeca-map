@@ -10254,8 +10254,16 @@
       "discord_posted_at": "2026-11-05T16:30:07.084000+00:00",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
-      "first_detected_at": "2026-11-05T16:35:58.617543+00:00"
+      "first_detected_at": "2026-11-05T16:35:58.617543+00:00",
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ]
     }
   ],
-  "updated_at": "2026-11-05T16:51:01.151978+00:00"
+  "updated_at": "2026-11-05T16:57:31.734032+00:00"
 }

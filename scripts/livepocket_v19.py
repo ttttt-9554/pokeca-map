@@ -206,6 +206,20 @@ def page_stores(text):
     return list(unique.values())
 
 
+def overview_store(observation):
+    """Use a named retail venue with an explicit prefecture as a fallback."""
+    if observation.get('page_identity') != 'event_confirmed':
+        return None
+    store = store_part(observation.get('overview_venue'))
+    if not store or not store['prefecture'] or not re.search(r'(?:店|ショップ|SHOP|STORE)$', store['name'], re.I):
+        return None
+    # An unreadable or conflicting explicit list must not become one store.
+    if any(STORE_HEADING.fullmatch(normalize_store_heading(line))
+           for line in (observation.get('text') or '').splitlines()):
+        return None
+    return store
+
+
 def read_manual(path, known_urls):
     """All-or-nothing validation; multiple verified rows per URL are allowed."""
     if not path.exists():
@@ -319,9 +333,9 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
             if isinstance(name, str) and TICKET_PURCHASE_PREFIX.match(name.strip()):
                 item['store_name'] = safe_name(name)
         result = seen_pages.get(url) or {}
-        page = []
-        if result.get('status') == 'ok' and v12.exact_event_url(result.get('final_url')) == url:
-            page = page_stores(result.get('text'))
+        exact_page = result.get('status') == 'ok' and v12.exact_event_url(result.get('final_url')) == url
+        page = page_stores(result.get('text')) if exact_page else []
+        page_source = 'v19_livepocket_explicit_store_list'
         # Discord text is safe to attribute only when this message contains
         # exactly ONE distinct LivePocket event URL (not a roundup).
         excerpt = r.get('post_excerpt')
@@ -345,6 +359,15 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
                 re.sub(r'\s+', '', legacy.lstrip('* ')).casefold().startswith(
                     re.sub(r'\s+', '', product).casefold())):
             legacy = ''
+        if exact_page and not (before or p.get('stores') or page or discord or manual.get(url) or safe_name(legacy)):
+            venue = overview_store(result)
+            if venue and all(item.get('prefecture') in (None, '', venue['prefecture']) for item in (r, p)):
+                page = [venue]
+                legacy = venue['name']
+                page_source = 'v19_livepocket_overview_venue'
+                for item in (r, p):
+                    item.update(store_name=legacy, prefecture=venue['prefecture'])
+                r.setdefault('field_sources', {}).update(store_name=page_source, prefecture=page_source)
         merged = merge_stores(before, page + discord, manual.get(url),
                               legacy, r.get('prefecture') or p.get('prefecture') or '')
         if merged:
@@ -353,7 +376,7 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
             if merged != before:
                 stats['store_lists_added'] += 1
             if page:
-                r.setdefault('field_sources', {})['stores'] = 'v19_livepocket_explicit_store_list'
+                r.setdefault('field_sources', {})['stores'] = page_source
                 stats['stores_from_pages'] += 1
             if discord:
                 r.setdefault('field_sources', {})['stores'] = 'v19_discord_single_event_store_list'
