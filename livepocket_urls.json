@@ -22590,13 +22590,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/6mf8u": {
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/4t5pvnf6l8": {
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/pv9dk": {
@@ -24579,14 +24579,14 @@
         },
         "https://livepocket.jp/e/4t5pvnf6l8": {
           "detected_at": "2026-11-06T03:35:59.003686+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/6mf8u": {
           "detected_at": "2026-11-06T03:35:59.003686+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/pv9dk": {
@@ -26169,6 +26169,16 @@
         "https://livepocket.jp/e/jd0iq1-bl1": {
           "attempts": 1,
           "last_attempt_at": "2026-11-06T08:41:23.913923+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/6mf8u": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-06T09:41:26.578489+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/4t5pvnf6l8": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-06T09:41:26.578489+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -31966,7 +31976,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
           "title_observed": "ポケモンカードゲーム スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選予約受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -31977,7 +31987,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
           "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -37106,7 +37116,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/6mf8u": {
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -37119,7 +37129,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/4t5pvnf6l8": {
-          "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "checked_at": "2026-11-06T09:41:26.578489+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
