@@ -22781,7 +22781,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
-          "checked_at": "2026-11-06T17:31:22.183158+00:00",
+          "checked_at": "2026-11-06T23:47:37.496076+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -24801,7 +24801,7 @@
         "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
           "detected_at": "2026-11-06T11:30:32.182141+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-06T17:31:22.183158+00:00",
+          "checked_at": "2026-11-06T23:47:37.496076+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bgwe7": {
@@ -26407,8 +26407,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-06T17:31:22.183158+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-06T23:47:37.496076+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/sq7kw": {
@@ -32321,7 +32321,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T17:31:22.183158+00:00",
+          "checked_at": "2026-11-06T23:47:37.496076+00:00",
           "title_observed": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
           "genre": "pokemon",
           "product_origin": "",
@@ -37525,7 +37525,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
-          "checked_at": "2026-11-06T17:31:22.183158+00:00",
+          "checked_at": "2026-11-06T23:47:37.496076+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
