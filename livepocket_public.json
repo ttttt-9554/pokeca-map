@@ -10777,6 +10777,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
     },
     {
@@ -10842,6 +10844,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
     },
     {
@@ -10853,6 +10857,7 @@
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
       "review_category": "pokemon",
+      "application_start_at": "2026-11-06T11:50:00+09:00",
       "stores": [
         {
           "name": "PAO青梅店",
@@ -10906,6 +10911,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
     },
     {
@@ -10994,5 +11001,5 @@
       "first_detected_at": "2026-11-06T10:30:58.102364+00:00"
     }
   ],
-  "updated_at": "2026-11-06T10:40:59.523284+00:00"
+  "updated_at": "2026-11-06T10:51:19.962421+00:00"
 }
