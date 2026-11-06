@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-06T09:10:58.305814+00:00",
+  "collected_at": "2026-11-06T10:30:56.227779+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 687,
+  "unique_livepocket_urls": 688,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -19387,33 +19387,67 @@
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15"
+    },
+    {
+      "url": "https://livepocket.jp/e/uyq6h",
+      "discord_message_id": "1568210868892602431",
+      "discord_posted_at": "2026-11-06T10:30:07.093000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nTSUTAYA TRADING CARD錦糸町\n受付終了: 11/08 21:00（残り2日1時間）\nhttps://livepocket.jp/e/uyq6h",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ワンピースカード『Heroines Edition vol.2』 キャンセル分 抽選販売受付",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-04T16:00:00+09:00",
+      "result_announcement_date": "2026-11-11",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-16",
+      "purchase_end_time": "21:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 518,
+    "parsed": 519,
     "no_structured_details": 169
   },
   "field_counts": {
-    "store_name": 492,
-    "prefecture": 448,
-    "event_title": 374,
+    "store_name": 493,
+    "prefecture": 449,
+    "event_title": 375,
     "event_date": 1,
     "product_name": 102,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 650,
-    "application_start_at": 638,
-    "stores_events": 512
+    "application_end_at": 651,
+    "application_start_at": 639,
+    "stores_events": 513
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568190713135374336"
+      "1551580466266644552": "1568210868892602431"
     },
     "last_run": {
-      "checked_at": "2026-11-06T09:10:58.305814+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-06T10:30:56.227779+00:00",
+      "new_urls": 1,
       "original_urls": 687,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -19653,7 +19687,8 @@
         "1568112718777680045": "2026-11-06T04:05:57.640755+00:00",
         "1568123323781619723": "2026-11-06T04:45:57.369504+00:00",
         "1568143014155780181": "2026-11-06T06:05:59.098668+00:00",
-        "1568188298315300895": "2026-11-06T09:00:57.984637+00:00"
+        "1568188298315300895": "2026-11-06T09:00:57.984637+00:00",
+        "1568210868892602431": "2026-11-06T10:30:57.204672+00:00"
       },
       "checked_search_urls": {}
     },
@@ -22633,6 +22668,11 @@
           "checked_at": "2026-11-06T09:01:32.030508+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/uyq6h": {
+          "checked_at": "2026-11-06T10:31:23.734170+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -24629,6 +24669,12 @@
           "detected_at": "2026-11-06T09:00:59.237441+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-06T09:01:32.030508+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/uyq6h": {
+          "detected_at": "2026-11-06T10:30:58.102364+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T10:31:23.734170+00:00",
           "http_status": null
         }
       },
@@ -32075,6 +32121,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/uyq6h": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T10:31:23.734170+00:00",
+          "title_observed": "ワンピースカード『Heroines Edition vol.2』 キャンセル分 抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -37226,6 +37283,19 @@
         },
         "https://livepocket.jp/e/itj-5": {
           "checked_at": "2026-11-06T09:01:32.030508+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/uyq6h": {
+          "checked_at": "2026-11-06T10:31:23.734170+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
