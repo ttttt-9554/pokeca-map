@@ -40,14 +40,21 @@
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=Hphm7w4at3",
       "source_site": "shoplottery.e-starbox.com",
-      "event_title": "",
+      "event_title": "【ときわ書房ニューコースト新浦安店】ワンピース「Heroines Edition Vol.2」購入権抽選",
       "prefecture": "",
       "discord_posted_at": "2026-10-20T00:28:21.615000+00:00",
       "first_detected_at": "2026-10-21T06:00:56.557694+00:00",
       "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "application_start_at": "2026-10-19T00:00:00+09:00",
+      "application_end_at": "2026-10-25T23:59:59+09:00",
+      "external_url_unverified": false,
+      "starbox_checked_at": "2026-11-06T13:30:58.108Z",
+      "result_announcement_date": "2026-10-29",
+      "store_name": "ときわ書房ニューコースト新浦安店",
+      "product_name": "Heroines Edition Vol.2",
+      "official_event_title": "【ときわ書房ニューコースト新浦安店】ワンピース「Heroines Edition Vol.2」購入権抽選",
+      "event_title_provisional": false,
+      "starbox_verified_at": "2026-11-06T13:30:58.108Z"
     },
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSf_V_BuLBgOzWZlfMXABkWKnPagns8RKJdiFQjSTgoH6uEesQ/viewform",
@@ -287,7 +294,8 @@
       "review_category": "unknown",
       "application_start_at": null,
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "starbox_checked_at": "2026-11-06T13:30:58.108Z"
     },
     {
       "url": "https://customform.jp/form/input/255620?key=cffd4864",
