@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T04:45:56.181774+00:00",
-  "unique_livepocket_urls": 684,
+  "collected_at": "2026-11-06T06:05:57.938237+00:00",
+  "unique_livepocket_urls": 685,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10797,7 +10797,33 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/7uj-k",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-06T06:00:29.263000+00:00",
+      "stores": [
+        {
+          "name": "ふるいち ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "purchase_end_time": "21:00",
+      "first_detected_at": "2026-11-06T06:06:00.178588+00:00"
     }
   ],
-  "updated_at": "2026-11-06T05:56:01.236682+00:00"
+  "updated_at": "2026-11-06T06:06:26.988793+00:00"
 }
