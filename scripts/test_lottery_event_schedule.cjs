@@ -20,17 +20,20 @@ const item = {
 };
 const records = new Map();
 const saved = [];
+const cardOverrides = new Map();
+const scheduleFields = app.match(/const LOTTERY_SHARED_SCHEDULE_FIELDS = [\s\S]+?;/)[0];
 const names = [
   'isLivePocketEventUrl', 'lotteryScheduleDate', 'lotteryScheduleTime', 'lotteryScheduleText',
-  'lotteryPurchasePeriodText', 'lotteryOfficialSchedule', 'lotteryCardScheduleHtml',
+  'lotteryPurchasePeriodText', 'lotteryOfficialSchedule', 'lotteryCardScheduleHtml', 'lpCardOverlay',
   'lotteryTrackRecord', 'lotteryTrackAnnouncement', 'lotteryTrackClean',
-  'lotteryPickupPeriodReversed', 'lotteryTrackerSchedule', 'lotteryTrackerDefaults',
+  'lotteryPickupPeriodReversed', 'lotteryTrackerSchedule', 'lotteryTrackerScheduleOverrides', 'lotteryTrackerDefaults',
   'lotteryTrackerSave',
 ];
-const api = vm.runInNewContext(names.map(name => (name === 'lotteryTrackerSave' ? 'async ' : '') +
-  extract(name)).join('\n') + '\n({lotteryCardScheduleHtml,lotteryTrackClean,lotteryTrackerDefaults,lotteryTrackerSave})', {
+const api = vm.runInNewContext(scheduleFields+'\n'+names.map(name => (name === 'lotteryTrackerSave' ? 'async ' : '') +
+  extract(name)).join('\n') + '\n({lotteryCardScheduleHtml,lpCardOverlay,lotteryTrackClean,lotteryTrackerSchedule,lotteryTrackerScheduleOverrides,lotteryTrackerDefaults,lotteryTrackerSave})', {
   lotteryItems: [item],
   lotteryTrackRecords: records,
+  lpCardOverrides: cardOverrides,
   escape: String,
   authUser: {id: 'test-user'},
   lotteryTrackSaving: false,
@@ -54,6 +57,34 @@ const api = vm.runInNewContext(names.map(name => (name === 'lotteryTrackerSave' 
     },
   },
 }, {timeout: 1000});
+
+function testSharedScheduleInheritance() {
+  const externalUrl = 'https://example.com/lottery';
+  const external = {...item, url:externalUrl, result_announcement_date:null,
+    lottery_result_end_date:'2026-11-11'};
+  cardOverrides.set(externalUrl,{edited_fields:['result_announcement_date','purchase_end_date','purchase_end_time'],
+    result_announcement_date:null, purchase_end_date:'2026-11-16', purchase_end_time:'21:00:00'});
+  const edited = api.lpCardOverlay(external);
+  assert.equal(external.lottery_result_end_date,'2026-11-11');
+  assert.equal(api.lotteryTrackerSchedule({},edited).result_announcement_date,'');
+  assert.match(api.lotteryCardScheduleHtml(edited),/購入期間：2026\/11\/13～2026\/11\/16 21:00/);
+
+  const manual = {...item, url:'https://example.com/?app_lottery=123', app_lottery:true};
+  assert.match(api.lotteryCardScheduleHtml(manual),/抽選発表日：2026\/11\/10/);
+  const initial = api.lotteryTrackerSchedule({},manual);
+  const inherited = api.lotteryTrackerScheduleOverrides(initial,initial,null);
+  assert.equal(inherited.result_announcement_date,'');
+  assert.equal(inherited.pickup_end,'');
+  const updated = {...manual, result_announcement_date:'2026-11-12', purchase_end_date:'2026-11-17'};
+  assert.equal(api.lotteryTrackerSchedule(inherited,updated).result_announcement_date,'2026-11-12');
+  assert.equal(api.lotteryTrackerSchedule(inherited,updated).pickup_end,'2026-11-17');
+  const personal = api.lotteryTrackerScheduleOverrides({...initial, result_announcement_date:'2026-11-14',
+    pickup_end:'2026-11-18', pickup_end_time:'16:00'},initial,null);
+  assert.equal(api.lotteryTrackerSchedule(personal,updated).result_announcement_date,'2026-11-14');
+  assert.equal(api.lotteryTrackerSchedule(personal,updated).pickup_end,'2026-11-18');
+  assert.equal(api.lotteryTrackerSchedule(personal,updated).pickup_end_time,'16:00');
+  assert.equal(api.lotteryTrackerScheduleOverrides(initial,initial,personal).pickup_end,'2026-11-18');
+}
 
 function testAnnouncementNotifications() {
   const storage = new Map();
@@ -125,8 +156,9 @@ async function main() {
   assert.equal(prior.pickup_end, '', 'Do not fill an end date earlier than the saved start');
   await api.lotteryTrackerSave(url, {...prior, account_entries:[]});
   assert.equal(saved[1].result_announcement_at, '2026-11-12T21:10');
+  testSharedScheduleInheritance();
   testAnnouncementNotifications();
-  console.log('LivePocket schedules, private save and same-day JST notifications verified');
+  console.log('Shared lottery schedules, private overrides and same-day JST notifications verified');
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

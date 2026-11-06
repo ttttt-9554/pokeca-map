@@ -21,6 +21,7 @@ const api=vm.runInNewContext([
  ...['lpAppStoredStores','lpAppExtraStoreRows','lpAppStoreDraft','lpAppPayload','lpAppItem'].map(extract),
  '({lpAppStoredStores,lpAppStoreDraft,lpAppPayload,lpAppItem})'
 ].join('\n'),{$,LP_MANUAL_AREAS:['東京都','栃木県','全国'],
+ LOTTERY_SHARED_SCHEDULE_FIELDS:[],lotterySharedSchedulePayload:()=>({}),
  lpExtDateSave:v=>v||null,safeLotteryUrl:u=>/^https?:\/\//.test(u),
  normalizeCatalogProductInput:()=>{},catalogProductCanonicalName:name=>name,
  lpAppUrl:id=>'https://example.com/?app_lottery='+id},{timeout:1000});

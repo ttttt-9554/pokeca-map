@@ -31,8 +31,10 @@ const context={$:id=>nodes[id],safeLotteryUrl:u=>/^https?:\/\//.test(u),
  LP_MANUAL_AREAS:['東京都','栃木県','全国'],lpExtDateSave:v=>v||null,
  normalizeCatalogProductInput:()=>{},catalogProductCanonicalName:name=>name,
  lpAppUrl:id=>'https://example.com/?app_lottery='+id};
-const api=vm.runInNewContext(['lpAppStoredStores','lpAppExtraStoreRows','lpAppStoreDraft',
- 'lpAppSyncMethod','lpAppPayload','lpAppItem']
+const scheduleFields=app.match(/const LOTTERY_SHARED_SCHEDULE_FIELDS = [\s\S]+?;/)[0];
+const api=vm.runInNewContext(scheduleFields+'\n'+['lpAppStoredStores','lpAppExtraStoreRows','lpAppStoreDraft',
+ 'lpAppSyncMethod','lpAppPayload','lpAppItem','lotteryScheduleDate','lotteryScheduleTime',
+ 'lotteryOfficialSchedule','lotteryPickupPeriodReversed','lotterySharedSchedulePayload']
  .map(extract).join('\n')+'\n({lpAppSyncMethod,lpAppPayload,lpAppItem})',context,{timeout:1000});
 api.lpAppSyncMethod();
 assert.equal(controls.appNameField.hidden,false);
@@ -40,6 +42,8 @@ assert.equal(appInput.required,true);
 let payload=api.lpAppPayload();
 assert.equal(payload.registration_method,'app');
 assert.equal(payload.app_name,'テスト公式アプリ');
+assert.equal(payload.result_announcement_date,null);
+assert.equal(payload.purchase_end_date,null);
 values.registration_method='in_store';values.store_name='テストショップ宇都宮店';
 api.lpAppSyncMethod();
 assert.equal(controls.appNameField.hidden,true);
@@ -49,16 +53,27 @@ assert.equal(storeInput.required,true);
 assert.equal(areaInput.required,true);
 assert.throws(()=>api.lpAppPayload(),/都道府県/);
 values.prefecture='栃木県';
+Object.assign(values,{result_announcement_date:'2026-11-12',purchase_start_date:'2026-11-15',
+ purchase_end_date:'2026-11-15',purchase_start_time:'13:00',purchase_end_time:'12:00'});
+assert.throws(()=>api.lpAppPayload(),/購入開始日時/);
+values.purchase_end_date='';
+assert.throws(()=>api.lpAppPayload(),/対応する日付/);
+values.purchase_end_date='2026-11-16';
 payload=api.lpAppPayload();
 assert.equal(payload.app_name,values.store_name);
 assert.equal(payload.registration_method,'in_store');
 assert.equal(payload.stores.length,1);
 assert.equal(payload.stores[0].name,values.store_name);
-const store=api.lpAppItem({id:'mock',registration_method:'in_store',
+assert.equal(payload.result_announcement_date,'2026-11-12');
+assert.equal(payload.result_announcement_time,null);
+const store=api.lpAppItem({...payload,id:'mock',registration_method:'in_store',
  app_name:payload.app_name,store_name:values.store_name,prefecture:'栃木県',
  event_title:values.event_title,created_at:'2026-10-26'});
 assert.equal(store.manual_registration_method,'in_store');
 assert.match(store.source_site,/店頭応募/);
+assert.equal(store.result_announcement_date,'2026-11-12');
+assert.equal(store.purchase_end_date,'2026-11-16');
+assert.equal(store.purchase_end_time,'12:00');
 const legacy=api.lpAppItem({id:'old',app_name:'旧アプリ',event_title:'既存抽選'});
 assert.equal(legacy.manual_registration_method,'app');
 assert.match(legacy.source_site,/アプリ抽選/);

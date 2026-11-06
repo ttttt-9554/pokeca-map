@@ -11,7 +11,7 @@ const url='https://livepocket.jp/e/sample-x',base={url,event_title:'元の抽選
 const saved=new Map([[url,{event_url:url,is_hidden:true,edited_fields:[]}]]);
 const {lpCardOverlay,lpCardShouldDelete}=vm.runInNewContext(
  get('lpCardOverlay')+'\n'+get('lpCardShouldDelete')+'\n({lpCardOverlay,lpCardShouldDelete})',
- {lpCardOverrides:saved},{timeout:1000});
+ {lpCardOverrides:saved,LOTTERY_SHARED_SCHEDULE_FIELDS:[]},{timeout:1000});
 const hidden=lpCardOverlay(base);
 assert.equal(hidden.manual_card_hidden,true);
 assert.equal(hidden.event_title,base.event_title);

@@ -15,7 +15,9 @@ function fn(name){
 }
 assert.match(html,/<dialog id="lpAppDialog"[^>]+closedby="closerequest"/);
 assert.match(html,/id="lpAppCloseX"[^>]+aria-label="手動抽選登録を閉じる"/);
-assert.match(css,/#lpAppDialog \.lp-app-dialog-top\{[\s\S]*?position:sticky/);
+assert.match(html,/<div class="lp-app-dialog-top">\s*<h3 id="lpAppFormHeading"[^>]*>[^<]+<\/h3>\s*<button[^>]+id="lpAppCloseX"[^>]*><\/button>\s*<\/div>\s*<section id="lpAppFormFold"/);
+assert.match(css,/#lpAppDialog\[open\]\{display:flex;flex-direction:column\}/);
+assert.match(css,/#lpAppDialog #lpAppFormFold\{[^}]*overflow-y:auto/);
 assert.match(css,/#lpAppDialog #lpAppCloseX::before/);
 assert.match(css,/#lpAppDialog #lpAppCloseX::after/);
 assert.match(app,/\$\('lpAppCloseX'\)\.addEventListener\('click',lpAppRequestClose\)/);
@@ -27,19 +29,23 @@ const inputs=[
  {name:'registration_method',type:'select-one',value:'app'}
 ];
 const form={querySelectorAll:()=>inputs};
-const dialog={open:true,close(){this.open=false}};
+const dialog={open:false,showModal(){this.open=true},close(){this.open=false}};
+const scrollBody={hidden:true,scrollTop:420};
 let busy=false,confirmed=false,confirmCount=0,closeCount=0;
 const context={
- $:id=>id==='lpAppForm'?form:id==='lpAppDialog'?dialog:null,
+ $:id=>({lpAppForm:form,lpAppDialog:dialog,lpAppFormFold:scrollBody})[id],
  get lpAppBusy(){return busy},
  confirm(){confirmCount++;return confirmed},
  lpAppCloseEditor(){closeCount++;dialog.close()}
 };
 const api=vm.runInNewContext(
  'let lpAppInitialSnapshot=null;\n'+
- fn('lpAppFormSnapshot')+'\n'+fn('lpAppRequestClose')+
- '\n({snapshot:lpAppFormSnapshot,request:lpAppRequestClose,setBaseline:v=>{lpAppInitialSnapshot=v}})',
+ fn('lpAppFormSnapshot')+'\n'+fn('lpAppRequestClose')+'\n'+fn('lpAppShowEditor')+
+ '\n({snapshot:lpAppFormSnapshot,request:lpAppRequestClose,show:lpAppShowEditor,setBaseline:v=>{lpAppInitialSnapshot=v}})',
  context,{timeout:1000});
+assert.equal(api.show(),true);
+assert.equal(scrollBody.scrollTop,0,'A newly opened dialog starts from the first form field');
+assert.equal(scrollBody.hidden,false);
 api.setBaseline(api.snapshot());
 assert.equal(api.request(),true);
 assert.equal(closeCount,1);
@@ -58,4 +64,4 @@ dialog.open=true;busy=true;
 assert.equal(api.request(),false,'Cannot close while save/delete is underway');
 assert.equal(dialog.open,true);
 assert.equal(closeCount,2);
-console.log('Safe manual lottery dialog: backdrop, sticky X, unsaved edits, Escape guards passed');
+console.log('Safe manual lottery dialog: fixed heading, scrolling form, unsaved edits and close guards passed');

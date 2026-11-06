@@ -3443,6 +3443,15 @@
     return start === end ? start : start + '～' + end;
   }
 
+  const LOTTERY_SHARED_SCHEDULE_FIELDS = ['result_announcement_date','result_announcement_time',
+    'purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'];
+
+  function lotterySharedScheduleValue(item, field) {
+    if (field.endsWith('_time')) return lotteryScheduleTime(item[field]);
+    return lotteryScheduleDate(item[field]) ||
+      (field==='result_announcement_date' ? lotteryScheduleDate(item.lottery_result_end_date) : '');
+  }
+
   function lotteryOfficialSchedule(item) {
     const resultDate = lotteryScheduleDate(item.result_announcement_date);
     const start = lotteryScheduleDate(item.purchase_start_date);
@@ -3453,6 +3462,23 @@
       pickup_start:start, pickup_start_time:start ? lotteryScheduleTime(item.purchase_start_time) : '',
       pickup_end:end, pickup_end_time:end ? lotteryScheduleTime(item.purchase_end_time) : ''
     };
+  }
+
+  function lotterySharedSchedulePayload(form) {
+    const schedule = {};
+    for (const field of LOTTERY_SHARED_SCHEDULE_FIELDS) {
+      const raw = String(form.elements.namedItem(field)?.value || '').trim();
+      const value = field.endsWith('_time') ? lotteryScheduleTime(raw) : lotteryScheduleDate(raw);
+      if (raw && !value) throw Error('発表日・購入期間の日付と時刻を確認してください。');
+      schedule[field] = value || null;
+    }
+    if ((schedule.result_announcement_time && !schedule.result_announcement_date) ||
+        (schedule.purchase_start_time && !schedule.purchase_start_date) ||
+        (schedule.purchase_end_time && !schedule.purchase_end_date))
+      throw Error('時刻を入力する場合は、対応する日付も入力してください。');
+    if (lotteryPickupPeriodReversed(lotteryOfficialSchedule(schedule)))
+      throw Error('購入開始日時は終了日時以前にしてください。');
+    return schedule;
   }
 
   function lotteryGenre(item) {
@@ -3635,8 +3661,10 @@
   // An edited_fields entry means an intentional override, including clearing a date.
   const LP_CARD_TABLE = 'lottery_card_overrides';
   const LP_CARD_FIELDS = ['event_title','product_name','store_name','prefecture','stores',
-    'application_start_at','application_end_at','review_category','product_type'];
+    'application_start_at','application_end_at','review_category','product_type',...LOTTERY_SHARED_SCHEDULE_FIELDS];
   const LP_CARD_FORM_FIELDS = LP_CARD_FIELDS.filter(x=>!['store_name','prefecture','stores'].includes(x));
+  const LP_CARD_SELECT = 'event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,is_hidden,updated_at,'+
+    LOTTERY_SHARED_SCHEDULE_FIELDS.join(',');
   const LP_CARD_MAX_STORES = 100;
   let lpCardOverrides = new Map(), lpCardReady = false, lpCardLoading = null;
   let lpCardLastFetch = 0, lpCardError = '', lpCardEditing = '', lpCardBusy = false;
@@ -3666,6 +3694,11 @@
     if (fields.has('product_type')) item.pokemon_map_type = row.product_type || 'unknown';
     if (fields.has('application_start_at')) item.application_start_at = row.application_start_at || null;
     if (fields.has('application_end_at')) item.application_end_at = row.application_end_at || null;
+    for (const field of LOTTERY_SHARED_SCHEDULE_FIELDS) {
+      if (fields.has(field)) item[field] = row[field];
+    }
+    // Clearing the edited date also hides the older collector's fallback date.
+    if (fields.has('result_announcement_date')) delete item.lottery_result_end_date;
     const storeEdited = fields.has('store_name'), areaEdited = fields.has('prefecture');
     // v21.80: Prefer the new 100-store JSONB column. Older rows that used
     // "stores" remain readable, as do v21.68 single-store corrections.
@@ -3701,7 +3734,7 @@
     lpCardLoading = (async () => {
       try {
         const {data,error} = await supabaseClient.from(LP_CARD_TABLE)
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,is_hidden,updated_at')
+          .select(LP_CARD_SELECT)
           .limit(5000);
         if (error) throw error;
         lpCardOverrides = new Map((data || []).filter(x=>safeLotteryUrl(x.event_url))
@@ -3727,6 +3760,7 @@
     if (field === 'review_category') return lotteryGenre(item);
     if (field === 'product_type') return lotteryProductType(item);
     if (field === 'application_start_at' || field === 'application_end_at') return lpExtDateInput(item[field]);
+    if (LOTTERY_SHARED_SCHEDULE_FIELDS.includes(field)) return lotterySharedScheduleValue(item,field);
     return String(item[field] || '');
   }
 
@@ -3983,7 +4017,10 @@
     if (!data?.length) { panel.textContent = 'カード編集の履歴はまだありません。'; return; }
     const labels = {event_title:'イベント名',product_name:'商品名',store_name:'店舗',
       prefecture:'地域',stores:'対象店舗一覧',review_category:'ジャンル',product_type:'商品区分',
-      application_start_at:'応募開始',application_end_at:'応募締切'};
+      application_start_at:'応募開始',application_end_at:'応募締切',
+      result_announcement_date:'抽選発表日',result_announcement_time:'発表時刻',
+      purchase_start_date:'購入開始日',purchase_start_time:'購入開始時刻',
+      purchase_end_date:'購入終了日',purchase_end_time:'購入終了時刻'};
     panel.innerHTML = '<ol>'+data.map(row => {
       const before = row.previous_value || {}, after = row.new_value || {};
       // The audit trigger records both JSONB columns. Compare the effective
@@ -4160,8 +4197,10 @@
         if (!confirm('カードからの手動修正を解除し、従来の修正内容に戻しますか？ 編集履歴は残ります。')) return;
       } else {
         normalizeCatalogProductInput(form);
+        const schedule=lotterySharedSchedulePayload(form);
         for (const field of LP_CARD_FORM_FIELDS) {
-          const raw=String(form.elements.namedItem(field)?.value || '').trim();
+          const isScheduleField=LOTTERY_SHARED_SCHEDULE_FIELDS.includes(field);
+          const raw=isScheduleField ? schedule[field] || '' : String(form.elements.namedItem(field)?.value || '').trim();
           const original=lpCardEditableValue(legacy,field);
           if (raw.length > 200) throw Error('入力文字数を確認してください：'+field);
           if (field==='review_category' && !['unknown','pokemon','onepiece','yugioh'].includes(raw))
@@ -4170,8 +4209,8 @@
             throw Error('商品区分が不正です。');
           if (raw !== original) {
             edited.push(field);
-            payload[field] = field==='application_start_at' || field==='application_end_at'
-              ? lpExtDateSave(raw) : raw;
+            payload[field] = isScheduleField ? schedule[field] :
+              (field==='application_start_at' || field==='application_end_at' ? lpExtDateSave(raw) : raw);
           } else payload[field] = null;
         }
         // Compare against the unmodified legacy view. An already-saved list
@@ -4267,7 +4306,7 @@
       } else {
         const {data,error}=await supabaseClient.from(LP_CARD_TABLE)
           .upsert(payload,{onConflict:'event_url'})
-          .select('event_url,edited_fields,event_title,product_name,store_name,prefecture,stores,stores_override,application_start_at,application_end_at,review_category,product_type,review_complete,review_evidence,review_completed_at,review_deadline_unpublished,review_note,is_hidden,updated_at')
+          .select(LP_CARD_SELECT)
           .single();
         if (error) throw error;
         if (data?.event_url !== url || !Array.isArray(data.edited_fields)) throw Error('保存結果を確認できませんでした');
@@ -4462,6 +4501,7 @@
       .filter(Boolean).map(resolveLotteryProductMaster);
     if($('lpPrefecture'))renderLotteryPrefectures();
     if($('lotteryView')?.classList.contains('active'))renderLottery();
+    else if(authUser && lotteryTrackUserId===authUser.id)renderLotteryTrackerSummary();
     if($('lotteryResultsView')?.classList.contains('active'))lpResultsRender();
     lpExtRenderAdmin();
     lpCardHiddenRender();
@@ -5227,11 +5267,12 @@
   }
 
   function lotteryCardScheduleHtml(item) {
-    if (!isLivePocketEventUrl(item.url)) return '';
     const schedule = lotteryOfficialSchedule(item);
     const announcement = lotteryScheduleText(schedule.result_announcement_date, schedule.result_announcement_time);
+    const purchase = lotteryPurchasePeriodText(schedule);
+    if (!announcement && !purchase && !isLivePocketEventUrl(item.url)) return '';
     return '<small>抽選発表日：'+escape(announcement)+'</small>'+
-      '<small>購入期間：'+escape(lotteryPurchasePeriodText(schedule))+'</small>';
+      '<small>購入期間：'+escape(purchase)+'</small>';
   }
 
   function lotteryCard(item, state) {
@@ -5327,7 +5368,7 @@
       ${lotteryOnsiteSharedHtml(item.url)}
       ${officialNotice}
       ${lotteryTrackerActionsHtml(item, officialAction)}
-      ${item.app_lottery&&isDeveloper()&&item.app_lottery_owner!==authUser.id?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">🛠 管理者編集</button></div>':''}
+      ${item.app_lottery&&isDeveloper()?'<div class="lp-external-dev-actions"><button type="button" data-lp-app-edit="'+escape(item.app_lottery_id)+'">🛠 管理者編集</button></div>':''}
       ${isDeveloper()&&!item.app_lottery? `<div class="lp-external-dev-actions"><button type="button" class="lp-card-edit-button" data-lp-card-edit="${escape(item.url)}">🛠 編集</button>${external?`<button type="button" data-lp-ext-edit="${escape(item.url)}">除外・復元管理</button>`:""}</div>`:''}
     </article>`;
   }
@@ -5597,7 +5638,8 @@
   // but application results and pickup notes stay in the existing private RLS tables.
   const LP_APP_TABLE='lottery_app_events';
   const LP_APP_URL_PREFIX='https://ttttt-9554.github.io/pokeca-map/?app_lottery=';
-  const LP_APP_SELECT='id,created_by,registration_method,app_name,event_title,product_name,store_name,prefecture,stores,review_category,product_type,application_start_at,application_end_at,source_url,details,is_hidden,created_at,updated_at';
+  const LP_APP_SELECT='id,created_by,registration_method,app_name,event_title,product_name,store_name,prefecture,stores,review_category,product_type,application_start_at,application_end_at,source_url,details,is_hidden,created_at,updated_at,'+
+    LOTTERY_SHARED_SCHEDULE_FIELDS.join(',');
   let lpAppRows=new Map(),lpAppReady=false,lpAppError='',lpAppFetch=null,lpAppLastFetch=0;
   let lpAppSeq=0,lpAppUser='',lpAppBusy=false,lpAppEditing='';
   function lpAppUrl(id){
@@ -5743,6 +5785,7 @@
       manual_card_genre:true,pokemon_map_type:row.product_type||'unknown',
       application_start_at:row.application_start_at||null,
       application_end_at:row.application_end_at||null,
+      ...Object.fromEntries(LOTTERY_SHARED_SCHEDULE_FIELDS.map(field=>[field,row[field]])),
       first_detected_at:row.created_at,created_at:row.created_at
     };
   }
@@ -5915,16 +5958,16 @@
     lpAppFormMessage('');
     lpAppRestoreForm();
   }
-  function lpAppShowEditor(isExisting){
+  function lpAppShowEditor(){
     const section=$('lpAppFormFold'),dialog=$('lpAppDialog');
     if(!section||!dialog||typeof dialog.showModal!=='function')return false;
     section.hidden=false;
     // Open above the page scroll in both registration and edit modes.
     if(!dialog.open)dialog.showModal();
-    dialog.scrollTop=0;
     const heading=$('lpAppFormHeading');
     // Focusing the heading does not trigger the iPhone software keyboard.
     try{heading?.focus({preventScroll:true});}catch(_){heading?.focus();}
+    section.scrollTop=0;
     return true;
   }
   function lpAppFormMessage(message){
@@ -5969,6 +6012,7 @@
       for(const store of stores.slice(1))lpAppAppendStore(store);
       set('application_start_at',lpExtDateInput(row.application_start_at));
       set('application_end_at',lpExtDateInput(row.application_end_at));
+      for(const field of LOTTERY_SHARED_SCHEDULE_FIELDS)set(field,lotterySharedScheduleValue(row,field));
     }else{
       set('registration_method','app');
       set('review_category','pokemon');set('product_type','unknown');
@@ -5983,7 +6027,7 @@
     $('lpAppDelete').hidden=!row;
     $('lpAppFormHeading').textContent=row?'手動抽選登録を編集':'抽選を新しく手動登録';
     lpAppFormMessage('応募方式を選び、公式案内または店頭で確認した情報を入力してください。URLは任意です。');
-    if(lpAppShowEditor(!!row))lpAppInitialSnapshot=lpAppFormSnapshot();
+    if(lpAppShowEditor())lpAppInitialSnapshot=lpAppFormSnapshot();
   }
   // Keep the app-specific field for existing entries; the same public table
   // also stores face-to-face lotteries without inventing an app name.
@@ -6061,6 +6105,7 @@
       product_type:val('product_type')||'unknown',
       application_start_at:lpExtDateSave(val('application_start_at')),
       application_end_at:lpExtDateSave(val('application_end_at')),
+      ...lotterySharedSchedulePayload(form),
       source_url:val('source_url')||null,details:val('details')||null
     };
     if(payload.app_name.length<2||payload.app_name.length>100 ||
@@ -7758,7 +7803,7 @@
     const applied=record && record.status!=='not_applied';
     const show=record?LP_TRACK_LABELS[record.status]:'未応募';
     const onsite=lotteryOnsiteSummary(item.url).state==='required' ? (record?.onsite_done?'現地対応済み':'現地対応待ち') : '';
-    const warning=lotteryTrackPickupMessage(record);
+    const warning=lotteryTrackPickupMessage(record && {...record,...lotteryTrackerSchedule(record,item)});
     const css=warning.startsWith('⚠')?'lp-track-overdue':'';
     return `<div class="lp-track-actions" aria-label="自分の応募管理">
       ${record?`<div class="lp-track-state"><span class="lp-track-pill">${escape(show)}${onsite?' ／ '+escape(onsite):''}</span></div>`:''}
@@ -7785,7 +7830,7 @@
       if(old?.status && old.status!=='not_applied'){
         lotteryTrackerOpenEditor(url);return;
       }
-      lotteryTrackerSave(url,{...lotteryTrackerDefaults(url),status:'applied',
+      lotteryTrackerSave(url,{...old,status:'applied',
         application_count:1,won_count:0,lost_count:0});
     }else if(button.dataset.lpTrack==='edit') lotteryTrackerOpenEditor(url);
   }
@@ -7799,7 +7844,7 @@
 
   function lotteryTrackerSchedule(record,item) {
     const saved=lotteryTrackAnnouncement(record);
-    const official=item && isLivePocketEventUrl(item.url) ? lotteryOfficialSchedule(item) : {};
+    const official=lotteryOfficialSchedule(item||{});
     const pickup={
       pickup_start:record.pickup_start||'',pickup_end:record.pickup_end||'',
       pickup_start_time:record.pickup_start?record.pickup_start_time||'':'',
@@ -7817,6 +7862,18 @@
         saved.result_announcement_time : official.result_announcement_time||'',
       ...(lotteryPickupPeriodReversed(filled)?pickup:filled)
     };
+  }
+
+  function lotteryTrackerScheduleOverrides(values, initial, record) {
+    const overrides={};
+    for(const [date,time] of [['result_announcement_date','result_announcement_time'],
+      ['pickup_start','pickup_start_time'],['pickup_end','pickup_end_time']]){
+      // Preserve inheritance when the user only changes an outcome or note.
+      const source=values[date]===initial[date] && values[time]===initial[time] ? record : values;
+      overrides[date]=source?.[date]||'';
+      overrides[time]=source?.[time]||'';
+    }
+    return overrides;
   }
 
   function lotteryTrackerDefaults(url) {
@@ -8184,7 +8241,7 @@
       <label>購入・受取開始時刻（任意）<input type="time" name="pickup_start_time" value="${escape(data.pickup_start_time||'')}"></label>
       <label>購入・受取期限日<input type="date" name="pickup_end" value="${escape(data.pickup_end)}"></label>
       <label>購入・受取終了時刻（任意）<input type="time" name="pickup_end_time" value="${escape(data.pickup_end_time||'')}"></label>
-      <p class="lp-tracker-intro">ライポケから取得できた日付と時刻を自動入力します。自分で保存した日程を優先します。</p>
+      <p class="lp-tracker-intro">抽選カードの日付と時刻を自動入力します。自分で編集した日程を優先します。</p>
       <label>自分用メモ（500文字まで）<textarea name="note" maxlength="500" rows="3" placeholder="例：店頭で本人確認が必要／受取時に身分証を持参">${escape(data.note)}</textarea></label>
       <div class="lp-track-modal-actions"><button type="submit" class="primary">保存</button><button type="button" id="lpTrackEditorClose">閉じる</button>
       ${lotteryTrackRecord(url)?'<button type="button" id="lpTrackEditorDelete">記録を削除</button>':''}</div>
@@ -8264,7 +8321,7 @@
       const normalizedStatus=applications===0?'not_applied':
         status==='received'&&won>0?'received':
         won>0?'won':lost===applications?'lost':'applied';
-      const data={status:normalizedStatus,onsite_required:completed,onsite_done:completed,
+      const values={status:normalizedStatus,onsite_required:completed,onsite_done:completed,
         application_count:applications,won_count:won,lost_count:lost,
         ...(accountValues?{account_entries:accountValues.account_entries}:{}),
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
@@ -8272,13 +8329,14 @@
         result_announcement_date:String(fd.get('result_announcement_date')||''),
         result_announcement_time:String(fd.get('result_announcement_time')||''),
         note:String(fd.get('note')||'').trim().slice(0,500)};
-      if(data.result_announcement_time&&!data.result_announcement_date){
+      if(values.result_announcement_time&&!values.result_announcement_date){
         $('lpTrackEditorMessage').textContent='発表時刻を記録する場合は発表日を入力してください。';return;
       }
-      if(lotteryPickupPeriodReversed(data)){
+      if(lotteryPickupPeriodReversed(values)){
         $('lpTrackEditorMessage').textContent='受取開始日は受取期限日より前にしてください。';return;
       }
-      await lotteryTrackerSave(url,data,true);
+      const overrides=lotteryTrackerScheduleOverrides(values,data,lotteryTrackRecord(url));
+      await lotteryTrackerSave(url,{...values,...overrides},true);
     });
     dlg._captureTrackSnapshot?.();
     if (showLotteryEditorDialog(dlg)) {
