@@ -1,4 +1,6 @@
 // Public page extraction. Only unambiguous, explicitly labelled data is returned.
+export const STARBOX_HOST = 'shoplottery.e-starbox.com';
+
 export function supportedUrl(value) {
   try {
     const u=new URL(value);
@@ -8,6 +10,7 @@ export function supportedUrl(value) {
     if(u.hostname==='7net.omni7.jp') return /^\/detail\/\d+\.html$/.test(u.pathname) && !u.search;
     if(u.hostname==='famima-online.family.co.jp') return u.pathname==='/item' && /^\?itemCode=\d{10,25}$/.test(u.search);
     if(u.hostname==='cloud-pass.jp') return /^\/pr\/[a-f0-9]{64}\/?$/i.test(u.pathname) && !u.search;
+    if(u.hostname===STARBOX_HOST) return u.pathname==='/lottery/entry' && /^\?code=[A-Za-z0-9]{10}$/.test(u.search);
     return false;
   } catch {return false;}
 }
@@ -93,10 +96,121 @@ function cloudPassFields(html) {
   return fields;
 }
 
+function starboxDateTime(parts) {
+  const minute = validDate(parts.slice(0, 5));
+  return minute ? minute.slice(0, 16) + ':' + (parts[5] || '00') + '+09:00' : '';
+}
+
+function starboxSchedulePoint(value, anchor) {
+  const match = value.trim().match(/^(?:(\d{4})\s*(?:年|\/)\s*)?(\d{1,2})\s*(?:月|\/)\s*(\d{1,2})(?!\d)\s*日?(?:\s*\([月火水木金土日](?:曜(?:日)?)?\))?\s*(.*)$/);
+  if (!match) return '';
+  const [, explicitYear, month, day, suffix] = match;
+  const year = Number(anchor.slice(0, 4));
+  const date = (explicitYear ? [Number(explicitYear)] : [year, year + 1])
+    .map(y => validDate([y, month, day, 0, 0])?.slice(0, 10))
+    .find(d => d && d >= anchor);
+  // A month/day in the notes is tied to the application deadline's year.
+  // Permit a nearby December-to-January rollover, not an assumed date a year later.
+  if (!date || (!explicitYear && Date.parse(date) - Date.parse(anchor) > 90 * 86400000)) return '';
+  if (!suffix || /^(?:中|(?:開店|閉店|営業開始|営業終了)(?:時(?:刻)?)?)$/.test(suffix)) return date;
+  const clock = suffix.match(/^(?:の\s*)?(\d{1,2})(?::(\d{2})|\s*時(?:\s*(?:(\d{1,2})\s*分|(半)))?)\s*(頃|ごろ|前後)?$/);
+  if (!clock) return '';
+  const [, hour, colonMinute, japaneseMinute, half, approximate] = clock;
+  const minutes = colonMinute || japaneseMinute || (half ? '30' : '0');
+  if (Number(hour) > 23 || Number(minutes) > 59) return '';
+  return approximate ? date : `${date}T${hour.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+}
+
+function starboxScheduleRange(value, anchor) {
+  const [from, to, extra] = value.split(/\s*(?:[~〜～–—]|から)\s*/);
+  if (!to || extra !== undefined) return [];
+  const start = starboxSchedulePoint(from, anchor);
+  if (!start) return [];
+  const endText = /^\d{1,2}日/.test(to) ? `${start.slice(5, 7)}月${to}` : to;
+  const end = starboxSchedulePoint(endText, start.slice(0, 10));
+  return end && !(start.length > 10 && end.length > 10 && start > end) ? [start, end] : [];
+}
+
+function starboxScheduleFields(detail, applicationEnd) {
+  const anchor = applicationEnd.slice(0, 10);
+  const lines = detail.replace(/\r?\n/g, ' ')
+    .replace(/<br\b[^>]*>|<\/(?:div|p|li|h[1-6])\s*>/gi, '\n')
+    .split('\n').map(line => plain(line).normalize('NFKC')).filter(Boolean);
+  const labeled = pattern => lines.flatMap((line, i) => {
+    const match = line.match(pattern);
+    return match ? [match[1].trim() || lines[i + 1] || ''] : [];
+  });
+  const announced = uniqueText(labeled(/^(?:[▼■]\s*)?(?:抽選結果(?:の)?発表|抽選発表|結果発表|当選発表)(?:に関して|について|予定(?:日時|日)?|日時|日|期間)?\s*:?\s*(.*)$/)
+    .map(value => value.replace(/\s*(?:を予定しております|を予定しています|予定です|予定|です)[。.]?$/, '').trim())
+    .map(value => /[~〜～–—]|から/.test(value) ? starboxScheduleRange(value, anchor)[1] : starboxSchedulePoint(value, anchor)));
+  const buyNotes = labeled(/^(?:[▼■]\s*)?(?:当選者(?:様)?(?:の|向け)?\s*)?(?:購入|販売|商品受取|受け取り|受取)(?:可能)?期間\s*:?\s*(.*)$/);
+  // Store-specific prose may give a purchase window without a heading.
+  for (const line of lines) {
+    const sentence = line.match(/^(\d[^。]*?)\s*まで(?:に)?\s*(?:お買い求め|ご購入|お受け取り)(?:ください)?[。.]?$/);
+    if (sentence) buyNotes.push(sentence[1]);
+  }
+  const purchase = uniqueText(buyNotes.map(value => starboxScheduleRange(value.replace(/まで[。.]?$/, '').trim(), anchor).join('|')));
+  const fields = {};
+  if (announced) {
+    fields.result_announcement_date = announced.slice(0, 10);
+    if (announced.length > 10) fields.result_announcement_time = announced.slice(11);
+  }
+  if (purchase) {
+    const [start, end] = purchase.split('|');
+    fields.purchase_start_date = start.slice(0, 10);
+    fields.purchase_end_date = end.slice(0, 10);
+    if (start.length > 10) fields.purchase_start_time = start.slice(11);
+    if (end.length > 10) fields.purchase_end_time = end.slice(11);
+  }
+  return fields;
+}
+
+function starboxFields(html) {
+  const markup = html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+  const detail = markup.match(/<div\b[^>]*\bid=["']lottery-detail["'][^>]*>([\s\S]*?)(?=<div\b[^>]*\bid=["']lottery-tutorial["']|<\/main\s*>|$)/i)?.[1];
+  const title = uniqueText(tagContents(markup, 'h1').map(plain));
+  if (!detail || title.length < 5 || title.length > 200 || !title.includes('抽選')) return {};
+  const fields = {event_title: title};
+  const periods = [...detail.matchAll(/<h[2-6]\b[^>]*>([^<]+)<\/h[2-6]\s*>\s*<div\b[^>]*>([^<]+)<\/div\s*>/gi)]
+    .filter(m => plain(m[1]) === '応募期間').map(m => plain(m[2]).normalize('NFKC'));
+  const timestamp = datePattern + '(?::([0-5]\\d))?';
+  const period = uniqueText(periods).match(new RegExp('^' + timestamp + '\\s*[~〜～–—-]\\s*' + timestamp + '$'));
+  if (period) {
+    const start = starboxDateTime(period.slice(1, 7));
+    const end = starboxDateTime(period.slice(7, 13));
+    if (start && end && start < end) {
+      fields.application_start_at = start;
+      fields.application_end_at = end;
+      Object.assign(fields, starboxScheduleFields(detail, end));
+    }
+  }
+  const store = title.match(/^【([^】、,／]{2,100}店)(?:限定)?】/)?.[1];
+  if (store) fields.store_name = store;
+  // Exact branch confirmed by the operator's store guide.
+  // https://www.kyowa-corp.co.jp/am/shop/13-101/
+  if (store === 'トレーディングカードピット亀戸店') fields.prefecture = '東京都';
+
+  const product = uniqueText([...markup.matchAll(/<label\b[^>]*\bfor=["']input-item_no-\d+["'][^>]*>([\s\S]*?)<\/label\s*>/gi)]
+    .map(match => plain(match[1])));
+  if (product && product.length <= 200) fields.product_name = product;
+  const text = title + ' ' + plain(detail);
+  const genre = uniqueText([
+    /ポケモンカード|ポケカ|POK[ÉE]MON/i.test(text) ? 'pokemon' : '',
+    /ワンピースカード|ONE\s*PIECE/i.test(text) ? 'onepiece' : '',
+    /遊戯王/.test(text) ? 'yugioh' : ''
+  ]);
+  if (genre) fields.review_category = genre;
+  const pack = /拡張パック|ブースターパック/.test(title);
+  const deck = /デッキ/.test(title);
+  if (pack || deck) fields.product_type = pack && deck ? 'pack/deck' : pack ? 'pack' : 'deck';
+  return fields;
+}
+
 export function extract(html,url){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
+  if (u.hostname === STARBOX_HOST) return supportedUrl(url) ? starboxFields(html) : {};
   const raw=html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/i)?.[1]||html.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/i)?.[1]||'';
   const title=plain(raw).replace(/\s*[|｜]\s*(?:ファミマオンライン|ヤマシロヤ|セブンネットショッピング).*$/,'').trim();
   if(title.length>=5&&title.length<=200&&/抽選/.test(title)&&!/(?:受付終了|Google フォーム|closed form)/i.test(title))result.event_title=title;

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {supportedUrl,extract} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
-import {enrichCloudPass} from './cloud_pass_lottery_enrich.mjs';
+import {enrichCloudPass, enrichStarbox} from './cloud_pass_lottery_enrich.mjs';
 const g='https://docs.google.com/forms/d/e/1FAIpQLSd6O9PhrqOHX4xxcRV4APYy_B_0OyCAW_ZkTa-Rp7htUleUjQ/closedform';
 assert(supportedUrl(g));
 for(const url of ['https://docs.google.com.evil.test/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','http://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','https://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform?foo=1','https://e-yamashiroya.com@localhost/a','https://e-yamashiroya.com/a?next=http://localhost'])assert(!supportedUrl(url),url);
@@ -51,4 +51,49 @@ const unavailable = {items: [{url: cloud, external_url_unverified: true}]};
 assert.equal(await enrichCloudPass(unavailable, async () => '<title>ログイン</title>', now), 1);
 assert.equal(unavailable.items[0].external_url_unverified, true);
 assert.equal(await enrichCloudPass(unavailable, () => assert.fail('retry interval ignored'), now), 0);
-console.log('Individual lottery extraction, blocked pages and URL restrictions passed');
+
+const starbox = 'https://shoplottery.e-starbox.com/lottery/entry?code=YJTlpkMz6h';
+assert(supportedUrl(starbox));
+for (const url of [starbox + '&code=abcdefghij', starbox + '#entry', starbox.slice(0,-1),
+  starbox.replace('shoplottery.e-starbox.com', 'shoplottery.e-starbox.com.example.org'),
+  starbox.replace('/entry', '/apply'), starbox.replace('https:', 'http:')]) assert(!supportedUrl(url), url);
+const starTitle = '【トレーディングカードピット亀戸店】拡張パック「見本」購入権抽選';
+const starPeriod = '<h3>応募期間</h2><div>2026/11/06 10:00:00 ～ 2026/11/08 21:00:59</div>';
+const starPage = '<h1>'+starTitle+'</h1><div id="lottery-detail">'+starPeriod+
+  '<div>ポケモンカードゲームの抽選です。</div>'+
+  '<div>11月9日(月) 開店時から11月15日(日) 閉店時までにお買い求めください。</div>'+
+  '<div>▼抽選結果の発表に関して</div><div>11月8日(日)の21時30分ごろを予定しております。</div></div>'+
+  '<div id="lottery-tutorial">応募について</div><label for="input-item_no-1">拡張パック 見本</label>';
+const starFields = {event_title:starTitle, application_start_at:'2026-11-06T10:00:00+09:00',
+  application_end_at:'2026-11-08T21:00:59+09:00', result_announcement_date:'2026-11-08',
+  purchase_start_date:'2026-11-09', purchase_end_date:'2026-11-15',
+  store_name:'トレーディングカードピット亀戸店', prefecture:'東京都', product_name:'拡張パック 見本',
+  review_category:'pokemon', product_type:'pack'};
+assert.deepEqual(extract(starPage, starbox), starFields);
+assert.equal(extract(starPage.replace('21時30分ごろ', '21時30分'), starbox).result_announcement_time,'21:30');
+const range = starPage.replace('11月8日(日)の21時30分ごろ', '11月8日～10日 18:00');
+assert.equal(extract(range, starbox).result_announcement_date,'2026-11-10');
+assert.equal(extract(range, starbox).result_announcement_time,'18:00');
+const conflicting = starPage.replace(starPeriod,starPeriod+starPeriod.replace('21:00:59','20:00:00'));
+assert.equal(extract(conflicting, starbox).application_end_at,undefined);
+assert.equal(extract(starPage.replace('応募期間','購入期間'), starbox).application_start_at,undefined);
+assert.equal(extract(starPage+'<label for="input-item_no-2">別商品</label>', starbox).product_name,undefined);
+assert.deepEqual(extract(starPage, starbox+'&next=https://example.org'), {});
+assert.deepEqual(extract('<h1>抽選ページが見つかりません</h1>', starbox), {});
+const older = Array.from({length:4},(_,i)=>({url:starbox.replace('YJTlpkMz6h','abcdefghij'.slice(0,-1)+i),
+  first_detected_at:'2026-11-05T03:00:00Z'}));
+const starRow = {url:starbox, event_title:'仮のイベント名', external_url_unverified:true, discord_posted_at:'2026-11-06T01:00:00Z'};
+const starCatalog = {items:[...older, starRow]};
+const attempted = [];
+assert.equal(await enrichStarbox(starCatalog, async url=>{
+  attempted.push(url);
+  if(url!==starbox)throw Error('temporary failure');
+  return starPage;
+},now),4);
+assert.equal(attempted[0],starbox);
+assert.equal(starRow.official_event_title,starTitle);
+assert.equal(starRow.external_url_unverified,false);
+assert.equal(starRow.purchase_end_date,'2026-11-15');
+assert.equal(starRow.pokemon_map_type,'pack');
+assert.equal(await enrichStarbox({items:[starRow,...older.slice(0,3)]},()=>assert.fail('Starbox retry policy ignored'),now),0);
+console.log('Individual lottery and Starbox collection checks passed');

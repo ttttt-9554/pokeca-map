@@ -9038,11 +9038,11 @@
       card:lpCardOverrides,location:lpLocationOverrides,
       cloud:lpCloudOverrides,external:lpExtOverrides,diagnostics:lpDevReviewRows};
   }
-  async function lpDevUnifiedOpenEditor(url){
+  async function lpDevUnifiedOpenEditor(url, editCard=isLivePocketEventUrl(url)){
     if(!isDeveloper()||!safeLotteryUrl(url))throw Error('開発者ログインが必要です。');
     if(!lotteryBaseItems.some(item=>item.url===url))await loadLotteryEvents(true);
     if(!lotteryBaseItems.some(item=>item.url===url))throw Error('登録済みの抽選が見つかりません。');
-    if(isLivePocketEventUrl(url)){
+    if(editCard){
       if(!lpCardReady&&!await lpCardRefresh(true))throw Error('カード修正情報を取得できません。');
       lpCardOpen(url);
       if(!$('lpCardDialog')?.open)throw Error('編集画面を開けませんでした。');
@@ -9105,19 +9105,30 @@
     return Array.isArray(data)?data:[];
   }
   async function lpDevOpenFetchedEditor(url,fields){
-    await lpDevUnifiedOpenEditor(url);
-    if(isLivePocketEventUrl(url)){
-      const form=$('lpCardForm');
-      for(const name of ['event_title','product_name','application_start_at','application_end_at']){
+    const livePocket=isLivePocketEventUrl(url);
+    const editCard=livePocket||!!fields?.product_name||LOTTERY_SHARED_SCHEDULE_FIELDS.some(name=>fields?.[name]);
+    await lpDevUnifiedOpenEditor(url,editCard);
+    const form=$(editCard?'lpCardForm':'lpExtForm');
+    for(const name of ['review_category','product_type']){
+      const input=form.elements.namedItem(name),value=fields?.[name];
+      if(input&&(!input.value||input.value==='unknown')&&[...input.options].some(option=>option.value===value))
+        input.value=value;
+    }
+    if(editCard){
+      const unverifiedTitle=!livePocket&&lotteryBaseItems.find(item=>item.url===url)?.external_url_unverified&&
+        !lpExtOverrides.get(url)?.event_title&&!lpCardOverrides.get(url)?.edited_fields?.includes('event_title');
+      for(const name of ['event_title','product_name','application_start_at','application_end_at',...LOTTERY_SHARED_SCHEDULE_FIELDS]){
         const input=form.elements.namedItem(name),value=fields?.[name];
-        if(input&&!input.value&&typeof value==='string')
-          input.value=name.startsWith('application_')?lpExtDateInput(value):value.slice(0,200);
+        if(input&&(!input.value||(name==='event_title'&&unverifiedTitle))&&typeof value==='string'&&value)
+          input.value=name.startsWith('application_')?lpExtDateInput(value):
+            LOTTERY_SHARED_SCHEDULE_FIELDS.includes(name)?lotterySharedScheduleValue(fields,name):value.slice(0,200);
       }
-      const found=Array.isArray(fields?.stores)?fields.stores.filter(row=>
+      const stores=Array.isArray(fields?.stores)?fields.stores:[{name:fields?.store_name,prefecture:fields?.prefecture}];
+      const found=stores.filter(row=>
         row&&typeof row.name==='string'&&row.name.trim()&&row.name.length<=200)
         .slice(0,LP_CARD_MAX_STORES).map(row=>({name:row.name.trim(),
-          prefecture:LP_MANUAL_AREAS.includes(row.prefecture)?row.prefecture:''})):[];
-      const current=lpCardStoreRead(false);
+          prefecture:LP_MANUAL_AREAS.includes(row.prefecture)?row.prefecture:''}));
+      const current=lpCardStoreRead(false).filter(row=>row.name);
       if(!current.length&&found.length){
         lpCardStoreRender(found);
         $('lpCardStoresFold').open=found.length>1;
@@ -9133,18 +9144,12 @@
         }
         if(changed)lpCardStoreRender(current);
       }
-      lpCardSetStatus('取得した候補を空欄に入力しました。内容を確認して保存してください。');
+      lpCardSetStatus('取得した候補を入力しました。内容を確認して保存してください。');
       return;
     }
-    const form=$('lpExtForm');
     for(const name of ['event_title','application_start_at','application_end_at']){
       const input=form.elements.namedItem(name),value=fields?.[name];
       if(input&&!input.value&&typeof value==='string')input.value=name==='event_title'?value.slice(0,200):lpExtDateInput(value);
-    }
-    for(const name of ['review_category','product_type']){
-      const input=form.elements.namedItem(name),value=fields?.[name];
-      if(input&&(!input.value||input.value==='unknown')&&[...input.options].some(option=>option.value===value))
-        input.value=value;
     }
     const rows=[...form.querySelectorAll('[data-lp-ext-store-row]')];
     if(rows.length===1){

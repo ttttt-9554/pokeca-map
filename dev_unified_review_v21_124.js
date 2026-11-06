@@ -103,7 +103,10 @@
       const result=fetchResults.get(row.url)||fetchResults.get(row.url.replace(/\/$/,''));
       const pending=result?.livepocket&&['pending','running'].includes(result.status);
       const labels={event_title:'抽選名',product_name:'商品名',store_name:'店舗名',prefecture:'地域',
-        application_start_at:'応募開始',application_end_at:'応募締切'};
+        application_start_at:'応募開始',application_end_at:'応募締切',
+        result_announcement_date:'抽選発表日',result_announcement_time:'発表時刻',
+        purchase_start_date:'購入開始日',purchase_start_time:'購入開始時刻',
+        purchase_end_date:'購入終了日',purchase_end_time:'購入終了時刻'};
       const candidates=result?.fields?Object.entries(result.fields)
         .filter(([k,v])=>labels[k]&&typeof v==='string'&&v.trim())
         .map(([k,v])=>'<li>'+api.escape(labels[k])+'：'+api.escape(v)+'</li>').join('')+

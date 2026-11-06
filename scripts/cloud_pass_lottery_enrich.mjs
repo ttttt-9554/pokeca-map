@@ -1,6 +1,6 @@
 import {readFile, rename, writeFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-import {extract, supportedUrl} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
+import {extract, supportedUrl, STARBOX_HOST} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
 
 const catalogPath = 'other_lottery_public.json';
 const maxPageBytes = 2_000_000;
@@ -28,14 +28,16 @@ async function fetchPage(url) {
   return html + decoder.decode();
 }
 
-export async function enrichCloudPass(catalog, load = fetchPage, now = new Date()) {
+async function enrichSite(items, host, source, load, now) {
+  const checkedAt = source + '_checked_at';
+  const verifiedAt = source + '_verified_at';
   let checked = 0;
-  for (const item of catalog.items) {
+  for (const item of items) {
     if (checked >= 4) break;
     const url = item.url;
-    if (typeof url !== 'string' || !supportedUrl(url) || new URL(url).hostname !== 'cloud-pass.jp' ||
-        item.cloud_pass_verified_at || now - Date.parse(item.cloud_pass_checked_at) < retryInterval) continue;
-    item.cloud_pass_checked_at = now.toISOString();
+    if (typeof url !== 'string' || !supportedUrl(url) || new URL(url).hostname !== host ||
+        item[verifiedAt] || now - Date.parse(item[checkedAt]) < retryInterval) continue;
+    item[checkedAt] = now.toISOString();
     checked += 1;
 
     let page;
@@ -51,20 +53,32 @@ export async function enrichCloudPass(catalog, load = fetchPage, now = new Date(
       official_event_title: fields.event_title,
       event_title_provisional: false,
       external_url_unverified: false,
-      cloud_pass_verified_at: now.toISOString()
+      [verifiedAt]: now.toISOString()
     });
     if (productType) item.pokemon_map_type = productType;
   }
   return checked;
 }
 
+export function enrichCloudPass(catalog, load = fetchPage, now = new Date()) {
+  return enrichSite(catalog.items, 'cloud-pass.jp', 'cloud_pass', load, now);
+}
+
+export function enrichStarbox(catalog, load = fetchPage, now = new Date()) {
+  const posted = item => Date.parse(item.discord_posted_at || item.first_detected_at || '') || 0;
+  const newestFirst = [...catalog.items].sort((a, b) => posted(b) - posted(a));
+  return enrichSite(newestFirst, STARBOX_HOST, 'starbox', load, now);
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
-  const checked = await enrichCloudPass(catalog);
-  if (checked) {
+  // Keep the existing collector entry point for the shared Edge parsers.
+  const [cloudChecked, starboxChecked] = await Promise.all([enrichCloudPass(catalog), enrichStarbox(catalog)]);
+  if (cloudChecked || starboxChecked) {
     const tempPath = catalogPath + '.tmp';
     await writeFile(tempPath, JSON.stringify(catalog, null, 2) + '\n', 'utf8');
     await rename(tempPath, catalogPath);
   }
-  console.log('Cloud Pass pages checked:', checked);
+  console.log('Cloud Pass pages checked:', cloudChecked);
+  console.log('Starbox lottery pages checked:', starboxChecked);
 }
