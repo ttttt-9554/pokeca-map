@@ -10485,10 +10485,11 @@
     },
     {
       "url": "https://livepocket.jp/e/jd0iq1-bl1",
-      "discord_posted_at": "2026-11-06T02:30:09.351000+00:00",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "application_end_at": "2026-11-08T23:59:00+09:00",
       "application_start_at": "2026-10-27T17:46:00+09:00",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "discord_posted_at": "2026-11-06T02:30:09.351000+00:00",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10568,17 +10569,11 @@
           "prefecture": "千葉県"
         }
       ],
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "first_detected_at": "2026-11-06T02:35:56.676149+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-06T02:35:56.676149+00:00"
     }
   ],
-  "updated_at": "2026-11-06T02:36:22.558654+00:00"
+  "updated_at": "2026-11-06T02:46:01.945742+00:00"
 }
