@@ -22600,8 +22600,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/pv9dk": {
-          "checked_at": "2026-11-06T04:06:24.006141+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T10:11:17.377586+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/tgk3o": {
@@ -24591,8 +24591,8 @@
         },
         "https://livepocket.jp/e/pv9dk": {
           "detected_at": "2026-11-06T04:05:58.694068+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-06T10:11:17.377586+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/37m04": {
@@ -26179,6 +26179,11 @@
         "https://livepocket.jp/e/4t5pvnf6l8": {
           "attempts": 1,
           "last_attempt_at": "2026-11-06T09:41:26.578489+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/pv9dk": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-06T10:11:17.377586+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -31998,7 +32003,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "checked_at": "2026-11-06T10:11:17.377586+00:00",
           "title_observed": "ポケモンカードゲーム スペシャルデッキセットMEGA『メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -37142,7 +37147,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/pv9dk": {
-          "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "checked_at": "2026-11-06T10:11:17.377586+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
