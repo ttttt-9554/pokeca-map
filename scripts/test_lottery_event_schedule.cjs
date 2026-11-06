@@ -55,6 +55,43 @@ const api = vm.runInNewContext(names.map(name => (name === 'lotteryTrackerSave' 
   },
 }, {timeout: 1000});
 
+function testAnnouncementNotifications() {
+  const storage = new Map();
+  const toastCounts = [];
+  const window = {};
+  let now;
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', 'lottery_notifications_v1.js'), 'utf8'), {
+    window,
+    document: {readyState: 'loading', visibilityState: 'visible', addEventListener() {}},
+    Date: class extends Date { static now() { return now; } },
+    localStorage: {
+      getItem: key => storage.get(key),
+      setItem(key, value) {
+        storage.set(key, value);
+        toastCounts.push(Object.keys(JSON.parse(value)).length);
+      },
+    },
+  }, {timeout: 1000});
+  const dateOnly = {event_url: url, status: 'applied', result_announcement_date: '2026-11-12'};
+  const timed = {...dateOnly, event_url: url + '2', result_announcement_at: '2026-11-12T21:10'};
+  const syncAt = (time, account = '1') => {
+    now = Date.parse(time);
+    window.TorecaLotteryNotify.sync({userId: '12345678-1234-1234-1234-123456789ab' + account,
+      records: [dateOnly, timed]});
+  };
+  syncAt('2026-11-11T14:59:59Z');
+  assert.deepEqual(toastCounts, [], 'No notification before JST midnight');
+  syncAt('2026-11-11T15:00:00Z');
+  assert.deepEqual(toastCounts, [2], 'Notify both date-only and timed lotteries on the announcement day');
+  window.TorecaLotteryNotify.clear();
+  syncAt('2026-11-12T12:10:00Z');
+  assert.deepEqual(toastCounts, [2], 'Reopening at the scheduled time must not repeat the notifications');
+  syncAt('2026-11-12T12:10:01Z', '2');
+  assert.deepEqual(toastCounts, [2, 2], 'Notify on the same day even after the scheduled time');
+  syncAt('2026-11-12T15:00:00Z', '3');
+  assert.deepEqual(toastCounts, [2, 2], 'No new announcement notifications after the JST date ends');
+}
+
 async function main() {
   const card = api.lotteryCardScheduleHtml(item);
   assert.equal(card, '<small>抽選発表日：2026/11/10</small><small>購入期間：2026/11/13～2026/11/15</small>');
@@ -88,7 +125,8 @@ async function main() {
   assert.equal(prior.pickup_end, '', 'Do not fill an end date earlier than the saved start');
   await api.lotteryTrackerSave(url, {...prior, account_entries:[]});
   assert.equal(saved[1].result_announcement_at, '2026-11-12T21:10');
-  console.log('LivePocket card, separate announcement fields, autofill and private save verified');
+  testAnnouncementNotifications();
+  console.log('LivePocket schedules, private save and same-day JST notifications verified');
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

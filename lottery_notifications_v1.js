@@ -7,7 +7,6 @@
 
   const TZ = 'Asia/Tokyo';
   const PICKUP_LEAD_DAYS = 3;
-  const MAX_PAST_RESULT_DAYS = 7;
   const MAX_OVERDUE_PICKUP_DAYS = 2;
   const BASE = 'toreca-lottery-notifications-v1:';
   let userId = '';
@@ -107,30 +106,16 @@
           '同じ抽選で他のユーザーが結果を登録しました。' +
           '公式サイトで当選結果を確認して、ご自身の当落も記録してください。'));
       }
-      if (status === 'applied') {
-        const resultAt = parseJstDateTime(r.result_announcement_at);
-        if (Number.isFinite(resultAt)) {
-          const hours = (resultAt - now) / 3600000;
-          if (hours > 0 && hours <= 24) {
-            output.push(makeNotice(r, 'result', 'before', 3, resultAt,
-              '📣 抽選結果の発表が近づいています',
-              '発表予定：' + String(r.result_announcement_at).replace('T', ' ') +
-              '（日本時間）／ 24時間以内です'));
-          } else if (!otherUserProcessed &&
-              hours <= 0 && hours >= -24 * MAX_PAST_RESULT_DAYS) {
-            output.push(makeNotice(r, 'result', 'due', 1, resultAt,
-              '📣 抽選結果の発表予定時刻になりました',
-              '発表予定：' + String(r.result_announcement_at).replace('T', ' ') +
-              '（日本時間）／ 公式サイトで当落を確認してください'));
-          }
-        } else if (!otherUserProcessed && /^\d{4}-\d{2}-\d{2}$/.test(r.result_announcement_date || '')) {
-          const day = r.result_announcement_date;
-          const daysAgo = (utcDay(currentDay) - utcDay(day)) / 86400000;
-          if (daysAgo >= 0 && daysAgo <= MAX_PAST_RESULT_DAYS) {
-            output.push(makeNotice(r, 'result', 'due', 1, day,
-              '📣 抽選結果の発表予定日です',
-              '発表予定日：' + day.replaceAll('-', '/') + ' ／ 公式サイトで当落を確認してください'));
-          }
+      if (status === 'applied' && !otherUserProcessed) {
+        const dateTime = String(r.result_announcement_at || '');
+        const resultAt = parseJstDateTime(dateTime);
+        const hasTime = Number.isFinite(resultAt);
+        const day = hasTime ? dateTime.slice(0, 10) : r.result_announcement_date;
+        if (day === currentDay) {
+          const scheduled = day.replaceAll('-', '/') + (hasTime ? ' ' + dateTime.slice(11) : '');
+          output.push(makeNotice(r, 'result', 'due', 1, hasTime ? resultAt : day,
+            '📣 本日は抽選結果の発表予定日です',
+            '発表予定：' + scheduled + '（日本時間）／ 発表後に公式サイトで当落を確認してください'));
         }
       }
       if (status !== 'won' || !/^\d{4}-\d{2}-\d{2}$/.test(r.pickup_end || '')) continue;
