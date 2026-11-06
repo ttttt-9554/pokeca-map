@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T04:05:56.411474+00:00",
-  "unique_livepocket_urls": 681,
+  "collected_at": "2026-11-06T04:45:56.181774+00:00",
+  "unique_livepocket_urls": 684,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10713,7 +10713,100 @@
         }
       ],
       "first_detected_at": "2026-11-06T04:05:58.694068+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/7cw9u",
+      "discord_posted_at": "2026-11-06T04:42:14.712000+00:00",
+      "event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+      "purchase_start_date": "2026-11-20",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/tgk3o",
+      "discord_posted_at": "2026-11-06T04:42:14.712000+00:00",
+      "event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+      "purchase_start_date": "2026-11-20",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/37m04",
+      "discord_posted_at": "2026-11-06T04:42:14.712000+00:00",
+      "event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29",
+      "first_detected_at": "2026-11-06T04:45:58.504652+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
-  "updated_at": "2026-11-06T04:36:00.974393+00:00"
+  "updated_at": "2026-11-06T04:46:43.130228+00:00"
 }

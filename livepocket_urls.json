@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-06T04:05:56.411474+00:00",
+  "collected_at": "2026-11-06T04:45:56.181774+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 681,
+  "unique_livepocket_urls": 684,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -19058,34 +19058,153 @@
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15"
+    },
+    {
+      "url": "https://livepocket.jp/e/7cw9u",
+      "discord_message_id": "1568123323781619723",
+      "discord_posted_at": "2026-11-06T04:42:14.712000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/7cw9u\nhttps://livepocket.jp/e/tgk3o\nhttps://livepocket.jp/e/37m04",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "purchase_start_date": "2026-11-20",
+      "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/tgk3o",
+      "discord_message_id": "1568123323781619723",
+      "discord_posted_at": "2026-11-06T04:42:14.712000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/7cw9u\nhttps://livepocket.jp/e/tgk3o\nhttps://livepocket.jp/e/37m04",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "purchase_start_date": "2026-11-20",
+      "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/37m04",
+      "discord_message_id": "1568123323781619723",
+      "discord_posted_at": "2026-11-06T04:42:14.712000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/7cw9u\nhttps://livepocket.jp/e/tgk3o\nhttps://livepocket.jp/e/37m04",
+      "store_name": null,
+      "prefecture": null,
+      "details_source": null,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "stores": "v19_livepocket_explicit_store_list",
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      },
+      "event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 515,
-    "no_structured_details": 166
+    "no_structured_details": 169
   },
   "field_counts": {
     "store_name": 489,
     "prefecture": 445,
-    "event_title": 368,
+    "event_title": 371,
     "event_date": 1,
-    "product_name": 99,
+    "product_name": 100,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 644,
+    "application_end_at": 647,
     "application_start_at": 633,
-    "stores_events": 506
+    "stores_events": 507
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568112718777680045"
+      "1551580466266644552": "1568123574445940827"
     },
     "last_run": {
-      "checked_at": "2026-11-06T04:05:56.411474+00:00",
-      "new_urls": 1,
-      "original_urls": 680,
+      "checked_at": "2026-11-06T04:45:56.181774+00:00",
+      "new_urls": 3,
+      "original_urls": 681,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -19321,7 +19440,8 @@
         "1568090082408276008": "2026-11-06T02:35:55.934908+00:00",
         "1568097665630343168": "2026-11-06T03:05:57.962524+00:00",
         "1568105225330368656": "2026-11-06T03:35:57.983049+00:00",
-        "1568112718777680045": "2026-11-06T04:05:57.640755+00:00"
+        "1568112718777680045": "2026-11-06T04:05:57.640755+00:00",
+        "1568123323781619723": "2026-11-06T04:45:57.369504+00:00"
       },
       "checked_search_urls": {}
     },
@@ -22271,6 +22391,21 @@
           "checked_at": "2026-11-06T04:06:24.006141+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/tgk3o": {
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/7cw9u": {
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/37m04": {
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -24231,6 +24366,24 @@
           "detected_at": "2026-11-06T04:05:58.694068+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/37m04": {
+          "detected_at": "2026-11-06T04:45:58.504652+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/7cw9u": {
+          "detected_at": "2026-11-06T04:45:58.504652+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/tgk3o": {
+          "detected_at": "2026-11-06T04:45:58.504652+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
           "http_status": null
         }
       },
@@ -31561,6 +31714,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/tgk3o": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "title_observed": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/7cw9u": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "title_observed": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/37m04": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "title_observed": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
+          "genre": "pokemon",
+          "product_origin": "v20_uniform_multi_shop_tickets",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -36634,6 +36820,45 @@
         },
         "https://livepocket.jp/e/pv9dk": {
           "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/tgk3o": {
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/7cw9u": {
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/37m04": {
+          "checked_at": "2026-11-06T04:46:25.209408+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
