@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T01:40:56.269777+00:00",
-  "unique_livepocket_urls": 675,
+  "collected_at": "2026-11-06T02:05:57.673319+00:00",
+  "unique_livepocket_urls": 676,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10269,6 +10269,7 @@
       "store_name": "ヤマト屋書店TSUTAYA中里店",
       "prefecture": "宮城県",
       "event_title": "TSUTAYA中里店 11/13発売ポケモンカード抽選",
+      "application_start_at": "2026-11-06T00:00:00+09:00",
       "application_end_at": "2026-11-09T21:00:00+09:00",
       "discord_posted_at": "2026-11-06T01:00:10.119000+00:00",
       "result_announcement_date": "2026-11-10",
@@ -10281,8 +10282,7 @@
           "prefecture": "宮城県"
         }
       ],
-      "first_detected_at": "2026-11-06T01:00:59.039984+00:00",
-      "application_start_at": "2026-11-06T00:00:00+09:00"
+      "first_detected_at": "2026-11-06T01:00:59.039984+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s2dtfw7rvo",
@@ -10459,7 +10459,32 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-06T01:40:58.133538+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/m_o9_",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-06T02:00:08.173000+00:00",
+      "stores": [
+        {
+          "name": "古本市場与野本町店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場与野本町店】ポケカ抽選販売（スタートデッキ100 バトルコレクション）",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "スタートデッキ100 バトルコレクション",
+      "pokemon_map_type": "deck",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（スタートデッキ100 バトルコレクション）",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-06T02:05:59.621098+00:00"
     }
   ],
-  "updated_at": "2026-11-06T01:58:37.359316+00:00"
+  "updated_at": "2026-11-06T02:06:27.690705+00:00"
 }
