@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-06T10:30:56.227779+00:00",
+  "collected_at": "2026-11-06T11:30:29.619685+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 688,
+  "unique_livepocket_urls": 689,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -19423,34 +19423,68 @@
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-16",
       "purchase_end_time": "21:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp",
+      "discord_message_id": "1568225981028769912",
+      "discord_posted_at": "2026-11-06T11:30:10.107000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいち ららぽーと富士見店\n受付終了: 11/08 21:00（残り2日0時間）\nhttps://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいち ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "purchase_end_time": "21:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 519,
+    "parsed": 520,
     "no_structured_details": 169
   },
   "field_counts": {
-    "store_name": 493,
-    "prefecture": 449,
-    "event_title": 375,
+    "store_name": 494,
+    "prefecture": 450,
+    "event_title": 376,
     "event_date": 1,
     "product_name": 102,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 651,
-    "application_start_at": 640,
-    "stores_events": 513
+    "application_end_at": 652,
+    "application_start_at": 641,
+    "stores_events": 514
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568210868892602431"
+      "1551580466266644552": "1568225981028769912"
     },
     "last_run": {
-      "checked_at": "2026-11-06T10:30:56.227779+00:00",
+      "checked_at": "2026-11-06T11:30:29.619685+00:00",
       "new_urls": 1,
-      "original_urls": 687,
+      "original_urls": 688,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -19690,7 +19724,8 @@
         "1568123323781619723": "2026-11-06T04:45:57.369504+00:00",
         "1568143014155780181": "2026-11-06T06:05:59.098668+00:00",
         "1568188298315300895": "2026-11-06T09:00:57.984637+00:00",
-        "1568210868892602431": "2026-11-06T10:30:57.204672+00:00"
+        "1568210868892602431": "2026-11-06T10:30:57.204672+00:00",
+        "1568225981028769912": "2026-11-06T11:30:30.603590+00:00"
       },
       "checked_search_urls": {}
     },
@@ -22675,6 +22710,11 @@
           "checked_at": "2026-11-06T10:31:23.734170+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
+          "checked_at": "2026-11-06T11:30:55.808224+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -24677,6 +24717,12 @@
           "detected_at": "2026-11-06T10:30:58.102364+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-06T10:31:23.734170+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
+          "detected_at": "2026-11-06T11:30:32.182141+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T11:30:55.808224+00:00",
           "http_status": null
         }
       },
@@ -32149,6 +32195,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T11:30:55.808224+00:00",
+          "title_observed": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -37313,6 +37370,19 @@
         },
         "https://livepocket.jp/e/uyq6h": {
           "checked_at": "2026-11-06T10:31:23.734170+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
+          "checked_at": "2026-11-06T11:30:55.808224+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
