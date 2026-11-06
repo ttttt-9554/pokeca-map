@@ -3992,60 +3992,63 @@
       "stores": [
         {
           "name": "イトーヨーカドー大船店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー船橋店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー若葉台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー伊勢原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー上尾駅前店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー草加店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー小田原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー我孫子店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー大井町店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー知多店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー明石店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー宇都宮店",
-          "prefecture": ""
+          "prefecture": "栃木県"
         },
         {
           "name": "イトーヨーカドー甲子園店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/yv07y",
@@ -10345,62 +10348,65 @@
       "stores": [
         {
           "name": "イトーヨーカドー大船店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー船橋店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー若葉台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー伊勢原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー上尾駅前店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー草加店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー小田原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー我孫子店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー大井町店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー知多店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー明石店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー宇都宮店",
-          "prefecture": ""
+          "prefecture": "栃木県"
         },
         {
           "name": "イトーヨーカドー甲子園店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ],
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "first_detected_at": "2026-11-06T01:00:59.039984+00:00"
+      "first_detected_at": "2026-11-06T01:00:59.039984+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
-  "updated_at": "2026-11-06T01:21:03.594139+00:00"
+  "updated_at": "2026-11-06T01:32:41.737559+00:00"
 }

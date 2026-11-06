@@ -8268,62 +8268,63 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v21_3_uniform_multi_store_tickets",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "stores": [
         {
           "name": "イトーヨーカドー大船店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー船橋店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー若葉台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー伊勢原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー上尾駅前店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー草加店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー小田原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー我孫子店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー大井町店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー知多店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー明石店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー宇都宮店",
-          "prefecture": ""
+          "prefecture": "栃木県"
         },
         {
           "name": "イトーヨーカドー甲子園店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ]
     },
@@ -18581,7 +18582,8 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "stores": "v19_livepocket_explicit_store_list",
-        "product_name": "v20_uniform_multi_shop_tickets"
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "application_end_at": "2026-11-08T23:59:00+09:00",
@@ -18589,55 +18591,55 @@
       "stores": [
         {
           "name": "イトーヨーカドー大船店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー船橋店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー若葉台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー伊勢原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー上尾駅前店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー草加店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー小田原店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー我孫子店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー大井町店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー知多店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー明石店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー宇都宮店",
-          "prefecture": ""
+          "prefecture": "栃木県"
         },
         {
           "name": "イトーヨーカドー甲子園店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         }
       ]
     }
