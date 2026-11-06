@@ -22728,8 +22728,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/7uj-k": {
-          "checked_at": "2026-11-06T06:06:26.988793+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T12:11:29.039516+00:00",
+          "status": "browser_redirected",
           "http_status": null
         },
         "https://livepocket.jp/e/lkv83": {
@@ -24738,8 +24738,8 @@
         },
         "https://livepocket.jp/e/7uj-k": {
           "detected_at": "2026-11-06T06:06:00.178588+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-06T06:06:26.988793+00:00",
+          "status": "browser_redirected",
+          "checked_at": "2026-11-06T12:11:29.039516+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/itj-5": {
@@ -26341,6 +26341,11 @@
           "attempts": 1,
           "last_attempt_at": "2026-11-06T10:51:19.962421+00:00",
           "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/7uj-k": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-06T12:11:29.039516+00:00",
+          "last_status": "browser_redirected"
         }
       }
     },
@@ -32200,12 +32205,12 @@
           "conflict": false
         },
         "https://livepocket.jp/e/7uj-k": {
-          "status": "ok",
-          "reason": "official_title_verified",
+          "status": "browser_redirected",
+          "reason": "fetch_browser_redirected",
           "http_status": "",
-          "checked_at": "2026-11-06T06:06:26.988793+00:00",
-          "title_observed": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
-          "genre": "pokemon",
+          "checked_at": "2026-11-06T12:11:29.039516+00:00",
+          "title_observed": "",
+          "genre": "",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
@@ -37388,17 +37393,17 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/7uj-k": {
-          "checked_at": "2026-11-06T06:06:26.988793+00:00",
-          "reason": "official_title_detected",
-          "candidate_count": 3,
-          "valid_candidate_count": 1,
+          "checked_at": "2026-11-06T12:11:29.039516+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
           "detail": "",
-          "candidate_sources": "og:1;event_heading:1;document:1",
-          "title_detected": true,
-          "rejection_codes": "truncated:2;truncated_tail:2",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
           "meta_template_cleaned": 0,
-          "heading_seen": 1,
-          "recovery_probe": "dom_heading_verified"
+          "heading_seen": 0,
+          "recovery_probe": ""
         },
         "https://livepocket.jp/e/lkv83": {
           "checked_at": "2026-11-06T09:01:32.030508+00:00",
