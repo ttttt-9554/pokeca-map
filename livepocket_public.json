@@ -10609,8 +10609,6 @@
           "prefecture": "栃木県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選予約受付",
       "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
     },
     {
@@ -10694,8 +10692,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
     },
     {
@@ -10977,5 +10973,5 @@
       "first_detected_at": "2026-11-06T09:00:59.237441+00:00"
     }
   ],
-  "updated_at": "2026-11-06T09:41:26.578489+00:00"
+  "updated_at": "2026-11-06T09:51:00.406689+00:00"
 }
