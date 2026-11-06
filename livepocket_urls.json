@@ -18948,7 +18948,8 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "stores": "v19_livepocket_explicit_store_list",
-        "product_name": "v20_uniform_multi_shop_tickets"
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "application_end_at": "2026-11-08T23:59:00+09:00",
@@ -18956,71 +18957,71 @@
       "stores": [
         {
           "name": "イトーヨーカドー浦和店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー昭島店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ加古川店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー古淵店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー東久留米店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー南大沢店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー能見台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー八王子店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー横浜別所店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー川崎店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー四街道店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー三郷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー曳舟店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ鷲宮店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドーアリオ上尾店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドープライムツリー赤池店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー トイロスクール天美店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
       ]
     }

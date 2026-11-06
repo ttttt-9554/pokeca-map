@@ -10622,78 +10622,81 @@
       "stores": [
         {
           "name": "イトーヨーカドー浦和店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー昭島店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ加古川店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー古淵店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー東久留米店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー南大沢店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー能見台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー八王子店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー横浜別所店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー川崎店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー四街道店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー三郷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー曳舟店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ鷲宮店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドーアリオ上尾店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドープライムツリー赤池店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー トイロスクール天美店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
       ],
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
+      "first_detected_at": "2026-11-06T03:35:59.003686+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
-  "updated_at": "2026-11-06T03:56:02.574410+00:00"
+  "updated_at": "2026-11-06T04:03:43.424947+00:00"
 }
