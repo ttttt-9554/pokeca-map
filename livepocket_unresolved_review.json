@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-06T01:21:08Z",
-  "total": 1,
+  "as_of": "2026-11-06T01:51:12Z",
+  "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
@@ -18,6 +18,21 @@
       "last_checked_at": "2026-10-30T13:21:24.456958+00:00",
       "next_retry_at": "2026-10-31T13:21:24.456958+00:00",
       "queue": "ready"
+    },
+    {
+      "url": "https://livepocket.jp/e/vw0pq",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "store_name": "イトーヨーカドー",
+      "prefecture": "",
+      "application_end_at": "",
+      "missing": [
+        "deadline"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-06T01:50:56.399007+00:00",
+      "next_retry_at": "2026-11-07T01:50:56.399007+00:00",
+      "queue": "retry_wait"
     }
   ]
 }
