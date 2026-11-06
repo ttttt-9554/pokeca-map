@@ -383,7 +383,8 @@
       "review_category": "unknown",
       "application_start_at": null,
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "starbox_checked_at": "2026-11-06T12:30:57.250Z"
     },
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=XcQ6zsxfAy",
@@ -395,31 +396,50 @@
       "review_category": "unknown",
       "application_start_at": null,
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "starbox_checked_at": "2026-11-06T12:30:57.250Z"
     },
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=OXGJgFaHS4",
       "source_site": "shoplottery.e-starbox.com",
-      "event_title": "応募：【トレーディングカードピット亀戸店】「...",
-      "prefecture": "",
+      "event_title": "【トレーディングカードピット亀戸店】「スターターセットex イーブイex」 購入権抽選",
+      "prefecture": "東京都",
       "discord_posted_at": "2026-10-24T16:28:27.596000+00:00",
       "first_detected_at": "2026-10-24T16:35:59.384678+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "review_category": "pokemon",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-25T21:00:59+09:00",
+      "external_url_unverified": false,
+      "starbox_checked_at": "2026-11-06T12:30:57.250Z",
+      "result_announcement_date": "2026-10-25",
+      "purchase_start_date": "2026-10-26",
+      "purchase_end_date": "2026-11-01",
+      "store_name": "トレーディングカードピット亀戸店",
+      "product_name": "スターターセットex イーブイex",
+      "official_event_title": "【トレーディングカードピット亀戸店】「スターターセットex イーブイex」 購入権抽選",
+      "event_title_provisional": false,
+      "starbox_verified_at": "2026-11-06T12:30:57.250Z"
     },
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=Ag0t9RODFP",
       "source_site": "shoplottery.e-starbox.com",
-      "event_title": "応募：【トレーディングカードピット亀戸店】「...",
-      "prefecture": "",
+      "event_title": "【トレーディングカードピット亀戸店】「スターターセットex ゾロア＆ゾロアークex」 購入権抽選",
+      "prefecture": "東京都",
       "discord_posted_at": "2026-10-24T16:28:27.596000+00:00",
       "first_detected_at": "2026-10-24T16:35:59.384718+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "review_category": "pokemon",
+      "application_start_at": "2026-10-24T10:00:00+09:00",
+      "application_end_at": "2026-10-25T21:00:59+09:00",
+      "external_url_unverified": false,
+      "starbox_checked_at": "2026-11-06T12:30:57.250Z",
+      "result_announcement_date": "2026-10-25",
+      "purchase_start_date": "2026-10-26",
+      "purchase_end_date": "2026-11-01",
+      "store_name": "トレーディングカードピット亀戸店",
+      "product_name": "スターターセットex ゾロア＆ゾロアークex",
+      "official_event_title": "【トレーディングカードピット亀戸店】「スターターセットex ゾロア＆ゾロアークex」 購入権抽選",
+      "event_title_provisional": false,
+      "starbox_verified_at": "2026-11-06T12:30:57.250Z"
     },
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=Ka61B89sc5",
