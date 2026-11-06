@@ -31,14 +31,15 @@ LABEL = re.compile(
     r'(?:応募|申込|申込み|申し込み|受付|予約|エントリー)'
     r'(?:受付)?\s*(?:期間|締切|期限|終了日時?)', re.I,
 )
+TICKET_PERIOD_LABEL = re.compile(r'(?:販売|抽選)\s*受付\s*期間')
 BLOCK_WORDS = re.compile(
     r'(?i)(?:access denied|just a moment|captcha|robot check|'
     r'セキュリティチェック|アクセスが制限|ボットによるアクセス)'
 )
 
 
-def detail_signup_period(text: str):
-    """Prefer explicit signup dates in event details over ticket-sale dates."""
+def _detail_signup_evidence(text: str):
+    """Read the detailed application period, retaining date-only start evidence."""
     if not isinstance(text, str):
         return None
     section = re.search(r'(?m)^[ \t\u3000]*(?:イベント)?詳細[ \t\u3000]*' + chr(36), text)
@@ -62,17 +63,25 @@ def detail_signup_period(text: str):
     for i, match in enumerate(matches):
         stop = min(len(flat), match.start()+220,
                    matches[i+1].start() if i+1<len(matches) else len(flat))
-        candidate = v12.parse_signup_text(flat[match.start():stop])
+        candidate = v12.signup_period_evidence(flat[match.start():stop])
         if candidate:
             found.append(candidate)
     if not found:
         return None
-    ends = {v11.iso(end) for _, end in found}
-    starts = {v11.iso(start) for start, _ in found if start}
+    ends = {v11.iso(end) for _, end, _ in found}
+    starts = {v11.iso(start) for start, _, _ in found if start}
     if len(ends) != 1 or len(starts) > 1:
-        return (None, None)
+        return None, None, None
+    start_dates = {day for _, _, dates in found for day in dates}
     return (v11.parse_datetime(next(iter(starts))) if starts else None,
-            v11.parse_datetime(next(iter(ends))))
+            v11.parse_datetime(next(iter(ends))),
+            next(iter(start_dates)) if len(start_dates) == 1 else None)
+
+
+def detail_signup_period(text: str):
+    """Return the details section's explicit application times, if present."""
+    evidence = _detail_signup_evidence(text)
+    return evidence[:2] if evidence else None
 
 def extract_deadline(text: str):
     """Read only explicit signup statements, never event dates.
@@ -82,14 +91,18 @@ def extract_deadline(text: str):
     """
     if not isinstance(text, str) or not text.strip():
         return None, None
-    preferred = detail_signup_period(text)
+    preferred = _detail_signup_evidence(text)
     if preferred is not None:
-        return preferred
+        detail_start, detail_end, detail_start_date = preferred
+        if detail_start or not (detail_end and detail_start_date):
+            return detail_start, detail_end
     # LivePocket may render labels and dates in adjacent DOM nodes/newlines.
     flat = re.sub(r'\s+', ' ', text).strip()
     candidates = []
     labels = list(LABEL.finditer(flat))[:60]
     for i, match in enumerate(labels):
+        if preferred is not None and not TICKET_PERIOD_LABEL.fullmatch(match.group().strip()):
+            continue
         # A second label starts an independent deadline statement. Never let
         # its end date become the first statement's apparent deadline.
         stop = min(match.start() + 420, labels[i + 1].start() if i + 1 < len(labels) else len(flat))
@@ -97,6 +110,12 @@ def extract_deadline(text: str):
         parsed = v12.parse_signup_text(snippet)
         if parsed is not None:
             candidates.append(parsed)
+    if preferred is not None:
+        # Ticket sales can open earlier than applications. Only fill the missing
+        # time when both the stated start day and the deadline corroborate it.
+        starts = {start for start, end in candidates
+                  if start and start.date() == detail_start_date and end == detail_end}
+        return (next(iter(starts)) if len(starts) == 1 else None), detail_end
     # Support explicit fully-yearful short lines already validated by v11.
     for line in text.splitlines():
         if LABEL.search(line) and len(line) < 500:

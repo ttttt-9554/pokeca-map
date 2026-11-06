@@ -18495,13 +18495,15 @@
         "store_name": "v21_23_discord_exact_url_adjacent_store",
         "stores": "v21_23_discord_exact_url_adjacent_store",
         "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page"
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
       },
       "event_title": "TSUTAYA中里店 11/13発売ポケモンカード抽選",
       "application_end_at": "2026-11-09T21:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
-      "purchase_end_date": "2026-11-15"
+      "purchase_end_date": "2026-11-15",
+      "application_start_at": "2026-11-06T00:00:00+09:00"
     },
     {
       "url": "https://livepocket.jp/e/s2dtfw7rvo",
@@ -18747,7 +18749,7 @@
     "sales_period": 0,
     "lottery_result_period": 1,
     "application_end_at": 638,
-    "application_start_at": 626,
+    "application_start_at": 627,
     "stores_events": 500
   },
   "collector_state": {

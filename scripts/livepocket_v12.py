@@ -77,8 +77,8 @@ def _date(m, year):
     return dt, timed
 
 
-def parse_signup_text(source):
-    """Parse one self-contained signup statement. Return (start, end), else None.
+def signup_period_evidence(source):
+    """Read (timed start, timed end, stated start dates) from a signup statement.
 
     Examples: "＜予約申込期間＞ 2026年5月4日(月)～5月9日(土)23:59"
     A date-only end or an unlabelled event date is NOT a deadline.
@@ -115,7 +115,7 @@ def parse_signup_text(source):
             # If same-year inference would cross years, reject (could be Jan next year).
             if not second.group(1) and (end.month, end.day) < (start.month, start.day):
                 continue
-            candidate_ranges.append((start if start_timed else None, end))
+            candidate_ranges.append((start if start_timed else None, end, start.date()))
     for match in END_LABEL.finditer(normalized):
         tail = normalized[match.end():match.end()+90]
         date_match = DATE_TOKEN.search(tail)
@@ -123,19 +123,25 @@ def parse_signup_text(source):
             continue
         end, timed = _date(date_match, None)
         if end and timed:
-            candidate_ranges.append((None, end))
+            candidate_ranges.append((None, end, None))
     if not candidate_ranges:
         return None
     # Two statements with conflicting end times must not be reconciled by guess.
-    ends = {v11.iso(end) for _, end in candidate_ranges}
+    ends = {v11.iso(end) for _, end, _ in candidate_ranges}
     if len(ends) != 1:
         return None
-    starts = {v11.iso(start) for start, _ in candidate_ranges if start}
+    starts = {v11.iso(start) for start, _, _ in candidate_ranges if start}
     if len(starts) > 1:
         return None
-    if starts:
-        return v11.parse_datetime(next(iter(starts))), candidate_ranges[0][1]
-    return None, candidate_ranges[0][1]
+    start = v11.parse_datetime(next(iter(starts))) if starts else None
+    start_dates = {day for _, _, day in candidate_ranges if day}
+    return start, candidate_ranges[0][1], start_dates
+
+
+def parse_signup_text(source):
+    """Return (start, end) without turning a date-only start into a time."""
+    evidence = signup_period_evidence(source)
+    return evidence[:2] if evidence else None
 
 
 def parse_search_results(reply, expected_url):

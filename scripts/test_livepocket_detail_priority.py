@@ -27,6 +27,32 @@ class DetailPriorityTests(unittest.TestCase):
         self.assertEqual(start.strftime("%Y-%m-%d %H:%M"),"2026-10-24 13:00")
         self.assertEqual(end.strftime("%Y-%m-%d %H:%M"),"2026-10-26 21:45")
 
+    def test_ticket_start_time_must_match_detail_dates(self):
+        details = "詳細\n〇応募期間:2026年11月6日(金) ～ 11月9日(\ufeff月)21：00まで\n"
+        cases = (
+            ("2026年11月6日(金) 00:00\n〜2026年11月9日(月) 21:00", "2026-11-06T00:00:00+09:00"),
+            ("2026年11月5日(木) 00:00〜2026年11月9日(月) 21:00", None),
+            ("2026年11月6日(金) 00:00〜2026年11月9日(月) 20:00", None),
+            ("2026年11月6日(金)〜2026年11月9日(月) 21:00", None),
+        )
+        for period, expected_start in cases:
+            with self.subTest(period=period):
+                body = details + "受付・チケット情報\n販売受付期間\n" + period
+                start, end = extract_deadline(body)
+                self.assertEqual(start.isoformat() if start else None, expected_start)
+                self.assertEqual(end.isoformat(), "2026-11-09T21:00:00+09:00")
+
+    def test_conflicting_ticket_start_times_do_not_fill_missing_time(self):
+        body = """詳細
+応募期間 2026年11月6日〜11月9日21:00
+受付・チケット情報
+販売受付期間 2026年11月6日00:00〜2026年11月9日21:00
+販売受付期間 2026年11月6日01:00〜2026年11月9日21:00
+"""
+        start, end = extract_deadline(body)
+        self.assertIsNone(start)
+        self.assertEqual(end.isoformat(), "2026-11-09T21:00:00+09:00")
+
     def test_detail_without_period_does_not_consume_other_section(self):
         body = """詳細
 商品の説明のみ
