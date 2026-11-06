@@ -77,6 +77,27 @@ class IndividualFetchTests(unittest.TestCase):
         self.assertEqual(v21.v19.merge_stores(existing, stores, []), stores)
         self.assertEqual(v21.v19.safe_name('11/14模型店'), '11/14模型店')
 
+    def test_restock_tickets_supply_stores_product_and_start_in_both_paths(self):
+        product = 'ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ'
+        stores = [{'name': 'PAO青梅店', 'prefecture': ''}, {'name': '竜星のPAO大宮店', 'prefecture': ''}]
+        body = ('概要\nポケモンカード抽選販売\n詳細\n応募締切：2026年11月8日23:59まで\n'
+                '受付・チケット情報\n抽選販売受付\n販売受付期間\n'
+                '2026年11月6日11:50〜2026年11月8日23:59\n' +
+                '\n'.join(f"{store['name']}【再販分】{product}\n販売中\n¥0" for store in stores))
+        observation = page(text=body)
+        fields = individual.extract(v21, URL, observation)['fields']
+        expected = {'stores': stores, 'product_name': product,
+                    'application_start_at': '2026-11-06T11:50:00+09:00',
+                    'application_end_at': '2026-11-08T23:59:00+09:00'}
+        raw, public = pair(pending=True)
+        raw, public, *_ = v21.process(
+            raw, public, lambda _: observation, catalog={}, now=NOW, new_limit=1,
+            background_limit=0, retry_limit=0, title_limit=0, verified={}, v19_verified={},
+            verified_titles={}, verified_unavailable={})
+        for row in (fields, raw['items'][0], public['items'][0]):
+            self.assertEqual({key: row[key] for key in expected}, expected)
+        self.assertEqual(v21.v19.page_stores(body.replace('販売中', '').replace('¥0', '')), [])
+
     def run_case(self,pending=False,blocked=False,unknown=False):
         raw,public=pair(pending)
         if blocked:raw['collector_state']['v14']['blocked_until']=(NOW+timedelta(hours=1)).isoformat()
@@ -189,6 +210,18 @@ class WorkerQueueTests(unittest.TestCase):
         self.assertEqual(result['status'],'success')
         self.assertEqual(result['fields']['event_title'],'ポケモンカード抽選販売')
         self.assertNotIn('event_title',public['items'][0])
+
+    def test_existing_runner_claims_and_finishes_one_queued_followup(self):
+        raw, public = pair()
+        with patch.object(individual.v14, 'read_pair', return_value=(raw, public)), \
+                patch.object(v21, 'browser_fetcher', return_value=(page, lambda: None)):
+            individual.execute_next()
+        self.assertEqual([name for name, _ in self.calls],
+                         ['livepocket_individual_claim_v1', 'livepocket_individual_finish_v1'])
+        self.assertEqual(self.calls[-1][1]['p_id'], self.task['request_id'])
+        self.assertEqual(self.calls[-1][1]['p_status'], 'success')
+        self.assertFalse(self.req.exists())
+
     def test_immediate_run_does_not_fetch_unknown_or_blocked_event(self):
         for reason in ('unknown','cooldown'):
             raw,public=pair()

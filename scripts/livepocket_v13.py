@@ -55,7 +55,8 @@ def _detail_signup_evidence(text: str):
         tail = tail[:next_section.start()]
     labels = re.compile(
         r'応募受付期間|申込受付期間|申込み受付期間|申し込み受付期間|'
-        r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間'
+        r'応募期間|抽選受付期間|抽選申込期間|申込期間|申込み期間|申し込み期間|'
+        + v12.END_LABEL.pattern
     )
     flat = re.sub(r'\s+', ' ', tail[:12000])
     found = []
@@ -71,11 +72,11 @@ def _detail_signup_evidence(text: str):
     ends = {v11.iso(end) for _, end, _ in found}
     starts = {v11.iso(start) for start, _, _ in found if start}
     if len(ends) != 1 or len(starts) > 1:
-        return None, None, None
+        return None, None, set()
     start_dates = {day for _, _, dates in found for day in dates}
     return (v11.parse_datetime(next(iter(starts))) if starts else None,
             v11.parse_datetime(next(iter(ends))),
-            next(iter(start_dates)) if len(start_dates) == 1 else None)
+            start_dates)
 
 
 def detail_signup_period(text: str):
@@ -93,8 +94,8 @@ def extract_deadline(text: str):
         return None, None
     preferred = _detail_signup_evidence(text)
     if preferred is not None:
-        detail_start, detail_end, detail_start_date = preferred
-        if detail_start or not (detail_end and detail_start_date):
+        detail_start, detail_end, detail_start_dates = preferred
+        if detail_start or not detail_end or len(detail_start_dates) > 1:
             return detail_start, detail_end
     # LivePocket may render labels and dates in adjacent DOM nodes/newlines.
     flat = re.sub(r'\s+', ' ', text).strip()
@@ -111,10 +112,11 @@ def extract_deadline(text: str):
         if parsed is not None:
             candidates.append(parsed)
     if preferred is not None:
-        # Ticket sales can open earlier than applications. Only fill the missing
-        # time when both the stated start day and the deadline corroborate it.
+        # Some details give only a deadline. Use a matching ticket period, and
+        # respect the detailed start day as well whenever one is given.
         starts = {start for start, end in candidates
-                  if start and start.date() == detail_start_date and end == detail_end}
+                  if start and end == detail_end
+                  and (not detail_start_dates or start.date() in detail_start_dates)}
         return (next(iter(starts)) if len(starts) == 1 else None), detail_end
     # Support explicit fully-yearful short lines already validated by v11.
     for line in text.splitlines():

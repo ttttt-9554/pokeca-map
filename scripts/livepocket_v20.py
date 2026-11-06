@@ -52,10 +52,11 @@ def ticket_product_candidates(text):
     result = []
     for i, line in enumerate(lines):
         title = v19.TICKET_SHOP_TITLE.match(line)
-        name = v19.safe_name(title.group(1), strict_retail=True) if title else None
+        name = v19.safe_name(title.group('bracketed') or title.group('leading'),
+                             strict_retail=True) if title else None
         if not name:
             continue
-        segment = [line.split('】', 1)[1].strip()]
+        segment = [title.group('product').strip()]
         for line2 in lines[i + 1:i + 11]:
             if v19.TICKET_SHOP_TITLE.match(line2):
                 break

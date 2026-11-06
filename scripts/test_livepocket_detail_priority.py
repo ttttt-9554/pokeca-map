@@ -53,6 +53,16 @@ class DetailPriorityTests(unittest.TestCase):
         self.assertIsNone(start)
         self.assertEqual(end.isoformat(), "2026-11-09T21:00:00+09:00")
 
+    def test_ticket_start_can_complete_detail_cutoff_only(self):
+        details = "詳細\n応募締切：2026年11月8日(日)23:59まで\n受付・チケット情報\n"
+        period = "販売受付期間 2026年11月6日(金) 11:50〜2026年11月8日(日) 23:59"
+        start, end = extract_deadline(details + period)
+        self.assertEqual(start.isoformat(), "2026-11-06T11:50:00+09:00")
+        self.assertEqual(end.isoformat(), "2026-11-08T23:59:00+09:00")
+        self.assertEqual(extract_deadline(details + period.replace("23:59", "22:59")), (None, end))
+        self.assertEqual(extract_deadline(details + period + "\n" + period.replace("11:50", "11:55")),
+                         (None, end))
+
     def test_detail_without_period_does_not_consume_other_section(self):
         body = """詳細
 商品の説明のみ

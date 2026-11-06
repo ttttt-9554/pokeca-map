@@ -10728,7 +10728,62 @@
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
       "review_category": "pokemon",
-      "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
+      "first_detected_at": "2026-11-06T04:45:58.504652+00:00",
+      "application_start_at": "2026-11-06T11:50:00+09:00",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/tgk3o",
@@ -10738,7 +10793,62 @@
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
       "review_category": "pokemon",
-      "first_detected_at": "2026-11-06T04:45:58.504652+00:00"
+      "first_detected_at": "2026-11-06T04:45:58.504652+00:00",
+      "application_start_at": "2026-11-06T11:50:00+09:00",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/37m04",
@@ -10829,5 +10939,5 @@
       "first_detected_at": "2026-11-06T06:06:00.178588+00:00"
     }
   ],
-  "updated_at": "2026-11-06T07:06:18.722603+00:00"
+  "updated_at": "2026-11-06T07:23:51.699783+00:00"
 }

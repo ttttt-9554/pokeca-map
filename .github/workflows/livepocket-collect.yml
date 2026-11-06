@@ -78,6 +78,7 @@ jobs:
           INDIVIDUAL_REQUEST_ID: ${{ needs.route.outputs.request_id }}
         run: python scripts/livepocket_individual_fetch.py prepare-one
       - name: Install browser for the requested event
+        id: individual_browser
         timeout-minutes: 2
         if: ${{ steps.claim.outputs.requested == 'true' }}
         continue-on-error: true
@@ -89,6 +90,22 @@ jobs:
         if: ${{ steps.claim.outputs.requested == 'true' }}
         continue-on-error: true
         run: python scripts/livepocket_individual_fetch.py execute
+      - name: Save individual review result
+        id: individual_complete
+        if: ${{ always() && steps.claim.outputs.requested == 'true' }}
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_individual_fetch.py complete
+      - name: Check another queued event
+        if: ${{ !cancelled() && steps.individual_browser.outcome == 'success' && steps.individual_complete.outcome == 'success' }}
+        timeout-minutes: 2
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/livepocket_individual_fetch.py execute-next
       - name: Preserve access cooldown if requested page is blocked
         if: ${{ always() && steps.claim.outputs.requested == 'true' }}
         continue-on-error: true
@@ -105,13 +122,6 @@ jobs:
             if git push origin HEAD:main; then exit 0; fi
           done
           exit 1
-      - name: Save individual review result
-        if: ${{ always() && steps.claim.outputs.requested == 'true' }}
-        continue-on-error: true
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python scripts/livepocket_individual_fetch.py complete
 
   collect:
     needs: route

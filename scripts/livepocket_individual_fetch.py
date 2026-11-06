@@ -172,12 +172,23 @@ def complete():
     print('Individual recheck result saved:',result['status'])
 
 
+def execute_next():
+    """Use the current runner to handle one more queued developer request."""
+    prepare()
+    try:
+        execute_direct()
+    finally:
+        complete()
+
+
 if __name__=='__main__':
-    if len(sys.argv)!=2 or sys.argv[1] not in ('route','prepare','prepare-one','execute','complete'):
-        raise SystemExit('Usage: livepocket_individual_fetch.py route|prepare|prepare-one|execute|complete')
+    commands = {'route': route, 'prepare': prepare, 'execute': execute_direct,
+                'execute-next': execute_next, 'complete': complete}
+    if len(sys.argv)!=2 or (sys.argv[1] not in commands and sys.argv[1]!='prepare-one'):
+        raise SystemExit('Usage: livepocket_individual_fetch.py route|prepare|prepare-one|execute|execute-next|complete')
     try:
         if sys.argv[1]=='prepare-one':prepare(os.environ.get('INDIVIDUAL_REQUEST_ID',''))
-        else:{'route':route,'prepare':prepare,'execute':execute_direct,'complete':complete}[sys.argv[1]]()
+        else:commands[sys.argv[1]]()
     except Exception as err:
         # Do not print authorization headers, page content, or private responses.
         print('Individual recheck unavailable:',type(err).__name__,file=sys.stderr)

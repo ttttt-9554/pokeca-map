@@ -116,13 +116,15 @@ def normalize_store_heading(s):
     return s
 
 
-# Ticket cards on the official "受付・チケット情報" tab sometimes use one
-# bracketed name per participating shop, without a separate "対象店舗" heading.
-# Count a shop only when the bracketed name looks like a retail location AND
+# Ticket cards can use either 【店舗名】商品 or 店舗名【再販分】商品
+# without a separate "対象店舗" heading.
+# Count a shop only when the name looks like a retail location AND
 # the card has a ticket-status/price marker shortly thereafter.  Two or more
 # distinct ticket options are required; a single bracketed mention is not an
 # independently verified multi-store list.
-TICKET_SHOP_TITLE = re.compile(r'^\s*【\s*([^】\r\n]{2,90}店)\s*】(?:[^\r\n]*)$')
+TICKET_SHOP_TITLE = re.compile(
+    r'^\s*(?:【\s*(?P<bracketed>[^】\r\n]{2,90}店)\s*】|'
+    r'(?P<leading>[^【】\r\n]{2,90}店)\s*【再販分】)(?P<product>[^\r\n]*)$')
 TICKET_CARD_MARKER = re.compile(r'(?:販売中|販売終了|受付中|受付終了|販売予定|分配不可|￥|¥|予定枚数終了|受付締切)')
 
 
@@ -136,7 +138,7 @@ def ticket_option_stores(text):
         m = TICKET_SHOP_TITLE.match(line)
         if not m:
             continue
-        name = safe_name(m.group(1), strict_retail=True)
+        name = safe_name(m.group('bracketed') or m.group('leading'), strict_retail=True)
         if not name:
             continue
         following = []
