@@ -10282,6 +10282,8 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "TSUTAYA中里店 11/13発売ポケモンカード抽選",
       "first_detected_at": "2026-11-06T01:00:59.039984+00:00"
     },
     {
@@ -10333,6 +10335,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "first_detected_at": "2026-11-06T01:00:59.039984+00:00"
     },
     {
@@ -10400,6 +10404,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "first_detected_at": "2026-11-06T01:00:59.039984+00:00"
     },
     {
@@ -10823,5 +10829,5 @@
       "first_detected_at": "2026-11-06T06:06:00.178588+00:00"
     }
   ],
-  "updated_at": "2026-11-06T06:56:01.762398+00:00"
+  "updated_at": "2026-11-06T07:06:18.722603+00:00"
 }
