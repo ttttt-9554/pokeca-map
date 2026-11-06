@@ -3897,10 +3897,7 @@
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "pokemon_map_evidence": "product_name"
     },
     {
       "url": "https://livepocket.jp/e/i44fhaaluv",
@@ -10247,7 +10244,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_event_title": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
       "first_detected_at": "2026-11-05T15:36:04.407471+00:00"
     },
     {
@@ -10699,5 +10695,5 @@
       "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
     }
   ],
-  "updated_at": "2026-11-06T03:38:17.754255+00:00"
+  "updated_at": "2026-11-06T03:45:58.928475+00:00"
 }
