@@ -22746,17 +22746,17 @@
           "http_status": null
         },
         "https://livepocket.jp/e/tgk3o": {
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/7cw9u": {
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/37m04": {
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -24759,19 +24759,19 @@
         "https://livepocket.jp/e/37m04": {
           "detected_at": "2026-11-06T04:45:58.504652+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/7cw9u": {
           "detected_at": "2026-11-06T04:45:58.504652+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/tgk3o": {
           "detected_at": "2026-11-06T04:45:58.504652+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/7uj-k": {
@@ -26372,18 +26372,18 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/tgk3o": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-06T10:51:19.962421+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-06T17:01:27.403015+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/7cw9u": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-06T10:51:19.962421+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-06T17:01:27.403015+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/37m04": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-06T10:51:19.962421+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-06T17:01:27.403015+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/7uj-k": {
@@ -32234,7 +32234,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "title_observed": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -32245,7 +32245,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "title_observed": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -32256,7 +32256,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "title_observed": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
           "genre": "pokemon",
           "product_origin": "v20_uniform_multi_shop_tickets",
@@ -37424,7 +37424,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/tgk3o": {
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -37437,7 +37437,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/7cw9u": {
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -37450,7 +37450,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/37m04": {
-          "checked_at": "2026-11-06T10:51:19.962421+00:00",
+          "checked_at": "2026-11-06T17:01:27.403015+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
