@@ -796,12 +796,29 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://cloud-pass.jp/pr/e56d69685f54144518d380686287126d5fe2699de6b75f195dce9fcaa2332a00",
+      "source_site": "cloud-pass.jp",
+      "event_title": "2611_【抽選】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット 9種セット 販売予約",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-11-06T09:10:01.586000+00:00",
+      "first_detected_at": "2026-11-06T09:10:58.721366+00:00",
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-06T18:00:00+09:00",
+      "application_end_at": "2026-11-07T23:59:00+09:00",
+      "external_url_unverified": false,
+      "cloud_pass_checked_at": "2026-11-06T09:10:58.939Z",
+      "store_name": "SHIBUYA TSUTAYA",
+      "official_event_title": "2611_【抽選】ポケモンカードゲーム MEGA 30th CELEBRATION カードセット 9種セット 販売予約",
+      "event_title_provisional": false,
+      "cloud_pass_verified_at": "2026-11-06T09:10:58.939Z"
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1568188298315300895"
+    "1551580466266644552": "1568190713135374336"
   },
-  "collected_at": "2026-11-06T09:00:57.277577+00:00",
+  "collected_at": "2026-11-06T09:10:58.721401+00:00",
   "messages_scanned": 100,
   "sale_report_signals": []
 }
