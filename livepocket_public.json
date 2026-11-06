@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T12:50:57.988134+00:00",
-  "unique_livepocket_urls": 690,
+  "collected_at": "2026-11-06T13:00:58.120228+00:00",
+  "unique_livepocket_urls": 691,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11039,7 +11039,26 @@
         }
       ],
       "first_detected_at": "2026-11-06T12:01:01.427958+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/sq7kw",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-11-06T13:00:09.539000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "11/13発売 ポケモン スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-06T20:00:00+09:00",
+      "official_event_title": "11/13発売 ポケモン スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "first_detected_at": "2026-11-06T13:01:01.356821+00:00"
     }
   ],
-  "updated_at": "2026-11-06T12:51:03.956267+00:00"
+  "updated_at": "2026-11-06T13:01:26.054209+00:00"
 }
