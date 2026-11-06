@@ -9083,6 +9083,11 @@
       const input=form.elements.namedItem(name),value=fields?.[name];
       if(input&&!input.value&&typeof value==='string')input.value=name==='event_title'?value.slice(0,200):lpExtDateInput(value);
     }
+    for(const name of ['review_category','product_type']){
+      const input=form.elements.namedItem(name),value=fields?.[name];
+      if(input&&(!input.value||input.value==='unknown')&&[...input.options].some(option=>option.value===value))
+        input.value=value;
+    }
     const rows=[...form.querySelectorAll('[data-lp-ext-store-row]')];
     if(rows.length===1){
       const name=rows[0].querySelector('[data-lp-ext-store-name]');

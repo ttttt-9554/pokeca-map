@@ -7,6 +7,7 @@ export function supportedUrl(value) {
     if(u.hostname==='e-yamashiroya.com') return /^\/(?:%[\da-f]{2}|[a-z\d_\-\/])+$/i.test(u.pathname) && !u.search && !u.pathname.includes('//');
     if(u.hostname==='7net.omni7.jp') return /^\/detail\/\d+\.html$/.test(u.pathname) && !u.search;
     if(u.hostname==='famima-online.family.co.jp') return u.pathname==='/item' && /^\?itemCode=\d{10,25}$/.test(u.search);
+    if(u.hostname==='cloud-pass.jp') return /^\/pr\/[a-f0-9]{64}\/?$/i.test(u.pathname) && !u.search;
     return false;
   } catch {return false;}
 }
@@ -34,9 +35,68 @@ function oneDate(text,label){
   if(!values.length||values.some(x=>!x))return null;
   const unique=[...new Set(values)];return unique.length===1?unique[0]:null;
 }
+function tagContents(html, tag, className) {
+  const pattern = new RegExp('<' + tag + '\\b([^>]*)>([\\s\\S]*?)<\\/' + tag + '\\s*>', 'gi');
+  return [...html.matchAll(pattern)]
+    .filter(([, attrs]) => !className || attrs.match(/(?:^|\s)class\s*=\s*(["'])(.*?)\1/i)?.[2]
+      .split(/\s+/).includes(className))
+    .map(match => match[2]);
+}
+
+function uniqueText(values) {
+  const unique = [...new Set(values.filter(Boolean))];
+  return unique.length === 1 ? unique[0] : '';
+}
+
+function cloudPassFields(html) {
+  const markup = html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+  const title = uniqueText(tagContents(markup, 'h3', 'title').map(plain));
+  if (title.length < 5 || title.length > 200 || !title.includes('抽選')) return {};
+  const fields = {event_title: title};
+
+  // The calendar below this section lists pickup days. Read only the
+  // application period explicitly named in the event summary.
+  const periods = tagContents(markup, 'dl', 'date').flatMap(block =>
+    [...block.matchAll(/<dt\b[^>]*>([\s\S]*?)<\/dt\s*>\s*<dd\b[^>]*>([\s\S]*?)<\/dd\s*>/gi)]
+      .filter(match => plain(match[1]) === '申込期間')
+      .map(match => plain(match[2]))
+  );
+  const range = new RegExp('^' + datePattern + '\\s*[～〜~−–—-]\\s*' + datePattern + '$');
+  const period = uniqueText(periods).match(range);
+  if (period) {
+    const start = validDate(period.slice(1, 6));
+    const end = validDate(period.slice(6, 11));
+    if (start && end && start < end) {
+      fields.application_start_at = start;
+      fields.application_end_at = end;
+    }
+  }
+
+  const project = uniqueText(tagContents(markup, 'h3', 'projectName').map(plain));
+  const paragraphs = tagContents(markup, 'p').map(plain).filter(Boolean);
+  const pickup = uniqueText(paragraphs
+    .filter((_, index) => /^≪受取場所≫$/.test(paragraphs[index - 1] || '')));
+  if (project && project.length <= 200 && pickup.includes(project)) {
+    fields.store_name = project;
+    // https://shibuyatsutaya.tsite.jp/facilities/
+    if (project === 'SHIBUYA TSUTAYA') fields.prefecture = '東京都';
+  }
+  if (/ポケモン|ポケカ|POK[ÉE]MON/i.test(title)) {
+    fields.review_category = 'pokemon';
+    if (title.includes('拡張パック') && !title.includes('デッキ')) fields.product_type = 'pack';
+    if (title.includes('デッキ') && !title.includes('拡張パック')) fields.product_type = 'deck';
+  } else if (/ワンピース|ONE\s*PIECE/i.test(title)) {
+    fields.review_category = 'onepiece';
+  } else if (title.includes('遊戯王')) {
+    fields.review_category = 'yugioh';
+  }
+  return fields;
+}
+
 export function extract(html,url){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
+  if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
   const raw=html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/i)?.[1]||html.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/i)?.[1]||'';
   const title=plain(raw).replace(/\s*[|｜]\s*(?:ファミマオンライン|ヤマシロヤ|セブンネットショッピング).*$/,'').trim();
   if(title.length>=5&&title.length<=200&&/抽選/.test(title)&&!/(?:受付終了|Google フォーム|closed form)/i.test(title))result.event_title=title;

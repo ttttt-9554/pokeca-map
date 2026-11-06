@@ -770,14 +770,20 @@
     {
       "url": "https://cloud-pass.jp/pr/c3d80628e17314fee84030533c8566c1c6c0f060dc1d0fd8c54e00d248311ad3",
       "source_site": "cloud-pass.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "2611_【抽選】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 販売予約",
+      "prefecture": "東京都",
       "discord_posted_at": "2026-11-06T01:09:43.109000+00:00",
       "first_detected_at": "2026-11-06T01:10:58.623389+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "external_url_unverified": false,
+      "cloud_pass_checked_at": "2026-11-06T03:47:07.022Z",
+      "store_name": "SHIBUYA TSUTAYA",
+      "official_event_title": "2611_【抽選】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 販売予約",
+      "event_title_provisional": false,
+      "cloud_pass_verified_at": "2026-11-06T03:47:07.022Z",
+      "pokemon_map_type": "pack"
     },
     {
       "url": "https://edion-cp.com/poke110602",

@@ -165,6 +165,9 @@ jobs:
       - name: Read Sevennet lottery titles and application periods
         run: python scripts/sevennet_lottery_enrich.py
 
+      - name: Read Cloud Pass lottery titles and application periods
+        run: node scripts/cloud_pass_lottery_enrich.mjs
+
       - name: Read Famima lottery titles and reservation periods
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}

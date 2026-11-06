@@ -8,6 +8,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_sevennet_lottery_enrich.py
       - scripts/famima_lottery_enrich.py
       - scripts/test_famima_lottery_enrich.py
+      - scripts/cloud_pass_lottery_enrich.mjs
       - scripts/livepocket_period_trial.py
       - scripts/test_livepocket_period_trial.py
       - scripts/livepocket_event_schedule.py
