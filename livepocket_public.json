@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T03:35:57.100637+00:00",
-  "unique_livepocket_urls": 680,
+  "collected_at": "2026-11-06T04:05:56.411474+00:00",
+  "unique_livepocket_urls": 681,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -3910,76 +3910,79 @@
       "stores": [
         {
           "name": "イトーヨーカドー浦和店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー昭島店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ加古川店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー古淵店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー東久留米店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー南大沢店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー能見台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー八王子店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー横浜別所店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー川崎店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー四街道店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー三郷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー曳舟店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ鷲宮店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドーアリオ上尾店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドープライムツリー赤池店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー トイロスクール天美店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
       ],
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name"
+      "pokemon_map_evidence": "product_name",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/h2dkqnh0f0",
@@ -10692,11 +10695,30 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "first_detected_at": "2026-11-06T03:35:59.003686+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/pv9dk",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-11-06T04:00:06.282000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA『メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
+      "application_end_at": "2026-11-09T20:00:00+09:00",
+      "application_start_at": "2026-11-06T08:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA『メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-06T04:05:58.694068+00:00"
     }
   ],
-  "updated_at": "2026-11-06T04:03:43.424947+00:00"
+  "updated_at": "2026-11-06T04:06:32.563775+00:00"
 }

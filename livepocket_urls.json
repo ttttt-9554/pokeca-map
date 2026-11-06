@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-06T03:35:57.100637+00:00",
+  "collected_at": "2026-11-06T04:05:56.411474+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 680,
+  "unique_livepocket_urls": 681,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -8176,78 +8176,79 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v21_3_uniform_multi_store_tickets",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "application_end_at": "2026-10-18T23:59:00+09:00",
       "application_start_at": "2026-10-07T14:21:00+09:00",
       "stores": [
         {
           "name": "イトーヨーカドー浦和店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー昭島店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ加古川店",
-          "prefecture": ""
+          "prefecture": "兵庫県"
         },
         {
           "name": "イトーヨーカドー古淵店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー東久留米店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー南大沢店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー能見台店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー八王子店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドー横浜別所店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー川崎店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         },
         {
           "name": "イトーヨーカドー四街道店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         },
         {
           "name": "イトーヨーカドー三郷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドー曳舟店",
-          "prefecture": ""
+          "prefecture": "東京都"
         },
         {
           "name": "イトーヨーカドーアリオ鷲宮店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドーアリオ上尾店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         },
         {
           "name": "イトーヨーカドープライムツリー赤池店",
-          "prefecture": ""
+          "prefecture": "愛知県"
         },
         {
           "name": "イトーヨーカドー トイロスクール天美店",
-          "prefecture": ""
+          "prefecture": "大阪府"
         }
       ]
     },
@@ -19024,34 +19025,67 @@
           "prefecture": "大阪府"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/pv9dk",
+      "discord_message_id": "1568112718777680045",
+      "discord_posted_at": "2026-11-06T04:00:06.282000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA Trading Card 宇都宮インターパークビレッジ\n受付終了: 11/09 20:00（残り3日6時間）\nhttps://livepocket.jp/e/pv9dk",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA『メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
+      "application_end_at": "2026-11-09T20:00:00+09:00",
+      "application_start_at": "2026-11-06T08:00:00+09:00",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 514,
+    "parsed": 515,
     "no_structured_details": 166
   },
   "field_counts": {
-    "store_name": 488,
-    "prefecture": 444,
-    "event_title": 367,
+    "store_name": 489,
+    "prefecture": 445,
+    "event_title": 368,
     "event_date": 1,
     "product_name": 99,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 643,
-    "application_start_at": 632,
-    "stores_events": 505
+    "application_end_at": 644,
+    "application_start_at": 633,
+    "stores_events": 506
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568105225330368656"
+      "1551580466266644552": "1568112718777680045"
     },
     "last_run": {
-      "checked_at": "2026-11-06T03:35:57.100637+00:00",
-      "new_urls": 2,
-      "original_urls": 678,
+      "checked_at": "2026-11-06T04:05:56.411474+00:00",
+      "new_urls": 1,
+      "original_urls": 680,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -19286,7 +19320,8 @@
         "1568082527720312914": "2026-11-06T02:05:58.581160+00:00",
         "1568090082408276008": "2026-11-06T02:35:55.934908+00:00",
         "1568097665630343168": "2026-11-06T03:05:57.962524+00:00",
-        "1568105225330368656": "2026-11-06T03:35:57.983049+00:00"
+        "1568105225330368656": "2026-11-06T03:35:57.983049+00:00",
+        "1568112718777680045": "2026-11-06T04:05:57.640755+00:00"
       },
       "checked_search_urls": {}
     },
@@ -22231,6 +22266,11 @@
           "checked_at": "2026-11-06T03:36:32.404068+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/pv9dk": {
+          "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -24185,6 +24225,12 @@
           "detected_at": "2026-11-06T03:35:59.003686+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/pv9dk": {
+          "detected_at": "2026-11-06T04:05:58.694068+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T04:06:24.006141+00:00",
           "http_status": null
         }
       },
@@ -31504,6 +31550,17 @@
           "product_origin": "v20_uniform_multi_shop_tickets",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/pv9dk": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T04:06:24.006141+00:00",
+          "title_observed": "ポケモンカードゲーム スペシャルデッキセットMEGA『メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -36564,6 +36621,19 @@
         },
         "https://livepocket.jp/e/4t5pvnf6l8": {
           "checked_at": "2026-11-06T03:36:32.404068+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/pv9dk": {
+          "checked_at": "2026-11-06T04:06:24.006141+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
