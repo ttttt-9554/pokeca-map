@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T11:30:29.619685+00:00",
-  "unique_livepocket_urls": 689,
+  "collected_at": "2026-11-06T12:00:56.962407+00:00",
+  "unique_livepocket_urls": 690,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10291,6 +10291,7 @@
       "application_start_at": "2026-10-27T17:46:00+09:00",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "discord_posted_at": "2026-11-06T01:00:10.119000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10342,6 +10343,7 @@
       "application_start_at": "2026-10-27T17:46:00+09:00",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "discord_posted_at": "2026-11-06T01:00:10.119000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10490,6 +10492,7 @@
       "application_start_at": "2026-10-27T17:46:00+09:00",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "discord_posted_at": "2026-11-06T02:30:09.351000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
@@ -10618,6 +10621,7 @@
       "application_start_at": "2026-10-27T17:46:00+09:00",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "discord_posted_at": "2026-11-06T03:30:19.705000+00:00",
+      "prefecture": "埼玉県",
       "review_category": "pokemon",
       "stores": [
         {
@@ -11017,7 +11021,27 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-06T11:30:32.182141+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/bgwe7",
+      "store_name": "キデイランド 浦和美園店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-06T12:00:28.179000+00:00",
+      "stores": [
+        {
+          "name": "キデイランド 浦和美園店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "キデイランド浦和美園店 ワンピースカードゲーム 拡張パック「Heroines Edition vol.2」購入券 抽選",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "review_category": "onepiece",
+      "product_name": "ワンピースカードゲーム",
+      "official_genre": "onepiece",
+      "official_event_title": "キデイランド浦和美園店 ワンピースカードゲーム 拡張パック「Heroines Edition vol.2」購入券 抽選",
+      "first_detected_at": "2026-11-06T12:01:01.427958+00:00"
     }
   ],
-  "updated_at": "2026-11-06T11:51:01.551579+00:00"
+  "updated_at": "2026-11-06T12:01:30.303491+00:00"
 }
