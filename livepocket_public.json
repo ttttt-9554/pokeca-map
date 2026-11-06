@@ -10441,6 +10441,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【ふるいち八潮中央店】ワンピースカード店頭抽選販売(世界最強の戦士)",
       "first_detected_at": "2026-11-06T01:40:58.133538+00:00"
     },
     {
@@ -10458,6 +10460,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "first_detected_at": "2026-11-06T01:40:58.133538+00:00"
     },
     {
@@ -10933,5 +10937,5 @@
       "first_detected_at": "2026-11-06T06:06:00.178588+00:00"
     }
   ],
-  "updated_at": "2026-11-06T07:41:02.419526+00:00"
+  "updated_at": "2026-11-06T07:51:22.961294+00:00"
 }
