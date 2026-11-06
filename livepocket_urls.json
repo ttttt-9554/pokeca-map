@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-06T02:35:55.212465+00:00",
+  "collected_at": "2026-11-06T03:05:57.021468+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 677,
+  "unique_livepocket_urls": 678,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -18867,34 +18867,66 @@
           "prefecture": "千葉県"
         }
       ]
+    },
+    {
+      "url": "https://livepocket.jp/e/x4eog",
+      "discord_message_id": "1568097665630343168",
+      "discord_posted_at": "2026-11-06T03:00:17.332000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nキデイランド吉祥寺店\n受付終了: 11/11 23:59（残り5日11時間）\nhttps://livepocket.jp/e/x4eog\n\n📍東京都\nサイト上\n受付終了: 11/13 21:00（残り7日8時間）\nhttps://livepocket.jp/e/ufbho\n\n📍埼玉県\n古本市場志木店\n受付終了: 11/10 23:59（残り4日11時間）\nhttps://livepocket.jp/e/wcs2w\n\n📍埼玉県\nふるいち八潮中央店\n受付終了: 11/06 22:00（残り9時間59分）\nhttps://livepocket.jp/e/5ufuq\n\n📍埼玉県\n古本市場与野本町店\n受付終了: 11/08 22:00（残り2日9時間）\nhttps://livepocket.jp/e/m_o9_\n\n📍宮城県\nヤマト屋書店TSUTAYA中里店\n受付終了: 11/09 21:00（残り3日8時間）\nhttps://livepocket.jp/e/zm4do\n\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/08 23:59（残り2日11時間）\nhttps://livepocket.jp/e/s2dtfw7rvo\n\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/08 23:59（残り2日11時間）\nhttps://livepocket.jp/e/luo8lp88-d\n\n📍全国チェーン\nイトーヨーカドー\nhttps://livepocket.jp/e/vw0pq\n\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/08 23:59（残り2日11時間）\nhttps://livepocket.jp/e/jd0iq1-bl1",
+      "store_name": "キデイランド吉祥寺店",
+      "prefecture": "東京都",
+      "details_source": "discord_post",
+      "product_name": "ワンピースカードゲーム",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v19_livepocket_explicit_store_list",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label"
+      },
+      "event_title": "キデイランド吉祥寺店 ワンピースカードゲーム 拡張パック「OP18 神の支配」購入券 抽選",
+      "application_end_at": "2026-11-11T23:59:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "result_announcement_date": "2026-11-18"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 511,
+    "parsed": 512,
     "no_structured_details": 166
   },
   "field_counts": {
-    "store_name": 486,
-    "prefecture": 442,
-    "event_title": 364,
+    "store_name": 487,
+    "prefecture": 443,
+    "event_title": 365,
     "event_date": 1,
-    "product_name": 97,
+    "product_name": 98,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 640,
-    "application_start_at": 629,
-    "stores_events": 502
+    "application_end_at": 641,
+    "application_start_at": 630,
+    "stores_events": 503
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568090082408276008"
+      "1551580466266644552": "1568097665630343168"
     },
     "last_run": {
-      "checked_at": "2026-11-06T02:35:55.212465+00:00",
+      "checked_at": "2026-11-06T03:05:57.021468+00:00",
       "new_urls": 1,
-      "original_urls": 676,
+      "original_urls": 677,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -19127,7 +19159,8 @@
         "1568067436387893398": "2026-11-06T01:00:57.897496+00:00",
         "1568074986772627486": "2026-11-06T01:40:57.107124+00:00",
         "1568082527720312914": "2026-11-06T02:05:58.581160+00:00",
-        "1568090082408276008": "2026-11-06T02:35:55.934908+00:00"
+        "1568090082408276008": "2026-11-06T02:35:55.934908+00:00",
+        "1568097665630343168": "2026-11-06T03:05:57.962524+00:00"
       },
       "checked_search_urls": {}
     },
@@ -22057,6 +22090,11 @@
           "checked_at": "2026-11-06T02:36:17.040726+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/x4eog": {
+          "checked_at": "2026-11-06T03:06:24.441627+00:00",
+          "status": "checked_title_deadline_product",
+          "http_status": null
         }
       }
     },
@@ -23993,6 +24031,12 @@
           "detected_at": "2026-11-06T02:35:56.676149+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-06T02:36:17.040726+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/x4eog": {
+          "detected_at": "2026-11-06T03:05:58.973331+00:00",
+          "status": "checked_title_deadline_product",
+          "checked_at": "2026-11-06T03:06:24.441627+00:00",
           "http_status": null
         }
       },
@@ -31279,6 +31323,17 @@
           "product_origin": "v20_uniform_multi_shop_tickets",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/x4eog": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-06T03:06:24.441627+00:00",
+          "title_observed": "キデイランド吉祥寺店 ワンピースカードゲーム 拡張パック「OP18 神の支配」購入券 抽選",
+          "genre": "onepiece",
+          "product_origin": "v15_page_product_label",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -36300,6 +36355,19 @@
         },
         "https://livepocket.jp/e/jd0iq1-bl1": {
           "checked_at": "2026-11-06T02:36:17.040726+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/x4eog": {
+          "checked_at": "2026-11-06T03:06:24.441627+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

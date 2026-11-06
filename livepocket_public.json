@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T02:35:55.212465+00:00",
-  "unique_livepocket_urls": 677,
+  "collected_at": "2026-11-06T03:05:57.021468+00:00",
+  "unique_livepocket_urls": 678,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10573,7 +10573,28 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T02:35:56.676149+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/x4eog",
+      "store_name": "キデイランド吉祥寺店",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-11-06T03:00:17.332000+00:00",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "event_title": "キデイランド吉祥寺店 ワンピースカードゲーム 拡張パック「OP18 神の支配」購入券 抽選",
+      "application_end_at": "2026-11-11T23:59:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "review_category": "onepiece",
+      "product_name": "ワンピースカードゲーム",
+      "official_genre": "onepiece",
+      "official_event_title": "キデイランド吉祥寺店 ワンピースカードゲーム 拡張パック「OP18 神の支配」購入券 抽選",
+      "result_announcement_date": "2026-11-18",
+      "first_detected_at": "2026-11-06T03:05:58.973331+00:00"
     }
   ],
-  "updated_at": "2026-11-06T02:55:59.978898+00:00"
+  "updated_at": "2026-11-06T03:06:24.441627+00:00"
 }
