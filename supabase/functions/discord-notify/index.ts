@@ -1,7 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import webpush from "npm:web-push@3.6.7";
-import { scanAndDrainLottery } from "./lottery-scan-flow.mjs";
+import { scanAndDrainLottery, scanLotteryCatalogs } from "./lottery-scan-flow.mjs";
+import { automaticLotteryFields, externalLotteryNotificationEvents } from "./external-lottery-scan.mjs";
 
 // v21.49: Every shared report is delivered to Discord as its own embed.
 // DB trigger enqueues (atomically with INSERT); Supabase Cron calls DRAIN each
@@ -10,6 +11,7 @@ const APP_URL = "https://ttttt-9554.github.io/pokeca-map/";
 const MAX_DRAIN = 10;
 const LOTTERY_MAX_DRAIN = 5;
 const LIVEPOCKET_PUBLIC_JSON = "https://ttttt-9554.github.io/pokeca-map/livepocket_public.json";
+const EXTERNAL_PUBLIC_JSON = APP_URL + "other_lottery_public.json";
 const SPACING_MS = 1250;
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 type Report = {
@@ -267,7 +269,7 @@ async function drainSaleNotifications(
 }
 
 type LotteryJob = {
-  source: "livepocket" | "app" | "external_edit";
+  source: "livepocket" | "app" | "external_edit" | "external_auto";
   event_key: string;
   attempts: number;
   payload: Record<string, unknown>;
@@ -285,9 +287,8 @@ function lotteryDate(value: unknown): string {
 
 function buildLotteryMessage(job: LotteryJob) {
   const p = job.payload || {};
-  // An administrator-verified external URL update is a separate notice,
-  // not a fabricated LivePocket or app registration.
-  if (job.source === "external_edit") {
+  const isExternalAuto = job.source === "external_auto";
+  if (isExternalAuto || job.source === "external_edit") {
     const rawUrl = typeof p.event_url === "string" ? p.event_url : "";
     const originalUrl = /^https?:\/\/[^\s<>"]+$/.test(rawUrl) ? rawUrl : APP_URL;
     const changed = Array.isArray(p.changed_fields)
@@ -307,19 +308,23 @@ function buildLotteryMessage(job: LotteryJob) {
       username: "トレカレーダー",
       allowed_mentions: { parse: [] },
       embeds: [{
-        title: "🛠️ 外部抽選の編集情報が更新されました",
+        title: isExternalAuto
+          ? "🎟️ 外部抽選が追加されました"
+          : "🛠️ 外部抽選の編集情報が更新されました",
         description: clean(p.event_title || p.store_name || "名称未確認の抽選", 220),
         color: 3447003,
         url: originalUrl,
         fields: [
-          { name: "📝 更新内容", value: changed || "手動確認", inline: false },
+          ...(isExternalAuto ? [] : [{ name: "📝 更新内容", value: changed || "手動確認", inline: false }]),
           { name: stores.length ? "🏪 対象店舗（" + stores.length + "件）" : "🏪 対象店舗",
             value: clean(listedStores, 1000), inline: false },
-          { name: "📍 地域", value: clean(p.prefecture, 40), inline: true },
+          { name: "📍 地域", value: clean(p.prefecture, isExternalAuto ? 240 : 40), inline: true },
           { name: "🕒 応募開始", value: lotteryDate(p.application_start_at), inline: true },
           { name: "⌛ 応募締切", value: lotteryDate(p.application_end_at), inline: true }
         ],
-        footer: { text: "確認済みの内容はトレカレーダーに反映。応募条件は公式ページでご確認ください。" }
+        footer: { text: isExternalAuto
+          ? "応募条件と受付期間は公式ページでご確認ください。"
+          : "確認済みの内容はトレカレーダーに反映。応募条件は公式ページでご確認ください。" }
       }]
     };
   }
@@ -353,24 +358,26 @@ function buildLotteryMessage(job: LotteryJob) {
   };
 }
 
-// The GitHub Actions collector publishes this JSON after it has gathered new
-// URLs. Only exact, never-before-seen URLs enqueue notifications. Preexisting
-// catalog entries were baselined before enabling this scanner.
-async function scanLivePocket(supabase: ReturnType<typeof createClient>) {
+async function fetchLotteryCatalog(url: string, label: string): Promise<unknown> {
   const controller = new AbortController();
   const stop = setTimeout(() => controller.abort(), 16000);
-  let catalog: unknown;
   try {
-    const res = await fetch(LIVEPOCKET_PUBLIC_JSON + "?t=" + Date.now(), {
+    const res = await fetch(url + "?t=" + Date.now(), {
       method: "GET",
       cache: "no-store",
       signal: controller.signal
     });
-    if (!res.ok) throw Error("LivePocket JSON HTTP " + res.status);
-    catalog = await res.json();
+    if (!res.ok) throw Error(label + " JSON HTTP " + res.status);
+    return await res.json();
   } finally {
     clearTimeout(stop);
   }
+}
+
+// The collector publishes this catalog. Existing URLs were baselined
+// before the notification scanner was enabled.
+async function scanLivePocket(supabase: ReturnType<typeof createClient>) {
+  const catalog = await fetchLotteryCatalog(LIVEPOCKET_PUBLIC_JSON, "LivePocket");
   const items = (catalog as {items?:unknown})?.items;
   if (!Array.isArray(items) || items.length < 1 || items.length > 2500) {
     throw Error("Invalid LivePocket public catalog");
@@ -393,6 +400,31 @@ async function scanLivePocket(supabase: ReturnType<typeof createClient>) {
   });
   if (error) throw Error("LivePocket scan could not record new URLs: " + error.message);
   return {total: accepted.length, newlyQueued: Number(data || 0)};
+}
+
+async function scanExternalLotteries(supabase: ReturnType<typeof createClient>) {
+  const catalog = await fetchLotteryCatalog(EXTERNAL_PUBLIC_JSON, "External lottery");
+  const now = Date.now();
+  const events = externalLotteryNotificationEvents(catalog)
+    .filter(event => Date.parse(event.application_end_at) > now);
+  if (!events.length) return {total: 0, newlyQueued: 0};
+  const {data, error} = await supabase.rpc("lottery_register_new_external", {p_events: events});
+  if (error) throw Error("External lottery scan could not record new URLs: " + error.message);
+  return {total: events.length, newlyQueued: Number(data || 0)};
+}
+
+async function externalAutoLotteryCanSend(supabase: ReturnType<typeof createClient>, job: LotteryJob) {
+  const url = job.payload.event_url;
+  const end = job.payload.application_end_at;
+  if (typeof url !== "string" || typeof end !== "string" || !(Date.parse(end) > Date.now()))
+    return false;
+  const [external, card] = await Promise.all([
+    supabase.from("lottery_external_event_overrides").select("event_url").eq("event_url", url).maybeSingle(),
+    supabase.from("lottery_card_overrides").select("is_hidden,edited_fields").eq("event_url", url).maybeSingle()
+  ]);
+  if (external.error || card.error) throw Error((external.error || card.error)?.message);
+  return !external.data && !card.data?.is_hidden &&
+    !card.data?.edited_fields?.some((field: string) => automaticLotteryFields.includes(field));
 }
 
 async function drainLotteryNotifications(
@@ -439,6 +471,8 @@ async function drainLotteryNotifications(
             sent++;
           }
         }
+      } else if (job.source === "external_auto" && !await externalAutoLotteryCanSend(supabase, job)) {
+        skipped++;
       } else {
         await sendDiscord(webhookUrl, buildLotteryMessage(job));
         sent++;
@@ -603,7 +637,10 @@ Deno.serve(async (req: Request) => {
   if (payload.type === "LOTTERY_SCAN") {
     try {
       const summary = await scanAndDrainLottery(
-        () => scanLivePocket(supabase),
+        () => scanLotteryCatalogs({
+          livepocket: () => scanLivePocket(supabase),
+          external: () => scanExternalLotteries(supabase)
+        }, (name: string, error: unknown) => console.error("Lottery catalog scan failed:", name, String(error))),
         async () => {
           const webhook = Deno.env.get("LOTTERY_DISCORD_WEBHOOK_URL");
           if (!webhook) throw Error("Dedicated lottery webhook not configured");
@@ -611,13 +648,13 @@ Deno.serve(async (req: Request) => {
         },
         (error: unknown) => console.error("Immediate lottery delivery failed:", String(error))
       );
-      console.log("LivePocket catalog scan:", summary);
+      console.log("Lottery catalog scan:", JSON.stringify(summary));
       return new Response(JSON.stringify(summary), {
         status: 200, headers: { "Content-Type": "application/json" }
       });
     } catch (error) {
-      console.error("LivePocket catalog scan failed:", String(error));
-      return new Response("LivePocket scan unavailable", { status: 503 });
+      console.error("Lottery catalog scan unavailable:", String(error));
+      return new Response("Lottery catalog scan unavailable", { status: 503 });
     }
   }
   if (payload.type !== "DRAIN") return new Response("Ignored", { status: 200 });
