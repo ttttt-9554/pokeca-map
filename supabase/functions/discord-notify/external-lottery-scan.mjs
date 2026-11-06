@@ -12,7 +12,7 @@ export const automaticLotteryFields = [
   'event_title', 'store_name', 'prefecture', 'stores', 'application_start_at', 'application_end_at'
 ];
 
-function canonicalUrl(value) {
+export function canonicalExternalLotteryUrl(value) {
   if (!/^https?:\/\/[^\s<>"\\]{4,1992}$/i.test(value)) return '';
   const url = new URL(value);
   const host = url.hostname.replace(/\.$/, '');
@@ -30,7 +30,7 @@ function canonicalUrl(value) {
   return url.href.length <= 2000 ? url.href : '';
 }
 
-function applicationTime(value) {
+export function applicationTime(value) {
   const match = value.match(/^(\d{4}-\d{2}-\d{2})T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/);
   if (!match) return NaN;
   const day = new Date(match[1] + 'T00:00:00Z');
@@ -48,7 +48,7 @@ function notificationEvent(item) {
       /(?:\.\.\.|…|https?:\/\/|[<>\uFFFD„\x00-\x1F\x7F]|\b(?:captcha|access denied|just a moment|403 forbidden|robot check)\b|アクセスが制限|チケット購入・予約・販売)/i.test(title))
     return null;
   let identity;
-  try { identity = canonicalUrl(eventUrl); } catch { return null; }
+  try { identity = canonicalExternalLotteryUrl(eventUrl); } catch { return null; }
   if (!identity) return null;
 
   const stores = (Array.isArray(item.stores) && item.stores.length

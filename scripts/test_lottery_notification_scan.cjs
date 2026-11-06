@@ -64,8 +64,101 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   const famima = 'https://famima-online.family.co.jp/item?itemCode=100000000001';
   assert.equal(events({...confirmed, url: famima + '&utm_source=example'})[0].identity, famima);
 
+  const {deadlineDiscordMessages, scanLotteryDeadlineAlerts} =
+    await import('../supabase/functions/discord-notify/lottery-deadline-alerts.mjs');
+  const {setupLotteryDeadlineChannel} =
+    await import('../supabase/functions/discord-notify/lottery-deadline-channel.mjs');
+  const appUrl = 'https://ttttt-9554.github.io/pokeca-map/';
+  const guild = '100000000000000001', source = '100000000000000002';
+  const deadlineChannel = '100000000000000003', category = '100000000000000004';
+  const bot = '100000000000000005';
+  const sourcePermissions = [{id: guild, type: 0, allow: '0', deny: '1024'}];
+  const fixture = {
+    event_key: 'a'.repeat(32), claim_no: 1, event_url: confirmed.url,
+    event_title: 'カード応募 [抽選]', store_name: '東京店', reminder: 'one_hour',
+    deadline: new Date(Date.now() + 60 * 60_000).toISOString()
+  };
+  const longBatch = deadlineDiscordMessages(Array.from({length: 70}, (_, index) => ({
+    ...fixture, event_key: String(index)
+  })), appUrl);
+  assert.equal(longBatch.reduce((n, message) => n + message.jobs.length, 0), 70);
+  assert.ok(longBatch.length > 1 && longBatch.every(message => message.content.length <= 1900));
+
+  const settings = {
+    botToken: 'test-bot',
+    newLotteryWebhook: 'https://discord.com/api/webhooks/100000000000000006/example-token'
+  };
+  let channel, created = 0, sent = 0, settled;
+  const oldFetch = globalThis.fetch;
+  globalThis.fetch = async (url, options) => {
+    const path = new URL(url).pathname;
+    if (url === settings.newLotteryWebhook) {
+      assert.notEqual(options.method, 'POST');
+      return Response.json({guild_id: guild, channel_id: source});
+    }
+    assert.equal(options.headers.get('Authorization'), 'Bot test-bot');
+    if (path === '/api/v10/guilds/' + guild + '/channels') {
+      if (options.method === 'POST') {
+        const requested = JSON.parse(options.body);
+        assert.equal(requested.name, '抽選締切アラート');
+        assert.equal(requested.parent_id, category);
+        assert.deepEqual(requested.permission_overwrites, sourcePermissions);
+        channel = {...requested, id: deadlineChannel};
+        created++;
+        return Response.json(channel);
+      }
+      return Response.json([
+        {id: source, name: '新規抽選アラート', type: 0, parent_id: category, permission_overwrites: sourcePermissions},
+        ...(channel ? [channel] : [])
+      ]);
+    }
+    if (path === '/api/v10/users/@me') return Response.json({id: bot, username: 'fixture-bot'});
+    if (path.endsWith('/roles')) return Response.json([{id: guild, permissions: '8'}]);
+    if (path.endsWith('/members/' + bot)) return Response.json({roles: []});
+    assert.equal(path, '/api/v10/channels/' + deadlineChannel + '/messages');
+    assert.equal(options.method, 'POST');
+    const message = JSON.parse(options.body);
+    assert.match(message.content, /応募締切まで約1時間/);
+    assert.ok(message.content.includes(confirmed.url));
+    assert.deepEqual(message.allowed_mentions, {parse: []});
+    assert.match(message.nonce, /^[0-9a-f]{24}$/);
+    assert.equal(message.enforce_nonce, true);
+    sent++;
+    return Response.json({id: '100000000000000007'});
+  };
+  try {
+    const setup = await setupLotteryDeadlineChannel(settings);
+    assert.equal(setup.ready, true);
+    assert.equal(setup.channel_id, deadlineChannel);
+    await setupLotteryDeadlineChannel(settings);
+    assert.equal(created, 1);
+    const database = {
+      rpc: async (name, args) => {
+        if (name === 'lottery_claim_deadline_discord_alerts') {
+          assert.equal(args.p_catalog.length, 1);
+          assert.equal(args.p_catalog[0].event_url, confirmed.url);
+          return {data: [fixture]};
+        }
+        assert.equal(name, 'lottery_settle_deadline_discord_alerts');
+        settled = args;
+        return {data: 1};
+      }
+    };
+    const run = () => scanLotteryDeadlineAlerts(database, {
+      livepocket: Promise.resolve({items: []}), external: Promise.resolve({items: [confirmed]})
+    }, settings, appUrl);
+    assert.deepEqual(await run(), {claimed: 1, sent: 1});
+    assert.equal(settled.p_delivered, true);
+    channel = null;
+    await assert.rejects(run(), /deadline channel is missing/);
+    assert.equal(settled.p_delivered, false);
+    assert.equal(sent, 1);
+  } finally {
+    globalThis.fetch = oldFetch;
+  }
+
   const edge=fs.readFileSync('supabase/functions/discord-notify/index.ts','utf8');
   assert.match(edge,/https:\/\/ttttt-9554\.github\.io\/pokeca-map\/livepocket_public\.json/);
   assert.match(edge,/scanAndDrainLottery\(/);
-  console.log('External lottery confirmation, independent catalog scans and immediate queue drain passed');
+  console.log('External lottery confirmation, independent scans and separate deadline delivery passed');
 })().catch(error=>{console.error(error);process.exitCode=1});

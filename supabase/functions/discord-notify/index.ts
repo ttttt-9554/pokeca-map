@@ -3,6 +3,8 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import webpush from "npm:web-push@3.6.7";
 import { scanAndDrainLottery, scanLotteryCatalogs } from "./lottery-scan-flow.mjs";
 import { automaticLotteryFields, externalLotteryNotificationEvents } from "./external-lottery-scan.mjs";
+import { scanLotteryDeadlineAlerts } from "./lottery-deadline-alerts.mjs";
+import { setupLotteryDeadlineChannel } from "./lottery-deadline-channel.mjs";
 
 // v21.49: Every shared report is delivered to Discord as its own embed.
 // DB trigger enqueues (atomically with INSERT); Supabase Cron calls DRAIN each
@@ -376,8 +378,7 @@ async function fetchLotteryCatalog(url: string, label: string): Promise<unknown>
 
 // The collector publishes this catalog. Existing URLs were baselined
 // before the notification scanner was enabled.
-async function scanLivePocket(supabase: ReturnType<typeof createClient>) {
-  const catalog = await fetchLotteryCatalog(LIVEPOCKET_PUBLIC_JSON, "LivePocket");
+async function scanLivePocket(supabase: ReturnType<typeof createClient>, catalog: unknown) {
   const items = (catalog as {items?:unknown})?.items;
   if (!Array.isArray(items) || items.length < 1 || items.length > 2500) {
     throw Error("Invalid LivePocket public catalog");
@@ -402,8 +403,7 @@ async function scanLivePocket(supabase: ReturnType<typeof createClient>) {
   return {total: accepted.length, newlyQueued: Number(data || 0)};
 }
 
-async function scanExternalLotteries(supabase: ReturnType<typeof createClient>) {
-  const catalog = await fetchLotteryCatalog(EXTERNAL_PUBLIC_JSON, "External lottery");
+async function scanExternalLotteries(supabase: ReturnType<typeof createClient>, catalog: unknown) {
   const now = Date.now();
   const events = externalLotteryNotificationEvents(catalog)
     .filter(event => Date.parse(event.application_end_at) > now);
@@ -411,6 +411,13 @@ async function scanExternalLotteries(supabase: ReturnType<typeof createClient>) 
   const {data, error} = await supabase.rpc("lottery_register_new_external", {p_events: events});
   if (error) throw Error("External lottery scan could not record new URLs: " + error.message);
   return {total: events.length, newlyQueued: Number(data || 0)};
+}
+
+function lotteryDeadlineSettings() {
+  return {
+    botToken: Deno.env.get("DISCORD_BOT_TOKEN"),
+    newLotteryWebhook: Deno.env.get("LOTTERY_DISCORD_WEBHOOK_URL")
+  };
 }
 
 async function externalAutoLotteryCanSend(supabase: ReturnType<typeof createClient>, job: LotteryJob) {
@@ -634,20 +641,41 @@ Deno.serve(async (req: Request) => {
     }
   }
 
+  if (payload.type === "LOTTERY_DEADLINE_CHANNEL_SETUP") {
+    try {
+      return Response.json(await setupLotteryDeadlineChannel(lotteryDeadlineSettings()));
+    } catch (error) {
+      const message = String(error);
+      console.error("Lottery deadline channel setup failed:", message);
+      return Response.json({ready: false, error: message}, {status: 503});
+    }
+  }
+
   if (payload.type === "LOTTERY_SCAN") {
     try {
-      const summary = await scanAndDrainLottery(
-        () => scanLotteryCatalogs({
-          livepocket: () => scanLivePocket(supabase),
-          external: () => scanExternalLotteries(supabase)
-        }, (name: string, error: unknown) => console.error("Lottery catalog scan failed:", name, String(error))),
-        async () => {
-          const webhook = Deno.env.get("LOTTERY_DISCORD_WEBHOOK_URL");
-          if (!webhook) throw Error("Dedicated lottery webhook not configured");
-          return await drainLotteryNotifications(supabase, webhook);
-        },
-        (error: unknown) => console.error("Immediate lottery delivery failed:", String(error))
-      );
+      const catalogs = {
+        livepocket: fetchLotteryCatalog(LIVEPOCKET_PUBLIC_JSON, "LivePocket"),
+        external: fetchLotteryCatalog(EXTERNAL_PUBLIC_JSON, "External lottery")
+      };
+      const [newAlerts, deadline] = await Promise.allSettled([
+        scanAndDrainLottery(
+          () => scanLotteryCatalogs({
+            livepocket: async () => scanLivePocket(supabase, await catalogs.livepocket),
+            external: async () => scanExternalLotteries(supabase, await catalogs.external)
+          }, (name: string, error: unknown) => console.error("Lottery catalog scan failed:", name, String(error))),
+          async () => {
+            const webhook = Deno.env.get("LOTTERY_DISCORD_WEBHOOK_URL");
+            if (!webhook) throw Error("Dedicated lottery webhook not configured");
+            return await drainLotteryNotifications(supabase, webhook);
+          },
+          (error: unknown) => console.error("Immediate lottery delivery failed:", String(error))
+        ),
+        scanLotteryDeadlineAlerts(supabase, catalogs, lotteryDeadlineSettings(), APP_URL)
+      ]);
+      if (deadline.status === "rejected")
+        console.error("Lottery deadline scan failed:", String(deadline.reason));
+      if (newAlerts.status === "rejected") throw newAlerts.reason;
+      const summary = {...newAlerts.value, deadline: deadline.status === "fulfilled" ? deadline.value : {error: true}};
       console.log("Lottery catalog scan:", JSON.stringify(summary));
       return new Response(JSON.stringify(summary), {
         status: 200, headers: { "Content-Type": "application/json" }
