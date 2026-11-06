@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T03:05:57.021468+00:00",
-  "unique_livepocket_urls": 678,
+  "collected_at": "2026-11-06T03:35:57.100637+00:00",
+  "unique_livepocket_urls": 680,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10592,7 +10592,112 @@
         }
       ],
       "first_detected_at": "2026-11-06T03:05:58.973331+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/6mf8u",
+      "store_name": "TSUTAYA400号西那須野店",
+      "prefecture": "栃木県",
+      "discord_posted_at": "2026-11-06T03:30:19.705000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA400号西那須野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選予約受付",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選予約受付",
+      "result_announcement_date": "2026-11-10",
+      "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/4t5pvnf6l8",
+      "discord_posted_at": "2026-11-06T03:30:19.705000+00:00",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-10-27T17:46:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "イトーヨーカドー浦和店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー昭島店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ加古川店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー古淵店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー東久留米店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー南大沢店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー能見台店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー八王子店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー横浜別所店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー川崎店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー四街道店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー三郷店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー曳舟店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ鷲宮店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドーアリオ上尾店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドープライムツリー赤池店",
+          "prefecture": ""
+        },
+        {
+          "name": "イトーヨーカドー トイロスクール天美店",
+          "prefecture": ""
+        }
+      ],
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "first_detected_at": "2026-11-06T03:35:59.003686+00:00"
     }
   ],
-  "updated_at": "2026-11-06T03:25:57.973120+00:00"
+  "updated_at": "2026-11-06T03:36:32.404068+00:00"
 }
