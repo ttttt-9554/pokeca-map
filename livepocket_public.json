@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-06T06:05:57.938237+00:00",
-  "unique_livepocket_urls": 685,
+  "collected_at": "2026-11-06T09:00:56.854298+00:00",
+  "unique_livepocket_urls": 687,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -10931,7 +10931,51 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-06T06:06:00.178588+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/itj-5",
+      "store_name": "TSUTAYA六高台店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-11-06T09:00:25.848000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA六高台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "ワンピースカードゲーム ブースターパック 「神の支配」",
+      "application_end_at": "2026-11-09T21:45:00+09:00",
+      "application_start_at": "2026-11-07T13:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 「神の支配」",
+      "result_announcement_date": "2026-11-11",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-21",
+      "first_detected_at": "2026-11-06T09:00:59.237441+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/lkv83",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-06T09:00:25.848000+00:00",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-06T09:00:59.237441+00:00"
     }
   ],
-  "updated_at": "2026-11-06T08:51:00.608027+00:00"
+  "updated_at": "2026-11-06T09:01:32.030508+00:00"
 }
