@@ -10955,6 +10955,8 @@
           "prefecture": "千葉県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 「神の支配」",
       "first_detected_at": "2026-11-06T09:00:59.237441+00:00"
     },
     {
@@ -10975,6 +10977,8 @@
           "prefecture": "埼玉県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
       "first_detected_at": "2026-11-06T09:00:59.237441+00:00"
     },
     {
@@ -11059,5 +11063,5 @@
       "first_detected_at": "2026-11-06T13:01:01.356821+00:00"
     }
   ],
-  "updated_at": "2026-11-06T21:11:01.125565+00:00"
+  "updated_at": "2026-11-06T21:21:27.309509+00:00"
 }

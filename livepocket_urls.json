@@ -22766,12 +22766,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/lkv83": {
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/itj-5": {
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -24783,13 +24783,13 @@
         "https://livepocket.jp/e/itj-5": {
           "detected_at": "2026-11-06T09:00:59.237441+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/lkv83": {
           "detected_at": "2026-11-06T09:00:59.237441+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/uyq6h": {
@@ -26392,13 +26392,13 @@
           "last_status": "browser_redirected"
         },
         "https://livepocket.jp/e/lkv83": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-06T15:11:25.799366+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-06T21:21:27.309509+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/itj-5": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-06T15:11:25.799366+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-06T21:21:27.309509+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/uyq6h": {
@@ -32288,7 +32288,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "title_observed": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
           "genre": "pokemon",
           "product_origin": "",
@@ -32299,7 +32299,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "title_observed": "ワンピースカードゲーム ブースターパック 「神の支配」",
           "genre": "onepiece",
           "product_origin": "",
@@ -37486,7 +37486,7 @@
           "recovery_probe": ""
         },
         "https://livepocket.jp/e/lkv83": {
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -37499,7 +37499,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/itj-5": {
-          "checked_at": "2026-11-06T15:11:25.799366+00:00",
+          "checked_at": "2026-11-06T21:21:27.309509+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
