@@ -22791,8 +22791,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/sq7kw": {
-          "checked_at": "2026-11-06T13:01:26.054209+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-06T19:11:27.564291+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -24812,8 +24812,8 @@
         },
         "https://livepocket.jp/e/sq7kw": {
           "detected_at": "2026-11-06T13:01:01.356821+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-06T13:01:26.054209+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-06T19:11:27.564291+00:00",
           "http_status": null
         }
       },
@@ -26409,6 +26409,11 @@
         "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
           "attempts": 1,
           "last_attempt_at": "2026-11-06T17:31:22.183158+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/sq7kw": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-06T19:11:27.564291+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -32338,7 +32343,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-06T13:01:26.054209+00:00",
+          "checked_at": "2026-11-06T19:11:27.564291+00:00",
           "title_observed": "11/13発売 ポケモン スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
           "genre": "",
           "product_origin": "",
@@ -37546,7 +37551,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/sq7kw": {
-          "checked_at": "2026-11-06T13:01:26.054209+00:00",
+          "checked_at": "2026-11-06T19:11:27.564291+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
