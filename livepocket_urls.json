@@ -23921,7 +23921,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/arz9b": {
-          "checked_at": "2026-11-07T11:16:27.578549+00:00",
+          "checked_at": "2026-11-07T17:26:24.939606+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -26119,7 +26119,7 @@
         "https://livepocket.jp/e/arz9b": {
           "detected_at": "2026-11-07T05:05:59.967700+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T11:16:27.578549+00:00",
+          "checked_at": "2026-11-07T17:26:24.939606+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/7nmst": {
@@ -27869,8 +27869,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/arz9b": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T11:16:27.578549+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-07T17:26:24.939606+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/7nmst": {
@@ -34001,7 +34001,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T11:16:27.578549+00:00",
+          "checked_at": "2026-11-07T17:26:24.939606+00:00",
           "title_observed": "ポケモンカードゲーム 拡張パック「ハドウシーカー」 抽選受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -39593,7 +39593,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/arz9b": {
-          "checked_at": "2026-11-07T11:16:27.578549+00:00",
+          "checked_at": "2026-11-07T17:26:24.939606+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
