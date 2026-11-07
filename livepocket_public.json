@@ -11444,8 +11444,6 @@
           "prefecture": "宮城県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "TSUTAYA東仙台店 ポケモンカードゲーム 抽選販売",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11489,6 +11487,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』",
       "first_detected_at": "2026-11-07T10:05:59.359162+00:00"
     },
     {
@@ -11678,8 +11678,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     },
     {
@@ -11698,10 +11696,8 @@
           "prefecture": "宮城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     }
   ],
-  "updated_at": "2026-11-07T22:06:27.201656+00:00"
+  "updated_at": "2026-11-07T22:16:20.843282+00:00"
 }
