@@ -23926,7 +23926,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/7nmst": {
-          "checked_at": "2026-11-07T14:26:25.339176+00:00",
+          "checked_at": "2026-11-07T20:36:26.874196+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -26125,7 +26125,7 @@
         "https://livepocket.jp/e/7nmst": {
           "detected_at": "2026-11-07T08:16:02.278361+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T14:26:25.339176+00:00",
+          "checked_at": "2026-11-07T20:36:26.874196+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/k_foq": {
@@ -27874,8 +27874,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/7nmst": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T14:26:25.339176+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-07T20:36:26.874196+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vq5r7": {
@@ -34017,7 +34017,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T14:26:25.339176+00:00",
+          "checked_at": "2026-11-07T20:36:26.874196+00:00",
           "title_observed": "ポケモンカードゲームMEGA 拡張パック『30th CELEBRATION』抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -39611,7 +39611,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/7nmst": {
-          "checked_at": "2026-11-07T14:26:25.339176+00:00",
+          "checked_at": "2026-11-07T20:36:26.874196+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
