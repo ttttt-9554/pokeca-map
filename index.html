@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261106-lottery-date-field-fit-v1">
+  <link rel="stylesheet" href="style.css?v=20261108-store-merge-ui-v1">
 
   <style>
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
@@ -1343,13 +1343,42 @@ nav[aria-label="メインメニュー"] {
         <p id="lpStoreMasterStatus" class="hint" role="status" aria-live="polite">開くと照合候補を読み込みます。</p>
         <h4>🔍 同一店舗かもしれない候補</h4>
         <div id="lpStoreMasterCandidates" class="lp-store-master-candidates"></div>
-        <details class="lp-store-master-manual">
+        <details id="lpStoreManualMerge" class="lp-store-master-manual">
           <summary>手動で既存店舗を統合</summary>
           <div class="lp-store-master-manual-body">
-            <label>統合する店舗<select id="lpStoreMergeSource"><option value="">店舗を選択</option></select></label>
-            <label>統合先の正式店舗<select id="lpStoreMergeTarget"><option value="">店舗を選択</option></select></label>
-            <button type="button" id="lpStoreMasterMerge">選択した店舗を統合</button>
-            <p class="hint">別の都道府県の店舗は統合できません。誤統合防止のため確認してから操作してください。</p>
+            <p class="hint">正式名称として残す店舗を選び、まとめる表記をチェックしてください。</p>
+            <div class="lp-store-merge-grid">
+              <section class="lp-store-merge-step" aria-labelledby="lpStoreMergeTargetHeading">
+                <h4 id="lpStoreMergeTargetHeading">1. 統合先の正式店舗</h4>
+                <label for="lpStoreMergePrefecture">都道府県</label>
+                <select id="lpStoreMergePrefecture"><option value="">すべての都道府県</option></select>
+                <label for="lpStoreMergeTargetSearch">店舗名・住所で検索</label>
+                <div class="tr-search-row">
+                  <input id="lpStoreMergeTargetSearch" type="text" inputmode="search" enterkeyhint="search" maxlength="90" autocomplete="off" placeholder="例：TSUTAYA 東仙台">
+                  <button id="lpStoreMergeTargetSearchClear" type="button" class="tr-search-clear" aria-label="統合先の検索をクリア" disabled>×</button>
+                </div>
+                <label for="lpStoreMergeTarget">正式名称として残す店舗</label>
+                <select id="lpStoreMergeTarget"><option value="">統合先を選択</option></select>
+                <div id="lpStoreMergeTargetPreview" class="lp-store-merge-target" tabindex="-1"></div>
+              </section>
+              <section class="lp-store-merge-step" aria-labelledby="lpStoreMergeSourceHeading">
+                <h4 id="lpStoreMergeSourceHeading">2. まとめる店舗を選択 <span id="lpStoreMergeSelectedCount">0件</span></h4>
+                <label for="lpStoreMergeSourceSearch">店舗名・住所で検索</label>
+                <div class="tr-search-row">
+                  <input id="lpStoreMergeSourceSearch" type="text" inputmode="search" enterkeyhint="search" maxlength="90" autocomplete="off" placeholder="統合する表記を絞り込み" disabled>
+                  <button id="lpStoreMergeSourceSearchClear" type="button" class="tr-search-clear" aria-label="統合元の検索をクリア" disabled>×</button>
+                </div>
+                <p id="lpStoreMergeSourceCount" class="hint"></p>
+                <div id="lpStoreMergeSources" class="lp-store-merge-sources" role="group" aria-label="統合する店舗の候補"></div>
+              </section>
+            </div>
+            <div class="lp-store-merge-selection">
+              <div class="lp-store-merge-selection-head"><strong>選択中の店舗</strong><button id="lpStoreMergeClear" type="button" disabled>選択を解除</button></div>
+              <div id="lpStoreMergeSelected" class="lp-store-merge-selected"></div>
+            </div>
+            <p id="lpStoreMergeStatus" class="hint" role="status" aria-live="polite"></p>
+            <button type="button" id="lpStoreMasterMerge" class="primary" disabled>統合する店舗を選択</button>
+            <p class="hint">統合先と同じ都道府県の店舗のみ選べます。検索中も選択は保持され、統合前に内容を確認できます。</p>
           </div>
         </details>
         <details class="lp-store-master-all">
@@ -1941,7 +1970,7 @@ nav[aria-label="メインメニュー"] {
   
   <script src="lottery_notifications_v1.js?v=20261106-lottery-result-day-v1"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261103-yodobashi-status-v1"></script>
-  <script src="store_analytics_v21_120.js?v=20261102-store-canonical-v1"></script>
+  <script src="store_analytics_v21_120.js?v=20261108-searchable-store-merge-v1"></script>
   <script src="dev_unified_review_v21_124.js?v=20261106-starbox-lottery-v1"></script>
 
 <script>

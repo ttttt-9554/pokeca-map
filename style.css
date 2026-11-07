@@ -2672,6 +2672,37 @@ html[data-theme="dark"] #lpAppDialog #lpAppCloseX{
   cursor:pointer;font-weight:750;
 }
 #devView .lp-store-master-manual-body{padding:7px 0}
+#devView .lp-store-merge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+#devView .lp-store-merge-step{min-width:0;padding:12px;border:1px solid var(--app-border,#cbd5e1);border-radius:10px;background:var(--app-surface2,#f8fafc)}
+#devView .lp-store-merge-step h4{margin:0 0 10px;font-size:14px}
+#devView .lp-store-merge-step input,#devView .lp-store-merge-step select{min-width:0;max-width:100%;box-sizing:border-box;min-height:42px}
+#devView .lp-store-merge-step .tr-search-row{width:100%;min-width:0}
+#devView .lp-store-merge-step .tr-search-row>input{width:100%;margin:0}
+#devView .lp-store-merge-target{margin-top:10px;padding:10px;border-radius:8px;border:1px solid var(--app-border,#cbd5e1);background:var(--app-surface,#fff);overflow-wrap:anywhere}
+#devView .lp-store-merge-target strong,#devView .lp-store-merge-target small{display:block;line-height:1.65}
+#devView .lp-store-merge-target small{font-size:12px;color:var(--app-muted,#64748b)}
+#devView .lp-store-merge-sources{display:grid;gap:7px;max-height:290px;overflow-y:auto;overscroll-behavior:contain;min-width:0}
+#devView .lp-store-master-manual label.lp-store-merge-option{display:flex;align-items:flex-start;gap:9px;min-width:0;margin:0;padding:10px;border:1px solid var(--app-border,#cbd5e1);border-radius:8px;background:var(--app-surface,#fff);cursor:pointer}
+#devView .lp-store-master-manual .lp-store-merge-option input[type="checkbox"]{appearance:auto;flex:0 0 19px;width:19px;height:19px;min-height:19px;padding:0;margin:3px 0 0;accent-color:#2563eb}
+#devView .lp-store-merge-option>span{min-width:0;overflow-wrap:anywhere}
+#devView .lp-store-merge-option strong,#devView .lp-store-merge-option small{display:block;line-height:1.55}
+#devView .lp-store-merge-option small{font-weight:400;font-size:11px;color:var(--app-muted,#64748b)}
+#devView .lp-store-master-manual .lp-store-merge-option.is-selected{border-color:var(--app-accent,#2563eb);box-shadow:inset 3px 0 var(--app-accent,#2563eb)}
+#devView .lp-store-merge-selection{margin:12px 0;padding:10px;border:1px solid var(--app-border,#cbd5e1);border-radius:9px;min-width:0}
+#devView .lp-store-merge-selection-head{display:flex;gap:8px;justify-content:space-between;align-items:center}
+#devView .lp-store-merge-selection-head button{padding:6px 9px;min-height:34px;font-size:12px}
+#devView .lp-store-merge-selected{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;max-height:160px;overflow-y:auto}
+#devView .lp-store-merge-selected button{min-width:0;max-width:100%;padding:6px 9px;text-align:left;font-size:12px;overflow-wrap:anywhere}
+#devView #lpStoreMergeSelectedCount{font-size:12px;font-weight:600;color:var(--app-muted,#64748b)}
+#devView #lpStoreMergeStatus{white-space:pre-line;overflow-wrap:anywhere}
+#devView #lpStoreMasterMerge{width:100%;box-sizing:border-box;font-size:14px}
+#devView .lp-store-master-actions{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+#devView .lp-store-master-actions button{min-height:36px;padding:6px 9px;font-size:12px}
+#devView .lp-store-master-manual :is(input,select,button):disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:680px){
+  #devView .lp-store-merge-grid{grid-template-columns:minmax(0,1fr)}
+  #devView .lp-store-merge-sources{max-height:240px}
+}
 #devView .lp-store-master-item{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
 #devView .lp-store-master-item span{font-size:12px;color:var(--app-muted,#64748b)}
 html[data-theme="dark"] #lotteryResultsView .lp-store-analytics,
