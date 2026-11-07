@@ -326,6 +326,7 @@ function lotteryStoreField(stores: LotteryStore[], fallback: unknown) {
 
 function buildLotteryMessage(job: LotteryJob, deadlineTitle?: string) {
   const p = job.payload || {};
+  const startTitle = p.notify_application_started === true ? "🎟️ 抽選の応募受付が始まりました" : undefined;
   const stores = lotteryMessageStores(p.stores);
   const isExternalAuto = job.source === "external_auto";
   if (isExternalAuto || job.source === "external_edit") {
@@ -339,7 +340,7 @@ function buildLotteryMessage(job: LotteryJob, deadlineTitle?: string) {
       username: "トレカレーダー",
       allowed_mentions: { parse: [] },
       embeds: [{
-        title: deadlineTitle ?? (isExternalAuto
+        title: deadlineTitle ?? startTitle ?? (isExternalAuto
           ? "🎟️ 外部抽選が追加されました"
           : "🛠️ 外部抽選の編集情報が更新されました"),
         description: clean(p.event_title || p.store_name || "名称未確認の抽選", 220),
@@ -380,7 +381,7 @@ function buildLotteryMessage(job: LotteryJob, deadlineTitle?: string) {
     username: "ポケカ発見マップ",
     allowed_mentions: { parse: [] },
     embeds: [{
-      title: deadlineTitle ?? (isApp ? "📱 アプリ抽選が登録されました" : "🎟️ LivePocket抽選が追加されました"),
+      title: deadlineTitle ?? startTitle ?? (isApp ? "📱 アプリ抽選が登録されました" : "🎟️ LivePocket抽選が追加されました"),
       description: title,
       color: isApp ? 3845453 : 5793266,
       url,
@@ -437,7 +438,8 @@ async function scanLivePocket(supabase: ReturnType<typeof createClient>, catalog
     const url = (item as Record<string, unknown>).url;
     return typeof url === "string" && /^https:\/\/livepocket\.jp\/e\/[A-Za-z0-9_-]{4,64}$/.test(url);
   });
-  const {data, error} = await supabase.rpc("lottery_register_new_livepocket", {
+  const {data, error} = await supabase.rpc("lottery_register_discord_catalog", {
+    p_source: "livepocket",
     p_events: accepted.map(item => ({
       url: item.url,
       event_title: typeof item.event_title === "string" ? item.event_title : "",
@@ -445,7 +447,8 @@ async function scanLivePocket(supabase: ReturnType<typeof createClient>, catalog
       store_name: typeof item.store_name === "string" ? item.store_name : "",
       prefecture: typeof item.prefecture === "string" ? item.prefecture : "",
       application_start_at: typeof item.application_start_at === "string" ? item.application_start_at : null,
-      application_end_at: typeof item.application_end_at === "string" ? item.application_end_at : null
+      application_end_at: typeof item.application_end_at === "string" ? item.application_end_at : null,
+      manual_page_unavailable: item.manual_page_unavailable === true
     }))
   });
   if (error) throw Error("LivePocket scan could not record new URLs: " + error.message);
@@ -454,12 +457,14 @@ async function scanLivePocket(supabase: ReturnType<typeof createClient>, catalog
 
 async function scanExternalLotteries(supabase: ReturnType<typeof createClient>, catalog: unknown) {
   const now = Date.now();
-  const events = externalLotteryNotificationEvents(catalog)
-    .filter(event => Date.parse(event.application_end_at) > now);
+  const events = externalLotteryNotificationEvents(catalog);
   if (!events.length) return {total: 0, newlyQueued: 0};
-  const {data, error} = await supabase.rpc("lottery_register_new_external", {p_events: events});
+  const {data, error} = await supabase.rpc("lottery_register_discord_catalog", {
+    p_source: "external_auto", p_events: events
+  });
   if (error) throw Error("External lottery scan could not record new URLs: " + error.message);
-  return {total: events.length, newlyQueued: Number(data || 0)};
+  return {total: events.filter(event => Date.parse(event.application_end_at) > now).length,
+    newlyQueued: Number(data || 0)};
 }
 
 function lotteryDeadlineSettings() {
@@ -471,8 +476,10 @@ function lotteryDeadlineSettings() {
 
 async function externalAutoLotteryCanSend(supabase: ReturnType<typeof createClient>, job: LotteryJob) {
   const url = job.payload.event_url;
+  const start = job.payload.application_start_at;
   const end = job.payload.application_end_at;
-  if (typeof url !== "string" || typeof end !== "string" || !(Date.parse(end) > Date.now()))
+  if (typeof url !== "string" || typeof start !== "string" || !Number.isFinite(Date.parse(start)) ||
+      typeof end !== "string" || !(Date.parse(end) > Date.now()))
     return false;
   const [external, card] = await Promise.all([
     supabase.from("lottery_external_event_overrides").select("event_url").eq("event_url", url).maybeSingle(),
@@ -480,7 +487,8 @@ async function externalAutoLotteryCanSend(supabase: ReturnType<typeof createClie
   ]);
   if (external.error || card.error) throw Error((external.error || card.error)?.message);
   return !external.data && !card.data?.is_hidden &&
-    !card.data?.edited_fields?.some((field: string) => automaticLotteryFields.includes(field));
+    !card.data?.edited_fields?.some((field: string) =>
+      field !== "application_start_at" && field !== "application_end_at" && automaticLotteryFields.includes(field));
 }
 
 async function drainLotteryNotifications(
@@ -496,7 +504,9 @@ async function drainLotteryNotifications(
   for (const job of jobs) {
     let errorMessage: string | null = null;
     try {
-      if (job.source === "app") {
+      if (job.payload.skip_new_notification === true) {
+        skipped++;
+      } else if (job.source === "app") {
         // Do not notify after the author has hidden or deleted a registration
         // before this queue entry is processed.
         const {data: entry,error: entryError} = await supabase.from("lottery_app_events")
