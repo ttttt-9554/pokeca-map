@@ -13,6 +13,9 @@ name: Store Lottery Statistics Regression
       - 'index.html'
       - 'scripts/test_store_analytics.cjs'
       - 'scripts/test_store_merge_ui.cjs'
+      - 'scripts/test_store_address_sync.mjs'
+      - 'supabase/functions/lottery-store-sync/**'
+      - 'supabase/lottery_store_auto_addresses_v1.sql'
       - 'supabase/lottery_store_stats_all_results_v21_128.sql'
       - '.github/workflows/store-stats-regression.yml'
   workflow_dispatch:
@@ -32,6 +35,8 @@ jobs:
           node --check store_analytics_v21_120.js
           node --check scripts/test_store_analytics.cjs
           node --check scripts/test_store_merge_ui.cjs
+          node --check supabase/functions/lottery-store-sync/address-sync.mjs
+          node --check supabase/functions/lottery-store-sync/verified-addresses.mjs
           node --check store_aliases_v1.js
           node --check store_map_links_v1.js
           node --check lottery_sales_reference_v1.js
@@ -41,4 +46,5 @@ jobs:
         run: |
           node scripts/test_store_analytics.cjs
           node scripts/test_store_merge_ui.cjs
+          node scripts/test_store_address_sync.mjs
           node scripts/test_store_master_canonical.cjs

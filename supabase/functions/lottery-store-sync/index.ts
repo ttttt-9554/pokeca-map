@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { syncAddresses } from "./address-sync.mjs";
 
 // v21.145: Import ONLY public, already-published lottery catalog store labels.
 // Never read or transmit private application accounts or user outcomes.
@@ -67,6 +68,15 @@ Deno.serve(async (req: Request): Promise<Response> => {
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
+  const enrichAddresses = async () => {
+    try {
+      return await syncAddresses(supabase);
+    } catch (error) {
+      const result = { error: String((error as Error)?.message || error).slice(0, 200) };
+      console.error("Store address sync failed:", JSON.stringify(result));
+      return result;
+    }
+  };
 
   const downloaded = await Promise.allSettled(CATALOGS.map(readCatalog));
   const stores = new Map<string, Store>();
@@ -92,7 +102,8 @@ Deno.serve(async (req: Request): Promise<Response> => {
 
   if (downloaded.every(result => result.status !== "fulfilled")) {
     console.error("Lottery store catalogs unavailable:", errors.join("; "));
-    return new Response(JSON.stringify({ error: "Catalogs unavailable", errors }), {
+    return new Response(JSON.stringify({ error: "Catalogs unavailable", errors,
+      addresses: await enrichAddresses() }), {
       status: 502, headers: { "Content-Type": "application/json" }
     });
   }
@@ -112,9 +123,10 @@ Deno.serve(async (req: Request): Promise<Response> => {
     accepted += Number(data || 0);
   }
 
+  const addresses = await enrichAddresses();
   const result = {
     publicEvents: eventCount, candidateStores: values.length,
-    accepted, sourcesOk: downloaded.length - errors.length, errors
+    accepted, sourcesOk: downloaded.length - errors.length, errors, addresses
   };
   console.log("Public lottery store master sync:", JSON.stringify(result));
   return new Response(JSON.stringify(result), {
