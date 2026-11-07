@@ -11381,6 +11381,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 拡張パック「ハドウシーカー」 抽選受付",
       "first_detected_at": "2026-11-07T05:05:59.967700+00:00"
     },
     {
@@ -11490,5 +11492,5 @@
       "first_detected_at": "2026-11-07T10:05:59.359162+00:00"
     }
   ],
-  "updated_at": "2026-11-07T11:06:00.282245+00:00"
+  "updated_at": "2026-11-07T11:16:27.578549+00:00"
 }
