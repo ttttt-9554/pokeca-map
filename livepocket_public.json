@@ -11398,7 +11398,15 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-11-07T08:16:02.278361+00:00"
+      "first_detected_at": "2026-11-07T08:16:02.278361+00:00",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vq5r7",
@@ -11467,5 +11475,5 @@
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     }
   ],
-  "updated_at": "2026-11-07T09:36:20.022463+00:00"
+  "updated_at": "2026-11-07T09:38:06.003Z"
 }

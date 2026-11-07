@@ -20051,8 +20051,8 @@
       "discord_posted_at": "2026-11-07T08:09:30.029000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "https://livepocket.jp/e/7nmst",
-      "store_name": null,
-      "prefecture": null,
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
       "details_source": null,
       "product_name": null,
       "application_period": null,
@@ -20061,14 +20061,23 @@
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue"
       },
       "event_title": "ポケモンカードゲームMEGA 拡張パック『30th CELEBRATION』抽選販売受付",
       "application_end_at": "2026-11-09T20:00:00+09:00",
       "application_start_at": "2026-11-06T08:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
-      "purchase_end_date": "2026-11-15"
+      "purchase_end_date": "2026-11-15",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ]
     },
     {
       "url": "https://livepocket.jp/e/vq5r7",
@@ -20186,7 +20195,7 @@
     "lottery_result_period": 1,
     "application_end_at": 674,
     "application_start_at": 663,
-    "stores_events": 535
+    "stores_events": 536
   },
   "collector_state": {
     "last_seen_message_ids": {
