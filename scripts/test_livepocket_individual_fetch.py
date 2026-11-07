@@ -70,7 +70,7 @@ class IndividualFetchTests(unittest.TestCase):
         name = 'TSUTAYA Trading Card 宇都宮インターパークビレッジ'
         venue = name + ' (栃木県)'
         body = BODY.replace('対象店舗\nテスト渋谷店（東京都）', '会場\n' + venue)
-        observation = {**page(text=body), 'overview_venue': venue}
+        observation = {**page(text=body), 'overview_venue': venue, 'overview_seller': name}
         stores = [{'name': name, 'prefecture': '栃木県'}]
         self.assertEqual(individual.extract(v21, URL, observation)['fields']['stores'], stores)
         raw, public = pair(pending=True)
@@ -167,6 +167,98 @@ class IndividualFetchTests(unittest.TestCase):
             individual_request={'url':URL,'request_id':'fake'},individual_result=outcome)
         self.assertEqual(calls,[URL]);self.assertEqual(outcome['status'],'blocked')
         self.assertTrue(out[0]['collector_state']['v14']['blocked_until'])
+
+class OverviewEvidenceTests(unittest.TestCase):
+    def observation(self, name='リベルテ新宿', seller=None, master='', prefecture='東京都'):
+        venue = name + ' (' + prefecture + ')'
+        body = BODY.replace('対象店舗\nテスト渋谷店（東京都）', '会場\n' + venue)
+        return {**page(text=body), 'overview_venue': venue,
+                'overview_seller': seller if seller is not None else name,
+                'overview_master_prefecture': master}
+
+    def assert_both_paths(self, observation, expected):
+        self.assertEqual(individual.extract(v21, URL, observation)['fields'].get('stores'), expected)
+        raw, public = pair(pending=True)
+        raw, public, *_ = v21.process(
+            raw, public, lambda _: observation, catalog={}, now=NOW, new_limit=1,
+            background_limit=0, retry_limit=0, title_limit=0, verified={}, v19_verified={},
+            verified_titles={}, verified_unavailable={})
+        for row in (raw['items'][0], public['items'][0]):
+            self.assertEqual(row.get('stores'), expected)
+
+    def test_new_branch_without_known_brand_or_suffix_uses_official_seller(self):
+        self.assert_both_paths(self.observation(seller='リベルテ　新宿'),
+                              [{'name': 'リベルテ新宿', 'prefecture': '東京都'}])
+
+    def test_exact_master_match_does_not_require_the_seller_to_be_the_branch(self):
+        self.assert_both_paths(self.observation(name='ポケモンセンターヒロシマ', seller='運営会社',
+                                              master='広島県', prefecture='広島県'),
+                              [{'name': 'ポケモンセンターヒロシマ', 'prefecture': '広島県'}])
+
+    def test_missing_or_conflicting_evidence_remains_unknown(self):
+        for observation in (
+            self.observation(seller='別の販売元'),
+            self.observation(seller='別の販売元', master='大阪府'),
+            self.observation(seller='リベルテ新宿 (大阪府)'),
+            self.observation(name='会場未定'),
+            self.observation(name='オンライン'),
+            {**self.observation(), 'overview_venue': 'リベルテ新宿'},
+            {**self.observation(), 'titles': ['カード会員限定 ライブチケット抽選販売']},
+            {**self.observation(name='テスト体育館'), 'titles': ['ライブ抽選販売']},
+        ):
+            with self.subTest(observation=observation):
+                self.assert_both_paths(observation, None)
+
+    def test_explicit_store_lists_keep_priority_over_the_overview(self):
+        observation = {**self.observation(), 'text': BODY}
+        fields = individual.extract(v21, URL, observation)['fields']
+        self.assertEqual(fields['stores'], [{'name': 'テスト渋谷店', 'prefecture': '東京都'}])
+        conflicting = BODY.replace('応募期間', '対象店舗：別店舗（大阪府）\n応募期間')
+        self.assertIsNone(v21.v19.overview_store(
+            {**observation, 'text': conflicting, 'page_identity': 'event_confirmed'}))
+
+    def test_wrong_page_identity_or_url_cannot_use_evidence(self):
+        self.assertIsNone(v21.v19.overview_store(
+            {**self.observation(master='東京都'), 'page_identity': 'event_unconfirmed'}))
+        result = individual.extract(v21, URL,
+                                    {**self.observation(master='東京都'), 'final_url': URL + 'other'})
+        self.assertEqual(result['fields'], {})
+
+    def test_labelled_seller_and_venue_must_be_unique_across_desktop_and_mobile(self):
+        class Locator:
+            def __init__(self, values): self.values = values
+            def evaluate_all(self, _): return self.values
+        class Page:
+            def __init__(self, venues, sellers): self.venues, self.sellers = venues, sellers
+            def locator(self, selector):
+                if 'event-detail-info__place' in selector: return Locator(self.venues)
+                if 'event-detail-info__owner' in selector: return Locator(self.sellers)
+                raise AssertionError('Unscoped selector')
+        venue = 'リベルテ新宿 (東京都)'
+        page = Page([venue, venue], ['リベルテ新宿', 'リベルテ新宿'])
+        metadata = v21.overview_observation(page, {'リベルテ新宿': '東京都'})
+        self.assertEqual(metadata, {'overview_venue': venue, 'overview_seller': 'リベルテ新宿',
+                                    'overview_master_prefecture': '東京都'})
+        self.assertEqual(v21.overview_seller_from_dom(Page([venue], ['別店舗', 'リベルテ新宿'])), '')
+        self.assertEqual(v21.overview_observation(Page([venue, '別会場 (大阪府)'], ['リベルテ新宿']),
+                                                 {'リベルテ新宿': '東京都'})['overview_venue'], '')
+
+    def test_master_lookup_rejects_conflicts_after_width_normalization(self):
+        env = {'SUPABASE_URL': 'https://fixture.example', 'SUPABASE_SERVICE_ROLE_KEY': 'fixture-secret'}
+        known = {'ＦＯＯＳＨＯＰ銀座': '東京都', 'fooshop銀座': '大阪府', 'リベルテ新宿': '東京都'}
+        with patch.dict(os.environ, env), patch.object(v21, 'fetch_master_store_regions', return_value=known) as lookup:
+            self.assertEqual(v21.overview_store_regions(), {'リベルテ新宿': '東京都'})
+            lookup.assert_called_once_with(env['SUPABASE_URL'], env['SUPABASE_SERVICE_ROLE_KEY'])
+
+    def test_master_outage_keeps_official_seller_evidence_available(self):
+        env = {'SUPABASE_URL': 'https://fixture.example', 'SUPABASE_SERVICE_ROLE_KEY': 'fixture-secret'}
+        with patch.dict(os.environ, env), patch.object(v21, 'fetch_master_store_regions', side_effect=OSError):
+            self.assertEqual(v21.overview_store_regions(), {})
+        self.assert_both_paths(self.observation(), [{'name': 'リベルテ新宿', 'prefecture': '東京都'}])
+        with patch.dict(os.environ, {}, clear=True), patch.object(v21, 'fetch_master_store_regions') as lookup:
+            self.assertEqual(v21.overview_store_regions(), {})
+            lookup.assert_not_called()
+
 
 class WorkerQueueTests(unittest.TestCase):
     def setUp(self):

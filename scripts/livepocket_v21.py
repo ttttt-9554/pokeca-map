@@ -32,6 +32,7 @@ import livepocket_v19 as v19
 import livepocket_v20 as v20
 from livepocket_venue_prefecture import fill_one as fill_venue_prefecture
 from livepocket_manual_completed import read_manual_completed, read_review_completed
+from livepocket_master_prefecture import fetch_regions as fetch_master_store_regions
 
 RAW_PATH = v14.RAW_PATH
 PUBLIC_PATH = v14.PUBLIC_PATH
@@ -2181,15 +2182,56 @@ def overview_venue_from_dom(page):
     return next(iter(venues)) if len(venues) == 1 else ''
 
 
+def overview_seller_from_dom(page):
+    """Read only the event's labelled seller; desktop/mobile must agree."""
+    try:
+        sellers = page.locator(
+            '.event-detail-info__block > dt:has(.event-detail-info__owner) + dd.event-detail-info__data'
+        ).evaluate_all(r"""elements => elements.map(element =>
+            element.textContent.replace(/\s+/g, ' ').trim()).filter(Boolean)""")
+    except Exception:
+        return ''
+    sellers = set(sellers)
+    return next(iter(sellers)) if len(sellers) == 1 else ''
+
+
+def overview_store_regions():
+    """Load unique public branch/region pairs once per browser session."""
+    base, key = os.getenv('SUPABASE_URL', ''), os.getenv('SUPABASE_SERVICE_ROLE_KEY', '')
+    if not base or not key:
+        return {}
+    try:
+        known = fetch_master_store_regions(base, key)
+    except (OSError, RuntimeError, ValueError):
+        print('Venue store-master lookup unavailable; using official page evidence.')
+        return {}
+    regions, conflicts = {}, set()
+    for name, prefecture in known.items():
+        name = v19.overview_name_key(name)
+        if name in regions and regions[name] != prefecture:
+            conflicts.add(name)
+        regions[name] = prefecture
+    return {name: prefecture for name, prefecture in regions.items() if name not in conflicts}
+
+
+def overview_observation(page, regions):
+    venue = overview_venue_from_dom(page)
+    store = v19.store_part(venue)
+    return {'overview_venue': venue, 'overview_seller': overview_seller_from_dom(page),
+            'overview_master_prefecture': regions.get(v19.overview_name_key(store['name']), '') if store else ''}
+
+
 def browser_fetcher():
     """Preserve v20 same-URL browser behavior; also read structured event titles.
 
-    No new endpoint, API, login, access-block evasion, or second request.
+    The existing service-only master lookup is shared across the session.
+    No second event-page request, login or access-block evasion.
     """
     try:
         from playwright.sync_api import sync_playwright, TimeoutError as BrowserTimeout
     except ImportError as exc:
         raise RuntimeError('Playwrightがインストールされていません') from exc
+    venue_regions = overview_store_regions()
     manager = sync_playwright().start()
     try:
         browser = manager.chromium.launch(headless=True)
@@ -2356,7 +2398,7 @@ def browser_fetcher():
             return {'status': 'ok', 'final_url': page.url,
                     'text': body[:30000], 'titles': titles,
                     'title_sources': title_sources,
-                    'overview_venue': overview_venue_from_dom(page),
+                    **overview_observation(page, venue_regions),
                     'dom_title_candidates': dom_title_candidates if isinstance(dom_title_candidates, list) else []}
         except BrowserTimeout:
             return {'status': 'browser_timeout'}

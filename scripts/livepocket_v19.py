@@ -18,6 +18,7 @@ import io
 import json
 import os
 import re
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -27,6 +28,7 @@ import livepocket_v12 as v12
 import livepocket_v14 as v14
 import livepocket_v15 as v15
 import livepocket_v18 as v18
+from livepocket_store_name_normalize import normalize as normalize_store_name
 
 RAW_PATH = v14.RAW_PATH
 PUBLIC_PATH = v14.PUBLIC_PATH
@@ -48,8 +50,15 @@ GENERIC_STORE = re.compile(r'(?:^全国.*店舗$|^店舗.*一覧$|^各店舗$|^�
 DANGEROUS = re.compile(r'http[s]?://|[<>\ufffd]|\.{3}|…|[\n\r\t]|^[-+=@]')
 DISCORD_URL_RE = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{4,64}')
 RETAIL = re.compile(r'店$|(?:SHOP|STORE|TSUTAYA|HMV|BOOKS|トレカ|古本市場|ふるいち|キデイランド|イトーヨーカドー|晴れる屋|麦わらストア|ジャンプショップ)', re.I)
-OVERVIEW_RETAIL = re.compile(
-    r'(?:店|ショップ|SHOP|STORE)$|^TSUTAYA\s+Trading\s+Card\s+\S.{1,85}$', re.I)
+OVERVIEW_RETAIL = re.compile(r'(?:店|ショップ|SHOP|STORE)$', re.I)
+OVERVIEW_PLACEHOLDERS = frozenset((
+    '会場', '会場未定', '会場未確認', '店舗', '対象店舗', '各店舗', '各店',
+    '販売元', '受取場所', '全国', 'オンライン', '実店舗なし',
+))
+RETAIL_DRAW_TITLE = re.compile(r'抽選販売|抽選予約|購入権|販売権', re.I)
+CARD_GOODS_TITLE = re.compile(
+    r'カードゲーム|トレーディングカード|ポケモンカード|ポケカ|ワンピースカード|遊戯王|'
+    r'トレカ|拡張パック|ブースターパック|デッキ|\bTCG\b|\bBOX\b', re.I)
 TICKET_DATE = r'(?:\d{4}\s*[年/／]\s*)?\d{1,2}\s*[月/／]\s*\d{1,2}\s*日?'
 TICKET_PURCHASE_PREFIX = re.compile(
     rf'^{TICKET_DATE}\s*(?:[〜～~–—－-]|から)\s*{TICKET_DATE}\s*購入可能\s*[・･:：]\s*')
@@ -210,18 +219,43 @@ def page_stores(text):
     return list(unique.values())
 
 
+def overview_name_key(name):
+    """Match named branches using the shared master's normalizer, never fuzzily."""
+    return normalize_store_name(unicodedata.normalize('NFKC', str(name or '')))
+
+
+def overview_retail_draw(observation):
+    """Require a goods purchase draw in an event-specific heading."""
+    for title, source in zip(observation.get('titles') or [], observation.get('title_sources') or []):
+        if source not in ('h1', 'event_heading', 'jsonld', 'event_state') or not isinstance(title, str):
+            continue
+        title = unicodedata.normalize('NFKC', title)
+        if RETAIL_DRAW_TITLE.search(title) and CARD_GOODS_TITLE.search(title):
+            return True
+    return False
+
+
 def overview_store(observation):
     """Use a named retail venue with an explicit prefecture as a fallback."""
     if observation.get('page_identity') != 'event_confirmed':
         return None
     store = store_part(observation.get('overview_venue'))
-    # Trading Card branches can identify their location without a 店 suffix.
-    # A confirmed event, explicit prefecture and retail format are still needed.
-    if not store or not store['prefecture'] or not OVERVIEW_RETAIL.search(store['name']):
+    if (not store or not store['prefecture'] or store['name'] in v10.PREFS
+            or overview_name_key(store['name']) in OVERVIEW_PLACEHOLDERS):
         return None
     # An unreadable or conflicting explicit list must not become one store.
     if any(STORE_HEADING.fullmatch(normalize_store_heading(line))
            for line in (observation.get('text') or '').splitlines()):
+        return None
+    # A suffix is sufficient for legacy shop labels, but no longer required.
+    # Other names need an exact master match (including prefecture), or the
+    # same branch as the official seller on an explicitly retail draw page.
+    master_match = observation.get('overview_master_prefecture') == store['prefecture']
+    seller = store_part(observation.get('overview_seller'))
+    seller_match = bool(seller and overview_name_key(seller['name']) == overview_name_key(store['name'])
+                        and (not seller['prefecture'] or seller['prefecture'] == store['prefecture'])
+                        and overview_retail_draw(observation))
+    if not (OVERVIEW_RETAIL.search(store['name']) or master_match or seller_match):
         return None
     return store
 

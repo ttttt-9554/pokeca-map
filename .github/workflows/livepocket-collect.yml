@@ -94,6 +94,9 @@ jobs:
         timeout-minutes: 2
         if: ${{ steps.claim.outputs.requested == 'true' }}
         continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python scripts/livepocket_individual_fetch.py execute
       - name: Save individual review result
         id: individual_complete
@@ -265,6 +268,8 @@ jobs:
       - name: Check ticket products and multiple-store prefectures (v21)
         shell: bash
         env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           LIVEPOCKET_V21_BROWSER_READY: ${{ steps.v21plan.outputs.browser_needed == 'true' || steps.individual_prepare.outputs.requested == 'true' }}
           LIVEPOCKET_INDIVIDUAL_ENABLED: ${{ steps.individual_prepare.outputs.requested }}
         run: |
