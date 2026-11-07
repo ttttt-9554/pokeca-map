@@ -43,13 +43,14 @@ def candidates(catalog, now):
         if supported(item.get('url'))]
     if any(value and value > now for value in map(timestamp, cooldowns)):
         return []
+    importer_updated = os.environ.get('CUSTOMFORM_IMPORTER_UPDATED') == 'true'
     output = []
     for item in catalog.get('items', []):
         posted = timestamp(item.get('discord_posted_at')) or timestamp(item.get('first_detected_at'))
         checked = timestamp(item.get('customform_checked_at'))
         if (supported(item.get('url')) and not item.get('customform_verified_at')
                 and posted and posted >= now - timedelta(days=7)
-                and (not checked or checked <= now - timedelta(days=1))):
+                and (importer_updated or not checked or checked <= now - timedelta(days=1))):
             output.append(item)
     return sorted(output, key=lambda row: row.get('discord_posted_at', ''), reverse=True)[:3]
 
@@ -72,19 +73,30 @@ def browser_pages(items):
             for item in items:
                 page = context.new_page()
                 try:
-                    page.goto(item['url'], wait_until='domcontentloaded', timeout=25000)
+                    try:
+                        page.goto(item['url'], wait_until='domcontentloaded', timeout=25000)
+                    except BrowserError as error:
+                        code = re.search(r'net::[A-Z_]+', str(error))
+                        print('CustomForm navigation:', code.group() if code else type(error).__name__)
+                        if page.url != item['url']:
+                            yield item, '', False
+                            continue
                     page.wait_for_selector('h1', state='visible', timeout=25000)
                     page.wait_for_selector(r'[wire\:snapshot]', state='attached', timeout=5000)
                     html = page.content()
-                    yield item, html if page.url == item['url'] and len(html.encode()) <= 2_000_000 else '', False
+                    accepted = page.url == item['url'] and len(html.encode()) <= 2_000_000
+                    print('CustomForm public page:', 'ready' if accepted else 'unexpected address or size')
+                    yield item, html if accepted else '', False
                 except BrowserTimeout:
                     blocked = bool(page.locator('script[src*="awswaf.com"]').count())
                     yield item, '', blocked
                     if blocked:
                         break
-                except BrowserError:
+                except BrowserError as error:
                     # Keep successful earlier pages and retry ordinary network
                     # failures later without logging page data or credentials.
+                    code = re.search(r'net::[A-Z_]+', str(error))
+                    print('CustomForm page read:', code.group() if code else type(error).__name__)
                     yield item, '', False
                 finally:
                     page.close()
@@ -148,7 +160,9 @@ def main():
     for item, html, blocked in browser_pages(items):
         item['customform_checked_at'] = now.isoformat()
         if html:
-            verified += apply_fields(item, parse_page(html, item['url']), regions, now)
+            fields = parse_page(html, item['url'])
+            print('CustomForm extracted fields:', ','.join(sorted(fields)))
+            verified += apply_fields(item, fields, regions, now)
         if blocked:
             item['customform_retry_after'] = (now + timedelta(days=1)).isoformat()
     temp = CATALOG.with_suffix('.tmp')

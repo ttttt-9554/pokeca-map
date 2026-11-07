@@ -2,6 +2,11 @@
 name: LivePocket Discord URL Collector
 
 'on':
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/customform_lottery_enrich.py'
+      - 'scripts/customform_lottery_parse.mjs'
   workflow_dispatch:
     inputs:
       backfill:
@@ -132,6 +137,7 @@ jobs:
     timeout-minutes: 20
     env:
       LIVEPOCKET_V14_SNAPSHOT: '.livepocket_v14_before.json'
+      CUSTOMFORM_IMPORTER_UPDATED: ${{ github.event_name == 'push' && 'true' || 'false' }}
       LIVEPOCKET_DEVELOPER_RECHECK: ${{ github.event_name == 'workflow_dispatch' && inputs.review_batch == '12' && 'true' || 'false' }}
       LIVEPOCKET_V14_NEW_PER_RUN: '15'
       # 定期実行は schedule だけでなく外部からの workflow_dispatch でも起動する。
