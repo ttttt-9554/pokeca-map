@@ -11361,30 +11361,28 @@
       "url": "https://livepocket.jp/e/arz9b",
       "store_name": "TSUTAYA流山店",
       "prefecture": "千葉県",
-      "discord_posted_at": "2026-11-07T05:00:06.516000+00:00",
-      "stores": [
-        {
-          "name": "TSUTAYA流山店",
-          "prefecture": "千葉県"
-        }
-      ],
       "event_title": "ポケモンカードゲーム 拡張パック「ハドウシーカー」 抽選受付",
-      "application_end_at": "2026-11-08T21:45:00+09:00",
       "application_start_at": "2026-11-06T09:30:00+09:00",
-      "review_category": "pokemon",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 拡張パック「ハドウシーカー」 抽選受付",
+      "application_end_at": "2026-11-08T21:45:00+09:00",
+      "discord_posted_at": "2026-11-07T05:00:06.516000+00:00",
       "result_announcement_date": "2026-11-12",
       "result_announcement_time": "13:00",
       "purchase_start_date": "2026-11-27",
       "purchase_start_time": "09:30",
       "purchase_end_date": "2026-11-29",
       "purchase_end_time": "21:45",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA流山店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T05:05:59.967700+00:00"
     }
   ],
-  "updated_at": "2026-11-07T05:06:36.872968+00:00"
+  "updated_at": "2026-11-07T05:16:02.116131+00:00"
 }
