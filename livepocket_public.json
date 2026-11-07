@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-07T15:35:55.026023+00:00",
-  "unique_livepocket_urls": 721,
+  "collected_at": "2026-11-07T16:05:56.703381+00:00",
+  "unique_livepocket_urls": 723,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11654,7 +11654,52 @@
         }
       ],
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/q2duc",
+      "store_name": "ふるいちトップブックス川島インター店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-07T16:00:03.949000+00:00",
+      "stores": [
+        {
+          "name": "ふるいちトップブックス川島インター店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-07T09:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
+      "result_announcement_date": "2026-11-11",
+      "purchase_start_date": "2026-11-14",
+      "purchase_end_date": "2026-11-16",
+      "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru",
+      "store_name": "TSUTAYA涌谷店",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-11-07T16:00:03.949000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA涌谷店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
+      "application_end_at": "2026-11-10T21:00:00+09:00",
+      "application_start_at": "2026-11-07T12:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
+      "result_announcement_date": "2026-11-18",
+      "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     }
   ],
-  "updated_at": "2026-11-07T15:56:01.185003+00:00"
+  "updated_at": "2026-11-07T16:06:23.772052+00:00"
 }
