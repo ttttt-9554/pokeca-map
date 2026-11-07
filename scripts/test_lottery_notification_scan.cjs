@@ -68,7 +68,6 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
     await import('../supabase/functions/discord-notify/lottery-deadline-alerts.mjs');
   const {setupLotteryDeadlineChannel} =
     await import('../supabase/functions/discord-notify/lottery-deadline-channel.mjs');
-  const appUrl = 'https://ttttt-9554.github.io/pokeca-map/';
   const guild = '100000000000000001', source = '100000000000000002';
   const deadlineChannel = '100000000000000003', category = '100000000000000004';
   const bot = '100000000000000005';
@@ -78,17 +77,23 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
     event_title: 'カード応募 [抽選]', store_name: '東京店', reminder: 'one_hour',
     deadline: new Date(Date.now() + 60 * 60_000).toISOString()
   };
-  const longBatch = deadlineDiscordMessages(Array.from({length: 70}, (_, index) => ({
-    ...fixture, event_key: String(index)
-  })), appUrl);
-  assert.equal(longBatch.reduce((n, message) => n + message.jobs.length, 0), 70);
-  assert.ok(longBatch.length > 1 && longBatch.every(message => message.content.length <= 1900));
+  const buildEmbed = (job, title) => ({
+    title, url: job.event_url, description: job.event_title,
+    fields: [{name: '🏪 店舗', value: job.store_name}]
+  });
+  const batchJobs = Array.from({length: 25}, (_, index) => ({...fixture, event_key: String(index)}));
+  assert.deepEqual(deadlineDiscordMessages(batchJobs, buildEmbed).map(batch => batch.embeds.length), [10, 10, 5]);
+  const longBatch = deadlineDiscordMessages(batchJobs, (job, title) => ({
+    ...buildEmbed(job, title), description: '抽'.repeat(1000)
+  }));
+  assert.equal(longBatch.reduce((n, message) => n + message.jobs.length, 0), 25);
+  assert.ok(longBatch.length > 3 && longBatch.every(message => message.embeds.length <= 5));
 
   const settings = {
     botToken: 'test-bot',
     newLotteryWebhook: 'https://discord.com/api/webhooks/100000000000000006/example-token'
   };
-  let channel, created = 0, sent = 0, settled;
+  let channel, created = 0, sent = 0, settled, botPermissions = '8';
   const oldFetch = globalThis.fetch;
   globalThis.fetch = async (url, options) => {
     const path = new URL(url).pathname;
@@ -113,13 +118,16 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
       ]);
     }
     if (path === '/api/v10/users/@me') return Response.json({id: bot, username: 'fixture-bot'});
-    if (path.endsWith('/roles')) return Response.json([{id: guild, permissions: '8'}]);
+    if (path.endsWith('/roles')) return Response.json([{id: guild, permissions: botPermissions}]);
     if (path.endsWith('/members/' + bot)) return Response.json({roles: []});
     assert.equal(path, '/api/v10/channels/' + deadlineChannel + '/messages');
     assert.equal(options.method, 'POST');
     const message = JSON.parse(options.body);
-    assert.match(message.content, /応募締切まで約1時間/);
-    assert.ok(message.content.includes(confirmed.url));
+    assert.equal(message.embeds.length, 1);
+    assert.match(message.embeds[0].title, /応募締切まで約1時間/);
+    assert.equal(message.embeds[0].url, confirmed.url);
+    assert.equal(message.embeds[0].description, fixture.event_title);
+    assert.equal(message.flags, undefined);
     assert.deepEqual(message.allowed_mentions, {parse: []});
     assert.match(message.nonce, /^[0-9a-f]{24}$/);
     assert.equal(message.enforce_nonce, true);
@@ -132,11 +140,18 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
     assert.equal(setup.channel_id, deadlineChannel);
     await setupLotteryDeadlineChannel(settings);
     assert.equal(created, 1);
+    channel.permission_overwrites = [];
+    botPermissions = '3072';
+    assert.equal((await setupLotteryDeadlineChannel(settings, false)).ready, false);
+    botPermissions = '19456';
+    assert.equal((await setupLotteryDeadlineChannel(settings, false)).ready, true);
     const database = {
       rpc: async (name, args) => {
-        if (name === 'lottery_claim_deadline_discord_alerts') {
+        if (name === 'lottery_claim_deadline_discord_embeds') {
           assert.equal(args.p_catalog.length, 1);
           assert.equal(args.p_catalog[0].event_url, confirmed.url);
+          assert.equal(args.p_catalog[0].prefecture, '東京都');
+          assert.equal(args.p_catalog[0].application_start_at, '2026-11-06T01:00:00.000Z');
           return {data: [fixture]};
         }
         assert.equal(name, 'lottery_settle_deadline_discord_alerts');
@@ -146,13 +161,15 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
     };
     const run = () => scanLotteryDeadlineAlerts(database, {
       livepocket: Promise.resolve({items: []}), external: Promise.resolve({items: [confirmed]})
-    }, settings, appUrl);
+    }, settings, buildEmbed);
     assert.deepEqual(await run(), {claimed: 1, sent: 1});
     assert.equal(settled.p_delivered, true);
     channel = null;
     await assert.rejects(run(), /deadline channel is missing/);
     assert.equal(settled.p_delivered, false);
     assert.equal(sent, 1);
+    await assert.rejects(setupLotteryDeadlineChannel(settings, false), /deadline channel is missing/);
+    assert.equal(created, 1);
   } finally {
     globalThis.fetch = oldFetch;
   }

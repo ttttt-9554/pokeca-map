@@ -7,11 +7,14 @@ const titles = {
   one_hour: '⏰ 応募締切まで約1時間',
   both: '⏰ 本日が応募締切・締切まで約1時間'
 };
-const formatDeadline = new Intl.DateTimeFormat('ja-JP', {
-  timeZone: 'Asia/Tokyo', month: '2-digit', day: '2-digit',
-  hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
-});
 const text = value => typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
+const MAX_EMBEDS = 10;
+const MAX_EMBED_TEXT = 6000;
+
+function applicationDate(value) {
+  const time = applicationTime(text(value));
+  return Number.isFinite(time) ? new Date(time).toISOString() : null;
+}
 
 function publishedCards(catalog, origin) {
   if (!Array.isArray(catalog?.items)) return [];
@@ -26,12 +29,18 @@ function publishedCards(catalog, origin) {
         : canonicalExternalLotteryUrl(eventUrl);
     } catch { continue; }
     if (!identity) continue;
-    const deadline = applicationTime(text(item.application_end_at));
+    const stores = Array.isArray(item.stores) ? item.stores.slice(0, 100).map(store => ({
+      name: text(store?.name), prefecture: text(store?.prefecture)
+    })).filter(store => store.name) : [];
     result.push({
       event_url: eventUrl, identity, origin,
       event_title: text(item.event_title_provisional ? item.product_name : item.event_title || item.product_name),
-      store_name: text(item.stores?.[0]?.name || item.store_name),
-      deadline: Number.isFinite(deadline) ? new Date(deadline).toISOString() : null,
+      store_name: stores[0]?.name || text(item.store_name),
+      prefecture: stores[0]?.prefecture || text(item.prefecture),
+      stores,
+      product_name: text(item.product_name),
+      application_start_at: applicationDate(item.application_start_at),
+      deadline: applicationDate(item.application_end_at),
       unavailable: item.manual_page_unavailable === true,
       famima_verified: Boolean(item.famima_verified_at)
     });
@@ -39,32 +48,30 @@ function publishedCards(catalog, origin) {
   return result;
 }
 
-function discordLabel(value, max) {
-  return text(value).slice(0, max).replace(/[\\*_~|\[\]()<>#\x60]/g, '\\$&');
+function embedTextLength(embed) {
+  return [
+    embed.title, embed.description, embed.footer?.text, embed.author?.name,
+    ...(embed.fields ?? []).flatMap(field => [field.name, field.value])
+  ].reduce((length, value) => length + (value?.length ?? 0), 0);
 }
 
-export function deadlineDiscordMessages(jobs, appUrl) {
+export function deadlineDiscordMessages(jobs, buildEmbed) {
   const result = [];
   for (const [kind, title] of Object.entries(titles)) {
-    const header = '**' + title + '**（日本時間）\n';
-    let content = header, batch = [];
+    let batch = {embeds: [], jobs: []}, length = 0;
     for (const job of jobs.filter(job => job.reminder === kind)) {
-      const name = discordLabel(job.event_title, 125) || '抽選カード';
-      const store = discordLabel(job.store_name, 64);
-      const url = /^https?:\/\/[^\s<>"]{4,650}$/i.test(job.event_url) ? job.event_url : appUrl;
-      const link = url.replace(/\(/g, '%28').replace(/\)/g, '%29');
-      const line = '- [' + name + '](' + link + ')' +
-        (store ? '（' + store + '）' : '') + '  ·  ' +
-        formatDeadline.format(new Date(job.deadline)) + ' 締切\n';
-      if (content.length + line.length > 1900 && batch.length) {
-        result.push({content, jobs: batch});
-        content = header;
-        batch = [];
+      const embed = buildEmbed(job, title);
+      const size = embedTextLength(embed);
+      if (batch.embeds.length && (batch.embeds.length === MAX_EMBEDS || length + size > MAX_EMBED_TEXT)) {
+        result.push(batch);
+        batch = {embeds: [], jobs: []};
+        length = 0;
       }
-      content += line;
-      batch.push(job);
+      batch.embeds.push(embed);
+      batch.jobs.push(job);
+      length += size;
     }
-    if (batch.length) result.push({content, jobs: batch});
+    if (batch.embeds.length) result.push(batch);
   }
   return result;
 }
@@ -85,14 +92,14 @@ async function messageNonce(jobs) {
   return Array.from(new Uint8Array(digest).slice(0, 12), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-export async function scanLotteryDeadlineAlerts(supabase, catalogs, settings, appUrl) {
+export async function scanLotteryDeadlineAlerts(supabase, catalogs, settings, buildEmbed) {
   if (!settings.botToken || !settings.newLotteryWebhook) return {configured: false};
   const [livepocket, external] = await Promise.allSettled([catalogs.livepocket, catalogs.external]);
   const p_catalog = [
     ...publishedCards(livepocket.value, 'livepocket'),
     ...publishedCards(external.value, 'external')
   ];
-  const {data, error} = await supabase.rpc('lottery_claim_deadline_discord_alerts', {p_catalog});
+  const {data, error} = await supabase.rpc('lottery_claim_deadline_discord_embeds', {p_catalog});
   if (error) throw Error('Lottery deadline claim failed: ' + error.message);
   const jobs = data ?? [];
   if (!jobs.length) return {claimed: 0, sent: 0};
@@ -106,11 +113,11 @@ export async function scanLotteryDeadlineAlerts(supabase, catalogs, settings, ap
   }
   let sent = 0;
   const active = jobs.filter(job => Date.parse(job.deadline) > Date.now());
-  const messages = deadlineDiscordMessages(active, appUrl);
+  const messages = deadlineDiscordMessages(active, buildEmbed);
   for (const [index, batch] of messages.entries()) {
     try {
       await postLotteryDeadlineMessage(destination.channel.id, settings.botToken, {
-        content: batch.content, allowed_mentions: {parse: []}, flags: 4,
+        embeds: batch.embeds, allowed_mentions: {parse: []},
         nonce: await messageNonce(batch.jobs), enforce_nonce: true
       });
     } catch (error) {

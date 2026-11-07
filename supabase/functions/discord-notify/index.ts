@@ -277,6 +277,22 @@ type LotteryJob = {
   payload: Record<string, unknown>;
 };
 
+type LotteryDeadlineJob = {
+  origin: "livepocket" | "external" | "app";
+  event_url: string;
+  event_title: string | null;
+  store_name: string | null;
+  prefecture: string | null;
+  stores: unknown;
+  app_id: string | null;
+  app_name: string | null;
+  registration_method: string | null;
+  product_name: string | null;
+  application_start_at: string | null;
+  deadline: string;
+  claim_no: number;
+};
+
 function lotteryDate(value: unknown): string {
   if (typeof value !== "string" || !value.trim()) return "未確認";
   const d = new Date(value);
@@ -287,8 +303,30 @@ function lotteryDate(value: unknown): string {
   });
 }
 
-function buildLotteryMessage(job: LotteryJob) {
+type LotteryStore = {name: string; prefecture?: string};
+
+function lotteryMessageStores(value: unknown): LotteryStore[] {
+  return Array.isArray(value)
+    ? value.filter((entry): entry is LotteryStore =>
+        !!entry && typeof entry === "object" && typeof entry.name === "string" && !!entry.name.trim())
+    : [];
+}
+
+function lotteryStoreField(stores: LotteryStore[], fallback: unknown) {
+  const listed = stores.length
+    ? stores.slice(0,18).map(store => store.name +
+        (store.prefecture ? "（" + store.prefecture + "）" : "")).join("\n") +
+        (stores.length > 18 ? "\nほか" + (stores.length - 18) + "店舗" : "")
+    : fallback;
+  return {
+    name: stores.length ? "🏪 対象店舗（" + stores.length + "件）" : "🏪 対象店舗",
+    value: clean(listed, 1000), inline: false
+  };
+}
+
+function buildLotteryMessage(job: LotteryJob, deadlineTitle?: string) {
   const p = job.payload || {};
+  const stores = lotteryMessageStores(p.stores);
   const isExternalAuto = job.source === "external_auto";
   if (isExternalAuto || job.source === "external_edit") {
     const rawUrl = typeof p.event_url === "string" ? p.event_url : "";
@@ -297,30 +335,22 @@ function buildLotteryMessage(job: LotteryJob) {
       ? p.changed_fields.filter((v): v is string => typeof v === "string")
           .slice(0, 8).map(v => clean(v, 70)).join("・")
       : "手動確認";
-    const stores = Array.isArray(p.stores)
-      ? p.stores.filter((x): x is {name: string; prefecture?: string} =>
-          !!x && typeof x === "object" && typeof x.name === "string" && !!x.name.trim())
-      : [];
-    const listedStores = stores.length
-      ? stores.slice(0,18).map(x => x.name +
-          (x.prefecture ? "（" + x.prefecture + "）" : "")).join("\n") +
-          (stores.length > 18 ? "\nほか" + (stores.length - 18) + "店舗" : "")
-      : p.store_name;
     return {
       username: "トレカレーダー",
       allowed_mentions: { parse: [] },
       embeds: [{
-        title: isExternalAuto
+        title: deadlineTitle ?? (isExternalAuto
           ? "🎟️ 外部抽選が追加されました"
-          : "🛠️ 外部抽選の編集情報が更新されました",
+          : "🛠️ 外部抽選の編集情報が更新されました"),
         description: clean(p.event_title || p.store_name || "名称未確認の抽選", 220),
         color: 3447003,
         url: originalUrl,
         fields: [
           ...(isExternalAuto ? [] : [{ name: "📝 更新内容", value: changed || "手動確認", inline: false }]),
-          { name: stores.length ? "🏪 対象店舗（" + stores.length + "件）" : "🏪 対象店舗",
-            value: clean(listedStores, 1000), inline: false },
+          lotteryStoreField(stores, p.store_name),
           { name: "📍 地域", value: clean(p.prefecture, isExternalAuto ? 240 : 40), inline: true },
+          ...(deadlineTitle && p.product_name
+            ? [{ name: "🎴 商品", value: clean(p.product_name, 200), inline: false }] : []),
           { name: "🕒 応募開始", value: lotteryDate(p.application_start_at), inline: true },
           { name: "⌛ 応募締切", value: lotteryDate(p.application_end_at), inline: true }
         ],
@@ -331,15 +361,17 @@ function buildLotteryMessage(job: LotteryJob) {
     };
   }
   const isApp = job.source === "app";
+  const inStore = deadlineTitle && p.registration_method === "in_store";
   const id = isApp ? job.event_key : "";
   const url = isApp
     ? APP_URL + "?app_lottery=" + encodeURIComponent(id)
     : job.event_key;
   const title = clean(p.event_title || p.product_name || (isApp ? "アプリ内抽選" : "LivePocket新着"), 220);
   const fields = [
-    ...(isApp ? [{ name: "📱 アプリ名", value: clean(p.app_name, 100), inline: false }] : []),
-    { name: "🏪 店舗", value: clean(p.store_name, 200), inline: false },
-    { name: "📍 地域", value: clean(p.prefecture, 40), inline: true },
+    ...(isApp && !inStore ? [{ name: "📱 アプリ名", value: clean(p.app_name, 100), inline: false }] : []),
+    deadlineTitle && stores.length > 1
+      ? lotteryStoreField(stores, p.store_name) : { name: "🏪 店舗", value: clean(p.store_name, 200), inline: false },
+    { name: "📍 地域", value: clean(p.prefecture, deadlineTitle ? 240 : 40), inline: true },
     { name: "🎴 商品", value: clean(p.product_name, 200), inline: false },
     { name: "🕒 応募開始", value: lotteryDate(p.application_start_at), inline: true },
     { name: "⌛ 応募締切", value: lotteryDate(p.application_end_at), inline: true }
@@ -348,16 +380,33 @@ function buildLotteryMessage(job: LotteryJob) {
     username: "ポケカ発見マップ",
     allowed_mentions: { parse: [] },
     embeds: [{
-      title: (isApp ? "📱 アプリ抽選が登録されました" : "🎟️ LivePocket抽選が追加されました"),
+      title: deadlineTitle ?? (isApp ? "📱 アプリ抽選が登録されました" : "🎟️ LivePocket抽選が追加されました"),
       description: title,
       color: isApp ? 3845453 : 5793266,
       url,
       fields,
-      footer: { text: isApp
+      footer: { text: inStore ? "抽選タブで店頭の応募条件と受付期間をご確認ください。" : isApp
         ? "抽選タブで確認・応募は公式アプリで"
         : "LivePocket公式ページで条件・期間を確認してください" }
     }]
   };
+}
+
+function buildLotteryDeadlineEmbed(job: LotteryDeadlineJob, title: string) {
+  const source = job.origin === "app" ? "app" : job.origin === "livepocket" ? "livepocket" : "external_auto";
+  const registeredStores = lotteryMessageStores(job.stores);
+  const stores = registeredStores.length > 1 ? registeredStores
+    : job.store_name ? [{name: job.store_name, prefecture: job.prefecture ?? undefined}] : [];
+  const areas = [...new Set(stores.map(store => store.prefecture).filter(Boolean))];
+  return buildLotteryMessage({
+    source, event_key: job.app_id || job.event_url, attempts: job.claim_no,
+    payload: {
+      event_url: job.event_url, event_title: job.event_title, app_name: job.app_name,
+      registration_method: job.registration_method, product_name: job.product_name,
+      store_name: job.store_name, prefecture: areas.join("・") || job.prefecture, stores,
+      application_start_at: job.application_start_at, application_end_at: job.deadline
+    }
+  }, title).embeds[0];
 }
 
 async function fetchLotteryCatalog(url: string, label: string): Promise<unknown> {
@@ -643,7 +692,7 @@ Deno.serve(async (req: Request) => {
 
   if (payload.type === "LOTTERY_DEADLINE_CHANNEL_SETUP") {
     try {
-      return Response.json(await setupLotteryDeadlineChannel(lotteryDeadlineSettings()));
+      return Response.json(await setupLotteryDeadlineChannel(lotteryDeadlineSettings(), payload.check_only !== true));
     } catch (error) {
       const message = String(error);
       console.error("Lottery deadline channel setup failed:", message);
@@ -670,7 +719,7 @@ Deno.serve(async (req: Request) => {
           },
           (error: unknown) => console.error("Immediate lottery delivery failed:", String(error))
         ),
-        scanLotteryDeadlineAlerts(supabase, catalogs, lotteryDeadlineSettings(), APP_URL)
+        scanLotteryDeadlineAlerts(supabase, catalogs, lotteryDeadlineSettings(), buildLotteryDeadlineEmbed)
       ]);
       if (deadline.status === "rejected")
         console.error("Lottery deadline scan failed:", String(deadline.reason));

@@ -1,5 +1,6 @@
 const DISCORD_API = 'https://discord.com/api/v10';
 const CHANNEL_NAME = '抽選締切アラート';
+const DEADLINE_CHANNEL_PERMISSIONS = (1n << 10n) | (1n << 11n) | (1n << 14n);
 const isDiscordId = id => typeof id === 'string' && /^\d{17,20}$/.test(id);
 
 async function discordRequest(url, label, botToken, init = {}) {
@@ -67,7 +68,7 @@ function channelPermissions(channel, guildId, roles, member, userId) {
   const memberRoles = new Set(member.roles);
   let permissions = roles.reduce((bits, role) => role.id === guildId || memberRoles.has(role.id)
     ? bits | BigInt(role.permissions) : bits, 0n);
-  if (permissions & (1n << 3n)) return permissions | (1n << 10n) | (1n << 11n);
+  if (permissions & (1n << 3n)) return permissions | DEADLINE_CHANNEL_PERMISSIONS;
   const overwrites = channel.permission_overwrites ?? [];
   const apply = (bits, rows) => {
     let allow = 0n, deny = 0n;
@@ -82,8 +83,8 @@ function channelPermissions(channel, guildId, roles, member, userId) {
   return apply(permissions, overwrites.filter(row => row.type === 1 && row.id === userId));
 }
 
-export async function setupLotteryDeadlineChannel(settings) {
-  const {channel, guildId, created} = await lotteryDeadlineChannel(settings, true);
+export async function setupLotteryDeadlineChannel(settings, allowCreate = true) {
+  const {channel, guildId, created} = await lotteryDeadlineChannel(settings, allowCreate);
   const {botToken} = settings;
   const [bot, roles] = await Promise.all([
     discordData('/users/@me', 'Lottery deadline bot lookup', botToken),
@@ -92,9 +93,8 @@ export async function setupLotteryDeadlineChannel(settings) {
   if (!isDiscordId(bot.id)) throw Error('Lottery deadline bot could not be identified');
   const member = await discordData('/guilds/' + guildId + '/members/' + bot.id, 'Lottery deadline bot membership lookup', botToken);
   const permissions = channelPermissions(channel, guildId, roles, member, bot.id);
-  const required = (1n << 10n) | (1n << 11n);
   return {
-    ready: (permissions & required) === required,
+    ready: (permissions & DEADLINE_CHANNEL_PERMISSIONS) === DEADLINE_CHANNEL_PERMISSIONS,
     created, channel_id: channel.id, guild_id: guildId, bot_name: bot.global_name || bot.username
   };
 }
