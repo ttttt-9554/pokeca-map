@@ -11336,6 +11336,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
       "first_detected_at": "2026-11-07T03:30:58.080458+00:00"
     },
     {
@@ -11424,8 +11426,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【抽選販売】ワンピースカードゲーム ブースターパック OP18『神の支配』",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11446,8 +11446,6 @@
           "prefecture": "宮城県"
         }
       ],
-      "official_genre": "pokemon",
-      "official_event_title": "TSUTAYA東仙台店 ポケモンカードゲーム 抽選販売",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11468,8 +11466,6 @@
           "prefecture": "宮城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11555,122 +11551,112 @@
       "url": "https://livepocket.jp/e/3n9no",
       "store_name": "TSUTAYA追浜店",
       "prefecture": "神奈川県",
+      "event_title": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
+      "application_start_at": "2026-11-07T10:00:00+09:00",
+      "application_end_at": "2026-11-09T21:00:00+09:00",
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA追浜店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
-      "application_end_at": "2026-11-09T21:00:00+09:00",
-      "application_start_at": "2026-11-07T10:00:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
       "url": "https://livepocket.jp/e/mc956",
       "store_name": "TSUTAYA Trading Card 戸塚店",
       "prefecture": "神奈川県",
+      "event_title": "抽選販売 11月13日発売 PM『スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー』",
+      "application_start_at": "2026-11-07T10:30:00+09:00",
+      "application_end_at": "2026-11-09T21:00:00+09:00",
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
+      "result_announcement_date": "2026-11-10",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 戸塚店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "抽選販売 11月13日発売 PM『スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー』",
-      "application_end_at": "2026-11-09T21:00:00+09:00",
-      "application_start_at": "2026-11-07T10:30:00+09:00",
-      "official_event_title": "抽選販売 11月13日発売 PM『スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー』",
-      "result_announcement_date": "2026-11-10",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
       "url": "https://livepocket.jp/e/dqtqd",
       "store_name": "TSUTAYA横須賀粟田店",
       "prefecture": "神奈川県",
+      "product_name": "SPデッキセット MEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "event_title": "ポケカ『SPデッキセット MEGA メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "application_end_at": "2026-11-08T21:30:00+09:00",
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
+      "result_announcement_date": "2026-11-09",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA横須賀粟田店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "ポケカ『SPデッキセット MEGA メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
-      "application_end_at": "2026-11-08T21:30:00+09:00",
-      "application_start_at": "2026-11-06T10:00:00+09:00",
-      "review_category": "pokemon",
-      "product_name": "SPデッキセット MEGA メガオーダイル・メガカイリュー・メガゲンガー",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケカ『SPデッキセット MEGA メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
-      "result_announcement_date": "2026-11-09",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
       "url": "https://livepocket.jp/e/24acn",
       "store_name": "TSUTAYA大利根店トレカ売場",
       "prefecture": "埼玉県",
+      "product_name": "HEROINES PRECIOUS BOX",
+      "event_title": "【大利根店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
+      "result_announcement_date": "2026-11-12",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA大利根店トレカ売場",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【大利根店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "HEROINES PRECIOUS BOX",
-      "official_genre": "onepiece",
-      "official_event_title": "【大利根店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "result_announcement_date": "2026-11-12",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
       "url": "https://livepocket.jp/e/sb0d4",
       "store_name": "古本市場深谷店",
       "prefecture": "埼玉県",
+      "event_title": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "古本市場深谷店",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
-      "application_end_at": "2026-11-08T22:00:00+09:00",
-      "application_start_at": "2026-11-06T10:00:00+09:00",
-      "review_category": "onepiece",
-      "official_event_title": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
-      "result_announcement_date": "2026-11-10",
-      "purchase_start_date": "2026-11-13",
-      "purchase_end_date": "2026-11-15",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
       "url": "https://livepocket.jp/e/854lu",
       "store_name": "TSUTAYA栃木城内店トレカ売場",
       "prefecture": "栃木県",
+      "event_title": "【栃木城内店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
+      "result_announcement_date": "2026-11-17",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA栃木城内店トレカ売場",
           "prefecture": "栃木県"
         }
       ],
-      "event_title": "【栃木城内店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【栃木城内店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "result_announcement_date": "2026-11-17",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     }
   ],
-  "updated_at": "2026-11-07T15:36:24.290258+00:00"
+  "updated_at": "2026-11-07T15:46:25.465664+00:00"
 }
