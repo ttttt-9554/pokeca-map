@@ -89,7 +89,8 @@ def browser_pages(items):
                 page.on('response', remember_document)
                 try:
                     try:
-                        page.goto(item['url'], wait_until='domcontentloaded', timeout=25000)
+                        navigation = page.goto(item['url'], wait_until='domcontentloaded', timeout=25000)
+                        print('CustomForm document HTTP:', navigation.status if navigation else 'none')
                     except BrowserError as error:
                         code = re.search(r'net::[A-Z_]+', str(error))
                         print('CustomForm navigation:', code.group() if code else type(error).__name__)
@@ -97,6 +98,8 @@ def browser_pages(items):
                             yield item, '', False
                             continue
                     page.wait_for_selector('h1', state='visible', timeout=25000)
+                    print('CustomForm visible heading:',
+                          re.sub(r'\s+', ' ', page.locator('h1').first.inner_text())[:200])
                     html = document_html[-1] if document_html else page.content()
                     print('CustomForm snapshot:', 'response' if document_html else 'rendered DOM',
                           'present' if 'wire:snapshot=' in html else 'absent')
