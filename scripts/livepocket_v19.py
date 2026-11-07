@@ -48,6 +48,8 @@ GENERIC_STORE = re.compile(r'(?:^全国.*店舗$|^店舗.*一覧$|^各店舗$|^�
 DANGEROUS = re.compile(r'http[s]?://|[<>\ufffd]|\.{3}|…|[\n\r\t]|^[-+=@]')
 DISCORD_URL_RE = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{4,64}')
 RETAIL = re.compile(r'店$|(?:SHOP|STORE|TSUTAYA|HMV|BOOKS|トレカ|古本市場|ふるいち|キデイランド|イトーヨーカドー|晴れる屋|麦わらストア|ジャンプショップ)', re.I)
+OVERVIEW_RETAIL = re.compile(
+    r'(?:店|ショップ|SHOP|STORE)$|^TSUTAYA\s+Trading\s+Card\s+\S.{1,85}$', re.I)
 TICKET_DATE = r'(?:\d{4}\s*[年/／]\s*)?\d{1,2}\s*[月/／]\s*\d{1,2}\s*日?'
 TICKET_PURCHASE_PREFIX = re.compile(
     rf'^{TICKET_DATE}\s*(?:[〜～~–—－-]|から)\s*{TICKET_DATE}\s*購入可能\s*[・･:：]\s*')
@@ -213,7 +215,9 @@ def overview_store(observation):
     if observation.get('page_identity') != 'event_confirmed':
         return None
     store = store_part(observation.get('overview_venue'))
-    if not store or not store['prefecture'] or not re.search(r'(?:店|ショップ|SHOP|STORE)$', store['name'], re.I):
+    # Trading Card branches can identify their location without a 店 suffix.
+    # A confirmed event, explicit prefecture and retail format are still needed.
+    if not store or not store['prefecture'] or not OVERVIEW_RETAIL.search(store['name']):
         return None
     # An unreadable or conflicting explicit list must not become one store.
     if any(STORE_HEADING.fullmatch(normalize_store_heading(line))

@@ -17,6 +17,7 @@ name: LivePocket Detail Deadline Regression
       - lottery_notifications_v1.js
       - supabase/lottery_result_announcement_parts_v1.sql
       - scripts/livepocket_individual_fetch.py
+      - scripts/livepocket_v19.py
       - scripts/test_livepocket_individual_fetch.py
       - scripts/test_livepocket_immediate_dispatch_ui.cjs
       - scripts/test_lottery_public_poll.cjs

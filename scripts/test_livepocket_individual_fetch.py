@@ -66,6 +66,44 @@ class IndividualFetchTests(unittest.TestCase):
         observation['overview_venue'] = 'テスト体育館（栃木県）'
         self.assertNotIn('stores', individual.extract(v21, URL, observation)['fields'])
 
+    def test_trading_card_branch_without_shop_suffix_in_both_collection_paths(self):
+        name = 'TSUTAYA Trading Card 宇都宮インターパークビレッジ'
+        venue = name + ' (栃木県)'
+        body = BODY.replace('対象店舗\nテスト渋谷店（東京都）', '会場\n' + venue)
+        observation = {**page(text=body), 'overview_venue': venue}
+        stores = [{'name': name, 'prefecture': '栃木県'}]
+        self.assertEqual(individual.extract(v21, URL, observation)['fields']['stores'], stores)
+        raw, public = pair(pending=True)
+        raw, public, *_ = v21.process(
+            raw, public, lambda _: observation, catalog=[], now=NOW, new_limit=1,
+            background_limit=0, retry_limit=0, title_limit=0, verified={}, v19_verified={},
+            verified_titles={}, verified_unavailable={})
+        for row in (raw['items'][0], public['items'][0]):
+            self.assertEqual(row['stores'], stores)
+            self.assertEqual(row['store_name'], name)
+            self.assertEqual(row['prefecture'], '栃木県')
+        self.assertEqual(raw['items'][0]['field_sources']['stores'], 'v19_livepocket_overview_venue')
+
+    def test_trading_card_venue_keeps_identity_scope_and_existing_stores(self):
+        name = 'TSUTAYA Trading Card 宇都宮インターパークビレッジ'
+        observation = {**page(), 'page_identity': 'event_confirmed',
+                       'overview_venue': name + ' (栃木県)'}
+        self.assertIsNone(v21.v19.overview_store({**observation, 'page_identity': 'event_unconfirmed'}))
+        for venue in (name, 'TSUTAYA Trading Card (栃木県)', 'TSUTAYA O-EAST (東京都)',
+                      'テスト体育館 (栃木県)'):
+            with self.subTest(venue=venue):
+                self.assertIsNone(v21.v19.overview_store({**observation, 'overview_venue': venue}))
+        self.assertEqual(individual.extract(v21, URL, observation)['fields']['stores'],
+                         [{'name': 'テスト渋谷店', 'prefecture': '東京都'}])
+        existing = [{'name': '保存済みの店舗', 'prefecture': '東京都'}]
+        raw, public = pair()
+        for row in (raw['items'][0], public['items'][0]):
+            row.update(store_name=existing[0]['name'], prefecture='東京都', stores=existing)
+        observation['text'] = BODY.replace('対象店舗\nテスト渋谷店（東京都）\n', '')
+        v21.v19.apply_stores(raw, public, {URL: observation})
+        self.assertEqual(raw['items'][0]['stores'], existing)
+        self.assertEqual(public['items'][0]['stores'], existing)
+
     def test_purchase_window_in_shop_ticket_is_removed_from_new_and_saved_stores(self):
         prefix = '11/14～11/16購入可能・'
         names = ['フルコンプ秋葉原店', 'フルコンプ千葉店']
