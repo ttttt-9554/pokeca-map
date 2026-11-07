@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-07T03:00:14.321369+00:00",
+  "collected_at": "2026-11-07T03:10:55.900189+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -19955,7 +19955,7 @@
     "prefecture": 469,
     "event_title": 391,
     "event_date": 1,
-    "product_name": 106,
+    "product_name": 107,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
@@ -19965,12 +19965,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568460002237350011"
+      "1551580466266644552": "1568460049372684518"
     },
     "last_run": {
-      "checked_at": "2026-11-07T03:00:14.321369+00:00",
-      "new_urls": 2,
-      "original_urls": 702,
+      "checked_at": "2026-11-07T03:10:55.900189+00:00",
+      "new_urls": 0,
+      "original_urls": 704,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,

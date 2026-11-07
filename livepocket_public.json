@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-07T03:00:14.321369+00:00",
+  "collected_at": "2026-11-07T03:10:55.900189+00:00",
   "unique_livepocket_urls": 704,
   "items": [
     {
@@ -11282,43 +11282,39 @@
       "url": "https://livepocket.jp/e/9grzx",
       "store_name": "TSUTAYA宇都宮テクノ店トレカ売場",
       "prefecture": "栃木県",
+      "event_title": "【宇都宮テクノ店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
       "discord_posted_at": "2026-11-07T03:00:05.111000+00:00",
+      "result_announcement_date": "2026-11-17",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA宇都宮テクノ店トレカ売場",
           "prefecture": "栃木県"
         }
       ],
-      "event_title": "【宇都宮テクノ店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【宇都宮テクノ店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "result_announcement_date": "2026-11-17",
       "first_detected_at": "2026-11-07T03:00:16.749815+00:00"
     },
     {
       "url": "https://livepocket.jp/e/zzi1f",
       "store_name": "TSUTAYA宇都宮テクノ店トレカ売場",
       "prefecture": "栃木県",
+      "product_name": "HEROINES PRECIOUS BOX",
+      "event_title": "【宇都宮テクノ店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
       "discord_posted_at": "2026-11-07T03:00:05.111000+00:00",
+      "result_announcement_date": "2026-11-12",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA宇都宮テクノ店トレカ売場",
           "prefecture": "栃木県"
         }
       ],
-      "event_title": "【宇都宮テクノ店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "HEROINES PRECIOUS BOX",
-      "official_genre": "onepiece",
-      "official_event_title": "【宇都宮テクノ店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "result_announcement_date": "2026-11-12",
       "first_detected_at": "2026-11-07T03:00:16.749815+00:00"
     }
   ],
-  "updated_at": "2026-11-07T03:00:46.160035+00:00"
+  "updated_at": "2026-11-07T03:11:00.237053+00:00"
 }
