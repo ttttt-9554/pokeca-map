@@ -1,0 +1,31 @@
+name: Guerrilla Log Retention Regression
+'on':
+  push:
+    paths:
+      - 'supabase/guerrilla_run_log_compaction_v1.sql'
+      - 'scripts/test_guerrilla_log_retention.sql'
+      - '.github/workflows/guerrilla-log-retention.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: regression
+          POSTGRES_PASSWORD: test-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify retention and idle delivery in an isolated database
+        env:
+          PGPASSWORD: test-only
+        run: psql -X -v ON_ERROR_STOP=1 -h 127.0.0.1 -U postgres -d regression -f scripts/test_guerrilla_log_retention.sql
