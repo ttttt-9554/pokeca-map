@@ -11424,8 +11424,6 @@
           "prefecture": "千葉県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【抽選販売】ワンピースカードゲーム ブースターパック OP18『神の支配』",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11446,6 +11444,8 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_genre": "pokemon",
+      "official_event_title": "TSUTAYA東仙台店 ポケモンカードゲーム 抽選販売",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11466,8 +11466,6 @@
           "prefecture": "宮城県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     },
     {
@@ -11564,8 +11562,6 @@
           "prefecture": "神奈川県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
@@ -11682,6 +11678,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     },
     {
@@ -11700,8 +11698,10 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     }
   ],
-  "updated_at": "2026-11-07T21:56:29.833065+00:00"
+  "updated_at": "2026-11-07T22:06:27.201656+00:00"
 }
