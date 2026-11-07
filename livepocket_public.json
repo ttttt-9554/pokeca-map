@@ -11100,66 +11100,60 @@
       "url": "https://livepocket.jp/e/gr4t4",
       "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
       "prefecture": "神奈川県",
+      "product_name": "ブースターパック 神の支配 OP18",
+      "event_title": "ONE PIECEカードゲーム「ブースターパック 神の支配 OP18」抽選販売",
+      "application_start_at": "2026-11-07T09:00:00+09:00",
+      "application_end_at": "2026-11-08T20:00:00+09:00",
       "discord_posted_at": "2026-11-07T01:30:05.163000+00:00",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "09:00",
+      "purchase_end_date": "2026-11-22",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA BOOKSTORE川崎駅前店",
           "prefecture": "神奈川県"
         }
       ],
-      "event_title": "ONE PIECEカードゲーム「ブースターパック 神の支配 OP18」抽選販売",
-      "application_end_at": "2026-11-08T20:00:00+09:00",
-      "application_start_at": "2026-11-07T09:00:00+09:00",
-      "review_category": "onepiece",
-      "product_name": "ブースターパック 神の支配 OP18",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム「ブースターパック 神の支配 OP18」抽選販売",
-      "purchase_start_date": "2026-11-21",
-      "purchase_start_time": "09:00",
-      "purchase_end_date": "2026-11-22",
       "first_detected_at": "2026-11-07T01:31:01.138175+00:00"
     },
     {
       "url": "https://livepocket.jp/e/mjfbt",
       "store_name": "TSUTAYA所沢山口店トレカ売場",
       "prefecture": "埼玉県",
+      "event_title": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
       "discord_posted_at": "2026-11-07T01:30:05.163000+00:00",
+      "result_announcement_date": "2026-11-17",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "TSUTAYA所沢山口店トレカ売場",
           "prefecture": "埼玉県"
         }
       ],
-      "event_title": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "result_announcement_date": "2026-11-17",
       "first_detected_at": "2026-11-07T01:31:01.138175+00:00"
     },
     {
       "url": "https://livepocket.jp/e/gc0bj",
       "store_name": "ふるいちトップブックスひたちなか店",
       "prefecture": "茨城県",
+      "event_title": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
+      "application_start_at": "2026-11-07T08:00:00+09:00",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
       "discord_posted_at": "2026-11-07T01:30:05.163000+00:00",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "review_category": "onepiece",
       "stores": [
         {
           "name": "ふるいちトップブックスひたちなか店",
           "prefecture": "茨城県"
         }
       ],
-      "event_title": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
-      "application_end_at": "2026-11-08T22:00:00+09:00",
-      "application_start_at": "2026-11-07T08:00:00+09:00",
-      "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
-      "purchase_start_date": "2026-11-13",
-      "purchase_end_date": "2026-11-15",
       "first_detected_at": "2026-11-07T01:31:01.138175+00:00"
     }
   ],
-  "updated_at": "2026-11-07T01:31:38.032738+00:00"
+  "updated_at": "2026-11-07T01:40:58.348587+00:00"
 }
