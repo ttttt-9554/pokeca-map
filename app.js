@@ -3837,10 +3837,62 @@
     ['TSUTAYA 佐野店','栃木県']
   ].map(([name,prefecture])=>({name,prefecture}));
 
+  // The 46 participating branches listed in CustomForm lottery 258807.
+  // This shared preset is available in registration and card editing.
+  const LP_WONDERGOO_GROUP_STORES = [
+    ["Ganryu秋葉原店","東京都"],
+    ["Ganryu名古屋大須店","愛知県"],
+    ["WonderGOOひたちなか店","茨城県"],
+    ["WonderGOO真岡店","栃木県"],
+    ["WonderGOO茂原店","千葉県"],
+    ["WonderGOO足利店","栃木県"],
+    ["WonderGOO鹿島店","茨城県"],
+    ["WonderGOO鹿沼店","栃木県"],
+    ["WonderGOO石岡店","茨城県"],
+    ["WonderGOO那珂店","茨城県"],
+    ["WonderGOO水戸笠原店","茨城県"],
+    ["WonderGOOひたち野うしく店","茨城県"],
+    ["WonderGOO古河店","茨城県"],
+    ["WonderGOO小山店","栃木県"],
+    ["WonderGOO鎌ヶ谷店","千葉県"],
+    ["WonderGOO守谷店","茨城県"],
+    ["WonderGOO鉾田店","茨城県"],
+    ["WonderGOO日立中央店","茨城県"],
+    ["WonderGOO常陸大宮店","茨城県"],
+    ["WonderGOO下館店","茨城県"],
+    ["WonderGOO旭店","千葉県"],
+    ["WonderGOO大田原店","栃木県"],
+    ["WonderGOO千葉ニュータウン店","千葉県"],
+    ["WonderGOO八街店","千葉県"],
+    ["WonderGOO北茨城店","茨城県"],
+    ["WonderGOOいわき鹿島店","福島県"],
+    ["WonderGOOつくば店","茨城県"],
+    ["WonderGOO富里店","千葉県"],
+    ["WonderGOO成東店","千葉県"],
+    ["WonderGOO日立田尻店","茨城県"],
+    ["WonderGOO本庄店","埼玉県"],
+    ["WonderGOO下野店","栃木県"],
+    ["新星堂熊谷店","埼玉県"],
+    ["新星堂ニッケコルトンプラザ店","千葉県"],
+    ["新星堂アピタ松任店","石川県"],
+    ["新星堂小田原ダイナシティ店","神奈川県"],
+    ["新星堂アリオ葛西店","東京都"],
+    ["新星堂アピタ岡崎北店","愛知県"],
+    ["新星堂鶴岡店","山形県"],
+    ["新星堂船橋ヨーカドー店","千葉県"],
+    ["新星堂アスナル金山店","愛知県"],
+    ["新星堂mozoワンダーシティ店","愛知県"],
+    ["新星堂アリオ深谷店","埼玉県"],
+    ["新星堂福山店","広島県"],
+    ["新星堂立場ヨーカドー店","神奈川県"],
+    ["新星堂イオンモール佐野新都市店","栃木県"]
+  ].map(([name,prefecture])=>({name,prefecture}));
+
   const LP_BUILTIN_STORE_PRESETS = {
     'yellow-submarine':{label:'イエローサブマリン',rows:LP_YELLOW_SUBMARINE_STORES},
     'geo-tochigi':{label:'GEO 栃木',rows:LP_GEO_TOCHIGI_STORES},
-    'tsutaya-tochigi':{label:'TSUTAYA 栃木',rows:LP_TSUTAYA_TOCHIGI_STORES}
+    'tsutaya-tochigi':{label:'TSUTAYA 栃木',rows:LP_TSUTAYA_TOCHIGI_STORES},
+    'wondergoo-shinseido-ganryu':{label:'WonderGOO・新星堂・Ganryu',rows:LP_WONDERGOO_GROUP_STORES}
   };
   function lpBuiltinStorePresetOptions(){
     return Object.entries(LP_BUILTIN_STORE_PRESETS).map(([id,preset])=>
