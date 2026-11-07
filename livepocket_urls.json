@@ -23966,13 +23966,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/sb0d4": {
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/mc956": {
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/dqtqd": {
@@ -23981,8 +23981,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/854lu": {
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/3n9no": {
@@ -26184,8 +26184,8 @@
         },
         "https://livepocket.jp/e/854lu": {
           "detected_at": "2026-11-07T15:35:57.139287+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/dqtqd": {
@@ -26196,14 +26196,14 @@
         },
         "https://livepocket.jp/e/mc956": {
           "detected_at": "2026-11-07T15:35:57.139287+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/sb0d4": {
           "detected_at": "2026-11-07T15:35:57.139287+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
@@ -27901,6 +27901,21 @@
         "https://livepocket.jp/e/d1_98": {
           "attempts": 1,
           "last_attempt_at": "2026-11-07T17:46:21.302234+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/sb0d4": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-07T21:46:18.352361+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/mc956": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-07T21:46:18.352361+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/854lu": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-07T21:46:18.352361+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -34105,7 +34120,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "title_observed": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
           "genre": "",
           "product_origin": "",
@@ -34116,7 +34131,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "title_observed": "抽選販売 11月13日発売 PM『スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー』",
           "genre": "",
           "product_origin": "",
@@ -34138,7 +34153,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "title_observed": "【栃木城内店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -39715,7 +39730,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/sb0d4": {
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -39728,7 +39743,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/mc956": {
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -39754,7 +39769,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/854lu": {
-          "checked_at": "2026-11-07T15:36:24.290258+00:00",
+          "checked_at": "2026-11-07T21:46:18.352361+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
