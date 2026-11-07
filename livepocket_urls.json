@@ -23568,7 +23568,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/mjfbt": {
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -23578,7 +23578,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/gc0bj": {
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -25708,7 +25708,7 @@
         "https://livepocket.jp/e/gc0bj": {
           "detected_at": "2026-11-07T01:31:01.138175+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/gr4t4": {
@@ -25720,7 +25720,7 @@
         "https://livepocket.jp/e/mjfbt": {
           "detected_at": "2026-11-07T01:31:01.138175+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/0r314": {
@@ -27442,13 +27442,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/mjfbt": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T07:36:28.046070+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-07T13:46:17.683027+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/gc0bj": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T07:36:28.046070+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-07T13:46:17.683027+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/0r314": {
@@ -33446,7 +33446,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "title_observed": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -33468,7 +33468,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "title_observed": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
           "genre": "onepiece",
           "product_origin": "",
@@ -38913,7 +38913,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/mjfbt": {
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -38939,7 +38939,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/gc0bj": {
-          "checked_at": "2026-11-07T07:36:28.046070+00:00",
+          "checked_at": "2026-11-07T13:46:17.683027+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
