@@ -36,8 +36,12 @@ def timestamp(value):
 
 
 def candidates(catalog, now):
-    cooldown = timestamp(catalog.get('customform_retry_after'))
-    if cooldown and cooldown > now:
+    # Discord collection preserves item metadata, but rebuilds the catalog's
+    # top-level counters on every run. Keep host backoff on the affected item.
+    cooldowns = [catalog.get('customform_retry_after')] + [
+        item.get('customform_retry_after') for item in catalog.get('items', [])
+        if supported(item.get('url'))]
+    if any(value and value > now for value in map(timestamp, cooldowns)):
         return []
     output = []
     for item in catalog.get('items', []):
@@ -146,7 +150,7 @@ def main():
         if html:
             verified += apply_fields(item, parse_page(html, item['url']), regions, now)
         if blocked:
-            catalog['customform_retry_after'] = (now + timedelta(days=1)).isoformat()
+            item['customform_retry_after'] = (now + timedelta(days=1)).isoformat()
     temp = CATALOG.with_suffix('.tmp')
     temp.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     temp.replace(CATALOG)
