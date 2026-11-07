@@ -222,6 +222,13 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
     padding:0 6px;font-size:14px;font-weight:800;color:var(--app-text,#172033);
   }
   #lpExtDialog #lpExtStoreCount{font-size:12px;color:var(--app-muted,#64748b)}
+  #lpExtDialog .lp-ext-store-preset{
+    display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-width:0;margin:12px 0;
+  }
+  #lpExtDialog .lp-ext-store-preset label{
+    min-width:0;margin:0;font-size:12px;font-weight:750;line-height:1.6;
+  }
+  #lpExtDialog .lp-ext-store-preset select{min-width:0;max-width:100%;padding:9px}
   #lpExtDialog .lp-ext-stores-list{display:grid;gap:10px;min-width:0;margin:10px 0}
   #lpExtDialog .lp-ext-store-row{
     min-width:0;box-sizing:border-box;padding:11px;border-radius:10px;
@@ -1785,6 +1792,13 @@ nav[aria-label="メインメニュー"] {
         <fieldset id="lpExtStoresField" class="lp-ext-stores-field">
           <legend>🏬 対象店舗 <span id="lpExtStoreCount">1件</span></legend>
           <p class="hint">店舗ごとに店舗名と都道府県を登録できます（最大100件）。</p>
+          <div class="lp-ext-store-preset">
+            <label>店舗チェーンから一括追加
+              <select id="lpExtStorePreset"><option value="">チェーンを選択</option></select>
+            </label>
+            <button id="lpExtApplyStorePreset" type="button" class="lp-ext-store-add">🏬 選択したチェーンの店舗を追加</button>
+            <p class="hint">対象店舗を確認し、必要な店舗だけ残して保存してください。</p>
+          </div>
           <div id="lpExtStores" class="lp-ext-stores-list" aria-label="対象店舗一覧"></div>
           <button id="lpExtStoreAdd" type="button" class="lp-ext-store-add">➕ 店舗を追加</button>
         </fieldset>

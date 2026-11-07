@@ -158,4 +158,72 @@ assert.match(sql,/ADD COLUMN IF NOT EXISTS stores jsonb/);
 assert.match(sql,/lottery_ext_stores_array_max_100/);
 assert.match(sql,/NEW\.stores IS DISTINCT FROM OLD\.stores/);
 assert.match(sql,/'stores',coalesce\(NEW\.stores/);
+// The external editor uses the same shared chain directory as manual entry.
+const builtinSection=app.slice(app.indexOf('  const LP_YELLOW_SUBMARINE_STORES = ['),
+ app.indexOf('  function lpIsBareGeoTochigiChain('));
+const builtinPresets=vm.runInNewContext(builtinSection+'\nLP_BUILTIN_STORE_PRESETS');
+let bulkDraft=[{name:'',prefecture:''}],bulkRenders=0,bulkDeveloper=true;
+const bulkControls={
+ lpExtStorePreset:{value:'wondergoo-shinseido-ganryu'},
+ lpExtEditorStatus:{textContent:''},
+ lpExtForm:{querySelectorAll:()=>bulkDraft.map(store=>({
+   querySelector:selector=>({value:selector==='[data-lp-ext-store-name]'?store.name:store.prefecture})
+ }))}
+};
+const bulkContext={
+ $:id=>bulkControls[id],LP_BUILTIN_STORE_PRESETS:builtinPresets,
+ LP_EXT_MAX_STORES:100,lpExtBusy:false,lpExtEditing:'https://customform.jp/form/input/258799',
+ isDeveloper:()=>bulkDeveloper,
+ lpExtStoreRender:rows=>{bulkDraft=plain(rows);bulkRenders++;}
+};
+const applyBulk=vm.runInNewContext([
+ fn('lotteryCanonicalStore'),fn('lotteryCanonicalStores'),fn('lpPresetStoreKey'),
+ fn('lpExtApplyStorePreset'),'lpExtApplyStorePreset'
+].join('\n'),bulkContext,{timeout:1000});
+applyBulk();
+assert.equal(bulkDraft.length,46,'An empty placeholder becomes the full 46-store directory');
+assert.ok(bulkDraft.every(store=>store.name&&store.prefecture));
+ctx.LP_MANUAL_AREAS.push(...new Set(bulkDraft.map(store=>store.prefecture)));
+const chainPayload=save(bulkDraft);
+assert.equal(chainPayload.stores.length,46,'All chain stores survive the existing save payload');
+assert.equal(chainPayload.store_name,bulkDraft[0].name);
+const once=bulkRenders;
+applyBulk();
+assert.equal(bulkRenders,once,'Repeated bulk additions cannot duplicate stores');
+assert.match(bulkControls.lpExtEditorStatus.textContent,/すでに/);
+bulkDraft=[{name:'Ｇａｎｒｙｕ　秋葉原店',prefecture:'東京都'}];
+applyBulk();
+assert.equal(bulkDraft.length,46,'Normalized existing branch is not added twice');
+assert.equal(bulkDraft[0].name,'Ｇａｎｒｙｕ　秋葉原店','Existing draft text is retained');
+bulkDraft=[{name:'別途入力した店舗',prefecture:'大阪府'}];
+applyBulk();
+assert.equal(bulkDraft.length,47);
+assert.equal(bulkDraft[0].name,'別途入力した店舗');
+bulkDraft=Array.from({length:55},(_,i)=>({name:'手動店舗'+i,prefecture:'東京都'}));
+const beforeLimit=JSON.stringify(bulkDraft),rendersBeforeLimit=bulkRenders;
+applyBulk();
+assert.equal(JSON.stringify(bulkDraft),beforeLimit,'Over-limit additions preserve all entered rows');
+assert.equal(bulkRenders,rendersBeforeLimit);
+assert.match(bulkControls.lpExtEditorStatus.textContent,/100店舗/);
+bulkDraft=[{name:'',prefecture:'東京都'}];
+applyBulk();
+assert.equal(bulkDraft[0].prefecture,'東京都','Partial region edits cannot be silently discarded');
+assert.equal(bulkRenders,rendersBeforeLimit);
+assert.match(bulkControls.lpExtEditorStatus.textContent,/店舗名/);
+bulkDraft=[{name:'',prefecture:''}];
+bulkControls.lpExtStorePreset.value='';
+applyBulk();
+assert.equal(bulkRenders,rendersBeforeLimit);
+assert.match(bulkControls.lpExtEditorStatus.textContent,/選択/);
+bulkControls.lpExtStorePreset.value='wondergoo-shinseido-ganryu';
+bulkDeveloper=false;
+applyBulk();
+bulkDeveloper=true;
+bulkContext.lpExtBusy=true;
+applyBulk();
+assert.equal(bulkRenders,rendersBeforeLimit,'Authorization and active saves guard bulk additions');
+assert.match(html,/id="lpExtStorePreset"/);
+assert.match(html,/id="lpExtApplyStorePreset" type="button"/);
+assert.ok(app.includes("$('lpExtApplyStorePreset')?.addEventListener('click',lpExtApplyStorePreset)"));
+console.log('External chain presets: 46-store save, existing drafts, duplicates, limits and authorization passed');
 console.log('External lottery multi-store edits: round-trip, legacy, remove, validation, regions and alerts passed');

@@ -4998,6 +4998,46 @@
     $('lpExtStores').innerHTML=initial.map(lpExtStoreRowHtml).join('');
     lpExtStoreUpdateControls();
   }
+  function lpExtApplyStorePreset(){
+    if(!isDeveloper()||lpExtBusy||!lpExtEditing)return;
+    const message=$('lpExtEditorStatus');
+    const chosen=$('lpExtStorePreset')?.value||'';
+    const builtin=LP_BUILTIN_STORE_PRESETS[chosen];
+    const preset=builtin?lotteryCanonicalStores(builtin.rows):[];
+    if(!builtin||!Array.isArray(preset)||!preset.length){
+      message.textContent='追加する店舗チェーンを選択してください。';
+      return;
+    }
+    const current=[...$('lpExtForm').querySelectorAll('[data-lp-ext-store-row]')].map(row=>({
+      name:String(row.querySelector('[data-lp-ext-store-name]')?.value||'').trim(),
+      prefecture:String(row.querySelector('[data-lp-ext-store-pref]')?.value||'').trim()
+    }));
+    if(current.some(store=>!store.name&&store.prefecture)){
+      message.textContent='都道府県だけ入力した店舗があります。店舗名を入力するか、その行を削除してから一括追加してください。';
+      return;
+    }
+    const retained=current.filter(store=>store.name);
+    const seen=new Set(retained.map(lpPresetStoreKey));
+    const additions=preset.filter(store=>{
+      if(!store?.name)return false;
+      const key=lpPresetStoreKey(store);
+      if(seen.has(key))return false;
+      seen.add(key);
+      return true;
+    });
+    if(!additions.length){
+      message.textContent='選択したチェーンの店舗はすでに一覧にあります。';
+      return;
+    }
+    if(retained.length+additions.length>LP_EXT_MAX_STORES){
+      message.textContent='⚠ 最大100店舗を超えるため追加できません。';
+      return;
+    }
+    lpExtStoreRender(retained.concat(additions));
+    message.textContent='✅ '+builtin.label+'から'+additions.length+
+      '店舗を追加しました。確認・調整後「編集内容を保存」で確定してください。';
+  }
+
   function lpExtValidatedStores(rows){
     if(!Array.isArray(rows)||rows.length<1||rows.length>LP_EXT_MAX_STORES)
       throw Error('対象店舗は1〜100件の範囲で登録してください。');
@@ -5219,6 +5259,10 @@
   function lpExtInitUI(){
     const root=$('lpExtManage'),dialog=$('lpExtDialog');
     if(!root||!dialog)return;
+    if($('lpExtStorePreset'))
+      $('lpExtStorePreset').innerHTML='<option value="">チェーンを選択</option>'+
+        lpBuiltinStorePresetOptions();
+    $('lpExtApplyStorePreset')?.addEventListener('click',lpExtApplyStorePreset);
     $('lpExtStoreAdd').addEventListener('click',()=>{
       const root=$('lpExtStores');
       if(root.querySelectorAll('[data-lp-ext-store-row]').length>=LP_EXT_MAX_STORES)return;
