@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-07T06:05:56.388228+00:00",
-  "unique_livepocket_urls": 707,
+  "collected_at": "2026-11-07T08:15:57.144967+00:00",
+  "unique_livepocket_urls": 708,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11175,7 +11175,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "【再販】PM MEGA 拡張パック「30th CELEBRATION」",
       "first_detected_at": "2026-11-07T02:01:05.758060+00:00"
     },
     {
@@ -11215,6 +11214,8 @@
           "prefecture": "栃木県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "【宇都宮東簗瀬店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "first_detected_at": "2026-11-07T02:10:58.083676+00:00"
     },
     {
@@ -11383,7 +11384,24 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T05:05:59.967700+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/7nmst",
+      "discord_posted_at": "2026-11-07T08:09:30.029000+00:00",
+      "event_title": "ポケモンカードゲームMEGA 拡張パック『30th CELEBRATION』抽選販売受付",
+      "application_end_at": "2026-11-09T20:00:00+09:00",
+      "application_start_at": "2026-11-06T08:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲームMEGA 拡張パック『30th CELEBRATION』抽選販売受付",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-07T08:16:02.278361+00:00"
     }
   ],
-  "updated_at": "2026-11-07T08:06:27.002293+00:00"
+  "updated_at": "2026-11-07T08:16:36.731330+00:00"
 }
