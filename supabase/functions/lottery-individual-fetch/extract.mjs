@@ -1,5 +1,6 @@
 // Public page extraction. Only unambiguous, explicitly labelled data is returned.
 export const STARBOX_HOST = 'shoplottery.e-starbox.com';
+export const CUSTOMFORM_HOST = 'customform.jp';
 
 export function supportedUrl(value) {
   try {
@@ -11,6 +12,8 @@ export function supportedUrl(value) {
     if(u.hostname==='famima-online.family.co.jp') return u.pathname==='/item' && /^\?itemCode=\d{10,25}$/.test(u.search);
     if(u.hostname==='cloud-pass.jp') return /^\/pr\/[a-f0-9]{64}\/?$/i.test(u.pathname) && !u.search;
     if(u.hostname===STARBOX_HOST) return u.pathname==='/lottery/entry' && /^\?code=[A-Za-z0-9]{10}$/.test(u.search);
+    if(u.hostname===CUSTOMFORM_HOST) return /^\/form\/input\/\d{1,10}\/?$/.test(u.pathname) &&
+      (!u.search || /^\?key=[a-zA-Z0-9_-]{8,64}$/.test(u.search));
     return false;
   } catch {return false;}
 }
@@ -206,11 +209,96 @@ function starboxFields(html) {
   return fields;
 }
 
+function customformFields(html, url) {
+  const snapshots = [...html.matchAll(/\bwire:snapshot\s*=\s*(["'])([\s\S]*?)\1/gi)];
+  const forms = snapshots.flatMap(([, , value]) => {
+    try {
+      const data = JSON.parse(decode(value)).data;
+      const form = Array.isArray(data?.customform) ? data.customform[0] : data?.customform;
+      return form && String(form.customform_id) === new URL(url).pathname.split('/').filter(Boolean).pop()
+        ? [{data, form}] : [];
+    } catch { return []; }
+  });
+  if (forms.length !== 1) return {};
+  const {data, form} = forms[0];
+  const title = uniqueText(tagContents(html, 'h1').map(plain));
+  if (title !== String(form.title || '').trim() || title.length < 5 || title.length > 200 ||
+      !title.includes('抽選') || data.closed === true) return {};
+  const fields = {event_title: title};
+  const lines = String(form.description || '').replace(/<br\b[^>]*>/gi, '\n')
+    .split(/\r?\n/).map(line => plain(line).normalize('NFKC').replace(/^[■◆▼]\s*/, '')).filter(Boolean);
+  const labeled = pattern => uniqueText(lines.flatMap(line => {
+    const match = line.match(pattern);
+    return match ? [match[1]] : [];
+  }));
+
+  // The form supplies full calendar years. The advertised application period
+  // takes precedence over the server's automatic form-closing clock.
+  const reference = [form.close_time, form.open_time, form.release_time, form.create_time]
+    .find(value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}[ T]/.test(value));
+  if (reference) {
+    const anchorTime = Date.parse(reference.slice(0, 10) + 'T00:00:00Z') - 90 * 86400000;
+    if (Number.isFinite(anchorTime)) {
+      const anchor = new Date(anchorTime).toISOString().slice(0, 10);
+      const period = labeled(/^(?:抽選)?応募期間\s*:\s*(.+)$/);
+      const range = starboxScheduleRange(period, anchor);
+      if (range.length && range.every(value => value.length === 16)) {
+        fields.application_start_at = range[0] + ':00+09:00';
+        fields.application_end_at = range[1] + ':00+09:00';
+        const end = range[1].slice(0, 10);
+        const purchaseText = labeled(/^(?:当選)?販売期間(?:は\s*[:、]?|\s*:)\s*(.+)$/)
+          .replace(/(?:の\d+日間|で、|です|各店舗|各当選店舗).*$/, '').trim();
+        const purchase = starboxScheduleRange(purchaseText, end);
+        if (purchase.length) {
+          fields.purchase_start_date = purchase[0].slice(0, 10);
+          fields.purchase_end_date = purchase[1].slice(0, 10);
+          if (purchase[0].length > 10) fields.purchase_start_time = purchase[0].slice(11);
+          if (purchase[1].length > 10) fields.purchase_end_time = purchase[1].slice(11);
+        }
+        const announcementText = labeled(/^(?:当選メール案内期間|当選(?:者)?(?:への)?案内(?:開始)?(?:日時|日)?)\s*:\s*(.+)$/)
+          .replace(/[~〜～]\s*$/, '').replace(/以降.*$/, '').trim();
+        const announcement = starboxSchedulePoint(announcementText, end);
+        if (announcement) {
+          fields.result_announcement_date = announcement.slice(0, 10);
+          if (announcement.length > 10) fields.result_announcement_time = announcement.slice(11);
+        }
+      }
+    }
+  }
+  const questions = Array.isArray(data.questions) ? data.questions[0] : data.questions;
+  const storeLists = Object.values(questions || {}).flatMap(value => {
+    const question = Array.isArray(value) ? value[0] : value;
+    if (question?.input_type !== 3 || !/(?:店舗|応募店|受取店)/.test(question.title || '') ||
+        !/選択|選ん/.test(question.title || '')) return [];
+    const options = Array.isArray(question.options?.[0]) ? question.options[0] : question.options;
+    if (!Array.isArray(options) || !options.length || options.length > 100) return [];
+    const stores = options.filter(value => typeof value === 'string' && value.trim())
+      .map(value => value.normalize('NFKC').trim().replace(/^WG\s*/i, 'WonderGOO')
+        .replace(/^(新星堂|WonderGOO|Ganryu)\s+/, '$1'))
+      .filter(name => !/^(?:選択してください|選んでください|未選択|その他|[-ー]+)$/.test(name));
+    return stores.length && stores.every(name => name.length <= 200) ? [stores] : [];
+  });
+  if (storeLists.length === 1) {
+    fields.stores = [...new Set(storeLists[0])].map(name => ({name, prefecture: ''}));
+    fields.store_name = fields.stores[0]?.name || '';
+  }
+  const product = labeled(/^(?:抽選商品|対象商品)\s*:\s*(.+)$/);
+  if (product && product.length <= 200) fields.product_name = product;
+  const subject = title + ' ' + product;
+  if (/ワンピース|ONE\s*PIECE/i.test(subject)) fields.review_category = 'onepiece';
+  else if (/ポケモン|ポケカ|POK[ÉE]MON/i.test(subject)) fields.review_category = 'pokemon';
+  else if (/遊戯王/.test(subject)) fields.review_category = 'yugioh';
+  const pack = /拡張パック|ブースターパック/.test(subject), deck = /デッキ/.test(subject);
+  if (pack || deck) fields.product_type = pack && deck ? 'pack/deck' : pack ? 'pack' : 'deck';
+  return fields;
+}
+
 export function extract(html,url){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
   if (u.hostname === STARBOX_HOST) return supportedUrl(url) ? starboxFields(html) : {};
+  if (u.hostname === CUSTOMFORM_HOST) return supportedUrl(url) ? customformFields(html, url) : {};
   const raw=html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/i)?.[1]||html.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/i)?.[1]||'';
   const title=plain(raw).replace(/\s*[|｜]\s*(?:ファミマオンライン|ヤマシロヤ|セブンネットショッピング).*$/,'').trim();
   if(title.length>=5&&title.length<=200&&/抽選/.test(title)&&!/(?:受付終了|Google フォーム|closed form)/i.test(title))result.event_title=title;

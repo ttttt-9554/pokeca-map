@@ -1,7 +1,30 @@
-import {supportedUrl,extract} from './extract.mjs';
+import {supportedUrl,extract,CUSTOMFORM_HOST} from './extract.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
 function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
+
+async function collectedCustomForm(url:string) {
+ const response=await fetch('https://ttttt-9554.github.io/pokeca-map/other_lottery_public.json?t='+Date.now(),
+  {cache:'no-store',signal:AbortSignal.timeout(6000)});
+ if(!response.ok)throw Error('catalog unavailable');
+ const catalog=await response.json();
+ const item=Array.isArray(catalog?.items)?catalog.items.find((row:{url?:string})=>row?.url===url):null;
+ if(!item?.customform_verified_at||item.external_url_unverified!==false)
+  return json({error:'ブラウザーによる自動収集を待っています。収集後にもう一度お試しください。'},422);
+ const fields:Record<string,unknown>={};
+ for(const name of ['event_title','product_name','store_name','prefecture','review_category',
+   'application_start_at','application_end_at','result_announcement_date','result_announcement_time',
+   'purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time']){
+  if(typeof item[name]==='string'&&item[name])fields[name]=item[name];
+ }
+ if(Array.isArray(item.stores))fields.stores=item.stores.slice(0,100).map((store:{name?:string,prefecture?:string})=>({
+  name:typeof store?.name==='string'?store.name:'',prefecture:typeof store?.prefecture==='string'?store.prefecture:''
+ }));
+ if(typeof item.pokemon_map_type==='string')fields.product_type=item.pokemon_map_type;
+ const collected=new Date(item.customform_verified_at).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
+ return json({fields,message:'ブラウザーで自動収集した情報です（取得日時：'+collected+'、日本時間）。候補を確認してください。'});
+}
+
 Deno.serve(async(req:Request)=>{
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors});
  if(req.method!=='POST')return json({error:'許可されていない操作です。'},405);
@@ -20,6 +43,7 @@ Deno.serve(async(req:Request)=>{
  if(typeof input?.url!=='string'||input.url.length>1000||!supportedUrl(input.url))
   return json({error:'このサイトは個別取得に未対応です。元ページを開いて確認してください。'},422);
  try{
+  if(new URL(input.url).hostname===CUSTOMFORM_HOST)return await collectedCustomForm(input.url);
   const response=await fetch(input.url,{redirect:'manual',headers:{'User-Agent':'TorecaRadar/1.0','Accept':'text/html,application/xhtml+xml'},signal:AbortSignal.timeout(14000)});
   if(response.status>=300&&response.status<400)return json({error:'別ページへの転送があるため、自動取得できませんでした。'},422);
   if(!response.ok)return json({error:`取得先が応答しませんでした（HTTP ${response.status}）。`},422);

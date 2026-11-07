@@ -227,6 +227,10 @@ jobs:
         id: v21plan
         run: python scripts/livepocket_v21.py plan
 
+      - name: Plan new CustomForm lotteries
+        id: customform_plan
+        run: python scripts/customform_lottery_enrich.py plan
+
       # Claim at most one administrator-requested event. No extra request is
       # made when the normal collector already visits the same event.
       - name: Prepare individual LivePocket review
@@ -239,10 +243,18 @@ jobs:
 
       # 新着・再確認・個別要求がなければブラウザをインストールしない。
       - name: Install free browser only when needed
-        if: ${{ steps.v21plan.outputs.browser_needed == 'true' || steps.individual_prepare.outputs.requested == 'true' }}
+        if: ${{ steps.v21plan.outputs.browser_needed == 'true' || steps.individual_prepare.outputs.requested == 'true' || steps.customform_plan.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
+
+      - name: Collect CustomForm lottery details
+        if: ${{ steps.customform_plan.outputs.browser_needed == 'true' }}
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/customform_lottery_enrich.py run
 
       - name: Check ticket products and multiple-store prefectures (v21)
         shell: bash
@@ -272,7 +284,9 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python scripts/livepocket_master_prefecture.py --write
+        run: |
+          python scripts/livepocket_master_prefecture.py --write
+          python scripts/customform_lottery_enrich.py regions
 
       # 公開しても安全な集計数字のみ出力（URL・Discord本文・トークン等は含めない）。
       # Daily new-URL totals are refreshed on every collection run when changed;

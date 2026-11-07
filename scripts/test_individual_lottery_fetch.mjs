@@ -96,4 +96,46 @@ assert.equal(starRow.external_url_unverified,false);
 assert.equal(starRow.purchase_end_date,'2026-11-15');
 assert.equal(starRow.pokemon_map_type,'pack');
 assert.equal(await enrichStarbox({items:[starRow,...older.slice(0,3)]},()=>assert.fail('Starbox retry policy ignored'),now),0);
-console.log('Individual lottery and Starbox collection checks passed');
+
+const custom='https://customform.jp/form/input/258807?key=96371fe2';
+assert(supportedUrl(custom));
+assert(supportedUrl('https://customform.jp/form/input/258807'));
+for(const url of [custom+'&next=https://example.com',custom+'#form',custom.replace('customform.jp','customform.jp.example.com'),
+ custom.replace('https:','http:'),custom.replace('/input/','/result/'),custom.replace('96371fe2','bad')])
+ assert(!supportedUrl(url),url);
+const customTitle='11/21発売 ワンピースカード 神の支配 抽選販売 応募フォーム';
+const customDescription='■抽選商品:ワンピースカード ブースターパック「神の支配」【OP-18】\n'+
+ '■応募期間：11/7(土)10時00分～11/9(月)20時59分\n'+
+ '■販売期間は、11/21(土)～11/22(日)の2日間です。\n'+
+ '■販売期間終了後はキャンセル扱いです。\n'+
+ '◆抽選は、11/16(月)12時以降に実施。\n当選メール案内期間：11/16(月)15時～';
+const customData={data:{customform:[{customform_id:258807,title:customTitle,description:customDescription,
+ close_time:'2026-11-09 21:00:00'}, {s:'arr'}],
+ questions:[{stores:[{input_type:3,title:'抽選購入応募店舗を選択して下さい。',
+ options:[['ＷＧひたちなか店','新星堂 アリオ深谷店'],{s:'arr'}]}],
+ irrelevant:[{input_type:2,title:'店舗選択に同意します。',options:[['同意しました。'],{s:'arr'}]}]},
+ {s:'arr'}],closed:false}};
+const customPage=data=>'<main wire:snapshot="'+JSON.stringify(data).replaceAll('&','&amp;').replaceAll('"','&quot;')+
+ '"><h1>'+customTitle+'</h1><div class="whitespace-pre-line">'+data.data.customform[0].description+'</div></main>';
+const customFields=extract(customPage(customData),custom);
+assert.equal(customFields.application_start_at,'2026-11-07T10:00:00+09:00');
+assert.equal(customFields.application_end_at,'2026-11-09T20:59:00+09:00');
+assert.equal(customFields.result_announcement_date,'2026-11-16');
+assert.equal(customFields.result_announcement_time,'15:00');
+assert.equal(customFields.purchase_start_date,'2026-11-21');
+assert.equal(customFields.purchase_end_date,'2026-11-22');
+assert.equal(customFields.purchase_start_time,undefined);
+assert.equal(customFields.purchase_end_time,undefined);
+assert.deepEqual(customFields.stores,[{name:'WonderGOOひたちなか店',prefecture:''},{name:'新星堂アリオ深谷店',prefecture:''}]);
+assert.equal(customFields.review_category,'onepiece');
+assert.equal(customFields.product_type,'pack');
+const different=structuredClone(customData);different.data.customform[0].customform_id=258805;
+assert.deepEqual(extract(customPage(different),custom),{});
+const noClock=structuredClone(customData);noClock.data.customform[0].description=customDescription.replace('10時00分','');
+assert.equal(extract(customPage(noClock),custom).application_start_at,undefined);
+const ambiguous=structuredClone(customData);ambiguous.data.customform[0].description+='\n■応募期間：11/7(土)10時00分～11/9(月)18時00分';
+assert.equal(extract(customPage(ambiguous),custom).application_end_at,undefined);
+const noYear=structuredClone(customData);delete noYear.data.customform[0].close_time;
+assert.equal(extract(customPage(noYear),custom).application_start_at,undefined);
+assert.deepEqual(extract('<script>window.gokuProps={}</script>',custom),{});
+console.log('Individual lottery, Starbox and CustomForm extraction checks passed');
