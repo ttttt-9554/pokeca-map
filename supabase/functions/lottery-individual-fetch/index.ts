@@ -9,8 +9,12 @@ async function collectedCustomForm(url:string) {
  if(!response.ok)throw Error('catalog unavailable');
  const catalog=await response.json();
  const item=Array.isArray(catalog?.items)?catalog.items.find((row:{url?:string})=>row?.url===url):null;
- if(!item?.customform_verified_at||item.external_url_unverified!==false)
+ if(!item?.customform_verified_at||item.external_url_unverified!==false){
+  const blocked=Array.isArray(catalog?.items)&&catalog.items.some((row:{customform_last_error?:string,customform_retry_after?:string})=>
+   row?.customform_last_error==='source_access_denied'&&Date.parse(row.customform_retry_after||'')>Date.now());
+  if(blocked)return json({error:'取得先が定期収集サーバーからのアクセスを拒否しているため、現在は自動取得できません。元ページを開いて確認してください。'},422);
   return json({error:'ブラウザーによる自動収集を待っています。収集後にもう一度お試しください。'},422);
+ }
  const fields:Record<string,unknown>={};
  for(const name of ['event_title','product_name','store_name','prefecture','review_category',
    'application_start_at','application_end_at','result_announcement_date','result_announcement_time',

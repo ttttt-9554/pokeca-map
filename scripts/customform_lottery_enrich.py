@@ -75,8 +75,8 @@ def browser_pages(items):
                 document_html = []
 
                 def remember_document(response):
-                    # Read the public SSR snapshot before Livewire hydration
-                    # removes it from the rendered DOM. Never submit inputs.
+                    # Prefer the public server-rendered snapshot because
+                    # browser rendering may change the DOM. Never submit inputs.
                     if (response.url == item['url'] and response.status == 200
                             and response.request.resource_type == 'document'):
                         try:
@@ -88,6 +88,7 @@ def browser_pages(items):
 
                 page.on('response', remember_document)
                 try:
+                    navigation = None
                     try:
                         navigation = page.goto(item['url'], wait_until='domcontentloaded', timeout=25000)
                         print('CustomForm document HTTP:', navigation.status if navigation else 'none')
@@ -98,8 +99,13 @@ def browser_pages(items):
                             yield item, '', False
                             continue
                     page.wait_for_selector('h1', state='visible', timeout=25000)
-                    print('CustomForm visible heading:',
-                          re.sub(r'\s+', ' ', page.locator('h1').first.inner_text())[:200])
+                    heading = re.sub(r'\s+', ' ', page.locator('h1').first.inner_text())[:200]
+                    print('CustomForm visible heading:', heading)
+                    if ((navigation and navigation.status in (401, 403, 429))
+                            or re.search(r'403\s+Forbidden|Access\s+Denied|Request\s+Blocked', heading, re.I)):
+                        print('CustomForm collection paused: source access denied')
+                        yield item, '', True
+                        break
                     html = document_html[-1] if document_html else page.content()
                     print('CustomForm snapshot:', 'response' if document_html else 'rendered DOM',
                           'present' if 'wire:snapshot=' in html else 'absent')
@@ -135,6 +141,8 @@ def apply_fields(item, fields, regions, now):
     item.update(fields)
     item.update(official_event_title=fields['event_title'], event_title_provisional=False,
                 external_url_unverified=False, customform_verified_at=now.isoformat())
+    item.pop('customform_last_error', None)
+    item.pop('customform_retry_after', None)
     if product_type:
         item['pokemon_map_type'] = product_type
     return True
@@ -184,6 +192,7 @@ def main():
             print('CustomForm extracted fields:', ','.join(sorted(fields)))
             verified += apply_fields(item, fields, regions, now)
         if blocked:
+            item['customform_last_error'] = 'source_access_denied'
             item['customform_retry_after'] = (now + timedelta(days=1)).isoformat()
     temp = CATALOG.with_suffix('.tmp')
     temp.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

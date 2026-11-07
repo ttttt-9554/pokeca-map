@@ -1346,7 +1346,9 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true,
-      "customform_checked_at": "2026-11-07T04:42:35.596644+00:00"
+      "customform_checked_at": "2026-11-07T04:42:35.596644+00:00",
+      "customform_last_error": "source_access_denied",
+      "customform_retry_after": "2026-11-08T04:42:35.596Z"
     },
     {
       "url": "https://customform.jp/form/input/258805?key=234b809d",
@@ -1359,7 +1361,9 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true,
-      "customform_checked_at": "2026-11-07T04:42:35.596644+00:00"
+      "customform_checked_at": "2026-11-07T04:42:35.596644+00:00",
+      "customform_last_error": "source_access_denied",
+      "customform_retry_after": "2026-11-08T04:42:35.596Z"
     }
   ],
   "last_seen_message_ids": {
