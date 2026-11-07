@@ -11470,27 +11470,25 @@
       "url": "https://livepocket.jp/e/dz3vb",
       "store_name": "TSUTAYA鎌ケ谷店",
       "prefecture": "千葉県",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』",
+      "application_start_at": "2026-11-02T09:30:00+09:00",
+      "application_end_at": "2026-11-15T21:45:00+09:00",
       "discord_posted_at": "2026-11-07T10:00:05.341000+00:00",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-27",
+      "review_category": "pokemon",
       "stores": [
         {
           "name": "TSUTAYA鎌ケ谷店",
           "prefecture": "千葉県"
         }
       ],
-      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』",
-      "application_end_at": "2026-11-15T21:45:00+09:00",
-      "application_start_at": "2026-11-02T09:30:00+09:00",
-      "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』",
-      "result_announcement_date": "2026-11-17",
-      "purchase_start_date": "2026-11-27",
-      "purchase_end_date": "2026-11-27",
       "first_detected_at": "2026-11-07T10:05:59.359162+00:00"
     }
   ],
-  "updated_at": "2026-11-07T10:06:28.284076+00:00"
+  "updated_at": "2026-11-07T10:16:00.561984+00:00"
 }
