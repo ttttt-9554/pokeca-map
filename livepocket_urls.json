@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-07T01:00:58.133729+00:00",
+  "collected_at": "2026-11-07T01:30:56.195094+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 693,
+  "unique_livepocket_urls": 696,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -19588,34 +19588,131 @@
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15"
+    },
+    {
+      "url": "https://livepocket.jp/e/gr4t4",
+      "discord_message_id": "1568437353213595659",
+      "discord_posted_at": "2026-11-07T01:30:05.163000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nTSUTAYA BOOKSTORE川崎駅前店\n受付終了: 11/08 20:00（残り1日9時間）\nhttps://livepocket.jp/e/gr4t4\n\n📍埼玉県\nTSUTAYA所沢山口店トレカ売場\n受付終了: 11/09 23:59（残り2日13時間）\nhttps://livepocket.jp/e/mjfbt\n\n📍茨城県\nふるいちトップブックスひたちなか店\n受付終了: 11/08 22:00（残り1日11時間）\nhttps://livepocket.jp/e/gc0bj",
+      "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
+      "prefecture": "神奈川県",
+      "details_source": "discord_post",
+      "product_name": "ブースターパック 神の支配 OP18",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product"
+      },
+      "event_title": "ONE PIECEカードゲーム「ブースターパック 神の支配 OP18」抽選販売",
+      "application_end_at": "2026-11-08T20:00:00+09:00",
+      "application_start_at": "2026-11-07T09:00:00+09:00",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "09:00",
+      "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/mjfbt",
+      "discord_message_id": "1568437353213595659",
+      "discord_posted_at": "2026-11-07T01:30:05.163000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nTSUTAYA BOOKSTORE川崎駅前店\n受付終了: 11/08 20:00（残り1日9時間）\nhttps://livepocket.jp/e/gr4t4\n\n📍埼玉県\nTSUTAYA所沢山口店トレカ売場\n受付終了: 11/09 23:59（残り2日13時間）\nhttps://livepocket.jp/e/mjfbt\n\n📍茨城県\nふるいちトップブックスひたちなか店\n受付終了: 11/08 22:00（残り1日11時間）\nhttps://livepocket.jp/e/gc0bj",
+      "store_name": "TSUTAYA所沢山口店トレカ売場",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "TSUTAYA所沢山口店トレカ売場",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "result_announcement_date": "2026-11-17"
+    },
+    {
+      "url": "https://livepocket.jp/e/gc0bj",
+      "discord_message_id": "1568437353213595659",
+      "discord_posted_at": "2026-11-07T01:30:05.163000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nTSUTAYA BOOKSTORE川崎駅前店\n受付終了: 11/08 20:00（残り1日9時間）\nhttps://livepocket.jp/e/gr4t4\n\n📍埼玉県\nTSUTAYA所沢山口店トレカ売場\n受付終了: 11/09 23:59（残り2日13時間）\nhttps://livepocket.jp/e/mjfbt\n\n📍茨城県\nふるいちトップブックスひたちなか店\n受付終了: 11/08 22:00（残り1日11時間）\nhttps://livepocket.jp/e/gc0bj",
+      "store_name": "ふるいちトップブックスひたちなか店",
+      "prefecture": "茨城県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいちトップブックスひたちなか店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-07T08:00:00+09:00",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 524,
+    "parsed": 527,
     "no_structured_details": 169
   },
   "field_counts": {
-    "store_name": 498,
-    "prefecture": 458,
-    "event_title": 380,
+    "store_name": 501,
+    "prefecture": 461,
+    "event_title": 383,
     "event_date": 1,
     "product_name": 103,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 656,
-    "application_start_at": 645,
-    "stores_events": 518
+    "application_end_at": 659,
+    "application_start_at": 648,
+    "stores_events": 521
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568429810638790677"
+      "1551580466266644552": "1568437353213595659"
     },
     "last_run": {
-      "checked_at": "2026-11-07T01:00:58.133729+00:00",
-      "new_urls": 2,
-      "original_urls": 691,
+      "checked_at": "2026-11-07T01:30:56.195094+00:00",
+      "new_urls": 3,
+      "original_urls": 693,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -19859,7 +19956,8 @@
         "1568225981028769912": "2026-11-06T11:30:30.603590+00:00",
         "1568233606575296594": "2026-11-06T12:00:59.989122+00:00",
         "1568248627887865877": "2026-11-06T13:01:00.466720+00:00",
-        "1568429810638790677": "2026-11-07T01:00:59.203673+00:00"
+        "1568429810638790677": "2026-11-07T01:00:59.203673+00:00",
+        "1568437353213595659": "2026-11-07T01:30:59.854748+00:00"
       },
       "checked_search_urls": {}
     },
@@ -22869,6 +22967,21 @@
           "checked_at": "2026-11-07T01:01:32.324395+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/mjfbt": {
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gr4t4": {
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gc0bj": {
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -24901,6 +25014,24 @@
           "detected_at": "2026-11-07T01:01:00.223852+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-07T01:01:32.324395+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gc0bj": {
+          "detected_at": "2026-11-07T01:31:01.138175+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gr4t4": {
+          "detected_at": "2026-11-07T01:31:01.138175+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/mjfbt": {
+          "detected_at": "2026-11-07T01:31:01.138175+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
           "http_status": null
         }
       },
@@ -32458,6 +32589,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/mjfbt": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "title_observed": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/gr4t4": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "title_observed": "ONE PIECEカードゲーム「ブースターパック 神の支配 OP18」抽選販売",
+          "genre": "onepiece",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/gc0bj": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "title_observed": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -37687,6 +37851,45 @@
         },
         "https://livepocket.jp/e/fa29k": {
           "checked_at": "2026-11-07T01:01:32.324395+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/mjfbt": {
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/gr4t4": {
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/gc0bj": {
+          "checked_at": "2026-11-07T01:31:38.032738+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
