@@ -72,6 +72,21 @@ def browser_pages(items):
         try:
             for item in items:
                 page = context.new_page()
+                document_html = []
+
+                def remember_document(response):
+                    # Read the public SSR snapshot before Livewire hydration
+                    # removes it from the rendered DOM. Never submit inputs.
+                    if (response.url == item['url'] and response.status == 200
+                            and response.request.resource_type == 'document'):
+                        try:
+                            source = response.text()
+                            if len(source.encode()) <= 2_000_000:
+                                document_html[:] = [source]
+                        except BrowserError:
+                            pass
+
+                page.on('response', remember_document)
                 try:
                     try:
                         page.goto(item['url'], wait_until='domcontentloaded', timeout=25000)
@@ -82,13 +97,15 @@ def browser_pages(items):
                             yield item, '', False
                             continue
                     page.wait_for_selector('h1', state='visible', timeout=25000)
-                    page.wait_for_selector(r'[wire\:snapshot]', state='attached', timeout=5000)
-                    html = page.content()
+                    html = document_html[-1] if document_html else page.content()
+                    print('CustomForm snapshot:', 'response' if document_html else 'rendered DOM',
+                          'present' if 'wire:snapshot=' in html else 'absent')
                     accepted = page.url == item['url'] and len(html.encode()) <= 2_000_000
                     print('CustomForm public page:', 'ready' if accepted else 'unexpected address or size')
                     yield item, html if accepted else '', False
                 except BrowserTimeout:
                     blocked = bool(page.locator('script[src*="awswaf.com"]').count())
+                    print('CustomForm page timeout:', 'verification page' if blocked else 'public form not ready')
                     yield item, '', blocked
                     if blocked:
                         break
