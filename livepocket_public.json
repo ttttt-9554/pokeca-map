@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-07T09:05:56.781972+00:00",
-  "unique_livepocket_urls": 708,
+  "collected_at": "2026-11-07T09:35:55.560051+00:00",
+  "unique_livepocket_urls": 711,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11336,6 +11336,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
       "first_detected_at": "2026-11-07T03:30:58.080458+00:00"
     },
     {
@@ -11397,7 +11399,73 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T08:16:02.278361+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/vq5r7",
+      "store_name": "TSUTAYA鎌ケ谷店",
+      "prefecture": "千葉県",
+      "discord_posted_at": "2026-11-07T09:30:04.185000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "event_title": "【抽選販売】ワンピースカードゲーム ブースターパック OP18『神の支配』",
+      "application_end_at": "2026-11-15T21:45:00+09:00",
+      "application_start_at": "2026-11-04T09:30:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【抽選販売】ワンピースカードゲーム ブースターパック OP18『神の支配』",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-21",
+      "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/k_foq",
+      "store_name": "TSUTAYA東仙台店 ２階トレカコーナー",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-11-07T09:30:04.185000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 ２階トレカコーナー",
+          "prefecture": "宮城県"
+        }
+      ],
+      "event_title": "TSUTAYA東仙台店 ポケモンカードゲーム 抽選販売",
+      "application_end_at": "2026-11-09T22:00:00+09:00",
+      "application_start_at": "2026-11-07T18:00:00+09:00",
+      "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "TSUTAYA東仙台店 ポケモンカードゲーム 抽選販売",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mpbzb",
+      "store_name": "TSUTAYA東仙台店 ２階TSUTAYAレジ",
+      "prefecture": "宮城県",
+      "discord_posted_at": "2026-11-07T09:30:04.185000+00:00",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 ２階TSUTAYAレジ",
+          "prefecture": "宮城県"
+        }
+      ],
+      "event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
+      "application_end_at": "2026-11-09T22:00:00+09:00",
+      "application_start_at": "2026-11-07T18:00:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-07T09:35:57.540948+00:00"
     }
   ],
-  "updated_at": "2026-11-07T09:26:03.617742+00:00"
+  "updated_at": "2026-11-07T09:36:20.022463+00:00"
 }
