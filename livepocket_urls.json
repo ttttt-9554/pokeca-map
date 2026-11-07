@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-07T02:01:03.276876+00:00",
+  "collected_at": "2026-11-07T02:10:56.053805+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 698,
+  "unique_livepocket_urls": 699,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -19752,34 +19752,64 @@
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15"
+    },
+    {
+      "url": "https://livepocket.jp/e/rw4tq",
+      "discord_message_id": "1568446058277765280",
+      "discord_posted_at": "2026-11-07T02:04:40.612000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/rw4tq",
+      "store_name": "宇都宮東簗瀬店",
+      "prefecture": null,
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop"
+      },
+      "event_title": "【宇都宮東簗瀬店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "stores": [
+        {
+          "name": "宇都宮東簗瀬店",
+          "prefecture": ""
+        }
+      ],
+      "result_announcement_date": "2026-11-17"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 529,
-    "no_structured_details": 169
+    "no_structured_details": 170
   },
   "field_counts": {
-    "store_name": 503,
+    "store_name": 504,
     "prefecture": 463,
-    "event_title": 385,
+    "event_title": 386,
     "event_date": 1,
-    "product_name": 104,
+    "product_name": 105,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 661,
-    "application_start_at": 650,
-    "stores_events": 523
+    "application_end_at": 662,
+    "application_start_at": 651,
+    "stores_events": 524
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568444913195163748"
+      "1551580466266644552": "1568446058277765280"
     },
     "last_run": {
-      "checked_at": "2026-11-07T02:01:03.276876+00:00",
-      "new_urls": 2,
-      "original_urls": 696,
+      "checked_at": "2026-11-07T02:10:56.053805+00:00",
+      "new_urls": 1,
+      "original_urls": 698,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -20025,7 +20055,8 @@
         "1568248627887865877": "2026-11-06T13:01:00.466720+00:00",
         "1568429810638790677": "2026-11-07T01:00:59.203673+00:00",
         "1568437353213595659": "2026-11-07T01:30:59.854748+00:00",
-        "1568444913195163748": "2026-11-07T02:01:04.626829+00:00"
+        "1568444913195163748": "2026-11-07T02:01:04.626829+00:00",
+        "1568446058277765280": "2026-11-07T02:10:57.134339+00:00"
       },
       "checked_search_urls": {}
     },
@@ -23060,6 +23091,11 @@
           "checked_at": "2026-11-07T02:01:39.486023+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/rw4tq": {
+          "checked_at": "2026-11-07T02:11:26.227851+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -25122,6 +25158,12 @@
           "detected_at": "2026-11-07T02:01:05.758060+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-07T02:01:39.486023+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/rw4tq": {
+          "detected_at": "2026-11-07T02:10:58.083676+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T02:11:26.227851+00:00",
           "http_status": null
         }
       },
@@ -32734,6 +32776,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/rw4tq": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-07T02:11:26.227851+00:00",
+          "title_observed": "【宇都宮東簗瀬店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -38028,6 +38081,19 @@
         },
         "https://livepocket.jp/e/0r314": {
           "checked_at": "2026-11-07T02:01:39.486023+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/rw4tq": {
+          "checked_at": "2026-11-07T02:11:26.227851+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
