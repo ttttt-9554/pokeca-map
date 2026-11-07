@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-07T08:15:57.144967+00:00",
+  "collected_at": "2026-11-07T09:05:56.781972+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -20091,12 +20091,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568537869146914896"
+      "1551580466266644552": "1568550669336584342"
     },
     "last_run": {
-      "checked_at": "2026-11-07T08:15:57.144967+00:00",
-      "new_urls": 1,
-      "original_urls": 707,
+      "checked_at": "2026-11-07T09:05:56.781972+00:00",
+      "new_urls": 0,
+      "original_urls": 708,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -23411,8 +23411,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/9grzx": {
-          "checked_at": "2026-11-07T03:00:46.160035+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-07T09:06:25.931025+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/egvdx": {
@@ -25524,8 +25524,8 @@
         },
         "https://livepocket.jp/e/9grzx": {
           "detected_at": "2026-11-07T03:00:16.749815+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-07T03:00:46.160035+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-07T09:06:25.931025+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/zzi1f": {
@@ -27196,6 +27196,11 @@
         "https://livepocket.jp/e/3_a1v": {
           "attempts": 1,
           "last_attempt_at": "2026-11-07T08:36:35.217968+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/9grzx": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-07T09:06:25.931025+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -33268,7 +33273,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T03:00:46.160035+00:00",
+          "checked_at": "2026-11-07T09:06:25.931025+00:00",
           "title_observed": "【宇都宮テクノ店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -38689,7 +38694,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9grzx": {
-          "checked_at": "2026-11-07T03:00:46.160035+00:00",
+          "checked_at": "2026-11-07T09:06:25.931025+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
