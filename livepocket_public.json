@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-07T03:10:55.900189+00:00",
-  "unique_livepocket_urls": 704,
+  "collected_at": "2026-11-07T03:30:55.866378+00:00",
+  "unique_livepocket_urls": 705,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11314,7 +11314,32 @@
         }
       ],
       "first_detected_at": "2026-11-07T03:00:16.749815+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/egvdx",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-07T03:30:08.605000+00:00",
+      "stores": [
+        {
+          "name": "古本市場与野本町店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【古本市場与野本町店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場与野本町店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-07T03:30:58.080458+00:00"
     }
   ],
-  "updated_at": "2026-11-07T03:20:59.964220+00:00"
+  "updated_at": "2026-11-07T03:31:27.050900+00:00"
 }
