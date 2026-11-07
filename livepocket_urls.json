@@ -23651,7 +23651,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/9grzx": {
-          "checked_at": "2026-11-07T09:06:25.931025+00:00",
+          "checked_at": "2026-11-07T15:16:30.454214+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -25800,7 +25800,7 @@
         "https://livepocket.jp/e/9grzx": {
           "detected_at": "2026-11-07T03:00:16.749815+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T09:06:25.931025+00:00",
+          "checked_at": "2026-11-07T15:16:30.454214+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/zzi1f": {
@@ -27516,8 +27516,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9grzx": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T09:06:25.931025+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-07T15:16:30.454214+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/egvdx": {
@@ -33605,7 +33605,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T09:06:25.931025+00:00",
+          "checked_at": "2026-11-07T15:16:30.454214+00:00",
           "title_observed": "【宇都宮テクノ店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -39103,7 +39103,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9grzx": {
-          "checked_at": "2026-11-07T09:06:25.931025+00:00",
+          "checked_at": "2026-11-07T15:16:30.454214+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
