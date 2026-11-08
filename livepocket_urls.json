@@ -23994,13 +23994,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/f8haj": {
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/6b32h": {
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -26236,14 +26236,14 @@
         },
         "https://livepocket.jp/e/6b32h": {
           "detected_at": "2026-11-08T02:30:56.937121+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/f8haj": {
           "detected_at": "2026-11-08T02:30:56.937121+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "http_status": null
         }
       },
@@ -27969,6 +27969,16 @@
         "https://livepocket.jp/e/h78by": {
           "attempts": 1,
           "last_attempt_at": "2026-11-08T08:06:29.264619+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/f8haj": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-08T08:36:16.162486+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/6b32h": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-08T08:36:16.162486+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -34294,7 +34304,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "title_observed": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
           "genre": "",
           "product_origin": "",
@@ -34305,7 +34315,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "title_observed": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
           "genre": "pokemon",
           "product_origin": "",
@@ -39981,7 +39991,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/f8haj": {
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -39994,7 +40004,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/6b32h": {
-          "checked_at": "2026-11-08T02:31:17.641879+00:00",
+          "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
