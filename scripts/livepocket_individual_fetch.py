@@ -57,11 +57,7 @@ def extract(v21, url, page):
     start,end=v21.v14.v13.extract_deadline(body)
     if start:fields['application_start_at']=v21.v11.iso(start)
     if end:fields['application_end_at']=v21.v11.iso(end)
-    stores=v21.v19.page_stores(body)
-    if not stores:
-        name,_=v21.v20.v15.explicit_store(body)
-        store=v21.v19.store_part(name) or v21.v19.overview_store(page)
-        if store:stores=[store]
+    stores,_=v21.v19.observation_stores(page)
     if stores:
         fields['stores']=[{'name':s['name'],'prefecture':s.get('prefecture','')} for s in stores[:35]]
     return {'status':'success','fields':fields,'message':(

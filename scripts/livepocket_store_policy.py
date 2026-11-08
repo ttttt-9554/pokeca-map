@@ -11,6 +11,7 @@ from livepocket_venue_prefecture import PREFECTURES
 PAGE = 'livepocket_official_page'
 MANUAL = 'livepocket_verified_manual'
 PENDING = 'livepocket_page_required'
+AREAS = frozenset((*PREFECTURES, '全国', ''))
 LOCATION_KEYS = frozenset(('store_name', 'prefecture', 'stores',
                           'store_location_source', 'store_location_url'))
 URL_RE = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{3,64}$')
@@ -31,7 +32,7 @@ def valid_rows(rows):
             continue
         name, pref = row.get('name'), row.get('prefecture') or ''
         if (not isinstance(name, str) or not 2 <= len(name.strip()) <= 200
-                or pref not in (*PREFECTURES, '')):
+                or pref not in AREAS):
             continue
         value = {'name': name.strip(), 'prefecture': pref}
         if value not in out:
@@ -111,14 +112,20 @@ def sanitize_catalog(raw, public):
                for row in raw.get('items', []) if isinstance(row, dict))
 
 
-def recheck_candidates(raw, public, *, now, limit=3):
+def recheck_candidates(raw, public, *, now, limit=8):
     """Only open events; never start crawling expired history for this migration."""
     checks = raw.get('collector_state', {}).get('official_store_checks_v1', {})
+    index = {row.get('url'): row for row in raw.get('items', []) if isinstance(row, dict)}
     candidates = []
     for row in public.get('items', []):
-        if verified(row) or row.get('manual_page_unavailable'):
+        if row.get('manual_page_unavailable') or row.get('store_location_source') == MANUAL:
             continue
         url = row.get('url')
+        source = (index.get(url, {}).get('field_sources') or {}).get('stores')
+        if (verified(row) and source != 'v22_official_title_shop'
+                and valid_rows(row.get('stores'))
+                and all(store.get('prefecture') for store in row['stores'])):
+            continue
         if not isinstance(url, str) or not URL_RE.fullmatch(url):
             continue
         try:

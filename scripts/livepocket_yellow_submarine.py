@@ -129,6 +129,26 @@ def resolve_branches(titles, preset):
     return []
 
 
+def page_chain_stores(observation):
+    """Use the established preset only for an explicit page-wide chain draw."""
+    if observation.get('page_identity') != 'event_confirmed':
+        return []
+    venue = re.sub(r'\s*[（(][^（）()]+[）)]$', '', str(observation.get('overview_venue') or ''))
+    if not chain_name(venue) or not chain_name(observation.get('overview_seller')):
+        return []
+    # This sentence states participation. Receipt/identity conditions elsewhere
+    # on the page must not be misread as a branch list or corporate shop name.
+    text = str(observation.get('text') or '')
+    if not re.search(r'イエローサブマリンの取扱店舗全店統一での抽選', text):
+        return []
+    if re.search(r'(?:一部店舗|[店店舗]+を)(?:除く|除外)|対象外店舗', text):
+        return []
+    try:
+        return load_preset(Path(__file__).resolve().parents[1] / 'yellow_submarine_stores.json')
+    except (OSError, ValueError):
+        return []
+
+
 def apply_chain(raw, public, preset, protected_urls=()):
     protected = set(protected_urls)
     if not isinstance(raw, dict) or not isinstance(public, dict):

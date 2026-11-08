@@ -7685,7 +7685,15 @@
       "discord_posted_at": "2026-11-03T05:30:03.904000+00:00",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-03T05:35:58.225410+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA二十世紀が丘店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA二十世紀が丘店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/3pdc4"
     },
     {
@@ -7727,7 +7735,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-03T10:05:58.376014+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA Trading Card 松戸",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 松戸",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/0-aj_"
     },
     {
@@ -7737,7 +7753,15 @@
       "discord_posted_at": "2026-11-03T10:00:07.563000+00:00",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-03T10:05:58.376014+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA Trading Card 松戸",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 松戸",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/926kc"
     },
     {
@@ -7747,7 +7771,15 @@
       "discord_posted_at": "2026-11-03T10:00:07.563000+00:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-03T10:05:58.376014+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA Trading Card 松戸",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 松戸",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/cxg3t"
     },
     {
@@ -7773,7 +7805,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "NexusTradingCards",
+      "prefecture": "全国",
+      "stores": [
+        {
+          "name": "NexusTradingCards",
+          "prefecture": "全国"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/a35_-"
     },
     {
@@ -7784,7 +7824,15 @@
       "discord_posted_at": "2026-11-03T15:00:15.086000+00:00",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA入間仏子店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "TSUTAYA入間仏子店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ewhgu"
     },
     {
@@ -7798,7 +7846,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-03T15:06:00.066686+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "ブックエース坂東店",
+      "prefecture": "茨城県",
+      "stores": [
+        {
+          "name": "ブックエース坂東店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ghdew"
     },
     {
@@ -7874,7 +7930,15 @@
       "discord_posted_at": "2026-11-04T04:00:07.485000+00:00",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-04T04:00:58.819190+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "トレカエース常陸太田店",
+      "prefecture": "茨城県",
+      "stores": [
+        {
+          "name": "トレカエース常陸太田店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/wp6tg"
     },
     {
@@ -7904,7 +7968,15 @@
       "discord_posted_at": "2026-11-04T06:30:07.343000+00:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-04T06:30:58.256624+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/z_1ke"
     },
     {
@@ -7915,7 +7987,15 @@
       "discord_posted_at": "2026-11-04T10:00:06.791000+00:00",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-04T10:10:58.422252+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/gswrx"
     },
     {
@@ -7926,7 +8006,15 @@
       "discord_posted_at": "2026-11-04T10:00:06.791000+00:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-04T10:10:58.422252+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/2zkfx"
     },
     {
@@ -7963,7 +8051,15 @@
       "result_announcement_date": "2026-11-12",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-04T13:31:01.213869+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "文教堂行徳店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "文教堂行徳店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/8v2fs"
     },
     {
@@ -8073,7 +8169,15 @@
       "result_announcement_date": "2026-11-09",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-05T09:05:58.310343+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "文教堂書店湘南とうきゅう店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/mda0k"
     },
     {
@@ -8086,7 +8190,15 @@
       "result_announcement_date": "2026-11-09",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-05T09:05:58.310343+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "文教堂書店湘南とうきゅう店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/e42vd"
     },
     {
@@ -8103,7 +8215,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-05T09:26:00.605592+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "ハレツー通販",
+      "prefecture": "全国",
+      "stores": [
+        {
+          "name": "ハレツー通販",
+          "prefecture": "全国"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/s191v"
     },
     {
@@ -8116,7 +8236,15 @@
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-15",
       "first_detected_at": "2026-11-05T15:36:04.407471+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "古本市場志木店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "古本市場志木店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/wcs2w"
     },
     {
@@ -8150,7 +8278,15 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-06T01:00:59.039984+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "ヤマト屋書店TSUTAYA中里店",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYA中里店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/zm4do"
     },
     {
@@ -8165,8 +8301,51 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T01:00:59.039984+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/s2dtfw7rvo"
+      "store_name": "イトーヨーカドー大和鶴間店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーららぽーと横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーグランツリー武蔵小杉店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/s2dtfw7rvo",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/luo8lp88-d",
@@ -8180,8 +8359,67 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T01:00:59.039984+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/luo8lp88-d"
+      "store_name": "イトーヨーカドー大船店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大船店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー船橋店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドー若葉台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー伊勢原店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー上尾駅前店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー草加店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー小田原店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー我孫子店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドー大井町店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー知多店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "イトーヨーカドー明石店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イトーヨーカドー宇都宮店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "イトーヨーカドー甲子園店",
+          "prefecture": "兵庫県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/luo8lp88-d",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ufbho",
@@ -8195,7 +8433,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T01:40:58.133538+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "torevi",
+      "prefecture": "全国",
+      "stores": [
+        {
+          "name": "torevi",
+          "prefecture": "全国"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ufbho"
     },
     {
@@ -8246,16 +8492,16 @@
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-06T02:05:59.621098+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/m_o9_",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場与野本町店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場与野本町店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/m_o9_"
     },
     {
       "url": "https://livepocket.jp/e/jd0iq1-bl1",
@@ -8269,8 +8515,91 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T02:35:56.676149+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/jd0iq1-bl1"
+      "store_name": "イトーヨーカドー武蔵境店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー武蔵境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー多摩センター店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー和光店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー三島店",
+          "prefecture": "静岡県"
+        },
+        {
+          "name": "イトーヨーカドー赤羽店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ葛西店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー甲府昭和店",
+          "prefecture": "山梨県"
+        },
+        {
+          "name": "イトーヨーカドー木場店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー湘南台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー立場店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー大宮宮原店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー国領店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー大森店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ川口店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ八尾店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーアリオ鳳店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドー武蔵小金井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ市原店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ柏店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/jd0iq1-bl1",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/x4eog",
@@ -8282,7 +8611,15 @@
       "result_announcement_date": "2026-11-18",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-06T03:05:58.973331+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "キデイランド吉祥寺店",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/x4eog"
     },
     {
@@ -8294,7 +8631,15 @@
       "result_announcement_date": "2026-11-10",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-06T03:35:59.003686+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA400号西那須野店",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA400号西那須野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/6mf8u"
     },
     {
@@ -8309,8 +8654,83 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T03:35:59.003686+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/4t5pvnf6l8"
+      "store_name": "イトーヨーカドー浦和店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー浦和店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー昭島店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ加古川店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イトーヨーカドー古淵店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー東久留米店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー南大沢店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー能見台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー横浜別所店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー川崎店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー四街道店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドー三郷店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー曳舟店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ鷲宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ上尾店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドープライムツリー赤池店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "イトーヨーカドー トイロスクール天美店",
+          "prefecture": "大阪府"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/4t5pvnf6l8",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/pv9dk",
@@ -8323,7 +8743,15 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-06T04:05:58.694068+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/pv9dk"
     },
     {
@@ -8340,8 +8768,63 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/7cw9u"
+      "store_name": "PAO青梅店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/7cw9u",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/tgk3o",
@@ -8357,8 +8840,63 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/tgk3o"
+      "store_name": "PAO青梅店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/tgk3o",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/37m04",
@@ -8374,8 +8912,63 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-06T04:45:58.504652+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/37m04"
+      "store_name": "PAO青梅店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/37m04",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/7uj-k",
@@ -8392,16 +8985,20 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-06T06:06:00.178588+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/7uj-k",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "ふるいち ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち ららぽーと富士見店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/7uj-k",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/itj-5",
@@ -8414,7 +9011,15 @@
       "purchase_end_date": "2026-11-21",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-06T09:00:59.237441+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA六高台店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA六高台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/itj-5"
     },
     {
@@ -8428,16 +9033,16 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-06T09:00:59.237441+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/lkv83",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場深谷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場深谷店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/lkv83"
     },
     {
       "url": "https://livepocket.jp/e/uyq6h",
@@ -8451,7 +9056,15 @@
       "purchase_end_time": "21:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-06T10:30:58.102364+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/uyq6h"
     },
     {
@@ -8469,16 +9082,16 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-06T11:30:32.182141+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "ふるいち ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち ららぽーと富士見店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp"
     },
     {
       "url": "https://livepocket.jp/e/bgwe7",
@@ -8489,7 +9102,15 @@
       "discord_posted_at": "2026-11-06T12:00:28.179000+00:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-06T12:01:01.427958+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "キデイランド 浦和美園店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "キデイランド 浦和美園店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/bgwe7"
     },
     {
@@ -8501,7 +9122,15 @@
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "first_detected_at": "2026-11-06T13:01:01.356821+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/sq7kw"
     },
     {
@@ -8513,16 +9142,16 @@
       "result_announcement_date": "2026-11-17",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T01:01:00.223852+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/fa29k",
+      "store_name": "TSUTAYA自治医大店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "自治医大店",
-          "prefecture": ""
+          "name": "TSUTAYA自治医大店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "自治医大店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/fa29k"
     },
     {
       "url": "https://livepocket.jp/e/yb7-8",
@@ -8535,7 +9164,15 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-07T01:01:00.223852+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/yb7-8"
     },
     {
@@ -8550,7 +9187,15 @@
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T01:31:01.138175+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/gr4t4"
     },
     {
@@ -8562,16 +9207,16 @@
       "result_announcement_date": "2026-11-17",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T01:31:01.138175+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/mjfbt",
+      "store_name": "TSUTAYA所沢山口店トレカ売場",
+      "prefecture": "埼玉県",
       "stores": [
         {
-          "name": "所沢山口店",
-          "prefecture": ""
+          "name": "TSUTAYA所沢山口店トレカ売場",
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "所沢山口店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/mjfbt"
     },
     {
       "url": "https://livepocket.jp/e/gc0bj",
@@ -8583,16 +9228,16 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T01:31:01.138175+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/gc0bj",
+      "store_name": "ふるいちトップブックスひたちなか店",
+      "prefecture": "茨城県",
       "stores": [
         {
           "name": "ふるいちトップブックスひたちなか店",
-          "prefecture": ""
+          "prefecture": "茨城県"
         }
       ],
-      "store_name": "ふるいちトップブックスひたちなか店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gc0bj"
     },
     {
       "url": "https://livepocket.jp/e/0r314",
@@ -8608,7 +9253,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T02:01:05.758060+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/0r314"
     },
     {
@@ -8623,26 +9276,34 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-07T02:01:05.758060+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "トレカエース新取手店",
+      "prefecture": "茨城県",
+      "stores": [
+        {
+          "name": "トレカエース新取手店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/w38v5"
     },
     {
       "url": "https://livepocket.jp/e/rw4tq",
-      "store_name": "宇都宮東簗瀬店",
-      "prefecture": "",
       "event_title": "【宇都宮東簗瀬店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "application_start_at": "2026-11-07T07:00:00+09:00",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "discord_posted_at": "2026-11-07T02:04:40.612000+00:00",
       "result_announcement_date": "2026-11-17",
       "review_category": "onepiece",
+      "first_detected_at": "2026-11-07T02:10:58.083676+00:00",
+      "store_name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "宇都宮東簗瀬店",
-          "prefecture": ""
+          "name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "first_detected_at": "2026-11-07T02:10:58.083676+00:00",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/rw4tq"
     },
@@ -8657,7 +9318,15 @@
       "purchase_end_date": "2026-11-27",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T02:30:57.963967+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/3_a1v"
     },
     {
@@ -8695,7 +9364,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T02:30:57.963967+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "キデイランド ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/7_pst"
     },
     {
@@ -8707,16 +9384,16 @@
       "result_announcement_date": "2026-11-17",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T03:00:16.749815+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/9grzx",
+      "store_name": "TSUTAYA宇都宮テクノ店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "宇都宮テクノ店",
-          "prefecture": ""
+          "name": "TSUTAYA宇都宮テクノ店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "宇都宮テクノ店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/9grzx"
     },
     {
       "url": "https://livepocket.jp/e/zzi1f",
@@ -8728,16 +9405,16 @@
       "result_announcement_date": "2026-11-12",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T03:00:16.749815+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/zzi1f",
+      "store_name": "TSUTAYA宇都宮テクノ店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "宇都宮テクノ店",
-          "prefecture": ""
+          "name": "TSUTAYA宇都宮テクノ店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "宇都宮テクノ店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/zzi1f"
     },
     {
       "url": "https://livepocket.jp/e/egvdx",
@@ -8753,16 +9430,16 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T03:30:58.080458+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/egvdx",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場与野本町店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場与野本町店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/egvdx"
     },
     {
       "url": "https://livepocket.jp/e/htnyy",
@@ -8774,16 +9451,16 @@
       "result_announcement_date": "2026-11-12",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T04:00:56.598573+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/htnyy",
+      "store_name": "TSUTAYA自治医大店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "自治医大店",
-          "prefecture": ""
+          "name": "TSUTAYA自治医大店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "自治医大店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/htnyy"
     },
     {
       "url": "https://livepocket.jp/e/arz9b",
@@ -8802,7 +9479,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T05:05:59.967700+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA流山店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA流山店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/arz9b"
     },
     {
@@ -8841,7 +9526,15 @@
       "purchase_end_date": "2026-11-21",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA鎌ケ谷店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/vq5r7"
     },
     {
@@ -8855,7 +9548,15 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA東仙台店 ２階トレカコーナー",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 ２階トレカコーナー",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/k_foq"
     },
     {
@@ -8869,7 +9570,15 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T09:35:57.540948+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA東仙台店 ２階TSUTAYAレジ",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 ２階TSUTAYAレジ",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/mpbzb"
     },
     {
@@ -8886,7 +9595,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T10:05:59.359162+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA鎌ケ谷店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/dz3vb"
     },
     {
@@ -8898,16 +9615,16 @@
       "result_announcement_date": "2026-11-17",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T11:35:56.914739+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/d1_98",
+      "store_name": "TSUTAYA作新学院前店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "作新学院前店",
-          "prefecture": ""
+          "name": "TSUTAYA作新学院前店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "作新学院前店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/d1_98"
     },
     {
       "url": "https://livepocket.jp/e/f2n7x",
@@ -8919,16 +9636,16 @@
       "result_announcement_date": "2026-11-12",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T11:35:56.914739+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/f2n7x",
+      "store_name": "TSUTAYA作新学院前店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "作新学院前店",
-          "prefecture": ""
+          "name": "TSUTAYA作新学院前店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "作新学院前店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f2n7x"
     },
     {
       "url": "https://livepocket.jp/e/jogp8",
@@ -8940,7 +9657,15 @@
       "result_announcement_date": "2026-11-13",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T15:05:57.125944+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "キデイランド ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/jogp8"
     },
     {
@@ -8951,7 +9676,15 @@
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA追浜店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA追浜店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/3n9no"
     },
     {
@@ -8962,7 +9695,15 @@
       "discord_posted_at": "2026-11-07T15:30:07.125000+00:00",
       "result_announcement_date": "2026-11-10",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA Trading Card 戸塚店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 戸塚店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/mc956"
     },
     {
@@ -8975,7 +9716,15 @@
       "result_announcement_date": "2026-11-09",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA横須賀粟田店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA横須賀粟田店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/dqtqd"
     },
     {
@@ -8988,16 +9737,16 @@
       "result_announcement_date": "2026-11-12",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/24acn",
+      "store_name": "TSUTAYA大利根店トレカ売場",
+      "prefecture": "埼玉県",
       "stores": [
         {
-          "name": "大利根店",
-          "prefecture": ""
+          "name": "TSUTAYA大利根店トレカ売場",
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "大利根店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/24acn"
     },
     {
       "url": "https://livepocket.jp/e/sb0d4",
@@ -9010,16 +9759,16 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/sb0d4",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場深谷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場深谷店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sb0d4"
     },
     {
       "url": "https://livepocket.jp/e/854lu",
@@ -9030,16 +9779,16 @@
       "result_announcement_date": "2026-11-17",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/854lu",
+      "store_name": "TSUTAYA栃木城内店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "栃木城内店",
-          "prefecture": ""
+          "name": "TSUTAYA栃木城内店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "栃木城内店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/854lu"
     },
     {
       "url": "https://livepocket.jp/e/q2duc",
@@ -9055,16 +9804,16 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/q2duc",
+      "store_name": "ふるいちトップブックス川島インター店",
+      "prefecture": "埼玉県",
       "stores": [
         {
-          "name": "ふるいち川島インター店",
-          "prefecture": ""
+          "name": "ふるいちトップブックス川島インター店",
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち川島インター店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/q2duc"
     },
     {
       "url": "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru",
@@ -9075,7 +9824,15 @@
       "result_announcement_date": "2026-11-18",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "TSUTAYA涌谷店",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "TSUTAYA涌谷店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru"
     },
     {
@@ -9089,16 +9846,16 @@
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-08T01:00:56.901837+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/l2k4b",
+      "store_name": "ふるいち八潮中央店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "ふるいち八潮中央店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち八潮中央店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/l2k4b"
     },
     {
       "url": "https://livepocket.jp/e/bh-48",
@@ -9112,7 +9869,99 @@
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-08T01:30:58.463466+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "イエローサブマリン札幌GAMESHOP",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イエローサブマリン札幌GAMESHOP",
+          "prefecture": "北海道"
+        },
+        {
+          "name": "イエローサブマリン横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン新宿店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン池袋GAMESHOP",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン町田GAMESHOP",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン横浜西口店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン川越カードショップ",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イエローサブマリン大宮本店・プレイソフト",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イエローサブマリン千葉ゲームショップ",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イエローサブマリン宇都宮店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "イエローサブマリン溝口店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン川崎店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン柏店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イエローサブマリン秋葉原本店★ミント",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン京都店",
+          "prefecture": "京都府"
+        },
+        {
+          "name": "イエローサブマリン名古屋GAMESHOP",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "イエローサブマリンなんば本店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イエローサブマリン三宮店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イエローサブマリン姫路店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イエローサブマリンマジッカーズ福岡店",
+          "prefecture": "福岡県"
+        },
+        {
+          "name": "イエローサブマリン広島店",
+          "prefecture": "広島県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/bh-48"
     },
     {
@@ -9129,7 +9978,15 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-08T02:00:59.030124+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_name": "トレカエース春日部店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "トレカエース春日部店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/h78by"
     },
     {
@@ -9146,16 +10003,16 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-08T02:30:56.937121+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/6b32h",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         }
       ],
-      "store_name": "トレカパーク横浜西口店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/6b32h"
     },
     {
       "url": "https://livepocket.jp/e/f8haj",
@@ -9168,17 +10025,17 @@
       "purchase_end_date": "2026-11-15",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-08T02:30:56.937121+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/f8haj",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         }
       ],
-      "store_name": "トレカパーク横浜西口店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f8haj"
     }
   ],
-  "updated_at": "2026-11-08T06:27:12.664947+00:00"
+  "updated_at": "2026-11-08T07:13:36.759936+00:00"
 }

@@ -19,10 +19,14 @@ name: LivePocket Detail Deadline Regression
       - scripts/livepocket_individual_fetch.py
       - scripts/livepocket_v19.py
       - scripts/livepocket_store_policy.py
+      - scripts/livepocket_page_locations.py
+      - scripts/livepocket_v20.py
+      - scripts/livepocket_yellow_submarine.py
       - scripts/livepocket_collect.py
       - scripts/livepocket_v7.py
       - scripts/livepocket_v8.py
       - scripts/test_livepocket_site_stores.py
+      - scripts/test_livepocket_page_locations.py
       - scripts/test_livepocket_individual_fetch.py
       - scripts/test_livepocket_immediate_dispatch_ui.cjs
       - scripts/test_lottery_public_poll.cjs
@@ -106,7 +110,7 @@ jobs:
           python-version: '3.12'
       - name: Compile and run all deadline safety regressions
         run: |
-          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_site_stores.py
+          PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_site_stores.py scripts/test_livepocket_page_locations.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_sevennet_lottery_enrich.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_famima_lottery_enrich.py
           PYTHONPATH=scripts python -m unittest -v scripts/test_livepocket_period_trial.py scripts/test_livepocket_individual_fetch.py

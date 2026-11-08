@@ -163,7 +163,9 @@ def apply_verified(raw, public, pages, verified):
     rindex, pindex = v11.indices(raw, public)
     stats = {'ticket_products_added': 0, 'verified_products_added': 0,
              'verified_prefectures_added': 0, 'multi_store_events': 0,
-             'product_conflicts_retained': 0}
+             'product_conflicts_retained': 0,
+             'verified_prefectures_waiting_for_store': 0,
+             'verified_prefecture_conflicts_retained': 0}
     for url, item in rindex.items():
         pub = pindex[url]
         # Use exact-URL page text, never a different event or a rounded-up post.
@@ -187,8 +189,10 @@ def apply_verified(raw, public, pages, verified):
         stores = pub.get('stores') or item.get('stores') or []
         checked = verified['prefectures'].get(url, {})
         present_names = {s.get('name') for s in stores if isinstance(s, dict)}
-        if set(checked) - present_names:
-            raise ValueError(f'v20: verified shop name not in this event: {url}')
+        # The region reference verifies a prefecture, not participation in an
+        # event. A stale row must neither recreate a removed Discord shop nor
+        # abort collection of every other event while its page is rechecked.
+        stats['verified_prefectures_waiting_for_store'] += len(set(checked) - present_names)
         changed = False
         for store in stores:
             name = store.get('name')
@@ -196,7 +200,8 @@ def apply_verified(raw, public, pages, verified):
                 continue
             old = store.get('prefecture') or ''
             if old and old != checked[name]:
-                raise ValueError(f'v20: prefecture conflicts with event store: {url} {name}')
+                stats['verified_prefecture_conflicts_retained'] += 1
+                continue
             if not old:
                 store['prefecture'] = checked[name]
                 stats['verified_prefectures_added'] += 1

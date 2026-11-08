@@ -14841,17 +14841,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【抽選受付】26年11月13日発売 ポケモンカードゲームMEGA「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」",
+      "application_end_at": "2026-11-08T21:45:00+09:00",
+      "application_start_at": "2026-11-02T09:00:00+09:00",
+      "store_name": "TSUTAYA二十世紀が丘店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA二十世紀が丘店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3pdc4",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
-      "event_title": "【抽選受付】26年11月13日発売 ポケモンカードゲームMEGA「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」",
-      "application_end_at": "2026-11-08T21:45:00+09:00",
-      "application_start_at": "2026-11-02T09:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/3pdc4"
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/0epyz",
@@ -14918,14 +14929,25 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム MEGA 30thCELEBRATION カードセット９種",
       "application_end_at": "2026-11-08T20:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/0-aj_"
+      "store_name": "TSUTAYA Trading Card 松戸",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 松戸",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/0-aj_",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/926kc",
@@ -14938,14 +14960,25 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
       "application_end_at": "2026-11-08T20:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/926kc"
+      "store_name": "TSUTAYA Trading Card 松戸",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 松戸",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/926kc",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/cxg3t",
@@ -14958,14 +14991,25 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2【EB-05】",
       "application_end_at": "2026-11-08T20:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/cxg3t"
+      "store_name": "TSUTAYA Trading Card 松戸",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 松戸",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/cxg3t",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/4jh8u",
@@ -15000,17 +15044,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【購入権抽選】30th CELEBRATION BOX",
+      "application_end_at": "2026-11-11T23:59:00+09:00",
+      "application_start_at": "2026-11-03T23:00:00+09:00",
+      "store_name": "NexusTradingCards",
+      "prefecture": "全国",
+      "stores": [
+        {
+          "name": "NexusTradingCards",
+          "prefecture": "全国"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/a35_-",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "product_name": "v14_livepocket_explicit_product_label",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
-      "event_title": "【購入権抽選】30th CELEBRATION BOX",
-      "application_end_at": "2026-11-11T23:59:00+09:00",
-      "application_start_at": "2026-11-03T23:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/a35_-"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_online_shop",
+        "stores": "v19_livepocket_online_shop",
+        "prefecture": "v19_livepocket_online_shop"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ewhgu",
@@ -15023,16 +15078,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
       "application_end_at": "2026-11-08T21:45:00+09:00",
       "application_start_at": "2026-11-02T07:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/ewhgu"
+      "store_name": "TSUTAYA入間仏子店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "TSUTAYA入間仏子店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ewhgu",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ghdew",
@@ -15045,16 +15111,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-03T10:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/ghdew"
+      "store_name": "ブックエース坂東店",
+      "prefecture": "茨城県",
+      "stores": [
+        {
+          "name": "ブックエース坂東店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ghdew",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/s72w6",
@@ -15185,16 +15262,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲームハイクラスパックMEGAドリーム抽選販売",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-03T09:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/wp6tg"
+      "store_name": "トレカエース常陸太田店",
+      "prefecture": "茨城県",
+      "stores": [
+        {
+          "name": "トレカエース常陸太田店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/wp6tg",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/o17ppsed05",
@@ -15239,16 +15327,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【店頭告知要確認】公認店限定「ONE PIECE HEROINES PRECIOUS BOX」抽選販売",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-04T09:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/z_1ke"
+      "store_name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/z_1ke",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/gswrx",
@@ -15261,16 +15360,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA『ﾒｶﾞｵｰﾀﾞｲﾙ･ﾒｶﾞｶｲﾘｭｰ･ﾒｶﾞｹﾞﾝｶﾞｰ』 抽選販売受付",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-05T10:30:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/gswrx"
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gswrx",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/2zkfx",
@@ -15283,16 +15393,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ワンピースカード ブースターパック『神の支配』 抽選販売受付",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-04T17:15:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/2zkfx"
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/2zkfx",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/2nyas",
@@ -15352,17 +15473,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
       "application_end_at": "2026-11-09T20:30:00+09:00",
       "application_start_at": "2026-11-04T13:39:00+09:00",
       "result_announcement_date": "2026-11-12",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/8v2fs"
+      "store_name": "文教堂行徳店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "文教堂行徳店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/8v2fs",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ogdt-",
@@ -15528,18 +15660,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
       "event_title": "ワンピースカードゲーム 『HEROINES PRECIOUS BOX』抽選販売",
       "application_end_at": "2026-11-08T20:30:00+09:00",
       "application_start_at": "2026-11-05T17:26:00+09:00",
       "result_announcement_date": "2026-11-09",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/mda0k"
+      "store_name": "文教堂書店湘南とうきゅう店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/mda0k",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/e42vd",
@@ -15552,18 +15695,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
       "event_title": "ポケモンカードゲーム『スペシャルデッキセットMEGAメガオーダイル・メガカイリュー・メガゲンガー』抽選販売",
       "application_end_at": "2026-11-08T20:30:00+09:00",
       "application_start_at": "2026-11-05T17:27:00+09:00",
       "result_announcement_date": "2026-11-09",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/e42vd"
+      "store_name": "文教堂書店湘南とうきゅう店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "文教堂書店湘南とうきゅう店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/e42vd",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/s191v",
@@ -15576,18 +15730,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ハレツー通販 拡張パック「ハドウシーカー」購入権",
       "application_end_at": "2026-11-11T18:00:00+09:00",
       "result_announcement_date": "2026-11-16",
       "purchase_start_date": "2026-11-16",
       "purchase_end_date": "2026-11-20",
       "purchase_end_time": "15:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/s191v"
+      "store_name": "ハレツー通販",
+      "prefecture": "全国",
+      "stores": [
+        {
+          "name": "ハレツー通販",
+          "prefecture": "全国"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/s191v",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_online_shop",
+        "stores": "v19_livepocket_online_shop",
+        "prefecture": "v19_livepocket_online_shop"
+      }
     },
     {
       "url": "https://livepocket.jp/e/wcs2w",
@@ -15600,19 +15765,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "古本市場志木店 ワンピカード抽選販売(世界最強の戦士)",
       "application_end_at": "2026-11-10T23:59:00+09:00",
       "application_start_at": "2026-11-05T15:34:00+09:00",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/wcs2w"
+      "store_name": "古本市場志木店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "古本市場志木店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/wcs2w",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/z1m9e",
@@ -15660,19 +15836,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "TSUTAYA中里店 11/13発売ポケモンカード抽選",
       "application_end_at": "2026-11-09T21:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
       "application_start_at": "2026-11-06T00:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/zm4do"
+      "store_name": "ヤマト屋書店TSUTAYA中里店",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYA中里店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/zm4do",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/s2dtfw7rvo",
@@ -15685,17 +15872,60 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-10-27T17:46:00+09:00",
+      "store_name": "イトーヨーカドー大和鶴間店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーららぽーと横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーグランツリー武蔵小杉店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/s2dtfw7rvo",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets"
-      },
-      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "application_end_at": "2026-11-08T23:59:00+09:00",
-      "application_start_at": "2026-10-27T17:46:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/s2dtfw7rvo"
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/luo8lp88-d",
@@ -15708,17 +15938,76 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-10-27T17:46:00+09:00",
+      "store_name": "イトーヨーカドー大船店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大船店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー船橋店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドー若葉台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー伊勢原店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー上尾駅前店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー草加店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー小田原店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー我孫子店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドー大井町店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー知多店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "イトーヨーカドー明石店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イトーヨーカドー宇都宮店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "イトーヨーカドー甲子園店",
+          "prefecture": "兵庫県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/luo8lp88-d",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets"
-      },
-      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "application_end_at": "2026-11-08T23:59:00+09:00",
-      "application_start_at": "2026-10-27T17:46:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/luo8lp88-d"
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ufbho",
@@ -15731,17 +16020,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "ポケモンカード「MEGA拡張パック 30th CELEBRATION 1BOX」定価抽選販売",
+      "application_end_at": "2026-11-13T21:00:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "store_name": "torevi",
+      "prefecture": "全国",
+      "stores": [
+        {
+          "name": "torevi",
+          "prefecture": "全国"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ufbho",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
-      "event_title": "ポケモンカード「MEGA拡張パック 30th CELEBRATION 1BOX」定価抽選販売",
-      "application_end_at": "2026-11-13T21:00:00+09:00",
-      "application_start_at": "2026-11-06T10:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/ufbho"
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_online_shop",
+        "stores": "v19_livepocket_online_shop",
+        "prefecture": "v19_livepocket_online_shop"
+      }
     },
     {
       "url": "https://livepocket.jp/e/5ufuq",
@@ -15807,29 +16107,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【古本市場与野本町店】ポケカ抽選販売（スタートデッキ100 バトルコレクション）",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/m_o9_",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場与野本町店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場与野本町店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/m_o9_",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/jd0iq1-bl1",
@@ -15842,17 +16143,100 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-10-27T17:46:00+09:00",
+      "store_name": "イトーヨーカドー武蔵境店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー武蔵境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー多摩センター店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー和光店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー三島店",
+          "prefecture": "静岡県"
+        },
+        {
+          "name": "イトーヨーカドー赤羽店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ葛西店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー甲府昭和店",
+          "prefecture": "山梨県"
+        },
+        {
+          "name": "イトーヨーカドー木場店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー湘南台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー立場店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー大宮宮原店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー国領店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー大森店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ川口店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ八尾店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーアリオ鳳店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドー武蔵小金井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ市原店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ柏店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/jd0iq1-bl1",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets"
-      },
-      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "application_end_at": "2026-11-08T23:59:00+09:00",
-      "application_start_at": "2026-10-27T17:46:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/jd0iq1-bl1"
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/x4eog",
@@ -15865,18 +16249,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v15_page_product_label"
-      },
       "event_title": "キデイランド吉祥寺店 ワンピースカードゲーム 拡張パック「OP18 神の支配」購入券 抽選",
       "application_end_at": "2026-11-11T23:59:00+09:00",
       "application_start_at": "2026-11-09T10:00:00+09:00",
       "result_announcement_date": "2026-11-18",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/x4eog"
+      "store_name": "キデイランド吉祥寺店",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "キデイランド吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/x4eog",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v19_livepocket_explicit_store_list"
+      }
     },
     {
       "url": "https://livepocket.jp/e/6mf8u",
@@ -15889,17 +16284,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選予約受付",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
       "result_announcement_date": "2026-11-10",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/6mf8u"
+      "store_name": "TSUTAYA400号西那須野店",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA400号西那須野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/6mf8u",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/4t5pvnf6l8",
@@ -15912,17 +16318,92 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-10-27T17:46:00+09:00",
+      "store_name": "イトーヨーカドー浦和店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イトーヨーカドー浦和店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー昭島店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ加古川店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イトーヨーカドー古淵店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー東久留米店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー南大沢店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー能見台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー横浜別所店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー川崎店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー四街道店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドー三郷店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー曳舟店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ鷲宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ上尾店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドープライムツリー赤池店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "イトーヨーカドー トイロスクール天美店",
+          "prefecture": "大阪府"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/4t5pvnf6l8",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets"
-      },
-      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "application_end_at": "2026-11-08T23:59:00+09:00",
-      "application_start_at": "2026-10-27T17:46:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/4t5pvnf6l8"
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/pv9dk",
@@ -15935,19 +16416,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム スペシャルデッキセットMEGA『メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
       "application_end_at": "2026-11-09T20:00:00+09:00",
       "application_start_at": "2026-11-06T08:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/pv9dk"
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/pv9dk",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/7cw9u",
@@ -15960,19 +16452,74 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets"
-      },
       "event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
       "application_start_at": "2026-11-06T11:50:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/7cw9u"
+      "store_name": "PAO青梅店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/7cw9u",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/tgk3o",
@@ -15985,19 +16532,74 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets"
-      },
       "event_title": "【PAO/竜星のPAO】再販分 ポケモンカードゲーム商品関連 抽選受付",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
       "application_start_at": "2026-11-06T11:50:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/tgk3o"
+      "store_name": "PAO青梅店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/tgk3o",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/37m04",
@@ -16010,19 +16612,74 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v20_uniform_multi_shop_tickets",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【PAO/竜星のPAO】ポケモンカードゲーム商品関連 抽選受付【11/27(金)発売予定】",
       "application_end_at": "2026-11-08T23:59:00+09:00",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
       "application_start_at": "2026-11-06T11:50:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/37m04"
+      "store_name": "PAO青梅店",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "PAO青梅店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "PAO堀之内店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO八王子店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO町田店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO中野店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "竜星のPAO千葉中央店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "竜星のPAO横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "竜星のPAO多摩境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "竜星のPAO秋葉原ロケット無線店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/37m04",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/7uj-k",
@@ -16035,13 +16692,6 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
@@ -16049,16 +16699,25 @@
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
       "purchase_end_time": "21:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/7uj-k",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "ふるいち ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち ららぽーと富士見店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/7uj-k",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v22_official_title_shop",
+        "stores": "v22_official_title_shop",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/itj-5",
@@ -16071,19 +16730,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ワンピースカードゲーム ブースターパック 「神の支配」",
       "application_end_at": "2026-11-09T21:45:00+09:00",
       "application_start_at": "2026-11-07T13:00:00+09:00",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-21",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/itj-5"
+      "store_name": "TSUTAYA六高台店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA六高台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/itj-5",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/lkv83",
@@ -16096,29 +16766,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【古本市場深谷店】ポケカ抽選販売（30th セレブレーション）",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/lkv83",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場深谷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場深谷店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/lkv83",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/uyq6h",
@@ -16131,11 +16802,6 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ワンピースカード『Heroines Edition vol.2』 キャンセル分 抽選販売受付",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-04T16:00:00+09:00",
@@ -16143,8 +16809,24 @@
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-16",
       "purchase_end_time": "21:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/uyq6h"
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/uyq6h",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp",
@@ -16157,13 +16839,6 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【ふるいち ららぽーと富士見店】ポケカ抽選販売(30th CELEBRATION)",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
@@ -16171,16 +16846,24 @@
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
       "purchase_end_time": "21:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp",
+      "store_name": "ふるいち ららぽーと富士見店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "ふるいち ららぽーと富士見店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち ららぽーと富士見店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/bgwe7",
@@ -16193,17 +16876,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "キデイランド浦和美園店 ワンピースカードゲーム 拡張パック「Heroines Edition vol.2」購入券 抽選",
+      "application_end_at": "2026-11-08T23:59:00+09:00",
+      "application_start_at": "2026-11-06T10:00:00+09:00",
+      "store_name": "キデイランド 浦和美園店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "キデイランド 浦和美園店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bgwe7",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v15_page_product_label"
-      },
-      "event_title": "キデイランド浦和美園店 ワンピースカードゲーム 拡張パック「Heroines Edition vol.2」購入券 抽選",
-      "application_end_at": "2026-11-08T23:59:00+09:00",
-      "application_start_at": "2026-11-06T10:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/bgwe7"
+        "product_name": "v15_page_product_label",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v19_livepocket_explicit_store_list"
+      }
     },
     {
       "url": "https://livepocket.jp/e/sq7kw",
@@ -16216,18 +16910,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "11/13発売 ポケモン スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-06T20:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/sq7kw"
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sq7kw",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/fa29k",
@@ -16240,27 +16945,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【自治医大店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T07:00:00+09:00",
       "result_announcement_date": "2026-11-17",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/fa29k",
+      "store_name": "TSUTAYA自治医大店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "自治医大店",
-          "prefecture": ""
+          "name": "TSUTAYA自治医大店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "自治医大店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/fa29k",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/yb7-8",
@@ -16273,19 +16979,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー抽選販売",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-07T09:00:00+09:00",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/yb7-8"
+      "store_name": "ブックエース小名浜住吉店",
+      "prefecture": "福島県",
+      "stores": [
+        {
+          "name": "ブックエース小名浜住吉店",
+          "prefecture": "福島県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/yb7-8",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/gr4t4",
@@ -16298,20 +17015,31 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
       "event_title": "ONE PIECEカードゲーム「ブースターパック 神の支配 OP18」抽選販売",
       "application_end_at": "2026-11-08T20:00:00+09:00",
       "application_start_at": "2026-11-07T09:00:00+09:00",
       "purchase_start_date": "2026-11-21",
       "purchase_start_time": "09:00",
       "purchase_end_date": "2026-11-22",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/gr4t4"
+      "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gr4t4",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/mjfbt",
@@ -16324,27 +17052,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【所沢山口店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T07:00:00+09:00",
       "result_announcement_date": "2026-11-17",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/mjfbt",
+      "store_name": "TSUTAYA所沢山口店トレカ売場",
+      "prefecture": "埼玉県",
       "stores": [
         {
-          "name": "所沢山口店",
-          "prefecture": ""
+          "name": "TSUTAYA所沢山口店トレカ売場",
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "所沢山口店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/mjfbt",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/gc0bj",
@@ -16357,28 +17086,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【ふるいちトップブックスひたちなか店】ワンピースカードゲーム抽選販売（世界最強の戦士）",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-07T08:00:00+09:00",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/gc0bj",
+      "store_name": "ふるいちトップブックスひたちなか店",
+      "prefecture": "茨城県",
       "stores": [
         {
           "name": "ふるいちトップブックスひたちなか店",
-          "prefecture": ""
+          "prefecture": "茨城県"
         }
       ],
-      "store_name": "ふるいちトップブックスひたちなか店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gc0bj",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/0r314",
@@ -16391,19 +17121,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【再販】PM MEGA 拡張パック「30th CELEBRATION」",
       "application_end_at": "2026-11-08T20:00:00+09:00",
       "application_start_at": "2026-11-07T09:00:00+09:00",
       "purchase_start_date": "2026-11-24",
       "purchase_start_time": "11:00",
       "purchase_end_date": "2026-11-25",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/0r314"
+      "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/0r314",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/w38v5",
@@ -16416,20 +17157,31 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
       "event_title": "ポケモンカードゲーム MEGA 「スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー」",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-07T10:00:00+09:00",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/w38v5"
+      "store_name": "トレカエース新取手店",
+      "prefecture": "茨城県",
+      "stores": [
+        {
+          "name": "トレカエース新取手店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/w38v5",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/rw4tq",
@@ -16437,32 +17189,33 @@
       "discord_posted_at": "2026-11-07T02:04:40.612000+00:00",
       "discord_channel_id": "1551580466266644552",
       "post_excerpt": "https://livepocket.jp/e/rw4tq",
-      "store_name": "宇都宮東簗瀬店",
-      "prefecture": "",
       "details_source": "discord_post",
       "product_name": null,
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【宇都宮東簗瀬店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "result_announcement_date": "2026-11-17",
+      "store_name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮東簗瀬店トレカ売場",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/rw4tq",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
-      "event_title": "【宇都宮東簗瀬店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "stores": [
-        {
-          "name": "宇都宮東簗瀬店",
-          "prefecture": ""
-        }
-      ],
-      "result_announcement_date": "2026-11-17",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/rw4tq"
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/3_a1v",
@@ -16475,19 +17228,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "11/21(土)発売 ワンピースカードゲーム ブースターパック『神の支配』抽選販売受付",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-06T14:48:00+09:00",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-27",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/3_a1v"
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3_a1v",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/8ytjh",
@@ -16535,18 +17299,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v15_page_product_label"
-      },
       "event_title": "キデイランドららぽーと富士見店 ポケモンカードゲーム 拡張パック「ストームエメラルダ」購入券 抽選",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T10:00:00+09:00",
       "result_announcement_date": "2026-11-13",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/7_pst"
+      "store_name": "キデイランド ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/7_pst",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v19_livepocket_explicit_store_list"
+      }
     },
     {
       "url": "https://livepocket.jp/e/9grzx",
@@ -16559,27 +17334,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【宇都宮テクノ店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T07:00:00+09:00",
       "result_announcement_date": "2026-11-17",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/9grzx",
+      "store_name": "TSUTAYA宇都宮テクノ店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "宇都宮テクノ店",
-          "prefecture": ""
+          "name": "TSUTAYA宇都宮テクノ店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "宇都宮テクノ店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/9grzx",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/zzi1f",
@@ -16592,28 +17368,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【宇都宮テクノ店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "result_announcement_date": "2026-11-12",
+      "store_name": "TSUTAYA宇都宮テクノ店トレカ売場",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮テクノ店トレカ売場",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/zzi1f",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v21_9_official_title_quoted_tcg_product",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
-      "event_title": "【宇都宮テクノ店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "result_announcement_date": "2026-11-12",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/zzi1f",
-      "stores": [
-        {
-          "name": "宇都宮テクノ店",
-          "prefecture": ""
-        }
-      ],
-      "store_name": "宇都宮テクノ店",
-      "prefecture": ""
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/egvdx",
@@ -16626,29 +17403,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【古本市場与野本町店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/egvdx",
+      "store_name": "古本市場与野本町店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場与野本町店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場与野本町店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/egvdx",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/htnyy",
@@ -16661,28 +17439,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【自治医大店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "result_announcement_date": "2026-11-12",
+      "store_name": "TSUTAYA自治医大店トレカ売場",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA自治医大店トレカ売場",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/htnyy",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v21_9_official_title_quoted_tcg_product",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
-      "event_title": "【自治医大店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "result_announcement_date": "2026-11-12",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/htnyy",
-      "stores": [
-        {
-          "name": "自治医大店",
-          "prefecture": ""
-        }
-      ],
-      "store_name": "自治医大店",
-      "prefecture": ""
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/arz9b",
@@ -16695,11 +17474,6 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ポケモンカードゲーム 拡張パック「ハドウシーカー」 抽選受付",
       "application_end_at": "2026-11-08T21:45:00+09:00",
       "application_start_at": "2026-11-06T09:30:00+09:00",
@@ -16709,8 +17483,24 @@
       "purchase_start_time": "09:30",
       "purchase_end_date": "2026-11-29",
       "purchase_end_time": "21:45",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/arz9b"
+      "store_name": "TSUTAYA流山店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA流山店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/arz9b",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/7nmst",
@@ -16759,19 +17549,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【抽選販売】ワンピースカードゲーム ブースターパック OP18『神の支配』",
       "application_end_at": "2026-11-15T21:45:00+09:00",
       "application_start_at": "2026-11-04T09:30:00+09:00",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-21",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/vq5r7"
+      "store_name": "TSUTAYA鎌ケ谷店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/vq5r7",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/k_foq",
@@ -16784,19 +17585,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "TSUTAYA東仙台店 ポケモンカードゲーム 抽選販売",
       "application_end_at": "2026-11-09T22:00:00+09:00",
       "application_start_at": "2026-11-07T18:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/k_foq"
+      "store_name": "TSUTAYA東仙台店 ２階トレカコーナー",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 ２階トレカコーナー",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/k_foq",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/mpbzb",
@@ -16809,19 +17621,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
       "application_end_at": "2026-11-09T22:00:00+09:00",
       "application_start_at": "2026-11-07T18:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/mpbzb"
+      "store_name": "TSUTAYA東仙台店 ２階TSUTAYAレジ",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 ２階TSUTAYAレジ",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/mpbzb",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/dz3vb",
@@ -16834,19 +17657,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』",
       "application_end_at": "2026-11-15T21:45:00+09:00",
       "application_start_at": "2026-11-02T09:30:00+09:00",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-27",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/dz3vb"
+      "store_name": "TSUTAYA鎌ケ谷店",
+      "prefecture": "千葉県",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/dz3vb",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/d1_98",
@@ -16859,27 +17693,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【作新学院前店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T07:00:00+09:00",
       "result_announcement_date": "2026-11-17",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/d1_98",
+      "store_name": "TSUTAYA作新学院前店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "作新学院前店",
-          "prefecture": ""
+          "name": "TSUTAYA作新学院前店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "作新学院前店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/d1_98",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/f2n7x",
@@ -16892,28 +17727,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【作新学院前店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "result_announcement_date": "2026-11-12",
+      "store_name": "TSUTAYA作新学院前店トレカ売場",
+      "prefecture": "栃木県",
+      "stores": [
+        {
+          "name": "TSUTAYA作新学院前店トレカ売場",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f2n7x",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v21_9_official_title_quoted_tcg_product",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
-      "event_title": "【作新学院前店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "result_announcement_date": "2026-11-12",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/f2n7x",
-      "stores": [
-        {
-          "name": "作新学院前店",
-          "prefecture": ""
-        }
-      ],
-      "store_name": "作新学院前店",
-      "prefecture": ""
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/jogp8",
@@ -16926,18 +17762,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v15_page_product_label"
-      },
       "event_title": "キデイランドららぽーと富士見店 ワンピースカードゲーム 拡張パック「世界最強の戦士」購入券 抽選",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T10:00:00+09:00",
       "result_announcement_date": "2026-11-13",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/jogp8"
+      "store_name": "キデイランド ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/jogp8",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v15_page_product_label",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v19_livepocket_explicit_store_list"
+      }
     },
     {
       "url": "https://livepocket.jp/e/3n9no",
@@ -16950,16 +17797,27 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
       "application_end_at": "2026-11-09T21:00:00+09:00",
       "application_start_at": "2026-11-07T10:00:00+09:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/3n9no"
+      "store_name": "TSUTAYA追浜店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA追浜店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3n9no",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/mc956",
@@ -16972,17 +17830,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "抽選販売 11月13日発売 PM『スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー』",
       "application_end_at": "2026-11-09T21:00:00+09:00",
       "application_start_at": "2026-11-07T10:30:00+09:00",
       "result_announcement_date": "2026-11-10",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/mc956"
+      "store_name": "TSUTAYA Trading Card 戸塚店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 戸塚店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/mc956",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/dqtqd",
@@ -16995,18 +17864,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "product_name": "v21_9_official_title_quoted_tcg_product"
-      },
       "event_title": "ポケカ『SPデッキセット MEGA メガオーダイル・メガカイリュー・メガゲンガー』抽選販売受付",
       "application_end_at": "2026-11-08T21:30:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
       "result_announcement_date": "2026-11-09",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/dqtqd"
+      "store_name": "TSUTAYA横須賀粟田店",
+      "prefecture": "神奈川県",
+      "stores": [
+        {
+          "name": "TSUTAYA横須賀粟田店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/dqtqd",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/24acn",
@@ -17019,28 +17899,29 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
+      "event_title": "【大利根店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
+      "application_end_at": "2026-11-09T23:59:00+09:00",
+      "application_start_at": "2026-11-07T07:00:00+09:00",
+      "result_announcement_date": "2026-11-12",
+      "store_name": "TSUTAYA大利根店トレカ売場",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "TSUTAYA大利根店トレカ売場",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/24acn",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "product_name": "v21_9_official_title_quoted_tcg_product",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
-      "event_title": "【大利根店】ワンピースカード「HEROINES PRECIOUS BOX」抽選販売受付",
-      "application_end_at": "2026-11-09T23:59:00+09:00",
-      "application_start_at": "2026-11-07T07:00:00+09:00",
-      "result_announcement_date": "2026-11-12",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/24acn",
-      "stores": [
-        {
-          "name": "大利根店",
-          "prefecture": ""
-        }
-      ],
-      "store_name": "大利根店",
-      "prefecture": ""
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/sb0d4",
@@ -17053,29 +17934,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-06T10:00:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/sb0d4",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "古本市場深谷店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場深谷店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sb0d4",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/854lu",
@@ -17088,27 +17970,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【栃木城内店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "application_end_at": "2026-11-09T23:59:00+09:00",
       "application_start_at": "2026-11-07T07:00:00+09:00",
       "result_announcement_date": "2026-11-17",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/854lu",
+      "store_name": "TSUTAYA栃木城内店トレカ売場",
+      "prefecture": "栃木県",
       "stores": [
         {
-          "name": "栃木城内店",
-          "prefecture": ""
+          "name": "TSUTAYA栃木城内店トレカ売場",
+          "prefecture": "栃木県"
         }
       ],
-      "store_name": "栃木城内店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/854lu",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/q2duc",
@@ -17121,29 +18004,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-07T09:00:00+09:00",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-16",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/q2duc",
+      "store_name": "ふるいちトップブックス川島インター店",
+      "prefecture": "埼玉県",
       "stores": [
         {
-          "name": "ふるいち川島インター店",
-          "prefecture": ""
+          "name": "ふるいちトップブックス川島インター店",
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち川島インター店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/q2duc",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru",
@@ -17156,17 +18040,28 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
       "application_end_at": "2026-11-10T21:00:00+09:00",
       "application_start_at": "2026-11-07T12:00:00+09:00",
       "result_announcement_date": "2026-11-18",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru"
+      "store_name": "TSUTAYA涌谷店",
+      "prefecture": "宮城県",
+      "stores": [
+        {
+          "name": "TSUTAYA涌谷店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/l2k4b",
@@ -17179,29 +18074,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【ふるいち八潮中央店】ワンピースカード店頭抽選販売(Heroines Edition vol.2)",
       "application_end_at": "2026-11-08T22:00:00+09:00",
       "application_start_at": "2026-11-08T10:00:00+09:00",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/l2k4b",
+      "store_name": "ふるいち八潮中央店",
+      "prefecture": "埼玉県",
       "stores": [
         {
           "name": "ふるいち八潮中央店",
-          "prefecture": ""
+          "prefecture": "埼玉県"
         }
       ],
-      "store_name": "ふるいち八潮中央店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/l2k4b",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/bh-48",
@@ -17214,20 +18110,114 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "product_name": "v14_livepocket_explicit_product_label",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【OP-18】ブースターパック 「神の支配」購入権抽選",
       "application_end_at": "2026-11-15T09:00:00+09:00",
       "application_start_at": "2026-11-08T09:00:00+09:00",
       "result_announcement_date": "2026-11-20",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/bh-48"
+      "store_name": "イエローサブマリン札幌GAMESHOP",
+      "prefecture": "",
+      "stores": [
+        {
+          "name": "イエローサブマリン札幌GAMESHOP",
+          "prefecture": "北海道"
+        },
+        {
+          "name": "イエローサブマリン横浜店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン新宿店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン池袋GAMESHOP",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン町田GAMESHOP",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン横浜西口店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン川越カードショップ",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イエローサブマリン大宮本店・プレイソフト",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イエローサブマリン千葉ゲームショップ",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イエローサブマリン宇都宮店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "イエローサブマリン溝口店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン川崎店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イエローサブマリン立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン柏店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イエローサブマリン秋葉原本店★ミント",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イエローサブマリン京都店",
+          "prefecture": "京都府"
+        },
+        {
+          "name": "イエローサブマリン名古屋GAMESHOP",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "イエローサブマリンなんば本店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イエローサブマリン三宮店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イエローサブマリン姫路店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "イエローサブマリンマジッカーズ福岡店",
+          "prefecture": "福岡県"
+        },
+        {
+          "name": "イエローサブマリン広島店",
+          "prefecture": "広島県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bh-48",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_explicit_chain_scope",
+        "stores": "v19_livepocket_explicit_chain_scope"
+      }
     },
     {
       "url": "https://livepocket.jp/e/h78by",
@@ -17240,19 +18230,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
-      },
       "event_title": "【再販③】ポケモンカードゲーム MEGA 拡張パック 『30th CELEBRATION』抽選販売受付",
       "application_end_at": "2026-11-08T23:00:00+09:00",
       "application_start_at": "2026-11-08T09:00:00+09:00",
       "result_announcement_date": "2026-11-09",
       "purchase_start_date": "2026-11-12",
       "purchase_end_date": "2026-11-13",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/h78by"
+      "store_name": "トレカエース春日部店",
+      "prefecture": "埼玉県",
+      "stores": [
+        {
+          "name": "トレカエース春日部店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/h78by",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/6b32h",
@@ -17265,29 +18266,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-08T09:35:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/6b32h",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         }
       ],
-      "store_name": "トレカパーク横浜西口店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/6b32h",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     },
     {
       "url": "https://livepocket.jp/e/f8haj",
@@ -17300,29 +18302,30 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "parsed",
-      "field_sources": {
-        "event_title": "v14_livepocket_page_title",
-        "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page",
-        "store_name": "v22_official_title_shop",
-        "stores": "v22_official_title_shop"
-      },
       "event_title": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
       "application_end_at": "2026-11-08T21:00:00+09:00",
       "application_start_at": "2026-11-08T09:51:00+09:00",
       "result_announcement_date": "2026-11-10",
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/f8haj",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
       "stores": [
         {
           "name": "トレカパーク横浜西口店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         }
       ],
-      "store_name": "トレカパーク横浜西口店",
-      "prefecture": ""
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f8haj",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      }
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
@@ -17331,8 +18334,8 @@
     "no_structured_details": 170
   },
   "field_counts": {
-    "store_name": 162,
-    "prefecture": 20,
+    "store_name": 212,
+    "prefecture": 83,
     "event_title": 415,
     "event_date": 1,
     "product_name": 113,
@@ -17341,7 +18344,7 @@
     "lottery_result_period": 1,
     "application_end_at": 691,
     "application_start_at": 680,
-    "stores_events": 162
+    "stores_events": 212
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -36849,6 +37852,368 @@
           "purchase_candidates": []
         }
       ]
+    },
+    "official_store_checks_v1": {
+      "https://livepocket.jp/e/0-aj_": {
+        "checked_at": "2026-11-08T06:59:32.721559+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.721559+00:00"
+      },
+      "https://livepocket.jp/e/0r314": {
+        "checked_at": "2026-11-08T06:59:32.745997+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.745997+00:00"
+      },
+      "https://livepocket.jp/e/926kc": {
+        "checked_at": "2026-11-08T06:59:32.765784+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.765784+00:00"
+      },
+      "https://livepocket.jp/e/cxg3t": {
+        "checked_at": "2026-11-08T06:59:32.782109+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.782109+00:00"
+      },
+      "https://livepocket.jp/e/gr4t4": {
+        "checked_at": "2026-11-08T06:59:32.831934+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.831934+00:00"
+      },
+      "https://livepocket.jp/e/mda0k": {
+        "checked_at": "2026-11-08T06:59:32.834953+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.834953+00:00"
+      },
+      "https://livepocket.jp/e/e42vd": {
+        "checked_at": "2026-11-08T06:59:32.839064+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.839064+00:00"
+      },
+      "https://livepocket.jp/e/3_a1v": {
+        "checked_at": "2026-11-08T06:59:32.882440+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.882440+00:00"
+      },
+      "https://livepocket.jp/e/6b32h": {
+        "checked_at": "2026-11-08T06:59:32.909807+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.909807+00:00"
+      },
+      "https://livepocket.jp/e/2zkfx": {
+        "checked_at": "2026-11-08T06:59:32.910911+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.910911+00:00"
+      },
+      "https://livepocket.jp/e/f8haj": {
+        "checked_at": "2026-11-08T06:59:32.938001+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.938001+00:00"
+      },
+      "https://livepocket.jp/e/dfsosjhopfdxopphfpkhtpgpfppseltp": {
+        "checked_at": "2026-11-08T06:59:32.966335+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:32.966335+00:00"
+      },
+      "https://livepocket.jp/e/ghdew": {
+        "checked_at": "2026-11-08T06:59:33.004459+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.004459+00:00"
+      },
+      "https://livepocket.jp/e/gswrx": {
+        "checked_at": "2026-11-08T06:59:33.012678+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.012678+00:00"
+      },
+      "https://livepocket.jp/e/uyq6h": {
+        "checked_at": "2026-11-08T06:59:33.032483+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.032483+00:00"
+      },
+      "https://livepocket.jp/e/z_1ke": {
+        "checked_at": "2026-11-08T06:59:33.078287+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.078287+00:00"
+      },
+      "https://livepocket.jp/e/q2duc": {
+        "checked_at": "2026-11-08T06:59:33.082222+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.082222+00:00"
+      },
+      "https://livepocket.jp/e/dqtqd": {
+        "checked_at": "2026-11-08T06:59:33.128245+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.128245+00:00"
+      },
+      "https://livepocket.jp/e/3pdc4": {
+        "checked_at": "2026-11-08T06:59:33.134353+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.134353+00:00"
+      },
+      "https://livepocket.jp/e/arz9b": {
+        "checked_at": "2026-11-08T06:59:33.169833+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.169833+00:00"
+      },
+      "https://livepocket.jp/e/ewhgu": {
+        "checked_at": "2026-11-08T06:59:33.174068+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.174068+00:00"
+      },
+      "https://livepocket.jp/e/6mf8u": {
+        "checked_at": "2026-11-08T06:59:33.194904+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:33.194904+00:00"
+      },
+      "https://livepocket.jp/e/egvdx": {
+        "checked_at": "2026-11-08T06:59:38.991886+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:38.991886+00:00"
+      },
+      "https://livepocket.jp/e/gc0bj": {
+        "checked_at": "2026-11-08T06:59:39.695307+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:39.695307+00:00"
+      },
+      "https://livepocket.jp/e/l2k4b": {
+        "checked_at": "2026-11-08T06:59:44.436291+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:44.436291+00:00"
+      },
+      "https://livepocket.jp/e/lkv83": {
+        "checked_at": "2026-11-08T06:59:44.591478+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:44.591478+00:00"
+      },
+      "https://livepocket.jp/e/sb0d4": {
+        "checked_at": "2026-11-08T06:59:50.821930+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:50.821930+00:00"
+      },
+      "https://livepocket.jp/e/sq7kw": {
+        "checked_at": "2026-11-08T06:59:50.849382+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:50.849382+00:00"
+      },
+      "https://livepocket.jp/e/m_o9_": {
+        "checked_at": "2026-11-08T06:59:51.135170+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:51.135170+00:00"
+      },
+      "https://livepocket.jp/e/wp6tg": {
+        "checked_at": "2026-11-08T06:59:56.296463+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:56.296463+00:00"
+      },
+      "https://livepocket.jp/e/yb7-8": {
+        "checked_at": "2026-11-08T06:59:56.328645+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:56.328645+00:00"
+      },
+      "https://livepocket.jp/e/w38v5": {
+        "checked_at": "2026-11-08T06:59:56.392651+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T12:59:56.392651+00:00"
+      },
+      "https://livepocket.jp/e/z1m9e": {
+        "checked_at": "2026-11-08T07:00:01.490798+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:01.490798+00:00"
+      },
+      "https://livepocket.jp/e/h78by": {
+        "checked_at": "2026-11-08T07:00:01.615080+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:01.615080+00:00"
+      },
+      "https://livepocket.jp/e/37m04": {
+        "checked_at": "2026-11-08T07:00:01.982332+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:01.982332+00:00"
+      },
+      "https://livepocket.jp/e/4t5pvnf6l8": {
+        "checked_at": "2026-11-08T07:00:06.938405+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:06.938405+00:00"
+      },
+      "https://livepocket.jp/e/7cw9u": {
+        "checked_at": "2026-11-08T07:00:07.094582+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:07.094582+00:00"
+      },
+      "https://livepocket.jp/e/bgwe7": {
+        "checked_at": "2026-11-08T07:00:07.395906+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:07.395906+00:00"
+      },
+      "https://livepocket.jp/e/luo8lp88-d": {
+        "checked_at": "2026-11-08T07:00:12.307080+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:12.307080+00:00"
+      },
+      "https://livepocket.jp/e/jd0iq1-bl1": {
+        "checked_at": "2026-11-08T07:00:12.355225+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:12.355225+00:00"
+      },
+      "https://livepocket.jp/e/s2dtfw7rvo": {
+        "checked_at": "2026-11-08T07:00:12.897706+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:12.897706+00:00"
+      },
+      "https://livepocket.jp/e/pv9dk": {
+        "checked_at": "2026-11-08T07:00:19.149941+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:19.149941+00:00"
+      },
+      "https://livepocket.jp/e/7nmst": {
+        "checked_at": "2026-11-08T07:00:19.657726+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:19.657726+00:00"
+      },
+      "https://livepocket.jp/e/tgk3o": {
+        "checked_at": "2026-11-08T07:00:20.127570+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:20.127570+00:00"
+      },
+      "https://livepocket.jp/e/8v2fs": {
+        "checked_at": "2026-11-08T07:00:26.676839+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:26.676839+00:00"
+      },
+      "https://livepocket.jp/e/3n9no": {
+        "checked_at": "2026-11-08T07:00:26.709260+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:26.709260+00:00"
+      },
+      "https://livepocket.jp/e/mc956": {
+        "checked_at": "2026-11-08T07:00:26.769405+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:26.769405+00:00"
+      },
+      "https://livepocket.jp/e/zm4do": {
+        "checked_at": "2026-11-08T07:00:32.455759+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:32.455759+00:00"
+      },
+      "https://livepocket.jp/e/k_foq": {
+        "checked_at": "2026-11-08T07:00:32.753224+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:32.753224+00:00"
+      },
+      "https://livepocket.jp/e/itj-5": {
+        "checked_at": "2026-11-08T07:00:33.072793+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:33.072793+00:00"
+      },
+      "https://livepocket.jp/e/24acn": {
+        "checked_at": "2026-11-08T07:00:39.504480+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:39.504480+00:00"
+      },
+      "https://livepocket.jp/e/7_pst": {
+        "checked_at": "2026-11-08T07:00:39.537896+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:39.537896+00:00"
+      },
+      "https://livepocket.jp/e/mpbzb": {
+        "checked_at": "2026-11-08T07:00:39.850809+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:39.850809+00:00"
+      },
+      "https://livepocket.jp/e/9grzx": {
+        "checked_at": "2026-11-08T07:00:45.033241+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:45.033241+00:00"
+      },
+      "https://livepocket.jp/e/d1_98": {
+        "checked_at": "2026-11-08T07:00:45.181096+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:45.181096+00:00"
+      },
+      "https://livepocket.jp/e/854lu": {
+        "checked_at": "2026-11-08T07:00:45.265981+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:45.265981+00:00"
+      },
+      "https://livepocket.jp/e/f2n7x": {
+        "checked_at": "2026-11-08T07:00:50.046859+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:50.046859+00:00"
+      },
+      "https://livepocket.jp/e/fa29k": {
+        "checked_at": "2026-11-08T07:00:50.073484+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:50.073484+00:00"
+      },
+      "https://livepocket.jp/e/htnyy": {
+        "checked_at": "2026-11-08T07:00:50.137938+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:50.137938+00:00"
+      },
+      "https://livepocket.jp/e/jogp8": {
+        "checked_at": "2026-11-08T07:00:55.167956+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:55.167956+00:00"
+      },
+      "https://livepocket.jp/e/rw4tq": {
+        "checked_at": "2026-11-08T07:00:55.281420+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:55.281420+00:00"
+      },
+      "https://livepocket.jp/e/mjfbt": {
+        "checked_at": "2026-11-08T07:00:55.313448+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:00:55.313448+00:00"
+      },
+      "https://livepocket.jp/e/zzi1f": {
+        "checked_at": "2026-11-08T07:01:00.520670+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:00.520670+00:00"
+      },
+      "https://livepocket.jp/e/wcs2w": {
+        "checked_at": "2026-11-08T07:01:00.611698+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:00.611698+00:00"
+      },
+      "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
+        "checked_at": "2026-11-08T07:01:00.641807+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:00.641807+00:00"
+      },
+      "https://livepocket.jp/e/s191v": {
+        "checked_at": "2026-11-08T07:01:06.837800+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:06.837800+00:00"
+      },
+      "https://livepocket.jp/e/a35_-": {
+        "checked_at": "2026-11-08T07:01:07.016136+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:07.016136+00:00"
+      },
+      "https://livepocket.jp/e/x4eog": {
+        "checked_at": "2026-11-08T07:01:07.490073+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:07.490073+00:00"
+      },
+      "https://livepocket.jp/e/ufbho": {
+        "checked_at": "2026-11-08T07:01:13.246426+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:13.246426+00:00"
+      },
+      "https://livepocket.jp/e/dz3vb": {
+        "checked_at": "2026-11-08T07:01:13.296409+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:13.296409+00:00"
+      },
+      "https://livepocket.jp/e/bh-48": {
+        "checked_at": "2026-11-08T07:01:13.711949+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:13.711949+00:00"
+      },
+      "https://livepocket.jp/e/vq5r7": {
+        "checked_at": "2026-11-08T07:01:21.100770+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-08T13:01:21.100770+00:00"
+      }
     }
   }
 }

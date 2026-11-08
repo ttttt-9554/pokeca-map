@@ -1965,8 +1965,7 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
                 # Only label store changes as page-derived if the same event
                 # actually contained an explicit store. Whole-catalog legacy
                 # store-list normalization is NOT evidence of a page update.
-                text = result.get('text') or ''
-                return bool(v19.page_stores(text) or v20.v15.explicit_store(text)[0])
+                return bool(v19.observation_stores(result)[0])
             if metric == 'manual_genre_updated':
                 return bool(pi[url].get('official_event_title'))
             if metric == 'manual_title_updated':
@@ -2225,8 +2224,19 @@ def overview_store_regions():
 def overview_observation(page, regions):
     venue = overview_venue_from_dom(page)
     store = v19.store_part(venue)
-    return {'overview_venue': venue, 'overview_seller': overview_seller_from_dom(page),
-            'overview_master_prefecture': regions.get(v19.overview_name_key(store['name']), '') if store else ''}
+    result = {'overview_venue': venue, 'overview_seller': overview_seller_from_dom(page)}
+    # The branch name can be wrapped in a span/anchor, while the address and
+    # map link are siblings. Read the labelled HTML, not just direct text nodes.
+    from livepocket_page_locations import overview_from_html
+    try:
+        structured = overview_from_html(page.content())
+        if structured.get('overview_venue'):
+            result.update(structured)
+            store = v19.store_part(result['overview_venue'])
+    except Exception:
+        pass
+    result['overview_master_prefecture'] = regions.get(v19.overview_name_key(store['name']), '') if store else ''
+    return result
 
 
 def browser_fetcher():
@@ -2783,7 +2793,7 @@ def main():
     official_due, official_counts, _ = (
         official_title_diagnostics(raw, public, limit=0 if manual_recheck else OFFICIAL_TITLE_CHECK_PER_RUN)
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
-    location_limit = 0 if manual_recheck else 3
+    location_limit = 0 if manual_recheck else 8
     location_due = ([] if v14._cooldown_active(raw.setdefault('collector_state', {}).setdefault('v14', {}), datetime.now(timezone.utc))
                     else store_policy.recheck_candidates(raw, public, now=datetime.now(timezone.utc), limit=location_limit))
     browser_needed = bool(work['browser_needed'] or titles_due or official_due or location_due)

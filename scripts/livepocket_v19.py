@@ -6,8 +6,8 @@ responses for a clearly labelled participating-store list. No paid API, no
 second HTTP request, no location/name inference and no URL duplication.
 
 Schema: stores: [{"name": "...", "prefecture": "..."}, ...]
-The legacy store_name/prefecture fields are left untouched. v7 discards stores
-from its public allowlist, so this step re-publishes them from raw every run.
+The primary store_name/prefecture fields and their source markers are updated
+with the same page-backed list in raw and public catalogs.
 """
 from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
@@ -51,7 +51,10 @@ GENERIC_STORE = re.compile(r'(?:^全国.*店舗$|^店舗.*一覧$|^各店舗$|^�
 DANGEROUS = re.compile(r'http[s]?://|[<>\ufffd]|\.{3}|…|[\n\r\t]|^[-+=@]')
 DISCORD_URL_RE = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{4,64}')
 RETAIL = re.compile(r'店$|(?:SHOP|STORE|TSUTAYA|HMV|BOOKS|トレカ|古本市場|ふるいち|キデイランド|イトーヨーカドー|晴れる屋|麦わらストア|ジャンプショップ)', re.I)
-OVERVIEW_RETAIL = re.compile(r'(?:店|ショップ|SHOP|STORE)$', re.I)
+OVERVIEW_RETAIL = re.compile(
+    r'(?:店|ショップ|SHOP|STORE|売場|売り場|トレカコーナー)$|'
+    r'店\s*(?:[0-9０-９]+(?:階|[fFＦｆ])\s*)?(?:TSUTAYA\s*)?レジ$|'
+    r'(?:TRADING\s*CARD|トレカ)', re.I)
 OVERVIEW_PLACEHOLDERS = frozenset((
     '会場', '会場未定', '会場未確認', '店舗', '対象店舗', '各店舗', '各店',
     '販売元', '受取場所', '全国', 'オンライン', '実店舗なし',
@@ -236,7 +239,7 @@ def overview_retail_draw(observation):
     return False
 
 
-def overview_store(observation):
+def overview_store(observation, *, allow_explicit=False):
     """Use a named retail venue with an explicit prefecture as a fallback."""
     if observation.get('page_identity') != 'event_confirmed':
         return None
@@ -245,7 +248,7 @@ def overview_store(observation):
             or overview_name_key(store['name']) in OVERVIEW_PLACEHOLDERS):
         return None
     # An unreadable or conflicting explicit list must not become one store.
-    if any(STORE_HEADING.fullmatch(normalize_store_heading(line))
+    if not allow_explicit and any(STORE_HEADING.fullmatch(normalize_store_heading(line))
            for line in (observation.get('text') or '').splitlines()):
         return None
     # A suffix is sufficient for legacy shop labels, but no longer required.
@@ -259,6 +262,70 @@ def overview_store(observation):
     if not (OVERVIEW_RETAIL.search(store['name']) or master_match or seller_match):
         return None
     return store
+
+
+def observation_stores(observation):
+    """Share page-only location resolution between scheduled and manual fetches."""
+    rows = page_stores(observation.get('text'))
+    source = 'v19_livepocket_explicit_store_list'
+    if not rows:
+        name, source = v15.explicit_store(observation.get('text'))
+        store = store_part(name) if name else None
+        if store:
+            rows = [store]
+        else:
+            venue = overview_store(observation)
+            if venue:
+                rows, source = [venue], 'v19_livepocket_overview_venue'
+    if not rows:
+        online = online_store(observation)
+        if online:
+            rows, source = [online], 'v19_livepocket_online_shop'
+    if not rows and observation.get('page_identity') == 'event_confirmed':
+        from livepocket_yellow_submarine import page_chain_stores
+        rows = page_chain_stores(observation)
+        if rows:
+            source = 'v19_livepocket_explicit_chain_scope'
+    # An explicit branch in the details/tickets can omit its prefecture even
+    # when the same branch has a fully labelled venue above. Fill that branch
+    # only; never assign one overview region to every shop in a multi-store list.
+    venue = overview_store(observation, allow_explicit=True) if rows else None
+    if venue:
+        for row in rows:
+            if (not row.get('prefecture')
+                    and overview_name_key(row['name']) == overview_name_key(venue['name'])):
+                row['prefecture'] = venue['prefecture']
+    return rows, source
+
+
+def online_store(observation):
+    """An explicitly online goods draw uses its named web shop, not a company."""
+    if observation.get('page_identity') != 'event_confirmed':
+        return None
+    venue = re.sub(r'\s*[（(][^（）()]{2,8}[）)]$', '', str(observation.get('overview_venue') or ''))
+    if venue not in ('オンライン', 'ECサイト上', 'サイト上', 'オンラインショップ', '通販'):
+        return None
+    text = str(observation.get('text') or '')
+    # Online registration for an in-store pickup is not a mail-order shop.
+    if not re.search(r'発送|配送|送料', text) or re.search(r'発送(?:は|を)?(?:行いません|いたしません|しません)|郵送対応は致しません', text):
+        return None
+    titles = [title for title, source in zip(observation.get('titles') or [], observation.get('title_sources') or [])
+              if source in ('h1', 'event_heading', 'jsonld', 'event_state') and isinstance(title, str)]
+    if not any(CARD_GOODS_TITLE.search(title) and re.search(r'抽選|購入権', title) for title in titles):
+        return None
+    names = set()
+    for title in titles:
+        match = re.match(r'^([^【「\s]{2,50}?(?:通販|オンラインショップ))\s', title)
+        if match and safe_name(match.group(1)):
+            names.add(match.group(1))
+    if len(names) > 1:
+        return None
+    name = next(iter(names)) if names else safe_name(observation.get('overview_seller'))
+    # A corporate seller remains a corporate seller; a title can explicitly
+    # identify the consumer-facing online shop instead (e.g. ハレツー通販).
+    if not name or re.search(r'株式会社|有限会社|合同会社|事務局|運営会社', name):
+        return None
+    return {'name': name, 'prefecture': '全国'}
 
 
 def read_manual(path, known_urls):
@@ -307,7 +374,7 @@ def merge_stores(existing, page, manual, legacy_name='', legacy_pref=''):
                 continue
             name = safe_name(s.get('name'))
             pref = s.get('prefecture') or ''
-            if name and pref in (v10.PREFS | {''}):
+            if name and pref in store_policy.AREAS:
                 entries[(name, pref)] = {'name': name, 'prefecture': pref}
     legacy_name = safe_name(legacy_name)
     # Older versions used one chain-level placeholder (e.g. イトーヨーカドー)
@@ -374,23 +441,11 @@ def apply_stores(raw, public, seen_pages=None, manual=None):
         retained = copy.deepcopy(r.get('stores') or [])
         result = seen_pages.get(url) or {}
         exact_page = result.get('status') == 'ok' and v12.exact_event_url(result.get('final_url')) == url
-        page = page_stores(result.get('text')) if exact_page else []
-        page_source = 'v19_livepocket_explicit_store_list'
-        if exact_page and not page:
-            name, origin = v15.explicit_store(result.get('text'))
-            shop = store_part(name) if name else None
-            if shop:
-                page = [shop]
-                page_source = origin
-            else:
-                venue = overview_store(result)
-                if venue:
-                    page = [venue]
-                    page_source = 'v19_livepocket_overview_venue'
+        page, page_source = observation_stores(result) if exact_page else ([], '')
         # An independently captured official event heading is page evidence too.
         # Never extract a store from a Discord event-title preview.
         origin = str((r.get('field_sources') or {}).get('event_title') or '')
-        if not page and origin.startswith(('v14_livepocket_', 'v21_official_', 'v21_9_official_exact_url_title')):
+        if not page and not retained and origin.startswith(('v14_livepocket_', 'v21_official_', 'v21_9_official_exact_url_title')):
             heading = re.match(r'^【\s*([^【】]{2,90}?店)\s*】', str(r.get('event_title') or ''))
             shop = store_part(heading.group(1), strict_retail=True) if heading else None
             if shop:
