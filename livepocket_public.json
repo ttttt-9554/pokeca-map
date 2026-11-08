@@ -1666,11 +1666,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/7jwhw",
-      "review_category": "onepiece",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "review_category": "onepiece"
     },
     {
       "url": "https://livepocket.jp/e/2f27o",
@@ -2283,11 +2279,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/77ks9",
-      "review_category": "pokemon",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/ydr3m",
@@ -2331,11 +2323,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/z-3a8",
-      "review_category": "pokemon",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "review_category": "pokemon"
     },
     {
       "url": "https://livepocket.jp/e/bcev6",
@@ -2856,11 +2844,7 @@
         }
       ],
       "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/fg69z",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "store_location_url": "https://livepocket.jp/e/fg69z"
     },
     {
       "url": "https://livepocket.jp/e/pjg_2",
@@ -3257,11 +3241,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-18T03:30:56.091782+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/d89xs",
@@ -3283,11 +3263,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-18T03:30:56.091782+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/8qub1",
@@ -3309,11 +3285,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-18T03:30:56.091782+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-18T03:30:56.091782+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ilzq0",
@@ -3398,11 +3370,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/lk0z7",
-      "first_detected_at": "2026-10-18T13:00:57.379019+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/6vevi",
@@ -3420,11 +3388,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/6vevi",
-      "first_detected_at": "2026-10-18T13:00:57.379019+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3i7a4",
@@ -3462,11 +3426,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/8h3tm",
       "review_category": "onepiece",
-      "first_detected_at": "2026-10-18T13:00:57.379019+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-18T13:00:57.379019+00:00"
     },
     {
       "url": "https://livepocket.jp/e/0opt9",
@@ -3764,11 +3724,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/3pk7b",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-19T05:35:55.559039+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-19T05:35:55.559039+00:00"
     },
     {
       "url": "https://livepocket.jp/e/tnwja",
@@ -3824,11 +3780,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-19T06:05:55.400853+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-19T06:05:55.400853+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ixm84",
@@ -3871,11 +3823,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-19T08:30:58.551035+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3dfit",
@@ -3904,11 +3852,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/al-c0",
-      "first_detected_at": "2026-10-19T08:30:58.551035+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-19T08:30:58.551035+00:00"
     },
     {
       "url": "https://livepocket.jp/e/wydmh",
@@ -4082,11 +4026,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-20T04:30:58.798364+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-20T04:30:58.798364+00:00"
     },
     {
       "url": "https://livepocket.jp/e/j_tt7",
@@ -4172,11 +4112,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-20T09:01:00.332205+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-20T09:01:00.332205+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3g_ll",
@@ -4210,11 +4146,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-20T10:00:56.346596+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-20T10:00:56.346596+00:00"
     },
     {
       "url": "https://livepocket.jp/e/blr50",
@@ -4247,11 +4179,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/13e82",
-      "first_detected_at": "2026-10-21T02:35:56.174339+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-21T02:35:56.174339+00:00"
     },
     {
       "url": "https://livepocket.jp/e/pzb5z",
@@ -4273,11 +4201,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-21T03:05:58.354609+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
     },
     {
       "url": "https://livepocket.jp/e/4ukll",
@@ -4299,11 +4223,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-21T03:05:58.354609+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-21T03:05:58.354609+00:00"
     },
     {
       "url": "https://livepocket.jp/e/q-2l1",
@@ -4321,11 +4241,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/q-2l1",
-      "first_detected_at": "2026-10-21T04:35:56.961264+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-21T04:35:56.961264+00:00"
     },
     {
       "url": "https://livepocket.jp/e/fgvl7",
@@ -4358,11 +4274,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-21T08:05:58.542292+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-21T08:05:58.542292+00:00"
     },
     {
       "url": "https://livepocket.jp/e/684iy",
@@ -4398,11 +4310,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-21T08:30:56.713219+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-21T08:30:56.713219+00:00"
     },
     {
       "url": "https://livepocket.jp/e/g1lus",
@@ -4473,11 +4381,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-22T06:30:56.591431+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-22T06:30:56.591431+00:00"
     },
     {
       "url": "https://livepocket.jp/e/dyl5v",
@@ -4522,11 +4426,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-22T10:00:57.486466+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-22T10:00:57.486466+00:00"
     },
     {
       "url": "https://livepocket.jp/e/qarxc",
@@ -4548,11 +4448,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-22T15:06:01.070513+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-22T15:06:01.070513+00:00"
     },
     {
       "url": "https://livepocket.jp/e/mdxh9",
@@ -4653,11 +4549,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T01:00:42.029630+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T01:00:42.029630+00:00"
     },
     {
       "url": "https://livepocket.jp/e/txclv",
@@ -4679,11 +4571,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T01:30:57.574006+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ayuy4",
@@ -4702,11 +4590,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ayuy4",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-23T01:30:57.574006+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
       "url": "https://livepocket.jp/e/d59un",
@@ -4728,11 +4612,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T01:30:57.574006+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T01:30:57.574006+00:00"
     },
     {
       "url": "https://livepocket.jp/e/h0r8an9sy9",
@@ -4830,11 +4710,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T04:50:55.469425+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T04:50:55.469425+00:00"
     },
     {
       "url": "https://livepocket.jp/e/k1y8y",
@@ -4867,11 +4743,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T06:05:38.114711+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T06:05:38.114711+00:00"
     },
     {
       "url": "https://livepocket.jp/e/5ssjy",
@@ -4951,11 +4823,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T11:35:58.013964+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T11:35:58.013964+00:00"
     },
     {
       "url": "https://livepocket.jp/e/f6vcu",
@@ -4977,11 +4845,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T12:05:58.467967+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T12:05:58.467967+00:00"
     },
     {
       "url": "https://livepocket.jp/e/gyclx",
@@ -5003,11 +4867,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T12:05:58.467967+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T12:05:58.467967+00:00"
     },
     {
       "url": "https://livepocket.jp/e/om0-d",
@@ -5026,11 +4886,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/om0-d",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-23T12:05:58.467967+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T12:05:58.467967+00:00"
     },
     {
       "url": "https://livepocket.jp/e/vj35o",
@@ -5052,11 +4908,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T12:35:58.135659+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T12:35:58.135659+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3v6ni",
@@ -5090,11 +4942,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-23T13:05:59.608580+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-23T13:05:59.608580+00:00"
     },
     {
       "url": "https://livepocket.jp/e/jrssp",
@@ -5143,11 +4991,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T00:00:58.433607+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T00:00:58.433607+00:00"
     },
     {
       "url": "https://livepocket.jp/e/hbg8_",
@@ -5194,11 +5038,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/8qn_a",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-24T00:30:57.216063+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     },
     {
       "url": "https://livepocket.jp/e/xw_dt",
@@ -5217,11 +5057,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/xw_dt",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-24T00:30:57.216063+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T00:30:57.216063+00:00"
     },
     {
       "url": "https://livepocket.jp/e/yigdg",
@@ -5254,11 +5090,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T02:05:57.476323+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     },
     {
       "url": "https://livepocket.jp/e/x54u6",
@@ -5280,11 +5112,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T02:05:57.476323+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     },
     {
       "url": "https://livepocket.jp/e/cglfk",
@@ -5306,11 +5134,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T02:05:57.476323+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T02:05:57.476323+00:00"
     },
     {
       "url": "https://livepocket.jp/e/c82il",
@@ -5411,11 +5235,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ganvl",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-24T04:05:57.204038+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T04:05:57.204038+00:00"
     },
     {
       "url": "https://livepocket.jp/e/fmrx2",
@@ -5444,11 +5264,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/zau0z",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-24T04:35:56.419014+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T04:35:56.419014+00:00"
     },
     {
       "url": "https://livepocket.jp/e/up9fr",
@@ -5478,11 +5294,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/a-wb2",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-24T05:35:57.334167+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T05:35:57.334167+00:00"
     },
     {
       "url": "https://livepocket.jp/e/qqo16",
@@ -5504,11 +5316,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T05:35:57.334167+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T05:35:57.334167+00:00"
     },
     {
       "url": "https://livepocket.jp/e/87-y2",
@@ -5530,11 +5338,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T07:30:58.248074+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T07:30:58.248074+00:00"
     },
     {
       "url": "https://livepocket.jp/e/oaete",
@@ -5567,11 +5371,7 @@
       "pokemon_map_match": "スタートデッキ100 バトルコレクション",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-24T08:05:58.799266+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T08:05:58.799266+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3adrx",
@@ -6211,11 +6011,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/u7d0k",
-      "first_detected_at": "2026-10-24T09:05:58.588451+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
       "url": "https://livepocket.jp/e/om3cc",
@@ -6235,11 +6031,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/om3cc",
       "review_category": "onepiece",
-      "first_detected_at": "2026-10-24T09:05:58.588451+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T09:05:58.588451+00:00"
     },
     {
       "url": "https://livepocket.jp/e/vs_p-",
@@ -6497,11 +6289,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/w9sy5",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-24T10:35:58.228616+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-24T10:35:58.228616+00:00"
     },
     {
       "url": "https://livepocket.jp/e/pq2vb",
@@ -6700,11 +6488,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-25T03:30:58.211006+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-25T03:30:58.211006+00:00"
     },
     {
       "url": "https://livepocket.jp/e/4td_r",
@@ -6726,11 +6510,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-25T04:00:58.394789+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-25T04:00:58.394789+00:00"
     },
     {
       "url": "https://livepocket.jp/e/s00-4",
@@ -6763,11 +6543,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/voozz",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-25T05:30:57.879734+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-25T05:30:57.879734+00:00"
     },
     {
       "url": "https://livepocket.jp/e/dkbwm",
@@ -6789,11 +6565,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-25T06:36:00.675460+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-25T06:36:00.675460+00:00"
     },
     {
       "url": "https://livepocket.jp/e/dz82m",
@@ -6815,11 +6587,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-25T07:05:57.806780+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-25T07:05:57.806780+00:00"
     },
     {
       "url": "https://livepocket.jp/e/fve2o",
@@ -6841,11 +6609,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-25T11:00:57.774476+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-25T11:00:57.774476+00:00"
     },
     {
       "url": "https://livepocket.jp/e/qg3as",
@@ -6992,11 +6756,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-26T14:05:59.422556+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-26T14:05:59.422556+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ol959",
@@ -7025,11 +6785,7 @@
       ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/83tom",
-      "first_detected_at": "2026-10-27T00:40:59.070714+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-27T00:40:59.070714+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ukxef",
@@ -7259,11 +7015,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/b8ut2",
       "review_category": "pokemon",
-      "first_detected_at": "2026-10-30T12:30:57.432106+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-30T12:30:57.432106+00:00"
     },
     {
       "url": "https://livepocket.jp/e/nxng3",
@@ -7408,11 +7160,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-31T08:00:56.653881+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-31T08:00:56.653881+00:00"
     },
     {
       "url": "https://livepocket.jp/e/lv5m0",
@@ -7445,11 +7193,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-31T09:10:58.113196+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-31T09:10:58.113196+00:00"
     },
     {
       "url": "https://livepocket.jp/e/fiwby",
@@ -7471,11 +7215,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-10-31T10:00:58.177610+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-10-31T10:00:58.177610+00:00"
     },
     {
       "url": "https://livepocket.jp/e/7c2e-",
@@ -7645,11 +7385,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-11-01T05:35:59.035438+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
       "url": "https://livepocket.jp/e/kdg4f",
@@ -7671,11 +7407,7 @@
       "pokemon_map_match": "「30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー」",
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-11-01T05:35:59.035438+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ezavr",
@@ -7697,11 +7429,7 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-11-01T05:35:59.035438+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-01T05:35:59.035438+00:00"
     },
     {
       "url": "https://livepocket.jp/e/d6y1u",
@@ -7742,11 +7470,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/3tqn7",
       "review_category": "pokemon",
-      "first_detected_at": "2026-11-01T08:05:56.492131+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-01T08:05:56.492131+00:00"
     },
     {
       "url": "https://livepocket.jp/e/bb5zr",
@@ -7793,11 +7517,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/emrbh",
       "review_category": "pokemon",
-      "first_detected_at": "2026-11-01T11:35:58.354185+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-01T11:35:58.354185+00:00"
     },
     {
       "url": "https://livepocket.jp/e/zpkzs",
@@ -8238,11 +7958,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/o17ppsed05",
       "review_category": "onepiece",
-      "first_detected_at": "2026-11-04T05:00:59.015162+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-04T05:00:59.015162+00:00"
     },
     {
       "url": "https://livepocket.jp/e/z_1ke",
@@ -8369,11 +8085,7 @@
       "pokemon_map_match": "インフェルノX",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-11-05T01:35:58.878606+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-05T01:35:58.878606+00:00"
     },
     {
       "url": "https://livepocket.jp/e/t7ka0",
@@ -8398,11 +8110,7 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "first_detected_at": "2026-11-05T03:05:59.646682+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-05T03:05:59.646682+00:00"
     },
     {
       "url": "https://livepocket.jp/e/8cmzh",
@@ -8750,11 +8458,7 @@
       "purchase_start_date": "2026-11-13",
       "purchase_end_date": "2026-11-15",
       "review_category": "onepiece",
-      "first_detected_at": "2026-11-06T01:40:58.133538+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-06T01:40:58.133538+00:00"
     },
     {
       "url": "https://livepocket.jp/e/vw0pq",
@@ -9620,11 +9324,7 @@
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
-      "first_detected_at": "2026-11-07T02:30:57.963967+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146",
-        "prefecture": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-07T02:30:57.963967+00:00"
     },
     {
       "url": "https://livepocket.jp/e/7_pst",
@@ -10130,8 +9830,6 @@
       "purchase_start_date": "2026-11-20",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【ふるいち八潮中央店】ワンピースカード店頭抽選販売(Heroines Edition vol.2)",
       "first_detected_at": "2026-11-08T01:00:56.901837+00:00"
     },
     {
@@ -10314,5 +10012,5 @@
       "first_detected_at": "2026-11-08T02:30:56.937121+00:00"
     }
   ],
-  "updated_at": "2026-11-08T07:16:38.760318+00:00"
+  "updated_at": "2026-11-08T07:26:02.129467+00:00"
 }
