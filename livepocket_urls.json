@@ -24156,7 +24156,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/3n9no": {
-          "checked_at": "2026-11-07T21:56:29.833065+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -24166,12 +24166,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/q2duc": {
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -26374,7 +26374,7 @@
         "https://livepocket.jp/e/3n9no": {
           "detected_at": "2026-11-07T15:35:57.139287+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T21:56:29.833065+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/854lu": {
@@ -26404,13 +26404,13 @@
         "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
           "detected_at": "2026-11-07T16:06:00.061337+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/q2duc": {
           "detected_at": "2026-11-07T16:06:00.061337+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/l2k4b": {
@@ -28144,18 +28144,18 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3n9no": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T21:56:29.833065+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-08T04:06:29.732370+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/q2duc": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T22:06:27.201656+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-08T04:06:29.732370+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-07T22:06:27.201656+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-08T04:06:29.732370+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -34404,7 +34404,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T21:56:29.833065+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "title_observed": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
           "genre": "onepiece",
           "product_origin": "",
@@ -34426,7 +34426,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "title_observed": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
           "genre": "pokemon",
           "product_origin": "",
@@ -34437,7 +34437,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
           "genre": "onepiece",
           "product_origin": "",
@@ -40077,7 +40077,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/3n9no": {
-          "checked_at": "2026-11-07T21:56:29.833065+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -40103,7 +40103,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/q2duc": {
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -40116,7 +40116,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
-          "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "checked_at": "2026-11-08T04:06:29.732370+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

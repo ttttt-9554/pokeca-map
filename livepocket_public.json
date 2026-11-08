@@ -11560,6 +11560,8 @@
           "prefecture": "神奈川県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 『神の支配』 抽選予約",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
@@ -11577,7 +11579,6 @@
           "prefecture": "神奈川県"
         }
       ],
-      "official_event_title": "抽選販売 11月13日発売 PM『スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー』",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
@@ -11636,7 +11637,6 @@
           "prefecture": "埼玉県"
         }
       ],
-      "official_event_title": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
@@ -11655,8 +11655,6 @@
           "prefecture": "栃木県"
         }
       ],
-      "official_genre": "onepiece",
-      "official_event_title": "【栃木城内店】ワンピースカード「神の支配【OP-18】」抽選販売受付",
       "first_detected_at": "2026-11-07T15:35:57.139287+00:00"
     },
     {
@@ -11680,6 +11678,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川島インター店】ポケモンカード抽選販売（30ｔｈ ＣＥＬＥＢＲＡＴＩＯＮカードセット ９種セット）",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     },
     {
@@ -11698,6 +11698,8 @@
           "prefecture": "宮城県"
         }
       ],
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
       "first_detected_at": "2026-11-07T16:06:00.061337+00:00"
     },
     {
@@ -11808,5 +11810,5 @@
       "first_detected_at": "2026-11-08T02:30:56.937121+00:00"
     }
   ],
-  "updated_at": "2026-11-08T03:56:27.390760+00:00"
+  "updated_at": "2026-11-08T04:06:29.732370+00:00"
 }
