@@ -53,8 +53,9 @@ DISCORD_URL_RE = re.compile(r'https://livepocket\.jp/e/[A-Za-z0-9_-]{4,64}')
 RETAIL = re.compile(r'店$|(?:SHOP|STORE|TSUTAYA|HMV|BOOKS|トレカ|古本市場|ふるいち|キデイランド|イトーヨーカドー|晴れる屋|麦わらストア|ジャンプショップ)', re.I)
 OVERVIEW_RETAIL = re.compile(
     r'(?:店|ショップ|SHOP|STORE|売場|売り場|トレカコーナー)$|'
+    r'店\s*[0-9０-９]+\s*(?:階|[fFＦｆ])$|'
     r'店\s*(?:[0-9０-９]+(?:階|[fFＦｆ])\s*)?(?:TSUTAYA\s*)?レジ$|'
-    r'(?:TRADING\s*CARD|トレカ)', re.I)
+    r'(?:TRADING\s*CARD|トレカ|ショップ)', re.I)
 OVERVIEW_PLACEHOLDERS = frozenset((
     '会場', '会場未定', '会場未確認', '店舗', '対象店舗', '各店舗', '各店',
     '販売元', '受取場所', '全国', 'オンライン', '実店舗なし',

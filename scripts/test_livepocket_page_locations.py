@@ -73,6 +73,16 @@ class PageLocationTests(unittest.TestCase):
         fields = individual.extract(v21, URL, page)['fields']
         self.assertEqual(fields['stores'], [{'name': 'TSUTAYA東仙台店 ２階TSUTAYAレジ', 'prefecture': '宮城県'}])
 
+    def test_official_venue_with_floor_or_internal_shop_word_keeps_full_name(self):
+        for name, seller, title in (
+            ('カードキングダム秋葉原駅前店4階', 'カードキングダム 秋葉原駅前店', 'ワンピースカード抽選販売'),
+            ('アゾンレーベルショップ池袋', '株式会社アゾンインターナショナル', 'ドール抽選予約販売'),
+        ):
+            page = self.observation(html(venue=name, prefecture='東京都', seller=seller))
+            page['titles'] = [title]
+            fields = individual.extract(v21, URL, page)['fields']
+            self.assertEqual(fields['stores'], [{'name': name, 'prefecture': '東京都'}])
+
     def test_exact_branch_region_is_enriched_without_spreading_it_to_other_shops(self):
         page = self.observation(html(venue='キデイランド吉祥寺店', prefecture='東京都'))
         page['text'] += '\n対象店舗\nキデイランド吉祥寺店\n別の名古屋店\n応募期間\n'
