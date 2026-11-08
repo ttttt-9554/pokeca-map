@@ -15,6 +15,8 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_livepocket_event_schedule.py
       - scripts/test_lottery_event_schedule.cjs
       - lottery_notifications_v1.js
+      - lottery_application_return_v1.js
+      - scripts/test_lottery_application_return.cjs
       - supabase/lottery_result_announcement_parts_v1.sql
       - scripts/livepocket_individual_fetch.py
       - scripts/livepocket_v19.py
@@ -121,6 +123,8 @@ jobs:
         run: |
           node --check app.js
           node --check lottery_notifications_v1.js
+          node --check lottery_application_return_v1.js
+          node scripts/test_lottery_application_return.cjs
           node scripts/test_lottery_event_schedule.cjs
           node --check search_inputs_v1.js
           node --check info_plaza_sales_v1.js

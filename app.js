@@ -357,6 +357,7 @@
     window.TorecaSalesReference?.onAuthChanged?.();
     window.TorecaStoreMaps?.onAuthChanged?.();
     window.TorecaUnifiedReview?.onAuthChanged?.();
+    window.TorecaApplicationReturn?.onAuthChanged?.();
     restoreProtectedTabAfterAuth();
     if (isDeveloper()) { renderCloudAdminLists(); loadLotteryDevResults(); }
     lpExtRenderAdmin();
@@ -5427,7 +5428,7 @@
       : (external?'抽選URLを開いて確認':'公式ページで確認');
     const officialShort = item.app_lottery ? '↗ 案内' : (external?'↗ 抽選':'↗ 公式');
     const officialAction = officialUrl
-      ? '<a class="lp-official" href="'+escape(officialUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="'+escape(officialLabel)+'（新しいタブで開く）">'+
+      ? '<a class="lp-official" data-lp-application-return="'+escape(item.url)+'" href="'+escape(officialUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="'+escape(officialLabel)+'（新しいタブで開く）">'+
         '<span class="lp-action-full">'+escape(officialLabel)+' ↗</span>'+
         '<span class="lp-action-short" aria-hidden="true">'+escape(officialShort)+'</span></a>'
       : '';
@@ -7929,6 +7930,42 @@
       lotteryTrackerSave(url,{...old,status:'applied',
         application_count:1,won_count:0,lost_count:0});
     }else if(button.dataset.lpTrack==='edit') lotteryTrackerOpenEditor(url);
+  }
+
+  function lotteryReturnContext(url,fromReturn=false){
+    const item=lotteryItems.find(row=>row.url===url);
+    const record=lotteryTrackRecord(url);
+    const registered=Number(record?.application_count)>0||
+      ['applied','won','lost','received'].includes(record?.status);
+    return {
+      eligible:!!item&&safeLotteryUrl(url)&&!item.manual_card_hidden&&!item.app_lottery_hidden&&
+        (['open','unknown'].includes(lotteryState(item))||
+          (fromReturn&&lotteryState(item)==='closed')),
+      registered,title:lotteryTrackItemName(url),
+      needsEditor:!!lpPrivateAccountDefault()&&lpTrackerCandidateStores(url).length>1
+    };
+  }
+
+  async function lotteryReturnPrepare(owner){
+    if(!owner||authUser?.id!==owner||discordRoleAuthPending)return false;
+    if(lotteryLoading)await lotteryLoading;
+    else if(!lotteryItems.length)await loadLotteryEvents();
+    await refreshLotteryTrackerForAccount(true);
+    return authUser?.id===owner&&!discordRoleAuthPending&&
+      lotteryTrackUserId===owner&&!lotteryTrackError&&lpPrivateAccountReady&&lpPrivateAccountUser===owner;
+  }
+
+  async function lotteryReturnRegister(url,owner){
+    if(authUser?.id!==owner||discordRoleAuthPending||lotteryTrackSaving)return false;
+    const context=lotteryReturnContext(url,true);
+    if(context.registered)return true;
+    if(!context.eligible||context.needsEditor)return false;
+    const values={...lotteryTrackRecord(url),status:'applied',
+      application_count:1,won_count:0,lost_count:0};
+    // An empty not-applied row must still use the person's default account.
+    if(!values.account_entries?.length)delete values.account_entries;
+    await lotteryTrackerSave(url,values);
+    return authUser?.id===owner&&lotteryReturnContext(url).registered;
   }
 
   function lotteryPickupPeriodReversed(schedule) {
@@ -11024,6 +11061,12 @@
       initLotteryDevRecheck();
       initFriendPresence();
       initLottery();
+      window.TorecaApplicationReturn?.init?.({
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        getContext:lotteryReturnContext,prepare:lotteryReturnPrepare,
+        register:lotteryReturnRegister,
+        openEditor:(url,owner)=>authUser?.id===owner?lotteryTrackerOpenEditor(url):undefined
+      });
       lpResultsInit();
       bindEvents();
       initSearchInputs();

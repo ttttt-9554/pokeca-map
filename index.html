@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261108-store-merge-ui-v1">
+  <link rel="stylesheet" href="style.css?v=20261108-application-return-v1">
 
   <style>
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
@@ -1957,13 +1957,14 @@ nav[aria-label="メインメニュー"] {
 
   <!-- アプリ本体 -->
   <script src="search_inputs_v1.js?v=20261102-multi-store-choice-v6"></script>
+  <script src="lottery_application_return_v1.js?v=20261108-application-return-v1"></script>
   <script>
   // Load the app script with the refresh token when the user explicitly
   // requests an update, preventing a stale app.js response in iOS/Chrome.
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261106-starbox-lottery-v1';
+      ? token : '20261108-application-return-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

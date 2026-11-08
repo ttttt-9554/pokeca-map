@@ -3829,3 +3829,18 @@ html[data-theme="dark"] #devView #lpProductMasterPanel .lp-product-manual-merge-
     grid-column:auto;
   }
 }
+/* Private application reminder when returning from an official lottery link. */
+#lpApplicationReturnDialog{
+  box-sizing:border-box;width:min(440px,calc(100vw - 28px));max-height:calc(100dvh - 40px);
+  padding:20px;border:1px solid var(--app-border,#64748b);border-radius:18px;
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);overflow:auto;
+}
+#lpApplicationReturnDialog::backdrop{background:#0009}
+#lpApplicationReturnDialog .lp-application-return-header{display:flex;align-items:flex-start;gap:12px}
+#lpApplicationReturnDialog h3{font-size:18px;line-height:1.5;margin:0;flex:1;min-width:0}
+#lpApplicationReturnDialog [data-return-close]{flex:0 0 36px;min-height:36px;padding:0;font-size:24px;line-height:1}
+#lpApplicationReturnEvent{font-size:14px;line-height:1.6;font-weight:700;overflow-wrap:anywhere;margin:16px 0 10px}
+#lpApplicationReturnDescription,#lpApplicationReturnHint{font-size:13px;line-height:1.7;margin:10px 0;color:var(--app-muted,#64748b)}
+#lpApplicationReturnDialog .lp-application-return-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+#lpApplicationReturnDialog .lp-application-return-actions button{flex:1 1 150px;min-height:44px;white-space:normal}
+#lpApplicationReturnStatus{font-size:13px;line-height:1.6;margin:12px 0 0;overflow-wrap:anywhere}
