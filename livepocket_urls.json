@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-07T16:05:56.703381+00:00",
+  "collected_at": "2026-11-08T01:00:55.128378+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 723,
+  "unique_livepocket_urls": 724,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -20558,34 +20558,67 @@
       "application_end_at": "2026-11-10T21:00:00+09:00",
       "application_start_at": "2026-11-07T12:00:00+09:00",
       "result_announcement_date": "2026-11-18"
+    },
+    {
+      "url": "https://livepocket.jp/e/l2k4b",
+      "discord_message_id": "1568792198097404025",
+      "discord_posted_at": "2026-11-08T01:00:06.776000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいち八潮中央店\n受付終了: 11/08 22:00（残り11時間59分）\nhttps://livepocket.jp/e/l2k4b",
+      "store_name": "ふるいち八潮中央店",
+      "prefecture": "埼玉県",
+      "details_source": "discord_post",
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "parsed",
+      "stores": [
+        {
+          "name": "ふるいち八潮中央店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "field_sources": {
+        "store_name": "v21_23_discord_exact_url_adjacent_store",
+        "stores": "v21_23_discord_exact_url_adjacent_store",
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "【ふるいち八潮中央店】ワンピースカード店頭抽選販売(Heroines Edition vol.2)",
+      "application_end_at": "2026-11-08T22:00:00+09:00",
+      "application_start_at": "2026-11-08T10:00:00+09:00",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-20",
+      "purchase_end_date": "2026-11-22"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 553,
+    "parsed": 554,
     "no_structured_details": 170
   },
   "field_counts": {
-    "store_name": 528,
-    "prefecture": 488,
-    "event_title": 410,
+    "store_name": 529,
+    "prefecture": 489,
+    "event_title": 411,
     "event_date": 1,
     "product_name": 112,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 686,
-    "application_start_at": 675,
-    "stores_events": 548
+    "application_end_at": 687,
+    "application_start_at": 676,
+    "stores_events": 549
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568656290790772858"
+      "1551580466266644552": "1568792198097404025"
     },
     "last_run": {
-      "checked_at": "2026-11-07T16:05:56.703381+00:00",
-      "new_urls": 2,
-      "original_urls": 721,
+      "checked_at": "2026-11-08T01:00:55.128378+00:00",
+      "new_urls": 1,
+      "original_urls": 723,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -20844,7 +20877,8 @@
         "1568588352981172354": "2026-11-07T11:35:55.983262+00:00",
         "1568641248510611607": "2026-11-07T15:05:56.090215+00:00",
         "1568648754364547144": "2026-11-07T15:35:56.073719+00:00",
-        "1568656290790772858": "2026-11-07T16:05:59.243082+00:00"
+        "1568656290790772858": "2026-11-07T16:05:59.243082+00:00",
+        "1568792198097404025": "2026-11-08T01:00:56.070731+00:00"
       },
       "checked_search_urls": {}
     },
@@ -24004,6 +24038,11 @@
           "checked_at": "2026-11-07T22:06:27.201656+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/l2k4b": {
+          "checked_at": "2026-11-08T01:01:17.769064+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -26216,6 +26255,12 @@
           "detected_at": "2026-11-07T16:06:00.061337+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/l2k4b": {
+          "detected_at": "2026-11-08T01:00:56.901837+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-08T01:01:17.769064+00:00",
           "http_status": null
         }
       },
@@ -34218,6 +34263,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/l2k4b": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-08T01:01:17.769064+00:00",
+          "title_observed": "【ふるいち八潮中央店】ワンピースカード店頭抽選販売(Heroines Edition vol.2)",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -39837,6 +39893,19 @@
         },
         "https://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru": {
           "checked_at": "2026-11-07T22:06:27.201656+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/l2k4b": {
+          "checked_at": "2026-11-08T01:01:17.769064+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
