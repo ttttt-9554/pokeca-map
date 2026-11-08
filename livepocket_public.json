@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-08T02:00:56.646341+00:00",
-  "unique_livepocket_urls": 726,
+  "collected_at": "2026-11-08T02:30:55.192622+00:00",
+  "unique_livepocket_urls": 728,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11759,7 +11759,53 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-08T02:00:59.030124+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/6b32h",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-11-08T02:30:06.338000+00:00",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-08T09:35:00+09:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【トレカパーク横浜西口店】ポケカ抽選販売（ＭＥＧＡ ３０ｔｈ ＣＥＬＥＢＲＡＴＩＯＮ カードセット 9種セット）",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-08T02:30:56.937121+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/f8haj",
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-11-08T02:30:06.338000+00:00",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "event_title": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-08T09:51:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-13",
+      "purchase_end_date": "2026-11-15",
+      "first_detected_at": "2026-11-08T02:30:56.937121+00:00"
     }
   ],
-  "updated_at": "2026-11-08T02:21:01.896991+00:00"
+  "updated_at": "2026-11-08T02:31:17.641879+00:00"
 }
