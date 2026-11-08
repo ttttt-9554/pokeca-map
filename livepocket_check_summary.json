@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "42474218212",
-    "run_number": "3233",
-    "completed_process_at": "2026-11-08T11:06:06Z",
+    "run_id": "42476451096",
+    "run_number": "3236",
+    "completed_process_at": "2026-11-08T11:36:05Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 0,
@@ -147,14 +147,14 @@
     "last_7_days": 103,
     "registered_total": 729,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-11-08T11:06:06Z",
+    "as_of": "2026-11-08T11:36:05Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 2,
     "retry_wait": 0,
-    "completed": 97,
-    "expired": 624,
+    "completed": 95,
+    "expired": 626,
     "removed": 3,
     "new_pending": 0,
     "quarantined": 3,
@@ -168,6 +168,6 @@
     "next_batch_size": 2,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-11-08T11:06:08Z"
+    "as_of": "2026-11-08T11:36:07Z"
   }
 }
