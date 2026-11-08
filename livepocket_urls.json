@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-08T06:05:55.328079+00:00",
+  "collected_at": "2026-11-08T09:05:55.136434+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 728,
+  "unique_livepocket_urls": 729,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -20527,33 +20527,69 @@
         "stores": "v19_livepocket_overview_venue",
         "prefecture": "v19_livepocket_overview_venue"
       }
+    },
+    {
+      "url": "https://livepocket.jp/e/1-4vi",
+      "discord_message_id": "1568913005964427286",
+      "discord_posted_at": "2026-11-08T09:00:09.616000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 18時まとめ】\n\n📍東京都\nカードショップ オリオンベース\n受付終了: 11/08 20:30（残り2時間29分）\nhttps://livepocket.jp/e/1-4vi\n\n🔁 再通知\n📍神奈川県\nTSUTAYA追浜店\n受付終了: 11/09 21:00（残り1日2時間）\nhttps://livepocket.jp/e/3n9no\n\n🔁 再通知\n📍神奈川県\nTSUTAYA Trading Card 戸塚店\n受付終了: 11/09 21:00（残り1日2時間）\nhttps://livepocket.jp/e/mc956\n\n🔁 再通知\n📍神奈川県\nTSUTAYA横須賀粟田店\n受付終了: 11/08 21:30（残り3時間29分）\nhttps://livepocket.jp/e/dqtqd\n\n🔁 再通知\n📍神奈川県\nトレカパーク横浜西口店\n受付終了: 11/08 21:00（残り2時間59分）\nhttps://livepocket.jp/e/6b32h\n\n🔁 再通知\n📍神奈川県\nトレカパーク横浜西口店\n受付終了: 11/08 21:00（残り2時間59分）\nhttps://livepocket.jp/e/f8haj\n\n🔁 再通知\n📍埼玉県\nTSUTAYA大利根店トレカ売場\n受付終了: 11/09 23:59（残り1日5時間）\nhttps://livepocket.jp/e/24acn\n\n🔁 再通知\n📍埼玉県\n古本市場深谷店\n受付終了: 11/08 22:00（残り3時間59分）\nhttps://livepocket.jp/e/sb0d4\n\n🔁 再通知\n📍埼玉県\nふるいちトップブックス川島インター店\n受付終了: 11/08 21:00（残り2時間59分）\nhttps://livepocket.jp/e/q2duc\n\n🔁 再通知\n📍埼玉県\nふるいち八潮中央店\n受付終了: 11/08 22:00（残り3時間59分）\nhttps://livepocket.jp/e/l2k4b\n\n🔁 再通知\n📍埼玉県\nOP-18\n受付終了: 11/11 20:00（残り3日1時間）\nhttps://livepocket.jp/e/bh-48\n\n🔁 再通知\n📍埼玉県\nトレカエース春日部店\n受付終了: 11/08 23:00（残り4時間59分）\nhttps://livepocket.jp/e/h78by\n\n🔁 再通知\n📍栃木県\nTSUTAYA栃木城内店トレカ売場\n受付終了: 11/09 23:59（残り1日5時間）\nhttps://livepocket.jp/e/854lu\n\n🔁 再通知\n📍宮城県\nTSUTAYA涌谷店\n受付終了: 11/10 21:00（残り2日2時間）\nhttps://livepocket.jp/e/2q34tryqw98dvhasjkl-jgh12u89yru",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/1-4vi",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』抽選販売受付",
+      "application_end_at": "2026-11-08T21:00:00+09:00",
+      "application_start_at": "2026-11-06T15:18:00+09:00",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-11",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-12-03"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 558,
-    "no_structured_details": 170
+    "no_structured_details": 171
   },
   "field_counts": {
-    "store_name": 283,
-    "prefecture": 229,
-    "event_title": 426,
+    "store_name": 284,
+    "prefecture": 230,
+    "event_title": 427,
     "event_date": 1,
     "product_name": 115,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 692,
-    "application_start_at": 684,
-    "stores_events": 283
+    "application_end_at": 693,
+    "application_start_at": 685,
+    "stores_events": 284
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1568867717426053230"
+      "1551580466266644552": "1568913005964427286"
     },
     "last_run": {
-      "checked_at": "2026-11-08T06:05:55.328079+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-08T09:05:55.136434+00:00",
+      "new_urls": 1,
       "original_urls": 728,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -20817,7 +20853,8 @@
         "1568792198097404025": "2026-11-08T01:00:56.070731+00:00",
         "1568799753821622275": "2026-11-08T01:30:57.411619+00:00",
         "1568807288599355503": "2026-11-08T02:00:57.832869+00:00",
-        "1568814845502038198": "2026-11-08T02:30:56.127960+00:00"
+        "1568814845502038198": "2026-11-08T02:30:56.127960+00:00",
+        "1568913005964427286": "2026-11-08T09:05:56.244305+00:00"
       },
       "checked_search_urls": {}
     },
@@ -24002,6 +24039,11 @@
           "checked_at": "2026-11-08T08:36:16.162486+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/1-4vi": {
+          "checked_at": "2026-11-08T09:06:19.286509+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -26244,6 +26286,12 @@
           "detected_at": "2026-11-08T02:30:56.937121+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-08T08:36:16.162486+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/1-4vi": {
+          "detected_at": "2026-11-08T09:05:57.144878+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-08T09:06:19.286509+00:00",
           "http_status": null
         }
       },
@@ -34321,6 +34369,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/1-4vi": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-08T09:06:19.286509+00:00",
+          "title_observed": "11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -40005,6 +40064,19 @@
         },
         "https://livepocket.jp/e/6b32h": {
           "checked_at": "2026-11-08T08:36:16.162486+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/1-4vi": {
+          "checked_at": "2026-11-08T09:06:19.286509+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
