@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-08T01:00:55.128378+00:00",
-  "unique_livepocket_urls": 724,
+  "collected_at": "2026-11-08T01:30:55.156264+00:00",
+  "unique_livepocket_urls": 725,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -11715,7 +11715,29 @@
         }
       ],
       "first_detected_at": "2026-11-08T01:00:56.901837+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/bh-48",
+      "store_name": "OP-18",
+      "prefecture": "埼玉県",
+      "discord_posted_at": "2026-11-08T01:30:08.201000+00:00",
+      "stores": [
+        {
+          "name": "OP-18",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "event_title": "【OP-18】ブースターパック 「神の支配」購入権抽選",
+      "product_name": "ワンピースカードゲーム【OP-18】ブースターパック「神の支配」",
+      "application_end_at": "2026-11-15T09:00:00+09:00",
+      "application_start_at": "2026-11-08T09:00:00+09:00",
+      "review_category": "onepiece",
+      "official_event_title": "【OP-18】ブースターパック 「神の支配」購入権抽選",
+      "result_announcement_date": "2026-11-20",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23",
+      "first_detected_at": "2026-11-08T01:30:58.463466+00:00"
     }
   ],
-  "updated_at": "2026-11-08T01:21:01.517742+00:00"
+  "updated_at": "2026-11-08T01:31:24.607808+00:00"
 }
