@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-08T06:26:08Z",
+  "as_of": "2026-11-08T07:16:41Z",
   "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
       "event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
-      "store_name": "イトーヨーカドー",
+      "store_name": "",
       "prefecture": "",
       "application_end_at": "",
       "missing": [
+        "store",
         "deadline"
       ],
       "last_check_status": "ok",
@@ -22,10 +23,11 @@
     {
       "url": "https://livepocket.jp/e/vw0pq",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
-      "store_name": "イトーヨーカドー",
+      "store_name": "",
       "prefecture": "",
       "application_end_at": "",
       "missing": [
+        "store",
         "deadline"
       ],
       "last_check_status": "ok",
