@@ -24,6 +24,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from livepocket_store_policy import LOCATION_KEYS
 
 DATA_PATH = Path(os.environ.get("LIVEPOCKET_DATA_FILE", "livepocket_urls.json"))
 BASE_URL = "https://discord.com/api/v10"
@@ -462,44 +463,10 @@ def message_texts(message: dict[str, Any]) -> list[str]:
 
 
 def parse_text(text: str, catalog: dict[str, set[str]] | None = None) -> dict[str, dict[str, str | None]]:
-    """Associate each URL with only its adjacent location heading and store line."""
-    catalog = load_product_catalog() if catalog is None else catalog
-    result: dict[str, dict[str, str | None]] = {}
-    prefecture: str | None = None
-    store: str | None = None
-    for raw_line in text.splitlines():
-        line = raw_line.strip().strip("<> ")
-        if not line:
-            continue
-        m = PREF_RE.match(line)
-        if m:
-            prefecture = m.group(1).strip() if m.group(1).strip() in PREF_SET else None
-            store = None
-            continue
-        urls = event_urls(line)
-        if urls:
-            for url in urls:
-                current = result.setdefault(url, {"store_name": None, "prefecture": None})
-                if prefecture:
-                    current["prefecture"] = prefecture
-                if credible_store(store):
-                    current["store_name"] = clean_label(store)
-            continue
-        # An adjacent catalog-backed product label must NOT replace a store
-        # heading. Preserve it for the next URL under the same store.
-        if adjacent_catalog_label(line, _cached_product_catalog()):
-            continue
-        # Do not mistake a Discord product label (or a short, explicit
-        # shorthand) for the shop. Keep the shop heading across product lines.
-        if (event_title_label(line) or adjacent_catalog_label(line, catalog) or product_norm(line) in {'30th', 'ストーム', 'メガブ'}
-                or re.search(r'Heroines\s*Edition|世界最強の戦士|ART\s*WORK\s*COLLECTION', line, re.I)):
-            continue
-        # Only a preceding line can be a store. Never use a post title as a store.
-        if line.startswith(("🔗", "📣", "🎫", "⚠", "※", "【", "#")):
-            store = None
-        else:
-            store = clean_label(line) if credible_store(line) else None
-    return result
+    """Discover URLs; Discord headings are not evidence of store locations."""
+    return {url: {"store_name": None, "prefecture": None} for url in event_urls(text)}
+
+
 
 
 def parse_message(message: dict[str, Any], catalog: dict[str, set[str]] | None = None) -> tuple[dict[str, dict[str, str | None]], str]:
@@ -522,6 +489,8 @@ def parse_message(message: dict[str, Any], catalog: dict[str, set[str]] | None =
         for line in combined.splitlines():
             s = line.strip()
             for field, regex in FIELD_PATTERNS.items():
+                if field in LOCATION_KEYS:
+                    continue
                 m = regex.match(s)
                 if m and m.group(1).strip() and "..." not in m.group(1):
                     result[only_url][field] = m.group(1).strip()
@@ -563,6 +532,8 @@ def merge_message(items: dict[str, dict[str, Any]], message: dict[str, Any], cha
         if str(item.get("discord_message_id")) == str(message.get("id")):
             item["post_excerpt"] = full_text
         for key, value in details.items():
+            if key in LOCATION_KEYS:
+                continue
             if value and (not item.get(key) or (key == "store_name" and not credible_store(item[key]))):
                 if key == "store_name" and item.get(key) and not credible_store(item[key]):
                     item.setdefault("store_name_original", item[key])

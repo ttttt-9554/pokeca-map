@@ -2,8 +2,7 @@
 """LivePocket v7: conservative store-name repair and browser-facing JSON export.
 
 This script does NOT request LivePocket or infer store names from bare URLs.
-It recovers stores only from recognizable heading/product/URL blocks in the
-Discord text already associated with a given event URL.
+Discord blocks may supplement product labels, never store names or regions.
 
 The exported JSON intentionally omits Discord message texts, IDs and
 collector internals. Publishing a different JSON does NOT make the existing
@@ -12,6 +11,7 @@ raw file private when the repo/GitHub Pages source is public.
 from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
 from livepocket_event_schedule import FIELDS as SCHEDULE_FIELDS
+from livepocket_store_policy import sanitize_pair
 
 import copy
 import json
@@ -41,6 +41,7 @@ PUBLIC_FIELDS = (
     'lottery_result_period', 'lottery_result_start_date',
     'lottery_result_end_date', 'ticket_name', 'ticket_price_yen',
     'ticket_application_limit', 'sales_period', 'discord_posted_at',
+    'stores', 'store_location_source', 'store_location_url',
 ) + SCHEDULE_FIELDS
 
 
@@ -133,6 +134,7 @@ def enrich(data):
     stats = {'total_urls': len(out['items']), 'bogus_stores_corrected': 0,
              'store_names_recovered': 0, 'products_recovered': 0}
     for item in out['items']:
+        sanitize_pair(item)
         if bogus_shop(item):
             old = item['store_name']
             item.setdefault('store_name_original', old)
@@ -142,7 +144,7 @@ def enrich(data):
         entry = candidates.get(post_id, {}).get(item.get('url'))
         if not entry:
             continue
-        for field in ('store_name', 'product_name'):
+        for field in ('product_name',):
             label = entry[field]
             if not item.get(field):
                 item[field] = label

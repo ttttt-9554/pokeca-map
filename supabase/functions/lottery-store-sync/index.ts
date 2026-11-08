@@ -12,6 +12,9 @@ const MAX_EVENTS = 5000;
 const BATCH = 500;
 type Store = { name: string; prefecture: string };
 type Lottery = {
+  url?: unknown;
+  store_location_source?: unknown;
+  store_location_url?: unknown;
   store_name?: unknown;
   prefecture?: unknown;
   stores?: unknown;
@@ -82,6 +85,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
   const stores = new Map<string, Store>();
   const errors: string[] = [];
   let eventCount = 0;
+  let unverifiedLivePocketLocations = 0;
   downloaded.forEach((result, index) => {
     if (result.status !== "fulfilled") {
       errors.push("catalog " + (index + 1) + ": " + String(result.reason).slice(0, 130));
@@ -89,6 +93,14 @@ Deno.serve(async (req: Request): Promise<Response> => {
     }
     eventCount += result.value.length;
     for (const event of result.value) {
+      if (index === 0 || (typeof event.url === "string" && event.url.startsWith("https://livepocket.jp/"))) {
+        if (typeof event.url !== "string" || !/^https:\/\/livepocket\.jp\/e\/[A-Za-z0-9_-]{3,64}$/.test(event.url) ||
+            event.store_location_url !== event.url ||
+            !["livepocket_official_page", "livepocket_verified_manual"].includes(String(event.store_location_source))) {
+          unverifiedLivePocketLocations++;
+          continue;
+        }
+      }
       addStore(stores, event.store_name, event.prefecture);
       if (Array.isArray(event.stores)) {
         for (const entry of event.stores) {
@@ -126,7 +138,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
   const addresses = await enrichAddresses();
   const result = {
     publicEvents: eventCount, candidateStores: values.length,
-    accepted, sourcesOk: downloaded.length - errors.length, errors, addresses
+    accepted, sourcesOk: downloaded.length - errors.length, errors, addresses, unverifiedLivePocketLocations
   };
   console.log("Public lottery store master sync:", JSON.stringify(result));
   return new Response(JSON.stringify(result), {

@@ -145,14 +145,6 @@ def discord_candidates(embed):
             value = clean(val, 110)
             if value and not value.startswith(('http', '※')):
                 candidate['product_name'] = value
-        elif key in ('店舗名', '開催店舗', '販売店舗'):
-            value = credible_shop(val)
-            if value:
-                candidate['store_name'] = value
-        elif key in ('都道府県', '開催都道府県'):
-            value = clean(val, 10)
-            if value in PREF_NAMES:
-                candidate['prefecture'] = value
         elif key in ('応募期間', '抽選受付期間', '申込期間', '受付期間'):
             value = period(val)
             if value:
@@ -166,6 +158,8 @@ def apply_candidates(items_by_url, candidates, provenance, stats):
         if item is None:
             continue
         for key, value in fields.items():
+            if key in ('store_name', 'prefecture', 'stores'):
+                continue
             if not value or item.get(key):
                 continue
             item[key] = value

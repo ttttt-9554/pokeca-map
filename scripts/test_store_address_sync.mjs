@@ -82,13 +82,27 @@ assert.match(sql,/Conflicting store addresses/);
 // Exercise the deployed request handler without contacting a site or database.
 const entry=stripTypeScriptTypes(fs.readFileSync(new URL('../supabase/functions/lottery-store-sync/index.ts',import.meta.url),'utf8'))
   .replace(/^import[^;]*;\s*/gm,'');
-let handler,mode='ok',synced=0,downloaded=0,ingested=0;
+let handler,mode='ok',synced=0,downloaded=0,ingested=0,ingestionRows=[];
 vm.runInNewContext(entry,{Deno:{env:{get:name=>({NOTIFY_SECRET:'test-only',SUPABASE_URL:'https://example.invalid',
   SUPABASE_SERVICE_ROLE_KEY:'mock-only'}[name])},serve:fn=>{handler=fn;}},Request,Response,AbortController,setTimeout,clearTimeout,
   console:{log(){},error(){}},createClient:()=>({rpc:async(name,args)=>{
-    assert.equal(name,'lottery_store_ingest_public_v1');assert.equal(args.p_stores.length,1);ingested++;
+    assert.equal(name,'lottery_store_ingest_public_v1');
+    if(mode!=='location-policy')assert.equal(args.p_stores.length,1);
+    ingestionRows=args.p_stores;ingested++;
     return {data:1};}}),syncAddresses:async()=>{synced++;if(mode==='address-error')throw Error('address save failed');return {updated:1};},
-  fetch:async()=>{downloaded++;return mode==='catalog-error'?new Response('',{status:503}):
+  fetch:async url=>{downloaded++;
+    if(mode==='location-policy'){
+      const verified=(code,name,source='livepocket_official_page')=>({url:'https://livepocket.jp/e/'+code,
+        store_location_url:'https://livepocket.jp/e/'+code,store_location_source:source,
+        store_name:name,prefecture:'栃木県'});
+      return Response.json({items:url.includes('/livepocket_public.json')?[
+        {url:'https://livepocket.jp/e/wrong123',store_name:'Discordの別店舗',prefecture:'東京都'},
+        verified('page123','公式店舗'),verified('manual123','手動確認店舗','livepocket_verified_manual'),
+        {...verified('copied123','別イベントの店舗'),store_location_url:'https://livepocket.jp/e/other123'}
+      ]:[{url:'https://customform.jp/form/input/123',store_name:'外部抽選店舗',prefecture:'栃木県'},
+        {url:'https://livepocket.jp/e/wrong123',store_name:'Discordの別店舗',prefecture:'東京都'}]});
+    }
+    return mode==='catalog-error'?new Response('',{status:503}):
     Response.json({items:[{store_name:'公開テスト店舗',prefecture:'栃木県'}]});}});
 const request=(method='POST',authorized=true)=>new Request('https://example.invalid/sync',{method,
   headers:authorized?{'x-notify-secret':'test-only'}:{}});
@@ -104,4 +118,9 @@ assert.equal(synced,2,'Manual master addresses still sync when public catalogs a
 assert.equal(ingested,1);
 mode='address-error';response=await handler(request());
 assert.equal(response.status,200);assert.equal((await response.json()).addresses.error,'address save failed');
+mode='location-policy';response=await handler(request());
+assert.equal(response.status,200);
+assert.equal((await response.json()).unverifiedLivePocketLocations,3);
+assert.deepEqual(Array.from(ingestionRows,row=>row.name).sort(),['公式店舗','外部抽選店舗','手動確認店舗'].sort(),
+  'Only same-event page/manual facts enter the LivePocket store master; other lottery sources still work');
 console.log('Store addresses: official parsers, branch/prefecture matching, conflicts, retained manual edits, partial sources, service-only writes and empty runs passed');

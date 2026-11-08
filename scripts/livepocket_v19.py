@@ -11,6 +11,7 @@ from its public allowlist, so this step re-publishes them from raw every run.
 """
 from __future__ import annotations
 import livepocket_arrival_policy as arrival_policy
+import livepocket_store_policy as store_policy
 
 import copy
 import csv
@@ -360,76 +361,64 @@ def merge_stores(existing, page, manual, legacy_name='', legacy_pref=''):
 
 
 def apply_stores(raw, public, seen_pages=None, manual=None):
+    """Only merge same-event official page facts and verified manual rows."""
     arrival_policy.clean_placeholders(raw, public)
-    seen_pages = seen_pages or {}
-    manual = manual or {}
+    seen_pages, manual = seen_pages or {}, manual or {}
     rindex, pindex = v11.indices(raw, public)
     stats = {'store_lists_added': 0, 'multi_store_urls': 0, 'total_linked_stores': 0,
              'stores_from_pages': 0, 'stores_from_discord': 0, 'stores_from_csv': 0}
     for url, r in rindex.items():
         p = pindex[url]
-        for item in (r, p):
-            name = item.get('store_name')
-            if isinstance(name, str) and TICKET_PURCHASE_PREFIX.match(name.strip()):
-                item['store_name'] = safe_name(name)
+        before = copy.deepcopy(r.get('stores') or [])
+        store_policy.sanitize_pair(r, p)
+        retained = copy.deepcopy(r.get('stores') or [])
         result = seen_pages.get(url) or {}
         exact_page = result.get('status') == 'ok' and v12.exact_event_url(result.get('final_url')) == url
         page = page_stores(result.get('text')) if exact_page else []
         page_source = 'v19_livepocket_explicit_store_list'
-        # Discord text is safe to attribute only when this message contains
-        # exactly ONE distinct LivePocket event URL (not a roundup).
-        excerpt = r.get('post_excerpt')
-        discord = []
-        if isinstance(excerpt, str) and set(DISCORD_URL_RE.findall(excerpt)) == {url}:
-            discord = page_stores(excerpt)
-        before = r.get('stores') or []
-        legacy = r.get('store_name') or p.get('store_name') or ''
+        if exact_page and not page:
+            name, origin = v15.explicit_store(result.get('text'))
+            shop = store_part(name) if name else None
+            if shop:
+                page = [shop]
+                page_source = origin
+            else:
+                venue = overview_store(result)
+                if venue:
+                    page = [venue]
+                    page_source = 'v19_livepocket_overview_venue'
+        # An independently captured official event heading is page evidence too.
+        # Never extract a store from a Discord event-title preview.
         origin = str((r.get('field_sources') or {}).get('event_title') or '')
-        if not safe_name(legacy) and origin.startswith(('v14_livepocket_', 'v21_official_', 'v21_9_official_exact_url_title')):
+        if not page and origin.startswith(('v14_livepocket_', 'v21_official_', 'v21_9_official_exact_url_title')):
             heading = re.match(r'^【\s*([^【】]{2,90}?店)\s*】', str(r.get('event_title') or ''))
-            observed_shop = safe_name(heading.group(1), strict_retail=True) if heading else None
-            if observed_shop:
-                legacy = observed_shop
-                r['store_name'] = p['store_name'] = observed_shop
-                r.setdefault('field_sources', {})['store_name'] = 'v22_official_title_shop'
-        product = r.get('product_name') or p.get('product_name') or ''
-        # v5 sometimes copied an item name into the old store_name field.
-        # Do not convert that known placeholder into a verified store entry.
-        if isinstance(legacy,str) and isinstance(product,str) and product and (
-                re.sub(r'\s+', '', legacy.lstrip('* ')).casefold().startswith(
-                    re.sub(r'\s+', '', product).casefold())):
-            legacy = ''
-        if exact_page and not (before or p.get('stores') or page or discord or manual.get(url) or safe_name(legacy)):
-            venue = overview_store(result)
-            if venue and all(item.get('prefecture') in (None, '', venue['prefecture']) for item in (r, p)):
-                page = [venue]
-                legacy = venue['name']
-                page_source = 'v19_livepocket_overview_venue'
-                for item in (r, p):
-                    item.update(store_name=legacy, prefecture=venue['prefecture'])
-                r.setdefault('field_sources', {}).update(store_name=page_source, prefecture=page_source)
-        merged = merge_stores(before, page + discord, manual.get(url),
-                              legacy, r.get('prefecture') or p.get('prefecture') or '')
-        if merged:
-            r['stores'] = copy.deepcopy(merged)
-            p['stores'] = copy.deepcopy(merged)
-            if merged != before:
-                stats['store_lists_added'] += 1
-            if page:
-                r.setdefault('field_sources', {})['stores'] = page_source
-                stats['stores_from_pages'] += 1
-            if discord:
-                r.setdefault('field_sources', {})['stores'] = 'v19_discord_single_event_store_list'
-                stats['stores_from_discord'] += 1
-            if manual.get(url):
-                r.setdefault('field_sources', {})['stores'] = 'v19_user_verified_store_csv'
-                stats['stores_from_csv'] += 1
-        else:
-            r.pop('stores', None)
-            p.pop('stores', None)
-        if len(merged) > 1:
-            stats['multi_store_urls'] += 1
-        stats['total_linked_stores'] += len(merged)
+            shop = store_part(heading.group(1), strict_retail=True) if heading else None
+            if shop:
+                page = [shop]
+                page_source = 'v22_official_title_shop'
+        # A newly read page replaces old locations. A failed page preserves only
+        # facts already backed by a page or explicit manual verification.
+        retained_manual = r.get('store_location_source') == store_policy.MANUAL and not manual.get(url)
+        chosen = retained if retained_manual else merge_stores([], page if page else retained, manual.get(url))
+        source = store_policy.MANUAL if manual.get(url) or retained_manual else store_policy.PAGE
+        store_policy.set_locations(r, p, chosen, source)
+        if chosen and not retained_manual and (page or manual.get(url)):
+            fields = r.setdefault('field_sources', {})
+            source_label = 'v19_user_verified_store_csv' if manual.get(url) else page_source
+            for key in ('store_name', 'stores'):
+                fields[key] = source_label
+            fields.pop('stores_prefectures', None)
+            fields.pop('prefecture', None)
+            if r.get('prefecture'):
+                fields['prefecture'] = source_label
+        if chosen != before:
+            stats['store_lists_added'] += 1
+        if page and not retained_manual:
+            stats['stores_from_pages'] += 1
+        if manual.get(url):
+            stats['stores_from_csv'] += 1
+        stats['multi_store_urls'] += int(len(chosen) > 1)
+        stats['total_linked_stores'] += len(chosen)
     public['schema_version'] = 19
     raw.setdefault('field_counts', {})['stores_events'] = sum(bool(x.get('stores')) for x in raw['items'])
     return stats

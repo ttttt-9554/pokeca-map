@@ -10,6 +10,7 @@ import livepocket_arrival_policy as arrival_policy
 import livepocket_period_trial as period_trial
 import livepocket_individual_fetch as individual_fetch
 import livepocket_event_schedule as event_schedule
+import livepocket_store_policy as store_policy
 
 import csv
 import io
@@ -373,32 +374,8 @@ def status_mistaken_for_store(value):
 
 
 def shop_from_exact_discord_url(excerpt, event_url):
-    """Recognize ONLY prefecture -> shop -> status -> the exact event URL.
-
-    A multi-URL Discord roundup is fine because this strictly checks the
-    neighboring lines belonging to the requested URL.  Ambiguous observations
-    do not create a store.  Nothing here classifies an event title.
-    """
-    if not isinstance(excerpt, str) or not isinstance(event_url, str):
-        return None
-    if len(excerpt) > 100000:
-        return None
-    lines = [s.strip() for s in excerpt.splitlines() if s.strip()]
-    found = {}
-    for i in range(3, len(lines)):
-        matched_url = lines[i].strip('<> ')
-        if matched_url.rstrip('/') != event_url.rstrip('/') or not URL_ONLY.fullmatch(matched_url):
-            continue
-        if not status_mistaken_for_store(lines[i-1]):
-            continue
-        shop = v19.safe_name(lines[i-2])
-        pref_line = re.fullmatch(r'📍\s*(.+)', lines[i-3])
-        pref = pref_line.group(1).strip() if pref_line else ''
-        if (not shop or status_mistaken_for_store(shop) or
-                pref not in v10.PREFS or shop == pref):
-            continue
-        found[(shop, pref)] = {'name': shop, 'prefecture': pref}
-    return next(iter(found.values())) if len(found) == 1 else None
+    """Discord is not an accepted location source, including exact URL pairs."""
+    return None
 
 
 def repair_status_as_store(raw, public):
@@ -477,6 +454,7 @@ def process_v21_1(raw, public, fetch, *, catalog, now=None, new_limit=15,
     # The collector and v7 have already run.  Remove a status-as-store value
     # BEFORE v19 re-merges legacy stores; do not allow it to be resurrected.
     repaired_before = repair_status_as_store(raw, public)
+    store_policy.sanitize_catalog(raw, public)
     with use_store_aware_missing():
         raw, public, review, deadlines, sources, content, stats = v20.process(
             raw, public, fetch, now=now, new_limit=new_limit,
@@ -1622,11 +1600,14 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             title_limit=TITLE_RECHECK_DEFAULT_PER_RUN,
             manual_recheck=False, manual_limit=MANUAL_RECHECK_LIMIT,
             verified_titles=None, verified_unavailable=None,
-            individual_request=None, individual_result=None):
+            individual_request=None, individual_result=None, location_limit=0):
     """v21.13: title-priority checks, URL-scoped results and verified titles."""
     now = v14._utc(now)
     snapshot = {item['url']: json.dumps(item, ensure_ascii=False, sort_keys=True)
                 for item in public['items']}
+    location_resets = store_policy.sanitize_catalog(raw, public)
+    location_queue = [url for url in store_policy.recheck_candidates(raw, public, now=now, limit=location_limit)
+                      if url not in (verified_unavailable or {})]
     before_items = {item['url']: json.loads(json.dumps(item, ensure_ascii=False))
                     for item in public['items']}
     if manual_recheck:
@@ -2002,6 +1983,33 @@ def process(raw, public, fetch, *, catalog, now=None, new_limit=15,
             stats[metric] = sum(page_supported_change(u, metric, keys)
                                 for u in successful)
     
+    # Recheck only still-open locations awaiting site evidence. Reuse this run's
+    # observation, preserve the ordinary global block/cooldown and cap requests.
+    location_checks = state.setdefault('official_store_checks_v1', {})
+    location_attempted = 0
+    for location_url in location_queue:
+        if v14._cooldown_active(state.setdefault('v14', {}), now):
+            break
+        if location_url in observations:
+            observation = observations[location_url]
+        else:
+            location_attempted += 1
+            try:
+                observation = record(location_url)
+            except Exception:
+                observation = {'status': 'browser_error'}
+                observations[location_url] = observation
+        status = observation.get('status') if isinstance(observation, dict) else 'browser_error'
+        location_checks[location_url] = {'checked_at': now.isoformat(), 'status': status,
+            'next_check_at': (now + timedelta(hours=6)).isoformat()}
+        if status in ('browser_blocked', 'browser_blocked_or_empty'):
+            state['v14']['blocked_until'] = (now + timedelta(hours=v14.BLOCK_DELAY_HOURS)).isoformat()
+            break
+    stats['unverified_store_locations_reset'] = location_resets
+    stats['official_store_rechecks'] = location_attempted
+    location_stats = v19.apply_stores(raw, public, seen_pages=observations, manual=v19_verified)
+    stats['official_store_pages_applied'] = location_stats['stores_from_pages']
+    review, content = v19.enrich_reports(raw, public, review, content)
     # Reuse confirmed exact-URL observations for venues and event schedules.
     venue_added = 0
     schedules_updated = 0
@@ -2743,6 +2751,8 @@ def main():
     known = {item['url'] for item in raw['items']}
     verified = v20.read_verified(v20.MANUAL_PATH, known)
     v19_verified = v19.read_manual(v19.MANUAL_PATH, known)
+    # Plan after sanitization; Discord locations cannot make an event complete.
+    v19.apply_stores(raw, public, manual=v19_verified)
     new_limit = v14.safe_limit('LIVEPOCKET_V14_NEW_PER_RUN', 15, 25)
     background_limit = (v14.safe_limit('LIVEPOCKET_V14_BACKGROUND_PER_RUN', 8, 12)
                         if v14.wants_background() else 0)
@@ -2773,12 +2783,15 @@ def main():
     official_due, official_counts, _ = (
         official_title_diagnostics(raw, public, limit=0 if manual_recheck else OFFICIAL_TITLE_CHECK_PER_RUN)
         if background_limit else ([], {'background_not_enabled': len(raw.get('items', []))}, {}))
-    browser_needed = bool(work['browser_needed'] or titles_due or official_due)
+    location_limit = 0 if manual_recheck else 3
+    location_due = ([] if v14._cooldown_active(raw.setdefault('collector_state', {}).setdefault('v14', {}), datetime.now(timezone.utc))
+                    else store_policy.recheck_candidates(raw, public, now=datetime.now(timezone.utc), limit=location_limit))
+    browser_needed = bool(work['browser_needed'] or titles_due or official_due or location_due)
     if sys.argv[1] == 'plan':
         print('v21.16 browser plan:', work, 'manual_selected:', len(manual_urls), 'title_due:', len(titles_due),
               'official_due:', len(official_due), 'official_reasons:', official_counts,
               'official_urls:', [u.rsplit('/', 1)[-1] for u in official_due],
-              'map catalog products:', len(catalog))
+              'official_store_due:', len(location_due), 'map catalog products:', len(catalog))
         if os.getenv('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as fh:
                 fh.write('browser_needed=' + ('true' if browser_needed else 'false') + '\n')
@@ -2786,6 +2799,7 @@ def main():
     ready = os.getenv('LIVEPOCKET_V21_BROWSER_READY', '')
     if ready == 'false':
         new_limit = background_limit = retry_limit = title_limit = 0
+        location_limit = 0
         needed = False
     else:
         needed = ready == 'true' or browser_needed
@@ -2809,7 +2823,8 @@ def main():
                        manual_limit=MANUAL_RECHECK_LIMIT,
                        verified_titles=verified_titles,
                        verified_unavailable=verified_unavailable,
-                       individual_request=individual_request,individual_result=individual_result)
+                       individual_request=individual_request,individual_result=individual_result,
+                       location_limit=location_limit)
     finally:
         close()
     if individual_result:

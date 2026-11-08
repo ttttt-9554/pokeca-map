@@ -207,7 +207,7 @@ jobs:
           LIVEPOCKET_V8_BRAVE_PER_RUN: '0'
         run: python scripts/livepocket_v8.py
 
-      - name: Recover store names and create public JSON (v7)
+      - name: Keep page-verified stores and create public JSON (v7)
         run: python scripts/livepocket_v7.py
 
       - name: Prefecture matching and review previews (v9)
@@ -230,7 +230,7 @@ jobs:
           python -m py_compile scripts/livepocket_v21.py scripts/livepocket_manual_completed.py scripts/livepocket_check_summary.py scripts/livepocket_venue_prefecture.py scripts/livepocket_master_prefecture.py scripts/livepocket_store_name_normalize.py scripts/livepocket_yellow_submarine.py
           PYTHONPATH=scripts python -m unittest scripts/test_livepocket_detail_priority.py
           python scripts/test_livepocket_manual_review.py
-          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_master_prefecture.py scripts/test_livepocket_yellow_submarine.py
+          PYTHONPATH=scripts python -m unittest scripts/test_livepocket_venue_prefecture.py scripts/test_livepocket_master_prefecture.py scripts/test_livepocket_yellow_submarine.py scripts/test_livepocket_site_stores.py
 
       - name: Plan new, due retries and ticket products and verified store locations (v21)
         id: v21plan

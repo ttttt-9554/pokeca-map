@@ -84,7 +84,7 @@ class IndividualFetchTests(unittest.TestCase):
             self.assertEqual(row['prefecture'], '栃木県')
         self.assertEqual(raw['items'][0]['field_sources']['stores'], 'v19_livepocket_overview_venue')
 
-    def test_trading_card_venue_keeps_identity_scope_and_existing_stores(self):
+    def test_trading_card_venue_keeps_identity_scope_and_verified_manual_stores(self):
         name = 'TSUTAYA Trading Card 宇都宮インターパークビレッジ'
         observation = {**page(), 'page_identity': 'event_confirmed',
                        'overview_venue': name + ' (栃木県)'}
@@ -97,8 +97,8 @@ class IndividualFetchTests(unittest.TestCase):
                          [{'name': 'テスト渋谷店', 'prefecture': '東京都'}])
         existing = [{'name': '保存済みの店舗', 'prefecture': '東京都'}]
         raw, public = pair()
-        for row in (raw['items'][0], public['items'][0]):
-            row.update(store_name=existing[0]['name'], prefecture='東京都', stores=existing)
+        v21.store_policy.set_locations(raw['items'][0], public['items'][0], existing,
+                                      v21.store_policy.MANUAL)
         observation['text'] = BODY.replace('対象店舗\nテスト渋谷店（東京都）\n', '')
         v21.v19.apply_stores(raw, public, {URL: observation})
         self.assertEqual(raw['items'][0]['stores'], existing)
