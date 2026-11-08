@@ -3840,6 +3840,10 @@ html[data-theme="dark"] #devView #lpProductMasterPanel .lp-product-manual-merge-
 #lpApplicationReturnDialog h3{font-size:18px;line-height:1.5;margin:0;flex:1;min-width:0}
 #lpApplicationReturnDialog [data-return-close]{flex:0 0 36px;min-height:36px;padding:0;font-size:24px;line-height:1}
 #lpApplicationReturnEvent{font-size:14px;line-height:1.6;font-weight:700;overflow-wrap:anywhere;margin:16px 0 10px}
+#lpApplicationReturnDialog .lp-application-return-details{margin:12px 0;padding:12px;border:1px solid var(--app-border,#64748b);border-radius:10px;font-size:14px;line-height:1.6}
+#lpApplicationReturnDialog .lp-application-return-details div+div{margin-top:10px}
+#lpApplicationReturnDialog .lp-application-return-details dt{font-size:12px;color:var(--app-muted,#64748b)}
+#lpApplicationReturnDialog .lp-application-return-details dd{margin:2px 0 0;font-weight:700;overflow-wrap:anywhere;white-space:pre-line}
 #lpApplicationReturnDescription,#lpApplicationReturnHint{font-size:13px;line-height:1.7;margin:10px 0;color:var(--app-muted,#64748b)}
 #lpApplicationReturnDialog .lp-application-return-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 #lpApplicationReturnDialog .lp-application-return-actions button{flex:1 1 150px;min-height:44px;white-space:normal}

@@ -20,7 +20,7 @@
   }
   function schedule(){
     if(timer)clearTimeout(timer);
-    timer=setTimeout(()=>{timer=null;void check();},300);
+    timer=setTimeout(()=>{timer=null;void check();},0);
   }
   function markAway(){
     if(!fresh(pending))return;
@@ -42,6 +42,9 @@
       '<h3 id="lpApplicationReturnTitle" tabindex="-1">応募を登録しますか？</h3>'+
       '<button type="button" data-return-close aria-label="確認を閉じる">×</button></div>'+
       '<p id="lpApplicationReturnEvent"></p>'+
+      '<dl class="lp-application-return-details">'+
+      '<div><dt>店舗名</dt><dd id="lpApplicationReturnStore"></dd></div>'+
+      '<div><dt>商品名</dt><dd id="lpApplicationReturnProduct"></dd></div></dl>'+
       '<p id="lpApplicationReturnDescription">公式ページで応募が完了していれば、応募済みの記録を登録できます。</p>'+
       '<p id="lpApplicationReturnHint"></p>'+
       '<div class="lp-application-return-actions">'+
@@ -59,6 +62,8 @@
     if(pending!==entry||!eligible(context))return;
     const d=ensureDialog();
     d.querySelector('#lpApplicationReturnEvent').textContent=context.title||'抽選';
+    d.querySelector('#lpApplicationReturnStore').textContent=context.storeLabel||'店舗未確認';
+    d.querySelector('#lpApplicationReturnProduct').textContent=context.productName||'商品名未確認';
     d.querySelector('#lpApplicationReturnHint').textContent=context.needsEditor
       ? '応募アカウント・店舗を確認してから保存します。'
       : '応募済みとして1口を登録します。日程やメモは個別管理で編集できます。';
@@ -71,12 +76,20 @@
     }
   }
   async function check(){
-    if(!api||checking||working||dialog?.open||!pending||!pending.left||!visible())return;
+    if(!api||working||dialog?.open||!pending||!pending.left||!visible())return;
     if(!fresh(pending)){clear();return;}
     if(!user())return;
     if(user()!==pending.owner){clear();return;}
     if(document.querySelector('dialog[open]'))return;
     const entry=pending,version=revision;
+    // The card already has the display data. Do not block this confirmation
+    // on a full cloud refresh; register() still refreshes before any write.
+    const cached=contextFor(entry);
+    if(cached?.ready!==false){
+      if(eligible(cached))show(entry,cached);else clear();
+      return;
+    }
+    if(checking)return;
     checking=true;
     try{
       if(!await api.prepare(entry.owner))return;

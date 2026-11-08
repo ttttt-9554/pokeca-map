@@ -7935,14 +7935,19 @@
   function lotteryReturnContext(url,fromReturn=false){
     const item=lotteryItems.find(row=>row.url===url);
     const record=lotteryTrackRecord(url);
+    const stores=lpTrackerCandidateStores(url);
     const registered=Number(record?.application_count)>0||
       ['applied','won','lost','received'].includes(record?.status);
     return {
+      ready:!!item,
       eligible:!!item&&safeLotteryUrl(url)&&!item.manual_card_hidden&&!item.app_lottery_hidden&&
         (['open','unknown'].includes(lotteryState(item))||
           (fromReturn&&lotteryState(item)==='closed')),
       registered,title:lotteryTrackItemName(url),
-      needsEditor:!!lpPrivateAccountDefault()&&lpTrackerCandidateStores(url).length>1
+      storeLabel:stores.length?stores.map(store=>store.name+
+        (store.prefecture?'（'+store.prefecture+'）':'')).join('\n'):lotteryTrackStoreLabel(url),
+      productName:String(item?.product_name||'').trim(),
+      needsEditor:!!lpPrivateAccountDefault()&&stores.length>1
     };
   }
 
