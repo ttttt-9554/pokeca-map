@@ -12080,56 +12080,53 @@
     },
     {
       "url": "https://livepocket.jp/e/z98pz",
-      "discord_posted_at": "2026-11-08T13:30:07.357000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/z98pz",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
       "event_title": "ポケモンカードゲーム 「30th CELEBRATION」再入荷分 抽選販売受付",
-      "application_end_at": "2026-11-11T21:00:00+09:00",
       "application_start_at": "2026-11-09T10:30:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-11T21:00:00+09:00",
+      "discord_posted_at": "2026-11-08T13:30:07.357000+00:00",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "pokemon_map_match": "30th CELEBRATION",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「30th CELEBRATION」再入荷分 抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/z98pz",
       "result_announcement_date": "2026-11-14",
       "purchase_start_date": "2026-11-17",
       "purchase_start_time": "10:30",
       "purchase_end_date": "2026-11-22",
       "purchase_end_time": "21:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-08T13:35:58.931701+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3ampp",
-      "discord_posted_at": "2026-11-08T13:30:07.357000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/3ampp",
+      "store_name": "古本市場志木店",
+      "prefecture": "埼玉県",
       "event_title": "【抽選販売】ONE PIECEカード エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
-      "application_end_at": "2026-11-10T22:00:00+09:00",
       "application_start_at": "2026-11-08T20:13:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-10T22:00:00+09:00",
+      "discord_posted_at": "2026-11-08T13:30:07.357000+00:00",
       "stores": [
         {
           "name": "古本市場志木店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場志木店",
-      "prefecture": "埼玉県",
-      "official_event_title": "【抽選販売】ONE PIECEカード エクストラブースター ONE PIECE Heroines Edition vol.2【EB-05】",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3ampp",
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-15",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-08T13:35:58.931701+00:00"
     }
   ],
-  "updated_at": "2026-11-08T13:36:26.582669+00:00"
+  "updated_at": "2026-11-08T13:46:02.407298+00:00"
 }
