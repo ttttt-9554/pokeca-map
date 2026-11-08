@@ -39,7 +39,7 @@ REPORT_COLUMNS = v18.COLUMNS + ('store_count', 'store_names', 'store_prefectures
 MANUAL_COLUMNS = ('url', 'store_name', 'prefecture', 'verified', 'source_url')
 MAX_STORES = 35
 STORE_HEADING = re.compile(
-    r'^(?:【\s*)?(?:対象店舗(?:一覧)?|販売店舗(?:一覧)?|実施店舗(?:一覧)?|開催店舗(?:一覧)?|受取店舗(?:一覧)?|'
+    r'^(?:【\s*)?(?:対象店舗(?:一覧)?|販売店舗(?:一覧)?|(?:抽選販売)?実施店舗(?:一覧)?|開催店舗(?:一覧)?|受取店舗(?:一覧)?|'
     r'参加店舗(?:一覧)?|取扱店舗(?:一覧)?|店舗名|販売店(?:舗)?|お受け取り店舗)(?:\s*】)?\s*(?:[：:]\s*(.*))?\s*$', re.I)
 OTHER_HEADING = re.compile(
     r'^(?:【[^】]{2,45}】|(?:応募|申込|抽選|注意事項|受付|開催日|イベント名|対象商品|商品名|'

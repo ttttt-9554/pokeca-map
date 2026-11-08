@@ -139,7 +139,7 @@ def page_chain_stores(observation):
     # This sentence states participation. Receipt/identity conditions elsewhere
     # on the page must not be misread as a branch list or corporate shop name.
     text = str(observation.get('text') or '')
-    if not re.search(r'イエローサブマリンの取扱店舗全店統一での抽選', text):
+    if not re.search(r'イエローサブマリンの(?:ポケカ|ポケモンカード)?取扱店舗全店統一での抽選', text):
         return []
     if re.search(r'(?:一部店舗|[店店舗]+を)(?:除く|除外)|対象外店舗', text):
         return []

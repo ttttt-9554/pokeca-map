@@ -80,6 +80,12 @@ class PageLocationTests(unittest.TestCase):
         self.assertEqual(stores, [{'name': 'キデイランド吉祥寺店', 'prefecture': '東京都'},
                                   {'name': '別の名古屋店', 'prefecture': ''}])
 
+    def test_lottery_sales_store_heading_accepts_shop_branches_without_store_suffix(self):
+        body = '【抽選販売実施店舗】\nHMVトレカショップ新宿\nHMVららぽーと豊洲\n【応募期間】\n2026年11月1日～11月5日'
+        self.assertEqual(v21.v19.page_stores(body), [
+            {'name': 'HMVトレカショップ新宿', 'prefecture': ''},
+            {'name': 'HMVららぽーと豊洲', 'prefecture': ''}])
+
     def test_stale_region_reference_cannot_abort_or_recreate_discord_shop(self):
         raw, public = pair()
         result = v21.process(raw, public, lambda _: self.observation(), catalog={}, now=NOW,
@@ -133,6 +139,8 @@ class PageLocationTests(unittest.TestCase):
             self.assertEqual(yellow.page_chain_stores(page), [])
             load.assert_not_called()
         page['text'] = 'イエローサブマリンの取扱店舗全店統一での抽選のため、店舗のエリアがその他と表記されます。'
+        self.assertEqual(len(yellow.page_chain_stores(page)), 22)
+        page['text'] = page['text'].replace('の取扱', 'のポケカ取扱')
         self.assertEqual(len(yellow.page_chain_stores(page)), 22)
         page['text'] += '\n対象外店舗があります。'
         self.assertEqual(yellow.page_chain_stores(page), [])
