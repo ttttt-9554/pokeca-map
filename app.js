@@ -7964,11 +7964,14 @@
     if(authUser?.id!==owner||discordRoleAuthPending||lotteryTrackSaving)return false;
     const context=lotteryReturnContext(url,true);
     if(context.registered)return true;
-    if(!context.eligible||context.needsEditor)return false;
+    if(!context.eligible)return false;
     const values={...lotteryTrackRecord(url),status:'applied',
       application_count:1,won_count:0,lost_count:0};
-    // An empty not-applied row must still use the person's default account.
-    if(!values.account_entries?.length)delete values.account_entries;
+    // Without a store choice, keep one unassigned ticket instead of forcing
+    // the editor or choosing a branch on the person's behalf.
+    if(context.needsEditor)values.account_entries=[];
+    // Single-store applications still use the person's default account.
+    else if(!values.account_entries?.length)delete values.account_entries;
     await lotteryTrackerSave(url,values);
     return authUser?.id===owner&&lotteryReturnContext(url).registered;
   }

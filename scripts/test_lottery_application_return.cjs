@@ -25,6 +25,8 @@ class Events{
 }
 function fixture(options={}){
   const document=new Events(),window=new Events(),nodes=[],timers=new Map();
+  window.navigator={standalone:options.iosStandalone===true};
+  window.matchMedia=()=>({matches:options.standalone!==false});
   const storage=new Map(options.saved?[[KEY,JSON.stringify(options.saved)]]:[]);
   let now=NOW,sequence=0;
   const timerDelays=[];
@@ -83,6 +85,11 @@ function fixture(options={}){
     advance:ms=>{now+=ms;},otherDialog:()=>{const d=new Element('dialog');nodes.push(d);d.showModal();return d;}};
 }
 async function prompt(f,url=ONE){f.click(url);f.away();f.back();await f.flush();assert.equal(f.dialog()?.open,true);}
+function manage(f){
+  f.button('register');
+  assert.equal(f.dialog().querySelector('#lpApplicationReturnTitle').textContent,'管理画面を開きますか？');
+  assert.equal(f.dialog().querySelector('[data-return-skip]').textContent,'開かずに1口で登録');
+}
 async function main(){
   let f=fixture();f.click();await f.flush();
   assert.equal(f.dialog(),undefined,'Opening a link alone must not prompt or save');
@@ -113,42 +120,78 @@ async function main(){
   }
   f=fixture();await prompt(f);f.dialog().fire('click',{target:f.dialog()});assert.equal(f.dialog().open,true,'Backdrop taps do not register or dismiss');
   let release;f.state.saveHook=()=>new Promise(resolve=>{release=resolve;});
-  f.button('register');f.button('register');await f.flush();
+  manage(f);assert.equal(f.state.writes.length,0,'Choosing to register first asks whether to open management');
+  f.button('skip');f.button('register');await f.flush();
   assert.equal(f.state.writes.length,1,'Rapid confirmation cannot submit twice');
   f.dialog().fire('cancel');assert.equal(f.dialog().open,true,'Saving cannot be cancelled halfway');
   release();await f.flush();assert.equal(f.dialog().open,false);assert.equal(f.storage.has(KEY),false);
 
   f=fixture();f.state.contexts.get(ONE).needsEditor=true;await prompt(f);
-  assert.equal(f.dialog().querySelector('[data-return-register]').textContent,'応募登録へ進む');
-  f.button('register');await f.flush();assert.equal(f.state.editors.length,1);assert.equal(f.state.writes.length,0);
+  assert.equal(f.dialog().querySelector('[data-return-register]').textContent,'応募済みに登録');
+  manage(f);f.button('register');await f.flush();assert.equal(f.state.editors.length,1);assert.equal(f.state.writes.length,1);
   assert.equal(f.dialog().open,false);
   f=fixture();await prompt(f);f.state.contexts.get(ONE).registered=true;f.button('register');await f.flush();assert.equal(f.state.writes.length,0,'Recheck cloud state before confirming');
 
+  for(const open of [false,true]){
+    f=fixture();await prompt(f);manage(f);f.state.contexts.get(ONE).registered=true;
+    f.button(open?'register':'skip');await f.flush();
+    assert.equal(f.state.writes.length,0,'A record registered elsewhere is never overwritten');
+    assert.equal(f.state.editors.length,Number(open),'An existing record can still open management');
+  }
+  for(const action of ['close','cancel']){
+    f=fixture();await prompt(f);manage(f);
+    if(action==='close')f.button('close');else f.dialog().fire('cancel');
+    await f.flush();assert.equal(f.state.writes.length,1,'Dismissing the management choice keeps the confirmed one-ticket registration');
+    assert.equal(f.state.editors.length,0);
+  }
+  f=fixture();f.state.contexts.get(ONE).needsEditor=true;await prompt(f);manage(f);
+  f.button('skip');await f.flush();assert.equal(f.state.writes.length,1);assert.equal(f.state.editors.length,0,'Multi-store quick registration does not force management');
+
+  for(const mode of [{standalone:false},{standalone:false,iosStandalone:false}]){
+    f=fixture(mode);const event=f.click();
+    assert.equal(f.dialog()?.open,true,'Web and Chrome show confirmation during the link click without a return event');
+    assert.equal(event.defaultPrevented,false,'Official link navigation still uses its normal target and rel');
+    assert.equal(f.state.prepareCalls.length,0);assert.equal(f.state.writes.length,0);
+    f.away();f.back();await f.flush();assert.equal(f.dialog().showCount,1,'Browser returns do not duplicate the click prompt');
+    manage(f);f.button('skip');await f.flush();assert.equal(f.state.writes.length,1);
+  }
+  f=fixture({standalone:false,iosStandalone:true});f.click();await f.flush();
+  assert.equal(f.dialog(),undefined,'iOS home-screen mode retains the return prompt');
+  f.away();f.back();await f.flush();assert.equal(f.dialog().open,true);
+  f=fixture({standalone:false});f.state.contexts.get(ONE).registered=true;
+  assert.equal(f.click().defaultPrevented,false);assert.equal(f.dialog(),undefined,'Registered browser links still navigate without prompting');
+  f=fixture({standalone:false,uid:''});f.click();assert.equal(f.dialog(),undefined);
+
   f=fixture();f.state.prepareResult=false;await prompt(f);
   assert.equal(f.state.prepareCalls.length,0,'A slow or offline cloud must not delay the confirmation');
-  f.button('register');await f.flush();assert.equal(f.state.writes.length,0);
+  manage(f);f.button('skip');await f.flush();assert.equal(f.state.writes.length,0);
   assert.match(f.dialog().querySelector('#lpApplicationReturnStatus').textContent,/登録できませんでした/);
   f.state.prepareResult=true;
-  f.state.saveResult=false;f.button('register');await f.flush();
+  f.state.saveResult=false;f.button('skip');await f.flush();
   assert.equal(f.dialog().open,true);assert.match(f.dialog().querySelector('#lpApplicationReturnStatus').textContent,/登録できませんでした/);
-  assert.equal(f.storage.has(KEY),true);f.state.saveResult=true;f.button('register');await f.flush();assert.equal(f.dialog().open,false);
-  f=fixture();await prompt(f);f.state.prepareResult=false;f.button('register');await f.flush();assert.equal(f.state.writes.length,0);
+  assert.equal(f.storage.has(KEY),true);f.state.saveResult=true;f.button('skip');await f.flush();assert.equal(f.dialog().open,false);
+  f=fixture();await prompt(f);f.state.prepareResult=false;manage(f);f.button('skip');await f.flush();assert.equal(f.state.writes.length,0);
 
   f=fixture();f.click();f.away();f.changeUser('user-b');f.back();await f.flush();assert.equal(f.dialog(),undefined);assert.equal(f.storage.has(KEY),false);
   f=fixture();await prompt(f);f.changeUser('');assert.equal(f.dialog().open,false);assert.equal(f.storage.has(KEY),false);
+  f=fixture();await prompt(f);manage(f);f.changeUser('user-b');await f.flush();assert.equal(f.state.writes.length,0);assert.equal(f.dialog().open,false);
   f=fixture({saved:saved(),uid:''});await f.flush();assert.equal(f.dialog(),undefined);
   f.changeUser('user-a');await f.flush();assert.equal(f.dialog().open,true,'Same-user session restoration retains reminder');
   f=fixture({saved:{...saved(),openedAt:NOW-31*60*1000}});await f.flush();assert.equal(f.dialog(),undefined);assert.equal(f.storage.has(KEY),false);
   f=fixture();f.click();f.away();f.advance(31*60*1000);f.back();await f.flush();assert.equal(f.dialog(),undefined);
 
   f=fixture({saved:saved()});await f.flush();assert.equal(f.dialog().open,true,'A return after reload is supported');
+  f=fixture({saved:{...saved(),stage:'manage'}});await f.flush();
+  assert.equal(f.dialog().querySelector('#lpApplicationReturnTitle').textContent,'管理画面を開きますか？');
+  f.button('skip');await f.flush();assert.equal(f.state.writes.length,1,'Reloading the management choice retains consent and registers once');
   f=fixture({saved:{...saved(),left:false}});await f.flush();assert.equal(f.dialog(),undefined,'Visible reload without leaving is not a return');
   f=fixture();const other=f.otherDialog();f.click();f.away();f.back();await f.flush();assert.equal(f.dialog(),undefined);
   other.close();await f.flush();assert.equal(f.dialog().open,true,'Defer until the existing editor closes');
 
   f=fixture();f.state.prepareHook=()=>new Promise(()=>{});await prompt(f);
   assert.equal(f.state.prepareCalls.length,0,'An unresolved cloud refresh cannot hold up a ready card');
-  f.button('register');await f.flush();assert.equal(f.state.prepareCalls.length,1);
+  manage(f);assert.equal(f.state.prepareCalls.length,0,'The management question is also immediate');
+  f.button('skip');await f.flush();assert.equal(f.state.prepareCalls.length,1);
   assert.equal(f.state.writes.length,0,'Registration still waits for the latest cloud records');
 
   f=fixture();let prepareRelease;f.state.contexts.get(ONE).ready=false;
@@ -178,7 +221,7 @@ async function main(){
   assert.match(app,/TorecaApplicationReturn\?\.onAuthChanged/);
   assert.match(css,/#lpApplicationReturnDialog\{[^}]*max-height:calc\(100dvh - 40px\)[^}]*overflow:auto/s);
   assert.match(css,/\.lp-application-return-actions\{[^}]*flex-wrap:wrap/);
-  console.log('Application return: immediate cached display, store/product names, consent, lifecycle, duplicates, auth, retry and private-save integration passed');
+  console.log('Application return: browser click / installed return, immediate two-step consent, one-ticket registration, optional management, names, auth, retry and duplicate checks passed');
 }
 function fn(name){
   const start=app.search(new RegExp('  (?:async )?function '+name+'\\(')),end=app.indexOf('\n  }\n',start);
@@ -224,9 +267,12 @@ async function testAppIntegration(){
   item.state='closed';assert.equal(helpers.context(ONE).eligible,false);assert.equal(helpers.context(ONE,true).eligible,true,'A deadline passing while away does not discard the reminder');
   ctx.lpTrackerCandidateStores=()=>[store,{name:'サンプル大宮店',prefecture:'埼玉県'}];
   assert.equal(helpers.context(ONE,true).storeLabel,'サンプル宇都宮店（栃木県）\nサンプル大宮店（埼玉県）');
-  assert.equal(helpers.context(ONE,true).needsEditor,true);assert.equal(await helpers.register(ONE,'user-a'),false);assert.equal(writes.length,1);
+  assert.equal(helpers.context(ONE,true).needsEditor,true);assert.equal(await helpers.register(ONE,'user-a'),true);assert.equal(writes.length,2);
+  assert.equal(writes[1].application_count,1);assert.equal(writes[1].account_entries.length,0,'Multi-store registration saves exactly one unassigned ticket without choosing a store');
+  assert.equal(await helpers.register(ONE,'user-a'),true);assert.equal(writes.length,2,'A retry must not create a second ticket');
+  records.clear();
   ctx.lpPrivateAccountDefault=()=>null;item.state='open';
-  assert.equal(await helpers.register(ONE,'user-a'),true);assert.equal(writes.length,2);assert.equal(writes[1].account_entries,undefined,'Without a configured profile the existing unassigned flow remains available');
+  assert.equal(await helpers.register(ONE,'user-a'),true);assert.equal(writes.length,3);assert.equal(writes[2].account_entries,undefined,'Without a configured profile the existing unassigned flow remains available');
   ctx.lotteryTrackError='offline';assert.equal(await helpers.prepare('user-a'),false);
   ctx.lotteryTrackError='';ctx.lpPrivateAccountUser='user-b';assert.equal(await helpers.prepare('user-a'),false);
   ctx.lpTrackerCandidateStores=()=>[];delete item.product_name;

@@ -1,4 +1,4 @@
-// Ask about a private application only after returning from a card's link.
+// Browser tabs prompt on link clicks; installed apps prompt on return.
 (() => {
   'use strict';
   const KEY='toreca-lottery-application-return-v1',TTL=30*60*1000;
@@ -6,6 +6,8 @@
   let lastUser='',bound=false,revision=0;
   const user=()=>String(api?.getUserId?.()||'');
   const visible=()=>document.visibilityState!=='hidden';
+  const installed=()=>window.navigator?.standalone===true||
+    window.matchMedia?.('(display-mode: standalone)')?.matches===true;
   const fresh=entry=>entry&&typeof entry.url==='string'&&typeof entry.owner==='string'&&
     Number.isFinite(entry.openedAt)&&Date.now()>=entry.openedAt&&Date.now()-entry.openedAt<TTL;
   function persist(){
@@ -52,22 +54,40 @@
       '<button type="button" data-return-register class="primary">応募済みに登録</button></div>'+
       '<p id="lpApplicationReturnStatus" role="status" aria-live="polite"></p>';
     document.body.append(dialog);
-    dialog.querySelector('[data-return-close]').addEventListener('click',()=>{if(!working)clear();});
-    dialog.querySelector('[data-return-skip]').addEventListener('click',()=>{if(!working)clear();});
-    dialog.querySelector('[data-return-register]').addEventListener('click',()=>void register());
-    dialog.addEventListener('cancel',event=>{event.preventDefault();if(!working)clear();});
+    dialog.querySelector('[data-return-close]').addEventListener('click',dismiss);
+    dialog.querySelector('[data-return-skip]').addEventListener('click',dismiss);
+    dialog.querySelector('[data-return-register]').addEventListener('click',()=>{
+      if(working||!pending)return;
+      if(pending.stage==='manage'){void register(true);return;}
+      const context=contextFor(pending);
+      if(!eligible(context)){clear();return;}
+      pending.stage='manage';persist();show(pending,context);
+      dialog.querySelector('#lpApplicationReturnTitle').focus({preventScroll:true});
+    });
+    dialog.addEventListener('cancel',event=>{event.preventDefault();dismiss();});
     return dialog;
+  }
+  function dismiss(){
+    if(working)return;
+    if(pending?.stage==='manage')void register(false);
+    else clear();
   }
   function show(entry,context,message=''){
     if(pending!==entry||!eligible(context))return;
     const d=ensureDialog();
+    const manage=entry.stage==='manage';
+    d.querySelector('#lpApplicationReturnTitle').textContent=manage?'管理画面を開きますか？':'応募を登録しますか？';
     d.querySelector('#lpApplicationReturnEvent').textContent=context.title||'抽選';
     d.querySelector('#lpApplicationReturnStore').textContent=context.storeLabel||'店舗未確認';
     d.querySelector('#lpApplicationReturnProduct').textContent=context.productName||'商品名未確認';
-    d.querySelector('#lpApplicationReturnHint').textContent=context.needsEditor
-      ? '応募アカウント・店舗を確認してから保存します。'
-      : '応募済みとして1口を登録します。日程やメモは個別管理で編集できます。';
-    d.querySelector('[data-return-register]').textContent=context.needsEditor?'応募登録へ進む':'応募済みに登録';
+    d.querySelector('#lpApplicationReturnDescription').textContent=manage
+      ? '応募済みとして1口を登録します。管理画面では応募アカウント・店舗・口数などを編集できます。'
+      : '公式ページで応募が完了していれば、応募済みの記録を登録できます。';
+    d.querySelector('#lpApplicationReturnHint').textContent=manage
+      ? (context.needsEditor?'店舗が複数のため、店舗・アカウントは未割当で登録します。管理画面から設定できます。':'管理画面を開かずに登録することもできます。')
+      : '「応募済みに登録」の後、管理画面を開くか選べます。';
+    d.querySelector('[data-return-skip]').textContent=manage?'開かずに1口で登録':'今は登録しない';
+    d.querySelector('[data-return-register]').textContent=manage?'管理画面を開く':'応募済みに登録';
     d.querySelector('#lpApplicationReturnStatus').textContent=message;
     if(!d.open){
       if(typeof d.showModal!=='function')return;
@@ -99,7 +119,7 @@
       show(entry,context);
     }catch(_){}finally{checking=false;if(pending&&pending!==entry)schedule();}
   }
-  async function register(){
+  async function register(openEditor=false){
     if(working||!pending)return;
     const entry=pending,version=revision,d=ensureDialog();
     working=true;
@@ -109,17 +129,13 @@
       if(!await api.prepare(entry.owner))throw Error('unavailable');
       if(version!==revision||pending!==entry)return;
       const context=contextFor(entry);
-      if(!eligible(context)){clear();return;}
-      if(context.needsEditor){
-        clear();
-        await api.openEditor(entry.url,entry.owner);
-        return;
-      }
+      if(!context?.eligible){clear();return;}
       d.querySelector('#lpApplicationReturnStatus').textContent='登録しています…';
-      const saved=await api.register(entry.url,entry.owner);
+      const saved=context.registered||await api.register(entry.url,entry.owner);
       if(version!==revision||pending!==entry)return;
       if(!saved)throw Error('save_failed');
       clear();
+      if(openEditor&&user()===entry.owner)await api.openEditor(entry.url,entry.owner);
     }catch(_){
       if(version===revision&&pending===entry&&user()===entry.owner)
         d.querySelector('#lpApplicationReturnStatus').textContent='登録できませんでした。通信状況を確認して、もう一度お試しください。';
@@ -137,7 +153,13 @@
     if(!eligible(context)){clear();return;}
     // Preserve the anchor's normal target/rel behavior; no window.opener access.
     revision++;
-    pending={url,owner:user(),openedAt:Date.now(),left:false};persist();
+    pending={url,owner:user(),openedAt:Date.now(),left:!installed(),stage:'register'};persist();
+    // Leave the anchor's default navigation untouched. The browser dialog
+    // is already present in the original tab when the person returns.
+    if(pending.left){
+      if(visible()&&!document.querySelector('dialog[open]'))show(pending,context);
+      else schedule();
+    }
   }
   function onAuthChanged(){
     if(!api)return;
