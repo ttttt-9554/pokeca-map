@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-09T08:30:56.893638+00:00",
+  "collected_at": "2026-11-09T09:00:59.450541+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -21558,7 +21558,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/j4vq_",
       "field_sources": {
@@ -21596,7 +21596,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/c6vdv",
       "field_sources": {
@@ -21632,7 +21632,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/vsjqc",
       "field_sources": {
@@ -21668,7 +21668,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/0zj2n",
       "field_sources": {
@@ -21704,7 +21704,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/f98e5",
       "field_sources": {
@@ -21732,8 +21732,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 565,
-    "no_structured_details": 176
+    "parsed": 570,
+    "no_structured_details": 171
   },
   "field_counts": {
     "store_name": 338,
@@ -21750,12 +21750,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569267819651014726"
+      "1551580466266644552": "1569275405620219986"
     },
     "last_run": {
-      "checked_at": "2026-11-09T08:30:56.893638+00:00",
-      "new_urls": 1,
-      "original_urls": 740,
+      "checked_at": "2026-11-09T09:00:59.450541+00:00",
+      "new_urls": 0,
+      "original_urls": 741,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
