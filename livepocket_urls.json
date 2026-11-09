@@ -25424,12 +25424,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/didu0": {
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/5b8dz": {
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -25459,8 +25459,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/gs4-9": {
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/y1cu9": {
@@ -27759,13 +27759,13 @@
         "https://livepocket.jp/e/5b8dz": {
           "detected_at": "2026-11-09T04:30:58.622414+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/didu0": {
           "detected_at": "2026-11-09T04:30:58.622414+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/f56_k": {
@@ -27806,8 +27806,8 @@
         },
         "https://livepocket.jp/e/gs4-9": {
           "detected_at": "2026-11-09T10:31:03.473751+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/y1cu9": {
@@ -29590,13 +29590,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/didu0": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-09T10:31:30.357292+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-09T16:36:35.576489+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/5b8dz": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-09T10:31:30.357292+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-09T16:36:35.576489+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vsjqc": {
@@ -29622,6 +29622,11 @@
         "https://livepocket.jp/e/f98e5": {
           "attempts": 1,
           "last_attempt_at": "2026-11-09T14:41:26.748785+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/gs4-9": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-09T16:36:35.576489+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -36035,7 +36040,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "title_observed": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -36046,7 +36051,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -36112,7 +36117,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "title_observed": "【竹の塚店】『神の支配』BOX 抽選予約",
           "genre": "",
           "product_origin": "",
@@ -41936,7 +41941,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/didu0": {
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -41949,7 +41954,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/5b8dz": {
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -42027,7 +42032,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/gs4-9": {
-          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "checked_at": "2026-11-09T16:36:35.576489+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
