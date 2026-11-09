@@ -12171,74 +12171,68 @@
     },
     {
       "url": "https://livepocket.jp/e/5b8dz",
-      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/5b8dz",
+      "store_name": "文教堂書店南大沢店",
+      "prefecture": "東京都",
       "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
-      "application_end_at": "2026-11-15T21:00:00+09:00",
       "application_start_at": "2026-11-09T13:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
       "stores": [
         {
           "name": "文教堂書店南大沢店",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "文教堂書店南大沢店",
-      "prefecture": "東京都",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/5b8dz",
       "result_announcement_date": "2026-11-18",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-09T04:30:58.622414+00:00"
     },
     {
       "url": "https://livepocket.jp/e/didu0",
-      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/didu0",
+      "store_name": "文教堂書店南大沢店",
+      "prefecture": "東京都",
       "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
-      "application_end_at": "2026-11-15T21:00:00+09:00",
       "application_start_at": "2026-11-09T13:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
       "stores": [
         {
           "name": "文教堂書店南大沢店",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "文教堂書店南大沢店",
-      "prefecture": "東京都",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/didu0",
       "result_announcement_date": "2026-11-18",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-09T04:30:58.622414+00:00"
     },
     {
       "url": "https://livepocket.jp/e/f56_k",
-      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/f56_k",
+      "store_name": "TSUTAYA17号北浦和店",
+      "prefecture": "埼玉県",
+      "product_name": "ブースターパック 神の支配",
       "event_title": "ONE PIECE CARD GAME「ブースターパック 神の支配」抽選販売",
-      "application_end_at": "2026-11-11T22:00:00+09:00",
       "application_start_at": "2026-11-09T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-11T22:00:00+09:00",
+      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
       "stores": [
         {
           "name": "TSUTAYA17号北浦和店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA17号北浦和店",
-      "prefecture": "埼玉県",
-      "product_name": "ブースターパック 神の支配",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECE CARD GAME「ブースターパック 神の支配」抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f56_k",
       "result_announcement_date": "2026-11-16",
       "purchase_start_date": "2026-11-21",
       "purchase_start_time": "10:00",
       "purchase_end_date": "2026-11-23",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-09T04:30:58.622414+00:00"
     }
   ],
-  "updated_at": "2026-11-09T04:31:26.308480+00:00"
+  "updated_at": "2026-11-09T04:40:59.999732+00:00"
 }
