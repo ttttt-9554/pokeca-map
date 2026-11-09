@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-08T15:05:55.810093+00:00",
+  "collected_at": "2026-11-09T01:30:56.706959+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 731,
+  "unique_livepocket_urls": 733,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -21371,33 +21371,103 @@
       "result_announcement_date": "2026-11-11",
       "purchase_start_date": "2026-11-14",
       "purchase_end_date": "2026-11-15"
+    },
+    {
+      "url": "https://livepocket.jp/e/hrld4",
+      "discord_message_id": "1569162128831553677",
+      "discord_posted_at": "2026-11-09T01:30:05.136000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 11/09 21:01（残り10時間30分）\nhttps://livepocket.jp/e/hrld4\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 11/15 20:30（残り6日9時間）\nhttps://livepocket.jp/e/hloou",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/hrld4",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ふるいちイオンモール座間店ワンピースカード抽選販売「ヒロインズエディション２」",
+      "application_end_at": "2026-11-09T21:01:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "result_announcement_date": "2026-11-10",
+      "purchase_start_date": "2026-11-15",
+      "purchase_end_date": "2026-11-15"
+    },
+    {
+      "url": "https://livepocket.jp/e/hloou",
+      "discord_message_id": "1569162128831553677",
+      "discord_posted_at": "2026-11-09T01:30:05.136000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 11/09 21:01（残り10時間30分）\nhttps://livepocket.jp/e/hrld4\n\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 11/15 20:30（残り6日9時間）\nhttps://livepocket.jp/e/hloou",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/hloou",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカードゲーム 神の支配 抽選販売",
+      "application_end_at": "2026-11-15T20:30:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "文教堂書店浦安西友店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "文教堂書店浦安西友店",
+      "prefecture": "千葉県",
+      "result_announcement_date": "2026-11-16"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 560,
-    "no_structured_details": 171
+    "no_structured_details": 173
   },
   "field_counts": {
-    "store_name": 328,
-    "prefecture": 281,
-    "event_title": 429,
+    "store_name": 330,
+    "prefecture": 283,
+    "event_title": 431,
     "event_date": 1,
     "product_name": 115,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 695,
-    "application_start_at": 692,
-    "stores_events": 328
+    "application_end_at": 697,
+    "application_start_at": 694,
+    "stores_events": 330
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569003621062938644"
+      "1551580466266644552": "1569162128831553677"
     },
     "last_run": {
-      "checked_at": "2026-11-08T15:05:55.810093+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-09T01:30:56.706959+00:00",
+      "new_urls": 2,
       "original_urls": 731,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -21663,7 +21733,8 @@
         "1568807288599355503": "2026-11-08T02:00:57.832869+00:00",
         "1568814845502038198": "2026-11-08T02:30:56.127960+00:00",
         "1568913005964427286": "2026-11-08T09:05:56.244305+00:00",
-        "1568980944214564950": "2026-11-08T13:35:57.654981+00:00"
+        "1568980944214564950": "2026-11-08T13:35:57.654981+00:00",
+        "1569162128831553677": "2026-11-09T01:30:57.716559+00:00"
       },
       "checked_search_urls": {}
     },
@@ -24863,6 +24934,16 @@
           "checked_at": "2026-11-08T19:46:19.756665+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/hrld4": {
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/hloou": {
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -27123,6 +27204,18 @@
           "detected_at": "2026-11-08T13:35:58.931701+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-08T19:46:19.756665+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/hloou": {
+          "detected_at": "2026-11-09T01:30:58.790686+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/hrld4": {
+          "detected_at": "2026-11-09T01:30:58.790686+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
           "http_status": null
         }
       },
@@ -35243,6 +35336,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/hrld4": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "title_observed": "ふるいちイオンモール座間店ワンピースカード抽選販売「ヒロインズエディション２」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/hloou": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "title_observed": "ワンピースカードゲーム 神の支配 抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -40966,6 +41081,32 @@
         },
         "https://livepocket.jp/e/3ampp": {
           "checked_at": "2026-11-08T19:46:19.756665+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/hrld4": {
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/hloou": {
+          "checked_at": "2026-11-09T01:31:28.568835+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
