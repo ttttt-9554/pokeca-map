@@ -12443,28 +12443,26 @@
     },
     {
       "url": "https://livepocket.jp/e/ntly8",
-      "discord_posted_at": "2026-11-09T15:00:19.733000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/ntly8",
+      "store_name": "TSUTAYA加須店",
+      "prefecture": "埼玉県",
       "event_title": "ワンピースカードゲーム 「神の支配」抽選受付",
-      "application_end_at": "2026-11-12T22:00:00+09:00",
       "application_start_at": "2026-11-09T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-12T22:00:00+09:00",
+      "discord_posted_at": "2026-11-09T15:00:19.733000+00:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA加須店",
-      "prefecture": "埼玉県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム 「神の支配」抽選受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ntly8",
       "result_announcement_date": "2026-11-14",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-24",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-09T15:00:59.168858+00:00"
     }
   ],
-  "updated_at": "2026-11-09T15:01:29.645459+00:00"
+  "updated_at": "2026-11-09T15:11:05.835577+00:00"
 }
