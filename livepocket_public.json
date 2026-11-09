@@ -12258,6 +12258,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
       "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
     },
     {
@@ -12308,6 +12310,8 @@
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ・メガシンフォニア抽選販売",
       "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
     },
     {
@@ -12392,6 +12396,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 『神の支配【OP18】』抽選販売受付",
       "first_detected_at": "2026-11-09T12:01:04.647422+00:00"
     },
     {
@@ -12464,5 +12470,5 @@
       "first_detected_at": "2026-11-09T15:00:59.168858+00:00"
     }
   ],
-  "updated_at": "2026-11-09T17:56:05.409045+00:00"
+  "updated_at": "2026-11-09T18:06:32.656748+00:00"
 }

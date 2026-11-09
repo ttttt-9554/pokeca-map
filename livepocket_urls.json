@@ -25434,12 +25434,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/vsjqc": {
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/j4vq_": {
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -25464,8 +25464,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/y1cu9": {
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/vznxg": {
@@ -27783,13 +27783,13 @@
         "https://livepocket.jp/e/j4vq_": {
           "detected_at": "2026-11-09T06:01:03.159958+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/vsjqc": {
           "detected_at": "2026-11-09T06:01:03.159958+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/0zj2n": {
@@ -27812,8 +27812,8 @@
         },
         "https://livepocket.jp/e/y1cu9": {
           "detected_at": "2026-11-09T12:01:04.647422+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ieq29": {
@@ -29600,13 +29600,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/vsjqc": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-09T12:01:34.536655+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-09T18:06:32.656748+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/j4vq_": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-09T12:01:34.536655+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-09T18:06:32.656748+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/c6vdv": {
@@ -29627,6 +29627,11 @@
         "https://livepocket.jp/e/gs4-9": {
           "attempts": 1,
           "last_attempt_at": "2026-11-09T16:36:35.576489+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/y1cu9": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-09T18:06:32.656748+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -36062,7 +36067,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ・メガシンフォニア抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -36073,7 +36078,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "title_observed": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -36128,7 +36133,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "title_observed": "ワンピースカードゲーム ブースターパック 『神の支配【OP18】』抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -41967,7 +41972,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/vsjqc": {
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -41980,7 +41985,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/j4vq_": {
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -42045,7 +42050,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/y1cu9": {
-          "checked_at": "2026-11-09T12:01:34.536655+00:00",
+          "checked_at": "2026-11-09T18:06:32.656748+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
