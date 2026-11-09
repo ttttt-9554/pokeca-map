@@ -1,17 +1,26 @@
 import {readFile, rename, writeFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-import {extract, supportedUrl, STARBOX_HOST} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
+import {extract, supportedUrl, STARBOX_HOST, GEO_HOST} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
 
 const catalogPath = 'other_lottery_public.json';
 const maxPageBytes = 2_000_000;
 const retryInterval = 24 * 60 * 60 * 1000;
 
 async function fetchPage(url) {
-  const response = await fetch(url, {
+  const source = new URL(url);
+  const geo = source.hostname === GEO_HOST;
+  if (geo && !source.pathname.endsWith('/')) source.pathname += '/';
+  const response = await fetch(source, {
     redirect: 'manual',
     headers: {'User-Agent': 'TorecaRadar/1.0', Accept: 'text/html,application/xhtml+xml'},
     signal: AbortSignal.timeout(12_000)
   });
+  if (geo && [403, 429].includes(response.status)) {
+    await response.body?.cancel();
+    const error = new Error('GEO lottery page denied access');
+    error.status = response.status;
+    throw error;
+  }
   if (!response.ok || !/text\/html|application\/xhtml\+xml/i.test(response.headers.get('content-type') || '') ||
       Number(response.headers.get('content-length') || 0) > maxPageBytes || !response.body) {
     await response.body?.cancel();
@@ -43,7 +52,11 @@ async function enrichSite(items, host, source, load, now) {
     let page;
     try {
       page = await load(url);
-    } catch {
+    } catch (error) {
+      if (host === GEO_HOST && [403, 429].includes(error?.status)) {
+        item.geo_last_error = 'source_access_denied';
+        break;
+      }
       continue;
     }
     if (!page) continue;
@@ -55,6 +68,7 @@ async function enrichSite(items, host, source, load, now) {
       external_url_unverified: false,
       [verifiedAt]: now.toISOString()
     });
+    if (host === GEO_HOST) delete item.geo_last_error;
     if (productType) item.pokemon_map_type = productType;
   }
   return checked;
@@ -64,21 +78,33 @@ export function enrichCloudPass(catalog, load = fetchPage, now = new Date()) {
   return enrichSite(catalog.items, 'cloud-pass.jp', 'cloud_pass', load, now);
 }
 
-export function enrichStarbox(catalog, load = fetchPage, now = new Date()) {
+function newestFirst(items) {
   const posted = item => Date.parse(item.discord_posted_at || item.first_detected_at || '') || 0;
-  const newestFirst = [...catalog.items].sort((a, b) => posted(b) - posted(a));
-  return enrichSite(newestFirst, STARBOX_HOST, 'starbox', load, now);
+  return [...items].sort((a, b) => posted(b) - posted(a));
+}
+
+export function enrichStarbox(catalog, load = fetchPage, now = new Date()) {
+  return enrichSite(newestFirst(catalog.items), STARBOX_HOST, 'starbox', load, now);
+}
+
+export function enrichGeo(catalog, load = fetchPage, now = new Date()) {
+  if (catalog.items.some(item => item.geo_last_error === 'source_access_denied' &&
+      now - Date.parse(item.geo_checked_at) < retryInterval)) return 0;
+  return enrichSite(newestFirst(catalog.items), GEO_HOST, 'geo', load, now);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
   // Keep the existing collector entry point for the shared Edge parsers.
-  const [cloudChecked, starboxChecked] = await Promise.all([enrichCloudPass(catalog), enrichStarbox(catalog)]);
-  if (cloudChecked || starboxChecked) {
+  const [cloudChecked, starboxChecked, geoChecked] = await Promise.all([
+    enrichCloudPass(catalog), enrichStarbox(catalog), enrichGeo(catalog)
+  ]);
+  if (cloudChecked || starboxChecked || geoChecked) {
     const tempPath = catalogPath + '.tmp';
     await writeFile(tempPath, JSON.stringify(catalog, null, 2) + '\n', 'utf8');
     await rename(tempPath, catalogPath);
   }
   console.log('Cloud Pass pages checked:', cloudChecked);
   console.log('Starbox lottery pages checked:', starboxChecked);
+  console.log('GEO lottery pages checked:', geoChecked);
 }

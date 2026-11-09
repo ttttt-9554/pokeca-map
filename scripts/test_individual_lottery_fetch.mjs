@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {supportedUrl,extract} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
-import {enrichCloudPass, enrichStarbox} from './cloud_pass_lottery_enrich.mjs';
+import {enrichCloudPass, enrichStarbox, enrichGeo} from './cloud_pass_lottery_enrich.mjs';
 const g='https://docs.google.com/forms/d/e/1FAIpQLSd6O9PhrqOHX4xxcRV4APYy_B_0OyCAW_ZkTa-Rp7htUleUjQ/closedform';
 assert(supportedUrl(g));
 for(const url of ['https://docs.google.com.evil.test/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','http://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','https://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform?foo=1','https://e-yamashiroya.com@localhost/a','https://e-yamashiroya.com/a?next=http://localhost'])assert(!supportedUrl(url),url);
@@ -138,4 +138,52 @@ assert.equal(extract(customPage(ambiguous),custom).application_end_at,undefined)
 const noYear=structuredClone(customData);delete noYear.data.customform[0].close_time;
 assert.equal(extract(customPage(noYear),custom).application_start_at,undefined);
 assert.deepEqual(extract('<script>window.gokuProps={}</script>',custom),{});
-console.log('Individual lottery, Starbox and CustomForm extraction checks passed');
+const geo = 'https://draw.geo-online.co.jp/lottery/133/';
+assert(supportedUrl(geo));
+assert(supportedUrl(geo.slice(0, -1)));
+for (const url of [geo + '?next=https://example.com', geo + '#results',
+  geo.replace('draw.geo-online.co.jp', 'draw.geo-online.co.jp.example.org'),
+  geo.replace('https:', 'http:'), geo.replace('133/', 'login/'), geo.replace('133/', '')]) {
+  assert(!supportedUrl(url), url);
+}
+const geoProduct = 'ポケモンカードゲーム MEGA 拡張パック「見本」';
+const geoPeriod = '<p>応募期間は「11/9(月) 11:00 ～ 11/12(木) 17:59」までとなります。</p>';
+const geoPage = '<h1>ゲオ抽選販売専用サイト</h1><p>2026.11.06</p><h2>' + geoProduct + '</h2>' + geoPeriod +
+  '<dl><dt>対象店舗</dt><dd>全国のゲオ店舗</dd><dt>当選者への連絡日</dt><dd>11月25日(水)</dd>' +
+  '<dt>当選者へのお渡し期間</dt><dd>11/27(金) 開店時～11/29(日) 閉店時</dd></dl>';
+const geoFields = {event_title: geoProduct, product_name: geoProduct, store_name: 'ゲオ', prefecture: '全国',
+  application_start_at: '2026-11-09T11:00:00+09:00', application_end_at: '2026-11-12T17:59:00+09:00',
+  result_announcement_date: '2026-11-25', purchase_start_date: '2026-11-27', purchase_end_date: '2026-11-29',
+  review_category: 'pokemon', product_type: 'pack'};
+assert.deepEqual(extract(geoPage, geo), geoFields);
+assert.deepEqual(extract(geoPage.replace('<p>2026.11.06</p>', '').replace(geoPeriod,
+  '<table><tr><th>抽選受付期間</th><td>2026年11月9日(月) 11:00～11月12日(木) 17:59</td></tr></table>'), geo), geoFields);
+assert.deepEqual(extract(geoPage.replace('2026.11.06', ''), geo), {}, 'Do not infer the year from the fetch date');
+assert.deepEqual(extract(geoPage.replace('応募期間', '購入期間'), geo), {}, 'Purchase dates cannot become the application period');
+assert.deepEqual(extract(geoPage + geoPeriod.replace('17:59', '18:59'), geo), {}, 'Conflicting application periods must not be chosen');
+assert.equal(extract(geoPage.replace('11月25日(水)', '11月25日(水)～11月26日(木) 18:00'), geo).result_announcement_date, '2026-11-26');
+assert.equal(extract(geoPage.replace('11月25日(水)', '11月25日(水)～11月26日(木) 18:00'), geo).result_announcement_time, '18:00');
+assert.equal(extract(geoPage.replace('全国のゲオ店舗', 'ゲオ宇都宮店'), geo).prefecture, undefined);
+assert.equal(extract(geoPage.replace('全国のゲオ店舗', 'ゲオ宇都宮店'), geo).store_name, 'ゲオ宇都宮店');
+assert.equal(extract(geoPage.replace('11:00', ''), geo).application_start_at, undefined);
+assert.deepEqual(extract('<title>Access Denied</title><h1>Access Denied</h1>', geo), {});
+assert.deepEqual(extract(geoPage, geo + '?redirect=https://example.com'), {});
+
+const geoRow = {url: geo, external_url_unverified: true};
+assert.equal(await enrichGeo({items: [geoRow]}, async () => geoPage, now), 1);
+assert.equal(geoRow.official_event_title, geoProduct);
+assert.equal(geoRow.external_url_unverified, false);
+assert.equal(geoRow.pokemon_map_type, 'pack');
+assert.equal(geoRow.geo_verified_at, now.toISOString());
+const deniedGeo = {url: geo, external_url_unverified: true, event_title: '既存データ'};
+const anotherGeo = {url: geo.replace('133', '132'), external_url_unverified: true};
+const deniedCatalog = {items: [deniedGeo, anotherGeo]};
+assert.equal(await enrichGeo(deniedCatalog, async () => {
+  throw Object.assign(new Error('Forbidden'), {status: 403});
+}, now), 1);
+assert.equal(deniedGeo.event_title, '既存データ');
+assert.equal(deniedGeo.external_url_unverified, true);
+assert.equal(deniedGeo.geo_last_error, 'source_access_denied');
+assert.equal(anotherGeo.geo_checked_at, undefined, 'Stop further GEO requests after access denial');
+assert.equal(await enrichGeo(deniedCatalog, () => assert.fail('GEO cooldown ignored'), now), 0);
+console.log('Individual lottery, Starbox, CustomForm and GEO extraction checks passed');

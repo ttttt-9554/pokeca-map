@@ -1,6 +1,7 @@
 // Public page extraction. Only unambiguous, explicitly labelled data is returned.
 export const STARBOX_HOST = 'shoplottery.e-starbox.com';
 export const CUSTOMFORM_HOST = 'customform.jp';
+export const GEO_HOST = 'draw.geo-online.co.jp';
 
 export function supportedUrl(value) {
   try {
@@ -12,6 +13,7 @@ export function supportedUrl(value) {
     if(u.hostname==='famima-online.family.co.jp') return u.pathname==='/item' && /^\?itemCode=\d{10,25}$/.test(u.search);
     if(u.hostname==='cloud-pass.jp') return /^\/pr\/[a-f0-9]{64}\/?$/i.test(u.pathname) && !u.search;
     if(u.hostname===STARBOX_HOST) return u.pathname==='/lottery/entry' && /^\?code=[A-Za-z0-9]{10}$/.test(u.search);
+    if(u.hostname===GEO_HOST) return /^\/lottery\/[1-9]\d{0,8}\/?$/.test(u.pathname) && !u.search;
     if(u.hostname===CUSTOMFORM_HOST) return /^\/form\/input\/\d{1,10}\/?$/.test(u.pathname) &&
       (!u.search || /^\?key=[a-zA-Z0-9_-]{8,64}$/.test(u.search));
     return false;
@@ -293,12 +295,99 @@ function customformFields(html, url) {
   return fields;
 }
 
+function geoScheduleText(value) {
+  const text = value.normalize('NFKC').trim();
+  const quoted = text.match(/^「([^」]+)」/)?.[1] || text;
+  return quoted.replace(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/g, '$1/$2/$3')
+    .replace(/\s+-\s+/g, ' ~ ')
+    .replace(/\s*(?:まで(?:となり.*|です)?|予定(?:です)?|以降(?:順次)?)\s*[。.]?$/, '')
+    .trim();
+}
+
+function geoExplicitDate(value) {
+  const parts = value.match(/^(\d{4})\s*(?:年|\/)\s*(\d{1,2})\s*(?:月|\/)\s*(\d{1,2})(?!\d)/);
+  return parts ? validDate([...parts.slice(1), 0, 0])?.slice(0, 10) : '';
+}
+
+function geoFields(html) {
+  const markup = html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+  const lines = markup.replace(/\r?\n/g, ' ')
+    .replace(/<br\b[^>]*>|<\/(?:div|p|li|dt|dd|th|td|h[1-6])\s*>/gi, '\n')
+    .split('\n').map(plain).filter(Boolean);
+  const labeled = label => {
+    const pattern = new RegExp('^(?:' + label + ')(?=\\s|[:：は】〗≫]|$)\\s*[】〗≫]?\\s*(?:[:：]|は[、,]?)?\\s*(.*)$');
+    return lines.flatMap((line, index) => {
+      const match = line.replace(/^[【〖≪■◆▼●]\s*/, '').match(pattern);
+      return match ? [match[1].trim() || lines[index + 1] || ''] : [];
+    });
+  };
+
+  // Accept a year printed in the period or an explicit publication date.
+  // The fetch date is not evidence for the event's year.
+  const publication = uniqueText(lines.filter(line => /^\d{4}[./-]\d{1,2}[./-]\d{1,2}$/.test(line))
+    .map(line => geoExplicitDate(geoScheduleText(line))));
+  const ranges = (label, anchor) => uniqueText(labeled(label).map(value => {
+    const text = geoScheduleText(value);
+    const reference = geoExplicitDate(text) || anchor;
+    return reference ? starboxScheduleRange(text, reference).join('|') : '';
+  }));
+  const period = ranges('抽選応募期間|抽選受付期間|申込期間|応募期間|受付期間', publication);
+  if (!period) return {};
+  const [start, end] = period.split('|');
+  if (start >= end) return {};
+
+  const productLabel = uniqueText(labeled('抽選商品(?:名)?|対象商品(?:名)?|商品名')
+    .map(value => value.replace(/^[・●]\s*/, '').trim()).filter(value => value.length >= 4 && value.length <= 200));
+  const subject = ['h1', 'h2', 'h3', 'title'].map(tag => uniqueText(tagContents(markup, tag)
+    .map(value => plain(value).replace(/\s*(?:[|｜]|\s-\s)\s*(?:ゲオ|GEO).*$/i, ''))
+    .filter(value => value.length <= 200 && /ポケモンカード|ポケカ|ONE\s*PIECE|ワンピースカード|遊戯王|デュエル[・･]マスターズ/i.test(value))))
+    .find(Boolean);
+  const title = subject || productLabel;
+  if (!title) return {};
+  const product = productLabel || title.replace(/^(?:[【〖]抽選販売[】〗]\s*)/, '')
+    .replace(/\s*(?:の)?(?:購入権)?抽選(?:販売|受付|応募)?(?:のお知らせ)?\s*$/, '').trim();
+  const fields = {event_title: title, store_name: 'ゲオ'};
+  if (product) fields.product_name = product;
+  if (start.length > 10) fields.application_start_at = start + ':00+09:00';
+  if (end.length > 10) fields.application_end_at = end + ':00+09:00';
+
+  const area = uniqueText(labeled('対象店舗|実施店舗|販売店舗|受取店舗|受け取り店舗|対象地域'));
+  if (/^全国(?:$|の|\s)/.test(area)) fields.prefecture = '全国';
+  else if (/^(?:ゲオ|GEO)\s*[^、,／/・]{1,70}店$/i.test(area)) fields.store_name = area;
+
+  const anchor = end.slice(0, 10);
+  const announced = uniqueText(labeled('当選者への連絡日|当選(?:結果|発表)(?:日時|日|期間)?|抽選結果(?:の)?発表(?:日時|日|期間)?|結果発表(?:日時|日|期間)?')
+    .map(value => {
+      const text = geoScheduleText(value).replace(/[~〜～]\s*$/, '').trim();
+      return /[~〜～–—]|から/.test(text) ? starboxScheduleRange(text, anchor)[1] : starboxSchedulePoint(text, anchor);
+    }));
+  if (announced) {
+    fields.result_announcement_date = announced.slice(0, 10);
+    if (announced.length > 10) fields.result_announcement_time = announced.slice(11);
+  }
+  const purchase = ranges('当選者へのお渡し期間|当選者購入期間|購入期間|販売期間|お渡し期間|受け取り期間|受取期間', anchor);
+  if (purchase) {
+    const [first, last] = purchase.split('|');
+    fields.purchase_start_date = first.slice(0, 10);
+    fields.purchase_end_date = last.slice(0, 10);
+    if (first.length > 10) fields.purchase_start_time = first.slice(11);
+    if (last.length > 10) fields.purchase_end_time = last.slice(11);
+  }
+  if (/ポケモンカード|ポケカ/i.test(title + ' ' + product)) fields.review_category = 'pokemon';
+  else if (/ONE\s*PIECE|ワンピースカード/i.test(title + ' ' + product)) fields.review_category = 'onepiece';
+  else if (/遊戯王/.test(title + ' ' + product)) fields.review_category = 'yugioh';
+  const pack = /拡張パック|ブースターパック/.test(product), deck = /デッキ/.test(product);
+  if (pack || deck) fields.product_type = pack && deck ? 'pack/deck' : pack ? 'pack' : 'deck';
+  return fields;
+}
+
 export function extract(html,url){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
   if (u.hostname === STARBOX_HOST) return supportedUrl(url) ? starboxFields(html) : {};
   if (u.hostname === CUSTOMFORM_HOST) return supportedUrl(url) ? customformFields(html, url) : {};
+  if (u.hostname === GEO_HOST) return supportedUrl(url) ? geoFields(html) : {};
   const raw=html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/i)?.[1]||html.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/i)?.[1]||'';
   const title=plain(raw).replace(/\s*[|｜]\s*(?:ファミマオンライン|ヤマシロヤ|セブンネットショッピング).*$/,'').trim();
   if(title.length>=5&&title.length<=200&&/抽選/.test(title)&&!/(?:受付終了|Google フォーム|closed form)/i.test(title))result.event_title=title;
