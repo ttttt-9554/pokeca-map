@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-09T04:30:56.234516+00:00",
-  "unique_livepocket_urls": 736,
+  "collected_at": "2026-11-09T06:01:01.231706+00:00",
+  "unique_livepocket_urls": 739,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12232,7 +12232,90 @@
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-09T04:30:58.622414+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/j4vq_",
+      "discord_posted_at": "2026-11-09T06:00:16.241000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/j4vq_",
+      "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "application_end_at": "2026-11-11T21:00:00+09:00",
+      "application_start_at": "2026-11-09T10:30:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA TRADING CARD錦糸町",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-17",
+      "purchase_start_time": "10:30",
+      "purchase_end_date": "2026-11-22",
+      "purchase_end_time": "21:00",
+      "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/c6vdv",
+      "discord_posted_at": "2026-11-09T06:00:16.241000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/c6vdv",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売",
+      "application_end_at": "2026-11-11T22:00:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売",
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-16",
+      "purchase_end_date": "2026-11-18",
+      "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/vsjqc",
+      "discord_posted_at": "2026-11-09T06:00:16.241000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/vsjqc",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ・メガシンフォニア抽選販売",
+      "application_end_at": "2026-11-14T22:00:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "トレカエース下館店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース下館店",
+      "prefecture": "茨城県",
+      "pokemon_map_match": "メガシンフォニア",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ・メガシンフォニア抽選販売",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-19",
+      "purchase_end_date": "2026-11-20",
+      "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
     }
   ],
-  "updated_at": "2026-11-09T05:51:01.225575+00:00"
+  "updated_at": "2026-11-09T06:01:32.453574+00:00"
 }
