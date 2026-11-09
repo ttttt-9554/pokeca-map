@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-09T10:31:00.915045+00:00",
-  "unique_livepocket_urls": 742,
+  "collected_at": "2026-11-09T12:01:01.021325+00:00",
+  "unique_livepocket_urls": 743,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12258,6 +12258,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
       "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
     },
     {
@@ -12283,6 +12285,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売",
       "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
     },
     {
@@ -12308,6 +12312,8 @@
       "pokemon_map_match": "メガシンフォニア",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ・メガシンフォニア抽選販売",
       "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
     },
     {
@@ -12371,7 +12377,31 @@
       "store_location_url": "https://livepocket.jp/e/gs4-9",
       "result_announcement_date": "2026-11-17",
       "first_detected_at": "2026-11-09T10:31:03.473751+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/y1cu9",
+      "discord_posted_at": "2026-11-09T12:00:17.136000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/y1cu9",
+      "event_title": "ワンピースカードゲーム ブースターパック 『神の支配【OP18】』抽選販売受付",
+      "application_end_at": "2026-11-15T23:00:00+09:00",
+      "application_start_at": "2026-11-09T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "トレカエース春日部店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "トレカエース春日部店",
+      "prefecture": "埼玉県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 『神の支配【OP18】』抽選販売受付",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-09T12:01:04.647422+00:00"
     }
   ],
-  "updated_at": "2026-11-09T11:50:59.748767+00:00"
+  "updated_at": "2026-11-09T12:01:34.536655+00:00"
 }
