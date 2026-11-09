@@ -25454,7 +25454,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/f98e5": {
-          "checked_at": "2026-11-09T14:41:26.748785+00:00",
+          "checked_at": "2026-11-09T20:46:27.685884+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -27801,7 +27801,7 @@
         "https://livepocket.jp/e/f98e5": {
           "detected_at": "2026-11-09T08:31:00.121966+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-09T14:41:26.748785+00:00",
+          "checked_at": "2026-11-09T20:46:27.685884+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/gs4-9": {
@@ -29620,8 +29620,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/f98e5": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-09T14:41:26.748785+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-09T20:46:27.685884+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/gs4-9": {
@@ -36121,7 +36121,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T14:41:26.748785+00:00",
+          "checked_at": "2026-11-09T20:46:27.685884+00:00",
           "title_observed": "ONE PIECEカードゲーム 神の支配 OP18 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -42034,7 +42034,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/f98e5": {
-          "checked_at": "2026-11-09T14:41:26.748785+00:00",
+          "checked_at": "2026-11-09T20:46:27.685884+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
