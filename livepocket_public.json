@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-09T06:01:01.231706+00:00",
-  "unique_livepocket_urls": 739,
+  "collected_at": "2026-11-09T07:00:55.270109+00:00",
+  "unique_livepocket_urls": 740,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12309,7 +12309,31 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-09T06:01:03.159958+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/0zj2n",
+      "discord_posted_at": "2026-11-09T07:00:06.452000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/0zj2n",
+      "event_title": "ワンピースカードゲーム ブースターパック 神の支配 抽選販売",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "ブックエースTSUTAYAイオンタウン水戸南店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "ブックエースTSUTAYAイオンタウン水戸南店",
+      "prefecture": "茨城県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 神の支配 抽選販売",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-09T07:00:57.635065+00:00"
     }
   ],
-  "updated_at": "2026-11-09T06:51:02.727996+00:00"
+  "updated_at": "2026-11-09T07:01:25.102297+00:00"
 }
