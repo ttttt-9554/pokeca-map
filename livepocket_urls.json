@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-09T03:00:55.897611+00:00",
+  "collected_at": "2026-11-09T04:30:56.234516+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 733,
+  "unique_livepocket_urls": 736,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -21441,33 +21441,139 @@
       "store_name": "文教堂書店浦安西友店",
       "prefecture": "千葉県",
       "result_announcement_date": "2026-11-16"
+    },
+    {
+      "url": "https://livepocket.jp/e/5b8dz",
+      "discord_message_id": "1569207427327328357",
+      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り6日7時間）\nhttps://livepocket.jp/e/5b8dz\n\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り6日7時間）\nhttps://livepocket.jp/e/didu0\n\n📍埼玉県\nTSUTAYA17号北浦和店\n受付終了: 11/11 22:00（残り2日8時間）\nhttps://livepocket.jp/e/f56_k",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/5b8dz",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "application_start_at": "2026-11-09T13:00:00+09:00",
+      "stores": [
+        {
+          "name": "文教堂書店南大沢店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "文教堂書店南大沢店",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-18"
+    },
+    {
+      "url": "https://livepocket.jp/e/didu0",
+      "discord_message_id": "1569207427327328357",
+      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り6日7時間）\nhttps://livepocket.jp/e/5b8dz\n\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り6日7時間）\nhttps://livepocket.jp/e/didu0\n\n📍埼玉県\nTSUTAYA17号北浦和店\n受付終了: 11/11 22:00（残り2日8時間）\nhttps://livepocket.jp/e/f56_k",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/didu0",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "application_start_at": "2026-11-09T13:00:00+09:00",
+      "stores": [
+        {
+          "name": "文教堂書店南大沢店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "文教堂書店南大沢店",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-18"
+    },
+    {
+      "url": "https://livepocket.jp/e/f56_k",
+      "discord_message_id": "1569207427327328357",
+      "discord_posted_at": "2026-11-09T04:30:05.139000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り6日7時間）\nhttps://livepocket.jp/e/5b8dz\n\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り6日7時間）\nhttps://livepocket.jp/e/didu0\n\n📍埼玉県\nTSUTAYA17号北浦和店\n受付終了: 11/11 22:00（残り2日8時間）\nhttps://livepocket.jp/e/f56_k",
+      "details_source": null,
+      "product_name": "ブースターパック 神の支配",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f56_k",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ONE PIECE CARD GAME「ブースターパック 神の支配」抽選販売",
+      "application_end_at": "2026-11-11T22:00:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA17号北浦和店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA17号北浦和店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-16",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "10:00",
+      "purchase_end_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 562,
-    "no_structured_details": 171
+    "no_structured_details": 174
   },
   "field_counts": {
-    "store_name": 330,
-    "prefecture": 283,
-    "event_title": 431,
+    "store_name": 333,
+    "prefecture": 286,
+    "event_title": 434,
     "event_date": 1,
     "product_name": 115,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 697,
-    "application_start_at": 694,
-    "stores_events": 330
+    "application_end_at": 700,
+    "application_start_at": 697,
+    "stores_events": 333
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569184803583164457"
+      "1551580466266644552": "1569207427327328357"
     },
     "last_run": {
-      "checked_at": "2026-11-09T03:00:55.897611+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-09T04:30:56.234516+00:00",
+      "new_urls": 3,
       "original_urls": 733,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -21734,7 +21840,8 @@
         "1568814845502038198": "2026-11-08T02:30:56.127960+00:00",
         "1568913005964427286": "2026-11-08T09:05:56.244305+00:00",
         "1568980944214564950": "2026-11-08T13:35:57.654981+00:00",
-        "1569162128831553677": "2026-11-09T01:30:57.716559+00:00"
+        "1569162128831553677": "2026-11-09T01:30:57.716559+00:00",
+        "1569207427327328357": "2026-11-09T04:30:57.420755+00:00"
       },
       "checked_search_urls": {}
     },
@@ -24944,6 +25051,21 @@
           "checked_at": "2026-11-09T01:31:28.568835+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/f56_k": {
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/didu0": {
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/5b8dz": {
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -27216,6 +27338,24 @@
           "detected_at": "2026-11-09T01:30:58.790686+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/5b8dz": {
+          "detected_at": "2026-11-09T04:30:58.622414+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/didu0": {
+          "detected_at": "2026-11-09T04:30:58.622414+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/f56_k": {
+          "detected_at": "2026-11-09T04:30:58.622414+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
           "http_status": null
         }
       },
@@ -35358,6 +35498,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/f56_k": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "title_observed": "ONE PIECE CARD GAME「ブースターパック 神の支配」抽選販売",
+          "genre": "onepiece",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/didu0": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "title_observed": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/5b8dz": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -41107,6 +41280,45 @@
         },
         "https://livepocket.jp/e/hloou": {
           "checked_at": "2026-11-09T01:31:28.568835+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/f56_k": {
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/didu0": {
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/5b8dz": {
+          "checked_at": "2026-11-09T04:31:26.308480+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
