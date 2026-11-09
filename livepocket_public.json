@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-09T15:00:57.051580+00:00",
-  "unique_livepocket_urls": 746,
+  "collected_at": "2026-11-09T22:05:56.288429+00:00",
+  "unique_livepocket_urls": 747,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12462,7 +12462,31 @@
       "purchase_end_date": "2026-11-24",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-09T15:00:59.168858+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/52-_e",
+      "discord_posted_at": "2026-11-09T22:00:04.362000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/52-_e",
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18 抽選販売",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-09T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "ブックエース茨大前店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "ブックエース茨大前店",
+      "prefecture": "茨城県",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18 抽選販売",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-09T22:05:58.268130+00:00"
     }
   ],
-  "updated_at": "2026-11-09T21:56:06.519930+00:00"
+  "updated_at": "2026-11-09T22:06:22.362069+00:00"
 }
