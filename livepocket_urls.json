@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-09T13:00:57.564554+00:00",
+  "collected_at": "2026-11-09T15:00:57.051580+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 745,
+  "unique_livepocket_urls": 746,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -21773,7 +21773,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/y1cu9",
       "field_sources": {
@@ -21809,7 +21809,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ieq29",
       "field_sources": {
@@ -21845,7 +21845,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/vznxg",
       "field_sources": {
@@ -21870,34 +21870,70 @@
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/ntly8",
+      "discord_message_id": "1569366033230471339",
+      "discord_posted_at": "2026-11-09T15:00:19.733000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 0時まとめ（期限・地域除外済）】\n\n🔁 再通知\n📍東京都\n文教堂書店南大沢店\n受付終了: 11/15 21:00（残り5日20時間）\nhttps://livepocket.jp/e/didu0\n\n🔁 再通知\n📍東京都\nTSUTAYA TRADING CARD錦糸町\n受付終了: 11/11 21:00（残り1日20時間）\nhttps://livepocket.jp/e/j4vq_\n\n🔁 再通知\n📍東京都\nキントレ竹の塚店\n受付終了: 11/11 21:59（残り1日21時間）\nhttps://livepocket.jp/e/gs4-9\n\n🔁 再通知\n📍千葉県\n文教堂書店浦安西友店\n受付終了: 11/15 20:30（残り5日20時間）\nhttps://livepocket.jp/e/hloou\n\n📍千葉県\nTSUTAYA北習志野駅前店\n受付終了: 11/13 23:59（残り3日23時間）\nhttps://livepocket.jp/e/ieq29\n\n🔁 再通知\n📍埼玉県\nTSUTAYA17号北浦和店\n受付終了: 11/11 22:00（残り1日21時間）\nhttps://livepocket.jp/e/f56_k\n\n🔁 再通知\n📍埼玉県\nトレカエース春日部店\n受付終了: 11/15 23:00（残り5日22時間）\nhttps://livepocket.jp/e/y1cu9\n\n📍埼玉県\nTSUTAYA加須店\n受付終了: 11/12 22:00（残り2日21時間）\nhttps://livepocket.jp/e/ntly8\n\n🔁 再通知\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/11 22:00（残り1日21時間）\nhttps://livepocket.jp/e/c6vdv\n\n🔁 再通知\n📍茨城県\nトレカエース下館店\n受付終了: 11/14 22:00（残り4日21時間）\nhttps://livepocket.jp/e/vsjqc\n\n🔁 再通知\n📍茨城県\nブックエースTSUTAYAイオンタウン水戸南店\n受付終了: 11/15 21:00（残り5日20時間）\nhttps://livepocket.jp/e/0zj2n\n\n🔁 再通知\n📍茨城県\nトレカエース TSUTAYAデイズタウンつくば\n受付終了: 11/15 22:00（残り5日21時間）\nhttps://livepocket.jp/e/f98e5\n\n📍茨城県\nトレカエース新取手店\n受付終了: 11/15 22:00（残り5日21時間）\nhttps://livepocket.jp/e/vznxg",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ntly8",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカードゲーム 「神の支配」抽選受付",
+      "application_end_at": "2026-11-12T22:00:00+09:00",
+      "application_start_at": "2026-11-09T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA加須店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA加須店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-24"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 571,
-    "no_structured_details": 174
+    "parsed": 574,
+    "no_structured_details": 172
   },
   "field_counts": {
-    "store_name": 342,
-    "prefecture": 295,
-    "event_title": 443,
+    "store_name": 343,
+    "prefecture": 296,
+    "event_title": 444,
     "event_date": 1,
     "product_name": 116,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 709,
-    "application_start_at": 706,
-    "stores_events": 342
+    "application_end_at": 710,
+    "application_start_at": 707,
+    "stores_events": 343
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569335779522781434"
+      "1551580466266644552": "1569366033230471339"
     },
     "last_run": {
-      "checked_at": "2026-11-09T13:00:57.564554+00:00",
-      "new_urls": 2,
-      "original_urls": 743,
+      "checked_at": "2026-11-09T15:00:57.051580+00:00",
+      "new_urls": 1,
+      "original_urls": 745,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -22170,7 +22206,8 @@
         "1569267819651014726": "2026-11-09T08:30:58.649651+00:00",
         "1569298020376383560": "2026-11-09T10:31:02.191025+00:00",
         "1569320723854401757": "2026-11-09T12:01:03.760276+00:00",
-        "1569335779522781434": "2026-11-09T13:00:58.875561+00:00"
+        "1569335779522781434": "2026-11-09T13:00:58.875561+00:00",
+        "1569366033230471339": "2026-11-09T15:00:58.089031+00:00"
       },
       "checked_search_urls": {}
     },
@@ -25440,6 +25477,11 @@
           "checked_at": "2026-11-09T13:01:29.498608+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/ntly8": {
+          "checked_at": "2026-11-09T15:01:29.645459+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -27784,6 +27826,12 @@
           "detected_at": "2026-11-09T13:01:00.207720+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-09T13:01:29.498608+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/ntly8": {
+          "detected_at": "2026-11-09T15:00:59.168858+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T15:01:29.645459+00:00",
           "http_status": null
         }
       },
@@ -36103,6 +36151,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/ntly8": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T15:01:29.645459+00:00",
+          "title_observed": "ワンピースカードゲーム 「神の支配」抽選受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -42008,6 +42067,19 @@
         },
         "https://livepocket.jp/e/ieq29": {
           "checked_at": "2026-11-09T13:01:29.498608+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/ntly8": {
+          "checked_at": "2026-11-09T15:01:29.645459+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
