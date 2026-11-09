@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-09T09:00:59.450541+00:00",
-  "unique_livepocket_urls": 741,
+  "collected_at": "2026-11-09T10:31:00.915045+00:00",
+  "unique_livepocket_urls": 742,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12187,6 +12187,8 @@
       "store_location_url": "https://livepocket.jp/e/5b8dz",
       "result_announcement_date": "2026-11-18",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
       "first_detected_at": "2026-11-09T04:30:58.622414+00:00"
     },
     {
@@ -12207,6 +12209,8 @@
       "store_location_url": "https://livepocket.jp/e/didu0",
       "result_announcement_date": "2026-11-18",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
       "first_detected_at": "2026-11-09T04:30:58.622414+00:00"
     },
     {
@@ -12352,7 +12356,27 @@
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-09T08:31:00.121966+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/gs4-9",
+      "discord_posted_at": "2026-11-09T10:30:04.205000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gs4-9",
+      "event_title": "【竹の塚店】『神の支配』BOX 抽選予約",
+      "application_end_at": "2026-11-11T21:59:00+09:00",
+      "application_start_at": "2026-11-07T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "キントレ竹の塚店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "キントレ竹の塚店",
+      "prefecture": "東京都",
+      "official_event_title": "【竹の塚店】『神の支配』BOX 抽選予約",
+      "result_announcement_date": "2026-11-17",
+      "first_detected_at": "2026-11-09T10:31:03.473751+00:00"
     }
   ],
-  "updated_at": "2026-11-09T10:21:04.597317+00:00"
+  "updated_at": "2026-11-09T10:31:30.357292+00:00"
 }

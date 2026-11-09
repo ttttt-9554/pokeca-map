@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-09T09:00:59.450541+00:00",
+  "collected_at": "2026-11-09T10:31:00.915045+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 741,
+  "unique_livepocket_urls": 742,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -21728,33 +21728,67 @@
       "prefecture": "茨城県",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/gs4-9",
+      "discord_message_id": "1569298020376383560",
+      "discord_posted_at": "2026-11-09T10:30:04.205000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nキントレ竹の塚店\n受付終了: 11/11 21:59（残り2日2時間）\nhttps://livepocket.jp/e/gs4-9",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gs4-9",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【竹の塚店】『神の支配』BOX 抽選予約",
+      "application_end_at": "2026-11-11T21:59:00+09:00",
+      "application_start_at": "2026-11-07T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "キントレ竹の塚店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "キントレ竹の塚店",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-17"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 570,
-    "no_structured_details": 171
+    "no_structured_details": 172
   },
   "field_counts": {
-    "store_name": 338,
-    "prefecture": 291,
-    "event_title": 439,
+    "store_name": 339,
+    "prefecture": 292,
+    "event_title": 440,
     "event_date": 1,
     "product_name": 116,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 705,
-    "application_start_at": 702,
-    "stores_events": 338
+    "application_end_at": 706,
+    "application_start_at": 703,
+    "stores_events": 339
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569275405620219986"
+      "1551580466266644552": "1569298020376383560"
     },
     "last_run": {
-      "checked_at": "2026-11-09T09:00:59.450541+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-09T10:31:00.915045+00:00",
+      "new_urls": 1,
       "original_urls": 741,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -22025,7 +22059,8 @@
         "1569207427327328357": "2026-11-09T04:30:57.420755+00:00",
         "1569230123134357625": "2026-11-09T06:01:02.160252+00:00",
         "1569245181570588792": "2026-11-09T07:00:56.387287+00:00",
-        "1569267819651014726": "2026-11-09T08:30:58.649651+00:00"
+        "1569267819651014726": "2026-11-09T08:30:58.649651+00:00",
+        "1569298020376383560": "2026-11-09T10:31:02.191025+00:00"
       },
       "checked_search_urls": {}
     },
@@ -25242,13 +25277,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/didu0": {
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/5b8dz": {
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/vsjqc": {
@@ -25273,6 +25308,11 @@
         },
         "https://livepocket.jp/e/f98e5": {
           "checked_at": "2026-11-09T08:31:28.681242+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gs4-9": {
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "status": "checked_title_deadline",
           "http_status": null
         }
@@ -27551,14 +27591,14 @@
         },
         "https://livepocket.jp/e/5b8dz": {
           "detected_at": "2026-11-09T04:30:58.622414+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/didu0": {
           "detected_at": "2026-11-09T04:30:58.622414+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/f56_k": {
@@ -27595,6 +27635,12 @@
           "detected_at": "2026-11-09T08:31:00.121966+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-09T08:31:28.681242+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gs4-9": {
+          "detected_at": "2026-11-09T10:31:03.473751+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "http_status": null
         }
       },
@@ -29350,6 +29396,16 @@
         "https://livepocket.jp/e/hloou": {
           "attempts": 1,
           "last_attempt_at": "2026-11-09T07:41:17.325040+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/didu0": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-09T10:31:30.357292+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/5b8dz": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-09T10:31:30.357292+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -35763,7 +35819,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "title_observed": "ONE PIECEカードゲーム ONE PIECE HEROINES PRECIOUS BOX 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -35774,7 +35830,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -35832,6 +35888,17 @@
           "checked_at": "2026-11-09T08:31:28.681242+00:00",
           "title_observed": "ONE PIECEカードゲーム 神の支配 OP18 抽選販売",
           "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/gs4-9": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
+          "title_observed": "【竹の塚店】『神の支配』BOX 抽選予約",
+          "genre": "",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
@@ -41609,7 +41676,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/didu0": {
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -41622,7 +41689,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/5b8dz": {
-          "checked_at": "2026-11-09T04:31:26.308480+00:00",
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -41688,6 +41755,19 @@
         },
         "https://livepocket.jp/e/f98e5": {
           "checked_at": "2026-11-09T08:31:28.681242+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/gs4-9": {
+          "checked_at": "2026-11-09T10:31:30.357292+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
