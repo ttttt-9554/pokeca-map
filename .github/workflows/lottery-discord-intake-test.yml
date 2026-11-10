@@ -1,0 +1,35 @@
+name: Lottery Discord Intake Checks
+'on':
+  push:
+    paths:
+      - 'app.js'
+      - 'index.html'
+      - 'supabase/functions/lottery-discord-intake/**'
+      - 'scripts/test_lottery_public_poll.cjs'
+      - 'scripts/test_lottery_discord_intake.mjs'
+      - 'scripts/test_lottery_discord_preview.cjs'
+      - 'scripts/test_lottery_tab_login_visibility.cjs'
+      - '.github/workflows/lottery-discord-intake-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate intake and existing card behavior
+        run: |
+          node --check app.js
+          node scripts/test_lottery_public_poll.cjs
+          node scripts/test_lottery_discord_intake.mjs
+          node scripts/test_lottery_discord_preview.cjs
+          node scripts/test_lottery_tab_login_visibility.cjs
+          node scripts/test_lottery_application_return.cjs
+          node scripts/test_lottery_product_resolution.cjs
+          node scripts/test_lottery_summary.cjs
+          node scripts/test_refresh_tab_auth_restore.cjs

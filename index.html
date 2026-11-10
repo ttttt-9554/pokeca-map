@@ -33,6 +33,8 @@
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
     #lpTrackerPanel .lp-track-product-group > summary { cursor: pointer; overflow-wrap: anywhere; }
     [hidden] { display: none !important; }
+    #lpDiscordIntakeLinks { max-height: 18rem; overflow: auto; }
+    #lpDiscordIntakeLinks li { overflow-wrap: anywhere; }
     .store-category-group { border: 0; padding: 0; margin: 16px 0 20px; min-width: 0; }
     .store-category-group legend { font-weight: 700; margin-bottom: 12px; }
     .store-category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -777,6 +779,10 @@ nav[aria-label="メインメニュー"] {
       </div>
       <p id="lpLoadStatus" class="hint" role="status" aria-live="polite">抽選情報はタブを開くと読み込みます。</p>
       <div id="lpSummary" class="lp-summary" role="group" aria-label="抽選の件数一覧" aria-live="polite"></div>
+      <details id="lpDiscordIntake" class="lp-store-details" hidden open>
+        <summary>Discord新着・詳細確認中（<span id="lpDiscordIntakeCount">0件</span>）</summary>
+        <ul id="lpDiscordIntakeLinks" aria-live="polite"></ul>
+      </details>
       <details id="lpOnsiteArchive" aria-label="現地対応アーカイブ">
         <summary>📚 現地対応アーカイブ（<span id="lpOnsiteArchiveCount">0件</span>）</summary>
         <div class="lp-onsite-archive-body">
@@ -1964,7 +1970,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261110-lottery-product-master-v1';
+      ? token : '20261111-lottery-discord-intake-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

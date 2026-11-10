@@ -480,6 +480,10 @@
     });
     supabaseClient.channel('pokeca-lottery-card-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_CARD_TABLE},()=>lpCardRefresh(true))
+      .on('postgres_changes',{event:'INSERT',schema:'public',table:LP_DISCORD_INTAKE_TABLE},()=>{
+        if(document.visibilityState==='visible'&&$('lotteryView')?.classList.contains('active'))
+          void lpDiscordIntakeRefresh();
+      })
       .subscribe();
     supabaseClient.channel('pokeca-app-lottery-updates')
       .on('postgres_changes',{event:'*',schema:'public',table:LP_APP_TABLE},()=>lpAppRefresh(true))
@@ -837,7 +841,7 @@
       }
     }
     if (tab === 'map') refreshMap();
-    if (tab === 'lottery') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); globalThis.window?.TorecaSalesReference?.refresh?.(); }
+    if (tab === 'lottery') { loadLotteryEvents(); void lpDiscordIntakeRefresh(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); refreshLotteryOnsiteArchive(); globalThis.window?.TorecaSalesReference?.refresh?.(); }
     if (tab === 'appLottery') { loadLotteryEvents(); lpAppRefresh(true); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); }
     if (tab === 'lotteryManage') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpCardRefresh(); refreshLotteryTrackerForAccount(); refreshLotteryOnsiteReports(); renderLotteryTrackerSummary(); }
     if (tab === 'lotteryResults') { loadLotteryEvents(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); lpAppRefresh(); lpResultsRefresh(true); lpResultsRender(); }
@@ -3317,6 +3321,8 @@
   // ========================================
   const LP_JSON_URL = './livepocket_public.json';
   const LP_OTHER_JSON_URL = './other_lottery_public.json';
+  const LP_RAW_CATALOG = 'https://raw.githubusercontent.com/ttttt-9554/pokeca-map/main/';
+  const LP_DISCORD_INTAKE_TABLE = 'lottery_discord_intake_v1';
   const LP_EXT_OVERRIDE_TABLE = 'lottery_external_event_overrides';
   let lpExtOverrides = new Map();
   let lpExtReady = false,lpExtError='',lpExtLastFetch=0,lpExtLoading=null;
@@ -3351,8 +3357,8 @@
   let lpCloudError = '';
   let lotteryLastFetch = 0;
   let lotteryLoading = null;
-  let lotteryPublicRevision = '';
-  let lotteryPublicChecking = false;
+  const lotteryPublicCatalogs = new Map();
+  let lotteryDiscordIntake = [], lotteryDiscordIntakeLoading = null;
   let lotteryVisibleLimit = LP_PAGE_SIZE;
   let lotteryTimer = null;
   let lotteryCountdownTimer = null;
@@ -4772,67 +4778,88 @@
   }
 
   function lotteryPublicVersion(data) {
-    return typeof data?.updated_at === 'string' && data.updated_at ? data.updated_at :
-      typeof data?.collected_at === 'string' ? data.collected_at : '';
+    return Date.parse(data?.updated_at || data?.collected_at || '');
   }
 
-  // Check the published catalog once per visible minute. Unchanged catalogs
-  // do not cause extra Supabase reads or redraw the user's current screen.
-  async function checkLotteryPublicUpdate() {
-    if (lotteryPublicChecking || lotteryLoading || !lotteryPublicRevision) return;
-    lotteryPublicChecking = true;
-    try {
-      const response = await fetch(LP_JSON_URL + '?refresh=' + Date.now(), {cache:'no-store'});
-      if (!response.ok) return;
-      const data = await response.json();
-      if (!data || !Array.isArray(data.items)) return;
-      const revision = lotteryPublicVersion(data);
-      if (revision && revision !== lotteryPublicRevision) await loadLotteryEvents(true);
-    } catch (_) {
-      // The normal five-minute/manual refresh remains available on failure.
-    } finally { lotteryPublicChecking = false; }
+  async function fetchLotteryPublicCatalog(path, quiet = false) {
+    const previous = lotteryPublicCatalogs.get(path);
+    const stamp = quiet ? '?minute=' + Math.floor(Date.now() / 60000) : '?refresh=' + Date.now();
+    // Main's generated catalogs are available before the Pages deployment.
+    // A local preview or fork keeps using its own same-origin files.
+    const useRaw = window.location.origin === 'https://ttttt-9554.github.io';
+    const sources = useRaw ? [LP_RAW_CATALOG + path.slice(2), path] : [path];
+    let failure;
+    for (const url of sources) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 7000);
+      try {
+        const response = await fetch(url + stamp, {cache:'no-store', signal:controller.signal});
+        if (!response.ok) throw Error('HTTP ' + response.status);
+        const body = await response.text();
+        if (body === previous?.body) return previous;
+        const data = JSON.parse(body);
+        if (!Array.isArray(data?.items)) throw Error('公開JSONの形式が正しくありません');
+        const version = lotteryPublicVersion(data), oldVersion = lotteryPublicVersion(previous?.data);
+        if (Number.isFinite(oldVersion) && (!Number.isFinite(version) || version < oldVersion ||
+            (version === oldVersion && previous.url !== path && url === path))) return previous;
+        return {data, body, url};
+      } catch (error) {
+        failure = error;
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    throw failure;
   }
 
-  async function loadLotteryEvents(force = false) {
+  function checkLotteryPublicUpdate() {
+    return loadLotteryEvents(true, true);
+  }
+
+  async function loadLotteryEvents(force = false, quiet = false) {
+    if (lotteryLoading) return lotteryLoading;
     if (!force && lotteryItems.length && Date.now() - lotteryLastFetch < LP_REFRESH_MS) {
       renderLottery(); return;
     }
-    if (lotteryLoading) return lotteryLoading;
     const button = $('lpRefresh');
     const status = $('lpLoadStatus');
-    button.disabled = true;
-    status.textContent = '抽選情報を取得しています…';
+    if (!quiet) {
+      button.disabled = true;
+      status.textContent = '抽選情報を取得しています…';
+    }
     lotteryLoading = (async () => {
       try {
-        // Cache-busting query avoids older Pages/CDN/browser copies after a new commit.
-        const response = await fetch(LP_JSON_URL + '?refresh=' + Date.now(), {cache:'no-store'});
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const data = await response.json();
-        if (!data || !Array.isArray(data.items)) throw new Error('公開JSONの形式が正しくありません');
-        // The LivePocket source remains authoritative for its own event URLs.
-        // External links are metadata-only. Never crawl untrusted third-party URLs.
-        let external=[],externalError='';
-        try{
-          const other=await fetch(LP_OTHER_JSON_URL+'?refresh='+Date.now(),{cache:'no-store'});
-          if(!other.ok)throw Error('HTTP '+other.status);
-          const more=await other.json();
-          if(!more||!Array.isArray(more.items))throw Error('外部URLデータ形式不正');
-          external=more.items.filter(x=>x&&safeLotteryUrl(x.url)&&
-            !isLivePocketEventUrl(x.url));
-        }catch(err){externalError=String(err?.message||err);}
+        const feeds = [LP_JSON_URL, LP_OTHER_JSON_URL];
+        const results = await Promise.allSettled(feeds.map(path => fetchLotteryPublicCatalog(path, quiet)));
+        let changed = false;
+        const failed = [];
+        results.forEach((result, index) => {
+          const path = feeds[index];
+          if (result.status === 'rejected') failed.push(index === 0 ? 'LivePocket' : '外部URL');
+          else if (result.value !== lotteryPublicCatalogs.get(path)) {
+            lotteryPublicCatalogs.set(path, result.value);
+            changed = true;
+          }
+        });
+        if (quiet && !changed) return;
+        if (!lotteryPublicCatalogs.size) throw Error('公開URL一覧に接続できません');
+        const data = lotteryPublicCatalogs.get(LP_JSON_URL)?.data;
+        const external = (lotteryPublicCatalogs.get(LP_OTHER_JSON_URL)?.data.items || [])
+          .filter(item => item && !isLivePocketEventUrl(item.url));
         const seen=new Set(),clean=[];
-        for(const item of [...data.items,...external]){
+        for(const item of [...(data?.items || []),...external]){
           if(!item||!safeLotteryUrl(item.url)||seen.has(item.url))continue;
           seen.add(item.url);
           clean.push(item);
         }
         lotteryBaseItems=[...clean,...lpAppMergedItems()];
-        if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); await lpAppRefresh(); }
+        if(supabaseClient && !quiet) {
+          await Promise.all([lpExtRefresh(), lpCardRefresh(), lpAppRefresh()]);
+        }
         lpCloudApply();
-        lotteryPublicRevision = lotteryPublicVersion(data);
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
-        const update = data.updated_at || data.collected_at;
+        const update = data?.updated_at || data?.collected_at;
         const info = lotteryJapaneseDate(update);
         // JSON update time is not a proof that Actions has run recently.
         const viewedAt = new Intl.DateTimeFormat('ja-JP', {
@@ -4840,7 +4867,7 @@
         }).format(new Date());
         const otherCount=clean.filter(x=>!isLivePocketEventUrl(x.url)).length;
         status.textContent = `取得済み ${clean.length}件（外部URL ${otherCount}件）`+
-          (externalError?' ／ 外部URL取得失敗：'+externalError:'')+
+          (failed.length?' ／ 一部の取得に失敗（'+failed.join('・')+'）':'')+
           (info ? ` ／ LivePocket最終変更 ${info}（日本時間）` : '') +
           ` ／ 画面で最新データを取得 ${viewedAt}`;
         renderLottery();
@@ -4851,11 +4878,56 @@
           (lotteryItems.length ? '（最後に取得した一覧を表示中）' : '');
         renderLottery();
       } finally {
-        button.disabled = false;
+        if(!quiet)button.disabled = false;
         lotteryLoading = null;
       }
     })();
     return lotteryLoading;
+  }
+
+  function renderLotteryDiscordIntake() {
+    const panel = $('lpDiscordIntake');
+    if (!panel) return;
+    const known = new Set(lotteryBaseItems.map(item =>
+      isLivePocketEventUrl(item.url) ? item.url.replace(/\/$/, '') : item.url));
+    const cutoff = Date.now() - 2 * 60 * 60 * 1000;
+    const items = authUser && !discordRoleAuthPending ? lotteryDiscordIntake.filter(item =>
+      lotteryDate(item.discord_posted_at) > cutoff && !known.has(item.url) &&
+      !lpCardOverrides.get(item.url)?.is_hidden &&
+      (isLivePocketEventUrl(item.url) ? lpCardReady :
+        lpExtReady && lpExtOverrides.get(item.url)?.state !== 'excluded')
+    ) : [];
+    panel.hidden = !items.length;
+    $('lpDiscordIntakeCount').textContent = items.length + '件';
+    const list = $('lpDiscordIntakeLinks');
+    const html = items.map(item => {
+      const url = new URL(item.url);
+      const label = isLivePocketEventUrl(item.url) ? 'LivePocket' : url.hostname;
+      return '<li><a href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">'+
+        escape(label + url.pathname.slice(0, 80))+' ↗</a> <small>'+
+        escape(lotteryJapaneseDate(item.discord_posted_at))+' 投稿</small></li>';
+    }).join('');
+    if (list.innerHTML !== html) list.innerHTML = html;
+  }
+
+  async function lpDiscordIntakeRefresh() {
+    const owner = authUser?.id;
+    if (!supabaseClient || !owner || discordRoleAuthPending) return;
+    if (lotteryDiscordIntakeLoading) return lotteryDiscordIntakeLoading;
+    lotteryDiscordIntakeLoading = (async () => {
+      try {
+        const {data, error} = await supabaseClient.from(LP_DISCORD_INTAKE_TABLE)
+          .select('url,discord_posted_at').order('discord_posted_at',{ascending:false}).limit(200);
+        if (error || authUser?.id !== owner || discordRoleAuthPending) return;
+        lotteryDiscordIntake = (data || []).filter(item => item && safeLotteryUrl(item.url));
+        renderLotteryDiscordIntake();
+      } catch (_) {
+        // Keep the existing previews when a background request fails.
+      } finally {
+        lotteryDiscordIntakeLoading = null;
+      }
+    })();
+    return lotteryDiscordIntakeLoading;
   }
 
   function lotteryStatusText(state, item) {
@@ -4913,8 +4985,6 @@
     feedback.textContent='🔄 GitHubで公開されている外部抽選URLを取得しています…';
     // Without a timeout, a stalled iPhone connection can leave the button
     // disabled indefinitely and look as if tapping it had no effect.
-    const controller=typeof AbortController==='function'?new AbortController():null;
-    let timeout=null;
     try{
       if(!supabaseClient)throw Error('Supabase接続待ちです。ログイン状態を確認してください');
       if(lotteryLoading){
@@ -4925,14 +4995,8 @@
           })]);
         }finally{if(waitTimer!==null)clearTimeout(waitTimer);}
       }
-      if(controller)timeout=setTimeout(()=>controller.abort(),16000);
-      const response=await fetch(LP_OTHER_JSON_URL+'?refresh='+Date.now(),{
-        cache:'no-store',signal:controller?.signal
-      });
-      if(timeout!==null){clearTimeout(timeout);timeout=null;}
-      if(!response.ok)throw Error('公開URL一覧 HTTP '+response.status);
-      const data=await response.json();
-      if(!data||!Array.isArray(data.items))throw Error('公開URL一覧のデータ形式が不正です');
+      const catalog=await fetchLotteryPublicCatalog(LP_OTHER_JSON_URL);
+      const data=catalog.data;
       const fresh=new Map();
       for(const item of data.items){
         if(!item||!safeLotteryUrl(item.url)||isLivePocketEventUrl(item.url))continue;
@@ -4955,6 +5019,7 @@
         ...lotteryBaseItems.filter(item=>item&&(isLivePocketEventUrl(item.url)||item.app_lottery)),
         ...fresh.values()
       ];
+      lotteryPublicCatalogs.set(LP_OTHER_JSON_URL,catalog);
       lotteryLastFetch=Date.now();
       lpCloudApply();
       renderLotteryPrefectures();
@@ -4976,7 +5041,6 @@
       console.warn('外部抽選の最新情報を取得できません:',error);
       return false;
     }finally{
-      if(timeout!==null)clearTimeout(timeout);
       lpExtPublishedRefreshBusy=false;
       button.disabled=false;
       button.removeAttribute('aria-busy');
@@ -5599,6 +5663,7 @@
 
   function renderLottery() {
     if (!$('lpCards')) return;
+    renderLotteryDiscordIntake();
     const now = Date.now();
     const query = productNorm($('lpQuery').value);
     const genre = $('lpGenre').value;
@@ -5733,7 +5798,7 @@
         renderLottery();
       });
     }
-    $('lpRefresh').addEventListener('click',() => {loadLotteryEvents(true);window.TorecaSalesReference?.refresh?.(true);window.TorecaStoreMaps?.refresh?.(true);});
+    $('lpRefresh').addEventListener('click',() => {loadLotteryEvents(true);void lpDiscordIntakeRefresh();window.TorecaSalesReference?.refresh?.(true);window.TorecaStoreMaps?.refresh?.(true);});
     $('lpMore').addEventListener('click',() => {lotteryVisibleLimit += LP_PAGE_SIZE;renderLottery();});
     $('lpClearFilters').addEventListener('click',() => {
       $('lpQuery').value = '';
@@ -5763,7 +5828,11 @@
            r.status==='applied'&&r.application_count>0)) {
         lpResultsRefresh();
       }
-      if ($('lotteryView').classList.contains('active')) { renderLottery(); void checkLotteryPublicUpdate(); }
+      if ($('lotteryView').classList.contains('active')) {
+        renderLottery();
+        void checkLotteryPublicUpdate();
+        void lpDiscordIntakeRefresh();
+      }
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('lotteryResultsView')?.classList.contains('active')) lpResultsRefresh();
       if ($('lotteryView').classList.contains('active') ||
@@ -5792,7 +5861,11 @@
         if([...lotteryTrackRecords.values()].some(r=>
            r.status==='applied'&&r.application_count>0)) lpResultsRefresh();
       }
-      if ($('lotteryView').classList.contains('active')) {loadLotteryEvents();void checkLotteryPublicUpdate();lpLocationRefresh(true);}
+      if ($('lotteryView').classList.contains('active')) {
+        void checkLotteryPublicUpdate();
+        void lpDiscordIntakeRefresh();
+        lpLocationRefresh(true);
+      }
       if ($('lotteryManageView').classList.contains('active')) renderLotteryTrackerSummary();
       if ($('appLotteryView')?.classList.contains('active')) lpAppRefresh(true);
       if ($('lotteryResultsView')?.classList.contains('active')) lpResultsRefresh(true);

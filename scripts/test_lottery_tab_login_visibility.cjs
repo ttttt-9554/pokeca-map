@@ -62,7 +62,7 @@ const context={
  ...loginMock,document,$:id=>id==='appScrollArea'?scroll:document.getElementById(id),
  isDeveloper:()=>false,setMapFilterOpen:()=>{},
  render:()=>{rendered++},refreshMap:()=>{},
- loadLotteryEvents:()=>{},lpCloudRefresh:()=>{},lpLocationRefresh:()=>{},
+ loadLotteryEvents:()=>{},lpDiscordIntakeRefresh:()=>{},lpCloudRefresh:()=>{},lpLocationRefresh:()=>{},
  lpExtRefresh:()=>{},lpCardRefresh:()=>{},
  refreshLotteryTrackerForAccount:()=>{},
  refreshLotteryOnsiteReports:()=>{},refreshLotteryOnsiteArchive:()=>{},
