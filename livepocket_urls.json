@@ -42744,6 +42744,11 @@
         "checked_at": "2026-11-08T07:16:28.760695+00:00",
         "status": "browser_redirected",
         "next_check_at": "2026-11-08T13:16:28.760695+00:00"
+      },
+      "https://livepocket.jp/e/tjphs": {
+        "checked_at": "2026-11-10T03:23:17.496988+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-10T09:23:17.496988+00:00"
       }
     }
   }

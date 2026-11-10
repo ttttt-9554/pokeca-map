@@ -12461,8 +12461,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-24",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム 「神の支配」抽選受付",
       "first_detected_at": "2026-11-09T15:00:59.168858+00:00"
     },
     {
@@ -12511,23 +12509,21 @@
     },
     {
       "url": "https://livepocket.jp/e/tjphs",
+      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
+      "application_start_at": "2026-11-10T12:00:00+09:00",
+      "application_end_at": "2026-11-12T23:59:00+09:00",
       "discord_posted_at": "2026-11-10T03:03:14.951000+00:00",
       "store_location_source": "livepocket_page_required",
       "store_location_url": "https://livepocket.jp/e/tjphs",
-      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
-      "application_end_at": "2026-11-12T23:59:00+09:00",
-      "application_start_at": "2026-11-10T12:00:00+09:00",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-30",
+      "purchase_end_date": "2026-12-06",
       "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
-      "result_announcement_date": "2026-11-25",
-      "purchase_start_date": "2026-11-30",
-      "purchase_end_date": "2026-12-06",
       "first_detected_at": "2026-11-10T03:10:58.811289+00:00"
     }
   ],
-  "updated_at": "2026-11-10T03:14:38.524318+00:00"
+  "updated_at": "2026-11-10T03:23:17.496988+00:00"
 }
