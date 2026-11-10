@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-10T10:35:57.685762+00:00",
+  "collected_at": "2026-11-10T10:45:57.377821+00:00",
   "unique_livepocket_urls": 752,
   "items": [
     {
@@ -12573,26 +12573,24 @@
     },
     {
       "url": "https://livepocket.jp/e/ikbe9",
-      "discord_posted_at": "2026-11-10T10:30:06.075000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/ikbe9",
+      "store_name": "文教堂行徳店",
+      "prefecture": "千葉県",
       "event_title": "ONE PIECE カードゲーム ブースターパック 神の支配 OP18",
-      "application_end_at": "2026-11-16T20:30:00+09:00",
       "application_start_at": "2026-11-10T12:44:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-16T20:30:00+09:00",
+      "discord_posted_at": "2026-11-10T10:30:06.075000+00:00",
       "stores": [
         {
           "name": "文教堂行徳店",
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "文教堂行徳店",
-      "prefecture": "千葉県",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECE カードゲーム ブースターパック 神の支配 OP18",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ikbe9",
       "result_announcement_date": "2026-11-20",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-10T10:35:59.969535+00:00"
     }
   ],
-  "updated_at": "2026-11-10T10:36:28.285748+00:00"
+  "updated_at": "2026-11-10T10:46:03.989844+00:00"
 }
