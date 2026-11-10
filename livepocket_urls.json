@@ -25716,8 +25716,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/g5y5q": {
-          "checked_at": "2026-11-10T12:09:36.487662+00:00",
-          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-10T18:16:33.678468+00:00",
+          "status": "browser_redirected",
           "http_status": null
         },
         "https://livepocket.jp/e/ikbe9": {
@@ -28102,8 +28102,8 @@
         },
         "https://livepocket.jp/e/g5y5q": {
           "detected_at": "2026-11-10T06:01:00.047798+00:00",
-          "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-10T12:09:36.487662+00:00",
+          "status": "browser_redirected",
+          "checked_at": "2026-11-10T18:16:33.678468+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ikbe9": {
@@ -29943,9 +29943,9 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/g5y5q": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-10T12:09:36.487662+00:00",
-          "last_status": "checked_retry_no_new_details"
+          "attempts": 2,
+          "last_attempt_at": "2026-11-10T18:16:33.678468+00:00",
+          "last_status": "browser_redirected"
         },
         "https://livepocket.jp/e/ikbe9": {
           "attempts": 1,
@@ -36536,12 +36536,12 @@
           "conflict": false
         },
         "https://livepocket.jp/e/g5y5q": {
-          "status": "ok",
-          "reason": "official_title_verified",
+          "status": "browser_redirected",
+          "reason": "fetch_browser_redirected",
           "http_status": "",
-          "checked_at": "2026-11-10T12:09:36.487662+00:00",
-          "title_observed": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
-          "genre": "onepiece",
+          "checked_at": "2026-11-10T18:16:33.678468+00:00",
+          "title_observed": "",
+          "genre": "",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
@@ -42538,17 +42538,17 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/g5y5q": {
-          "checked_at": "2026-11-10T12:09:36.487662+00:00",
-          "reason": "official_title_detected",
-          "candidate_count": 3,
-          "valid_candidate_count": 1,
+          "checked_at": "2026-11-10T18:16:33.678468+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
           "detail": "",
-          "candidate_sources": "og:1;event_heading:1;document:1",
-          "title_detected": true,
-          "rejection_codes": "truncated:2;truncated_tail:2",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
           "meta_template_cleaned": 0,
-          "heading_seen": 1,
-          "recovery_probe": "dom_heading_verified"
+          "heading_seen": 0,
+          "recovery_probe": ""
         },
         "https://livepocket.jp/e/ikbe9": {
           "checked_at": "2026-11-10T16:46:32.948735+00:00",
