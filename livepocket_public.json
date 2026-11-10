@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-10T03:10:56.264801+00:00",
-  "unique_livepocket_urls": 749,
+  "collected_at": "2026-11-10T03:30:56.275932+00:00",
+  "unique_livepocket_urls": 750,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12523,7 +12523,34 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-10T03:10:58.811289+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/omvuw",
+      "discord_posted_at": "2026-11-10T03:30:08.474000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/omvuw",
+      "event_title": "【抽選受付】26年11月21日発売「ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】」",
+      "application_end_at": "2026-11-15T21:45:00+09:00",
+      "application_start_at": "2026-11-09T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA二十世紀が丘店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA二十世紀が丘店",
+      "prefecture": "千葉県",
+      "product_name": "ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
+      "official_genre": "onepiece",
+      "official_event_title": "【抽選受付】26年11月21日発売「ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】」",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "09:00",
+      "purchase_end_date": "2026-11-22",
+      "purchase_end_time": "21:45",
+      "first_detected_at": "2026-11-10T03:30:58.030375+00:00"
     }
   ],
-  "updated_at": "2026-11-10T03:23:17.496988+00:00"
+  "updated_at": "2026-11-10T03:31:21.037501+00:00"
 }
