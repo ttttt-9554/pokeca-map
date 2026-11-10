@@ -49,7 +49,7 @@
   let cloudProductAliases = [];
   let cloudProductIndex = new Map();
   let cloudProductById = new Map();
-  let cloudProductSyncAt = 0, cloudProductSyncBusy = false;
+  let lotteryMasterTerms = [];
   let cloudStores = [];
   let mapSelectedProducts = []; // {name, category}
   let editId = null;
@@ -2494,35 +2494,146 @@
     }
     cloudProductIndex=index;
     cloudProductById=byId;
+    lotteryMasterTerms=buildLotteryMasterTerms(byId);
   }
+
+  function lotteryMasterKey(value){
+    return catalogProductKey(String(value||'').normalize('NFKC')
+      .replace(/[『』\[\]〈〉《》〔〕]/g,'').replace(/[‐‑‒–—−]/g,'-'));
+  }
+
+  function lotteryMasterParts(value){
+    const codes=new Set();
+    const text=String(value||'').normalize('NFKC')
+      .replace(/(^|[^a-z0-9])((?:op|eb|prb|st)\s*[-‐‑–−]?\s*\d{1,3})(?![a-z0-9])/gi,
+        (_,lead,code)=>{codes.add(lotteryMasterKey(code));return lead;});
+    const name=lotteryMasterKey(text)
+      .replace(/^(?:ポケモンカード(?:ゲーム)?(?:スカーレット&バイオレット|ソード&シールド|sv)?|onepiece(?:カード(?:ゲーム)?|cardgame)|ワンピースカード(?:ゲーム)?)/,'')
+      .replace(/^(?:(?:mega)?(?:強化拡張パック|拡張パック|ハイクラスパック)|ブースターパック|エクストラブースター|exブースター)/,'');
+    // Set codes stay part of the identity even when the site moves them
+    // from the front of the product name to the end.
+    return {shape:name?name+[...codes].sort().join(''):'',codes};
+  }
+
+  function lotteryMasterVariantTail(tail){
+    return /^(?:vol\d|preciousbox|futuristicbox|カードセット|プレミアムデッキセット|スペシャルデッキセット|バトルコレクション)/.test(tail);
+  }
+
+  function buildLotteryMasterTerms(byId){
+    const names=[...byId.values()].map(product=>({name:product.name,product,alias:false}));
+    for(const row of cloudProductAliases){
+      const product=byId.get(row.product_id);
+      if(product&&product.genre===row.genre&&row.alias_name)
+        names.push({name:row.alias_name,product,alias:true});
+    }
+    const groups=new Map();
+    const productCodes=new Map();
+    for(const term of names){
+      term.key=lotteryMasterKey(term.name);
+      const {shape,codes}=lotteryMasterParts(term.name);
+      term.shape=shape;
+      if(!productCodes.has(term.product.id))productCodes.set(term.product.id,new Set());
+      for(const code of codes)productCodes.get(term.product.id).add(code);
+      if(!term.shape)continue;
+      const groupKey=(term.product.genre||'pokemon')+'|'+term.shape;
+      if(!groups.has(groupKey))groups.set(groupKey,{approved:new Map(),plain:new Map()});
+      term.group=groups.get(groupKey);
+      if(term.alias||term.product.source!=='lottery_sync')term.group.approved.set(term.product.id,term.product);
+      else if(term.key===term.shape)term.group.plain.set(term.product.id,term.product);
+    }
+    const terms=new Map();
+    for(const term of names){
+      let product=term.product;
+      // Older imports can have a second row for the same spelling with a
+      // series prefix. Only redirect exact equivalents, within their genre.
+      if(product.source==='lottery_sync'&&!term.alias&&term.group){
+        const {approved,plain}=term.group;
+        const choices=approved.size?approved:plain;
+        if(choices.size===1){
+          const preferred=choices.values().next().value;
+          if(preferred.category===product.category||
+             !product.category||product.category==='unknown'||
+             !preferred.category||preferred.category==='unknown')product=preferred;
+        }
+      }
+      const genre=product.genre||'pokemon';
+      for(const key of new Set([term.key,term.shape])){
+        if(key)terms.set(genre+'|'+key+'|'+product.id,{key,genre,product,codes:productCodes.get(product.id)});
+      }
+    }
+    return [...terms.values()];
+  }
+
+  function lotteryMasterMatches(value,genre,embedded=false){
+    const text=lotteryMasterKey(value);
+    if(!text)return {matches:new Map(),unresolved:false};
+    const {shape,codes}=lotteryMasterParts(value);
+    const reportedCodes=[...codes];
+    const terms=lotteryMasterTerms.filter(term=>!genre||genre==='unknown'||term.genre===genre);
+    const compatible=term=>!reportedCodes.length||!term.codes.size||reportedCodes.some(code=>term.codes.has(code));
+    const exact=key=>new Map(terms.filter(term=>term.key===key&&compatible(term))
+      .map(term=>[term.product.id,term.product]));
+    const direct=exact(text);
+    if(direct.size)return {matches:direct,unresolved:false};
+    const equivalent=exact(shape);
+    if(equivalent.size||!embedded)return {matches:equivalent,unresolved:false};
+    const hits=[];
+    for(const term of terms){
+      const {key,product}=term;
+      if(key.length<5&&!/^[ぁ-ゖァ-ヺ一-龯ー]{4,}$/.test(key))continue;
+      if(/^(?:スペシャルデッキセット(?:mega)?|プレミアムデッキセット)$/.test(key))continue;
+      for(let start=text.indexOf(key);start>=0;start=text.indexOf(key,start+key.length)){
+        const end=start+key.length,tail=text.slice(end);
+        if(/\d$/.test(key)&&/^\d/.test(tail))continue;
+        hits.push({start,end,product,unresolved:lotteryMasterVariantTail(tail)||!compatible(term)});
+      }
+    }
+    // A longer name can resolve a shorter match at the same position.
+    // Independently mentioned products and unresolved editions still count.
+    const distinct=hits.filter(hit=>!hits.some(other=>
+      other.start<=hit.start&&other.end>=hit.end&&
+      (other.start<hit.start||other.end>hit.end)));
+    return {
+      matches:new Map(distinct.filter(hit=>!hit.unresolved).map(hit=>[hit.product.id,hit.product])),
+      unresolved:distinct.some(hit=>hit.unresolved)
+    };
+  }
+
   function resolveLotteryProductMaster(item){
     if(!item)return item;
     const genre=lotteryGenre(item);
-    let master=catalogProductMatch(item.product_name,genre);
-    // New collector entries can have a verified title but no product field.
-    // Only an unambiguous full master name/approved alias is evidence here.
-    // An intentional manual clear and provisional Discord titles stay empty.
-    if(!master&&!String(item.product_name||'').trim()&&!item.manual_card_product&&
-       !item.event_title_provisional){
-      const title=catalogProductKey(item.official_event_title||item.event_title);
-      const matches=new Map();
-      const candidates=[
-        ...cloudProducts.filter(p=>p.genre===genre).map(p=>({name:p.name,product:p})),
-        ...cloudProductAliases.filter(a=>a.genre===genre)
-          .map(a=>({name:a.alias_name,product:cloudProductById.get(a.product_id)}))
-      ];
-      for(const candidate of candidates){
-        const key=catalogProductKey(candidate.name);
-        if(candidate.product&&key.length>=5&&title.includes(key))
-          matches.set(candidate.product.id,candidate.product);
-      }
-      if(matches.size===1)master=matches.values().next().value;
+    const original=String(item.product_name_original??item.product_name??'').trim();
+    const manual=item.manual_card_product||(item.app_lottery&&!!original);
+    const observed=manual?String(item.product_name||'').trim():original;
+    const named=lotteryMasterMatches(observed,genre,!manual);
+    const title=!manual&&!item.event_title_provisional&&
+      (!item.external_url_unverified||item.official_event_title||item.manual_card_title)
+      ? item.official_event_title||item.event_title : '';
+    const fromTitle=lotteryMasterMatches(title,genre,true);
+    if(named.matches.size===1&&fromTitle.matches.size===1){
+      const observedMaster=named.matches.values().next().value;
+      const titleKey=lotteryMasterKey(title),nameKey=lotteryMasterKey(observedMaster.name);
+      const start=titleKey.indexOf(nameKey);
+      if(!fromTitle.matches.has(observedMaster.id)&&start>=0&&
+        lotteryMasterVariantTail(titleKey.slice(start+nameKey.length)))named.matches.clear();
     }
-    if(!master)return item;
+    const matches=new Map([...named.matches,...fromTitle.matches]);
+    const needsReview=matches.size>1||named.unresolved||fromTitle.unresolved;
+    if(matches.size!==1||needsReview){
+      if(manual)return item;
+      if(needsReview||(observed&&!lotteryMasterParts(observed).shape)){
+        return {...item,product_name:'',product_name_original:original,
+          catalog_product_ambiguous:needsReview};
+      }
+      return item;
+    }
+    const master=matches.values().next().value;
     return {...item,
       catalog_product_id:master.id,
-      catalog_product_from_title:item.catalog_product_from_title||!String(item.product_name||'').trim(),
-      product_name_original:item.product_name_original??item.product_name??'',
+      catalog_product_from_title:!named.matches.size,
+      catalog_product_ambiguous:false,
+      ...(!item.manual_card_genre&&genre==='unknown'?{review_category:master.genre}:{}),
+      product_name_original:original,
       product_name:master.name};
   }
 
@@ -2594,8 +2705,8 @@
     }
     const products=()=>{
       const genre=input.form?.elements.namedItem('review_category')?.value;
-      return cloudProducts.filter(p=>!genre||p.genre===genre).map(p=>({
-        value:p.name,detail:lpProductDetailText(p),
+      return cloudProducts.filter(p=>!genre||genre==='unknown'||p.genre===genre).map(p=>({
+        value:p.name,genre:p.genre,detail:lpProductDetailText(p),
         search:[p.reading,...cloudProductAliases.filter(a=>a.product_id===p.id)
           .map(a=>a.alias_name)].filter(Boolean).join(' ')
       }));
@@ -2623,6 +2734,11 @@
   }
   function lpSearchSelect(input,choice){
     if(input.id==='searchArea')searchStores();
+    const genre=input.name==='product_name'?input.form?.elements.namedItem('review_category'):null;
+    if(genre?.value==='unknown'&&[...genre.options].some(option=>option.value===choice.genre)){
+      genre.value=choice.genre;
+      genre.dispatchEvent(new Event('change',{bubbles:true}));
+    }
     const area=lpSearchPrefectureInput(input);
     if(area&&choice.prefecture){
       if(area.tagName!=='SELECT'||[...area.options].some(option=>option.value===choice.prefecture)){
@@ -2652,9 +2768,9 @@
       const genre=form.elements.namedItem('review_category')?.value||'pokemon';
       const seen=new Set(),names=[];
       for(const product of cloudProducts)
-        if(product.genre===genre&&product.name)names.push(product.name);
+        if((genre==='unknown'||product.genre===genre)&&product.name)names.push(product.name);
       for(const alias of cloudProductAliases)
-        if(alias.genre===genre&&alias.alias_name)names.push(alias.alias_name);
+        if((genre==='unknown'||alias.genre===genre)&&alias.alias_name)names.push(alias.alias_name);
       for(const name of names){
         if(seen.has(name))continue;
         seen.add(name);
@@ -2668,60 +2784,14 @@
     const input=form?.elements.namedItem('product_name');
     const genre=form?.elements.namedItem('review_category')?.value||'pokemon';
     if(!input?.value)return;
-    const master=catalogProductMatch(input.value,genre);
-    if(!master)return;
+    const {matches}=lotteryMasterMatches(input.value,genre);
+    if(matches.size!==1)return;
+    const master=matches.values().next().value;
     input.value=master.name;
     const kind=form.elements.namedItem('product_type');
     if(kind && kind.value==='unknown' && ['pack','deck'].includes(master.category))
       kind.value=master.category;
   }
-  // Remote collector JSON isn't in Supabase. Sync it when an authorized
-  // developer opens the lottery list; manual entries sync via DB triggers.
-  function catalogProductCollectorCandidateValid(name){
-    const clean=String(name||'').trim();
-    if(clean.length<5||clean.length>200||
-       /^(ポケモンカードゲーム|ワンピースカードゲーム|ONE PIECEカードゲーム)$/.test(clean)||
-       /[／/]|抽選|応募|予約|再販|系$/.test(clean)||
-       (clean.includes('「')&&!clean.includes('」'))||
-       (clean.includes('『')&&!clean.includes('』'))||
-       (clean.includes('＆')&&clean.length<12)||
-       (/ex$/i.test(clean)&&clean.length<9))return false;
-    return true;
-  }
-  async function syncCollectedCatalogProducts(force=false){
-    if(!isDeveloper()||!authUser||!supabaseClient||cloudProductSyncBusy)return false;
-    if(!force&&Date.now()-cloudProductSyncAt<20*60*1000)return true;
-    cloudProductSyncBusy=true;
-    try{
-      const seen=new Set(),pending=[];
-      const sorted=[...lotteryItems].sort((a,b)=>
-        lotteryFirstSeenTime(b)-lotteryFirstSeenTime(a));
-      for(const item of sorted){
-        const name=String(item?.product_name||'').trim(),genre=lotteryGenre(item);
-        if(!catalogProductCollectorCandidateValid(name)||
-           !['pokemon','onepiece','yugioh'].includes(genre)||
-           item.app_lottery_hidden||item.manual_card_hidden)continue;
-        const identity=catalogProductIdentity(name,genre);
-        if(seen.has(identity)||cloudProductIndex.has(identity))continue;
-        seen.add(identity);
-        pending.push({name,genre,category:lotteryProductType(item)});
-        if(pending.length>=300)break;
-      }
-      if(!pending.length){cloudProductSyncAt=Date.now();return true;}
-      for(let offset=0;offset<pending.length;offset+=150){
-        const {error}=await supabaseClient.rpc('catalog_product_sync_batch_v1',
-          {p_items:pending.slice(offset,offset+150)});
-        if(error)throw error;
-      }
-      cloudProductSyncAt=Date.now();
-      await loadCloudData();
-      return true;
-    }catch(error){
-      console.warn('商品マスターへの収集データ同期に失敗しました:',error);
-      return false;
-    }finally{cloudProductSyncBusy=false;}
-  }
-
   // クラウドデータは端末のlocalStorageに混ぜない（削除後に復活させないため）。
   // 唯一の参照元はSupabase。旧CSVをunionして重複させない。
   function mergeCloudProducts() {
@@ -2758,10 +2828,7 @@
     mergeCloudProducts();updateStoreCount();renderCloudAdminLists();
     fillLotteryProductSuggestions();fillCatalogProductInputs();
     globalThis.window?.TorecaSearchInputs?.refresh?.();
-    if(lotteryBaseItems.length){
-      lpCloudApply();
-      if(isDeveloper())void syncCollectedCatalogProducts();
-    }
+    if(lotteryBaseItems.length)lpCloudApply();
     if (document.activeElement===$('product')) showProductDropdown();
     if (document.activeElement===$('mapProductSearch')) showMapProductDropdown();
     if ($('cloudAdminStatus')) $('cloudAdminStatus').textContent=`共有商品 ${cloudProducts.length}件・登録別名 ${cloudProductAliases.length}件・共有店舗 ${cloudStores.length}件`;
@@ -4001,7 +4068,7 @@
       alert('カード編集用データの取得を確認できません。再読み込みしてください。 '+lpCardError);
       return;
     }
-    const item = lpCardOverlay(lpLegacyApply(base));
+    const item = resolveLotteryProductMaster(lpCardOverlay(lpLegacyApply(base)));
     if (!item) return;
     lpCardEditing = url;
     lpCardReviewUrl='';
@@ -4251,16 +4318,20 @@
       } else {
         normalizeCatalogProductInput(form);
         const schedule=lotterySharedSchedulePayload(form);
+        const inherited=resolveLotteryProductMaster(legacy);
+        const current=resolveLotteryProductMaster(lpCardOverlay(legacy));
+        const savedFields=new Set(saved?.edited_fields||[]);
         for (const field of LP_CARD_FORM_FIELDS) {
           const isScheduleField=LOTTERY_SHARED_SCHEDULE_FIELDS.includes(field);
           const raw=isScheduleField ? schedule[field] || '' : String(form.elements.namedItem(field)?.value || '').trim();
-          const original=lpCardEditableValue(legacy,field);
+          const productField=['product_name','review_category','product_type'].includes(field);
+          const original=lpCardEditableValue(productField&&!savedFields.has(field)?current:inherited,field);
           if (raw.length > 200) throw Error('入力文字数を確認してください：'+field);
           if (field==='review_category' && !['unknown','pokemon','onepiece','yugioh'].includes(raw))
             throw Error('ジャンルが不正です。');
           if (field==='product_type' && !['unknown','pack','deck','pack/deck'].includes(raw))
             throw Error('商品区分が不正です。');
-          if (raw !== original) {
+          if (raw !== original || (field==='product_name'&&savedFields.has(field))) {
             edited.push(field);
             payload[field] = isScheduleField ? schedule[field] :
               (field==='application_start_at' || field==='application_end_at' ? lpExtDateSave(raw) : raw);
@@ -4758,7 +4829,6 @@
         lotteryBaseItems=[...clean,...lpAppMergedItems()];
         if(supabaseClient) { await lpExtRefresh(); await lpCardRefresh(); await lpAppRefresh(); }
         lpCloudApply();
-        void syncCollectedCatalogProducts();
         lotteryPublicRevision = lotteryPublicVersion(data);
         lotteryLastFetch = Date.now();
         renderLotteryPrefectures();
@@ -5449,7 +5519,8 @@
       ${item.catalog_product_id
         ? `<p class="lp-sub lp-card-product">📦 商品：${escape(item.product_name)}</p>`
         : item.product_name
-          ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>` : ''}
+          ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>`
+          : item.catalog_product_ambiguous ? '<p class="lp-sub">商品名：要確認</p>' : ''}
       ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
       ${item.app_lottery?(item.manual_registration_method==='in_store'
         ?'<p class="lp-store-muted lp-app-name">🏬 応募方式：<strong>店頭で直接応募</strong><span>（受付店舗・応募条件は店頭で確認）</span></p>'
@@ -9247,8 +9318,15 @@
   }
   async function lpDevOpenFetchedEditor(url,fields){
     const livePocket=isLivePocketEventUrl(url);
+    const base=lotteryBaseItems.find(item=>item.url===url);
+    if(fields?.product_name||fields?.event_title){
+      fields=resolveLotteryProductMaster({...fields,
+        review_category:fields.review_category||base?.review_category,
+        official_event_title:fields.official_event_title||fields.event_title});
+    }
     const editCard=livePocket||!!fields?.product_name||LOTTERY_SHARED_SCHEDULE_FIELDS.some(name=>fields?.[name]);
     await lpDevUnifiedOpenEditor(url,editCard);
+    const cardFields=lpCardOverrides.get(url)?.edited_fields||[];
     const form=$(editCard?'lpCardForm':'lpExtForm');
     for(const name of ['review_category','product_type']){
       const input=form.elements.namedItem(name),value=fields?.[name];
@@ -9256,14 +9334,18 @@
         input.value=value;
     }
     if(editCard){
-      const unverifiedTitle=!livePocket&&lotteryBaseItems.find(item=>item.url===url)?.external_url_unverified&&
-        !lpExtOverrides.get(url)?.event_title&&!lpCardOverrides.get(url)?.edited_fields?.includes('event_title');
+      const unverifiedTitle=!livePocket&&base?.external_url_unverified&&
+        !lpExtOverrides.get(url)?.event_title&&!cardFields.includes('event_title');
       for(const name of ['event_title','product_name','application_start_at','application_end_at',...LOTTERY_SHARED_SCHEDULE_FIELDS]){
         const input=form.elements.namedItem(name),value=fields?.[name];
-        if(input&&(!input.value||(name==='event_title'&&unverifiedTitle))&&typeof value==='string'&&value)
+        if(name==='product_name'&&cardFields.includes(name))continue;
+        const replaceProduct=name==='product_name'&&fields?.catalog_product_id&&
+          !lotteryMasterMatches(input?.value,form.elements.namedItem('review_category')?.value).matches.size;
+        if(input&&(!input.value||(name==='event_title'&&unverifiedTitle)||replaceProduct)&&typeof value==='string'&&value)
           input.value=name.startsWith('application_')?lpExtDateInput(value):
             LOTTERY_SHARED_SCHEDULE_FIELDS.includes(name)?lotterySharedScheduleValue(fields,name):value.slice(0,200);
       }
+      normalizeCatalogProductInput(form);
       const stores=Array.isArray(fields?.stores)?fields.stores:[{name:fields?.store_name,prefecture:fields?.prefecture}];
       const found=stores.filter(row=>
         row&&typeof row.name==='string'&&row.name.trim()&&row.name.length<=200)

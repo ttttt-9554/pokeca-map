@@ -7,6 +7,10 @@ let stores=[{name:'渋谷店',prefecture:''},{name:'秋葉原店',prefecture:'�
 const starbox='https://shoplottery.e-starbox.com/lottery/entry?code=YJTlpkMz6h';
 let opensCard=false;
 const context={isLivePocketEventUrl:u=>u.includes('livepocket.jp'),lpDevUnifiedOpenEditor:async(_url,card)=>{opensCard=card},
+ resolveLotteryProductMaster:fields=>fields.product_name==='取得した表記'
+   ?{...fields,product_name:'マスター正式名',catalog_product_id:'master-id'}:fields,
+ lotteryMasterMatches:value=>({matches:value==='マスター正式名'?new Map([['master-id',{}]]):new Map()}),
+ normalizeCatalogProductInput(){},
  LOTTERY_SHARED_SCHEDULE_FIELDS:['result_announcement_date','purchase_end_date'],lotterySharedScheduleValue:(r,k)=>r[k],
  lotteryBaseItems:[{url:starbox,external_url_unverified:true}],lpCardOverrides:new Map(),lpExtOverrides:new Map(),
  $:id=>id==='lpCardForm'?{elements:{namedItem:n=>values[n]}}:id==='lpCardStoresFold'?{open:false}:null,
@@ -37,5 +41,12 @@ const open=vm.runInNewContext(extract('lpDevOpenFetchedEditor')+'\nlpDevOpenFetc
  await open(starbox,{event_title:'別の取得名',result_announcement_date:'2026-11-09'});
  assert.equal(values.event_title.value,'管理者が確認した名前');
  assert.equal(values.result_announcement_date.value,'2026-11-08');
- console.log('Lottery candidate handoff preserves manual values and fills Starbox dates');
+ values.product_name.value='自動取得した仮の商品名';
+ await open(starbox,{product_name:'取得した表記'});
+ assert.equal(values.product_name.value,'マスター正式名');
+ context.lpCardOverrides.set(starbox,{edited_fields:['event_title','product_name']});
+ values.product_name.value='';
+ await open(starbox,{product_name:'取得した表記'});
+ assert.equal(values.product_name.value,'','An intentional product clear stays empty after refresh');
+ console.log('Lottery candidate handoff uses the master and preserves manual values and Starbox dates');
 })().catch(e=>{console.error(e);process.exitCode=1});
