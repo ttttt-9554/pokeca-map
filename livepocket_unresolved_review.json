@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-10T03:01:09Z",
-  "total": 2,
+  "as_of": "2026-11-10T03:14:54Z",
+  "total": 3,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
@@ -35,6 +35,21 @@
       "last_checked_at": "2026-11-06T14:01:22.617488+00:00",
       "next_retry_at": "2026-11-07T14:01:22.617488+00:00",
       "queue": "ready"
+    },
+    {
+      "url": "https://livepocket.jp/e/tjphs",
+      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-11-12T23:59:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-10T03:14:38.524318+00:00",
+      "next_retry_at": "2026-11-11T03:14:38.524318+00:00",
+      "queue": "retry_wait"
     }
   ]
 }

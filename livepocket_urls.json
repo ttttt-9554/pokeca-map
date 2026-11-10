@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-10T03:00:56.005272+00:00",
+  "collected_at": "2026-11-10T03:10:56.264801+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 748,
+  "unique_livepocket_urls": 749,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -21978,33 +21978,58 @@
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/tjphs",
+      "discord_message_id": "1569547962080694445",
+      "discord_posted_at": "2026-11-10T03:03:14.951000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/tjphs",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/tjphs",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page"
+      },
+      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
+      "application_end_at": "2026-11-12T23:59:00+09:00",
+      "application_start_at": "2026-11-10T12:00:00+09:00",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-30",
+      "purchase_end_date": "2026-12-06"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 576,
-    "no_structured_details": 172
+    "no_structured_details": 173
   },
   "field_counts": {
     "store_name": 345,
     "prefecture": 298,
-    "event_title": 446,
+    "event_title": 447,
     "event_date": 1,
     "product_name": 116,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 712,
-    "application_start_at": 709,
+    "application_end_at": 713,
+    "application_start_at": 710,
     "stores_events": 345
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569547173412995172"
+      "1551580466266644552": "1569547962080694445"
     },
     "last_run": {
-      "checked_at": "2026-11-10T03:00:56.005272+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-10T03:10:56.264801+00:00",
+      "new_urls": 1,
       "original_urls": 748,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -22281,7 +22306,8 @@
         "1569335779522781434": "2026-11-09T13:00:58.875561+00:00",
         "1569366033230471339": "2026-11-09T15:00:58.089031+00:00",
         "1569471665220489381": "2026-11-09T22:05:57.260478+00:00",
-        "1569516979037929512": "2026-11-10T01:00:57.362254+00:00"
+        "1569516979037929512": "2026-11-10T01:00:57.362254+00:00",
+        "1569547962080694445": "2026-11-10T03:10:57.475074+00:00"
       },
       "checked_search_urls": {}
     },
@@ -25553,7 +25579,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ntly8": {
-          "checked_at": "2026-11-09T21:06:26.634210+00:00",
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -25564,6 +25590,11 @@
         },
         "https://livepocket.jp/e/mfi62": {
           "checked_at": "2026-11-10T01:01:35.339243+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/tjphs": {
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "status": "checked_title_deadline",
           "http_status": null
         }
@@ -27915,7 +27946,7 @@
         "https://livepocket.jp/e/ntly8": {
           "detected_at": "2026-11-09T15:00:59.168858+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-09T21:06:26.634210+00:00",
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/52-_e": {
@@ -27928,6 +27959,12 @@
           "detected_at": "2026-11-10T01:00:58.636537+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-10T01:01:35.339243+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/tjphs": {
+          "detected_at": "2026-11-10T03:10:58.811289+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "http_status": null
         }
       },
@@ -29741,8 +29778,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ntly8": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-09T21:06:26.634210+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-10T03:14:38.524318+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -36277,7 +36314,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-09T21:06:26.634210+00:00",
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "title_observed": "ワンピースカードゲーム 「神の支配」抽選受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -36302,6 +36339,17 @@
           "checked_at": "2026-11-10T01:01:35.339243+00:00",
           "title_observed": "ONE PIECE カードゲーム ブースターパック 神の支配 OP18 抽選販売",
           "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/tjphs": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
+          "title_observed": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
+          "genre": "pokemon",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
@@ -42222,7 +42270,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ntly8": {
-          "checked_at": "2026-11-09T21:06:26.634210+00:00",
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -42249,6 +42297,19 @@
         },
         "https://livepocket.jp/e/mfi62": {
           "checked_at": "2026-11-10T01:01:35.339243+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/tjphs": {
+          "checked_at": "2026-11-10T03:14:38.524318+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
