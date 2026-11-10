@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-10T03:30:56.275932+00:00",
-  "unique_livepocket_urls": 750,
+  "collected_at": "2026-11-10T06:00:57.552012+00:00",
+  "unique_livepocket_urls": 751,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12548,7 +12548,31 @@
       "purchase_end_time": "21:45",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-10T03:30:58.030375+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/g5y5q",
+      "discord_posted_at": "2026-11-10T06:00:11.524000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/g5y5q",
+      "event_title": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
+      "application_end_at": "2026-11-11T23:59:00+09:00",
+      "application_start_at": "2026-11-10T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA西五反田店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "TSUTAYA西五反田店",
+      "prefecture": "東京都",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-10T06:01:00.047798+00:00"
     }
   ],
-  "updated_at": "2026-11-10T05:51:05.581050+00:00"
+  "updated_at": "2026-11-10T06:01:44.247732+00:00"
 }
