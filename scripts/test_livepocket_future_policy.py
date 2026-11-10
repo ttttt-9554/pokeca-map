@@ -130,7 +130,9 @@ class ForwardOnlyPolicyTests(TestCase):
         self.assertIn("'checked': 0",stdout)
 
     def test_cli_plan_requests_browser_only_for_future_notice(self):
-        stdout, output=self._sample_cli(NEW_DETECTED,plan=True)
+        # The CLI uses a rolling 14-day window and the real clock.
+        recent_post=datetime.now(NOW.tzinfo).isoformat()
+        stdout, output=self._sample_cli(recent_post,plan=True)
         self.assertIn('eligible 1',stdout)
         self.assertEqual(output.splitlines(),['browser_needed=true'])
 
