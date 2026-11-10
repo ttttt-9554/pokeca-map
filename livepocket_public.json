@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-10T10:45:57.377821+00:00",
+  "collected_at": "2026-11-10T12:05:57.546506+00:00",
   "unique_livepocket_urls": 752,
   "items": [
     {
@@ -12569,6 +12569,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
       "first_detected_at": "2026-11-10T06:01:00.047798+00:00"
     },
     {
@@ -12592,5 +12594,5 @@
       "first_detected_at": "2026-11-10T10:35:59.969535+00:00"
     }
   ],
-  "updated_at": "2026-11-10T11:56:02.865976+00:00"
+  "updated_at": "2026-11-10T12:09:36.487662+00:00"
 }
