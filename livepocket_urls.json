@@ -25929,7 +25929,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ryaqf": {
-          "checked_at": "2026-11-11T17:16:31.315189+00:00",
+          "checked_at": "2026-11-11T23:21:19.742261+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         }
@@ -28347,7 +28347,7 @@
         "https://livepocket.jp/e/ryaqf": {
           "detected_at": "2026-11-11T09:05:59.700440+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-11T17:16:31.315189+00:00",
+          "checked_at": "2026-11-11T23:21:19.742261+00:00",
           "http_status": null
         }
       },
@@ -30206,8 +30206,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/ryaqf": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-11T17:16:31.315189+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-11T23:21:19.742261+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -36863,7 +36863,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-11T17:16:31.315189+00:00",
+          "checked_at": "2026-11-11T23:21:19.742261+00:00",
           "title_observed": "【店頭告知を必ず確認してください】11/21発売ワンピース「神の支配」【OP-18】抽選販売",
           "genre": "",
           "product_origin": "",
@@ -42929,7 +42929,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ryaqf": {
-          "checked_at": "2026-11-11T17:16:31.315189+00:00",
+          "checked_at": "2026-11-11T23:21:19.742261+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -43366,9 +43366,9 @@
         "next_check_at": "2026-11-08T13:16:28.760695+00:00"
       },
       "https://livepocket.jp/e/tjphs": {
-        "checked_at": "2026-11-11T17:16:31.315189+00:00",
+        "checked_at": "2026-11-11T23:21:19.742261+00:00",
         "status": "ok",
-        "next_check_at": "2026-11-11T23:16:31.315189+00:00"
+        "next_check_at": "2026-11-12T05:21:19.742261+00:00"
       }
     }
   }
