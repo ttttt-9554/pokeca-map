@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-11T04:35:56.768050+00:00",
+  "collected_at": "2026-11-11T05:05:55.794759+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 755,
+  "unique_livepocket_urls": 756,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -22219,34 +22219,68 @@
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/0atd3",
+      "discord_message_id": "1569939766110068887",
+      "discord_posted_at": "2026-11-11T05:00:08.311000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nカードボックス青馬堂矢向店\n受付終了: 11/15 22:00（残り4日7時間）\nhttps://livepocket.jp/e/0atd3",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/0atd3",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカード OP-18「神の支配」 深夜販売入場券",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-11T13:30:00+09:00",
+      "stores": [
+        {
+          "name": "カードボックス青馬堂矢向店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "カードボックス青馬堂矢向店",
+      "prefecture": "神奈川県",
+      "result_announcement_date": "2026-11-16"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 580,
-    "no_structured_details": 175
+    "no_structured_details": 176
   },
   "field_counts": {
-    "store_name": 351,
-    "prefecture": 304,
-    "event_title": 453,
+    "store_name": 352,
+    "prefecture": 305,
+    "event_title": 454,
     "event_date": 1,
     "product_name": 118,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 719,
-    "application_start_at": 716,
-    "stores_events": 351
+    "application_end_at": 720,
+    "application_start_at": 717,
+    "stores_events": 352
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1569932216597745685"
+      "1551580466266644552": "1569939766110068887"
     },
     "last_run": {
-      "checked_at": "2026-11-11T04:35:56.768050+00:00",
+      "checked_at": "2026-11-11T05:05:55.794759+00:00",
       "new_urls": 1,
-      "original_urls": 754,
+      "original_urls": 755,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -22529,7 +22563,8 @@
         "1569660416085336064": "2026-11-10T10:35:58.839213+00:00",
         "1569894477450186763": "2026-11-11T02:05:56.872192+00:00",
         "1569917165790830726": "2026-11-11T03:35:57.540009+00:00",
-        "1569932216597745685": "2026-11-11T04:35:58.098040+00:00"
+        "1569932216597745685": "2026-11-11T04:35:58.098040+00:00",
+        "1569939766110068887": "2026-11-11T05:05:56.983295+00:00"
       },
       "checked_search_urls": {}
     },
@@ -25849,6 +25884,11 @@
           "checked_at": "2026-11-11T04:36:27.521398+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/0atd3": {
+          "checked_at": "2026-11-11T05:06:34.000513+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -28253,6 +28293,12 @@
           "detected_at": "2026-11-11T04:35:59.298913+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-11T04:36:27.521398+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/0atd3": {
+          "detected_at": "2026-11-11T05:05:58.240983+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-11T05:06:34.000513+00:00",
           "http_status": null
         }
       },
@@ -36732,6 +36778,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/0atd3": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-11T05:06:34.000513+00:00",
+          "title_observed": "ワンピースカード OP-18「神の支配」 深夜販売入場券",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -42767,6 +42824,19 @@
         },
         "https://livepocket.jp/e/he4pu": {
           "checked_at": "2026-11-11T04:36:27.521398+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/0atd3": {
+          "checked_at": "2026-11-11T05:06:34.000513+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
