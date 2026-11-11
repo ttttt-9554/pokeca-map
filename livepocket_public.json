@@ -12593,31 +12593,29 @@
     },
     {
       "url": "https://livepocket.jp/e/al4o2",
-      "discord_posted_at": "2026-11-11T02:00:10.653000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/al4o2",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
       "event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ抽選販売",
-      "application_end_at": "2026-11-13T22:00:00+09:00",
       "application_start_at": "2026-11-11T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-13T22:00:00+09:00",
+      "discord_posted_at": "2026-11-11T02:00:10.653000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "トレカエース勝田東石川店",
-      "prefecture": "茨城県",
-      "pokemon_map_match": "メガブレイブ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/al4o2",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-19",
       "purchase_end_date": "2026-11-20",
+      "review_category": "pokemon",
+      "pokemon_map_match": "メガブレイブ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-11T02:05:57.901531+00:00"
     }
   ],
-  "updated_at": "2026-11-11T02:06:21.790021+00:00"
+  "updated_at": "2026-11-11T02:16:02.952653+00:00"
 }
