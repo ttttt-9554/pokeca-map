@@ -25924,8 +25924,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/0atd3": {
-          "checked_at": "2026-11-11T05:06:34.000513+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-11T11:16:21.390597+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/ryaqf": {
@@ -28340,8 +28340,8 @@
         },
         "https://livepocket.jp/e/0atd3": {
           "detected_at": "2026-11-11T05:05:58.240983+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-11T05:06:34.000513+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-11T11:16:21.390597+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ryaqf": {
@@ -30198,6 +30198,11 @@
         "https://livepocket.jp/e/he4pu": {
           "attempts": 1,
           "last_attempt_at": "2026-11-11T10:46:28.595040+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/0atd3": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-11T11:16:21.390597+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -36842,7 +36847,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-11T05:06:34.000513+00:00",
+          "checked_at": "2026-11-11T11:16:21.390597+00:00",
           "title_observed": "ワンピースカード OP-18「神の支配」 深夜販売入場券",
           "genre": "onepiece",
           "product_origin": "",
@@ -42906,7 +42911,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0atd3": {
-          "checked_at": "2026-11-11T05:06:34.000513+00:00",
+          "checked_at": "2026-11-11T11:16:21.390597+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
