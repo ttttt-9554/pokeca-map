@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-11T09:05:57.115692+00:00",
+  "collected_at": "2026-11-11T12:05:57.880281+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -22264,7 +22264,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ryaqf",
       "field_sources": {
@@ -22294,8 +22294,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 583,
-    "no_structured_details": 174
+    "parsed": 584,
+    "no_structured_details": 173
   },
   "field_counts": {
     "store_name": 353,
@@ -22312,12 +22312,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570000184816046130"
+      "1551580466266644552": "1570045469566967888"
     },
     "last_run": {
-      "checked_at": "2026-11-11T09:05:57.115692+00:00",
-      "new_urls": 1,
-      "original_urls": 756,
+      "checked_at": "2026-11-11T12:05:57.880281+00:00",
+      "new_urls": 0,
+      "original_urls": 757,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
