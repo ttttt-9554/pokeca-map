@@ -12614,6 +12614,8 @@
       "pokemon_map_match": "メガブレイブ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ抽選販売",
       "first_detected_at": "2026-11-11T02:05:57.901531+00:00"
     },
     {
@@ -12680,5 +12682,5 @@
       "first_detected_at": "2026-11-11T05:05:58.240983+00:00"
     }
   ],
-  "updated_at": "2026-11-11T08:06:03.675973+00:00"
+  "updated_at": "2026-11-11T08:16:26.113166+00:00"
 }
