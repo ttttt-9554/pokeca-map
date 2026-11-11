@@ -12614,6 +12614,8 @@
       "pokemon_map_match": "メガブレイブ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガブレイブ抽選販売",
       "first_detected_at": "2026-11-11T02:05:57.901531+00:00"
     },
     {
@@ -12657,8 +12659,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム「神の支配」",
       "first_detected_at": "2026-11-11T04:35:59.298913+00:00"
     },
     {
@@ -12679,8 +12679,6 @@
       "store_location_url": "https://livepocket.jp/e/0atd3",
       "result_announcement_date": "2026-11-16",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード OP-18「神の支配」 深夜販売入場券",
       "first_detected_at": "2026-11-11T05:05:58.240983+00:00"
     },
     {
@@ -12704,9 +12702,8 @@
       "purchase_end_date": "2026-11-23",
       "purchase_end_time": "21:00",
       "review_category": "onepiece",
-      "official_event_title": "【店頭告知を必ず確認してください】11/21発売ワンピース「神の支配」【OP-18】抽選販売",
       "first_detected_at": "2026-11-11T09:05:59.700440+00:00"
     }
   ],
-  "updated_at": "2026-11-11T17:16:31.315189+00:00"
+  "updated_at": "2026-11-11T17:26:43.788905+00:00"
 }
