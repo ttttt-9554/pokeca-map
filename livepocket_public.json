@@ -12639,28 +12639,26 @@
     },
     {
       "url": "https://livepocket.jp/e/he4pu",
-      "discord_posted_at": "2026-11-11T04:30:08.367000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/he4pu",
+      "store_name": "TSUTAYA鹿沼店",
+      "prefecture": "栃木県",
       "event_title": "ワンピースカードゲーム「神の支配」",
-      "application_end_at": "2026-11-15T22:00:00+09:00",
       "application_start_at": "2026-11-11T09:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "discord_posted_at": "2026-11-11T04:30:08.367000+00:00",
       "stores": [
         {
           "name": "TSUTAYA鹿沼店",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA鹿沼店",
-      "prefecture": "栃木県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム「神の支配」",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/he4pu",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-11T04:35:59.298913+00:00"
     }
   ],
-  "updated_at": "2026-11-11T04:36:27.521398+00:00"
+  "updated_at": "2026-11-11T04:46:01.710236+00:00"
 }
