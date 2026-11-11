@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-11T14:16:12Z",
+  "as_of": "2026-11-11T17:16:50Z",
   "total": 3,
   "items": [
     {
@@ -21,6 +21,21 @@
       "queue": "ready"
     },
     {
+      "url": "https://livepocket.jp/e/tjphs",
+      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-11-12T23:59:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-10T15:26:29.189358+00:00",
+      "next_retry_at": "2026-11-11T15:26:29.189358+00:00",
+      "queue": "ready"
+    },
+    {
       "url": "https://livepocket.jp/e/vw0pq",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー 抽選販売",
       "store_name": "",
@@ -35,21 +50,6 @@
       "last_checked_at": "2026-11-06T14:01:22.617488+00:00",
       "next_retry_at": "2026-11-07T14:01:22.617488+00:00",
       "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/tjphs",
-      "event_title": "ホビーステーション「ポケモンカードゲームMEGA 30th CELEBRATION カードセット ９種セット（再販）」抽選販売",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-11-12T23:59:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-11-10T15:26:29.189358+00:00",
-      "next_retry_at": "2026-11-11T15:26:29.189358+00:00",
-      "queue": "retry_wait"
     }
   ]
 }

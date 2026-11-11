@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-11T12:05:57.880281+00:00",
+  "collected_at": "2026-11-11T17:15:56.743467+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -22312,10 +22312,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570045469566967888"
+      "1551580466266644552": "1570090769778221191"
     },
     "last_run": {
-      "checked_at": "2026-11-11T12:05:57.880281+00:00",
+      "checked_at": "2026-11-11T17:15:56.743467+00:00",
       "new_urls": 0,
       "original_urls": 757,
       "suspect_legacy_store_names": 0,
@@ -25919,18 +25919,18 @@
           "http_status": null
         },
         "https://livepocket.jp/e/he4pu": {
-          "checked_at": "2026-11-11T10:46:28.595040+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/0atd3": {
-          "checked_at": "2026-11-11T11:16:21.390597+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/ryaqf": {
-          "checked_at": "2026-11-11T09:06:26.547505+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -28335,19 +28335,19 @@
         "https://livepocket.jp/e/he4pu": {
           "detected_at": "2026-11-11T04:35:59.298913+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-11T10:46:28.595040+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/0atd3": {
           "detected_at": "2026-11-11T05:05:58.240983+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-11T11:16:21.390597+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ryaqf": {
           "detected_at": "2026-11-11T09:05:59.700440+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-11T09:06:26.547505+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "http_status": null
         }
       },
@@ -30196,13 +30196,18 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/he4pu": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-11T10:46:28.595040+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-11T17:16:31.315189+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/0atd3": {
+          "attempts": 2,
+          "last_attempt_at": "2026-11-11T17:16:31.315189+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/ryaqf": {
           "attempts": 1,
-          "last_attempt_at": "2026-11-11T11:16:21.390597+00:00",
+          "last_attempt_at": "2026-11-11T17:16:31.315189+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -36836,7 +36841,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-11T10:46:28.595040+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "title_observed": "ワンピースカードゲーム「神の支配」",
           "genre": "onepiece",
           "product_origin": "",
@@ -36847,7 +36852,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-11T11:16:21.390597+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "title_observed": "ワンピースカード OP-18「神の支配」 深夜販売入場券",
           "genre": "onepiece",
           "product_origin": "",
@@ -36858,7 +36863,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-11T09:06:26.547505+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "title_observed": "【店頭告知を必ず確認してください】11/21発売ワンピース「神の支配」【OP-18】抽選販売",
           "genre": "",
           "product_origin": "",
@@ -42898,7 +42903,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/he4pu": {
-          "checked_at": "2026-11-11T10:46:28.595040+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -42911,7 +42916,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/0atd3": {
-          "checked_at": "2026-11-11T11:16:21.390597+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -42924,7 +42929,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ryaqf": {
-          "checked_at": "2026-11-11T09:06:26.547505+00:00",
+          "checked_at": "2026-11-11T17:16:31.315189+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -43361,9 +43366,9 @@
         "next_check_at": "2026-11-08T13:16:28.760695+00:00"
       },
       "https://livepocket.jp/e/tjphs": {
-        "checked_at": "2026-11-11T10:06:30.102083+00:00",
+        "checked_at": "2026-11-11T17:16:31.315189+00:00",
         "status": "ok",
-        "next_check_at": "2026-11-11T16:06:30.102083+00:00"
+        "next_check_at": "2026-11-11T23:16:31.315189+00:00"
       }
     }
   }
