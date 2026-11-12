@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-12T10:36:00.015493+00:00",
+  "collected_at": "2026-11-12T11:35:55.346672+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 764,
+  "unique_livepocket_urls": 765,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -22544,34 +22544,70 @@
       "purchase_start_time": "12:00",
       "purchase_end_date": "2026-11-20",
       "purchase_end_time": "21:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/gy0g3",
+      "discord_message_id": "1570400282926383234",
+      "discord_posted_at": "2026-11-12T11:30:04.076000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nTSUTAYA Trading Card平塚店\n受付終了: 11/17 20:00（残り4日23時間）\nhttps://livepocket.jp/e/gy0g3",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gy0g3",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカード 「神の支配」 抽選販売受付",
+      "application_end_at": "2026-11-17T20:00:00+09:00",
+      "application_start_at": "2026-11-11T12:28:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card平塚店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "TSUTAYA Trading Card平塚店",
+      "prefecture": "神奈川県",
+      "result_announcement_date": "2026-11-20",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 588,
-    "no_structured_details": 176
+    "no_structured_details": 177
   },
   "field_counts": {
-    "store_name": 360,
-    "prefecture": 313,
-    "event_title": 462,
+    "store_name": 361,
+    "prefecture": 314,
+    "event_title": 463,
     "event_date": 1,
     "product_name": 118,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 728,
-    "application_start_at": 725,
-    "stores_events": 360
+    "application_end_at": 729,
+    "application_start_at": 726,
+    "stores_events": 361
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570385190453518449"
+      "1551580466266644552": "1570400282926383234"
     },
     "last_run": {
-      "checked_at": "2026-11-12T10:36:00.015493+00:00",
+      "checked_at": "2026-11-12T11:35:55.346672+00:00",
       "new_urls": 1,
-      "original_urls": 763,
+      "original_urls": 764,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -22863,7 +22899,8 @@
         "1570317274198577184": "2026-11-12T06:05:56.392312+00:00",
         "1570370078409760768": "2026-11-12T09:35:58.319645+00:00",
         "1570377631008952330": "2026-11-12T10:05:58.722849+00:00",
-        "1570385190453518449": "2026-11-12T10:36:01.077943+00:00"
+        "1570385190453518449": "2026-11-12T10:36:01.077943+00:00",
+        "1570400282926383234": "2026-11-12T11:35:56.531952+00:00"
       },
       "checked_search_urls": {}
     },
@@ -26228,6 +26265,11 @@
           "checked_at": "2026-11-12T10:36:32.168846+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/gy0g3": {
+          "checked_at": "2026-11-12T11:36:27.522195+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -28686,6 +28728,12 @@
           "detected_at": "2026-11-12T10:36:02.965542+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-12T10:36:32.168846+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gy0g3": {
+          "detected_at": "2026-11-12T11:35:57.856826+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T11:36:27.522195+00:00",
           "http_status": null
         }
       },
@@ -37299,6 +37347,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/gy0g3": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-12T11:36:27.522195+00:00",
+          "title_observed": "ワンピースカード 「神の支配」 抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -43461,6 +43520,19 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/gy0g3": {
+          "checked_at": "2026-11-12T11:36:27.522195+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         }
       }
     },
@@ -43887,9 +43959,9 @@
         "next_check_at": "2026-11-08T13:16:28.760695+00:00"
       },
       "https://livepocket.jp/e/tjphs": {
-        "checked_at": "2026-11-12T05:26:23.550663+00:00",
+        "checked_at": "2026-11-12T11:36:27.522195+00:00",
         "status": "ok",
-        "next_check_at": "2026-11-12T11:26:23.550663+00:00"
+        "next_check_at": "2026-11-12T17:36:27.522195+00:00"
       }
     }
   }
