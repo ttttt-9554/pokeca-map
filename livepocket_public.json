@@ -12746,31 +12746,29 @@
     },
     {
       "url": "https://livepocket.jp/e/ip2mr",
-      "discord_posted_at": "2026-11-12T04:00:07.024000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/ip2mr",
+      "store_name": "トレカエース春日部店",
+      "prefecture": "埼玉県",
       "event_title": "【再販⑤】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
-      "application_end_at": "2026-11-12T23:00:00+09:00",
       "application_start_at": "2026-11-11T09:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-12T23:00:00+09:00",
+      "discord_posted_at": "2026-11-12T04:00:07.024000+00:00",
       "stores": [
         {
           "name": "トレカエース春日部店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "トレカエース春日部店",
-      "prefecture": "埼玉県",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【再販⑤】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ip2mr",
       "result_announcement_date": "2026-11-13",
       "purchase_start_date": "2026-11-16",
       "purchase_end_date": "2026-11-17",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-12T04:05:57.460417+00:00"
     }
   ],
-  "updated_at": "2026-11-12T04:06:24.707073+00:00"
+  "updated_at": "2026-11-12T04:16:02.765556+00:00"
 }
