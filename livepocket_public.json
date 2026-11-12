@@ -12960,32 +12960,30 @@
     },
     {
       "url": "https://livepocket.jp/e/m0ix9",
-      "discord_posted_at": "2026-11-12T14:30:07.235000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/m0ix9",
+      "store_name": "蔦屋書店茂原店 トレカコーナー",
+      "prefecture": "千葉県",
       "event_title": "蔦屋書店茂原店ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選販売",
-      "application_end_at": "2026-11-15T22:00:00+09:00",
       "application_start_at": "2026-11-11T16:28:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "discord_posted_at": "2026-11-12T14:30:07.235000+00:00",
       "stores": [
         {
           "name": "蔦屋書店茂原店 トレカコーナー",
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "蔦屋書店茂原店 トレカコーナー",
-      "prefecture": "千葉県",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "蔦屋書店茂原店ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/m0ix9",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-27",
       "purchase_start_time": "09:00",
       "purchase_end_date": "2026-11-29",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-12T14:31:00.935056+00:00"
     }
   ],
-  "updated_at": "2026-11-12T14:31:26.811967+00:00"
+  "updated_at": "2026-11-12T14:41:02.310603+00:00"
 }
