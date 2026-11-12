@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {supportedUrl,extract} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
-import {enrichCloudPass, enrichStarbox, enrichGeo} from './cloud_pass_lottery_enrich.mjs';
+import {supportedUrl, extract, lotteryPageRequest} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
+import {enrichCloudPass, enrichStarbox, enrichGeo, enrichRakutenBooks} from './cloud_pass_lottery_enrich.mjs';
 const g='https://docs.google.com/forms/d/e/1FAIpQLSd6O9PhrqOHX4xxcRV4APYy_B_0OyCAW_ZkTa-Rp7htUleUjQ/closedform';
 assert(supportedUrl(g));
 for(const url of ['https://docs.google.com.evil.test/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','http://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform','https://docs.google.com/forms/d/e/aaaaaaaaaaaaaaaaaaaa/viewform?foo=1','https://e-yamashiroya.com@localhost/a','https://e-yamashiroya.com/a?next=http://localhost'])assert(!supportedUrl(url),url);
@@ -186,4 +186,58 @@ assert.equal(deniedGeo.external_url_unverified, true);
 assert.equal(deniedGeo.geo_last_error, 'source_access_denied');
 assert.equal(anotherGeo.geo_checked_at, undefined, 'Stop further GEO requests after access denial');
 assert.equal(await enrichGeo(deniedCatalog, () => assert.fail('GEO cooldown ignored'), now), 0);
-console.log('Individual lottery, Starbox, CustomForm and GEO extraction checks passed');
+const rakuten = 'https://books.rakuten.co.jp/rb/18595282';
+for (const url of [rakuten, rakuten + '/', rakuten + '/?bkts=1']) {
+  assert(supportedUrl(url));
+  const request = lotteryPageRequest(url);
+  assert.equal(request.url.href, rakuten + '/?bkts=1');
+  assert.equal(request.headers['Accept-Language'], 'ja');
+}
+for (const url of [rakuten + '?next=https://example.com', rakuten + '#lottery',
+  rakuten.replace('books.rakuten.co.jp', 'books.rakuten.co.jp.example.org'),
+  rakuten.replace('/rb/', '/event/'), rakuten.replace('https:', 'http:')]) {
+  assert(!supportedUrl(url), url);
+}
+const rakutenTitle = 'ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION';
+const rakutenSchedule = '<h5 class="lotteryItem__title">■抽選販売スケジュール</h5>' +
+  '<p><b>抽選受付期間：2026/11/13(金) 10:00 〜 2026/11/18(水) 23:59<br>' +
+  '当選者販売期間：2026/11/29(日) 10:00 〜 2026/12/03(木) 23:59<br></b></p>' +
+  '<ul><li>※当落の結果は、販売開始日までにメールでご連絡します。</li></ul>';
+const rakutenPage = '<h1 class="header-nav__logo"><img alt="楽天ブックス"></h1>' +
+  '<h1 itemprop="name">' + rakutenTitle + '<br/><a class="authorLink">玩具</a></h1>' +
+  '<p>販売期間：2026/09/16 10:00～2026/09/30 23:59</p>' +
+  '<h2>商品説明</h2><div class="lotteryItem">' + rakutenSchedule +
+  '<h5>■抽選対象商品</h5><p>同じページに掲載された別商品の名称</p></div>';
+const rakutenFields = {
+  event_title: rakutenTitle, product_name: rakutenTitle, store_name: '楽天ブックス', prefecture: '全国',
+  application_start_at: '2026-11-13T10:00:00+09:00', application_end_at: '2026-11-18T23:59:00+09:00',
+  purchase_start_date: '2026-11-29', purchase_start_time: '10:00',
+  purchase_end_date: '2026-12-03', purchase_end_time: '23:59',
+  review_category: 'pokemon', product_type: 'pack'
+};
+assert.deepEqual(extract(rakutenPage, rakuten + '/?bkts=1'), rakutenFields);
+assert.deepEqual(extract(rakutenPage.replace(rakutenSchedule, ''), rakuten), {},
+  'A normal sales window is not a lottery');
+assert.deepEqual(extract(rakutenPage.replace('11/18(水)', '11/99(水)'), rakuten), {});
+assert.deepEqual(extract(rakutenPage.replace('11/13(金) 10:00', '11/13(金)'), rakuten), {});
+assert.deepEqual(extract(rakutenPage + rakutenSchedule.replace('11/18(水) 23:59', '11/19(木) 20:00'), rakuten), {},
+  'Conflicting lottery schedules must be left unconfirmed');
+const exactResult = rakutenPage.replace('</b></p>', '抽選結果発表期間：2026/11/27～2026/11/28 18:00</b></p>');
+assert.equal(extract(exactResult, rakuten).result_announcement_date, '2026-11-28');
+assert.equal(extract(exactResult, rakuten).result_announcement_time, '18:00');
+assert.equal(extract(exactResult.replace('2026/11/27～2026/11/28 18:00', '2026/11/29まで'), rakuten)
+  .result_announcement_date, undefined);
+
+const rakutenNow = new Date('2026-11-12T05:00:00Z');
+const rakutenRow = {url: rakuten, external_url_unverified: true, discord_posted_at: '2026-11-12T03:45:00Z'};
+const staleRakuten = rakutenPage.replaceAll('2026/11/', '2026/10/');
+assert.equal(await enrichRakutenBooks({items: [rakutenRow]}, async () => staleRakuten, rakutenNow), 1);
+assert.equal(rakutenRow.external_url_unverified, true, 'An earlier lottery on the same product URL is stale');
+const rakutenRetry = new Date(rakutenNow.getTime() + 60 * 60 * 1000);
+assert.equal(await enrichRakutenBooks({items: [rakutenRow]}, async () => rakutenPage, rakutenRetry), 1);
+assert.equal(rakutenRow.external_url_unverified, false);
+assert.equal(rakutenRow.official_event_title, rakutenTitle);
+assert.equal(rakutenRow.purchase_end_time, '23:59');
+assert.equal(rakutenRow.pokemon_map_type, 'pack');
+assert.equal(await enrichRakutenBooks({items: [rakutenRow]}, () => assert.fail('Verified Rakuten page was refetched'), rakutenRetry), 0);
+console.log('Individual lottery extraction checks passed, including Rakuten Books');

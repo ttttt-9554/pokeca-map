@@ -2,6 +2,7 @@
 export const STARBOX_HOST = 'shoplottery.e-starbox.com';
 export const CUSTOMFORM_HOST = 'customform.jp';
 export const GEO_HOST = 'draw.geo-online.co.jp';
+export const RAKUTEN_BOOKS_HOST = 'books.rakuten.co.jp';
 
 export function supportedUrl(value) {
   try {
@@ -14,11 +15,28 @@ export function supportedUrl(value) {
     if(u.hostname==='cloud-pass.jp') return /^\/pr\/[a-f0-9]{64}\/?$/i.test(u.pathname) && !u.search;
     if(u.hostname===STARBOX_HOST) return u.pathname==='/lottery/entry' && /^\?code=[A-Za-z0-9]{10}$/.test(u.search);
     if(u.hostname===GEO_HOST) return /^\/lottery\/[1-9]\d{0,8}\/?$/.test(u.pathname) && !u.search;
+    if(u.hostname===RAKUTEN_BOOKS_HOST) {
+      return /^\/rb\/[1-9]\d{0,9}\/?$/.test(u.pathname) && (!u.search || u.search === '?bkts=1');
+    }
     if(u.hostname===CUSTOMFORM_HOST) return /^\/form\/input\/\d{1,10}\/?$/.test(u.pathname) &&
       (!u.search || /^\?key=[a-zA-Z0-9_-]{8,64}$/.test(u.search));
     return false;
   } catch {return false;}
 }
+
+export function lotteryPageRequest(value) {
+  const url = new URL(value);
+  const headers = {'User-Agent': 'TorecaRadar/1.0', Accept: 'text/html,application/xhtml+xml'};
+  if (url.hostname === GEO_HOST || url.hostname === RAKUTEN_BOOKS_HOST) {
+    url.pathname = url.pathname.replace(/\/?$/, '/');
+  }
+  if (url.hostname === RAKUTEN_BOOKS_HOST) {
+    url.search = '?bkts=1';
+    headers['Accept-Language'] = 'ja';
+  }
+  return {url, headers};
+}
+
 function decode(s){
   return String(s||'').replace(/&#(x[\da-f]+|\d+);/gi,(_,n)=>{
     let c=n[0].toLowerCase()==='x'?parseInt(n.slice(1),16):parseInt(n,10);
@@ -381,6 +399,66 @@ function geoFields(html) {
   return fields;
 }
 
+function rakutenBooksFields(html) {
+  const markup = html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+  const title = uniqueText([...markup.matchAll(/<h1\b[^>]*\bitemprop\s*=\s*(['"])name\1[^>]*>([\s\S]*?)<\/h1\s*>/gi)]
+    .map(match => plain(match[2].replace(/<a\b[^>]*\bclass\s*=\s*["']authorLink["'][^>]*>[\s\S]*?<\/a\s*>/gi, ''))));
+  if (title.length < 5 || title.length > 200) return {};
+
+  // The product page also displays a sales window outside the lottery section.
+  const lines = [...markup.matchAll(/<h([2-6])\b[^>]*>([\s\S]*?)<\/h\1\s*>([\s\S]*?)(?=<h[1-6]\b|$)/gi)]
+    .filter(match => plain(match[2]).replace(/^■\s*/, '') === '抽選販売スケジュール')
+    .flatMap(match => match[3].replace(/<br\b[^>]*>|<\/(?:p|li|div|tr)\s*>/gi, '\n').split('\n'))
+    .map(line => plain(line).normalize('NFKC'));
+  const labeled = label => {
+    const pattern = new RegExp('^(?:' + label + ')\\s*:\\s*(.+)$');
+    return uniqueText(lines.map(line => line.match(pattern)?.[1]));
+  };
+  const application = geoScheduleText(labeled('抽選受付期間|抽選応募期間'));
+  const yearAnchor = geoExplicitDate(application);
+  if (!yearAnchor) return {};
+  const [start, end] = starboxScheduleRange(application, yearAnchor);
+  if (!start || !end || start.length <= 10 || end.length <= 10 || start >= end) return {};
+
+  const fields = {
+    event_title: title,
+    product_name: title,
+    store_name: '楽天ブックス',
+    prefecture: '全国',
+    application_start_at: start + ':00+09:00',
+    application_end_at: end + ':00+09:00',
+  };
+  const sale = geoScheduleText(labeled('当選者(?:向け)?(?:販売|購入)期間'));
+  const [first, last] = starboxScheduleRange(sale, end.slice(0, 10));
+  if (first && last && (first.length === 10 || first >= end)) {
+    fields.purchase_start_date = first.slice(0, 10);
+    fields.purchase_end_date = last.slice(0, 10);
+    if (first.length > 10) fields.purchase_start_time = first.slice(11);
+    if (last.length > 10) fields.purchase_end_time = last.slice(11);
+  }
+
+  // A promise to email by the sales start is not an announced result date.
+  const result = labeled('(?:抽選結果発表|当落結果発表|結果発表|当選発表|抽選結果通知|当選通知)(?:予定)?(?:日時|日|期間)?');
+  if (result && !/まで|以内|以降/.test(result)) {
+    const anchor = end.slice(0, 10);
+    const announced = /[~〜～–—]|から/.test(result)
+      ? starboxScheduleRange(result, anchor)[1]
+      : starboxSchedulePoint(result, anchor);
+    if (announced) {
+      fields.result_announcement_date = announced.slice(0, 10);
+      if (announced.length > 10) fields.result_announcement_time = announced.slice(11);
+    }
+  }
+
+  if (/ポケモンカード|ポケカ/i.test(title)) fields.review_category = 'pokemon';
+  else if (/ONE\s*PIECE|ワンピースカード/i.test(title)) fields.review_category = 'onepiece';
+  else if (/遊戯王/.test(title)) fields.review_category = 'yugioh';
+  const pack = /拡張パック|ブースターパック/.test(title);
+  const deck = /デッキ|スターターセット/.test(title);
+  if (pack || deck) fields.product_type = pack && deck ? 'pack/deck' : pack ? 'pack' : 'deck';
+  return fields;
+}
+
 export function extract(html,url){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
@@ -388,6 +466,7 @@ export function extract(html,url){
   if (u.hostname === STARBOX_HOST) return supportedUrl(url) ? starboxFields(html) : {};
   if (u.hostname === CUSTOMFORM_HOST) return supportedUrl(url) ? customformFields(html, url) : {};
   if (u.hostname === GEO_HOST) return supportedUrl(url) ? geoFields(html) : {};
+  if (u.hostname === RAKUTEN_BOOKS_HOST) return supportedUrl(url) ? rakutenBooksFields(html) : {};
   const raw=html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/i)?.[1]||html.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/i)?.[1]||'';
   const title=plain(raw).replace(/\s*[|｜]\s*(?:ファミマオンライン|ヤマシロヤ|セブンネットショッピング).*$/,'').trim();
   if(title.length>=5&&title.length<=200&&/抽選/.test(title)&&!/(?:受付終了|Google フォーム|closed form)/i.test(title))result.event_title=title;

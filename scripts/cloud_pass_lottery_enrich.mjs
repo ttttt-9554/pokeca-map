@@ -1,23 +1,23 @@
 import {readFile, rename, writeFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-import {extract, supportedUrl, STARBOX_HOST, GEO_HOST} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
+import {
+  extract, lotteryPageRequest, supportedUrl, STARBOX_HOST, GEO_HOST, RAKUTEN_BOOKS_HOST
+} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
 
 const catalogPath = 'other_lottery_public.json';
 const maxPageBytes = 2_000_000;
 const retryInterval = 24 * 60 * 60 * 1000;
 
 async function fetchPage(url) {
-  const source = new URL(url);
-  const geo = source.hostname === GEO_HOST;
-  if (geo && !source.pathname.endsWith('/')) source.pathname += '/';
+  const {url: source, headers} = lotteryPageRequest(url);
   const response = await fetch(source, {
     redirect: 'manual',
-    headers: {'User-Agent': 'TorecaRadar/1.0', Accept: 'text/html,application/xhtml+xml'},
+    headers,
     signal: AbortSignal.timeout(12_000)
   });
-  if (geo && [403, 429].includes(response.status)) {
+  if ([GEO_HOST, RAKUTEN_BOOKS_HOST].includes(source.hostname) && [403, 429].includes(response.status)) {
     await response.body?.cancel();
-    const error = new Error('GEO lottery page denied access');
+    const error = new Error(source.hostname + ' lottery page denied access');
     error.status = response.status;
     throw error;
   }
@@ -40,12 +40,16 @@ async function fetchPage(url) {
 async function enrichSite(items, host, source, load, now) {
   const checkedAt = source + '_checked_at';
   const verifiedAt = source + '_verified_at';
+  const lastError = source + '_last_error';
+  const rakutenBooks = host === RAKUTEN_BOOKS_HOST;
+  const checkLimit = rakutenBooks ? 12 : 4;
+  const retryAfter = rakutenBooks ? 60 * 60 * 1000 : retryInterval;
   let checked = 0;
   for (const item of items) {
-    if (checked >= 4) break;
+    if (checked >= checkLimit) break;
     const url = item.url;
     if (typeof url !== 'string' || !supportedUrl(url) || new URL(url).hostname !== host ||
-        item[verifiedAt] || now - Date.parse(item[checkedAt]) < retryInterval) continue;
+        item[verifiedAt] || now - Date.parse(item[checkedAt]) < retryAfter) continue;
     item[checkedAt] = now.toISOString();
     checked += 1;
 
@@ -53,8 +57,8 @@ async function enrichSite(items, host, source, load, now) {
     try {
       page = await load(url);
     } catch (error) {
-      if (host === GEO_HOST && [403, 429].includes(error?.status)) {
-        item.geo_last_error = 'source_access_denied';
+      if ((host === GEO_HOST || rakutenBooks) && [403, 429].includes(error?.status)) {
+        item[lastError] = 'source_access_denied';
         break;
       }
       continue;
@@ -62,13 +66,15 @@ async function enrichSite(items, host, source, load, now) {
     if (!page) continue;
     const {product_type: productType, ...fields} = extract(page, url);
     if (!fields.event_title || !fields.application_start_at || !fields.application_end_at) continue;
+    // Rakuten Books reuses the product URL between lottery rounds.
+    if (rakutenBooks && Date.parse(fields.application_end_at) <= Date.parse(item.discord_posted_at)) continue;
     Object.assign(item, fields, {
       official_event_title: fields.event_title,
       event_title_provisional: false,
       external_url_unverified: false,
       [verifiedAt]: now.toISOString()
     });
-    if (host === GEO_HOST) delete item.geo_last_error;
+    if (host === GEO_HOST || rakutenBooks) delete item[lastError];
     if (productType) item.pokemon_map_type = productType;
   }
   return checked;
@@ -93,13 +99,19 @@ export function enrichGeo(catalog, load = fetchPage, now = new Date()) {
   return enrichSite(newestFirst(catalog.items), GEO_HOST, 'geo', load, now);
 }
 
+export function enrichRakutenBooks(catalog, load = fetchPage, now = new Date()) {
+  if (catalog.items.some(item => item.rakuten_books_last_error === 'source_access_denied' &&
+      now - Date.parse(item.rakuten_books_checked_at) < retryInterval)) return 0;
+  return enrichSite(newestFirst(catalog.items), RAKUTEN_BOOKS_HOST, 'rakuten_books', load, now);
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
   // Keep the existing collector entry point for the shared Edge parsers.
-  const [cloudChecked, starboxChecked, geoChecked] = await Promise.all([
-    enrichCloudPass(catalog), enrichStarbox(catalog), enrichGeo(catalog)
+  const [cloudChecked, starboxChecked, geoChecked, rakutenChecked] = await Promise.all([
+    enrichCloudPass(catalog), enrichStarbox(catalog), enrichGeo(catalog), enrichRakutenBooks(catalog)
   ]);
-  if (cloudChecked || starboxChecked || geoChecked) {
+  if (cloudChecked || starboxChecked || geoChecked || rakutenChecked) {
     const tempPath = catalogPath + '.tmp';
     await writeFile(tempPath, JSON.stringify(catalog, null, 2) + '\n', 'utf8');
     await rename(tempPath, catalogPath);
@@ -107,4 +119,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   console.log('Cloud Pass pages checked:', cloudChecked);
   console.log('Starbox lottery pages checked:', starboxChecked);
   console.log('GEO lottery pages checked:', geoChecked);
+  console.log('Rakuten Books lottery pages checked:', rakutenChecked);
 }

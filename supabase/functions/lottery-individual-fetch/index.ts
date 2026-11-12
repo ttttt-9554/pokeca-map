@@ -1,4 +1,4 @@
-import {supportedUrl,extract,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
+import {supportedUrl,extract,lotteryPageRequest,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
 function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
@@ -47,10 +47,9 @@ Deno.serve(async(req:Request)=>{
  if(typeof input?.url!=='string'||input.url.length>1000||!supportedUrl(input.url))
   return json({error:'このサイトは個別取得に未対応です。元ページを開いて確認してください。'},422);
  try{
-  const source=new URL(input.url),host=source.hostname;
+  const {url:source,headers}=lotteryPageRequest(input.url),host=source.hostname;
   if(host===CUSTOMFORM_HOST)return await collectedCustomForm(input.url);
-  if(host===GEO_HOST&&!source.pathname.endsWith('/'))source.pathname+='/';
-  const response=await fetch(source,{redirect:'manual',headers:{'User-Agent':'TorecaRadar/1.0','Accept':'text/html,application/xhtml+xml'},signal:AbortSignal.timeout(14000)});
+  const response=await fetch(source,{redirect:'manual',headers,signal:AbortSignal.timeout(14000)});
   if(response.status>=300&&response.status<400)return json({error:'別ページへの転送があるため、自動取得できませんでした。'},422);
   if(host===GEO_HOST&&[403,429].includes(response.status))
    return json({error:`GEO公式サイトが自動取得を拒否しました（HTTP ${response.status}）。公式ページの案内を確認してください。`},422);
