@@ -12771,31 +12771,29 @@
     },
     {
       "url": "https://livepocket.jp/e/43vbl",
-      "discord_posted_at": "2026-11-12T06:00:13.253000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/43vbl",
+      "store_name": "TSUTAYA加須店",
+      "prefecture": "埼玉県",
       "event_title": "ポケモンカードゲーム 「ストームエメラルダ」抽選受付",
-      "application_end_at": "2026-11-14T22:00:00+09:00",
       "application_start_at": "2026-11-12T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-14T22:00:00+09:00",
+      "discord_posted_at": "2026-11-12T06:00:13.253000+00:00",
       "stores": [
         {
           "name": "TSUTAYA加須店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA加須店",
-      "prefecture": "埼玉県",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」抽選受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/43vbl",
       "result_announcement_date": "2026-11-15",
       "purchase_start_date": "2026-11-18",
       "purchase_end_date": "2026-11-20",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-12T06:05:57.426661+00:00"
     }
   ],
-  "updated_at": "2026-11-12T06:06:27.929679+00:00"
+  "updated_at": "2026-11-12T06:15:59.757636+00:00"
 }
