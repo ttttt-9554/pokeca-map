@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-11T17:15:56.743467+00:00",
-  "unique_livepocket_urls": 757,
+  "collected_at": "2026-11-12T01:00:59.244018+00:00",
+  "unique_livepocket_urls": 758,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12701,7 +12701,31 @@
       "purchase_end_time": "21:00",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-11T09:05:59.700440+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ve2yt",
+      "discord_posted_at": "2026-11-12T01:00:08.359000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ve2yt",
+      "event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+      "application_end_at": "2026-11-12T21:01:00+09:00",
+      "application_start_at": "2026-11-12T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "official_genre": "pokemon",
+      "official_event_title": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
+      "result_announcement_date": "2026-11-13",
+      "purchase_start_date": "2026-11-17",
+      "purchase_end_date": "2026-11-23",
+      "first_detected_at": "2026-11-12T01:01:04.452761+00:00"
     }
   ],
-  "updated_at": "2026-11-12T00:51:08.800466+00:00"
+  "updated_at": "2026-11-12T01:01:37.162696+00:00"
 }
