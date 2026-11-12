@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-12T11:35:55.346672+00:00",
+  "collected_at": "2026-11-12T12:00:57.052939+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 765,
+  "unique_livepocket_urls": 766,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -22443,7 +22443,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/f2y9q",
       "field_sources": {
@@ -22480,7 +22480,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/pumq4",
       "field_sources": {
@@ -22517,7 +22517,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/08pdi",
       "field_sources": {
@@ -22555,7 +22555,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/gy0g3",
       "field_sources": {
@@ -22580,34 +22580,70 @@
       "result_announcement_date": "2026-11-20",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23"
+    },
+    {
+      "url": "https://livepocket.jp/e/wazdl",
+      "discord_message_id": "1570407872599425056",
+      "discord_posted_at": "2026-11-12T12:00:13.595000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 21時まとめ】\n\n📍東京都\nTSUTAYA Trading Card府中駅前\n受付終了: 11/14 21:00（残り1日23時間）\nhttps://livepocket.jp/e/f2y9q\n\n📍東京都\nカードキングダム秋葉原駅前店4階\n受付終了: 11/13 21:00（残り23時間59分）\nhttps://livepocket.jp/e/08pdi\n\n🔁 再通知\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 11/12 21:01（残り1分未満）\nhttps://livepocket.jp/e/ve2yt\n\n📍神奈川県\nTSUTAYA Trading Card平塚店\n受付終了: 11/17 20:00（残り4日22時間）\nhttps://livepocket.jp/e/gy0g3\n\n📍千葉県\nTSUTAYA流山おおたかの森駅前店\n受付終了: 11/14 21:00（残り1日23時間）\nhttps://livepocket.jp/e/pumq4\n\n🔁 再通知\n📍埼玉県\nトレカエース春日部店\n受付終了: 11/12 23:00（残り1時間59分）\nhttps://livepocket.jp/e/ip2mr\n\n🔁 再通知\n📍埼玉県\nTSUTAYA加須店\n受付終了: 11/14 22:00（残り2日0時間）\nhttps://livepocket.jp/e/43vbl\n\n🔁 再通知\n📍栃木県\nTSUTAYA宇都宮竹林店\n受付終了: 11/15 22:00（残り3日0時間）\nhttps://livepocket.jp/e/nugyy\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\n受付終了: 11/15 22:00（残り3日0時間）\nhttps://livepocket.jp/e/wazdl",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/wazdl",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "11/21発売 ONE PIECE カードゲーム ブースターパック「OP-18 神の支配」抽選販売",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-12T08:50:00+09:00",
+      "stores": [
+        {
+          "name": "ＴＳＵＴＡＹＡ真岡店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "ＴＳＵＴＡＹＡ真岡店",
+      "prefecture": "栃木県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 588,
-    "no_structured_details": 177
+    "parsed": 592,
+    "no_structured_details": 174
   },
   "field_counts": {
-    "store_name": 361,
-    "prefecture": 314,
-    "event_title": 463,
+    "store_name": 362,
+    "prefecture": 315,
+    "event_title": 464,
     "event_date": 1,
     "product_name": 118,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 729,
-    "application_start_at": 726,
-    "stores_events": 361
+    "application_end_at": 730,
+    "application_start_at": 727,
+    "stores_events": 362
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570400282926383234"
+      "1551580466266644552": "1570407872599425056"
     },
     "last_run": {
-      "checked_at": "2026-11-12T11:35:55.346672+00:00",
+      "checked_at": "2026-11-12T12:00:57.052939+00:00",
       "new_urls": 1,
-      "original_urls": 764,
+      "original_urls": 765,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -22900,7 +22936,8 @@
         "1570370078409760768": "2026-11-12T09:35:58.319645+00:00",
         "1570377631008952330": "2026-11-12T10:05:58.722849+00:00",
         "1570385190453518449": "2026-11-12T10:36:01.077943+00:00",
-        "1570400282926383234": "2026-11-12T11:35:56.531952+00:00"
+        "1570400282926383234": "2026-11-12T11:35:56.531952+00:00",
+        "1570407872599425056": "2026-11-12T12:00:58.369391+00:00"
       },
       "checked_search_urls": {}
     },
@@ -26270,6 +26307,11 @@
           "checked_at": "2026-11-12T11:36:27.522195+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/wazdl": {
+          "checked_at": "2026-11-12T12:01:27.185148+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -28734,6 +28776,12 @@
           "detected_at": "2026-11-12T11:35:57.856826+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-12T11:36:27.522195+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/wazdl": {
+          "detected_at": "2026-11-12T12:00:59.691671+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T12:01:27.185148+00:00",
           "http_status": null
         }
       },
@@ -37358,6 +37406,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/wazdl": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-12T12:01:27.185148+00:00",
+          "title_observed": "11/21発売 ONE PIECE カードゲーム ブースターパック「OP-18 神の支配」抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -43523,6 +43582,19 @@
         },
         "https://livepocket.jp/e/gy0g3": {
           "checked_at": "2026-11-12T11:36:27.522195+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/wazdl": {
+          "checked_at": "2026-11-12T12:01:27.185148+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
