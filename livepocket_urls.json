@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-12T01:00:59.244018+00:00",
+  "collected_at": "2026-11-12T02:00:56.383591+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 758,
+  "unique_livepocket_urls": 759,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -22326,34 +22326,68 @@
       "result_announcement_date": "2026-11-13",
       "purchase_start_date": "2026-11-17",
       "purchase_end_date": "2026-11-23"
+    },
+    {
+      "url": "https://livepocket.jp/e/nugyy",
+      "discord_message_id": "1570256834713882676",
+      "discord_posted_at": "2026-11-12T02:00:03.357000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA宇都宮竹林店\n受付終了: 11/15 22:00（残り3日10時間）\nhttps://livepocket.jp/e/nugyy",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nugyy",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-10T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮竹林店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA宇都宮竹林店",
+      "prefecture": "栃木県",
+      "result_announcement_date": "2026-11-16"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 584,
-    "no_structured_details": 174
+    "no_structured_details": 175
   },
   "field_counts": {
-    "store_name": 354,
-    "prefecture": 307,
-    "event_title": 456,
+    "store_name": 355,
+    "prefecture": 308,
+    "event_title": 457,
     "event_date": 1,
     "product_name": 118,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 722,
-    "application_start_at": 719,
-    "stores_events": 354
+    "application_end_at": 723,
+    "application_start_at": 720,
+    "stores_events": 355
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570241756199522355"
+      "1551580466266644552": "1570256834713882676"
     },
     "last_run": {
-      "checked_at": "2026-11-12T01:00:59.244018+00:00",
+      "checked_at": "2026-11-12T02:00:56.383591+00:00",
       "new_urls": 1,
-      "original_urls": 757,
+      "original_urls": 758,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -22639,7 +22673,8 @@
         "1569932216597745685": "2026-11-11T04:35:58.098040+00:00",
         "1569939766110068887": "2026-11-11T05:05:56.983295+00:00",
         "1570000184816046130": "2026-11-11T09:05:58.462164+00:00",
-        "1570241756199522355": "2026-11-12T01:01:03.094474+00:00"
+        "1570241756199522355": "2026-11-12T01:01:03.094474+00:00",
+        "1570256834713882676": "2026-11-12T02:00:57.485513+00:00"
       },
       "checked_search_urls": {}
     },
@@ -25974,6 +26009,11 @@
           "checked_at": "2026-11-12T01:01:37.162696+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/nugyy": {
+          "checked_at": "2026-11-12T02:01:25.293920+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -28396,6 +28436,12 @@
           "detected_at": "2026-11-12T01:01:04.452761+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-12T01:01:37.162696+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/nugyy": {
+          "detected_at": "2026-11-12T02:00:58.578479+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T02:01:25.293920+00:00",
           "http_status": null
         }
       },
@@ -36928,6 +36974,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/nugyy": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-12T02:01:25.293920+00:00",
+          "title_observed": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -43002,6 +43059,19 @@
         },
         "https://livepocket.jp/e/ve2yt": {
           "checked_at": "2026-11-12T01:01:37.162696+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/nugyy": {
+          "checked_at": "2026-11-12T02:01:25.293920+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
