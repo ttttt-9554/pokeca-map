@@ -12841,6 +12841,8 @@
       "purchase_start_time": "10:00",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
       "first_detected_at": "2026-11-12T10:06:00.069735+00:00"
     },
     {
@@ -12985,5 +12987,5 @@
       "first_detected_at": "2026-11-12T14:31:00.935056+00:00"
     }
   ],
-  "updated_at": "2026-11-12T22:11:02.170115+00:00"
+  "updated_at": "2026-11-12T22:22:00.145633+00:00"
 }
