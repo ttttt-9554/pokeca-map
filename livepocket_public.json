@@ -12931,8 +12931,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "プレオープン記念【抽選】ワンピースカードゲーム 神の支配",
       "first_detected_at": "2026-11-12T14:01:00.868971+00:00"
     },
     {
@@ -12958,8 +12956,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "プレオープン記念【抽選】ポケモンカードゲーム MEGA拡張パック 「30th CELEBRATION」",
       "first_detected_at": "2026-11-12T14:01:00.868971+00:00"
     },
     {
@@ -12989,5 +12985,5 @@
       "first_detected_at": "2026-11-12T14:31:00.935056+00:00"
     }
   ],
-  "updated_at": "2026-11-12T20:11:27.859039+00:00"
+  "updated_at": "2026-11-12T20:21:01.042169+00:00"
 }
