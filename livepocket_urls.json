@@ -26080,8 +26080,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ve2yt": {
-          "checked_at": "2026-11-12T01:01:37.162696+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T07:06:20.925174+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/nugyy": {
@@ -28518,8 +28518,8 @@
         },
         "https://livepocket.jp/e/ve2yt": {
           "detected_at": "2026-11-12T01:01:04.452761+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-12T01:01:37.162696+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-12T07:06:20.925174+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nugyy": {
@@ -30398,6 +30398,11 @@
         "https://livepocket.jp/e/ryaqf": {
           "attempts": 2,
           "last_attempt_at": "2026-11-11T23:21:19.742261+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/ve2yt": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-12T07:06:20.925174+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -37064,7 +37069,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-12T01:01:37.162696+00:00",
+          "checked_at": "2026-11-12T07:06:20.925174+00:00",
           "title_observed": "ふるいちイオンモール座間店ポケカ抽選販売「30thセレブレーション」",
           "genre": "pokemon",
           "product_origin": "",
@@ -43176,7 +43181,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ve2yt": {
-          "checked_at": "2026-11-12T01:01:37.162696+00:00",
+          "checked_at": "2026-11-12T07:06:20.925174+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
