@@ -26400,8 +26400,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/f2y9q": {
-          "checked_at": "2026-11-12T09:36:26.284793+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T15:41:43.468992+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/pumq4": {
@@ -28882,8 +28882,8 @@
         },
         "https://livepocket.jp/e/f2y9q": {
           "detected_at": "2026-11-12T09:35:59.397534+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-12T09:36:26.284793+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-12T15:41:43.468992+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/pumq4": {
@@ -30806,6 +30806,11 @@
         "https://livepocket.jp/e/43vbl": {
           "attempts": 1,
           "last_attempt_at": "2026-11-12T12:11:28.479423+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/f2y9q": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-12T15:41:43.468992+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -37516,7 +37521,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-12T09:36:26.284793+00:00",
+          "checked_at": "2026-11-12T15:41:43.468992+00:00",
           "title_observed": "ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -43724,7 +43729,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/f2y9q": {
-          "checked_at": "2026-11-12T09:36:26.284793+00:00",
+          "checked_at": "2026-11-12T15:41:43.468992+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
