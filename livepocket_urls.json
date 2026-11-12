@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-12T10:05:57.492340+00:00",
+  "collected_at": "2026-11-12T10:36:00.015493+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 763,
+  "unique_livepocket_urls": 764,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -22506,34 +22506,72 @@
       "purchase_start_date": "2026-11-21",
       "purchase_start_time": "10:00",
       "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/08pdi",
+      "discord_message_id": "1570385190453518449",
+      "discord_posted_at": "2026-11-12T10:30:05.750000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nカードキングダム秋葉原駅前店4階\n受付終了: 11/13 21:00（残り1日1時間）\nhttps://livepocket.jp/e/08pdi",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/08pdi",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "カードキングダム秋葉原駅前店 ONE PIECEカードゲーム OP-17「世界最強の戦士」再販抽選販売",
+      "application_end_at": "2026-11-13T21:00:00+09:00",
+      "application_start_at": "2026-11-11T12:00:00+09:00",
+      "stores": [
+        {
+          "name": "カードキングダム秋葉原駅前店4階",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "カードキングダム秋葉原駅前店4階",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-18",
+      "purchase_start_time": "12:00",
+      "purchase_end_date": "2026-11-20",
+      "purchase_end_time": "21:00"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 588,
-    "no_structured_details": 175
+    "no_structured_details": 176
   },
   "field_counts": {
-    "store_name": 359,
-    "prefecture": 312,
-    "event_title": 461,
+    "store_name": 360,
+    "prefecture": 313,
+    "event_title": 462,
     "event_date": 1,
     "product_name": 118,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 727,
-    "application_start_at": 724,
-    "stores_events": 359
+    "application_end_at": 728,
+    "application_start_at": 725,
+    "stores_events": 360
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570377631008952330"
+      "1551580466266644552": "1570385190453518449"
     },
     "last_run": {
-      "checked_at": "2026-11-12T10:05:57.492340+00:00",
+      "checked_at": "2026-11-12T10:36:00.015493+00:00",
       "new_urls": 1,
-      "original_urls": 762,
+      "original_urls": 763,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -22824,7 +22862,8 @@
         "1570287049083453452": "2026-11-12T04:05:56.390488+00:00",
         "1570317274198577184": "2026-11-12T06:05:56.392312+00:00",
         "1570370078409760768": "2026-11-12T09:35:58.319645+00:00",
-        "1570377631008952330": "2026-11-12T10:05:58.722849+00:00"
+        "1570377631008952330": "2026-11-12T10:05:58.722849+00:00",
+        "1570385190453518449": "2026-11-12T10:36:01.077943+00:00"
       },
       "checked_search_urls": {}
     },
@@ -26184,6 +26223,11 @@
           "checked_at": "2026-11-12T10:06:41.663969+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/08pdi": {
+          "checked_at": "2026-11-12T10:36:32.168846+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -28636,6 +28680,12 @@
           "detected_at": "2026-11-12T10:06:00.069735+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-12T10:06:41.663969+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/08pdi": {
+          "detected_at": "2026-11-12T10:36:02.965542+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T10:36:32.168846+00:00",
           "http_status": null
         }
       },
@@ -37238,6 +37288,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/08pdi": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-12T10:36:32.168846+00:00",
+          "title_observed": "カードキングダム秋葉原駅前店 ONE PIECEカードゲーム OP-17「世界最強の戦士」再販抽選販売",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -43377,6 +43438,19 @@
         },
         "https://livepocket.jp/e/pumq4": {
           "checked_at": "2026-11-12T10:06:41.663969+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/08pdi": {
+          "checked_at": "2026-11-12T10:36:32.168846+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

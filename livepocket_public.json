@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-12T10:05:57.492340+00:00",
-  "unique_livepocket_urls": 763,
+  "collected_at": "2026-11-12T10:36:00.015493+00:00",
+  "unique_livepocket_urls": 764,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12842,7 +12842,33 @@
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-12T10:06:00.069735+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/08pdi",
+      "discord_posted_at": "2026-11-12T10:30:05.750000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/08pdi",
+      "event_title": "カードキングダム秋葉原駅前店 ONE PIECEカードゲーム OP-17「世界最強の戦士」再販抽選販売",
+      "application_end_at": "2026-11-13T21:00:00+09:00",
+      "application_start_at": "2026-11-11T12:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "カードキングダム秋葉原駅前店4階",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "カードキングダム秋葉原駅前店4階",
+      "prefecture": "東京都",
+      "official_genre": "onepiece",
+      "official_event_title": "カードキングダム秋葉原駅前店 ONE PIECEカードゲーム OP-17「世界最強の戦士」再販抽選販売",
+      "result_announcement_date": "2026-11-14",
+      "purchase_start_date": "2026-11-18",
+      "purchase_start_time": "12:00",
+      "purchase_end_date": "2026-11-20",
+      "purchase_end_time": "21:00",
+      "first_detected_at": "2026-11-12T10:36:02.965542+00:00"
     }
   ],
-  "updated_at": "2026-11-12T10:26:03.984794+00:00"
+  "updated_at": "2026-11-12T10:36:32.168846+00:00"
 }
