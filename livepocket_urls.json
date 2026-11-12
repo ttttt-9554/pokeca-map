@@ -26284,8 +26284,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/43vbl": {
-          "checked_at": "2026-11-12T06:06:27.929679+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-12T12:11:28.479423+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/f2y9q": {
@@ -28750,8 +28750,8 @@
         },
         "https://livepocket.jp/e/43vbl": {
           "detected_at": "2026-11-12T06:05:57.426661+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-12T06:06:27.929679+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-12T12:11:28.479423+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/f2y9q": {
@@ -30657,6 +30657,11 @@
         "https://livepocket.jp/e/ip2mr": {
           "attempts": 1,
           "last_attempt_at": "2026-11-12T10:06:41.663969+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/43vbl": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-12T12:11:28.479423+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -37356,7 +37361,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-12T06:06:27.929679+00:00",
+          "checked_at": "2026-11-12T12:11:28.479423+00:00",
           "title_observed": "ポケモンカードゲーム 「ストームエメラルダ」抽選受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -43529,7 +43534,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/43vbl": {
-          "checked_at": "2026-11-12T06:06:27.929679+00:00",
+          "checked_at": "2026-11-12T12:11:28.479423+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
