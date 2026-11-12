@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-12T09:35:57.299841+00:00",
-  "unique_livepocket_urls": 762,
+  "collected_at": "2026-11-12T10:05:57.492340+00:00",
+  "unique_livepocket_urls": 763,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -12767,6 +12767,8 @@
       "pokemon_map_match": "ストームエメラルダ",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【再販⑤】ポケモンカードゲーム MEGA 拡張パック 『ストームエメラルダ』抽選販売受付",
       "first_detected_at": "2026-11-12T04:05:57.460417+00:00"
     },
     {
@@ -12819,7 +12821,32 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-12T09:35:59.397534+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/pumq4",
+      "discord_posted_at": "2026-11-12T10:00:03.438000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/pumq4",
+      "event_title": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
+      "application_end_at": "2026-11-14T21:00:00+09:00",
+      "application_start_at": "2026-11-12T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA流山おおたかの森駅前店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA流山おおたかの森駅前店",
+      "prefecture": "千葉県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック 神の支配【OP-18】",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "10:00",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-12T10:06:00.069735+00:00"
     }
   ],
-  "updated_at": "2026-11-12T09:56:11.358332+00:00"
+  "updated_at": "2026-11-12T10:06:41.663969+00:00"
 }
