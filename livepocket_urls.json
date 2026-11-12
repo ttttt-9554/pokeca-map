@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-12T06:05:55.224427+00:00",
+  "collected_at": "2026-11-12T09:05:55.428298+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -22407,7 +22407,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/43vbl",
       "field_sources": {
@@ -22436,8 +22436,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 587,
-    "no_structured_details": 174
+    "parsed": 588,
+    "no_structured_details": 173
   },
   "field_counts": {
     "store_name": 357,
@@ -22454,12 +22454,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570317274198577184"
+      "1551580466266644552": "1570362568134893629"
     },
     "last_run": {
-      "checked_at": "2026-11-12T06:05:55.224427+00:00",
-      "new_urls": 1,
-      "original_urls": 760,
+      "checked_at": "2026-11-12T09:05:55.428298+00:00",
+      "new_urls": 0,
+      "original_urls": 761,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
