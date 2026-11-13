@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T09:30:56.957742+00:00",
-  "unique_livepocket_urls": 789,
+  "collected_at": "2026-11-13T11:00:57.296197+00:00",
+  "unique_livepocket_urls": 790,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13438,7 +13438,34 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "first_detected_at": "2026-11-13T09:30:59.091850+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/lpk_op",
+      "discord_posted_at": "2026-11-13T11:00:08.312000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/lpk_op",
+      "event_title": "ワンピースカードゲーム 「神の支配」抽選受付",
+      "application_end_at": "2026-11-15T21:45:00+09:00",
+      "application_start_at": "2026-11-13T09:30:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA流山店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA流山店",
+      "prefecture": "千葉県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム 「神の支配」抽選受付",
+      "result_announcement_date": "2026-11-18",
+      "result_announcement_time": "13:00",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "09:30",
+      "purchase_end_date": "2026-11-23",
+      "purchase_end_time": "21:45",
+      "first_detected_at": "2026-11-13T11:00:59.914191+00:00"
     }
   ],
-  "updated_at": "2026-11-13T10:50:59.443318+00:00"
+  "updated_at": "2026-11-13T11:01:51.092749+00:00"
 }
