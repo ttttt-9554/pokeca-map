@@ -26420,7 +26420,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/wazdl": {
-          "checked_at": "2026-11-12T18:11:23.204904+00:00",
+          "checked_at": "2026-11-13T00:21:19.412758+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -28907,7 +28907,7 @@
         "https://livepocket.jp/e/wazdl": {
           "detected_at": "2026-11-12T12:00:59.691671+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-12T18:11:23.204904+00:00",
+          "checked_at": "2026-11-13T00:21:19.412758+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/471n8": {
@@ -30829,8 +30829,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/wazdl": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-12T18:11:23.204904+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T00:21:19.412758+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/qatvd": {
@@ -37600,7 +37600,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-12T18:11:23.204904+00:00",
+          "checked_at": "2026-11-13T00:21:19.412758+00:00",
           "title_observed": "11/21発売 ONE PIECE カードゲーム ブースターパック「OP-18 神の支配」抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -43816,7 +43816,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/wazdl": {
-          "checked_at": "2026-11-12T18:11:23.204904+00:00",
+          "checked_at": "2026-11-13T00:21:19.412758+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
