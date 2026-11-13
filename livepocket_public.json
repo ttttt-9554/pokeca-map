@@ -13026,6 +13026,7 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-24",
       "review_category": "onepiece",
+      "official_event_title": "ONE PIECEカード ブースターパック 神の支配【OP-18】",
       "first_detected_at": "2026-11-13T01:35:59.366550+00:00"
     },
     {
@@ -13305,52 +13306,48 @@
     },
     {
       "url": "https://livepocket.jp/e/t7mnn",
-      "discord_posted_at": "2026-11-13T07:30:07.032000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/t7mnn",
-      "event_title": "ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2抽選販売",
-      "product_name": "［ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2］",
-      "application_end_at": "2026-11-15T23:59:00+09:00",
-      "application_start_at": "2026-11-13T13:15:00+09:00",
-      "review_category": "onepiece",
       "store_name": "［TSUTAYA調布駅南口店］",
+      "prefecture": "",
+      "product_name": "［ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2］",
+      "event_title": "ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2抽選販売",
+      "application_start_at": "2026-11-13T13:15:00+09:00",
+      "application_end_at": "2026-11-15T23:59:00+09:00",
+      "discord_posted_at": "2026-11-13T07:30:07.032000+00:00",
       "stores": [
         {
           "name": "［TSUTAYA調布駅南口店］",
           "prefecture": ""
         }
       ],
-      "prefecture": "",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/t7mnn",
       "result_announcement_date": "2026-11-16",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T07:31:01.564605+00:00"
     },
     {
       "url": "https://livepocket.jp/e/3z-wc",
-      "discord_posted_at": "2026-11-13T07:30:07.032000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/3z-wc",
+      "store_name": "TSUTAYA嵐山店",
+      "prefecture": "埼玉県",
       "event_title": "ワンピースカードゲーム 「神の支配」",
-      "application_end_at": "2026-11-17T21:30:00+09:00",
       "application_start_at": "2026-11-12T09:30:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-17T21:30:00+09:00",
+      "discord_posted_at": "2026-11-13T07:30:07.032000+00:00",
       "stores": [
         {
           "name": "TSUTAYA嵐山店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA嵐山店",
-      "prefecture": "埼玉県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム 「神の支配」",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3z-wc",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_start_time": "09:30",
       "purchase_end_date": "2026-11-23",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T07:31:01.564605+00:00"
     }
   ],
-  "updated_at": "2026-11-13T07:31:32.409008+00:00"
+  "updated_at": "2026-11-13T07:41:28.701423+00:00"
 }
