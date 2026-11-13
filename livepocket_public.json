@@ -12986,28 +12986,26 @@
     },
     {
       "url": "https://livepocket.jp/e/yrxa9",
-      "discord_posted_at": "2026-11-13T00:48:41.344000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/yrxa9",
+      "store_name": "ヤマト屋書店TSUTAYA中里店",
+      "prefecture": "宮城県",
       "event_title": "TSUTAYA中里店 11/21発売ワンピースカード抽選",
-      "application_end_at": "2026-11-16T21:00:00+09:00",
       "application_start_at": "2026-11-13T00:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-16T21:00:00+09:00",
+      "discord_posted_at": "2026-11-13T00:48:41.344000+00:00",
       "stores": [
         {
           "name": "ヤマト屋書店TSUTAYA中里店",
           "prefecture": "宮城県"
         }
       ],
-      "store_name": "ヤマト屋書店TSUTAYA中里店",
-      "prefecture": "宮城県",
-      "official_genre": "onepiece",
-      "official_event_title": "TSUTAYA中里店 11/21発売ワンピースカード抽選",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/yrxa9",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T00:55:56.344358+00:00"
     }
   ],
-  "updated_at": "2026-11-13T00:56:21.007821+00:00"
+  "updated_at": "2026-11-13T01:06:01.997999+00:00"
 }
