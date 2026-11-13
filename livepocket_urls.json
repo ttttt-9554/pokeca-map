@@ -27438,7 +27438,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/sjp1y": {
-          "checked_at": "2026-11-13T14:21:37.804120+00:00",
+          "checked_at": "2026-11-13T20:26:20.502478+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -30070,7 +30070,7 @@
         "https://livepocket.jp/e/sjp1y": {
           "detected_at": "2026-11-13T08:11:09.197969+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-13T14:21:37.804120+00:00",
+          "checked_at": "2026-11-13T20:26:20.502478+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/9tvnv": {
@@ -32112,8 +32112,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/sjp1y": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-13T14:21:37.804120+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T20:26:20.502478+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9tvnv": {
@@ -39118,7 +39118,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T14:21:37.804120+00:00",
+          "checked_at": "2026-11-13T20:26:20.502478+00:00",
           "title_observed": "ワンピースカード 「神の支配」抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -45649,7 +45649,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/sjp1y": {
-          "checked_at": "2026-11-13T14:21:37.804120+00:00",
+          "checked_at": "2026-11-13T20:26:20.502478+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
