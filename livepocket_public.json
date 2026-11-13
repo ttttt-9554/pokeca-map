@@ -13048,8 +13048,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
       "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     },
     {
@@ -13072,8 +13070,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
       "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     },
     {
@@ -13353,28 +13349,26 @@
     },
     {
       "url": "https://livepocket.jp/e/sjp1y",
-      "discord_posted_at": "2026-11-13T08:02:10.160000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/sjp1y",
+      "store_name": "TSUTAYA秩父店",
+      "prefecture": "埼玉県",
       "event_title": "ワンピースカード 「神の支配」抽選販売受付",
-      "application_end_at": "2026-11-15T20:00:00+09:00",
       "application_start_at": "2026-11-12T09:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T20:00:00+09:00",
+      "discord_posted_at": "2026-11-13T08:02:10.160000+00:00",
       "stores": [
         {
           "name": "TSUTAYA秩父店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA秩父店",
-      "prefecture": "埼玉県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカード 「神の支配」抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sjp1y",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-21",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T08:11:09.197969+00:00"
     }
   ],
-  "updated_at": "2026-11-13T08:11:48.068374+00:00"
+  "updated_at": "2026-11-13T08:20:59.444050+00:00"
 }
