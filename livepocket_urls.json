@@ -27418,7 +27418,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/bb1am": {
-          "checked_at": "2026-11-13T11:51:40.726174+00:00",
+          "checked_at": "2026-11-13T17:56:22.977793+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -30028,7 +30028,7 @@
         "https://livepocket.jp/e/bb1am": {
           "detected_at": "2026-11-13T05:36:15.542470+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-13T11:51:40.726174+00:00",
+          "checked_at": "2026-11-13T17:56:22.977793+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ejju8": {
@@ -32097,8 +32097,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bb1am": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-13T11:51:40.726174+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T17:56:22.977793+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bt6dj": {
@@ -39059,7 +39059,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T11:51:40.726174+00:00",
+          "checked_at": "2026-11-13T17:56:22.977793+00:00",
           "title_observed": "ポケモンカード『ストームエメラルダ』抽選販売について",
           "genre": "pokemon",
           "product_origin": "",
@@ -45582,7 +45582,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/bb1am": {
-          "checked_at": "2026-11-13T11:51:40.726174+00:00",
+          "checked_at": "2026-11-13T17:56:22.977793+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
