@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T03:35:55.687791+00:00",
-  "unique_livepocket_urls": 774,
+  "collected_at": "2026-11-13T04:35:56.505087+00:00",
+  "unique_livepocket_urls": 777,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13091,7 +13091,83 @@
       "result_announcement_date": "2026-11-18",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-13T02:35:59.512168+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/s3ajb",
+      "discord_posted_at": "2026-11-13T04:27:19.664000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/s3ajb",
+      "event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
+      "application_end_at": "2026-11-14T20:00:00+09:00",
+      "application_start_at": "2026-11-14T11:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "新宿マルイアネックス3階 FEWMANY",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "新宿マルイアネックス3階 FEWMANY",
+      "prefecture": "東京都",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
+      "result_announcement_date": "2026-11-16",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "10:30",
+      "purchase_end_date": "2026-11-21",
+      "purchase_end_time": "20:00",
+      "first_detected_at": "2026-11-13T04:35:59.070470+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nk62g",
+      "discord_posted_at": "2026-11-13T04:27:19.664000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nk62g",
+      "event_title": "ポケモンカード MEGA 拡張パック ハドウシーカー",
+      "application_end_at": "2026-11-23T20:30:00+09:00",
+      "application_start_at": "2026-11-05T12:34:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "文教堂あきる野店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "文教堂あきる野店",
+      "prefecture": "東京都",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード MEGA 拡張パック ハドウシーカー",
+      "first_detected_at": "2026-11-13T04:35:59.070470+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2mrjj",
+      "discord_posted_at": "2026-11-13T04:27:19.664000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/2mrjj",
+      "event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-13T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA宇都宮南店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA宇都宮南店",
+      "prefecture": "栃木県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "09:00",
+      "purchase_end_date": "2026-11-22",
+      "purchase_end_time": "22:00",
+      "first_detected_at": "2026-11-13T04:35:59.070470+00:00"
     }
   ],
-  "updated_at": "2026-11-13T04:26:03.554322+00:00"
+  "updated_at": "2026-11-13T04:36:35.366585+00:00"
 }
