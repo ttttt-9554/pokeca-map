@@ -27393,7 +27393,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/2mrjj": {
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:16:31.608398+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -30004,7 +30004,7 @@
         "https://livepocket.jp/e/2mrjj": {
           "detected_at": "2026-11-13T04:35:59.070470+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:16:31.608398+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nk62g": {
@@ -32077,8 +32077,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/2mrjj": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-13T10:41:26.914127+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T17:16:31.608398+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yr356": {
@@ -39004,7 +39004,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:16:31.608398+00:00",
           "title_observed": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -45517,7 +45517,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/2mrjj": {
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:16:31.608398+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
