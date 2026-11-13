@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-13T07:30:57.204094+00:00",
+  "collected_at": "2026-11-13T08:11:03.546351+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 785,
+  "unique_livepocket_urls": 786,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -23301,34 +23301,70 @@
       "purchase_start_date": "2026-11-21",
       "purchase_start_time": "09:30",
       "purchase_end_date": "2026-11-23"
+    },
+    {
+      "url": "https://livepocket.jp/e/sjp1y",
+      "discord_message_id": "1570710351396343858",
+      "discord_posted_at": "2026-11-13T08:02:10.160000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA秩父店\n受付終了: 11/15 20:00（残り2日2時間）\nhttps://livepocket.jp/e/sjp1y",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sjp1y",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカード 「神の支配」抽選販売受付",
+      "application_end_at": "2026-11-15T20:00:00+09:00",
+      "application_start_at": "2026-11-12T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA秩父店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA秩父店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-21"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 609,
-    "no_structured_details": 176
+    "no_structured_details": 177
   },
   "field_counts": {
-    "store_name": 381,
-    "prefecture": 333,
-    "event_title": 483,
+    "store_name": 382,
+    "prefecture": 334,
+    "event_title": 484,
     "event_date": 1,
     "product_name": 121,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 748,
-    "application_start_at": 745,
-    "stores_events": 381
+    "application_end_at": 749,
+    "application_start_at": 746,
+    "stores_events": 382
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570702285213011968"
+      "1551580466266644552": "1570710351396343858"
     },
     "last_run": {
-      "checked_at": "2026-11-13T07:30:57.204094+00:00",
-      "new_urls": 2,
-      "original_urls": 783,
+      "checked_at": "2026-11-13T08:11:03.546351+00:00",
+      "new_urls": 1,
+      "original_urls": 785,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -23634,7 +23670,8 @@
         "1570664534841106443": "2026-11-13T05:05:57.613346+00:00",
         "1570672122026795103": "2026-11-13T05:36:14.562901+00:00",
         "1570679678522363937": "2026-11-13T06:05:57.398786+00:00",
-        "1570702285213011968": "2026-11-13T07:31:00.504753+00:00"
+        "1570702285213011968": "2026-11-13T07:31:00.504753+00:00",
+        "1570710351396343858": "2026-11-13T08:11:08.221584+00:00"
       },
       "checked_search_urls": {}
     },
@@ -27036,13 +27073,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/nichl": {
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/z_qtz": {
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/hboq2": {
@@ -27102,6 +27139,11 @@
         },
         "https://livepocket.jp/e/3z-wc": {
           "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/sjp1y": {
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "status": "checked_title_deadline",
           "http_status": null
         }
@@ -29608,14 +29650,14 @@
         },
         "https://livepocket.jp/e/z_qtz": {
           "detected_at": "2026-11-13T02:05:59.403801+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/nichl": {
           "detected_at": "2026-11-13T02:05:59.403801+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/hboq2": {
@@ -29688,6 +29730,12 @@
           "detected_at": "2026-11-13T07:31:01.564605+00:00",
           "status": "checked_title_product_deadline_store",
           "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/sjp1y": {
+          "detected_at": "2026-11-13T08:11:09.197969+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "http_status": null
         }
       },
@@ -31618,6 +31666,16 @@
         "https://livepocket.jp/e/a21ct": {
           "attempts": 1,
           "last_attempt_at": "2026-11-13T07:41:28.701423+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/z_qtz": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-13T08:11:48.068374+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/nichl": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-13T08:11:48.068374+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -38438,7 +38496,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "title_observed": "ワンピースカードゲーム『神の支配』抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -38449,7 +38507,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "title_observed": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -38583,6 +38641,17 @@
           "http_status": "",
           "checked_at": "2026-11-13T07:31:32.409008+00:00",
           "title_observed": "ワンピースカードゲーム 「神の支配」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/sjp1y": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
+          "title_observed": "ワンピースカード 「神の支配」抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
@@ -44842,7 +44911,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nichl": {
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -44855,7 +44924,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/z_qtz": {
-          "checked_at": "2026-11-13T02:06:38.182834+00:00",
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -45012,6 +45081,19 @@
         },
         "https://livepocket.jp/e/3z-wc": {
           "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/sjp1y": {
+          "checked_at": "2026-11-13T08:11:48.068374+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
