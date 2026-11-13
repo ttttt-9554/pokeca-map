@@ -13008,27 +13008,26 @@
     },
     {
       "url": "https://livepocket.jp/e/a21ct",
-      "discord_posted_at": "2026-11-13T01:30:07.510000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/a21ct",
+      "store_name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+      "prefecture": "宮城県",
       "event_title": "ONE PIECEカード ブースターパック 神の支配【OP-18】",
-      "application_end_at": "2026-11-15T23:59:00+09:00",
       "application_start_at": "2026-11-13T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T23:59:00+09:00",
+      "discord_posted_at": "2026-11-13T01:30:07.510000+00:00",
       "stores": [
         {
           "name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
           "prefecture": "宮城県"
         }
       ],
-      "store_name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
-      "prefecture": "宮城県",
-      "official_event_title": "ONE PIECEカード ブースターパック 神の支配【OP-18】",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/a21ct",
       "result_announcement_date": "2026-11-19",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-24",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T01:35:59.366550+00:00"
     }
   ],
-  "updated_at": "2026-11-13T01:36:34.039148+00:00"
+  "updated_at": "2026-11-13T01:46:01.171035+00:00"
 }
