@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-13T05:56:10Z",
-  "total": 2,
+  "as_of": "2026-11-13T06:06:37Z",
+  "total": 3,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
@@ -35,6 +35,21 @@
       "last_checked_at": "2026-11-06T14:01:22.617488+00:00",
       "next_retry_at": "2026-11-07T14:01:22.617488+00:00",
       "queue": "ready"
+    },
+    {
+      "url": "https://livepocket.jp/e/bt6dj",
+      "event_title": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
+      "store_name": "キデイランド ららぽーと富士見店",
+      "prefecture": "埼玉県",
+      "application_end_at": "",
+      "missing": [
+        "deadline"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-13T06:06:25.530753+00:00",
+      "next_retry_at": "2026-11-14T06:06:25.530753+00:00",
+      "queue": "retry_wait"
     }
   ]
 }

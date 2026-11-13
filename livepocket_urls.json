@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-13T05:36:09.492563+00:00",
+  "collected_at": "2026-11-13T06:05:56.361877+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 782,
+  "unique_livepocket_urls": 783,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -22736,7 +22736,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/yrxa9",
       "field_sources": {
@@ -22914,7 +22914,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/s3ajb",
       "field_sources": {
@@ -22952,7 +22952,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/nk62g",
       "field_sources": {
@@ -22985,7 +22985,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/2mrjj",
       "field_sources": {
@@ -23023,7 +23023,7 @@
       "product_name": "ONE PIECEカードゲーム ブースターパック 神の支配",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/t5_18",
       "field_sources": {
@@ -23060,7 +23060,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ejju8",
       "field_sources": {
@@ -23098,7 +23098,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/yr356",
       "field_sources": {
@@ -23136,7 +23136,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/bb1am",
       "field_sources": {
@@ -23174,7 +23174,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/n5tb0",
       "field_sources": {
@@ -23199,34 +23199,65 @@
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23"
+    },
+    {
+      "url": "https://livepocket.jp/e/bt6dj",
+      "discord_message_id": "1570679678522363937",
+      "discord_posted_at": "2026-11-13T06:00:17.177000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 15時まとめ】\n\n🔁 再通知\n📍東京都\n新宿マルイアネックス3階 FEWMANY\n受付終了: 11/14 11:00（残り19時間59分）\nhttps://livepocket.jp/e/s3ajb\n\n🔁 再通知\n📍東京都\n文教堂あきる野店\n受付終了: 11/23 20:30（残り10日5時間）\nhttps://livepocket.jp/e/nk62g\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\n受付終了: 11/14 11:00（残り19時間59分）\nhttps://livepocket.jp/e/ejju8\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\n受付終了: 11/14 11:00（残り19時間59分）\nhttps://livepocket.jp/e/yr356\n\n📍東京都\n新宿マルイアネックス3階 FEWMANY\n受付終了: 11/14 11:00（残り19時間59分）\nhttps://livepocket.jp/e/bb1am\n\n📍埼玉県\nTSUTAYA籠原店\n受付終了: 11/15 21:30（残り2日6時間）\nhttps://livepocket.jp/e/t5_18\n\n📍埼玉県\nキデイランド ららぽーと富士見店\n受付終了: 11/16 10:00（残り2日18時間）\nhttps://livepocket.jp/e/bt6dj\n\n🔁 再通知\n📍栃木県\nTSUTAYA Trading Card 宇都宮インターパークビレッジ\n受付終了: 11/16 19:30（残り3日4時間）\nhttps://livepocket.jp/e/z_qtz\n\n🔁 再通知\n📍栃木県\nTSUTAYA400号西那須野店\n受付終了: 11/15 22:00（残り2日6時間）\nhttps://livepocket.jp/e/hboq2\n\n🔁 再通知\n📍栃木県\nTSUTAYA宇都宮南店\n受付終了: 11/15 22:00（残り2日6時間）\nhttps://livepocket.jp/e/2mrjj\n\n🔁 再通知\n📍栃木県\nTSUTAYA Trading Card 宇都宮インターパークビレッジ\n受付終了: 11/16 19:30（残り3日4時間）\nhttps://livepocket.jp/e/nichl\n\n📍栃木県\nＴＳＵＴＡＹＡ真岡店\n受付終了: 11/15 22:00（残り2日6時間）\nhttps://livepocket.jp/e/n5tb0\n\n🔁 再通知\n📍宮城県\nヤマト屋書店TSUTAYA中里店\n受付終了: 11/16 21:00（残り3日5時間）\nhttps://livepocket.jp/e/yrxa9\n\n🔁 再通知\n📍宮城県\nヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店\n受付終了: 11/15 23:59（残り2日8時間）\nhttps://livepocket.jp/e/a21ct",
+      "details_source": null,
+      "product_name": "ポケモンカード 拡張パック「ハドウシーカー」",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bt6dj",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "product_name": "v14_livepocket_explicit_product_label",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v19_livepocket_explicit_store_list"
+      },
+      "event_title": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
+      "store_name": "キデイランド ららぽーと富士見店",
+      "stores": [
+        {
+          "name": "キデイランド ららぽーと富士見店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-25"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 600,
-    "no_structured_details": 182
+    "parsed": 609,
+    "no_structured_details": 174
   },
   "field_counts": {
-    "store_name": 378,
-    "prefecture": 331,
-    "event_title": 480,
+    "store_name": 379,
+    "prefecture": 332,
+    "event_title": 481,
     "event_date": 1,
-    "product_name": 119,
+    "product_name": 120,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
     "application_end_at": 746,
     "application_start_at": 743,
-    "stores_events": 378
+    "stores_events": 379
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570672122026795103"
+      "1551580466266644552": "1570679678522363937"
     },
     "last_run": {
-      "checked_at": "2026-11-13T05:36:09.492563+00:00",
-      "new_urls": 4,
-      "original_urls": 778,
+      "checked_at": "2026-11-13T06:05:56.361877+00:00",
+      "new_urls": 1,
+      "original_urls": 782,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -23530,7 +23561,8 @@
         "1570626794795835484": "2026-11-13T02:35:58.447383+00:00",
         "1570656284737405082": "2026-11-13T04:35:57.768531+00:00",
         "1570664534841106443": "2026-11-13T05:05:57.613346+00:00",
-        "1570672122026795103": "2026-11-13T05:36:14.562901+00:00"
+        "1570672122026795103": "2026-11-13T05:36:14.562901+00:00",
+        "1570679678522363937": "2026-11-13T06:05:57.398786+00:00"
       },
       "checked_search_urls": {}
     },
@@ -26985,6 +27017,11 @@
           "checked_at": "2026-11-13T05:37:02.514343+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/bt6dj": {
+          "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "status": "checked_title_product_store",
+          "http_status": null
         }
       }
     },
@@ -29551,6 +29588,12 @@
           "detected_at": "2026-11-13T05:36:15.542470+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-13T05:37:02.514343+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/bt6dj": {
+          "detected_at": "2026-11-13T06:05:58.507640+00:00",
+          "status": "checked_title_product_store",
+          "checked_at": "2026-11-13T06:06:25.530753+00:00",
           "http_status": null
         }
       },
@@ -38407,6 +38450,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/bt6dj": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "title_observed": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
+          "genre": "pokemon",
+          "product_origin": "v14_livepocket_explicit_product_label",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -44793,6 +44847,19 @@
         },
         "https://livepocket.jp/e/bb1am": {
           "checked_at": "2026-11-13T05:37:02.514343+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/bt6dj": {
+          "checked_at": "2026-11-13T06:06:25.530753+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
