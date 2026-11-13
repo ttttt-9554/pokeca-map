@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-13T04:35:56.505087+00:00",
+  "collected_at": "2026-11-13T05:05:56.430729+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 777,
+  "unique_livepocket_urls": 778,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -23012,34 +23012,71 @@
       "purchase_start_time": "09:00",
       "purchase_end_date": "2026-11-22",
       "purchase_end_time": "22:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/t5_18",
+      "discord_message_id": "1570664534841106443",
+      "discord_posted_at": "2026-11-13T05:00:06.642000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA籠原店\n受付終了: 11/15 21:30（残り2日7時間）\nhttps://livepocket.jp/e/t5_18",
+      "details_source": null,
+      "product_name": "ONE PIECEカードゲーム ブースターパック 神の支配",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/t5_18",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "11月21日発売『ONE PIECEカードゲーム ブースターパック 神の支配 』抽選販売受付",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "application_start_at": "2026-11-13T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA籠原店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA籠原店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-20",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-21"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 600,
-    "no_structured_details": 177
+    "no_structured_details": 178
   },
   "field_counts": {
-    "store_name": 373,
-    "prefecture": 326,
-    "event_title": 475,
+    "store_name": 374,
+    "prefecture": 327,
+    "event_title": 476,
     "event_date": 1,
     "product_name": 118,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 741,
-    "application_start_at": 738,
-    "stores_events": 373
+    "application_end_at": 742,
+    "application_start_at": 739,
+    "stores_events": 374
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570656284737405082"
+      "1551580466266644552": "1570664534841106443"
     },
     "last_run": {
-      "checked_at": "2026-11-13T04:35:56.505087+00:00",
-      "new_urls": 3,
-      "original_urls": 774,
+      "checked_at": "2026-11-13T05:05:56.430729+00:00",
+      "new_urls": 1,
+      "original_urls": 777,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -23341,7 +23378,8 @@
         "1570619390041399396": "2026-11-13T02:05:57.731751+00:00",
         "1570619241936453746": "2026-11-13T02:05:57.731751+00:00",
         "1570626794795835484": "2026-11-13T02:35:58.447383+00:00",
-        "1570656284737405082": "2026-11-13T04:35:57.768531+00:00"
+        "1570656284737405082": "2026-11-13T04:35:57.768531+00:00",
+        "1570664534841106443": "2026-11-13T05:05:57.613346+00:00"
       },
       "checked_search_urls": {}
     },
@@ -26771,6 +26809,11 @@
           "checked_at": "2026-11-13T04:36:35.366585+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/t5_18": {
+          "checked_at": "2026-11-13T05:06:28.485682+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -29307,6 +29350,12 @@
           "detected_at": "2026-11-13T04:35:59.070470+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-13T04:36:35.366585+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/t5_18": {
+          "detected_at": "2026-11-13T05:05:58.861173+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T05:06:28.485682+00:00",
           "http_status": null
         }
       },
@@ -38108,6 +38157,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/t5_18": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-13T05:06:28.485682+00:00",
+          "title_observed": "11月21日発売『ONE PIECEカードゲーム ブースターパック 神の支配 』抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -44429,6 +44489,19 @@
         },
         "https://livepocket.jp/e/2mrjj": {
           "checked_at": "2026-11-13T04:36:35.366585+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/t5_18": {
+          "checked_at": "2026-11-13T05:06:28.485682+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
