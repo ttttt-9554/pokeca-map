@@ -27463,8 +27463,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/x3nmu": {
-          "checked_at": "2026-11-13T12:02:30.248192+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T18:06:33.187682+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/qm6iz": {
@@ -30099,8 +30099,8 @@
         },
         "https://livepocket.jp/e/x3nmu": {
           "detected_at": "2026-11-13T12:01:46.656101+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-13T12:02:30.248192+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-13T18:06:33.187682+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/6qf48": {
@@ -32129,6 +32129,11 @@
         "https://livepocket.jp/e/lpk_op": {
           "attempts": 1,
           "last_attempt_at": "2026-11-13T17:06:57.509043+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/x3nmu": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-13T18:06:33.187682+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -39158,7 +39163,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T12:02:30.248192+00:00",
+          "checked_at": "2026-11-13T18:06:33.187682+00:00",
           "title_observed": "ONE PIECE ブースターパック 世界最強の戦士 抽選販売",
           "genre": "",
           "product_origin": "",
@@ -45699,7 +45704,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/x3nmu": {
-          "checked_at": "2026-11-13T12:02:30.248192+00:00",
+          "checked_at": "2026-11-13T18:06:33.187682+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
