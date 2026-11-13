@@ -27448,7 +27448,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/9tvnv": {
-          "checked_at": "2026-11-13T15:01:28.458790+00:00",
+          "checked_at": "2026-11-13T21:06:24.463352+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -30076,7 +30076,7 @@
         "https://livepocket.jp/e/9tvnv": {
           "detected_at": "2026-11-13T09:01:00.880553+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-13T15:01:28.458790+00:00",
+          "checked_at": "2026-11-13T21:06:24.463352+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/zy35l": {
@@ -32117,8 +32117,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9tvnv": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-13T15:01:28.458790+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T21:06:24.463352+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/21d0x": {
@@ -39140,7 +39140,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T15:01:28.458790+00:00",
+          "checked_at": "2026-11-13T21:06:24.463352+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック 「ハドウシーカー」",
           "genre": "pokemon",
           "product_origin": "",
@@ -45675,7 +45675,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9tvnv": {
-          "checked_at": "2026-11-13T15:01:28.458790+00:00",
+          "checked_at": "2026-11-13T21:06:24.463352+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
