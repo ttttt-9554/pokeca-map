@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-13T06:05:56.361877+00:00",
+  "collected_at": "2026-11-13T07:30:57.204094+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 783,
+  "unique_livepocket_urls": 785,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -23230,34 +23230,105 @@
       ],
       "prefecture": "埼玉県",
       "result_announcement_date": "2026-11-25"
+    },
+    {
+      "url": "https://livepocket.jp/e/t7mnn",
+      "discord_message_id": "1570702285213011968",
+      "discord_posted_at": "2026-11-13T07:30:07.032000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nTSUTAYA調布駅南口店\n受付終了: 11/15 23:59（残り2日7時間）\nhttps://livepocket.jp/e/t7mnn\n\n📍埼玉県\nTSUTAYA嵐山店\n受付終了: 11/17 21:30（残り4日4時間）\nhttps://livepocket.jp/e/3z-wc",
+      "details_source": null,
+      "product_name": "［ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2］",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/t7mnn",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "product_name": "v14_livepocket_explicit_product_label",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list"
+      },
+      "event_title": "ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2抽選販売",
+      "application_end_at": "2026-11-15T23:59:00+09:00",
+      "application_start_at": "2026-11-13T13:15:00+09:00",
+      "store_name": "［TSUTAYA調布駅南口店］",
+      "stores": [
+        {
+          "name": "［TSUTAYA調布駅南口店］",
+          "prefecture": ""
+        }
+      ],
+      "prefecture": "",
+      "result_announcement_date": "2026-11-16"
+    },
+    {
+      "url": "https://livepocket.jp/e/3z-wc",
+      "discord_message_id": "1570702285213011968",
+      "discord_posted_at": "2026-11-13T07:30:07.032000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nTSUTAYA調布駅南口店\n受付終了: 11/15 23:59（残り2日7時間）\nhttps://livepocket.jp/e/t7mnn\n\n📍埼玉県\nTSUTAYA嵐山店\n受付終了: 11/17 21:30（残り4日4時間）\nhttps://livepocket.jp/e/3z-wc",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3z-wc",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカードゲーム 「神の支配」",
+      "application_end_at": "2026-11-17T21:30:00+09:00",
+      "application_start_at": "2026-11-12T09:30:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA嵐山店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA嵐山店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "09:30",
+      "purchase_end_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 609,
-    "no_structured_details": 174
+    "no_structured_details": 176
   },
   "field_counts": {
-    "store_name": 379,
-    "prefecture": 332,
-    "event_title": 481,
+    "store_name": 381,
+    "prefecture": 333,
+    "event_title": 483,
     "event_date": 1,
-    "product_name": 120,
+    "product_name": 121,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 746,
-    "application_start_at": 743,
-    "stores_events": 379
+    "application_end_at": 748,
+    "application_start_at": 745,
+    "stores_events": 381
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1570679678522363937"
+      "1551580466266644552": "1570702285213011968"
     },
     "last_run": {
-      "checked_at": "2026-11-13T06:05:56.361877+00:00",
-      "new_urls": 1,
-      "original_urls": 782,
+      "checked_at": "2026-11-13T07:30:57.204094+00:00",
+      "new_urls": 2,
+      "original_urls": 783,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -23562,7 +23633,8 @@
         "1570656284737405082": "2026-11-13T04:35:57.768531+00:00",
         "1570664534841106443": "2026-11-13T05:05:57.613346+00:00",
         "1570672122026795103": "2026-11-13T05:36:14.562901+00:00",
-        "1570679678522363937": "2026-11-13T06:05:57.398786+00:00"
+        "1570679678522363937": "2026-11-13T06:05:57.398786+00:00",
+        "1570702285213011968": "2026-11-13T07:31:00.504753+00:00"
       },
       "checked_search_urls": {}
     },
@@ -27022,6 +27094,16 @@
           "checked_at": "2026-11-13T06:06:25.530753+00:00",
           "status": "checked_title_product_store",
           "http_status": null
+        },
+        "https://livepocket.jp/e/t7mnn": {
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "status": "checked_title_product_deadline_store",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3z-wc": {
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -29594,6 +29676,18 @@
           "detected_at": "2026-11-13T06:05:58.507640+00:00",
           "status": "checked_title_product_store",
           "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3z-wc": {
+          "detected_at": "2026-11-13T07:31:01.564605+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/t7mnn": {
+          "detected_at": "2026-11-13T07:31:01.564605+00:00",
+          "status": "checked_title_product_deadline_store",
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
           "http_status": null
         }
       },
@@ -38466,6 +38560,28 @@
           "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/t7mnn": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "title_observed": "ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2抽選販売",
+          "genre": "onepiece",
+          "product_origin": "v14_livepocket_explicit_product_label",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/3z-wc": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "title_observed": "ワンピースカードゲーム 「神の支配」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -44865,6 +44981,32 @@
         },
         "https://livepocket.jp/e/bt6dj": {
           "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/t7mnn": {
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/3z-wc": {
+          "checked_at": "2026-11-13T07:31:32.409008+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
