@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T05:05:56.430729+00:00",
-  "unique_livepocket_urls": 778,
+  "collected_at": "2026-11-13T05:36:09.492563+00:00",
+  "unique_livepocket_urls": 782,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13184,7 +13184,110 @@
       "purchase_end_date": "2026-11-21",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-13T05:05:58.861173+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/ejju8",
+      "discord_posted_at": "2026-11-13T05:30:15.568000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ejju8",
+      "event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
+      "application_end_at": "2026-11-14T20:00:00+09:00",
+      "application_start_at": "2026-11-14T11:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "新宿マルイアネックス3階 FEWMANY",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "新宿マルイアネックス3階 FEWMANY",
+      "prefecture": "東京都",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
+      "result_announcement_date": "2026-11-16",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "10:30",
+      "purchase_end_date": "2026-11-21",
+      "purchase_end_time": "20:00",
+      "first_detected_at": "2026-11-13T05:36:15.542470+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/yr356",
+      "discord_posted_at": "2026-11-13T05:30:15.568000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/yr356",
+      "event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
+      "application_end_at": "2026-11-14T20:00:00+09:00",
+      "application_start_at": "2026-11-14T11:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "新宿マルイアネックス3階 FEWMANY",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "新宿マルイアネックス3階 FEWMANY",
+      "prefecture": "東京都",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
+      "result_announcement_date": "2026-11-16",
+      "purchase_start_date": "2026-11-21",
+      "purchase_start_time": "10:30",
+      "purchase_end_date": "2026-11-21",
+      "purchase_end_time": "20:00",
+      "first_detected_at": "2026-11-13T05:36:15.542470+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/bb1am",
+      "discord_posted_at": "2026-11-13T05:30:15.568000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bb1am",
+      "event_title": "ポケモンカード『ストームエメラルダ』抽選販売について",
+      "application_end_at": "2026-11-14T20:00:00+09:00",
+      "application_start_at": "2026-11-14T11:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "新宿マルイアネックス3階 FEWMANY",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "新宿マルイアネックス3階 FEWMANY",
+      "prefecture": "東京都",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『ストームエメラルダ』抽選販売について",
+      "result_announcement_date": "2026-11-16",
+      "purchase_start_date": "2026-11-22",
+      "purchase_start_time": "10:30",
+      "purchase_end_date": "2026-11-22",
+      "purchase_end_time": "20:00",
+      "first_detected_at": "2026-11-13T05:36:15.542470+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/n5tb0",
+      "discord_posted_at": "2026-11-13T05:30:15.568000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/n5tb0",
+      "event_title": "11/13発売 スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-13T08:50:00+09:00",
+      "stores": [
+        {
+          "name": "ＴＳＵＴＡＹＡ真岡店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "ＴＳＵＴＡＹＡ真岡店",
+      "prefecture": "栃木県",
+      "official_event_title": "11/13発売 スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23",
+      "first_detected_at": "2026-11-13T05:36:15.542470+00:00"
     }
   ],
-  "updated_at": "2026-11-13T05:26:35.113000+00:00"
+  "updated_at": "2026-11-13T05:37:02.514343+00:00"
 }
