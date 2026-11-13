@@ -27383,12 +27383,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/s3ajb": {
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/nk62g": {
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -27458,8 +27458,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/lpk_op": {
-          "checked_at": "2026-11-13T11:01:51.092749+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/x3nmu": {
@@ -30010,13 +30010,13 @@
         "https://livepocket.jp/e/nk62g": {
           "detected_at": "2026-11-13T04:35:59.070470+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/s3ajb": {
           "detected_at": "2026-11-13T04:35:59.070470+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/t5_18": {
@@ -30093,8 +30093,8 @@
         },
         "https://livepocket.jp/e/lpk_op": {
           "detected_at": "2026-11-13T11:00:59.914191+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-13T11:01:51.092749+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/x3nmu": {
@@ -32067,13 +32067,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/s3ajb": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-13T10:41:26.914127+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T17:06:57.509043+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nk62g": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-13T10:41:26.914127+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-13T17:06:57.509043+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/2mrjj": {
@@ -32124,6 +32124,11 @@
         "https://livepocket.jp/e/21d0x": {
           "attempts": 1,
           "last_attempt_at": "2026-11-13T15:32:21.234569+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/lpk_op": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-13T17:06:57.509043+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -38977,7 +38982,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "title_observed": "ポケモンカード『30thセレブレーションセット』抽選販売について",
           "genre": "pokemon",
           "product_origin": "",
@@ -38988,7 +38993,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "title_observed": "ポケモンカード MEGA 拡張パック ハドウシーカー",
           "genre": "pokemon",
           "product_origin": "",
@@ -39142,7 +39147,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T11:01:51.092749+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "title_observed": "ワンピースカードゲーム 「神の支配」抽選受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -45486,7 +45491,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/s3ajb": {
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -45499,7 +45504,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nk62g": {
-          "checked_at": "2026-11-13T10:41:26.914127+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -45681,7 +45686,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/lpk_op": {
-          "checked_at": "2026-11-13T11:01:51.092749+00:00",
+          "checked_at": "2026-11-13T17:06:57.509043+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
