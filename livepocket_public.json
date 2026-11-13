@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T01:35:56.776025+00:00",
-  "unique_livepocket_urls": 771,
+  "collected_at": "2026-11-13T02:05:56.514073+00:00",
+  "unique_livepocket_urls": 773,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13027,7 +13027,55 @@
       "purchase_end_date": "2026-11-24",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-13T01:35:59.366550+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nichl",
+      "discord_posted_at": "2026-11-13T02:00:43.283000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nichl",
+      "event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
+      "application_end_at": "2026-11-16T19:30:00+09:00",
+      "application_start_at": "2026-11-13T08:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/z_qtz",
+      "discord_posted_at": "2026-11-13T02:00:07.972000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/z_qtz",
+      "event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
+      "application_end_at": "2026-11-16T19:30:00+09:00",
+      "application_start_at": "2026-11-13T08:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
+      "result_announcement_date": "2026-11-17",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     }
   ],
-  "updated_at": "2026-11-13T01:56:02.965297+00:00"
+  "updated_at": "2026-11-13T02:06:38.182834+00:00"
 }
