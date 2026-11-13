@@ -13301,6 +13301,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
       "first_detected_at": "2026-11-13T06:05:58.507640+00:00"
     },
     {
@@ -13484,7 +13486,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
-      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士 抽選販売",
       "first_detected_at": "2026-11-13T12:01:46.656101+00:00"
     },
     {
@@ -13559,5 +13560,5 @@
       "first_detected_at": "2026-11-13T15:00:59.880394+00:00"
     }
   ],
-  "updated_at": "2026-11-13T18:06:33.187682+00:00"
+  "updated_at": "2026-11-13T18:16:35.431799+00:00"
 }
