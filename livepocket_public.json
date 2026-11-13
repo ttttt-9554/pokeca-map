@@ -12931,6 +12931,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "プレオープン記念【抽選】ワンピースカードゲーム 神の支配",
       "first_detected_at": "2026-11-12T14:01:00.868971+00:00"
     },
     {
@@ -12956,6 +12958,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "プレオープン記念【抽選】ポケモンカードゲーム MEGA拡張パック 「30th CELEBRATION」",
       "first_detected_at": "2026-11-12T14:01:00.868971+00:00"
     },
     {
@@ -13030,52 +13034,48 @@
     },
     {
       "url": "https://livepocket.jp/e/nichl",
-      "discord_posted_at": "2026-11-13T02:00:43.283000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/nichl",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
       "event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
-      "application_end_at": "2026-11-16T19:30:00+09:00",
       "application_start_at": "2026-11-13T08:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-16T19:30:00+09:00",
+      "discord_posted_at": "2026-11-13T02:00:43.283000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
-      "prefecture": "栃木県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nichl",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     },
     {
       "url": "https://livepocket.jp/e/z_qtz",
-      "discord_posted_at": "2026-11-13T02:00:07.972000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/z_qtz",
+      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
+      "prefecture": "栃木県",
       "event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
-      "application_end_at": "2026-11-16T19:30:00+09:00",
       "application_start_at": "2026-11-13T08:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-16T19:30:00+09:00",
+      "discord_posted_at": "2026-11-13T02:00:07.972000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA Trading Card 宇都宮インターパークビレッジ",
-      "prefecture": "栃木県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/z_qtz",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     }
   ],
-  "updated_at": "2026-11-13T02:06:38.182834+00:00"
+  "updated_at": "2026-11-13T02:16:28.087003+00:00"
 }
