@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T12:30:56.808607+00:00",
-  "unique_livepocket_urls": 793,
+  "collected_at": "2026-11-13T15:00:57.638274+00:00",
+  "unique_livepocket_urls": 794,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13090,8 +13090,6 @@
       "store_location_url": "https://livepocket.jp/e/hboq2",
       "result_announcement_date": "2026-11-18",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム 『神の支配』抽選予約受付",
       "first_detected_at": "2026-11-13T02:35:59.512168+00:00"
     },
     {
@@ -13418,6 +13416,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック 「ハドウシーカー」",
       "first_detected_at": "2026-11-13T09:01:00.880553+00:00"
     },
     {
@@ -13534,7 +13534,33 @@
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-13T12:30:59.264819+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/4ywaz",
+      "discord_posted_at": "2026-11-13T15:00:28.242000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/4ywaz",
+      "event_title": "キデイランド 吉祥寺店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
+      "product_name": "ポケモンカード 拡張パック「ハドウシーカー」",
+      "application_end_at": "2026-11-18T23:59:00+09:00",
+      "application_start_at": "2026-11-16T10:00:00+09:00",
+      "review_category": "pokemon",
+      "store_name": "キデイランド 吉祥寺店",
+      "stores": [
+        {
+          "name": "キデイランド 吉祥寺店",
+          "prefecture": "東京都"
+        }
+      ],
+      "prefecture": "東京都",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "キデイランド 吉祥寺店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
+      "result_announcement_date": "2026-11-25",
+      "first_detected_at": "2026-11-13T15:00:59.880394+00:00"
     }
   ],
-  "updated_at": "2026-11-13T14:51:27.442468+00:00"
+  "updated_at": "2026-11-13T15:01:28.458790+00:00"
 }
