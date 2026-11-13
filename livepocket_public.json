@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T09:00:58.267302+00:00",
-  "unique_livepocket_urls": 788,
+  "collected_at": "2026-11-13T09:30:56.957742+00:00",
+  "unique_livepocket_urls": 789,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13417,7 +13417,29 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-13T09:01:00.880553+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/21d0x",
+      "discord_posted_at": "2026-11-13T09:30:07.484000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/21d0x",
+      "event_title": "11/13発売 スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-13T16:54:00+09:00",
+      "stores": [
+        {
+          "name": "ＴＳＵＴＡＹＡ真岡店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "ＴＳＵＴＡＹＡ真岡店",
+      "prefecture": "栃木県",
+      "official_event_title": "11/13発売 スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23",
+      "first_detected_at": "2026-11-13T09:30:59.091850+00:00"
     }
   ],
-  "updated_at": "2026-11-13T09:21:03.278144+00:00"
+  "updated_at": "2026-11-13T09:31:21.031000+00:00"
 }
