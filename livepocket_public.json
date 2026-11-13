@@ -13207,6 +13207,8 @@
       "purchase_end_date": "2026-11-21",
       "purchase_end_time": "20:00",
       "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
       "first_detected_at": "2026-11-13T05:36:15.542470+00:00"
     },
     {
@@ -13231,6 +13233,8 @@
       "purchase_end_date": "2026-11-21",
       "purchase_end_time": "20:00",
       "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード『30thセレブレーションセット』抽選販売について",
       "first_detected_at": "2026-11-13T05:36:15.542470+00:00"
     },
     {
@@ -13558,5 +13562,5 @@
       "first_detected_at": "2026-11-13T15:00:59.880394+00:00"
     }
   ],
-  "updated_at": "2026-11-13T17:36:04.276585+00:00"
+  "updated_at": "2026-11-13T17:46:22.909710+00:00"
 }
