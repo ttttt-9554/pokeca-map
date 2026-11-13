@@ -13345,6 +13345,8 @@
       "purchase_start_time": "09:30",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム 「神の支配」",
       "first_detected_at": "2026-11-13T07:31:01.564605+00:00"
     },
     {
@@ -13558,5 +13560,5 @@
       "first_detected_at": "2026-11-13T15:00:59.880394+00:00"
     }
   ],
-  "updated_at": "2026-11-13T19:36:02.328922+00:00"
+  "updated_at": "2026-11-13T19:46:28.610144+00:00"
 }
