@@ -13048,6 +13048,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
       "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     },
     {
@@ -13070,6 +13072,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
       "first_detected_at": "2026-11-13T02:05:59.403801+00:00"
     },
     {
@@ -13367,6 +13371,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-21",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカード 「神の支配」抽選販売受付",
       "first_detected_at": "2026-11-13T08:11:09.197969+00:00"
     },
     {
@@ -13534,5 +13540,5 @@
       "first_detected_at": "2026-11-13T12:30:59.264819+00:00"
     }
   ],
-  "updated_at": "2026-11-13T14:11:03.269770+00:00"
+  "updated_at": "2026-11-13T14:21:37.804120+00:00"
 }
