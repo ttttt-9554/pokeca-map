@@ -13301,6 +13301,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
       "first_detected_at": "2026-11-13T06:05:58.507640+00:00"
     },
     {
@@ -13466,27 +13468,26 @@
     },
     {
       "url": "https://livepocket.jp/e/x3nmu",
-      "discord_posted_at": "2026-11-13T12:00:28.999000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/x3nmu",
+      "store_name": "トレカエース常陸太田店",
+      "prefecture": "茨城県",
       "event_title": "ONE PIECE ブースターパック 世界最強の戦士 抽選販売",
-      "application_end_at": "2026-11-15T22:00:00+09:00",
       "application_start_at": "2026-11-10T21:03:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "discord_posted_at": "2026-11-13T12:00:28.999000+00:00",
       "stores": [
         {
           "name": "トレカエース常陸太田店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "トレカエース常陸太田店",
-      "prefecture": "茨城県",
-      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士 抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/x3nmu",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-13T12:01:46.656101+00:00"
     }
   ],
-  "updated_at": "2026-11-13T12:02:30.248192+00:00"
+  "updated_at": "2026-11-13T12:11:40.964506+00:00"
 }

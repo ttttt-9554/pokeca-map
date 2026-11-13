@@ -27314,8 +27314,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/bt6dj": {
-          "checked_at": "2026-11-13T06:06:25.530753+00:00",
-          "status": "checked_title_product_store",
+          "checked_at": "2026-11-13T12:11:40.964506+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/t7mnn": {
@@ -29927,8 +29927,8 @@
         },
         "https://livepocket.jp/e/bt6dj": {
           "detected_at": "2026-11-13T06:05:58.507640+00:00",
-          "status": "checked_title_product_store",
-          "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-13T12:11:40.964506+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/3z-wc": {
@@ -31957,6 +31957,11 @@
         "https://livepocket.jp/e/bb1am": {
           "attempts": 1,
           "last_attempt_at": "2026-11-13T11:51:40.726174+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/bt6dj": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-13T12:11:40.964506+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -38898,7 +38903,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "checked_at": "2026-11-13T12:11:40.964506+00:00",
           "title_observed": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
           "genre": "pokemon",
           "product_origin": "v14_livepocket_explicit_product_label",
@@ -45390,7 +45395,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/bt6dj": {
-          "checked_at": "2026-11-13T06:06:25.530753+00:00",
+          "checked_at": "2026-11-13T12:11:40.964506+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
