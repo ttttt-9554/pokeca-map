@@ -26954,8 +26954,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/yrxa9": {
-          "checked_at": "2026-11-13T00:56:21.007821+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-13T07:06:58.407872+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/a21ct": {
@@ -29514,8 +29514,8 @@
         },
         "https://livepocket.jp/e/yrxa9": {
           "detected_at": "2026-11-13T00:55:56.344358+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-13T00:56:21.007821+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-13T07:06:58.407872+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/a21ct": {
@@ -31514,6 +31514,11 @@
         "https://livepocket.jp/e/m0ix9": {
           "attempts": 2,
           "last_attempt_at": "2026-11-13T02:46:53.915662+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/yrxa9": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-13T07:06:58.407872+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -38312,7 +38317,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-13T00:56:21.007821+00:00",
+          "checked_at": "2026-11-13T07:06:58.407872+00:00",
           "title_observed": "TSUTAYA中里店 11/21発売ワンピースカード抽選",
           "genre": "onepiece",
           "product_origin": "",
@@ -44690,7 +44695,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/yrxa9": {
-          "checked_at": "2026-11-13T00:56:21.007821+00:00",
+          "checked_at": "2026-11-13T07:06:58.407872+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
