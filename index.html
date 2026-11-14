@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261115-pokemon-thumbnails-v1">
+  <link rel="stylesheet" href="style.css?v=20261115-pokemon-grid-wanted-v1">
 
   <style>
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
@@ -1177,11 +1177,12 @@ nav[aria-label="メインメニュー"] {
         <label for="pokemonCardSearch">カード名・番号
           <input id="pokemonCardSearch" type="search" placeholder="ピカチュウ、028/103 など" maxlength="100" autocomplete="off" enterkeyhint="search">
         </label>
-        <label for="pokemonCardOwnedFilter">所持状況
+        <label for="pokemonCardOwnedFilter">絞り込み
           <select id="pokemonCardOwnedFilter">
             <option value="all">すべて</option>
             <option value="owned">所持済み</option>
             <option value="missing">未所持</option>
+            <option value="wanted">欲しい</option>
           </select>
         </label>
       </div>
@@ -1995,7 +1996,7 @@ nav[aria-label="メインメニュー"] {
   <!-- アプリ本体 -->
   <script src="search_inputs_v1.js?v=20261102-multi-store-choice-v6"></script>
   <script src="lottery_application_return_v1.js?v=20261109-application-return-v3"></script>
-  <script src="pokemon_card_collection_v1.js?v=20261115-pokemon-thumbnails-v1"></script>
+  <script src="pokemon_card_collection_v1.js?v=20261115-pokemon-grid-wanted-v1"></script>
   <script>
   // Load the app script with the refresh token when the user explicitly
   // requests an update, preventing a stale app.js response in iOS/Chrome.

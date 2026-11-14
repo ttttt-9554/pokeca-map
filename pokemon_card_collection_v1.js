@@ -14,6 +14,7 @@
   let options, active = false, owner = '', ownerVersion = 0;
   let sets = null, setsRequest = null, selectedGroup = null;
   let cards = null, readVersion = 0, loading = false, saving = false;
+  let pendingWanted = null;
   let limit = PAGE_SIZE, backTab = 'infoPlaza', message = '';
 
   function searchKey(value){
@@ -28,6 +29,7 @@
     return (cards || []).filter(card => {
       if (filter === 'owned' && !card.quantity) return false;
       if (filter === 'missing' && card.quantity) return false;
+      if (filter === 'wanted' && !card.wanted) return false;
       const text = searchKey([card.name, card.set_code, card.card_number].join(' '));
       const number = card.card_number?.split('/')[0];
       return terms.every(term => /^\d+$/.test(term)
@@ -52,8 +54,8 @@
     }
     const image = document.createElement('img');
     image.alt = '';
-    image.width = 72;
-    image.height = 100;
+    image.width = 110;
+    image.height = 154;
     image.loading = 'lazy';
     image.decoding = 'async';
     image.referrerPolicy = 'no-referrer';
@@ -70,21 +72,23 @@
     const row = document.createElement('li');
     row.className = 'pokemon-card-row';
     row.dataset.cardId = card.card_id;
-    const info = document.createElement('div');
-    info.className = 'pokemon-card-info';
     const name = document.createElement('strong');
+    name.className = 'pokemon-card-name';
     name.textContent = card.name;
     const meta = document.createElement('small');
+    meta.className = 'pokemon-card-number';
     meta.textContent = [card.set_code, card.card_number || '番号表記なし'].filter(Boolean).join(' ');
     const official = document.createElement('a');
     official.href = OFFICIAL_DETAIL + card.card_id + '/regu/all';
     official.target = '_blank';
     official.rel = 'noopener noreferrer';
+    official.className = 'pokemon-card-official';
     official.textContent = '公式詳細 ↗';
-    info.append(name, meta, official);
 
     const actions = document.createElement('div');
     actions.className = 'pokemon-card-quantity';
+    actions.setAttribute('role', 'group');
+    actions.setAttribute('aria-label', `${card.name} ${card.card_number || ''}の所持枚数`);
     const label = document.createElement('span');
     label.textContent = card.quantity + '枚';
     for (const delta of [-1, 1]) {
@@ -97,7 +101,18 @@
       actions.append(button);
       if (delta < 0) actions.append(label);
     }
-    row.append(cardThumbnail(card, official.href), info, actions);
+    const wanted = document.createElement('label');
+    wanted.className = 'pokemon-card-wanted';
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.dataset.cardWanted = '';
+    checkbox.checked = pendingWanted?.cardId === card.card_id ? pendingWanted.value : !!card.wanted;
+    checkbox.disabled = saving || loading;
+    checkbox.setAttribute('aria-label', `${card.name} ${card.card_number || ''}が欲しい`);
+    const wantedText = document.createElement('span');
+    wantedText.textContent = '欲しい';
+    wanted.append(checkbox, wantedText);
+    row.append(cardThumbnail(card, official.href), name, meta, official, actions, wanted);
     return row;
   }
 
@@ -160,7 +175,7 @@
       }
       const next = [];
       for (let offset = 0; ; offset += READ_SIZE) {
-        const {data, error} = await options.getClient().rpc('pokemon_card_set_search_v1', {p_group_id: selectedGroup})
+        const {data, error} = await options.getClient().rpc('pokemon_card_set_search_v2', {p_group_id: selectedGroup})
           .order('sort_order').order('card_id').range(offset, offset + READ_SIZE - 1);
         if (version !== readVersion) return false;
         if (error) throw error;
@@ -223,6 +238,44 @@
     }
   }
 
+  async function setWanted(cardId, value){
+    if (!active || !owner || loading || saving || !options.getUserId()) return;
+    const card = cards?.find(row => row.card_id === cardId);
+    if (!card || !!card.wanted === value) return;
+    const version = ownerVersion;
+    const restoreFocus = document.activeElement?.hasAttribute('data-card-wanted');
+    pendingWanted = {cardId, value};
+    saving = true;
+    message = '「欲しい」を保存しています…';
+    render();
+    try {
+      const {data, error} = await options.getClient().rpc('pokemon_card_wanted_set_v1', {
+        p_card_id: cardId, p_wanted: value
+      });
+      if (version !== ownerVersion) return;
+      if (error || typeof data !== 'boolean') throw error || new Error('Invalid wanted value');
+      card.wanted = data;
+      message = card.name + (data ? 'を「欲しい」に追加しました。' : 'の「欲しい」を解除しました。');
+    } catch {
+      if (version !== ownerVersion) return;
+      saving = false;
+      pendingWanted = null;
+      if (await loadCards() && version === ownerVersion) {
+        message = '保存結果を再取得しました。「欲しい」のチェックを確認してください。';
+      }
+    } finally {
+      if (version === ownerVersion) {
+        pendingWanted = null;
+        saving = false;
+        render();
+        if (active && restoreFocus && document.activeElement === document.body) {
+          const checkbox = $('pokemonCardList').querySelector(`[data-card-id="${cardId}"] input[data-card-wanted]:enabled`);
+          (checkbox || $('pokemonCardOwnedFilter')).focus({preventScroll:true});
+        }
+      }
+    }
+  }
+
   function onAuthChanged(){
     const user = options?.getUserId() || '';
     $('openPokemonCards').hidden = !user;
@@ -233,6 +286,7 @@
     ++readVersion;
     sets = setsRequest = selectedGroup = cards = null;
     loading = saving = false;
+    pendingWanted = null;
     message = '';
     limit = PAGE_SIZE;
     $('pokemonCardSet').replaceChildren();
@@ -272,7 +326,7 @@
     options = config;
     $('openPokemonCards').addEventListener('click', () => open());
     $('pokemonCardsBack').addEventListener('click', () => options.navigate(backTab));
-    $('pokemonCardsRefresh').addEventListener('click', () => void loadCards());
+    $('pokemonCardsRefresh').addEventListener('click', () => { failedImages.clear(); void loadCards(); });
     $('pokemonCardSet').addEventListener('change', event => {
       selectedGroup = Number(event.target.value);
       cards = null;
@@ -289,6 +343,11 @@
       const delta = Number(button.dataset.cardDelta);
       if (delta !== -1 && delta !== 1) return;
       void adjust(Number(button.closest('[data-card-id]').dataset.cardId), delta);
+    });
+    $('pokemonCardList').addEventListener('change', event => {
+      const checkbox = event.target.closest('input[data-card-wanted]');
+      if (!checkbox || checkbox.disabled) return;
+      void setWanted(Number(checkbox.closest('[data-card-id]').dataset.cardId), checkbox.checked);
     });
     onAuthChanged();
   }
