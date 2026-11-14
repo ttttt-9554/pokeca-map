@@ -78,12 +78,7 @@
     const meta = document.createElement('small');
     meta.className = 'pokemon-card-number';
     meta.textContent = [card.set_code, card.card_number || '番号表記なし'].filter(Boolean).join(' ');
-    const official = document.createElement('a');
-    official.href = OFFICIAL_DETAIL + card.card_id + '/regu/all';
-    official.target = '_blank';
-    official.rel = 'noopener noreferrer';
-    official.className = 'pokemon-card-official';
-    official.textContent = '公式詳細 ↗';
+    const detailUrl = OFFICIAL_DETAIL + card.card_id + '/regu/all';
 
     const actions = document.createElement('div');
     actions.className = 'pokemon-card-quantity';
@@ -112,7 +107,7 @@
     const wantedText = document.createElement('span');
     wantedText.textContent = '欲しい';
     wanted.append(checkbox, wantedText);
-    row.append(cardThumbnail(card, official.href), name, meta, official, actions, wanted);
+    row.append(cardThumbnail(card, detailUrl), name, meta, actions, wanted);
     return row;
   }
 
