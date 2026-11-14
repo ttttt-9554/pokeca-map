@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-14T06:05:54.876153+00:00",
+  "collected_at": "2026-11-14T06:35:55.469125+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 799,
+  "unique_livepocket_urls": 803,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -23803,33 +23803,174 @@
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22"
+    },
+    {
+      "url": "https://livepocket.jp/e/pg7oy",
+      "discord_message_id": "1571049587152654336",
+      "discord_posted_at": "2026-11-14T06:30:10.267000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂あきる野店\n受付終了: 11/16 20:30（残り2日4時間）\nhttps://livepocket.jp/e/pg7oy\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/xbmr7\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/1g0fh\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/5gmyo",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/pg7oy",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
+      "application_end_at": "2026-11-16T20:30:00+09:00",
+      "application_start_at": "2026-11-05T12:18:00+09:00",
+      "stores": [
+        {
+          "name": "文教堂あきる野店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "文教堂あきる野店",
+      "prefecture": "東京都"
+    },
+    {
+      "url": "https://livepocket.jp/e/xbmr7",
+      "discord_message_id": "1571049587152654336",
+      "discord_posted_at": "2026-11-14T06:30:10.267000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂あきる野店\n受付終了: 11/16 20:30（残り2日4時間）\nhttps://livepocket.jp/e/pg7oy\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/xbmr7\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/1g0fh\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/5gmyo",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/xbmr7",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【ふるいち土浦】ポケカ抽選販売（拡張パック30th CELEBRATION）",
+      "application_end_at": "2026-11-15T21:01:00+09:00",
+      "application_start_at": "2026-11-14T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール土浦店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール土浦店",
+      "prefecture": "茨城県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23"
+    },
+    {
+      "url": "https://livepocket.jp/e/1g0fh",
+      "discord_message_id": "1571049587152654336",
+      "discord_posted_at": "2026-11-14T06:30:10.267000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂あきる野店\n受付終了: 11/16 20:30（残り2日4時間）\nhttps://livepocket.jp/e/pg7oy\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/xbmr7\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/1g0fh\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/5gmyo",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/1g0fh",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【ふるいち土浦】ワンピース抽選販売（Heroines Edition vol.2）",
+      "application_end_at": "2026-11-15T21:01:00+09:00",
+      "application_start_at": "2026-11-14T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール土浦店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール土浦店",
+      "prefecture": "茨城県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23"
+    },
+    {
+      "url": "https://livepocket.jp/e/5gmyo",
+      "discord_message_id": "1571049587152654336",
+      "discord_posted_at": "2026-11-14T06:30:10.267000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n文教堂あきる野店\n受付終了: 11/16 20:30（残り2日4時間）\nhttps://livepocket.jp/e/pg7oy\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/xbmr7\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/1g0fh\n\n📍茨城県\nふるいちイオンモール土浦店\n受付終了: 11/15 21:01（残り1日5時間）\nhttps://livepocket.jp/e/5gmyo",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/5gmyo",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【ふるいち土浦】ワンピース抽選販売（世界最強の戦士）",
+      "application_end_at": "2026-11-15T21:01:00+09:00",
+      "application_start_at": "2026-11-14T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール土浦店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール土浦店",
+      "prefecture": "茨城県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 623,
-    "no_structured_details": 176
+    "no_structured_details": 180
   },
   "field_counts": {
-    "store_name": 395,
-    "prefecture": 347,
-    "event_title": 497,
+    "store_name": 399,
+    "prefecture": 351,
+    "event_title": 501,
     "event_date": 1,
     "product_name": 123,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 762,
-    "application_start_at": 759,
-    "stores_events": 395
+    "application_end_at": 766,
+    "application_start_at": 763,
+    "stores_events": 399
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571042046674735185"
+      "1551580466266644552": "1571049587152654336"
     },
     "last_run": {
-      "checked_at": "2026-11-14T06:05:54.876153+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-14T06:35:55.469125+00:00",
+      "new_urls": 4,
       "original_urls": 799,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -24146,7 +24287,8 @@
         "1570815620382200009": "2026-11-13T15:00:58.740479+00:00",
         "1570974086035804360": "2026-11-14T01:35:56.651726+00:00",
         "1570996741980029062": "2026-11-14T03:05:56.064910+00:00",
-        "1571019384082927648": "2026-11-14T04:36:05.632464+00:00"
+        "1571019384082927648": "2026-11-14T04:36:05.632464+00:00",
+        "1571049587152654336": "2026-11-14T06:35:56.397670+00:00"
       },
       "checked_search_urls": {}
     },
@@ -27686,6 +27828,26 @@
           "checked_at": "2026-11-14T04:36:49.434894+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/xbmr7": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/pg7oy": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/5gmyo": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/1g0fh": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -30354,6 +30516,30 @@
           "detected_at": "2026-11-14T04:36:06.601036+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-14T04:36:49.434894+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/1g0fh": {
+          "detected_at": "2026-11-14T06:35:57.318131+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/5gmyo": {
+          "detected_at": "2026-11-14T06:35:57.318131+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/pg7oy": {
+          "detected_at": "2026-11-14T06:35:57.318131+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/xbmr7": {
+          "detected_at": "2026-11-14T06:35:57.318131+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
           "http_status": null
         }
       },
@@ -39502,6 +39688,50 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/xbmr7": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "title_observed": "【ふるいち土浦】ポケカ抽選販売（拡張パック30th CELEBRATION）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/pg7oy": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/5gmyo": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "title_observed": "【ふるいち土浦】ワンピース抽選販売（世界最強の戦士）",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/1g0fh": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "title_observed": "【ふるいち土浦】ワンピース抽選販売（Heroines Edition vol.2）",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -46109,6 +46339,58 @@
         },
         "https://livepocket.jp/e/l9z_p": {
           "checked_at": "2026-11-14T04:36:49.434894+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/xbmr7": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/pg7oy": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/5gmyo": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/1g0fh": {
+          "checked_at": "2026-11-14T06:36:21.115366+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
