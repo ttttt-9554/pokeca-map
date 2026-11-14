@@ -47204,6 +47204,11 @@
         "checked_at": "2026-11-14T08:06:27.618629+00:00",
         "status": "browser_unverified_page",
         "next_check_at": "2026-11-14T14:06:27.618629+00:00"
+      },
+      "https://livepocket.jp/e/wxx_y": {
+        "checked_at": "2026-11-14T10:16:20.340771+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-14T16:16:20.340771+00:00"
       }
     }
   }
