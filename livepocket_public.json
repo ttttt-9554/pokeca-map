@@ -13580,7 +13580,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "PM MEGA 拡張パック「ハドウシーカー」抽選販売",
       "first_detected_at": "2026-11-14T01:35:58.542383+00:00"
     },
     {
@@ -13600,6 +13599,8 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/afq8s",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
       "first_detected_at": "2026-11-14T01:35:58.542383+00:00"
     },
     {
@@ -13782,8 +13783,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
       "first_detected_at": "2026-11-14T07:36:05.691646+00:00"
     },
     {
@@ -13806,8 +13805,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック『ハドウシーカー』抽選予約",
       "first_detected_at": "2026-11-14T07:36:05.691646+00:00"
     },
     {
@@ -13904,5 +13901,5 @@
       "first_detected_at": "2026-11-14T12:06:04.643099+00:00"
     }
   ],
-  "updated_at": "2026-11-14T13:46:57.283432+00:00"
+  "updated_at": "2026-11-14T13:56:44.303267+00:00"
 }
