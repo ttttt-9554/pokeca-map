@@ -28078,7 +28078,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/gr1sc": {
-          "checked_at": "2026-11-14T14:16:25.120633+00:00",
+          "checked_at": "2026-11-14T20:26:40.742678+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -30805,7 +30805,7 @@
         "https://livepocket.jp/e/gr1sc": {
           "detected_at": "2026-11-14T08:05:57.591966+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-14T14:16:25.120633+00:00",
+          "checked_at": "2026-11-14T20:26:40.742678+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bb-ug": {
@@ -32907,8 +32907,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/gr1sc": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-14T14:16:25.120633+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-14T20:26:40.742678+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bb-ug": {
@@ -40113,7 +40113,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-14T14:16:25.120633+00:00",
+          "checked_at": "2026-11-14T20:26:40.742678+00:00",
           "title_observed": "再販分抽選 ストームエメラルダ ポケモンカードゲーム MEGA 拡張パック",
           "genre": "pokemon",
           "product_origin": "",
@@ -46849,7 +46849,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/gr1sc": {
-          "checked_at": "2026-11-14T14:16:25.120633+00:00",
+          "checked_at": "2026-11-14T20:26:40.742678+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -47330,9 +47330,9 @@
         "next_check_at": "2026-11-12T17:36:27.522195+00:00"
       },
       "https://livepocket.jp/e/t7mnn": {
-        "checked_at": "2026-11-14T14:16:25.120633+00:00",
+        "checked_at": "2026-11-14T20:26:40.742678+00:00",
         "status": "browser_unverified_page",
-        "next_check_at": "2026-11-14T20:16:25.120633+00:00"
+        "next_check_at": "2026-11-15T02:26:40.742678+00:00"
       },
       "https://livepocket.jp/e/wxx_y": {
         "checked_at": "2026-11-14T10:16:20.340771+00:00",
