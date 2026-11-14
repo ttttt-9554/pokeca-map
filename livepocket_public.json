@@ -13687,8 +13687,6 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/pg7oy",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
       "first_detected_at": "2026-11-14T06:35:57.318131+00:00"
     },
     {
@@ -13714,8 +13712,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいち土浦】ポケカ抽選販売（拡張パック30th CELEBRATION）",
       "first_detected_at": "2026-11-14T06:35:57.318131+00:00"
     },
     {
@@ -13738,6 +13734,7 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
+      "official_event_title": "【ふるいち土浦】ワンピース抽選販売（Heroines Edition vol.2）",
       "first_detected_at": "2026-11-14T06:35:57.318131+00:00"
     },
     {
@@ -13760,7 +13757,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
-      "official_event_title": "【ふるいち土浦】ワンピース抽選販売（世界最強の戦士）",
       "first_detected_at": "2026-11-14T06:35:57.318131+00:00"
     },
     {
@@ -13904,5 +13900,5 @@
       "first_detected_at": "2026-11-14T12:06:04.643099+00:00"
     }
   ],
-  "updated_at": "2026-11-14T12:46:29.504024+00:00"
+  "updated_at": "2026-11-14T12:56:28.195132+00:00"
 }
