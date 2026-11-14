@@ -28046,18 +28046,18 @@
           "http_status": null
         },
         "https://livepocket.jp/e/xbmr7": {
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/pg7oy": {
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/5gmyo": {
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/1g0fh": {
@@ -30772,20 +30772,20 @@
         },
         "https://livepocket.jp/e/5gmyo": {
           "detected_at": "2026-11-14T06:35:57.318131+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/pg7oy": {
           "detected_at": "2026-11-14T06:35:57.318131+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/xbmr7": {
           "detected_at": "2026-11-14T06:35:57.318131+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/ntq9n": {
@@ -32872,6 +32872,21 @@
         "https://livepocket.jp/e/l9z_p": {
           "attempts": 1,
           "last_attempt_at": "2026-11-14T10:46:29.627099+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/xbmr7": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-14T12:46:29.504024+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/pg7oy": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-14T12:46:29.504024+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/5gmyo": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-14T12:46:29.504024+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -40000,7 +40015,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "title_observed": "【ふるいち土浦】ポケカ抽選販売（拡張パック30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -40011,7 +40026,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "title_observed": "ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
           "genre": "onepiece",
           "product_origin": "",
@@ -40022,7 +40037,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "title_observed": "【ふるいち土浦】ワンピース抽選販売（世界最強の戦士）",
           "genre": "",
           "product_origin": "",
@@ -46724,7 +46739,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/xbmr7": {
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -46737,7 +46752,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/pg7oy": {
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -46750,7 +46765,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/5gmyo": {
-          "checked_at": "2026-11-14T06:36:21.115366+00:00",
+          "checked_at": "2026-11-14T12:46:29.504024+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
