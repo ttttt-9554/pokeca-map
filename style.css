@@ -3848,3 +3848,45 @@ html[data-theme="dark"] #devView #lpProductMasterPanel .lp-product-manual-merge-
 #lpApplicationReturnDialog .lp-application-return-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 #lpApplicationReturnDialog .lp-application-return-actions button{flex:1 1 150px;min-height:44px;white-space:normal}
 #lpApplicationReturnStatus{font-size:13px;line-height:1.6;margin:12px 0 0;overflow-wrap:anywhere}
+
+/* Pokémon card search and personal collection */
+#pokemonCardsView[hidden], .pokemon-cards-entry[hidden], .pokemon-cards-more[hidden],
+.pokemon-card-progress[hidden]{display:none}
+#pokemonCardsView{color:var(--app-text,#172033);padding-bottom:30px}
+#pokemonCardsTitle{margin:14px 0}
+.pokemon-cards-entry{
+  display:block;width:100%;min-height:44px;margin:0 0 12px;
+  background:var(--app-surface2,#f0f5fc);color:var(--app-text,#172033);
+  border-color:var(--app-border,#cfdbec);text-align:left;
+}
+.pokemon-cards-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.pokemon-cards-header button,.pokemon-cards-more,.pokemon-card-quantity button{
+  min-height:44px;background:var(--app-surface2,#f0f5fc);color:var(--app-text,#172033);
+  border-color:var(--app-border,#cfdbec);touch-action:manipulation;
+}
+.pokemon-cards-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(104px,.6fr);gap:10px}
+.pokemon-cards-filters label{display:grid;gap:4px;min-width:0;font-size:13px;font-weight:700}
+.pokemon-cards-filters label:first-child{grid-column:1/-1}
+.pokemon-cards-filters :is(input,select){
+  box-sizing:border-box;min-width:0;min-height:44px;padding:8px 10px;
+  background:var(--app-surface,#fff);color:var(--app-text,#172033);border-color:var(--app-border,#cfdbec);
+}
+.pokemon-card-progress,.pokemon-card-row{
+  background:var(--app-surface,#fff);border:1px solid var(--app-border,#cfdbec);border-radius:12px;
+}
+.pokemon-card-progress{margin-top:12px;padding:10px 12px}
+.pokemon-card-progress p{margin:0;color:var(--app-text,#172033);font-size:14px;font-weight:700}
+.pokemon-card-progress progress{display:block;width:100%;height:10px;margin-top:8px;accent-color:var(--app-accent,#2563eb)}
+.pokemon-card-status{margin:10px 0;font-size:13px;line-height:1.5;min-height:1.5em;color:var(--app-muted,#53627b)}
+.pokemon-card-list{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.pokemon-card-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:10px 12px}
+.pokemon-card-row>div:first-child{min-width:0;overflow-wrap:anywhere}
+.pokemon-card-row strong,.pokemon-card-row small{display:block}
+.pokemon-card-row strong{font-size:15px;line-height:1.4}
+.pokemon-card-row small{color:var(--app-muted,#53627b);margin:2px 0;font-size:12px}
+.pokemon-card-row a{color:var(--app-accent,#2563eb);font-size:13px}
+.pokemon-card-quantity{flex:none;display:grid;grid-template-columns:44px minmax(37px,auto) 44px;align-items:center;gap:3px}
+.pokemon-card-quantity span{text-align:center;font-size:13px;font-weight:750;font-variant-numeric:tabular-nums}
+.pokemon-card-quantity button{padding:0;font-size:21px;line-height:1}
+.pokemon-card-quantity button:disabled,.pokemon-cards-header button:disabled{opacity:.55;cursor:default}
+.pokemon-cards-more{width:100%;margin-top:12px}

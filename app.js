@@ -351,6 +351,7 @@
     renderMyShared();
     updateDeveloperTab();
     window.TorecaInfoPlaza?.onAuthChanged?.();
+    window.TorecaPokemonCards?.onAuthChanged?.();
     window.TorecaStoreAliases?.onAuthChanged?.();
     window.TorecaSupabaseUsage?.onAuthChanged?.();
     window.TorecaAdminLoginUsers?.onAuthChanged?.();
@@ -764,9 +765,9 @@
     return document.querySelectorAll('nav button[data-tab], #appLoginOpen[data-tab]');
   }
 
-  // v21.136: Lottery pages are only shown inside an approved Discord login.
+  // Private app pages are only shown inside an approved Discord login.
   // This is a view/navigation rule, NOT protection for public JSON endpoints.
-  const LOTTERY_LOGIN_TABS=['lottery','lotteryManage','lotteryResults','appLottery'];
+  const LOTTERY_LOGIN_TABS=['lottery','lotteryManage','lotteryResults','appLottery','pokemonCards'];
 
   // v21.140: A tab captured by manual refresh may need authentication.
   // Do not navigate there until Supabase has restored and approved the user.
@@ -818,7 +819,7 @@
     });
 
     appNavigationButtons().forEach(button => {
-      const active=button.dataset.tab===tab;
+      const active=button.dataset.tab===tab||(tab==='pokemonCards'&&button.dataset.tab==='infoPlaza');
       button.classList.toggle('active',active);
       if(button.id==='appLoginOpen'){
         if(active)button.setAttribute('aria-current','page');
@@ -848,6 +849,7 @@
     if (tab === 'dev' && isDeveloper()) { loadLotteryEvents(); loadLotteryDevResults(); lpCloudRefresh(); lpLocationRefresh(); lpExtRefresh(); lpCardRefresh(); refreshDeveloperSalePreview(); }
     // Browser integrations are optional in isolated regression-test contexts.
     globalThis.window?.TorecaInfoPlaza?.onTabChanged?.(tab);
+    globalThis.window?.TorecaPokemonCards?.onTabChanged?.(tab);
     globalThis.window?.TorecaStoreAliases?.onTabChanged?.(tab);
     globalThis.window?.TorecaStoreMaps?.onTabChanged?.(tab);
     globalThis.window?.TorecaAdminLoginUsers?.onTabChanged?.(tab);
@@ -3110,6 +3112,8 @@
         const actions=document.createElement('div');
         actions.className='lp-product-master-actions';
         for(const [name,callback] of [
+          ...(window.TorecaPokemonCards?.hasProduct?.(item.id)
+            ? [['収録カード',()=>window.TorecaPokemonCards.open(item.id)]] : []),
           ['編集',()=>lpProductEdit(item)],
           ['別名登録',()=>void addCloudProductAlias(item)],
           ...(aliases.length?[['別名削除',()=>void removeCloudProductAlias(item,aliases)]]:[]),
@@ -11272,6 +11276,12 @@
         getClient:()=>supabaseClient,isDev:isDeveloper,
         getUserId:()=>authUser?.id||''
       });
+      window.TorecaPokemonCards?.init?.({
+        getClient:()=>supabaseClient,
+        getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
+        navigate:switchTab,
+        onCatalogLoaded:renderCloudAdminLists
+      });
       window.TorecaSalesReference?.init?.({
         getClient:()=>supabaseClient,
         getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
@@ -11307,7 +11317,7 @@
         const currentUrl = new URL(window.location.href);
         const requestedTab = currentUrl.searchParams.has('app_refresh')
           ? currentUrl.searchParams.get('app_tab') : null;
-        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','lotteryResults','infoPlaza','group','dev'];
+        const allowedTabs = ['map','add','history','lottery','appLottery','lotteryManage','lotteryResults','infoPlaza','pokemonCards','group','dev'];
         if(allowedTabs.includes(requestedTab))
           initialTab=deferProtectedTabUntilAuth(requestedTab);
         if (currentUrl.searchParams.has('app_tab')) {

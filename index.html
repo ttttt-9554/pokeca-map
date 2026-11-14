@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261109-application-return-v3">
+  <link rel="stylesheet" href="style.css?v=20261115-pokemon-cards-v1">
 
   <style>
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
@@ -1158,10 +1158,40 @@ nav[aria-label="メインメニュー"] {
     </section>
 
 
-    <!-- Information Plaza: intentionally empty until its features are defined. -->
     <section id="infoPlazaView" class="view" aria-labelledby="infoPlazaTitle">
       <h2 id="infoPlazaTitle">💬 情報広場</h2>
+      <button type="button" id="openPokemonCards" class="pokemon-cards-entry" hidden>ポケカ検索・コレクション →</button>
       <div id="infoPlazaContent" class="info-plaza-empty" aria-label="情報広場の表示領域"></div>
+    </section>
+
+    <section id="pokemonCardsView" class="view" aria-labelledby="pokemonCardsTitle" hidden>
+      <div class="pokemon-cards-header">
+        <button type="button" id="pokemonCardsBack">← 情報広場</button>
+        <button type="button" id="pokemonCardsRefresh">↻ 再取得</button>
+      </div>
+      <h2 id="pokemonCardsTitle" tabindex="-1">ポケカ検索・コレクション</h2>
+      <div class="pokemon-cards-filters">
+        <label for="pokemonCardSet">収録商品
+          <select id="pokemonCardSet" disabled></select>
+        </label>
+        <label for="pokemonCardSearch">カード名・番号
+          <input id="pokemonCardSearch" type="search" placeholder="ピカチュウ、028/103 など" maxlength="100" autocomplete="off" enterkeyhint="search">
+        </label>
+        <label for="pokemonCardOwnedFilter">所持状況
+          <select id="pokemonCardOwnedFilter">
+            <option value="all">すべて</option>
+            <option value="owned">所持済み</option>
+            <option value="missing">未所持</option>
+          </select>
+        </label>
+      </div>
+      <div id="pokemonCardProgress" class="pokemon-card-progress" hidden>
+        <p id="pokemonCardSummary" aria-live="polite"></p>
+        <progress id="pokemonCardProgressBar" aria-label="収録カードの収集率" max="1" value="0"></progress>
+      </div>
+      <p id="pokemonCardStatus" class="pokemon-card-status" role="status"></p>
+      <ul id="pokemonCardList" class="pokemon-card-list" aria-label="収録カード"></ul>
+      <button type="button" id="pokemonCardsMore" class="pokemon-cards-more" hidden>さらに表示</button>
     </section>
 
 
@@ -1964,13 +1994,14 @@ nav[aria-label="メインメニュー"] {
   <!-- アプリ本体 -->
   <script src="search_inputs_v1.js?v=20261102-multi-store-choice-v6"></script>
   <script src="lottery_application_return_v1.js?v=20261109-application-return-v3"></script>
+  <script src="pokemon_card_collection_v1.js?v=20261115-pokemon-cards-v1"></script>
   <script>
   // Load the app script with the refresh token when the user explicitly
   // requests an update, preventing a stale app.js response in iOS/Chrome.
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261114-lottery-received-fold-v1';
+      ? token : '20261115-pokemon-cards-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
@@ -2043,7 +2074,7 @@ nav[aria-label="メインメニュー"] {
         );
         currentTab = selected ? selected.dataset.tab : '';
       }
-      if (/^(map|add|history|lottery|appLottery|lotteryManage|lotteryResults|infoPlaza|group|dev)$/.test(currentTab)) {
+      if (/^(map|add|history|lottery|appLottery|lotteryManage|lotteryResults|infoPlaza|pokemonCards|group|dev)$/.test(currentTab)) {
         next.searchParams.set('app_tab',currentTab);
       }
       if(controller)timeout=setTimeout(function(){controller.abort();},12000);
