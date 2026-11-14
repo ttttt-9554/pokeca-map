@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-14T07:36:00.528328+00:00",
+  "collected_at": "2026-11-14T08:05:55.078277+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 805,
+  "unique_livepocket_urls": 806,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -24013,34 +24013,70 @@
       ],
       "store_name": "TSUTAYA追浜店",
       "prefecture": "神奈川県"
+    },
+    {
+      "url": "https://livepocket.jp/e/gr1sc",
+      "discord_message_id": "1571072231491108954",
+      "discord_posted_at": "2026-11-14T08:00:09.098000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍福島県\nブックエース上荒川店\n受付終了: 11/15 22:00（残り1日4時間）\nhttps://livepocket.jp/e/gr1sc",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gr1sc",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "再販分抽選 ストームエメラルダ ポケモンカードゲーム MEGA 拡張パック",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-14T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "ブックエース上荒川店",
+          "prefecture": "福島県"
+        }
+      ],
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 623,
-    "no_structured_details": 182
+    "no_structured_details": 183
   },
   "field_counts": {
-    "store_name": 401,
-    "prefecture": 353,
-    "event_title": 503,
+    "store_name": 402,
+    "prefecture": 354,
+    "event_title": 504,
     "event_date": 1,
     "product_name": 123,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 768,
-    "application_start_at": 765,
-    "stores_events": 401
+    "application_end_at": 769,
+    "application_start_at": 766,
+    "stores_events": 402
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571064675251134466"
+      "1551580466266644552": "1571072231491108954"
     },
     "last_run": {
-      "checked_at": "2026-11-14T07:36:00.528328+00:00",
-      "new_urls": 2,
-      "original_urls": 803,
+      "checked_at": "2026-11-14T08:05:55.078277+00:00",
+      "new_urls": 1,
+      "original_urls": 805,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -24358,7 +24394,8 @@
         "1570996741980029062": "2026-11-14T03:05:56.064910+00:00",
         "1571019384082927648": "2026-11-14T04:36:05.632464+00:00",
         "1571049587152654336": "2026-11-14T06:35:56.397670+00:00",
-        "1571064675251134466": "2026-11-14T07:36:04.357107+00:00"
+        "1571064675251134466": "2026-11-14T07:36:04.357107+00:00",
+        "1571072231491108954": "2026-11-14T08:05:56.261627+00:00"
       },
       "checked_search_urls": {}
     },
@@ -27928,6 +27965,11 @@
           "checked_at": "2026-11-14T07:36:46.429751+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/gr1sc": {
+          "checked_at": "2026-11-14T08:06:27.618629+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -30632,6 +30674,12 @@
           "detected_at": "2026-11-14T07:36:05.691646+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-14T07:36:46.429751+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/gr1sc": {
+          "detected_at": "2026-11-14T08:05:57.591966+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T08:06:27.618629+00:00",
           "http_status": null
         }
       },
@@ -39856,6 +39904,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/gr1sc": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-14T08:06:27.618629+00:00",
+          "title_observed": "再販分抽選 ストームエメラルダ ポケモンカードゲーム MEGA 拡張パック",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -46551,6 +46610,19 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/gr1sc": {
+          "checked_at": "2026-11-14T08:06:27.618629+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
         }
       }
     },
@@ -46982,9 +47054,9 @@
         "next_check_at": "2026-11-12T17:36:27.522195+00:00"
       },
       "https://livepocket.jp/e/t7mnn": {
-        "checked_at": "2026-11-14T02:06:21.693880+00:00",
+        "checked_at": "2026-11-14T08:06:27.618629+00:00",
         "status": "browser_unverified_page",
-        "next_check_at": "2026-11-14T08:06:21.693880+00:00"
+        "next_check_at": "2026-11-14T14:06:27.618629+00:00"
       }
     }
   }
