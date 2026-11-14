@@ -7089,8 +7089,7 @@
   let lotteryTrackFetching = null;
   let lotteryTrackSaving = false;
   let lotteryTrackFilter = 'all';
-  // v21.47: lost entries start folded; preserve the visitor's choice.
-  let lotteryLostGroupExpanded = false;
+  const lotteryTrackGroupExpanded = new Map([['lost', false], ['received', false]]);
   let lotteryTrackError = '';
 
   // Keep the location legible without expanding the existing management cards.
@@ -7168,18 +7167,18 @@
         color:var(--app-text,#172033)!important;line-height:1.45}
       .lp-track-group-count{flex-shrink:0;padding:3px 9px;border-radius:999px;font-size:12px;
         background:var(--app-surface,#fff);border:1px solid var(--app-border,#cbd5e1)}
-      /* v21.47: Only the lost group is collapsible; count stays visible. */
-      .lp-track-lost-fold>summary{list-style:none;cursor:pointer;touch-action:manipulation;
+      /* Keep the count visible when a completed group is collapsed. */
+      .lp-track-group-fold>summary{list-style:none;cursor:pointer;touch-action:manipulation;
         -webkit-tap-highlight-color:transparent}
-      .lp-track-lost-fold>summary::-webkit-details-marker{display:none}
-      .lp-track-lost-fold>summary::marker{content:""}
-      .lp-track-lost-meta{display:flex;align-items:center;gap:12px;flex-shrink:0}
-      .lp-track-lost-chevron{display:block;width:9px;height:9px;flex-shrink:0;
+      .lp-track-group-fold>summary::-webkit-details-marker{display:none}
+      .lp-track-group-fold>summary::marker{content:""}
+      .lp-track-group-meta{display:flex;align-items:center;gap:12px;flex-shrink:0}
+      .lp-track-group-chevron{display:block;width:9px;height:9px;flex-shrink:0;
         border-right:2px solid currentColor;border-bottom:2px solid currentColor;
         transform:rotate(45deg);transition:transform .2s ease;margin:0 6px 4px 2px}
-      .lp-track-lost-fold[open] .lp-track-lost-chevron{
+      .lp-track-group-fold[open] .lp-track-group-chevron{
         transform:rotate(225deg);margin:5px 6px 0 2px}
-      .lp-track-lost-fold>summary:focus-visible{
+      .lp-track-group-fold>summary:focus-visible{
         outline:2px solid var(--app-accent,#2563eb);outline-offset:2px;border-radius:5px}
       .lp-track-row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--app-border,#dbe3ed)}
       .lp-track-row>div{min-width:0;flex:1}
@@ -7387,15 +7386,16 @@
     $('lotteryManageView').append(container);
     $('lpTrackFilter').addEventListener('change', e => {
       lotteryTrackFilter = e.target.value;
-      // Explicitly filtering to "落選" reveals the matching entries.
-      if (lotteryTrackFilter === 'lost') lotteryLostGroupExpanded = true;
+      if (lotteryTrackGroupExpanded.has(lotteryTrackFilter)) {
+        lotteryTrackGroupExpanded.set(lotteryTrackFilter, true);
+      }
       renderLotteryTrackerSummary();
     });
     // Preserve the fold state when Supabase refreshes or a record is edited.
     $('lpResultAlerts').addEventListener('click',lotteryTrackerHandleClick);
-    $('lpTrackList').addEventListener('toggle', event => {
-      if (event.target?.matches?.('details.lp-track-lost-fold')) {
-        lotteryLostGroupExpanded = event.target.open;
+    $('lpTrackList').addEventListener('toggle', ({target}) => {
+      if (target?.matches?.('details.lp-track-group-fold')) {
+        lotteryTrackGroupExpanded.set(target.dataset.status, target.open);
       }
     }, true);
     $('lpTrackReload').addEventListener('click',()=>refreshLotteryTrackerForAccount(true));
@@ -7900,11 +7900,12 @@
       const rows=[...products.values()].map(product=>
         `<details class="lp-track-product-group" open><summary><strong>📦 ${escape(product.name)}</strong> <span>（${product.records.length}件）</span></summary>${product.records.map(renderRow).join('')}</details>`
       ).join('');
-      if(key==='lost'){
-        return `<details class="lp-track-group lp-track-lost-fold" data-status="lost" aria-label="落選" ${lotteryLostGroupExpanded?'open':''}>
-          <summary class="lp-track-group-head"><span>${icon} ${escape(LP_TRACK_LABELS[key])}</span>
-            <span class="lp-track-lost-meta"><span class="lp-track-group-count">${total}件</span>
-            <span class="lp-track-lost-chevron" aria-hidden="true"></span></span>
+      if(lotteryTrackGroupExpanded.has(key)){
+        const label=escape(LP_TRACK_LABELS[key]);
+        return `<details class="lp-track-group lp-track-group-fold" data-status="${key}" aria-label="${label}" ${lotteryTrackGroupExpanded.get(key)?'open':''}>
+          <summary class="lp-track-group-head"><span>${icon} ${label}</span>
+            <span class="lp-track-group-meta"><span class="lp-track-group-count">${total}件</span>
+            <span class="lp-track-group-chevron" aria-hidden="true"></span></span>
           </summary>${rows}</details>`;
       }
       return `<section class="lp-track-group" data-status="${key}" aria-label="${escape(LP_TRACK_LABELS[key])}">
