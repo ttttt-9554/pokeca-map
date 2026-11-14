@@ -4,8 +4,9 @@
 Example: python scripts/import_pokemon_card_set.py 961 '30th CELEBRATION'
          '30th CELEBRATION' /tmp/pokemon-card-set.sql
 
-Store only card identifiers, names, set marks and printed numbers. The SQL
-can be applied by the database operator after inspecting the generated rows.
+Store card identifiers, names, set marks, printed numbers and official image
+paths. Image files are not downloaded. Use --images-only to refresh the image
+paths for an already imported group without fetching every detail page.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor
@@ -28,6 +29,15 @@ MAX_PAGES = 30
 
 def compact(value):
     return ' '.join(value.split())
+
+
+def read_image_path(value, card_id):
+    if not value:
+        return None
+    match = re.fullmatch(r'/assets/images/card_images/(?:large|legend)/[A-Za-z0-9_-]+/([0-9]{1,10})_[A-Za-z0-9_-]+\.jpg', value)
+    if not match or int(match[1]) != card_id:
+        raise ValueError(f'Official image path does not match card {card_id}')
+    return value
 
 
 class Detail(HTMLParser):
@@ -134,21 +144,21 @@ class Source:
                 card_id = int(row['cardID'])
                 if not 0 < card_id <= 2147483647 or not 1 <= len(name) <= 160:
                     raise ValueError('Invalid official card ID or name')
-                cards.append((card_id, name))
+                cards.append((card_id, name, read_image_path(row.get('cardThumbFile'), card_id)))
             if page == counts[1]:
                 break
-        if len(cards) != expected[0] or len({i for i, _ in cards}) != len(cards):
+        if len(cards) != expected[0] or len({row[0] for row in cards}) != len(cards):
             raise ValueError('Official search pages were incomplete or contained duplicates')
         return cards
 
     def printing(self, card):
-        card_id, name = card
+        card_id, name, image_path = card
         try:
             code, number = read_printing(self.get(f'{DETAIL}{card_id}/regu/all'), card_id)
         except Exception:
             self.stopped.set()
             raise
-        return card_id, name, code, number
+        return card_id, name, code, number, image_path
 
 
 def literal(value):
@@ -170,14 +180,34 @@ VALUES ({group}, (SELECT id FROM public.catalog_products
   WHERE genre = 'pokemon' AND name = {literal(product_name)}), {literal(title)})
 ON CONFLICT (official_group_id) DO UPDATE SET product_id=excluded.product_id, title=excluded.title;
 
-INSERT INTO public.pokemon_cards_v1 (card_id, name, set_code, card_number) VALUES
+INSERT INTO public.pokemon_cards_v1 (card_id, name, set_code, card_number, official_image_path) VALUES
 {card_rows}
 ON CONFLICT (card_id) DO UPDATE SET name=excluded.name, set_code=excluded.set_code,
-  card_number=excluded.card_number;
+  card_number=excluded.card_number, official_image_path=excluded.official_image_path;
 
 INSERT INTO public.pokemon_card_set_entries_v1 (official_group_id, card_id, sort_order) VALUES
 {entry_rows}
 ON CONFLICT (official_group_id, card_id) DO UPDATE SET sort_order=excluded.sort_order;
+COMMIT;
+"""
+
+
+def render_image_import(group, cards):
+    rows = ',\n'.join(f'  ({card_id}, {literal(path)})' for card_id, _, path in cards)
+    return f"""-- Refresh official search image references for an existing group.
+BEGIN;
+WITH updated AS (
+  UPDATE public.pokemon_cards_v1 AS card SET official_image_path = source.image_path
+  FROM (VALUES
+{rows}
+  ) AS source(card_id, image_path)
+  WHERE card.card_id = source.card_id AND EXISTS (
+    SELECT 1 FROM public.pokemon_card_set_entries_v1 AS entry
+    WHERE entry.card_id = card.card_id AND entry.official_group_id = {group}
+  )
+  RETURNING card.card_id
+)
+SELECT count(*) AS updated_images FROM updated;
 COMMIT;
 """
 
@@ -188,12 +218,17 @@ def main():
     parser.add_argument('product_name')
     parser.add_argument('title')
     parser.add_argument('output', type=Path)
+    parser.add_argument('--images-only', action='store_true')
     args = parser.parse_args()
     title = compact(args.title)
     if not 0 < args.group <= 2147483647 or not 1 <= len(title) <= 200 or not args.product_name.strip():
         parser.error('Specify a valid official product group and title')
     source = Source()
     cards = source.cards(args.group, title)
+    if args.images_only:
+        args.output.write_text(render_image_import(args.group, cards), encoding='utf-8')
+        print(f'Ready: {len(cards)} official image references.')
+        return
     print(f'Official search returned {len(cards)} cards. Checking detail pages.', flush=True)
     with ThreadPoolExecutor(max_workers=3) as pool:
         printings = []

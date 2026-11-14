@@ -7,7 +7,9 @@
   const PAGE_SIZE = 40;
   const READ_SIZE = 250;
   const MAX_QUANTITY = 9999;
+  const OFFICIAL_ORIGIN = 'https://www.pokemon-card.com';
   const OFFICIAL_DETAIL = 'https://www.pokemon-card.com/card-search/details.php/card/';
+  const failedImages = new Set();
 
   let options, active = false, owner = '', ownerVersion = 0;
   let sets = null, setsRequest = null, selectedGroup = null;
@@ -34,11 +36,42 @@
     });
   }
 
+  function cardThumbnail(card, detailUrl){
+    const link = document.createElement('a');
+    link.className = 'pokemon-card-thumbnail';
+    link.href = detailUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', `${card.name} ${card.card_number || ''}の画像・詳細を公式サイトで見る`);
+    const path = card.official_image_path;
+    // Only the exact official image for this printing may be loaded.
+    const match = typeof path === 'string' && path.match(/^\/assets\/images\/card_images\/(?:large|legend)\/[A-Za-z0-9_-]+\/([0-9]{1,10})_[A-Za-z0-9_-]+\.jpg$/);
+    if (!match || Number(match[1]) !== card.card_id || failedImages.has(path)) {
+      link.textContent = '画像なし';
+      return link;
+    }
+    const image = document.createElement('img');
+    image.alt = '';
+    image.width = 72;
+    image.height = 100;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.referrerPolicy = 'no-referrer';
+    image.addEventListener('error', () => {
+      failedImages.add(path);
+      link.replaceChildren(document.createTextNode('画像なし'));
+    }, {once:true});
+    image.src = OFFICIAL_ORIGIN + path;
+    link.append(image);
+    return link;
+  }
+
   function cardRow(card){
     const row = document.createElement('li');
     row.className = 'pokemon-card-row';
     row.dataset.cardId = card.card_id;
     const info = document.createElement('div');
+    info.className = 'pokemon-card-info';
     const name = document.createElement('strong');
     name.textContent = card.name;
     const meta = document.createElement('small');
@@ -64,7 +97,7 @@
       actions.append(button);
       if (delta < 0) actions.append(label);
     }
-    row.append(info, actions);
+    row.append(cardThumbnail(card, official.href), info, actions);
     return row;
   }
 
@@ -127,7 +160,7 @@
       }
       const next = [];
       for (let offset = 0; ; offset += READ_SIZE) {
-        const {data, error} = await options.getClient().rpc('pokemon_card_set_list_v1', {p_group_id: selectedGroup})
+        const {data, error} = await options.getClient().rpc('pokemon_card_set_search_v1', {p_group_id: selectedGroup})
           .order('sort_order').order('card_id').range(offset, offset + READ_SIZE - 1);
         if (version !== readVersion) return false;
         if (error) throw error;
@@ -195,6 +228,7 @@
     $('openPokemonCards').hidden = !user;
     if (user === owner) return;
     owner = user;
+    failedImages.clear();
     ++ownerVersion;
     ++readVersion;
     sets = setsRequest = selectedGroup = cards = null;

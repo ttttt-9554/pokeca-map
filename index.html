@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261115-pokemon-cards-v1">
+  <link rel="stylesheet" href="style.css?v=20261115-pokemon-thumbnails-v1">
 
   <style>
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
@@ -1190,7 +1190,8 @@ nav[aria-label="メインメニュー"] {
         <progress id="pokemonCardProgressBar" aria-label="収録カードの収集率" max="1" value="0"></progress>
       </div>
       <p id="pokemonCardStatus" class="pokemon-card-status" role="status"></p>
-      <ul id="pokemonCardList" class="pokemon-card-list" aria-label="収録カード"></ul>
+      <p class="pokemon-card-source">画像・カード情報の出典：<a href="https://www.pokemon-card.com/card-search/" target="_blank" rel="noopener noreferrer">ポケモンカードゲーム公式ホームページ</a><br>画像を押すと公式のカード詳細が開きます。<small>©Pokémon/Nintendo/Creatures/GAME FREAK</small></p>
+      <ul id="pokemonCardList" class="pokemon-card-list" aria-label="カード検索結果"></ul>
       <button type="button" id="pokemonCardsMore" class="pokemon-cards-more" hidden>さらに表示</button>
     </section>
 
@@ -1994,7 +1995,7 @@ nav[aria-label="メインメニュー"] {
   <!-- アプリ本体 -->
   <script src="search_inputs_v1.js?v=20261102-multi-store-choice-v6"></script>
   <script src="lottery_application_return_v1.js?v=20261109-application-return-v3"></script>
-  <script src="pokemon_card_collection_v1.js?v=20261115-pokemon-cards-v1"></script>
+  <script src="pokemon_card_collection_v1.js?v=20261115-pokemon-thumbnails-v1"></script>
   <script>
   // Load the app script with the refresh token when the user explicitly
   // requests an update, preventing a stale app.js response in iOS/Chrome.
