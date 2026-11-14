@@ -1939,12 +1939,24 @@
       "event_title_provisional": false,
       "customform_verified_at": "2026-11-14T05:36:48.054582+00:00",
       "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSeQ9SJRFVy93g84DY-QyshzmV0-t5v5stZ0vMUzvhnc8qzwFg/viewform",
+      "source_site": "docs.google.com",
+      "event_title": "【バトロコ小山駅前】11/21（土）発売ワンピース...",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-14T11:53:07.478000+00:00",
+      "first_detected_at": "2026-11-14T11:55:58.932016+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1571102434217033850"
+    "1551580466266644552": "1571130861066395679"
   },
-  "collected_at": "2026-11-14T10:05:58.733131+00:00",
+  "collected_at": "2026-11-14T11:55:58.932047+00:00",
   "messages_scanned": 100,
   "sale_report_signals": []
 }
