@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-14T08:05:55.078277+00:00",
-  "unique_livepocket_urls": 806,
+  "collected_at": "2026-11-14T09:06:02.859085+00:00",
+  "unique_livepocket_urls": 807,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13621,6 +13621,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム 拡張パック各種",
       "first_detected_at": "2026-11-14T03:05:56.959006+00:00"
     },
     {
@@ -13829,7 +13831,31 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-14T08:05:57.591966+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/bb-ug",
+      "discord_posted_at": "2026-11-14T09:00:19.933000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bb-ug",
+      "event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
+      "application_end_at": "2026-11-16T22:00:00+09:00",
+      "application_start_at": "2026-11-14T18:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 2階TSUTAYAレジ",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_name": "TSUTAYA東仙台店 2階TSUTAYAレジ",
+      "prefecture": "宮城県",
+      "official_genre": "onepiece",
+      "official_event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
+      "result_announcement_date": "2026-11-19",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-24",
+      "first_detected_at": "2026-11-14T09:06:08.645503+00:00"
     }
   ],
-  "updated_at": "2026-11-14T08:56:10.381920+00:00"
+  "updated_at": "2026-11-14T09:06:52.264567+00:00"
 }
