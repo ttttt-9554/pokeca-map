@@ -13807,31 +13807,29 @@
     },
     {
       "url": "https://livepocket.jp/e/gr1sc",
-      "discord_posted_at": "2026-11-14T08:00:09.098000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/gr1sc",
+      "store_name": "ブックエース上荒川店",
+      "prefecture": "福島県",
       "event_title": "再販分抽選 ストームエメラルダ ポケモンカードゲーム MEGA 拡張パック",
-      "application_end_at": "2026-11-15T22:00:00+09:00",
       "application_start_at": "2026-11-14T09:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "discord_posted_at": "2026-11-14T08:00:09.098000+00:00",
       "stores": [
         {
           "name": "ブックエース上荒川店",
           "prefecture": "福島県"
         }
       ],
-      "store_name": "ブックエース上荒川店",
-      "prefecture": "福島県",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "再販分抽選 ストームエメラルダ ポケモンカードゲーム MEGA 拡張パック",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gr1sc",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-14T08:05:57.591966+00:00"
     }
   ],
-  "updated_at": "2026-11-14T08:06:27.618629+00:00"
+  "updated_at": "2026-11-14T08:08:47.389765+00:00"
 }
