@@ -13646,6 +13646,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【抽選】ポケモンカードゲームMEGA 『ハドウシーカー』",
       "first_detected_at": "2026-11-14T04:36:06.601036+00:00"
     },
     {
@@ -13668,6 +13670,8 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【抽選】ワンピースカードゲーム ブースターパック【神の支配】",
       "first_detected_at": "2026-11-14T04:36:06.601036+00:00"
     },
     {
@@ -13874,5 +13878,5 @@
       "first_detected_at": "2026-11-14T10:06:05.056631+00:00"
     }
   ],
-  "updated_at": "2026-11-14T10:36:07.289273+00:00"
+  "updated_at": "2026-11-14T10:46:29.627099+00:00"
 }
