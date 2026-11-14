@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-13T15:00:57.638274+00:00",
-  "unique_livepocket_urls": 794,
+  "collected_at": "2026-11-14T01:35:55.725967+00:00",
+  "unique_livepocket_urls": 796,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13556,7 +13556,54 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-13T15:00:59.880394+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/d1iyc",
+      "discord_posted_at": "2026-11-14T01:30:09.398000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/d1iyc",
+      "event_title": "PM MEGA 拡張パック「ハドウシーカー」抽選販売",
+      "application_end_at": "2026-11-15T20:00:00+09:00",
+      "application_start_at": "2026-11-14T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA BOOKSTORE川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "TSUTAYA BOOKSTORE川崎駅前店",
+      "prefecture": "神奈川県",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_event_title": "PM MEGA 拡張パック「ハドウシーカー」抽選販売",
+      "purchase_start_date": "2026-11-27",
+      "purchase_start_time": "09:00",
+      "purchase_end_date": "2026-11-28",
+      "first_detected_at": "2026-11-14T01:35:58.542383+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/afq8s",
+      "discord_posted_at": "2026-11-14T01:30:09.398000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/afq8s",
+      "event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-14T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "ビッグワンTSUTAYAさくら店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "ビッグワンTSUTAYAさくら店",
+      "prefecture": "栃木県",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム ブースターパック「神の支配」抽選販売",
+      "first_detected_at": "2026-11-14T01:35:58.542383+00:00"
     }
   ],
-  "updated_at": "2026-11-14T01:26:03.833889+00:00"
+  "updated_at": "2026-11-14T01:36:27.885277+00:00"
 }
