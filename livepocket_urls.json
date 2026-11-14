@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-14T04:36:01.798743+00:00",
+  "collected_at": "2026-11-14T06:05:54.876153+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -23706,7 +23706,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/yh57f",
       "field_sources": {
@@ -23742,7 +23742,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/l9z_p",
       "field_sources": {
@@ -23778,7 +23778,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/zpoqc",
       "field_sources": {
@@ -23807,8 +23807,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 620,
-    "no_structured_details": 179
+    "parsed": 623,
+    "no_structured_details": 176
   },
   "field_counts": {
     "store_name": 395,
@@ -23825,12 +23825,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571019384082927648"
+      "1551580466266644552": "1571042046674735185"
     },
     "last_run": {
-      "checked_at": "2026-11-14T04:36:01.798743+00:00",
-      "new_urls": 2,
-      "original_urls": 797,
+      "checked_at": "2026-11-14T06:05:54.876153+00:00",
+      "new_urls": 0,
+      "original_urls": 799,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
