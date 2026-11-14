@@ -13509,8 +13509,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【抽選販売】再販ポケモンカードゲームMEGA 拡張パック 30th CELEBRATION",
       "first_detected_at": "2026-11-13T12:30:59.264819+00:00"
     },
     {
@@ -13533,8 +13531,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "【抽選販売】ONE PIECEカードゲーム ブースターパック 神の支配 OP18",
       "first_detected_at": "2026-11-13T12:30:59.264819+00:00"
     },
     {
@@ -13562,5 +13558,5 @@
       "first_detected_at": "2026-11-13T15:00:59.880394+00:00"
     }
   ],
-  "updated_at": "2026-11-14T00:46:22.523798+00:00"
+  "updated_at": "2026-11-14T00:56:04.682874+00:00"
 }
