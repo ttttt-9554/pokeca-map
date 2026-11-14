@@ -28033,7 +28033,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/yh57f": {
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -28083,8 +28083,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/bb-ug": {
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/wxx_y": {
@@ -30751,7 +30751,7 @@
         "https://livepocket.jp/e/yh57f": {
           "detected_at": "2026-11-14T03:05:56.959006+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/l9z_p": {
@@ -30810,8 +30810,8 @@
         },
         "https://livepocket.jp/e/bb-ug": {
           "detected_at": "2026-11-14T09:06:08.645503+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/wxx_y": {
@@ -32862,8 +32862,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yh57f": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-14T09:06:52.264567+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-14T15:16:26.873002+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/zpoqc": {
@@ -32909,6 +32909,11 @@
         "https://livepocket.jp/e/gr1sc": {
           "attempts": 1,
           "last_attempt_at": "2026-11-14T14:16:25.120633+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/bb-ug": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-14T15:16:26.873002+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -40004,7 +40009,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "title_observed": "ポケモンカードゲーム 拡張パック各種",
           "genre": "pokemon",
           "product_origin": "",
@@ -40114,7 +40119,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "title_observed": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -46722,7 +46727,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/yh57f": {
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -46852,7 +46857,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/bb-ug": {
-          "checked_at": "2026-11-14T09:06:52.264567+00:00",
+          "checked_at": "2026-11-14T15:16:26.873002+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
