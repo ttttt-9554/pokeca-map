@@ -1723,14 +1723,222 @@
     {
       "url": "https://customform.jp/form/input/259368?key=952920d6",
       "source_site": "customform.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "11/27(金)発売 ポケモンカード MEGA 拡張パック「ハドウシーカー」抽選販売",
+      "prefecture": "東京都",
       "discord_posted_at": "2026-11-14T01:51:49.815000+00:00",
       "first_detected_at": "2026-11-14T01:55:57.495019+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-14T10:00:00+09:00",
+      "application_end_at": "2026-11-16T20:59:00+09:00",
+      "external_url_unverified": false,
+      "customform_checked_at": "2026-11-14T05:36:48.054582+00:00",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29",
+      "result_announcement_date": "2026-11-19",
+      "result_announcement_time": "15:00",
+      "stores": [
+        {
+          "name": "Ganryu秋葉原店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "Ganryu名古屋大須店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "Ganryu木更津店",
+          "prefecture": ""
+        },
+        {
+          "name": "WonderGOOひたちなか店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO真岡店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "WonderGOO茂原店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO足利店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "WonderGOO鹿島店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO鹿沼店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "WonderGOO石岡店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO那珂店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO水戸笠原店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOOひたち野うしく店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO古河店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO小山店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "WonderGOO鎌ヶ谷店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO守谷店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO鉾田店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO日立中央店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO常陸大宮店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO下館店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO旭店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO大田原店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "WonderGOO入間店",
+          "prefecture": ""
+        },
+        {
+          "name": "WonderGOO千葉ニュータウン店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO八街店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO北茨城店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOOいわき鹿島店",
+          "prefecture": "福島県"
+        },
+        {
+          "name": "WonderGOOつくば店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO富里店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO成東店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "WonderGOO日立田尻店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "WonderGOO本庄店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "WonderGOO下野店",
+          "prefecture": "栃木県"
+        },
+        {
+          "name": "新星堂熊谷店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "新星堂ニッケコルトンプラザ店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "新星堂アピタ松任店",
+          "prefecture": "石川県"
+        },
+        {
+          "name": "新星堂小田原ダイナシティ店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "新星堂アリオ葛西店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "新星堂アピタ岡崎北店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "新星堂鶴岡店",
+          "prefecture": "山形県"
+        },
+        {
+          "name": "新星堂船橋ヨーカドー店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "新星堂アスナル金山店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "新星堂mozoワンダーシティ店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "新星堂アリオ深谷店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "新星堂福山店",
+          "prefecture": "広島県"
+        },
+        {
+          "name": "新星堂立場ヨーカドー店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "新星堂イオンモール佐野新都市店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "Ganryu秋葉原店",
+      "product_name": "ポケモンカード MEGA 拡張パック「ハドウシーカー」",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      },
+      "official_event_title": "11/27(金)発売 ポケモンカード MEGA 拡張パック「ハドウシーカー」抽選販売",
+      "event_title_provisional": false,
+      "customform_verified_at": "2026-11-14T05:36:48.054582+00:00",
+      "pokemon_map_type": "pack"
     }
   ],
   "last_seen_message_ids": {
