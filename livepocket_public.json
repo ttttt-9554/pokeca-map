@@ -13625,55 +13625,51 @@
     },
     {
       "url": "https://livepocket.jp/e/l9z_p",
-      "discord_posted_at": "2026-11-14T04:30:09.294000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/l9z_p",
+      "store_name": "CARDWINGS八王子駅前店",
+      "prefecture": "東京都",
       "event_title": "【抽選】ポケモンカードゲームMEGA 『ハドウシーカー』",
-      "application_end_at": "2026-11-23T23:59:00+09:00",
       "application_start_at": "2026-11-14T13:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-23T23:59:00+09:00",
+      "discord_posted_at": "2026-11-14T04:30:09.294000+00:00",
       "stores": [
         {
           "name": "CARDWINGS八王子駅前店",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "CARDWINGS八王子駅前店",
-      "prefecture": "東京都",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【抽選】ポケモンカードゲームMEGA 『ハドウシーカー』",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/l9z_p",
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-28",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-14T04:36:06.601036+00:00"
     },
     {
       "url": "https://livepocket.jp/e/zpoqc",
-      "discord_posted_at": "2026-11-14T04:30:09.294000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/zpoqc",
+      "store_name": "CARDWINGS八王子駅前店",
+      "prefecture": "東京都",
       "event_title": "【抽選】ワンピースカードゲーム ブースターパック【神の支配】",
-      "application_end_at": "2026-11-16T23:59:00+09:00",
       "application_start_at": "2026-11-14T13:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-16T23:59:00+09:00",
+      "discord_posted_at": "2026-11-14T04:30:09.294000+00:00",
       "stores": [
         {
           "name": "CARDWINGS八王子駅前店",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "CARDWINGS八王子駅前店",
-      "prefecture": "東京都",
-      "official_genre": "onepiece",
-      "official_event_title": "【抽選】ワンピースカードゲーム ブースターパック【神の支配】",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/zpoqc",
       "result_announcement_date": "2026-11-17",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-22",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-14T04:36:06.601036+00:00"
     }
   ],
-  "updated_at": "2026-11-14T04:36:49.434894+00:00"
+  "updated_at": "2026-11-14T04:46:01.176312+00:00"
 }
