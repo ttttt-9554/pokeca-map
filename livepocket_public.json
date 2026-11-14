@@ -13621,8 +13621,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
       "review_category": "pokemon",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 拡張パック各種",
       "first_detected_at": "2026-11-14T03:05:56.959006+00:00"
     },
     {
@@ -13852,8 +13850,6 @@
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-24",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "TSUTAYA東仙台店 ワンピースカードゲーム 抽選販売",
       "first_detected_at": "2026-11-14T09:06:08.645503+00:00"
     },
     {
@@ -13903,5 +13899,5 @@
       "first_detected_at": "2026-11-14T12:06:04.643099+00:00"
     }
   ],
-  "updated_at": "2026-11-14T15:16:26.873002+00:00"
+  "updated_at": "2026-11-14T15:26:00.661024+00:00"
 }
