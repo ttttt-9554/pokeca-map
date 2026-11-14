@@ -13603,28 +13603,26 @@
     },
     {
       "url": "https://livepocket.jp/e/yh57f",
-      "discord_posted_at": "2026-11-14T03:00:10.996000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/yh57f",
+      "store_name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
+      "prefecture": "千葉県",
       "event_title": "ポケモンカードゲーム 拡張パック各種",
-      "application_end_at": "2026-11-15T22:00:00+09:00",
       "application_start_at": "2026-11-14T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "discord_posted_at": "2026-11-14T03:00:10.996000+00:00",
       "stores": [
         {
           "name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "TSUTAYABOOKSTOREそよら成田ニュータウン",
-      "prefecture": "千葉県",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 拡張パック各種",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/yh57f",
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-21",
       "purchase_end_date": "2026-11-23",
+      "review_category": "pokemon",
       "first_detected_at": "2026-11-14T03:05:56.959006+00:00"
     }
   ],
-  "updated_at": "2026-11-14T03:06:21.010626+00:00"
+  "updated_at": "2026-11-14T03:16:02.297528+00:00"
 }
