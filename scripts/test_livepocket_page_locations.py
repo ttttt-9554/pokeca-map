@@ -96,6 +96,36 @@ class PageLocationTests(unittest.TestCase):
             {'name': 'HMVトレカショップ新宿', 'prefecture': ''},
             {'name': 'HMVららぽーと豊洲', 'prefecture': ''}])
 
+    def test_quoted_sales_store_matches_official_venue_in_both_fetch_paths(self):
+        name = 'TSUTAYA調布駅南口店'
+        for left, right in (('[', ']'), ('［', '］'), ('【', '】'), ('「', '」'), ('『', '』')):
+            with self.subTest(left=left):
+                document = html(venue=name, prefecture='東京都', seller=name)
+                document += f'<p>販売店舗：{left}{name}{right}</p>'
+                page = self.observation(document)
+                expected = [{'name': name, 'prefecture': '東京都'}]
+                self.assertEqual(individual.extract(v21, URL, page)['fields']['stores'], expected)
+                raw, public = pair()
+                v21.v19.apply_stores(raw, public, {URL: page})
+                v21.v19.apply_stores(raw, public)
+                self.assertEqual(public['items'][0]['stores'], expected)
+
+    def test_quoted_store_list_only_receives_matching_venue_region(self):
+        page = self.observation(html(venue='TSUTAYA調布駅南口店', prefecture='東京都'))
+        page['text'] += '\n販売店舗：［TSUTAYA調布駅南口店］／［TSUTAYA別店舗］\n'
+        self.assertEqual(v21.v19.observation_stores(page)[0], [
+            {'name': 'TSUTAYA調布駅南口店', 'prefecture': '東京都'},
+            {'name': 'TSUTAYA別店舗', 'prefecture': ''}])
+
+    def test_label_quotes_preserve_explicit_regions_and_internal_name_brackets(self):
+        self.assertEqual(v21.v19.store_part('［TSUTAYA調布駅南口店（東京都）］'),
+                         {'name': 'TSUTAYA調布駅南口店', 'prefecture': '東京都'})
+        self.assertEqual(v21.v19.store_part('[TSUTAYA調布駅南口店]（東京都）'),
+                         {'name': 'TSUTAYA調布駅南口店', 'prefecture': '東京都'})
+        self.assertEqual(v21.v19.safe_name('SHOP[本館]店'), 'SHOP[本館]店')
+        self.assertEqual(v21.v19.unwrap_store_label('[A店][B店]'), '[A店][B店]')
+        self.assertIsNone(v21.v19.safe_name('［］'))
+
     def test_stale_region_reference_cannot_abort_or_recreate_discord_shop(self):
         raw, public = pair()
         result = v21.process(raw, public, lambda _: self.observation(), catalog={}, now=NOW,

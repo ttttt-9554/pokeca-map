@@ -24105,19 +24105,20 @@
         "application_end_at": "v14_livepocket_rendered_public_page",
         "application_start_at": "v14_livepocket_rendered_public_page",
         "store_name": "v19_livepocket_explicit_store_list",
-        "stores": "v19_livepocket_explicit_store_list"
+        "stores": "v19_livepocket_explicit_store_list",
+        "prefecture": "v19_livepocket_explicit_store_list"
       },
       "event_title": "ワンピースカード エクストラブースター ONE PIECE Heroines Edition vol.2抽選販売",
       "application_end_at": "2026-11-15T23:59:00+09:00",
       "application_start_at": "2026-11-13T16:55:00+09:00",
-      "store_name": "［TSUTAYA調布駅南口店］",
+      "store_name": "TSUTAYA調布駅南口店",
       "stores": [
         {
-          "name": "［TSUTAYA調布駅南口店］",
-          "prefecture": ""
+          "name": "TSUTAYA調布駅南口店",
+          "prefecture": "東京都"
         }
       ],
-      "prefecture": "",
+      "prefecture": "東京都",
       "result_announcement_date": "2026-11-16"
     },
     {

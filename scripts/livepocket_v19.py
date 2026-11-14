@@ -69,11 +69,25 @@ TICKET_PURCHASE_PREFIX = re.compile(
     rf'^{TICKET_DATE}\s*(?:[〜～~–—－-]|から)\s*{TICKET_DATE}\s*購入可能\s*[・･:：]\s*')
 
 
+def unwrap_store_label(value):
+    """Remove paired presentation quotes, preserving brackets inside a name."""
+    value = value.strip()
+    pairs = {'[': ']', '［': '］', '【': '】', '「': '」', '『': '』'}
+    while len(value) >= 2 and pairs.get(value[0]) == value[-1]:
+        opening, closing = value[0], value[-1]
+        inner = value[1:-1].strip()
+        # Separate labels must not be mistaken for one enclosing pair.
+        if opening in inner or closing in inner:
+            break
+        value = inner
+    return value
+
+
 def safe_name(s, *, strict_retail=False):
     """Reject prose, truncation, formula-like values and unconstrained stores."""
     if not isinstance(s, str) or arrival_policy.unknown_shop(s):
         return None
-    s = re.sub(r'[\s\u3000]+', ' ', s).strip(' \u3000「」『』')
+    s = unwrap_store_label(re.sub(r'[\s\u3000]+', ' ', s))
     # A ticket can put a purchase window before the actual branch name.
     s, removed_window = TICKET_PURCHASE_PREFIX.subn('', s, count=1)
     strict_retail = strict_retail or bool(removed_window)
@@ -92,7 +106,7 @@ def store_part(piece, *, strict_retail=False):
     """Extract prefecture only when directly attached to THIS store entry."""
     if not isinstance(piece, str):
         return None
-    piece = LIST_PREFIX.sub('', piece.strip()).strip(' \u3000-—')
+    piece = unwrap_store_label(LIST_PREFIX.sub('', piece.strip()).strip(' \u3000-—'))
     prefecture = ''
     # Explicit locality immediately BEFORE the store name.
     m = re.match(r'^(' + '|'.join(map(re.escape, PREF_ORDER)) + r')\s*[：:／/\-ー ]\s*(.+)$', piece)
