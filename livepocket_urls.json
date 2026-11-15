@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-15T09:35:55.926797+00:00",
+  "collected_at": "2026-11-15T12:06:00.187196+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -24564,7 +24564,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/zrxpq",
       "field_sources": {
@@ -24593,8 +24593,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 639,
-    "no_structured_details": 178
+    "parsed": 640,
+    "no_structured_details": 177
   },
   "field_counts": {
     "store_name": 412,
@@ -24611,12 +24611,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571457249933533225"
+      "1551580466266644552": "1571495039324921937"
     },
     "last_run": {
-      "checked_at": "2026-11-15T09:35:55.926797+00:00",
-      "new_urls": 1,
-      "original_urls": 816,
+      "checked_at": "2026-11-15T12:06:00.187196+00:00",
+      "new_urls": 0,
+      "original_urls": 817,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
