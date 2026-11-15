@@ -13907,14 +13907,13 @@
     },
     {
       "url": "https://livepocket.jp/e/rnqyh",
-      "discord_posted_at": "2026-11-15T01:30:08.323000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/rnqyh",
-      "event_title": "11月再販：ポケモンカードゲーム MEGA 30th CELEBRATION カードセット 9種セット購入権抽選",
+      "store_name": "イエローサブマリン札幌GAMESHOP",
+      "prefecture": "",
       "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATION カードセット (9種セット)",
-      "application_end_at": "2026-11-18T20:05:00+09:00",
+      "event_title": "11月再販：ポケモンカードゲーム MEGA 30th CELEBRATION カードセット 9種セット購入権抽選",
       "application_start_at": "2026-11-15T09:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-18T20:05:00+09:00",
+      "discord_posted_at": "2026-11-15T01:30:08.323000+00:00",
       "stores": [
         {
           "name": "イエローサブマリン札幌GAMESHOP",
@@ -14005,28 +14004,26 @@
           "prefecture": "広島県"
         }
       ],
-      "store_name": "イエローサブマリン札幌GAMESHOP",
-      "prefecture": "",
-      "pokemon_map_match": "30th CELEBRATION",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "11月再販：ポケモンカードゲーム MEGA 30th CELEBRATION カードセット 9種セット購入権抽選",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/rnqyh",
       "result_announcement_date": "2026-11-22",
       "purchase_start_date": "2026-11-23",
       "purchase_end_date": "2026-11-25",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-15T01:30:57.172919+00:00"
     },
     {
       "url": "https://livepocket.jp/e/x1tfu",
-      "discord_posted_at": "2026-11-15T01:30:08.323000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/x1tfu",
-      "event_title": "1１月下旬再販：ポケモンカードゲーム「ストームエメラルダ」購入権抽選",
+      "store_name": "イエローサブマリン札幌GAMESHOP",
+      "prefecture": "",
       "product_name": "ポケモンカードゲームMEGA 拡張パック「ストームエメラルダ」",
-      "application_end_at": "2026-11-18T20:05:00+09:00",
+      "event_title": "1１月下旬再販：ポケモンカードゲーム「ストームエメラルダ」購入権抽選",
       "application_start_at": "2026-11-15T09:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-18T20:05:00+09:00",
+      "discord_posted_at": "2026-11-15T01:30:08.323000+00:00",
       "stores": [
         {
           "name": "イエローサブマリン札幌GAMESHOP",
@@ -14117,18 +14114,17 @@
           "prefecture": "広島県"
         }
       ],
-      "store_name": "イエローサブマリン札幌GAMESHOP",
-      "prefecture": "",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "1１月下旬再販：ポケモンカードゲーム「ストームエメラルダ」購入権抽選",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/x1tfu",
       "result_announcement_date": "2026-11-22",
       "purchase_start_date": "2026-11-23",
       "purchase_end_date": "2026-11-25",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-15T01:30:57.172919+00:00"
     }
   ],
-  "updated_at": "2026-11-15T01:31:20.878377+00:00"
+  "updated_at": "2026-11-15T01:41:03.523759+00:00"
 }
