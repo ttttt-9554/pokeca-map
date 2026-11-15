@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-14T15:05:02.858667+00:00",
+  "collected_at": "2026-11-15T01:00:56.741929+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 809,
+  "unique_livepocket_urls": 810,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -24157,12 +24157,26 @@
       "result_announcement_date": "2026-11-18",
       "purchase_start_date": "2026-11-19",
       "purchase_end_date": "2026-11-20"
+    },
+    {
+      "url": "https://livepocket.jp/e/vlyl-",
+      "discord_message_id": "1571328911621754960",
+      "discord_posted_at": "2026-11-15T01:00:06.410000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA流山店\n受付終了: 11/15 21:45（残り11時間44分）\nhttps://livepocket.jp/e/vlyl-",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/vlyl-"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 633,
-    "no_structured_details": 176
+    "no_structured_details": 177
   },
   "field_counts": {
     "store_name": 405,
@@ -24179,11 +24193,11 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571178032335556808"
+      "1551580466266644552": "1571328911621754960"
     },
     "last_run": {
-      "checked_at": "2026-11-14T15:05:02.858667+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-15T01:00:56.741929+00:00",
+      "new_urls": 1,
       "original_urls": 809,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -24506,7 +24520,8 @@
         "1571072231491108954": "2026-11-14T08:05:56.261627+00:00",
         "1571087376430665789": "2026-11-14T09:06:07.550875+00:00",
         "1571102434217033850": "2026-11-14T10:06:03.833909+00:00",
-        "1571132678059597955": "2026-11-14T12:06:03.716328+00:00"
+        "1571132678059597955": "2026-11-14T12:06:03.716328+00:00",
+        "1571328911621754960": "2026-11-15T01:00:57.886078+00:00"
       },
       "checked_search_urls": {}
     },
@@ -28096,6 +28111,11 @@
           "checked_at": "2026-11-15T00:21:38.462790+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/vlyl-": {
+          "checked_at": "2026-11-15T01:01:26.426465+00:00",
+          "status": "browser_redirected",
+          "http_status": null
         }
       }
     },
@@ -30824,6 +30844,12 @@
           "detected_at": "2026-11-14T12:06:04.643099+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-15T00:21:38.462790+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/vlyl-": {
+          "detected_at": "2026-11-15T01:00:59.372733+00:00",
+          "status": "browser_redirected",
+          "checked_at": "2026-11-15T01:01:26.426465+00:00",
           "http_status": null
         }
       },
@@ -40152,6 +40178,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/vlyl-": {
+          "status": "browser_redirected",
+          "reason": "fetch_browser_redirected",
+          "http_status": "",
+          "checked_at": "2026-11-15T01:01:26.426465+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
         }
       }
     },
@@ -46899,6 +46936,19 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/vlyl-": {
+          "checked_at": "2026-11-15T01:01:26.426465+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
         }
       }
     },

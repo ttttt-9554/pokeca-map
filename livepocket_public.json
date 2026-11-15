@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-14T15:05:02.858667+00:00",
-  "unique_livepocket_urls": 809,
+  "collected_at": "2026-11-15T01:00:56.741929+00:00",
+  "unique_livepocket_urls": 810,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -13897,7 +13897,14 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-14T12:06:04.643099+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/vlyl-",
+      "discord_posted_at": "2026-11-15T01:00:06.410000+00:00",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/vlyl-",
+      "first_detected_at": "2026-11-15T01:00:59.372733+00:00"
     }
   ],
-  "updated_at": "2026-11-15T00:51:09.421518+00:00"
+  "updated_at": "2026-11-15T01:01:26.426465+00:00"
 }
