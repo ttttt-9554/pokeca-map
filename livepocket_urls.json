@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-15T01:30:55.316240+00:00",
+  "collected_at": "2026-11-15T03:00:56.372506+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -24182,7 +24182,7 @@
       "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATION カードセット (9種セット)",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/rnqyh",
       "field_sources": {
@@ -24302,7 +24302,7 @@
       "product_name": "ポケモンカードゲームMEGA 拡張パック「ストームエメラルダ」",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/x1tfu",
       "field_sources": {
@@ -24415,8 +24415,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 633,
-    "no_structured_details": 179
+    "parsed": 635,
+    "no_structured_details": 177
   },
   "field_counts": {
     "store_name": 407,
@@ -24433,12 +24433,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571336469392392212"
+      "1551580466266644552": "1571359119905136730"
     },
     "last_run": {
-      "checked_at": "2026-11-15T01:30:55.316240+00:00",
-      "new_urls": 2,
-      "original_urls": 810,
+      "checked_at": "2026-11-15T03:00:56.372506+00:00",
+      "new_urls": 0,
+      "original_urls": 812,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
