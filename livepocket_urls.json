@@ -28556,8 +28556,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/5c195": {
-          "checked_at": "2026-11-15T04:06:57.113077+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-15T10:16:23.676093+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/x6n98": {
@@ -31330,8 +31330,8 @@
         },
         "https://livepocket.jp/e/5c195": {
           "detected_at": "2026-11-15T04:06:08.317159+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-15T04:06:57.113077+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-15T10:16:23.676093+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/m6qov": {
@@ -33450,6 +33450,11 @@
         "https://livepocket.jp/e/yhososodifgu": {
           "attempts": 1,
           "last_attempt_at": "2026-11-15T09:46:24.686948+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/5c195": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-15T10:16:23.676093+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -40732,7 +40737,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-15T04:06:57.113077+00:00",
+          "checked_at": "2026-11-15T10:16:23.676093+00:00",
           "title_observed": "ONE PIECE CARD GAME ブースターパック『神の支配』【OP-18】抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -47572,7 +47577,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/5c195": {
-          "checked_at": "2026-11-15T04:06:57.113077+00:00",
+          "checked_at": "2026-11-15T10:16:23.676093+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
