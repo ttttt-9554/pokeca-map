@@ -32,25 +32,33 @@ assert.match(html,/Discordロール認証/);
 assert.doesNotMatch(html,/アクセス権限の確認（テスト）/);
 
 const source=[
+extract('consumeDiscordHookRedirectError'),
+extract('initShared',true),
+extract('discordLogin',true),
 extract('trustedDiscordRoleFromToken',true),
 extract('discordRoleResultMessage'),
 extract('discordRoleVerifyToken',true),
 extract('requireDiscordRole',true),
 extract('checkDiscordRoleAccess',true),
-'({discordRoleResultMessage,discordRoleVerifyToken,requireDiscordRole,checkDiscordRoleAccess})'
+'({consumeDiscordHookRedirectError,initShared,discordRoleResultMessage,discordRoleVerifyToken,requireDiscordRole,checkDiscordRoleAccess})'
 ].join('\n');
 function harness(){
  let answer={ok:true,status:200,body:{allowed:true}};
- let calls=0,signouts=0,displays=0,groupRedirects=0,lastAuth='';
- const nodes={discordRoleCheck:{disabled:false},discordRoleStatus:{textContent:''}};
+ let calls=0,signouts=0,displays=0,groupRedirects=0,lastAuth='',oauthStarts=0,clientOptions=null;
+ const nodes={discordRoleCheck:{disabled:false},discordRoleStatus:{textContent:''},sharedStatus:{textContent:''}};
+ const channel={on(){return this},subscribe(){return this}};
  const context={
   authUser:null,discordRoleAuthPending:false,discordRoleAuthError:'',
   discordRoleAuthGeneration:0,discordRoleVerifiedToken:'',discordRoleVerifiedUntil:0,
   discordRoleVerification:null,discordRoleCheckBusy:false,
   SUPABASE_URL:'https://api.example',SUPABASE_KEY:'sb_publishable_demo',
   $:id=>nodes[id],displayAuth:()=>{displays++},switchTab:tab=>{if(tab==='group')groupRedirects++},
-  AbortController,setTimeout,clearTimeout,Date,
-  supabaseClient:{auth:{
+  AbortController,setTimeout,clearTimeout,Date,URL,URLSearchParams,
+  restoreTabAfterAuth:false,sharedChannel:null,
+  LP_CARD_TABLE:'cards',LP_DISCORD_INTAKE_TABLE:'intake',LP_APP_TABLE:'apps',WISHLIST_TABLE:'wishlist',SHARED_TABLE:'reports',
+  supabaseClient:{channel:()=>channel,auth:{
+   initialize:async()=>({error:null}),onAuthStateChange:()=>{},
+   signInWithOAuth:async options=>{oauthStarts++;assert.equal(options.provider,'discord');return {error:null}},
    getSession:async()=>({data:{session:{user:{id:'u1'},access_token:'token1'}},error:null}),
    signOut:async()=>{signouts++;return {error:null}}
   }},
@@ -59,8 +67,13 @@ function harness(){
     return {ok:answer.ok,status:answer.status,json:async()=>answer.body};
   }
  };
+ for(const name of ['loadSharedReports','loadCloudData','lpCloudRefresh','lpLocationRefresh','lpExtRefresh','lpCardRefresh',
+   'lpAppRefresh','lpResultsRefresh','refreshLotteryOnsiteReports','refreshLotteryOnsiteArchive'])context[name]=async()=>{};
+ context.window={location:new URL('https://app.example/pokeca-map/'),addEventListener:()=>{},
+   history:{state:null,replaceState(_state,_title,url){context.window.location=new URL(url)}},
+   supabase:{createClient:(_url,_key,options)=>{clientOptions=options;return context.supabaseClient}}};
  const api=vm.runInNewContext(source,context,{timeout:1000});
- return {api,context,nodes,setAnswer:a=>{answer=a},stats:()=>({calls,signouts,displays,groupRedirects,lastAuth})};
+ return {api,context,nodes,setAnswer:a=>{answer=a},stats:()=>({calls,signouts,displays,groupRedirects,lastAuth,oauthStarts,clientOptions})};
 }
 const session={user:{id:'u1'},access_token:'token1'};
 (async()=>{
@@ -136,5 +149,42 @@ const session={user:{id:'u1'},access_token:'token1'};
    user:{id:'u1'},access_token:'token2'
  }),true,'Token rotation for an approved login is not a new Discord check');
  assert.equal(tokenRefresh.stats().calls,1,'No additional role lookup on token rotation');
- console.log('Discord login: 14-day restore, rejection, transient retry, JWT refresh and no polling passed');
+
+ const firstLogin=harness();
+ await firstLogin.api.initShared();
+ assert.equal(firstLogin.stats().clientOptions.auth.flowType,'pkce',
+   'Initial signup must commit before the pre-token hook looks up its identity');
+ assert.equal(firstLogin.stats().clientOptions.auth.detectSessionInUrl,true);
+ assert.equal(firstLogin.stats().clientOptions.auth.persistSession,true);
+ assert.equal(firstLogin.context.authUser.id,'u1');
+
+ const callbackFailure=harness();
+ callbackFailure.context.window.location=new URL('https://app.example/pokeca-map/?code=one-time-code');
+ callbackFailure.context.supabaseClient.auth.initialize=async()=>({error:{message:'Service currently unavailable due to hook'}});
+ callbackFailure.context.supabaseClient.auth.getSession=async()=>({data:{session:null},error:null});
+ await callbackFailure.api.initShared();
+ assert.equal(callbackFailure.context.authUser,null);
+ assert.equal(callbackFailure.context.discordRoleAuthError,'oauth_login_failed');
+ assert.doesNotMatch(callbackFailure.api.discordRoleResultMessage('oauth_login_failed'),/情報は保持/);
+ await callbackFailure.api.checkDiscordRoleAccess();
+ assert.equal(callbackFailure.stats().oauthStarts,1,'Retry with no issued session must restart Discord OAuth');
+ assert.equal(callbackFailure.stats().calls,0,'Never call the role endpoint without a token');
+
+ const missingVerifier=harness();
+ missingVerifier.context.window.location=new URL('https://app.example/pokeca-map/?code=unusable-code');
+ missingVerifier.context.supabaseClient.auth.getSession=async()=>({data:{session:null},error:null});
+ await missingVerifier.api.initShared();
+ assert.equal(missingVerifier.context.discordRoleAuthError,'oauth_login_failed',
+   'An unmatched callback must offer a new login even if SDK initialization returns no error');
+
+ const redirectFailure=harness();
+ redirectFailure.context.window.location=new URL('https://app.example/pokeca-map/?keep=1#error=server_error&error_description=Service+currently+unavailable+due+to+hook');
+ redirectFailure.api.consumeDiscordHookRedirectError();
+ assert.equal(redirectFailure.context.discordRoleAuthError,'oauth_login_failed');
+ assert.equal(redirectFailure.context.window.location.hash,'');
+ assert.equal(redirectFailure.context.window.location.search,'?keep=1');
+ redirectFailure.context.window.location=new URL('https://app.example/pokeca-map/?error=access_denied&error_description=Discord+role+required');
+ redirectFailure.api.consumeDiscordHookRedirectError();
+ assert.equal(redirectFailure.context.discordRoleAuthError,'role_required');
+ console.log('Discord login: PKCE signup order, callback errors, no-session restart, 14-day restore, rejection, transient retry and JWT refresh passed');
 })().catch(e=>{console.error(e);process.exitCode=1});

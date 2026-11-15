@@ -17,7 +17,7 @@ const {pathToFileURL}=require('node:url');
  const uid='22222222-2222-4222-8222-222222222222';
  const id='123456789012345678',role='1565321684603637890';
  const sessions=new Map();
- let handler,memberRequests=0,identityRequests=0,signatures=0,memberRoles=[role];
+ let handler,memberRequests=0,identityRequests=0,signatures=0,memberRoles=[role],identityCommitted=true;
  class Webhook {
    constructor(secret){assert.equal(secret,'whsec_test_secret');}
    verify(payload,headers){
@@ -29,6 +29,7 @@ const {pathToFileURL}=require('node:url');
  const admin={
    auth:{admin:{getUserById:async user=>{
      identityRequests++;
+     if(!identityCommitted)return {data:{user:null},error:{message:'User not found',status:404}};
      return {data:{user:{id:user,identities:[
        {provider:'discord',identity_data:{provider_id:id}}]}},error:null};
    }}},
@@ -117,5 +118,24 @@ const {pathToFileURL}=require('node:url');
  const badSignature=await run(event('oauth',session2),'bad');
  assert.equal(badSignature.status,401,'Invalid webhook signatures are rejected');
  assert(signatures>=5);
- console.log('Auth Hook runtime: new OAuth, remembered refresh, separate login, role expiry and signatures passed');
+
+ // Implicit signup invokes the HTTP hook before its user/identity transaction
+ // commits, so a separate Admin API connection cannot yet find that user.
+ // PKCE exchanges the code after the callback commits that transaction.
+ const signupSession='44444444-4444-4444-8444-444444444444';
+ identityCommitted=false;memberRoles=[role];
+ const beforeCommit=await run(event('oauth',signupSession));
+ assert.equal(beforeCommit.status,503);
+ assert.equal(beforeCommit.body.error.message,'Discord identity unavailable');
+ assert(!sessions.has(signupSession));
+ identityCommitted=true;
+ const afterCommit=await run(event('oauth',signupSession));
+ assert.equal(afterCommit.status,200,'Committed PKCE signup reaches the real Discord role check');
+ const laterRoleSession='55555555-5555-4555-8555-555555555555';
+ memberRoles=[];
+ assert.equal((await run(event('oauth',laterRoleSession))).status,403);
+ assert(!sessions.has(laterRoleSession),'PKCE must not admit someone without the role');
+ memberRoles=[role];
+ assert.equal((await run(event('oauth',laterRoleSession))).status,200,'Adding a role later allows a fresh login');
+ console.log('Auth Hook runtime: initial signup transaction, later role grant, new OAuth, remembered refresh, role expiry and signatures passed');
 })().catch(err=>{console.error(err);process.exitCode=1});

@@ -12,6 +12,13 @@
 - 一時的な回線切断で画面側のログイン資格をすぐ削除しない。
 - **90秒ごとの自動確認は行わない。**
 
+## 初回ログインの処理順序
+- ブラウザのSupabaseクライアントは `flowType: 'pkce'` と `detectSessionInUrl: true` を指定する。
+- Discordのコールバックでユーザー・認証IDの保存を確定した後、ブラウザで認証コードを交換する。このトークン発行時に既存のロール確認Hookが動く。
+- implicit方式では初回ユーザーの保存が確定する前にHTTP Hookが動き、Admin APIで `User not found` になるため戻さない。
+- コード交換はログインを開始したブラウザで完了させる。交換エラーは `auth.initialize()` の結果で確認し、セッション未発行時の再確認ボタンはOAuthをやり直す。
+- ロール確認には引き続きAdmin APIが返す認証IDを使い、編集可能な `user_metadata` を本人確認の代用にしない。
+
 ## セキュリティ上の留意点
 - 14日間の保持期間中にDiscordロールが解除されても、現在のセッションは次の確認まで継続する。緊急停止が必要な場合はSupabaseから対象ユーザーのセッションを取り消す。
 - Supabase Auth自体のセッション有効性、手動ログアウト、端末ブラウザの保存領域消去などによって、14日を待たずにログアウトする場合がある。
@@ -24,5 +31,5 @@
 - 署名Secret: `DISCORD_ACCESS_TOKEN_HOOK_SECRET`（既存のものを維持、GitHubには保存しない）
 - Bot: `Toreca Radar Auth`（URL収集用のDiscord Botとは別）
 - 設定: [Auth Hooks](https://supabase.com/dashboard/project/aypcmtlaaygmiexboypk/auth/hooks)
-- 問題が起きた場合はAuth Hookを一時的に無効化して切り戻せる。ロールなしログイン制限が弱まるため、復旧後に再有効化すること。
+- 初回ログインのエラーはPKCE設定と認証ログを確認する。ロール確認Hookの無効化を復旧手順にしない。
 

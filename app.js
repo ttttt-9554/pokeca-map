@@ -332,8 +332,12 @@
     // manual retry. A real role rejection still requires a fresh Discord login.
     const retryable=discordRoleAuthError&&
       !['role_required','login_required','discord_login_required'].includes(discordRoleAuthError);
-    if(roleCheck)roleCheck.disabled=!!discordRoleCheckBusy||!supabaseClient||
-      discordRoleAuthPending||(!authUser&&!retryable);
+    if(roleCheck){
+      roleCheck.disabled=!!discordRoleCheckBusy||!supabaseClient||
+        discordRoleAuthPending||(!authUser&&!retryable);
+      roleCheck.textContent=discordRoleAuthError==='oauth_login_failed'
+        ? 'Discordログインをやり直す' : 'ログイン権限を再確認';
+    }
     if($('discordRoleStatus')){
       $('discordRoleStatus').textContent=discordRoleAuthPending
         ? '🔄 Discordロールを自動確認しています…'
@@ -404,7 +408,7 @@
       const description=(query.get('error_description')||
         fragment.get('error_description')||'').replace(/\\+/g,' ');
       discordRoleAuthError=/Discord role required/i.test(description)
-        ? 'role_required' : 'role_check_unavailable';
+        ? 'role_required' : 'oauth_login_failed';
       for(const key of ['error','error_code','error_description']){
         query.delete(key);
         fragment.delete(key);
@@ -418,8 +422,13 @@
   async function initShared() {
     consumeDiscordHookRedirectError();
     if (!window.supabase?.createClient) { displayAuth(); return; }
+    const oauthCallback=new URL(window.location.href).searchParams.has('code');
     supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-      auth: {detectSessionInUrl:true, persistSession:true, autoRefreshToken:true}
+      // PKCE commits a new Discord identity before exchanging the code. The
+      // pre-token role hook can then look it up through the trusted Admin API.
+      // Implicit OAuth calls that hook inside the uncommitted signup, causing
+      // a 404 for first-time users. Existing saved sessions remain usable.
+      auth: {flowType:'pkce', detectSessionInUrl:true, persistSession:true, autoRefreshToken:true}
     });
     supabaseClient.auth.onAuthStateChange((event,session) => {
       if(event==='SIGNED_OUT'){
@@ -446,7 +455,14 @@
         },0);
       }
     });
+    // getSession() alone does not surface a failed automatic code exchange.
+    const {error:initializationError}=await supabaseClient.auth.initialize();
     const {data,error} = await supabaseClient.auth.getSession();
+    if(oauthCallback&&!data?.session){
+      const reason=initializationError?.message||error?.message||'';
+      discordRoleAuthError=/Discord role required/i.test(reason)
+        ? 'role_required' : 'oauth_login_failed';
+    }
     if (error) $('sharedStatus').textContent = 'ログイン状態の確認に失敗: ' + error.message;
     if(data?.session) await requireDiscordRole(data.session);
     else {
@@ -507,6 +523,7 @@
       login_required:'⚠ Discordログインが必要です。',
       discord_login_required:'⚠ Discord認証に問題があります。もう一度ログインしてください。',
       role_required:'⛔ 指定ロールがないためログインできません。サーバー管理者に確認してください。',
+      oauth_login_failed:'⚠ ログインを完了できませんでした。「Discordログインをやり直す」から、このブラウザで再度ログインしてください。',
       role_check_unavailable:'⚠ 通信エラーでロールを確認できませんでした。ログイン情報は保持しています。「ログイン権限を再確認」から再試行してください。',
       identity_unavailable:'⚠ 認証情報を確認できませんでした。保存されたログイン情報は保持しています。再確認してください。',
       access_store_unavailable:'⚠ 認証結果を保存できませんでした。ログイン情報は保持しています。再確認してください。',
@@ -639,7 +656,11 @@
     try{
       const {data,error}=await supabaseClient.auth.getSession();
       if(error||!data?.session){
-        status.textContent=discordRoleResultMessage('login_required');return;
+        // A failed pre-token hook leaves no session to recheck. Restart OAuth
+        // here instead of trapping the user on a non-working retry button.
+        discordRoleAuthError='oauth_login_failed';
+        if(!error)await discordLogin();
+        return;
       }
       await requireDiscordRole(data.session,true);
     }finally{
