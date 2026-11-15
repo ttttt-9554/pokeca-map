@@ -1,0 +1,31 @@
+name: Pokemon Card Collection Regression
+on:
+  push:
+    paths:
+      - pokemon_card_collection_v1.js
+      - index.html
+      - scripts/test_pokemon_card_collection.cjs
+      - .github/workflows/pokemon-card-collection-test.yml
+  pull_request:
+    paths:
+      - pokemon_card_collection_v1.js
+      - index.html
+      - scripts/test_pokemon_card_collection.cjs
+      - .github/workflows/pokemon-card-collection-test.yml
+permissions:
+  contents: read
+jobs:
+  card-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated DOM test dependency
+        run: npm install --no-audit --no-fund --ignore-scripts --prefix "$RUNNER_TEMP/pokemon-card-tests" jsdom@27.0.1
+      - name: Verify stable images and collection controls
+        run: |
+          node --check pokemon_card_collection_v1.js
+          NODE_PATH="$RUNNER_TEMP/pokemon-card-tests/node_modules" node scripts/test_pokemon_card_collection.cjs

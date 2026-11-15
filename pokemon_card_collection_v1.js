@@ -10,6 +10,7 @@
   const OFFICIAL_ORIGIN = 'https://www.pokemon-card.com';
   const OFFICIAL_DETAIL = 'https://www.pokemon-card.com/card-search/details.php/card/';
   const failedImages = new Set();
+  const rowParts = new WeakMap();
 
   let options, active = false, owner = '', ownerVersion = 0;
   let sets = null, setsRequest = null, selectedGroup = null;
@@ -68,6 +69,10 @@
     return link;
   }
 
+  function cardContentKey(card){
+    return JSON.stringify([card.name, card.set_code, card.card_number, card.official_image_path]);
+  }
+
   function cardRow(card){
     const row = document.createElement('li');
     row.className = 'pokemon-card-row';
@@ -86,6 +91,7 @@
     actions.setAttribute('aria-label', `${card.name} ${card.card_number || ''}の所持枚数`);
     const label = document.createElement('span');
     label.textContent = card.quantity + '枚';
+    const buttons = [];
     for (const delta of [-1, 1]) {
       const button = document.createElement('button');
       button.type = 'button';
@@ -94,6 +100,7 @@
       button.textContent = delta < 0 ? '−' : '＋';
       button.setAttribute('aria-label', `${card.name} ${card.card_number || ''}を1枚${delta < 0 ? '減らす' : '増やす'}`);
       actions.append(button);
+      buttons.push({element:button, delta});
       if (delta < 0) actions.append(label);
     }
     const wanted = document.createElement('label');
@@ -108,7 +115,45 @@
     wantedText.textContent = '欲しい';
     wanted.append(checkbox, wantedText);
     row.append(cardThumbnail(card, detailUrl), name, meta, actions, wanted);
+    rowParts.set(row, {key:cardContentKey(card), imagePath:card.official_image_path, label, buttons, checkbox});
     return row;
+  }
+
+  function setText(element, value){
+    if (element.textContent !== value) element.textContent = value;
+  }
+
+  function syncCardRows(visible){
+    const list = $('pokemonCardList');
+    const visibleIds = new Set(visible.map(card => String(card.card_id)));
+    // Remove filtered-out rows first so surviving images do not need to move.
+    for (const row of Array.from(list.children)) {
+      if (!visibleIds.has(row.dataset.cardId)) row.remove();
+    }
+    const existing = new Map(Array.from(list.children, row => [row.dataset.cardId, row]));
+    let cursor = list.firstElementChild;
+    for (const card of visible) {
+      let row = existing.get(String(card.card_id));
+      if (row && rowParts.get(row)?.key !== cardContentKey(card)) {
+        const replacement = cardRow(card);
+        if (cursor === row) cursor = replacement;
+        row.replaceWith(replacement);
+        row = replacement;
+      }
+      if (!row) row = cardRow(card);
+      const parts = rowParts.get(row);
+      setText(parts.label, card.quantity + '枚');
+      for (const {element, delta} of parts.buttons) {
+        const disabled = saving || loading || (delta < 0 ? card.quantity === 0 : card.quantity >= MAX_QUANTITY);
+        if (element.disabled !== disabled) element.disabled = disabled;
+      }
+      const checked = pendingWanted?.cardId === card.card_id ? pendingWanted.value : !!card.wanted;
+      if (parts.checkbox.checked !== checked) parts.checkbox.checked = checked;
+      if (parts.checkbox.disabled !== (saving || loading)) parts.checkbox.disabled = saving || loading;
+      // An unchanged row stays attached, retaining its decoded image and focus.
+      if (row === cursor) cursor = cursor.nextElementSibling;
+      else list.insertBefore(row, cursor);
+    }
   }
 
   function render(){
@@ -117,18 +162,18 @@
     const copies = (cards || []).reduce((total, card) => total + card.quantity, 0);
     const progress = $('pokemonCardProgressBar');
     $('pokemonCardProgress').hidden = !cards?.length;
-    progress.max = cards?.length || 1;
-    progress.value = owned;
-    $('pokemonCardSummary').textContent = cards
-      ? `${owned} / ${cards.length}種類 所持 · 計${copies}枚 · 未所持${cards.length - owned}種類` : '';
-    $('pokemonCardStatus').textContent = message || (loading ? '収録カードを読み込んでいます…'
+    if (progress.max !== (cards?.length || 1)) progress.max = cards?.length || 1;
+    if (progress.value !== owned) progress.value = owned;
+    setText($('pokemonCardSummary'), cards
+      ? `${owned} / ${cards.length}種類 所持 · 計${copies}枚 · 未所持${cards.length - owned}種類` : '');
+    setText($('pokemonCardStatus'), message || (loading ? '収録カードを読み込んでいます…'
       : sets?.length === 0 ? '収録カードはまだ登録されていません。'
       : cards && !filtered.length ? '条件に合うカードはありません。'
-      : cards ? `${filtered.length}件中 ${Math.min(limit, filtered.length)}件を表示` : '');
+      : cards ? `${filtered.length}件中 ${Math.min(limit, filtered.length)}件を表示` : ''));
     $('pokemonCardSet').disabled = loading || saving || !sets?.length;
     $('pokemonCardsRefresh').disabled = loading || saving;
     $('pokemonCardsMore').hidden = filtered.length <= limit;
-    $('pokemonCardList').replaceChildren(...filtered.slice(0, limit).map(cardRow));
+    syncCardRows(filtered.slice(0, limit));
   }
 
   async function loadSets(){
@@ -321,7 +366,15 @@
     options = config;
     $('openPokemonCards').addEventListener('click', () => open());
     $('pokemonCardsBack').addEventListener('click', () => options.navigate(backTab));
-    $('pokemonCardsRefresh').addEventListener('click', () => { failedImages.clear(); void loadCards(); });
+    $('pokemonCardsRefresh').addEventListener('click', () => {
+      // Only failed thumbnails need a fresh image element on an explicit retry.
+      for (const row of $('pokemonCardList').children) {
+        const parts = rowParts.get(row);
+        if (parts && failedImages.has(parts.imagePath)) parts.key = null;
+      }
+      failedImages.clear();
+      void loadCards();
+    });
     $('pokemonCardSet').addEventListener('change', event => {
       selectedGroup = Number(event.target.value);
       cards = null;
