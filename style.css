@@ -3901,6 +3901,8 @@ html[data-theme="dark"] #devView #lpProductMasterPanel .lp-product-manual-merge-
 .pokemon-card-quantity{display:grid;width:100%;max-width:148px;grid-template-columns:minmax(28px,1fr) minmax(0,auto) minmax(28px,1fr);align-items:center;gap:4px}
 .pokemon-card-quantity span{text-align:center;font-size:13px;font-weight:750;font-variant-numeric:tabular-nums}
 .pokemon-card-quantity button{padding:0;font-size:21px;line-height:1}
+.pokemon-card-quantity button,.pokemon-card-wanted,.pokemon-card-wanted input{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.pokemon-card-quantity button:focus-visible{outline:3px solid var(--app-accent,#2563eb);outline-offset:2px}
 .pokemon-card-wanted{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:40px;margin:0;cursor:pointer;font-size:13px}
 .pokemon-card-wanted input[type="checkbox"]{width:20px;height:20px;min-width:20px;flex:0 0 20px;margin:0;padding:0;accent-color:var(--app-accent,#2563eb)}
 .pokemon-card-wanted:has(input:checked){color:var(--app-accent,#2563eb);font-weight:700}

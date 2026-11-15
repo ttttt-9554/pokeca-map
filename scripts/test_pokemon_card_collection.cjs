@@ -16,6 +16,9 @@ const wanted = new Map();
 const pendingWrites = [];
 let loseResponse = false;
 let holdWrite = false;
+let failRecovery = false;
+let rejectWrite = false;
+const writeCalls = [];
 const tick = () => new Promise(resolve=>setImmediate(resolve));
 function start(initialUser){
   const dom = new JSDOM(html,{runScripts:'outside-only',url:'https://ttttt-9554.github.io/pokeca-map/'});
@@ -32,21 +35,27 @@ function start(initialUser){
       if(name==='pokemon_card_set_search_v2'){
         assert.equal(args.p_group_id,961);
         assert.ok(user);
-        return {order(){return this},range(start,end){return Promise.resolve({data:cards.slice(start,end+1).map(card=>({...card,quantity:quantities.get(user+':'+card.card_id)||0,wanted:wanted.get(user+':'+card.card_id)||false}))})}};
+        let matching = cards;
+        return {order(){return this},eq(key,value){assert.equal(key,'card_id');matching=cards.filter(card=>card.card_id===value);return this},range(start,end){
+          if(failRecovery){failRecovery=false;return Promise.reject(new Error('read unavailable'));}
+          return Promise.resolve({data:matching.slice(start,end+1).map(card=>({...card,quantity:quantities.get(user+':'+card.card_id)||0,wanted:wanted.get(user+':'+card.card_id)||false}))});
+        }};
       }
+      writeCalls.push({user,name,...args});
+      if(rejectWrite){rejectWrite=false;return Promise.resolve({data:null,error:{message:'write rejected'}});}
       if(name==='pokemon_card_wanted_set_v1'){
         const key=user+':'+args.p_card_id;
         wanted.set(key,args.p_wanted);
-        if(holdWrite)return new Promise(resolve=>pendingWrites.push(()=>resolve({data:args.p_wanted})));
+        if(holdWrite)return new Promise((resolve,reject)=>pendingWrites.push(error=>error?reject(error):resolve({data:args.p_wanted})));
         if(loseResponse){loseResponse=false;return Promise.reject(new Error('response lost'));}
         return Promise.resolve({data:args.p_wanted});
       }
       assert.equal(name,'pokemon_card_quantity_adjust_v1');
       assert.ok(user);
       const key=user+':'+args.p_card_id;
-      const quantity=Math.max(0,(quantities.get(key)||0)+args.p_delta);
+      const quantity=Math.min(9999,Math.max(0,(quantities.get(key)||0)+args.p_delta));
       quantities.set(key, quantity);
-      if (holdWrite) return new Promise(resolve=>pendingWrites.push(()=>resolve({data:quantity})));
+      if (holdWrite) return new Promise((resolve,reject)=>pendingWrites.push(error=>error?reject(error):resolve({data:quantity})));
       if (loseResponse) {loseResponse=false;return Promise.reject(new Error('response lost'));}
       return Promise.resolve({data:quantity});
     }
@@ -103,7 +112,8 @@ function watchImages(ui, images = Array.from(ui.$('pokemonCardList').querySelect
   holdWrite=true;
   stableRows[0].querySelector('button[data-card-delta="1"]').click();
   stableImages.check();
-  assert.equal(stableRows[0].querySelector('button[data-card-delta="1"]').disabled,true);
+  assert.equal(stableRows[0].querySelector('button[data-card-delta="1"]').disabled,false);
+  assert.match(stableRows[0].textContent,/1枚/,'quantity responds before the network reply');
   pendingWrites.shift()(); await tick();
   stableImages.check();
   assert.match(stableRows[0].textContent,/1枚/);
@@ -122,7 +132,7 @@ function watchImages(ui, images = Array.from(ui.$('pokemonCardList').querySelect
   const want=()=>ui.list()[0].querySelector('input[data-card-wanted]').click();
   want();
   assert.equal(ui.list()[0].querySelector('input').checked,true);
-  assert.equal(ui.list()[0].querySelector('input').disabled,true);
+  assert.equal(ui.list()[0].querySelector('input').disabled,false);
   await tick();
   assert.equal(wanted.get(uid[0]+':50640'),true);
   stableImages.check();stableImages.close();
@@ -224,5 +234,102 @@ function watchImages(ui, images = Array.from(ui.$('pokemonCardList').querySelect
   assert.equal(ui.list()[0].querySelector('strong').textContent,'ピカチュウ（更新済み）');
   assert.equal(ui.list()[1],unchangedThird,'catalog changes update only the changed card');
   ui.dom.window.close();
-  console.log('Stable images during quantity/wanted saves, paging, refresh, recovery and filtering. Thumbnails (distinct prints, lazy loading, fallback and official links) + UI: product link, kana/number search, paging, quantities, reload, filtering, lost response and sign-out passed.');
+
+  ui=start('rapid-user');ui.$('openPokemonCards').click();await tick();
+  const rapidRows=ui.list();
+  const plus=rapidRows[0].querySelector('[data-card-delta="1"]');
+  const minus=rapidRows[0].querySelector('[data-card-delta="-1"]');
+  const checkbox=rapidRows[0].querySelector('input');
+  const quantity=()=>rapidRows[0].querySelector('.pokemon-card-quantity span').textContent;
+  const rapidImages=watchImages(ui);
+  const mutations=[];
+  const observer=new ui.dom.window.MutationObserver(batch=>mutations.push(...batch));
+  observer.observe(ui.$('pokemonCardsView'),{attributes:true,childList:true,subtree:true,characterData:true});
+  holdWrite=true;
+  plus.click();plus.click();plus.click();minus.click();checkbox.click();checkbox.click();checkbox.click();
+  assert.equal(quantity(),'2枚','all rapid taps are visible immediately');
+  assert.equal(checkbox.checked,true);
+  assert.equal(plus.disabled,false);
+  assert.equal(minus.disabled,false);
+  assert.equal(checkbox.disabled,false);
+  assert.equal(pendingWrites.length,1,'one request at a time per card');
+  mutations.push(...observer.takeRecords());
+  const initialMutations=mutations.splice(0);
+  for(const record of initialMutations){
+    assert.ok(!rapidRows.slice(1).some(row=>row===record.target||row.contains(record.target)), 'an untouched card was mutated');
+    if(record.type==='attributes' && record.attributeName==='disabled') assert.equal(record.target,minus,'only the zero-quantity boundary may change disabled state');
+    if(record.type==='childList') assert.notEqual(record.target,ui.$('pokemonCardList'),'saving must not rebuild the grid');
+    assert.ok(!['style','class'].includes(record.attributeName),'saving must not restyle the page');
+  }
+  rapidRows[1].querySelector('[data-card-delta="1"]').click();
+  assert.equal(pendingWrites.length,2,'another card saves without waiting for the first');
+  pendingWrites.pop()();await tick();
+  assert.match(rapidRows[1].textContent,/1枚/);
+  while(pendingWrites.length){pendingWrites.shift()();await tick();assert.equal(quantity(),'2枚','older replies must not rewind newer taps');assert.equal(checkbox.checked,true);}
+  assert.equal(quantities.get('rapid-user:50640'),2);
+  assert.equal(wanted.get('rapid-user:50640'),true);
+  assert.equal(writeCalls.filter(call=>call.user==='rapid-user').length,8,'each tap is persisted once');
+  mutations.push(...observer.takeRecords());
+  for(const record of mutations){
+    assert.ok(!rapidRows.slice(2).some(row=>row===record.target||row.contains(record.target)),'save replies must leave untouched cards alone');
+    assert.ok(!['style','class'].includes(record.attributeName),'save replies must not restyle the page');
+    if(record.type==='attributes' && record.attributeName==='disabled') {
+      assert.equal(record.target,rapidRows[1].querySelector('[data-card-delta="-1"]'),'only the second card zero boundary changes');
+    }
+  }
+  rapidImages.check();rapidImages.close();observer.disconnect();
+  assert.equal(ui.$('pokemonCardStatus').textContent,'保存しました。');
+
+  // A missing reply may hide a successful write: read this card and continue
+  // only unsent taps, while leaving other cards untouched and operable.
+  plus.click();plus.click();plus.click();
+  assert.equal(quantity(),'5枚');
+  pendingWrites.shift()(new Error('response lost'));await tick();
+  assert.equal(quantity(),'5枚');
+  assert.equal(pendingWrites.length,1);
+  while(pendingWrites.length){pendingWrites.shift()();await tick();}
+  assert.equal(quantities.get('rapid-user:50640'),5,'the uncertain increment was not duplicated');
+  assert.equal(quantity(),'5枚');
+  assert.match(ui.$('pokemonCardStatus').textContent,/保存結果を再取得/);
+
+  holdWrite=false;rejectWrite=true;
+  plus.click();plus.click();
+  assert.equal(quantity(),'7枚');
+  await tick();
+  assert.equal(quantity(),'6枚','a rejected tap is rolled back while an unsent tap still saves');
+  assert.equal(quantities.get('rapid-user:50640'),6);
+
+  holdWrite=false;loseResponse=true;failRecovery=true;
+  plus.click();await tick();await tick();
+  assert.equal(plus.disabled,true,'only an unconfirmed card is blocked');
+  assert.equal(rapidRows[1].querySelector('[data-card-delta="1"]').disabled,false);
+  assert.match(ui.$('pokemonCardStatus').textContent,/保存結果を確認できません/);
+  ui.$('pokemonCardsRefresh').click();await tick();
+  assert.equal(plus.disabled,false);
+  assert.equal(quantity(),'7枚');
+  holdWrite=true;
+  plus.click();plus.click();ui.$('pokemonCardsRefresh').click();
+  assert.equal(quantity(),'9枚','refresh must not overwrite pending taps');
+  while(pendingWrites.length){pendingWrites.shift()();await tick();}
+  assert.equal(quantity(),'9枚');
+  assert.equal(quantities.get('rapid-user:50640'),9);
+
+  // Signing out cancels unsent taps, and late replies cannot write as the
+  // next account or change its display.
+  plus.click();plus.click();plus.click();
+  const callsBeforeSignOut=writeCalls.length;
+  ui.changeUser('');ui.changeUser('new-account');ui.$('openPokemonCards').click();await tick();
+  pendingWrites.shift()();await tick();
+  assert.equal(writeCalls.length,callsBeforeSignOut);
+  assert.match(ui.list()[0].textContent,/0枚/);
+  assert.equal(pendingWrites.length,0);
+  holdWrite=false;
+  quantities.set('new-account:50640',9998);
+  ui.$('pokemonCardsRefresh').click();await tick();
+  const cappedPlus=ui.list()[0].querySelector('[data-card-delta="1"]');
+  cappedPlus.click();cappedPlus.click();await tick();
+  assert.equal(quantities.get('new-account:50640'),9999);
+  assert.equal(cappedPlus.disabled,true);
+  ui.dom.window.close();
+  console.log('Passed: immediate and queued quantity/wanted updates, independent cards, no unrelated DOM/style changes, stable images, bounds, recovery, refresh, auth isolation, catalog search and filtering.');
 })().catch(error=>{console.error(error);process.exitCode=1});
