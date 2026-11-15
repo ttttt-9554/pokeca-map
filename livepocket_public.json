@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-15T06:05:57.063080+00:00",
-  "unique_livepocket_urls": 814,
+  "collected_at": "2026-11-15T06:35:55.110986+00:00",
+  "unique_livepocket_urls": 816,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14169,7 +14169,56 @@
       "result_announcement_date": "2026-11-16",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-15T04:06:08.317159+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/x6n98",
+      "discord_posted_at": "2026-11-15T06:30:04.062000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/x6n98",
+      "event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（ﾎﾟｹﾓﾝｶｰﾄﾞｹﾞｰﾑMEGA30thCELEBRATION）",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "application_start_at": "2026-11-14T14:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "ふるいち川越クレアモール店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "ふるいち川越クレアモール店",
+      "prefecture": "埼玉県",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいち川越クレアモール店】ポケカ抽選販売（ﾎﾟｹﾓﾝｶｰﾄﾞｹﾞｰﾑMEGA30thCELEBRATION）",
+      "result_announcement_date": "2026-11-22",
+      "purchase_start_date": "2026-11-23",
+      "purchase_end_date": "2026-11-26",
+      "first_detected_at": "2026-11-15T06:35:57.276027+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/m6qov",
+      "discord_posted_at": "2026-11-15T06:30:04.062000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/m6qov",
+      "event_title": "OP「神の支配」1BOX抽選受付",
+      "application_end_at": "2026-11-15T21:00:00+09:00",
+      "application_start_at": "2026-11-15T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鴻巣吹上店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA鴻巣吹上店",
+      "prefecture": "埼玉県",
+      "official_event_title": "OP「神の支配」1BOX抽選受付",
+      "result_announcement_date": "2026-11-16",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-22",
+      "first_detected_at": "2026-11-15T06:35:57.276027+00:00"
     }
   ],
-  "updated_at": "2026-11-15T06:26:01.220934+00:00"
+  "updated_at": "2026-11-15T06:36:25.260520+00:00"
 }
