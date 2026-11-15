@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-15T03:00:56.372506+00:00",
-  "unique_livepocket_urls": 812,
+  "collected_at": "2026-11-15T03:35:58.341612+00:00",
+  "unique_livepocket_urls": 813,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14124,7 +14124,34 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-15T01:30:57.172919+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/yhososodifgu",
+      "discord_posted_at": "2026-11-15T03:30:04.724000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/yhososodifgu",
+      "event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
+      "application_end_at": "2026-11-15T22:00:00+09:00",
+      "application_start_at": "2026-11-14T17:13:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "古本市場竹の塚店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "古本市場竹の塚店",
+      "prefecture": "東京都",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "古本市場竹の塚店 ポケカ抽選販売 30th CELEBRATION",
+      "result_announcement_date": "2026-11-18",
+      "purchase_start_date": "2026-11-19",
+      "purchase_end_date": "2026-11-20",
+      "first_detected_at": "2026-11-15T03:36:01.189357+00:00"
     }
   ],
-  "updated_at": "2026-11-15T03:26:00.349413+00:00"
+  "updated_at": "2026-11-15T03:36:46.935347+00:00"
 }
