@@ -14240,24 +14240,23 @@
     },
     {
       "url": "https://livepocket.jp/e/is_6n",
-      "discord_posted_at": "2026-11-15T14:37:01.148000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/is_6n",
+      "store_name": "リバティ鑑定倶楽部王子店",
+      "prefecture": "東京都",
       "event_title": "ワンピース 神の支配 抽選申込",
-      "application_end_at": "2026-11-17T11:00:00+09:00",
       "application_start_at": "2026-11-10T11:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-17T11:00:00+09:00",
+      "discord_posted_at": "2026-11-15T14:37:01.148000+00:00",
       "stores": [
         {
           "name": "リバティ鑑定倶楽部王子店",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "リバティ鑑定倶楽部王子店",
-      "prefecture": "東京都",
-      "official_event_title": "ワンピース 神の支配 抽選申込",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/is_6n",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-15T14:46:06.627132+00:00"
     }
   ],
-  "updated_at": "2026-11-15T14:46:49.656761+00:00"
+  "updated_at": "2026-11-15T14:56:09.628997+00:00"
 }
