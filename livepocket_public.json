@@ -14152,26 +14152,24 @@
     },
     {
       "url": "https://livepocket.jp/e/5c195",
-      "discord_posted_at": "2026-11-15T04:00:05.965000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/5c195",
+      "store_name": "TSUTAYA横須賀粟田店",
+      "prefecture": "神奈川県",
       "event_title": "ONE PIECE CARD GAME ブースターパック『神の支配』【OP-18】抽選販売",
-      "application_end_at": "2026-11-15T21:30:00+09:00",
       "application_start_at": "2026-11-13T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-15T21:30:00+09:00",
+      "discord_posted_at": "2026-11-15T04:00:05.965000+00:00",
       "stores": [
         {
           "name": "TSUTAYA横須賀粟田店",
           "prefecture": "神奈川県"
         }
       ],
-      "store_name": "TSUTAYA横須賀粟田店",
-      "prefecture": "神奈川県",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECE CARD GAME ブースターパック『神の支配』【OP-18】抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/5c195",
       "result_announcement_date": "2026-11-16",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-15T04:06:08.317159+00:00"
     }
   ],
-  "updated_at": "2026-11-15T04:06:57.113077+00:00"
+  "updated_at": "2026-11-15T04:15:59.795038+00:00"
 }
