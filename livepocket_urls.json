@@ -28610,8 +28610,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/is_6n": {
-          "checked_at": "2026-11-15T14:46:49.656761+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-15T20:56:40.862687+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -31393,8 +31393,8 @@
         },
         "https://livepocket.jp/e/is_6n": {
           "detected_at": "2026-11-15T14:46:06.627132+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-15T14:46:49.656761+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-15T20:56:40.862687+00:00",
           "http_status": null
         }
       },
@@ -33505,6 +33505,11 @@
         "https://livepocket.jp/e/zrxpq": {
           "attempts": 1,
           "last_attempt_at": "2026-11-15T15:46:47.577591+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/is_6n": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-15T20:56:40.862687+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -40831,7 +40836,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-15T14:46:49.656761+00:00",
+          "checked_at": "2026-11-15T20:56:40.862687+00:00",
           "title_observed": "ワンピース 神の支配 抽選申込",
           "genre": "",
           "product_origin": "",
@@ -47690,7 +47695,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/is_6n": {
-          "checked_at": "2026-11-15T14:46:49.656761+00:00",
+          "checked_at": "2026-11-15T20:56:40.862687+00:00",
           "reason": "official_title_detected",
           "candidate_count": 2,
           "valid_candidate_count": 1,
