@@ -13287,6 +13287,8 @@
       "prefecture": "埼玉県",
       "product_name": "ポケモンカード 拡張パック「ハドウシーカー」",
       "event_title": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
+      "application_start_at": "2026-11-16T10:00:00+09:00",
+      "application_end_at": "2026-11-18T23:59:00+09:00",
       "discord_posted_at": "2026-11-13T06:00:17.177000+00:00",
       "stores": [
         {
@@ -13301,9 +13303,7 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "first_detected_at": "2026-11-13T06:05:58.507640+00:00",
-      "application_start_at": "2026-11-16T10:00:00+09:00",
-      "application_end_at": "2026-11-18T23:59:00+09:00"
+      "first_detected_at": "2026-11-13T06:05:58.507640+00:00"
     },
     {
       "url": "https://livepocket.jp/e/t7mnn",
@@ -14452,5 +14452,5 @@
       "first_detected_at": "2026-11-16T11:06:14.177453+00:00"
     }
   ],
-  "updated_at": "2026-11-16T11:36:09.353134+00:00"
+  "updated_at": "2026-11-16T11:46:03.366754+00:00"
 }

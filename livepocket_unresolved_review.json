@@ -1,24 +1,9 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-16T11:36:17Z",
-  "total": 3,
+  "as_of": "2026-11-16T11:46:09Z",
+  "total": 2,
   "items": [
-    {
-      "url": "https://livepocket.jp/e/bt6dj",
-      "event_title": "キデイランドららぽーと富士見店 ポケモンカード 拡張パック「ハドウシーカー」 購入券（抽選）",
-      "store_name": "キデイランド ららぽーと富士見店",
-      "prefecture": "埼玉県",
-      "application_end_at": "",
-      "missing": [
-        "deadline"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-11-13T18:16:35.431799+00:00",
-      "next_retry_at": "2026-11-14T18:16:35.431799+00:00",
-      "queue": "ready"
-    },
     {
       "url": "https://livepocket.jp/e/s2q8j",
       "event_title": "【イトーヨーカドー】ONE PIECEカードゲーム ブースターパック 神の支配【OP-18】",
