@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-16T05:06:02.479221+00:00",
-  "unique_livepocket_urls": 822,
+  "collected_at": "2026-11-16T06:05:55.575734+00:00",
+  "unique_livepocket_urls": 823,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14348,7 +14348,34 @@
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/h0xze",
+      "discord_posted_at": "2026-11-16T06:00:08.235000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/h0xze",
+      "event_title": "ポケモンカード 「ハドウシーカー」抽選販売受付",
+      "application_end_at": "2026-11-20T23:59:00+09:00",
+      "application_start_at": "2026-11-16T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA北習志野駅前店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA北習志野駅前店",
+      "prefecture": "千葉県",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード 「ハドウシーカー」抽選販売受付",
+      "result_announcement_date": "2026-11-23",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-27",
+      "first_detected_at": "2026-11-16T06:05:57.603756+00:00"
     }
   ],
-  "updated_at": "2026-11-16T05:56:07.042726+00:00"
+  "updated_at": "2026-11-16T06:06:22.265036+00:00"
 }
