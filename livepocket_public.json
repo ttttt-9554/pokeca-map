@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-16T03:36:04.846255+00:00",
-  "unique_livepocket_urls": 820,
+  "collected_at": "2026-11-16T05:06:02.479221+00:00",
+  "unique_livepocket_urls": 822,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14301,7 +14301,57 @@
       "purchase_end_date": "2026-11-25",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-16T03:36:09.839322+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/igwfv",
+      "discord_posted_at": "2026-11-16T05:00:04.949000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/igwfv",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "application_start_at": "2026-11-16T09:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "トレカエース茨大前店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース茨大前店",
+      "prefecture": "茨城県",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-28",
+      "purchase_end_date": "2026-11-29",
+      "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/zy3rl",
+      "discord_posted_at": "2026-11-16T05:00:04.949000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/zy3rl",
+      "event_title": "ONE PIECEブースターパック 世界最強の戦士 OP17 抽選販売",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "application_start_at": "2026-11-16T09:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "トレカエース茨大前店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース茨大前店",
+      "prefecture": "茨城県",
+      "official_event_title": "ONE PIECEブースターパック 世界最強の戦士 OP17 抽選販売",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-28",
+      "purchase_end_date": "2026-11-29",
+      "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
     }
   ],
-  "updated_at": "2026-11-16T04:56:10.973630+00:00"
+  "updated_at": "2026-11-16T05:06:43.283289+00:00"
 }
