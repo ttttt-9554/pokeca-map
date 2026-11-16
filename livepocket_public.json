@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-16T06:05:55.575734+00:00",
-  "unique_livepocket_urls": 823,
+  "collected_at": "2026-11-16T08:36:05.373107+00:00",
+  "unique_livepocket_urls": 824,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14373,7 +14373,34 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-16T06:05:57.603756+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/dkl_p",
+      "discord_posted_at": "2026-11-16T08:30:05.366000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/dkl_p",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック メガシンフォニア抽選販売",
+      "application_end_at": "2026-11-17T22:00:00+09:00",
+      "application_start_at": "2026-11-15T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "pokemon_map_match": "メガシンフォニア",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック メガシンフォニア抽選販売",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-26",
+      "purchase_end_date": "2026-11-27",
+      "first_detected_at": "2026-11-16T08:36:11.466443+00:00"
     }
   ],
-  "updated_at": "2026-11-16T08:26:02.461411+00:00"
+  "updated_at": "2026-11-16T08:36:59.604724+00:00"
 }

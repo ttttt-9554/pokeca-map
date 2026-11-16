@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-16T06:05:55.575734+00:00",
+  "collected_at": "2026-11-16T08:36:05.373107+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 823,
+  "unique_livepocket_urls": 824,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -24800,34 +24800,70 @@
       "result_announcement_date": "2026-11-23",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-27"
+    },
+    {
+      "url": "https://livepocket.jp/e/dkl_p",
+      "discord_message_id": "1571804541316374599",
+      "discord_posted_at": "2026-11-16T08:30:05.366000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/17 22:00（残り1日4時間）\nhttps://livepocket.jp/e/dkl_p",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/dkl_p",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック メガシンフォニア抽選販売",
+      "application_end_at": "2026-11-17T22:00:00+09:00",
+      "application_start_at": "2026-11-15T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-26",
+      "purchase_end_date": "2026-11-27"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 644,
-    "no_structured_details": 179
+    "no_structured_details": 180
   },
   "field_counts": {
-    "store_name": 418,
-    "prefecture": 368,
-    "event_title": 520,
+    "store_name": 419,
+    "prefecture": 369,
+    "event_title": 521,
     "event_date": 1,
     "product_name": 126,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 785,
-    "application_start_at": 782,
-    "stores_events": 418
+    "application_end_at": 786,
+    "application_start_at": 783,
+    "stores_events": 419
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1571766804613828718"
+      "1551580466266644552": "1571804541316374599"
     },
     "last_run": {
-      "checked_at": "2026-11-16T06:05:55.575734+00:00",
+      "checked_at": "2026-11-16T08:36:05.373107+00:00",
       "new_urls": 1,
-      "original_urls": 822,
+      "original_urls": 823,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -25160,7 +25196,8 @@
         "1571698857786474596": "2026-11-16T01:36:05.103528+00:00",
         "1571729064790859876": "2026-11-16T03:36:08.831828+00:00",
         "1571751691337080975": "2026-11-16T05:06:04.540075+00:00",
-        "1571766804613828718": "2026-11-16T06:05:56.652448+00:00"
+        "1571766804613828718": "2026-11-16T06:05:56.652448+00:00",
+        "1571804541316374599": "2026-11-16T08:36:10.493341+00:00"
       },
       "checked_search_urls": {}
     },
@@ -28820,6 +28857,11 @@
           "checked_at": "2026-11-16T06:06:22.265036+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/dkl_p": {
+          "checked_at": "2026-11-16T08:36:59.604724+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -31632,6 +31674,12 @@
           "detected_at": "2026-11-16T06:05:57.603756+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-16T06:06:22.265036+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/dkl_p": {
+          "detected_at": "2026-11-16T08:36:11.466443+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-16T08:36:59.604724+00:00",
           "http_status": null
         }
       },
@@ -41139,6 +41187,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/dkl_p": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-16T08:36:59.604724+00:00",
+          "title_observed": "ポケモンカードゲーム MEGA 拡張パック メガシンフォニア抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -48058,6 +48117,19 @@
         },
         "https://livepocket.jp/e/h0xze": {
           "checked_at": "2026-11-16T06:06:22.265036+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/dkl_p": {
+          "checked_at": "2026-11-16T08:36:59.604724+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
