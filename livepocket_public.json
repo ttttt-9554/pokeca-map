@@ -14327,6 +14327,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
     },
     {
@@ -14349,7 +14351,6 @@
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
-      "official_event_title": "ONE PIECEブースターパック 世界最強の戦士 OP17 抽選販売",
       "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
     },
     {
@@ -14423,7 +14424,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "抽選販売 11月27日発売 「ハドウシーカー」",
       "first_detected_at": "2026-11-16T11:06:14.177453+00:00"
     },
     {
@@ -14451,10 +14451,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【GOOD GAME】11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選受付",
       "first_detected_at": "2026-11-16T11:06:14.177453+00:00"
     }
   ],
-  "updated_at": "2026-11-16T17:11:52.759321+00:00"
+  "updated_at": "2026-11-16T17:21:49.720482+00:00"
 }
