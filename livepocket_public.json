@@ -14424,10 +14424,18 @@
     },
     {
       "url": "https://livepocket.jp/e/sd_2-",
+      "store_name": "GOOD GAME",
+      "prefecture": "千葉県",
       "event_title": "【GOOD GAME】11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選受付",
       "application_start_at": "2026-11-16T19:30:00+09:00",
       "application_end_at": "2026-11-23T23:59:00+09:00",
       "discord_posted_at": "2026-11-16T11:00:08.286000+00:00",
+      "stores": [
+        {
+          "name": "GOOD GAME",
+          "prefecture": "千葉県"
+        }
+      ],
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/sd_2-",
       "result_announcement_date": "2026-11-25",
@@ -14439,16 +14447,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "stores": [
-        {
-          "name": "GOOD GAME",
-          "prefecture": "千葉県"
-        }
-      ],
-      "store_name": "GOOD GAME",
-      "prefecture": "千葉県",
       "first_detected_at": "2026-11-16T11:06:14.177453+00:00"
     }
   ],
-  "updated_at": "2026-11-16T11:16:28.338111+00:00"
+  "updated_at": "2026-11-16T11:26:12.797856+00:00"
 }
