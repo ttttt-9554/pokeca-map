@@ -28934,7 +28934,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/dkl_p": {
-          "checked_at": "2026-11-16T14:46:36.345341+00:00",
+          "checked_at": "2026-11-16T20:56:26.687528+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -31764,7 +31764,7 @@
         "https://livepocket.jp/e/dkl_p": {
           "detected_at": "2026-11-16T08:36:11.466443+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-16T14:46:36.345341+00:00",
+          "checked_at": "2026-11-16T20:56:26.687528+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/cmplz": {
@@ -33920,8 +33920,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/dkl_p": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-16T14:46:36.345341+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-16T20:56:26.687528+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/sd_2-": {
@@ -41324,7 +41324,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-16T14:46:36.345341+00:00",
+          "checked_at": "2026-11-16T20:56:26.687528+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック メガシンフォニア抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -48283,7 +48283,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/dkl_p": {
-          "checked_at": "2026-11-16T14:46:36.345341+00:00",
+          "checked_at": "2026-11-16T20:56:26.687528+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
