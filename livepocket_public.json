@@ -14325,8 +14325,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
     },
     {
@@ -14349,7 +14347,6 @@
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
-      "official_event_title": "ONE PIECEブースターパック 世界最強の戦士 OP17 抽選販売",
       "first_detected_at": "2026-11-16T05:06:05.545320+00:00"
     },
     {
@@ -14404,49 +14401,54 @@
     },
     {
       "url": "https://livepocket.jp/e/cmplz",
-      "discord_posted_at": "2026-11-16T11:00:08.286000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/cmplz",
+      "store_name": "TSUTAYA Trading Card 戸塚店",
+      "prefecture": "神奈川県",
       "event_title": "抽選販売 11月27日発売 「ハドウシーカー」",
-      "application_end_at": "2026-11-23T21:00:00+09:00",
       "application_start_at": "2026-11-16T10:30:00+09:00",
+      "application_end_at": "2026-11-23T21:00:00+09:00",
+      "discord_posted_at": "2026-11-16T11:00:08.286000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card 戸塚店",
           "prefecture": "神奈川県"
         }
       ],
-      "store_name": "TSUTAYA Trading Card 戸塚店",
-      "prefecture": "神奈川県",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/cmplz",
+      "result_announcement_date": "2026-11-24",
       "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "抽選販売 11月27日発売 「ハドウシーカー」",
-      "result_announcement_date": "2026-11-24",
       "first_detected_at": "2026-11-16T11:06:14.177453+00:00"
     },
     {
       "url": "https://livepocket.jp/e/sd_2-",
-      "discord_posted_at": "2026-11-16T11:00:08.286000+00:00",
-      "store_location_source": "livepocket_page_required",
-      "store_location_url": "https://livepocket.jp/e/sd_2-",
       "event_title": "【GOOD GAME】11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選受付",
-      "application_end_at": "2026-11-23T23:59:00+09:00",
       "application_start_at": "2026-11-16T19:30:00+09:00",
-      "review_category": "pokemon",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【GOOD GAME】11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選受付",
+      "application_end_at": "2026-11-23T23:59:00+09:00",
+      "discord_posted_at": "2026-11-16T11:00:08.286000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sd_2-",
       "result_announcement_date": "2026-11-25",
       "purchase_start_date": "2026-11-27",
       "purchase_start_time": "16:00",
       "purchase_end_date": "2026-12-04",
       "purchase_end_time": "20:59",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "stores": [
+        {
+          "name": "GOOD GAME",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "GOOD GAME",
+      "prefecture": "千葉県",
       "first_detected_at": "2026-11-16T11:06:14.177453+00:00"
     }
   ],
-  "updated_at": "2026-11-16T11:07:08.089479+00:00"
+  "updated_at": "2026-11-16T11:16:28.338111+00:00"
 }

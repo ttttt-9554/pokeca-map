@@ -24882,12 +24882,15 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
-      "store_location_source": "livepocket_page_required",
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/sd_2-",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
       },
       "event_title": "【GOOD GAME】11/27(金)発売 ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」抽選受付",
       "application_end_at": "2026-11-23T23:59:00+09:00",
@@ -24896,7 +24899,15 @@
       "purchase_start_date": "2026-11-27",
       "purchase_start_time": "16:00",
       "purchase_end_date": "2026-12-04",
-      "purchase_end_time": "20:59"
+      "purchase_end_time": "20:59",
+      "stores": [
+        {
+          "name": "GOOD GAME",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "GOOD GAME",
+      "prefecture": "千葉県"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
@@ -24915,7 +24926,7 @@
     "lottery_result_period": 1,
     "application_end_at": 788,
     "application_start_at": 785,
-    "stores_events": 420
+    "stores_events": 421
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -48726,6 +48737,11 @@
         "checked_at": "2026-11-14T10:16:20.340771+00:00",
         "status": "ok",
         "next_check_at": "2026-11-14T16:16:20.340771+00:00"
+      },
+      "https://livepocket.jp/e/sd_2-": {
+        "checked_at": "2026-11-16T11:16:28.338111+00:00",
+        "status": "ok",
+        "next_check_at": "2026-11-16T17:16:28.338111+00:00"
       }
     }
   }
