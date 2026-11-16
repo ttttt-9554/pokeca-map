@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-15T15:06:04.556353+00:00",
-  "unique_livepocket_urls": 818,
+  "collected_at": "2026-11-16T01:36:01.883335+00:00",
+  "unique_livepocket_urls": 819,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14256,7 +14256,32 @@
       "store_location_url": "https://livepocket.jp/e/is_6n",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-15T14:46:06.627132+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/1p9ix",
+      "discord_posted_at": "2026-11-16T01:30:08.449000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/1p9ix",
+      "event_title": "ポケモンカードゲームMEGA拡張パック ハドウシーカー抽選販売",
+      "application_end_at": "2026-11-22T20:30:00+09:00",
+      "application_start_at": "2026-11-16T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "文教堂書店浦安西友店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "文教堂書店浦安西友店",
+      "prefecture": "千葉県",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲームMEGA拡張パック ハドウシーカー抽選販売",
+      "result_announcement_date": "2026-11-23",
+      "first_detected_at": "2026-11-16T01:36:08.463275+00:00"
     }
   ],
-  "updated_at": "2026-11-16T01:26:02.732163+00:00"
+  "updated_at": "2026-11-16T01:36:47.138403+00:00"
 }
