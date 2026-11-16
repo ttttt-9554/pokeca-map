@@ -28929,8 +28929,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/h0xze": {
-          "checked_at": "2026-11-16T06:06:22.265036+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-16T12:16:52.494287+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/dkl_p": {
@@ -31757,8 +31757,8 @@
         },
         "https://livepocket.jp/e/h0xze": {
           "detected_at": "2026-11-16T06:05:57.603756+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-16T06:06:22.265036+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-16T12:16:52.494287+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/dkl_p": {
@@ -33912,6 +33912,11 @@
         "https://livepocket.jp/e/igwfv": {
           "attempts": 1,
           "last_attempt_at": "2026-11-16T11:07:08.089479+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/h0xze": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-16T12:16:52.494287+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -41293,7 +41298,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-16T06:06:22.265036+00:00",
+          "checked_at": "2026-11-16T12:16:52.494287+00:00",
           "title_observed": "ポケモンカード 「ハドウシーカー」抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -48250,7 +48255,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/h0xze": {
-          "checked_at": "2026-11-16T06:06:22.265036+00:00",
+          "checked_at": "2026-11-16T12:16:52.494287+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
