@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-16T01:36:01.883335+00:00",
+  "collected_at": "2026-11-16T03:05:55.322074+00:00",
   "unique_livepocket_urls": 819,
   "items": [
     {
@@ -14255,6 +14255,7 @@
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/is_6n",
       "review_category": "onepiece",
+      "official_event_title": "ワンピース 神の支配 抽選申込",
       "first_detected_at": "2026-11-15T14:46:06.627132+00:00"
     },
     {
@@ -14281,5 +14282,5 @@
       "first_detected_at": "2026-11-16T01:36:08.463275+00:00"
     }
   ],
-  "updated_at": "2026-11-16T02:56:07.166583+00:00"
+  "updated_at": "2026-11-16T03:06:24.735044+00:00"
 }
