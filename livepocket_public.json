@@ -14282,27 +14282,26 @@
     },
     {
       "url": "https://livepocket.jp/e/01-d6",
-      "discord_posted_at": "2026-11-16T03:30:10.360000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/01-d6",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
       "event_title": "ONE PIECE ブースターパック 世界最強の戦士【OP17】抽選販売",
-      "application_end_at": "2026-11-17T22:00:00+09:00",
       "application_start_at": "2026-11-15T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-17T22:00:00+09:00",
+      "discord_posted_at": "2026-11-16T03:30:10.360000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "トレカエース勝田東石川店",
-      "prefecture": "茨城県",
-      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士【OP17】抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/01-d6",
       "result_announcement_date": "2026-11-21",
       "purchase_start_date": "2026-11-23",
       "purchase_end_date": "2026-11-25",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-16T03:36:09.839322+00:00"
     }
   ],
-  "updated_at": "2026-11-16T03:36:52.624358+00:00"
+  "updated_at": "2026-11-16T03:46:20.814066+00:00"
 }
