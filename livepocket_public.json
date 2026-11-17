@@ -14526,28 +14526,27 @@
     },
     {
       "url": "https://livepocket.jp/e/npdkc",
-      "discord_posted_at": "2026-11-17T06:57:50.119000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/npdkc",
+      "store_name": "BIGMAGIC池袋店",
+      "prefecture": "東京都",
       "event_title": "BIGMAGIC 池袋店「ハドウシーカー」購入権",
-      "application_end_at": "2026-11-23T23:59:00+09:00",
       "application_start_at": "2026-11-17T15:29:00+09:00",
+      "application_end_at": "2026-11-23T23:59:00+09:00",
+      "discord_posted_at": "2026-11-17T06:57:50.119000+00:00",
       "stores": [
         {
           "name": "BIGMAGIC池袋店",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "BIGMAGIC池袋店",
-      "prefecture": "東京都",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/npdkc",
+      "result_announcement_date": "2026-11-24",
       "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "BIGMAGIC 池袋店「ハドウシーカー」購入権",
-      "result_announcement_date": "2026-11-24",
       "first_detected_at": "2026-11-17T07:01:04.237362+00:00"
     }
   ],
-  "updated_at": "2026-11-17T07:01:45.704109+00:00"
+  "updated_at": "2026-11-17T07:11:10.545561+00:00"
 }
