@@ -29153,7 +29153,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/gdpb9": {
-          "checked_at": "2026-11-17T15:12:09.572640+00:00",
+          "checked_at": "2026-11-17T21:21:30.322853+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         }
@@ -32015,7 +32015,7 @@
         "https://livepocket.jp/e/gdpb9": {
           "detected_at": "2026-11-17T09:00:59.577403+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-17T15:12:09.572640+00:00",
+          "checked_at": "2026-11-17T21:21:30.322853+00:00",
           "http_status": null
         }
       },
@@ -34189,8 +34189,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/gdpb9": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-17T15:12:09.572640+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-17T21:21:30.322853+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -41660,7 +41660,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-17T15:12:09.572640+00:00",
+          "checked_at": "2026-11-17T21:21:30.322853+00:00",
           "title_observed": "ポケモンカード 「インフェルノX」「メガドリームex」抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -48688,7 +48688,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/gdpb9": {
-          "checked_at": "2026-11-17T15:12:09.572640+00:00",
+          "checked_at": "2026-11-17T21:21:30.322853+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
