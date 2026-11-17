@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-17T07:01:01.227158+00:00",
-  "unique_livepocket_urls": 830,
+  "collected_at": "2026-11-17T09:00:56.768950+00:00",
+  "unique_livepocket_urls": 831,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14546,7 +14546,34 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-17T07:01:04.237362+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/gdpb9",
+      "discord_posted_at": "2026-11-17T09:00:12.210000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gdpb9",
+      "event_title": "ポケモンカード 「インフェルノX」「メガドリームex」抽選販売受付",
+      "application_end_at": "2026-11-20T23:59:00+09:00",
+      "application_start_at": "2026-11-17T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA北習志野駅前店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA北習志野駅前店",
+      "prefecture": "千葉県",
+      "pokemon_map_match": "インフェルノX",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカード 「インフェルノX」「メガドリームex」抽選販売受付",
+      "result_announcement_date": "2026-11-22",
+      "purchase_start_date": "2026-11-24",
+      "purchase_end_date": "2026-11-24",
+      "first_detected_at": "2026-11-17T09:00:59.577403+00:00"
     }
   ],
-  "updated_at": "2026-11-17T08:51:04.071562+00:00"
+  "updated_at": "2026-11-17T09:01:27.475952+00:00"
 }
