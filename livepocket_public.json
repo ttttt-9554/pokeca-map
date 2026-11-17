@@ -14499,33 +14499,31 @@
     },
     {
       "url": "https://livepocket.jp/e/8_cfj",
-      "discord_posted_at": "2026-11-17T03:30:07.985000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/8_cfj",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
       "event_title": "ポケモンカードゲーム 「ハドウシーカー」 抽選販売受付",
-      "application_end_at": "2026-11-19T21:00:00+09:00",
       "application_start_at": "2026-11-16T10:30:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-19T21:00:00+09:00",
+      "discord_posted_at": "2026-11-17T03:30:07.985000+00:00",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「ハドウシーカー」 抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/8_cfj",
       "result_announcement_date": "2026-11-23",
       "purchase_start_date": "2026-11-27",
       "purchase_start_time": "10:30",
       "purchase_end_date": "2026-11-29",
       "purchase_end_time": "21:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-17T03:31:00.716968+00:00"
     }
   ],
-  "updated_at": "2026-11-17T03:31:29.103550+00:00"
+  "updated_at": "2026-11-17T03:41:01.509939+00:00"
 }
