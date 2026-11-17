@@ -14453,30 +14453,28 @@
     },
     {
       "url": "https://livepocket.jp/e/1f0ih",
-      "discord_posted_at": "2026-11-17T01:30:07.812000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/1f0ih",
-      "event_title": "★トレカラウンジ★ ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」購入券 抽選",
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
-      "application_end_at": "2026-11-19T23:59:00+09:00",
-      "application_start_at": "2026-11-17T10:00:00+09:00",
-      "review_category": "pokemon",
       "store_name": "トレカラウンジ秋葉原本店・トレカラウンジ別館買取センター",
+      "prefecture": "東京都",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
+      "event_title": "★トレカラウンジ★ ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」購入券 抽選",
+      "application_start_at": "2026-11-17T10:00:00+09:00",
+      "application_end_at": "2026-11-19T23:59:00+09:00",
+      "discord_posted_at": "2026-11-17T01:30:07.812000+00:00",
       "stores": [
         {
           "name": "トレカラウンジ秋葉原本店・トレカラウンジ別館買取センター",
           "prefecture": "東京都"
         }
       ],
-      "prefecture": "東京都",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/1f0ih",
+      "result_announcement_date": "2026-11-24",
+      "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "★トレカラウンジ★ ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」購入券 抽選",
-      "result_announcement_date": "2026-11-24",
       "first_detected_at": "2026-11-17T01:36:03.933466+00:00"
     }
   ],
-  "updated_at": "2026-11-17T01:36:49.019397+00:00"
+  "updated_at": "2026-11-17T01:46:06.233244+00:00"
 }
