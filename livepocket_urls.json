@@ -29143,8 +29143,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/8_cfj": {
-          "checked_at": "2026-11-17T03:31:29.103550+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-17T09:41:58.264064+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/npdkc": {
@@ -32002,8 +32002,8 @@
         },
         "https://livepocket.jp/e/8_cfj": {
           "detected_at": "2026-11-17T03:31:00.716968+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-17T03:31:29.103550+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-17T09:41:58.264064+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/npdkc": {
@@ -34176,6 +34176,11 @@
         "https://livepocket.jp/e/3p3b_": {
           "attempts": 1,
           "last_attempt_at": "2026-11-17T09:12:10.557875+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/8_cfj": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-17T09:41:58.264064+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -41623,7 +41628,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-17T03:31:29.103550+00:00",
+          "checked_at": "2026-11-17T09:41:58.264064+00:00",
           "title_observed": "ポケモンカードゲーム 「ハドウシーカー」 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -48647,7 +48652,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/8_cfj": {
-          "checked_at": "2026-11-17T03:31:29.103550+00:00",
+          "checked_at": "2026-11-17T09:41:58.264064+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
