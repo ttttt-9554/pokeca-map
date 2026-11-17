@@ -29138,7 +29138,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/3p3b_": {
-          "checked_at": "2026-11-17T09:12:10.557875+00:00",
+          "checked_at": "2026-11-17T15:21:28.697151+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -31997,7 +31997,7 @@
         "https://livepocket.jp/e/3p3b_": {
           "detected_at": "2026-11-17T03:01:06.728688+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-17T09:12:10.557875+00:00",
+          "checked_at": "2026-11-17T15:21:28.697151+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/8_cfj": {
@@ -34174,8 +34174,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/3p3b_": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-17T09:12:10.557875+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-17T15:21:28.697151+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8_cfj": {
@@ -41627,7 +41627,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-17T09:12:10.557875+00:00",
+          "checked_at": "2026-11-17T15:21:28.697151+00:00",
           "title_observed": "ふるいちイオンモール座間店ワンピースカード抽選販売「世界最強の戦士」",
           "genre": "onepiece",
           "product_origin": "",
@@ -48649,7 +48649,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/3p3b_": {
-          "checked_at": "2026-11-17T09:12:10.557875+00:00",
+          "checked_at": "2026-11-17T15:21:28.697151+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
