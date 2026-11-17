@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-17T01:36:01.404430+00:00",
+  "collected_at": "2026-11-17T03:01:02.215036+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 827,
+  "unique_livepocket_urls": 828,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -24921,7 +24921,7 @@
       "product_name": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/1f0ih",
       "field_sources": {
@@ -24945,34 +24945,70 @@
       ],
       "prefecture": "東京都",
       "result_announcement_date": "2026-11-24"
+    },
+    {
+      "url": "https://livepocket.jp/e/3p3b_",
+      "discord_message_id": "1572083919958839356",
+      "discord_posted_at": "2026-11-17T03:00:14.425000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nトレカラウンジ秋葉原本店・トレカラウンジ別館買取センター\n受付終了: 11/19 23:59（残り2日11時間）\nhttps://livepocket.jp/e/1f0ih\n\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 11/18 21:01（残り1日9時間）\nhttps://livepocket.jp/e/3p3b_",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3p3b_",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ふるいちイオンモール座間店ワンピースカード抽選販売「世界最強の戦士」",
+      "application_end_at": "2026-11-18T21:01:00+09:00",
+      "application_start_at": "2026-11-17T11:24:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "result_announcement_date": "2026-11-19",
+      "purchase_start_date": "2026-11-22",
+      "purchase_end_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 648,
+    "parsed": 649,
     "no_structured_details": 179
   },
   "field_counts": {
-    "store_name": 422,
-    "prefecture": 372,
-    "event_title": 524,
+    "store_name": 423,
+    "prefecture": 373,
+    "event_title": 525,
     "event_date": 1,
     "product_name": 127,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 790,
-    "application_start_at": 787,
-    "stores_events": 422
+    "application_end_at": 791,
+    "application_start_at": 788,
+    "stores_events": 423
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572061242980433980"
+      "1551580466266644552": "1572083919958839356"
     },
     "last_run": {
-      "checked_at": "2026-11-17T01:36:01.404430+00:00",
+      "checked_at": "2026-11-17T03:01:02.215036+00:00",
       "new_urls": 1,
-      "original_urls": 826,
+      "original_urls": 827,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -25308,7 +25344,8 @@
         "1571766804613828718": "2026-11-16T06:05:56.652448+00:00",
         "1571804541316374599": "2026-11-16T08:36:10.493341+00:00",
         "1571842302299602964": "2026-11-16T11:06:13.176190+00:00",
-        "1572061242980433980": "2026-11-17T01:36:02.894566+00:00"
+        "1572061242980433980": "2026-11-17T01:36:02.894566+00:00",
+        "1572083919958839356": "2026-11-17T03:01:05.799356+00:00"
       },
       "checked_search_urls": {}
     },
@@ -28988,6 +29025,11 @@
           "checked_at": "2026-11-17T01:36:49.019397+00:00",
           "status": "checked_title_product_deadline_store",
           "http_status": null
+        },
+        "https://livepocket.jp/e/3p3b_": {
+          "checked_at": "2026-11-17T03:01:49.955533+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -31824,6 +31866,12 @@
           "detected_at": "2026-11-17T01:36:03.933466+00:00",
           "status": "checked_title_product_deadline_store",
           "checked_at": "2026-11-17T01:36:49.019397+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3p3b_": {
+          "detected_at": "2026-11-17T03:01:06.728688+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-17T03:01:49.955533+00:00",
           "http_status": null
         }
       },
@@ -41410,6 +41458,17 @@
           "product_origin": "v14_livepocket_explicit_product_label",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/3p3b_": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-17T03:01:49.955533+00:00",
+          "title_observed": "ふるいちイオンモール座間店ワンピースカード抽選販売「世界最強の戦士」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -48381,6 +48440,19 @@
         },
         "https://livepocket.jp/e/1f0ih": {
           "checked_at": "2026-11-17T01:36:49.019397+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/3p3b_": {
+          "checked_at": "2026-11-17T03:01:49.955533+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
