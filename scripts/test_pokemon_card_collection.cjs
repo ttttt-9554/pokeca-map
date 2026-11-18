@@ -10,7 +10,11 @@ const cards = [
   {card_id:50640,name:'ピカチュウ',set_code:'M6a',card_number:'028/103',sort_order:1,official_image_path:'/assets/images/card_images/large/M6a/050640_P_PIKACHIXYUU.jpg'},
   {card_id:50658,name:'ピカチュウ',set_code:'M6a',card_number:'046/103',sort_order:2,official_image_path:'/assets/images/card_images/large/M6a/050658_P_PIKACHIXYUU.jpg'},
   ...Array.from({length:40}, (_,i)=>({card_id:51000+i,name:'基本エネルギー',set_code:'M6a',card_number:null,sort_order:3+i}))];
-const sets = [{official_group_id:961,product_id:'master',title:'30th CELEBRATION'}];
+const sets = [
+  {official_group_id:999,product_id:'unknown',title:'発売日不明',catalog_products:null},
+  {official_group_id:955,product_id:'older',title:'旧パック',catalog_products:{release_date:'2026-07-31'}},
+  {official_group_id:961,product_id:'master',title:'30th CELEBRATION',catalog_products:{release_date:'2026-09-16'}}
+];
 const quantities = new Map();
 const wanted = new Map();
 const pendingWrites = [];
@@ -35,7 +39,7 @@ function start(initialUser){
       if(name==='pokemon_card_set_search_v2'){
         assert.equal(args.p_group_id,961);
         assert.ok(user);
-        let matching = cards;
+        let matching = [...cards].reverse();
         return {order(){return this},eq(key,value){assert.equal(key,'card_id');matching=cards.filter(card=>card.card_id===value);return this},range(start,end){
           if(failRecovery){failRecovery=false;return Promise.reject(new Error('read unavailable'));}
           return Promise.resolve({data:matching.slice(start,end+1).map(card=>({...card,quantity:quantities.get(user+':'+card.card_id)||0,wanted:wanted.get(user+':'+card.card_id)||false}))});
@@ -107,6 +111,9 @@ function watchImages(ui, images = Array.from(ui.$('pokemonCardList').querySelect
   assert.equal(ui.$('pokemonCardsBack').textContent,'← 商品マスター');
   await tick();
   assert.equal(ui.list().length,40);
+  assert.deepEqual(Array.from(ui.$('pokemonCardSet').options, option=>option.value), ['961','955','999']);
+  assert.match(ui.list()[0].textContent, /028\/103/);
+  assert.match(ui.list()[1].textContent, /046\/103/);
   const stableRows=ui.list();
   const stableImages=watchImages(ui);
   holdWrite=true;

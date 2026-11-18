@@ -193,10 +193,12 @@
     const version = ownerVersion;
     const request = (async () => {
       const {data, error} = await options.getClient().from('pokemon_card_sets_v1')
-        .select('official_group_id,product_id,title').order('title').order('official_group_id');
+        .select('official_group_id,product_id,title,catalog_products(release_date)').order('title').order('official_group_id');
       if (version !== ownerVersion) return null;
       if (error) throw error;
-      sets = data || [];
+      sets = (data || []).slice().sort((a, b) =>
+        (b.catalog_products?.release_date || '').localeCompare(a.catalog_products?.release_date || '')
+        || b.official_group_id - a.official_group_id);
       const select = $('pokemonCardSet');
       select.replaceChildren(...sets.map(set => new Option(set.title, set.official_group_id)));
       options.onCatalogLoaded?.();
@@ -241,7 +243,12 @@
         next.push(...data);
         if (data.length < READ_SIZE) break;
       }
-      cards = next;
+      cards = next.sort((a, b) => {
+        const an = String(a.card_number || '').split('/')[0];
+        const bn = String(b.card_number || '').split('/')[0];
+        return (an ? (bn ? an.localeCompare(bn, 'ja', {numeric: true}) : -1) : (bn ? 1 : 0))
+          || a.sort_order - b.sort_order || a.card_id - b.card_id;
+      });
       for (const card of cards) uncertainCards.delete(card.card_id);
       return true;
     } catch {
