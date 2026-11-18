@@ -29233,8 +29233,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/9pof30gfr": {
-          "checked_at": "2026-11-18T03:10:44.570576+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-18T09:16:27.882464+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/yd0az": {
@@ -32105,8 +32105,8 @@
         },
         "https://livepocket.jp/e/9pof30gfr": {
           "detected_at": "2026-11-18T03:06:09.893342+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-18T03:10:44.570576+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-18T09:16:27.882464+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/yd0az": {
@@ -34288,6 +34288,11 @@
         "https://livepocket.jp/e/gdpb9": {
           "attempts": 2,
           "last_attempt_at": "2026-11-17T21:21:30.322853+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/9pof30gfr": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-18T09:16:27.882464+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -41768,7 +41773,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-18T03:10:44.570576+00:00",
+          "checked_at": "2026-11-18T09:16:27.882464+00:00",
           "title_observed": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
           "genre": "pokemon",
           "product_origin": "",
@@ -48820,7 +48825,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9pof30gfr": {
-          "checked_at": "2026-11-18T03:10:44.570576+00:00",
+          "checked_at": "2026-11-18T09:16:27.882464+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
