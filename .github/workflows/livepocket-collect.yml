@@ -9,6 +9,9 @@ name: LivePocket Discord URL Collector
       - 'scripts/customform_lottery_parse.mjs'
       - 'scripts/google_forms_lottery_enrich.mjs'
       - 'supabase/functions/lottery-individual-fetch/google-forms.mjs'
+      - 'scripts/online_shop_lottery_enrich.mjs'
+      - 'scripts/pbandai_lottery_enrich.py'
+      - 'supabase/functions/lottery-individual-fetch/online-shop-lottery.mjs'
   workflow_dispatch:
     inputs:
       backfill:
@@ -192,6 +195,9 @@ jobs:
       - name: Read public Google Forms lottery descriptions
         run: node scripts/google_forms_lottery_enrich.mjs
 
+      - name: Read DMM lottery product panels
+        run: node scripts/online_shop_lottery_enrich.mjs
+
       - name: Read Famima lottery titles and reservation periods
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -245,6 +251,10 @@ jobs:
         id: customform_plan
         run: python scripts/customform_lottery_enrich.py plan
 
+      - name: Plan Premium Bandai lotteries
+        id: pbandai_plan
+        run: python scripts/pbandai_lottery_enrich.py plan
+
       # Claim at most one administrator-requested event. No extra request is
       # made when the normal collector already visits the same event.
       - name: Prepare individual LivePocket review
@@ -257,10 +267,16 @@ jobs:
 
       # 新着・再確認・個別要求がなければブラウザをインストールしない。
       - name: Install free browser only when needed
-        if: ${{ steps.v21plan.outputs.browser_needed == 'true' || steps.individual_prepare.outputs.requested == 'true' || steps.customform_plan.outputs.browser_needed == 'true' }}
+        if: ${{ steps.v21plan.outputs.browser_needed == 'true' || steps.individual_prepare.outputs.requested == 'true' || steps.customform_plan.outputs.browser_needed == 'true' || steps.pbandai_plan.outputs.browser_needed == 'true' }}
         run: |
           python -m pip install 'playwright>=1.55,<2'
           python -m playwright install --with-deps chromium
+
+      - name: Collect Premium Bandai lottery panels
+        if: ${{ steps.pbandai_plan.outputs.browser_needed == 'true' }}
+        timeout-minutes: 5
+        continue-on-error: true
+        run: python scripts/pbandai_lottery_enrich.py run
 
       - name: Collect CustomForm lottery details
         if: ${{ steps.customform_plan.outputs.browser_needed == 'true' }}

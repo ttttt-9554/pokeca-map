@@ -67,7 +67,7 @@
       out.push({
         url:base.url,item,missing,
         touched:manuallyTouched,official:card?.review_complete===true,
-        sourceChecked:!!item.google_forms_verified_at,
+        sourceChecked:!!(item.google_forms_verified_at||item.online_shop_verified_at),
         provider:api.isLivePocket(base.url)?'LivePocket':'外部抽選'
       });
     }

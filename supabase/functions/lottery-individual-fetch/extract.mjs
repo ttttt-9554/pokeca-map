@@ -1,5 +1,6 @@
 // Public page extraction. Only unambiguous, explicitly labelled data is returned.
 import {googleFormUrl, googleFormFields} from './google-forms.mjs';
+import {onlineShopUrl,onlineShopFields,DMM_HOST,BANDAI_HOST} from './online-shop-lottery.mjs';
 export const STARBOX_HOST = 'shoplottery.e-starbox.com';
 export const CUSTOMFORM_HOST = 'customform.jp';
 export const GEO_HOST = 'draw.geo-online.co.jp';
@@ -9,6 +10,7 @@ export function supportedUrl(value) {
   try {
     const u=new URL(value);
     if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash) return false;
+    if([DMM_HOST,BANDAI_HOST,'al.dmm.com'].includes(u.hostname)) return !!onlineShopUrl(value);
     if(u.hostname==='docs.google.com'||u.hostname==='forms.gle') return !!googleFormUrl(value);
     if(u.hostname==='e-yamashiroya.com') return /^\/(?:%[\da-f]{2}|[a-z\d_\-\/])+$/i.test(u.pathname) && !u.search && !u.pathname.includes('//');
     if(u.hostname==='7net.omni7.jp') return /^\/detail\/\d+\.html$/.test(u.pathname) && !u.search;
@@ -26,7 +28,7 @@ export function supportedUrl(value) {
 }
 
 export function lotteryPageRequest(value) {
-  const url = new URL(value);
+  const url = onlineShopUrl(value) || new URL(value);
   const headers = {'User-Agent': 'TorecaRadar/1.0', Accept: 'text/html,application/xhtml+xml'};
   if (url.hostname === GEO_HOST || url.hostname === RAKUTEN_BOOKS_HOST) {
     url.pathname = url.pathname.replace(/\/?$/, '/');
@@ -463,6 +465,7 @@ function rakutenBooksFields(html) {
 export function extract(html,url,options={}){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
+  if([DMM_HOST,BANDAI_HOST,'al.dmm.com'].includes(u.hostname))return onlineShopFields(html,url);
   if(u.hostname==='docs.google.com'&&html.includes('FB_PUBLIC_LOAD_DATA_'))
     return supportedUrl(url)?googleFormFields(html,url,options):{};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};

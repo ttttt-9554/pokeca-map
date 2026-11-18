@@ -1,16 +1,23 @@
 import {supportedUrl,extract,lotteryPageRequest,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
 import {googleFormUrl,fetchGoogleForm} from './google-forms.mjs';
+import {BANDAI_HOST,collectedOnlineShop} from './online-shop-lottery.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
 function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
 
-async function collectedCustomForm(url:string) {
+async function collectedBrowserPage(url:string,bandai=false) {
  const response=await fetch('https://ttttt-9554.github.io/pokeca-map/other_lottery_public.json?t='+Date.now(),
   {cache:'no-store',signal:AbortSignal.timeout(6000)});
  if(!response.ok)throw Error('catalog unavailable');
  const catalog=await response.json();
- const item=Array.isArray(catalog?.items)?catalog.items.find((row:{url?:string})=>row?.url===url):null;
- if(!item?.customform_verified_at||item.external_url_unverified!==false){
+ const item=bandai?collectedOnlineShop(catalog,url):Array.isArray(catalog?.items)?catalog.items.find((row:{url?:string})=>row?.url===url):null;
+ const verified=bandai?item?.online_shop_verified_at:item?.customform_verified_at;
+ if(!verified||item.external_url_unverified!==false){
+  if(bandai){
+   const blocked=Array.isArray(catalog?.items)&&catalog.items.some((row:{online_shop_source_url?:string,url?:string,online_shop_retry_after?:string})=>
+    (row?.online_shop_source_url||row?.url||'').startsWith('https://p-bandai.jp/')&&Date.parse(row.online_shop_retry_after||'')>Date.now());
+   return json({error:blocked?'取得先が定期収集サーバーからのアクセスを拒否しているため、現在は自動取得できません。元ページを開いて確認してください。':'ブラウザーによる自動収集を待っています。収集後にもう一度お試しください。'},422);
+  }
   const blocked=Array.isArray(catalog?.items)&&catalog.items.some((row:{customform_last_error?:string,customform_retry_after?:string})=>
    row?.customform_last_error==='source_access_denied'&&Date.parse(row.customform_retry_after||'')>Date.now());
   if(blocked)return json({error:'取得先が定期収集サーバーからのアクセスを拒否しているため、現在は自動取得できません。元ページを開いて確認してください。'},422);
@@ -26,7 +33,7 @@ async function collectedCustomForm(url:string) {
   name:typeof store?.name==='string'?store.name:'',prefecture:typeof store?.prefecture==='string'?store.prefecture:''
  }));
  if(typeof item.pokemon_map_type==='string')fields.product_type=item.pokemon_map_type;
- const collected=new Date(item.customform_verified_at).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
+ const collected=new Date(verified).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
  return json({fields,message:'ブラウザーで自動収集した情報です（取得日時：'+collected+'、日本時間）。候補を確認してください。'});
 }
 
@@ -54,7 +61,7 @@ Deno.serve(async(req:Request)=>{
    return json({fields,message:Object.keys(fields).length?'Googleフォームの案内から取得しました。記載のない日時は空欄です。':'公開された案内を読み取れませんでした。受付終了やログイン制限を確認してください。'});
   }
   const {url:source,headers}=lotteryPageRequest(input.url),host=source.hostname;
-  if(host===CUSTOMFORM_HOST)return await collectedCustomForm(input.url);
+  if(host===CUSTOMFORM_HOST||host===BANDAI_HOST)return await collectedBrowserPage(input.url,host===BANDAI_HOST);
   const response=await fetch(source,{redirect:'manual',headers,signal:AbortSignal.timeout(14000)});
   if(response.status>=300&&response.status<400)return json({error:'別ページへの転送があるため、自動取得できませんでした。'},422);
   if(host===GEO_HOST&&[403,429].includes(response.status))
