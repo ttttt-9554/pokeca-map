@@ -37,6 +37,10 @@ export async function fetchDmm(value,request=fetch) {
   if(source?.hostname!==DMM_HOST)throw Error('Unsupported DMM product');
   const response=await request(source.href,{redirect:'manual',headers:{Accept:'text/html,application/xhtml+xml',
     'Accept-Language':'ja-JP,ja;q=0.9','User-Agent':'TorecaRadar/1.0'},signal:AbortSignal.timeout(14000)});
+  console.log('DMM public document:',response.status,response.headers.get('content-type')||'unknown type');
+  if(response.status>=300&&response.status<400){
+    try{const next=new URL(response.headers.get('location'),source);console.log('DMM redirect:',next.origin+next.pathname);}catch{}
+  }
   if(!response.ok || !/text\/html|application\/xhtml\+xml/i.test(response.headers.get('content-type')||'') ||
     Number(response.headers.get('content-length')||0)>2000000 || !response.body){
     await response.body?.cancel();const error=new Error('DMM page unavailable');error.status=response.status;throw error;
@@ -60,6 +64,7 @@ export async function enrichDmm(catalog,load=fetchDmm,now=new Date()) {
       if(!pages.has(source))pages.set(source,await load(item.url));
       updated+=Number(applyShopPage(item,pages.get(source),now));
     }catch(error){
+      console.log('DMM collection error:',error?.status||error?.cause?.code||error?.name||'unknown');
       item.online_shop_last_error='page_unavailable';
       if([401,403,429].includes(error?.status)){
         item.online_shop_last_error='source_access_denied';

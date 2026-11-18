@@ -1,5 +1,5 @@
 // Public lottery panels only. Product release/shipping dates are not deadlines.
-export const ONLINE_SHOP_PARSER_VERSION = 1;
+export const ONLINE_SHOP_PARSER_VERSION = 2;
 export const DMM_HOST = 'www.dmm.com';
 export const BANDAI_HOST = 'p-bandai.jp';
 const tracking = new Set(['utm_medium','utm_source','utm_term','utm_campaign','utm_content']);

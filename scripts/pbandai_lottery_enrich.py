@@ -28,6 +28,7 @@ def browser_pages(items):
                 row = {'url': item['url'], 'html': '', 'blocked': False}
                 try:
                     response = page.goto(item['source'], wait_until='domcontentloaded', timeout=30000)
+                    print('Premium Bandai document HTTP:', response.status if response else 'none')
                     if response and response.status in (401, 403, 429):
                         row['blocked'] = True
                     else:
@@ -45,8 +46,12 @@ def browser_pages(items):
                     except Error:
                         text = ''
                     row['blocked'] = bool(re.search(r'Access\s+Denied|verify (?:that )?you are human|アクセスが制限|ロボットではありません', text, re.I))
-                except Error:
-                    pass
+                    print('Premium Bandai render timeout:', page.url, page.title()[:150],
+                          'heading count:', page.locator('h1.pb24-item-main__title').count(),
+                          'lottery panel count:', page.locator('dl.pb24-item-main__lotterycart--data').count())
+                except Error as error:
+                    code = re.search(r'net::[A-Z_]+', str(error))
+                    print('Premium Bandai navigation:', code.group() if code else type(error).__name__)
                 finally:
                     page.close()
                 output.append(row)
