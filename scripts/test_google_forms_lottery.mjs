@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import {googleFormUrl,googleFormFields,fetchGoogleForm} from '../supabase/functions/lottery-individual-fetch/google-forms.mjs';
+import {googleFormUrl,googleFormFields,fetchGoogleForm,GOOGLE_FORMS_PARSER_VERSION} from '../supabase/functions/lottery-individual-fetch/google-forms.mjs';
 import {supportedUrl,extract} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
 import {enrichGoogleForms} from './google_forms_lottery_enrich.mjs';
 
@@ -55,11 +55,50 @@ assert.equal(tachikawa.result_announcement_date,'2026-11-20');
 assert.equal(tachikawa.result_announcement_time,undefined);
 assert.equal(tachikawa.purchase_start_date,undefined);
 assert.equal(tachikawa.purchase_end_date,'2026-11-21');
+assert.equal(tachikawa.google_forms_start_not_stated,true);
+assert.equal(fields.google_forms_start_not_stated,false);
+
+// Yokohama uses prose rather than the other branches' period headings.
+const yokohamaText=`■受付〆切 : 11/19(木)23時59分まで
+■当選者の発表は11/20(金) に公式Xにて発表致します。
+■11/21(土)OPEN時より販売対応致します。
+■11/22(日)閉店時までに店頭にて購入できる方のみのご応募に限らせていただきます。`;
+const yokohamaTitle='【バトロコ横浜伊勢佐木町】ワンピースカード「神の支配」抽選販売応募フォーム';
+const yokohama=parse(yokohamaText,yokohamaTitle);
+assert.equal(yokohama.prefecture,'神奈川県');
+assert.equal(yokohama.application_start_at,undefined);
+assert.equal(yokohama.google_forms_start_not_stated,true);
+assert.equal(yokohama.application_end_at,'2026-11-19T23:59:00+09:00');
+assert.equal(yokohama.result_announcement_date,'2026-11-20');
+assert.equal(yokohama.purchase_start_date,'2026-11-21');
+assert.equal(yokohama.purchase_end_date,'2026-11-22');
+for(const name of ['result_announcement_time','purchase_start_time','purchase_end_time'])
+  assert.equal(yokohama[name],undefined,'Opening/closing words are not exact times');
+assert.equal(parse('受付締め切り：11/19 23:59').application_end_at,'2026-11-19T23:59:00+09:00');
+assert.equal(parse(yokohamaText+'\n応募開始：確認中').google_forms_start_not_stated,false);
+assert.equal(parse(yokohamaText+'\n応募受付期間：11月18日以降').google_forms_start_not_stated,false);
+assert.equal(parse('応募受付期間：11/18～11/19 25:00').google_forms_start_not_stated,false);
+const conflict=parse(yokohamaText+'\n■受付〆切 : 11/20 23:59まで');
+assert.equal(conflict.application_end_at,undefined);
+assert.equal(conflict.google_forms_start_not_stated,false);
+assert.equal(parse(yokohamaText+'\n■11/23(月)閉店時までに購入できる方のみ').purchase_end_date,undefined);
+assert.equal(parse('■11/21(土)から購入できません。').purchase_start_date,undefined);
+assert.equal(parse('■11/21(土)まで購入できません。').purchase_end_date,undefined);
+const reversed=parse('■11/23(月)より販売します。\n■11/21(土)までに購入できる方のみ');
+assert.equal(reversed.purchase_start_date,undefined);assert.equal(reversed.purchase_end_date,undefined);
+const sectionForm=googleFormFields(page('',yokohamaTitle,[[1,'抽選の案内',yokohamaText,8]]),url,{referenceDate:now.toISOString()});
+assert.equal(sectionForm.application_end_at,yokohama.application_end_at);
+for(const name of ['バトロコ小田原駅前','バトロコ小田原駅前店','バトロコ横浜伊勢佐木町'])
+  assert.equal(parse(description,'【'+name+'】ポケモンカード抽選応募').prefecture,'神奈川県');
+assert.equal(parse(description,'【バトロコ高田馬場】ポケモンカード抽選応募').prefecture,'東京都');
+assert.equal(parse(description,'【バトロコ小田原駅前別会場】ポケモンカード抽選応募').prefecture,undefined);
 
 assert.equal(parse('応募期間：2026/11/18 10:30～2026/11/19 23:59').application_start_at,'2026-11-18T10:30:00+09:00');
 assert.equal(parse('応募締切：１１月１９日 ２３：５９').application_end_at,'2026-11-19T23:59:00+09:00');
 assert.equal(parse('当選発表：11月20日～22日 18時半').result_announcement_time,'18:30');
 assert.equal(parse('当選発表：11月20日～22日 18時半').result_announcement_date,'2026-11-22');
+assert.equal(parse('■当選発表\n11月20日(金)\n当選発表はX上で行います。').result_announcement_date,'2026-11-20');
+assert.equal(parse('■当選発表\n11月20日(金)\n当選発表は11月21日(土)').result_announcement_date,undefined);
 assert.equal(parse('購入期間：11月21日10時～23日20時30分').purchase_end_time,'20:30');
 assert.equal(parse('応募期間：12/31～1/2 23:59',title,{referenceDate:'2026-12-30T01:00:00Z'}).application_end_at,'2027-01-02T23:59:00+09:00');
 for(const text of ['応募期間：11/18～11/31 23:59','応募期間：11/18～11/19 25:00',
@@ -111,6 +150,10 @@ assert.deepEqual(await enrichGoogleForms(catalog,async()=>loaded,now),{checked:1
 assert.equal(row.application_start_at,'2026-11-18');assert.equal(row.external_url_unverified,false);
 assert.equal(row.official_event_title,fields.event_title);assert.equal(row.pokemon_map_type,'pack');
 assert.deepEqual(await enrichGoogleForms(catalog,()=>assert.fail('retry too soon'),now),{checked:0,updated:0});
+const oldParser={url,discord_posted_at:now.toISOString(),google_forms_checked_at:now.toISOString(),google_forms_parser_version:1};
+assert.deepEqual(await enrichGoogleForms({items:[oldParser]},async()=>loaded,now),{checked:1,updated:1});
+assert.equal(oldParser.google_forms_parser_version,GOOGLE_FORMS_PARSER_VERSION);
+assert.deepEqual(await enrichGoogleForms({items:[oldParser]},()=>assert.fail('new version repeated'),now),{checked:0,updated:0});
 await enrichGoogleForms(catalog,async()=>({url,html:'<title>受付終了</title>'}),new Date(+now+7*3600000));
 assert.equal(row.store_name,'バトロコ川崎駅前店');assert.equal(row.google_forms_last_error,'closed_or_unavailable');
 const partial={url,discord_posted_at:now.toISOString()};

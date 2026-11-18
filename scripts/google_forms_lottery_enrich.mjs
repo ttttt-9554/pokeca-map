@@ -1,6 +1,6 @@
 import {readFile,writeFile,rename} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-import {googleFormUrl,googleFormFields,fetchGoogleForm} from '../supabase/functions/lottery-individual-fetch/google-forms.mjs';
+import {googleFormUrl,googleFormFields,fetchGoogleForm,GOOGLE_FORMS_PARSER_VERSION} from '../supabase/functions/lottery-individual-fetch/google-forms.mjs';
 
 const catalogPath='other_lottery_public.json';
 const retryInterval=6*60*60*1000;
@@ -15,8 +15,10 @@ export async function enrichGoogleForms(catalog,load=fetchGoogleForm,now=new Dat
     const end=Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(endText)?endText+'T23:59:59.999+09:00':endText);
     if(Number.isFinite(end)&&end<+now)continue;
     if(Number.isFinite(discovered(item))&&discovered(item)<+now-14*86400000&&!Number.isFinite(end))continue;
-    if(+now-Date.parse(item.google_forms_checked_at||'')<retryInterval)continue;
-    item.google_forms_checked_at=now.toISOString();checked++;
+    if(item.google_forms_parser_version===GOOGLE_FORMS_PARSER_VERSION&&
+      +now-Date.parse(item.google_forms_checked_at||'')<retryInterval)continue;
+    item.google_forms_checked_at=now.toISOString();
+    item.google_forms_parser_version=GOOGLE_FORMS_PARSER_VERSION;checked++;
     try{
       const page=await load(item.url);
       const fields=googleFormFields(page.html,page.url,{referenceDate:

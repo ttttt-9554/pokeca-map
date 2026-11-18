@@ -5549,7 +5549,8 @@
     const kind = typ === 'pack' ? '拡張パック' : typ === 'deck' ? '構築デッキ' : typ === 'pack/deck' ? '商品区分が複数候補' : '';
     const when = item.application_end_at && Number.isFinite(lotteryDate(item.application_end_at))
       ? lotteryJapaneseDate(item.application_end_at) + ' 締切' : '応募締切：未確認';
-    const start = Number.isFinite(lotteryDate(item.application_start_at)) ? lotteryJapaneseDate(item.application_start_at) : '';
+    const start = Number.isFinite(lotteryDate(item.application_start_at)) ? lotteryJapaneseDate(item.application_start_at) :
+      item.google_forms_verified_at&&item.google_forms_start_not_stated===true?'元ページに記載なし':'';
     let countdown = '';
     if (state === 'open' && !/^\d{4}-\d{2}-\d{2}$/.test(item.application_end_at||'')) {
       const minutes = Math.max(0, Math.floor((lotteryDate(item.application_end_at) - Date.now()) / 60000));

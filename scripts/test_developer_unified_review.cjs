@@ -99,4 +99,31 @@ state.card.set(url,{edited_fields:['event_title'],review_complete:true,
 state.items=[{...state.items[0],application_end_at:null}];
 rows=ui.collect();
 assert(!rows[0].missing.includes('deadline'),'Confirmed missing deadline must be resolved');
+
+// A successfully read, deadline-only Google Form has a known absent start.
+// Keep the empty value and disclose it, without calling it a collection error.
+state.card.clear();state.diagnostics=[];
+state.items=[{...state.items[0],application_start_at:null,
+ application_end_at:'2026-11-19T23:59:00+09:00',
+ google_forms_verified_at:'2026-11-18T10:30:00Z',google_forms_start_not_stated:true}];
+ui.render();rows=ui.collect();
+assert.equal(rows[0].missing.length,0);
+assert.equal(state.items[0].application_start_at,null,'Never manufacture a start date');
+assert.match(nodes.get('lpDevUnifiedCompletedList').innerHTML,/元フォームから取得済み/);
+assert.match(nodes.get('lpDevUnifiedCompletedList').innerHTML,/応募開始：元ページに記載なし（空欄）/);
+assert.match(nodes.get('lpDevUnifiedCounts').innerHTML,/未対応 0件/);
+state.items[0].google_forms_verified_at=null;
+assert(ui.collect()[0].missing.includes('start'),'An unverified flag cannot resolve a field');
+state.items[0].google_forms_verified_at='2026-11-18T10:30:00Z';
+state.items[0].google_forms_start_not_stated=false;
+assert(ui.collect()[0].missing.includes('start'),'Parse failures remain unresolved');
+state.items[0].google_forms_start_not_stated=true;
+state.card.set(url,{edited_fields:['application_start_at']});
+assert(ui.collect()[0].missing.includes('start'),'An explicit manual clear still needs review');
+state.card.clear();state.external.set(url,{application_start_at:null});
+assert(ui.collect()[0].missing.includes('start'),'External edits override source absence flags');
+state.external.clear();state.items[0].prefecture='';state.items[0].stores=[];
+rows=ui.collect();
+assert(rows[0].missing.includes('area')&&rows[0].missing.includes('store'),
+ 'A missing start marker must not hide missing locations');
 console.log('Unified developer review and card-save sync verified');

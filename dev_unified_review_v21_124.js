@@ -38,7 +38,9 @@
     if(!titleValid)missing.push('title');
     if(!stores.length||rawStores.some(store=>!known(store.name)))missing.push('store');
     if(!places.length||stores.some(store=>!knownArea(store.prefecture)))missing.push('area');
-    if(!Number.isFinite(Date.parse(item?.application_start_at||'')))missing.push('start');
+    const startNotStated=item?.google_forms_verified_at&&item.google_forms_start_not_stated===true&&
+      !modified.has('application_start_at')&&!state.external.has(url);
+    if(!Number.isFinite(Date.parse(item?.application_start_at||''))&&!startNotStated)missing.push('start');
     const noDeadline=saved?.review_complete===true&&saved.review_deadline_unpublished===true;
     if(!Number.isFinite(Date.parse(item?.application_end_at||''))&&!noDeadline)
       missing.push('deadline');
@@ -65,6 +67,7 @@
       out.push({
         url:base.url,item,missing,
         touched:manuallyTouched,official:card?.review_complete===true,
+        sourceChecked:!!item.google_forms_verified_at,
         provider:api.isLivePocket(base.url)?'LivePocket':'外部抽選'
       });
     }
@@ -76,7 +79,7 @@
     if(!host||!api||!api.isDeveloper())return;
     const all=collect();
     lastRows=all;
-    const pending=all.filter(r=>r.missing.length),done=all.filter(r=>!r.missing.length&&r.touched);
+    const pending=all.filter(r=>r.missing.length),done=all.filter(r=>!r.missing.length&&(r.touched||r.sourceChecked));
     const counts=Object.fromEntries(Object.keys(FIELD_LABELS).map(key=>[
       key,pending.filter(row=>row.missing.includes(key)).length
     ]));
@@ -124,7 +127,9 @@
         (row.missing.length?'<div class="lp-dev-unified-labels">'+
           row.missing.map(k=>'<span>⚠ '+FIELD_LABELS[k]+'未確認</span>').join('')+
           '</div>':'<p class="lp-dev-unified-done">✅ '+(row.official?
-            '公式情報の確認完了':'手動修正済み・未確認事項なし')+'</p>')+
+            '公式情報の確認完了':row.touched?'手動修正済み・未確認事項なし':'元フォームから取得済み')+'</p>')+
+        (row.item.google_forms_verified_at&&row.item.google_forms_start_not_stated===true&&
+          !row.item.application_start_at?'<p class="hint">応募開始：元ページに記載なし（空欄）</p>':'')+
         (row.missing.length&&row.touched?'<p class="lp-dev-unified-done">✅ 現在入力済み：'+
           Object.keys(FIELD_LABELS).filter(k=>!row.missing.includes(k))
             .map(k=>FIELD_LABELS[k]).join('・')+'</p>':'')+
