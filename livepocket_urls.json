@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-17T15:01:10.872796+00:00",
+  "collected_at": "2026-11-18T03:06:03.562692+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 831,
+  "unique_livepocket_urls": 832,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -25089,33 +25089,69 @@
       "result_announcement_date": "2026-11-22",
       "purchase_start_date": "2026-11-24",
       "purchase_end_date": "2026-11-24"
+    },
+    {
+      "url": "https://livepocket.jp/e/9pof30gfr",
+      "discord_message_id": "1572446299075387433",
+      "discord_posted_at": "2026-11-18T03:00:12.339000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍千葉県\n古本市場市川鬼高店\n受付終了: 11/19 22:00（残り1日9時間）\nhttps://livepocket.jp/e/9pof30gfr",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/9pof30gfr",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
+      "application_end_at": "2026-11-19T22:00:00+09:00",
+      "application_start_at": "2026-11-17T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "古本市場市川鬼高店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "古本市場市川鬼高店",
+      "prefecture": "千葉県",
+      "result_announcement_date": "2026-11-21",
+      "purchase_start_date": "2026-11-24",
+      "purchase_end_date": "2026-11-26"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 653,
-    "no_structured_details": 178
+    "no_structured_details": 179
   },
   "field_counts": {
-    "store_name": 426,
-    "prefecture": 376,
-    "event_title": 528,
+    "store_name": 427,
+    "prefecture": 377,
+    "event_title": 529,
     "event_date": 1,
     "product_name": 127,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 794,
-    "application_start_at": 791,
-    "stores_events": 426
+    "application_end_at": 795,
+    "application_start_at": 792,
+    "stores_events": 427
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572265104366501991"
+      "1551580466266644552": "1572446299075387433"
     },
     "last_run": {
-      "checked_at": "2026-11-17T15:01:10.872796+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-18T03:06:03.562692+00:00",
+      "new_urls": 1,
       "original_urls": 831,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -25456,7 +25492,8 @@
         "1572083919958839356": "2026-11-17T03:01:05.799356+00:00",
         "1572091442694852719": "2026-11-17T03:30:58.918981+00:00",
         "1572143712673210478": "2026-11-17T07:01:03.248297+00:00",
-        "1572174507634860125": "2026-11-17T09:00:58.197746+00:00"
+        "1572174507634860125": "2026-11-17T09:00:58.197746+00:00",
+        "1572446299075387433": "2026-11-18T03:06:08.910757+00:00"
       },
       "checked_search_urls": {}
     },
@@ -29156,6 +29193,11 @@
           "checked_at": "2026-11-17T21:21:30.322853+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/9pof30gfr": {
+          "checked_at": "2026-11-18T03:10:44.570576+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -32016,6 +32058,12 @@
           "detected_at": "2026-11-17T09:00:59.577403+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-17T21:21:30.322853+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/9pof30gfr": {
+          "detected_at": "2026-11-18T03:06:09.893342+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-18T03:10:44.570576+00:00",
           "http_status": null
         }
       },
@@ -41666,6 +41714,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/9pof30gfr": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-18T03:10:44.570576+00:00",
+          "title_observed": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -48689,6 +48748,19 @@
         },
         "https://livepocket.jp/e/gdpb9": {
           "checked_at": "2026-11-17T21:21:30.322853+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/9pof30gfr": {
+          "checked_at": "2026-11-18T03:10:44.570576+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-17T15:01:10.872796+00:00",
-  "unique_livepocket_urls": 831,
+  "collected_at": "2026-11-18T03:06:03.562692+00:00",
+  "unique_livepocket_urls": 832,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14571,7 +14571,34 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-17T09:00:59.577403+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/9pof30gfr",
+      "discord_posted_at": "2026-11-18T03:00:12.339000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/9pof30gfr",
+      "event_title": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
+      "application_end_at": "2026-11-19T22:00:00+09:00",
+      "application_start_at": "2026-11-17T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "古本市場市川鬼高店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "古本市場市川鬼高店",
+      "prefecture": "千葉県",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【古本市場市川鬼高店】ポケモンカードゲームＭＥＧＡ「３０ｔｈＣＥＬＥＢＲＡＴＩＯＮカードセット 9種セット」",
+      "result_announcement_date": "2026-11-21",
+      "purchase_start_date": "2026-11-24",
+      "purchase_end_date": "2026-11-26",
+      "first_detected_at": "2026-11-18T03:06:09.893342+00:00"
     }
   ],
-  "updated_at": "2026-11-18T02:56:09.264252+00:00"
+  "updated_at": "2026-11-18T03:10:44.570576+00:00"
 }
