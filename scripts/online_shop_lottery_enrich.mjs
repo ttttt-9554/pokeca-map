@@ -43,7 +43,12 @@ export async function fetchDmm(value,request=fetch) {
   }
   if(!response.ok || !/text\/html|application\/xhtml\+xml/i.test(response.headers.get('content-type')||'') ||
     Number(response.headers.get('content-length')||0)>2000000 || !response.body){
-    await response.body?.cancel();const error=new Error('DMM page unavailable');error.status=response.status;throw error;
+    await response.body?.cancel();const error=new Error('DMM page unavailable');error.status=response.status;
+    if(response.status>=300&&response.status<400){
+      const next=new URL(response.headers.get('location')||'',source);
+      if(next.hostname==='accounts.dmm.com'||(next.hostname===DMM_HOST&&next.pathname==='/mono/-/order/'))error.code='source_login_required';
+    }
+    throw error;
   }
   const decoder=new TextDecoder();let html='',size=0;
   for await(const chunk of response.body){
@@ -65,9 +70,9 @@ export async function enrichDmm(catalog,load=fetchDmm,now=new Date()) {
       updated+=Number(applyShopPage(item,pages.get(source),now));
     }catch(error){
       console.log('DMM collection error:',error?.status||error?.cause?.code||error?.name||'unknown');
-      item.online_shop_last_error='page_unavailable';
-      if([401,403,429].includes(error?.status)){
-        item.online_shop_last_error='source_access_denied';
+      item.online_shop_last_error=error?.code==='source_login_required'?'source_login_required':'page_unavailable';
+      if(item.online_shop_last_error==='source_login_required'||[401,403,429].includes(error?.status)){
+        if(item.online_shop_last_error!=='source_login_required')item.online_shop_last_error='source_access_denied';
         item.online_shop_retry_after=new Date(+now+86400000).toISOString();break;
       }
     }
@@ -93,7 +98,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
           if(onlineShopUrl(page.url)?.hostname!==BANDAI_HOST)continue;
           const item=catalog.items.find(row=>row.url===page.url);if(!item)continue;
           result.checked++;result.updated+=Number(applyShopPage(item,page.html||'',now));
-          if(page.blocked){item.online_shop_last_error='source_access_denied';item.online_shop_retry_after=new Date(+now+86400000).toISOString();}
+          if(page.blocked){item.online_shop_last_error=page.error==='source_region_redirect'?'source_region_redirect':'source_access_denied';item.online_shop_retry_after=new Date(+now+86400000).toISOString();}
         }
       }else if(mode==='dmm')result=await enrichDmm(catalog);
       else throw Error('Unsupported collector mode');

@@ -34,9 +34,12 @@ def browser_pages(items):
                     else:
                         # Some responses initially contain only the site's JS loader.
                         # Let the normal page load; do not interact with verification.
-                        page.wait_for_selector('h1.pb24-item-main__title', state='visible', timeout=30000)
-                        page.wait_for_selector('dl.pb24-item-main__lotterycart--data', state='visible', timeout=15000)
-                        if page.url == item['source']:
+                        page.wait_for_function("() => location.pathname === '/global_newpc.html' || !!document.querySelector('dl.pb24-item-main__lotterycart--data')", timeout=30000)
+                        if page.url == 'https://p-bandai.jp/global_newpc.html':
+                            row['blocked'] = True
+                            row['error'] = 'source_region_redirect'
+                        elif page.url == item['source']:
+                            page.wait_for_selector('h1.pb24-item-main__title', state='visible', timeout=5000)
                             html = page.content()
                             if len(html.encode('utf-8')) <= 2_000_000:
                                 row['html'] = html
@@ -55,7 +58,7 @@ def browser_pages(items):
                 finally:
                     page.close()
                 output.append(row)
-                print('Premium Bandai public lottery panel:', 'ready' if row['html'] else 'access denied' if row['blocked'] else 'unavailable')
+                print('Premium Bandai public lottery panel:', 'ready' if row['html'] else row.get('error', 'access denied') if row['blocked'] else 'unavailable')
                 if row['blocked']:
                     break
         finally:
