@@ -1719,7 +1719,9 @@
       "review_category": "unknown",
       "application_start_at": null,
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "google_forms_checked_at": "2026-11-18T10:16:23.521Z",
+      "google_forms_last_error": "closed_or_unavailable"
     },
     {
       "url": "https://customform.jp/form/input/259368?key=952920d6",
@@ -1951,7 +1953,9 @@
       "review_category": "unknown",
       "application_start_at": null,
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "google_forms_checked_at": "2026-11-18T10:16:23.521Z",
+      "google_forms_last_error": "closed_or_unavailable"
     },
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=N6bouIW98C",
@@ -1994,38 +1998,88 @@
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSe-b5abHHuW9LMPzAwPsDDV-FaemaUx6KcMiB1dcqT_ntgMCA/viewform",
       "source_site": "docs.google.com",
-      "event_title": "【バトロコ 川崎駅前店】11/21（土）発売  ワンピ...",
-      "prefecture": "",
+      "event_title": "【バトロコ 川崎駅前店】11/21(土)発売 ワンピースカードゲーム「ブースターパック神の支配【OP-18】」 抽選販売応募フォーム",
+      "prefecture": "神奈川県",
       "discord_posted_at": "2026-11-18T09:55:07.098000+00:00",
       "first_detected_at": "2026-11-18T09:55:56.144998+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "review_category": "onepiece",
+      "application_start_at": "2026-11-18",
+      "application_end_at": "2026-11-19T23:59:00+09:00",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-18T10:16:23.521Z",
+      "result_announcement_date": "2026-11-20",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23",
+      "product_name": "ワンピースカードゲーム「 ブースターパック神の支配【OP-18】 」",
+      "stores": [
+        {
+          "name": "バトロコ川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "バトロコ川崎駅前店",
+      "official_event_title": "【バトロコ 川崎駅前店】11/21(土)発売 ワンピースカードゲーム「ブースターパック神の支配【OP-18】」 抽選販売応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-18T10:16:23.521Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSe-b5abHHuW9LMPzAwPsDDV-FaemaUx6KcMiB1dcqT_ntgMCA/viewform",
+      "pokemon_map_type": "pack"
     },
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSeetFKVAPhw8NIlHWmB_RHITyXz72pIVFulFtGCCYOOIPPDIA/viewform",
       "source_site": "docs.google.com",
-      "event_title": "【バトロコ立川駅前】11/21（土）発売 ワンピース...",
-      "prefecture": "",
+      "event_title": "【バトロコ立川駅前】11/21(土)発売 ワンピースカードゲーム ブースターパック「神の支配」抽選販売応募フォーム",
+      "prefecture": "東京都",
       "discord_posted_at": "2026-11-18T09:52:22.036000+00:00",
       "first_detected_at": "2026-11-18T09:55:56.145035+00:00",
-      "review_category": "unknown",
+      "review_category": "onepiece",
       "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "application_end_at": "2026-11-19T23:59:00+09:00",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-18T10:16:23.521Z",
+      "result_announcement_date": "2026-11-20",
+      "purchase_end_date": "2026-11-21",
+      "product_name": "ワンピースカードゲーム  ブースターパック「神の支配」",
+      "stores": [
+        {
+          "name": "バトロコ立川駅前",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "バトロコ立川駅前",
+      "official_event_title": "【バトロコ立川駅前】11/21(土)発売 ワンピースカードゲーム ブースターパック「神の支配」抽選販売応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-18T10:16:23.521Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSeetFKVAPhw8NIlHWmB_RHITyXz72pIVFulFtGCCYOOIPPDIA/viewform",
+      "pokemon_map_type": "pack"
     },
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSeAMHZCCn4kLOXjzGO37DiyzDF865oWZRQfsBQXEyVj6-sfRg/viewform",
       "source_site": "docs.google.com",
-      "event_title": "【バトロコ小田原駅前】　ブースターパック 神の...",
+      "event_title": "【バトロコ小田原駅前】 ブースターパック 神の支配【OP-18】抽選フォーム",
       "prefecture": "",
       "discord_posted_at": "2026-11-18T09:59:18.150000+00:00",
       "first_detected_at": "2026-11-18T10:06:08.231508+00:00",
       "review_category": "unknown",
       "application_start_at": null,
-      "application_end_at": null,
-      "external_url_unverified": true
+      "application_end_at": "2026-11-19T23:59:00+09:00",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-18T10:16:23.521Z",
+      "result_announcement_date": "2026-11-20",
+      "purchase_start_date": "2026-11-21",
+      "purchase_end_date": "2026-11-23",
+      "product_name": "ブースターパック 神の支配【OP-18】",
+      "stores": [
+        {
+          "name": "バトロコ小田原駅前",
+          "prefecture": ""
+        }
+      ],
+      "store_name": "バトロコ小田原駅前",
+      "official_event_title": "【バトロコ小田原駅前】 ブースターパック 神の支配【OP-18】抽選フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-18T10:16:23.521Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSeAMHZCCn4kLOXjzGO37DiyzDF865oWZRQfsBQXEyVj6-sfRg/viewform",
+      "pokemon_map_type": "pack"
     },
     {
       "url": "https://shoplottery.e-starbox.com/lottery/entry?code=8oHG3xLgVX",
@@ -2049,14 +2103,27 @@
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSe0hLbY3H1dp7tG4kZGmohoyVhlpjNZ0vYr5djYO4jNohI36A/viewform",
       "source_site": "docs.google.com",
-      "event_title": "【バトロコ横浜伊勢佐木町】11/21 (土)発売ワンピ...",
+      "event_title": "【バトロコ横浜伊勢佐木町】11/21 (土)発売ワンピースカード ブースターパック「神の支配」抽選販売応募フォーム",
       "prefecture": "",
       "discord_posted_at": "2026-11-18T09:56:49.022000+00:00",
       "first_detected_at": "2026-11-18T10:06:08.231573+00:00",
-      "review_category": "unknown",
+      "review_category": "onepiece",
       "application_start_at": null,
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-18T10:16:23.521Z",
+      "stores": [
+        {
+          "name": "バトロコ横浜伊勢佐木町",
+          "prefecture": ""
+        }
+      ],
+      "store_name": "バトロコ横浜伊勢佐木町",
+      "official_event_title": "【バトロコ横浜伊勢佐木町】11/21 (土)発売ワンピースカード ブースターパック「神の支配」抽選販売応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-18T10:16:23.521Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSe0hLbY3H1dp7tG4kZGmohoyVhlpjNZ0vYr5djYO4jNohI36A/viewform",
+      "pokemon_map_type": "pack"
     }
   ],
   "last_seen_message_ids": {
