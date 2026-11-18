@@ -152,22 +152,22 @@
   },
   "review_progress": {
     "ready": 2,
-    "retry_wait": 1,
-    "completed": 48,
+    "retry_wait": 0,
+    "completed": 49,
     "expired": 778,
     "removed": 3,
     "new_pending": 0,
     "quarantined": 3,
     "total": 835,
-    "unresolved": 3,
+    "unresolved": 2,
     "missing_title": 0,
-    "missing_store": 3,
+    "missing_store": 2,
     "missing_deadline": 2,
-    "next_retry_at": "2026-11-19T10:36:23Z",
+    "next_retry_at": null,
     "access_cooldown": false,
     "next_batch_size": 2,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-11-18T11:06:30Z"
+    "as_of": "2026-11-18T11:40:43.743537+00:00"
   }
 }

@@ -146,7 +146,7 @@ def normalize_store_heading(s):
     return s
 
 
-# Ticket cards can use either 【店舗名】商品 or 店舗名【再販分】商品
+# Ticket cards can use 【店舗名】商品, 店舗名【再販分】商品 or 店舗名 商品
 # without a separate "対象店舗" heading.
 # Count a shop only when the name looks like a retail location AND
 # the card has a ticket-status/price marker shortly thereafter.  Two or more
@@ -154,8 +154,12 @@ def normalize_store_heading(s):
 # independently verified multi-store list.
 TICKET_SHOP_TITLE = re.compile(
     r'^\s*(?:【\s*(?P<bracketed>[^】\r\n]{2,90}店)\s*】|'
-    r'(?P<leading>[^【】\r\n]{2,90}店)\s*【再販分】)(?P<product>[^\r\n]*)$')
+    r'(?P<leading>[^【】\r\n]{2,90}店)\s*【再販分】|'
+    r'(?P<plain>[^【】\r\n]{2,90}?店)[ \t\u3000]+)(?P<product>[^\r\n]*)$')
 TICKET_CARD_MARKER = re.compile(r'(?:販売中|販売終了|受付中|受付終了|販売予定|分配不可|￥|¥|予定枚数終了|受付締切)')
+TICKET_SECTION_END = re.compile(
+    r'^(?:お問い合わせ|このイベントに関するお問い合わせ|関連イベント|おすすめ(?:の)?イベント|'
+    r'同じ(?:会場|地域|カテゴリー)のイベントを検索)$')
 
 
 def ticket_option_stores(text):
@@ -163,25 +167,38 @@ def ticket_option_stores(text):
     if not isinstance(text, str) or '受付・チケット情報' not in text:
         return []
     lines = [line.strip() for line in text.splitlines()]
-    matches = []
+    matches = {}
+    in_tickets = False
     for idx, line in enumerate(lines):
+        if line == '受付・チケット情報':
+            in_tickets = True
+        elif TICKET_SECTION_END.fullmatch(line):
+            in_tickets = False
         m = TICKET_SHOP_TITLE.match(line)
         if not m:
             continue
-        name = safe_name(m.group('bracketed') or m.group('leading'), strict_retail=True)
+        # Unquoted names need a goods title immediately after the store and
+        # must be inside ticket content, not prose or a recommended event.
+        if m.group('plain') and (not in_tickets
+                or not CARD_GOODS_TITLE.match(m.group('product'))
+                or re.search(r'(?:各|全)店(?:舗)?$', m.group('plain'))):
+            continue
+        name = safe_name(m.group('bracketed') or m.group('leading') or m.group('plain'), strict_retail=True)
         if not name:
             continue
         following = []
         for nextline in lines[idx+1:idx+11]:
-            if TICKET_SHOP_TITLE.match(nextline):
+            if TICKET_SHOP_TITLE.match(nextline) or TICKET_SECTION_END.fullmatch(nextline):
                 break
             following.append(nextline)
         if not TICKET_CARD_MARKER.search('\n'.join(following)):
             continue
-        matches.append({'name': name, 'prefecture': ''})
+        # Desktop/mobile markup and opening the tab can repeat the same cards.
+        # Count distinct shops before applying the per-event limit.
+        matches[name] = {'name': name, 'prefecture': ''}
         if len(matches) > MAX_STORES:
             return []
-    distinct = list({m['name']: m for m in matches}.values())
+    distinct = list(matches.values())
     return distinct if len(distinct) >= 2 else []
 
 

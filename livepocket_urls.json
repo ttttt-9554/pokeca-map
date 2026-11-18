@@ -25174,20 +25174,99 @@
       "application_period": null,
       "sales_period": null,
       "extraction_status": "no_structured_details",
-      "store_location_source": "livepocket_page_required",
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/wfku9",
       "field_sources": {
         "event_title": "v14_livepocket_page_title",
         "product_name": "v14_livepocket_explicit_product_label",
         "application_end_at": "v14_livepocket_rendered_public_page",
-        "application_start_at": "v14_livepocket_rendered_public_page"
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
       },
       "event_title": "晴れる屋2 ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX購入権",
       "application_end_at": "2026-11-23T23:59:00+09:00",
       "application_start_at": "2026-11-18T16:15:00+09:00",
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
-      "purchase_end_date": "2026-11-29"
+      "purchase_end_date": "2026-11-29",
+      "stores": [
+        {
+          "name": "晴れる屋2秋葉原タワー店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2仙台店",
+          "prefecture": "宮城県"
+        },
+        {
+          "name": "晴れる屋2郡山店",
+          "prefecture": "福島県"
+        },
+        {
+          "name": "晴れる屋2大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "晴れる屋2立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2高田馬場店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2大須店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "晴れる屋2なんば店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "晴れる屋2京都店",
+          "prefecture": "京都府"
+        },
+        {
+          "name": "晴れる屋2三宮店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "晴れる屋2福岡店",
+          "prefecture": "福岡県"
+        },
+        {
+          "name": "晴れる屋2岡山店",
+          "prefecture": "岡山県"
+        },
+        {
+          "name": "晴れる屋2水戸店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "晴れる屋2四日市店",
+          "prefecture": "三重県"
+        },
+        {
+          "name": "晴れる屋2金沢店",
+          "prefecture": "石川県"
+        },
+        {
+          "name": "晴れる屋2静岡店",
+          "prefecture": "静岡県"
+        },
+        {
+          "name": "晴れる屋2千葉店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "晴れる屋2秋葉原タワー店",
+      "prefecture": ""
     },
     {
       "url": "https://livepocket.jp/e/ct073",
@@ -25242,7 +25321,7 @@
     "lottery_result_period": 1,
     "application_end_at": 798,
     "application_start_at": 795,
-    "stores_events": 429
+    "stores_events": 430
   },
   "collector_state": {
     "last_seen_message_ids": {
@@ -49429,9 +49508,9 @@
         "next_check_at": "2026-11-16T17:16:28.338111+00:00"
       },
       "https://livepocket.jp/e/wfku9": {
-        "checked_at": "2026-11-18T10:38:34.741962+00:00",
+        "checked_at": "2026-11-18T11:40:43.743537+00:00",
         "status": "ok",
-        "next_check_at": "2026-11-18T16:38:34.741962+00:00"
+        "next_check_at": "2026-11-18T17:40:43.743537+00:00"
       }
     }
   }

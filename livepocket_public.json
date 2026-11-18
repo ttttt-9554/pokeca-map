@@ -14630,7 +14630,7 @@
       "application_start_at": "2026-11-18T16:15:00+09:00",
       "application_end_at": "2026-11-23T23:59:00+09:00",
       "discord_posted_at": "2026-11-18T10:35:31.400000+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/wfku9",
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
@@ -14639,7 +14639,86 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "first_detected_at": "2026-11-18T10:36:02.284882+00:00"
+      "first_detected_at": "2026-11-18T10:36:02.284882+00:00",
+      "stores": [
+        {
+          "name": "晴れる屋2秋葉原タワー店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2仙台店",
+          "prefecture": "宮城県"
+        },
+        {
+          "name": "晴れる屋2郡山店",
+          "prefecture": "福島県"
+        },
+        {
+          "name": "晴れる屋2大宮店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "晴れる屋2立川店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2池袋店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2高田馬場店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "晴れる屋2大須店",
+          "prefecture": "愛知県"
+        },
+        {
+          "name": "晴れる屋2なんば店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "晴れる屋2京都店",
+          "prefecture": "京都府"
+        },
+        {
+          "name": "晴れる屋2三宮店",
+          "prefecture": "兵庫県"
+        },
+        {
+          "name": "晴れる屋2福岡店",
+          "prefecture": "福岡県"
+        },
+        {
+          "name": "晴れる屋2岡山店",
+          "prefecture": "岡山県"
+        },
+        {
+          "name": "晴れる屋2水戸店",
+          "prefecture": "茨城県"
+        },
+        {
+          "name": "晴れる屋2四日市店",
+          "prefecture": "三重県"
+        },
+        {
+          "name": "晴れる屋2金沢店",
+          "prefecture": "石川県"
+        },
+        {
+          "name": "晴れる屋2静岡店",
+          "prefecture": "静岡県"
+        },
+        {
+          "name": "晴れる屋2千葉店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "晴れる屋2秋葉原タワー店",
+      "prefecture": "",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://livepocket.jp/e/ct073",
@@ -14667,5 +14746,5 @@
       "first_detected_at": "2026-11-18T11:05:57.697175+00:00"
     }
   ],
-  "updated_at": "2026-11-18T11:36:07.047395+00:00"
+  "updated_at": "2026-11-18T11:40:43.743537+00:00"
 }

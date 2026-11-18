@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-18T11:36:12Z",
-  "total": 3,
+  "as_of": "2026-11-18T11:40:43.743537+00:00",
+  "total": 2,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
@@ -35,21 +35,6 @@
       "last_checked_at": "2026-11-06T14:01:22.617488+00:00",
       "next_retry_at": "2026-11-07T14:01:22.617488+00:00",
       "queue": "ready"
-    },
-    {
-      "url": "https://livepocket.jp/e/wfku9",
-      "event_title": "晴れる屋2 ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX購入権",
-      "store_name": "",
-      "prefecture": "",
-      "application_end_at": "2026-11-23T23:59:00+09:00",
-      "missing": [
-        "store"
-      ],
-      "last_check_status": "ok",
-      "last_http_status": null,
-      "last_checked_at": "2026-11-18T10:36:23.325582+00:00",
-      "next_retry_at": "2026-11-19T10:36:23.325582+00:00",
-      "queue": "retry_wait"
     }
   ]
 }
