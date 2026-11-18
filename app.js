@@ -7091,7 +7091,7 @@
 
   const LP_TRACK_TABLE = 'lottery_user_entries';
   const LP_EXT_TRACK_TABLE = 'lottery_external_user_entries';
-  const LP_TRACK_SELECT = 'event_url,status,application_count,won_count,lost_count,account_entries,'+
+  const LP_TRACK_SELECT = 'event_url,status,application_count,won_count,lost_count,account_entries,store_name,store_prefecture,'+
     'onsite_required,onsite_done,pickup_start,pickup_end,pickup_start_time,pickup_end_time,'+
     'result_announcement_at,result_announcement_date,result_announcement_time,note,updated_at';
   function lotteryTrackTableFor(url){
@@ -7533,6 +7533,8 @@
       status,
       application_count:applications,won_count:Math.min(won,applications),
       lost_count:Math.min(lost,applications-Math.min(won,applications)),
+      store_name:typeof row.store_name==='string'?row.store_name.trim().slice(0,200):'',
+      store_prefecture:typeof row.store_prefecture==='string'?row.store_prefecture.trim().slice(0,80):'',
       account_entries:Array.isArray(row.account_entries)?
         row.account_entries.filter(x=>x&&typeof x.account_id==='string')
           .map(x=>({account_id:x.account_id,
@@ -7692,7 +7694,10 @@
 
   // Show the actual store alongside the product in private lottery management.
   // Prefer explicit store records; never guess a prefecture from the name.
-  function lotteryTrackStoreLabel(url) {
+  function lotteryTrackStoreLabel(url,record=null) {
+    const selected=record?lpTrackerChosenStores(record):[];
+    if(selected.length)return selected.map(store=>store.name+
+      (store.prefecture?'（'+store.prefecture+'）':'')).join(' ／ ');
     const item=lotteryItems.find(x=>x.url===url);
     if(!item)return '店舗情報なし（掲載終了・非表示の可能性）';
     const stores=lotteryStoreEntries(item);
@@ -7788,7 +7793,7 @@
       '<span class="lp-pickup-alert-count">'+due.length+'件</span></div>'+
       due.slice(0,20).map(r=>'<div class="lp-pickup-alert-row urgent"><div>'+
         '<strong>'+escape(lotteryTrackItemName(r.event_url))+'</strong>'+
-        '<p class="lp-track-store-label">📍 店舗：'+escape(lotteryTrackStoreLabel(r.event_url))+'</p>'+
+        '<p class="lp-track-store-label">📍 店舗：'+escape(lotteryTrackStoreLabel(r.event_url,r))+'</p>'+
         '<p>結果発表予定：'+escape(lotteryScheduleText(r.result_announcement_date,r.result_announcement_time))+
         ' ／ 当落を確認してください</p></div>'+
         '<button type="button" data-lp-track="edit" data-url="'+escape(r.event_url)+'">結果を記録</button></div>').join('');
@@ -7818,7 +7823,7 @@
         return '<div class="lp-pickup-alert-row '+
           (level==='soon'?'':'urgent')+'"><div>'+
           '<strong>'+escape(lotteryTrackItemName(record.event_url))+'</strong>'+
-          '<p class="lp-track-store-label">📍 店舗：'+escape(lotteryTrackStoreLabel(record.event_url))+'</p>'+
+          '<p class="lp-track-store-label">📍 店舗：'+escape(lotteryTrackStoreLabel(record.event_url,record))+'</p>'+
           '<p>'+escape(label+'：'+lotteryPickupDateText(record.pickup_end)+(record.pickup_end_time?' '+record.pickup_end_time:''))+'</p>'+
           '</div><button type="button" data-lp-track="edit" data-url="'+
           escape(record.event_url)+'">管理</button></div>';
@@ -7855,7 +7860,7 @@
       records:records.map(r=>({
         event_url:r.event_url,
         title:lotteryTrackItemName(r.event_url),
-        store_label:lotteryTrackStoreLabel(r.event_url),
+        store_label:lotteryTrackStoreLabel(r.event_url,r),
         status:r.status,
         application_count:r.application_count,
         won_count:r.won_count,
@@ -7904,7 +7909,7 @@
           ? `<p>自分の現地対応：${x.onsite_done?'完了':'未完了'}</p>`:'';
         return `<div class="lp-track-row"><div>
           <strong>${escape(lotteryTrackItemName(x.event_url))}</strong>
-          <p class="lp-track-store-label">📍 店舗：${escape(lotteryTrackStoreLabel(x.event_url))}</p>
+          <p class="lp-track-store-label">📍 店舗：${escape(lotteryTrackStoreLabel(x.event_url,x))}</p>
           ${onsite}
           <p class="lp-track-quantity-summary">🎟️ 応募 ${x.application_count}口 ／ 🎉 当選 ${x.won_count}口 ／ 📪 落選 ${x.lost_count}口</p>
           ${announcement?`<p>抽選発表日：${escape(announcement)}</p>`:''}
@@ -7998,12 +8003,7 @@
         const schedule=lotteryTrackerSchedule(r,item);
         const assigned=Array.isArray(r.account_entries)?r.account_entries:[];
         const choices=lpTrackerCandidateStores(r.event_url);
-        let stores=[...new Map(assigned.filter(a=>a.store_name)
-          .map(a=>{
-            const raw={name:a.store_name,prefecture:a.store_prefecture||''};
-            const canonical=globalThis.window?.TorecaStoreAliases?.resolve?.(raw)||raw;
-            return [canonical.name+'|'+canonical.prefecture,canonical];
-          })).values()];
+        let stores=lpTrackerChosenStores(r);
         if(!stores.length){
           const fallback={name:item.store_name||lotteryTrackStoreLabel(r.event_url),
             prefecture:item.prefecture||''};
@@ -8221,7 +8221,7 @@
   // One application ticket per selected personal account.
   // Previously entered aggregate tickets remain in "未割当" until assigned.
   // Exact store candidates from this lottery's effective catalog entry.
-  // A one-store event prefills the store; every account may edit its branch.
+  // A one-store event always uses the card's store; multiple stores are selected.
   // Store choices remain private, including newly entered store names.
   function lpTrackerCandidateStores(url){
     if(!url)return [];
@@ -8238,6 +8238,13 @@
   }
 
   function lpTrackerStoreControl(entry,stores=[],manualStore=false){
+    if(stores.length===1){
+      const store=stores[0];
+      return '<div class="lp-track-account-store"><span>🏬 応募店舗</span>'+
+        '<p class="lp-track-store-choice" data-lp-store-fixed><strong>'+escape(store.name)+
+        '</strong>'+(store.prefecture?'（'+escape(store.prefecture)+'）':'')+'</p>'+
+        '<small>抽選カードの店舗で固定</small></div>';
+    }
     if(stores.length>1){
       const saved=globalThis.window?.TorecaStoreAliases?.resolve?.(
         entry?.store_name,entry?.store_prefecture)||{
@@ -8261,6 +8268,75 @@
         (manualStore||stores.length?' required':'')+' autocomplete="off" placeholder="店舗名を入力" value="'+escape(canonical.name)+'"></label>'+
       '<label>📍 地域（都道府県）<input type="text" data-lp-manual-store-pref maxlength="80"'+
         (manualStore?' required':'')+' autocomplete="off" placeholder="例：栃木県" value="'+escape(canonical.prefecture)+'"></label></div>';
+  }
+
+  function lpTrackerRecordStore(url,record){
+    const choices=lpTrackerCandidateStores(url);
+    if(choices.length===1)return choices[0];
+    const store={name:String(record?.store_name||'').trim().slice(0,200),
+      prefecture:String(record?.store_prefecture||'').trim().slice(0,80)};
+    return globalThis.window?.TorecaStoreAliases?.resolve?.(store)||store;
+  }
+
+  function lpTrackerChosenStores(record){
+    const assigned=(record?.account_entries||[]).filter(row=>Number(row.application_count)>0);
+    const fallback=lpTrackerRecordStore(record.event_url,record);
+    const selected=assigned.map(row=>lpTrackerRecordStore(record.event_url,
+      row.store_name?row:record));
+    if(!assigned.length||Number(record.application_count)>assigned.reduce((sum,row)=>sum+Number(row.application_count),0))
+      selected.push(fallback);
+    return [...new Map(selected.filter(store=>store.name)
+      .map(store=>[store.name+'|'+store.prefecture,store])).values()];
+  }
+
+  function lpTrackerRecordStoreMarkup(data){
+    return '<fieldset class="lp-track-account-block lp-track-record-store" id="lpTrackRecordStore">'+
+      '<legend>応募店舗（アカウント登録不要）</legend>'+
+      lpTrackerStoreControl(data,lpTrackerCandidateStores(data.event_url),!!lpAppEventId(data.event_url))
+        .replaceAll('data-lp-account-store','data-lp-record-store')+
+      '<p class="lp-tracker-intro">アカウントを指定しない応募分の店舗を保存します。</p></fieldset>';
+  }
+
+  function lpTrackerRecordStoreBind(form,url){
+    const root=form.querySelector('#lpTrackRecordStore');
+    const choices=lpTrackerCandidateStores(url);
+    const count=()=>Math.max(0,Number(form.elements.application_count.value)-
+      form.querySelectorAll('[data-lp-account-row]').length);
+    const update=()=>{
+      root.hidden=form.querySelectorAll('[data-lp-account-row]').length>0&&count()===0;
+      root.querySelectorAll('input,select').forEach(input=>{
+        input.disabled=root.hidden;
+        input.required=!root.hidden&&count()>0&&(choices.length>1||!!lpAppEventId(url));
+      });
+      const selection=root.querySelector('[data-lp-record-store]');
+      const area=root.querySelector('[data-lp-record-store-area]');
+      if(selection&&area){
+        const store=/^\d+$/.test(selection.value)?choices[Number(selection.value)]:null;
+        area.textContent=store?'📍 地域：'+(store.prefecture||'未確認'):
+          'この抽選に登録された対象店舗から選択してください。';
+      }
+    };
+    form.addEventListener('input',update);
+    form.addEventListener('change',update);
+    form.addEventListener('click',update);
+    update();
+    return {collect(){
+      if(root.hidden)return {};
+      let chosen=choices.length===1?choices[0]:null;
+      if(choices.length>1){
+        const value=root.querySelector('[data-lp-record-store]')?.value||'';
+        chosen=/^\d+$/.test(value)?choices[Number(value)]:null;
+        if(!chosen&&count()>0)throw Error('応募店舗を選択してください。');
+      }else if(!choices.length){
+        const name=root.querySelector('[data-lp-manual-store-name]')?.value.trim()||'';
+        const prefecture=root.querySelector('[data-lp-manual-store-pref]')?.value.trim()||'';
+        if(lpAppEventId(url)&&count()>0&&(!name||!prefecture))
+          throw Error('店舗名と地域を両方入力してください。');
+        if(name)chosen=lpTrackerCanonicalStore({name,prefecture});
+      }
+      return {store_name:String(chosen?.name||'').slice(0,200),
+        store_prefecture:String(chosen?.prefecture||'').slice(0,80)};
+    }};
   }
 
   function lpTrackerAccountRowHtml(entry,usedIds=[],stores=[],manualStore=false){
@@ -8353,7 +8429,6 @@
     const root=$('lpTrackPrivateAccounts');
     if(!root)return null;
     const keys=['application_count','won_count','lost_count'];
-    for(const key of keys)form.elements[key].readOnly=true;
     const holder=$('lpTrackAccountRows'),unassigned=$('lpTrackUnassigned');
     const stores=lpTrackerCandidateStores(url);
     const manualStore=!!lpAppEventId(url)&&!(typeof lotteryItems!=='undefined'&&
@@ -8374,16 +8449,23 @@
       form.elements.won_count.value=String(getLegacy('won_count')+won);
       form.elements.lost_count.value=String(getLegacy('lost_count')+lost);
       const hasUnassigned=keys.some(key=>getLegacy(key)!==0);
-      unassigned.hidden=!hasUnassigned;
+      unassigned.hidden=!hasUnassigned||records.length===0;
+      for(const key of keys)form.elements[key].readOnly=records.length>0;
       const status=form.elements.status;
       if(status){
         const total=Number(form.elements.application_count.value);
         const w=Number(form.elements.won_count.value);
         const l=Number(form.elements.lost_count.value);
-        const allWonReceived=w>0&&records.filter(r=>['won','received'].includes(rowOutcome(r))).every(r=>rowOutcome(r)==='received');
+        const allWonReceived=w>0&&((records.length===0&&status.value==='received')||
+          getLegacy('won_count')===0&&records.filter(r=>['won','received'].includes(rowOutcome(r))).every(r=>rowOutcome(r)==='received'));
         status.value=total===0?'not_applied':allWonReceived?'received':w>0?'won':l===total?'lost':'applied';
       }
       updateQuantityHint();
+    };
+    const syncUnassigned=()=>{
+      if(rows().length)return;
+      for(const key of keys)setLegacy(key,Number(form.elements[key].value));
+      summarise();
     };
     const addOne=()=>{
       const selectedIds=rows().map(row=>row.querySelector('[data-lp-account-id]').value);
@@ -8396,6 +8478,9 @@
       const entry={account_id:profile.id,application_count:1,
         won_count:Number(transfer.outcome==='won'),received_count:0,
         lost_count:Number(transfer.outcome==='lost')};
+      const selected=form.querySelector?.('[data-lp-record-store]')?.value;
+      const selectedStore=/^\d+$/.test(selected||'')?stores[Number(selected)]:null;
+      if(selectedStore){entry.store_name=selectedStore.name;entry.store_prefecture=selectedStore.prefecture;}
       const html=lpTrackerAccountRowHtml(entry,selectedIds,stores,manualStore);
       if(!html)return false;
       holder.insertAdjacentHTML('beforeend',html);
@@ -8443,6 +8528,8 @@
     });
     summarise();
     return {
+      hasAccounts(){return rows().length>0;},
+      syncUnassigned,
       adjustStatus(status){
         // Global status is a summary, not a second route to change counts.
         // Marking a won entry "received" is the only independent action.
@@ -8479,6 +8566,8 @@
             const selection=row.querySelector('[data-lp-account-store]')?.value||'';
             if(/^\d+$/.test(selection))chosen=stores[Number(selection)]||null;
             if(!chosen)throw Error('各応募アカウントの応募店舗を選択してください。');
+          }else if(stores.length===1){
+            chosen=stores[0];
           }else if(nameInput){
             const name=nameInput.value.trim();
             const prefecture=row.querySelector('[data-lp-manual-store-pref]')?.value.trim()||'';
@@ -8486,8 +8575,6 @@
               throw Error('アプリ抽選は店舗名と地域を両方入力してください。');
             if(stores.length&&!name)throw Error('各応募アカウントの応募店舗を選択・入力してください。');
             if(name)chosen=lpTrackerCanonicalStore({name,prefecture});
-          }else if(stores.length===1){
-            chosen=stores[0];
           }else{
             const previous=previousByAccount.get(id);
             if(previous?.store_name)chosen={
@@ -8547,6 +8634,7 @@
         </div>
         <p class="lp-tracker-intro" id="lpTrackQuantityInfo" role="status" aria-live="polite"></p>
       </fieldset>
+      ${lpTrackerRecordStoreMarkup(data)}
       ${lpTrackerPrivateMarkup(data)}
       <p class="lp-tracker-intro">現地対応の必要性・内容は各イベントの「みんなの現地対応情報」から共有できます。この画面で記録するのは自分の完了状況だけです。</p>
       <label class="lp-check-line"><input type="checkbox" name="onsite_done" ${data.onsite_done?'checked':''}>自分の現地対応を完了した</label>
@@ -8584,6 +8672,9 @@
     for(const name of ['application_count','won_count','lost_count'])
       form.elements[name].addEventListener('input',updateQuantityHint);
     const privateEditor=lpTrackerPrivateBind(form,updateQuantityHint,url,data);
+    for(const name of ['application_count','won_count','lost_count'])
+      form.elements[name].addEventListener('input',()=>privateEditor?.syncUnassigned());
+    const storeEditor=lpTrackerRecordStoreBind(form,url);
     form.querySelector('#lpTrackOpenPrivateAccounts')?.addEventListener('click',()=>{
       // Close the original dialog before opening the account setup dialog on iOS.
       dlg.close();
@@ -8591,7 +8682,7 @@
     });
     form.elements.status.addEventListener('change',()=>{
       const status=form.elements.status.value;
-      if(privateEditor){privateEditor.adjustStatus(status);return;}
+      if(privateEditor?.hasAccounts()){privateEditor.adjustStatus(status);return;}
       let applications=Number(form.elements.application_count.value)||0;
       let won=Number(form.elements.won_count.value)||0;
       let lost=Number(form.elements.lost_count.value)||0;
@@ -8605,6 +8696,7 @@
       form.elements.application_count.value=String(Math.min(applications,9999));
       form.elements.won_count.value=String(Math.min(won,9999));
       form.elements.lost_count.value=String(Math.min(lost,9999));
+      privateEditor?.syncUnassigned();
       updateQuantityHint();
     });
     updateQuantityHint();
@@ -8618,7 +8710,9 @@
       const form=e.currentTarget,fd=new FormData(form);
       const status=String(fd.get('status')||'not_applied');
       const completed=fd.get('onsite_done')==='on';
-      let accountValues=null;
+      let accountValues=null,storeValues;
+      try{storeValues=storeEditor.collect();}
+      catch(error){$('lpTrackEditorMessage').textContent=String(error?.message||error);return;}
       if(privateEditor){
         try{accountValues=privateEditor.collect();}
         catch(error){
@@ -8638,7 +8732,7 @@
         won>0?'won':lost===applications?'lost':'applied';
       const values={status:normalizedStatus,onsite_required:completed,onsite_done:completed,
         application_count:applications,won_count:won,lost_count:lost,
-        ...(accountValues?{account_entries:accountValues.account_entries}:{}),
+        account_entries:accountValues?.account_entries||[],...storeValues,
         pickup_start:String(fd.get('pickup_start')||''),pickup_end:String(fd.get('pickup_end')||''),
         pickup_start_time:String(fd.get('pickup_start_time')||''),pickup_end_time:String(fd.get('pickup_end_time')||''),
         result_announcement_date:String(fd.get('result_announcement_date')||''),
@@ -8693,9 +8787,11 @@
       status==='received'&&won>0?'received':
       won>0?'won':lost===applications?'lost':'applied';
     const {result_announcement_date,result_announcement_time}=lotteryTrackAnnouncement(values);
+    const store=lpTrackerRecordStore(url,'store_name' in values?values:lotteryTrackRecord(url));
     // Keep the legacy timestamp in sync for already-open app sessions.
     const payload={user_id:uid,event_url:url,status:canonicalStatus,onsite_required:completed,
       onsite_done:completed,application_count:applications,won_count:won,lost_count:lost,
+      store_name:store.name||'',store_prefecture:store.name?store.prefecture||'':'',
       pickup_start:values.pickup_start||null,pickup_end:values.pickup_end||null,
       pickup_start_time:values.pickup_start?values.pickup_start_time||null:null,
       pickup_end_time:values.pickup_end?values.pickup_end_time||null:null,

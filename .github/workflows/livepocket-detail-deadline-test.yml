@@ -55,6 +55,8 @@ name: LivePocket Detail Deadline Regression
       - scripts/test_private_lottery_accounts.cjs
       - scripts/test_private_account_unassigned.cjs
       - scripts/test_private_account_store.cjs
+      - scripts/test_lottery_standalone_store.cjs
+      - supabase/migrations/20261118080126_lottery_tracker_standalone_store.sql
       - supabase/lottery_private_account_store_v21_102.sql
       - supabase/lottery_private_application_accounts_v21_100.sql
       - supabase/lottery_private_account_one_ticket_v21_101.sql
@@ -107,6 +109,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify private store persistence without application accounts
+        run: |
+          npm install --no-audit --no-fund --ignore-scripts --prefix "$RUNNER_TEMP/lottery-tracker-tests" jsdom@27.0.1 @electric-sql/pglite@0.3.14
+          NODE_PATH="$RUNNER_TEMP/lottery-tracker-tests/node_modules" node scripts/test_lottery_standalone_store.cjs
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

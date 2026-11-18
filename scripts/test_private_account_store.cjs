@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-// Offline regression: single store prefill, editable branches and multiple-store choice,
+// Offline regression: fixed single store and multiple-store choice,
 // legacy preservation and store metadata never reaching public results.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -55,9 +55,9 @@ assert.equal(api.lpTrackerCandidateStores(UNKNOWN).length,0);
 const ticket={account_id:A,application_count:1,won_count:0,lost_count:0};
 let html=api.lpTrackerPrivateMarkup({event_url:ONE,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
-assert.match(html,/data-lp-manual-store-name[^>]*value="ふるいち宇都宮店"/);
-assert.match(html,/data-lp-manual-store-pref[^>]*value="栃木県"/);
-assert.match(html,/<input type="text" data-lp-manual-store-name/,'Single-store branches remain editable');
+assert.match(html,/data-lp-store-fixed><strong>ふるいち宇都宮店<\/strong>（栃木県）/);
+assert.match(html,/抽選カードの店舗で固定/);
+assert.doesNotMatch(html,/data-lp-manual-store-name|data-lp-account-store required/,'Single store cannot be changed');
 html=api.lpTrackerPrivateMarkup({event_url:MANY,application_count:1,
  won_count:0,lost_count:0,account_entries:[ticket]});
 assert.match(html,/data-lp-account-store required/);
@@ -130,7 +130,7 @@ result=collector(ONE,'').collect();
 assert.equal(result.account_entries[0].store_name,'ふるいち宇都宮店');
 assert.equal(result.account_entries[0].store_prefecture,'栃木県');
 const changedBranch=collector(ONE,'',null,{name:'ビックカメラ宇都宮店',prefecture:'栃木県'}).collect();
-assert.equal(changedBranch.account_entries[0].store_name,'ビックカメラ宇都宮店');
+assert.equal(changedBranch.account_entries[0].store_name,'ふるいち宇都宮店');
 assert.equal(changedBranch.account_entries[0].store_prefecture,'栃木県');
 result=collector(UNKNOWN,'', {event_url:UNKNOWN,account_entries:[{
  ...ticket,store_name:'過去の店舗',store_prefecture:'東京都'
@@ -164,4 +164,4 @@ assert.match(schema,/Invalid application store/);
 const results=app.slice(app.indexOf('  const LP_RESULTS_COUNT_RPC='),
  app.indexOf('  const LP_PRIVATE_ACCOUNT_TABLE='));
 assert.doesNotMatch(results,/store_prefecture|account_entries|lpPrivateAccount/);
-console.log('Private stores: editable prefill, typed branch, required multi, saved legacy and privacy OK');
+console.log('Private stores: fixed single store, required multi, unknown-store entry and privacy OK');

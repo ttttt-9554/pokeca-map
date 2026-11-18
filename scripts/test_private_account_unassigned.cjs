@@ -139,6 +139,8 @@ empty.change(0,'received');
 assert.equal(empty.ctl.collect().won_count,1,
  'A received account still counts as one winning ticket');
 assert.equal(empty.ctl.collect().account_entries[0].received_count,1);
+empty.change(0,'won');
+assert.equal(empty.form.elements.status.value,'won','Changing an account back to won clears received status');
 empty.change(0,'pending');
 assert.equal(empty.ctl.collect().won_count,0);
 assert.equal(empty.ctl.collect().account_entries[0].lost_count,0);

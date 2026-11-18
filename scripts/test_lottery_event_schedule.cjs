@@ -27,11 +27,12 @@ const names = [
   'lotteryPurchasePeriodText', 'lotteryOfficialSchedule', 'lotteryCardScheduleHtml', 'lpCardOverlay',
   'lotteryTrackRecord', 'lotteryTrackAnnouncement', 'lotteryTrackClean',
   'lotteryPickupPeriodReversed', 'lotteryTrackerSchedule', 'lotteryTrackerScheduleOverrides', 'lotteryTrackerDefaults',
-  'lotteryTrackerSave',
+  'lpTrackerRecordStore','lotteryTrackerSave',
 ];
 const api = vm.runInNewContext(scheduleFields+'\n'+names.map(name => (name === 'lotteryTrackerSave' ? 'async ' : '') +
   extract(name)).join('\n') + '\n({lotteryCardScheduleHtml,lpCardOverlay,lotteryTrackClean,lotteryTrackerSchedule,lotteryTrackerScheduleOverrides,lotteryTrackerDefaults,lotteryTrackerSave})', {
   lotteryItems: [item],
+  lpTrackerCandidateStores: () => [],
   lotteryTrackRecords: records,
   lpCardOverrides: cardOverrides,
   escape: String,

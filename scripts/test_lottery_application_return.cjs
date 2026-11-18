@@ -245,7 +245,7 @@ async function testAppIntegration(){
       return {select:()=>({single:async()=>({data:payload,error:null})})};
     }})}
   };
-  const helpers=vm.runInNewContext(['lotteryReturnContext','lotteryReturnPrepare','lotteryReturnRegister','lotteryTrackerSave'].map(fn).join('\n')+
+  const helpers=vm.runInNewContext(['lotteryReturnContext','lotteryReturnPrepare','lotteryReturnRegister','lpTrackerRecordStore','lotteryTrackerSave'].map(fn).join('\n')+
     '\n({context:lotteryReturnContext,prepare:lotteryReturnPrepare,register:lotteryReturnRegister})',ctx,{timeout:1000});
   assert.equal(helpers.context(ONE).ready,true);
   assert.equal(helpers.context(ONE).productName,item.product_name);
