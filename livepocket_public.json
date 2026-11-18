@@ -14599,31 +14599,30 @@
     },
     {
       "url": "https://livepocket.jp/e/yd0az",
-      "discord_posted_at": "2026-11-18T06:30:05.467000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/yd0az",
+      "store_name": "JapanTCGCenter本厚木駅前店",
+      "prefecture": "神奈川県",
       "event_title": "【JapanTCGCenter本厚木駅前店 ハドウシーカー30パック 抽選販売】",
-      "application_end_at": "2026-11-23T21:00:00+09:00",
       "application_start_at": "2026-11-18T14:00:00+09:00",
+      "application_end_at": "2026-11-23T21:00:00+09:00",
+      "discord_posted_at": "2026-11-18T06:30:05.467000+00:00",
       "stores": [
         {
           "name": "JapanTCGCenter本厚木駅前店",
           "prefecture": "神奈川県"
         }
       ],
-      "store_name": "JapanTCGCenter本厚木駅前店",
-      "prefecture": "神奈川県",
-      "review_category": "pokemon",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_event_title": "【JapanTCGCenter本厚木駅前店 ハドウシーカー30パック 抽選販売】",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/yd0az",
       "purchase_start_date": "2026-11-27",
       "purchase_start_time": "11:00",
       "purchase_end_date": "2026-11-27",
       "purchase_end_time": "21:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-18T06:35:59.486373+00:00"
     }
   ],
-  "updated_at": "2026-11-18T06:36:40.668230+00:00"
+  "updated_at": "2026-11-18T06:46:01.489017+00:00"
 }
