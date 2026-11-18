@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-18T03:06:03.562692+00:00",
+  "collected_at": "2026-11-18T06:06:03.313026+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -25100,7 +25100,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/9pof30gfr",
       "field_sources": {
@@ -25129,8 +25129,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 653,
-    "no_structured_details": 179
+    "parsed": 654,
+    "no_structured_details": 178
   },
   "field_counts": {
     "store_name": 427,
@@ -25147,12 +25147,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572446299075387433"
+      "1551580466266644552": "1572491566474600471"
     },
     "last_run": {
-      "checked_at": "2026-11-18T03:06:03.562692+00:00",
-      "new_urls": 1,
-      "original_urls": 831,
+      "checked_at": "2026-11-18T06:06:03.313026+00:00",
+      "new_urls": 0,
+      "original_urls": 832,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
