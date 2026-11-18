@@ -7,6 +7,8 @@ name: LivePocket Discord URL Collector
     paths:
       - 'scripts/customform_lottery_enrich.py'
       - 'scripts/customform_lottery_parse.mjs'
+      - 'scripts/google_forms_lottery_enrich.mjs'
+      - 'supabase/functions/lottery-individual-fetch/google-forms.mjs'
   workflow_dispatch:
     inputs:
       backfill:
@@ -186,6 +188,9 @@ jobs:
 
       - name: Read Cloud Pass lottery titles and application periods
         run: node scripts/cloud_pass_lottery_enrich.mjs
+
+      - name: Read public Google Forms lottery descriptions
+        run: node scripts/google_forms_lottery_enrich.mjs
 
       - name: Read Famima lottery titles and reservation periods
         env:

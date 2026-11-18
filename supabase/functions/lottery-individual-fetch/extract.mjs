@@ -1,4 +1,5 @@
 // Public page extraction. Only unambiguous, explicitly labelled data is returned.
+import {googleFormUrl, googleFormFields} from './google-forms.mjs';
 export const STARBOX_HOST = 'shoplottery.e-starbox.com';
 export const CUSTOMFORM_HOST = 'customform.jp';
 export const GEO_HOST = 'draw.geo-online.co.jp';
@@ -8,7 +9,7 @@ export function supportedUrl(value) {
   try {
     const u=new URL(value);
     if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash) return false;
-    if(u.hostname==='docs.google.com') return /^\/forms\/d\/e\/[A-Za-z0-9_-]{20,180}\/(?:viewform|closedform)\/?$/.test(u.pathname) && !u.search;
+    if(u.hostname==='docs.google.com'||u.hostname==='forms.gle') return !!googleFormUrl(value);
     if(u.hostname==='e-yamashiroya.com') return /^\/(?:%[\da-f]{2}|[a-z\d_\-\/])+$/i.test(u.pathname) && !u.search && !u.pathname.includes('//');
     if(u.hostname==='7net.omni7.jp') return /^\/detail\/\d+\.html$/.test(u.pathname) && !u.search;
     if(u.hostname==='famima-online.family.co.jp') return u.pathname==='/item' && /^\?itemCode=\d{10,25}$/.test(u.search);
@@ -459,9 +460,11 @@ function rakutenBooksFields(html) {
   return fields;
 }
 
-export function extract(html,url){
+export function extract(html,url,options={}){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
+  if(u.hostname==='docs.google.com'&&html.includes('FB_PUBLIC_LOAD_DATA_'))
+    return supportedUrl(url)?googleFormFields(html,url,options):{};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
   if (u.hostname === STARBOX_HOST) return supportedUrl(url) ? starboxFields(html) : {};
   if (u.hostname === CUSTOMFORM_HOST) return supportedUrl(url) ? customformFields(html, url) : {};

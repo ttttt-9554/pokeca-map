@@ -9,6 +9,8 @@ name: LivePocket Detail Deadline Regression
       - scripts/famima_lottery_enrich.py
       - scripts/test_famima_lottery_enrich.py
       - scripts/cloud_pass_lottery_enrich.mjs
+      - scripts/google_forms_lottery_enrich.mjs
+      - scripts/test_google_forms_lottery.mjs
       - scripts/livepocket_period_trial.py
       - scripts/test_livepocket_period_trial.py
       - scripts/livepocket_event_schedule.py
@@ -165,6 +167,7 @@ jobs:
           node scripts/test_lottery_public_poll.cjs
           node scripts/test_lottery_notification_scan.cjs
           node scripts/test_individual_lottery_fetch.mjs
+          node scripts/test_google_forms_lottery.mjs
           node scripts/test_app_manual_location.cjs
           node scripts/test_external_edit_discord.cjs
           node scripts/test_external_multi_stores.cjs

@@ -3451,8 +3451,14 @@
     return [...names];
   }
 
-  function lotteryDate(value) {
+  function lotteryDate(value, endOfDay=false) {
     if (!value) return NaN;
+    if (typeof value==='string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      const day=new Date(value+'T00:00:00Z');
+      if(!Number.isFinite(+day)||day.toISOString().slice(0,10)!==value)return NaN;
+      // Compare calendar-only periods in Japan without inventing a displayed time.
+      return Date.parse(value+(endOfDay?'T23:59:59.999+09:00':'T00:00:00+09:00'));
+    }
     const time = Date.parse(value);
     return Number.isFinite(time) ? time : NaN;
   }
@@ -3467,13 +3473,13 @@
        corrected.edited_fields.includes('application_end_at')){
       // An explicitly cleared deadline is unknown: never resurrect an older
       // public or diagnostic date in a developer's manual-review queue.
-      const manualEnd=lotteryDate(corrected.application_end_at);
+      const manualEnd=lotteryDate(corrected.application_end_at,true);
       return Number.isFinite(manualEnd)&&manualEnd<=now;
     }
     const effective=lotteryItems.find(item=>item.url===url);
     const publicItem=lotteryBaseItems.find(item=>item.url===url);
-    const correctedEnd=lotteryDate(effective?.application_end_at ?? publicItem?.application_end_at);
-    const end=Number.isFinite(correctedEnd)?correctedEnd:lotteryDate(diagnosticEnd);
+    const correctedEnd=lotteryDate(effective?.application_end_at ?? publicItem?.application_end_at,true);
+    const end=Number.isFinite(correctedEnd)?correctedEnd:lotteryDate(diagnosticEnd,true);
     return Number.isFinite(end)&&end<=now;
   }
 
@@ -3503,7 +3509,7 @@
     // Keep them in the "すべて" list and preserve saved lottery history.
     if (item.manual_page_unavailable === true || item.app_lottery_hidden === true ||
       item.manual_card_hidden === true) return 'unavailable';
-    const end = lotteryDate(item.application_end_at);
+    const end = lotteryDate(item.application_end_at,true);
     const start = lotteryDate(item.application_start_at);
     if (Number.isFinite(end) && now > end) return 'closed';
     if (Number.isFinite(start) && now < start) return 'upcoming';
@@ -3515,6 +3521,7 @@
   function lotteryJapaneseDate(value) {
     const time = lotteryDate(value);
     if (!Number.isFinite(time)) return '';
+    if(/^\d{4}-\d{2}-\d{2}$/.test(value))return value.replaceAll('-','/');
     return new Intl.DateTimeFormat('ja-JP',{
       timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',
       hour:'2-digit',minute:'2-digit',hour12:false
@@ -5074,6 +5081,8 @@
   }
 
     function lpExtDateInput(iso){
+    // datetime-local cannot represent a date whose time was not supplied.
+    if(/^\d{4}-\d{2}-\d{2}$/.test(iso||''))return '';
     const ms=Date.parse(iso||'');
     if(!Number.isFinite(ms))return '';
     return new Intl.DateTimeFormat('sv-SE',{
@@ -5542,13 +5551,14 @@
       ? lotteryJapaneseDate(item.application_end_at) + ' 締切' : '応募締切：未確認';
     const start = Number.isFinite(lotteryDate(item.application_start_at)) ? lotteryJapaneseDate(item.application_start_at) : '';
     let countdown = '';
-    if (state === 'open') {
+    if (state === 'open' && !/^\d{4}-\d{2}-\d{2}$/.test(item.application_end_at||'')) {
       const minutes = Math.max(0, Math.floor((lotteryDate(item.application_end_at) - Date.now()) / 60000));
       const days = Math.floor(minutes / 1440);
       const hours = Math.floor((minutes % 1440) / 60);
       countdown = days ? ` ／ 残り${days}日${hours}時間` : ` ／ 残り${hours}時間${minutes % 60}分`;
     }
-    const deadlineRemainingMs = lotteryDate(item.application_end_at) - Date.now();
+    const deadlineRemainingMs = /^\d{4}-\d{2}-\d{2}$/.test(item.application_end_at||'')
+      ? NaN : lotteryDate(item.application_end_at) - Date.now();
     const urgent = state === 'open' && Number.isFinite(deadlineRemainingMs) && deadlineRemainingMs > 0 && deadlineRemainingMs < 86400000;
     const placeText = places.length ? places.join('・') : '都道府県未確認';
     const genre = lotteryGenre(item);
@@ -5675,7 +5685,7 @@
         const sa=lotteryState(a,now), sb=lotteryState(b,now);
         if(sa!==sb) return priority[sa]-priority[sb];
         if(sa==='open'||sa==='upcoming'){
-          const ea=lotteryDate(a.application_end_at), eb=lotteryDate(b.application_end_at);
+          const ea=lotteryDate(a.application_end_at,true), eb=lotteryDate(b.application_end_at,true);
           if(Number.isFinite(ea)&&Number.isFinite(eb)&&ea!==eb)return ea-eb;
         }
       }
@@ -9342,7 +9352,7 @@
     const previous=lotteryOnsiteMyReport(url);
     const names=item?[...new Set(lotteryStoreEntries(item).map(x=>x.name).filter(Boolean))]:[];
     const areas=item?lotteryPrefectures(item):[];
-    const end=item?lotteryDate(item.application_end_at):NaN;
+    const end=item?lotteryDate(item.application_end_at,true):NaN;
     const payload={user_id:uid,event_url:url,requirement:values.requirement,
       details:String(values.details||'').slice(0,500),
       application_end_at:Number.isFinite(end)?new Date(end).toISOString():(previous?.application_end_at||null),

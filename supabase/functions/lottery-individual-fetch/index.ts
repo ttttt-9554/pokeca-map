@@ -1,4 +1,5 @@
 import {supportedUrl,extract,lotteryPageRequest,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
+import {googleFormUrl,fetchGoogleForm} from './google-forms.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
 function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
@@ -47,6 +48,11 @@ Deno.serve(async(req:Request)=>{
  if(typeof input?.url!=='string'||input.url.length>1000||!supportedUrl(input.url))
   return json({error:'このサイトは個別取得に未対応です。元ページを開いて確認してください。'},422);
  try{
+  if(googleFormUrl(input.url)){
+   const page=await fetchGoogleForm(input.url);
+   const fields=extract(page.html,page.url);
+   return json({fields,message:Object.keys(fields).length?'Googleフォームの案内から取得しました。記載のない日時は空欄です。':'公開された案内を読み取れませんでした。受付終了やログイン制限を確認してください。'});
+  }
   const {url:source,headers}=lotteryPageRequest(input.url),host=source.hostname;
   if(host===CUSTOMFORM_HOST)return await collectedCustomForm(input.url);
   const response=await fetch(source,{redirect:'manual',headers,signal:AbortSignal.timeout(14000)});

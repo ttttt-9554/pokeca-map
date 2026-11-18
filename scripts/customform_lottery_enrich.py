@@ -162,7 +162,7 @@ def main():
         print('Pending CustomForm lotteries:', len(items))
         return
     region_items = [item for item in catalog.get('items', [])
-                    if item.get('customform_verified_at') and isinstance(item.get('stores'), list)
+                    if (item.get('customform_verified_at') or item.get('google_forms_verified_at')) and isinstance(item.get('stores'), list)
                     and any(not store.get('prefecture') for store in item['stores'])]
     if not items and not region_items:
         return
@@ -171,7 +171,7 @@ def main():
         try:
             regions = fetch_regions(os.environ['SUPABASE_URL'], os.environ['SUPABASE_SERVICE_ROLE_KEY'])
         except (RuntimeError, ValueError, OSError):
-            print('CustomForm store regions will be retried from the store master.')
+            print('Form store regions will be retried from the store master.')
     changes = 0
     for item in region_items:
         changes += apply_one(item, item, regions)
@@ -182,7 +182,7 @@ def main():
             temp = CATALOG.with_suffix('.tmp')
             temp.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
             temp.replace(CATALOG)
-        print('CustomForm store regions filled:', changes)
+        print('Form store regions filled:', changes)
         return
     verified = 0
     for item, html, blocked in browser_pages(items):
