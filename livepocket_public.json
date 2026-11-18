@@ -14625,21 +14625,13 @@
     },
     {
       "url": "https://livepocket.jp/e/wfku9",
+      "store_name": "晴れる屋2秋葉原タワー店",
+      "prefecture": "",
       "product_name": "ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX 購入権",
       "event_title": "晴れる屋2 ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX購入権",
       "application_start_at": "2026-11-18T16:15:00+09:00",
       "application_end_at": "2026-11-23T23:59:00+09:00",
       "discord_posted_at": "2026-11-18T10:35:31.400000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/wfku9",
-      "result_announcement_date": "2026-11-24",
-      "purchase_start_date": "2026-11-27",
-      "purchase_end_date": "2026-11-29",
-      "review_category": "pokemon",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "product_name",
-      "first_detected_at": "2026-11-18T10:36:02.284882+00:00",
       "stores": [
         {
           "name": "晴れる屋2秋葉原タワー店",
@@ -14714,11 +14706,16 @@
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "晴れる屋2秋葉原タワー店",
-      "prefecture": "",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/wfku9",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "first_detected_at": "2026-11-18T10:36:02.284882+00:00"
     },
     {
       "url": "https://livepocket.jp/e/ct073",
@@ -14746,5 +14743,5 @@
       "first_detected_at": "2026-11-18T11:05:57.697175+00:00"
     }
   ],
-  "updated_at": "2026-11-18T11:40:43.743537+00:00"
+  "updated_at": "2026-11-18T11:46:02.750276+00:00"
 }

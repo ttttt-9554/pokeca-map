@@ -2425,7 +2425,7 @@
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSegG_CHc_rfaVMEpIoxgAgDAnAowD7KNjR7-PvKSUKyhEATlQ/viewform",
       "source_site": "docs.google.com",
       "event_title": "【TCバトロコ八千代台店】11/21(土)発売予定ワンピースカードゲーム 「神の支配」抽選販売応募フォーム",
-      "prefecture": "",
+      "prefecture": "千葉県",
       "discord_posted_at": "2026-11-18T11:33:07.748000+00:00",
       "first_detected_at": "2026-11-18T11:35:59.093704+00:00",
       "review_category": "onepiece",
@@ -2442,14 +2442,18 @@
       "stores": [
         {
           "name": "バトロコ八千代台店",
-          "prefecture": ""
+          "prefecture": "千葉県"
         }
       ],
       "store_name": "バトロコ八千代台店",
       "official_event_title": "【TCバトロコ八千代台店】11/21(土)発売予定ワンピースカードゲーム 「神の支配」抽選販売応募フォーム",
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-18T11:36:00.760Z",
-      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSegG_CHc_rfaVMEpIoxgAgDAnAowD7KNjR7-PvKSUKyhEATlQ/viewform"
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSegG_CHc_rfaVMEpIoxgAgDAnAowD7KNjR7-PvKSUKyhEATlQ/viewform",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSe8zt0Cxet4CvqkIcon-VJl5xWPeGy7kwZcLoWzq2J6mAtZ5A/viewform",
