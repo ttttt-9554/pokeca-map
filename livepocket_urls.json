@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-18T11:35:58.717183+00:00",
+  "collected_at": "2026-11-18T12:04:05.810248+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -25278,7 +25278,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ct073",
       "field_sources": {
@@ -25307,8 +25307,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 655,
-    "no_structured_details": 180
+    "parsed": 656,
+    "no_structured_details": 179
   },
   "field_counts": {
     "store_name": 430,
@@ -25325,10 +25325,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572575741227438160"
+      "1551580466266644552": "1572582180423471104"
     },
     "last_run": {
-      "checked_at": "2026-11-18T11:35:58.717183+00:00",
+      "checked_at": "2026-11-18T12:04:05.810248+00:00",
       "new_urls": 0,
       "original_urls": 835,
       "suspect_legacy_store_names": 0,
