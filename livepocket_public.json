@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-18T10:35:55.575888+00:00",
+  "collected_at": "2026-11-18T10:38:11.195720+00:00",
   "unique_livepocket_urls": 834,
   "items": [
     {
@@ -14625,24 +14625,22 @@
     },
     {
       "url": "https://livepocket.jp/e/wfku9",
+      "product_name": "ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX 購入権",
+      "event_title": "晴れる屋2 ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX購入権",
+      "application_start_at": "2026-11-18T16:15:00+09:00",
+      "application_end_at": "2026-11-23T23:59:00+09:00",
       "discord_posted_at": "2026-11-18T10:35:31.400000+00:00",
       "store_location_source": "livepocket_page_required",
       "store_location_url": "https://livepocket.jp/e/wfku9",
-      "event_title": "晴れる屋2 ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX購入権",
-      "product_name": "ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX 購入権",
-      "application_end_at": "2026-11-23T23:59:00+09:00",
-      "application_start_at": "2026-11-18T16:15:00+09:00",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29",
       "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "晴れる屋2 ポケモンカードゲーム【MEGA】拡張パック ハドウシーカー BOX購入権",
-      "result_announcement_date": "2026-11-24",
-      "purchase_start_date": "2026-11-27",
-      "purchase_end_date": "2026-11-29",
       "first_detected_at": "2026-11-18T10:36:02.284882+00:00"
     }
   ],
-  "updated_at": "2026-11-18T10:36:23.325582+00:00"
+  "updated_at": "2026-11-18T10:38:34.741962+00:00"
 }
