@@ -79,6 +79,7 @@
       id, kind, stage, priority, time,
       event_url: record.event_url,
       title: String(record.title || '抽選名未確認').slice(0, 160),
+      store_label: String(record.store_label || '').trim() || '店舗未確認',
       headline, details
     };
   }
@@ -240,6 +241,9 @@
       const title = document.createElement('p');
       title.className = 'trn-item-title';
       title.textContent = item.title;
+      const store = document.createElement('p');
+      store.className = 'trn-item-store';
+      store.textContent = '📍 店舗：' + item.store_label;
       const detail = document.createElement('p');
       detail.className = 'trn-item-detail';
       detail.textContent = item.details;
@@ -258,7 +262,7 @@
         acknowledge.addEventListener('click', () => mark(item.id));
         actions.append(acknowledge);
       }
-      row.append(heading, title, detail, actions);
+      row.append(heading, title, store, detail, actions);
       panelList.append(row);
     });
     if (notices.length > 100) {
@@ -367,6 +371,7 @@
       '.trn-item.is-urgent>strong{color:#dc2626}html[data-theme="dark"] .trn-item.is-urgent>strong{color:#fda4af}',
       '.trn-item.is-read{opacity:.7}.trn-item strong{font-size:13px;line-height:1.5;display:block;overflow-wrap:anywhere}',
       '.trn-item-title{font-weight:700;font-size:13px!important;line-height:1.5;margin:6px 0!important;color:inherit!important;overflow-wrap:anywhere}',
+      '.trn-item-store{font-size:12px!important;line-height:1.5;margin:4px 0!important;color:inherit!important;overflow-wrap:anywhere}',
       '.trn-item-detail{font-size:12px!important;line-height:1.6;margin:4px 0 10px!important;color:var(--app-muted,#64748b)!important;overflow-wrap:anywhere}',
       '.trn-actions{display:flex;gap:8px;flex-wrap:wrap}.trn-actions button{padding:8px 11px;border-radius:9px;background:#2563eb;color:#fff!important;font-size:12px;border:1px solid #2563eb;min-height:36px;cursor:pointer}',
       '.trn-actions button.trn-secondary{background:var(--app-surface2,#f1f5f9);color:var(--app-text,#172033)!important;border-color:var(--app-border,#cbd5e1)}',

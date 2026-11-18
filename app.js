@@ -7154,6 +7154,7 @@
       .lp-pickup-alert-row strong{display:block;font-size:13px;line-height:1.5;
         overflow-wrap:anywhere;color:#422006}
       .lp-pickup-alert-row p{margin:5px 0 0;font-size:12px;font-weight:800;color:#854d0e}
+      .lp-pickup-alert-row .lp-track-store-label{font-weight:600;line-height:1.5;overflow-wrap:anywhere}
       .lp-pickup-alert-row.urgent{border-color:#fca5a5;background:#fff1f2}
       .lp-pickup-alert-row.urgent p{color:#9f1239}
       .lp-pickup-alert-row button{flex-shrink:0;min-height:39px;
@@ -7787,6 +7788,7 @@
       '<span class="lp-pickup-alert-count">'+due.length+'件</span></div>'+
       due.slice(0,20).map(r=>'<div class="lp-pickup-alert-row urgent"><div>'+
         '<strong>'+escape(lotteryTrackItemName(r.event_url))+'</strong>'+
+        '<p class="lp-track-store-label">📍 店舗：'+escape(lotteryTrackStoreLabel(r.event_url))+'</p>'+
         '<p>結果発表予定：'+escape(lotteryScheduleText(r.result_announcement_date,r.result_announcement_time))+
         ' ／ 当落を確認してください</p></div>'+
         '<button type="button" data-lp-track="edit" data-url="'+escape(r.event_url)+'">結果を記録</button></div>').join('');
@@ -7816,6 +7818,7 @@
         return '<div class="lp-pickup-alert-row '+
           (level==='soon'?'':'urgent')+'"><div>'+
           '<strong>'+escape(lotteryTrackItemName(record.event_url))+'</strong>'+
+          '<p class="lp-track-store-label">📍 店舗：'+escape(lotteryTrackStoreLabel(record.event_url))+'</p>'+
           '<p>'+escape(label+'：'+lotteryPickupDateText(record.pickup_end)+(record.pickup_end_time?' '+record.pickup_end_time:''))+'</p>'+
           '</div><button type="button" data-lp-track="edit" data-url="'+
           escape(record.event_url)+'">管理</button></div>';
@@ -7852,6 +7855,7 @@
       records:records.map(r=>({
         event_url:r.event_url,
         title:lotteryTrackItemName(r.event_url),
+        store_label:lotteryTrackStoreLabel(r.event_url),
         status:r.status,
         application_count:r.application_count,
         won_count:r.won_count,
