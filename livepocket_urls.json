@@ -29391,8 +29391,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/ct073": {
-          "checked_at": "2026-11-18T11:06:20.915412+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-18T17:11:22.106501+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -32276,8 +32276,8 @@
         },
         "https://livepocket.jp/e/ct073": {
           "detected_at": "2026-11-18T11:05:57.697175+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-18T11:06:20.915412+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-18T17:11:22.106501+00:00",
           "http_status": null
         }
       },
@@ -34463,6 +34463,11 @@
         "https://livepocket.jp/e/yd0az": {
           "attempts": 1,
           "last_attempt_at": "2026-11-18T12:41:43.529789+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/ct073": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-18T17:11:22.106501+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -41976,7 +41981,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-18T11:06:20.915412+00:00",
+          "checked_at": "2026-11-18T17:11:22.106501+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック 「ストームエメラルダ」 再販分",
           "genre": "pokemon",
           "product_origin": "",
@@ -49056,7 +49061,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ct073": {
-          "checked_at": "2026-11-18T11:06:20.915412+00:00",
+          "checked_at": "2026-11-18T17:11:22.106501+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
