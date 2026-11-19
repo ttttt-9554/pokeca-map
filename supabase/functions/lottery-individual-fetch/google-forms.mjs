@@ -1,6 +1,6 @@
 import {readPublicHtml} from './public-html.mjs';
 // Public Google Forms metadata only. Never submit a form or read responses.
-export const GOOGLE_FORMS_PARSER_VERSION = 3;
+export const GOOGLE_FORMS_PARSER_VERSION = 4;
 export function googleFormUrl(value) {
   try {
     const url = new URL(value);
@@ -83,7 +83,7 @@ function point(value, anchor) {
 function period(value, anchor) {
   const start = point(value, anchor);
   if (!start) return [];
-  const separator = start.rest.match(/^(?:[~〜～–—－-]|から)\s*/);
+  const separator = start.rest.match(/^(?:[~〜～–—－-]|(?:(?:フォーム)?公開(?:時)?)?(?:から|より))\s*/);
   if (!separator) return [start];
   let tail = start.rest.slice(separator[0].length);
   if (/^\d{1,2}日/.test(tail)) tail = start.date.slice(5, 7) + '月' + tail;
@@ -114,8 +114,19 @@ const verifiedAreas = new Map([
   ['バトロコ立川駅前店', '東京都'], ['バトロコ立川駅前', '東京都'],
   ['バトロコ小田原駅前店', '神奈川県'], ['バトロコ小田原駅前', '神奈川県'],
   ['バトロコ横浜伊勢佐木町店', '神奈川県'], ['バトロコ横浜伊勢佐木町', '神奈川県'],
-  ['バトロコ高田馬場店', '東京都'], ['バトロコ高田馬場', '東京都']
+  ['バトロコ高田馬場店', '東京都'], ['バトロコ高田馬場', '東京都'],
+  // https://www.daimaru.co.jp/shinsaibashi/shop/mint.html
+  ['MINT大丸心斎橋店', '大阪府']
 ]);
+
+function productFromChoice(questions, lines) {
+  const choices = questions.filter(q => /^(?:ご?希望(?:の)?商品|抽選対象商品)(?:を選択してください)?$/.test(clean(q[1])));
+  if (choices.length !== 1 || ![2,3,4].includes(choices[0][3])) return '';
+  const options = choices[0][4]?.[0]?.[1];
+  if (!Array.isArray(options) || options.length !== 1) return '';
+  const name = clean(options[0]?.[0]).match(/^「([^「」\r\n]{2,180})」(?:[\s.…・×\d][^「」\r\n]*)?$/)?.[1];
+  return name && lines.some(line => line.includes('「' + name + '」')) ? name : '';
+}
 
 export function googleFormFields(html, source, {referenceDate = new Date().toISOString()} = {}) {
   const url = googleFormUrl(source);
@@ -129,14 +140,22 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   const title = clean(data[1][8]).replace(/\s+/g, ' ');
   if (title.length < 5 || title.length > 200 || !/抽選/.test(title) || /[<>]|ログイン|アクセス権|受付終了/.test(title)) return {};
   const fields = {event_title: title};
-  const sections = (Array.isArray(data[1][1]) ? data[1][1] : [])
-    .filter(question => Array.isArray(question) && [6,8].includes(question[3]))
+  const questions = Array.isArray(data[1][1]) ? data[1][1].filter(Array.isArray) : [];
+  const sections = questions.filter(question => [6,8].includes(question[3]))
     .flatMap(question => [clean(question[1]), clean(question[2])]);
   const lines = [clean(data[1][0]), ...sections].join('\n').split(/\r?\n/)
     .map(line => clean(line).replace(/^<([^<>]{1,40})>\s*/, '【$1】')).filter(Boolean);
-  const labelValues = names => lines.flatMap((line, index) => {
+  const labelValues = (names, rangeAnchor) => lines.flatMap((line, index) => {
     const match = line.match(new RegExp('^(?:[■◆◇▼●【\\[]\\s*)?(?:' + names + ')[\\s:：】\\]]*(.*)$'));
-    return match ? [match[1] || lines[index + 1] || ''] : [];
+    if (!match) return [];
+    const valueIndex = match[1] ? index : index + 1;
+    const value = match[1] || lines[valueIndex] || '';
+    if (rangeAnchor && /(?:から|より|[~〜～–—－-])$/.test(value)) {
+      const joined = value + ' ' + (lines[valueIndex + 1] || '');
+      const [, end] = period(joined, rangeAnchor);
+      if (end && /^(?:$|まで|締[め]?切|〆切)/.test(end.rest)) return [joined];
+    }
+    return [value];
   });
   const labeled = names => single(labelValues(names));
   const reference = new Date(referenceDate);
@@ -145,7 +164,7 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
     const applicationLabels = '(?:抽選(?:販売)?)?(?:応募|申込|申し込み)(?:受付)?期間|受付期間';
     const startLabels = '(?:応募|申込|受付)開始(?:日時|日)?';
     const deadlineLabels = '(?:応募|申込|受付)(?:締切|締め切り|締め切|〆切|終了)(?:日時|日)?';
-    const application = labeled(applicationLabels);
+    const application = single(labelValues(applicationLabels, anchor));
     const range = period(application, anchor);
     if (range.length === 2) {
       fields.application_start_at = stamp(range[0]);
@@ -169,11 +188,11 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
     fields.google_forms_start_not_stated = !!(fields.application_end_at && !fields.application_start_at &&
       deadlineOnly && !labelValues(startLabels).length && !startHint);
     const scheduleAnchor = (fields.application_end_at || anchor).slice(0,10);
-    const resultLabels = '(?:抽選結果|当選(?:者)?|当落|結果|抽選)(?:の)?(?:発表|通知)(?:予定)?(?:日時|日|期間)?(?:は)?';
+    const resultLabels = '(?:抽選結果|当選(?:者)?|当落|結果|抽選)(?:の)?(?:発表|通知|ご?連絡)(?:予定)?(?:日時|日|期間)?(?:は)?';
     const resultText = single(labelValues(resultLabels).filter(value =>
-      // A second sentence such as "当選発表はX上で行います" names a channel,
-      // not another announcement date. Conflicting date values still fail.
-      !/^(?:当店の)?(?:公式)?(?:X|Twitter|SNS|店頭)(?:上|で|にて|に)/i.test(value)));
+      // Keep conflicting dates and explicit uncertainty, but ignore delivery
+      // channels and instructions for presenting the winning notification.
+      /^(?:\d|未定|未確定|未発表|不明|調整中|確認中|後日|延期|中止)/.test(value)));
     const result = period(resultText, scheduleAnchor).at(-1);
     if (result) {
       fields.result_announcement_date = result.date;
@@ -213,10 +232,13 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
       }
     }
   }
-  const product = labeled('抽選対象商品|抽選商品|対象商品|商品(?=】|:|$)').replace(/\s+[0-9][0-9,]*円(?:\(税込(?:み)?\))?\s*$/, '').replace(/\s*\d+\s*(?:BOX|ボックス|箱)\s*$/i, '').trim();
+  const productLabels = labelValues('抽選対象商品|抽選商品|対象商品|商品(?=】|:|$)');
+  const product = productLabels.length
+    ? single(productLabels).replace(/\s+[0-9][0-9,]*円(?:\(税込(?:み)?\))?\s*$/, '').replace(/\s*\d+\s*(?:BOX|ボックス|箱)\s*$/i, '').trim()
+    : productFromChoice(questions, lines);
   if (product && product.length <= 200) fields.product_name = product;
-  const lists = (Array.isArray(data[1][1]) ? data[1][1] : []).flatMap(question => {
-    if (!Array.isArray(question) || !/(?:店舗|応募店|受取店)/.test(clean(question[1])) ||
+  const lists = questions.flatMap(question => {
+    if (!/(?:店舗|応募店|受取店)/.test(clean(question[1])) ||
         !/選択|選ん/.test(clean(question[1])) || ![2,3,4].includes(question[3])) return [];
     const options = question[4]?.[0]?.[1];
     if (!Array.isArray(options) || !options.length || options.length > 100) return [];
@@ -225,7 +247,10 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   });
   const explicitStore = storeName(labeled('対象店舗|店舗名|受取店舗|応募店舗'));
   const titleStore = storeName(title.match(/^[【〖\[]([^】〗\]]+)[】〗\]]/)?.[1]);
-  const names = lists.length === 1 ? lists[0] : [explicitStore || titleStore].filter(Boolean);
+  const prefix = storeName(title.match(/^([^【〖\[<>]{2,80}?店)\s+/)?.[1]);
+  const confirmedPrefix = !lists.length && prefix && lines.some(line => line === prefix || line.startsWith(prefix + 'では') ||
+    line.includes('、' + prefix + 'では')) ? prefix : '';
+  const names = lists.length === 1 ? lists[0] : [explicitStore || titleStore || confirmedPrefix].filter(Boolean);
   // The organizer identifies its online shop in the public notice's shipping terms.
   const deliveryShop = !names.length && lines.some(line => /(?:商品の発送|別途送料)/.test(line)) &&
     lines.some(line => /https:\/\/planetpocket\.shop-pro\.jp\/\?mode=sk(?:$|[\s。])/.test(line));
@@ -239,7 +264,9 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   if (/ワンピース|ONE\s*PIECE/i.test(subject)) fields.review_category = 'onepiece';
   else if (/ポケモン|ポケカ|POK[ÉE]MON/i.test(subject)) fields.review_category = 'pokemon';
   else if (/遊戯王/.test(subject)) fields.review_category = 'yugioh';
-  const pack = /拡張パック|ブースターパック/.test(subject), deck = /デッキ/.test(subject);
+  const pack = /拡張パック|ブースターパック/.test(subject) ||
+    /^(?:ONE\s*PIECE\s*(?:CARD\s*GAME|カードゲーム)|ワンピースカードゲーム)\s*.+(?:【OP-\d{2,3}】|\[OP-\d{2,3}\])$/i.test(product);
+  const deck = /デッキ/.test(subject);
   if (pack || deck) fields.product_type = pack && deck ? 'pack/deck' : pack ? 'pack' : 'deck';
   return fields;
 }

@@ -189,7 +189,6 @@ assert.equal(helpers.lotteryState(dates,Date.parse('2026-11-19T23:59:59+09:00'))
 assert.equal(helpers.lotteryState(dates,Date.parse('2026-11-20T00:00:00+09:00')),'closed');
 assert.equal(helpers.lpApplicationExpired(url,'',Date.parse('2026-11-18T22:00:00+09:00')),false);
 assert.equal(helpers.lpApplicationExpired(url,'',Date.parse('2026-11-19T00:00:00+09:00')),true);
-console.log('Google Forms public metadata, safe redirects, date-only display and collection regressions passed');
 
 const deliveryForm = `＜抽選販売応募受付期間＞
 2026年11月20日(金) 10:00 締切
@@ -211,3 +210,45 @@ assert.equal(delivery.purchase_start_date,undefined);
 assert.equal(delivery.product_name,'ワンピースカード ブースターパック 神の支配【OP-18】');
 assert.deepEqual(delivery.stores,[{name:'プラネットポケット',prefecture:'全国'}]);
 assert.equal(parse(deliveryForm.replace('planetpocket.shop-pro.jp','other.shop-pro.jp'),deliveryTitle).store_name,undefined);
+
+const mintStore = 'MINT大丸心斎橋店';
+const mintProduct = 'ONE PIECE CARD GAME 神の支配【OP-18】';
+const mintTitle = mintStore + ' ' + mintProduct + '抽選応募フォーム';
+const mintNotice = [
+  '入荷数が少量の為、' + mintStore + 'では抽選による販売を行います。',
+  '■販売価格', '「' + mintProduct + '」…1BOX 5,760円（税込）',
+  '■受付期間', '2026年11月19日（木）公開から', '2026年11月20日（金）10:00まで',
+  '■当選者のご連絡', '2026年11月20日（金）を予定しております。',
+  '当選通知はスクリーンショットなどの画像データは認められません。',
+  '■購入期間：2026年11月21日（土）～2026年11月23日（月）',
+  '※入荷遅れにより11月21日(土)10:00からの販売が難しい場合はお知らせします。',
+  mintStore, '営業時間：10：00～20：00'
+].join('\n');
+const mintOption = '「' + mintProduct + '」…1BOX 5,760円（税込）※テープカットしてのお渡しです。';
+const choice = (...options) => [1, '希望商品', null, 2, [[2, options.map(option => [option])]]];
+const mintPage = page(mintNotice, mintTitle, [choice(mintOption)]);
+const mint = extract(mintPage, url, {referenceDate: now.toISOString()});
+assert.deepEqual(mint, {
+  event_title: mintTitle, product_name: mintProduct, review_category: 'onepiece', product_type: 'pack',
+  store_name: mintStore, prefecture: '大阪府', stores: [{name: mintStore, prefecture: '大阪府'}],
+  application_start_at: '2026-11-19', application_end_at: '2026-11-20T10:00:00+09:00',
+  google_forms_start_not_stated: false, result_announcement_date: '2026-11-20',
+  purchase_start_date: '2026-11-21', purchase_end_date: '2026-11-23'
+});
+const previousMint = {url: url + '?usp=send_form', google_forms_checked_at: now.toISOString(),
+  google_forms_parser_version: 3, application_start_at: null, application_end_at: null};
+assert.deepEqual(await enrichGoogleForms({items:[previousMint]}, async()=>({html:mintPage,url}), now), {checked:1,updated:1});
+assert.equal(previousMint.google_forms_source_url, url);
+assert.equal(previousMint.application_end_at, mint.application_end_at);
+assert.equal(previousMint.pokemon_map_type, 'pack');
+
+assert.equal(parse('受付期間：11/19 公開から\n■購入期間：11/21～11/23', mintTitle).application_end_at, undefined);
+assert.equal(parse('受付期間：11/19 公開から\n11/21から販売予定', mintTitle).application_end_at, undefined);
+assert.equal(parse('受付期間：11/19公開から\n11/20 10:00まで\n受付期間：11/19公開から\n11/21 10:00まで', mintTitle).application_end_at, undefined);
+assert.equal(parse('受付期間：11/19 18:00～\n11/20 10:00', mintTitle).application_start_at, '2026-11-19T18:00:00+09:00');
+assert.equal(parse(mintNotice + '\n当選通知：未定', mintTitle).result_announcement_date, undefined);
+assert.equal(parse('■購入期間：11/21～11/23\n大丸心斎橋店', mintTitle).store_name, undefined);
+assert.equal(parse(mintNotice.replaceAll(mintStore, 'MINT別支店'), mintTitle.replace(mintStore, 'MINT別支店')).prefecture, undefined);
+assert.equal(googleFormFields(page(mintNotice, mintTitle, [choice(mintOption, '別の商品')]), url).product_name, undefined);
+assert.equal(googleFormFields(page(mintNotice, mintTitle, [choice('「別の商品」…1BOX')]), url).product_name, undefined);
+console.log('Google Forms public metadata, safe redirects, date-only display and collection regressions passed');
