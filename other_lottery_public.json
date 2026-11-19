@@ -3408,12 +3408,29 @@
       "store_notice_verified_at": "2026-11-19T07:45:56.598Z",
       "store_notice_source_url": "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/news/202611/000715.html",
       "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://7net.omni7.jp/detail/2190054905.html",
+      "source_site": "7net.omni7.jp",
+      "event_title": "【抽選応募】ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
+      "prefecture": "全国",
+      "discord_posted_at": "2026-11-19T08:30:04.374000+00:00",
+      "first_detected_at": "2026-11-19T08:35:57.634644+00:00",
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-19T17:00:00+09:00",
+      "application_end_at": "2026-11-23T23:59:00+09:00",
+      "external_url_unverified": false,
+      "sevennet_checked_at": "2026-11-19T08:35:57.720214+00:00",
+      "official_event_title": "【抽選応募】ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
+      "event_title_provisional": false,
+      "store_name": "セブンイレブン",
+      "sevennet_verified_at": "2026-11-19T08:35:57.720214+00:00"
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1572861518863933502"
+    "1551580466266644552": "1572891700752289882"
   },
-  "collected_at": "2026-11-19T06:35:56.491388+00:00",
+  "collected_at": "2026-11-19T08:35:57.634688+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
