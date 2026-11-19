@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-19T11:35:57.202075+00:00",
-  "unique_livepocket_urls": 838,
+  "collected_at": "2026-11-19T12:25:55.989623+00:00",
+  "unique_livepocket_urls": 840,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14809,7 +14809,51 @@
       "purchase_start_date": "2026-11-29",
       "purchase_end_date": "2026-12-06",
       "first_detected_at": "2026-11-19T04:31:10.284320+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/k5koz",
+      "discord_posted_at": "2026-11-19T12:00:11.562000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/k5koz",
+      "event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 池袋店 カードゲーム抽選販売受付",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-20T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "麦わらストア 池袋店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "麦わらストア 池袋店",
+      "prefecture": "東京都",
+      "official_event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 池袋店 カードゲーム抽選販売受付",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-29",
+      "purchase_end_date": "2026-12-06",
+      "first_detected_at": "2026-11-19T12:26:03.704126+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/td3r4",
+      "discord_posted_at": "2026-11-19T12:00:11.562000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/td3r4",
+      "event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】MUGIWARA STORE HARAJUKU カードゲーム抽選販売受付",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-20T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "MUGIWARA STORE HARAJUKU",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "MUGIWARA STORE HARAJUKU",
+      "prefecture": "東京都",
+      "official_event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】MUGIWARA STORE HARAJUKU カードゲーム抽選販売受付",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-29",
+      "purchase_end_date": "2026-12-06",
+      "first_detected_at": "2026-11-19T12:26:03.704126+00:00"
     }
   ],
-  "updated_at": "2026-11-19T11:56:04.955905+00:00"
+  "updated_at": "2026-11-19T12:26:49.431308+00:00"
 }

@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-19T11:35:57.202075+00:00",
+  "collected_at": "2026-11-19T12:25:55.989623+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 838,
+  "unique_livepocket_urls": 840,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -25411,33 +25411,105 @@
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-29",
       "purchase_end_date": "2026-12-06"
+    },
+    {
+      "url": "https://livepocket.jp/e/k5koz",
+      "discord_message_id": "1572944579131609088",
+      "discord_posted_at": "2026-11-19T12:00:11.562000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 21時まとめ】\n\n🔁 再通知\n📍東京都\n麦わらストア 池袋店\n受付終了: 11/20 00:00（残り2時間59分）\nhttps://livepocket.jp/e/k5koz\n\n🔁 再通知\n📍東京都\nMUGIWARA STORE HARAJUKU\n受付終了: 11/20 00:00（残り2時間59分）\nhttps://livepocket.jp/e/td3r4\n\n🔁 再通知\n📍茨城県\nブックエース坂東店\n受付終了: 11/22 21:00（残り2日23時間）\nhttps://livepocket.jp/e/ikz9d\n\n🔁 再通知\n📍茨城県\nブックエース坂東店\n受付終了: 11/22 21:00（残り2日23時間）\nhttps://livepocket.jp/e/p_kks",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/k5koz",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 池袋店 カードゲーム抽選販売受付",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-20T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "麦わらストア 池袋店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "麦わらストア 池袋店",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-29",
+      "purchase_end_date": "2026-12-06"
+    },
+    {
+      "url": "https://livepocket.jp/e/td3r4",
+      "discord_message_id": "1572944579131609088",
+      "discord_posted_at": "2026-11-19T12:00:11.562000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 21時まとめ】\n\n🔁 再通知\n📍東京都\n麦わらストア 池袋店\n受付終了: 11/20 00:00（残り2時間59分）\nhttps://livepocket.jp/e/k5koz\n\n🔁 再通知\n📍東京都\nMUGIWARA STORE HARAJUKU\n受付終了: 11/20 00:00（残り2時間59分）\nhttps://livepocket.jp/e/td3r4\n\n🔁 再通知\n📍茨城県\nブックエース坂東店\n受付終了: 11/22 21:00（残り2日23時間）\nhttps://livepocket.jp/e/ikz9d\n\n🔁 再通知\n📍茨城県\nブックエース坂東店\n受付終了: 11/22 21:00（残り2日23時間）\nhttps://livepocket.jp/e/p_kks",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/td3r4",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】MUGIWARA STORE HARAJUKU カードゲーム抽選販売受付",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-20T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "MUGIWARA STORE HARAJUKU",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "MUGIWARA STORE HARAJUKU",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-29",
+      "purchase_end_date": "2026-12-06"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 659,
-    "no_structured_details": 179
+    "no_structured_details": 181
   },
   "field_counts": {
-    "store_name": 433,
-    "prefecture": 382,
-    "event_title": 535,
+    "store_name": 435,
+    "prefecture": 384,
+    "event_title": 537,
     "event_date": 1,
     "product_name": 128,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 801,
-    "application_start_at": 798,
-    "stores_events": 433
+    "application_end_at": 803,
+    "application_start_at": 800,
+    "stores_events": 435
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572937000930123927"
+      "1551580466266644552": "1572944584353382461"
     },
     "last_run": {
-      "checked_at": "2026-11-19T11:35:57.202075+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-19T12:25:55.989623+00:00",
+      "new_urls": 2,
       "original_urls": 838,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -25784,7 +25856,8 @@
         "1572560883522215980": "2026-11-18T10:36:01.306012+00:00",
         "1572567069340205166": "2026-11-18T11:05:56.529975+00:00",
         "1572808677369450519": "2026-11-19T03:00:58.985083+00:00",
-        "1572831335586730065": "2026-11-19T04:31:09.279842+00:00"
+        "1572831335586730065": "2026-11-19T04:31:09.279842+00:00",
+        "1572944579131609088": "2026-11-19T12:26:02.374464+00:00"
       },
       "checked_search_urls": {}
     },
@@ -29519,6 +29592,16 @@
           "checked_at": "2026-11-19T10:38:40.873620+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/td3r4": {
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/k5koz": {
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -32421,6 +32504,18 @@
           "detected_at": "2026-11-19T04:31:10.284320+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-19T10:38:40.873620+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/k5koz": {
+          "detected_at": "2026-11-19T12:26:03.704126+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/td3r4": {
+          "detected_at": "2026-11-19T12:26:03.704126+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
           "http_status": null
         }
       },
@@ -42178,6 +42273,28 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/td3r4": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
+          "title_observed": "【再入荷】【ブースターパック 「世界最強の戦士」】MUGIWARA STORE HARAJUKU カードゲーム抽選販売受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/k5koz": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
+          "title_observed": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 池袋店 カードゲーム抽選販売受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -49292,6 +49409,32 @@
         },
         "https://livepocket.jp/e/zegxt": {
           "checked_at": "2026-11-19T10:38:40.873620+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/td3r4": {
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/k5koz": {
+          "checked_at": "2026-11-19T12:26:49.431308+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
