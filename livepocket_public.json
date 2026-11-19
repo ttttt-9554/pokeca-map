@@ -14744,54 +14744,51 @@
     },
     {
       "url": "https://livepocket.jp/e/ikz9d",
-      "discord_posted_at": "2026-11-19T03:00:10.057000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/ikz9d",
+      "store_name": "ブックエース坂東店",
+      "prefecture": "茨城県",
       "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売",
-      "application_end_at": "2026-11-22T21:00:00+09:00",
       "application_start_at": "2026-11-19T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "discord_posted_at": "2026-11-19T03:00:10.057000+00:00",
       "stores": [
         {
           "name": "ブックエース坂東店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "ブックエース坂東店",
-      "prefecture": "茨城県",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/ikz9d",
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-19T03:01:00.049068+00:00"
     },
     {
       "url": "https://livepocket.jp/e/p_kks",
-      "discord_posted_at": "2026-11-19T03:00:10.057000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/p_kks",
+      "store_name": "ブックエース坂東店",
+      "prefecture": "茨城県",
       "event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売",
-      "application_end_at": "2026-11-22T21:00:00+09:00",
       "application_start_at": "2026-11-19T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "discord_posted_at": "2026-11-19T03:00:10.057000+00:00",
       "stores": [
         {
           "name": "ブックエース坂東店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "ブックエース坂東店",
-      "prefecture": "茨城県",
-      "official_event_title": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/p_kks",
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-19T03:01:00.049068+00:00"
     }
   ],
-  "updated_at": "2026-11-19T03:01:21.589950+00:00"
+  "updated_at": "2026-11-19T03:11:09.362766+00:00"
 }
