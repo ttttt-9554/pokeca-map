@@ -1,6 +1,7 @@
 import {supportedUrl,extract,lotteryPageRequest,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
 import {googleFormUrl,fetchGoogleForm} from './google-forms.mjs';
 import {DMM_HOST,BANDAI_HOST,collectedOnlineShop,onlineShopUrl} from './online-shop-lottery.mjs';
+import {storeNoticeUrl,fetchStoreNotice} from './store-notices.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
 function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
@@ -57,6 +58,10 @@ Deno.serve(async(req:Request)=>{
  if(typeof input?.url!=='string'||input.url.length>1000||!supportedUrl(input.url))
   return json({error:'このサイトは個別取得に未対応です。元ページを開いて確認してください。'},422);
  try{
+  if(storeNoticeUrl(input.url)){
+   const fields=await fetchStoreNotice(input.url);
+   return json({fields,message:fields.event_title?'店舗の公式告知から取得しました。候補を確認してください。':'このページから抽選の受付案内を読み取れませんでした。'});
+  }
   if(googleFormUrl(input.url)){
    const page=await fetchGoogleForm(input.url);
    const fields=extract(page.html,page.url);

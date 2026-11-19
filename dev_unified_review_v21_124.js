@@ -67,7 +67,7 @@
       out.push({
         url:base.url,item,missing,
         touched:manuallyTouched,official:card?.review_complete===true,
-        sourceChecked:!!(item.google_forms_verified_at||item.online_shop_verified_at),
+        sourceChecked:!!(item.google_forms_verified_at||item.online_shop_verified_at||item.store_notice_verified_at),
         provider:api.isLivePocket(base.url)?'LivePocket':'外部抽選'
       });
     }
@@ -127,7 +127,7 @@
         (row.missing.length?'<div class="lp-dev-unified-labels">'+
           row.missing.map(k=>'<span>⚠ '+FIELD_LABELS[k]+'未確認</span>').join('')+
           '</div>':'<p class="lp-dev-unified-done">✅ '+(row.official?
-            '公式情報の確認完了':row.touched?'手動修正済み・未確認事項なし':'元フォームから取得済み')+'</p>')+
+            '公式情報の確認完了':row.touched?'手動修正済み・未確認事項なし':row.item.google_forms_verified_at?'元フォームから取得済み':'元ページから取得済み')+'</p>')+
         (row.item.google_forms_verified_at&&row.item.google_forms_start_not_stated===true&&
           !row.item.application_start_at?'<p class="hint">応募開始：元ページに記載なし（空欄）</p>':'')+
         (row.missing.length&&row.touched?'<p class="lp-dev-unified-done">✅ 現在入力済み：'+

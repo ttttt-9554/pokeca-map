@@ -190,3 +190,24 @@ assert.equal(helpers.lotteryState(dates,Date.parse('2026-11-20T00:00:00+09:00'))
 assert.equal(helpers.lpApplicationExpired(url,'',Date.parse('2026-11-18T22:00:00+09:00')),false);
 assert.equal(helpers.lpApplicationExpired(url,'',Date.parse('2026-11-19T00:00:00+09:00')),true);
 console.log('Google Forms public metadata, safe redirects, date-only display and collection regressions passed');
+
+const deliveryForm = `＜抽選販売応募受付期間＞
+2026年11月20日(金) 10:00 締切
+＜抽選結果発表＞
+2026年11月22日(日)までにXで発表
+＜商品＞
+ワンピースカード ブースターパック 神の支配【OP-18】 5,760円（税込）
+＜応募資格＞
+2026年1月1日0:00～2026年11月18日23:59までに購入履歴がある方
+商品の発送は発売日以降です。別途送料が発生します。
+https://planetpocket.shop-pro.jp/?mode=sk`;
+const deliveryTitle='ワンピースカード ブースターパック 神の支配【OP-18】 抽選販売';
+const delivery=parse(deliveryForm, deliveryTitle);
+assert.equal(delivery.application_start_at,undefined);
+assert.equal(delivery.google_forms_start_not_stated,true);
+assert.equal(delivery.application_end_at,'2026-11-20T10:00:00+09:00');
+assert.equal(delivery.result_announcement_date,'2026-11-22');
+assert.equal(delivery.purchase_start_date,undefined);
+assert.equal(delivery.product_name,'ワンピースカード ブースターパック 神の支配【OP-18】');
+assert.deepEqual(delivery.stores,[{name:'プラネットポケット',prefecture:'全国'}]);
+assert.equal(parse(deliveryForm.replace('planetpocket.shop-pro.jp','other.shop-pro.jp'),deliveryTitle).store_name,undefined);

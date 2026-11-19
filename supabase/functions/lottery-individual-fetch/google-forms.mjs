@@ -1,5 +1,6 @@
+import {readPublicHtml} from './public-html.mjs';
 // Public Google Forms metadata only. Never submit a form or read responses.
-export const GOOGLE_FORMS_PARSER_VERSION = 2;
+export const GOOGLE_FORMS_PARSER_VERSION = 3;
 export function googleFormUrl(value) {
   try {
     const url = new URL(value);
@@ -38,23 +39,7 @@ export async function fetchGoogleForm(value, request = fetch) {
       url = next;
       continue;
     }
-    if (!response.ok || !/text\/html|application\/xhtml\+xml/i.test(response.headers.get('content-type') || '') ||
-        Number(response.headers.get('content-length') || 0) > 2000000 || !response.body) {
-      await response.body?.cancel();
-      throw Error('Google Form page unavailable');
-    }
-    const reader = response.body.getReader(), decoder = new TextDecoder();
-    let html = '', size = 0;
-    try {
-      while (true) {
-        const {done, value} = await reader.read();
-        if (done) break;
-        size += value.byteLength;
-        if (size > 2000000) { await reader.cancel(); throw Error('Google Form page too large'); }
-        html += decoder.decode(value, {stream: true});
-      }
-    } finally { reader.releaseLock(); }
-    return {url, html: html + decoder.decode()};
+    return {url, html: await readPublicHtml(response)};
   }
   throw Error('Too many Google Form redirects');
 }
@@ -110,6 +95,8 @@ function period(value, anchor) {
 
 function stamp(value) { return value.time ? `${value.date}T${value.time}:00+09:00` : value.date; }
 
+export {point as datePoint, period as dateRange, stamp as dateStamp};
+
 function storeName(value) {
   const name = clean(value).replace(/^(?:TC|トーナメントセンター)\s*(?=バトロコ)/i, '')
     .replace(/^(バトロコ|TSUTAYA|WonderGOO|新星堂)\s+/, '$1');
@@ -145,7 +132,8 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   const sections = (Array.isArray(data[1][1]) ? data[1][1] : [])
     .filter(question => Array.isArray(question) && [6,8].includes(question[3]))
     .flatMap(question => [clean(question[1]), clean(question[2])]);
-  const lines = [clean(data[1][0]), ...sections].join('\n').split(/\r?\n/).map(clean).filter(Boolean);
+  const lines = [clean(data[1][0]), ...sections].join('\n').split(/\r?\n/)
+    .map(line => clean(line).replace(/^<([^<>]{1,40})>\s*/, '【$1】')).filter(Boolean);
   const labelValues = names => lines.flatMap((line, index) => {
     const match = line.match(new RegExp('^(?:[■◆◇▼●【\\[]\\s*)?(?:' + names + ')[\\s:：】\\]]*(.*)$'));
     return match ? [match[1] || lines[index + 1] || ''] : [];
@@ -154,7 +142,7 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   const reference = new Date(referenceDate);
   const anchor = Number.isFinite(+reference) ? new Date(+reference + 9*3600000).toISOString().slice(0,10) : '';
   if (anchor) {
-    const applicationLabels = '(?:抽選)?(?:応募|申込|申し込み)(?:受付)?期間|受付期間';
+    const applicationLabels = '(?:抽選(?:販売)?)?(?:応募|申込|申し込み)(?:受付)?期間|受付期間';
     const startLabels = '(?:応募|申込|受付)開始(?:日時|日)?';
     const deadlineLabels = '(?:応募|申込|受付)(?:締切|締め切り|締め切|〆切|終了)(?:日時|日)?';
     const application = labeled(applicationLabels);
@@ -225,7 +213,7 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
       }
     }
   }
-  const product = labeled('抽選対象商品|抽選商品|対象商品').replace(/\s*\d+\s*(?:BOX|ボックス|箱)\s*$/i, '').trim();
+  const product = labeled('抽選対象商品|抽選商品|対象商品|商品(?=】|:|$)').replace(/\s+[0-9][0-9,]*円(?:\(税込(?:み)?\))?\s*$/, '').replace(/\s*\d+\s*(?:BOX|ボックス|箱)\s*$/i, '').trim();
   if (product && product.length <= 200) fields.product_name = product;
   const lists = (Array.isArray(data[1][1]) ? data[1][1] : []).flatMap(question => {
     if (!Array.isArray(question) || !/(?:店舗|応募店|受取店)/.test(clean(question[1])) ||
@@ -238,8 +226,12 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   const explicitStore = storeName(labeled('対象店舗|店舗名|受取店舗|応募店舗'));
   const titleStore = storeName(title.match(/^[【〖\[]([^】〗\]]+)[】〗\]]/)?.[1]);
   const names = lists.length === 1 ? lists[0] : [explicitStore || titleStore].filter(Boolean);
+  // The organizer identifies its online shop in the public notice's shipping terms.
+  const deliveryShop = !names.length && lines.some(line => /(?:商品の発送|別途送料)/.test(line)) &&
+    lines.some(line => /https:\/\/planetpocket\.shop-pro\.jp\/\?mode=sk(?:$|[\s。])/.test(line));
+  if (deliveryShop) names.push('プラネットポケット');
   if (names.length) {
-    fields.stores = [...new Set(names)].map(name => ({name, prefecture: verifiedAreas.get(name) || ''}));
+    fields.stores = [...new Set(names)].map(name => ({name, prefecture: deliveryShop ? '全国' : verifiedAreas.get(name) || ''}));
     fields.store_name = fields.stores[0].name;
     if (fields.stores.length === 1 && fields.stores[0].prefecture) fields.prefecture = fields.stores[0].prefecture;
   }

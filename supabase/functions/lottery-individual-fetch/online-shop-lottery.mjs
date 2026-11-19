@@ -1,3 +1,4 @@
+import {htmlAttributes as attrs, decodeHtml as decode} from './public-html.mjs';
 // Public lottery panels only. Product release/shipping dates are not deadlines.
 export const ONLINE_SHOP_PARSER_VERSION = 2;
 export const DMM_HOST = 'www.dmm.com';
@@ -26,21 +27,12 @@ export function onlineShopUrl(value) {
   } catch { return null; }
 }
 
-const decode = text => String(text || '').replace(/&#(x[\da-f]+|\d+);/gi, (_, n) => {
-  const code = n[0].toLowerCase() === 'x' ? parseInt(n.slice(1),16) : Number(n);
-  return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : '';
-}).replace(/&(amp|quot|apos|lt|gt|nbsp);/gi, (_, n) =>
-  ({amp:'&',quot:'"',apos:"'",lt:'<',gt:'>',nbsp:' '}[n.toLowerCase()]));
 function plain(html) {
   // WOVN keeps the official Japanese text in a comment on each translated leaf.
   const original = [...html.matchAll(/<!--wovn-src:([\s\S]*?)-->/g)];
   if (original.length === 1) html = original[0][1];
   return decode(html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,' ')
     .replace(/<[^>]*>/g,' ')).replace(/[\s\u3000]+/g,' ').trim();
-}
-function attrs(tag) {
-  return Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)]
-    .map(m => [m[1].toLowerCase(),decode(m[2] ?? m[3])]));
 }
 function tags(html, name, matches) {
   return [...html.matchAll(new RegExp('<'+name+'\\b([^>]*)>([\\s\\S]*?)<\\/'+name+'\\s*>','gi'))]
