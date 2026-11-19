@@ -1,3 +1,4 @@
+import {SEVENNET_HOST} from '../supabase/functions/lottery-individual-fetch/sevennet-fair.mjs';
 import {readFile, writeFile, rename} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {storeNoticeUrl, fetchStoreNotice, loadOfficialHtml, STORE_DIRECTORY} from '../supabase/functions/lottery-individual-fetch/store-notices.mjs';
@@ -45,8 +46,8 @@ export async function enrichStoreNotices(catalog, load = loadOfficialHtml, now =
       if (pending.has(item) && deadlineOf(fields.application_end_at) < +now) continue;
       // A successful reread replaces details supplied by this article, including a
       // removed LINE link or a change from a fixed time to staggered notification.
-      if (source.hostname === CENTER_HOST) {
-        for (const key of ['application_url','store_notice_purchase_note','store_notice_result_note',
+      if ([CENTER_HOST, SEVENNET_HOST].includes(source.hostname)) {
+        for (const key of ['application_url','delivery_start_date','store_notice_purchase_note','store_notice_result_note',
           'result_announcement_date','result_announcement_time','purchase_start_date','purchase_end_date',
           'purchase_start_time','purchase_end_time','product_name','pokemon_map_type']) delete item[key];
       }

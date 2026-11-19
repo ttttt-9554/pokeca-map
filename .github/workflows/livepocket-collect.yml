@@ -11,6 +11,7 @@ name: LivePocket Discord URL Collector
       - 'supabase/functions/lottery-individual-fetch/google-forms.mjs'
       - 'scripts/store_notice_lottery_enrich.mjs'
       - 'supabase/functions/lottery-individual-fetch/store-notices.mjs'
+      - 'supabase/functions/lottery-individual-fetch/sevennet-fair.mjs'
       - 'supabase/functions/lottery-individual-fetch/pokemon-center.mjs'
       - 'supabase/functions/lottery-individual-fetch/public-html.mjs'
       - 'scripts/online_shop_lottery_enrich.mjs'

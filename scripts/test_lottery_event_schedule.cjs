@@ -130,6 +130,11 @@ async function main() {
   assert.equal(api.lotteryCardScheduleHtml({url}), '<small>抽選発表日：</small><small>購入期間：</small>');
   assert.match(api.lotteryCardScheduleHtml({...item, result_announcement_time: '19:15'}), /2026\/11\/10 19:15/);
   assert.equal(api.lotteryCardScheduleHtml({url:'https://example.com/lottery'}), '');
+  const formSchedule = {url:'https://example.com/lottery', payment_start_date:'2026-11-21',
+    payment_end_date:'2026-11-26', pickup_period_note:'7日以内'};
+  assert.equal(api.lotteryCardScheduleHtml(formSchedule),
+    '<small>支払期間：2026/11/21～2026/11/26</small><small>引取期間：7日以内</small>');
+  assert.match(api.lotteryCardScheduleHtml({...formSchedule,delivery_start_date:'2026-12-17'}),/お届け予定：2026\/12\/17から順次/);
   assert.match(extract('lotteryTrackerOpenEditor'), /type="date" name="result_announcement_date"/);
   assert.match(extract('lotteryTrackerOpenEditor'), /type="time" name="result_announcement_time"/);
 

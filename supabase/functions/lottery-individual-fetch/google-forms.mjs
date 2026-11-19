@@ -1,6 +1,6 @@
-import {readPublicHtml} from './public-html.mjs';
+import {readPublicHtml, section, textOf} from './public-html.mjs';
 // Public Google Forms metadata only. Never submit a form or read responses.
-export const GOOGLE_FORMS_PARSER_VERSION = 4;
+export const GOOGLE_FORMS_PARSER_VERSION = 5;
 export function googleFormUrl(value) {
   try {
     const url = new URL(value);
@@ -119,6 +119,19 @@ const verifiedAreas = new Map([
   ['MINT大丸心斎橋店', '大阪府']
 ]);
 
+// The organizer uses abbreviated choices on its forms and full branch names in
+// its directory, https://193tcg.com/user_data/shopinfo. Scope aliases to that organizer.
+const branches193 = new Map([
+  ['名駅店', ['名駅店', '愛知県']], ['椿店', ['名駅椿店', '愛知県']],
+  ['大須店', ['大須店', '愛知県']], ['秋葉原店', ['秋葉原店', '東京都']],
+  ['日本橋店', ['日本橋店', '大阪府']], ['浜松ザザシティ店', ['ザザシティ浜松店', '静岡県']]
+]);
+
+function productFromIntro(lines) {
+  const intro = /^(ポケモンカードゲーム\s*(?:MEGA\s*)?(?:強化)?拡張パック\s*「[^「」\r\n]{1,100}」)\s*(?:※[^。]{1,80}?)?\s*の抽選(?:販売)?(?:受付|応募)?フォームです[。.]?$/;
+  return single(lines.map(line => line.match(intro)?.[1]));
+}
+
 function productFromChoice(questions, lines) {
   const choices = questions.filter(q => /^(?:ご?希望(?:の)?商品|抽選対象商品)(?:を選択してください)?$/.test(clean(q[1])));
   if (choices.length !== 1 || ![2,3,4].includes(choices[0][3])) return '';
@@ -137,7 +150,9 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   try { data = JSON.parse(snapshots[0][1]); } catch { return {}; }
   const id = new URL(url).pathname.replace(/^\/forms\/d\//, '').replace(/\/(?:viewform|closedform)$/, '');
   if (!Array.isArray(data) || data[14] !== id || !Array.isArray(data[1])) return {};
-  const title = clean(data[1][8]).replace(/\s+/g, ' ');
+  const displayTitle = clean(data[1][8]), documentTitle = clean(data[3]);
+  const publishedTitle = new URL(url).pathname.endsWith('/viewform') && documentTitle === clean(textOf(section(html, 'title')));
+  const title = (displayTitle || (publishedTitle ? documentTitle : '')).replace(/\s+/g, ' ');
   if (title.length < 5 || title.length > 200 || !/抽選/.test(title) || /[<>]|ログイン|アクセス権|受付終了/.test(title)) return {};
   const fields = {event_title: title};
   const questions = Array.isArray(data[1][1]) ? data[1][1].filter(Array.isArray) : [];
@@ -163,7 +178,7 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   if (anchor) {
     const applicationLabels = '(?:抽選(?:販売)?)?(?:応募|申込|申し込み)(?:受付)?期間|受付期間';
     const startLabels = '(?:応募|申込|受付)開始(?:日時|日)?';
-    const deadlineLabels = '(?:応募|申込|受付)(?:締切|締め切り|締め切|〆切|終了)(?:日時|日)?';
+    const deadlineLabels = '(?:抽選|応募|申込|受付)(?:締切|締め切り|締め切|〆切|終了)(?:日時|日)?';
     const application = single(labelValues(applicationLabels, anchor));
     const range = period(application, anchor);
     if (range.length === 2) {
@@ -188,6 +203,17 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
     fields.google_forms_start_not_stated = !!(fields.application_end_at && !fields.application_start_at &&
       deadlineOnly && !labelValues(startLabels).length && !startHint);
     const scheduleAnchor = (fields.application_end_at || anchor).slice(0,10);
+    const payment = period(single(labelValues('(?:お)?支払(?:い)?期間', scheduleAnchor)), scheduleAnchor);
+    if (payment.length === 2) {
+      fields.payment_start_date = payment[0].date;
+      fields.payment_end_date = payment[1].date;
+      if (payment[0].time) fields.payment_start_time = payment[0].time;
+      if (payment[1].time) fields.payment_end_time = payment[1].time;
+    }
+    const pickupLabels = '引(?:き)?取(?:り)?期間';
+    const pickupText = labeled(pickupLabels);
+    if (/^(?:(?:発売日|入荷日|当選通知)(?:から|より))?\s*[1-9]\d?\s*日以内[。.]?$/.test(pickupText))
+      fields.pickup_period_note = pickupText.replace(/[。.]$/, '');
     const resultLabels = '(?:抽選結果|当選(?:者)?|当落|結果|抽選)(?:の)?(?:発表|通知|ご?連絡)(?:予定)?(?:日時|日|期間)?(?:は)?';
     const resultText = single(labelValues(resultLabels).filter(value =>
       // Keep conflicting dates and explicit uncertainty, but ignore delivery
@@ -198,7 +224,7 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
       fields.result_announcement_date = result.date;
       if (result.time) fields.result_announcement_time = result.time;
     }
-    const purchaseLabels = '(?:商品)?(?:購入|販売|受取|受け取り)(?:可能)?期間';
+    const purchaseLabels = '(?:商品)?(?:購入|販売|受取|受け取り|引き?取り?)(?:可能)?期間';
     const purchase = period(labeled(purchaseLabels), scheduleAnchor);
     if (purchase.length === 2) {
       fields.purchase_start_date = purchase[0].date;
@@ -235,14 +261,25 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   const productLabels = labelValues('抽選対象商品|抽選商品|対象商品|商品(?=】|:|$)');
   const product = productLabels.length
     ? single(productLabels).replace(/\s+[0-9][0-9,]*円(?:\(税込(?:み)?\))?\s*$/, '').replace(/\s*\d+\s*(?:BOX|ボックス|箱)\s*$/i, '').trim()
-    : productFromChoice(questions, lines);
+    : productFromChoice(questions, lines) || productFromIntro(lines);
   if (product && product.length <= 200) fields.product_name = product;
+  const organizer193 = lines.some(line => /(?:^|[^A-Za-z0-9._%+-])cs@193shop\.com(?:$|[^A-Za-z0-9.-])/i.test(line)) &&
+    lines.some(line => /193NET/i.test(line));
+  const branchAreas = new Map();
   const lists = questions.flatMap(question => {
-    if (!/(?:店舗|応募店|受取店)/.test(clean(question[1])) ||
-        !/選択|選ん/.test(clean(question[1])) || ![2,3,4].includes(question[3])) return [];
+    const label = clean(question[1]);
+    if (![2,3,4].includes(question[3]) || !/(?:店舗|応募店|受取店)/.test(label) ||
+        !(/選択|選ん/.test(label) || (organizer193 && /^(?:購入|受取|応募)希望店舗$/.test(label)))) return [];
     const options = question[4]?.[0]?.[1];
     if (!Array.isArray(options) || !options.length || options.length > 100) return [];
-    const stores = options.map(option => storeName(option?.[0]));
+    const stores = options.map(option => {
+      const name = clean(option?.[0]);
+      const branch = organizer193 && branches193.get(name);
+      if (!branch) return storeName(name);
+      const canonical = 'TCGショップ193 ' + branch[0];
+      branchAreas.set(canonical, branch[1]);
+      return canonical;
+    });
     return stores.every(Boolean) ? [stores] : [];
   });
   const explicitStore = storeName(labeled('対象店舗|店舗名|受取店舗|応募店舗'));
@@ -256,7 +293,7 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
     lines.some(line => /https:\/\/planetpocket\.shop-pro\.jp\/\?mode=sk(?:$|[\s。])/.test(line));
   if (deliveryShop) names.push('プラネットポケット');
   if (names.length) {
-    fields.stores = [...new Set(names)].map(name => ({name, prefecture: deliveryShop ? '全国' : verifiedAreas.get(name) || ''}));
+    fields.stores = [...new Set(names)].map(name => ({name, prefecture: deliveryShop ? '全国' : branchAreas.get(name) || verifiedAreas.get(name) || ''}));
     fields.store_name = fields.stores[0].name;
     if (fields.stores.length === 1 && fields.stores[0].prefecture) fields.prefecture = fields.stores[0].prefecture;
   }

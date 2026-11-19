@@ -25,6 +25,13 @@ export async function enrichGoogleForms(catalog,load=fetchGoogleForm,now=new Dat
         item.discord_posted_at||item.first_detected_at||now.toISOString()});
       if(!fields.event_title){item.google_forms_last_error='closed_or_unavailable';continue;}
       const {product_type,...metadata}=fields;
+      for(const field of ['payment_start_date','payment_start_time','payment_end_date','payment_end_time','pickup_period_note']){
+        if(!(field in fields))delete item[field];
+      }
+      if(item.google_forms_verified_at && fields.pickup_period_note && !fields.purchase_start_date && !fields.purchase_end_date){
+        for(const field of ['purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'])delete item[field];
+      }
+      if(fields.google_forms_start_not_stated && item.application_start_at)item.application_start_at=null;
       // Partial official metadata is useful too: do not fabricate a missing start
       // date, time, or store. Developer review still flags each absent field.
       Object.assign(item,metadata,{

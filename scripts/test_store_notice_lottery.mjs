@@ -69,4 +69,39 @@ assert.equal(catalog.items[1].stores[3].prefecture,'京都府');
 const offline = async () => {throw Error('offline');};
 assert.deepEqual(await enrichStoreNotices(catalog,offline,new Date(+now+14*3600000)),{checked:2,updated:0});
 assert.equal(catalog.items[0].purchase_end_date,'2026-11-29');
+
+// Sevennet's application conditions, application dates, announcement and delivery are separate sections.
+const fairUrl = 'https://7net.omni7.jp/general/027016/fair-hobby-pokemoncardgame30th.html';
+const fairProduct = 'ポケモンカードゲーム MEGA 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー';
+const fairTitle = 'ポケモンカードゲーム抽選販売 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー';
+const fairPage = '<div class="st-ns_freecontainer"><script type="application/ld+json">'+
+  JSON.stringify({'@type':'BreadcrumbList',itemListElement:[{item:{'@id':fairUrl,name:fairTitle}}]})+'</script>'+
+  '<h1>ポケモンカードゲーム抽選販売</h1><h2>■対象商品</h2><p>'+fairProduct+'<br>販売価格：6,200円</p>'+
+  '<h2>■応募条件</h2><p>2025年11月1日～2026年11月16日</p>'+
+  '<h2>■応募期間</h2><p>2026年11月19日17:00～2026年11月23日23:59<br>※先着順ではありません。</p>'+
+  '<h2>■当選発表</h2><p>2026年12月8日 19:00までにご連絡</p>'+
+  '<h2>■商品のお届け・お支払いについて</h2><p>2026年12月17日より順次お届け予定です。</p></div>'+
+  '<footer><h2>応募期間</h2><p>2025年1月1日～2025年1月2日</p></footer>';
+assert(supportedUrl(fairUrl));
+assert(supportedUrl('https://7net.omni7.jp/detail/2190054281.html'));
+assert.equal(storeNoticeUrl(fairUrl+'?utm_source=discord').href,fairUrl);
+for(const bad of [fairUrl.replace('7net.omni7.jp','7net.omni7.jp.example.com'),fairUrl+'?next=x',fairUrl.replace('/fair-','/help-')])
+  assert(!supportedUrl(bad),bad);
+const fairFields = extract(fairPage,fairUrl);
+assert.equal(fairFields.event_title,fairTitle);assert.equal(fairFields.product_name,fairProduct);
+assert.equal(fairFields.review_category,'pokemon');assert.equal(fairFields.product_type,'deck');
+assert.deepEqual(fairFields.stores,[{name:'セブンイレブン',prefecture:'全国'}]);
+assert.equal(fairFields.application_start_at,'2026-11-19T17:00:00+09:00');
+assert.equal(fairFields.application_end_at,'2026-11-23T23:59:00+09:00');
+assert.equal(fairFields.result_announcement_date,'2026-12-08');assert.equal(fairFields.result_announcement_time,'19:00');
+assert.match(fairFields.store_notice_result_note,/まで/);
+assert.equal(fairFields.delivery_start_date,'2026-12-17');assert.equal(fairFields.purchase_start_date,undefined);
+for(const badPage of [fairPage.replace(fairUrl,fairUrl.replace('30th','other')),
+  fairPage.replace('■応募期間','■応募条件'),fairPage.replace('11月23日23:59','11月31日23:59'),
+  fairPage.replace('■当選発表','■応募期間'),fairPage.replace('ポケモンカードゲーム抽選販売</h1>','一般のお知らせ</h1>')])
+  assert.deepEqual(extract(badPage,fairUrl),{});
+const fairRow = {url:fairUrl};
+assert.deepEqual(await enrichStoreNotices({items:[fairRow]},async url=>{assert.equal(url,fairUrl);return fairPage;},now),{checked:1,updated:1});
+assert.equal(fairRow.application_start_at,fairFields.application_start_at);assert.equal(fairRow.pokemon_map_type,'deck');
+assert.equal(fairRow.store_notice_source_url,fairUrl);assert.equal(fairRow.external_url_unverified,false);
 console.log('Verified article identity, store participation, directory, dates and recurring collection.');

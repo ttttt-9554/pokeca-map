@@ -251,4 +251,40 @@ assert.equal(parse('■購入期間：11/21～11/23\n大丸心斎橋店', mintTi
 assert.equal(parse(mintNotice.replaceAll(mintStore, 'MINT別支店'), mintTitle.replace(mintStore, 'MINT別支店')).prefecture, undefined);
 assert.equal(googleFormFields(page(mintNotice, mintTitle, [choice(mintOption, '別の商品')]), url).product_name, undefined);
 assert.equal(googleFormFields(page(mintNotice, mintTitle, [choice('「別の商品」…1BOX')]), url).product_name, undefined);
+
+// In this Forms layout the public document title is present while the form title is empty.
+const branchTitle = 'ポケモンカード抽選販売';
+const branchText = [
+  'ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」※シュリンク・外箱無し の抽選販売受付フォームです。',
+  '当選者にはcs@193shop.comからメールでご連絡いたします。', '店頭会員限定（193NETは対象外）',
+  '【発売日】11月27日(金)', '【抽選締切】2026/11/19 23:59',
+  '【支払い期間】11月21日 ～ 11月26日', '【引取り期間】7日以内'
+].join('\n');
+const branchQuestion = [1,'購入希望店舗',null,3,[[2,['名駅店','椿店','大須店','秋葉原店','日本橋店','浜松ザザシティ店'].map(name=>[name])]]];
+function branchPage(text = branchText, htmlTitle = branchTitle, formId = 'e/'+id) {
+  const data = []; data[1] = [text, [branchQuestion]]; data[3] = branchTitle; data[14] = formId;
+  return '<title>'+htmlTitle+'</title><script>var FB_PUBLIC_LOAD_DATA_ = '+JSON.stringify(data)+';</script>';
+}
+const branchFields = googleFormFields(branchPage(), url, {referenceDate: now});
+assert.equal(branchFields.event_title,branchTitle);
+assert.equal(branchFields.product_name,'ポケモンカードゲームMEGA 拡張パック「ハドウシーカー」');
+assert.equal(branchFields.review_category,'pokemon');assert.equal(branchFields.product_type,'pack');
+assert.deepEqual(branchFields.stores.map(store=>[store.name,store.prefecture]),[
+  ['TCGショップ193 名駅店','愛知県'],['TCGショップ193 名駅椿店','愛知県'],['TCGショップ193 大須店','愛知県'],
+  ['TCGショップ193 秋葉原店','東京都'],['TCGショップ193 日本橋店','大阪府'],['TCGショップ193 ザザシティ浜松店','静岡県']
+]);
+assert.equal(branchFields.google_forms_start_not_stated,true);
+assert.equal(branchFields.application_end_at,'2026-11-19T23:59:00+09:00');
+assert.equal(branchFields.payment_start_date,'2026-11-21');assert.equal(branchFields.payment_end_date,'2026-11-26');
+assert.equal(branchFields.pickup_period_note,'7日以内');
+for(const key of ['result_announcement_date','application_start_at','purchase_start_date','purchase_end_date','payment_start_time'])
+  assert.equal(branchFields[key],undefined);
+assert.deepEqual(googleFormFields(branchPage(branchText,'別の抽選'),url),{});
+assert.deepEqual(googleFormFields(branchPage(branchText,branchTitle,'e/wrong'),url),{});
+assert.deepEqual(googleFormFields(branchPage(),url.replace('viewform','closedform')),{});
+assert.equal(googleFormFields(branchPage(branchText.replace('cs@193shop.com','cs@193shop.com.example')),url).stores,undefined);
+const previousDates = {url,google_forms_verified_at:'2026-11-18T01:00:00Z',purchase_end_date:'2026-11-24',payment_end_time:'17:30'};
+await enrichGoogleForms({items:[previousDates]},async()=>({url,html:branchPage()}),now);
+assert.equal(previousDates.purchase_end_date,undefined);assert.equal(previousDates.payment_end_time,undefined);
+assert.equal(previousDates.pickup_period_note,'7日以内');
 console.log('Google Forms public metadata, safe redirects, date-only display and collection regressions passed');

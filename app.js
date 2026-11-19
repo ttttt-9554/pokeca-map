@@ -3804,7 +3804,10 @@
       if (fields.has(field)) item[field] = row[field];
     }
     if (fields.has('result_announcement_date') || fields.has('result_announcement_time')) delete item.store_notice_result_note;
-    if (['purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'].some(key=>fields.has(key))) delete item.store_notice_purchase_note;
+    if (['purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'].some(key=>fields.has(key))) {
+      delete item.store_notice_purchase_note;
+      delete item.pickup_period_note;
+    }
     // Clearing the edited date also hides the older collector's fallback date.
     if (fields.has('result_announcement_date')) delete item.lottery_result_end_date;
     const storeEdited = fields.has('store_name'), areaEdited = fields.has('prefecture');
@@ -5537,11 +5540,20 @@
     const schedule = lotteryOfficialSchedule(item);
     const announcement = lotteryScheduleText(schedule.result_announcement_date, schedule.result_announcement_time);
     const purchase = lotteryPurchasePeriodText(schedule);
-    if (!announcement && !purchase && !isLivePocketEventUrl(item.url)) return '';
     const resultNote = announcement && item.store_notice_result_note ? '（'+item.store_notice_result_note+'）' : '';
     const purchaseNote = purchase && item.store_notice_purchase_note ? '（'+item.store_notice_purchase_note+'）' : '';
-    return '<small>抽選発表日：'+escape(announcement + resultNote)+'</small>'+
-      '<small>購入期間：'+escape(purchase + purchaseNote)+'</small>';
+    let html = '';
+    if (announcement || purchase || isLivePocketEventUrl(item.url)) {
+      html = '<small>抽選発表日：'+escape(announcement + resultNote)+'</small>'+
+        '<small>購入期間：'+escape(purchase + purchaseNote)+'</small>';
+    }
+    const paidFrom = lotteryScheduleText(lotteryScheduleDate(item.payment_start_date), lotteryScheduleTime(item.payment_start_time));
+    const paidUntil = lotteryScheduleText(lotteryScheduleDate(item.payment_end_date), lotteryScheduleTime(item.payment_end_time));
+    if (paidFrom && paidUntil) html += '<small>支払期間：'+escape(paidFrom+'～'+paidUntil)+'</small>';
+    if (!purchase && item.pickup_period_note) html += '<small>引取期間：'+escape(item.pickup_period_note)+'</small>';
+    const delivery = lotteryScheduleText(lotteryScheduleDate(item.delivery_start_date));
+    if (delivery) html += '<small>お届け予定：'+escape(delivery)+'から順次</small>';
+    return html;
   }
 
   function lotteryCard(item, state) {

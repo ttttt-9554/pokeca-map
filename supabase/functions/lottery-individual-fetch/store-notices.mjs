@@ -1,3 +1,4 @@
+import {SEVENNET_HOST, sevennetFairUrl, sevennetFairFields} from './sevennet-fair.mjs';
 import {CENTER_HOST, CENTER_DIRECTORY, pokemonCenterNoticeUrl, pokemonCenterFields, pokemonCenterDirectory, centerProfileUrl} from './pokemon-center.mjs';
 import {readPublicHtml, htmlAttributes, textOf, stripInactive, section, bodyLines} from './public-html.mjs';
 import {datePoint, dateRange, dateStamp} from './google-forms.mjs';
@@ -9,6 +10,7 @@ export const STORE_DIRECTORY = 'https://' + OTAKARA_HOST + '/store/';
 export function storeNoticeUrl(value) {
   try {
     const url = new URL(value);
+    if (url.hostname === SEVENNET_HOST) return sevennetFairUrl(value);
     if (url.hostname === CENTER_HOST) return pokemonCenterNoticeUrl(value);
     if (url.protocol !== 'https:' || url.username || url.password || url.port || url.hash || url.search) return null;
     if (url.hostname === SKIP_HOST && /^\/view\/news\/\d{14}\/?$/.test(url.pathname)) {
@@ -87,6 +89,7 @@ export function applyDirectory(stores, directory) {
 export function storeNoticeFields(html, value) {
   const source = storeNoticeUrl(value);
   if (!source || typeof html !== 'string' || html.length > 2_000_000) return {};
+  if (source.hostname === SEVENNET_HOST) return sevennetFairFields(html, source);
   const markup = stripInactive(html);
   const ids = [...markup.matchAll(/<(?:link|meta)\b[^>]*>/gi)].map(m => htmlAttributes(m[0]))
     .filter(a => a.rel === 'canonical' || a.property === 'og:url').map(a => storeNoticeUrl(a.href || a.content)?.href);
