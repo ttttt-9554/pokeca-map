@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-19T04:10:56.595505+00:00",
+  "collected_at": "2026-11-19T04:31:03.902146+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 837,
+  "unique_livepocket_urls": 838,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -25375,33 +25375,69 @@
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29"
+    },
+    {
+      "url": "https://livepocket.jp/e/zegxt",
+      "discord_message_id": "1572831335586730065",
+      "discord_posted_at": "2026-11-19T04:30:12.197000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\n麦わらストア 東京駅店\n受付終了: 11/20 00:00（残り10時間29分）\nhttps://livepocket.jp/e/zegxt",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/zegxt",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 東京駅店 カードゲーム抽選販売受付",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-20T00:00:00+09:00",
+      "stores": [
+        {
+          "name": "麦わらストア 東京駅店",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "麦わらストア 東京駅店",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-29",
+      "purchase_end_date": "2026-12-06"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 656,
-    "no_structured_details": 181
+    "no_structured_details": 182
   },
   "field_counts": {
-    "store_name": 432,
-    "prefecture": 381,
-    "event_title": 534,
+    "store_name": 433,
+    "prefecture": 382,
+    "event_title": 535,
     "event_date": 1,
     "product_name": 128,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 800,
-    "application_start_at": 797,
-    "stores_events": 432
+    "application_end_at": 801,
+    "application_start_at": 798,
+    "stores_events": 433
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572824274715148369"
+      "1551580466266644552": "1572831339827298314"
     },
     "last_run": {
-      "checked_at": "2026-11-19T04:10:56.595505+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-19T04:31:03.902146+00:00",
+      "new_urls": 1,
       "original_urls": 837,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -25747,7 +25783,8 @@
         "1572499118482526309": "2026-11-18T06:35:58.158241+00:00",
         "1572560883522215980": "2026-11-18T10:36:01.306012+00:00",
         "1572567069340205166": "2026-11-18T11:05:56.529975+00:00",
-        "1572808677369450519": "2026-11-19T03:00:58.985083+00:00"
+        "1572808677369450519": "2026-11-19T03:00:58.985083+00:00",
+        "1572831335586730065": "2026-11-19T04:31:09.279842+00:00"
       },
       "checked_search_urls": {}
     },
@@ -29477,6 +29514,11 @@
           "checked_at": "2026-11-19T03:01:21.589950+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/zegxt": {
+          "checked_at": "2026-11-19T04:33:38.005173+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -32373,6 +32415,12 @@
           "detected_at": "2026-11-19T03:01:00.049068+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/zegxt": {
+          "detected_at": "2026-11-19T04:31:10.284320+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-19T04:33:38.005173+00:00",
           "http_status": null
         }
       },
@@ -42104,6 +42152,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/zegxt": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-19T04:33:38.005173+00:00",
+          "title_observed": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 東京駅店 カードゲーム抽選販売受付",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -49205,6 +49264,19 @@
         },
         "https://livepocket.jp/e/ikz9d": {
           "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/zegxt": {
+          "checked_at": "2026-11-19T04:33:38.005173+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
