@@ -11,6 +11,7 @@ name: LivePocket Discord URL Collector
       - 'supabase/functions/lottery-individual-fetch/google-forms.mjs'
       - 'scripts/store_notice_lottery_enrich.mjs'
       - 'supabase/functions/lottery-individual-fetch/store-notices.mjs'
+      - 'supabase/functions/lottery-individual-fetch/pokemon-center.mjs'
       - 'supabase/functions/lottery-individual-fetch/public-html.mjs'
       - 'scripts/online_shop_lottery_enrich.mjs'
       - 'scripts/pbandai_lottery_enrich.py'
@@ -198,7 +199,7 @@ jobs:
       - name: Read public Google Forms lottery descriptions
         run: node scripts/google_forms_lottery_enrich.mjs
 
-      - name: Read Skip and Otakarasouko lottery notices
+      - name: Read official store lotteries and discover Pokémon Center notices
         run: node scripts/store_notice_lottery_enrich.mjs
 
       - name: Read DMM lottery product panels

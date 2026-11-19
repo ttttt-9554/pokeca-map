@@ -12,6 +12,7 @@ name: LivePocket Detail Deadline Regression
       - scripts/google_forms_lottery_enrich.mjs
       - scripts/test_google_forms_lottery.mjs
       - scripts/test_store_notice_lottery.mjs
+      - scripts/test_pokemon_center_lottery.mjs
       - scripts/store_notice_lottery_enrich.mjs
       - scripts/test_online_shop_lottery.mjs
       - scripts/online_shop_lottery_enrich.mjs
@@ -174,6 +175,7 @@ jobs:
           node scripts/test_individual_lottery_fetch.mjs
           node scripts/test_google_forms_lottery.mjs
           node scripts/test_store_notice_lottery.mjs
+          node scripts/test_pokemon_center_lottery.mjs
           node scripts/test_online_shop_lottery.mjs
           python -m py_compile scripts/pbandai_lottery_enrich.py
           node scripts/test_app_manual_location.cjs

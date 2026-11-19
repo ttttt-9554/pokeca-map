@@ -58,7 +58,7 @@ function point(value, anchor) {
   const match = text.match(/^(?:(\d{4})\s*(?:年|[\/.-])\s*)?(\d{1,2})\s*(?:月|[\/.-])\s*(\d{1,2})(?!\d)\s*日?/);
   if (!match) return null;
   let rest = text.slice(match[0].length).trim();
-  const weekday = rest.match(/^\(([日月火水木金土])(?:曜(?:日)?)?\)/);
+  const weekday = rest.match(/^\(([日月火水木金土])(?:曜(?:日)?)?(?:[・/](?:祝(?:日)?|振休|振替休日))?\)/);
   if (weekday) rest = rest.slice(weekday[0].length).trim();
   const reference = new Date(anchor + 'T00:00:00Z');
   const year = reference.getUTCFullYear();

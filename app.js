@@ -3803,6 +3803,8 @@
     for (const field of LOTTERY_SHARED_SCHEDULE_FIELDS) {
       if (fields.has(field)) item[field] = row[field];
     }
+    if (fields.has('result_announcement_date') || fields.has('result_announcement_time')) delete item.store_notice_result_note;
+    if (['purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'].some(key=>fields.has(key))) delete item.store_notice_purchase_note;
     // Clearing the edited date also hides the older collector's fallback date.
     if (fields.has('result_announcement_date')) delete item.lottery_result_end_date;
     const storeEdited = fields.has('store_name'), areaEdited = fields.has('prefecture');
@@ -5536,8 +5538,10 @@
     const announcement = lotteryScheduleText(schedule.result_announcement_date, schedule.result_announcement_time);
     const purchase = lotteryPurchasePeriodText(schedule);
     if (!announcement && !purchase && !isLivePocketEventUrl(item.url)) return '';
-    return '<small>抽選発表日：'+escape(announcement)+'</small>'+
-      '<small>購入期間：'+escape(purchase)+'</small>';
+    const resultNote = announcement && item.store_notice_result_note ? '（'+item.store_notice_result_note+'）' : '';
+    const purchaseNote = purchase && item.store_notice_purchase_note ? '（'+item.store_notice_purchase_note+'）' : '';
+    return '<small>抽選発表日：'+escape(announcement + resultNote)+'</small>'+
+      '<small>購入期間：'+escape(purchase + purchaseNote)+'</small>';
   }
 
   function lotteryCard(item, state) {
@@ -5592,11 +5596,15 @@
         </div>`
       : `<p class="lp-store-muted">対象店舗：未確認${places.length ? `（地域：${escape(placeText)}）` : ""}</p>`;
     // Shared link + private actions are rendered in a single card action row.
-    const officialUrl = item.app_lottery ? item.app_lottery_source_url : item.url;
+    const centerNotice = external && item.store_notice_verified_at &&
+      /^https:\/\/shop\.pokemon\.co\.jp\/ja\/shop\//.test(item.store_notice_source_url || '');
+    const lineApplication = centerNotice && /^https:\/\/miniapp\.line\.me\/\d{8,13}-[A-Za-z0-9]{5,16}\/events\/[a-f\d]{8}(?:-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(item.application_url || '')
+      ? item.application_url : '';
+    const officialUrl = item.app_lottery ? item.app_lottery_source_url : (lineApplication || item.url);
     const officialLabel = item.app_lottery
       ? (item.manual_registration_method==='in_store'?'店頭応募の案内を確認':'アプリ公式案内を確認')
-      : (external?'抽選URLを開いて確認':'公式ページで確認');
-    const officialShort = item.app_lottery ? '↗ 案内' : (external?'↗ 抽選':'↗ 公式');
+      : (lineApplication?'LINEで応募':external?'抽選URLを開いて確認':'公式ページで確認');
+    const officialShort = item.app_lottery ? '↗ 案内' : (lineApplication?'↗ LINEで応募':external?'↗ 抽選':'↗ 公式');
     const officialAction = officialUrl
       ? '<a class="lp-official" data-lp-application-return="'+escape(item.url)+'" href="'+escape(officialUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="'+escape(officialLabel)+'（新しいタブで開く）">'+
         '<span class="lp-action-full">'+escape(officialLabel)+' ↗</span>'+
@@ -5621,7 +5629,8 @@
         : item.product_name
           ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>`
           : item.catalog_product_ambiguous ? '<p class="lp-sub">商品名：要確認</p>' : ''}
-      ${external?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
+      ${lineApplication?'<p class="lp-store-muted"><a href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">店舗の公式告知 ↗</a></p>':''}
+      ${external&&!centerNotice?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
       ${item.app_lottery?(item.manual_registration_method==='in_store'
         ?'<p class="lp-store-muted lp-app-name">🏬 応募方式：<strong>店頭で直接応募</strong><span>（受付店舗・応募条件は店頭で確認）</span></p>'
         :'<p class="lp-store-muted lp-app-name">📱 アプリ名：<strong>'+escape(String(item.app_lottery_name||'未設定'))+'</strong><span>（アプリ内抽選・公式情報はアプリ内で確認）</span></p>'):''}

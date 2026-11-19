@@ -1,4 +1,5 @@
-import {readPublicHtml, htmlAttributes, decodeHtml} from './public-html.mjs';
+import {CENTER_HOST, CENTER_DIRECTORY, pokemonCenterNoticeUrl, pokemonCenterFields, pokemonCenterDirectory, centerProfileUrl} from './pokemon-center.mjs';
+import {readPublicHtml, htmlAttributes, textOf, stripInactive, section, bodyLines} from './public-html.mjs';
 import {datePoint, dateRange, dateStamp} from './google-forms.mjs';
 
 export const SKIP_HOST = 'www.skip-tcg.com';
@@ -8,6 +9,7 @@ export const STORE_DIRECTORY = 'https://' + OTAKARA_HOST + '/store/';
 export function storeNoticeUrl(value) {
   try {
     const url = new URL(value);
+    if (url.hostname === CENTER_HOST) return pokemonCenterNoticeUrl(value);
     if (url.protocol !== 'https:' || url.username || url.password || url.port || url.hash || url.search) return null;
     if (url.hostname === SKIP_HOST && /^\/view\/news\/\d{14}\/?$/.test(url.pathname)) {
       url.pathname = url.pathname.replace(/\/$/, '');
@@ -19,31 +21,6 @@ export function storeNoticeUrl(value) {
     }
     return null;
   } catch { return null; }
-}
-
-const compact = value => value.replace(/\s+/g, ' ').trim();
-const textOf = markup => compact(decodeHtml(markup.replace(/<[^>]+>/g, '')));
-const stripInactive = html => html.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
-
-// Bound the article and body separately. The store menu and adjacent news cards
-// contain unrelated products, dates and branches, including other lotteries.
-function section(html, tag, className) {
-  const tags = new RegExp('<(/?)' + tag + '\\b([^>]*)>', 'gi');
-  let depth = 0, start = 0;
-  for (const match of html.matchAll(tags)) {
-    if (!depth) {
-      if (match[1] || !(htmlAttributes(match[2]).class || '').split(/\s+/).includes(className)) continue;
-      start = match.index + match[0].length;
-      depth = 1;
-    } else if (!match[1]) depth++;
-    else if (--depth === 0) return html.slice(start, match.index);
-  }
-  return '';
-}
-
-function bodyLines(body) {
-  return decodeHtml(body.replace(/<br\b[^>]*>|<\/(?:div|td|p|tr|h[1-6]|li)>/gi, '\n')
-    .replace(/<[^>]+>/g, '')).normalize('NFKC').split(/\r?\n/).map(compact).filter(Boolean);
 }
 
 function labeledLine(lines, labels) {
@@ -114,6 +91,7 @@ export function storeNoticeFields(html, value) {
   const ids = [...markup.matchAll(/<(?:link|meta)\b[^>]*>/gi)].map(m => htmlAttributes(m[0]))
     .filter(a => a.rel === 'canonical' || a.property === 'og:url').map(a => storeNoticeUrl(a.href || a.content)?.href);
   if (!ids.length || !ids.every(id => id === source.href)) return {};
+  if (source.hostname === CENTER_HOST) return pokemonCenterFields(markup, source);
   const skip = source.hostname === SKIP_HOST;
   const article = skip ? section(markup, 'div', 'news-wrap') : section(markup, 'article', 'article-detail');
   const title = textOf(skip ? section(article, 'h2', 'sec_ttl') : section(article, 'h1', 'article-detail__title'));
@@ -178,6 +156,11 @@ export async function fetchStoreNotice(value, load = loadOfficialHtml, directory
   const source = storeNoticeUrl(value);
   if (!source) throw Error('Unsupported store notice');
   const fields = storeNoticeFields(await load(source.href), source.href);
+  if (source.hostname === CENTER_HOST && fields.stores?.length) {
+    const html = await load(CENTER_DIRECTORY).catch(() => '');
+    const branch = pokemonCenterDirectory(html).get(centerProfileUrl(source));
+    if (branch?.name === fields.store_name) fields.stores[0].prefecture = fields.prefecture = branch.prefecture;
+  }
   if (source.hostname === OTAKARA_HOST && fields.stores?.length) {
     // Branch participation comes only from this article. The fixed operator
     // directory supplies an area for exact matches, never additional branches.

@@ -48,6 +48,19 @@ def valid(url):
         return False
 
 
+def notice_key(url):
+    """Keep one event key for a shared and independently discovered store notice."""
+    if not url.startswith("https://shop.pokemon.co.jp/ja/shop/"):
+        return url
+    parsed = urllib.parse.urlsplit(url)
+    if (not parsed.fragment and re.fullmatch(
+        r"/ja/shop/(?:pokemoncenter|pokemonstore)-[a-z0-9]+(?:-[a-z0-9]+)*/news/20\d{2}(?:0[1-9]|1[0-2])/\d{6}\.html", parsed.path
+    ) and all(k in {"utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"}
+              for k, _ in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))):
+        return parsed._replace(query="").geturl()
+    return url
+
+
 def urls(text):
     output = []
     for m in RE.finditer(str(text or "")):
@@ -75,7 +88,7 @@ def make(url, message):
     host = urllib.parse.urlsplit(url).hostname.lower()
     title = ""
     for e in message.get("embeds") or []:
-        if url in urls(e.get("url")):
+        if notice_key(url) in (notice_key(link) for link in urls(e.get("url"))):
             name = str(e.get("title") or "").strip()
             if 3 <= len(name) <= 160 and "http" not in name.lower():
                 title = name
@@ -113,6 +126,7 @@ def fetch(token, channel, before=None):
 
 def run(data, channels, token, backfill=False, loader=fetch):
     records = {x["url"]:x for x in data.get("items",[]) if valid(x.get("url"))}
+    aliases = {notice_key(url):url for url in records}
     seen = dict(data.get("last_seen_message_ids") or {})
     count = 0
     sale_evidence = []
@@ -144,7 +158,9 @@ def run(data, channels, token, backfill=False, loader=fetch):
             highest = max(highest,max(ids))
             for message in messages:
                 if not backfill and int(message["id"]) <= last: continue
-                for url in links(message):
+                for shared in links(message):
+                    key = notice_key(shared)
+                    url = aliases.setdefault(key, key)
                     if url not in records:
                         records[url] = make(url,message)
                     else:
@@ -164,11 +180,14 @@ def run(data, channels, token, backfill=False, loader=fetch):
         signals=summarize_public(sale_evidence,sale_now)
     except Exception:
         signals=[]
-    return {"schema_version":1,"items":list(records.values()),
+    result = {"schema_version":1,"items":list(records.values()),
             "last_seen_message_ids":seen,
             "collected_at":datetime.now(timezone.utc).isoformat(),
             "messages_scanned":count,
             "sale_report_signals":signals}
+    if isinstance(data.get("pokemon_center_news_scan"), dict):
+        result["pokemon_center_news_scan"] = data["pokemon_center_news_scan"]
+    return result
 
 
 def main():
