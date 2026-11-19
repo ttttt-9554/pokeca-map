@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-19T08:35:57.067350+00:00",
+  "collected_at": "2026-11-19T09:05:55.955126+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -25386,7 +25386,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/zegxt",
       "field_sources": {
@@ -25415,8 +25415,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 658,
-    "no_structured_details": 180
+    "parsed": 659,
+    "no_structured_details": 179
   },
   "field_counts": {
     "store_name": 433,
@@ -25433,10 +25433,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1572891700752289882"
+      "1551580466266644552": "1572899287178944613"
     },
     "last_run": {
-      "checked_at": "2026-11-19T08:35:57.067350+00:00",
+      "checked_at": "2026-11-19T09:05:55.955126+00:00",
       "new_urls": 0,
       "original_urls": 838,
       "suspect_legacy_store_names": 0,
@@ -29506,13 +29506,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/p_kks": {
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/ikz9d": {
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/zegxt": {
@@ -32407,14 +32407,14 @@
         },
         "https://livepocket.jp/e/ikz9d": {
           "detected_at": "2026-11-19T03:01:00.049068+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/p_kks": {
           "detected_at": "2026-11-19T03:01:00.049068+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/zegxt": {
@@ -34611,6 +34611,16 @@
         "https://livepocket.jp/e/ct073": {
           "attempts": 2,
           "last_attempt_at": "2026-11-18T23:21:25.186698+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/p_kks": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-19T09:06:38.455585+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/ikz9d": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-19T09:06:38.455585+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -42135,7 +42145,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
           "title_observed": "ONE PIECE ブースターパック 世界最強の戦士 OP17抽選販売",
           "genre": "",
           "product_origin": "",
@@ -42146,7 +42156,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -49250,7 +49260,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/p_kks": {
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -49263,7 +49273,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/ikz9d": {
-          "checked_at": "2026-11-19T03:01:21.589950+00:00",
+          "checked_at": "2026-11-19T09:06:38.455585+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
