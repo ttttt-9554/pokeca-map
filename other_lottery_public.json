@@ -3603,16 +3603,47 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://edion-cp.com/trecapiopen1204",
+      "source_site": "edion-cp.com",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-20T03:30:11.668000+00:00",
+      "first_detected_at": "2026-11-20T03:35:57.126485+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd5lYMmBJoJPlwNw9sCfZHqlY1ojxDldaLUpWzAAdWNBcJHxg/viewform",
+      "source_site": "docs.google.com",
+      "event_title": "11月27日(金)発売 ポケモンカードゲーム『ハドウシーカー』 抽選応募フォーム",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-20T03:30:11.668000+00:00",
+      "first_detected_at": "2026-11-20T03:35:57.126532+00:00",
+      "review_category": "pokemon",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-20T03:35:57.450Z",
+      "google_forms_parser_version": 5,
+      "google_forms_start_not_stated": false,
+      "official_event_title": "11月27日(金)発売 ポケモンカードゲーム『ハドウシーカー』 抽選応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-20T03:35:57.450Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSd5lYMmBJoJPlwNw9sCfZHqlY1ojxDldaLUpWzAAdWNBcJHxg/viewform"
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573171126052331664"
+    "1551580466266644552": "1573178621739270194"
   },
-  "collected_at": "2026-11-20T03:05:56.927284+00:00",
+  "collected_at": "2026-11-20T03:35:57.126568+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-20T03:25:56.890Z",
+    "next_at": "2026-11-20T03:40:58.281Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-20T02:45:56.893Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-20T03:05:57.391Z",
@@ -3623,10 +3654,10 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/": "2026-11-20T03:15:56.031Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/": "2026-11-20T03:15:56.031Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-20T03:15:56.031Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-20T02:25:56.890Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-20T02:25:56.890Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-20T02:25:56.890Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-20T02:25:56.890Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-20T03:35:58.281Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-20T03:35:58.281Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-20T03:35:58.281Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-20T03:35:58.281Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-20T02:35:55.712Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-20T02:35:55.712Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-20T02:35:55.712Z",
