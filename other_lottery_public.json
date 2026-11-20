@@ -3892,13 +3892,13 @@
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573322030596624386"
+    "1551580466266644552": "1573352283838877796"
   },
-  "collected_at": "2026-11-20T13:05:54.844655+00:00",
+  "collected_at": "2026-11-20T15:01:00.905369+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-20T14:56:00.921Z",
+    "next_at": "2026-11-20T15:06:01.452Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-20T14:11:07.329Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-20T14:21:08.539Z",
@@ -3910,10 +3910,10 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/": "2026-11-20T14:51:00.921Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-20T14:51:00.921Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-20T14:51:00.921Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-20T13:50:55.673Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-20T13:50:55.673Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-20T13:50:55.673Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-20T13:50:55.673Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-20T15:01:01.452Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-20T15:01:01.452Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-20T15:01:01.452Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-20T15:01:01.452Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-20T14:00:56.937Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-20T14:00:56.937Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-20T14:00:56.937Z",
