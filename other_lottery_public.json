@@ -3689,16 +3689,35 @@
       "google_forms_verified_at": "2026-11-20T04:35:55.761Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSfItQqnXGwnZwX1VyYgEs3nrc9DAszH-krTLajmjvJ65p1IbQ/viewform",
       "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://shoplottery.e-starbox.com/lottery/entry?code=Ji4zxu3eYh",
+      "source_site": "shoplottery.e-starbox.com",
+      "event_title": "【カードボックス日本橋店】 ワンピースカードゲーム エクストラブースター【ONE PIECE Heroines Edition vol.2】1BOX 購入権利抽選",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-20T05:30:06.153000+00:00",
+      "first_detected_at": "2026-11-20T05:35:56.199014+00:00",
+      "review_category": "onepiece",
+      "application_start_at": "2026-11-15T21:00:00+09:00",
+      "application_end_at": "2026-11-20T23:59:59+09:00",
+      "external_url_unverified": false,
+      "starbox_checked_at": "2026-11-20T05:35:56.472Z",
+      "result_announcement_date": "2026-11-21",
+      "store_name": "カードボックス日本橋店",
+      "product_name": "ワンピースカードゲーム エクストラブースター「ONE PIECE Heroines Edition vol.2」",
+      "official_event_title": "【カードボックス日本橋店】 ワンピースカードゲーム エクストラブースター【ONE PIECE Heroines Edition vol.2】1BOX 購入権利抽選",
+      "event_title_provisional": false,
+      "starbox_verified_at": "2026-11-20T05:35:56.472Z"
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573193690405675139"
+    "1551580466266644552": "1573208797596491867"
   },
-  "collected_at": "2026-11-20T04:35:55.420965+00:00",
+  "collected_at": "2026-11-20T05:35:56.199069+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-20T05:30:57.644Z",
+    "next_at": "2026-11-20T05:45:57.672Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-20T05:05:55.909Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-20T05:15:57.752Z",
@@ -3706,9 +3725,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-20T05:25:57.644Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-20T05:25:57.644Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/": "2026-11-20T05:25:57.644Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/": "2026-11-20T04:25:56.166Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/": "2026-11-20T04:25:56.166Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-20T04:25:56.166Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/": "2026-11-20T05:35:57.262Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/": "2026-11-20T05:35:57.262Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-20T05:35:57.262Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-20T04:45:57.672Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-20T04:45:57.672Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-20T04:45:57.672Z",

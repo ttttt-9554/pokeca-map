@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-20T04:35:55.002866+00:00",
-  "unique_livepocket_urls": 849,
+  "collected_at": "2026-11-20T05:35:55.655259+00:00",
+  "unique_livepocket_urls": 850,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15217,7 +15217,34 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-20T02:06:11.156449+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/3kkmy",
+      "discord_posted_at": "2026-11-20T05:30:05.322000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3kkmy",
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック『30th CELEBRATION』『インフェルノX』抽選販売",
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "application_start_at": "2026-11-20T12:36:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック『30th CELEBRATION』『インフェルノX』抽選販売",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-12-03",
+      "first_detected_at": "2026-11-20T05:35:59.934003+00:00"
     }
   ],
-  "updated_at": "2026-11-20T05:26:03.523939+00:00"
+  "updated_at": "2026-11-20T05:36:23.156339+00:00"
 }

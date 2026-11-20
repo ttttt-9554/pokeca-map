@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-20T04:35:55.002866+00:00",
+  "collected_at": "2026-11-20T05:35:55.655259+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 849,
+  "unique_livepocket_urls": 850,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -25946,33 +25946,69 @@
       ],
       "store_name": "イトーヨーカドー浦和店",
       "prefecture": ""
+    },
+    {
+      "url": "https://livepocket.jp/e/3kkmy",
+      "discord_message_id": "1573208794110886008",
+      "discord_posted_at": "2026-11-20T05:30:05.322000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍東京都\nカードショップ オリオンベース\n受付終了: 11/22 20:30（残り2日5時間）\nhttps://livepocket.jp/e/3kkmy",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/3kkmy",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック『30th CELEBRATION』『インフェルノX』抽選販売",
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "application_start_at": "2026-11-20T12:36:00+09:00",
+      "stores": [
+        {
+          "name": "カードショップ オリオンベース",
+          "prefecture": "東京都"
+        }
+      ],
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-12-03"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 667,
-    "no_structured_details": 182
+    "no_structured_details": 183
   },
   "field_counts": {
-    "store_name": 443,
-    "prefecture": 388,
-    "event_title": 546,
+    "store_name": 444,
+    "prefecture": 389,
+    "event_title": 547,
     "event_date": 1,
     "product_name": 133,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 811,
-    "application_start_at": 808,
-    "stores_events": 443
+    "application_end_at": 812,
+    "application_start_at": 809,
+    "stores_events": 444
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573193690405675139"
+      "1551580466266644552": "1573208797596491867"
     },
     "last_run": {
-      "checked_at": "2026-11-20T04:35:55.002866+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-20T05:35:55.655259+00:00",
+      "new_urls": 1,
       "original_urls": 849,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -26324,7 +26360,8 @@
         "1573133292012699688": "2026-11-20T00:35:58.543552+00:00",
         "1573140847053115592": "2026-11-20T01:06:01.371257+00:00",
         "1573148399560036453": "2026-11-20T01:36:00.201659+00:00",
-        "1573155959319306332": "2026-11-20T02:06:10.080777+00:00"
+        "1573155959319306332": "2026-11-20T02:06:10.080777+00:00",
+        "1573208794110886008": "2026-11-20T05:35:58.755901+00:00"
       },
       "checked_search_urls": {}
     },
@@ -30114,6 +30151,11 @@
           "checked_at": "2026-11-20T02:08:22.356873+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/3kkmy": {
+          "checked_at": "2026-11-20T05:36:23.156339+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -33082,6 +33124,12 @@
           "detected_at": "2026-11-20T02:06:11.156449+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-20T02:08:22.356873+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/3kkmy": {
+          "detected_at": "2026-11-20T05:35:59.934003+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-20T05:36:23.156339+00:00",
           "http_status": null
         }
       },
@@ -42970,6 +43018,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/3kkmy": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-20T05:36:23.156339+00:00",
+          "title_observed": "ポケモンカードゲーム MEGA 拡張パック『30th CELEBRATION』『インフェルノX』抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -50227,6 +50286,19 @@
         },
         "https://livepocket.jp/e/91zar": {
           "checked_at": "2026-11-20T02:08:22.356873+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/3kkmy": {
+          "checked_at": "2026-11-20T05:36:23.156339+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
