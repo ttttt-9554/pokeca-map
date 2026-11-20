@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-20T00:35:55.748659+00:00",
-  "unique_livepocket_urls": 841,
+  "collected_at": "2026-11-20T01:05:55.940704+00:00",
+  "unique_livepocket_urls": 843,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14898,7 +14898,48 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-20T00:35:59.906252+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2pmzd",
+      "discord_posted_at": "2026-11-20T01:00:05.481000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/2pmzd",
+      "event_title": "TSUTAYA中里店 11/27発売ポケモンカード ハドウシーカー抽選",
+      "application_end_at": "2026-11-23T21:00:00+09:00",
+      "application_start_at": "2026-11-20T00:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYA中里店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_name": "ヤマト屋書店TSUTAYA中里店",
+      "prefecture": "宮城県",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "TSUTAYA中里店 11/27発売ポケモンカード ハドウシーカー抽選",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29",
+      "first_detected_at": "2026-11-20T01:06:02.257870+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/2a9e4",
+      "discord_posted_at": "2026-11-20T01:00:05.481000+00:00",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/2a9e4",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
+      "first_detected_at": "2026-11-20T01:06:02.257870+00:00"
     }
   ],
-  "updated_at": "2026-11-20T00:56:04.361074+00:00"
+  "updated_at": "2026-11-20T01:06:31.430218+00:00"
 }

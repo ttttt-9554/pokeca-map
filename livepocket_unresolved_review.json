@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-20T00:56:09Z",
-  "total": 2,
+  "as_of": "2026-11-20T01:06:45Z",
+  "total": 3,
   "items": [
     {
       "url": "https://livepocket.jp/e/s2q8j",
@@ -35,6 +35,22 @@
       "last_checked_at": "2026-11-06T14:01:22.617488+00:00",
       "next_retry_at": "2026-11-07T14:01:22.617488+00:00",
       "queue": "ready"
+    },
+    {
+      "url": "https://livepocket.jp/e/2a9e4",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "",
+      "missing": [
+        "store",
+        "deadline"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-20T01:06:31.430218+00:00",
+      "next_retry_at": "2026-11-21T01:06:31.430218+00:00",
+      "queue": "retry_wait"
     }
   ]
 }
