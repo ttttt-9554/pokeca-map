@@ -3633,12 +3633,68 @@
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-20T03:35:57.450Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSd5lYMmBJoJPlwNw9sCfZHqlY1ojxDldaLUpWzAAdWNBcJHxg/viewform"
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSfItQqnXGwnZwX1VyYgEs3nrc9DAszH-krTLajmjvJ65p1IbQ/viewform?usp=send_form",
+      "source_site": "docs.google.com",
+      "event_title": "MINT梅田店 ポケモンカードゲーム【拡張パック「ハドウシーカー」】抽選応募フォーム",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-20T04:30:04.318000+00:00",
+      "first_detected_at": "2026-11-20T04:35:55.420907+00:00",
+      "review_category": "pokemon",
+      "application_start_at": null,
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-20T04:35:55.761Z",
+      "google_forms_parser_version": 5,
+      "google_forms_start_not_stated": false,
+      "result_announcement_date": "2026-11-24",
+      "stores": [
+        {
+          "name": "MINT梅田店",
+          "prefecture": ""
+        }
+      ],
+      "store_name": "MINT梅田店",
+      "official_event_title": "MINT梅田店 ポケモンカードゲーム【拡張パック「ハドウシーカー」】抽選応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-20T04:35:55.761Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSfItQqnXGwnZwX1VyYgEs3nrc9DAszH-krTLajmjvJ65p1IbQ/viewform",
+      "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSfItQqnXGwnZwX1VyYgEs3nrc9DAszH-krTLajmjvJ65p1IbQ/viewform",
+      "source_site": "docs.google.com",
+      "event_title": "MINT梅田店 ポケモンカードゲーム【拡張パック「ハドウシーカー」】抽選応募フォーム",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-20T04:30:04.318000+00:00",
+      "first_detected_at": "2026-11-20T04:35:55.420941+00:00",
+      "review_category": "pokemon",
+      "application_start_at": null,
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-20T04:35:55.761Z",
+      "google_forms_parser_version": 5,
+      "google_forms_start_not_stated": false,
+      "result_announcement_date": "2026-11-24",
+      "stores": [
+        {
+          "name": "MINT梅田店",
+          "prefecture": ""
+        }
+      ],
+      "store_name": "MINT梅田店",
+      "official_event_title": "MINT梅田店 ポケモンカードゲーム【拡張パック「ハドウシーカー」】抽選応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-20T04:35:55.761Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSfItQqnXGwnZwX1VyYgEs3nrc9DAszH-krTLajmjvJ65p1IbQ/viewform",
+      "pokemon_map_type": "pack"
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573178621739270194"
+    "1551580466266644552": "1573193690405675139"
   },
-  "collected_at": "2026-11-20T03:35:57.126568+00:00",
+  "collected_at": "2026-11-20T04:35:55.420965+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
