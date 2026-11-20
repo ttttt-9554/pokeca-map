@@ -15316,27 +15316,26 @@
     },
     {
       "url": "https://livepocket.jp/e/s7juc",
-      "discord_posted_at": "2026-11-20T10:30:03.697000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/s7juc",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
       "event_title": "【古本市場深谷店】ワンピース抽選販売（EB-05 ヒロインズ2）",
-      "application_end_at": "2026-11-22T22:00:00+09:00",
       "application_start_at": "2026-11-20T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "discord_posted_at": "2026-11-20T10:30:03.697000+00:00",
       "stores": [
         {
           "name": "古本市場深谷店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場深谷店",
-      "prefecture": "埼玉県",
-      "official_event_title": "【古本市場深谷店】ワンピース抽選販売（EB-05 ヒロインズ2）",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/s7juc",
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-20T10:36:05.555002+00:00"
     }
   ],
-  "updated_at": "2026-11-20T10:36:30.285235+00:00"
+  "updated_at": "2026-11-20T10:46:13.144650+00:00"
 }
