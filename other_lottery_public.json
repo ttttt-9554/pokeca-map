@@ -3711,13 +3711,13 @@
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573208797596491867"
+    "1551580466266644552": "1573216386770145390"
   },
-  "collected_at": "2026-11-20T05:35:56.199069+00:00",
+  "collected_at": "2026-11-20T06:05:55.057681+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-20T06:01:01.271Z",
+    "next_at": "2026-11-20T06:05:55.909Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-20T05:05:55.909Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-20T05:15:57.752Z",
@@ -3732,10 +3732,10 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-20T05:56:01.271Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-20T05:56:01.271Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-20T05:56:01.271Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-20T04:55:56.251Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-20T04:55:56.251Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-20T04:55:56.251Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-20T04:55:56.251Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-20T06:05:55.401Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-20T06:05:55.401Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-20T06:05:55.401Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-20T06:05:55.401Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-20T05:05:55.909Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-20T05:05:55.909Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-20T05:05:55.909Z",
