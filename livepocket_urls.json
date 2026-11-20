@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-20T02:35:54.987276+00:00",
+  "collected_at": "2026-11-20T03:05:56.184323+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -25494,7 +25494,7 @@
       "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/gk4vuvavuy",
       "field_sources": {
@@ -25552,7 +25552,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/2pmzd",
       "field_sources": {
@@ -25606,7 +25606,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/nyesx",
       "field_sources": {
@@ -25642,7 +25642,7 @@
       "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/f2llf-b_7e",
       "field_sources": {
@@ -25748,7 +25748,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/91zar",
       "field_sources": {
@@ -25784,7 +25784,7 @@
       "product_name": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/hkfn-",
       "field_sources": {
@@ -25821,7 +25821,7 @@
       "product_name": "ポケモンカードゲーム MEGA 30th CELEBRATIONカードセット（9種）/拡張パック 30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/otd0-f6i7p",
       "field_sources": {
@@ -25859,7 +25859,7 @@
       "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/iucc0uofvq",
       "field_sources": {
@@ -25950,8 +25950,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 659,
-    "no_structured_details": 190
+    "parsed": 667,
+    "no_structured_details": 182
   },
   "field_counts": {
     "store_name": 443,
@@ -25968,10 +25968,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573163498354114722"
+      "1551580466266644552": "1573171126052331664"
     },
     "last_run": {
-      "checked_at": "2026-11-20T02:35:54.987276+00:00",
+      "checked_at": "2026-11-20T03:05:56.184323+00:00",
       "new_urls": 0,
       "original_urls": 849,
       "suspect_legacy_store_names": 0,
