@@ -30243,7 +30243,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/nyesx": {
-          "checked_at": "2026-11-20T07:46:26.771064+00:00",
+          "checked_at": "2026-11-20T13:51:21.486473+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -33229,7 +33229,7 @@
         "https://livepocket.jp/e/nyesx": {
           "detected_at": "2026-11-20T01:36:01.265205+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-20T07:46:26.771064+00:00",
+          "checked_at": "2026-11-20T13:51:21.486473+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/91zar": {
@@ -35500,8 +35500,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nyesx": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-20T07:46:26.771064+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-20T13:51:21.486473+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/91zar": {
@@ -43124,7 +43124,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-20T07:46:26.771064+00:00",
+          "checked_at": "2026-11-20T13:51:21.486473+00:00",
           "title_observed": "【抽選販売】ポケモンカード MEGA拡張パック ハドウシーカー",
           "genre": "pokemon",
           "product_origin": "",
@@ -50409,7 +50409,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nyesx": {
-          "checked_at": "2026-11-20T07:46:26.771064+00:00",
+          "checked_at": "2026-11-20T13:51:21.486473+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
