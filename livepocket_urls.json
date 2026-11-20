@@ -30231,8 +30231,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/91zar": {
-          "checked_at": "2026-11-20T02:08:22.356873+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-20T08:16:27.823648+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/3kkmy": {
@@ -33192,8 +33192,8 @@
         },
         "https://livepocket.jp/e/91zar": {
           "detected_at": "2026-11-20T02:06:11.156449+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-20T02:08:22.356873+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-20T08:16:27.823648+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/hkfn-": {
@@ -35454,6 +35454,11 @@
         "https://livepocket.jp/e/nyesx": {
           "attempts": 1,
           "last_attempt_at": "2026-11-20T07:46:26.771064+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/91zar": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-20T08:16:27.823648+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -43121,7 +43126,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-20T02:08:22.356873+00:00",
+          "checked_at": "2026-11-20T08:16:27.823648+00:00",
           "title_observed": "【古本市場深谷店】ワンピース抽選販売（OP17 世界最強の戦士）",
           "genre": "",
           "product_origin": "",
@@ -50405,7 +50410,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/91zar": {
-          "checked_at": "2026-11-20T02:08:22.356873+00:00",
+          "checked_at": "2026-11-20T08:16:27.823648+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
