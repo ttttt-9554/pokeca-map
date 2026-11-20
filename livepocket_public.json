@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-20T01:05:55.940704+00:00",
-  "unique_livepocket_urls": 843,
+  "collected_at": "2026-11-20T01:35:56.089424+00:00",
+  "unique_livepocket_urls": 845,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -14935,7 +14935,134 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-20T01:06:02.257870+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/nyesx",
+      "discord_posted_at": "2026-11-20T01:30:06.139000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nyesx",
+      "event_title": "【抽選販売】ポケモンカード MEGA拡張パック ハドウシーカー",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-20T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_name": "ヤマト屋書店TSUTAYABOOKSTORE仙台長命ヶ丘店",
+      "prefecture": "宮城県",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【抽選販売】ポケモンカード MEGA拡張パック ハドウシーカー",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-30",
+      "first_detected_at": "2026-11-20T01:36:01.265205+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/f2llf-b_7e",
+      "discord_posted_at": "2026-11-20T01:30:06.139000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f2llf-b_7e",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "application_start_at": "2026-11-06T15:56:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "イトーヨーカドー武蔵境店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー多摩センター店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー和光店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー三島店",
+          "prefecture": "静岡県"
+        },
+        {
+          "name": "イトーヨーカドー赤羽店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ葛西店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー甲府昭和店",
+          "prefecture": "山梨県"
+        },
+        {
+          "name": "イトーヨーカドー木場店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー湘南台店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー立場店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドー大宮宮原店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドー国領店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドー大森店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ川口店",
+          "prefecture": "埼玉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ八尾店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーアリオ鳳店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドー武蔵小金井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ市原店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ柏店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "イトーヨーカドー武蔵境店",
+      "prefecture": "",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
+      "first_detected_at": "2026-11-20T01:36:01.265205+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
-  "updated_at": "2026-11-20T01:26:04.520167+00:00"
+  "updated_at": "2026-11-20T01:36:36.920886+00:00"
 }

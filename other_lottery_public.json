@@ -3536,18 +3536,48 @@
       "google_forms_verified_at": "2026-11-19T13:02:48.541Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLScyVCz7XSzFQ8L4EWUXfMzbnjYKd2P3TCOXoAjrp3Wy0Md2ag/viewform",
       "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://cloud-pass.jp/pr/d5111f868ba8f555add7ef4d8c943ffd19273ae3a622a02861f04cf1c0db1e55",
+      "source_site": "cloud-pass.jp",
+      "event_title": "2612_【抽選】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ 販売予約",
+      "prefecture": "東京都",
+      "discord_posted_at": "2026-11-20T01:30:06.941000+00:00",
+      "first_detected_at": "2026-11-20T01:35:56.461355+00:00",
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-20T10:00:00+09:00",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "external_url_unverified": false,
+      "cloud_pass_checked_at": "2026-11-20T01:35:56.722Z",
+      "store_name": "SHIBUYA TSUTAYA",
+      "official_event_title": "2612_【抽選】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ 販売予約",
+      "event_title_provisional": false,
+      "cloud_pass_verified_at": "2026-11-20T01:35:56.722Z",
+      "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://geo-online.co.jp/news/792",
+      "source_site": "geo-online.co.jp",
+      "event_title": "",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-20T01:30:06.941000+00:00",
+      "first_detected_at": "2026-11-20T01:35:56.461374+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573140847053115592"
+    "1551580466266644552": "1573148402923995177"
   },
-  "collected_at": "2026-11-20T01:05:56.388499+00:00",
+  "collected_at": "2026-11-20T01:35:56.461430+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-20T01:30:57.124Z",
+    "next_at": "2026-11-20T01:40:57.630Z",
     "branches": {
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-20T00:25:55.668Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-20T01:35:57.630Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-20T00:46:10.884Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-20T00:46:10.884Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-20T00:46:10.884Z",
@@ -3564,9 +3594,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-20T01:25:57.124Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-20T01:25:57.124Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-20T01:25:57.124Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-20T00:25:55.668Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-20T00:25:55.668Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-20T00:25:55.668Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-20T01:35:57.630Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-20T01:35:57.630Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-20T01:35:57.630Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-20T00:35:56.643Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-20T00:35:56.643Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-20T00:35:56.643Z"
