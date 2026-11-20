@@ -29653,12 +29653,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/td3r4": {
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/k5koz": {
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -32573,13 +32573,13 @@
         "https://livepocket.jp/e/k5koz": {
           "detected_at": "2026-11-19T12:26:03.704126+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/td3r4": {
           "detected_at": "2026-11-19T12:26:03.704126+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/gk4vuvavuy": {
@@ -34794,13 +34794,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/td3r4": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-19T18:38:13.355758+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-20T00:47:53.175015+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/k5koz": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-19T18:38:13.355758+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-20T00:47:53.175015+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -42358,7 +42358,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "title_observed": "【再入荷】【ブースターパック 「世界最強の戦士」】MUGIWARA STORE HARAJUKU カードゲーム抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -42369,7 +42369,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "title_observed": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 池袋店 カードゲーム抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -49512,7 +49512,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/td3r4": {
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -49525,7 +49525,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/k5koz": {
-          "checked_at": "2026-11-19T18:38:13.355758+00:00",
+          "checked_at": "2026-11-20T00:47:53.175015+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

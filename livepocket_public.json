@@ -14829,6 +14829,7 @@
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-29",
       "purchase_end_date": "2026-12-06",
+      "official_event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】麦わらストア 池袋店 カードゲーム抽選販売受付",
       "first_detected_at": "2026-11-19T12:26:03.704126+00:00"
     },
     {
@@ -14850,17 +14851,18 @@
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-29",
       "purchase_end_date": "2026-12-06",
+      "official_event_title": "【再入荷】【ブースターパック 「世界最強の戦士」】MUGIWARA STORE HARAJUKU カードゲーム抽選販売受付",
       "first_detected_at": "2026-11-19T12:26:03.704126+00:00"
     },
     {
       "url": "https://livepocket.jp/e/gk4vuvavuy",
-      "discord_posted_at": "2026-11-20T00:30:04.219000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/gk4vuvavuy",
+      "store_name": "イトーヨーカドー大和鶴間店",
+      "prefecture": "",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
-      "application_end_at": "2026-11-22T23:59:00+09:00",
       "application_start_at": "2026-11-06T15:56:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-22T23:59:00+09:00",
+      "discord_posted_at": "2026-11-20T00:30:04.219000+00:00",
       "stores": [
         {
           "name": "イトーヨーカドー大和鶴間店",
@@ -14891,19 +14893,14 @@
           "prefecture": "神奈川県"
         }
       ],
-      "store_name": "イトーヨーカドー大和鶴間店",
-      "prefecture": "",
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/gk4vuvavuy",
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
-      "first_detected_at": "2026-11-20T00:35:59.906252+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-20T00:35:59.906252+00:00"
     }
   ],
-  "updated_at": "2026-11-20T00:36:34.646912+00:00"
+  "updated_at": "2026-11-20T00:47:53.175015+00:00"
 }
