@@ -14922,8 +14922,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "TSUTAYA中里店 11/27発売ポケモンカード ハドウシーカー抽選",
       "first_detected_at": "2026-11-20T01:06:02.257870+00:00"
     },
     {
@@ -14936,8 +14934,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION 抽選販売",
       "first_detected_at": "2026-11-20T01:06:02.257870+00:00"
     },
     {
@@ -15341,5 +15337,5 @@
       "first_detected_at": "2026-11-20T10:36:05.555002+00:00"
     }
   ],
-  "updated_at": "2026-11-20T13:26:23.800404+00:00"
+  "updated_at": "2026-11-20T13:29:17.132651+00:00"
 }
