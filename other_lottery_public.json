@@ -3792,7 +3792,7 @@
       "url": "https://docs.google.com/forms/d/e/1FAIpQLScq5nynyBRfLfvdDGcx7hw7FlPe1gOcUOQRvqoVx1Tcmk_Jsg/viewform",
       "source_site": "docs.google.com",
       "event_title": "【MINT横浜スカイビル店】 ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」1BOX購入抽選",
-      "prefecture": "",
+      "prefecture": "神奈川県",
       "discord_posted_at": "2026-11-20T09:30:06.233000+00:00",
       "first_detected_at": "2026-11-20T09:35:56.068990+00:00",
       "review_category": "pokemon",
@@ -3806,7 +3806,7 @@
       "stores": [
         {
           "name": "MINT横浜スカイビル店",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         }
       ],
       "store_name": "MINT横浜スカイビル店",
@@ -3814,7 +3814,11 @@
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-20T09:35:58.477Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLScq5nynyBRfLfvdDGcx7hw7FlPe1gOcUOQRvqoVx1Tcmk_Jsg/viewform",
-      "pokemon_map_type": "pack"
+      "pokemon_map_type": "pack",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://aeonretail.com/product/0/P-4988602182019/P-498860218201901/",
