@@ -15702,6 +15702,8 @@
       "pokemon_map_match": "MEGAドリームex",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードゲームMEGA ハイクラスパック『MEGAドリームex』抽選販売受付",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
@@ -15724,6 +15726,8 @@
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
       "review_category": "yugioh",
+      "official_genre": "yugioh",
+      "official_event_title": "遊戯王OCG『遊☆戯☆王 ORIGINAL ARTWORK COLLETION』抽選販売受付",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
@@ -15746,6 +15750,8 @@
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
       "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
@@ -15773,5 +15779,5 @@
       "first_detected_at": "2026-11-21T13:01:02.214969+00:00"
     }
   ],
-  "updated_at": "2026-11-21T14:41:02.104388+00:00"
+  "updated_at": "2026-11-21T14:51:39.115682+00:00"
 }
