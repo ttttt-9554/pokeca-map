@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-21T00:35:55.491678+00:00",
+  "collected_at": "2026-11-21T01:35:55.415858+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 852,
+  "unique_livepocket_urls": 853,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -26100,33 +26100,67 @@
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29"
+    },
+    {
+      "url": "https://livepocket.jp/e/fm247",
+      "discord_message_id": "1573510788667416708",
+      "discord_posted_at": "2026-11-21T01:30:06.435000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nTSUTAYA横須賀粟田店\n受付終了: 11/22 21:30（残り1日10時間）\nhttps://livepocket.jp/e/fm247",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/fm247",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカードMEGA 拡張パック『ハドウシーカー』抽選販売",
+      "application_end_at": "2026-11-22T21:30:00+09:00",
+      "application_start_at": "2026-11-20T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA横須賀粟田店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "TSUTAYA横須賀粟田店",
+      "prefecture": "神奈川県",
+      "result_announcement_date": "2026-11-23"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 670,
-    "no_structured_details": 182
+    "no_structured_details": 183
   },
   "field_counts": {
-    "store_name": 446,
-    "prefecture": 390,
-    "event_title": 549,
+    "store_name": 447,
+    "prefecture": 391,
+    "event_title": 550,
     "event_date": 1,
     "product_name": 134,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 814,
-    "application_start_at": 811,
-    "stores_events": 446
+    "application_end_at": 815,
+    "application_start_at": 812,
+    "stores_events": 447
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573495725592154312"
+      "1551580466266644552": "1573510792106746117"
     },
     "last_run": {
-      "checked_at": "2026-11-21T00:35:55.491678+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-21T01:35:55.415858+00:00",
+      "new_urls": 1,
       "original_urls": 852,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -26481,7 +26515,8 @@
         "1573155959319306332": "2026-11-20T02:06:10.080777+00:00",
         "1573208794110886008": "2026-11-20T05:35:58.755901+00:00",
         "1573231454102491149": "2026-11-20T07:06:03.655019+00:00",
-        "1573284284767277087": "2026-11-20T10:36:04.539043+00:00"
+        "1573284284767277087": "2026-11-20T10:36:04.539043+00:00",
+        "1573510788667416708": "2026-11-21T01:36:00.914139+00:00"
       },
       "checked_search_urls": {}
     },
@@ -30286,6 +30321,11 @@
           "checked_at": "2026-11-20T22:46:27.256508+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/fm247": {
+          "checked_at": "2026-11-21T01:36:24.890146+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -33272,6 +33312,12 @@
           "detected_at": "2026-11-20T10:36:05.555002+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-20T22:46:27.256508+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/fm247": {
+          "detected_at": "2026-11-21T01:36:02.126045+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-21T01:36:24.890146+00:00",
           "http_status": null
         }
       },
@@ -43223,6 +43269,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/fm247": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-21T01:36:24.890146+00:00",
+          "title_observed": "ポケモンカードMEGA 拡張パック『ハドウシーカー』抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -50519,6 +50576,19 @@
         },
         "https://livepocket.jp/e/s7juc": {
           "checked_at": "2026-11-20T22:46:27.256508+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/fm247": {
+          "checked_at": "2026-11-21T01:36:24.890146+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

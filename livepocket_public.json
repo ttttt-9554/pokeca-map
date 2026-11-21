@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-21T00:35:55.491678+00:00",
-  "unique_livepocket_urls": 852,
+  "collected_at": "2026-11-21T01:35:55.415858+00:00",
+  "unique_livepocket_urls": 853,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15335,7 +15335,32 @@
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-20T10:36:05.555002+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/fm247",
+      "discord_posted_at": "2026-11-21T01:30:06.435000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/fm247",
+      "event_title": "ポケモンカードMEGA 拡張パック『ハドウシーカー』抽選販売",
+      "application_end_at": "2026-11-22T21:30:00+09:00",
+      "application_start_at": "2026-11-20T10:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA横須賀粟田店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "TSUTAYA横須賀粟田店",
+      "prefecture": "神奈川県",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードMEGA 拡張パック『ハドウシーカー』抽選販売",
+      "result_announcement_date": "2026-11-23",
+      "first_detected_at": "2026-11-21T01:36:02.126045+00:00"
     }
   ],
-  "updated_at": "2026-11-21T01:26:10.050789+00:00"
+  "updated_at": "2026-11-21T01:36:24.890146+00:00"
 }
