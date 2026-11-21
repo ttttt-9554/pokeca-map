@@ -15544,28 +15544,27 @@
     },
     {
       "url": "https://livepocket.jp/e/1x796",
-      "discord_posted_at": "2026-11-21T03:30:04.862000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/1x796",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
       "event_title": "11/27発売 ポケモン ハドウシーカー抽選販売",
-      "application_end_at": "2026-11-22T22:00:00+09:00",
       "application_start_at": "2026-11-20T20:00:00+09:00",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "discord_posted_at": "2026-11-21T03:30:04.862000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "TSUTAYA辰巳台店",
-      "prefecture": "千葉県",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/1x796",
+      "purchase_start_date": "2026-11-27",
       "review_category": "pokemon",
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_event_title": "11/27発売 ポケモン ハドウシーカー抽選販売",
-      "purchase_start_date": "2026-11-27",
       "first_detected_at": "2026-11-21T03:36:01.115984+00:00"
     }
   ],
-  "updated_at": "2026-11-21T03:36:23.644851+00:00"
+  "updated_at": "2026-11-21T03:46:04.437524+00:00"
 }
