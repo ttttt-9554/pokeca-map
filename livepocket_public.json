@@ -15515,8 +15515,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【店頭告知を必ず確認してください】11/27発売ポケカ「ハドウシーカー」抽選販売",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     },
     {
@@ -15542,8 +15540,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     },
     {
@@ -15685,79 +15681,73 @@
     },
     {
       "url": "https://livepocket.jp/e/nk7t8",
-      "discord_posted_at": "2026-11-21T08:39:26.854000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/nk7t8",
+      "store_name": "TSUTAYA 今市店",
+      "prefecture": "栃木県",
       "event_title": "ポケモンカードゲームMEGA ハイクラスパック『MEGAドリームex』抽選販売受付",
-      "application_end_at": "2026-11-25T21:30:00+09:00",
       "application_start_at": "2026-11-21T08:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-25T21:30:00+09:00",
+      "discord_posted_at": "2026-11-21T08:39:26.854000+00:00",
       "stores": [
         {
           "name": "TSUTAYA 今市店",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA 今市店",
-      "prefecture": "栃木県",
-      "pokemon_map_match": "MEGAドリームex",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲームMEGA ハイクラスパック『MEGAドリームex』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nk7t8",
       "result_announcement_date": "2026-11-29",
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
+      "review_category": "pokemon",
+      "pokemon_map_match": "MEGAドリームex",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
       "url": "https://livepocket.jp/e/m9ude",
-      "discord_posted_at": "2026-11-21T08:39:26.854000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/m9ude",
+      "store_name": "TSUTAYA 今市店",
+      "prefecture": "栃木県",
       "event_title": "遊戯王OCG『遊☆戯☆王 ORIGINAL ARTWORK COLLETION』抽選販売受付",
-      "application_end_at": "2026-11-25T21:30:00+09:00",
       "application_start_at": "2026-11-21T08:00:00+09:00",
-      "review_category": "yugioh",
+      "application_end_at": "2026-11-25T21:30:00+09:00",
+      "discord_posted_at": "2026-11-21T08:39:26.854000+00:00",
       "stores": [
         {
           "name": "TSUTAYA 今市店",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA 今市店",
-      "prefecture": "栃木県",
-      "official_genre": "yugioh",
-      "official_event_title": "遊戯王OCG『遊☆戯☆王 ORIGINAL ARTWORK COLLETION』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/m9ude",
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
+      "review_category": "yugioh",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
       "url": "https://livepocket.jp/e/kyhoh",
-      "discord_posted_at": "2026-11-21T08:39:26.854000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/kyhoh",
+      "store_name": "TSUTAYA 今市店",
+      "prefecture": "栃木県",
       "event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
-      "application_end_at": "2026-11-25T21:30:00+09:00",
       "application_start_at": "2026-11-21T08:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-25T21:30:00+09:00",
+      "discord_posted_at": "2026-11-21T08:39:26.854000+00:00",
       "stores": [
         {
           "name": "TSUTAYA 今市店",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA 今市店",
-      "prefecture": "栃木県",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/kyhoh",
       "result_announcement_date": "2026-11-30",
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     }
   ],
-  "updated_at": "2026-11-21T08:46:25.244851+00:00"
+  "updated_at": "2026-11-21T08:56:09.602885+00:00"
 }
