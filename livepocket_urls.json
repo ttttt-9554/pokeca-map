@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-21T05:35:56.358445+00:00",
+  "collected_at": "2026-11-21T06:05:56.710938+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -26428,7 +26428,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/1x796",
       "field_sources": {
@@ -26462,7 +26462,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/35urr",
       "field_sources": {
@@ -26490,8 +26490,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 679,
-    "no_structured_details": 184
+    "parsed": 681,
+    "no_structured_details": 182
   },
   "field_counts": {
     "store_name": 457,
@@ -26508,12 +26508,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573571191451557898"
+      "1551580466266644552": "1573578765840289894"
     },
     "last_run": {
-      "checked_at": "2026-11-21T05:35:56.358445+00:00",
-      "new_urls": 1,
-      "original_urls": 862,
+      "checked_at": "2026-11-21T06:05:56.710938+00:00",
+      "new_urls": 0,
+      "original_urls": 863,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
