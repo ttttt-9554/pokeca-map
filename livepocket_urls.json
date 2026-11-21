@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-21T02:35:55.200779+00:00",
+  "collected_at": "2026-11-21T03:05:56.534857+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -26111,7 +26111,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/fm247",
       "field_sources": {
@@ -26145,7 +26145,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/bsfbk",
       "field_sources": {
@@ -26179,7 +26179,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/xp9ri",
       "field_sources": {
@@ -26213,7 +26213,7 @@
       "product_name": "エクストラブースター ONE PIECE Heroines Edition vol.2",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/un9l_",
       "field_sources": {
@@ -26248,7 +26248,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/pmz0v",
       "field_sources": {
@@ -26284,7 +26284,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/8fl8-",
       "field_sources": {
@@ -26320,7 +26320,7 @@
       "product_name": "拡張パック 30th CELEBRATION",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/sx90i",
       "field_sources": {
@@ -26355,7 +26355,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/n0da5",
       "field_sources": {
@@ -26392,7 +26392,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/l_r3m",
       "field_sources": {
@@ -26421,8 +26421,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 670,
-    "no_structured_details": 191
+    "parsed": 679,
+    "no_structured_details": 182
   },
   "field_counts": {
     "store_name": 455,
@@ -26439,12 +26439,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573525919081963580"
+      "1551580466266644552": "1573533508020863097"
     },
     "last_run": {
-      "checked_at": "2026-11-21T02:35:55.200779+00:00",
-      "new_urls": 3,
-      "original_urls": 858,
+      "checked_at": "2026-11-21T03:05:56.534857+00:00",
+      "new_urls": 0,
+      "original_urls": 861,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
