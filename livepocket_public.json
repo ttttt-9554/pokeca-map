@@ -15377,6 +15377,8 @@
       "store_location_url": "https://livepocket.jp/e/bsfbk",
       "result_announcement_date": "2026-11-25",
       "review_category": "pokemon",
+      "official_genre": "pokemon",
+      "official_event_title": "【コロコロBASE】11/27発売 ポケモンカードゲーム 新商品 抽選受付",
       "first_detected_at": "2026-11-21T02:06:09.970762+00:00"
     },
     {
@@ -15443,6 +15445,7 @@
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
+      "official_event_title": "【ふるいちイオンモールつくば店】ワンピース抽選販売（世界最強の戦士）",
       "first_detected_at": "2026-11-21T02:06:09.970762+00:00"
     },
     {
@@ -15773,5 +15776,5 @@
       "first_detected_at": "2026-11-21T13:01:02.214969+00:00"
     }
   ],
-  "updated_at": "2026-11-21T14:11:05.311365+00:00"
+  "updated_at": "2026-11-21T14:21:32.647739+00:00"
 }

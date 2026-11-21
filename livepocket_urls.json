@@ -30983,12 +30983,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/pmz0v": {
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/bsfbk": {
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -34064,13 +34064,13 @@
         "https://livepocket.jp/e/bsfbk": {
           "detected_at": "2026-11-21T02:06:09.970762+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/pmz0v": {
           "detected_at": "2026-11-21T02:06:09.970762+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/un9l_": {
@@ -36419,13 +36419,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/pmz0v": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-21T08:16:34.297304+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-21T14:21:32.647739+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/bsfbk": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-21T08:16:34.297304+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-21T14:21:32.647739+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/8fl8-": {
@@ -44210,7 +44210,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "title_observed": "【ふるいちイオンモールつくば店】ワンピース抽選販売（世界最強の戦士）",
           "genre": "",
           "product_origin": "",
@@ -44221,7 +44221,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "title_observed": "【コロコロBASE】11/27発売 ポケモンカードゲーム 新商品 抽選受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -51728,7 +51728,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/pmz0v": {
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -51741,7 +51741,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/bsfbk": {
-          "checked_at": "2026-11-21T08:16:34.297304+00:00",
+          "checked_at": "2026-11-21T14:21:32.647739+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
