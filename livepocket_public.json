@@ -15357,6 +15357,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "ポケモンカードMEGA 拡張パック『ハドウシーカー』抽選販売",
       "first_detected_at": "2026-11-21T01:36:02.126045+00:00"
     },
     {
@@ -15609,8 +15611,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     },
     {
@@ -15654,8 +15654,6 @@
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     },
     {
@@ -15681,8 +15679,6 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     },
     {
@@ -15779,5 +15775,5 @@
       "first_detected_at": "2026-11-21T13:01:02.214969+00:00"
     }
   ],
-  "updated_at": "2026-11-21T13:41:25.727884+00:00"
+  "updated_at": "2026-11-21T13:51:18.043620+00:00"
 }

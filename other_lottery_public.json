@@ -2897,7 +2897,7 @@
       "application_start_at": "2026-11-19T14:00:00+09:00",
       "application_end_at": "2026-11-23T23:59:00+09:00",
       "external_url_unverified": false,
-      "store_notice_checked_at": "2026-11-21T07:45:55.271Z",
+      "store_notice_checked_at": "2026-11-21T13:50:54.779Z",
       "store_name": "ポケモンセンターシブヤ",
       "stores": [
         {
@@ -2907,7 +2907,7 @@
       ],
       "official_event_title": "11月27日（金）発売のポケモンカードゲーム関連商品の販売方法について",
       "event_title_provisional": false,
-      "store_notice_verified_at": "2026-11-21T07:45:55.271Z",
+      "store_notice_verified_at": "2026-11-21T13:50:54.779Z",
       "store_notice_source_url": "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202611/000724.html",
       "product_name": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
       "result_announcement_date": "2026-11-25",
@@ -4120,10 +4120,10 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-21T13:40:57.357Z",
+    "next_at": "2026-11-21T13:51:09.526Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-21T13:40:57.263Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-21T12:40:57.357Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-21T13:50:54.779Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-21T13:00:58.415Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-21T13:10:57.861Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-21T13:10:57.861Z",
@@ -4136,9 +4136,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-21T13:40:57.263Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-21T13:40:57.263Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-21T13:40:57.263Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-21T12:40:57.357Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-21T12:40:57.357Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-21T12:40:57.357Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-21T13:50:54.779Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-21T13:50:54.779Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-21T13:50:54.779Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-21T12:51:09.526Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-21T12:51:09.526Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-21T12:51:09.526Z",
