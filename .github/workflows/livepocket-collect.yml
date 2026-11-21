@@ -9,6 +9,7 @@ name: LivePocket Discord URL Collector
       - 'scripts/customform_lottery_parse.mjs'
       - 'scripts/google_forms_lottery_enrich.mjs'
       - 'supabase/functions/lottery-individual-fetch/google-forms.mjs'
+      - 'supabase/functions/lottery-individual-fetch/google-form-notices.mjs'
       - 'scripts/store_notice_lottery_enrich.mjs'
       - 'supabase/functions/lottery-individual-fetch/store-notices.mjs'
       - 'supabase/functions/lottery-individual-fetch/sevennet-fair.mjs'

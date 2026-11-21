@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import {googleFormUrl,googleFormFields,fetchGoogleForm,GOOGLE_FORMS_PARSER_VERSION} from '../supabase/functions/lottery-individual-fetch/google-forms.mjs';
+import {googleFormUrl,googleFormFields,fetchGoogleForm,GoogleFormAccessError,GOOGLE_FORMS_PARSER_VERSION} from '../supabase/functions/lottery-individual-fetch/google-forms.mjs';
+import {readGoogleLottery} from '../supabase/functions/lottery-individual-fetch/google-form-notices.mjs';
 import {supportedUrl,extract} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
 import {enrichGoogleForms} from './google_forms_lottery_enrich.mjs';
 
@@ -287,4 +288,69 @@ const previousDates = {url,google_forms_verified_at:'2026-11-18T01:00:00Z',purch
 await enrichGoogleForms({items:[previousDates]},async()=>({url,html:branchPage()}),now);
 assert.equal(previousDates.purchase_end_date,undefined);assert.equal(previousDates.payment_end_time,undefined);
 assert.equal(previousDates.pickup_period_note,'7日以内');
-console.log('Google Forms public metadata, safe redirects, date-only display and collection regressions passed');
+const cloveId = '1FAIpQLSfv31yN4OSSFYE1uozMEx-5KwVQwweQKkwigH7u_11hFqDS_A';
+const cloveUrl = 'https://docs.google.com/forms/d/e/'+cloveId+'/viewform';
+const sharedClove = cloveUrl+'?pli=1';
+const clovePost = 'https://x.com/CloveBase/status/2123748209030029746';
+const cloveNow = new Date('2026-11-21T10:40:00Z');
+const cloveProduct = 'ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」';
+const postFixture = {url:clovePost,author_url:'https://x.com/CloveBase',html:
+  '<blockquote class="twitter-tweet"><p>'+cloveProduct+'<br>⏰【抽選期間】11/20(金)21:00～11/22(日)21:00</p></blockquote>'};
+assert.equal(googleFormUrl(sharedClove),cloveUrl);
+assert.equal(googleFormUrl(sharedClove+'&usp=sharing'),cloveUrl);
+assert(supportedUrl(sharedClove));
+for(const tail of ['?pli=other','?pli=1&entry.123=hidden','?pli=1#private','?pli=1&pli=2'])
+  assert(!supportedUrl(cloveUrl+tail));
+const direct = await fetchGoogleForm(sharedClove,async (target,options)=>{
+  assert.equal(target,cloveUrl);assert.equal(options.method,'GET');assert.equal(options.credentials,'omit');
+  return new Response(page(description,title,[],'e/'+cloveId),{headers:{'content-type':'text/html'}});
+});
+assert.equal(googleFormFields(direct.html,direct.url,{referenceDate:cloveNow}).event_title,title.normalize('NFKC'));
+for(const [code,reply] of [
+  ['source_login_required',()=>new Response(null,{status:401})],
+  ['source_access_denied',()=>new Response(null,{status:403})],
+  ['source_login_required',()=>new Response(null,{status:302,headers:{location:'https://accounts.google.com/ServiceLogin'}})],
+  ['source_login_required',()=>new Response('<body>このコンテンツにアクセスするにはログインする必要があります</body>',{headers:{'content-type':'text/html'}})]
+]){
+  const attempted=[];
+  await assert.rejects(fetchGoogleForm(sharedClove,async target=>{attempted.push(target);return reply();}),
+    error=>error instanceof GoogleFormAccessError && error.url===cloveUrl && error.code===code);
+  assert.deepEqual(attempted,[cloveUrl]);
+}
+const gated=async()=>{throw new GoogleFormAccessError(cloveUrl,'source_login_required');};
+const fromStore=async target=>{assert.equal(target,clovePost);return postFixture;};
+const observed=await readGoogleLottery(sharedClove,{load:gated,loadPost:fromStore});
+assert.equal(observed.evidence,'official_post_and_form_screen');assert.equal(observed.access,'source_login_required');
+const cloveFields=observed.fields;
+assert.deepEqual(cloveFields.stores,[{name:'CloveBase秋葉原店',prefecture:'東京都'}]);
+assert.equal(cloveFields.product_name,cloveProduct);assert.equal(cloveFields.product_type,'pack');
+assert.equal(cloveFields.application_start_at,'2026-11-20T21:00:00+09:00');
+assert.equal(cloveFields.application_end_at,'2026-11-22T21:00:00+09:00');
+assert.equal(cloveFields.result_announcement_date,'2026-11-23');assert.match(cloveFields.store_notice_result_note,/順次メール/);
+assert.equal(cloveFields.purchase_start_date,'2026-11-27');assert.equal(cloveFields.purchase_end_date,'2026-11-29');
+assert.match(cloveFields.store_notice_purchase_note,/13:00～18:00/);
+assert(!cloveFields.purchase_end_time && !cloveFields.result_announcement_time);
+const changed=await readGoogleLottery(sharedClove,{load:gated,loadPost:async()=>({...postFixture,html:postFixture.html.replace('11/22(日)21:00','11/22(日)20:30')})});
+assert.equal(changed.fields.application_end_at,'2026-11-22T20:30:00+09:00');
+for(const altered of [{...postFixture,author_url:'https://x.com/AnotherStore'},
+  {...postFixture,url:clovePost+'1'},{...postFixture,html:postFixture.html.replace('ハドウシーカー','他の商品')},null]){
+  const saved=await readGoogleLottery(sharedClove,{load:gated,loadPost:async()=>altered});
+  assert.equal(saved.evidence,'form_screen');assert.equal(saved.reviewedOn,'2026-11-21');
+}
+await assert.rejects(readGoogleLottery(url,{load:gated,loadPost:async()=>assert.fail('unrelated post')}),GoogleFormAccessError);
+const locked={url:sharedClove,external_url_unverified:true};
+assert.deepEqual(await enrichGoogleForms({items:[locked]},gated,cloveNow,fromStore),{checked:1,updated:1});
+assert.equal(locked.url,sharedClove);assert.equal(locked.google_forms_notice_url,clovePost);
+assert.equal(locked.google_forms_source_url,cloveUrl);assert.equal(locked.external_url_unverified,false);
+assert.equal(locked.google_forms_evidence,observed.evidence);assert.equal(locked.google_forms_last_error,observed.access);
+const sourceHtml=vm.runInNewContext('('+appFunction('lotteryGoogleFormSourceHtml')+')',{escape:String});
+assert.match(sourceHtml(locked),/店舗の公式告知、発表日・受取期間はフォーム画面/);
+assert(sourceHtml(locked).includes(clovePost));
+assert(!sourceHtml({...locked,google_forms_notice_url:'https://example.com/other'}).includes('<a'));
+await enrichGoogleForms({items:[locked]},async()=>direct,new Date(+cloveNow+7*3600000));
+assert.equal(locked.google_forms_evidence,undefined);assert.equal(locked.google_forms_last_error,undefined);
+assert.equal(locked.google_forms_notice_url,undefined);assert.equal(locked.event_title,title.normalize('NFKC'));
+const unknownLocked={url};
+await enrichGoogleForms({items:[unknownLocked]},async()=>{throw new GoogleFormAccessError(url,'source_login_required')},cloveNow);
+assert.equal(unknownLocked.google_forms_last_error,'source_login_required');assert.equal(unknownLocked.google_forms_verified_at,undefined);
+console.log('Google Forms public metadata, login-required sources, official post identity and collection regressions passed');

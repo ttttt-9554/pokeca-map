@@ -49,7 +49,15 @@ def valid(url):
 
 
 def notice_key(url):
-    """Keep one event key for a shared and independently discovered store notice."""
+    """Group recognized presentation URLs, keeping any existing catalog key."""
+    if url.startswith("https://docs.google.com/forms/d/"):
+        parsed = urllib.parse.urlsplit(url)
+        if (not parsed.fragment and re.fullmatch(
+            r"/forms/d/(?:e/)?[A-Za-z0-9_-]{20,180}/(?:viewform|closedform)/?", parsed.path
+        ) and all((key == "pli" and value == "1") or (key in {"usp","hl","embedded"} and len(value) <= 100)
+                  for key, value in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))):
+            return parsed._replace(path=parsed.path.rstrip("/"), query="").geturl()
+        return url
     if not url.startswith("https://shop.pokemon.co.jp/ja/shop/"):
         return url
     parsed = urllib.parse.urlsplit(url)

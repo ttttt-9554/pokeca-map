@@ -1,11 +1,14 @@
-import {readPublicHtml, section, textOf} from './public-html.mjs';
+import {readPublicHtml, section, stripInactive, textOf} from './public-html.mjs';
 // Public Google Forms metadata only. Never submit a form or read responses.
-export const GOOGLE_FORMS_PARSER_VERSION = 5;
+export const GOOGLE_FORMS_PARSER_VERSION = 6;
 export function googleFormUrl(value) {
   try {
     const url = new URL(value);
     if (url.protocol !== 'https:' || url.username || url.password || url.port || url.hash) return '';
-    if ([...url.searchParams].some(([key, value]) => !['usp', 'embedded', 'hl'].includes(key) || value.length > 100)) return '';
+    for (const [key, value] of url.searchParams) {
+      if (key === 'pli' && value === '1' && url.hostname === 'docs.google.com') continue;
+      if (!['usp', 'embedded', 'hl'].includes(key) || value.length > 100) return '';
+    }
     const allowed = url.hostname === 'docs.google.com'
       ? /^\/forms\/d\/(?:e\/)?[A-Za-z0-9_-]{20,180}\/(?:viewform|closedform)\/?$/.test(url.pathname)
       : url.hostname === 'forms.gle' && /^\/[A-Za-z0-9_-]{8,100}\/?$/.test(url.pathname);
@@ -16,6 +19,15 @@ export function googleFormUrl(value) {
   } catch { return ''; }
 }
 
+export class GoogleFormAccessError extends Error {
+  constructor(url, code) {
+    super(code === 'source_login_required' ? 'このGoogleフォームの閲覧にはGoogleログインが必要です。' :
+      'このGoogleフォームの閲覧は制限されています。');
+    this.url = url;
+    this.code = code;
+  }
+}
+
 export async function fetchGoogleForm(value, request = fetch) {
   let url = googleFormUrl(value);
   if (!url) throw Error('Unsupported Google Form URL');
@@ -23,13 +35,16 @@ export async function fetchGoogleForm(value, request = fetch) {
   for (let hop = 0; hop < 4; hop++) {
     if (seen.has(url)) throw Error('Google Form redirect loop');
     seen.add(url);
-    const response = await request(url, {method: 'GET', redirect: 'manual',
+    const response = await request(url, {method: 'GET', redirect: 'manual', credentials: 'omit',
       headers: {'User-Agent': 'TorecaRadar/1.0', Accept: 'text/html,application/xhtml+xml'},
       signal: AbortSignal.timeout(12000)});
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers.get('location');
-      const next = location ? googleFormUrl(new URL(location, url).href) : '';
       await response.body?.cancel();
+      const target = location ? new URL(location, url) : null;
+      if (target?.origin === 'https://accounts.google.com' && !target.username && !target.password)
+        throw new GoogleFormAccessError(url, 'source_login_required');
+      const next = target ? googleFormUrl(target.href) : '';
       // A sign-in or non-Forms destination is never followed.
       if (!next) throw Error('Google Form is not publicly accessible');
       if (new URL(url).hostname === 'docs.google.com' &&
@@ -39,7 +54,15 @@ export async function fetchGoogleForm(value, request = fetch) {
       url = next;
       continue;
     }
-    return {url, html: await readPublicHtml(response)};
+    if (response.status === 401 || response.status === 403) {
+      await response.body?.cancel();
+      throw new GoogleFormAccessError(url, response.status === 401 ? 'source_login_required' : 'source_access_denied');
+    }
+    const html = await readPublicHtml(response);
+    if (!/\bFB_PUBLIC_LOAD_DATA_\s*=/.test(html) &&
+        /このコンテンツにアクセスするにはログインする必要があります|(?:you (?:must|need to) )?sign in to (?:access|view) this (?:form|content)/i.test(textOf(stripInactive(html))))
+      throw new GoogleFormAccessError(url, 'source_login_required');
+    return {url, html};
   }
   throw Error('Too many Google Form redirects');
 }
@@ -116,7 +139,9 @@ const verifiedAreas = new Map([
   ['バトロコ横浜伊勢佐木町店', '神奈川県'], ['バトロコ横浜伊勢佐木町', '神奈川県'],
   ['バトロコ高田馬場店', '東京都'], ['バトロコ高田馬場', '東京都'],
   // https://www.daimaru.co.jp/shinsaibashi/shop/mint.html
-  ['MINT大丸心斎橋店', '大阪府']
+  ['MINT大丸心斎橋店', '大阪府'],
+  // https://base.clove.jp/stores
+  ['CloveBase秋葉原店', '東京都']
 ]);
 
 // The organizer uses abbreviated choices on its forms and full branch names in
@@ -152,14 +177,20 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
   if (!Array.isArray(data) || data[14] !== id || !Array.isArray(data[1])) return {};
   const displayTitle = clean(data[1][8]), documentTitle = clean(data[3]);
   const publishedTitle = new URL(url).pathname.endsWith('/viewform') && documentTitle === clean(textOf(section(html, 'title')));
-  const title = (displayTitle || (publishedTitle ? documentTitle : '')).replace(/\s+/g, ' ');
+  const title = displayTitle || (publishedTitle ? documentTitle : '');
+  const questions = Array.isArray(data[1][1]) ? data[1][1].filter(Array.isArray) : [];
+  return formNoticeFields(title, data[1][0], questions, referenceDate);
+}
+
+export function formNoticeFields(title, description, questions, referenceDate) {
+  title = clean(title).replace(/\s+/g, ' ');
   if (title.length < 5 || title.length > 200 || !/抽選/.test(title) || /[<>]|ログイン|アクセス権|受付終了/.test(title)) return {};
   const fields = {event_title: title};
-  const questions = Array.isArray(data[1][1]) ? data[1][1].filter(Array.isArray) : [];
   const sections = questions.filter(question => [6,8].includes(question[3]))
     .flatMap(question => [clean(question[1]), clean(question[2])]);
-  const lines = [clean(data[1][0]), ...sections].join('\n').split(/\r?\n/)
-    .map(line => clean(line).replace(/^<([^<>]{1,40})>\s*/, '【$1】')).filter(Boolean);
+  const lines = [clean(description), ...sections].join('\n').split(/\r?\n/)
+    .map(line => clean(line).replace(/^<([^<>]{1,40})>\s*/, '【$1】')
+      .replace(/^([◆◇■●])\s*([^◆◇■●]{1,40}?)\s*\1$/, '【$2】')).filter(Boolean);
   const labelValues = (names, rangeAnchor) => lines.flatMap((line, index) => {
     const match = line.match(new RegExp('^(?:[■◆◇▼●【\\[]\\s*)?(?:' + names + ')[\\s:：】\\]]*(.*)$'));
     if (!match) return [];
@@ -223,6 +254,13 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
     if (result) {
       fields.result_announcement_date = result.date;
       if (result.time) fields.result_announcement_time = result.time;
+    } else {
+      const first = point(resultText, scheduleAnchor);
+      if (first && /^(?:から|より)\s*[^。\d]{0,40}順次[^。\d]{0,30}メールを(?:お送り|送信)/.test(first.rest)) {
+        fields.result_announcement_date = first.date;
+        if (first.time) fields.result_announcement_time = first.time;
+        fields.store_notice_result_note = 'この日から順次メールで通知';
+      }
     }
     const purchaseLabels = '(?:商品)?(?:購入|販売|受取|受け取り|引き?取り?)(?:可能)?期間';
     const purchase = period(labeled(purchaseLabels), scheduleAnchor);
@@ -257,6 +295,22 @@ export function googleFormFields(html, source, {referenceDate = new Date().toISO
         }
       }
     }
+    // A release day only opens a pickup window when the notice explicitly
+    // requires purchase from release and gives a matching inclusive deadline.
+    const cutoff = point(labeled('(?:受取|受け取り|引き?取り?)(?:期日|期限)'), scheduleAnchor);
+    if (cutoff && /^(?:まで)?[。.]?$/.test(cutoff.rest) && !fields.purchase_end_date &&
+        (!fields.purchase_start_date || fields.purchase_start_date <= cutoff.date)) {
+      fields.purchase_end_date = cutoff.date;
+      if (cutoff.time) fields.purchase_end_time = cutoff.time;
+      const release = point(labeled('発売日(?=\\s*(?:[】:]|\\d|$))'), scheduleAnchor);
+      const days = single(lines.map(line => line.match(/^発売日(?:より|から)([1-9]\d?)日以内に(?:ご)?来店して購入(?:頂ける|いただける)方/)?.[1]));
+      if (!fields.purchase_start_date && days && release && !release.rest &&
+          Date.parse(cutoff.date) - Date.parse(release.date) === (Number(days) - 1) * 86400000)
+        fields.purchase_start_date = release.date;
+    }
+    const hours = labeled('営業時間').match(/^(\d{1,2}\/\d{1,2}(?:・\d{1,2}\/\d{1,2})*)は\s*((?:[01]?\d|2[0-3]):[0-5]\d)\s*[~〜～]\s*((?:[01]?\d|2[0-3]):[0-5]\d)までの営業/);
+    if (hours && fields.purchase_end_date)
+      fields.store_notice_purchase_note = hours[1] + 'は' + hours[2] + '～' + hours[3] + '営業';
   }
   const productLabels = labelValues('抽選対象商品|抽選商品|対象商品|商品(?=】|:|$)');
   const product = productLabels.length

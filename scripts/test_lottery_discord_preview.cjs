@@ -37,6 +37,12 @@ assert(!elements.lpDiscordIntakeLinks.innerHTML.includes('<script>'),'posted URL
 assert(!elements.lpDiscordIntakeLinks.innerHTML.includes('excluded.example'));
 ctx.lotteryBaseItems.push({url:'https://livepocket.jp/e/new01'});api.renderLotteryDiscordIntake();
 assert.equal(elements.lpDiscordIntakeCount.textContent,'1件','preview disappears when a complete card arrives');
+const form='https://docs.google.com/forms/d/e/1FAIpQLSfv31yN4OSSFYE1uozMEx-5KwVQwweQKkwigH7u_11hFqDS_A/viewform';
+ctx.lotteryDiscordIntake.push({url:form+'?pli=1',discord_posted_at:stamp},{url:form,discord_posted_at:stamp});
+api.renderLotteryDiscordIntake();
+assert.equal(elements.lpDiscordIntakeCount.textContent,'2件','both spellings add only one preview');
+ctx.lotteryBaseItems.push({url:form+'?usp=sharing'});api.renderLotteryDiscordIntake();
+assert.equal(elements.lpDiscordIntakeCount.textContent,'1件','a saved alias replaces the form preview');
 ctx.lpExtReady=false;api.renderLotteryDiscordIntake();
 assert.equal(elements.lpDiscordIntake.hidden,true,'wait for manual exclusions before showing external previews');
 ctx.lpExtReady=true;ctx.discordRoleAuthPending=true;api.renderLotteryDiscordIntake();

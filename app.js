@@ -4925,15 +4925,26 @@
   function renderLotteryDiscordIntake() {
     const panel = $('lpDiscordIntake');
     if (!panel) return;
-    const known = new Set(lotteryBaseItems.map(item =>
-      isLivePocketEventUrl(item.url) ? item.url.replace(/\/$/, '') : item.url));
+    function eventKey(value) {
+      if (isLivePocketEventUrl(value)) return value.replace(/\/$/, '');
+      if (!/^https:\/\/docs\.google\.com\/forms\/d\/(?:e\/)?[A-Za-z0-9_-]{20,180}\/(?:viewform|closedform)\/?(?:\?|$)/.test(value))
+        return value;
+      const url = new URL(value);
+      if (url.hash || [...url.searchParams].some(([key,v]) =>
+        !(key==='pli'&&v==='1') && !(['usp','embedded','hl'].includes(key)&&v.length<=100))) return value;
+      return url.origin + url.pathname.replace(/\/$/, '');
+    }
+    const known = new Set(lotteryBaseItems.map(item => eventKey(item.url)));
+    for (const [url, row] of lpCardOverrides) if (row.is_hidden) known.add(eventKey(url));
+    for (const [url, row] of lpExtOverrides) if (row.state==='excluded') known.add(eventKey(url));
     const cutoff = Date.now() - 2 * 60 * 60 * 1000;
-    const items = authUser && !discordRoleAuthPending ? lotteryDiscordIntake.filter(item =>
-      lotteryDate(item.discord_posted_at) > cutoff && !known.has(item.url) &&
-      !lpCardOverrides.get(item.url)?.is_hidden &&
-      (isLivePocketEventUrl(item.url) ? lpCardReady :
-        lpExtReady && lpExtOverrides.get(item.url)?.state !== 'excluded')
-    ) : [];
+    const items = authUser && !discordRoleAuthPending ? lotteryDiscordIntake.filter(item => {
+      const key = eventKey(item.url);
+      if (!(lotteryDate(item.discord_posted_at) > cutoff) || known.has(key) ||
+          !(isLivePocketEventUrl(item.url) ? lpCardReady : lpExtReady)) return false;
+      known.add(key);
+      return true;
+    }) : [];
     panel.hidden = !items.length;
     $('lpDiscordIntakeCount').textContent = items.length + '件';
     const list = $('lpDiscordIntakeLinks');
@@ -5556,6 +5567,21 @@
     return html;
   }
 
+  function lotteryGoogleFormSourceHtml(item) {
+    const livePost = item.google_forms_evidence==='official_post_and_form_screen';
+    const screen = livePost || item.google_forms_evidence==='form_screen';
+    let note = '';
+    if (livePost) note = '受付期間は店舗の公式告知、発表日・受取期間はフォーム画面で確認しました。';
+    else if (screen) note = 'フォーム画面で確認した情報です。';
+    if (item.google_forms_last_error==='source_login_required') note += '元フォームの閲覧にはGoogleログインが必要です。';
+    if (item.google_forms_last_error==='source_access_denied') note += '元フォームの閲覧は制限されています。';
+    if (!note) return '';
+    const url = item.google_forms_notice_url || '';
+    const link = screen && /^https:\/\/x\.com\/[a-zA-Z0-9_]{1,15}\/status\/\d{15,22}$/.test(url)
+      ? ' <a href="'+escape(url)+'" target="_blank" rel="noopener noreferrer">店舗の公式告知 ↗</a>' : '';
+    return '<p class="lp-store-muted">'+escape(note)+link+'</p>';
+  }
+
   function lotteryCard(item, state) {
     const stores = lotteryStoreEntries(item);
     const places = lotteryPrefectures(item);
@@ -5642,7 +5668,7 @@
           ? `<p class="lp-sub">商品名：${escape(item.product_name)}</p>`
           : item.catalog_product_ambiguous ? '<p class="lp-sub">商品名：要確認</p>' : ''}
       ${lineApplication?'<p class="lp-store-muted"><a href="'+escape(item.url)+'" target="_blank" rel="noopener noreferrer">店舗の公式告知 ↗</a></p>':''}
-      ${external&&!centerNotice?'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>':''}
+      ${external&&!centerNotice?(lotteryGoogleFormSourceHtml(item)||'<p class="lp-store-muted">Discord共有URLです。抽選ページかどうか、応募期間や店舗・当落条件を確認してください。未確認の項目は推測しません。</p>'):''}
       ${item.app_lottery?(item.manual_registration_method==='in_store'
         ?'<p class="lp-store-muted lp-app-name">🏬 応募方式：<strong>店頭で直接応募</strong><span>（受付店舗・応募条件は店頭で確認）</span></p>'
         :'<p class="lp-store-muted lp-app-name">📱 アプリ名：<strong>'+escape(String(item.app_lottery_name||'未設定'))+'</strong><span>（アプリ内抽選・公式情報はアプリ内で確認）</span></p>'):''}
@@ -11445,7 +11471,7 @@
         isDeveloper,snapshot:lpDevUnifiedSnapshot,
         validUrl:safeLotteryUrl,isLivePocket:isLivePocketEventUrl,
         stores:lotteryStoreEntries,areas:lotteryPrefectures,
-        validTitle:lpManualValidTitle,expired:lpApplicationExpired,escape,
+        validTitle:lpManualValidTitle,expired:lpApplicationExpired,escape,googleFormSourceHtml:lotteryGoogleFormSourceHtml,
         openEditor:lpDevUnifiedOpenEditor,fetchOne:lpDevFetchOne,
         openFetchedEditor:lpDevOpenFetchedEditor,
         getLivepocketFetches:lpDevLivepocketFetches,

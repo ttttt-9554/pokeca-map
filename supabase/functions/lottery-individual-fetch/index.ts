@@ -1,5 +1,6 @@
 import {supportedUrl,extract,lotteryPageRequest,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
-import {googleFormUrl,fetchGoogleForm} from './google-forms.mjs';
+import {googleFormUrl,GoogleFormAccessError} from './google-forms.mjs';
+import {readGoogleLottery} from './google-form-notices.mjs';
 import {DMM_HOST,BANDAI_HOST,collectedOnlineShop,onlineShopUrl} from './online-shop-lottery.mjs';
 import {storeNoticeUrl,fetchStoreNotice} from './store-notices.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
@@ -63,8 +64,13 @@ Deno.serve(async(req:Request)=>{
    return json({fields,message:fields.event_title?'店舗の公式告知から取得しました。候補を確認してください。':'このページから抽選の受付案内を読み取れませんでした。'});
   }
   if(googleFormUrl(input.url)){
-   const page=await fetchGoogleForm(input.url);
-   const fields=extract(page.html,page.url);
+   const {fields,evidence,reviewedOn}=await readGoogleLottery(input.url,{parse:extract});
+   if(evidence){
+    const message=evidence==='official_post_and_form_screen'?
+      '受付期間は店舗の公式告知から取得しました。発表・受取は'+reviewedOn+'に確認したフォーム画面の情報です。':
+      reviewedOn+'に確認したフォーム画面の情報です。現在の受付期間は元ページをご確認ください。';
+    return json({fields,message});
+   }
    return json({fields,message:Object.keys(fields).length?'Googleフォームの案内から取得しました。記載のない日時は空欄です。':'公開された案内を読み取れませんでした。受付終了やログイン制限を確認してください。'});
   }
   const {url:source,headers}=lotteryPageRequest(input.url),host=source.hostname;
@@ -87,5 +93,8 @@ Deno.serve(async(req:Request)=>{
   const buf=new Uint8Array(size);let offset=0;for(const part of chunks){buf.set(part,offset);offset+=part.length;}
   const result=extract(new TextDecoder().decode(buf),input.url);
   return json({fields:result,message:Object.keys(result).length?'取得した候補を確認してください。':'読み取れる項目が見つかりませんでした。受付終了や取得先の仕様を確認してください。'});
- }catch{return json({error:'ページを取得できませんでした。時間を置いて再度お試しください。'},422);}
+ }catch(error){
+  if(error instanceof GoogleFormAccessError)return json({error:error.message,code:error.code},422);
+  return json({error:'ページを取得できませんでした。時間を置いて再度お試しください。'},422);
+ }
 });

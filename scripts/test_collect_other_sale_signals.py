@@ -26,6 +26,15 @@ def scenario(messages):
 
 
 class SaleSignalCollectorTests(unittest.TestCase):
+    def test_form_presentation_url_preserves_saved_event_key(self):
+        form = "https://docs.google.com/forms/d/e/1FAIpQLSfv31yN4OSSFYE1uozMEx-5KwVQwweQKkwigH7u_11hFqDS_A/viewform"
+        shared = form + "?pli=1"
+        message = msg("200000000000000001", "300000000000000001", form, shared)
+        self.assertEqual([item["url"] for item in scenario([message])["items"]], [form])
+        row = {"url": shared, "event_title": "確認済み"}
+        existing = run({"items":[row]}, [CH], "fake", loader=lambda *_:[message])
+        self.assertEqual(existing["items"], [row])
+
     def test_two_independent_humans_publish_safe_aggregate(self):
         messages=[
             msg("200000000000000001","300000000000000001",
