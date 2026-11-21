@@ -15469,85 +15469,79 @@
     },
     {
       "url": "https://livepocket.jp/e/sx90i",
-      "discord_posted_at": "2026-11-21T02:30:13.807000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/sx90i",
+      "store_name": "TSUTAYA大利根店トレカ売場",
+      "prefecture": "埼玉県",
+      "product_name": "拡張パック 30th CELEBRATION",
       "event_title": "【大利根店】ポケモンカード「拡張パック 30th CELEBRATION」抽選販売受付",
-      "application_end_at": "2026-11-23T23:59:00+09:00",
       "application_start_at": "2026-11-21T09:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-23T23:59:00+09:00",
+      "discord_posted_at": "2026-11-21T02:30:13.807000+00:00",
       "stores": [
         {
           "name": "TSUTAYA大利根店トレカ売場",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA大利根店トレカ売場",
-      "prefecture": "埼玉県",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/sx90i",
+      "result_announcement_date": "2026-12-02",
+      "review_category": "pokemon",
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "product_name": "拡張パック 30th CELEBRATION",
-      "official_genre": "pokemon",
-      "official_event_title": "【大利根店】ポケモンカード「拡張パック 30th CELEBRATION」抽選販売受付",
-      "result_announcement_date": "2026-12-02",
+      "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     },
     {
       "url": "https://livepocket.jp/e/n0da5",
-      "discord_posted_at": "2026-11-21T02:30:13.807000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/n0da5",
+      "store_name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
+      "prefecture": "埼玉県",
       "event_title": "【店頭告知を必ず確認してください】11/27発売ポケカ「ハドウシーカー」抽選販売",
-      "application_end_at": "2026-11-23T21:00:00+09:00",
       "application_start_at": "2026-11-20T12:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-23T21:00:00+09:00",
+      "discord_posted_at": "2026-11-21T02:30:13.807000+00:00",
       "stores": [
         {
           "name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "フタバ図書 TSUTAYA トレーディングカード戸田店",
-      "prefecture": "埼玉県",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【店頭告知を必ず確認してください】11/27発売ポケカ「ハドウシーカー」抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/n0da5",
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
       "purchase_end_time": "21:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     },
     {
       "url": "https://livepocket.jp/e/l_r3m",
-      "discord_posted_at": "2026-11-21T02:30:13.807000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/l_r3m",
+      "store_name": "ふるいちイオンモールつくば店",
+      "prefecture": "茨城県",
       "event_title": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
-      "application_end_at": "2026-11-22T20:59:00+09:00",
       "application_start_at": "2026-11-21T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-22T20:59:00+09:00",
+      "discord_posted_at": "2026-11-21T02:30:13.807000+00:00",
       "stores": [
         {
           "name": "ふるいちイオンモールつくば店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "ふるいちイオンモールつくば店",
-      "prefecture": "茨城県",
-      "pokemon_map_match": "30th CELEBRATION",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/l_r3m",
       "result_announcement_date": "2026-11-25",
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     }
   ],
-  "updated_at": "2026-11-21T02:36:20.207115+00:00"
+  "updated_at": "2026-11-21T02:45:33.100920+00:00"
 }
