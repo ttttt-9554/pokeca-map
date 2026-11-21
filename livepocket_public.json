@@ -15567,26 +15567,25 @@
     },
     {
       "url": "https://livepocket.jp/e/35urr",
-      "discord_posted_at": "2026-11-21T05:30:07.581000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/35urr",
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
       "event_title": "11/21発売 ワンピース『神の支配』(0P-18）",
-      "application_end_at": "2026-11-22T22:00:00+09:00",
       "application_start_at": "2026-11-20T20:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "discord_posted_at": "2026-11-21T05:30:07.581000+00:00",
       "stores": [
         {
           "name": "TSUTAYA辰巳台店",
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "TSUTAYA辰巳台店",
-      "prefecture": "千葉県",
-      "official_event_title": "11/21発売 ワンピース『神の支配』(0P-18）",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/35urr",
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-21T05:36:01.070739+00:00"
     }
   ],
-  "updated_at": "2026-11-21T05:36:24.568325+00:00"
+  "updated_at": "2026-11-21T05:46:03.649919+00:00"
 }
