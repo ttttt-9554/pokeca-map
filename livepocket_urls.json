@@ -30848,8 +30848,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/8fl8-": {
-          "checked_at": "2026-11-21T02:06:43.916443+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-21T08:26:27.329983+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/sx90i": {
@@ -33892,8 +33892,8 @@
         },
         "https://livepocket.jp/e/8fl8-": {
           "detected_at": "2026-11-21T02:06:09.970762+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-21T02:06:43.916443+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-21T08:26:27.329983+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/bsfbk": {
@@ -36237,6 +36237,11 @@
         "https://livepocket.jp/e/bsfbk": {
           "attempts": 1,
           "last_attempt_at": "2026-11-21T08:16:34.297304+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/8fl8-": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-21T08:26:27.329983+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -44003,7 +44008,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-21T02:06:43.916443+00:00",
+          "checked_at": "2026-11-21T08:26:27.329983+00:00",
           "title_observed": "【ふるいちイオンモールつくば店】ワンピース抽選販売（Heroines Edition2）",
           "genre": "",
           "product_origin": "",
@@ -51481,7 +51486,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/8fl8-": {
-          "checked_at": "2026-11-21T02:06:43.916443+00:00",
+          "checked_at": "2026-11-21T08:26:27.329983+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
