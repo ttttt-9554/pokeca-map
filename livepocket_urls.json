@@ -31018,7 +31018,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/35urr": {
-          "checked_at": "2026-11-21T11:41:22.292405+00:00",
+          "checked_at": "2026-11-21T17:51:23.242434+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -34112,7 +34112,7 @@
         "https://livepocket.jp/e/35urr": {
           "detected_at": "2026-11-21T05:36:01.070739+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-21T11:41:22.292405+00:00",
+          "checked_at": "2026-11-21T17:51:23.242434+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/0_g35": {
@@ -36449,8 +36449,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/35urr": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-21T11:41:22.292405+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-21T17:51:23.242434+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/f7pvr": {
@@ -44302,7 +44302,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-21T11:41:22.292405+00:00",
+          "checked_at": "2026-11-21T17:51:23.242434+00:00",
           "title_observed": "11/21発売 ワンピース『神の支配』(0P-18）",
           "genre": "",
           "product_origin": "",
@@ -51834,7 +51834,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/35urr": {
-          "checked_at": "2026-11-21T11:41:22.292405+00:00",
+          "checked_at": "2026-11-21T17:51:23.242434+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
