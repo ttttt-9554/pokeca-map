@@ -15357,8 +15357,6 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードMEGA 拡張パック『ハドウシーカー』抽選販売",
       "first_detected_at": "2026-11-21T01:36:02.126045+00:00"
     },
     {
@@ -15590,105 +15588,97 @@
     },
     {
       "url": "https://livepocket.jp/e/7toa6",
-      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/7toa6",
+      "store_name": "TSUTAYA Trading Card平塚店",
+      "prefecture": "神奈川県",
       "event_title": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
-      "application_end_at": "2026-11-23T20:00:00+09:00",
       "application_start_at": "2026-11-19T16:33:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-23T20:00:00+09:00",
+      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
       "stores": [
         {
           "name": "TSUTAYA Trading Card平塚店",
           "prefecture": "神奈川県"
         }
       ],
-      "store_name": "TSUTAYA Trading Card平塚店",
-      "prefecture": "神奈川県",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「ハドウシーカー」",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/7toa6",
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     },
     {
       "url": "https://livepocket.jp/e/bxmxl",
-      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/bxmxl",
+      "store_name": "古本市場三芳店",
+      "prefecture": "埼玉県",
+      "product_name": "ONE PIECE HEROINES PRECIOUS BOX",
       "event_title": "【古本市場三芳店】抽選販売ワンピースカード「ONE PIECE HEROINES PRECIOUS BOX」",
-      "application_end_at": "2026-11-21T21:00:00+09:00",
       "application_start_at": "2026-11-21T09:30:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-21T21:00:00+09:00",
+      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
       "stores": [
         {
           "name": "古本市場三芳店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場三芳店",
-      "prefecture": "埼玉県",
-      "product_name": "ONE PIECE HEROINES PRECIOUS BOX",
-      "official_genre": "onepiece",
-      "official_event_title": "【古本市場三芳店】抽選販売ワンピースカード「ONE PIECE HEROINES PRECIOUS BOX」",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bxmxl",
       "result_announcement_date": "2026-11-25",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     },
     {
       "url": "https://livepocket.jp/e/f7pvr",
-      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/f7pvr",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
       "event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
-      "application_end_at": "2026-11-22T22:00:00+09:00",
       "application_start_at": "2026-11-21T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "トレカエース勝田東石川店",
-      "prefecture": "茨城県",
-      "official_genre": "onepiece",
-      "official_event_title": "ONE PIECEカードゲーム EXブースター ヒロインズエディション Vol.2 抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/f7pvr",
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     },
     {
       "url": "https://livepocket.jp/e/0_g35",
-      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/0_g35",
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
       "event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
-      "application_end_at": "2026-11-22T22:00:00+09:00",
       "application_start_at": "2026-11-21T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "discord_posted_at": "2026-11-21T07:30:08.149000+00:00",
       "stores": [
         {
           "name": "トレカエース勝田東石川店",
           "prefecture": "茨城県"
         }
       ],
-      "store_name": "トレカエース勝田東石川店",
-      "prefecture": "茨城県",
-      "pokemon_map_match": "30th CELEBRATION",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/0_g35",
       "result_announcement_date": "2026-11-28",
       "purchase_start_date": "2026-11-30",
       "purchase_end_date": "2026-12-02",
+      "review_category": "pokemon",
+      "pokemon_map_match": "30th CELEBRATION",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-21T07:36:08.917025+00:00"
     }
   ],
-  "updated_at": "2026-11-21T07:36:43.636973+00:00"
+  "updated_at": "2026-11-21T07:46:01.732839+00:00"
 }
