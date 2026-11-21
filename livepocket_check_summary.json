@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "44861940183",
-    "run_number": "5084",
-    "completed_process_at": "2026-11-21T03:36:33Z",
+    "run_id": "44871617255",
+    "run_number": "5096",
+    "completed_process_at": "2026-11-21T05:36:36Z",
     "mode": "automatic",
     "stats": {
       "new_attempted": 1,
@@ -14,8 +14,8 @@
       "retry_new_fields": 0,
       "retry_blocked": 0,
       "historical_attempted": 0,
-      "registered_urls": 862,
-      "deadlines_known": 824,
+      "registered_urls": 863,
+      "deadlines_known": 825,
       "store_lists_added": 1,
       "multi_store_urls": 28,
       "stores_from_pages": 1,
@@ -25,7 +25,7 @@
       "verified_prefectures_added": 0,
       "deadline_missing": 38,
       "map_matches": 267,
-      "map_conflicts_skipped": 205,
+      "map_conflicts_skipped": 206,
       "title_recheck_attempted": 0,
       "title_recheck_titles_added": 0,
       "title_recheck_products_added": 0,
@@ -46,7 +46,7 @@
       "product_updated": 0,
       "deadline_updated": 1,
       "store_updated": 8,
-      "genre_updated": 22,
+      "genre_updated": 23,
       "new_urls": 0
     },
     "page_check_attempts": 1,
@@ -142,23 +142,23 @@
   },
   "daily_additions": {
     "date_jst": "2026-11-21",
-    "today": 10,
+    "today": 11,
     "yesterday": 12,
-    "last_7_days": 53,
-    "registered_total": 862,
+    "last_7_days": 54,
+    "registered_total": 863,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-11-21T03:36:34Z",
+    "as_of": "2026-11-21T05:36:36Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
     "ready": 2,
     "retry_wait": 1,
-    "completed": 65,
+    "completed": 66,
     "expired": 788,
     "removed": 3,
     "new_pending": 0,
     "quarantined": 3,
-    "total": 862,
+    "total": 863,
     "unresolved": 3,
     "missing_title": 0,
     "missing_store": 3,
@@ -168,6 +168,6 @@
     "next_batch_size": 2,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-11-21T03:36:36Z"
+    "as_of": "2026-11-21T05:36:38Z"
   }
 }

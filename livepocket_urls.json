@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-21T04:05:55.050263+00:00",
+  "collected_at": "2026-11-21T05:35:56.358445+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 862,
+  "unique_livepocket_urls": 863,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -26451,33 +26451,68 @@
       "store_name": "TSUTAYA辰巳台店",
       "prefecture": "千葉県",
       "purchase_start_date": "2026-11-27"
+    },
+    {
+      "url": "https://livepocket.jp/e/35urr",
+      "discord_message_id": "1573571191451557898",
+      "discord_posted_at": "2026-11-21T05:30:07.581000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA辰巳台店\n受付終了: 11/22 22:00（残り1日7時間）\nhttps://livepocket.jp/e/35urr",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/35urr",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "11/21発売 ワンピース『神の支配』(0P-18）",
+      "application_end_at": "2026-11-22T22:00:00+09:00",
+      "application_start_at": "2026-11-20T20:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA辰巳台店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA辰巳台店",
+      "prefecture": "千葉県",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-27"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 679,
-    "no_structured_details": 183
+    "no_structured_details": 184
   },
   "field_counts": {
-    "store_name": 456,
-    "prefecture": 400,
-    "event_title": 559,
+    "store_name": 457,
+    "prefecture": 401,
+    "event_title": 560,
     "event_date": 1,
     "product_name": 136,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 824,
-    "application_start_at": 821,
-    "stores_events": 456
+    "application_end_at": 825,
+    "application_start_at": 822,
+    "stores_events": 457
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573548536677802087"
+      "1551580466266644552": "1573571191451557898"
     },
     "last_run": {
-      "checked_at": "2026-11-21T04:05:55.050263+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-21T05:35:56.358445+00:00",
+      "new_urls": 1,
       "original_urls": 862,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -26836,7 +26871,8 @@
         "1573510788667416708": "2026-11-21T01:36:00.914139+00:00",
         "1573518339219922967": "2026-11-21T02:06:08.952476+00:00",
         "1573525919081963580": "2026-11-21T02:35:58.093034+00:00",
-        "1573540981058572421": "2026-11-21T03:35:59.671323+00:00"
+        "1573540981058572421": "2026-11-21T03:35:59.671323+00:00",
+        "1573571191451557898": "2026-11-21T05:35:59.820520+00:00"
       },
       "checked_search_urls": {}
     },
@@ -30691,6 +30727,11 @@
           "checked_at": "2026-11-21T03:36:23.644851+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/35urr": {
+          "checked_at": "2026-11-21T05:36:24.568325+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -33737,6 +33778,12 @@
           "detected_at": "2026-11-21T03:36:01.115984+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-21T03:36:23.644851+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/35urr": {
+          "detected_at": "2026-11-21T05:36:01.070739+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-21T05:36:24.568325+00:00",
           "http_status": null
         }
       },
@@ -43798,6 +43845,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/35urr": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-21T05:36:24.568325+00:00",
+          "title_observed": "11/21発売 ワンピース『神の支配』(0P-18）",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -51224,6 +51282,19 @@
         },
         "https://livepocket.jp/e/1x796": {
           "checked_at": "2026-11-21T03:36:23.644851+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/35urr": {
+          "checked_at": "2026-11-21T05:36:24.568325+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
