@@ -1,6 +1,6 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-21T13:00:56.734429+00:00",
+  "collected_at": "2026-11-21T15:00:55.041545+00:00",
   "unique_livepocket_urls": 871,
   "items": [
     {
@@ -15515,6 +15515,8 @@
       "pokemon_map_match": "ハドウシーカー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【店頭告知を必ず確認してください】11/27発売ポケカ「ハドウシーカー」抽選販売",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     },
     {
@@ -15540,6 +15542,8 @@
       "pokemon_map_match": "30th CELEBRATION",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
+      "official_genre": "pokemon",
+      "official_event_title": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
       "first_detected_at": "2026-11-21T02:35:59.055794+00:00"
     },
     {
@@ -15702,8 +15706,6 @@
       "pokemon_map_match": "MEGAドリームex",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲームMEGA ハイクラスパック『MEGAドリームex』抽選販売受付",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
@@ -15726,8 +15728,6 @@
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
       "review_category": "yugioh",
-      "official_genre": "yugioh",
-      "official_event_title": "遊戯王OCG『遊☆戯☆王 ORIGINAL ARTWORK COLLETION』抽選販売受付",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
@@ -15750,8 +15750,6 @@
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07",
       "review_category": "onepiece",
-      "official_genre": "onepiece",
-      "official_event_title": "ワンピースカードゲーム『世界最強の戦士』抽選販売受付",
       "first_detected_at": "2026-11-21T08:46:00.035297+00:00"
     },
     {
@@ -15779,5 +15777,5 @@
       "first_detected_at": "2026-11-21T13:01:02.214969+00:00"
     }
   ],
-  "updated_at": "2026-11-21T14:51:39.115682+00:00"
+  "updated_at": "2026-11-21T15:01:27.107639+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-21T13:00:56.734429+00:00",
+  "collected_at": "2026-11-21T15:00:55.041545+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -26794,12 +26794,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573684432445898884"
+      "1551580466266644552": "1573714672291549405"
     },
     "last_run": {
-      "checked_at": "2026-11-21T13:00:56.734429+00:00",
-      "new_urls": 1,
-      "original_urls": 870,
+      "checked_at": "2026-11-21T15:00:55.041545+00:00",
+      "new_urls": 0,
+      "original_urls": 871,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -31003,12 +31003,12 @@
           "http_status": null
         },
         "https://livepocket.jp/e/n0da5": {
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/l_r3m": {
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -34088,13 +34088,13 @@
         "https://livepocket.jp/e/l_r3m": {
           "detected_at": "2026-11-21T02:35:59.055794+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/n0da5": {
           "detected_at": "2026-11-21T02:35:59.055794+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/sx90i": {
@@ -36434,13 +36434,13 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/n0da5": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-21T08:46:25.244851+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-21T15:01:27.107639+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/l_r3m": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-21T08:46:25.244851+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-21T15:01:27.107639+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/1x796": {
@@ -44269,7 +44269,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "title_observed": "【店頭告知を必ず確認してください】11/27発売ポケカ「ハドウシーカー」抽選販売",
           "genre": "pokemon",
           "product_origin": "",
@@ -44280,7 +44280,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "title_observed": "【ふるいちイオンモールつくば店】ポケカ抽選販売（30th CELEBRATION）",
           "genre": "pokemon",
           "product_origin": "",
@@ -51795,7 +51795,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/n0da5": {
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -51808,7 +51808,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/l_r3m": {
-          "checked_at": "2026-11-21T08:46:25.244851+00:00",
+          "checked_at": "2026-11-21T15:01:27.107639+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
