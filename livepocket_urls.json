@@ -31217,8 +31217,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/q7wr5": {
-          "checked_at": "2026-11-22T03:01:28.654590+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-22T09:11:20.919213+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/az0_8": {
@@ -34340,8 +34340,8 @@
         },
         "https://livepocket.jp/e/q7wr5": {
           "detected_at": "2026-11-22T03:01:00.527916+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-22T03:01:28.654590+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-22T09:11:20.919213+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/az0_8": {
@@ -36679,6 +36679,11 @@
         "https://livepocket.jp/e/6h916": {
           "attempts": 1,
           "last_attempt_at": "2026-11-22T05:41:40.678807+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/q7wr5": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-22T09:11:20.919213+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -44610,7 +44615,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-22T03:01:28.654590+00:00",
+          "checked_at": "2026-11-22T09:11:20.919213+00:00",
           "title_observed": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
           "genre": "",
           "product_origin": "",
@@ -52206,7 +52211,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/q7wr5": {
-          "checked_at": "2026-11-22T03:01:28.654590+00:00",
+          "checked_at": "2026-11-22T09:11:20.919213+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
