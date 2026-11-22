@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-22T00:06:01.032605+00:00",
-  "unique_livepocket_urls": 872,
+  "collected_at": "2026-11-22T03:00:55.853184+00:00",
+  "unique_livepocket_urls": 873,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15796,7 +15796,30 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-21T23:36:00.212265+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/q7wr5",
+      "discord_posted_at": "2026-11-22T03:00:06.881000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/q7wr5",
+      "event_title": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "application_start_at": "2026-11-22T09:49:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "トレカパーク横浜西口店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "トレカパーク横浜西口店",
+      "prefecture": "神奈川県",
+      "official_event_title": "【トレカパーク横浜西口店】ワンピース抽選販売（世界最強の戦士）",
+      "result_announcement_date": "2026-11-24",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-29",
+      "first_detected_at": "2026-11-22T03:01:00.527916+00:00"
     }
   ],
-  "updated_at": "2026-11-22T02:51:06.566492+00:00"
+  "updated_at": "2026-11-22T03:01:28.654590+00:00"
 }
