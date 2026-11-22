@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-22T06:00:54.915116+00:00",
+  "collected_at": "2026-11-22T06:30:55.434260+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 874,
+  "unique_livepocket_urls": 875,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -26881,33 +26881,69 @@
       "result_announcement_date": "2026-11-25",
       "purchase_start_date": "2026-11-30",
       "purchase_end_date": "2026-12-01"
+    },
+    {
+      "url": "https://livepocket.jp/e/rpef7",
+      "discord_message_id": "1573948680220704919",
+      "discord_posted_at": "2026-11-22T06:30:07.917000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍神奈川県\nふるいちイオンモール座間店\n受付終了: 11/22 21:01（残り5時間30分）\nhttps://livepocket.jp/e/rpef7",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/rpef7",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ふるいちイオンモール座間店ワンピースカード抽選販売「神の支配」",
+      "application_end_at": "2026-11-22T21:01:00+09:00",
+      "application_start_at": "2026-11-22T15:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール座間店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール座間店",
+      "prefecture": "神奈川県",
+      "result_announcement_date": "2026-11-23",
+      "purchase_start_date": "2026-11-26",
+      "purchase_end_date": "2026-11-30"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 689,
-    "no_structured_details": 185
+    "no_structured_details": 186
   },
   "field_counts": {
-    "store_name": 468,
-    "prefecture": 412,
-    "event_title": 571,
+    "store_name": 469,
+    "prefecture": 413,
+    "event_title": 572,
     "event_date": 1,
     "product_name": 139,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 836,
-    "application_start_at": 833,
-    "stores_events": 468
+    "application_end_at": 837,
+    "application_start_at": 834,
+    "stores_events": 469
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573941127768186952"
+      "1551580466266644552": "1573948683513372766"
     },
     "last_run": {
-      "checked_at": "2026-11-22T06:00:54.915116+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-22T06:30:55.434260+00:00",
+      "new_urls": 1,
       "original_urls": 874,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27273,7 +27309,8 @@
         "1573683372285370448": "2026-11-21T13:01:00.806754+00:00",
         "1573842981230874685": "2026-11-21T23:35:58.669350+00:00",
         "1573895827645137067": "2026-11-22T03:00:59.210460+00:00",
-        "1573929815495409664": "2026-11-22T05:21:01.058561+00:00"
+        "1573929815495409664": "2026-11-22T05:21:01.058561+00:00",
+        "1573948680220704919": "2026-11-22T06:30:59.011834+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31188,6 +31225,11 @@
           "checked_at": "2026-11-22T05:21:26.712043+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/rpef7": {
+          "checked_at": "2026-11-22T06:31:24.481201+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -34306,6 +34348,12 @@
           "detected_at": "2026-11-22T05:21:02.402012+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-22T05:21:26.712043+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/rpef7": {
+          "detected_at": "2026-11-22T06:31:00.402537+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-22T06:31:24.481201+00:00",
           "http_status": null
         }
       },
@@ -44579,6 +44627,17 @@
           "product_origin": "v21_9_official_title_quoted_tcg_product",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/rpef7": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-22T06:31:24.481201+00:00",
+          "title_observed": "ふるいちイオンモール座間店ワンピースカード抽選販売「神の支配」",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -52161,6 +52220,19 @@
         },
         "https://livepocket.jp/e/az0_8": {
           "checked_at": "2026-11-22T05:21:26.712043+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/rpef7": {
+          "checked_at": "2026-11-22T06:31:24.481201+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
