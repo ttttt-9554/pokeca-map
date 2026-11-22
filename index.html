@@ -173,12 +173,12 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
   /* Global form{background:#fff} must not create a white panel inside
      a dark-mode dialog on iOS. */
   #lpExtDialog #lpExtForm{
-    display:grid;gap:12px;box-sizing:border-box;min-width:0;width:100%;
+    display:grid;grid-template-columns:minmax(0,1fr);gap:12px;box-sizing:border-box;min-width:0;width:100%;
     margin:0;padding:0;border:0;border-radius:0;
     background:transparent!important;color:var(--app-text,#172033)!important;
   }
   #lpExtDialog #lpExtForm>label{
-    display:block;min-width:0;margin:4px 0;
+    display:grid;grid-template-columns:minmax(0,1fr);min-width:0;margin:4px 0;
     font-size:13px;font-weight:700;line-height:1.6;
     color:var(--app-text,#172033)!important;
     -webkit-text-fill-color:var(--app-text,#172033)!important;
@@ -190,6 +190,11 @@ html[data-theme="dark"] .app-update-feedback.is-error{border-color:#fca5a5}
     -webkit-text-fill-color:var(--app-text,#172033)!important;
     border:1px solid var(--app-border,#94a3b8)!important;
     font-size:16px;
+  }
+  /* Stretch the native date picker to the label width, including its padding on iOS. */
+  #lpExtDialog #lpExtForm input[type="datetime-local"]{
+    width:auto;min-width:0;justify-self:stretch;
+    -webkit-appearance:none;appearance:none;
   }
   #lpExtDialog #lpExtForm :is(input,textarea)::placeholder{
     color:var(--app-muted,#64748b)!important;
