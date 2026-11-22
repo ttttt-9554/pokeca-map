@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-22T06:30:55.434260+00:00",
+  "collected_at": "2026-11-22T09:00:56.311077+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -26892,7 +26892,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/rpef7",
       "field_sources": {
@@ -26921,8 +26921,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 689,
-    "no_structured_details": 186
+    "parsed": 690,
+    "no_structured_details": 185
   },
   "field_counts": {
     "store_name": 469,
@@ -26939,12 +26939,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573948683513372766"
+      "1551580466266644552": "1573986469893247080"
     },
     "last_run": {
-      "checked_at": "2026-11-22T06:30:55.434260+00:00",
-      "new_urls": 1,
-      "original_urls": 874,
+      "checked_at": "2026-11-22T09:00:56.311077+00:00",
+      "new_urls": 0,
+      "original_urls": 875,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
