@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-22T13:35:55.448866+00:00",
+  "collected_at": "2026-11-22T15:05:54.968707+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -26928,7 +26928,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/ybn5s",
       "field_sources": {
@@ -26957,8 +26957,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 690,
-    "no_structured_details": 186
+    "parsed": 691,
+    "no_structured_details": 185
   },
   "field_counts": {
     "store_name": 470,
@@ -26975,10 +26975,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574054361267445893"
+      "1551580466266644552": "1574077042394267730"
     },
     "last_run": {
-      "checked_at": "2026-11-22T13:35:55.448866+00:00",
+      "checked_at": "2026-11-22T15:05:54.968707+00:00",
       "new_urls": 0,
       "original_urls": 876,
       "suspect_legacy_store_names": 0,
