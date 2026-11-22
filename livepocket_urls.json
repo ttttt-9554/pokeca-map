@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-22T03:00:55.853184+00:00",
+  "collected_at": "2026-11-22T05:20:54.912639+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 873,
+  "unique_livepocket_urls": 874,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -26844,34 +26844,71 @@
       "result_announcement_date": "2026-11-24",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-29"
+    },
+    {
+      "url": "https://livepocket.jp/e/az0_8",
+      "discord_message_id": "1573929815495409664",
+      "discord_posted_at": "2026-11-22T05:15:10.216000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/az0_8",
+      "details_source": null,
+      "product_name": "スタートデッキ100 バトルコレクション",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/az0_8",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "product_name": "v21_9_official_title_quoted_tcg_product",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【ふるいちイオンモール太田店】ポケカ抽選販売「スタートデッキ100 バトルコレクション」",
+      "application_end_at": "2026-11-22T21:00:00+09:00",
+      "application_start_at": "2026-11-22T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール太田店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール太田店",
+      "prefecture": "群馬県",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-30",
+      "purchase_end_date": "2026-12-01"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 687,
-    "no_structured_details": 186
+    "no_structured_details": 187
   },
   "field_counts": {
-    "store_name": 467,
-    "prefecture": 411,
-    "event_title": 570,
+    "store_name": 468,
+    "prefecture": 412,
+    "event_title": 571,
     "event_date": 1,
     "product_name": 138,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 835,
-    "application_start_at": 832,
-    "stores_events": 467
+    "application_end_at": 836,
+    "application_start_at": 833,
+    "stores_events": 468
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1573895827645137067"
+      "1551580466266644552": "1573929815495409664"
     },
     "last_run": {
-      "checked_at": "2026-11-22T03:00:55.853184+00:00",
+      "checked_at": "2026-11-22T05:20:54.912639+00:00",
       "new_urls": 1,
-      "original_urls": 872,
+      "original_urls": 873,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -27235,7 +27272,8 @@
         "1573618835695734865": "2026-11-21T08:45:58.698716+00:00",
         "1573683372285370448": "2026-11-21T13:01:00.806754+00:00",
         "1573842981230874685": "2026-11-21T23:35:58.669350+00:00",
-        "1573895827645137067": "2026-11-22T03:00:59.210460+00:00"
+        "1573895827645137067": "2026-11-22T03:00:59.210460+00:00",
+        "1573929815495409664": "2026-11-22T05:21:01.058561+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31145,6 +31183,11 @@
           "checked_at": "2026-11-22T03:01:28.654590+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/az0_8": {
+          "checked_at": "2026-11-22T05:21:26.712043+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -34257,6 +34300,12 @@
           "detected_at": "2026-11-22T03:01:00.527916+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-22T03:01:28.654590+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/az0_8": {
+          "detected_at": "2026-11-22T05:21:02.402012+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-22T05:21:26.712043+00:00",
           "http_status": null
         }
       },
@@ -44514,6 +44563,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/az0_8": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-22T05:21:26.712043+00:00",
+          "title_observed": "【ふるいちイオンモール太田店】ポケカ抽選販売「スタートデッキ100 バトルコレクション」",
+          "genre": "pokemon",
+          "product_origin": "v21_9_official_title_quoted_tcg_product",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -52083,6 +52143,19 @@
         },
         "https://livepocket.jp/e/q7wr5": {
           "checked_at": "2026-11-22T03:01:28.654590+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/az0_8": {
+          "checked_at": "2026-11-22T05:21:26.712043+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
