@@ -7,6 +7,8 @@
   let stats=[],byKey=new Map(),fetching=null,lastFetch=0,error='';
   let masters=[],pairs=[],masterBusy=false,addressSaving=false;
   let mergeTargetId='',mergeBusy=false,mergeMessage='';
+  let prefectureOrder=new Map(),invalidateStoreChoices=()=>{},masterLimit=100;
+  const nameOrder=new Intl.Collator('ja',{numeric:true});
   const mergeSources=new Set();
   const clean=s=>String(s??'').trim();
 
@@ -120,13 +122,29 @@
       '</div></div>').join(''):
       '<p class="hint">確認が必要な類似店舗はありません。完全一致と既知の略称は自動で統一されます。</p>';
     const byId=new Map(masters.map(row=>[row.id,row]));
+    const targetOf=row=>byId.get(row.merged_into)||row;
+    const area=$('lpStoreMasterPrefecture'),previous=area?.value||'';
+    const sort=$('lpStoreMasterSort')?.value||'prefecture';
+    if(area){
+      const areas=[...new Set(live.map(row=>row.prefecture))].sort(comparePrefectures);
+      area.innerHTML='<option value="">すべての都道府県</option>'+areas.map(pref=>
+        '<option value="'+escape(pref)+'">'+escape(pref)+'</option>').join('');
+      area.value=areas.includes(previous)?previous:'';
+    }
     const visible=masters.filter(row=>{
-      const target=row.merged_into?byId.get(row.merged_into):null;
-      return !query||matches(row.name)||matches(row.prefecture)||matches(row.address)||
-        (target&&(matches(target.name)||matches(target.address)));
+      const target=targetOf(row);
+      return (!area?.value||target.prefecture===area.value)&&(!query||matches(row.name)||
+        matches(row.prefecture)||matches(row.address)||matches(target.name)||matches(target.address));
+    }).sort((left,right)=>{
+      const a=targetOf(left),b=targetOf(right);
+      const region=sort==='name'?0:comparePrefectures(a.prefecture,b.prefecture,sort==='prefecture-desc');
+      return region||nameOrder.compare(a.name,b.name)||Number(!!left.merged_into)-Number(!!right.merged_into)||
+        nameOrder.compare(left.name,right.name)||nameOrder.compare(left.id,right.id);
     });
-    list.innerHTML=visible.length?visible.slice(0,500).map(row=>{
-      const target=(row.merged_into&&byId.get(row.merged_into))||row;
+    if($('lpStoreMasterResult'))$('lpStoreMasterResult').textContent=visible.length+'件中 '+Math.min(masterLimit,visible.length)+'件を表示';
+    if($('lpStoreMasterMore'))$('lpStoreMasterMore').hidden=visible.length<=masterLimit;
+    list.innerHTML=visible.length?visible.slice(0,masterLimit).map(row=>{
+      const target=targetOf(row);
       return '<div class="lp-store-master-item" data-store-master-id="'+escape(row.id)+'">'+
       '<div class="lp-store-master-meta"><strong>'+escape(target.name)+
       '</strong><span>📍 '+escape(target.prefecture)+
@@ -137,16 +155,23 @@
         ?'<small>既存CSV照合・現住所は未確認</small>':
          target.address_source==='developer_entry'
         ?'<small>開発者入力</small>':'')+
-      '</div>'+
+      '</div><div class="lp-store-master-actions">'+
       (row.merged_into
         ?'<button type="button" data-store-unmerge="'+escape(row.id)+'">統合解除</button>'
-        :'<div class="lp-store-master-actions"><button type="button" data-store-address-edit="'+escape(row.id)+'">'+
+        :'<button type="button" data-store-address-edit="'+escape(row.id)+'">'+
           (row.address?'住所を編集':'住所を登録')+'</button>'+
-          '<button type="button" data-store-merge-target="'+escape(row.id)+'">統合先にする</button></div>')+
-      '</div>';
+          '<button type="button" data-store-merge-target="'+escape(row.id)+'">統合先にする</button>')+
+      '<button type="button" data-store-delete="'+escape(row.id)+'">'+(row.merged_into?'別名を削除':'店舗を削除')+
+      '</button></div></div>';
     }).join(''):
       '<p class="hint">一致する店舗はありません。</p>';
     renderManualMerge();
+  }
+
+  function comparePrefectures(a,b,descending=false){
+    const left=prefectureOrder.get(a),right=prefectureOrder.get(b);
+    if(left==null||right==null)return Number(left==null)-Number(right==null)||nameOrder.compare(a,b);
+    return descending?right-left:left-right;
   }
 
   function mergeFold(value){
@@ -191,7 +216,7 @@
     });
     const button=$('lpStoreMasterMerge');
     button.disabled=busy||!target||!selected.length;
-    button.textContent=mergeBusy?'統合中…':selected.length
+    button.textContent=mergeBusy?'処理中…':selected.length
       ?selected.length+'店舗をこの正式店舗へ統合':'統合する店舗を選択';
     $('lpStoreMergeStatus').textContent=mergeMessage||(!target?'統合先を選ぶと、同じ都道府県の店舗だけ表示します。':
       selected.length?'選択した'+selected.length+'店舗 → '+target.name:'まとめる店舗にチェックしてください。複数選択できます。');
@@ -206,7 +231,7 @@
     }
     const area=$('lpStoreMergePrefecture');
     const previous=target?.prefecture||area.value;
-    const areas=[...new Set(live.map(row=>row.prefecture))].sort((a,b)=>clean(a).localeCompare(clean(b),'ja'));
+    const areas=[...new Set(live.map(row=>row.prefecture))].sort(comparePrefectures);
     area.innerHTML='<option value="">すべての都道府県</option>'+areas.map(pref=>
       '<option value="'+escape(pref)+'">'+escape(pref)+'</option>').join('');
     area.value=areas.includes(previous)?previous:'';
@@ -366,6 +391,44 @@
     }finally{mergeBusy=false;renderManualMerge();}
   }
 
+  async function deleteStore(id){
+    const client=getClient(),row=masters.find(item=>item.id===id);
+    if(!isDev()||!client||!row||masterBusy||mergeBusy||addressSaving)return false;
+    const children=masters.filter(item=>item.merged_into===id).map(item=>item.id);
+    const target=masters.find(item=>item.id===row.merged_into);
+    const detail=row.merged_into?'正式店舗「'+(target?.name||'')+'」は一覧に残ります。':'';
+    const effect=children.length?'統合元の'+children.length+'件は'+(row.merged_into?'元の統合先に引き継ぎます。':'個別の店舗に戻ります。'):'';
+    if(!confirm([row.prefecture+'の「'+row.name+'」を店舗マスターから削除しますか？',detail,effect,
+      '過去の抽選・応募記録は残ります。この都道府県と店舗名の組み合わせは自動登録の対象から外れます。'].filter(Boolean).join('\n\n')))return false;
+    const feedback=$('lpStoreMasterFeedback');
+    mergeBusy=true;renderMergeSelection();
+    feedback.textContent='「'+row.name+'」を削除しています…';
+    try{
+      let removed=false,problem='';
+      try{
+        const {data,error}=await client.rpc('lottery_store_delete_v1',{
+          p_store_id:id,p_expected_parent:row.merged_into||null,p_expected_children:children
+        });
+        if(error)throw error;
+        if(data!==true)throw Error('削除結果を確認できませんでした。');
+        removed=true;
+        masters=masters.filter(item=>item.id!==id).map(item=>
+          item.merged_into===id?{...item,merged_into:row.merged_into||null}:item);
+        pairs=pairs.filter(pair=>pair.left_id!==id&&pair.right_id!==id);
+        renderMaster();
+      }catch(error){problem=String(error?.message||error);}
+      const loaded=await refreshMaster(true);
+      if(!removed&&!(loaded&&!masters.some(item=>item.id===id))){
+        feedback.textContent='削除を確認できませんでした。'+problem;
+        return false;
+      }
+      const views=[invalidateStoreChoices(),refresh(true),...['TorecaStoreAliases','TorecaStoreMaps','TorecaSalesReference']
+        .map(key=>globalThis.window?.[key]?.refresh?.(true))];
+      const updated=(await Promise.allSettled(views)).every(result=>result.status==='fulfilled'&&result.value!==false);
+      feedback.textContent='「'+row.name+'」を削除しました。'+(loaded&&updated?'':'表示を更新するには「更新・照合」を押してください。');
+      return true;
+    }finally{mergeBusy=false;renderManualMerge();}
+  }
 
   function openAddressEditor(id,button){
     if(!isDev()||!getClient()||addressSaving||masterBusy||mergeBusy)return;
@@ -454,15 +517,21 @@
   function init(options){
     getClient=options.getClient;isDev=options.isDev;
     renderCards=options.renderCards;escape=options.escape;
+    prefectureOrder=new Map((options.prefectures||[]).map((name,index)=>[name,index]));
+    invalidateStoreChoices=options.invalidateStoreChoices||(()=>{});
     $('lpStoreAnalyticsSearch')?.addEventListener('input',renderStats);
     $('lpStoreAnalyticsSort')?.addEventListener('change',renderStats);
     $('lpStoreAnalyticsReload')?.addEventListener('click',()=>refresh(true));
     $('lpStoreMasterReload')?.addEventListener('click',refreshMaster);
-    $('lpStoreMasterSearch')?.addEventListener('input',renderMaster);
+    for(const [id,event] of [['lpStoreMasterSearch','input'],['lpStoreMasterPrefecture','change'],['lpStoreMasterSort','change']]){
+      $(id)?.addEventListener(event,()=>{masterLimit=100;renderMaster();});
+    }
+    $('lpStoreMasterMore')?.addEventListener('click',()=>{masterLimit+=100;renderMaster();});
     $('lpStoreMasterCandidates')?.addEventListener('click',onCandidateClick);
     $('lpStoreMasterList')?.addEventListener('click',event=>{
-      const target=event.target.closest('button[data-store-unmerge],button[data-store-address-edit],button[data-store-merge-target]');
+      const target=event.target.closest('button[data-store-unmerge],button[data-store-address-edit],button[data-store-merge-target],button[data-store-delete]');
       if(!target)return;
+      if(target.dataset.storeDelete)return deleteStore(target.dataset.storeDelete);
       if(target.dataset.storeUnmerge)unmerge(target.dataset.storeUnmerge);
       else if(target.dataset.storeMergeTarget)chooseMergeTarget(target.dataset.storeMergeTarget,true);
       else if(target.dataset.storeAddressEdit)openAddressEditor(target.dataset.storeAddressEdit,target);

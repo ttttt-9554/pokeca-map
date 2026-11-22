@@ -27,7 +27,7 @@
   >
 
   <!-- アプリのデザイン -->
-  <link rel="stylesheet" href="style.css?v=20261115-pokemon-smooth-saves-v1">
+  <link rel="stylesheet" href="style.css?v=20261123-store-master-v1">
 
   <style>
     #lpTrackerPanel .lp-track-product-group { margin: 12px 0; padding: 10px; border: 1px solid var(--app-border,#64748b); border-radius: 12px; }
@@ -1426,7 +1426,18 @@ nav[aria-label="メインメニュー"] {
         </details>
         <details class="lp-store-master-all">
           <summary>店舗マスター一覧・住所登録 <span id="lpStoreMasterCount">未取得</span></summary>
+          <div class="lp-store-master-filters">
+            <label>都道府県<select id="lpStoreMasterPrefecture"><option value="">すべての都道府県</option></select></label>
+            <label>並べ替え<select id="lpStoreMasterSort">
+              <option value="prefecture">都道府県順（北海道から）</option>
+              <option value="prefecture-desc">都道府県順（沖縄県から）</option>
+              <option value="name">店舗名順</option>
+            </select></label>
+          </div>
+          <p id="lpStoreMasterResult" class="hint" role="status"></p>
+          <p id="lpStoreMasterFeedback" class="hint" role="status"></p>
           <div id="lpStoreMasterList" class="lp-store-master-list"></div>
+          <button type="button" id="lpStoreMasterMore" hidden>さらに表示</button>
         </details>
       </section>
 
@@ -2008,14 +2019,14 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261121-google-form-notices-v1';
+      ? token : '20261123-store-master-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>
   
   <script src="lottery_notifications_v1.js?v=20261118-lottery-notice-stores-v1"></script>
   <script src="onsite_comment_alert_v21_55.js?v=20261103-yodobashi-status-v1"></script>
-  <script src="store_analytics_v21_120.js?v=20261108-searchable-store-merge-v1"></script>
+  <script src="store_analytics_v21_120.js?v=20261123-store-master-v1"></script>
   <script src="dev_unified_review_v21_124.js?v=20261121-google-form-notices-v1"></script>
 
 <script>

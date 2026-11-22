@@ -2698,6 +2698,12 @@ html[data-theme="dark"] #lpAppDialog #lpAppCloseX{
 #devView #lpStoreMasterMerge{width:100%;box-sizing:border-box;font-size:14px}
 #devView .lp-store-master-actions{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
 #devView .lp-store-master-actions button{min-height:36px;padding:6px 9px;font-size:12px}
+#devView .lp-store-master-filters{display:flex;flex-wrap:wrap;gap:8px 12px;margin:12px 0}
+#devView .lp-store-master-filters label{display:grid;flex:1 1 155px;min-width:0;gap:4px;font-size:12px;font-weight:700}
+#devView .lp-store-master-filters select{width:100%;min-width:0;max-width:100%;box-sizing:border-box;min-height:40px}
+#devView .lp-store-master-actions [data-store-delete]{color:#9d2525;border-color:#cc7d7d}
+html[data-theme="dark"] #devView .lp-store-master-actions [data-store-delete]{color:#ffb5b5;border-color:#b87f85}
+#devView #lpStoreMasterFeedback:empty{display:none}
 #devView .lp-store-master-manual :is(input,select,button):disabled{opacity:.5;cursor:not-allowed}
 @media(max-width:680px){
   #devView .lp-store-merge-grid{grid-template-columns:minmax(0,1fr)}

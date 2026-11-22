@@ -31,17 +31,31 @@ const fixture=()=>[
   {id:'tokyo',name:'TSUTAYA田町店',prefecture:'東京都',address:'東京都港区芝1-2-3'},
   {id:'old',name:'旧TSUTAYA東仙台',prefecture:'宮城県',merged_into:'official'}
 ];
-function harness(){
+function harness(extra=[]){
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
   const nodes=new Map(ids.map(id=>[id,new Node(id)]));
-  let masters=fixture(),dev=true,confirmResult=true,failSource='',loseResponse='',gate=null;
+  let masters=[...fixture(),...extra],dev=true,confirmResult=true,failSource='',loseResponse='',gate=null;
   const calls=[],confirmations=[],refreshed=[];
   const client={rpc:async(name,args)=>{
     calls.push({name,args:copy(args||{})});
-    if(name==='lottery_store_admin_v1')return {data:{masters:copy(masters),candidates:[{
-      left_id:'official',right_id:'variant-a',left_name:masters[0].name,right_name:masters[1].name,
-      prefecture:'宮城県',similarity:.91}]},error:null};
+    if(name==='lottery_store_admin_v1'){
+      const left=masters.find(row=>row.id==='official'&&!row.merged_into);
+      const right=masters.find(row=>row.id==='variant-a'&&!row.merged_into);
+      const candidates=left&&right?[{left_id:left.id,right_id:right.id,left_name:left.name,
+        right_name:right.name,prefecture:left.prefecture,similarity:.91}]:[];
+      return {data:{masters:copy(masters),candidates},error:null};
+    }
     if(name==='lottery_store_stats_v1')return {data:[],error:null};
+    if(name==='lottery_store_delete_v1'){
+      assert.equal(dev,true);
+      if(gate)await gate;
+      const row=masters.find(item=>item.id===args.p_store_id);
+      assert.equal(args.p_expected_parent,row.merged_into||null);
+      assert.deepEqual(args.p_expected_children,masters.filter(item=>item.merged_into===row.id).map(item=>item.id));
+      if(failSource===row.id)return {data:null,error:{message:'別の画面で更新されました。'}};
+      masters=masters.filter(item=>item.id!==row.id).map(item=>item.merged_into===row.id?{...item,merged_into:row.merged_into}:item);
+      return loseResponse===row.id?{error:{message:'通信エラー'}}:{data:true};
+    }
     assert.equal(name,'lottery_store_review_v1');
     assert.equal(dev,true,'Every saved merge must be authorized');
     if(gate)await gate;
@@ -59,10 +73,11 @@ function harness(){
   vm.runInNewContext(code,{window,document:{getElementById:id=>nodes.get(id)||null},
     confirm:text=>{confirmations.push(text);return confirmResult;},alert:()=>{}},{timeout:1000});
   const ui=window.TorecaStoreUI;
-  ui.init({getClient:()=>client,isDev:()=>dev,renderCards:()=>{},escape});
+  ui.init({getClient:()=>client,isDev:()=>dev,renderCards:()=>{},escape,prefectures:['北海道','宮城県','東京都','沖縄県']});
   const node=id=>{assert(nodes.has(id),id);return nodes.get(id);};
   return {ui,calls,confirmations,refreshed,node,
     load:()=>ui.refreshMaster(),
+    remove:id=>node('lpStoreMasterList').fire('click',{target:{dataset:{storeDelete:id},closest(){return this;}}}),
     target:async id=>{node('lpStoreMergeTarget').value=id;await node('lpStoreMergeTarget').fire('change');},
     search:async(side,value)=>{const input=node('lpStoreMerge'+side+'Search');input.value=value;await input.fire('input');},
     check:async(id,checked=true)=>{
@@ -149,5 +164,41 @@ function harness(){
   release();await saving;
   const denied=harness();denied.setDev(false);await denied.load();await denied.node('lpStoreMasterMerge').fire('click');
   assert.equal(denied.calls.length,0,'Non-developers cannot request master reads or merges');
-  console.log('Manual store merge UI: searchable choices, retained multi-selection, region guards, group save, partial retry, lost responses and authorization passed');
+  const extra=Array.from({length:530},(_,i)=>({id:'south-'+i,name:'South '+i,prefecture:'沖縄県'}));
+  const sorted=harness([...extra,{id:'north',name:'Zulu',prefecture:'北海道'},{id:'last',name:'Alpha',prefecture:'未確認'}]);
+  await sorted.load();
+  const visible=()=>Array.from(sorted.node('lpStoreMasterList').innerHTML.matchAll(/data-store-master-id="([^"]+)"/g),m=>m[1]);
+  assert.equal(visible()[0],'north');assert.equal(visible().length,100);
+  for(let i=0;i<5;i++)await sorted.node('lpStoreMasterMore').fire('click');
+  assert.equal(visible().length,538);assert.equal(visible().at(-1),'last');
+  assert.equal(sorted.node('lpStoreMasterMore').hidden,true);
+  const sorter=sorted.node('lpStoreMasterSort');
+  sorter.value='prefecture-desc';await sorter.fire('change');
+  assert.deepEqual(visible().slice(0,3),['south-0','south-1','south-2']);
+  sorter.value='name';await sorter.fire('change');assert.equal(visible()[0],'last');
+  const pref=sorted.node('lpStoreMasterPrefecture');pref.value='宮城県';await pref.fire('change');
+  assert.equal(visible().length,5);assert(visible().includes('old'));
+  const search=sorted.node('lpStoreMasterSearch');search.value='旧TSUTAYA';await search.fire('input');
+  assert.deepEqual(visible(),['old']);
+  const removal=harness();await removal.load();
+  const deletes=()=>removal.calls.filter(call=>call.name==='lottery_store_delete_v1');
+  removal.setDev(false);await removal.remove('official');assert.equal(deletes().length,0);
+  removal.setDev(true);removal.setConfirm(false);await removal.remove('official');
+  assert.equal(deletes().length,0);assert.match(removal.confirmations.at(-1),/宮城県.*東仙台/);
+  assert.match(removal.confirmations.at(-1),/統合元の1件/);
+  removal.setConfirm(true);removal.lose('official');
+  let unlock;removal.defer(new Promise(resolve=>{unlock=resolve;}));
+  const deleting=removal.remove('official');await new Promise(setImmediate);
+  await removal.remove('official');assert.equal(deletes().length,1);
+  unlock();await deleting;
+  assert.match(removal.node('lpStoreMasterFeedback').textContent,/削除しました/);
+  assert.doesNotMatch(removal.node('lpStoreMasterList').innerHTML,/data-store-master-id="official"/);
+  assert.match(removal.node('lpStoreMasterList').innerHTML,/data-store-address-edit="old"/);
+  const alias=harness();await alias.load();alias.fail('old');await alias.remove('old');
+  assert.match(alias.node('lpStoreMasterFeedback').textContent,/別の画面で更新/);
+  assert.match(alias.node('lpStoreMasterList').innerHTML,/data-store-unmerge="old"/);
+  alias.fail('');await alias.remove('old');assert.match(alias.confirmations.at(-1),/正式店舗/);
+  assert.match(alias.node('lpStoreMasterList').innerHTML,/data-store-master-id="official"/);
+  assert.doesNotMatch(alias.node('lpStoreMasterList').innerHTML,/data-store-master-id="old"/);
+  console.log('Store master UI: prefecture sorting and filters, pagination, merges, guarded deletion, retries and authorization passed');
 })().catch(error=>{console.error(error);process.exitCode=1;});

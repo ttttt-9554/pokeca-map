@@ -11445,7 +11445,11 @@
         }
       });
       window.TorecaStoreUI?.init?.({getClient:()=>supabaseClient,isDev:isDeveloper,
-        renderCards:renderLottery,escape});
+        renderCards:renderLottery,escape,prefectures:LP_PREFECTURES,
+        invalidateStoreChoices:async()=>{
+          await lpSearchMasterLoading;
+          lpSearchMasterStores=[];lpSearchMasterAt=0;
+        }});
       window.TorecaStoreMaps?.init?.({
         getClient:()=>supabaseClient,
         getUserId:()=>authUser&&!discordRoleAuthPending?authUser.id:'',
