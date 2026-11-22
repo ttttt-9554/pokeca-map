@@ -4270,7 +4270,7 @@
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSdPOV9Zz5AkCLPjwfO8dhkEiw2MOpwVdqT-EVxpIudBBrNREQ/viewform",
       "source_site": "docs.google.com",
       "event_title": "【バトロコ沼津駅前】ポケモンカードゲーム 「ハドウシーカー」抽選販売応募フォーム",
-      "prefecture": "",
+      "prefecture": "千葉県",
       "discord_posted_at": "2026-11-22T15:00:06.899000+00:00",
       "first_detected_at": "2026-11-22T15:05:55.637676+00:00",
       "review_category": "pokemon",
@@ -4285,20 +4285,24 @@
       "stores": [
         {
           "name": "バトロコ沼津駅前",
-          "prefecture": ""
+          "prefecture": "千葉県"
         }
       ],
       "store_name": "バトロコ沼津駅前",
       "official_event_title": "【バトロコ沼津駅前】ポケモンカードゲーム 「ハドウシーカー」抽選販売応募フォーム",
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-22T15:05:57.612Z",
-      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSdPOV9Zz5AkCLPjwfO8dhkEiw2MOpwVdqT-EVxpIudBBrNREQ/viewform"
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSdPOV9Zz5AkCLPjwfO8dhkEiw2MOpwVdqT-EVxpIudBBrNREQ/viewform",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSeLcLlY9Dy263UaBIKiKZ2XsqpZ7kzU7k4ZYFDY9-0-so2Jgg/viewform",
       "source_site": "docs.google.com",
       "event_title": "【バトロコ本厚木駅前】ポケモンカード「ハドウシーカー 」抽選フォーム",
-      "prefecture": "",
+      "prefecture": "神奈川県",
       "discord_posted_at": "2026-11-22T15:00:06.899000+00:00",
       "first_detected_at": "2026-11-22T15:05:55.637775+00:00",
       "review_category": "pokemon",
@@ -4315,14 +4319,18 @@
       "stores": [
         {
           "name": "バトロコ本厚木駅前",
-          "prefecture": ""
+          "prefecture": "神奈川県"
         }
       ],
       "store_name": "バトロコ本厚木駅前",
       "official_event_title": "【バトロコ本厚木駅前】ポケモンカード「ハドウシーカー 」抽選フォーム",
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-22T15:05:57.612Z",
-      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSeLcLlY9Dy263UaBIKiKZ2XsqpZ7kzU7k4ZYFDY9-0-so2Jgg/viewform"
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSeLcLlY9Dy263UaBIKiKZ2XsqpZ7kzU7k4ZYFDY9-0-so2Jgg/viewform",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
   "last_seen_message_ids": {
