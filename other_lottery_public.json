@@ -4130,16 +4130,16 @@
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1573929815495409664"
+    "1551580466266644552": "1573933604298563695"
   },
-  "collected_at": "2026-11-22T05:20:55.333581+00:00",
+  "collected_at": "2026-11-22T05:30:56.171104+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-22T05:30:55.448Z",
+    "next_at": "2026-11-22T05:40:56.564Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-22T05:10:58.982Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-22T04:30:55.448Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-22T05:30:56.482Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-22T04:40:56.564Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-22T04:50:55.820Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-22T05:00:56.584Z",
@@ -4149,9 +4149,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-22T05:20:58.966Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-22T05:20:58.966Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-22T05:20:58.966Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-22T04:30:55.448Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-22T04:30:55.448Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-22T04:30:55.448Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-22T05:30:56.482Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-22T05:30:56.482Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-22T05:30:56.482Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-22T04:40:56.564Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-22T04:40:56.564Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-22T04:40:56.564Z",
