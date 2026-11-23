@@ -1368,7 +1368,7 @@ nav[aria-label="メインメニュー"] {
           <div id="lpDevUnifiedCompletedList" class="lp-dev-unified-list"></div>
         </details>
         <details id="lpCardHiddenPanel" class="lp-dev-unified-group">
-          <summary>🗃️ 非表示のLivePocket抽選 <span id="lpCardHiddenCount">確認中</span></summary>
+          <summary>🗃️ 非表示の抽選 <span id="lpCardHiddenCount">確認中</span></summary>
           <p class="hint">一覧から削除（非表示）にした抽選を確認・復元できます。元の抽選データや個人の応募履歴は保持しています。</p>
           <p id="lpCardHiddenFeedback" class="hint" role="status" aria-live="polite"></p>
           <div id="lpCardHiddenList" class="lp-card-hidden-list">開くと非表示の抽選を表示します。</div>
@@ -1855,9 +1855,9 @@ nav[aria-label="メインメニュー"] {
           <button id="lpCardRestore" type="button" hidden>↩️ 一覧に復元</button>
           <p id="lpCardVisibilityState" class="hint" role="status" aria-live="polite"></p>
         </div>
-        <h4>非表示中の抽選一覧 <span id="lpCardHiddenModalCount">0件</span></h4>
-        <div id="lpCardHiddenModalList" class="lp-card-hidden-list" aria-label="非表示にしたLivePocket抽選"></div>
         <p id="lpCardHiddenModalFeedback" class="hint" role="status" aria-live="polite"></p>
+        <h4>非表示中の抽選一覧 <span id="lpCardHiddenModalCount">0件</span></h4>
+        <div id="lpCardHiddenModalList" class="lp-card-hidden-list" aria-label="非表示にした抽選"></div>
         <button id="lpCardHiddenTabClose" type="button" class="lp-card-hidden-close">閉じる</button>
       </section>
     </div>
@@ -2019,7 +2019,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261123-store-master-v1';
+      ? token : '20261123-card-visibility-v1';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

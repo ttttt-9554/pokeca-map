@@ -43,18 +43,28 @@ assert.equal(refreshes,1);
 assert.equal(tabs.lpCardSelectTab('bad'),false);
 
 const url='https://livepocket.jp/e/sample-x',name='非表示のテスト抽選';
-const hidden=new Map([[url,{event_url:url,is_hidden:true,event_title:name}]]);
+const seven='https://7net.omni7.jp/general/027016/fair-hobby-pokemoncardgame30th.html';
+const hidden=new Map([
+  [url,{event_url:url,is_hidden:true,event_title:name}],
+  [seven,{event_url:seven,is_hidden:true}],
+  ['invalid',{event_url:'javascript:alert(1)',is_hidden:true}]
+]);
 const snapshot=vm.runInNewContext(extract('lpCardHiddenRender')+
   '\n({lpCardHiddenRender})',{
     $:id=>nodes.get(id),isDeveloper:()=>true,lpCardReady:true,
-    lpCardOverrides:hidden,lotteryBaseItems:[{url,event_title:name}],
+    lpCardOverrides:hidden,lpExtOverrides:new Map(),lotteryBaseItems:[{url,event_title:name},{url:seven,event_title:'セブンネット抽選'}],
+    safeLotteryUrl:vm.runInNewContext(extract('safeLotteryUrl')+'\nsafeLotteryUrl',{URL}),
     isLivePocketEventUrl:value=>String(value).startsWith('https://livepocket.jp/e/'),
     escape:value=>String(value)
   },{timeout:1000});
 snapshot.lpCardHiddenRender();
-assert.equal(nodes.get('lpCardHiddenCount').textContent,'1件');
-assert.equal(nodes.get('lpCardHiddenModalCount').textContent,'1件');
-assert.equal(nodes.get('lpCardHiddenTabCount').textContent,'1件');
+for(const id of ['lpCardHiddenCount','lpCardHiddenModalCount','lpCardHiddenTabCount'])
+  assert.equal(nodes.get(id).textContent,'2件');
+for(const id of ['lpCardHiddenList','lpCardHiddenModalList']){
+  assert(nodes.get(id).innerHTML.includes('data-lp-card-hidden-restore="'+seven+'"'));
+  assert.match(nodes.get(id).innerHTML,/セブンネット抽選/);
+  assert.doesNotMatch(nodes.get(id).innerHTML,/javascript:/);
+}
 assert.match(nodes.get('lpCardHiddenModalList').innerHTML,/data-lp-card-hidden-restore/);
 assert.doesNotMatch(nodes.get('lpCardHiddenModalList').innerHTML,/data-lp-card-hidden-edit/,
   'Editing another lottery from an open modal is intentionally disabled');

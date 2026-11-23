@@ -4240,7 +4240,7 @@
     return true;
   }
 
-  // v21.129: hide or restore LivePocket cards, never delete original data.
+  // Card visibility is independent of source moderation and field corrections.
   function lpCardVisibilityControls(url){
     const hidden=lpCardOverrides.get(url)?.is_hidden===true;
     const hide=$('lpCardHide'),restore=$('lpCardRestore');
@@ -4265,34 +4265,41 @@
       return;
     }
     const rows=[...lpCardOverrides.values()].filter(row=>
-      row?.is_hidden===true&&isLivePocketEventUrl(row.event_url));
+      row?.is_hidden===true&&safeLotteryUrl(row.event_url));
     for(const count of [devCount,modalCount,tabCount])
       if(count)count.textContent=rows.length+'件';
     function rowHtml(row,inModal){
       const base=lotteryBaseItems.find(item=>item.url===row.event_url);
-      const title=base?.event_title||row.event_title||row.event_url;
+      const title=(row.edited_fields?.includes('event_title')&&row.event_title)||
+        base?.event_title||row.event_title||row.event_url;
       const url=escape(row.event_url);
       return '<article class="lp-card-hidden-row">'+
         '<strong>'+escape(title)+'</strong>'+
         '<a href="'+url+'" target="_blank" rel="noopener noreferrer">🔗 元の抽選ページ</a>'+
         '<div class="lp-card-hidden-actions">'+
-        (!inModal&&base?'<button type="button" data-lp-card-hidden-edit="'+url+'">✏️ 編集</button>':'')+
+        (!inModal&&base&&lpExtOverrides.get(row.event_url)?.state!=='excluded'?
+          '<button type="button" data-lp-card-hidden-edit="'+url+'">✏️ 編集</button>':'')+
         '<button type="button" data-lp-card-hidden-restore="'+url+'">↩️ 一覧に復元</button>'+
         '</div></article>';
     }
-    const empty='<p class="hint">非表示にしているLivePocket抽選はありません。</p>';
+    const empty='<p class="hint">非表示にしている抽選はありません。</p>';
     if(devList)devList.innerHTML=rows.length?
-      rows.slice(0,250).map(row=>rowHtml(row,false)).join(''):empty;
+      rows.map(row=>rowHtml(row,false)).join(''):empty;
     if(modalList)modalList.innerHTML=rows.length?
-      rows.slice(0,250).map(row=>rowHtml(row,true)).join(''):empty;
+      rows.map(row=>rowHtml(row,true)).join(''):empty;
   }
 
   async function lpCardVisibilityChange(url,hidden,fromDialog=false){
-    if(!isDeveloper()||!authUser?.id||!supabaseClient||!lpCardReady||
-       lpCardBusy||!safeLotteryUrl(url)||!isLivePocketEventUrl(url))return false;
-    const saved=lpCardOverrides.get(url);
-    if((saved?.is_hidden===true)===hidden)return true;
-    if(!hidden&&!saved)return false;
+    const feedback=fromDialog?$('lpCardHiddenModalFeedback'):$('lpCardHiddenFeedback');
+    if(lpCardBusy)return false;
+    let problem='';
+    if(!isDeveloper()||!authUser?.id)problem='開発者としてログインしてください。';
+    else if(!supabaseClient||!lpCardReady)problem='表示設定を読み込めません。画面上部の「更新」を押してください。';
+    else if(!safeLotteryUrl(url))problem='対象の抽選URLを確認できません。';
+    if(problem){
+      if(feedback)feedback.textContent='⚠ '+problem;
+      return false;
+    }
     const message=hidden
       ? 'この抽選を全ユーザーの抽選一覧から削除（非表示）しますか？\n'+
         '元データ・カード修正履歴・個人の応募記録は消えません。\n'+
@@ -4302,32 +4309,36 @@
     lpCardBusy=true;
     const controls=[$('lpCardHide'),$('lpCardRestore')].filter(Boolean);
     controls.forEach(button=>button.disabled=true);
-    const feedback=fromDialog?$('lpCardHiddenModalFeedback'):$('lpCardHiddenFeedback');
     if(feedback)feedback.textContent='🔄 保存しています…';
     try{
       const payload={is_hidden:hidden,updated_by:authUser.id,updated_at:new Date().toISOString()};
-      let response;
-      if(saved){
-        // Update ONLY visibility, so title, stores, dates and verification survive.
-        response=await supabaseClient.from(LP_CARD_TABLE)
-          .update(payload).eq('event_url',url).select('event_url,is_hidden').single();
-      }else{
-        if(!hidden)throw Error('復元対象が見つかりません。');
-        // Let database defaults supply the empty correction list.
-        response=await supabaseClient.from(LP_CARD_TABLE)
-          .insert({event_url:url,...payload}).select('event_url,is_hidden').single();
-      }
-      if(response.error)throw response.error;
-      if(response.data?.event_url!==url||response.data?.is_hidden!==hidden)
+      const table=supabaseClient.from(LP_CARD_TABLE);
+      // Only the supplied columns participate in the upsert, including if
+      // another editor creates a correction between opening the card and saving.
+      const query=hidden?table.upsert({event_url:url,...payload},{onConflict:'event_url'}):
+        table.update(payload).eq('event_url',url);
+      const {data,error}=await query.select(LP_CARD_SELECT).maybeSingle();
+      if(!error&&((hidden&&!data)||(data&&(data.event_url!==url||data.is_hidden!==hidden))))
         throw Error('保存結果を確認できませんでした。');
-      lpCardLastFetch=0;
-      if(!await lpCardRefresh(true))
-        throw Error('保存されましたが再取得できません：'+lpCardError);
-      if(fromDialog)lpCardVisibilityControls(lpCardEditing);
-      if(feedback)feedback.textContent=hidden?'✅ 非表示にしました。':'✅ 一覧に復元しました。';
+      // A realtime read that started before the write can contain the old state.
+      if(lpCardLoading)await lpCardLoading;
+      if(!error){
+        if(data)lpCardOverrides.set(url,data);
+        else lpCardOverrides.delete(url);
+        lpCloudApply();
+      }
+      const refreshed=await lpCardRefresh(true);
+      const matches=(lpCardOverrides.get(url)?.is_hidden===true)===hidden;
+      if(error&&(!refreshed||!matches))throw error;
+      if(!matches)throw Error('別の操作で表示設定が変更されました。');
+      let result=hidden?'✅ 非表示にしました。':'✅ 一覧に復元しました。';
+      if(!hidden&&lpExtOverrides.get(url)?.state==='excluded')
+        result='カードの非表示を解除しました。外部抽選の除外設定が有効です。';
+      if(!refreshed)result+=' 最新の一覧は画面上部の「更新」で再取得できます。';
+      if(feedback)feedback.textContent=result;
       return true;
     }catch(error){
-      if(feedback)feedback.textContent='⚠ '+String(error?.message||error);
+      if(feedback)feedback.textContent='⚠ 表示設定を確認してください。'+String(error?.message||error);
       return false;
     }finally{
       lpCardBusy=false;
@@ -4672,6 +4683,7 @@
     if($('lotteryResultsView')?.classList.contains('active'))lpResultsRender();
     lpExtRenderAdmin();
     lpCardHiddenRender();
+    if(lpCardEditing)lpCardVisibilityControls(lpCardEditing);
     window.TorecaUnifiedReview?.render?.();
   }
 
