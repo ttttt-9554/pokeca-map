@@ -15936,24 +15936,74 @@
     {
       "url": "https://livepocket.jp/e/yval9",
       "discord_posted_at": "2026-11-23T11:00:07.388000+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/yval9",
+      "event_title": "【古本市場市川鬼高店】ワンピースカードゲーム 「神の支配」",
+      "application_end_at": "2026-11-26T22:00:00+09:00",
+      "application_start_at": "2026-11-23T18:43:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "古本市場市川鬼高店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "古本市場市川鬼高店",
+      "prefecture": "千葉県",
+      "official_genre": "onepiece",
+      "official_event_title": "【古本市場市川鬼高店】ワンピースカードゲーム 「神の支配」",
+      "purchase_start_date": "2026-12-01",
+      "purchase_end_date": "2026-12-03",
       "first_detected_at": "2026-11-23T11:00:59.100963+00:00"
     },
     {
       "url": "https://livepocket.jp/e/780_o",
       "discord_posted_at": "2026-11-23T11:00:07.388000+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/780_o",
+      "event_title": "ONE PIECEカードゲーム スタートデッキ 砂漠の王女と海賊たち【ST-37】 抽選販売",
+      "application_end_at": "2026-11-29T22:00:00+09:00",
+      "application_start_at": "2026-11-23T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム スタートデッキ 砂漠の王女と海賊たち【ST-37】 抽選販売",
+      "result_announcement_date": "2026-12-17",
+      "purchase_start_date": "2026-12-19",
+      "purchase_end_date": "2026-12-20",
       "first_detected_at": "2026-11-23T11:00:59.100963+00:00"
     },
     {
       "url": "https://livepocket.jp/e/7q6tg",
       "discord_posted_at": "2026-11-23T11:00:07.388000+00:00",
-      "store_location_source": "livepocket_page_required",
+      "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/7q6tg",
+      "event_title": "ONE PIECEカードゲーム スタートデッキ バロックワークス【ST-38】 抽選販売",
+      "application_end_at": "2026-11-29T22:00:00+09:00",
+      "application_start_at": "2026-11-23T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "トレカエース勝田東石川店",
+          "prefecture": "茨城県"
+        }
+      ],
+      "store_name": "トレカエース勝田東石川店",
+      "prefecture": "茨城県",
+      "official_genre": "onepiece",
+      "official_event_title": "ONE PIECEカードゲーム スタートデッキ バロックワークス【ST-38】 抽選販売",
+      "result_announcement_date": "2026-12-17",
+      "purchase_start_date": "2026-12-19",
+      "purchase_end_date": "2026-12-20",
       "first_detected_at": "2026-11-23T11:00:59.100963+00:00"
     }
   ],
-  "updated_at": "2026-11-23T11:31:08.634104+00:00"
+  "updated_at": "2026-11-23T11:41:32.103589+00:00"
 }
