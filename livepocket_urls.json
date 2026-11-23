@@ -31353,8 +31353,8 @@
           "http_status": null
         },
         "https://livepocket.jp/e/qkhgm": {
-          "checked_at": "2026-11-23T03:31:25.582801+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-23T09:41:27.674556+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -34496,8 +34496,8 @@
         },
         "https://livepocket.jp/e/qkhgm": {
           "detected_at": "2026-11-23T03:31:01.212996+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-23T03:31:25.582801+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-23T09:41:27.674556+00:00",
           "http_status": null
         }
       },
@@ -36838,6 +36838,11 @@
         "https://livepocket.jp/e/bsrqw": {
           "attempts": 1,
           "last_attempt_at": "2026-11-23T08:41:24.101509+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/qkhgm": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-23T09:41:27.674556+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -44824,7 +44829,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-23T03:31:25.582801+00:00",
+          "checked_at": "2026-11-23T09:41:27.674556+00:00",
           "title_observed": "ポケモンカード抽選受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -52463,7 +52468,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/qkhgm": {
-          "checked_at": "2026-11-23T03:31:25.582801+00:00",
+          "checked_at": "2026-11-23T09:41:27.674556+00:00",
           "reason": "official_title_detected",
           "candidate_count": 2,
           "valid_candidate_count": 1,
