@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-23T09:00:59.812604+00:00",
+  "collected_at": "2026-11-23T11:00:55.599142+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 878,
+  "unique_livepocket_urls": 881,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27025,12 +27025,54 @@
       "result_announcement_date": "2026-11-25",
       "purchase_start_date": "2026-11-30",
       "purchase_end_date": "2026-12-04"
+    },
+    {
+      "url": "https://livepocket.jp/e/yval9",
+      "discord_message_id": "1574379013592453183",
+      "discord_posted_at": "2026-11-23T11:00:07.388000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n古本市場市川鬼高店\n受付終了: 11/26 22:00（残り3日1時間）\nhttps://livepocket.jp/e/yval9\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/29 22:00（残り6日1時間）\nhttps://livepocket.jp/e/780_o\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/29 22:00（残り6日1時間）\nhttps://livepocket.jp/e/7q6tg",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/yval9"
+    },
+    {
+      "url": "https://livepocket.jp/e/780_o",
+      "discord_message_id": "1574379013592453183",
+      "discord_posted_at": "2026-11-23T11:00:07.388000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n古本市場市川鬼高店\n受付終了: 11/26 22:00（残り3日1時間）\nhttps://livepocket.jp/e/yval9\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/29 22:00（残り6日1時間）\nhttps://livepocket.jp/e/780_o\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/29 22:00（残り6日1時間）\nhttps://livepocket.jp/e/7q6tg",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/780_o"
+    },
+    {
+      "url": "https://livepocket.jp/e/7q6tg",
+      "discord_message_id": "1574379013592453183",
+      "discord_posted_at": "2026-11-23T11:00:07.388000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\n古本市場市川鬼高店\n受付終了: 11/26 22:00（残り3日1時間）\nhttps://livepocket.jp/e/yval9\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/29 22:00（残り6日1時間）\nhttps://livepocket.jp/e/780_o\n\n📍茨城県\nトレカエース勝田東石川店\n受付終了: 11/29 22:00（残り6日1時間）\nhttps://livepocket.jp/e/7q6tg",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/7q6tg"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 694,
-    "no_structured_details": 184
+    "no_structured_details": 187
   },
   "field_counts": {
     "store_name": 472,
@@ -27047,11 +27089,11 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574348878474379404"
+      "1551580466266644552": "1574379017124061194"
     },
     "last_run": {
-      "checked_at": "2026-11-23T09:00:59.812604+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-23T11:00:55.599142+00:00",
+      "new_urls": 3,
       "original_urls": 878,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27421,7 +27463,8 @@
         "1573948680220704919": "2026-11-22T06:30:59.011834+00:00",
         "1574031742069907559": "2026-11-22T12:06:04.819766+00:00",
         "1574250666065531022": "2026-11-23T02:30:57.253077+00:00",
-        "1574265753333399633": "2026-11-23T03:30:59.842237+00:00"
+        "1574265753333399633": "2026-11-23T03:30:59.842237+00:00",
+        "1574379013592453183": "2026-11-23T11:00:57.894048+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31356,6 +31399,21 @@
           "checked_at": "2026-11-23T09:41:27.674556+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/yval9": {
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "status": "browser_http_error",
+          "http_status": 405
+        },
+        "https://livepocket.jp/e/7q6tg": {
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "status": "browser_http_error",
+          "http_status": 405
+        },
+        "https://livepocket.jp/e/780_o": {
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "status": "browser_http_error",
+          "http_status": 405
         }
       }
     },
@@ -34499,9 +34557,28 @@
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-23T09:41:27.674556+00:00",
           "http_status": null
+        },
+        "https://livepocket.jp/e/780_o": {
+          "detected_at": "2026-11-23T11:00:59.100963+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "http_status": 405
+        },
+        "https://livepocket.jp/e/7q6tg": {
+          "detected_at": "2026-11-23T11:00:59.100963+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "http_status": 405
+        },
+        "https://livepocket.jp/e/yval9": {
+          "detected_at": "2026-11-23T11:00:59.100963+00:00",
+          "status": "browser_http_error",
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "http_status": 405
         }
       },
-      "pending_new_urls": []
+      "pending_new_urls": [],
+      "blocked_until": "2026-11-23T11:31:17.925989+00:00"
     },
     "v16": {
       "retry_log": {
@@ -44835,6 +44912,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/yval9": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/7q6tg": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/780_o": {
+          "status": "browser_http_error",
+          "reason": "fetch_browser_http_error",
+          "http_status": 405,
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "title_observed": "",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "",
+          "conflict": false
         }
       }
     },
@@ -52479,6 +52589,45 @@
           "meta_template_cleaned": 2,
           "heading_seen": 0,
           "recovery_probe": "event_tabs_missing"
+        },
+        "https://livepocket.jp/e/yval9": {
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/7q6tg": {
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
+        },
+        "https://livepocket.jp/e/780_o": {
+          "checked_at": "2026-11-23T11:01:17.925989+00:00",
+          "reason": "fetch_failed",
+          "candidate_count": 0,
+          "valid_candidate_count": 0,
+          "detail": "",
+          "candidate_sources": "",
+          "title_detected": false,
+          "rejection_codes": "",
+          "meta_template_cleaned": 0,
+          "heading_seen": 0,
+          "recovery_probe": ""
         }
       }
     },
