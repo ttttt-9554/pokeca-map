@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-23T11:30:58.222338+00:00",
+  "collected_at": "2026-11-23T12:00:56.424045+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -27036,7 +27036,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/yval9",
       "field_sources": {
@@ -27071,7 +27071,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/780_o",
       "field_sources": {
@@ -27107,7 +27107,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/7q6tg",
       "field_sources": {
@@ -27136,8 +27136,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 694,
-    "no_structured_details": 187
+    "parsed": 697,
+    "no_structured_details": 184
   },
   "field_counts": {
     "store_name": 475,
@@ -27154,10 +27154,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574386565893849118"
+      "1551580466266644552": "1574394166274949232"
     },
     "last_run": {
-      "checked_at": "2026-11-23T11:30:58.222338+00:00",
+      "checked_at": "2026-11-23T12:00:56.424045+00:00",
       "new_urls": 0,
       "original_urls": 881,
       "suspect_legacy_store_names": 0,
