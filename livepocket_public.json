@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-22T15:05:54.968707+00:00",
-  "unique_livepocket_urls": 876,
+  "collected_at": "2026-11-23T02:30:54.689841+00:00",
+  "unique_livepocket_urls": 877,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15888,7 +15888,31 @@
       "purchase_end_date": "2026-11-29",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-22T12:06:06.321345+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/bsrqw",
+      "discord_posted_at": "2026-11-23T02:30:06.953000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bsrqw",
+      "event_title": "TSUTAYA東仙台店 ポケモンカード抽選販売",
+      "application_end_at": "2026-11-23T22:00:00+09:00",
+      "application_start_at": "2026-11-21T18:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 2階TSUTAYAレジ",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_name": "TSUTAYA東仙台店 2階TSUTAYAレジ",
+      "prefecture": "宮城県",
+      "official_genre": "pokemon",
+      "official_event_title": "TSUTAYA東仙台店 ポケモンカード抽選販売",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-30",
+      "first_detected_at": "2026-11-23T02:30:58.336117+00:00"
     }
   ],
-  "updated_at": "2026-11-23T02:21:07.062807+00:00"
+  "updated_at": "2026-11-23T02:31:23.942283+00:00"
 }

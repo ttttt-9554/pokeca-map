@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-22T15:05:54.968707+00:00",
+  "collected_at": "2026-11-23T02:30:54.689841+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 876,
+  "unique_livepocket_urls": 877,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -26712,7 +26712,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/kyhoh",
       "field_sources": {
@@ -26953,33 +26953,69 @@
       "result_announcement_date": "2026-11-25",
       "purchase_start_date": "2026-11-28",
       "purchase_end_date": "2026-11-29"
+    },
+    {
+      "url": "https://livepocket.jp/e/bsrqw",
+      "discord_message_id": "1574250666065531022",
+      "discord_posted_at": "2026-11-23T02:30:06.953000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/25 20:00（残り2日8時間）\nhttps://livepocket.jp/e/kyhoh\n\n📍宮城県\nTSUTAYA東仙台店 2階TSUTAYAレジ\n受付終了: 11/23 22:00（残り10時間29分）\nhttps://livepocket.jp/e/bsrqw",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/bsrqw",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "TSUTAYA東仙台店 ポケモンカード抽選販売",
+      "application_end_at": "2026-11-23T22:00:00+09:00",
+      "application_start_at": "2026-11-21T18:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA東仙台店 2階TSUTAYAレジ",
+          "prefecture": "宮城県"
+        }
+      ],
+      "store_name": "TSUTAYA東仙台店 2階TSUTAYAレジ",
+      "prefecture": "宮城県",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-30"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 691,
+    "parsed": 692,
     "no_structured_details": 185
   },
   "field_counts": {
-    "store_name": 470,
-    "prefecture": 414,
-    "event_title": 573,
+    "store_name": 471,
+    "prefecture": 415,
+    "event_title": 574,
     "event_date": 1,
     "product_name": 139,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 838,
-    "application_start_at": 835,
-    "stores_events": 470
+    "application_end_at": 839,
+    "application_start_at": 836,
+    "stores_events": 471
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574077042394267730"
+      "1551580466266644552": "1574250666065531022"
     },
     "last_run": {
-      "checked_at": "2026-11-22T15:05:54.968707+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-23T02:30:54.689841+00:00",
+      "new_urls": 1,
       "original_urls": 876,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27347,7 +27383,8 @@
         "1573895827645137067": "2026-11-22T03:00:59.210460+00:00",
         "1573929815495409664": "2026-11-22T05:21:01.058561+00:00",
         "1573948680220704919": "2026-11-22T06:30:59.011834+00:00",
-        "1574031742069907559": "2026-11-22T12:06:04.819766+00:00"
+        "1574031742069907559": "2026-11-22T12:06:04.819766+00:00",
+        "1574250666065531022": "2026-11-23T02:30:57.253077+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31272,6 +31309,11 @@
           "checked_at": "2026-11-23T00:21:17.925205+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/bsrqw": {
+          "checked_at": "2026-11-23T02:31:23.942283+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -34402,6 +34444,12 @@
           "detected_at": "2026-11-22T12:06:06.321345+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-23T00:21:17.925205+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/bsrqw": {
+          "detected_at": "2026-11-23T02:30:58.336117+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-23T02:31:23.942283+00:00",
           "http_status": null
         }
       },
@@ -44707,6 +44755,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/bsrqw": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-23T02:31:23.942283+00:00",
+          "title_observed": "TSUTAYA東仙台店 ポケモンカード抽選販売",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -52315,6 +52374,19 @@
         },
         "https://livepocket.jp/e/ybn5s": {
           "checked_at": "2026-11-23T00:21:17.925205+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/bsrqw": {
+          "checked_at": "2026-11-23T02:31:23.942283+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
