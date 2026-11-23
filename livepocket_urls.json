@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-23T03:00:56.440001+00:00",
+  "collected_at": "2026-11-23T03:30:56.483531+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 877,
+  "unique_livepocket_urls": 878,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -26989,33 +26989,69 @@
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-11-27",
       "purchase_end_date": "2026-11-30"
+    },
+    {
+      "url": "https://livepocket.jp/e/qkhgm",
+      "discord_message_id": "1574265753333399633",
+      "discord_posted_at": "2026-11-23T03:30:04.038000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nTSUTAYA鴻巣吹上店\n受付終了: 11/23 21:00（残り8時間29分）\nhttps://livepocket.jp/e/qkhgm",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/qkhgm",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカード抽選受付",
+      "application_end_at": "2026-11-23T21:00:00+09:00",
+      "application_start_at": "2026-11-23T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA鴻巣吹上店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA鴻巣吹上店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-25",
+      "purchase_start_date": "2026-11-30",
+      "purchase_end_date": "2026-12-04"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 693,
-    "no_structured_details": 184
+    "no_structured_details": 185
   },
   "field_counts": {
-    "store_name": 471,
-    "prefecture": 415,
-    "event_title": 574,
+    "store_name": 472,
+    "prefecture": 416,
+    "event_title": 575,
     "event_date": 1,
     "product_name": 139,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 839,
-    "application_start_at": 836,
-    "stores_events": 471
+    "application_end_at": 840,
+    "application_start_at": 837,
+    "stores_events": 472
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574258223911801002"
+      "1551580466266644552": "1574265753333399633"
     },
     "last_run": {
-      "checked_at": "2026-11-23T03:00:56.440001+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-23T03:30:56.483531+00:00",
+      "new_urls": 1,
       "original_urls": 877,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27384,7 +27420,8 @@
         "1573929815495409664": "2026-11-22T05:21:01.058561+00:00",
         "1573948680220704919": "2026-11-22T06:30:59.011834+00:00",
         "1574031742069907559": "2026-11-22T12:06:04.819766+00:00",
-        "1574250666065531022": "2026-11-23T02:30:57.253077+00:00"
+        "1574250666065531022": "2026-11-23T02:30:57.253077+00:00",
+        "1574265753333399633": "2026-11-23T03:30:59.842237+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31314,6 +31351,11 @@
           "checked_at": "2026-11-23T02:31:23.942283+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/qkhgm": {
+          "checked_at": "2026-11-23T03:31:25.582801+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -34450,6 +34492,12 @@
           "detected_at": "2026-11-23T02:30:58.336117+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-23T02:31:23.942283+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/qkhgm": {
+          "detected_at": "2026-11-23T03:31:01.212996+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-23T03:31:25.582801+00:00",
           "http_status": null
         }
       },
@@ -44766,6 +44814,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/qkhgm": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-23T03:31:25.582801+00:00",
+          "title_observed": "ポケモンカード抽選受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -52397,6 +52456,19 @@
           "meta_template_cleaned": 0,
           "heading_seen": 1,
           "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/qkhgm": {
+          "checked_at": "2026-11-23T03:31:25.582801+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 2,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "",
+          "meta_template_cleaned": 2,
+          "heading_seen": 0,
+          "recovery_probe": "event_tabs_missing"
         }
       }
     },
