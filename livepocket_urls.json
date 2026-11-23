@@ -27059,7 +27059,8 @@
       "store_name": "古本市場市川鬼高店",
       "prefecture": "千葉県",
       "purchase_start_date": "2026-12-01",
-      "purchase_end_date": "2026-12-03"
+      "purchase_end_date": "2026-12-03",
+      "result_announcement_date": "2026-11-28"
     },
     {
       "url": "https://livepocket.jp/e/780_o",
@@ -31466,18 +31467,18 @@
           "http_status": null
         },
         "https://livepocket.jp/e/yval9": {
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
-          "status": "checked_retry_event_title_application_end_at",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/7q6tg": {
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
-          "status": "checked_retry_event_title_application_end_at",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/780_o": {
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
-          "status": "checked_retry_event_title_application_end_at",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         }
       }
@@ -34625,20 +34626,20 @@
         },
         "https://livepocket.jp/e/780_o": {
           "detected_at": "2026-11-23T11:00:59.100963+00:00",
-          "status": "checked_retry_event_title_application_end_at",
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/7q6tg": {
           "detected_at": "2026-11-23T11:00:59.100963+00:00",
-          "status": "checked_retry_event_title_application_end_at",
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/yval9": {
           "detected_at": "2026-11-23T11:00:59.100963+00:00",
-          "status": "checked_retry_event_title_application_end_at",
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "http_status": null
         }
       },
@@ -36988,19 +36989,19 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/yval9": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-23T11:41:32.103589+00:00",
-          "last_status": "checked_retry_event_title_application_end_at"
+          "attempts": 2,
+          "last_attempt_at": "2026-11-23T17:51:24.594303+00:00",
+          "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/7q6tg": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-23T11:41:32.103589+00:00",
-          "last_status": "checked_retry_event_title_application_end_at"
+          "attempts": 2,
+          "last_attempt_at": "2026-11-23T17:51:24.594303+00:00",
+          "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/780_o": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-23T11:41:32.103589+00:00",
-          "last_status": "checked_retry_event_title_application_end_at"
+          "attempts": 2,
+          "last_attempt_at": "2026-11-23T17:51:24.594303+00:00",
+          "last_status": "checked_retry_no_new_details"
         }
       }
     },
@@ -44997,7 +44998,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "title_observed": "【古本市場市川鬼高店】ワンピースカードゲーム 「神の支配」",
           "genre": "onepiece",
           "product_origin": "",
@@ -45008,7 +45009,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "title_observed": "ONE PIECEカードゲーム スタートデッキ バロックワークス【ST-38】 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -45019,7 +45020,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "title_observed": "ONE PIECEカードゲーム スタートデッキ 砂漠の王女と海賊たち【ST-37】 抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -52671,7 +52672,7 @@
           "recovery_probe": "event_tabs_missing"
         },
         "https://livepocket.jp/e/yval9": {
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -52684,7 +52685,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/7q6tg": {
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -52697,7 +52698,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/780_o": {
-          "checked_at": "2026-11-23T11:41:32.103589+00:00",
+          "checked_at": "2026-11-23T17:51:24.594303+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
