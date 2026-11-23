@@ -2257,7 +2257,7 @@
       "application_start_at": "2026-11-17T15:00:00+09:00",
       "application_end_at": "2026-11-24T15:00:00+09:00",
       "external_url_unverified": false,
-      "online_shop_checked_at": "2026-11-22T12:46:03.804Z",
+      "online_shop_checked_at": "2026-11-23T12:50:59.732Z",
       "online_shop_parser_version": 2,
       "online_shop_last_error": "source_login_required",
       "product_name": "【BOX販売】ONE PIECEカードゲーム ブースタパック 蒼海の七傑【OP-14】",
@@ -2275,7 +2275,7 @@
       "online_shop_source_url": "https://www.dmm.com/mono/hobby/-/detail/=/cid=c260802009_lo2608_3/",
       "pokemon_map_type": "pack",
       "online_shop_verified_via": "direct_http",
-      "online_shop_retry_after": "2026-11-23T12:46:03.804Z"
+      "online_shop_retry_after": "2026-11-24T12:50:59.732Z"
     },
     {
       "url": "https://al.dmm.com/?lurl=https%3A%2F%2Fwww.dmm.com%2Fmono%2Fhobby%2F-%2Fdetail%2F%3D%2Fcid%3Dc260402254_lo2608_3%2F&af_id=LoveryLono-001&ch=toolbar_sp&ch_id=link",
@@ -4547,9 +4547,9 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-23T12:41:01.961Z",
+    "next_at": "2026-11-23T12:55:56.818Z",
     "branches": {
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-23T11:41:01.961Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-23T12:50:56.818Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-23T11:50:56.332Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-23T12:10:58.268Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-23T12:20:59.312Z",
@@ -4566,9 +4566,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-23T12:40:58.423Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-23T12:40:58.423Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-23T12:40:58.423Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-23T11:41:01.961Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-23T11:41:01.961Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-23T11:41:01.961Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-23T12:50:56.818Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-23T12:50:56.818Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-23T12:50:56.818Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-23T11:50:56.332Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-23T11:50:56.332Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-23T11:50:56.332Z"
