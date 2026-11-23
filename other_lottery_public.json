@@ -4141,7 +4141,7 @@
       "application_start_at": "2026-11-22",
       "application_end_at": "2026-11-25T23:00:00+09:00",
       "external_url_unverified": false,
-      "google_forms_checked_at": "2026-11-23T00:10:55.861Z",
+      "google_forms_checked_at": "2026-11-23T06:11:08.046Z",
       "google_forms_parser_version": 6,
       "google_forms_start_not_stated": false,
       "result_announcement_date": "2026-11-26",
@@ -4157,7 +4157,7 @@
       "store_name": "バトロコ渋谷センター街店",
       "official_event_title": "【バトロコ渋谷センター街店】11/27(金)発売予定ポケモンカードゲーム 拡張パック「ハドウシーカー」抽選販売応募フォーム",
       "event_title_provisional": false,
-      "google_forms_verified_at": "2026-11-23T00:10:55.861Z",
+      "google_forms_verified_at": "2026-11-23T06:11:08.046Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSemrHr7KAxK5lb8-0UaGybBcqS6yFMXWXT7lDavfxdFQBLZHg/viewform",
       "pokemon_map_type": "pack",
       "field_sources": {
@@ -4393,9 +4393,9 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-23T06:01:06.423Z",
+    "next_at": "2026-11-23T06:16:09.241Z",
     "branches": {
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-23T05:01:06.423Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-23T06:11:09.241Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-23T05:10:56.838Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-23T05:30:59.908Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-23T05:40:59.462Z",
@@ -4415,9 +4415,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-23T06:00:57.315Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-23T06:00:57.315Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-23T06:00:57.315Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-23T05:01:06.423Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-23T05:01:06.423Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-23T05:01:06.423Z"
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-23T06:11:09.241Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-23T06:11:09.241Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-23T06:11:09.241Z"
     }
   }
 }
