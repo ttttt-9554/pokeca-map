@@ -4993,19 +4993,50 @@
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-24T22:40:59.693Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSfO6ETho880CTfwGJFnHHNjdxnAtCUBVJX0t6QFmYlYjdfXGQ/viewform"
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSc8qSn-eYgmR2GiL9kzs6_WhF1zNTEVqaTKGL_A-jBK7sXaqg/viewform",
+      "source_site": "docs.google.com",
+      "event_title": "【バトロコ 川崎駅前店】11/27(金)発売 UNION ARENA ブースターパック「〈物語〉シリーズ Vol.2」 抽選販売応募フォーム",
+      "prefecture": "神奈川県",
+      "discord_posted_at": "2026-11-24T23:00:04.612000+00:00",
+      "first_detected_at": "2026-11-24T23:00:59.007264+00:00",
+      "review_category": "unknown",
+      "application_start_at": "2026-11-24",
+      "application_end_at": "2026-11-25T23:59:00+09:00",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-24T23:00:59.386Z",
+      "google_forms_parser_version": 6,
+      "google_forms_start_not_stated": false,
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-11-27",
+      "purchase_end_date": "2026-11-30",
+      "product_name": "ブースターパック「〈物語〉シリーズ Vol.2【EX18BT】」",
+      "stores": [
+        {
+          "name": "バトロコ川崎駅前店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "バトロコ川崎駅前店",
+      "official_event_title": "【バトロコ 川崎駅前店】11/27(金)発売 UNION ARENA ブースターパック「〈物語〉シリーズ Vol.2」 抽選販売応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-24T23:00:59.386Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSc8qSn-eYgmR2GiL9kzs6_WhF1zNTEVqaTKGL_A-jBK7sXaqg/viewform",
+      "pokemon_map_type": "pack"
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1574824431518224505"
+    "1551580466266644552": "1574922583747334247"
   },
-  "collected_at": "2026-11-24T16:35:57.350118+00:00",
+  "collected_at": "2026-11-24T23:00:59.007303+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-24T22:51:00.045Z",
+    "next_at": "2026-11-24T23:05:59.936Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-24T22:41:00.661Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-24T21:51:00.045Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-24T23:00:59.936Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-24T22:00:59.027Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-24T22:20:58.181Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-24T22:30:57.874Z",
@@ -5021,9 +5052,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-24T22:41:00.661Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-24T22:41:00.661Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-24T22:41:00.661Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-24T21:51:00.045Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-24T21:51:00.045Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-24T21:51:00.045Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-24T23:00:59.936Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-24T23:00:59.936Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-24T23:00:59.936Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-24T22:00:59.027Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-24T22:00:59.027Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-24T22:00:59.027Z"
