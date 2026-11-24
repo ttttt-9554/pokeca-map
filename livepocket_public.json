@@ -16098,28 +16098,26 @@
     },
     {
       "url": "https://livepocket.jp/e/c4pkq",
-      "discord_posted_at": "2026-11-24T13:00:05.717000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/c4pkq",
+      "store_name": "TSUTAYA入間仏子店",
+      "prefecture": "埼玉県",
       "event_title": "再 ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
-      "application_end_at": "2026-11-29T21:45:00+09:00",
       "application_start_at": "2026-11-23T07:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-29T21:45:00+09:00",
+      "discord_posted_at": "2026-11-24T13:00:05.717000+00:00",
       "stores": [
         {
           "name": "TSUTAYA入間仏子店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "TSUTAYA入間仏子店",
-      "prefecture": "埼玉県",
-      "official_genre": "pokemon",
-      "official_event_title": "再 ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/c4pkq",
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-04",
       "purchase_end_date": "2026-12-06",
+      "review_category": "pokemon",
       "first_detected_at": "2026-11-24T13:06:00.927397+00:00"
     }
   ],
-  "updated_at": "2026-11-24T13:06:28.248117+00:00"
+  "updated_at": "2026-11-24T13:16:04.760991+00:00"
 }
