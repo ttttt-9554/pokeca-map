@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-24T13:35:57.389299+00:00",
-  "unique_livepocket_urls": 886,
+  "collected_at": "2026-11-24T14:05:56.122474+00:00",
+  "unique_livepocket_urls": 887,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16117,7 +16117,32 @@
       "purchase_end_date": "2026-12-06",
       "review_category": "pokemon",
       "first_detected_at": "2026-11-24T13:06:00.927397+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/229d9",
+      "discord_posted_at": "2026-11-24T14:00:06.440000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/229d9",
+      "event_title": "【抽選販売】『Yu-GI-Oh! THE DARK SIDE OF DIMENSIONS 10th ANNIVERSARY MOVIE BOX』",
+      "application_end_at": "2026-11-29T21:45:00+09:00",
+      "application_start_at": "2026-11-21T09:30:00+09:00",
+      "review_category": "yugioh",
+      "stores": [
+        {
+          "name": "TSUTAYA鎌ケ谷店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA鎌ケ谷店",
+      "prefecture": "千葉県",
+      "product_name": "Yu-GI-Oh! THE DARK SIDE OF DIMENSIONS 10th ANNIVERSARY MOVIE BOX",
+      "official_genre": "yugioh",
+      "official_event_title": "【抽選販売】『Yu-GI-Oh! THE DARK SIDE OF DIMENSIONS 10th ANNIVERSARY MOVIE BOX』",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-19",
+      "purchase_end_date": "2026-12-19",
+      "first_detected_at": "2026-11-24T14:05:58.580247+00:00"
     }
   ],
-  "updated_at": "2026-11-24T13:56:08.946891+00:00"
+  "updated_at": "2026-11-24T14:06:28.505758+00:00"
 }
