@@ -3,7 +3,7 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import webpush from "npm:web-push@3.6.7";
 import { scanAndDrainLottery, scanLotteryCatalogs } from "./lottery-scan-flow.mjs";
 import { automaticLotteryFields, externalLotteryNotificationEvents } from "./external-lottery-scan.mjs";
-import { scanLotteryDeadlineAlerts } from "./lottery-deadline-alerts.mjs";
+import { lotteryRegions, scanLotteryDeadlineAlerts } from "./lottery-deadline-alerts.mjs";
 import { setupLotteryDeadlineChannel } from "./lottery-deadline-channel.mjs";
 
 // v21.49: Every shared report is delivered to Discord as its own embed.
@@ -491,6 +491,25 @@ async function externalAutoLotteryCanSend(supabase: ReturnType<typeof createClie
       field !== "application_start_at" && field !== "application_end_at" && automaticLotteryFields.includes(field));
 }
 
+async function correctedRegionAllowed(supabase: ReturnType<typeof createClient>, url: string,
+  base: Record<string, unknown>, livePocket: boolean) {
+  const stores = lotteryMessageStores(base.stores);
+  const {data: card, error} = await supabase.from("lottery_card_overrides")
+    .select("edited_fields,prefecture,stores,stores_override").eq("event_url", url).maybeSingle();
+  if (error) throw Error(error.message);
+  if (card?.edited_fields?.includes("stores"))
+    return lotteryRegions.includesCard({stores: card.stores_override ?? card.stores});
+  if (stores.length <= 1 && card?.edited_fields?.includes("prefecture"))
+    return lotteryRegions.includesArea(card.prefecture);
+  if (livePocket && stores.length <= 1) {
+    const {data: location, error} = await supabase.from("livepocket_location_overrides")
+      .select("prefecture").eq("event_url", url).maybeSingle();
+    if (error) throw Error(error.message);
+    if (location?.prefecture) return lotteryRegions.includesArea(location.prefecture);
+  }
+  return lotteryRegions.includesCard(base);
+}
+
 async function drainLotteryNotifications(
   supabase: ReturnType<typeof createClient>,
   webhookUrl: string
@@ -500,6 +519,17 @@ async function drainLotteryNotifications(
   });
   if (error) throw Error("Lottery claim failed: " + error.message);
   const jobs = (data || []) as LotteryJob[];
+  const catalogs = new Map<string, Promise<unknown>>();
+  async function publishedRegionAllowed(job: LotteryJob) {
+    const livePocket = job.source === "livepocket";
+    const catalogUrl = livePocket ? LIVEPOCKET_PUBLIC_JSON : EXTERNAL_PUBLIC_JSON;
+    if (!catalogs.has(catalogUrl)) catalogs.set(catalogUrl, fetchLotteryCatalog(catalogUrl, job.source));
+    const catalog = await catalogs.get(catalogUrl) as {items?: Record<string, unknown>[]};
+    if (!Array.isArray(catalog?.items)) throw Error("Invalid lottery catalog");
+    const url = String(livePocket ? job.event_key : job.payload.event_url);
+    const base = catalog.items.find(item => item.url === url);
+    return !!base && await correctedRegionAllowed(supabase, url, base, livePocket);
+  }
   let sent = 0, retried = 0, skipped = 0;
   for (const job of jobs) {
     let errorMessage: string | null = null;
@@ -510,9 +540,9 @@ async function drainLotteryNotifications(
         // Do not notify after the author has hidden or deleted a registration
         // before this queue entry is processed.
         const {data: entry,error: entryError} = await supabase.from("lottery_app_events")
-          .select("id,is_hidden").eq("id",job.event_key).maybeSingle();
+          .select("id,is_hidden,prefecture,stores").eq("id",job.event_key).maybeSingle();
         if (entryError) throw Error(entryError.message);
-        if (!entry || entry.is_hidden) {
+        if (!entry || entry.is_hidden || !lotteryRegions.includesCard(entry)) {
           skipped++;
         } else {
           await sendDiscord(webhookUrl, buildLotteryMessage(job));
@@ -527,16 +557,18 @@ async function drainLotteryNotifications(
         } else {
           const {data: entry, error: entryError} = await supabase
             .from("lottery_external_event_overrides")
-            .select("event_url,state")
+            .select("event_url,state,prefecture,stores")
             .eq("event_url", url).maybeSingle();
           if (entryError) throw Error(entryError.message);
-          if (!entry || entry.state !== "active") {
+          if (!entry || entry.state !== "active" || !await correctedRegionAllowed(supabase, url, entry, false)) {
             skipped++;
           } else {
             await sendDiscord(webhookUrl, buildLotteryMessage(job));
             sent++;
           }
         }
+      } else if (!await publishedRegionAllowed(job)) {
+        skipped++;
       } else if (job.source === "external_auto" && !await externalAutoLotteryCanSend(supabase, job)) {
         skipped++;
       } else {

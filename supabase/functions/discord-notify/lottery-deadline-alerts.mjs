@@ -1,3 +1,5 @@
+import './lottery-regions.js';
+export const lotteryRegions = globalThis.TorecaLotteryRegions;
 import {applicationTime, canonicalExternalLotteryUrl} from './external-lottery-scan.mjs';
 import {lotteryDeadlineChannel, postLotteryDeadlineMessage} from './lottery-deadline-channel.mjs';
 
@@ -104,15 +106,22 @@ export async function scanLotteryDeadlineAlerts(supabase, catalogs, settings, bu
   const jobs = data ?? [];
   if (!jobs.length) return {claimed: 0, sent: 0};
 
+  const eligible = jobs.filter(job => lotteryRegions.includesCard(
+    Array.isArray(job.stores) && job.stores.length > 1 ? job :
+      {prefecture: job.prefecture || job.stores?.[0]?.prefecture}
+  ));
+  const skipped = jobs.filter(job => !eligible.includes(job));
+  if (skipped.length) await settle(supabase, skipped, true);
+  if (!eligible.length) return {claimed: jobs.length, sent: 0};
   let destination;
   try {
     destination = await lotteryDeadlineChannel(settings);
   } catch (error) {
-    await settle(supabase, jobs, false);
+    await settle(supabase, eligible, false);
     throw error;
   }
   let sent = 0;
-  const active = jobs.filter(job => Date.parse(job.deadline) > Date.now());
+  const active = eligible.filter(job => Date.parse(job.deadline) > Date.now());
   const messages = deadlineDiscordMessages(active, buildEmbed);
   for (const [index, batch] of messages.entries()) {
     try {

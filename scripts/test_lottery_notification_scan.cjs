@@ -64,6 +64,13 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   const famima = 'https://famima-online.family.co.jp/item?itemCode=100000000001';
   assert.equal(events({...confirmed, url: famima + '&utm_source=example'})[0].identity, famima);
 
+  require('../supabase/functions/discord-notify/lottery-regions.js');
+  const allowed = globalThis.TorecaLotteryRegions.includesCard;
+  for (const prefecture of '宮城県 福島県 栃木県 群馬県 茨城県 埼玉県 千葉県 東京都 神奈川県 福岡県 静岡県 全国'.split(' '))
+    assert.equal(allowed({prefecture}), true);
+  for (const prefecture of ['北海道','京都府','大阪府','未確認',''])
+    assert.equal(allowed({prefecture}), false);
+  assert.equal(allowed({stores:[{prefecture:'大阪府'},{prefecture:'千葉県'}]}),true);
   const {deadlineDiscordMessages, scanLotteryDeadlineAlerts} =
     await import('../supabase/functions/discord-notify/lottery-deadline-alerts.mjs');
   const {setupLotteryDeadlineChannel} =
@@ -74,7 +81,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   const sourcePermissions = [{id: guild, type: 0, allow: '0', deny: '1024'}];
   const fixture = {
     event_key: 'a'.repeat(32), claim_no: 1, event_url: confirmed.url,
-    event_title: 'カード応募 [抽選]', store_name: '東京店', reminder: 'one_hour',
+    event_title: 'カード応募 [抽選]', store_name: '東京店', prefecture: '東京都', reminder: 'one_hour',
     deadline: new Date(Date.now() + 60 * 60_000).toISOString()
   };
   const buildEmbed = (job, title) => ({

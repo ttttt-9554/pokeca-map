@@ -3451,6 +3451,10 @@
     return [...names];
   }
 
+  function lotteryRegionAllowed(item) {
+    return !!item && lotteryPrefectures(item).some(globalThis.TorecaLotteryRegions.includesArea);
+  }
+
   function lotteryDate(value, endOfDay=false) {
     if (!value) return NaN;
     if (typeof value==='string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
@@ -4952,6 +4956,7 @@
     const cutoff = Date.now() - 2 * 60 * 60 * 1000;
     const items = authUser && !discordRoleAuthPending ? lotteryDiscordIntake.filter(item => {
       const key = eventKey(item.url);
+      if (!lotteryRegionAllowed(item)) return false;
       if (!(lotteryDate(item.discord_posted_at) > cutoff) || known.has(key) ||
           !(isLivePocketEventUrl(item.url) ? lpCardReady : lpExtReady)) return false;
       known.add(key);
@@ -5767,7 +5772,8 @@
     const type = $('lpType').value;
     const site = $('lpSite').value;
     const wishlistOnly = $('lpWishlistOnly').checked;
-    const visible = lotteryItems.filter(item => {
+    const regionalItems = lotteryItems.filter(lotteryRegionAllowed);
+    const visible = regionalItems.filter(item => {
       if(item.app_lottery_hidden||item.manual_card_hidden)return false;
       if(site==='app'&&!item.app_lottery)return false;
       if(site==='external'&&(isLivePocketEventUrl(item.url)||item.app_lottery))return false;
@@ -5793,7 +5799,7 @@
       return true;
     });
     lotterySortCards(visible, $('lpSort').value, now);
-    const publicItems=lotteryItems.filter(x=>!x.app_lottery_hidden&&!x.manual_card_hidden);
+    const publicItems=regionalItems.filter(x=>!x.app_lottery_hidden&&!x.manual_card_hidden);
     const count=lotterySummaryCounts(publicItems,now);
     // Always global totals, independent of active lottery filters.
     $('lpSummary').innerHTML = `
@@ -7922,12 +7928,13 @@
     const records=[...lotteryTrackRecords.values()].map(record=>({
       ...record,...lotteryTrackerSchedule(record,itemsByUrl.get(record.event_url))
     }));
-    renderLotteryResultAlerts(records);
-    renderLotteryPickupAlerts(records);
+    const reminderRecords=records.filter(record=>lotteryRegionAllowed(itemsByUrl.get(record.event_url)));
+    renderLotteryResultAlerts(reminderRecords);
+    renderLotteryPickupAlerts(reminderRecords);
     // Pass only personal reminder fields; never expose account names or notes.
     window.TorecaLotteryNotify?.sync?.({
       userId:authUser.id,
-      records:records.map(r=>({
+      records:reminderRecords.map(r=>({
         event_url:r.event_url,
         title:lotteryTrackItemName(r.event_url),
         store_label:lotteryTrackStoreLabel(r.event_url,r),

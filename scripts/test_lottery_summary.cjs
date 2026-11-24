@@ -31,7 +31,7 @@ const events=[
 ];
 assert.deepEqual(JSON.parse(JSON.stringify(api.lotterySummaryCounts(events,now))),
   {open:5,today:2,yesterday:2,pokemon:1,onepiece:1,unknown:2});
-assert.match(app,/const publicItems=lotteryItems\.filter\(x=>!x\.app_lottery_hidden&&!x\.manual_card_hidden\)/);
+assert.match(app,/const publicItems=regionalItems\.filter\(x=>!x\.app_lottery_hidden&&!x\.manual_card_hidden\)/);
 assert.match(app,/lotterySummaryCounts\(publicItems,now\)/);
 const order=[...app.matchAll(/<small>(受付中|今日の新着|昨日の新着|ポケカ|ワンピース|未分類)<\/small>/g)]
   .slice(0,6).map(x=>x[1]);
