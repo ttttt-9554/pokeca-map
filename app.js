@@ -3598,6 +3598,14 @@
     return explicit || 'unknown';
   }
 
+  function lotteryListGenre(item) {
+    const genre = lotteryGenre(item);
+    if (/^union[ _-]?arena$/i.test(genre)) return 'unionarena';
+    if (genre !== 'unknown' || item.manual_card_genre) return genre;
+    const title = [item.product_name, item.official_event_title || item.event_title].join(' ').normalize('NFKC');
+    return /ユニオン[・\s]*アリーナ|ユニアリ|\bUNION[\s-]*ARENA\b/i.test(title) ? 'unionarena' : genre;
+  }
+
   function lotteryProductType(item) {
     const kind = String(item.pokemon_map_type || '').toLowerCase();
     if(['pack','deck','pack/deck'].includes(kind))return kind;
@@ -3655,19 +3663,11 @@
 
   function renderLotteryPrefectures() {
     const selected = $('lpPrefecture').value;
-    const actual = new Set(lotteryItems.filter(item=>
-      !item.manual_card_hidden&&!item.app_lottery_hidden).flatMap(lotteryPrefectures));
-    // Nationwide events must be reachable even if that prefecture has
-    // no local-only events yet (otherwise its filter option disappears).
-    const hasNationwide = actual.has(LP_NATIONWIDE);
     const root = $('lpPrefecture');
     root.replaceChildren();
     const all = document.createElement('option');
     all.value = 'all'; all.textContent = '全国';root.append(all);
-    const unknown = document.createElement('option');
-    unknown.value = 'unknown'; unknown.textContent = '都道府県未確認';root.append(unknown);
-    for (const name of LP_PREFECTURES) {
-      if (!hasNationwide && !actual.has(name)) continue;
+    for (const name of LP_PREFECTURES.filter(globalThis.TorecaLotteryRegions.includesArea)) {
       const option = document.createElement('option');
       option.value = name; option.textContent = name; root.append(option);
     }
@@ -5001,7 +5001,7 @@
   }
 
   function lotteryCategoryText(value) {
-    return ({pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unknown:'未分類'})[value] || value;
+    return ({pokemon:'ポケカ',onepiece:'ワンピース',yugioh:'遊戯王',unionarena:'ユニオンアリーナ',unknown:'未分類'})[value] || value;
   }
 
 
@@ -5621,7 +5621,7 @@
       ? NaN : lotteryDate(item.application_end_at) - Date.now();
     const urgent = state === 'open' && Number.isFinite(deadlineRemainingMs) && deadlineRemainingMs > 0 && deadlineRemainingMs < 86400000;
     const placeText = places.length ? places.join('・') : '都道府県未確認';
-    const genre = lotteryGenre(item);
+    const genre = lotteryListGenre(item);
     const yellowCandidates=lotteryCanonicalStores(LP_YELLOW_SUBMARINE_STORES);
     const chainReference = stores.length===1 && lpIsBareYellowChain(stores[0].name)
       ? '<details class="lp-store-details lp-chain-reference">'+
@@ -5724,7 +5724,7 @@
     const today=lotteryTokyoDay(now),yesterday=lotteryTokyoDay(now-86400000);
     const counts={open:0,today:0,yesterday:0,pokemon:0,onepiece:0,unknown:0};
     for(const item of items){
-      const genre=lotteryGenre(item);
+      const genre=lotteryListGenre(item);
       const open=lotteryState(item,now)==='open';
       if(open){
         counts.open++;
@@ -5778,7 +5778,7 @@
       if(site==='app'&&!item.app_lottery)return false;
       if(site==='external'&&(isLivePocketEventUrl(item.url)||item.app_lottery))return false;
       if(site==='livepocket'&&!isLivePocketEventUrl(item.url))return false;
-      if (genre !== 'all' && lotteryGenre(item) !== genre) return false;
+      if (genre !== 'all' && lotteryListGenre(item) !== genre) return false;
       if (prefecture === 'unknown' && lotteryPrefectures(item).length) return false;
       if (prefecture !== 'all' && prefecture !== 'unknown') {
         const areas=lotteryPrefectures(item);

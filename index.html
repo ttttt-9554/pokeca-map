@@ -813,6 +813,7 @@ nav[aria-label="メインメニュー"] {
               <option value="pokemon">ポケカ</option>
               <option value="onepiece">ワンピース</option>
               <option value="yugioh">遊戯王</option>
+              <option value="unionarena">ユニオンアリーナ</option>
               <option value="unknown">未分類</option>
             </select>
           </label>
@@ -2020,7 +2021,7 @@ nav[aria-label="メインメニュー"] {
   (function(){
     var token = new URLSearchParams(location.search).get('app_refresh');
     var version = token && /^\d{10,16}$/.test(token)
-      ? token : '20261124-lottery-regions-v1';
+      ? token : '20261124-lottery-filters-v2';
     document.write('<script src="app.js?v='+encodeURIComponent(version)+'"><\/script>');
   })();
   </script>

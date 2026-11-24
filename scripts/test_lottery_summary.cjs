@@ -7,13 +7,16 @@ function extract(name){
   return app.slice(start,end+5);
 }
 const api=vm.runInNewContext([
-  extract('lotteryTokyoDay'),extract('lotterySummaryCounts'),
-  '({lotteryTokyoDay,lotterySummaryCounts})'
+  extract('lotteryListGenre'),extract('lotteryTokyoDay'),extract('lotterySummaryCounts'),
+  '({lotteryListGenre,lotteryTokyoDay,lotterySummaryCounts})'
 ].join('\n'),{
   Date,lotteryDate:v=>v?Date.parse(v):NaN,
   lotteryGenre:item=>item.review_category||'unknown',
   lotteryState:item=>item.status||'unknown'
 },{timeout:1000});
+for(const title of ['UNION ARENA ブースター','ユニオンアリーナ 抽選','ユニアリ BOX'])
+  assert.equal(api.lotteryListGenre({event_title:title}), 'unionarena');
+assert.equal(api.lotteryListGenre({event_title:'ポケモンカード'}),'unknown');
 const now=Date.parse('2026-11-02T00:30:00+09:00');
 assert.equal(api.lotteryTokyoDay(now),'2026-11-02');
 assert.equal(api.lotteryTokyoDay(now-86400000),'2026-11-01');
