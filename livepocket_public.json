@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-24T12:05:55.189264+00:00",
-  "unique_livepocket_urls": 885,
+  "collected_at": "2026-11-24T13:05:57.189358+00:00",
+  "unique_livepocket_urls": 886,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16095,7 +16095,31 @@
       "pokemon_map_type": "deck",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-24T07:36:02.672313+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/c4pkq",
+      "discord_posted_at": "2026-11-24T13:00:05.717000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/c4pkq",
+      "event_title": "再 ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
+      "application_end_at": "2026-11-29T21:45:00+09:00",
+      "application_start_at": "2026-11-23T07:00:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "TSUTAYA入間仏子店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "TSUTAYA入間仏子店",
+      "prefecture": "埼玉県",
+      "official_genre": "pokemon",
+      "official_event_title": "再 ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー 抽選販売",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-04",
+      "purchase_end_date": "2026-12-06",
+      "first_detected_at": "2026-11-24T13:06:00.927397+00:00"
     }
   ],
-  "updated_at": "2026-11-24T12:56:07.569281+00:00"
+  "updated_at": "2026-11-24T13:06:28.248117+00:00"
 }
