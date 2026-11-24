@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-24T14:05:56.122474+00:00",
+  "collected_at": "2026-11-24T15:05:57.625114+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -27288,7 +27288,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/c4pkq",
       "field_sources": {
@@ -27324,7 +27324,7 @@
       "product_name": "Yu-GI-Oh! THE DARK SIDE OF DIMENSIONS 10th ANNIVERSARY MOVIE BOX",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/229d9",
       "field_sources": {
@@ -27354,8 +27354,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 701,
-    "no_structured_details": 186
+    "parsed": 703,
+    "no_structured_details": 184
   },
   "field_counts": {
     "store_name": 481,
@@ -27372,12 +27372,12 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574786699483947139"
+      "1551580466266644552": "1574801813067010178"
     },
     "last_run": {
-      "checked_at": "2026-11-24T14:05:56.122474+00:00",
-      "new_urls": 1,
-      "original_urls": 886,
+      "checked_at": "2026-11-24T15:05:57.625114+00:00",
+      "new_urls": 0,
+      "original_urls": 887,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,

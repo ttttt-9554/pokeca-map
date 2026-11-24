@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "last_run": {
-    "run_id": "45410296098",
-    "run_number": "5586",
-    "completed_process_at": "2026-11-24T14:06:39Z",
+    "run_id": "45421495186",
+    "run_number": "5592",
+    "completed_process_at": "2026-11-24T15:06:09Z",
     "mode": "automatic",
     "stats": {
-      "new_attempted": 1,
-      "new_titles_added": 1,
+      "new_attempted": 0,
+      "new_titles_added": 0,
       "new_products_added": 0,
       "new_stores_added": 0,
       "retry_attempted": 0,
@@ -16,9 +16,9 @@
       "historical_attempted": 0,
       "registered_urls": 887,
       "deadlines_known": 849,
-      "store_lists_added": 1,
+      "store_lists_added": 0,
       "multi_store_urls": 28,
-      "stores_from_pages": 1,
+      "stores_from_pages": 0,
       "stores_from_discord": 0,
       "ticket_products_added": 0,
       "verified_products_added": 0,
@@ -34,22 +34,22 @@
       "official_title_planned": 0,
       "official_title_attempted": 0,
       "official_titles_upgraded": 0,
-      "official_products_added": 1,
-      "official_genres_confirmed": 1,
+      "official_products_added": 0,
+      "official_genres_confirmed": 0,
       "official_fetch_blocked": 0,
       "manual_verified_titles_applied": 1,
       "manual_verified_titles_updated": 0,
       "manual_verified_title_conflicts": 0
     },
     "updates": {
-      "title_updated": 1,
-      "product_updated": 1,
-      "deadline_updated": 1,
-      "store_updated": 8,
-      "genre_updated": 23,
+      "title_updated": 0,
+      "product_updated": 0,
+      "deadline_updated": 0,
+      "store_updated": 7,
+      "genre_updated": 22,
       "new_urls": 0
     },
-    "page_check_attempts": 1,
+    "page_check_attempts": 0,
     "manual_page_check_attempts": 0
   },
   "last_manual": {
@@ -141,13 +141,13 @@
     "manual_page_check_attempts": 4
   },
   "daily_additions": {
-    "date_jst": "2026-11-24",
-    "today": 6,
-    "yesterday": 5,
-    "last_7_days": 56,
+    "date_jst": "2026-11-25",
+    "today": 0,
+    "yesterday": 6,
+    "last_7_days": 52,
     "registered_total": 887,
     "tracked_since_jst": "2026-10-17",
-    "as_of": "2026-11-24T14:06:39Z",
+    "as_of": "2026-11-24T15:06:09Z",
     "source": "v14_first_detected_urls"
   },
   "review_progress": {
@@ -168,6 +168,6 @@
     "next_batch_size": 3,
     "status": "ok",
     "source": "v21_65_manual_selector",
-    "as_of": "2026-11-24T14:06:41Z"
+    "as_of": "2026-11-24T15:06:11Z"
   }
 }
