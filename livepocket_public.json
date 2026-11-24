@@ -16023,31 +16023,29 @@
     },
     {
       "url": "https://livepocket.jp/e/merhm",
-      "discord_posted_at": "2026-11-24T06:30:02.502000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/merhm",
+      "store_name": "TSUTAYA北習志野駅前店",
+      "prefecture": "千葉県",
       "event_title": "ポケモンカード 「30thセレブレーション」「ストームエメラルダ」抽選販売受付",
-      "application_end_at": "2026-11-26T23:59:00+09:00",
       "application_start_at": "2026-11-24T10:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-26T23:59:00+09:00",
+      "discord_posted_at": "2026-11-24T06:30:02.502000+00:00",
       "stores": [
         {
           "name": "TSUTAYA北習志野駅前店",
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "TSUTAYA北習志野駅前店",
-      "prefecture": "千葉県",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカード 「30thセレブレーション」「ストームエメラルダ」抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/merhm",
       "result_announcement_date": "2026-11-28",
       "purchase_start_date": "2026-11-30",
       "purchase_end_date": "2026-11-30",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-24T06:35:59.996078+00:00"
     }
   ],
-  "updated_at": "2026-11-24T06:36:23.959822+00:00"
+  "updated_at": "2026-11-24T06:46:13.837392+00:00"
 }
