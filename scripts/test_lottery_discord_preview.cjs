@@ -1,5 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+require('../supabase/functions/discord-notify/lottery-regions.js');
 const source=fs.readFileSync('app.js','utf8');
 const start=source.indexOf('  function renderLotteryDiscordIntake() {');
 const end=source.indexOf('  function lotteryStatusText(',start);
@@ -7,6 +8,7 @@ const elements={lpDiscordIntake:{hidden:true},lpDiscordIntakeCount:{textContent:
 const stamp=new Date().toISOString();
 let requests=0,release=null,rows=[];
 const ctx={
+  lotteryRegionAllowed:globalThis.TorecaLotteryRegions.includesCard,
   Date,URL,console,authUser:{id:'member'},discordRoleAuthPending:false,
   LP_DISCORD_INTAKE_TABLE:'lottery_discord_intake_v1',lotteryDiscordIntakeLoading:null,
   lotteryBaseItems:[{url:'https://livepocket.jp/e/known/'}],
@@ -14,12 +16,14 @@ const ctx={
   lpCardOverrides:new Map([['https://hidden.example.com/a',{is_hidden:true}]]),
   lpExtOverrides:new Map([['https://excluded.example.com/a',{state:'excluded'}]]),
   lotteryDiscordIntake:[
-    {url:'https://livepocket.jp/e/known',discord_posted_at:stamp},
-    {url:'https://hidden.example.com/a',discord_posted_at:stamp},
-    {url:'https://excluded.example.com/a',discord_posted_at:stamp},
+    {url:"https://osaka.example.com/a",prefecture:"大阪府",discord_posted_at:stamp},
+    {url:"https://unknown.example.com/a",discord_posted_at:stamp},
+    {url:'https://livepocket.jp/e/known',prefecture:"東京都",discord_posted_at:stamp},
+    {url:'https://hidden.example.com/a',prefecture:"東京都",discord_posted_at:stamp},
+    {url:'https://excluded.example.com/a',prefecture:"東京都",discord_posted_at:stamp},
     {url:'https://old.example.com/a',discord_posted_at:'2020-01-01T00:00:00Z'},
-    {url:'https://livepocket.jp/e/new01',discord_posted_at:stamp},
-    {url:'https://shop.example.com/a?x=<script>',discord_posted_at:stamp}
+    {url:'https://livepocket.jp/e/new01',prefecture:"東京都",discord_posted_at:stamp},
+    {url:'https://shop.example.com/a?x=<script>',prefecture:"東京都",discord_posted_at:stamp}
   ],
   $:id=>elements[id],lotteryDate:Date.parse,lotteryJapaneseDate:()=>stamp,
   escape:s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;'),
@@ -38,7 +42,7 @@ assert(!elements.lpDiscordIntakeLinks.innerHTML.includes('excluded.example'));
 ctx.lotteryBaseItems.push({url:'https://livepocket.jp/e/new01'});api.renderLotteryDiscordIntake();
 assert.equal(elements.lpDiscordIntakeCount.textContent,'1件','preview disappears when a complete card arrives');
 const form='https://docs.google.com/forms/d/e/1FAIpQLSfv31yN4OSSFYE1uozMEx-5KwVQwweQKkwigH7u_11hFqDS_A/viewform';
-ctx.lotteryDiscordIntake.push({url:form+'?pli=1',discord_posted_at:stamp},{url:form,discord_posted_at:stamp});
+ctx.lotteryDiscordIntake.push({url:form+'?pli=1',prefecture:"東京都",discord_posted_at:stamp},{url:form,prefecture:"東京都",discord_posted_at:stamp});
 api.renderLotteryDiscordIntake();
 assert.equal(elements.lpDiscordIntakeCount.textContent,'2件','both spellings add only one preview');
 ctx.lotteryBaseItems.push({url:form+'?usp=sharing'});api.renderLotteryDiscordIntake();
@@ -51,7 +55,7 @@ ctx.discordRoleAuthPending=false;ctx.authUser=null;api.renderLotteryDiscordIntak
 assert.equal(elements.lpDiscordIntakeLinks.innerHTML,'','logout clears the preview DOM');
 (async()=>{
   await api.lpDiscordIntakeRefresh();assert.equal(requests,0,'signed-out visitors must not query the intake');
-  ctx.authUser={id:'member'};rows=[{url:'https://new.example.com/a',discord_posted_at:stamp}];
+  ctx.authUser={id:'member'};rows=[{url:'https://new.example.com/a',prefecture:"東京都",discord_posted_at:stamp}];
   const first=api.lpDiscordIntakeRefresh(),second=api.lpDiscordIntakeRefresh();
   assert.equal(requests,1,'overlapping refreshes must share a single query');
   ctx.authUser={id:'another-member'};release();await Promise.all([first,second]);
