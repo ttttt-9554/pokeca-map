@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-24T03:06:02.252228+00:00",
-  "unique_livepocket_urls": 881,
+  "collected_at": "2026-11-24T03:35:55.555625+00:00",
+  "unique_livepocket_urls": 882,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -15998,7 +15998,31 @@
       "purchase_end_date": "2026-12-20",
       "review_category": "onepiece",
       "first_detected_at": "2026-11-23T11:00:59.100963+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/mwy9d",
+      "discord_posted_at": "2026-11-24T03:30:09.362000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/mwy9d",
+      "event_title": "【ふるいちイオンモール太田店】ワンピースカード抽選販売「神の支配」",
+      "application_end_at": "2026-11-25T21:00:00+09:00",
+      "application_start_at": "2026-11-24T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール太田店",
+          "prefecture": "群馬県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール太田店",
+      "prefecture": "群馬県",
+      "official_genre": "onepiece",
+      "official_event_title": "【ふるいちイオンモール太田店】ワンピースカード抽選販売「神の支配」",
+      "result_announcement_date": "2026-11-26",
+      "purchase_start_date": "2026-12-02",
+      "purchase_end_date": "2026-12-03",
+      "first_detected_at": "2026-11-24T03:36:00.138457+00:00"
     }
   ],
-  "updated_at": "2026-11-24T03:26:04.141773+00:00"
+  "updated_at": "2026-11-24T03:36:24.839240+00:00"
 }
