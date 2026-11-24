@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-24T05:36:04.661078+00:00",
+  "collected_at": "2026-11-24T06:06:03.225594+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -27144,7 +27144,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/mwy9d",
       "field_sources": {
@@ -27173,8 +27173,8 @@
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 697,
-    "no_structured_details": 185
+    "parsed": 698,
+    "no_structured_details": 184
   },
   "field_counts": {
     "store_name": 476,
@@ -27191,10 +27191,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574658336681627818"
+      "1551580466266644552": "1574665902975098884"
     },
     "last_run": {
-      "checked_at": "2026-11-24T05:36:04.661078+00:00",
+      "checked_at": "2026-11-24T06:06:03.225594+00:00",
       "new_urls": 0,
       "original_urls": 882,
       "suspect_legacy_store_names": 0,
