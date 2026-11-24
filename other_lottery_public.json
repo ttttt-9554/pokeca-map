@@ -2288,9 +2288,10 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true,
-      "online_shop_checked_at": "2026-11-18T12:07:57.788Z",
+      "online_shop_checked_at": "2026-11-24T12:56:00.876Z",
       "online_shop_parser_version": 2,
-      "online_shop_last_error": "page_unavailable"
+      "online_shop_last_error": "source_login_required",
+      "online_shop_retry_after": "2026-11-25T12:56:00.876Z"
     },
     {
       "url": "https://al.dmm.com/?lurl=https%3A%2F%2Fwww.dmm.com%2Fmono%2Fhobby%2F-%2Fdetail%2F%3D%2Fcid%3Dc260404065_lo2608_3%2F&af_id=LoveryLono-001&ch=toolbar_sp&ch_id=link",
@@ -4142,7 +4143,7 @@
       "application_start_at": "2026-11-22",
       "application_end_at": "2026-11-25T23:00:00+09:00",
       "external_url_unverified": false,
-      "google_forms_checked_at": "2026-11-24T06:46:06.770Z",
+      "google_forms_checked_at": "2026-11-24T12:55:58.386Z",
       "google_forms_parser_version": 6,
       "google_forms_start_not_stated": false,
       "result_announcement_date": "2026-11-26",
@@ -4158,7 +4159,7 @@
       "store_name": "バトロコ渋谷センター街店",
       "official_event_title": "【バトロコ渋谷センター街店】11/27(金)発売予定ポケモンカードゲーム 拡張パック「ハドウシーカー」抽選販売応募フォーム",
       "event_title_provisional": false,
-      "google_forms_verified_at": "2026-11-24T06:46:06.770Z",
+      "google_forms_verified_at": "2026-11-24T12:55:58.386Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSemrHr7KAxK5lb8-0UaGybBcqS6yFMXWXT7lDavfxdFQBLZHg/viewform",
       "pokemon_map_type": "pack",
       "field_sources": {
@@ -4957,11 +4958,11 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-24T12:50:59.232Z",
+    "next_at": "2026-11-24T13:00:59.084Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-24T12:25:58.028Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-24T12:45:59.232Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-24T11:55:55.865Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-24T12:55:59.084Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-24T12:05:58.684Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-24T12:15:58.861Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/": "2026-11-24T11:55:55.865Z",
@@ -4979,9 +4980,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-24T12:45:59.232Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-24T12:45:59.232Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-24T12:45:59.232Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-24T11:37:56.041Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-24T11:37:56.041Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-24T11:37:56.041Z"
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-24T12:55:59.084Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-24T12:55:59.084Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-24T12:55:59.084Z"
     }
   }
 }
