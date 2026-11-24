@@ -4922,7 +4922,7 @@
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSe6s2t8eYFqqYipimLAOaocGFPTXurnSZknaU53HNBAO2aSdA/viewform",
       "source_site": "docs.google.com",
       "event_title": "【バトロコ福島駅前】11/27(金)発売予定ポケモンカードゲーム 拡張パック「ハドウシーカー」抽選販売応募フォーム",
-      "prefecture": "",
+      "prefecture": "福島県",
       "discord_posted_at": "2026-11-24T11:30:06.234000+00:00",
       "first_detected_at": "2026-11-24T11:35:56.894812+00:00",
       "review_category": "pokemon",
@@ -4941,7 +4941,7 @@
       "stores": [
         {
           "name": "バトロコ福島駅前",
-          "prefecture": ""
+          "prefecture": "福島県"
         }
       ],
       "store_name": "バトロコ福島駅前",
@@ -4949,7 +4949,11 @@
       "event_title_provisional": false,
       "google_forms_verified_at": "2026-11-24T11:35:57.262Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSe6s2t8eYFqqYipimLAOaocGFPTXurnSZknaU53HNBAO2aSdA/viewform",
-      "pokemon_map_type": "pack"
+      "pokemon_map_type": "pack",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146",
+        "prefecture": "store_master_unique_exact_name_v21_146"
+      }
     },
     {
       "url": "https://dorasuta.membercard.jp/lottery-entry?ekey=QTNxVWFvN0VBZWtWaFJwMzJOUnhFUT09&__cf_chl_tk=Zba5hZgVDEDFz1SyvUOTn4xKiA9tjBwnQtHGJp3r2FQ-1795525335-1.0.1.1-JTwPpdMirvZ6g5QiTFdZrnNNQeccZRWnmnSCP.rOb2k",
@@ -4971,10 +4975,10 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-24T14:51:00.172Z",
+    "next_at": "2026-11-24T14:56:01.423Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-24T14:46:00.172Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-24T13:45:59.819Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-24T14:55:57.606Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-24T13:56:01.423Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-24T14:25:58.604Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-24T14:35:57.807Z",
@@ -4990,9 +4994,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/": "2026-11-24T14:46:00.172Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-gotemba/": "2026-11-24T14:46:00.172Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/": "2026-11-24T14:46:00.172Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-24T13:45:59.819Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-24T13:45:59.819Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-24T13:45:59.819Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-24T14:55:57.606Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-24T14:55:57.606Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-24T14:55:57.606Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-24T13:56:01.423Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-24T13:56:01.423Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-24T13:56:01.423Z"
