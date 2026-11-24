@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-24T06:06:03.225594+00:00",
+  "collected_at": "2026-11-24T06:35:54.905626+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 882,
+  "unique_livepocket_urls": 883,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27169,33 +27169,69 @@
       "result_announcement_date": "2026-11-26",
       "purchase_start_date": "2026-12-02",
       "purchase_end_date": "2026-12-03"
+    },
+    {
+      "url": "https://livepocket.jp/e/merhm",
+      "discord_message_id": "1574673433240014858",
+      "discord_posted_at": "2026-11-24T06:30:02.502000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍千葉県\nTSUTAYA北習志野駅前店\n受付終了: 11/26 23:59（残り2日8時間）\nhttps://livepocket.jp/e/merhm",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/merhm",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカード 「30thセレブレーション」「ストームエメラルダ」抽選販売受付",
+      "application_end_at": "2026-11-26T23:59:00+09:00",
+      "application_start_at": "2026-11-24T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA北習志野駅前店",
+          "prefecture": "千葉県"
+        }
+      ],
+      "store_name": "TSUTAYA北習志野駅前店",
+      "prefecture": "千葉県",
+      "result_announcement_date": "2026-11-28",
+      "purchase_start_date": "2026-11-30",
+      "purchase_end_date": "2026-11-30"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 698,
-    "no_structured_details": 184
+    "no_structured_details": 185
   },
   "field_counts": {
-    "store_name": 476,
-    "prefecture": 420,
-    "event_title": 579,
+    "store_name": 477,
+    "prefecture": 421,
+    "event_title": 580,
     "event_date": 1,
     "product_name": 139,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 844,
-    "application_start_at": 841,
-    "stores_events": 476
+    "application_end_at": 845,
+    "application_start_at": 842,
+    "stores_events": 477
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1574665902975098884"
+      "1551580466266644552": "1574673433240014858"
     },
     "last_run": {
-      "checked_at": "2026-11-24T06:06:03.225594+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-24T06:35:54.905626+00:00",
+      "new_urls": 1,
       "original_urls": 882,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27567,7 +27603,8 @@
         "1574250666065531022": "2026-11-23T02:30:57.253077+00:00",
         "1574265753333399633": "2026-11-23T03:30:59.842237+00:00",
         "1574379013592453183": "2026-11-23T11:00:57.894048+00:00",
-        "1574628163529605170": "2026-11-24T03:35:58.519819+00:00"
+        "1574628163529605170": "2026-11-24T03:35:58.519819+00:00",
+        "1574673433240014858": "2026-11-24T06:35:57.759702+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31522,6 +31559,11 @@
           "checked_at": "2026-11-24T03:36:24.839240+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/merhm": {
+          "checked_at": "2026-11-24T06:36:23.959822+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -34688,6 +34730,12 @@
           "detected_at": "2026-11-24T03:36:00.138457+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-24T03:36:24.839240+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/merhm": {
+          "detected_at": "2026-11-24T06:35:59.996078+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-24T06:36:23.959822+00:00",
           "http_status": null
         }
       },
@@ -45085,6 +45133,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/merhm": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-24T06:36:23.959822+00:00",
+          "title_observed": "ポケモンカード 「30thセレブレーション」「ストームエメラルダ」抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -52771,6 +52830,19 @@
         },
         "https://livepocket.jp/e/mwy9d": {
           "checked_at": "2026-11-24T03:36:24.839240+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/merhm": {
+          "checked_at": "2026-11-24T06:36:23.959822+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
