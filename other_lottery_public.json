@@ -4848,7 +4848,7 @@
       "application_start_at": "2026-11-24",
       "application_end_at": "2026-11-25T23:59:00+09:00",
       "external_url_unverified": false,
-      "google_forms_checked_at": "2026-11-25T03:20:56.328Z",
+      "google_forms_checked_at": "2026-11-25T09:20:59.999Z",
       "google_forms_parser_version": 6,
       "google_forms_start_not_stated": false,
       "result_announcement_date": "2026-11-26",
@@ -4864,7 +4864,7 @@
       "store_name": "バトロコ高田馬場",
       "official_event_title": "【バトロコ高田馬場】11/27 (金)発売 ポケモンカードゲーム 拡張パック「ハドウシーカー」の抽選販売応募フォーム",
       "event_title_provisional": false,
-      "google_forms_verified_at": "2026-11-25T03:20:56.328Z",
+      "google_forms_verified_at": "2026-11-25T09:20:59.999Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSeTyA5EFUzYVeEj3Z7vijnpPZBv4CCAnZDJ1BK3NMz6vafrGQ/viewform",
       "pokemon_map_type": "pack"
     },
@@ -5105,11 +5105,11 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-25T09:10:59.338Z",
+    "next_at": "2026-11-25T09:26:01.094Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-25T08:51:07.744Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-25T09:00:59.589Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-25T08:10:59.338Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-25T09:21:01.094Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-25T08:20:57.586Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-megatokyo/": "2026-11-25T08:31:01.783Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/": "2026-11-25T08:20:57.586Z",
@@ -5127,9 +5127,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-25T09:00:59.589Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-25T09:00:59.589Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-25T09:00:59.589Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-25T08:10:59.338Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-25T08:10:59.338Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-25T08:10:59.338Z"
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-25T09:21:01.094Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-25T09:21:01.094Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-25T09:21:01.094Z"
     }
   }
 }
