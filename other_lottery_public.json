@@ -4423,7 +4423,7 @@
       "application_start_at": "2026-11-23",
       "application_end_at": "2026-11-25T23:59:00+09:00",
       "external_url_unverified": false,
-      "google_forms_checked_at": "2026-11-24T20:55:55.533Z",
+      "google_forms_checked_at": "2026-11-25T03:00:57.205Z",
       "google_forms_parser_version": 6,
       "google_forms_start_not_stated": false,
       "result_announcement_date": "2026-11-26",
@@ -4439,7 +4439,7 @@
       "store_name": "バトロコ池袋店",
       "official_event_title": "【バトロコ池袋店】11/27(金)発売予定 ユニオンアリーナ 各種商品 抽選販売応募フォーム",
       "event_title_provisional": false,
-      "google_forms_verified_at": "2026-11-24T20:55:55.533Z",
+      "google_forms_verified_at": "2026-11-25T03:00:57.205Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSceH7-5G8iNQrXISARygd0TDpvD4xzegBUlW8dxbrBvbsxYlQ/viewform",
       "field_sources": {
         "stores_prefectures": "store_master_unique_exact_name_v21_146",
@@ -4457,7 +4457,7 @@
       "application_start_at": "2026-11-23",
       "application_end_at": "2026-11-25T23:59:00+09:00",
       "external_url_unverified": false,
-      "google_forms_checked_at": "2026-11-24T20:55:55.533Z",
+      "google_forms_checked_at": "2026-11-25T03:00:57.205Z",
       "google_forms_parser_version": 6,
       "google_forms_start_not_stated": false,
       "purchase_start_date": "2026-11-27",
@@ -4472,7 +4472,7 @@
       "store_name": "バトロコ池袋店",
       "official_event_title": "【バトロコ池袋店】11/27(金)発売予定ポケモンカードゲーム 拡張パック「ハドウシーカー」 抽選販売応募フォーム",
       "event_title_provisional": false,
-      "google_forms_verified_at": "2026-11-24T20:55:55.533Z",
+      "google_forms_verified_at": "2026-11-25T03:00:57.205Z",
       "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLSfecVgShBWaUob667YcfI5Mdc0TJOOkLvoIx0TIpeEM02P-rw/viewform",
       "pokemon_map_type": "pack",
       "field_sources": {
@@ -5027,9 +5027,9 @@
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1574945241776132097"
+    "1551580466266644552": "1574983017485828230"
   },
-  "collected_at": "2026-11-25T00:30:55.052232+00:00",
+  "collected_at": "2026-11-25T03:00:56.781403+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
