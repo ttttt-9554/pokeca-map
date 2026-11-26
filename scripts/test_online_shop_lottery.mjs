@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {onlineShopUrl,onlineShopFields,collectedOnlineShop,DMM_HOST,BANDAI_HOST,ONLINE_SHOP_PARSER_VERSION} from '../supabase/functions/lottery-individual-fetch/online-shop-lottery.mjs';
+import {onlineShopUrl,onlineShopFields,collectedOnlineShop,DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST,ONLINE_SHOP_PARSER_VERSION} from '../supabase/functions/lottery-individual-fetch/online-shop-lottery.mjs';
 import {supportedUrl,extract,lotteryPageRequest} from '../supabase/functions/lottery-individual-fetch/extract.mjs';
 import {enrichDmm,shopCandidates,applyShopPage,fetchDmm} from './online_shop_lottery_enrich.mjs';
 
@@ -90,3 +90,35 @@ const edge=readFileSync(new URL('../supabase/functions/lottery-individual-fetch/
 assert(edge.includes('collectedBrowserPage(input.url,host===BANDAI_HOST)'));
 assert(edge.includes('if(host===DMM_HOST)return await collectedBrowserPage(input.url,true)'));
 console.log('DMM and Premium Bandai lottery parsing, URL safety, collection and cached retrieval passed.');
+
+
+const hobby='https://www.1999.co.jp/11183978';
+const hobbyTitle='〖抽選販売〗 ポケモンカードゲーム MEGA 拡張パック メガブレイブ (トレーディングカード)';
+const hobbyPage='<link rel="canonical" href="'+hobby+'"><h1>'+hobbyTitle+'</h1>'+
+ '<p>抽選申し込みは下記日時に開始します。</p><p>2026/11/27 17:00</p><p>こちらの抽選には参加条件がございます。</p>'+
+ '<p>発売日：2025年8月上旬</p><h2>商品説明</h2><h2>関連商品</h2><p>抽選受付終了日時：2026/12/31 20:00</p>';
+assert(supportedUrl(hobby));assert.equal(lotteryPageRequest(hobby+'?utm_source=discord').url.href,hobby);
+const hf=extract(hobbyPage,hobby);
+assert.equal(hf.store_name,'ホビーサーチ');assert.equal(hf.prefecture,'全国');
+assert.equal(hf.product_name,'ポケモンカードゲーム MEGA 拡張パック メガブレイブ');
+assert.equal(hf.review_category,'pokemon');assert.equal(hf.product_type,'pack');
+assert.equal(hf.application_start_at,'2026-11-27T17:00:00+09:00');
+assert.equal(hf.application_end_at,undefined);
+const active=hobbyPage.replace('抽選申し込みは下記日時に開始します。','抽選受付期間：').replace('2026/11/27 17:00','2026/11/27 17:00 ～ 2026/11/29 23:59');
+assert.equal(extract(active,hobby).application_end_at,'2026-11-29T23:59:00+09:00');
+const deadline=hobbyPage.replace('抽選申し込みは下記日時に開始します。','抽選受付終了日時：').replace('2026/11/27 17:00','2026/11/29 23:59');
+assert.equal(extract(deadline,hobby).application_end_at,'2026-11-29T23:59:00+09:00');
+for(const url of [hobby+'?next=https://example.com',hobby+'#form',hobby.replace('https:','http:'),hobby.replace('www.1999.co.jp','www.1999.co.jp.evil.test'),'https://www.1999.co.jp/list/3352/7/1'])assert(!supportedUrl(url));
+assert.deepEqual(extract(hobbyPage.replace(hobbyTitle,'ポケモンカードゲーム メガブレイブ'),hobby),{});
+assert.deepEqual(extract(hobbyPage.replace('2026/11/27','2026/11/31'),hobby),{});
+assert.deepEqual(extract(hobbyPage,hobby.replace('11183978','11183988')),{});
+const hc={items:[{...row(hobby),discord_posted_at:'2026-11-26T12:46:00Z'}]};
+const hn=new Date('2026-11-26T13:00:00Z');
+assert.deepEqual(await enrichDmm(hc,async()=>hobbyPage,hn,HOBBY_SEARCH_HOST),{checked:1,updated:1});
+assert.equal(hc.items[0].external_url_unverified,false);
+assert.equal(shopCandidates(hc,HOBBY_SEARCH_HOST,new Date(+hn+29*60000)).length,0);
+assert.equal(shopCandidates(hc,HOBBY_SEARCH_HOST,new Date(+hn+31*60000)).length,1);
+assert(applyShopPage(hc.items[0],deadline,new Date('2026-11-27T08:05:00Z')));
+assert.equal(hc.items[0].application_start_at,'2026-11-27T17:00:00+09:00');
+assert.equal(hc.items[0].application_end_at,'2026-11-29T23:59:00+09:00');
+console.log('Hobby Search scheduled/partial lotteries and refresh regressions passed');
