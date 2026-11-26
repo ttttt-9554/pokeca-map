@@ -5305,7 +5305,7 @@
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-26T10:06:00.890Z",
+    "next_at": "2026-11-26T10:20:56.981Z",
     "branches": {
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-26T09:30:59.295Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-26T09:40:56.586Z",
@@ -5327,9 +5327,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/": "2026-11-26T10:01:00.890Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/": "2026-11-26T10:01:00.890Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-hiroshima/": "2026-11-26T10:01:00.890Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-26T09:00:56.897Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-26T09:00:56.897Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-26T09:00:56.897Z"
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/": "2026-11-26T10:10:57.760Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-fukuoka/": "2026-11-26T10:10:57.760Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-okinawa/": "2026-11-26T10:10:57.760Z"
     }
   }
 }
