@@ -3,6 +3,7 @@ import {htmlAttributes as attrs, decodeHtml as decode} from './public-html.mjs';
 export const ONLINE_SHOP_PARSER_VERSION = 2;
 export const DMM_HOST = 'www.dmm.com';
 export const BANDAI_HOST = 'p-bandai.jp';
+export const HOBBY_SEARCH_HOST = 'www.1999.co.jp';
 const tracking = new Set(['utm_medium','utm_source','utm_term','utm_campaign','utm_content']);
 
 export function onlineShopUrl(value) {
@@ -20,9 +21,11 @@ export function onlineShopUrl(value) {
     if ([...u.searchParams.keys()].some(k => !tracking.has(k) || u.searchParams.getAll(k).length !== 1)) return null;
     const valid = u.hostname === DMM_HOST
       ? /^\/mono\/hobby\/-\/detail\/\=\/cid\=[a-z0-9_]{1,80}\/$/.test(u.pathname)
+      : u.hostname === HOBBY_SEARCH_HOST ? /^\/[1-9]\d{7}\/?$/.test(u.pathname)
       : u.hostname === BANDAI_HOST && /^\/item\/item-[1-9]\d{6,14}\/$/.test(u.pathname);
     if (!valid) return null;
     u.search = '';
+    if (u.hostname === HOBBY_SEARCH_HOST) u.pathname = u.pathname.replace(/\/$/, '');
     return u;
   } catch { return null; }
 }
@@ -74,6 +77,10 @@ export function onlineShopFields(html, value) {
   const markup = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,'');
   const identities = [...markup.matchAll(/<(?:link|meta)\b[^>]*>/gi)].map(m => attrs(m[0]))
     .filter(a => a.rel === 'canonical' || a.property === 'og:url').map(a => a.href || a.content);
+  if (source.hostname === HOBBY_SEARCH_HOST) {
+    if (identities.some(url => onlineShopUrl(url)?.href !== source.href)) return {};
+    return hobbySearchFields(markup);
+  }
   if (!identities.length || identities.some(url => onlineShopUrl(url)?.href !== source.href)) return {};
   const dmm = source.hostname === DMM_HOST;
   const title = unique(tags(markup,'h1',a => dmm ? a.id === 'title' : hasClass(a,'pb24-item-main__title')).map(plain));
@@ -121,4 +128,50 @@ export function collectedOnlineShop(catalog, value) {
     row.online_shop_parser_version === ONLINE_SHOP_PARSER_VERSION && row.online_shop_verified_at &&
     row.external_url_unverified === false && row.event_title && row.application_start_at && row.application_end_at);
   return rows.sort((a,b) => Date.parse(b.online_shop_verified_at)-Date.parse(a.online_shop_verified_at))[0] || null;
+}
+
+
+// Only read the main lottery panel. The same product URL may host multiple rounds.
+function hobbySearchFields(markup) {
+  const marker = /^[【〖［\[]\s*抽選販売\s*[】〗］\]]\s*/;
+  const headings = [...markup.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/gi)].filter(m=>marker.test(plain(m[1])));
+  if(headings.length!==1)return {};
+  const heading=headings[0], title=plain(heading[1]);
+  const product=title.replace(marker,'').replace(/\s*[（(]トレーディングカード[）)]$/,'').trim();
+  if(product.length<5||title.length>160)return {};
+  const review_category=/ポケモンカード|ポケカ/i.test(product)?'pokemon':
+    /ONE\s*PIECE|ワンピースカード/i.test(product)?'onepiece':
+    /遊戯王/i.test(product)?'yugioh':
+    /ユニオン[・\s]*アリーナ|ユニアリ|UNION[\s-]*ARENA/i.test(product)?'unionarena':'';
+  if(!review_category)return {};
+  const after=markup.slice(heading.index+heading[0].length);
+  const boundary=[...after.matchAll(/<h[2-6]\b[^>]*>([\s\S]*?)<\/h[2-6]\s*>/gi)]
+    .find(m=>/商品説明|商品仕様|この商品をチェック|関連商品|おすすめ商品|人気ランキング|ユーザーレビュー/.test(plain(m[1])));
+  const panel=plain(after.slice(0,Math.min(boundary?.index??after.length,35000))).normalize('NFKC')
+    .split(/商品説明|商品仕様|この商品をチェック|関連商品|おすすめ商品|人気ランキング|ユーザーレビュー/)[0];
+  const date='(\\d{4})\\s*(?:年|/)\\s*(\\d{1,2})\\s*(?:月|/)\\s*(\\d{1,2})(?!\\d)\\s*日?(?:\\s*\\([月火水木金土日](?:曜(?:日)?)?\\))?(?:\\s*(\\d{1,2})(?::(\\d{2})|時(?:\\s*(\\d{1,2})分)?))?';
+  function stamp(m){
+    const [y,mo,d,h,min]=[m[1],m[2],m[3],m[4]||0,m[5]||m[6]||0].map(Number);
+    const dt=new Date(Date.UTC(y,mo-1,d,h,min));
+    if(y<2020||y>2100||mo<1||mo>12||d<1||h>23||min>59||dt.getUTCFullYear()!==y||dt.getUTCMonth()+1!==mo||dt.getUTCDate()!==d)return '';
+    const pad=n=>String(n).padStart(2,'0');
+    return y+'-'+pad(mo)+'-'+pad(d)+(m[4]!==undefined?'T'+pad(h)+':'+pad(min)+':00+09:00':'');
+  }
+  const read=label=>unique([...panel.matchAll(new RegExp('(?:'+label+')\\s*[:：。]?\\s*'+date,'g'))].map(stamp));
+  let start=read('抽選(?:お)?申[し]?込[み]?(?:受付)?は下記日時に開始します|抽選(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?開始(?:日時|日|時間)?');
+  let end=read('抽選(?:お)?申[し]?込[み]?(?:受付)?は下記日時(?:まで(?:です)?|に終了します)|抽選(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?(?:締[め]?切[り]?|終了)(?:日時|日|時間)?|(?:応募|申[し]?込[み]?)締[め]?切[り]?(?:日時|日|時間)?');
+  const periods=[...panel.matchAll(new RegExp('抽選(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?期間\\s*[:：]?\\s*'+date+'\\s*(?:[~〜～]|から|–|—)\\s*'+date,'g'))];
+  if(periods.length===1){
+    start||=stamp(periods[0].slice(0,7));end||=stamp([periods[0][0],...periods[0].slice(7,13)]);
+  }
+  if((start&&end&&start>=end)||(!start&&!end))return {};
+  const store='ホビーサーチ';
+  const fields={event_title:title,product_name:product,store_name:store,prefecture:'全国',stores:[{name:store,prefecture:'全国'}],review_category};
+  if(start)fields.application_start_at=start;
+  if(end)fields.application_end_at=end;
+  const result=read('(?:抽選結果発表|当選発表)(?:日時|日|時間)?');
+  if(result){fields.result_announcement_date=result.slice(0,10);if(result.length>10)fields.result_announcement_time=result.slice(11,16);}
+  const pack=/拡張パック|ブースター?パック/.test(product),deck=/デッキ|スターターセット/.test(product);
+  if(pack||deck)fields.product_type=pack&&deck?'pack/deck':pack?'pack':'deck';
+  return fields;
 }
