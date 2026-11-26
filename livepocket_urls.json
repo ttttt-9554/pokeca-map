@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-26T03:00:56.428556+00:00",
+  "collected_at": "2026-11-26T04:30:55.084619+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 888,
+  "unique_livepocket_urls": 891,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27388,33 +27388,141 @@
       "purchase_start_time": "12:00",
       "purchase_end_date": "2026-12-02",
       "purchase_end_time": "21:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/a4__w",
+      "discord_message_id": "1575368018001662104",
+      "discord_posted_at": "2026-11-26T04:30:04.414000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちイオンモール川口前川店\n受付終了: 11/26 21:00（残り7時間29分）\nhttps://livepocket.jp/e/a4__w\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/29 20:00（残り3日6時間）\nhttps://livepocket.jp/e/8d87t\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/29 20:00（残り3日6時間）\nhttps://livepocket.jp/e/r9smj",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/a4__w",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【ふるいちイオンモール川口前川店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
+      "application_end_at": "2026-11-26T21:00:00+09:00",
+      "application_start_at": "2026-11-26T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "ふるいちイオンモール川口前川店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "ふるいちイオンモール川口前川店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-11-28",
+      "purchase_start_date": "2026-12-01",
+      "purchase_end_date": "2026-12-04"
+    },
+    {
+      "url": "https://livepocket.jp/e/8d87t",
+      "discord_message_id": "1575368018001662104",
+      "discord_posted_at": "2026-11-26T04:30:04.414000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちイオンモール川口前川店\n受付終了: 11/26 21:00（残り7時間29分）\nhttps://livepocket.jp/e/a4__w\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/29 20:00（残り3日6時間）\nhttps://livepocket.jp/e/8d87t\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/29 20:00（残り3日6時間）\nhttps://livepocket.jp/e/r9smj",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/8d87t",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ワンピースカードゲーム『神の支配』抽選販売受付",
+      "application_end_at": "2026-11-29T20:00:00+09:00",
+      "application_start_at": "2026-11-26T08:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA 今市店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA 今市店",
+      "prefecture": "栃木県",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-05",
+      "purchase_end_date": "2026-12-07"
+    },
+    {
+      "url": "https://livepocket.jp/e/r9smj",
+      "discord_message_id": "1575368018001662104",
+      "discord_posted_at": "2026-11-26T04:30:04.414000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\nふるいちイオンモール川口前川店\n受付終了: 11/26 21:00（残り7時間29分）\nhttps://livepocket.jp/e/a4__w\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/29 20:00（残り3日6時間）\nhttps://livepocket.jp/e/8d87t\n\n📍栃木県\nTSUTAYA 今市店\n受付終了: 11/29 20:00（残り3日6時間）\nhttps://livepocket.jp/e/r9smj",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/r9smj",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカードゲーム『ハドウシーカー』抽選販売受付",
+      "application_end_at": "2026-11-29T20:00:00+09:00",
+      "application_start_at": "2026-11-26T08:00:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA 今市店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA 今市店",
+      "prefecture": "栃木県",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-05",
+      "purchase_end_date": "2026-12-07"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 704,
-    "no_structured_details": 184
+    "no_structured_details": 187
   },
   "field_counts": {
-    "store_name": 482,
-    "prefecture": 426,
-    "event_title": 585,
+    "store_name": 485,
+    "prefecture": 429,
+    "event_title": 588,
     "event_date": 1,
     "product_name": 140,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 850,
-    "application_start_at": 847,
-    "stores_events": 482
+    "application_end_at": 853,
+    "application_start_at": 850,
+    "stores_events": 485
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1575345386678390785"
+      "1551580466266644552": "1575368024897364018"
     },
     "last_run": {
-      "checked_at": "2026-11-26T03:00:56.428556+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-26T04:30:55.084619+00:00",
+      "new_urls": 3,
       "original_urls": 888,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27791,7 +27899,8 @@
         "1574688546323955842": "2026-11-24T07:36:01.338220+00:00",
         "1574771593438302301": "2026-11-24T13:05:59.688935+00:00",
         "1574786695965188266": "2026-11-24T14:05:57.403972+00:00",
-        "1575028297002127430": "2026-11-25T06:01:05.650519+00:00"
+        "1575028297002127430": "2026-11-25T06:01:05.650519+00:00",
+        "1575368018001662104": "2026-11-26T04:30:58.299115+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31776,6 +31885,21 @@
           "checked_at": "2026-11-25T18:16:30.114576+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/r9smj": {
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/a4__w": {
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/8d87t": {
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -34978,6 +35102,24 @@
           "detected_at": "2026-11-25T06:01:06.609413+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-25T18:16:30.114576+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/8d87t": {
+          "detected_at": "2026-11-26T04:30:59.346302+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/a4__w": {
+          "detected_at": "2026-11-26T04:30:59.346302+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/r9smj": {
+          "detected_at": "2026-11-26T04:30:59.346302+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
           "http_status": null
         }
       },
@@ -45471,6 +45613,39 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/r9smj": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "title_observed": "ポケモンカードゲーム『ハドウシーカー』抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/a4__w": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "title_observed": "【ふるいちイオンモール川口前川店】ポケカ抽選販売（拡張パック 30th CELEBRATION）",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
+        },
+        "https://livepocket.jp/e/8d87t": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "title_observed": "ワンピースカードゲーム『神の支配』抽選販売受付",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -53235,6 +53410,45 @@
         },
         "https://livepocket.jp/e/6dpj2": {
           "checked_at": "2026-11-25T18:16:30.114576+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/r9smj": {
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/a4__w": {
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/8d87t": {
+          "checked_at": "2026-11-26T04:31:16.112775+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
