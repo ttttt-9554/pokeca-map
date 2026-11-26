@@ -5242,18 +5242,60 @@
       "application_start_at": null,
       "application_end_at": null,
       "external_url_unverified": true
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLScADiQk3Ask0P2_vn00gc-u5_Aw90Vvsh_JdZuzMY2i4KRAJQ/viewform",
+      "source_site": "docs.google.com",
+      "event_title": "【バトロコ吉祥寺駅前店】 11/27(金)発売 UNION ARENA ブースターパック「D.Gray-man【UA58BT】」 抽選販売応募フォーム",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-26T06:00:05.240000+00:00",
+      "first_detected_at": "2026-11-26T06:00:57.394427+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": "2026-11-26",
+      "external_url_unverified": false,
+      "google_forms_checked_at": "2026-11-26T06:00:57.695Z",
+      "google_forms_parser_version": 6,
+      "google_forms_start_not_stated": true,
+      "result_announcement_date": "2026-11-26",
+      "purchase_end_date": "2026-11-27",
+      "product_name": "ブースターパック D.Gray-man【UA58BT】",
+      "stores": [
+        {
+          "name": "バトロコ吉祥寺駅前店",
+          "prefecture": ""
+        }
+      ],
+      "store_name": "バトロコ吉祥寺駅前店",
+      "official_event_title": "【バトロコ吉祥寺駅前店】 11/27(金)発売 UNION ARENA ブースターパック「D.Gray-man【UA58BT】」 抽選販売応募フォーム",
+      "event_title_provisional": false,
+      "google_forms_verified_at": "2026-11-26T06:00:57.695Z",
+      "google_forms_source_url": "https://docs.google.com/forms/d/e/1FAIpQLScADiQk3Ask0P2_vn00gc-u5_Aw90Vvsh_JdZuzMY2i4KRAJQ/viewform",
+      "pokemon_map_type": "pack"
+    },
+    {
+      "url": "https://www.gangi.co.jp/blog/drawsale-723",
+      "source_site": "www.gangi.co.jp",
+      "event_title": "【会員限定】「ONE PIECEカードゲーム 500年後の未来...",
+      "prefecture": "",
+      "discord_posted_at": "2026-11-26T06:00:05.240000+00:00",
+      "first_detected_at": "2026-11-26T06:00:57.394472+00:00",
+      "review_category": "unknown",
+      "application_start_at": null,
+      "application_end_at": null,
+      "external_url_unverified": true
     }
   ],
   "last_seen_message_ids": {
-    "1551580466266644552": "1575375574774325390"
+    "1551580466266644552": "1575390691079622679"
   },
-  "collected_at": "2026-11-26T05:00:56.186980+00:00",
+  "collected_at": "2026-11-26T06:00:57.394501+00:00",
   "messages_scanned": 100,
   "sale_report_signals": [],
   "pokemon_center_news_scan": {
-    "next_at": "2026-11-26T06:00:57.985Z",
+    "next_at": "2026-11-26T06:10:56.121Z",
     "branches": {
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-26T05:00:57.985Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-sapporo/": "2026-11-26T06:00:58.229Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tohoku/": "2026-11-26T05:10:56.121Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-new-chitose-airport/": "2026-11-26T05:20:55.399Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/": "2026-11-26T05:30:56.302Z",
@@ -5261,9 +5303,9 @@
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/": "2026-11-26T05:50:58.114Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/": "2026-11-26T05:50:58.114Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/": "2026-11-26T05:50:58.114Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-26T05:00:57.985Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-26T05:00:57.985Z",
-      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-26T05:00:57.985Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama/": "2026-11-26T06:00:58.229Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/": "2026-11-26T06:00:58.229Z",
+      "https://shop.pokemon.co.jp/ja/shop/pokemonstore-tokyo-station/": "2026-11-26T06:00:58.229Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-outlet-kisarazu/": "2026-11-26T05:10:56.121Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemonstore-narita-airport/": "2026-11-26T05:10:56.121Z",
       "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-nagoya/": "2026-11-26T05:10:56.121Z",
