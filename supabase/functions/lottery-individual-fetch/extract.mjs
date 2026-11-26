@@ -1,7 +1,7 @@
 import {SEVENNET_HOST, sevennetFairUrl} from './sevennet-fair.mjs';
 // Public page extraction. Only unambiguous, explicitly labelled data is returned.
 import {googleFormUrl, googleFormFields} from './google-forms.mjs';
-import {onlineShopUrl,onlineShopFields,DMM_HOST,BANDAI_HOST} from './online-shop-lottery.mjs';
+import {onlineShopUrl,onlineShopFields,DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST} from './online-shop-lottery.mjs';
 import {CENTER_HOST} from './pokemon-center.mjs';
 import {storeNoticeFields, storeNoticeUrl, SKIP_HOST, OTAKARA_HOST} from './store-notices.mjs';
 export const STARBOX_HOST = 'shoplottery.e-starbox.com';
@@ -14,7 +14,7 @@ export function supportedUrl(value) {
     const u=new URL(value);
     if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash) return false;
     if([SKIP_HOST,OTAKARA_HOST,CENTER_HOST].includes(u.hostname)) return !!storeNoticeUrl(value);
-    if([DMM_HOST,BANDAI_HOST,'al.dmm.com'].includes(u.hostname)) return !!onlineShopUrl(value);
+    if([DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST,'al.dmm.com'].includes(u.hostname)) return !!onlineShopUrl(value);
     if(u.hostname==='docs.google.com'||u.hostname==='forms.gle') return !!googleFormUrl(value);
     if(u.hostname==='e-yamashiroya.com') return /^\/(?:%[\da-f]{2}|[a-z\d_\-\/])+$/i.test(u.pathname) && !u.search && !u.pathname.includes('//');
     if(u.hostname===SEVENNET_HOST) return !!sevennetFairUrl(value) || (/^\/detail\/\d+\.html$/.test(u.pathname) && !u.search);
@@ -470,7 +470,7 @@ export function extract(html,url,options={}){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
   if([SKIP_HOST,OTAKARA_HOST,CENTER_HOST].includes(u.hostname) || (u.hostname===SEVENNET_HOST && u.pathname.startsWith('/general/')))return storeNoticeFields(html,url);
-  if([DMM_HOST,BANDAI_HOST,'al.dmm.com'].includes(u.hostname))return onlineShopFields(html,url);
+  if([DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST,'al.dmm.com'].includes(u.hostname))return onlineShopFields(html,url);
   if(u.hostname==='docs.google.com'&&html.includes('FB_PUBLIC_LOAD_DATA_'))
     return supportedUrl(url)?googleFormFields(html,url,options):{};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
