@@ -1,6 +1,6 @@
 import {readFile,writeFile,rename} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-import {onlineShopUrl,onlineShopFields,ONLINE_SHOP_PARSER_VERSION,DMM_HOST,BANDAI_HOST} from '../supabase/functions/lottery-individual-fetch/online-shop-lottery.mjs';
+import {onlineShopUrl,onlineShopFields,ONLINE_SHOP_PARSER_VERSION,DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST} from '../supabase/functions/lottery-individual-fetch/online-shop-lottery.mjs';
 
 const catalogPath='other_lottery_public.json';
 const discovered=item=>Date.parse(item.discord_posted_at||item.first_detected_at||'');
@@ -13,8 +13,8 @@ export function shopCandidates(catalog,host,now=new Date()) {
     if(end<+now && !(discovered(item)>end))return false;
     if(discovered(item)<+now-14*86400000 && !Number.isFinite(end))return false;
     return item.online_shop_parser_version!==ONLINE_SHOP_PARSER_VERSION ||
-      !(+now-Date.parse(item.online_shop_checked_at||'')<6*3600000);
-  }).sort((a,b)=>(discovered(b)||0)-(discovered(a)||0)).slice(0,host===DMM_HOST?8:3);
+      !(+now-Date.parse(item.online_shop_checked_at||'')<(host===HOBBY_SEARCH_HOST?30*60000:6*3600000));
+  }).sort((a,b)=>(discovered(b)||0)-(discovered(a)||0)).slice(0,(host===DMM_HOST||host===HOBBY_SEARCH_HOST)?8:3);
 }
 
 export function applyShopPage(item,html,now=new Date()) {
@@ -24,6 +24,11 @@ export function applyShopPage(item,html,now=new Date()) {
   if(!fields.event_title || Date.parse(fields.application_end_at)<=discovered(item)){
     item.online_shop_last_error='closed_or_unavailable';return false;
   }
+  if(onlineShopUrl(item.url)?.hostname===HOBBY_SEARCH_HOST){
+    const newRound=(fields.application_start_at && item.application_start_at && fields.application_start_at!==item.application_start_at)
+      || (Date.parse(item.application_end_at||'')<discovered(item));
+    if(newRound)for(const key of ['application_start_at','application_end_at','result_announcement_date','result_announcement_time','purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'])delete item[key];
+  }
   Object.assign(item,fields,{official_event_title:fields.event_title,event_title_provisional:false,
     external_url_unverified:false,online_shop_verified_at:now.toISOString(),
     online_shop_source_url:onlineShopUrl(item.url).href});
@@ -32,12 +37,12 @@ export function applyShopPage(item,html,now=new Date()) {
   return true;
 }
 
-export async function fetchDmm(value,request=fetch) {
+export async function fetchDmm(value,request=fetch,host=DMM_HOST) {
   const source=onlineShopUrl(value);
-  if(source?.hostname!==DMM_HOST)throw Error('Unsupported DMM product');
+  if(![DMM_HOST,HOBBY_SEARCH_HOST].includes(host)||source?.hostname!==host)throw Error('Unsupported shop product');
   const response=await request(source.href,{redirect:'manual',headers:{Accept:'text/html,application/xhtml+xml',
     'Accept-Language':'ja-JP,ja;q=0.9','User-Agent':'TorecaRadar/1.0'},signal:AbortSignal.timeout(14000)});
-  console.log('DMM public document:',response.status,response.headers.get('content-type')||'unknown type');
+  console.log(host+' public document:',response.status,response.headers.get('content-type')||'unknown type');
   if(response.status>=300&&response.status<400){
     try{const next=new URL(response.headers.get('location'),source);console.log('DMM redirect:',next.origin+next.pathname);}catch{}
   }
@@ -58,18 +63,18 @@ export async function fetchDmm(value,request=fetch) {
   return html+decoder.decode();
 }
 
-export async function enrichDmm(catalog,load=fetchDmm,now=new Date()) {
+export async function enrichDmm(catalog,load=fetchDmm,now=new Date(),host=DMM_HOST) {
   let checked=0,updated=0;
   // A direct URL and an affiliate URL for the same product need one page read.
   const pages=new Map();
-  for(const item of shopCandidates(catalog,DMM_HOST,now)){
+  for(const item of shopCandidates(catalog,host,now)){
     item.online_shop_checked_at=now.toISOString();item.online_shop_parser_version=ONLINE_SHOP_PARSER_VERSION;checked++;
     try{
       const source=onlineShopUrl(item.url).href;
       if(!pages.has(source))pages.set(source,await load(item.url));
       updated+=Number(applyShopPage(item,pages.get(source),now));
     }catch(error){
-      console.log('DMM collection error:',error?.status||error?.cause?.code||error?.name||'unknown');
+      console.log(host+' collection error:',error?.status||error?.cause?.code||error?.name||'unknown');
       item.online_shop_last_error=error?.code==='source_login_required'?'source_login_required':'page_unavailable';
       if(item.online_shop_last_error==='source_login_required'||[401,403,429].includes(error?.status)){
         if(item.online_shop_last_error!=='source_login_required')item.online_shop_last_error='source_access_denied';
@@ -100,7 +105,11 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
           result.checked++;result.updated+=Number(applyShopPage(item,page.html||'',now));
           if(page.blocked){item.online_shop_last_error=page.error==='source_region_redirect'?'source_region_redirect':'source_access_denied';item.online_shop_retry_after=new Date(+now+86400000).toISOString();}
         }
-      }else if(mode==='dmm')result=await enrichDmm(catalog);
+      }else if(mode==='dmm'){
+        const dmm=await enrichDmm(catalog);
+        const hobby=await enrichDmm(catalog,url=>fetchDmm(url,fetch,HOBBY_SEARCH_HOST),now,HOBBY_SEARCH_HOST);
+        result={checked:dmm.checked+hobby.checked,updated:dmm.updated+hobby.updated};
+      }
       else throw Error('Unsupported collector mode');
       if(result.checked){
         await writeFile(catalogPath+'.tmp',JSON.stringify(catalog,null,2)+'\n','utf8');
