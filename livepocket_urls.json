@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-27T02:30:56.312786+00:00",
+  "collected_at": "2026-11-27T03:00:55.910405+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 894,
+  "unique_livepocket_urls": 895,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27507,7 +27507,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/nivw9",
       "field_sources": {
@@ -27543,7 +27543,7 @@
       "product_name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー",
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/my-3o_thzv",
       "field_sources": {
@@ -27649,7 +27649,7 @@
       "product_name": null,
       "application_period": null,
       "sales_period": null,
-      "extraction_status": "no_structured_details",
+      "extraction_status": "parsed",
       "store_location_source": "livepocket_official_page",
       "store_location_url": "https://livepocket.jp/e/du9cy",
       "field_sources": {
@@ -27672,34 +27672,96 @@
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-04",
       "purchase_end_date": "2026-12-06"
+    },
+    {
+      "url": "https://livepocket.jp/e/j6os9zy3zn",
+      "discord_message_id": "1575707803287556197",
+      "discord_posted_at": "2026-11-27T03:00:15.539000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 12時まとめ】\n\n📍東京都\nカードショップ オリオンベース\n受付終了: 11/29 20:30（残り2日8時間）\nhttps://livepocket.jp/e/du9cy\n\n📍福島県\nトレカエース植田店\n受付終了: 11/29 21:00（残り2日8時間）\nhttps://livepocket.jp/e/nivw9\n\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/29 23:59（残り2日11時間）\nhttps://livepocket.jp/e/my-3o_thzv\n\n📍全国チェーン\nイトーヨーカドー\n受付終了: 11/29 23:59（残り2日11時間）\nhttps://livepocket.jp/e/j6os9zy3zn",
+      "details_source": null,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー/ムニキスゼロ",
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/j6os9zy3zn",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_explicit_store_list",
+        "stores": "v19_livepocket_explicit_store_list",
+        "product_name": "v20_uniform_multi_shop_tickets",
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      },
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー/ムニキスゼロ",
+      "application_end_at": "2026-11-29T23:59:00+09:00",
+      "application_start_at": "2026-11-18T14:13:00+09:00",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーグランツリー武蔵小杉店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "イトーヨーカドー大和鶴間店",
+      "prefecture": ""
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
-    "parsed": 707,
-    "no_structured_details": 187
+    "parsed": 710,
+    "no_structured_details": 185
   },
   "field_counts": {
-    "store_name": 488,
+    "store_name": 489,
     "prefecture": 431,
-    "event_title": 591,
+    "event_title": 592,
     "event_date": 1,
-    "product_name": 141,
+    "product_name": 142,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 856,
-    "application_start_at": 852,
-    "stores_events": 488
+    "application_end_at": 857,
+    "application_start_at": 853,
+    "stores_events": 489
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1575700212914200716"
+      "1551580466266644552": "1575707803287556197"
     },
     "last_run": {
-      "checked_at": "2026-11-27T02:30:56.312786+00:00",
+      "checked_at": "2026-11-27T03:00:55.910405+00:00",
       "new_urls": 1,
-      "original_urls": 893,
+      "original_urls": 894,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -28079,7 +28141,8 @@
         "1575368018001662104": "2026-11-26T04:30:58.299115+00:00",
         "1575677568127074415": "2026-11-27T01:01:02.771848+00:00",
         "1575692657085390878": "2026-11-27T02:00:56.604597+00:00",
-        "1575700212914200716": "2026-11-27T02:31:01.407358+00:00"
+        "1575700212914200716": "2026-11-27T02:31:01.407358+00:00",
+        "1575707803287556197": "2026-11-27T03:00:59.763414+00:00"
       },
       "checked_search_urls": {}
     },
@@ -32094,6 +32157,11 @@
           "checked_at": "2026-11-27T02:31:27.032516+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/j6os9zy3zn": {
+          "checked_at": "2026-11-27T03:01:26.556240+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -35332,6 +35400,12 @@
           "detected_at": "2026-11-27T02:31:02.840409+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-27T02:31:27.032516+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/j6os9zy3zn": {
+          "detected_at": "2026-11-27T03:01:01.281550+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-27T03:01:26.556240+00:00",
           "http_status": null
         }
       },
@@ -45906,6 +45980,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/j6os9zy3zn": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-27T03:01:26.556240+00:00",
+          "title_observed": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー/ムニキスゼロ",
+          "genre": "pokemon",
+          "product_origin": "v20_uniform_multi_shop_tickets",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -53748,6 +53833,19 @@
         },
         "https://livepocket.jp/e/du9cy": {
           "checked_at": "2026-11-27T02:31:27.032516+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/j6os9zy3zn": {
+          "checked_at": "2026-11-27T03:01:26.556240+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

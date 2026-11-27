@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-27T02:30:56.312786+00:00",
-  "unique_livepocket_urls": 894,
+  "collected_at": "2026-11-27T03:00:55.910405+00:00",
+  "unique_livepocket_urls": 895,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16380,7 +16380,63 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-27T02:31:02.840409+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/j6os9zy3zn",
+      "discord_posted_at": "2026-11-27T03:00:15.539000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/j6os9zy3zn",
+      "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー/ムニキスゼロ",
+      "application_end_at": "2026-11-29T23:59:00+09:00",
+      "application_start_at": "2026-11-18T14:13:00+09:00",
+      "review_category": "pokemon",
+      "stores": [
+        {
+          "name": "イトーヨーカドー大和鶴間店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ蘇我店",
+          "prefecture": "千葉県"
+        },
+        {
+          "name": "イトーヨーカドーアリオ亀有店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ西新井店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ北砂店",
+          "prefecture": "東京都"
+        },
+        {
+          "name": "イトーヨーカドーアリオ橋本店",
+          "prefecture": "神奈川県"
+        },
+        {
+          "name": "イトーヨーカドーあべの店",
+          "prefecture": "大阪府"
+        },
+        {
+          "name": "イトーヨーカドーグランツリー武蔵小杉店",
+          "prefecture": "神奈川県"
+        }
+      ],
+      "store_name": "イトーヨーカドー大和鶴間店",
+      "prefecture": "",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー/ムニキスゼロ",
+      "pokemon_map_match": "ニンジャスピナー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "product_name",
+      "official_genre": "pokemon",
+      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー/ムニキスゼロ",
+      "first_detected_at": "2026-11-27T03:01:01.281550+00:00",
+      "field_sources": {
+        "stores_prefectures": "store_master_unique_exact_name_v21_146"
+      }
     }
   ],
-  "updated_at": "2026-11-27T02:51:04.247701+00:00"
+  "updated_at": "2026-11-27T03:01:35.548297+00:00"
 }
