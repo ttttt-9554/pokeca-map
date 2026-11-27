@@ -71,7 +71,7 @@ function range(text) {
   return values[0] < values[1] && Date.parse(values[1])-Date.parse(values[0]) <= 180*86400000 ? values : null;
 }
 
-export function onlineShopFields(html, value) {
+export function onlineShopFields(html, value, options={}) {
   const source = onlineShopUrl(value);
   if (!source || typeof html !== 'string' || html.length > 2_000_000) return {};
   const markup = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,'');
@@ -79,7 +79,7 @@ export function onlineShopFields(html, value) {
     .filter(a => a.rel === 'canonical' || a.property === 'og:url').map(a => a.href || a.content);
   if (source.hostname === HOBBY_SEARCH_HOST) {
     if (identities.some(url => onlineShopUrl(url)?.href !== source.href)) return {};
-    return hobbySearchFields(markup);
+    return hobbySearchFields(markup,options);
   }
   if (!identities.length || identities.some(url => onlineShopUrl(url)?.href !== source.href)) return {};
   const dmm = source.hostname === DMM_HOST;
@@ -133,12 +133,15 @@ export function collectedOnlineShop(catalog, value) {
 
 
 // Only read the main lottery panel. The same product URL may host multiple rounds.
-function hobbySearchFields(markup) {
+function hobbySearchFields(markup,{referenceDate=new Date(Date.now()+9*3600000).toISOString().slice(0,10)}={}) {
   const marker = /^[【〖［\[]\s*抽選販売\s*[】〗］\]]\s*/;
-  const headings = [...markup.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/gi)].filter(m=>marker.test(plain(m[1])));
+  const allHeadings=[...markup.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/gi)];
+  const marked=allHeadings.filter(m=>marker.test(plain(m[1])));
+  const headings=marked.length?marked:allHeadings;
   if(headings.length!==1)return {};
-  const heading=headings[0], title=plain(heading[1]);
-  const product=title.replace(marker,'').replace(/\s*[（(]トレーディングカード[）)]$/,'').trim();
+  const heading=headings[0], headingText=plain(heading[1]);
+  const product=headingText.replace(marker,'').replace(/\s*[（(]トレーディングカード[）)]$/,'').trim();
+  const title=marked.length?headingText:'【抽選販売】'+headingText;
   if(product.length<5||title.length>160)return {};
   const review_category=/ポケモンカード|ポケカ/i.test(product)?'pokemon':
     /ONE\s*PIECE|ワンピースカード/i.test(product)?'onepiece':
@@ -150,6 +153,9 @@ function hobbySearchFields(markup) {
     .find(m=>/商品説明|商品仕様|この商品をチェック|関連商品|おすすめ商品|人気ランキング|ユーザーレビュー/.test(plain(m[1])));
   const panel=plain(after.slice(0,Math.min(boundary?.index??after.length,35000))).normalize('NFKC')
     .split(/商品説明|商品仕様|この商品をチェック|関連商品|おすすめ商品|人気ランキング|ユーザーレビュー/)[0];
+  const active=/抽選(?:お)?申[し]?込[み]?\s*受付中/.test(panel);
+  // Some product layouts put the lottery label in the purchase panel, not the h1.
+  if(!marked.length&&!(active&&/応募受付\s*[:：]/.test(panel)))return {};
   // Explicit labels only: never interpret the product release/shipping date as an application deadline.
   const date='(\\d{4})\\s*(?:年|[/.])\\s*(\\d{1,2})\\s*(?:月|[/.])\\s*(\\d{1,2})(?!\\d)\\s*日?(?:\\s*\\([月火水木金土日](?:曜(?:日)?)?\\))?(?:\\s*(\\d{1,2})(?::(\\d{2})(?!\\d)|時(?:\\s*(\\d{1,2})分)?))?';
   const shortDate='(\\d{1,2})\\s*(?:月|[/.])\\s*(\\d{1,2})(?!\\d)\\s*日?(?:\\s*\\([月火水木金土日](?:曜(?:日)?)?\\))?(?:\\s*(\\d{1,2})(?::(\\d{2})(?!\\d)|時(?:\\s*(\\d{1,2})分)?))?';
@@ -187,6 +193,27 @@ function hobbySearchFields(markup) {
   // On an open product page the deadline can be printed as "抽選申し込み受付期間：...まで".
   if(!end){
     end=unique([...panel.matchAll(new RegExp(periodLabel+sep+date+'\\s*まで','g'))].map(stamp));
+  }
+  // The active Japanese product page says "応募受付：11月29日まで".
+  // Resolve a year only against the known start or the Japan-local observation date.
+  // Never supply a clock time where the official notice only supplies a date.
+  if(active){
+    const label='(?:応募受付|抽選(?:応募|(?:お)?申[し]?込[み]?)?受付(?:期間)?)';
+    const complete=[...panel.matchAll(new RegExp(label+sep+date+'\\s*まで','g'))].map(stamp);
+    const anchor=(start||referenceDate||'').slice(0,10);
+    const base=Date.parse(anchor+'T00:00:00Z');
+    const short=[];
+    if(/^\d{4}-\d{2}-\d{2}$/.test(anchor)&&Number.isFinite(base)){
+      for(const m of panel.matchAll(new RegExp(label+sep+shortDate+'\\s*まで','g'))){
+        const year=Number(anchor.slice(0,4));
+        const candidates=[year,year+1].map(y=>stamp([m[0],y,...m.slice(1,6)]))
+          .filter(x=>x&&Date.parse(x.slice(0,10)+'T00:00:00Z')>=base&&Date.parse(x.slice(0,10)+'T00:00:00Z')-base<=60*86400000);
+        if(candidates.length===1)short.push(candidates[0]);
+      }
+    }
+    const deadlines=[...new Set([...complete,...short].filter(Boolean))];
+    if(deadlines.length>1||(end&&deadlines.length===1&&end!==deadlines[0]))return {};
+    if(!end&&deadlines.length===1)end=deadlines[0];
   }
   // A scheduled "から"/"開始" is not a deadline.
   if(!start){
