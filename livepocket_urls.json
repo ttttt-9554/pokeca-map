@@ -32187,7 +32187,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/9w31_1beif": {
-          "checked_at": "2026-11-27T09:41:28.149469+00:00",
+          "checked_at": "2026-11-27T15:51:23.829705+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         }
@@ -35439,7 +35439,7 @@
         "https://livepocket.jp/e/9w31_1beif": {
           "detected_at": "2026-11-27T03:31:02.909299+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-27T09:41:28.149469+00:00",
+          "checked_at": "2026-11-27T15:51:23.829705+00:00",
           "http_status": null
         }
       },
@@ -37859,8 +37859,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9w31_1beif": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-27T09:41:28.149469+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-27T15:51:23.829705+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -46045,7 +46045,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-27T09:41:28.149469+00:00",
+          "checked_at": "2026-11-27T15:51:23.829705+00:00",
           "title_observed": "【イトーヨーカドー】ワンピースカード スタートデッキ【ST-37】【ST-38】/ ブースターパック【OP-16】【OP-17】【EB-05】抽選販売",
           "genre": "onepiece",
           "product_origin": "",
@@ -53918,7 +53918,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/9w31_1beif": {
-          "checked_at": "2026-11-27T09:41:28.149469+00:00",
+          "checked_at": "2026-11-27T15:51:23.829705+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -54380,9 +54380,9 @@
         "next_check_at": "2026-11-18T17:40:43.743537+00:00"
       },
       "https://livepocket.jp/e/9w31_1beif": {
-        "checked_at": "2026-11-27T09:41:28.149469+00:00",
+        "checked_at": "2026-11-27T15:51:23.829705+00:00",
         "status": "ok",
-        "next_check_at": "2026-11-27T15:41:28.149469+00:00"
+        "next_check_at": "2026-11-27T21:51:23.829705+00:00"
       }
     }
   }
