@@ -5308,7 +5308,7 @@
       "first_detected_at": "2026-11-26T12:50:59.235129+00:00",
       "review_category": "pokemon",
       "application_start_at": "2026-11-27T17:00:00+09:00",
-      "application_end_at": null,
+      "application_end_at": "2026-11-29",
       "external_url_unverified": false,
       "online_shop_checked_at": "2026-11-26T13:06:52.246Z",
       "online_shop_parser_version": 2,
@@ -5325,16 +5325,17 @@
       ],
       "pokemon_map_type": "pack",
       "online_shop_source_url": "https://www.1999.co.jp/11183978",
-      "online_shop_verified_at": "2026-11-26T13:07:21.639Z",
-      "online_shop_evidence": "official_product_page_review",
-      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "online_shop_verified_at": "2026-11-28T00:08:00+09:00",
+      "online_shop_evidence": "official_product_page_screen",
+      "hobby_search_notice_evidence": "official_product_page_screen",
       "hobby_search_notice_sources": [
         "https://www.instalker.org/tcg_info_navi",
         "https://nyuka-now.com/archives/162248"
       ],
       "hobby_search_notice_reviewed_on": "2026-11-28",
-      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。",
-      "hobby_search_start_reported_by_admin_on": "2026-11-28"
+      "hobby_search_deadline_note": "公式商品ページの画面で「応募受付：11月29日まで」を確認。終了時刻の記載なし。",
+      "hobby_search_start_reported_by_admin_on": "2026-11-28",
+      "hobby_search_deadline_source_url": "https://www.1999.co.jp/11183978"
     },
     {
       "url": "https://www.1999.co.jp/11371443",
