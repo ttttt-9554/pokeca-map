@@ -470,7 +470,7 @@ export function extract(html,url,options={}){
   const body=plain(html), u=new URL(url), result={};
   if(!body||/(?:verify you are human|verify that you are human|アクセスが制限されています|ロボットではありません)/i.test(body))return {};
   if([SKIP_HOST,OTAKARA_HOST,CENTER_HOST].includes(u.hostname) || (u.hostname===SEVENNET_HOST && u.pathname.startsWith('/general/')))return storeNoticeFields(html,url);
-  if([DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST,'al.dmm.com'].includes(u.hostname))return onlineShopFields(html,url);
+  if([DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST,'al.dmm.com'].includes(u.hostname))return onlineShopFields(html,url,options);
   if(u.hostname==='docs.google.com'&&html.includes('FB_PUBLIC_LOAD_DATA_'))
     return supportedUrl(url)?googleFormFields(html,url,options):{};
   if (u.hostname === 'cloud-pass.jp') return supportedUrl(url) ? cloudPassFields(html) : {};
