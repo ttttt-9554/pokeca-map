@@ -5326,79 +5326,189 @@
       "pokemon_map_type": "pack",
       "online_shop_source_url": "https://www.1999.co.jp/11183978",
       "online_shop_verified_at": "2026-11-26T13:07:21.639Z",
-      "online_shop_evidence": "official_product_page_review"
+      "online_shop_evidence": "official_product_page_review",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。",
+      "hobby_search_start_reported_by_admin_on": "2026-11-28"
     },
     {
       "url": "https://www.1999.co.jp/11371443",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-26T12:46:00.543000+00:00",
       "first_detected_at": "2026-11-26T12:50:59.235145+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム 30th CELEBRATION プレミアムデッキセット エーフィ・ブラッキー",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "deck",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://www.1999.co.jp/11412156",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-26T12:46:00.543000+00:00",
       "first_detected_at": "2026-11-26T12:50:59.235150+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "deck",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://www.1999.co.jp/11183988",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック メガシンフォニア",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-26T12:46:00.543000+00:00",
       "first_detected_at": "2026-11-26T12:50:59.235154+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック メガシンフォニア",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "pack",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://www.1999.co.jp/11371442",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-26T12:46:00.543000+00:00",
       "first_detected_at": "2026-11-26T12:50:59.235157+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック 30th CELEBRATION",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "pack",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://www.1999.co.jp/11341850",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック アビスアイ",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-26T12:46:00.543000+00:00",
       "first_detected_at": "2026-11-26T12:50:59.235160+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック アビスアイ",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "pack",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://www.1999.co.jp/11341851",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-26T12:46:00.543000+00:00",
       "first_detected_at": "2026-11-26T12:50:59.235164+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
-      "external_url_unverified": true
+      "external_url_unverified": true,
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "pack",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://myca.dmm.com/campaign/k29-4t-8r",
@@ -5451,18 +5561,35 @@
     {
       "url": "https://www.1999.co.jp/11412157",
       "source_site": "www.1999.co.jp",
-      "event_title": "",
-      "prefecture": "",
+      "event_title": "【抽選販売】ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
+      "prefecture": "全国",
       "discord_posted_at": "2026-11-27T02:00:05.186000+00:00",
       "first_detected_at": "2026-11-27T02:00:55.846791+00:00",
-      "review_category": "unknown",
-      "application_start_at": null,
+      "review_category": "pokemon",
+      "application_start_at": "2026-11-27T17:00:00+09:00",
       "application_end_at": null,
       "external_url_unverified": true,
       "online_shop_checked_at": "2026-11-27T13:11:08.067Z",
       "online_shop_parser_version": 2,
       "online_shop_last_error": "source_access_denied",
-      "online_shop_retry_after": "2026-11-28T13:11:08.067Z"
+      "online_shop_retry_after": "2026-11-28T13:11:08.067Z",
+      "event_title_provisional": false,
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
+      "store_name": "ホビーサーチ",
+      "stores": [
+        {
+          "name": "ホビーサーチ",
+          "prefecture": "全国"
+        }
+      ],
+      "pokemon_map_type": "pack",
+      "hobby_search_notice_evidence": "corroborated_public_announcements",
+      "hobby_search_notice_sources": [
+        "https://www.instalker.org/tcg_info_navi",
+        "https://nyuka-now.com/archives/162248"
+      ],
+      "hobby_search_notice_reviewed_on": "2026-11-28",
+      "hobby_search_deadline_note": "締切は複数の外部情報で相違があり公式未確認。元の商品ページで受付状況を確認してください。"
     },
     {
       "url": "https://card.luruna.jp/items/164670243",
