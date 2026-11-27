@@ -4,11 +4,12 @@ import {onlineShopUrl,onlineShopFields,ONLINE_SHOP_PARSER_VERSION,DMM_HOST,BANDA
 
 const catalogPath='other_lottery_public.json';
 const discovered=item=>Date.parse(item.discord_posted_at||item.first_detected_at||'');
+const applicationDeadline=value=>Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(value||'')?value+'T23:59:59.999+09:00':value||'');
 export function shopCandidates(catalog,host,now=new Date()) {
   if(catalog.items.some(item=>onlineShopUrl(item.url)?.hostname===host && Date.parse(item.online_shop_retry_after)>+now)) return [];
   return [...catalog.items].filter(item=>{
     if(onlineShopUrl(item.url)?.hostname!==host||item.manual_page_unavailable||item.manual_card_hidden)return false;
-    const end=Date.parse(item.application_end_at||'');
+    const end=applicationDeadline(item.application_end_at);
     // Do not revisit old rounds unless a new Discord post has discovered one.
     if(end<+now && !(discovered(item)>end))return false;
     if(discovered(item)<+now-14*86400000 && !Number.isFinite(end))return false;
@@ -20,13 +21,13 @@ export function shopCandidates(catalog,host,now=new Date()) {
 export function applyShopPage(item,html,now=new Date()) {
   item.online_shop_checked_at=now.toISOString();
   item.online_shop_parser_version=ONLINE_SHOP_PARSER_VERSION;
-  const {product_type,...fields}=onlineShopFields(html,item.url);
-  if(!fields.event_title || Date.parse(fields.application_end_at)<=discovered(item)){
+  const {product_type,...fields}=onlineShopFields(html,item.url,{referenceDate:new Date(+now+9*3600000).toISOString().slice(0,10)});
+  if(!fields.event_title || applicationDeadline(fields.application_end_at)<=discovered(item)){
     item.online_shop_last_error='closed_or_unavailable';return false;
   }
   if(onlineShopUrl(item.url)?.hostname===HOBBY_SEARCH_HOST){
     const newRound=(fields.application_start_at && item.application_start_at && fields.application_start_at!==item.application_start_at)
-      || (Date.parse(item.application_end_at||'')<discovered(item));
+      || (applicationDeadline(item.application_end_at)<discovered(item));
     if(newRound)for(const key of ['application_start_at','application_end_at','result_announcement_date','result_announcement_time','purchase_start_date','purchase_start_time','purchase_end_date','purchase_end_time'])delete item[key];
   }
   Object.assign(item,fields,{official_event_title:fields.event_title,event_title_provisional:false,
