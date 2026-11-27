@@ -126,7 +126,8 @@ export function collectedOnlineShop(catalog, value) {
   if (!source) return null;
   const rows = (catalog?.items || []).filter(row => onlineShopUrl(row?.url)?.href === source.href &&
     row.online_shop_parser_version === ONLINE_SHOP_PARSER_VERSION && row.online_shop_verified_at &&
-    row.external_url_unverified === false && row.event_title && row.application_start_at && row.application_end_at);
+    row.external_url_unverified === false && row.event_title && (source.hostname === HOBBY_SEARCH_HOST ?
+      (row.application_start_at || row.application_end_at) : (row.application_start_at && row.application_end_at)));
   return rows.sort((a,b) => Date.parse(b.online_shop_verified_at)-Date.parse(a.online_shop_verified_at))[0] || null;
 }
 
@@ -149,7 +150,9 @@ function hobbySearchFields(markup) {
     .find(m=>/商品説明|商品仕様|この商品をチェック|関連商品|おすすめ商品|人気ランキング|ユーザーレビュー/.test(plain(m[1])));
   const panel=plain(after.slice(0,Math.min(boundary?.index??after.length,35000))).normalize('NFKC')
     .split(/商品説明|商品仕様|この商品をチェック|関連商品|おすすめ商品|人気ランキング|ユーザーレビュー/)[0];
-  const date='(\\d{4})\\s*(?:年|/)\\s*(\\d{1,2})\\s*(?:月|/)\\s*(\\d{1,2})(?!\\d)\\s*日?(?:\\s*\\([月火水木金土日](?:曜(?:日)?)?\\))?(?:\\s*(\\d{1,2})(?::(\\d{2})|時(?:\\s*(\\d{1,2})分)?))?';
+  // Explicit labels only: never interpret the product release/shipping date as an application deadline.
+  const date='(\\d{4})\\s*(?:年|[/.])\\s*(\\d{1,2})\\s*(?:月|[/.])\\s*(\\d{1,2})(?!\\d)\\s*日?(?:\\s*\\([月火水木金土日](?:曜(?:日)?)?\\))?(?:\\s*(\\d{1,2})(?::(\\d{2})(?!\\d)|時(?:\\s*(\\d{1,2})分)?))?';
+  const shortDate='(\\d{1,2})\\s*(?:月|[/.])\\s*(\\d{1,2})(?!\\d)\\s*日?(?:\\s*\\([月火水木金土日](?:曜(?:日)?)?\\))?(?:\\s*(\\d{1,2})(?::(\\d{2})(?!\\d)|時(?:\\s*(\\d{1,2})分)?))?';
   function stamp(m){
     const [y,mo,d,h,min]=[m[1],m[2],m[3],m[4]||0,m[5]||m[6]||0].map(Number);
     const dt=new Date(Date.UTC(y,mo-1,d,h,min));
@@ -157,20 +160,54 @@ function hobbySearchFields(markup) {
     const pad=n=>String(n).padStart(2,'0');
     return y+'-'+pad(mo)+'-'+pad(d)+(m[4]!==undefined?'T'+pad(h)+':'+pad(min)+':00+09:00':'');
   }
-  const read=label=>unique([...panel.matchAll(new RegExp('(?:'+label+')\\s*[:：。]?\\s*'+date,'g'))].map(stamp));
-  let start=read('抽選(?:お)?申[し]?込[み]?(?:受付)?は下記日時に開始します|抽選(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?開始(?:日時|日|時間)?');
-  let end=read('抽選(?:お)?申[し]?込[み]?(?:受付)?は下記日時(?:まで(?:です)?|に終了します)|抽選(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?(?:締[め]?切[り]?|終了)(?:日時|日|時間)?|(?:応募|申[し]?込[み]?)締[め]?切[り]?(?:日時|日|時間)?');
-  const periods=[...panel.matchAll(new RegExp('抽選(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?期間\\s*[:：]?\\s*'+date+'\\s*(?:[~〜～]|から|–|—)\\s*'+date,'g'))];
-  if(periods.length===1){
-    start||=stamp(periods[0].slice(0,7));end||=stamp([periods[0][0],...periods[0].slice(7,13)]);
+  const prefix='(?:抽選(?:販売)?\\s*(?:応募|(?:お)?申[し]?込[み]?)?(?:受付)?|(?:応募|(?:お)?申[し]?込[み]?)(?:受付)?)';
+  const sep='\\s*[:：。]?\\s*';
+  const read=label=>unique([...panel.matchAll(new RegExp('(?:'+label+')'+sep+date+'(?!\\s*[:：]\\d|\\s*\\d)','g'))].map(stamp));
+  function readPeriod(label){
+    const ranges=[];
+    for(const m of panel.matchAll(new RegExp('(?:'+label+')'+sep+date+'\\s*(?:[~〜～–—]|から)\\s*'+date,'g'))){
+      ranges.push([stamp(m.slice(0,7)),stamp([m[0],...m.slice(7,13)])]);
+    }
+    if(!ranges.length){
+      for(const m of panel.matchAll(new RegExp('(?:'+label+')'+sep+date+'\\s*(?:[~〜～–—]|から)\\s*'+shortDate,'g'))){
+        const a=stamp(m.slice(0,7));
+        if(!a)continue;
+        let b=stamp([m[0],m[1],...m.slice(7,12)]);
+        if(b&&b<a)b=stamp([m[0],Number(m[1])+1,...m.slice(7,12)]);
+        if(b&&Date.parse(b)-Date.parse(a)<=180*86400000)ranges.push([a,b]);
+      }
+    }
+    const distinct=[...new Set(ranges.filter(r=>r[0]&&r[1]&&r[0]<=r[1]&&Date.parse(r[1])-Date.parse(r[0])<=180*86400000).map(JSON.stringify))];
+    return distinct.length===1?JSON.parse(distinct[0]):[];
+  }
+  const periodLabel=prefix+'(?:期間|受付期間)';
+  const period=readPeriod(periodLabel);
+  let start=read(prefix+'(?:は下記日時に開始します|開始(?:日時|日|時間)?)')||period[0];
+  let end=read(prefix+'(?:は下記日時(?:まで(?:です)?|に終了します)|(?:締[め]?切[り]?|終了)(?:日時|日|時間)?)')||period[1];
+  // On an open product page the deadline can be printed as "抽選申し込み受付期間：...まで".
+  if(!end){
+    end=unique([...panel.matchAll(new RegExp(periodLabel+sep+date+'\\s*まで','g'))].map(stamp));
+  }
+  // A scheduled "から"/"開始" is not a deadline.
+  if(!start){
+    start=unique([...panel.matchAll(new RegExp(periodLabel+sep+date+'\\s*(?:から|開始)(?!\\s*\\d)','g'))].map(stamp));
   }
   if((start&&end&&start>=end)||(!start&&!end))return {};
   const store='ホビーサーチ';
   const fields={event_title:title,product_name:product,store_name:store,prefecture:'全国',stores:[{name:store,prefecture:'全国'}],review_category};
   if(start)fields.application_start_at=start;
   if(end)fields.application_end_at=end;
-  const result=read('(?:抽選結果発表|当選発表)(?:日時|日|時間)?');
-  if(result){fields.result_announcement_date=result.slice(0,10);if(result.length>10)fields.result_announcement_time=result.slice(11,16);}
+  const resultLabel='(?:抽選結果発表|当選発表|当選通知)(?:日時|日|時間|期間)?';
+  const result=readPeriod(resultLabel)[1]||read(resultLabel);
+  if(result&&(!end||result.slice(0,10)>=end.slice(0,10))){
+    fields.result_announcement_date=result.slice(0,10);if(result.length>10)fields.result_announcement_time=result.slice(11,16);
+  }
+  const purchase=readPeriod('(?:当選者(?:向け|の)?(?:購入|注文手続き|受取[り]?)(?:期間|受付期間)|購入期間|注文手続き期間)');
+  if(purchase.length&&(!end||purchase[0].slice(0,10)>=end.slice(0,10))){
+    fields.purchase_start_date=purchase[0].slice(0,10);fields.purchase_end_date=purchase[1].slice(0,10);
+    if(purchase[0].length>10)fields.purchase_start_time=purchase[0].slice(11,16);
+    if(purchase[1].length>10)fields.purchase_end_time=purchase[1].slice(11,16);
+  }
   const pack=/拡張パック|ブースター?パック/.test(product),deck=/デッキ|スターターセット/.test(product);
   if(pack||deck)fields.product_type=pack&&deck?'pack/deck':pack?'pack':'deck';
   return fields;
