@@ -141,3 +141,25 @@ assert.equal(extract(winnerSchedule,hobby).purchase_end_date,'2026-12-03');
 assert.equal(extract(winnerSchedule,hobby).purchase_end_time,'23:59');
 assert.equal(collectedOnlineShop({items:[{...hc.items[0],application_end_at:null}]},hobby).application_start_at,'2026-11-27T17:00:00+09:00');
 console.log('Hobby Search active-period labels, partial cached data and winner schedules passed');
+
+
+// Actual user-confirmed Hobby Search page layout: year and time are absent.
+const screenPage='<link rel="canonical" href="'+hobby+'"><h1>'+hobbyTitle+'</h1>'+
+ '<div>抽選販売</div><p>販売価格 ￥5,412</p><p>抽選申し込み受付中</p>'+
+ '<p>応募するには、ログインしてください。</p><p>こちらの抽選には参加条件がございます。</p>'+
+ '<p>応募受付：11月29日まで</p><p>発売日：2025年8月上旬</p><h2>商品説明</h2>';
+const ref={referenceDate:'2026-11-28'};
+assert.equal(extract(screenPage,hobby,ref).application_end_at,'2026-11-29');
+assert.equal(extract(screenPage,hobby,ref).application_start_at,undefined);
+assert.equal(extract(screenPage.replace(hobbyTitle,hobbyTitle.replace('〖抽選販売〗 ','')),hobby,ref).application_end_at,'2026-11-29');
+assert.deepEqual(extract(screenPage.replace('11月29日まで','11月31日まで'),hobby,ref),{});
+assert.deepEqual(extract(screenPage.replace('抽選申し込み受付中','抽選受付終了'),hobby,ref),{});
+assert.deepEqual(extract(screenPage.replace('応募受付：11月29日まで','応募受付：11月25日まで'),hobby,ref),{});
+assert.equal(extract(screenPage.replace('11月29日まで','1月2日まで'),hobby,{referenceDate:'2026-12-30'}).application_end_at,'2027-01-02');
+assert.equal(extract(screenPage.replace('11月29日まで','2026年11月29日まで'),hobby,ref).application_end_at,'2026-11-29');
+const screenRow={...hc.items[0],application_end_at:null};
+assert(applyShopPage(screenRow,screenPage,new Date('2026-11-28T00:00:00+09:00')));
+assert.equal(screenRow.application_start_at,'2026-11-27T17:00:00+09:00');
+assert.equal(screenRow.application_end_at,'2026-11-29');
+assert.equal(shopCandidates({items:[screenRow]},HOBBY_SEARCH_HOST,new Date('2026-11-29T23:59:00+09:00')).length,1);
+console.log('Hobby Search real screen date-only deadlines, year rollover and local-day expiry passed');
