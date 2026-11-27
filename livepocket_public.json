@@ -16359,30 +16359,28 @@
     },
     {
       "url": "https://livepocket.jp/e/du9cy",
-      "discord_posted_at": "2026-11-27T02:30:05.853000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/du9cy",
+      "store_name": "カードショップ オリオンベース",
+      "prefecture": "東京都",
       "event_title": "ポケモンカードゲームMEGA拡張パック『ハドウシーカー』抽選販売受付",
       "application_end_at": "2026-11-29T21:00:00+09:00",
-      "review_category": "pokemon",
+      "discord_posted_at": "2026-11-27T02:30:05.853000+00:00",
       "stores": [
         {
           "name": "カードショップ オリオンベース",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "カードショップ オリオンベース",
-      "prefecture": "東京都",
-      "pokemon_map_match": "ハドウシーカー",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲームMEGA拡張パック『ハドウシーカー』抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/du9cy",
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-04",
       "purchase_end_date": "2026-12-06",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ハドウシーカー",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-27T02:31:02.840409+00:00"
     }
   ],
-  "updated_at": "2026-11-27T02:31:27.032516+00:00"
+  "updated_at": "2026-11-27T02:41:12.258271+00:00"
 }
