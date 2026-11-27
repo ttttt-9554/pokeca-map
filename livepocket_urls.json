@@ -32167,7 +32167,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/nivw9": {
-          "checked_at": "2026-11-27T07:06:18.170213+00:00",
+          "checked_at": "2026-11-27T13:11:51.038509+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -35415,7 +35415,7 @@
         "https://livepocket.jp/e/nivw9": {
           "detected_at": "2026-11-27T01:01:04.961244+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-27T07:06:18.170213+00:00",
+          "checked_at": "2026-11-27T13:11:51.038509+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/my-3o_thzv": {
@@ -37849,8 +37849,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/nivw9": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-27T07:06:18.170213+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-27T13:11:51.038509+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/du9cy": {
@@ -46001,7 +46001,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-27T07:06:18.170213+00:00",
+          "checked_at": "2026-11-27T13:11:51.038509+00:00",
           "title_observed": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -53866,7 +53866,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/nivw9": {
-          "checked_at": "2026-11-27T07:06:18.170213+00:00",
+          "checked_at": "2026-11-27T13:11:51.038509+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
