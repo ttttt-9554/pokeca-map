@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-27T14:30:57.419703+00:00",
+  "collected_at": "2026-11-27T15:00:55.865141+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
@@ -27778,10 +27778,10 @@
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1575881414325305575"
+      "1551580466266644552": "1575888988516913368"
     },
     "last_run": {
-      "checked_at": "2026-11-27T14:30:57.419703+00:00",
+      "checked_at": "2026-11-27T15:00:55.865141+00:00",
       "new_urls": 0,
       "original_urls": 896,
       "suspect_legacy_store_names": 0,
@@ -32177,7 +32177,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/du9cy": {
-          "checked_at": "2026-11-27T08:51:22.864970+00:00",
+          "checked_at": "2026-11-27T15:01:20.345016+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -35427,7 +35427,7 @@
         "https://livepocket.jp/e/du9cy": {
           "detected_at": "2026-11-27T02:31:02.840409+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-27T08:51:22.864970+00:00",
+          "checked_at": "2026-11-27T15:01:20.345016+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/j6os9zy3zn": {
@@ -37854,8 +37854,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/du9cy": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-27T08:51:22.864970+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-27T15:01:20.345016+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/9w31_1beif": {
@@ -46023,7 +46023,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-27T08:51:22.864970+00:00",
+          "checked_at": "2026-11-27T15:01:20.345016+00:00",
           "title_observed": "ポケモンカードゲームMEGA拡張パック『ハドウシーカー』抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -53892,7 +53892,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/du9cy": {
-          "checked_at": "2026-11-27T08:51:22.864970+00:00",
+          "checked_at": "2026-11-27T15:01:20.345016+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
