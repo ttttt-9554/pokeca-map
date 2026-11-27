@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-27T03:00:55.910405+00:00",
-  "unique_livepocket_urls": 895,
+  "collected_at": "2026-11-27T03:30:58.193759+00:00",
+  "unique_livepocket_urls": 896,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16431,7 +16431,20 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
       "first_detected_at": "2026-11-27T03:01:01.281550+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/9w31_1beif",
+      "discord_posted_at": "2026-11-27T03:30:05.528000+00:00",
+      "store_location_source": "livepocket_page_required",
+      "store_location_url": "https://livepocket.jp/e/9w31_1beif",
+      "event_title": "【イトーヨーカドー】ワンピースカード スタートデッキ【ST-37】【ST-38】/ ブースターパック【OP-16】【OP-17】【EB-05】抽選販売",
+      "application_end_at": "2026-11-29T23:59:00+09:00",
+      "application_start_at": "2026-11-18T13:25:00+09:00",
+      "review_category": "onepiece",
+      "official_genre": "onepiece",
+      "official_event_title": "【イトーヨーカドー】ワンピースカード スタートデッキ【ST-37】【ST-38】/ ブースターパック【OP-16】【OP-17】【EB-05】抽選販売",
+      "first_detected_at": "2026-11-27T03:31:02.909299+00:00"
     }
   ],
-  "updated_at": "2026-11-27T03:21:00.392598+00:00"
+  "updated_at": "2026-11-27T03:31:33.048934+00:00"
 }

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source": "v21_97_manual_review_queue",
-  "as_of": "2026-11-27T03:21:05Z",
-  "total": 3,
+  "as_of": "2026-11-27T03:31:46Z",
+  "total": 4,
   "items": [
     {
       "url": "https://livepocket.jp/e/2a9e4",
@@ -51,6 +51,21 @@
       "last_checked_at": "2026-11-06T14:01:22.617488+00:00",
       "next_retry_at": "2026-11-23T11:31:17.925989+00:00",
       "queue": "ready"
+    },
+    {
+      "url": "https://livepocket.jp/e/9w31_1beif",
+      "event_title": "【イトーヨーカドー】ワンピースカード スタートデッキ【ST-37】【ST-38】/ ブースターパック【OP-16】【OP-17】【EB-05】抽選販売",
+      "store_name": "",
+      "prefecture": "",
+      "application_end_at": "2026-11-29T23:59:00+09:00",
+      "missing": [
+        "store"
+      ],
+      "last_check_status": "ok",
+      "last_http_status": null,
+      "last_checked_at": "2026-11-27T03:31:33.048934+00:00",
+      "next_retry_at": "2026-11-28T03:31:33.048934+00:00",
+      "queue": "retry_wait"
     }
   ]
 }
