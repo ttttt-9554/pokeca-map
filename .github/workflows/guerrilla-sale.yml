@@ -29,15 +29,7 @@ name: Guerrilla Sale Status Monitor
       - 'sw.js'
       - 'onsite_comment_alert_v21_55.js'
       - '.github/workflows/guerrilla-sale.yml'
-  schedule:
-    # Schedule delivery is best-effort, not an exact five-minute SLA.
-    - cron: '3,8,13,18,23,28,33,38,43,48,53,58 * * * *'
-  # The existing collector is also dispatched by the project's external
-  # scheduler. This provides a fallback if GitHub delays scheduled runs.
-  workflow_run:
-    workflows: ['LivePocket Discord URL Collector']
-    types: [completed]
-    branches: [main]
+  # Automatic retailer monitoring is paused. Pushes still run offline tests.
 
 permissions:
   contents: read
@@ -71,7 +63,7 @@ jobs:
           node --check onsite_comment_alert_v21_55.js
 
       - name: Read-only retailer smoke probe
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: ${{ false }} # Paused: no retailer probes, even on manual dispatch.
         env:
           # Never retry a 403 on push. Only explicit manual opt-in can
           # request the two approved diagnostic item URLs.
@@ -80,7 +72,7 @@ jobs:
         run: python scripts/guerrilla_sale_probe.py
 
   monitor:
-    if: github.event_name != 'push'
+    if: ${{ false }} # Paused: re-enable only on an explicit restart.
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 10
