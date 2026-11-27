@@ -16264,13 +16264,13 @@
     },
     {
       "url": "https://livepocket.jp/e/my-3o_thzv",
-      "discord_posted_at": "2026-11-27T02:00:04.403000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/my-3o_thzv",
+      "store_name": "イトーヨーカドー武蔵境店",
+      "prefecture": "",
+      "product_name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー",
       "event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー",
-      "application_end_at": "2026-11-29T23:59:00+09:00",
       "application_start_at": "2026-11-18T14:31:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-29T23:59:00+09:00",
+      "discord_posted_at": "2026-11-27T02:00:04.403000+00:00",
       "stores": [
         {
           "name": "イトーヨーカドー武蔵境店",
@@ -16349,19 +16349,14 @@
           "prefecture": "千葉県"
         }
       ],
-      "store_name": "イトーヨーカドー武蔵境店",
-      "prefecture": "",
-      "product_name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/my-3o_thzv",
+      "review_category": "pokemon",
       "pokemon_map_match": "ニンジャスピナー",
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "product_name",
-      "official_genre": "pokemon",
-      "official_event_title": "【イトーヨーカドー】ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー",
-      "first_detected_at": "2026-11-27T02:00:57.669764+00:00",
-      "field_sources": {
-        "stores_prefectures": "store_master_unique_exact_name_v21_146"
-      }
+      "first_detected_at": "2026-11-27T02:00:57.669764+00:00"
     }
   ],
-  "updated_at": "2026-11-27T02:01:24.557853+00:00"
+  "updated_at": "2026-11-27T02:11:02.929825+00:00"
 }
