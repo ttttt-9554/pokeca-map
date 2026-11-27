@@ -1,23 +1,29 @@
 import {supportedUrl,extract,lotteryPageRequest,CUSTOMFORM_HOST,GEO_HOST} from './extract.mjs';
 import {googleFormUrl,GoogleFormAccessError} from './google-forms.mjs';
 import {readGoogleLottery} from './google-form-notices.mjs';
-import {DMM_HOST,BANDAI_HOST,collectedOnlineShop,onlineShopUrl} from './online-shop-lottery.mjs';
+import {DMM_HOST,BANDAI_HOST,HOBBY_SEARCH_HOST,collectedOnlineShop,onlineShopUrl} from './online-shop-lottery.mjs';
 import {storeNoticeUrl,fetchStoreNotice} from './store-notices.mjs';
 const admin='0ba965da-445b-4055-8d8d-ead585fa0d09';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'no-store','Content-Type':'application/json; charset=utf-8'};
 function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:cors});}
 
-async function collectedBrowserPage(url:string,onlineShop=false) {
+async function readPublicCatalog(){
  const response=await fetch('https://ttttt-9554.github.io/pokeca-map/other_lottery_public.json?t='+Date.now(),
   {cache:'no-store',signal:AbortSignal.timeout(6000)});
  if(!response.ok)throw Error('catalog unavailable');
- const catalog=await response.json();
+ return await response.json();
+}
+function shopBackoff(catalog:any,url:string){
+ return Array.isArray(catalog?.items)&&catalog.items.some((row:{url?:string,online_shop_retry_after?:string})=>
+  onlineShopUrl(row?.url)?.hostname===onlineShopUrl(url)?.hostname&&Date.parse(row.online_shop_retry_after||'')>Date.now());
+}
+async function collectedBrowserPage(url:string,onlineShop=false,preloaded?:any,sourceBlocked=false) {
+ const catalog=preloaded??await readPublicCatalog();
  const item=onlineShop?collectedOnlineShop(catalog,url):Array.isArray(catalog?.items)?catalog.items.find((row:{url?:string})=>row?.url===url):null;
  const verified=onlineShop?item?.online_shop_verified_at:item?.customform_verified_at;
  if(!verified||item.external_url_unverified!==false){
   if(onlineShop){
-   const blocked=Array.isArray(catalog?.items)&&catalog.items.some((row:{online_shop_source_url?:string,url?:string,online_shop_retry_after?:string})=>
-    onlineShopUrl(row?.url)?.hostname===onlineShopUrl(url)?.hostname&&Date.parse(row.online_shop_retry_after||'')>Date.now());
+   const blocked=sourceBlocked||shopBackoff(catalog,url);
    return json({error:blocked?'取得先が定期収集サーバーからのアクセスを拒否しているため、現在は自動取得できません。元ページを開いて確認してください。':'ブラウザーによる自動収集を待っています。収集後にもう一度お試しください。'},422);
   }
   const blocked=Array.isArray(catalog?.items)&&catalog.items.some((row:{customform_last_error?:string,customform_retry_after?:string})=>
@@ -37,7 +43,7 @@ async function collectedBrowserPage(url:string,onlineShop=false) {
  if(typeof item.pokemon_map_type==='string')fields.product_type=item.pokemon_map_type;
  const collected=new Date(verified).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
  const method=onlineShop?'元ページで確認済みの保存情報です':'ブラウザーで自動収集した情報です';
- const warning=onlineShop&&item.online_shop_last_error?'現在は収集元へのアクセスに制限があるため、前回確認した情報を表示しています。':'';
+ const warning=onlineShop&&(sourceBlocked||shopBackoff(catalog,url)||item.online_shop_last_error)?'最新情報の取得ができないため、前回確認した情報を表示しています。締切などの変更は元ページをご確認ください。':'';
  return json({fields,message:method+'（確認日時：'+collected+'、日本時間）。'+warning+'候補を確認してください。'});
 }
 
@@ -75,10 +81,21 @@ Deno.serve(async(req:Request)=>{
   }
   const {url:source,headers}=lotteryPageRequest(input.url),host=source.hostname;
   if(host===CUSTOMFORM_HOST||host===BANDAI_HOST)return await collectedBrowserPage(input.url,host===BANDAI_HOST);
+  let cachedCatalog;
+  if(host===HOBBY_SEARCH_HOST){
+   // Honor the existing collector's access-denial backoff; never retry through another route.
+   try{cachedCatalog=await readPublicCatalog();}catch{}
+   if(shopBackoff(cachedCatalog,input.url))return await collectedBrowserPage(input.url,true,cachedCatalog,true);
+  }
   const response=await fetch(source,{redirect:'manual',headers,signal:AbortSignal.timeout(14000)});
+  if(host===HOBBY_SEARCH_HOST&&[401,403,429].includes(response.status)){
+   await response.body?.cancel();
+   return await collectedBrowserPage(input.url,true,cachedCatalog,true);
+  }
   if(response.status>=300&&response.status<400){
    await response.body?.cancel();
    if(host===DMM_HOST)return await collectedBrowserPage(input.url,true);
+   if(host===HOBBY_SEARCH_HOST)return await collectedBrowserPage(input.url,true,cachedCatalog,true);
    return json({error:'別ページへの転送があるため、自動取得できませんでした。'},422);
   }
   if(host===GEO_HOST&&[403,429].includes(response.status))
