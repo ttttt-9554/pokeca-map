@@ -122,3 +122,22 @@ assert(applyShopPage(hc.items[0],deadline,new Date('2026-11-27T08:05:00Z')));
 assert.equal(hc.items[0].application_start_at,'2026-11-27T17:00:00+09:00');
 assert.equal(hc.items[0].application_end_at,'2026-11-29T23:59:00+09:00');
 console.log('Hobby Search scheduled/partial lotteries and refresh regressions passed');
+
+
+// After applications open, the page may show only the end or use short dates.
+// The collector keeps the existing verified start for that round.
+const activeHobby = text=>hobbyPage.replace(
+  '<p>抽選申し込みは下記日時に開始します。</p><p>2026/11/27 17:00</p>',
+  '<p>'+text+'</p><button>抽選に応募する</button>');
+const activeEnd=activeHobby('抽選お申し込み受付期間：2026/11/29 23:59まで');
+assert.equal(extract(activeEnd,hobby).application_end_at,'2026-11-29T23:59:00+09:00');
+assert.equal(extract(activeEnd,hobby).application_start_at,undefined);
+const shortPeriod=activeHobby('抽選申し込み受付期間：2026年11月27日(金)17時～11月29日(日)23時59分');
+assert.equal(extract(shortPeriod,hobby).application_start_at,'2026-11-27T17:00:00+09:00');
+assert.equal(extract(shortPeriod,hobby).application_end_at,'2026-11-29T23:59:00+09:00');
+const winnerSchedule=activeHobby('抽選受付終了日時：2026/11/29 23:59</p><p>当選発表：2026/12/1～2026/12/2</p><p>当選者購入期間：2026/12/1 12:00～2026/12/3 23:59');
+assert.equal(extract(winnerSchedule,hobby).result_announcement_date,'2026-12-02');
+assert.equal(extract(winnerSchedule,hobby).purchase_end_date,'2026-12-03');
+assert.equal(extract(winnerSchedule,hobby).purchase_end_time,'23:59');
+assert.equal(collectedOnlineShop({items:[{...hc.items[0],application_end_at:null}]},hobby).application_start_at,'2026-11-27T17:00:00+09:00');
+console.log('Hobby Search active-period labels, partial cached data and winner schedules passed');
