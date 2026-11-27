@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-26T23:36:02.380998+00:00",
+  "collected_at": "2026-11-27T01:00:55.074484+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 891,
+  "unique_livepocket_urls": 892,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27496,33 +27496,69 @@
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-07"
+    },
+    {
+      "url": "https://livepocket.jp/e/nivw9",
+      "discord_message_id": "1575677568127074415",
+      "discord_posted_at": "2026-11-27T01:00:06.915000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍福島県\nトレカエース植田店\n受付終了: 11/29 21:00（残り2日10時間）\nhttps://livepocket.jp/e/nivw9",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/nivw9",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売受付",
+      "application_end_at": "2026-11-29T21:00:00+09:00",
+      "application_start_at": "2026-11-25T09:00:00+09:00",
+      "stores": [
+        {
+          "name": "トレカエース植田店",
+          "prefecture": "福島県"
+        }
+      ],
+      "store_name": "トレカエース植田店",
+      "prefecture": "福島県",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-04",
+      "purchase_end_date": "2026-12-06"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 707,
-    "no_structured_details": 184
+    "no_structured_details": 185
   },
   "field_counts": {
-    "store_name": 485,
-    "prefecture": 429,
-    "event_title": 588,
+    "store_name": 486,
+    "prefecture": 430,
+    "event_title": 589,
     "event_date": 1,
     "product_name": 140,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 853,
-    "application_start_at": 850,
-    "stores_events": 485
+    "application_end_at": 854,
+    "application_start_at": 851,
+    "stores_events": 486
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1575654906600357958"
+      "1551580466266644552": "1575677568127074415"
     },
     "last_run": {
-      "checked_at": "2026-11-26T23:36:02.380998+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-27T01:00:55.074484+00:00",
+      "new_urls": 1,
       "original_urls": 891,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -27900,7 +27936,8 @@
         "1574771593438302301": "2026-11-24T13:05:59.688935+00:00",
         "1574786695965188266": "2026-11-24T14:05:57.403972+00:00",
         "1575028297002127430": "2026-11-25T06:01:05.650519+00:00",
-        "1575368018001662104": "2026-11-26T04:30:58.299115+00:00"
+        "1575368018001662104": "2026-11-26T04:30:58.299115+00:00",
+        "1575677568127074415": "2026-11-27T01:01:02.771848+00:00"
       },
       "checked_search_urls": {}
     },
@@ -31900,6 +31937,11 @@
           "checked_at": "2026-11-26T16:46:52.552598+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
+        },
+        "https://livepocket.jp/e/nivw9": {
+          "checked_at": "2026-11-27T01:01:34.671993+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -35120,6 +35162,12 @@
           "detected_at": "2026-11-26T04:30:59.346302+00:00",
           "status": "checked_retry_no_new_details",
           "checked_at": "2026-11-26T16:46:52.552598+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/nivw9": {
+          "detected_at": "2026-11-27T01:01:04.961244+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-27T01:01:34.671993+00:00",
           "http_status": null
         }
       },
@@ -45661,6 +45709,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/nivw9": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-27T01:01:34.671993+00:00",
+          "title_observed": "ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ抽選販売受付",
+          "genre": "pokemon",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -53464,6 +53523,19 @@
         },
         "https://livepocket.jp/e/8d87t": {
           "checked_at": "2026-11-26T16:46:52.552598+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/nivw9": {
+          "checked_at": "2026-11-27T01:01:34.671993+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
