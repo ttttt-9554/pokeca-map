@@ -32514,7 +32514,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/kktot": {
-          "checked_at": "2026-11-28T08:41:25.055321+00:00",
+          "checked_at": "2026-11-28T14:51:26.681073+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -35812,7 +35812,7 @@
         "https://livepocket.jp/e/kktot": {
           "detected_at": "2026-11-28T02:30:58.299001+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-28T08:41:25.055321+00:00",
+          "checked_at": "2026-11-28T14:51:26.681073+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/777p3": {
@@ -38274,8 +38274,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/kktot": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-28T08:41:25.055321+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-28T14:51:26.681073+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/777p3": {
@@ -46536,7 +46536,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-28T08:41:25.055321+00:00",
+          "checked_at": "2026-11-28T14:51:26.681073+00:00",
           "title_observed": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
           "genre": "pokemon",
           "product_origin": "",
@@ -54509,7 +54509,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/kktot": {
-          "checked_at": "2026-11-28T08:41:25.055321+00:00",
+          "checked_at": "2026-11-28T14:51:26.681073+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
