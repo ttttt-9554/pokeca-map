@@ -32489,13 +32489,13 @@
           "http_status": null
         },
         "https://livepocket.jp/e/lkpvo": {
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/5ostk": {
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
-          "status": "checked_title_deadline",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
+          "status": "checked_retry_no_new_details",
           "http_status": null
         },
         "https://livepocket.jp/e/xsc_d": {
@@ -35781,14 +35781,14 @@
         },
         "https://livepocket.jp/e/5ostk": {
           "detected_at": "2026-11-28T01:01:02.603659+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/lkpvo": {
           "detected_at": "2026-11-28T01:01:02.603659+00:00",
-          "status": "checked_title_deadline",
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "status": "checked_retry_no_new_details",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/xsc_d": {
@@ -38246,6 +38246,16 @@
         "https://livepocket.jp/e/9w31_1beif": {
           "attempts": 2,
           "last_attempt_at": "2026-11-27T15:51:23.829705+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/lkpvo": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-28T07:11:26.394326+00:00",
+          "last_status": "checked_retry_no_new_details"
+        },
+        "https://livepocket.jp/e/5ostk": {
+          "attempts": 1,
+          "last_attempt_at": "2026-11-28T07:11:26.394326+00:00",
           "last_status": "checked_retry_no_new_details"
         }
       }
@@ -46441,7 +46451,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
           "title_observed": "ワンピースカード ブースターパック『神の支配』再入荷 抽選販売受付",
           "genre": "onepiece",
           "product_origin": "",
@@ -46452,7 +46462,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
           "title_observed": "「30th CELEBRATION」抽選販売受付",
           "genre": "",
           "product_origin": "",
@@ -54404,7 +54414,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/lkpvo": {
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
@@ -54417,7 +54427,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/5ostk": {
-          "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "checked_at": "2026-11-28T07:11:26.394326+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
