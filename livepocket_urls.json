@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-28T03:00:55.584557+00:00",
+  "collected_at": "2026-11-28T03:40:55.279395+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 902,
+  "unique_livepocket_urls": 903,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27975,33 +27975,68 @@
       "purchase_start_time": "10:30",
       "purchase_end_date": "2026-12-06",
       "purchase_end_time": "21:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/777p3",
+      "discord_message_id": "1576079698654658560",
+      "discord_posted_at": "2026-11-28T03:38:02.304000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "https://livepocket.jp/e/777p3",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/777p3",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "30thセレブレーション 1BOX",
+      "application_end_at": "2026-11-29T23:00:00+09:00",
+      "application_start_at": "2026-11-27T13:10:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
+      "purchase_start_date": "2026-12-26",
+      "purchase_end_date": "2026-12-27"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 715,
-    "no_structured_details": 187
+    "no_structured_details": 188
   },
   "field_counts": {
-    "store_name": 495,
-    "prefecture": 437,
-    "event_title": 599,
+    "store_name": 496,
+    "prefecture": 438,
+    "event_title": 600,
     "event_date": 1,
     "product_name": 142,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 864,
-    "application_start_at": 860,
-    "stores_events": 495
+    "application_end_at": 865,
+    "application_start_at": 861,
+    "stores_events": 496
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1576070164401750099"
+      "1551580466266644552": "1576079698654658560"
     },
     "last_run": {
-      "checked_at": "2026-11-28T03:00:55.584557+00:00",
-      "new_urls": 0,
+      "checked_at": "2026-11-28T03:40:55.279395+00:00",
+      "new_urls": 1,
       "original_urls": 902,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
@@ -28389,7 +28424,8 @@
         "1576047514786861219": "2026-11-28T01:40:55.425510+00:00",
         "1576054089115242639": "2026-11-28T02:01:05.809867+00:00",
         "1576053778879217805": "2026-11-28T02:01:05.809867+00:00",
-        "1576062592177152141": "2026-11-28T02:30:57.381334+00:00"
+        "1576062592177152141": "2026-11-28T02:30:57.381334+00:00",
+        "1576079698654658560": "2026-11-28T03:40:58.379827+00:00"
       },
       "checked_search_urls": {}
     },
@@ -32444,6 +32480,11 @@
           "checked_at": "2026-11-28T02:31:23.902962+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/777p3": {
+          "checked_at": "2026-11-28T03:41:25.802575+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -35730,6 +35771,12 @@
           "detected_at": "2026-11-28T02:30:58.299001+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-28T02:31:23.902962+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/777p3": {
+          "detected_at": "2026-11-28T03:40:59.646049+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-28T03:41:25.802575+00:00",
           "http_status": null
         }
       },
@@ -46407,6 +46454,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/777p3": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-28T03:41:25.802575+00:00",
+          "title_observed": "30thセレブレーション 1BOX",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -54353,6 +54411,19 @@
         },
         "https://livepocket.jp/e/kktot": {
           "checked_at": "2026-11-28T02:31:23.902962+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/777p3": {
+          "checked_at": "2026-11-28T03:41:25.802575+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

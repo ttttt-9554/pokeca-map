@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-28T03:00:55.584557+00:00",
-  "unique_livepocket_urls": 902,
+  "collected_at": "2026-11-28T03:40:55.279395+00:00",
+  "unique_livepocket_urls": 903,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16586,7 +16586,28 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-28T02:30:58.299001+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/777p3",
+      "discord_posted_at": "2026-11-28T03:38:02.304000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/777p3",
+      "event_title": "30thセレブレーション 1BOX",
+      "application_end_at": "2026-11-29T23:00:00+09:00",
+      "application_start_at": "2026-11-27T13:10:00+09:00",
+      "stores": [
+        {
+          "name": "TSUTAYA佐野店",
+          "prefecture": "栃木県"
+        }
+      ],
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
+      "official_event_title": "30thセレブレーション 1BOX",
+      "purchase_start_date": "2026-12-26",
+      "purchase_end_date": "2026-12-27",
+      "first_detected_at": "2026-11-28T03:40:59.646049+00:00"
     }
   ],
-  "updated_at": "2026-11-28T03:31:05.770338+00:00"
+  "updated_at": "2026-11-28T03:41:25.802575+00:00"
 }
