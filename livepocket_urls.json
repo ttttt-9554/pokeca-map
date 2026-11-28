@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-28T01:00:55.013060+00:00",
+  "collected_at": "2026-11-28T01:40:54.299668+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 898,
+  "unique_livepocket_urls": 899,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -27829,34 +27829,70 @@
       "result_announcement_date": "2026-12-02",
       "purchase_start_date": "2026-12-05",
       "purchase_end_date": "2026-12-06"
+    },
+    {
+      "url": "https://livepocket.jp/e/xsc_d",
+      "discord_message_id": "1576047514786861219",
+      "discord_posted_at": "2026-11-28T01:30:09.072000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場深谷店\n受付終了: 11/29 22:00（残り1日11時間）\nhttps://livepocket.jp/e/xsc_d",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/xsc_d",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
+      "application_end_at": "2026-11-29T22:00:00+09:00",
+      "application_start_at": "2026-11-27T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-04",
+      "purchase_end_date": "2026-12-06"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 711,
-    "no_structured_details": 187
+    "no_structured_details": 188
   },
   "field_counts": {
-    "store_name": 491,
-    "prefecture": 433,
-    "event_title": 595,
+    "store_name": 492,
+    "prefecture": 434,
+    "event_title": 596,
     "event_date": 1,
     "product_name": 142,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 860,
-    "application_start_at": 856,
-    "stores_events": 491
+    "application_end_at": 861,
+    "application_start_at": 857,
+    "stores_events": 492
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1576039958672707796"
+      "1551580466266644552": "1576047514786861219"
     },
     "last_run": {
-      "checked_at": "2026-11-28T01:00:55.013060+00:00",
-      "new_urls": 2,
-      "original_urls": 896,
+      "checked_at": "2026-11-28T01:40:54.299668+00:00",
+      "new_urls": 1,
+      "original_urls": 898,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -28239,7 +28275,8 @@
         "1575700212914200716": "2026-11-27T02:31:01.407358+00:00",
         "1575707803287556197": "2026-11-27T03:00:59.763414+00:00",
         "1575715311045443767": "2026-11-27T03:31:01.468190+00:00",
-        "1576039958672707796": "2026-11-28T01:01:01.234330+00:00"
+        "1576039958672707796": "2026-11-28T01:01:01.234330+00:00",
+        "1576047514786861219": "2026-11-28T01:40:55.425510+00:00"
       },
       "checked_search_urls": {}
     },
@@ -32274,6 +32311,11 @@
           "checked_at": "2026-11-28T01:01:29.115101+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/xsc_d": {
+          "checked_at": "2026-11-28T01:41:18.186174+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -35536,6 +35578,12 @@
           "detected_at": "2026-11-28T01:01:02.603659+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/xsc_d": {
+          "detected_at": "2026-11-28T01:40:56.501263+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-28T01:41:18.186174+00:00",
           "http_status": null
         }
       },
@@ -46169,6 +46217,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/xsc_d": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-28T01:41:18.186174+00:00",
+          "title_observed": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
+          "genre": "",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -54063,6 +54122,19 @@
         },
         "https://livepocket.jp/e/5ostk": {
           "checked_at": "2026-11-28T01:01:29.115101+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/xsc_d": {
+          "checked_at": "2026-11-28T01:41:18.186174+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,

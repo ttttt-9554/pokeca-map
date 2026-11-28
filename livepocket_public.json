@@ -1,7 +1,7 @@
 {
   "schema_version": 21,
-  "collected_at": "2026-11-28T01:00:55.013060+00:00",
-  "unique_livepocket_urls": 898,
+  "collected_at": "2026-11-28T01:40:54.299668+00:00",
+  "unique_livepocket_urls": 899,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -16490,7 +16490,30 @@
       "pokemon_map_type": "pack",
       "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-28T01:01:02.603659+00:00"
+    },
+    {
+      "url": "https://livepocket.jp/e/xsc_d",
+      "discord_posted_at": "2026-11-28T01:30:09.072000+00:00",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/xsc_d",
+      "event_title": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
+      "application_end_at": "2026-11-29T22:00:00+09:00",
+      "application_start_at": "2026-11-27T10:00:00+09:00",
+      "review_category": "onepiece",
+      "stores": [
+        {
+          "name": "古本市場深谷店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
+      "official_event_title": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
+      "result_announcement_date": "2026-12-01",
+      "purchase_start_date": "2026-12-04",
+      "purchase_end_date": "2026-12-06",
+      "first_detected_at": "2026-11-28T01:40:56.501263+00:00"
     }
   ],
-  "updated_at": "2026-11-28T01:29:15.974799+00:00"
+  "updated_at": "2026-11-28T01:41:18.186174+00:00"
 }
