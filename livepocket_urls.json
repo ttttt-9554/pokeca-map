@@ -1,9 +1,9 @@
 {
-  "collected_at": "2026-11-28T03:40:55.279395+00:00",
+  "collected_at": "2026-11-28T05:30:53.787094+00:00",
   "mode": "incremental",
   "pages_scanned": 1,
   "messages_scanned": 100,
-  "unique_livepocket_urls": 903,
+  "unique_livepocket_urls": 904,
   "items": [
     {
       "url": "https://livepocket.jp/e/mm2c4",
@@ -28010,34 +28010,70 @@
       "prefecture": "栃木県",
       "purchase_start_date": "2026-12-26",
       "purchase_end_date": "2026-12-27"
+    },
+    {
+      "url": "https://livepocket.jp/e/y5_sz",
+      "discord_message_id": "1576107888718512309",
+      "discord_posted_at": "2026-11-28T05:30:03.339000+00:00",
+      "discord_channel_id": "1551580466266644552",
+      "post_excerpt": "🔗【LivePocket 30分まとめ】\n\n📍埼玉県\n古本市場戸田店\n受付終了: 11/30 22:00（残り2日7時間）\nhttps://livepocket.jp/e/y5_sz",
+      "details_source": null,
+      "product_name": null,
+      "application_period": null,
+      "sales_period": null,
+      "extraction_status": "no_structured_details",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/y5_sz",
+      "field_sources": {
+        "event_title": "v14_livepocket_page_title",
+        "application_end_at": "v14_livepocket_rendered_public_page",
+        "application_start_at": "v14_livepocket_rendered_public_page",
+        "store_name": "v19_livepocket_overview_venue",
+        "stores": "v19_livepocket_overview_venue",
+        "prefecture": "v19_livepocket_overview_venue"
+      },
+      "event_title": "【古本市場戸田店】ONE PIECEカードゲーム 神の支配【OP-18】",
+      "application_end_at": "2026-11-30T22:00:00+09:00",
+      "application_start_at": "2026-11-28T10:00:00+09:00",
+      "stores": [
+        {
+          "name": "古本市場戸田店",
+          "prefecture": "埼玉県"
+        }
+      ],
+      "store_name": "古本市場戸田店",
+      "prefecture": "埼玉県",
+      "result_announcement_date": "2026-12-02",
+      "purchase_start_date": "2026-12-05",
+      "purchase_end_date": "2026-12-07"
     }
   ],
   "enriched_at": "2026-10-16T08:51:41.920075+00:00",
   "enrichment_counts": {
     "parsed": 715,
-    "no_structured_details": 188
+    "no_structured_details": 189
   },
   "field_counts": {
-    "store_name": 496,
-    "prefecture": 438,
-    "event_title": 600,
+    "store_name": 497,
+    "prefecture": 439,
+    "event_title": 601,
     "event_date": 1,
     "product_name": 142,
     "application_period": 2,
     "sales_period": 0,
     "lottery_result_period": 1,
-    "application_end_at": 865,
-    "application_start_at": 861,
-    "stores_events": 496
+    "application_end_at": 866,
+    "application_start_at": 862,
+    "stores_events": 497
   },
   "collector_state": {
     "last_seen_message_ids": {
-      "1551580466266644552": "1576079698654658560"
+      "1551580466266644552": "1576107892086546503"
     },
     "last_run": {
-      "checked_at": "2026-11-28T03:40:55.279395+00:00",
+      "checked_at": "2026-11-28T05:30:53.787094+00:00",
       "new_urls": 1,
-      "original_urls": 902,
+      "original_urls": 903,
       "suspect_legacy_store_names": 0,
       "discord_url_pairs_added": 0,
       "discord_url_pairs_conflicts": 0,
@@ -28425,7 +28461,8 @@
         "1576054089115242639": "2026-11-28T02:01:05.809867+00:00",
         "1576053778879217805": "2026-11-28T02:01:05.809867+00:00",
         "1576062592177152141": "2026-11-28T02:30:57.381334+00:00",
-        "1576079698654658560": "2026-11-28T03:40:58.379827+00:00"
+        "1576079698654658560": "2026-11-28T03:40:58.379827+00:00",
+        "1576107888718512309": "2026-11-28T05:30:55.758690+00:00"
       },
       "checked_search_urls": {}
     },
@@ -32485,6 +32522,11 @@
           "checked_at": "2026-11-28T03:41:25.802575+00:00",
           "status": "checked_title_deadline",
           "http_status": null
+        },
+        "https://livepocket.jp/e/y5_sz": {
+          "checked_at": "2026-11-28T05:31:18.159066+00:00",
+          "status": "checked_title_deadline",
+          "http_status": null
         }
       }
     },
@@ -35777,6 +35819,12 @@
           "detected_at": "2026-11-28T03:40:59.646049+00:00",
           "status": "checked_title_deadline",
           "checked_at": "2026-11-28T03:41:25.802575+00:00",
+          "http_status": null
+        },
+        "https://livepocket.jp/e/y5_sz": {
+          "detected_at": "2026-11-28T05:30:56.953101+00:00",
+          "status": "checked_title_deadline",
+          "checked_at": "2026-11-28T05:31:18.159066+00:00",
           "http_status": null
         }
       },
@@ -46465,6 +46513,17 @@
           "product_origin": "",
           "title_origin": "v14_livepocket_page_title",
           "conflict": false
+        },
+        "https://livepocket.jp/e/y5_sz": {
+          "status": "ok",
+          "reason": "official_title_verified",
+          "http_status": "",
+          "checked_at": "2026-11-28T05:31:18.159066+00:00",
+          "title_observed": "【古本市場戸田店】ONE PIECEカードゲーム 神の支配【OP-18】",
+          "genre": "onepiece",
+          "product_origin": "",
+          "title_origin": "v14_livepocket_page_title",
+          "conflict": false
         }
       }
     },
@@ -54424,6 +54483,19 @@
         },
         "https://livepocket.jp/e/777p3": {
           "checked_at": "2026-11-28T03:41:25.802575+00:00",
+          "reason": "official_title_detected",
+          "candidate_count": 3,
+          "valid_candidate_count": 1,
+          "detail": "",
+          "candidate_sources": "og:1;event_heading:1;document:1",
+          "title_detected": true,
+          "rejection_codes": "truncated:2;truncated_tail:2",
+          "meta_template_cleaned": 0,
+          "heading_seen": 1,
+          "recovery_probe": "dom_heading_verified"
+        },
+        "https://livepocket.jp/e/y5_sz": {
+          "checked_at": "2026-11-28T05:31:18.159066+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
