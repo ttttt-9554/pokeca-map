@@ -16562,33 +16562,31 @@
     },
     {
       "url": "https://livepocket.jp/e/kktot",
-      "discord_posted_at": "2026-11-28T02:30:03.802000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/kktot",
+      "store_name": "TSUTAYA TRADING CARD錦糸町",
+      "prefecture": "東京都",
       "event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
-      "application_end_at": "2026-11-29T21:00:00+09:00",
       "application_start_at": "2026-11-27T15:00:00+09:00",
-      "review_category": "pokemon",
+      "application_end_at": "2026-11-29T21:00:00+09:00",
+      "discord_posted_at": "2026-11-28T02:30:03.802000+00:00",
       "stores": [
         {
           "name": "TSUTAYA TRADING CARD錦糸町",
           "prefecture": "東京都"
         }
       ],
-      "store_name": "TSUTAYA TRADING CARD錦糸町",
-      "prefecture": "東京都",
-      "pokemon_map_match": "ストームエメラルダ",
-      "pokemon_map_type": "pack",
-      "pokemon_map_evidence": "event_title",
-      "official_genre": "pokemon",
-      "official_event_title": "ポケモンカードゲーム 「ストームエメラルダ」再入荷分 抽選販売受付",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/kktot",
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-04",
       "purchase_start_time": "10:30",
       "purchase_end_date": "2026-12-06",
       "purchase_end_time": "21:00",
+      "review_category": "pokemon",
+      "pokemon_map_match": "ストームエメラルダ",
+      "pokemon_map_type": "pack",
+      "pokemon_map_evidence": "event_title",
       "first_detected_at": "2026-11-28T02:30:58.299001+00:00"
     }
   ],
-  "updated_at": "2026-11-28T02:31:23.902962+00:00"
+  "updated_at": "2026-11-28T02:41:02.909267+00:00"
 }
