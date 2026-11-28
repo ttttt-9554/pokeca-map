@@ -32499,7 +32499,7 @@
           "http_status": null
         },
         "https://livepocket.jp/e/xsc_d": {
-          "checked_at": "2026-11-28T07:51:48.529066+00:00",
+          "checked_at": "2026-11-28T14:01:22.720321+00:00",
           "status": "checked_retry_no_new_details",
           "http_status": null
         },
@@ -35794,7 +35794,7 @@
         "https://livepocket.jp/e/xsc_d": {
           "detected_at": "2026-11-28T01:40:56.501263+00:00",
           "status": "checked_retry_no_new_details",
-          "checked_at": "2026-11-28T07:51:48.529066+00:00",
+          "checked_at": "2026-11-28T14:01:22.720321+00:00",
           "http_status": null
         },
         "https://livepocket.jp/e/799qg": {
@@ -38259,8 +38259,8 @@
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/xsc_d": {
-          "attempts": 1,
-          "last_attempt_at": "2026-11-28T07:51:48.529066+00:00",
+          "attempts": 2,
+          "last_attempt_at": "2026-11-28T14:01:22.720321+00:00",
           "last_status": "checked_retry_no_new_details"
         },
         "https://livepocket.jp/e/zr53_": {
@@ -46503,7 +46503,7 @@
           "status": "ok",
           "reason": "official_title_verified",
           "http_status": "",
-          "checked_at": "2026-11-28T07:51:48.529066+00:00",
+          "checked_at": "2026-11-28T14:01:22.720321+00:00",
           "title_observed": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
           "genre": "",
           "product_origin": "",
@@ -54470,7 +54470,7 @@
           "recovery_probe": "dom_heading_verified"
         },
         "https://livepocket.jp/e/xsc_d": {
-          "checked_at": "2026-11-28T07:51:48.529066+00:00",
+          "checked_at": "2026-11-28T14:01:22.720321+00:00",
           "reason": "official_title_detected",
           "candidate_count": 3,
           "valid_candidate_count": 1,
