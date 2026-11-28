@@ -16589,25 +16589,24 @@
     },
     {
       "url": "https://livepocket.jp/e/777p3",
-      "discord_posted_at": "2026-11-28T03:38:02.304000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/777p3",
+      "store_name": "TSUTAYA佐野店",
+      "prefecture": "栃木県",
       "event_title": "30thセレブレーション 1BOX",
-      "application_end_at": "2026-11-29T23:00:00+09:00",
       "application_start_at": "2026-11-27T13:10:00+09:00",
+      "application_end_at": "2026-11-29T23:00:00+09:00",
+      "discord_posted_at": "2026-11-28T03:38:02.304000+00:00",
       "stores": [
         {
           "name": "TSUTAYA佐野店",
           "prefecture": "栃木県"
         }
       ],
-      "store_name": "TSUTAYA佐野店",
-      "prefecture": "栃木県",
-      "official_event_title": "30thセレブレーション 1BOX",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/777p3",
       "purchase_start_date": "2026-12-26",
       "purchase_end_date": "2026-12-27",
       "first_detected_at": "2026-11-28T03:40:59.646049+00:00"
     }
   ],
-  "updated_at": "2026-11-28T03:41:25.802575+00:00"
+  "updated_at": "2026-11-28T03:51:03.552488+00:00"
 }
