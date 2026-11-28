@@ -16493,27 +16493,26 @@
     },
     {
       "url": "https://livepocket.jp/e/xsc_d",
-      "discord_posted_at": "2026-11-28T01:30:09.072000+00:00",
-      "store_location_source": "livepocket_official_page",
-      "store_location_url": "https://livepocket.jp/e/xsc_d",
+      "store_name": "古本市場深谷店",
+      "prefecture": "埼玉県",
       "event_title": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
-      "application_end_at": "2026-11-29T22:00:00+09:00",
       "application_start_at": "2026-11-27T10:00:00+09:00",
-      "review_category": "onepiece",
+      "application_end_at": "2026-11-29T22:00:00+09:00",
+      "discord_posted_at": "2026-11-28T01:30:09.072000+00:00",
       "stores": [
         {
           "name": "古本市場深谷店",
           "prefecture": "埼玉県"
         }
       ],
-      "store_name": "古本市場深谷店",
-      "prefecture": "埼玉県",
-      "official_event_title": "【古本市場深谷店】ワンピース抽選販売（OP-18 神の支配）",
+      "store_location_source": "livepocket_official_page",
+      "store_location_url": "https://livepocket.jp/e/xsc_d",
       "result_announcement_date": "2026-12-01",
       "purchase_start_date": "2026-12-04",
       "purchase_end_date": "2026-12-06",
+      "review_category": "onepiece",
       "first_detected_at": "2026-11-28T01:40:56.501263+00:00"
     }
   ],
-  "updated_at": "2026-11-28T01:41:18.186174+00:00"
+  "updated_at": "2026-11-28T01:51:01.477068+00:00"
 }
